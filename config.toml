@@ -2,3 +2,8 @@ baseURL = "http://owncast.github.io/"
 languageCode = "en-us"
 title = "Owncast"
 theme = "book"
+
+enableGitInfo = true
+
+[params]
+    BookMenuBundle = "/menu"

@@ -1,6 +1,9 @@
 # Hugo default output directory
 /public
 
+# Hugo's place for Generated SCSS
+resources/_gen/*
+
 ## OS Files
 # Windows
 Thumbs.db
