@@ -7,3 +7,7 @@ enableGitInfo = true
 
 [params]
     BookMenuBundle = "/menu"
+    BookLogo = "/images/logo.png"
+    BookRepo = "https://github.com/owncast/owncast.github.io"
+    BookEditPath = "edit/master/content"
+    BookComments = false

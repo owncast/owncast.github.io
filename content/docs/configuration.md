@@ -8,7 +8,7 @@ The default `config.yaml` has a handful of values you can change.  However, more
 * Video quality settings.
 * S3 file storage.
 
-An example config file with additional features can be viewed at [config-example-full.yaml](config-example-full.yaml).
+An example config file with additional features can be viewed [below](#full-example).
 
 ## Video Quality
 
@@ -26,7 +26,7 @@ You can edit the `config.yaml` file and add as many stream _variants_ as you lik
       bitrate: 800
 ```
 
-Please visit the [Encoding](encoding.md) document to learn about how the video pipeline with Owncast works and how you can tweak it for the best results with your specific hardware and video configurations.
+Please visit the [Encoding](/docs/encoding/) document to learn about how the video pipeline with Owncast works and how you can tweak it for the best results with your specific hardware and video configurations.
 
 ### Important caveats
 
@@ -36,7 +36,7 @@ Each bitrate variant adds significant CPU usage and slows down the overall gener
 
 #### Disk Usage
 
-More stream quality variants requires more disk space, since it's another copy of the video on disk.  If you're serving video locally and you have enough disk space then it's probably no big deal and files will rather quickly get rotated and cleaned up.  If you're using something like [S3 for storage](S3.md) then files won't get cleaned up until some point in the future, so you'll have more remote storage use in play.
+More stream quality variants requires more disk space, since it's another copy of the video on disk.  If you're serving video locally and you have enough disk space then it's probably no big deal and files will rather quickly get rotated and cleaned up.  If you're using something like [S3 for storage](/docs/s3/) then files won't get cleaned up until some point in the future, so you'll have more remote storage use in play.
 
 ## External links
 

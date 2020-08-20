@@ -27,17 +27,17 @@ Multiple playlists are supported, one for each specific stream quality you want 
 
 Here's what knobs can be tweaked when trying to determine the quality or qualities you want to provide your user while balancing the amount of server resources you're consuming.
 
-### **Bitrate**
+### Bitrate
 
 The bitrate is the amount of data you send when you stream. A higher bitrate takes up more available internet bandwidth and create larger sized segments of video, making it take longer for viewers to download. Increasing your bitrate can improve your video quality, but only up to a certain point.
 
-### **Resolution**
+### Resolution
 
 Resolution refers to the size of a video on a screen.  Like bitrates you can provide multiple different sizes for different cases, but asking to resize a video amounts in additional work that needs to be performed.
 
 If you change both the width and the height you may be changing the aspect ratio of the video.  For example if you take a 1080x720 video and resize it to 800x800 it'll be the wrong aspect ratio and end up as a squashed square.  It's recommended if you have to change the size to only change the width **or** the height, and it'll keep the aspect ratio for you.
 
-### **Encoder preset**
+### Encoder preset
 
 A preset is a collection of options that will provide a certain encoding speed to compression ratio. A slower preset will provide better compression and result in a better looking video for the size.
 
@@ -64,7 +64,7 @@ The options are, in order from fastest to slowest:
 
 From the [ffmpeg h.264 encoding guide](https://trac.ffmpeg.org/wiki/Encode/H.264).
 
-### **Audio**
+### Audio
 
 Any changes to audio when streaming is additional work in the encoding process.  Luckily for most people what you're sending from your broadcasting software is generally reasonable and additional work won't be needed, even for low-bandwidth viewers. By default Owncast will not change the audio stream and instead just pass it along to the end users.  However, if you need to change the audio bitrate for some reason, such as you want your low quality stream to have much lower quality audio, it'll go through the transcoding process and become `AAC` encoded audio to your viewers.  But by default it's suggested to leave this as defaults and only change it if you need to.
 

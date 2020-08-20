@@ -1,10 +1,10 @@
+---
+---
 
-![Logo](/images/logo.png)
+{{< img src="/images/logo.png" align="center">}}
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-![Screenshot](/images/owncast-screenshot.png)
 
 In 2020 the world changed when everyone become stuck in their homes, looking for creative outlets to share their art, skills and themselves from inside their bedroom.
 
@@ -13,6 +13,8 @@ This created an explosion of live streaming on Facebook Live, YouTube Live, Inst
 But in a world where many were previously finding ways to rely on the big internet service companies less, the 2020 COVID-19 pandemic made everyone run right back to them.
 
 And as soon as people started streaming their DJ sets, movie watching parties, and themselves just sitting around listening to music the big companies came to mute their streams, remove their recordings or ban these users all together.
+
+{{< img src="/images/owncast-screenshot.png" align="center" width="100%">}}
 
 That's when I wanted a better option for people. Something you could run yourself and get all the functionality of these services, where you could live stream to an audience and and allow them to take part in the chat, just like they've been used to on all the other services. But instead of handing control over to somebody else, you run it.  **You won't get shut down, and you own it all, just like it should be.**
 
@@ -104,11 +106,3 @@ Please read the [more detailed documentation about configuration of S3-Compatibl
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-
-
-<!-- CONTACT -->
-## Contact
-
-Gabe Kangas - [@gabek@mastodon.social](https://mastodon.social/@gabek) - email [gabek@real-ity.com](mailto:gabek@real-ity.com)
-
-Project Link: [https://github.com/gabek/owncast](https://github.com/gabek/owncast)

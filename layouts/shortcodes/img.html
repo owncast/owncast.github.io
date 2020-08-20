@@ -1,0 +1,10 @@
+<!-- from https://scottwillsey.com/blog/hugo/imgshortcode/ -->
+
+{{ with .Get "align" }}<div style="text-align: {{.}};">{{ end }}
+    <figure {{ with .Get "class" }}class="{{.}}" {{ end }}>
+        {{ with .Get "link"}}<a href="{{.}}">{{ end }}
+            <img src="{{ .Get "src" }}" {{ with .Get "width"}} width="{{.}}" {{ end }} />
+            {{ if .Get "link"}}</a>{{ end }}
+        {{ with .Get "caption" }}<figcaption><small><i>{{.}}</i></small></figcaption>{{ end }}
+    </figure>
+    {{ if .Get "align" }}</div>{{ end }}

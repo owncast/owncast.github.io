@@ -2,7 +2,6 @@
 
 There are two quick ways to get up and running, depending on your preference.  One is to simply download the service and run it, and the other is through Docker, if Docker is your thing.
 
-
 ## Download and run a release
 
 1. Install [`ffmpeg`](https://ffmpeg.org/download.html) if you haven't.
@@ -40,7 +39,7 @@ Or if you'd prefer to download the source and use the Dockerfile to configure th
 
 1. Edit `config.yaml` and change the path of ffmpeg to where your copy is.
 1. In this default configuration there will be a single video quality available, simply whatever is being sent to the server is being distributed to the viewers.  The video is also going to be distributed from the server running the service in this case.
-1. Continue to edit the config file and customize with your own details, links and info.  See [More Configuration](configuration.md) to find additional ways to configure video quality.
+1. Continue to edit the config file and customize with your own details, links and info.  See [More Configuration](/docs/configuration/) to find additional ways to configure video quality.
 
 ### Test
 1. Point your broadcasting software at your new server using `rtmp://yourserver/live` and the stream key you set above and start your stream.

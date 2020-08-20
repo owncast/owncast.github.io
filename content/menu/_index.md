@@ -10,3 +10,5 @@ headless: true
   - [Encoding](/docs/encoding/)
   - [S3](/docs/s3/)
 - [Blog](/posts/)
+- [Contribute](/contribute)
+- [Contact](/contact)
