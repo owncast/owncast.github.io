@@ -9,4 +9,4 @@ headless: true
   - [Configuration](/docs/configuration/)
   - [Encoding](/docs/encoding/)
   - [S3](/docs/s3/)
-- [Blog](/posts)
+- [Blog](/posts/)
