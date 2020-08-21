@@ -11,7 +11,7 @@ Owncast is not for video conferencing or any use case where multiple people are 
 
 ## 2. Why would I use this instead of Twitch, Facebook Live, or YouTube live?
 
-Owncast might be a good alternative if you're somebody who doesn't want to rely on the large companies or wants the ability to build something completely custom that is more in tune with the experience they want to offer.  As a bonus it allows you to offer a live streaming experience that is without tracking, invasive analytics or advertising.
+Owncast might be a good alternative if you're somebody who doesn't want to rely on the large companies or wants the ability to build something completely custom that is more in line with the experience they want to offer.  As a bonus it allows you to offer a live streaming experience that is without tracking, invasive analytics or advertising.
 
 
 ## 3. What can I customize?

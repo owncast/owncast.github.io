@@ -1,19 +1,16 @@
-# Encoding with Owncast
+# Tuning the video encoding
 
 It's hard to give specific settings that will give you the best quality and performance with Owncast because people have different servers and requirements.  However, this document aims to outline what is being done to your content and the different knobs you can tweak to get the best output for your instance..
 
 **But first the basics.**
 
-### What is an Owncast powered live stream?
+### How does an Owncast video stream work?
 
 Owncast takes your source stream and converts it to short, individual video segments.  A list of these segments is created that your viewer's player will continue to read and play all the segments in order.  This is all using a specification called [HLS](https://developer.apple.com/documentation/http_live_streaming/understanding_the_http_live_streaming_architecture) or HTTP Live Streaming.
 
-<a href="https://developer.apple.com/documentation/http_live_streaming/understanding_the_http_live_streaming_architecture">
-  <img src="https://docs-assets.developer.apple.com/published/88e87744a3/de18e941-81de-482f-843d-834a4dd3aa71.png">
-  Image from Apple
-</a>
+{{< img src="https://docs-assets.developer.apple.com/published/88e87744a3/de18e941-81de-482f-843d-834a4dd3aa71.png" align="center">}}
 
-In this case Owncast works as the Media encoder, Stream segmenter, and distribution web server.  However Owncast supports video being distributed via 3rd party storage as well, so in that case the video segments would be distributed from there, instead.
+In this case Owncast works as the Media encoder, Stream segmenter, and distribution web server.  However [Owncast supports video being distributed via 3rd party storage as well](/docs/s3), so in that case the video segments would be distributed from there, instead.
 
 Multiple playlists are supported, one for each specific stream quality you want to provide your users.  Each one increases the amount of work being completed and can slow down everything else.
 
@@ -22,7 +19,7 @@ Multiple playlists are supported, one for each specific stream quality you want 
 
 1. The more work you need done to convert the video from one size, quality or format to another the more it will slow everything else down.
 1. The slower things go the slower the stream is provided to the user.
-1. If stream is provided to the user slow enough they'll start seeing buffering and errors.
+1. If stream is provided to the user slowly enough they'll start seeing buffering and errors.
 1. Converting audio counts as work, too.
 
 Here's what knobs can be tweaked when trying to determine the quality or qualities you want to provide your user while balancing the amount of server resources you're consuming.
