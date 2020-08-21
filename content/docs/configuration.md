@@ -16,7 +16,7 @@ Owncast supports HLS [Adaptive bitrate streaming](https://en.wikipedia.org/wiki/
 
 You can edit the `config.yaml` file and add as many stream _variants_ as you like under the `videoSettings` block, like so:
 
-```
+{{< highlight yaml >}}
   streamQualities:
     - low:
       bitrate: 400
@@ -24,7 +24,7 @@ You can edit the `config.yaml` file and add as many stream _variants_ as you lik
       encoderPreset: superfast
     - medium:
       bitrate: 800
-```
+{{< / highlight >}}
 
 Please visit the [Encoding](/docs/encoding/) document to learn about how the video pipeline with Owncast works and how you can tweak it for the best results with your specific hardware and video configurations.
 
@@ -65,6 +65,6 @@ Update your `tags` in the config to display the topics type of content you want 
 
 Below, you can see all config items:
 
-```yaml
+{{< highlight yaml >}}
 {{< readfile file="/content/docs/config-example-full.yaml" >}}
-```
+{{< / highlight >}}
