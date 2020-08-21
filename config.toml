@@ -1,4 +1,4 @@
-baseURL = "http://owncast.github.io/"
+baseURL = "http://owncast.online/"
 languageCode = "en-us"
 title = "Owncast"
 theme = "book"
@@ -6,6 +6,9 @@ theme = "book"
 enableGitInfo = true
 
 [params]
+    title = "Owncast"
+    description = "A self-hosted live video and web chat server for use with existing popular broadcasting software."
+    images = ["images/logo.png"]
     BookMenuBundle = "/menu"
     BookLogo = "/images/logo.png"
     BookRepo = "https://github.com/owncast/owncast.github.io"
