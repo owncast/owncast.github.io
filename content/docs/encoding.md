@@ -81,24 +81,24 @@ Each stream quality is given a name just for your own convinience so you can ref
 
 A simple example would be to create a quality you call "medium" that has a bitrate of 800k:
 
-```
+{{< highlight yaml >}}
     - medium:
       videoBitrate: 800
-```
+{{< / highlight >}}
 
 Or create a "high" quality at 2000k using the `faster` encoding preset.
 
-```
+{{< highlight yaml >}}
     - high:
       videoBitrate: 2000
       encoderPreset: faster
-```
+{{< / highlight >}}
 
 Or a 1000k bitrate that's resized to a width of 600, using the `superfast` preset.
-```
+{{< highlight yaml >}}
     - resized:
       videoBitrate: 1000
       encoderPreset: superfast
       scaledWidth: 600
-```
+{{< / highlight >}}
 
