@@ -1,14 +1,38 @@
-<div style="display: flex; justify-content: space-around;">
+<style>
+    .contributor-box {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .contributor-item {
+        flex: 1 0 30%;
+    }
+
+    @media (min-width: 500px) {
+        .contributor-item {
+            flex: 1 0 21%;
+        }
+    }
+
+    @media (min-width: 800px) {
+        .contributor-item {
+            flex: 1 0 15%;
+        }
+    }
+</style>
+
+<div class="contributor-box">
 {{ range $.Site.Data.collaborators }}
-<span>
+<span class="contributor-item">
     <figure>
         <a href="{{.html_url}}">
             <center>
-            <img src="{{.avatar_url}}" width="60px" style="border-radius: 30px";/>
+            <img src="{{.avatar_url}}" width="60px" style="border-radius: 30px"/>
             <figcaption><small>{{.login}}</small></figcaption>
             </center>
         </a>
     </figure>
-  </span>
+</span>
 {{ end }}
 </div>
