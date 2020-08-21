@@ -12,6 +12,7 @@ headless: true
   - [External Storage (S3)](/docs/s3/)
   - [Building from Source](/docs/building/)
 - [F.A.Q.](/docs/faq/)
+- [Use Cases](/usecases/)
 - [Blog](/posts/)
 - [Contribute](/contribute)
 - [Contact](/contact)
