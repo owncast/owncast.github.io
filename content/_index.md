@@ -30,7 +30,7 @@ I figured you can install Wordpress and self-host your blog, or install Megento 
 
 The goal is to have a single service that you can run that works out of the box. **Visit the [Quickstart](docs/quickstart/) to get up and running.**
 
-## Collaborators
+## Contributors
 
 {{< collaborators >}}
 
