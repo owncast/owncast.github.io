@@ -18,6 +18,9 @@ jobs:
           hugo-version: '0.74.2'
           extended: true
 
+      - name: Fetch Collaborators
+        run: curl https://api.github.com/repos/gabek/owncast/contributors > data/collaborators.json
+
       - name: Build
         run: hugo --minify
 

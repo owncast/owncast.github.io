@@ -1,0 +1,12 @@
+<div style="display: flex; justify-content: space-around;">
+{{ range $.Site.Data.collaborators }}
+<span>
+    <figure>
+        <a href="{{.html_url}}">
+            <img src="{{.avatar_url}}" width="60px" style="border-radius: 30px";/>
+            <figcaption><small><center>{{.login}}</center></small></figcaption>
+        </a>
+    </figure>
+  </span>
+{{ end }}
+</div>
