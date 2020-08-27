@@ -19,7 +19,7 @@ jobs:
           extended: true
 
       - name: Fetch Collaborators
-        run: curl https://api.github.com/repos/gabek/owncast/contributors > data/collaborators.json
+        run: curl https://api.github.com/repos/owncast/owncast/contributors > data/collaborators.json
 
       - name: Build
         run: hugo --minify
