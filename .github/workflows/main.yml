@@ -2,6 +2,8 @@ name: Hugo Build to GitHub Pages
 
 on:
   push:
+    branches:
+    - 'master'
 
 jobs:
   deploy:
