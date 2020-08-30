@@ -1,0 +1,59 @@
+@media (prefers-color-scheme: dark) {
+    body, .book-menu nav, .book-search input {
+        background: #121212;
+        color: #efefef;
+    }
+
+    .book-brand {
+        filter: drop-shadow(0 0 5px rgba(138, 74, 242, 0.5));
+    }
+    figure.glow {
+        filter: drop-shadow(0 0 20px rgba(138, 74, 242, 0.2));
+    }
+    
+    .book-menu nav a.active, .book-toc a, .markdown a.book-btn, .markdown a.book-btn:visited {
+        color: rgb(92, 179, 255);
+    }
+
+    aside nav ul a:hover {
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    .book-search input {
+        border: 1px solid #efefef;
+    }
+    
+    .markdown {
+        a {
+            color: rgb(92, 179, 255);
+            &:active, &:visited {
+                color: rgb(138, 74, 242);
+            }
+        }
+    
+        code {
+            background-color: #2f3334;
+        }
+    }
+
+    
+    .book-icon {
+        filter: invert(1);
+    }
+}
+
+h1#owncast {
+    text-align: center;
+    font-size: 4rem;
+    margin-top: 0.5em;
+
+    a.anchor {
+        display: none !important;
+    }
+}
+
+figure.glow {
+    margin-top: 2rem;
+}

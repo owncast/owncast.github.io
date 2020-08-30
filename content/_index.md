@@ -2,7 +2,9 @@
 title: Home
 ---
 
-{{< img src="/images/logo.png" align="center">}}
+{{< img src="/favicon.png" align="center" class="glow">}}
+
+# Owncast
 
 Owncast is a self-hosted live video and web chat server for use with existing popular broadcasting software.  Point your live stream at a server you personally control and regain ownership over your content.
 
