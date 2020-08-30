@@ -1,5 +1,5 @@
 # owncast.github.io
-Public facing web site.  Documentation and info.
+Public facing web site.  Documentation and info. Check out the website at [owncast.online](https://owncast.online).
 
 ## Run
 
