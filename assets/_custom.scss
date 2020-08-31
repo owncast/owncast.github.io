@@ -42,6 +42,10 @@
     .book-icon {
         filter: invert(1);
     }
+
+    .version-support {
+        color: white;
+    }
 }
 
 h1#owncast {
@@ -56,4 +60,9 @@ h1#owncast {
 
 figure.glow {
     margin-top: 2rem;
+}
+
+.version-support {
+    padding: 2px;
+    font-size: 10px;
 }
