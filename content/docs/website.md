@@ -59,3 +59,5 @@ Code blocks: <code>\`your text\`</code>
 ### Custom Emoji
 
 Place your own custom emoji images into `/webroot/img/emoji/` and the next time you refresh the web site you'll see your images in the emoji picker, available for use in chat.
+
+{{<versionsupport feature="emoji" version="0.0.2">}}
