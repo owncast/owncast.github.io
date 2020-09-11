@@ -26,7 +26,9 @@ You can get the release from [GitHub](https://github.com/owncast/owncast/release
 
 ### Upgrading from v0.0.1
 
-This release has a rewrite of the web frontend, so any customization you made previously will need to be re-applied to this new web app.  The following instructions will overwrite any updated files, but it won't delete any old files that are no longer used.
+This release has a rewrite of the web frontend, so any customization you made previously will need to be re-applied to this new web app.  The simplest way to upgrade is just overwrite the old version with the new version, but it won't delete any old files that are no longer used.
+
+However, you're free to upgrade any way you like, but make sure your `chat.db`, `config.yaml`, `webroot/static/content.md` and `stats.json` files are saved.
 
 1. Stop the service from running.
 1. Move the zip file of 0.0.2 to your previous install location.
