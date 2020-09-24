@@ -11,6 +11,7 @@ headless: true
   - [Encoding](/docs/encoding/)
   - [External Storage (S3)](/docs/s3/)
   - [Building from Source](/docs/building/)
+  - [Troubleshooting](/docs/troubleshooting/)
 - [F.A.Q.](/docs/faq/)
 - [Use Cases](/usecases/)
 - [Blog](/posts/)
