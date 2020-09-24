@@ -1,6 +1,6 @@
 ---
 title: Owncast v0.0.2
-date: 2020-08-09
+date: 2020-09-24
 summary: "[v0.0.2](https://github.com/owncast/owncast/milestone/2?closed=1) is mostly focused on web frontend updates, including a major refactor."
 draft: true
 ---
@@ -14,11 +14,16 @@ draft: true
 * Add support for embedding the video player externally. {{< githubissue 110 >}}
 * Your username will get highlighted in chat when mentioned. {{< githubissue 100 >}}
 * Emoji picker w/ custom emoji support. {{< githubissue 86 >}}
-* Autocomplete usernames in composing chat messages.  {{< githubissue 99 >}}
+* Autocomplete usernames in composing chat messages by hitting `tab`.  {{< githubissue 99 >}}
 * Improve support for autolinking, and embedding YouTube or Instagram links in chat. {{< githubissue 93 >}}
 * Server alerts to the console when there is excessive hardware utilization.  {{< githubissue 115 >}}
 * Updated version of Video.js and associated http-streaming library. {{< githubissue 133 >}}
 * Improve max bitrate compatibility with HLS spec. {{< githubissue 106 >}}
+* Stop jumping to bottom of chat when scrolling and reading previous messages. {{< githubissue 101 >}}
+* Username colors are tweaked to be easier to read. {{< githubissue 170 >}}
+* Improved mobile layout in the web UI.  {{< githubissue 140 >}}
+* Remove Cache-Control header when sending to external S3 storage to support Digital Ocean Spaces. {{< githubissue 117 >}}
+* Stream gets cleaned up after 5 minutes of being disconnected. {{< githubissue 152 >}}
 
 Visit the documentation to read more about how to take advantage of [embedding](/docs/embed/) and [custom emoji](/docs/website/#custom-emoji).
 
