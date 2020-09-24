@@ -19,7 +19,7 @@ Multiple playlists are supported, one for each specific stream quality you want 
 
 1. The more work you need done to convert the video from one size, quality or format to another the more it will slow everything else down.
 1. The slower things go the slower the stream is provided to the user.
-1. If stream is provided to the user slowly enough they'll start seeing buffering and errors.
+1. If stream is provided to the user too slowly they'll start seeing buffering and errors.
 1. Converting audio counts as work, too.
 
 Here's what knobs can be tweaked when trying to determine the quality or qualities you want to provide your user while balancing the amount of server resources you're consuming.
@@ -40,7 +40,9 @@ A preset is a collection of options that will provide a certain encoding speed t
 
 In short:
 
-You get "more bang for your buck" the slower you go.  But your server will be preforming more work the slower it is.
+You get "more bang for your buck" the slower you go.  But your server will be preforming more work the slower it is.  The more CPU you use to compress, the better the output image will be, or the smaller of a file the output will be for the same quality.
+
+
 
 **If you're trying to get better quality and smaller files** move to a slower encoding preset.
 
