@@ -1,8 +1,7 @@
 ---
 title: Owncast v0.0.2
-date: 2020-09-24
-summary: "[v0.0.2](https://github.com/owncast/owncast/milestone/2?closed=1) is mostly focused on web frontend updates, including a major refactor."
-draft: true
+date: 2020-09-27
+summary: "0.0.2 has a major focus on frontend web updates, with some nice new features including the ability to embed in your own site easier, custom emoji and more."
 ---
 
 [v0.0.2](https://github.com/owncast/owncast/milestone/2?closed=1) has a bunch of updates, mostly focused on the web frontend.
