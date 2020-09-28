@@ -26,7 +26,7 @@ summary: "0.0.2 has a major focus on frontend web updates, with some nice new fe
 
 Visit the documentation to read more about how to take advantage of [embedding](/docs/embed/) and [custom emoji](/docs/website/#custom-emoji).
 
-You can get the release from [GitHub](https://github.com/owncast/owncast/releases/tag/v0.0.2) or [on Docker Hub](https://hub.docker.com/layers/gabekangas/owncast/0.0.2/images/sha256-90b28e787a3e79b5ec2486e3087f4cf708cdaa71ab6ebf92cd343bba6e8bb576?context=repo).
+You can get the release from [GitHub](https://github.com/owncast/owncast/releases/tag/v0.0.2) or [on Docker Hub](https://hub.docker.com/layers/gabekangas/owncast/0.0.2/images/sha256-624bc2ff331d7d596018739315f25245379451bfa6022c5dee0e44ccb57d7f99).
 
 ### Upgrading from v0.0.1
 
