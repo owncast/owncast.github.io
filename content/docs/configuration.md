@@ -19,11 +19,11 @@ You can edit the `config.yaml` file and add as many stream _variants_ as you lik
 {{< highlight yaml >}}
   streamQualities:
     - low:
-      bitrate: 400
+      videoBitrate: 400
       scaledWidth: 600
       encoderPreset: superfast
     - medium:
-      bitrate: 800
+      videoBitrate: 800
 {{< / highlight >}}
 
 Please visit the [Encoding](/docs/encoding/) document to learn about how the video pipeline with Owncast works and how you can tweak it for the best results with your specific hardware and video configurations.
