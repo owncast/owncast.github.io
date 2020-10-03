@@ -7,6 +7,7 @@ headless: true
   - [Quickstart](/docs/quickstart/)
   - [Configuration](/docs/configuration/)
   - [Web Site + Chat](/docs/website/)
+  - [Embedding](/docs/embed/)
   - [Broadcasting Software](/docs/broadcasting/)
   - [Encoding](/docs/encoding/)
   - [External Storage (S3)](/docs/s3/)
