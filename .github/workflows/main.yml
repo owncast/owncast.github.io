@@ -23,6 +23,9 @@ jobs:
       - name: Fetch Collaborators
         run: curl https://api.github.com/repos/owncast/owncast/contributors > data/collaborators.json
 
+      - name: Bundle API documentation
+        run: sh bundleApiDocs.sh
+
       - name: Build
         run: hugo --minify
 
