@@ -21,3 +21,5 @@ Some limitations and restrictions:
 ### Watch a test live stream at [watch.owncast.online](http://watch.owncast.online)
 
 If you just want to see what it's like to watch a currently active Owncast live stream you can visit [watch.owncast.online](http://watch.owncast.online) and check it out.
+
+{{< owncastembed "https://watch.owncast.online/embed/video" >}}

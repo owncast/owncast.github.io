@@ -13,8 +13,12 @@ referrerpolicy="origin" scrolling="no"
 allowfullscreen>
 </iframe>
 {{< / highlight >}}
-
 {{<versionsupport feature="embedding video" version="0.0.2">}}
+
+It will look something like:
+
+{{< owncastembed "https://watch.owncast.online/embed/video" >}}
+
 
 
 ## Embedding chat
