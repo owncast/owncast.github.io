@@ -34,13 +34,17 @@ Resolution refers to the size of a video on a screen.  Like bitrates you can pro
 
 If you change both the width and the height you may be changing the aspect ratio of the video.  For example if you take a 1080x720 video and resize it to 800x800 it'll be the wrong aspect ratio and end up as a squashed square.  It's recommended if you have to change the size to only change the width **or** the height, and it'll keep the aspect ratio for you.
 
+### Framerate
+
+Framerate is the number of frames per second in the video. Owncast defaults to 24fps, but other common framerates are 30 or 60. Increasing the framerate will use more CPU on your server, and more bandwidth for your users.
+
 ### Encoder preset
 
 A preset is a collection of options that will provide a certain encoding speed to compression ratio. A slower preset will provide better compression and result in a better looking video for the size.
 
 In short:
 
-You get "more bang for your buck" the slower you go.  But your server will be preforming more work the slower it is.  The more CPU you use to compress, the better the output image will be, or the smaller of a file the output will be for the same quality.
+You get "more bang for your buck" the slower you go.  But your server will be performing more work the slower it is.  The more CPU you use to compress, the better the output image will be, or the smaller of a file the output will be for the same quality.
 
 
 
@@ -88,11 +92,12 @@ A simple example would be to create a quality you call "medium" that has a bitra
       videoBitrate: 800
 {{< / highlight >}}
 
-Or create a "high" quality at 2000k using the `faster` encoding preset.
+Or create a "high" quality at 2000k bitrate at 30fps using the `faster` encoding preset.
 
 {{< highlight yaml >}}
     - high:
       videoBitrate: 2000
+      framerate: 30
       encoderPreset: faster
 {{< / highlight >}}
 
