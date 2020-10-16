@@ -21,18 +21,17 @@ Many things can be responsible for buffering and issues with the video playback.
 1. Try increasing the values for `chunkLengthInSeconds` and `maxNumberInPlaylist` in the [config file](/docs/configuration).  This will start the user further behind live but give the client more playable video before it gets stuck waiting for the live edge.
 1. Change your video [stream quality settings](/docs/configuration/#video-quality) to a [faster preset](/docs/encoding/#encoder-preset).
 1. Reduce your [stream quality settings](/docs/configuration/#video-quality) to a single variant and a lower [bitrate](/docs/encoding/#bitrate).  Experiment with increasing the bitrate and adding another optional stream quality once you find settings that work for you.
-1. If you are using external storage, make sure you're able to upload to this storage service fast enough.  I suggest using a storage service that's as close (physically and logically) to where your Owncast instance is.  For example if if you're on an AWS machine, use a S3 bucket in the same region.  If you're on Digital Ocean, try DO Spaces.  But maybe don't use DO Spaces if you're on a Linode machine, use Linode Object Storage instead.  Run owncast with `-enableDebugFeatures` to see if you get any slow upload warnings.
-
+1. If you are using external storage, make sure you're able to upload to this storage service fast enough.  See below.
 
 ## Slow uploads to external storage
 
-If you have a slow upload connection, or are uploading to an external storage service that is too far away, or logically not optimized for fast uploads, you may run into an issue where it takes too long to get the video segments uploaded, ultimately not making them available fast enough for them to be used.
+If you have a slow upload connection, or are uploading to an external storage service that is too far away, or not optimized for fast uploads, you may run into an issue where it takes too long to get the video segments uploaded, ultimately not making them available fast enough for them to be used.
 
-1. Determine if there's another endpoint you can point to that might be geographically closer to you.
-1. Check to see if your hosting provider offers its own object storage solution.  For example if you run your server on Linode you would want to use Linode's Object Storage option and not Digital Ocean's or Amazon's as the speed to upload would be much faster.
-1. See if you can increase your upload speed.
+1. Determine if there's another endpoint for your storage service that might be geographically closer to you.
+1. Use a storage service that's as close (physically and logically) to where your Owncast instance is.  For example if if you're on an AWS machine, use a S3 bucket in the same region.  If you're on Digital Ocean, try DO Spaces.  But maybe don't use DO Spaces if you're on a Linode machine, use Linode Object Storage instead.  Run owncast with `--enableVerboseLogging` to see if you get any slow upload warnings.
+1. Try to increase your upload speed from your server provider.
 1. Find out if your storage service offers something like [AWS's Transfer Acceleration](https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html) to (possibly) try to increase the speed of uploads.
-1. Reduce the quality of your video so the video segments are smaller and will take less time to upload.  See the above tips such as changing the encoder preset and reducing the bitrate.
+1. Reduce the quality of your video so the video segments are smaller and will take less time to upload.  See the above tips such as changing the encoder preset and reducing the bitrate or framerate.
 
 ## Reducing the delay between the viewer and live
 
