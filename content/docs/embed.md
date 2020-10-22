@@ -7,10 +7,13 @@ The video-only URL to your stream content lives at: `http://your.host/embed/vide
 Here's some example HTML you can use.
 
 {{< highlight html >}}
-<iframe src="http://your.host/embed/video" title="Owncast"
-height="350px" width="550px"
-referrerpolicy="origin" scrolling="no"
-allowfullscreen>
+<iframe
+  src="http://your.host/embed/video"
+  title="Owncast"
+  height="350px" width="550px"
+  referrerpolicy="origin"
+  scrolling="no"
+  allowfullscreen>
 </iframe>
 {{< / highlight >}}
 {{<versionsupport feature="embedding video" version="0.0.2">}}

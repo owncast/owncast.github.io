@@ -6,6 +6,8 @@ Owncast includes a web interface for your video with built-in chat that is avail
 
 However, the web interface was specifically built to be editable by anybody comfortable tweaking a web page.  It's not bundled or transpiled into anything, it's just HTML + Javascript + CSS that you can start editing.  Feel free to add your own branding, links, change the colors in the CSS, fonts, layout, or anything else you could possibly want.  No development environment is needed, just open the files in an editor and start tweaking.
 
+If you want to embed Owncast in your existing website, checkout our [documentation on embedding Owncast](/docs/embed/).
+
 ## Customization
 
 By setting your name, description and logo you can quickly update the contents of the website to reflect your stream. 
