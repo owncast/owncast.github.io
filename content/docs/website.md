@@ -35,12 +35,12 @@ Here's an example.
 {{< highlight yaml >}}
   socialHandles:
     - platform: github
-      url: https://github.com/gabek/owncast
+      url: https://github.com/owncast/owncast
     - platform: instagram
       url: https://www.instagram.com/owncast
 {{< / highlight >}}
 
-For adding additional content you can edit the [`/webroot/static/content.md`](https://github.com/gabek/owncast/blob/master/webroot/static/content-example.md) file.  Anything you put in this using [markdown](https://www.markdownguide.org/) or HTML will display on the page without you having to touch the existing page.  Some ideas here: Your Patreon or Paypal link to support donations, an embed of a Soundcloud track, some images, or an embedded social feed.
+For adding additional content you can edit the [`/webroot/static/content.md`](https://github.com/owncast/owncast/blob/master/webroot/static/content-example.md) file.  Anything you put in this using [markdown](https://www.markdownguide.org/) or HTML will display on the page without you having to touch the existing page.  Some ideas here: Your Patreon or Paypal link to support donations, an embed of a Soundcloud track, some images, or an embedded social feed.
 
 ## Chat
 

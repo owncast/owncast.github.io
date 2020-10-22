@@ -15,6 +15,6 @@ bookToC: false
 
 We have a open discussion board for questions, bugs and feature requests. Just open an issue :)
 
-{{< button href="https://github.com/gabek/owncast/issues" >}}Issues on GitHub{{< /button >}}
+{{< button href="https://github.com/owncast/owncast/issues" >}}Issues on GitHub{{< /button >}}
 
 For security incidents, please send an email to Gabe (see above).

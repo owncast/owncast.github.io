@@ -7,7 +7,7 @@ title: Contribute
 We are open for new contributors to this project. If you have found issues or bugs,
 or would like to improve Owncast by sending your code, please visit our GitHub page:
 
-{{< button href="https://github.com/gabek/owncast" >}}GitHub Repository{{< /button >}}
+{{< button href="https://github.com/owncast/owncast" >}}GitHub Repository{{< /button >}}
 
 # Contributor Covenant Code of Conduct
 

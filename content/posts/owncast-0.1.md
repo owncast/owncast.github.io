@@ -16,6 +16,6 @@ This release is also on Dockerhub if that's convinient for you.
 docker pull gabekangas/owncast:0.0.1
 ```
 
-You can get the release from [GitHub](https://github.com/gabek/owncast/releases/tag/v0.0.1) or [on Docker Hub](https://hub.docker.com/layers/gabekangas/owncast/0.0.1/images/sha256-90b28e787a3e79b5ec2486e3087f4cf708cdaa71ab6ebf92cd343bba6e8bb576?context=repo).
+You can get the release from [GitHub](https://github.com/owncast/owncast/releases/tag/v0.0.1) or [on Docker Hub](https://hub.docker.com/layers/gabekangas/owncast/0.0.1/images/sha256-90b28e787a3e79b5ec2486e3087f4cf708cdaa71ab6ebf92cd343bba6e8bb576?context=repo).
 
 Congratulations Matt and Jessica!

@@ -2,7 +2,7 @@
 
 1. Ensure you have the gcc compiler configured.
 1. Install the [Go toolchain](https://golang.org/dl/).
-1. Clone the repo.  `git clone https://github.com/gabek/owncast`
+1. Clone the repo.  `git clone https://github.com/owncast/owncast`
 1. Follow the above [Getting Started](#getting-started) instructions, making sure ffmpeg exists and your config file is set.
 1. Make any [configuration](/docs/configuration) changes.
 1. `go run main.go` on the first run will download the required packages needed for the application to build.
@@ -11,7 +11,7 @@
 
 ## Using Docker
 
-1. Download the code: `git clone https://github.com/gabek/owncast`
+1. Download the code: `git clone https://github.com/owncast/owncast`
 1. Copy `config-example.yaml` to `config.yaml`
 1. [Edit `config.yaml`](#configure) with a file editor of your choice and change the path of ffmpeg by appending `ffmpegPath: /usr/bin/ffmpeg` at the top level of the yaml.
 1. Make any [configuration](/docs/configuration) changes.
