@@ -36,3 +36,6 @@ Bitrates specify the quality of the video.  The more bitrates you support the wi
 
 [Read more on Wikipedia](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming) about adaptive bitrate streaming.
 
+## 7. How can I contribute to this project?
+
+We are always looking for more contributors to Owncast. You can join and start conversations in the Issues tab of our [GitHub repositories](https://github.com/owncast/owncast). The team meets regularily on Jitsi, so if you want to hop in, check out [issue #167](https://github.com/owncast/owncast/issues/167).

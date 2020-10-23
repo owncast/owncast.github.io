@@ -7,7 +7,9 @@ title: Contribute
 We are open for new contributors to this project. If you have found issues or bugs,
 or would like to improve Owncast by sending your code, please visit our GitHub page:
 
-{{< button href="https://github.com/gabek/owncast" >}}GitHub Repository{{< /button >}}
+{{< button href="https://github.com/owncast/owncast" >}}GitHub Repository{{< /button >}}
+
+The team also gets on Jitsi regularily, so if you want to attend of those meetings, check out [issue #167](https://github.com/owncast/owncast/issues/167) where we coordinate meeting times.
 
 # Contributor Covenant Code of Conduct
 

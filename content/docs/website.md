@@ -6,6 +6,8 @@ Owncast includes a web interface for your video with built-in chat that is avail
 
 However, the web interface was specifically built to be editable by anybody comfortable tweaking a web page.  It's not bundled or transpiled into anything, it's just HTML + Javascript + CSS that you can start editing.  Feel free to add your own branding, links, change the colors in the CSS, fonts, layout, or anything else you could possibly want.  No development environment is needed, just open the files in an editor and start tweaking.
 
+If you want to embed Owncast in your existing website, checkout our [documentation on embedding Owncast](/docs/embed/).
+
 ## Customization
 
 By setting your name, description and logo you can quickly update the contents of the website to reflect your stream. 
@@ -35,12 +37,12 @@ Here's an example.
 {{< highlight yaml >}}
   socialHandles:
     - platform: github
-      url: https://github.com/gabek/owncast
+      url: https://github.com/owncast/owncast
     - platform: instagram
       url: https://www.instagram.com/owncast
 {{< / highlight >}}
 
-For adding additional content you can edit the [`/webroot/static/content.md`](https://github.com/gabek/owncast/blob/master/webroot/static/content-example.md) file.  Anything you put in this using [markdown](https://www.markdownguide.org/) or HTML will display on the page without you having to touch the existing page.  Some ideas here: Your Patreon or Paypal link to support donations, an embed of a Soundcloud track, some images, or an embedded social feed.
+For adding additional content you can edit the [`/webroot/static/content.md`](https://github.com/owncast/owncast/blob/master/webroot/static/content-example.md) file.  Anything you put in this using [markdown](https://www.markdownguide.org/) or HTML will display on the page without you having to touch the existing page.  Some ideas here: Your Patreon or Paypal link to support donations, an embed of a Soundcloud track, some images, or an embedded social feed.
 
 ## Chat
 
