@@ -1,6 +1,6 @@
 <!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Configuration #  The default config.yaml has a handful of values you can change. However, more can be customized if you need them to be. Some common changes to the config are:
  Your site name, logo, description and external links. The stream key to gain access to broadcasting to your stream. The path to your specific ffmpeg executable. Video quality settings. S3 file storage.  An example config file with additional features can be viewed below."><meta name=theme-color content="#FFFFFF"><meta property="og:title" content><meta property="og:description" content="Configuration #  The default config.yaml has a handful of values you can change. However, more can be customized if you need them to be. Some common changes to the config are:
- Your site name, logo, description and external links. The stream key to gain access to broadcasting to your stream. The path to your specific ffmpeg executable. Video quality settings. S3 file storage.  An example config file with additional features can be viewed below."><meta property="og:type" content="article"><meta property="og:url" content="http://owncast.online/docs/configuration/"><meta property="og:image" content="http://owncast.online/images/logo.png"><meta property="article:modified_time" content="2020-09-28T19:28:01-07:00"><meta property="og:site_name" content="Owncast"><title>Configuration | Owncast</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.2a8fd54db9c69c14e5fc3cbfc444296a02859dd929babe5e0456e3aedc30c19b.css integrity="sha256-Ko/VTbnGnBTl/Dy/xEQpagKFndkpur5eBFbjrtwwwZs="><script defer src=/en.search.min.0a592ebf675dbb3155145fa9a544eb41a83c83a822d9382ac4f2ba29bbdb83fd.js integrity="sha256-Clkuv2dduzFVFF+ppUTrQag8g6gi2TgqxPK6Kbvbg/0="></script></head><body><input type=checkbox class="hidden toggle" id=menu-control>
+ Your site name, logo, description and external links. The stream key to gain access to broadcasting to your stream. The path to your specific ffmpeg executable. Video quality settings. S3 file storage.  An example config file with additional features can be viewed below."><meta property="og:type" content="article"><meta property="og:url" content="http://owncast.online/docs/configuration/"><meta property="og:image" content="http://owncast.online/images/logo.png"><meta property="article:modified_time" content="2020-09-28T19:28:01-07:00"><meta property="og:site_name" content="Owncast"><title>Configuration | Owncast</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.2a8fd54db9c69c14e5fc3cbfc444296a02859dd929babe5e0456e3aedc30c19b.css integrity="sha256-Ko/VTbnGnBTl/Dy/xEQpagKFndkpur5eBFbjrtwwwZs="><script defer src=/en.search.min.394acc09260ef5765c95075ee7e143c0c4a9976408d5c74a84ccecedbbcae24d.js integrity="sha256-OUrMCSYO9XZclQde5+FDwMSpl2QI1cdKhMzs7bvK4k0="></script></head><body><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><nav><h2 class=book-brand><a href=/><img src=/favicon.png alt=Logo><span>Owncast</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/>Docs</a><ul><li><a href=/docs/quickstart/>Quickstart</a></li><li><a href=/docs/configuration/ class=active>Configuration</a></li><li><a href=/docs/website/>Web Site + Chat</a></li><li><a href=/docs/embed/>Embedding</a></li><li><a href=/docs/broadcasting/>Broadcasting Software</a></li><li><a href=/docs/encoding/>Encoding</a></li><li><a href=/docs/s3/>External Storage (S3)</a></li><li><a href=/docs/building/>Building from Source</a></li><li><a href=/docs/troubleshooting/>Troubleshooting</a></li></ul></li><li><a href=/docs/faq/>F.A.Q.</a></li><li><a href=/usecases/>Use Cases</a></li><li><a href=/posts/>Blog</a></li><li><a href=/contribute>Contribute</a></li><li><a href=/contact>Contact</a></li></ul></nav><script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
 <strong>Configuration</strong>
 <label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#video-quality>Video Quality</a><ul><li><a href=#important-caveats>Important caveats</a></li></ul></li><li><a href=#external-links>External links</a></li><li><a href=#full-example>Full Example</a></li></ul></nav></aside></header><article class=markdown><h1 id=configuration>Configuration
@@ -38,11 +38,11 @@
     - software
     - animal crossing
 
-  <span style=color:#75715e># https://github.com/gabek/owncast/blob/master/doc/configuration.md#external-links</span>
+  <span style=color:#75715e># https://github.com/owncast/owncast/blob/master/doc/configuration.md#external-links</span>
   <span style=color:#75715e># for full list of supported social links.  All optional.</span>
   <span style=color:#66d9ef>socialHandles</span>:
     - <span style=color:#66d9ef>platform</span>: github
-      <span style=color:#66d9ef>url</span>: https://github.com/gabek/owncast
+      <span style=color:#66d9ef>url</span>: https://github.com/owncast/owncast
     - <span style=color:#66d9ef>platform</span>: instagram
       <span style=color:#66d9ef>url</span>: http://instagram.biz/owncast
     - <span style=color:#66d9ef>platform</span>: facebook
@@ -61,7 +61,7 @@
   <span style=color:#66d9ef>offlineContent</span>: static/offline.m4v
 
   <span style=color:#75715e># Determine the bitrate of your stream variants.</span>
-  <span style=color:#75715e># See https://github.com/gabek/owncast/blob/master/doc/configuration.md#video-quality for details.</span>
+  <span style=color:#75715e># See https://github.com/owncast/owncast/blob/master/doc/configuration.md#video-quality for details.</span>
   <span style=color:#66d9ef>streamQualities</span>:
     - <span style=color:#66d9ef>low</span>:
       <span style=color:#75715e># Higher the bitrate, the better it looks, but it requires more bandwidth to consume.</span>
@@ -84,7 +84,7 @@
 <span style=color:#66d9ef>files</span>:
   <span style=color:#66d9ef>maxNumberInPlaylist</span>: <span style=color:#ae81ff>4</span>
 
-<span style=color:#75715e># Read https://github.com/gabek/owncast/blob/master/doc/S3.md for S3 config details.</span>
+<span style=color:#75715e># Read https://github.com/owncast/owncast/blob/master/doc/S3.md for S3 config details.</span>
 <span style=color:#66d9ef>s3</span>:
   <span style=color:#66d9ef>enabled</span>: <span style=color:#66d9ef>false</span>
   <span style=color:#66d9ef>endpoint</span>: https://s3.us-west<span style=color:#ae81ff>-2.</span>amazonaws.com

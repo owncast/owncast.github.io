@@ -20,11 +20,11 @@ instanceDetails:
     - software
     - animal crossing
 
-  # https://github.com/gabek/owncast/blob/master/doc/configuration.md#external-links
+  # https://github.com/owncast/owncast/blob/master/doc/configuration.md#external-links
   # for full list of supported social links.  All optional.
   socialHandles:
     - platform: github
-      url: https://github.com/gabek/owncast
+      url: https://github.com/owncast/owncast
     - platform: instagram
       url: http://instagram.biz/owncast
     - platform: facebook
@@ -43,7 +43,7 @@ videoSettings:
   offlineContent: static/offline.m4v
 
   # Determine the bitrate of your stream variants.
-  # See https://github.com/gabek/owncast/blob/master/doc/configuration.md#video-quality for details.
+  # See https://github.com/owncast/owncast/blob/master/doc/configuration.md#video-quality for details.
   streamQualities:
     - low:
       # Higher the bitrate, the better it looks, but it requires more bandwidth to consume.
@@ -66,7 +66,7 @@ videoSettings:
 files:
   maxNumberInPlaylist: 4
 
-# Read https://github.com/gabek/owncast/blob/master/doc/S3.md for S3 config details.
+# Read https://github.com/owncast/owncast/blob/master/doc/S3.md for S3 config details.
 s3:
   enabled: false
   endpoint: https://s3.us-west-2.amazonaws.com
