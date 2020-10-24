@@ -1,97 +1,148 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2059
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# Install configuration
+if ! [ "${OWNCAST_VERSION:-}" ]; then
+  OWNCAST_VERSION="0.0.2"
+fi
+
+if ! [ "${OWNCAST_INSTALL_DIRECTORY:-}" ]; then
+  OWNCAST_INSTALL_DIRECTORY="$(pwd)/owncast"
+fi
+
+INSTALL_TEMP_DIRECTORY="$(mktemp -d)"
+
+# Set up an exit handler so we can print a help message on failures.
+_success=false
+shutdown () {
+  if [ $_success = false ]; then
+    printf "Your Owncast installation did not complete successfully.\n"
+    printf "Please report your issue at https://github.com/owncast/owncast/issues\n"
+  fi
+  rm -rf "$INSTALL_TEMP_DIRECTORY"
+}
+trap shutdown INT TERM ABRT EXIT
+
+# Formatting escape codes.
 RED='\033[0;31m'
 PURPLE='\033[0;35m'
 BLUE='\033[1;34m'
 GREEN='\033[1;32m'
 BOLD='\033[1m'
-UNDERLINE=`tput smul`
+UNDERLINE='\033[4m'
 NC='\033[0m' # No Color
 
-VERSION="0.0.2"
-
-# Activity spinner
+# Activity spinner for background processes.
 spinner() {
-  local -r pid="${1}"
   local -r delay='0.3'
   local spinstr='\|/-'
   local temp
-  while ps a | awk '{print $1}' | grep -q "${pid}"; do
+  while ps -p "$1" >> /dev/null; do
     temp="${spinstr#?}"
     printf " [${BLUE}%c${NC}]  " "${spinstr}"
     spinstr=${temp}${spinstr%"${temp}"}
     sleep "${delay}"
     printf "\b\b\b\b\b\b"
   done
-}
-
-# End the activity spinner and clear the line
-exitSpinner() {
-  kill "${spinpid}"
-  wait $spinpid 2>/dev/null
   printf "\r"
 }
 
-printf "${PURPLE}${BOLD}Owncast Installer v${VERSION} ${NC}\n\n"
+# Print an error message and exit the program.
+errorAndExit() {
+  printf "${RED}ERROR:${NC} %s" "$1"
+  exit 1;
+}
 
-# Determine operating system
-OS=$(uname -s)
+# Check for a required tool, or exit
+requireTool() {
+  which "$1" >> /dev/null && EC=$? || EC=$?
+  if [ $EC != 0 ]; then
+    errorAndExit "Could not locate \"$1\", which is required for installation."
+  fi
+}
 
-if [ $OS = "Darwin" ]; then
-  PLATFORM="macOS"
-  FFMPEG_VERSION="4.3.1"
-  FFMPEG_DOWNLOAD_URL="https://evermeet.cx/ffmpeg/ffmpeg-${FFMPEG_VERSION}.zip"
-elif [ $OS = "Linux" ]; then
-  # TODO: Figure out the actual architecture
-  PLATFORM="linux"
-  FFMPEG_VERSION="b4.3.1"
-  FFMPEG_ARCH="linux-x64"
-  FFMPEG_DOWNLOAD_URL="https://github.com/eugeneware/ffmpeg-static/releases/download/${FFMPEG_VERSION}/${FFMPEG_ARCH}"
-else
-  exit 1
-fi
+main () {
+  printf "${PURPLE}${BOLD}Owncast Installer v%s ${NC}\n\n" "$OWNCAST_VERSION"
 
-# Build release download URL
-URL="https://github.com/owncast/owncast/releases/download/v${VERSION}/owncast-${PLATFORM}-${VERSION}.zip"
-TARGET_FILE="owncast-${PLATFORM}-${VERSION}.zip"
+  requireTool "curl"
+  requireTool "unzip"
 
-# Create target directory
-mkdir -p ./owncast
-cd owncast
-printf "${GREEN}Created${NC} directory  [${GREEN}✓${NC}]\n"
+  # Determine operating system & architecture
+  case $(uname -s) in
+    "Darwin")
+      PLATFORM="macOS"
+      FFMPEG_VERSION="4.3.1"
+      FFMPEG_DOWNLOAD_URL="https://evermeet.cx/ffmpeg/ffmpeg-${FFMPEG_VERSION}.zip"
+      FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"
+      ;;
+    "Linux")
+      case "$(uname -m)" in
+      "x86_64")
+        FFMPEG_ARCH="linux-x64"
+        ;;
+      i?86)
+        FFMPEG_ARCH="linux-ia32"
+        ;;
+      *)
+        errorAndExit "Unsupported CPU architecture $(uname -m)"
+        ;;
+      esac
+      PLATFORM="linux"
+      FFMPEG_VERSION="b4.3.1"
+      FFMPEG_DOWNLOAD_URL="https://github.com/eugeneware/ffmpeg-static/releases/download/${FFMPEG_VERSION}/${FFMPEG_ARCH}"
+      FFMPEG_TARGET_FILE="${OWNCAST_INSTALL_DIRECTORY}/ffmpeg"
+      ;;
+    *)
+      errorAndExit "Unsupported operating system $(uname -s)"
+      ;;
+  esac
 
-# Download release
-printf "${BLUE}Downloading${NC} Owncast v${VERSION} for ${PLATFORM}"
-spinner & spinpid=$!
-curl -s -L ${URL} --output ${TARGET_FILE}
-exitSpinner
-printf "${GREEN}Downloaded${NC} Owncast v${VERSION} for ${PLATFORM}  [${GREEN}✓${NC}]\n"
+  # Build release download URL
+  OWNCAST_URL="https://github.com/owncast/owncast/releases/download/v${OWNCAST_VERSION}/owncast-${PLATFORM}-${OWNCAST_VERSION}.zip"
+  OWNCAST_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/owncast-${PLATFORM}-${OWNCAST_VERSION}.zip"
 
-# Check for unzip
-which unzip >> /dev/null
-if [ $? -ne 0 ]; then
-  printf "${RED}ERROR:${NC} Unable to unzip ${TARGET_FILE} because unzip is not found on your system."
-  exit 1
-fi
+  # Create target directory
+  mkdir -p "$OWNCAST_INSTALL_DIRECTORY"
+  printf "${GREEN}Created${NC} directory  [${GREEN}✓${NC}]\n"
 
-# Unzip release
-unzip -oq ${TARGET_FILE}
+  # Download release
+  printf "${BLUE}Downloading${NC} Owncast v${OWNCAST_VERSION} for ${PLATFORM}"
+  curl -s -L ${OWNCAST_URL} --output "${OWNCAST_TARGET_FILE}" &
+  spinner $!
+  printf "${GREEN}Downloaded${NC} Owncast v${OWNCAST_VERSION} for ${PLATFORM}  [${GREEN}✓${NC}]\n"
 
-# Delete release zip file
-rm $TARGET_FILE
+  # Unzip release
+  unzip -oq "$OWNCAST_TARGET_FILE" -d "$OWNCAST_INSTALL_DIRECTORY"
 
-# Check for ffmpeg
-which ffmpeg >> /dev/null
-if [ $? -ne 0 ]; then
-  # Download ffmpeg
-  FFMPEG_TARGET_FILE="ffmpeg.zip"
-  printf "${BLUE}Downloading${NC} ffmpeg v${FFMPEG_VERSION} "
-  spinner & spinpid=$!
-  curl -s -L ${FFMPEG_DOWNLOAD_URL} --output ${FFMPEG_TARGET_FILE}
-  exitSpinner
-  printf "${GREEN}Downloaded${NC} ffmpeg because it was not found on your system [${GREEN}✓${NC}]\n"
-  unzip -oq ${FFMPEG_TARGET_FILE}
-  rm $FFMPEG_TARGET_FILE
-fi
+  # Delete release zip file
+  rm "$OWNCAST_TARGET_FILE"
 
-printf "\n"
-printf "${GREEN}Success!${NC} Run owncast by changing to the ${BOLD}owncast${NC} directory and run ${BOLD}./owncast${NC}.  The default port is ${BOLD}8080${NC} and the default streaming key is ${BOLD}abc123${NC}.\nVisit ${UNDERLINE}https://owncast.online/docs/configuration/${NC} to learn how to configure your new Owncast server."
-printf "\n\n"
+  # Check for ffmpeg
+  which ffmpeg >> /dev/null && EC=$? || EC=$?
+  if [ $EC -ne 0 ]; then
+    # Download ffmpeg
+    printf "${BLUE}Downloading${NC} ffmpeg v${FFMPEG_VERSION} "
+    curl -s -L ${FFMPEG_DOWNLOAD_URL} --output "${FFMPEG_TARGET_FILE}" &
+    spinner $!
+    printf "${GREEN}Downloaded${NC} ffmpeg because it was not found on your system [${GREEN}✓${NC}]\n"
+    if [[ "$FFMPEG_TARGET_FILE" == *.zip ]]; then
+      unzip -oq "$FFMPEG_TARGET_FILE" -d "$OWNCAST_INSTALL_DIRECTORY"
+      rm "$FFMPEG_TARGET_FILE"
+    fi
+    chmod u+x "${OWNCAST_INSTALL_DIRECTORY}/ffmpeg"
+  fi
+
+  _success=true
+
+  printf "\n"
+  printf "${GREEN}Success!${NC} Run owncast by changing to the ${BOLD}owncast${NC} directory and run ${BOLD}./owncast${NC}.\n"
+  printf "The default port is ${BOLD}8080${NC} and the default streaming key is ${BOLD}abc123${NC}.\n"
+  printf "Visit ${UNDERLINE}https://owncast.online/docs/configuration/${NC} to learn how to configure your new Owncast server."
+  printf "\n\n"
+}
+
+main
