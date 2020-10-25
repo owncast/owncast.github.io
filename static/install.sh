@@ -74,6 +74,7 @@ main () {
   # Determine operating system & architecture
   case $(uname -s) in
     "Darwin")
+      OWNCAST_ARCH="64bit"
       PLATFORM="macOS"
       FFMPEG_VERSION="4.3.1"
       FFMPEG_DOWNLOAD_URL="https://evermeet.cx/ffmpeg/ffmpeg-${FFMPEG_VERSION}.zip"
@@ -83,9 +84,11 @@ main () {
       case "$(uname -m)" in
       "x86_64")
         FFMPEG_ARCH="linux-x64"
+        OWNCAST_ARCH="64bit"
         ;;
       i?86)
         FFMPEG_ARCH="linux-ia32"
+        OWNCAST_ARCH="32bit"
         ;;
       *)
         errorAndExit "Unsupported CPU architecture $(uname -m)"
@@ -102,8 +105,8 @@ main () {
   esac
 
   # Build release download URL
-  OWNCAST_URL="https://github.com/owncast/owncast/releases/download/v${OWNCAST_VERSION}/owncast-${PLATFORM}-${OWNCAST_VERSION}.zip"
-  OWNCAST_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/owncast-${PLATFORM}-${OWNCAST_VERSION}.zip"
+  OWNCAST_URL="https://github.com/owncast/owncast/releases/download/v${OWNCAST_VERSION}/owncast-${OWNCAST_VERSION}-${PLATFORM}-${OWNCAST_ARCH}.zip"
+  OWNCAST_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/owncast-${OWNCAST_VERSION}-${PLATFORM}-${OWNCAST_ARCH}.zip"
 
   # Create target directory
   mkdir -p "$OWNCAST_INSTALL_DIRECTORY"
