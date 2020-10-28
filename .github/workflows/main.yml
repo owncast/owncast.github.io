@@ -4,6 +4,9 @@ on:
   push:
     branches:
     - 'master'
+  schedule:
+    # Every six hours update the web site
+    - cron:  '0 */6 * * *'
 
 jobs:
   deploy:
@@ -22,6 +25,19 @@ jobs:
 
       - name: Fetch Collaborators
         run: curl https://api.github.com/repos/owncast/owncast/contributors > data/collaborators.json
+
+      - name: Add current development documentation
+        run: mkdir -p static/api/development && curl https://raw.githubusercontent.com/owncast/owncast/master/doc/api/index.html > static/api/development/index.html
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v5
+        with:
+          author_name: Owncast
+          author_email: owncast@owncast.online
+          message: "Update dynamic content"
+          add: "static/api/development/index.html data/collaborators.json"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
         run: hugo --minify
