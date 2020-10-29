@@ -8,7 +8,7 @@ headless: true
   - [Configuration](/docs/configuration/)
   - [Web Site + Chat](/docs/website/)
   - [Embedding](/docs/embed/)
-  - [API Reference](/api/)
+  - [API Reference](/docs/api/)
   - [Broadcasting Software](/docs/broadcasting/)
   - [Encoding](/docs/encoding/)
   - [External Storage (S3)](/docs/s3/)
