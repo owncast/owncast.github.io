@@ -6,12 +6,16 @@ title: API Documentation
 
 Owncast offers an API to integrate its services in other interfaces, like the [Owncast Admin Panel](https://github.com/owncast/owncast-admin).
 
+Documentation for each release's APIs can be found with the release notes of each version.
+
+{{< button href="/posts" >}}Releases{{< /button >}}
+
 ## The latest API
-
 You can checkout the API documentation with the latest development that matches the `master` branch of the [git repository](https://github.com/owncast/owncast).
-Please mind that this version might be unstable as does not have the testing that Owncast releases endure.
+Please mind that this version might be unstable master is often under development as does not have the testing that Owncast releases endure.
 
-{{< button href="./development.html" >}}Latest API{{< /button >}}
+{{< button href="/api/development" >}}Latest API{{< /button >}}
+
 
 <!--
 ## API by their releases
