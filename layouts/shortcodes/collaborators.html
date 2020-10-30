@@ -24,6 +24,7 @@
 
 <div class="contributor-box">
 {{ range $.Site.Data.collaborators }}
+{{ if not (in .login "[bot]") }}
 <span class="contributor-item">
     <figure>
         <a href="{{.html_url}}">
@@ -34,5 +35,6 @@
         </a>
     </figure>
 </span>
+{{ end }}
 {{ end }}
 </div>
