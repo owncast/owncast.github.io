@@ -2,7 +2,7 @@
 headless: true
 ---
 
-
+- [About](/about/)
 - [Docs](/)
   - [Quickstart](/docs/quickstart/)
   - [Configuration](/docs/configuration/)
