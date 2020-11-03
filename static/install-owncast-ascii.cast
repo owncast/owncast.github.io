@@ -1,8 +1,7 @@
 {"version": 2, "width": 152, "height": 15, "timestamp": 1604354432, "env": {"SHELL": "/bin/zsh", "TERM": "xterm-256color"}}
-[6.346899, "o", "\u001b[7mcurl -s https://owncast.online/install.sh | bash\u001b[27m"]
-[7.160387, "o", "\u001b[48D\u001b[27mc\u001b[27mu\u001b[27mr\u001b[27ml\u001b[27m \u001b[27m-\u001b[27ms\u001b[27m \u001b[27mh\u001b[27mt\u001b[27mt\u001b[27mp\u001b[27ms\u001b[27m:\u001b[27m/\u001b[27m/\u001b[27mo\u001b[27mw\u001b[27mn\u001b[27mc\u001b[27ma\u001b[27ms\u001b[27mt\u001b[27m.\u001b[27mo\u001b[27mn\u001b[27ml\u001b[27mi\u001b[27mn\u001b[27me\u001b[27m/\u001b[27mi\u001b[27mn\u001b[27ms\u001b[27mt\u001b[27ma\u001b[27ml\u001b[27ml\u001b[27m.\u001b[27ms\u001b[27mh\u001b[27m \u001b[27m|\u001b[27m \u001b[27mb\u001b[27ma\u001b[27ms\u001b[27mh"]
+[7.160387, "o", "\u001b[48D\u001b[27m$ c\u001b[27mu\u001b[27mr\u001b[27ml\u001b[27m \u001b[27m-\u001b[27ms\u001b[27m \u001b[27mh\u001b[27mt\u001b[27mt\u001b[27mp\u001b[27ms\u001b[27m:\u001b[27m/\u001b[27m/\u001b[27mo\u001b[27mw\u001b[27mn\u001b[27mc\u001b[27ma\u001b[27ms\u001b[27mt\u001b[27m.\u001b[27mo\u001b[27mn\u001b[27ml\u001b[27mi\u001b[27mn\u001b[27me\u001b[27m/\u001b[27mi\u001b[27mn\u001b[27ms\u001b[27mt\u001b[27ma\u001b[27ml\u001b[27ml\u001b[27m.\u001b[27ms\u001b[27mh\u001b[27m \u001b[27m|\u001b[27m \u001b[27mb\u001b[27ma\u001b[27ms\u001b[27mh"]
 [7.160584, "o", "\u001b[?1l\u001b>\u001b[?2004l\r\r\n"]
-[7.161302, "o", "\u001b]2;curl -s https://owncast.online/install.sh | bash\u0007\u001b]1;curl\u0007"]
+[7.161302, "o", "\u001b]2; $ curl -s https://owncast.online/install.sh | bash\u0007\u001b]1;curl\u0007"]
 [7.522439, "o", "\u001b[0;35m\u001b[1mOwncast Installer v0.0.3 \u001b[0m\r\n\r\n"]
 [7.531843, "o", "\u001b[1;32mCreated\u001b[0m directory  [\u001b[1;32m✓\u001b[0m]\r\n\u001b[1;34mDownloading\u001b[0m Owncast v0.0.3 for linux"]
 [7.535284, "o", " [\u001b[1;34m\\\u001b[0m]  "]
