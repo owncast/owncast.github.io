@@ -17,6 +17,7 @@ Owncast supports HLS [Adaptive bitrate streaming](https://en.wikipedia.org/wiki/
 You can edit the `config.yaml` file and add as many stream _variants_ as you like under the `videoSettings` block, like so:
 
 {{< highlight yaml >}}
+videoSettings:
   streamQualities:
     - low:
       videoBitrate: 400
