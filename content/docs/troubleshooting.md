@@ -38,3 +38,7 @@ If you have a slow upload connection, or are uploading to an external storage se
 Try decreasing the values for `chunkLengthInSeconds` and `maxNumberInPlaylist` in the [config file](/docs/configuration).  This will keep the user closer to live, but give the client less playable segments to work with, leaving less room for any network blips.  In general the viewer will be approximately `chunkLengthInSeconds` * `maxNumberInPlaylist` seconds behind live.  If you have a machine that is able to process video quickly you may be able to get down to 8-10 seconds, but with little room for error.
 
 It's up to you to decide you want lower delays over less reliability or a more reliable stream with additional delay.
+
+## Chat is disabled
+
+The chat is only enabled when a stream is active.  This is to stop drive-by spammy chat messages by people when no stream is taking place.
