@@ -56,7 +56,7 @@ The instructions for Webinars and Personal Meeting Rooms are similar, [see Zoom'
 
 ### Using with ffmpeg
 
-Streaming with ffmpeg is quite easy. Assuming you are using a HDMI grabber device connected via USB, the grabbed stream might become as /dev/video2, and the audio stream be provided as alsa device hw:1,0. You can then stream like this:
+Streaming with ffmpeg is quite easy. You can stream any connected webcam or HDMI grabber that appears in `/dev/video*` and incoming alsa audio devices. In this example, the `/dev/video2` video device and the `hw:1,0` alsa audio device are used:
 ```
 ffmpeg -f alsa -ac 2 -i hw:1,0 -thread_queue_size 64 \
   -f v4l2 -framerate 60 -video_size 1280x720 -input_format yuyv422 -i /dev/video2 \
