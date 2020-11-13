@@ -53,3 +53,14 @@ Duration: 00:00:00.00, start: 0.000000, bitrate: N/A
 {{< / highlight >}}
 
 The instructions for Webinars and Personal Meeting Rooms are similar, [see Zoom's support page](https://support.zoom.us/hc/en-us/articles/115001777826-Live-Streaming-Meetings-or-Webinars-Using-a-Custom-Service) for more information.
+
+### Using with ffmpeg
+
+Streaming with ffmpeg is quite easy. Assuming you are using a HDMI grabber device connected via USB, the grabbed stream might become as /dev/video2, and the audio stream be provided as alsa device hw:1,0. You can then stream like this:
+```
+ffmpeg -f alsa -ac 2 -i hw:1,0 -thread_queue_size 64 \
+  -f v4l2 -framerate 60 -video_size 1280x720 -input_format yuyv422 -i /dev/video2 \
+  -c:v libx264 -preset veryfast -b:v 1984k -maxrate 1984k -bufsize 3968k \
+  -vf "format=yuv420p" -g 60 -c:a aac -b:a 128k -ar 44100 \
+  -f flv rtmp://<ip-of-your-server>/live/<your-streaming-key>
+```
