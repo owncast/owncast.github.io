@@ -42,3 +42,7 @@ It's up to you to decide you want lower delays over less reliability or a more r
 ## Chat is disabled
 
 The chat is only enabled when a stream is active.  This is to stop drive-by spammy chat messages by people when no stream is taking place.
+
+## Misc video issues
+
+If you're running into random video stability issues make sure you're running a supported version of ffmpeg.  [Download ffmpeg 4.1.5 or above](https://ffmpeg.org/download.html).

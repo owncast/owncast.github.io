@@ -16,7 +16,7 @@ You can choose between downloading a zip file of Owncast, or using Docker.
 
 ### Download and run a release
 
-1. Install [`ffmpeg`](https://ffmpeg.org/download.html) if you haven't.
+1. Install [`ffmpeg`](https://ffmpeg.org/download.html) if you haven't.  Use version 4.1.5 or above.
 1. Make a directory to run the service from, and download a release from https://github.com/owncast/owncast/releases into that directory.
 1. Unzip the release's archive for linux or macOS: `unzip owncast-linux-x.x.x.zip`.
 1. [Edit `config.yaml` as detailed below](#configure).  Specifically your stream key and `ffmpeg` location.
