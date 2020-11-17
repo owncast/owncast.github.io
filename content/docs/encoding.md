@@ -8,9 +8,13 @@ It's hard to give specific settings that will give you the best quality and perf
 
 Owncast takes your source stream and converts it to short, individual video segments.  A list of these segments is created that your viewer's player will continue to read and play all the segments in order.  This is all using a specification called [HLS](https://developer.apple.com/documentation/http_live_streaming/understanding_the_http_live_streaming_architecture) or HTTP Live Streaming.
 
-{{< img src="https://docs-assets.developer.apple.com/published/88e87744a3/de18e941-81de-482f-843d-834a4dd3aa71.png" align="center">}}
+This video from Jon Dahl is gives a very good overview of internet video, starting with _"what happens when you press play in your web browser?"_ and touching on every piece of the stack, backend and frontend.  It translates very well to how Owncast works and is suggested if you want to learn more.
+
+{{< youtube id="rb83esfHnW8?start=539" >}}
 
 In this case Owncast works as the Media encoder, Stream segmenter, and distribution web server.  However [Owncast supports video being distributed via 3rd party storage as well](/docs/s3), so in that case the video segments would be distributed from there, instead.
+
+{{< img src="https://docs-assets.developer.apple.com/published/88e87744a3/de18e941-81de-482f-843d-834a4dd3aa71.png" align="center">}}
 
 Multiple playlists are supported, one for each specific stream quality you want to provide your users.  Each one increases the amount of work being completed and can slow down everything else.
 
