@@ -19,4 +19,4 @@ We have a open discussion board for questions, bugs and feature requests. Just o
 
 For security incidents, please send an email to Gabe (see above).
 
-We are not responsible for the content that other people stream using Owncast nor can we interrupt how people use this open software. To takedown illegal streams, please check with the server administrators and their infrastructure providers.
+We are not responsible for the content that people stream using Owncast nor do we have insight into how people may use this software.  For specific concerns contact the owners of the servers in question.
