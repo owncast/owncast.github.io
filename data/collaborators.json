@@ -18,7 +18,7 @@
     "received_events_url": "https://api.github.com/users/gabek/received_events",
     "type": "User",
     "site_admin": false,
-    "contributions": 445
+    "contributions": 447
   },
   {
     "login": "gingervitis",
@@ -60,7 +60,7 @@
     "received_events_url": "https://api.github.com/users/dependabot%5Bbot%5D/received_events",
     "type": "Bot",
     "site_admin": false,
-    "contributions": 36
+    "contributions": 37
   },
   {
     "login": "muesli",
@@ -147,27 +147,6 @@
     "contributions": 7
   },
   {
-    "login": "SoldierCorp",
-    "id": 1775881,
-    "node_id": "MDQ6VXNlcjE3NzU4ODE=",
-    "avatar_url": "https://avatars1.githubusercontent.com/u/1775881?v=4",
-    "gravatar_id": "",
-    "url": "https://api.github.com/users/SoldierCorp",
-    "html_url": "https://github.com/SoldierCorp",
-    "followers_url": "https://api.github.com/users/SoldierCorp/followers",
-    "following_url": "https://api.github.com/users/SoldierCorp/following{/other_user}",
-    "gists_url": "https://api.github.com/users/SoldierCorp/gists{/gist_id}",
-    "starred_url": "https://api.github.com/users/SoldierCorp/starred{/owner}{/repo}",
-    "subscriptions_url": "https://api.github.com/users/SoldierCorp/subscriptions",
-    "organizations_url": "https://api.github.com/users/SoldierCorp/orgs",
-    "repos_url": "https://api.github.com/users/SoldierCorp/repos",
-    "events_url": "https://api.github.com/users/SoldierCorp/events{/privacy}",
-    "received_events_url": "https://api.github.com/users/SoldierCorp/received_events",
-    "type": "User",
-    "site_admin": false,
-    "contributions": 6
-  },
-  {
     "login": "mattdsteele",
     "id": 389077,
     "node_id": "MDQ6VXNlcjM4OTA3Nw==",
@@ -184,6 +163,27 @@
     "repos_url": "https://api.github.com/users/mattdsteele/repos",
     "events_url": "https://api.github.com/users/mattdsteele/events{/privacy}",
     "received_events_url": "https://api.github.com/users/mattdsteele/received_events",
+    "type": "User",
+    "site_admin": false,
+    "contributions": 7
+  },
+  {
+    "login": "SoldierCorp",
+    "id": 1775881,
+    "node_id": "MDQ6VXNlcjE3NzU4ODE=",
+    "avatar_url": "https://avatars1.githubusercontent.com/u/1775881?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/SoldierCorp",
+    "html_url": "https://github.com/SoldierCorp",
+    "followers_url": "https://api.github.com/users/SoldierCorp/followers",
+    "following_url": "https://api.github.com/users/SoldierCorp/following{/other_user}",
+    "gists_url": "https://api.github.com/users/SoldierCorp/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/SoldierCorp/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/SoldierCorp/subscriptions",
+    "organizations_url": "https://api.github.com/users/SoldierCorp/orgs",
+    "repos_url": "https://api.github.com/users/SoldierCorp/repos",
+    "events_url": "https://api.github.com/users/SoldierCorp/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/SoldierCorp/received_events",
     "type": "User",
     "site_admin": false,
     "contributions": 6
