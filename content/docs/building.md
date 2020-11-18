@@ -5,8 +5,7 @@
 1. Clone the repo.  `git clone https://github.com/owncast/owncast`
 1. Follow the above [Getting Started](#getting-started) instructions, making sure ffmpeg exists and your config file is set.
 1. Make any [configuration](/docs/configuration) changes.
-1. `go run main.go` on the first run will download the required packages needed for the application to build.
-1. It will start running the same as in the above [Usage](#usage) instructions and you can point [OBS to your localhost](#usage-with-obs) instance of it.
+1. `go run main.go pkged.go` will run the application.
 
 
 ## Using Docker
