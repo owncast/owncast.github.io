@@ -15,7 +15,6 @@ headless: true
   - [Building from Source](/docs/building/)
   - [Troubleshooting](/docs/troubleshooting/)
 - [F.A.Q.](/docs/faq/)
-- [Use Cases](/usecases/)
 - [Blog](/posts/)
 - [Contribute](/contribute)
 - [Contact](/contact)
