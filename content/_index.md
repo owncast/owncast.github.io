@@ -15,7 +15,7 @@ This created an explosion of live streaming on Facebook Live, YouTube Live, Inst
 
 {{< img src="/images/owncast-screenshot.png" align="center" width="100%">}}
 
-That's when I wanted a better option for people. Something you could run yourself and get all the functionality of these services, where you could live stream to an audience and and allow them to take part in the chat, just like they've been used to on all the other services.  **There should be a independent, standalone _Twitch in a Box_.**
+There deserves to be a better option for people. Something you could run yourself and get all the functionality of these services, where you could live stream to an audience and and allow them to take part in the chat, just like they've been used to on all the other services.  **There should be a independent, standalone _Twitch in a Box_.**
 
 ---
 

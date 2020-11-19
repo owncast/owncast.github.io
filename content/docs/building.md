@@ -11,7 +11,7 @@
 ## Using Docker
 
 1. Download the code: `git clone https://github.com/owncast/owncast`
-1. Copy `config-example.yaml` to `config.yaml`
+1. Copy `config-default.yaml` to `config.yaml`
 1. [Edit `config.yaml`](#configure) with a file editor of your choice and change the path of ffmpeg by appending `ffmpegPath: /usr/bin/ffmpeg` at the top level of the yaml.
 1. Make any [configuration](/docs/configuration) changes.
 1. If you ever make any future config file changes you must rerun the `docker build` step otherwise you can just run the `docker run` step to run the service going forward.
