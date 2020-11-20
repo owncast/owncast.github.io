@@ -23,7 +23,7 @@ You can choose between downloading a zip file of Owncast, or using Docker.
 1. Run `./owncast` to start the service.
 
 
-## Use a Docker image
+### Use a Docker image
 
 1. Find the recent version on Docker [by visiting Dockerhub](https://hub.docker.com/repository/registry-1.docker.io/gabekangas/owncast/tags?page=1).
 1. `docker pull gabekangas/owncast:x.x.x` replacing x.x.x with the tag
@@ -47,6 +47,7 @@ You can choose between downloading a zip file of Owncast, or using Docker.
 ## Test
 1. Point your broadcasting software at your new server using `rtmp://yourserver/live` and the stream key you set above and start your stream.
 1. Access your server in your web browser by visiting `http://yourserver:8080`.
+1. You can visit the Admin dashboard at `http://yourserver:8080/admin` where you can check visitor and server stats. To login, use `admin` and the stream key as the password.
 
 
 ### That's it!

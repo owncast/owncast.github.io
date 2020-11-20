@@ -6,6 +6,8 @@ summary: "0.0.3 has a new admin dashboard to help get an overview of the configu
 
 ## Owncast Admin
 
+{{< img src="/images/owncast-admin-0.0.3.png" align="center" width="100%">}}
+
 [v0.0.3](https://github.com/owncast/owncast/milestone/3?closed=1) introduces the web admin dashboard that you can use to get an overview of your owncast server.
 
 Visit `/admin` and login with `admin` as the username and your stream key as the password.

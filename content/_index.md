@@ -29,8 +29,6 @@ Test out Owncast without installing anything at all.  Learn how you can [point y
 
 The goal is to have a single service that you can run that works out of the box. **Visit the [Quickstart](/docs/quickstart/) to get up and running.**
 
-{{< img src="/images/owncast-admin-0.0.3.png" align="center" width="100%">}}
-
 ## Contributors
 
 {{< collaborators >}}
