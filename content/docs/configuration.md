@@ -62,6 +62,21 @@ More stream quality variants requires more disk space, since it's another copy o
 
 Update your `tags` in the config to display the topics type of content you want to call attention to.
 
+## Owncast Directory
+
+To help people discover streams by people using Owncast we have an optional Owncast directory you can add yourself to.  Set your `tags` are set in your config file along with if your stream is `nsfw`.  Set the `instanceURL` to be the public URL to your Owncast instance that you want people to be linked to.
+
+Adding the following to your config will list your server for others to discover.
+
+{{< highlight yaml >}}
+yp:
+  enabled: true
+  instanceURL: https://stream.myserver.org
+{{< / highlight >}}
+
+{{<versionsupport feature="owncast directory" version="0.0.3">}}
+
+
 ## Full Example
 
 Below, you can see all config items:
