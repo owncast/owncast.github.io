@@ -17,6 +17,7 @@ We will continue to add functionality to this over time, so please [let us know 
 ## Upgrade instructions from 0.0.2
 
 1. Stop the service from running.
+1. Backup your `config.yaml` and any other files you may have customized and want to save or refer to later.
 1. Move the zip file of 0.0.3 to your previous install location.
 1. Unzip the file, allowing it to overwrite old files.
 1. Edit your `config.yaml` file and change the `logo` entry to be a single item, no longer a `small` and `large`.  If you're using the default then it should look like the following: `logo: /img/logo.svg`.  Take note the old `logo` images have been changed to `logo.svg`.
@@ -50,5 +51,5 @@ We will continue to add functionality to this over time, so please [let us know 
 * Large play button is re-displayed when the video player is paused. {{< githubissue 201 >}} 
 * Seek bar has been removed from the player. {{< githubissue 171 >}}
 * Fix for crash when some RTMP sources send unexpected payloads.  {{< githubissue 340 >}} 
-* An internal refactor of the video pipeline that now supports slow encoding and slow upload warnings to help troubleshoot possible issues with playback.  {{< githubissue 151 >}} 
+* An internal refactor of the video pipeline. {{< githubissue 151 >}}
 * `offlineContent` is no longer specified in the config file.
