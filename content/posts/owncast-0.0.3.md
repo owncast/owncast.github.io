@@ -53,3 +53,11 @@ We will continue to add functionality to this over time, so please [let us know 
 * Fix for crash when some RTMP sources send unexpected payloads.  {{< githubissue 340 >}} 
 * An internal refactor of the video pipeline. {{< githubissue 151 >}}
 * `offlineContent` is no longer specified in the config file.
+
+## APIs
+
+This release added some basic read-only APIs for use in the new admin dashboards.  They are authenticated against your stream key just like the admin site is.
+
+You can find the complete set of APIs by visiting the API documentation.
+
+{{< button href="/api/0.0.3" >}}API Documentation{{< /button >}}
