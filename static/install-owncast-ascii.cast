@@ -1,5 +1,4 @@
-{"version": 2, "width": 254, "height": 16, "timestamp": 1606607871, "env": {"SHELL": "/bin/zsh", "TERM": "xterm-256color"}}
-[0.573969, "o", "\u001b[1m\u001b[7m%\u001b[27m\u001b[1m\u001b[0m                                                                                                                                                                                                                                                             \r \r\u001b]2;gabek@Gabes-MacBook-Pro: /tmp/test\u0007\u001b]1;/tmp/test\u0007"]
+{"version": 2, "width": 100, "height": 16, "timestamp": 1606607871, "env": {"SHELL": "/bin/zsh", "TERM": "xterm-256color"}}
 [1.917299, "o", "\r\u001b[0m\u001b[27m\u001b[24m\u001b[Jstreamer@stream.myserver.net $ \u001b[K\u001b[?1h\u001b="]
 [1.91741, "o", "\u001b[?2004h"]
 [2.669505, "o", "c"]
@@ -71,7 +70,6 @@
 [11.981697, "o", "\u001b[1;32mDownloaded\u001b[0m Owncast v0.0.3 for linux  [\u001b[1;32m✓\u001b[0m]\r\n"]
 [12.242702, "o", "\r\n\u001b[1;32mSuccess!\u001b[0m Run owncast by changing to the \u001b[1mowncast\u001b[0m directory and run \u001b[1m./owncast\u001b[0m.\r\nThe default port is \u001b[1m8080\u001b[0m and the default streaming key is \u001b[1mabc123\u001b[0m.\r\n"]
 [12.242746, "o", "Visit \u001b[4mhttps://owncast.online/docs/configuration/\u001b[0m to learn how to configure your new Owncast server.\r\n\r\n"]
-[12.244427, "o", "\u001b[1m\u001b[7m%\u001b[27m\u001b[1m\u001b[0m                                                                                                                                                                                                                                                             \r \r"]
 [12.244523, "o", "\u001b]2;gabek@Gabes-MacBook-Pro: /tmp/test\u0007\u001b]1;/tmp/test\u0007"]
 [12.244671, "o", "\r\u001b[0m\u001b[27m\u001b[24m\u001b[Jstreamer@stream.myserver.net $ \u001b[K"]
 [12.244801, "o", "\u001b[?1h\u001b=\u001b[?2004h"]
@@ -85,7 +83,6 @@
 [15.17492, "o", "\b\u001b[0m \b"]
 [15.175112, "o", "\u001b[?1l\u001b>\u001b[?2004l\r\r\n"]
 [15.176301, "o", "\u001b]2;cd owncast\u0007\u001b]1;cd\u0007"]
-[15.176456, "o", "\u001b[1m\u001b[7m%\u001b[27m\u001b[1m\u001b[0m                                                                                                                                                                                                                                                             \r \r"]
 [15.176499, "o", "\u001b]2;gabek@Gabes-MacBook-Pro: /tmp/test/owncast\u0007\u001b]1;../test/owncast\u0007"]
 [15.176642, "o", "\r\u001b[0m\u001b[27m\u001b[24m\u001b[Jstreamer@stream.myserver.net $ \u001b[K"]
 [15.176685, "o", "\u001b[?1h\u001b="]
