@@ -65,3 +65,13 @@ ffmpeg -f alsa -ac 2 -i hw:1,0 -thread_queue_size 64 \
   -vf "format=yuv420p" -g 60 -c:a aac -b:a 128k -ar 44100 \
   -f flv rtmp://<ip-of-your-server>/live/<your-streaming-key>
 {{< / highlight >}}
+
+
+### Cameras
+
+The following hardware with native live streaming have been tested and work.
+
+* [GoPro Hero 8](https://gopro.com/)
+* [Mevo](https://mevo.com/)
+
+If you have tested other hardware with Owncast we'd love to hear about it!
