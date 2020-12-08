@@ -6,7 +6,7 @@ title: Home
 
 Owncast is a self-hosted live video and web chat server for use with existing popular broadcasting software.  Point your live stream at a server you personally control and regain ownership over your content.  [Read more about the project](/about).
 
-{{< vimeo 484707748 >}}
+{{< img src="/images/owncast-screenshot.png" align="center" width="100%">}}
 
 ## Start streaming to your own server in seconds
 

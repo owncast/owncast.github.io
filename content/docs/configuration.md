@@ -64,11 +64,24 @@ Update your `tags` in the config to display the topics type of content you want 
 
 ## Owncast Directory
 
-To help people discover streams by people using Owncast we have an optional Owncast directory you can add yourself to.  Set your `tags` are set in your config file along with if your stream is `nsfw`.  Set the `instanceURL` to be the public URL to your Owncast instance that you want people to be linked to.
+To help people discover streams by people using Owncast we have an optional Owncast directory you can add yourself to.  Set your `tags` in your config file along with if your stream is `nsfw`.  Set the `instanceURL` to be the public URL to your Owncast instance that you want people to be linked to.
 
-Adding the following to your config will list your server for others to discover.
+Having the following as a part of your config will list your server for others to discover.
 
 {{< highlight yaml >}}
+instanceDetails:
+  name: Cool Person
+  title: This is my Owncast server
+  logo: /img/logo.svg
+  summary: "I do cool things online and you should watch."
+  tags:
+    - cool stuff
+    - rad stuff
+    - awesome stuff
+
+  # Specify if your stream includes NSFW content.
+  nsfw: false
+
 yp:
   enabled: true
   instanceURL: https://stream.myserver.org
