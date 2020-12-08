@@ -53,7 +53,6 @@ We will continue to add functionality to this over time, so please [let us know 
 * Fix for crash when some RTMP sources send unexpected payloads.  {{< githubissue 340 >}} 
 * An internal refactor of the video pipeline. {{< githubissue 151 >}}
 * `offlineContent` is no longer specified in the config file.
-* Inbound streams with no audio are now supported. {{< githubissue 400 >}}
 
 ## APIs
 
