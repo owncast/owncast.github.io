@@ -43,6 +43,8 @@ It's up to you to decide you want lower delays over less reliability or a more r
 
 The chat is only enabled when a stream is active.  This is to stop drive-by spammy chat messages by people when no stream is taking place.
 
+If you're using nginx (or possibly other web proxies) in front of your Owncast instance make sure it is configured properly to support websockets.  By default it does not pass along the websocket properly.  Please visit [the nginx documentation](https://nginx.org/en/docs/http/websocket.html) to make sure websocket support is configured properly to support Owncast chat.
+
 ## Misc video issues
 
 If you're running into random video stability issues make sure you're running a supported version of ffmpeg.  [Download ffmpeg 4.1.5 or above](https://ffmpeg.org/download.html).
