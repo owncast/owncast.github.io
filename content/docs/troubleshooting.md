@@ -46,3 +46,5 @@ The chat is only enabled when a stream is active.  This is to stop drive-by spam
 ## Misc video issues
 
 If you're running into random video stability issues make sure you're running a supported version of ffmpeg.  [Download ffmpeg 4.1.5 or above](https://ffmpeg.org/download.html).
+
+As an aside, ffmpeg installed via Snap packages do not work due to the sandoxing of Snap distributed software.
