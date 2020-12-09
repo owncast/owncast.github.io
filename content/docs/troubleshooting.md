@@ -50,3 +50,12 @@ If you're using nginx (or possibly other web proxies) in front of your Owncast i
 If you're running into random video stability issues make sure you're running a supported version of ffmpeg.  [Download ffmpeg 4.1.5 or above](https://ffmpeg.org/download.html).
 
 As an aside, ffmpeg installed via Snap packages do not work due to the sandoxing of Snap distributed software.
+
+## Streams without audio are currently not supported
+
+If you're streaming content that has no audio component (such as a camera with no microphone, for example) you may run into issues.  You're only likely to run into this if you're building a stream manually through something like ffmpeg.  And in this case you can insert an audio stream that's empty to resolve the issue.
+
+An example:
+```
+ffmpeg -input_format h264 -f video4linux2 -s 1920x1080 -i /dev/video0 -f lavfi -i anullsrc -c:v copy -c:a aac -shortest -f flv rtmp://192.168.2.11:1935/live/abc123
+```
