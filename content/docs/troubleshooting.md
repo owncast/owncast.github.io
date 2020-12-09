@@ -23,6 +23,8 @@ Many things can be responsible for buffering and issues with the video playback.
 1. Reduce your [stream quality settings](/docs/configuration/#video-quality) to a single variant and a lower [bitrate](/docs/encoding/#bitrate).  Experiment with increasing the bitrate and adding another optional stream quality once you find settings that work for you.
 1. If you are using external storage, make sure you're able to upload to this storage service fast enough.  See below.
 
+To gain some insight into how your stream is performing for people, put your stream URL (https://yourserver/hls/stream.m3u8) into [HLS Analyzer](https://hlsanalyzer.com/) to get a nice overview.  You can see any errors or warnings from the end user's point of view by looking at its results.
+
 ## Slow uploads to external storage
 
 If you have a slow upload connection, or are uploading to an external storage service that is too far away, or not optimized for fast uploads, you may run into an issue where it takes too long to get the video segments uploaded, ultimately not making them available fast enough for them to be used.
