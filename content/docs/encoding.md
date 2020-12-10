@@ -54,7 +54,7 @@ You get "more bang for your buck" the slower you go.  But your server will be pe
 
 **If you're trying to get better quality and smaller files** move to a slower encoding preset.
 
-**If you're getting buffering, errors, or your server just can't keep up** try moving to a faster preset.
+**If you're getting buffering, errors, or your server hardware just can't keep up** try moving to a faster preset.
 
 The default is `veryfast` but adjust as necessary.
 
@@ -64,10 +64,6 @@ The options are, in order from fastest to slowest:
 1. veryfast
 1. faster
 1. fast
-1. medium
-1. slow
-1. slower
-1. veryslow
 
 From the [ffmpeg h.264 encoding guide](https://trac.ffmpeg.org/wiki/Encode/H.264).
 
@@ -77,7 +73,7 @@ Any changes to audio when streaming is additional work in the encoding process. 
 
 ### How you configure your broadcasting software matters.
 
-The more you send to Owncast, the more work it has do to work with it.  This means you should generally not stream to Owncast at a significantly higher or lower quality than you expect to give to your viewers.  It makes no sense to stream to Owncast at 1080p if you're resizing it and downsampling it to something way smaller, because your server has to do that work.  On the other hand it makes no sense to stream to Owncast with a 1000k bitrate and then make it convert it to 2000k since it won't look any better.
+The more you send to Owncast, the more work it has do.  This means you should generally not stream to Owncast at a significantly higher or lower quality than you expect to give to your viewers.  It makes no sense to stream to Owncast at 1080p if you're resizing it and downsampling it to something way smaller, because your server has to do that work.  On the other hand it makes no sense to stream to Owncast with a 1000k bitrate and then make it convert it to 2000k since it won't look any better.
 
 So in short: Try to reasonably figure out what you want to stream to your users and match that as best as possible when setting up your broadcasting software.
 

@@ -61,7 +61,7 @@ videoSettings:
 files:
   maxNumberInPlaylist: 4
 
-# https://owncast.online/docs/s3/ for S3 config details.
+# Read https://owncast.online/docs/s3/ for S3 config details.
 s3:
   enabled: false
   endpoint: https://s3.us-west-2.amazonaws.com
