@@ -13,9 +13,12 @@ bookToC: false
 
 ## Questions or bug reports
 
-We have a open discussion board for questions, bugs and feature requests. Just open an issue :)
+Use any of the below options to get in touch with the Owncast team.  If you're experiencing issues please opan an issue.  Feel free to drop by our chat if you'd like to talk with Owncast community members or want to talk through something in real time.
 
-{{< button href="https://github.com/owncast/owncast/issues" >}}Issues on GitHub{{< /button >}}
+{{< button href="https://github.com/owncast/owncast/discussions" >}}Owncast Discussions{{< /button >}}
+{{< button href="https://github.com/owncast/owncast/issues" >}}Bugs & Issues{{< /button >}}
+{{< button href="https://owncast.rocket.chat" >}}Owncast Community Chat{{< /button >}}
+
 
 For security incidents, please send an email to Gabe (see above).
 
