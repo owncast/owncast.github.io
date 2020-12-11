@@ -1,3 +1,7 @@
+---
+title: "Troubleshooting"
+---
+
 ## CPU and RAM usage alerts
 
 If your hardware is being maxed out then your video may not be processed and delivered fast enough to keep up with the real-time requirements of live video.

@@ -2,6 +2,7 @@
 title: Owncast Demo Servers
 ---
 
+# Owncast Demo Servers
 
 We provide two public Owncast servers for you to see how it works.  One for streaming *to* and one for just watching.
 
@@ -17,6 +18,7 @@ Some limitations and restrictions:
 * You can't connect if somebody else is already streaming.
 * The streaming key will change over time and you'll see it show up as a chat message.
 
+---
 
 ### Watch a test live stream at [watch.owncast.online](http://watch.owncast.online)
 

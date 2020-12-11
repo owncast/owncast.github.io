@@ -1,3 +1,7 @@
+---
+title: "Quickstart"
+---
+
 # Quickstart
 
 {{< vimeo 484707748 >}}

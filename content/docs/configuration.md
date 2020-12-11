@@ -1,3 +1,7 @@
+---
+title: "Configuration"
+---
+
 # Configuration
 
 The default `config.yaml` has a handful of values you can change.  However, more can be customized if you need them to be.  Some common changes to the config are:
