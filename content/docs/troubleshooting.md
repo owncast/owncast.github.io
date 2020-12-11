@@ -50,7 +50,7 @@ If you're using nginx (or possibly other web proxies) in front of your Owncast i
 ## Misc video issues
 
 If you're running into random video stability issues make sure you're running a supported version of ffmpeg.  [Download ffmpeg 4.1.5 or above](https://ffmpeg.org/download.html).
-As an aside, ffmpeg installed via Snap packages do not work due to the sandoxing of Snap distributed software.
+As an aside, ffmpeg installed via Snap packages do not work due to the sandboxing of Snap distributed software.
 
 ## Server is not showing up in the directory
 
