@@ -294,6 +294,27 @@
     "contributions": 1
   },
   {
+    "login": "brownchow",
+    "id": 8622915,
+    "node_id": "MDQ6VXNlcjg2MjI5MTU=",
+    "avatar_url": "https://avatars0.githubusercontent.com/u/8622915?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/brownchow",
+    "html_url": "https://github.com/brownchow",
+    "followers_url": "https://api.github.com/users/brownchow/followers",
+    "following_url": "https://api.github.com/users/brownchow/following{/other_user}",
+    "gists_url": "https://api.github.com/users/brownchow/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/brownchow/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/brownchow/subscriptions",
+    "organizations_url": "https://api.github.com/users/brownchow/orgs",
+    "repos_url": "https://api.github.com/users/brownchow/repos",
+    "events_url": "https://api.github.com/users/brownchow/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/brownchow/received_events",
+    "type": "User",
+    "site_admin": false,
+    "contributions": 1
+  },
+  {
     "login": "bgildson",
     "id": 4239610,
     "node_id": "MDQ6VXNlcjQyMzk2MTA=",
