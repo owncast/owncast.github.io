@@ -66,7 +66,7 @@ More stream quality variants requires more disk space, since it's another copy o
 
 Update your `tags` in the config to display the topics type of content you want to call attention to.
 
-## Owncast Directory
+## Get listed in the directory
 
 To help people discover streams by people using Owncast we have an optional Owncast directory you can add yourself to.  Set your `tags` in your config file along with if your stream is `nsfw`.  Set the `instanceURL` to be the public URL to your Owncast instance that you want people to be linked to.
 
@@ -94,6 +94,13 @@ yp:
 {{<versionsupport feature="owncast directory" version="0.0.3">}}
 
 
+## Viewer locations (GeoIP)
+
+You can optionally see the location of viewers in the admin.
+[See the instructions to enable this feature](/docs/geoip).
+
+{{<versionsupport feature="admin dashboard" version="0.0.3">}}
+
 ## Full Example
 
 Below, you can see all config items:
@@ -101,3 +108,4 @@ Below, you can see all config items:
 {{< highlight yaml >}}
 {{< readfile file="/content/docs/config-example-full.yaml" >}}
 {{< / highlight >}}
+

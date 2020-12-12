@@ -66,6 +66,9 @@ The directory is new, and not something we're pushing heavily at the moment, but
 1. If you recently changed the URL of your server delete the `.yp.key` file to allow your server to re-register with the new URL.
 1. If you lose the above key file, or there's some other issue that's causing you not to be listed [please file a GitHub issue](https://github.com/owncast/owncast/issues) so we can reset your registration with the directory.
 
+{{<versionsupport feature="owncast directory" version="0.0.3">}}
+
+
 ## Streams without audio are currently not supported
 
 If you're streaming content that has no audio component (such as a camera with no microphone, for example) you may run into issues.  You're only likely to run into this if you're building a stream manually through something like ffmpeg.  And in this case you can insert an audio stream that's empty to resolve the issue.
