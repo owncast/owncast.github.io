@@ -4,6 +4,8 @@ date: 2020-12-14
 summary: "0.0.3 has a new admin dashboard to help get an overview of the configuration and performance of your Owncast server along with handfuls of additional updates."
 ---
 
+[v0.0.3](https://github.com/owncast/owncast/milestone/3?closed=1) has a new admin dashboard to help get an overview of the configuration and performance of your Owncast server along with handfuls of additional updates.
+
 ## Owncast Admin
 
 {{< img src="/images/owncast-admin-0.0.3.png" align="center" width="100%">}}
