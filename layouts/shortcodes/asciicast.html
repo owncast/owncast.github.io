@@ -1,0 +1,23 @@
+<link rel="stylesheet" type="text/css" href="/asciicast/asciinema-player.css" />
+
+<style>
+.asciinema-container {
+    border: 1px solid #334;
+    border-radius: .25rem;
+}
+
+.asciinema-container .asciinema-terminal {
+    width: auto !important;
+}
+
+.asciinema-container .asciinema-terminal .line {
+    width: auto;
+    overflow: unset;
+}
+
+</style>
+
+<div class="asciinema-container">
+    <asciinema-player title="Owncast" src="{{.Get 0}}" poster="npt:0:11" idle-time-limit="0.6"></asciinema-player>
+    <script src="/asciicast/asciinema-player.js"></script>
+</div>

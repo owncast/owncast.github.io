@@ -1,3 +1,7 @@
+---
+title: Embedding
+---
+
 ## Embedding video
 
 Owncast supports embedding your video stream directly into any other web site or source without having to setup a player.

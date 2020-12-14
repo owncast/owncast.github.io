@@ -1,3 +1,7 @@
+---
+title: "Web Site + Chat"
+---
+
 # Web site with video player and chat
 
 ## Overview

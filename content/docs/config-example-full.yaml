@@ -1,24 +1,21 @@
-publicHLSPath: webroot/hls
-privateHLSPath: hls
+# You can specific the path to a specific ffmpeg binary.
 ffmpegPath: /usr/local/bin/ffmpeg
 webServerPort: 8080
 
 instanceDetails:
   name: Owncast
   title: Owncast Demo Server
-  logo:
-    small: /img/logo128.png
-    large: /img/logo128.png
+  logo: /img/logo.svg
 
   summary: "This is brief summary of whom you are or what your stream is. demo server for Owncast.  You can read more about it at owncast.online.  You can edit this description in your web config file.\n\nBlathers is an owl with brown feathers. His face is white and he has a yellow beak. His arms are wing shaped and he has yellow talons. His eyes are very big with small black irises. He also has big pink cheek circles on his cheeks. His belly appears to be checkered in diamonds with light brown and white squares, similar to an argyle vest, which is traditionally associated with academia. His green bowtie further alludes to his academic nature."
-  # This is relative to the webroot, not the project root.  This is a markdown file that displays
-  # extra content on below your video.  Put whatever you want in here.
-  extraUserInfoFileName: "/static/content.md"
 
   tags:
     - music
     - software
     - animal crossing
+
+  # Specify if your stream includes NSFW content.
+  nsfw: false
 
   # https://owncast.online/docs/configuration/#external-links
   # for full list of supported social links.  All optional.
@@ -39,15 +36,13 @@ videoSettings:
   chunkLengthInSeconds: 4
   # Change this value and keep it secure.  Treat it like a password to your live stream.
   streamingKey: abc123
-  # The "Stream is offline" content displayed when a stream ends.
-  offlineContent: static/offline.m4v
 
-  # Determine the bitrate of your stream variants.
+  # Determine the qualities of your stream variants.
   # See https://owncast.online/docs/configuration/#video-quality for details.
   streamQualities:
     - low:
       # Higher the bitrate, the better it looks, but it requires more bandwidth to consume.
-      videoBitrate: 400
+      videoBitrate: 800
       # Resize the width to something smaller.  scaledHeight is also an option.  Don't use both at once
       # unless you want to chang the aspect ratio of your video.
       scaledWidth: 600
@@ -59,7 +54,7 @@ videoSettings:
       encoderPreset: veryfast
 
     - medium:
-      videoBitrate: 800
+      videoBitrate: 1200
       encoderPreset: fast
 
 # Number of segments kept referenced in the HLS playlist
@@ -75,3 +70,9 @@ s3:
   secret: lolomgqwtf49583949
   region: us-west-2
   bucket: myvideo
+
+# Off by default.  You can optionally list yourself in the Owncast directory.
+# Make sure your instanceURL is the public URL to your Owncast instance.
+yp:
+  enabled: true
+  instanceURL: https://stream.myserver.org

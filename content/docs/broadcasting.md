@@ -1,3 +1,7 @@
+---
+title: "Broadcasting Software"
+---
+
 # Setting up your Broadcasting software
 
 ### Compatibility

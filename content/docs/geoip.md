@@ -1,3 +1,7 @@
+---
+title: "GeoIP Lookups"
+---
+
 # GeoIP Lookups
 
 Owncast can display high-level geographic information about your current viewers if you enable GeoIP support in your instance.
