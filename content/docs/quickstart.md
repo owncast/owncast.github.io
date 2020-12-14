@@ -31,7 +31,7 @@ You can choose between downloading a zip file of Owncast, or using Docker.
 
 ### Use a Docker image
 
-1. Pull the `latest` version [from Dockerhub](https://hub.docker.com/repository/registry-1.docker.io/gabekangas/owncast/tags?page=1): `docker pull gabekangas/owncast:latest`.
+1. Pull the `latest` version [from Dockerhub](https://hub.docker.com/r/gabekangas/owncast/tags): `docker pull gabekangas/owncast:latest`.
 1. Run `docker run -p 8080:8080 -p 1935:1935 -it gabekangas/owncast:latest` to start the service.
 
 
