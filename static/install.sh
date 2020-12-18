@@ -7,7 +7,7 @@ set -o pipefail
 
 # Install configuration
 if ! [ "${OWNCAST_VERSION:-}" ]; then
-  OWNCAST_VERSION="0.0.3"
+  OWNCAST_VERSION="0.0.4"
 fi
 
 if ! [ "${OWNCAST_INSTALL_DIRECTORY:-}" ]; then
@@ -89,6 +89,10 @@ main () {
       i?86)
         FFMPEG_ARCH="linux-ia32"
         OWNCAST_ARCH="32bit"
+        ;;
+      armv7?)
+        FFMPEG_ARCH="linux-arm"
+        OWNCAST_ARCH="arm7"
         ;;
       *)
         errorAndExit "Unsupported CPU architecture $(uname -m)"
