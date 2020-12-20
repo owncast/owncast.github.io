@@ -252,6 +252,27 @@
     "contributions": 1
   },
   {
+    "login": "Marzal",
+    "id": 2069735,
+    "node_id": "MDQ6VXNlcjIwNjk3MzU=",
+    "avatar_url": "https://avatars3.githubusercontent.com/u/2069735?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/Marzal",
+    "html_url": "https://github.com/Marzal",
+    "followers_url": "https://api.github.com/users/Marzal/followers",
+    "following_url": "https://api.github.com/users/Marzal/following{/other_user}",
+    "gists_url": "https://api.github.com/users/Marzal/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/Marzal/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/Marzal/subscriptions",
+    "organizations_url": "https://api.github.com/users/Marzal/orgs",
+    "repos_url": "https://api.github.com/users/Marzal/repos",
+    "events_url": "https://api.github.com/users/Marzal/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/Marzal/received_events",
+    "type": "User",
+    "site_admin": false,
+    "contributions": 1
+  },
+  {
     "login": "jmhobbs",
     "id": 115059,
     "node_id": "MDQ6VXNlcjExNTA1OQ==",
