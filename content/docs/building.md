@@ -20,4 +20,4 @@ title: "Building from Source"
 1. Make any [configuration](/docs/configuration) changes.
 1. If you ever make any future config file changes you must rerun the `docker build` step otherwise you can just run the `docker run` step to run the service going forward.
 1. Run `docker build -t owncast .` and wait.  It may take a few minutes to build depending on the speed of your server.
-1. Run `docker run -p 8080:8080 -p 1935:1935 -it owncast` to start the service.
+1. Run `docker run -p 8080:8080 -p 1935:1935 -it -v ./config.yaml:/app/config.yaml owncast` to start the service with your custom comfiguration.

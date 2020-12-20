@@ -33,6 +33,7 @@ You can choose between downloading a zip file of Owncast, or using Docker.
 
 1. Pull the `latest` version [from Dockerhub](https://hub.docker.com/r/gabekangas/owncast/tags): `docker pull gabekangas/owncast:latest`.
 1. Run `docker run -p 8080:8080 -p 1935:1935 -it gabekangas/owncast:latest` to start the service.
+1. To modify the configuration, you can [take a blueprint from the docs](/docs/configuration/#full-example) and save it to ˋconfig.yamlˋ. Then, bind the file inside docker: ˋdocker run -v ./config.yaml:/app/config.yaml -p 8080:8080 -p 1935:1935 -it gabekangas/owncast:latestˋ.
 
 
 ## Prerequisites
