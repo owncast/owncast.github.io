@@ -18,7 +18,10 @@ If you would prefer to download a release manually or use Docker you have some o
 
 ## Manually download and run a release
 
-You can choose between downloading a zip file of Owncast, or using Docker.
+You can choose between
+- downloading a zip file of Owncast and run it as standalone binary
+- downloading a zip file of Owncast and run it as systemd unit file
+- using Docker
 
 ### Download and run a release
 
@@ -27,6 +30,62 @@ You can choose between downloading a zip file of Owncast, or using Docker.
 1. Unzip the release.
 1. [Edit `config.yaml` as detailed below](#configure).
 1. Run `./owncast` to start the service.
+
+
+### Use a systemd unit file
+
+1. Install [`ffmpeg`](https://ffmpeg.org/download.html) if you haven't.  Use version 4.1.5 or above.
+1. Make a directory to run the service from, and download a release from https://github.com/owncast/owncast/releases into that directory.
+1. Unzip the release.
+1. [Edit `config.yaml` as detailed below](#configure).
+1. Create `owncast` system user
+{{< highlight bash >}}
+sudo adduser \
+   --system \
+   --gecos "Owncast" \
+   --group \
+   --disabled-password \
+   --no-create-home \
+   --disabled-login \
+   owncast
+{{</ highlight >}}
+1. Create the systemd unit file at `/etc/systemd/system/owncast.service`
+{{< highlight systemd >}}
+[Unit]
+Description=Owncast
+# If you are using Owncast behind a reverse proxy,
+# you can specify the related service here to ensure that it is up and running
+# before launching the owncast service.
+# After=caddy.service
+# After=nginx.service
+# After=httpd.service
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=2
+User=owncast
+Group=owncast
+WorkingDirectory=/path/to/owncast/directory
+ExecStart=/path/to/owncast/directory/owncast
+
+[Install]
+WantedBy=multi-user.target
+{{</ highlight >}}
+1. Ensure that the `owncast` user has the appropriate rights to `/path/to/owncast/directory`.
+{{< highlight bash >}}
+sudo chown -R owncast:owncast /path/to/owncast/directory
+{{</ highlight >}}
+1. Enable and start the `owncast` service
+{{< highlight bash >}}
+sudo systemctl daemon-reload
+sudo systemctl enable owncast
+sudo systemctl start owncast
+{{</ highlight >}}
+1. See if `owncast` is runing
+{{< highlight bash >}}
+sudo systemctl status owncast
+{{</ highlight >}}
 
 
 ### Use a Docker image
