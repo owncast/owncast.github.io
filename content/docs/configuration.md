@@ -66,6 +66,17 @@ More stream quality variants requires more disk space, since it's another copy o
 
 Update your `tags` in the config to display the topics type of content you want to call attention to.
 
+## Custom Ports
+
+Per default, Owncast will run a `http` web server on port `8080` and a RTMP server on port `1935`. You can change the ports in the top level your `config.yaml`:
+
+{{< highlight yaml >}}
+webServerPort: 8080
+rtmpServerPort: 1935
+{{< / highlight >}}
+
+{{<versionsupport feature="Custom Ports" version="0.0.4">}}
+
 ## Get listed in the directory
 
 To help people discover streams by people using Owncast we have an optional Owncast directory you can add yourself to.  Set your `tags` in your config file along with if your stream is `nsfw`.  Set the `instanceURL` to be the public URL to your Owncast instance that you want people to be linked to.
