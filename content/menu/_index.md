@@ -10,6 +10,7 @@ headless: true
   - [Embedding](/docs/embed/)
   - [API Reference](/docs/api/)
   - [Broadcasting Software](/docs/broadcasting/)
+  - [Post-install](/docs/post_install/)
   - [Encoding](/docs/encoding/)
   - [External Storage (S3)](/docs/s3/)
   - [Building from Source](/docs/building/)
