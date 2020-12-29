@@ -2,6 +2,8 @@ name: Hugo Build to GitHub Pages
 
 on:
   push:
+    branches:
+    - 'master'
   schedule:
     # Every six hours update the web site
     - cron:  '0 */6 * * *'
