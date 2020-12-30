@@ -3,7 +3,7 @@ title: Contact
 bookToC: false
 ---
 
-## Contact
+# Contact
 
 > Gabe Kangas
 >

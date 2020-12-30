@@ -2,6 +2,7 @@
 title: "Building from Source"
 ---
 
+# Building from Source
 ## Building from Source
 
 1. Ensure you have the gcc compiler configured.
