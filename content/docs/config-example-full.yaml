@@ -1,6 +1,7 @@
 # You can specific the path to a specific ffmpeg binary.
 ffmpegPath: /usr/local/bin/ffmpeg
 webServerPort: 8080
+rtmpServerPort: 1935
 
 instanceDetails:
   name: Owncast
