@@ -80,7 +80,14 @@ figure.glow {
     }
 }
 .book-page {
-    padding-top: 0em
+    padding-top: 0em;
+    @media screen and (max-width: 56rem) {
+        padding-top: 1em;
+        .book-header {
+            color: #5a67d8;
+        }
+    }
+
 }
 .markdown h1,
 .markdown h2,
