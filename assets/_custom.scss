@@ -70,3 +70,94 @@ figure.glow {
 .github-issue-link {
     font-size: 12px;
 }
+
+
+.book-toc {
+    border-left: 1px solid rgba(90,103,216,.25);
+    font-size: .85em;
+    nav {
+        padding-top: 3em;
+    }
+}
+.book-page {
+    padding-top: 0em;
+    @media screen and (max-width: 56rem) {
+        padding-top: 1em;
+        .book-header {
+            color: #5a67d8;
+        }
+    }
+
+}
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+    font-weight: 600;
+    padding: .25em 0;
+    line-height: 1.2;
+    a {
+        opacity: .75;
+        &:hover {
+            opacity: 1;
+        }
+        &:first-child:not(.anchor) {
+            &::after {
+                content: '🔗';
+                font-size: .65em;
+                vertical-align: middle;
+                display: inline-block;
+                margin-left: .6em;
+            }
+        }
+    }
+}
+
+.markdown h1 {
+    color: #392a99;
+    border-bottom: 1px solid rgba(90,103,216,.15);
+    background-color: #eee;
+    padding: .35em;
+    padding-top: 2em;
+
+    a,
+    a:visited {
+        color: #392a99;
+    }
+    @media (prefers-color-scheme: dark) {
+        color: #fff;
+        background-color: #0c0918;
+        a,
+        a:visited {
+            color: #fff;
+        }
+    }    
+}
+.markdown h2 {
+    color: rgba(90,103,216,1);
+    border-bottom: 1px solid rgba(90,103,216,.75);
+    a,
+    a:visited {
+        color:  rgba(90,103,216,1);
+    }
+}
+.markdown h3 {
+    font-size: 1.25em;
+    color: rgba(90,103,216,.85);
+    a {
+        color: rgba(90,103,216,.8);
+    }
+}
+// hack a heading on top of the "Blog" page
+article.book-post:first-of-type {
+    &::before {
+        content: 'Releases';
+        font-size: 1.8em;
+        font-weight: 600;
+        display: inline-block;
+        padding: 1em 0;
+        color:  #392a99;
+        @media (prefers-color-scheme: dark) {
+            color: #fff;
+        }
+    }
+}

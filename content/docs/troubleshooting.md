@@ -1,6 +1,7 @@
 ---
 title: "Troubleshooting"
 ---
+# Troubleshooting
 
 ## CPU and RAM usage alerts
 
