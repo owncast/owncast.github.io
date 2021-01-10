@@ -22,11 +22,20 @@ Owncast Core:
 * Feat: Update chat message visibility for moderation {{< githubissue 524 >}}
 * Feat: Rate limit inbound chat messages {{< githubissue 484 >}}
 * Feat: Support s3 virtual hosted-style host {{< githubissue 497 >}}
-* Fix: "ffmpeg not found" log a fatal error {{< githubissue 554 >}}
+* Feat: Verify version of ffmpeg at launch {{< githubissue 587 >}}
+* Fix: "ffmpeg not found" logs a fatal error {{< githubissue 554 >}}
+* Fix: Manually bust m3u8 caches {{< githubissue 570 >}}
+* Fix: Crash in performanceTimer: concurrent map writes {{< githubissue 578 >}}
+
 
 Web Interface:
+* Feat: socialHandles are linked with rel="me" {{< githubissue 511 >}}
+* Feat: socialHandles use SVG icons {{< githubissue 515 >}}
 * Feat: Update chat message visibility for moderation {{< githubissue 524 >}}
+* Feat: socialHandles contain Ko-Fi platform {{< githubissue 525 >}}
+* Feat: Do not auto-close emoji picker after selecting an emoji {{ githubissue 612 >}}
 * Fix: Chat height calculation fails on iPads {{< githubissue 572 >}}
+
 
 Admin Interface:
 * Feat: Add message removal feature in admin. {{< githubissue 314 >}}
