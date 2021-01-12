@@ -32,7 +32,10 @@ Web Interface:
 * Feat: Social links now have the rel="me" attribute {{< githubissue 511 >}}
 * Feat: Social links use SVG icons {{< githubissue 515 >}}
 * Feat: Added Ko-Fi platform to social links {{< githubissue 525 >}}
+* Feat: Added KeyOxide platform to social links {{< githubissue 510 >}}
 * Feat: Do not auto-close emoji picker after selecting an emoji {{ githubissue 612 >}}
+* Feat: Workarounds for AdBlockers blocking social links to external profiles {{ githubissue 529 >}}
+
 
 Web Interface:
 * Fix: Fix layout issues that can take place on iPads {{< githubissue 572 >}}
