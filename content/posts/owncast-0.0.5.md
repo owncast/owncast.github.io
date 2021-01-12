@@ -53,7 +53,7 @@ There have been no breaking changes in this release.
 The features regarding chat message moderation brought new endpoints:
 
 * [`GET /api/admin/chat/messages`](https://owncast.online/api/0.0.5/#tag/Admin/paths/~1api~1admin~1chat~1messages/get) shows all chat messages, regardless of their visibility status
-* [`POST /api/admin/chat/updatemessagevisibility`](https://owncast.online/api/development/#tag/Admin/paths/~1api~1admin~1chat~1updatemessagevisibility/post) toggles the visibility of of messages
+* [`POST /api/admin/chat/updatemessagevisibility`](https://owncast.online/api/0.0.5/#tag/Admin/paths/~1api~1admin~1chat~1updatemessagevisibility/post) toggles the visibility of of messages
 * The Chat Websocket has a new message type `VISIBILITY-UPDATE`.
 
 
