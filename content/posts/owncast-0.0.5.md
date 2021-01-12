@@ -5,7 +5,7 @@ summary: "0.0.5 introduces basic chat moderation features to Owncast."
 ---
 
 [Owncast v0.0.5](https://github.com/owncast/owncast/milestone/8?closed=1) focuses primarily on some basic chat moderation, enabling the admin to remove chat messages
-.
+
 
 ## Upgrade instructions from 0.0.4
 
