@@ -63,6 +63,8 @@ More stream quality variants requires more disk space, since it's another copy o
 * `linkedin`
 * `discord`
 * `mastodon`
+* `kofi`
+* `keyoxide`
 
 Update your `tags` in the config to display the topics type of content you want to call attention to.
 
