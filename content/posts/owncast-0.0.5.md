@@ -1,6 +1,6 @@
 ---
 title: Owncast v0.0.5
-date: 2021-01-03
+date: 2021-01-12
 summary: "0.0.5 introduces basic chat moderation features to Owncast."
 ---
 
