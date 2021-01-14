@@ -24,11 +24,13 @@ Owncast has the ability for you to build things on top of it.  Here's some examp
 
 Webhooks will send events to your code when things happen on your Owncast server.  The following are a list of events you can get notified about.
 
-1. Stream started
-1. Stream stopped
-1. User joined the chat
-1. User sent chat message
-1. User changed their username
+| Description       | Name|
+| :------------- | :----------: |
+|  Stream started | STREAM_STARTED  |
+|  Stream stopped | STREAM_STOPPED  |
+|  User joined chat | USER_JOINED  |
+|  User sent chat message | CHAT  |
+|  User changed username | NAME_CHANGE  |
 
 ### How to accept webhooks
 
@@ -96,7 +98,7 @@ If you want to test how webhooks work before you write any code, create a test e
 Change the following `curl` command to point to your server URL and use your auth token.  It will send a system message to your chat.
 
 {{< highlight shell >}}
-curl -X POST -H "Content-Type: application/json"  -H "Authorization: Bearer YOURAUTHTOKEN" -d '{"body": "I am a system message!**"}' http://YOUR.OWNCAST.SERVER/api/admin/sendsystemmessage
+curl -X POST -H "Content-Type: application/json"  -H "Authorization: Bearer YOURAUTHTOKEN" -d '{"body": "I am a system message!"}' http://YOUR.OWNCAST.SERVER/api/integrations/chat/system
 
 {{< / highlight >}}
 
