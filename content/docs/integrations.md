@@ -7,6 +7,8 @@ title: "Building 3rd Party Integrations"
 >You're one of the first people to try out our 3rd party APIs, how exciting!  We really appreciate you taking the time to experiment with these additions to Owncast and putting your creativity to work.  Your feedback and testing will make it so future developers will be able to make some really cool stuff on top of Owncast, and you'll have a head start on building your own things.
 >
 > Since this is a pre-release feature, you'll have to jump through a couple extra hoops.  Check out the `external-integrations` branch and run Owncast via `go run main.go pkged.go`.
+>
+> The detailed in-development API documentation can be found [here](https://github.com/owncast/owncast/blob/external-integrations/doc/api/index.html).
 
 
 Owncast has the ability for you to build things on top of it.  Here's some examples of things you can build:
@@ -48,8 +50,8 @@ Webhooks will send events to your code when things happen on your Owncast server
 
 We currently support the following actions you can take from your code.
 
-1. Send chat message as the server (known as a `system` message)
-1. Send chat message as a user (known as a `user` message)
+1. Send chat message as the server (known as a `system` message) `/api/integrations/chat/system`
+1. Send chat message as a user (known as a `user` message) `/api/integrations/chat/user`
 
 Your Owncast server will only accept actions from requests with a valid Access Token.  Follow the below steps to create an access token.
 
@@ -100,6 +102,14 @@ curl -X POST -H "Content-Type: application/json"  -H "Authorization: Bearer YOUR
 
 ## Example Projects
 
+The following example projects are a work-in-progress.  If you'd like to help with them, we'd love to have you contribute!  Also, if you want to write some basic examples in a different language, that would be awesome.
+
+### Empty Project
+
+The following is a project setup for you to simply add your logic to a basic scaffolding of a Node.js project.  If you're looking to start a new Node.js project then this might be a good place to start.
+
+https://glitch.com/edit/#!/owncast-addon
+
 ### Dancing Banana
 
 https://github.com/geekgonecrazy/livestream-banana-bot
@@ -108,14 +118,21 @@ https://github.com/geekgonecrazy/livestream-banana-bot
 
 ### Notify followers via Email or SMS when you go live
 
-Description about this project.
+This project allows people to put in their phone number or email address to get notified any time you go live.  It uses Mailgun for email and Twilio for text messages.  It also has an embed where it thanks the user for following you on your stream.
+
+https://glitch.com/edit/#!/owncast-example-follow
 
 
 ### Tip Jar
 
-Description about this project.
+This project includes a page where people can tip you during your stream.  It uses Stripe as a payment processor.  When a payment is successful it sends a message to your chat.  TODO: Add an embed so you thank tippers via an image/message on your stream.
+
+https://glitch.com/edit/#!/owncast-example-tip-jar
+
 
 
 ### Emoji Wall
 
-Description about this project.
+This project is a simple embed that listens on that chat for people sending custom emojis.  If one or more custom emoji are sent in a message then they float by on the embed.
+
+https://glitch.com/edit/#!/owncast-example-emoji-wall
