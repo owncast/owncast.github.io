@@ -20,7 +20,7 @@ Owncast has the ability for you to build things on top of it.  Here's some examp
 
 
 
-## Outbound Webhooks
+## Outbound Webhooks (Owncast server -> Your code)
 
 Webhooks will send events to your code when things happen on your Owncast server.  The following are a list of events you can get notified about.
 
@@ -48,9 +48,9 @@ Webhooks will send events to your code when things happen on your Owncast server
 
 
 
-## Inbound APIs
+## Inbound APIs (Your code -> Owncast server)
 
-We currently support the following actions you can take from your code.
+We currently support the following actions you can make via HTTP `POST`s from your code.
 
 1. Send chat message as the server (known as a `system` message) `/api/integrations/chat/system`
 1. Send chat message as a user (known as a `user` message) `/api/integrations/chat/user`
