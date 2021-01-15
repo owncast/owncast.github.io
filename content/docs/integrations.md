@@ -14,7 +14,7 @@ title: "Building 3rd Party Integrations"
 Owncast has the ability for you to build things on top of it.  Here's some examples of things you can build:
 
 1. A chat bot that replies to keywords or commands.
-1. An OBS overlay so when an event happens (either in the chat or externally, anywhere online) an image or message shows up on the stream.
+1. An OBS overlay so when an event happens in the chat an image or message shows up on the stream.
 1. An integration into some kind of 3rd party service, such as when the song you're listening to on Spotify changes you put the song name in the chat.
 1. Send out a message to your social networks each time you go live.
 
@@ -36,7 +36,7 @@ Webhooks will send events to your code when things happen on your Owncast server
 
 1. Visit `/admin/webhooks` on your owncast server.
 1. Click `Create Webhook`.
-1. Put in the full public URL to a public URL that can receive this webhook.
+1. Put in the full public URL to an endpoint that can receive this webhook.
 1. Select the events you want to be notified of.
 1. Save this new webhook.
 
