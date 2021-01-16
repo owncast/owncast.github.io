@@ -16,6 +16,8 @@ curl -s https://owncast.online/install.sh | bash
 
 {{< asciicast "/install-owncast-ascii.cast">}}
 
+Now point your broadcast software, such as OBS, to `rtmp://<your public IP address>:1935/live` (default stream key is **abc123**) and start streaming!
+
 There deserves to be a better option for people. Something you could run yourself and get all the functionality of these services, where you could live stream to an audience and and allow them to take part in the chat, just like they've been used to on all the other services.  **There should be a independent, standalone _Twitch in a Box_.**
 
 ---
