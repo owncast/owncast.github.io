@@ -1,9 +1,11 @@
 ---
 title: "FAQ"
+menu:
+  docs:
+    parent: "documentation"
+weight: 100
+toc: true
 ---
-
-# Frequently Asked Questions
-
 
 ## 1. Who is this for?
 

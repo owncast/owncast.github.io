@@ -1,8 +1,11 @@
 ---
 title: "Quickstart"
+menu:
+  docs:
+    parent: "documentation"
+weight: 100
+toc: true
 ---
-
-# Quickstart
 
 {{< vimeo 484707748 >}}
 

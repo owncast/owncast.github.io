@@ -1,8 +1,13 @@
 ---
 title: "Building 3rd Party Integrations"
+menu:
+  docs:
+    parent: "integrations"
+weight: 100
+toc: true
 ---
 
-# Building addons, bots, overlays and more on top of Owncast
+## Building addons, bots, overlays and more on top of Owncast
 
 >You're one of the first people to try out our 3rd party APIs, how exciting!  We really appreciate you taking the time to experiment with these additions to Owncast and putting your creativity to work.  Your feedback and testing will make it so future developers will be able to make some really cool stuff on top of Owncast, and you'll have a head start on building your own things.
 >

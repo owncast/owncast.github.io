@@ -1,9 +1,11 @@
 ---
 title: "Building from Source"
+menu:
+  docs:
+    parent: "config"
+weight: 100
+toc: true
 ---
-
-# Building from Source
-## Building from Source
 
 1. Ensure you have the gcc compiler configured.
 1. Install the [Go toolchain](https://golang.org/dl/).

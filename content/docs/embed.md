@@ -1,8 +1,11 @@
 ---
 title: Embedding
+menu:
+  docs:
+    parent: "integrations"
+weight: 100
+toc: true
 ---
-
-# Embedding
 
 ## Embedding video
 

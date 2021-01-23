@@ -1,8 +1,11 @@
 ---
 title: "Broadcasting Software"
+menu:
+  docs:
+    parent: "integrations"
+weight: 100
+toc: true
 ---
-
-# Setting up your Broadcasting software
 
 ### Compatibility
 

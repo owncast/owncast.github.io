@@ -1,8 +1,11 @@
 ---
 title: "Configuration"
+menu:
+  docs:
+    parent: "config"
+weight: 100
+toc: true
 ---
-
-# Configuration
 
 The default `config.yaml` has a handful of values you can change.  However, more can be customized if you need them to be.  Some common changes to the config are:
 
@@ -118,7 +121,4 @@ You can optionally see the location of viewers in the admin.
 
 Below, you can see all config items:
 
-{{< highlight yaml >}}
-{{< readfile file="/content/docs/config-example-full.yaml" >}}
-{{< / highlight >}}
-
+TODO: Insert Config

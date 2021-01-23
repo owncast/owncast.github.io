@@ -1,7 +1,11 @@
 ---
 title: "Troubleshooting"
+menu:
+  docs:
+    parent: "documentation"
+weight: 100
+toc: true
 ---
-# Troubleshooting
 
 ## CPU and RAM usage alerts
 

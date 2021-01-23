@@ -1,8 +1,11 @@
 ---
 title: API Documentation
+menu:
+  docs:
+    parent: "integrations"
+weight: 100
+toc: true
 ---
-
-# API Documentation
 
 Owncast offers an API to integrate its services in other interfaces, like the [Owncast Admin Panel](https://github.com/owncast/owncast-admin).
 

@@ -1,8 +1,11 @@
 ---
 title: "Web Site + Chat"
+menu:
+  docs:
+    parent: "integrations"
+weight: 100
+toc: true
 ---
-
-# Web site with video player and chat
 
 ## Overview
 

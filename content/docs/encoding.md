@@ -1,8 +1,11 @@
 ---
 title: "Encoding"
+menu:
+  docs:
+    parent: "integrations"
+weight: 100
+toc: true
 ---
-
-# Tuning the video encoding
 
 It's hard to give specific settings that will give you the best quality and performance with Owncast because people have different servers and requirements.  However, this document aims to outline what is being done to your content and the different knobs you can tweak to get the best output for your instance..
 

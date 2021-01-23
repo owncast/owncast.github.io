@@ -1,0 +1,43 @@
+# Meta Data for SEO
+
+## Homepage
+title = "Owncast"
+titleSeparator = "-"
+titleAddition = "Selfhosted Livestreaming"
+description = "Owncast is a self-hosted live video and web chat server for use with existing broadcasting software. Point your live stream at a Owncast server you personally control and regain ownership over your content."
+
+## Open Graph + Twitter Cards
+images = ["doks.png"]
+twitterSite = "owncast"
+twitterCreator = "owncast"
+ogLocale = "en_US"
+
+## JSON-LD
+schemaType = "Organization"
+schemaLogo = "logo-doks.png"
+schemaGitHub = "https://github.com/owncast"
+schemaSection = "blog"
+
+## Sitelinks Search Box
+siteLinksSearchBox = false
+
+## Chrome Browser
+themeColor = "#fff"
+
+# Images
+quality = 85
+bgColor = "#fff"
+landscapePhotoWidths = [900, 800, 700, 600, 500]
+portraitPhotoWidths = [800, 700, 600, 500]
+lqipWidth = "20x"
+
+# Footer
+footer = "Created by FOSS-loving people around the globe. Website based on <a href=\"https://getdoks.org/\">Doks</a>."
+
+# Alert
+alert = false
+alertText = "Like Doks? <a class=\"alert-link\" href=\"https://github.com/h-enk/doks/stargazers\">Star on GitHub</a>. Thanks!</a>"
+
+# Edit Page
+docsRepo = "https://github.com/owncast/owncast.github.io"
+editPage = true
