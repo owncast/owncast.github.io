@@ -3,7 +3,7 @@ title: API Documentation
 menu:
   docs:
     parent: "integrations"
-weight: 100
+weight: 500
 toc: true
 ---
 

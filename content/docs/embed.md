@@ -3,7 +3,7 @@ title: Embedding
 menu:
   docs:
     parent: "integrations"
-weight: 100
+weight: 10
 toc: true
 ---
 

@@ -1,8 +1,8 @@
 ---
-title: "Encoding"
+title: "Vido Encoding"
 menu:
   docs:
-    parent: "integrations"
+    parent: "config"
 weight: 100
 toc: true
 ---

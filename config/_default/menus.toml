@@ -11,8 +11,8 @@
   url = "/docs/configuration/"
 
 [[integrations]]
-  name = "Integrating Owncast"
-  weight = 20
+  name = "APIs and Integrations"
+  weight = 200
   identifier = "integrations"
   url = "/docs/integrations/"
 
@@ -23,7 +23,7 @@
 
 [[main]]
   name = "Docs"
-  url = "/docs/quickstart/"
+  url = "/docs/"
   weight = 20
 
 [[main]]

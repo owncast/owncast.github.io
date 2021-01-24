@@ -1,10 +1,7 @@
 ---
 title: "GeoIP Lookups"
-menu:
-  docs:
-    parent: "config"
 weight: 100
-toc: true
+toc: false
 ---
 
 Owncast can display high-level geographic information about your current viewers if you enable GeoIP support in your instance.

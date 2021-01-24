@@ -2,7 +2,7 @@
 title: "Web Site + Chat"
 menu:
   docs:
-    parent: "integrations"
+    parent: "config"
 weight: 100
 toc: true
 ---

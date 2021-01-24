@@ -1,13 +1,17 @@
 ---
-title: "Building 3rd Party Integrations"
+title: "Building addons, bots, overlays and other third party tools and apps on top of Owncast"
+description: "Welcome to Doks! This tutorial will guide you through setting up and deploying your first Doks site."
+date: 2020-11-17T20:11:42+01:00
+lastmod: 2020-11-17T20:11:42+01:00
+draft: false
+images: []
 menu:
   docs:
     parent: "integrations"
-weight: 100
+weight: 200
 toc: true
+type: subpages
 ---
-
-## Building addons, bots, overlays and more on top of Owncast
 
 >You're one of the first people to try out our 3rd party APIs, how exciting!  We really appreciate you taking the time to experiment with these additions to Owncast and putting your creativity to work.  Your feedback and testing will make it so future developers will be able to make some really cool stuff on top of Owncast, and you'll have a head start on building your own things.
 >
@@ -22,8 +26,6 @@ Owncast has the ability for you to build things on top of it.  Here's some examp
 1. An OBS overlay so when an event happens in the chat an image or message shows up on the stream.
 1. An integration into some kind of 3rd party service, such as when the song you're listening to on Spotify changes you put the song name in the chat.
 1. Send out a message to your social networks each time you go live.
-
-
 
 ## Outbound Webhooks (Owncast server -> Your code)
 
@@ -97,16 +99,6 @@ A quick, easy and free way to get up and running to experiment is by using [Glit
 ### Test webhooks
 
 If you want to test how webhooks work before you write any code, create a test endpoint at https://requestcatcher.com/, and add the URL it gives you as a webhook in your admin and see the requests come through.
-
-
-### Test sending chat messages
-
-Change the following `curl` command to point to your server URL and use your auth token.  It will send a system message to your chat.
-
-{{< highlight shell >}}
-curl -X POST -H "Content-Type: application/json"  -H "Authorization: Bearer YOURAUTHTOKEN" -d '{"body": "I am a system message!"}' http://YOUR.OWNCAST.SERVER/api/integrations/chat/system
-
-{{< / highlight >}}
 
 ## Example Projects
 
