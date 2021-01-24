@@ -8,6 +8,7 @@ draft: false
 images: []
 weight: 030
 toc: false
+type: subpages
 ---
 
 1. Pull the `latest` version [from Dockerhub](https://hub.docker.com/r/gabekangas/owncast/tags): `docker pull gabekangas/owncast:latest`.

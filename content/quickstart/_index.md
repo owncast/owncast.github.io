@@ -11,7 +11,7 @@ menu:
     parent: "quickstart"
 weight: 010
 toc: false
-
+type: subpages
 ---
 {{< vimeo 484707748 >}}
 

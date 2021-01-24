@@ -8,6 +8,7 @@ draft: false
 images: []
 weight: 030
 toc: false
+type: subpages
 ---
 
 1. Make a directory to run the service from, and download a release from https://github.com/owncast/owncast/releases into that directory.

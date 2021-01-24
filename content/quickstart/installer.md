@@ -8,6 +8,7 @@ draft: false
 images: []
 weight: 020
 toc: false
+type: subpages
 ---
 
 Paste the following into your shell and the installer will download Owncast for you.

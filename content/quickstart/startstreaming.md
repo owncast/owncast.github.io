@@ -8,6 +8,7 @@ draft: false
 images: []
 weight: 060
 toc: false
+type: subpages
 ---
 
 1. Point your broadcasting software at your new server using `rtmp://yourserver/live` and the stream key you set above and start your stream.

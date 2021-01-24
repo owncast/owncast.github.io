@@ -8,6 +8,7 @@ draft: false
 images: []
 weight: 050
 toc: false
+type: subpages
 ---
 
 1. Edit `config.yaml` and change your stream key.
