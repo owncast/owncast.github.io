@@ -1,0 +1,12 @@
+<ol>
+{{ $currentSection := .CurrentSection }}
+{{ range where .Site.RegularPages.ByWeight "Section" .Section }}
+    {{ if in (.Permalink | string) .RelPermalink }}
+        <li>
+            <a href="{{ .Permalink }}">
+            {{ .Params.title | title }}
+            </a>
+        </li>
+{{ end }}
+{{ end }}
+</ol>

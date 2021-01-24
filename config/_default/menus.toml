@@ -17,14 +17,19 @@
   url = "/docs/integrations/"
 
 [[main]]
-  name = "Docs"
-  url = "/docs/quickstart/"
+  name = "Quickstart"
+  url = "/quickstart/"
   weight = 10
 
 [[main]]
-  name = "Blog"
-  url = "/blog/"
+  name = "Docs"
+  url = "/docs/quickstart/"
   weight = 20
+
+[[main]]
+  name = "Directory"
+  url = "https://directory.owncast.online"
+  weight = 40
 
 [[social]]
   name = "GitHub"
@@ -32,3 +37,9 @@
   url = "https://github.com/owncast"
   post = "v0.1.0"
   weight = 20
+
+[[quickstart]]
+  name = "Quickstart"
+  weight = 10
+  identifier = "quickstart"
+  url = "/quickstart/"
