@@ -1,6 +1,6 @@
 ---
-title: "Building addons, bots, overlays and other third party tools and apps on top of Owncast"
-description: "Welcome to Doks! This tutorial will guide you through setting up and deploying your first Doks site."
+title: "Build on top of Owncast"
+description: "Build addons, bots, overlays and other third party tools and apps on top of Owncast"
 date: 2020-11-17T20:11:42+01:00
 lastmod: 2020-11-17T20:11:42+01:00
 draft: false
@@ -13,11 +13,8 @@ toc: true
 type: subpages
 ---
 
->You're one of the first people to try out our 3rd party APIs, how exciting!  We really appreciate you taking the time to experiment with these additions to Owncast and putting your creativity to work.  Your feedback and testing will make it so future developers will be able to make some really cool stuff on top of Owncast, and you'll have a head start on building your own things.
->
-> Since this is a pre-release feature, you'll have to jump through a couple extra hoops.  Check out the `external-integrations` branch and run Owncast via `go run main.go pkged.go`.
->
-> The detailed in-development API documentation can be found [here](https://github.com/owncast/owncast/blob/external-integrations/doc/api/index.html).
+
+{{< alert icon="💡" text="You're one of the first people to try out our 3rd party APIs, how exciting!  We really appreciate you taking the time to experiment with these additions to Owncast and putting your creativity to work.  Your feedback and testing will make it so future developers will be able to make some really cool stuff on top of Owncast, and you'll have a head start on building your own things.<br/>Since this is a pre-release feature, you'll have to jump through a couple extra hoops.  Check out the `external-integrations` branch and run Owncast via `go run main.go pkged.go`.<br/>The detailed in-development API documentation can be found <a href=https://github.com/owncast/owncast/blob/external-integrations/doc/api/index.html>here</a>." >}}
 
 
 Owncast has the ability for you to build things on top of it.  Here's some examples of things you can build:
@@ -90,48 +87,10 @@ Example request:
 
 You have the ability to get notified when certain actions take place on your Owncast server via [webhooks](webhooks) and are able to send actions into your server via specific [APIs secured by access tokens](accesstokens).
 
-## Example Projects
-
-The following example projects are a work-in-progress.  If you'd like to help with them, we'd love to have you contribute!  Also, if you want to write some basic examples in a different language, that would be awesome.
-
-### Empty Project
-
-The following is a project setup for you to simply add your logic to a basic scaffolding of a Node.js project.  If you're looking to start a new Node.js project then this might be a good place to start.
-
-https://glitch.com/edit/#!/owncast-addon
-
-### Dancing Banana
-
-https://github.com/geekgonecrazy/livestream-banana-bot
-
-{{< youtube 1bAfwBwdbKg >}}
-
-### Notify followers via Email or SMS when you go live
-
-This project allows people to put in their phone number or email address to get notified any time you go live.  It uses Mailgun for email and Twilio for text messages.  It also has an embed where it thanks the user for following you on your stream.
-
-https://glitch.com/edit/#!/owncast-example-follow
-
-
-### Tip Jar
-
-This project includes a page where people can tip you during your stream.  It uses Stripe as a payment processor.  When a payment is successful it sends a message to your chat.  TODO: Add an embed so you thank tippers via an image/message on your stream.
-
-https://glitch.com/edit/#!/owncast-example-tip-jar
-
-
-
-### Emoji Wall
-
-This project is a simple embed that listens on that chat for people sending custom emojis.  If one or more custom emoji are sent in a message then they float by on the embed.
-
-https://glitch.com/edit/#!/owncast-example-emoji-wall
-
-
 ## Tools
 
 The following are some tools that might make building a bit easier.
 
-### Development environment
+## Development environment
 
 A quick, easy and free way to get up and running to experiment is by using [Glitch](http://glitch.com).  You can create a free account and write a Node.js application that can accept webhooks and send requests to your Owncast server.  You can edit code right in the browser and it's immediately available to the world.  You can always move your code to another server when you're done if you don't want to keep it on Glitch.

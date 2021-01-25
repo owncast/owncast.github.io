@@ -17,6 +17,7 @@ type: subpages
 
 Paste the following into your shell and the installer will download Owncast for you.
 
+{{< btn-copy text="curl -s https://owncast.online/install.sh | bash" >}}
 {{< highlight bash >}}
 curl -s https://owncast.online/install.sh | bash
 {{</ highlight >}}

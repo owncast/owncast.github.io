@@ -7,9 +7,11 @@ weight: 100
 toc: true
 ---
 
-Owncast supports HLS [Adaptive bitrate streaming](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming), or in other words, different video qualities will be used for different network conditions.
+This document aims to outline what is being done to your content and the different knobs you can tweak to get the best output for your instance.
 
-It's hard to give specific settings that will give you the best quality and performance with Owncast because people have different servers and requirements.  However, this document aims to outline what is being done to your content and the different knobs you can tweak to get the best output for your instance.
+Owncast is an implementation of HLS [Adaptive bitrate streaming](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming), or in other words, different video qualities will be used for different network conditions.
+
+{{< alert icon="💡" text="It's hard to give specific settings that will give you the best quality and performance with Owncast because people have different servers and requirements." >}}
 
 ## How does an Owncast video stream work?
 
@@ -53,24 +55,11 @@ Framerate is the number of frames per second in the video. Owncast defaults to 2
 
 The more CPU you use the better your output will be.  The more CPU you use to compress, the better the output image will be, or the smaller of a file the output will be for the same quality.  However, you will need to balance the amount of CPU you have available with the amount you can use to process video.
 
-### Latency
+### Latency Buffer
 
-You have some control over the live latency between the broadcaster and the viewer.  In general the lower the latency the less buffer is available for any possible slow transfers, network blips or errors.  While it's completely understandable to want to have as little latency as possible you may need to increase the latency buffer if you're experiencing issues.
+You have some control over the live latency between the broadcaster and the viewer.  While it's completely understandable to want to have as little latency as possible you may need to increase the latency buffer if you're experiencing issues.  In general the lower the latency the less buffer is available for any possible slow transfers, network blips or errors.  
 
-**If you're trying to get better quality and smaller files** move to a slower encoding preset.
-
-**If you're getting buffering, errors, or your server hardware just can't keep up** try moving to a faster preset.
-
-The default is `veryfast` but adjust as necessary.
-
-The options are, in order from fastest to slowest:
-1. ultrafast
-1. superfast
-1. veryfast
-1. faster
-1. fast
-
-From the [ffmpeg h.264 encoding guide](https://trac.ffmpeg.org/wiki/Encode/H.264).
+{{< alert icon="💡" text="If you require real-time, video conferencing style latency you may want to look for different solution than HLS video and scalable one-to-many distribution as it will never get to sub-second levels." >}}
 
 ## Audio
 
