@@ -1,7 +1,6 @@
 ---
 title: "Manual Install"
-description: "Welcome to Doks! This tutorial will guide you through setting up and deploying your first Doks site."
-lead: "Welcome to Doks! This tutorial will guide you through setting up and deploying your first Doks site."
+description: "If you don't want to use the automated installer you can download it yourself."
 date: 2020-11-17T20:11:42+01:00
 lastmod: 2020-11-17T20:11:42+01:00
 draft: false

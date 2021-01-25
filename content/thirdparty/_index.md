@@ -26,7 +26,6 @@ Owncast has the ability for you to build things on top of it.  Here's some examp
 1. An OBS overlay so when an event happens in the chat an image or message shows up on the stream.
 1. An integration into some kind of 3rd party service, such as when the song you're listening to on Spotify changes you put the song name in the chat.
 1. Send out a message to your social networks each time you go live.
-
 ## Outbound Webhooks (Owncast server -> Your code)
 
 Webhooks will send events to your code when things happen on your Owncast server.  The following are a list of events you can get notified about.
@@ -87,18 +86,9 @@ Example request:
 }
 {{< / highlight >}}
 
+## Functionality
 
-## Tools
-
-The following are some tools that might make building a bit easier.
-
-### Development environment
-
-A quick, easy and free way to get up and running to experiment is by using [Glitch](http://glitch.com).  You can create a free account and write a Node.js application that can accept webhooks and send requests to your Owncast server.  You can edit code right in the browser and it's immediately available to the world.  You can always move your code to another server when you're done if you don't want to keep it on Glitch.
-
-### Test webhooks
-
-If you want to test how webhooks work before you write any code, create a test endpoint at https://requestcatcher.com/, and add the URL it gives you as a webhook in your admin and see the requests come through.
+You have the ability to get notified when certain actions take place on your Owncast server via [webhooks](webhooks) and are able to send actions into your server via specific [APIs secured by access tokens](accesstokens).
 
 ## Example Projects
 
@@ -136,3 +126,12 @@ https://glitch.com/edit/#!/owncast-example-tip-jar
 This project is a simple embed that listens on that chat for people sending custom emojis.  If one or more custom emoji are sent in a message then they float by on the embed.
 
 https://glitch.com/edit/#!/owncast-example-emoji-wall
+
+
+## Tools
+
+The following are some tools that might make building a bit easier.
+
+### Development environment
+
+A quick, easy and free way to get up and running to experiment is by using [Glitch](http://glitch.com).  You can create a free account and write a Node.js application that can accept webhooks and send requests to your Owncast server.  You can edit code right in the browser and it's immediately available to the world.  You can always move your code to another server when you're done if you don't want to keep it on Glitch.

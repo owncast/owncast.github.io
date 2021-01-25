@@ -22,7 +22,7 @@ Your Owncast server will only accept actions from requests with a valid Access T
 1. Select the scope of permissions you want to give this token.
 1. Save this access token.
 
-#### Your code
+### Your code
 
 1. Create a new request in your code.
 1. This request should send headers with `Authorization: Bearer` and your access token.

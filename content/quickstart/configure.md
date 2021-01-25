@@ -1,7 +1,6 @@
 ---
 title: "Configure"
-description: "Welcome to Doks! This tutorial will guide you through setting up and deploying your first Doks site."
-lead: "Welcome to Doks! This tutorial will guide you through setting up and deploying your first Doks site."
+description: "You'll likely want to make a couple changes once you have Owncast up and running."
 date: 2020-11-17T20:11:42+01:00
 lastmod: 2020-11-17T20:11:42+01:00
 draft: false

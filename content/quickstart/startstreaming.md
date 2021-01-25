@@ -1,7 +1,6 @@
 ---
 title: "Start Streaming"
-description: "Welcome to Doks! This tutorial will guide you through setting up and deploying your first Doks site."
-lead: "Welcome to Doks! This tutorial will guide you through setting up and deploying your first Doks site."
+description: "Once you're setup you can start streaming with your existing software."
 date: 2020-11-17T20:11:42+01:00
 lastmod: 2020-11-17T20:11:42+01:00
 draft: false
