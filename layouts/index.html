@@ -5,9 +5,15 @@
       <h1 class="mt-0">{{ .Title }}</h1>
     </div>
     <div class="col-lg-9 col-xl-8 text-center">
-      <p class="lead">{{ .Params.Lead | safeHTML }}</p>
+      <p class="lead">Selfhosted video livestreams.<br />Point your live stream at a server you personally control and regain
+        ownership over your content.</p>
       <a class="btn btn-primary btn-lg px-4 mb-2" href="{{ "quickstart/" | absURL }}" role="button">Get started</a>
     </div>
+    <figure class="col-lg-12 text-center">
+      <a href=/images/owncast-screenshot.png>
+        <img src=/images/owncast-screenshot.png alt="Owncast Screenshot" width=100%>
+      </a>
+    </figure>
   </div>
 </section>
 {{ end }}
@@ -16,32 +22,39 @@
 <section class="section section-sm">
   <div class="container">
     <div class="row justify-content-center text-center">
-      <div class="col-lg-5">
+      <!-- <div class="col-lg-5">
         <h2 class="h4">Security aware</h2>
         <p>Get A+ scores on <a href="https://observatory.mozilla.org/analyze/doks.netlify.app">Mozilla Observatory</a> out of the box. Easily change the default Security Headers to suit your needs.</p>
+      </div> -->
+      <div class="col-lg-5">
+        <h2 class="h4">Works with open standards</h2>
+        <p>Owncast uses the RTMP protocols which means that your video mixer probably <a
+            href="http://localhost:1313/docs/broadcasting/">already works</a> with Owncast.</p>
       </div>
       <div class="col-lg-5">
-        <h2 class="h4">Fast by default</h2>
-        <p>Get 100 scores on <a href="https://googlechrome.github.io/lighthouse/viewer/?gist=7731347bb8ce999eff7428a8e763b637">Google Lighthouse</a> by default. Doks removes unused css, prefetches links, and lazy loads images.</p>
-      </div>
-      <div class="col-lg-5">
-        <h2 class="h4">SEO-ready</h2>
-        <p>Use sensible defaults for structured data, open graph, and Twitter cards. Or easily change the SEO settings to your liking.</p>
+        <h2 class="h4">Scalable Infrastructure</h2>
+        <p>Owncast can work with <a href="http://localhost:1313/docs/storage/"
+            title="Storage providers | Owncast Docs">different storage providers</a> to serve your videos to hundreds of users!
+        </p>
       </div>
     </div>
     <div class="row justify-content-center text-center">
       <div class="col-lg-5">
-        <h2 class="h4">Full text search</h2>
-        <p>Search your Doks site with FlexSearch. Easily customize index settings and search options to your liking.</p>
+        <h2 class="h4">Open Community</h2>
+        <p>The Owncast community is vibrant and always ready to help. Check out our <a
+            href="https://github.com/owncast/owncast/issues">Issues board</a> and our <a
+            href="https://owncast.rocket.chat">RocketChat</a>.</p>
       </div>
       <div class="col-lg-5">
-        <h2 class="h4">Page layouts</h2>
-        <p>Build pages with a landing page, blog, or documentation layout. Add custom sections and components to suit your needs.</p>
+        <h2 class="h4">Permissive License</h2>
+        <p>Owncast is licensed under the <a href="https://choosealicense.com/licenses/mit/" title="MIT license">MIT license</a>,
+          so you can use it freely.
+        </p>
       </div>
-      <div class="col-lg-5">
-        <h2 class="h4">Dark mode</h2>
-        <p>Switch to a low-light UI with the click of a button. Change colors with variables to match your branding.</p>
-      </div>
+      <!-- <div class="col-lg-5">
+                          <h2 class="h4">Security aware</h2>
+                          <p>Get A+ scores on <a href="https://observatory.mozilla.org/analyze/doks.netlify.app">Mozilla Observatory</a> out of the box. Easily change the default Security Headers to suit your needs.</p>
+                        </div> -->
     </div>
   </div>
 </section>
