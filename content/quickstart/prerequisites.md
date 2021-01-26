@@ -1,6 +1,6 @@
 ---
 title: "Prerequisites"
-description: "You'll need a publicly accessible server on the internet."
+description: "What will you need to get started?"
 date: 2020-11-17T20:11:42+01:00
 lastmod: 2020-11-17T20:11:42+01:00
 draft: false

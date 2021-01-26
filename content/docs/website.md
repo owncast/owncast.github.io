@@ -3,7 +3,7 @@ title: "Web Site + Chat"
 menu:
   docs:
     parent: "config"
-weight: 100
+weight: 300
 toc: true
 ---
 

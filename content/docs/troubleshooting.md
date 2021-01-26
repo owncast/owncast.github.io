@@ -3,7 +3,7 @@ title: "Troubleshooting"
 menu:
   docs:
     parent: "documentation"
-weight: 100
+weight: 300
 toc: true
 ---
 

@@ -3,7 +3,7 @@ title: Embedding into your site
 menu:
   docs:
     parent: "integrations"
-weight: 10
+weight: 200
 toc: true
 ---
 

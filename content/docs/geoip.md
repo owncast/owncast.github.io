@@ -1,6 +1,9 @@
 ---
 title: "GeoIP Lookups"
-weight: 100
+weight: 600
+menu:
+    docs:
+        parent: "config"
 toc: false
 ---
 

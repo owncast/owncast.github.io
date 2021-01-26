@@ -3,7 +3,7 @@ title: "FAQ"
 menu:
   docs:
     parent: "documentation"
-weight: 100
+weight: 200
 toc: true
 ---
 

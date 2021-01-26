@@ -3,7 +3,7 @@ title: "The Directory"
 menu:
   docs:
     parent: "config"
-weight: 100
+weight: 600
 toc: true
 ---
 

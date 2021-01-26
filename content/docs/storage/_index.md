@@ -9,7 +9,7 @@ images: []
 menu:
   docs:
     parent: "config"
-weight: 010
+weight: 500
 toc: false
 type: subpages
 ---
