@@ -1,7 +1,7 @@
 ---
 title: Owncast v0.0.3
 date: 2020-12-14
-summary: "0.0.3 has a new admin dashboard to help get an overview of the configuration and performance of your Owncast server along with handfuls of additional updates."
+description: "0.0.3 has a new admin dashboard to help get an overview of the configuration and performance of your Owncast server along with handfuls of additional updates."
 contributors: ["Gabe Kangas"]
 ---
 

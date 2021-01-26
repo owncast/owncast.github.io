@@ -1,7 +1,7 @@
 ---
 title: Owncast v0.0.1
 date: 2020-08-08
-summary: In honor of [@mattdsteele](https://github.com/mattdsteele) and [@JCake](https://github.com/mattdsteele) live streaming their wedding using Owncast tomorrow, here's the first release version.
+description: In honor of [@mattdsteele](https://github.com/mattdsteele) and [@JCake](https://github.com/mattdsteele) live streaming their wedding using Owncast tomorrow, here's the first release version.
 contributors: ["Gabe Kangas"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Owncast v0.0.4
 date: 2020-12-29
-summary: "0.0.4 includes several small updates and bug fixes."
+description: "0.0.4 includes several small updates and bug fixes."
 contributors: ["Gabe Kangas"]
 ---
 

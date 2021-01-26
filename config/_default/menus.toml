@@ -27,9 +27,20 @@
   weight = 20
 
 [[main]]
+  name = "Demo"
+  url = "https://watch.owncast.online"
+  weight = 30
+
+[[main]]
   name = "Directory"
   url = "https://directory.owncast.online"
   weight = 40
+
+[[main]]
+  name = "Releases"
+  url = "/releases"
+  weight = 50
+
 
 [[social]]
   name = "GitHub"
@@ -52,4 +63,9 @@
 [[footer]]
   name = "Contribute"
   url = "/contribute"
+  weight = 10
+
+[[footer]]
+  name = "FAQ"
+  url = "/faq"
   weight = 10

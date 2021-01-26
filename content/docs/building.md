@@ -2,7 +2,7 @@
 title: "Building from Source"
 menu:
   docs:
-    parent: "config"
+    parent: "documentation"
 weight: 100
 toc: true
 ---

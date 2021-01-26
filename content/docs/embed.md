@@ -1,5 +1,5 @@
 ---
-title: Embedding
+title: Embedding into your site
 menu:
   docs:
     parent: "integrations"

@@ -17,39 +17,17 @@ If you want to embed Owncast in your existing website, checkout our [documentati
 
 ## Customization
 
+### Name and description
+
 By setting your name, description and logo you can quickly update the contents of the website to reflect your stream. 
 
-You can add links to your profiles on other sites by simply setting `socialHandles` in the config file.
-`socialHandles` currently supports the following services by name:
+### External social links
 
-* `facebook`
-* `twitter`
-* `instagram`
-* `snapchat`
-* `tiktok`
-* `soundcloud`
-* `bandcamp`
-* `patreon`
-* `youtube`
-* `spotify`
-* `twitch`
-* `paypal`
-* `github`
-* `linkedin`
-* `discord`
-* `mastodon`
+You can add links to your profiles on other sites by adding them in the admin.
 
-Here's an example.
+### Web page content
 
-{{< highlight yaml >}}
-  socialHandles:
-    - platform: github
-      url: https://github.com/owncast/owncast
-    - platform: instagram
-      url: https://www.instagram.com/owncast
-{{< / highlight >}}
-
-For adding additional content you can edit the [`data/content.md`](https://github.com/owncast/owncast/blob/master/data/content-example.md) file.  Anything you put in this using [markdown](https://www.markdownguide.org/) or HTML will display on the page without you having to touch the existing page.  Some ideas here: Your Patreon or Paypal link to support donations, an embed of a Soundcloud track, some images, or an embedded social feed.
+The body of your page content can be customized in your admin.  Use standard Markdown syntax to add links, images, and more.
 
 ## Chat
 

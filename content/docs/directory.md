@@ -1,5 +1,5 @@
 ---
-title: "Get listed on the directory"
+title: "The Directory"
 menu:
   docs:
     parent: "config"

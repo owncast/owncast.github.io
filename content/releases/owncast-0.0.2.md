@@ -1,7 +1,7 @@
 ---
 title: Owncast v0.0.2
 date: 2020-09-27
-summary: "0.0.2 has a major focus on frontend web updates, with some nice new features including the ability to embed in your own site easier, custom emoji and more."
+description: "0.0.2 has a major focus on frontend web updates, with some nice new features including the ability to embed in your own site easier, custom emoji and more."
 contributors: ["Gabe Kangas"]
 ---
 

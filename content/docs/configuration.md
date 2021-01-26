@@ -14,16 +14,9 @@ Owncast has a handful of values you can change.  Some common things many people 
 * [Video quality settings](/docs/encoding).
 * [S3 file storage](/docs/storage).
 
-An example config file with additional features can be viewed [below](#full-example).
-
 ## Custom Ports
 
-Per default, Owncast will run a `http` web server on port `8080` and a RTMP server on port `1935`. You can change the ports in the top level your `config.yaml`:
-
-{{< highlight yaml >}}
-webServerPort: 8080
-rtmpServerPort: 1935
-{{< / highlight >}}
+Per default, Owncast will run a `http` web server on port `8080` and a RTMP server on port `1935`. You can change the ports in the the admin.
 
 {{<versionsupport feature="Custom Ports" version="0.0.4">}}
 

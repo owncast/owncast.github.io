@@ -10,7 +10,8 @@ weight: 010
 toc: false
 type: subpages
 ---
-{{< vimeo 484707748 >}}
+{{< asciicast "/install-owncast-ascii.cast">}}
+
 
 ----
 
@@ -22,3 +23,7 @@ curl -s https://owncast.online/install.sh | bash
 {{</ highlight >}}
 
 If you would prefer to download a release manually or use Docker you have some other options.
+
+### See an example of getting running in under a minute.
+
+{{< vimeo 484707748 >}}
