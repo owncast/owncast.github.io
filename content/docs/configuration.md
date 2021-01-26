@@ -7,43 +7,14 @@ weight: 100
 toc: true
 ---
 
-The default `config.yaml` has a handful of values you can change.  However, more can be customized if you need them to be.  Some common changes to the config are:
+Owncast has a handful of values you can change.  Some common things many people would want to change are:
 
-* Your site name, logo, description and external links.
-* The **stream key** to gain access to broadcasting to your stream.
-* The path to your specific `ffmpeg` executable.
-* Video quality settings.
-* S3 file storage.
+* Your site name, logo, description and external links that are displayed on the [web site](/docs/website).
+* The **stream key** to gain access to broadcasting to your stream and your admin.
+* [Video quality settings](/docs/encoding).
+* [S3 file storage](/docs/storage).
 
 An example config file with additional features can be viewed [below](#full-example).
-
-## Video Quality
-
-
-## External links
-
-`socialHandles` currently supports the following services by name:
-
-* `facebook`
-* `twitter`
-* `instagram`
-* `snapchat`
-* `tiktok`
-* `soundcloud`
-* `bandcamp`
-* `patreon`
-* `youtube`
-* `spotify`
-* `twitch`
-* `paypal`
-* `github`
-* `linkedin`
-* `discord`
-* `mastodon`
-* `kofi`
-* `keyoxide`
-
-Update your `tags` in the config to display the topics type of content you want to call attention to.
 
 ## Custom Ports
 
@@ -62,9 +33,3 @@ You can optionally see the location of viewers in the admin.
 [See the instructions to enable this feature](/docs/geoip).
 
 {{<versionsupport feature="admin dashboard" version="0.0.3">}}
-
-## Full Example
-
-Below, you can see all config items:
-
-TODO: Insert Config

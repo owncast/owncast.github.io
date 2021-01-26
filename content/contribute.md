@@ -2,7 +2,6 @@
 title: Contribute
 ---
 
-# Contribute to Owncast
 
 We are open for new contributors to this project. If you have found issues or bugs,
 or would like to improve Owncast by sending your code, please visit our GitHub page:

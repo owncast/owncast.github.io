@@ -1,9 +1,6 @@
 ---
 title: "Owncast Quickstart"
-description: "Welcome to Doks! This tutorial will guide you through setting up and deploying your first Doks site."
-lead: "Welcome to Doks! This tutorial will guide you through setting up and deploying your first Doks site."
-date: 2020-11-17T20:11:42+01:00
-lastmod: 2020-11-17T20:11:42+01:00
+description: "Start streaming to your own server in seconds."
 draft: false
 images: []
 menu:
@@ -14,6 +11,8 @@ toc: false
 type: subpages
 ---
 {{< vimeo 484707748 >}}
+
+----
 
 Paste the following into your shell and the installer will download Owncast for you.
 

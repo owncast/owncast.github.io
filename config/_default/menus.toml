@@ -43,3 +43,13 @@
   weight = 10
   identifier = "quickstart"
   url = "/quickstart/"
+
+[[footer]]
+  name = "Contact"
+  url = "/contact"
+  weight = 10
+
+[[footer]]
+  name = "Contribute"
+  url = "/contribute"
+  weight = 10

@@ -1,6 +1,6 @@
 ---
 title: "Configure"
-description: "You'll likely want to make a couple changes once you have Owncast up and running."
+description: "Visit /admin to configure and personalize your server."
 date: 2020-11-17T20:11:42+01:00
 lastmod: 2020-11-17T20:11:42+01:00
 draft: false
