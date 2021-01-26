@@ -27,7 +27,7 @@ If you're developing against the `master` branch of Owncast the following docume
 
 Documentation for each release's APIs can be found with the release notes of each version.
 
-{{< button href="/posts" >}}Releases{{< /button >}}
+{{< button href="/releases" >}}Releases{{< /button >}}
 
 You can also checkout the API documentation at any point from the [git repository](https://github.com/owncast/owncast).
 
