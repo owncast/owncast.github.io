@@ -7,7 +7,7 @@ set -o pipefail
 
 # Install configuration
 if ! [ "${OWNCAST_VERSION:-}" ]; then
-  OWNCAST_VERSION="0.0.5"
+  OWNCAST_VERSION="0.0.6"
 fi
 
 if ! [ "${OWNCAST_INSTALL_DIRECTORY:-}" ]; then
@@ -65,11 +65,49 @@ requireTool() {
   fi
 }
 
+# Backup the existing install
+backupInstall() {
+  BACKUP_STAGING="$(mktemp -d)"
+  mkdir ${BACKUP_STAGING}/backup
+  BACKUP_DIR="backup"
+  TIMESTAMP=$(date +%s)
+  BACKUP_FILE="${TIMESTAMP}-v${OWNCAST_VERSION}".tar.gz
+  printf "${BLUE}Backing up${NC} your files before upgrading to v${OWNCAST_VERSION}"
+
+  FILE_LIST=(
+    "webroot/*.html"
+    "webroot/styles/"
+    "webroot/js"
+    "webroot/img"
+    "data/"
+    "*.yaml"
+  )
+
+  # Make backup directory if it doesn't exist
+  [[ -d $BACKUP_DIR ]] || mkdir $BACKUP_DIR
+
+  for i in "${FILE_LIST[@]}"
+  do
+    : 
+    cp -r ${FILE_LIST[@]} ${BACKUP_STAGING}/backup
+  done
+
+  pushd ${BACKUP_STAGING} >> /dev/null
+  tar zcf ${BACKUP_FILE} backup & >> /dev/null
+  spinner $!
+  popd >> /dev/null
+  mv ${BACKUP_STAGING}/${BACKUP_FILE} backup/
+  
+  rm -rf ${BACKUP_STAGING}
+  printf "${BLUE}Backed up${NC} your files before upgrading to v${OWNCAST_VERSION}  [${GREEN}✓${NC}]\n"
+}
+
 main () {
   printf "${PURPLE}${BOLD}Owncast Installer v%s ${NC}\n\n" "$OWNCAST_VERSION"
 
   requireTool "curl"
   requireTool "unzip"
+  requireTool "tar"
 
   # Determine operating system & architecture
   case $(uname -s) in
@@ -112,10 +150,23 @@ main () {
   OWNCAST_URL="https://github.com/owncast/owncast/releases/download/v${OWNCAST_VERSION}/owncast-${OWNCAST_VERSION}-${PLATFORM}-${OWNCAST_ARCH}.zip"
   OWNCAST_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/owncast-${OWNCAST_VERSION}-${PLATFORM}-${OWNCAST_ARCH}.zip"
 
-  # Create target directory
-  mkdir -p "$OWNCAST_INSTALL_DIRECTORY"
-  printf "${GREEN}Created${NC} directory  [${GREEN}✓${NC}]\n"
-
+  # If the install directory exists already then cd into it and upgrade
+  if [[ -d "$OWNCAST_INSTALL_DIRECTORY" && -x "$OWNCAST_INSTALL_DIRECTORY/owncast" ]]; then
+    printf "${BLUE}Exising install found${NC} in ${OWNCAST_INSTALL_DIRECTORY}.  Will update it to v${OWNCAST_VERSION}. If this is incorrect remove the directory and rerun the installer.\n"
+    cd $OWNCAST_INSTALL_DIRECTORY
+    OWNCAST_INSTALL_DIRECTORY="./"
+    backupInstall
+  # If the owncast binary exists then upgrade
+  elif [ -x ./owncast ]; then
+    printf "${BLUE}Exising install found${NC} in this directory.  Will update it to v${OWNCAST_VERSION}. If this is incorrect remove the directory and rerun the installer.\n"
+    backupInstall
+    OWNCAST_INSTALL_DIRECTORY="./"
+  else
+     # Create target directory
+    mkdir -p "$OWNCAST_INSTALL_DIRECTORY"
+    printf "${GREEN}Created${NC} directory  [${GREEN}✓${NC}]\n"
+  fi
+ 
   # Download release
   printf "${BLUE}Downloading${NC} Owncast v${OWNCAST_VERSION} for ${PLATFORM}"
   curl -s -L ${OWNCAST_URL} --output "${OWNCAST_TARGET_FILE}" &
