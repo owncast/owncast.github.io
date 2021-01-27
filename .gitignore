@@ -16,3 +16,4 @@ $RECYCLE.BIN/
 
 # Node stuff
 node_modules
+.vercel
