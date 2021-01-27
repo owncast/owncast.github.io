@@ -52,8 +52,9 @@ Webhooks will send events to your code when things happen on your Owncast server
 
 We currently support the following actions you can make via HTTP `POST`s from your code.
 
-1. Send chat message as the server (known as a `system` message) `/api/integrations/chat/system`
-1. Send chat message as a user (known as a `user` message) `/api/integrations/chat/user`
+1. Send chat message as the server (known as a `system` message) `/api/integrations/chat/system` (System scope)
+1. Send chat message as a user (known as a `user` message) `/api/integrations/chat/user` (User scope)
+1. Send a generic action message such as "Bob rolled a 15 on the dice" `/api/integrations/chat/action` (System scope)
 
 Your Owncast server will only accept actions from requests with a valid Access Token.  Follow the below steps to create an access token.
 
