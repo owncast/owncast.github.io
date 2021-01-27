@@ -1,0 +1,17 @@
+table { 
+    border-collapse: collapse; 
+    width: 100%; 
+    margin: 20px;
+    border: 1px solid rgba(26, 4, 63, 0.5);
+} 
+  
+th, td { 
+    text-align: left; 
+    padding: 8px; 
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(26, 4, 63, 0.363);
+} 
+  
+tr:nth-child(even) { 
+    background-color: rgba(183, 175, 233, 0.158); 
+} 
