@@ -12,8 +12,15 @@ type: subpages
 
 We currently support the following actions you can make via HTTP `POST`s from your code.
 
-1. Send chat message as the server (known as a `system` message) `/api/integrations/chat/system`
-1. Send chat message as a user (known as a `user` message) `/api/integrations/chat/user`
+| Event       | Endpoint     | Scope     |
+| :------------- | :----------: | -----------: |
+|  System chat message | /api/integrations/chat/system   | `CAN_SEND_SYSTEM_MESSAGES`    |
+|  User chat message | /api/integrations/chat/user   | `CAN_SEND_MESSAGES`    |
+|  Chat action | /api/integrations/chat/action   | `CAN_SEND_SYSTEM_MESSAGES`    |
+|  Remove chat message | /api/integrations/chat/messagevisibility   | `HAS_ADMIN_ACCESS`    |
+|  Get chat history | /api/integrations/chat   | `HAS_ADMIN_ACCESS`    |
+|  Get connected clients | /api/integrations/clients   | `HAS_ADMIN_ACCESS`    |
+
 
 Your Owncast server will only accept actions from requests with a valid Access Token.  Follow the below steps to create an access token.
 
