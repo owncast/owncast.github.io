@@ -20,6 +20,7 @@ We currently support the following actions you can make via HTTP `POST`s from yo
 |  Remove chat message | /api/integrations/chat/messagevisibility   | `HAS_ADMIN_ACCESS`    |
 |  Get chat history | /api/integrations/chat   | `HAS_ADMIN_ACCESS`    |
 |  Get connected clients | /api/integrations/clients   | `HAS_ADMIN_ACCESS`    |
+|  Set stream title | /api/integrations/streamtitle   | `HAS_ADMIN_ACCESS`    |
 
 
 Your Owncast server will only accept actions from requests with a valid Access Token.  Follow the below steps to create an access token.
