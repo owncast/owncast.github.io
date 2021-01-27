@@ -1,6 +1,6 @@
 ---
 title: "Minio"
-description: "If you want to host the video segments on a self hosted S3 compatible [MinIO](https://min.io/) server, you get even more control over your data."
+description: "With a selfhosted MinIO server, you get even more control over your data."
 date: 2020-11-17T20:11:42+01:00
 lastmod: 2020-11-17T20:11:42+01:00
 draft: false
