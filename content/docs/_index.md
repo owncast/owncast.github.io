@@ -9,8 +9,9 @@ There are, however, handfuls of things you can configure to tweak the [content o
 
 You can also extend Owncast's functionality by building your own bots, overlays, tools and integrations by taking advantage of the [third party APIs](/thirdparty).
 
-Some things you might be interested in reading:
+Some things you might be interested in:
 
 1. [FAQ](/faq)
-1. [How to use an external storage provider](/docs/storage)
-1. [Learn how Owncast works and customize your video output](/docs/encoding)
+1. [Using an external storage provider instead of your own bandwidth](/docs/storage)
+1. [Customize your video output](/docs/encoding)
+1. [Enable SSL using a web proxy](/docs/sslproxies)

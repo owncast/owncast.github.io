@@ -1,12 +1,10 @@
 ---
-title: "Maintenance"
+title: "Backups"
 menu:
   docs:
     parent: "documentation"
-
+weight: 700
 ---
-
-## Backup
 
 Owncast will create a backup of your data periodically.  It can be found in your `backup` directory as `owncastdb.bak`.  You can add this to your normal system backups to keep your Owncast data safe.
 
