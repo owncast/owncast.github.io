@@ -10,5 +10,14 @@ toc: false
 type: subpages
 ---
 
-1. Edit `config.yaml` and change your stream key.
-1. Continue to edit the config file and customize with your own details, links and info.  See [More Configuration](/docs/configuration/) to find additional ways to configure video quality.
+While Owncast will work for you out of the box, there are things most people will want to customize after getting it up and running.
+
+Configuration is done through the Owncast administration page located on your server under `/admin`.  The login username is `admin` and the password is your stream key, the default being `abc123`.
+
+Some common items many people would want to update after installing Owncast are:
+
+* Your site name, logo, description and external links that are displayed on the [web site](/docs/website).
+* The **stream key** to gain access to broadcasting to your stream and your admin.
+* Enable your stream to show up in the [Owncast Directory](/docs/directory).
+
+Read more about [what you can configure and how](/docs/configuration).
