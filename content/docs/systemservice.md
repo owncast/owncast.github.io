@@ -7,7 +7,7 @@ weight: 1900
 toc: true
 ---
 
-You can setup Owncast to run under [systemd](https://systemd.io/) to it's a managed service on your machine that automatically starts when your machine does.
+You can optionally setup Owncast to run under [systemd](https://systemd.io/) so it's a managed service on your machine that automatically starts when your machine does.
 
 Below is an example configuration.
 

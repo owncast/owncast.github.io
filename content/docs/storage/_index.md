@@ -8,7 +8,7 @@ draft: false
 images: []
 menu:
   docs:
-    parent: "config"
+    parent: "configure"
 weight: 500
 toc: false
 type: subpages

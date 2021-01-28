@@ -2,7 +2,7 @@
 title: "Video Encoding"
 menu:
   docs:
-    parent: "config"
+    parent: "configure"
 weight: 400
 toc: true
 ---

@@ -4,7 +4,7 @@
   identifier = "documentation"
   url = "/docs/"
 
-[[config]]
+[[configure]]
   name = "Configuring Owncast"
   weight = 10
   identifier = "config"
