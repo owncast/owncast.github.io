@@ -10,10 +10,6 @@ weight: 010
 toc: false
 type: subpages
 ---
-{{< asciicast "/install-owncast-ascii.cast">}}
-
-
-----
 
 Paste the following into your shell and the installer will download Owncast for you.
 
@@ -22,7 +18,11 @@ Paste the following into your shell and the installer will download Owncast for 
 curl -s https://owncast.online/install.sh | bash
 {{</ highlight >}}
 
-If you would prefer to download a release manually or use Docker you have some other options.
+{{< asciicast "/install-owncast-ascii.cast">}}
+
+---
+
+If you would prefer to [download a release manually](manual) or use [Docker](docker) you have some other options.
 
 ### See an example of getting running in under a minute.
 
