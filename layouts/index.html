@@ -56,6 +56,12 @@
                           <p>Get A+ scores on <a href="https://observatory.mozilla.org/analyze/doks.netlify.app">Mozilla Observatory</a> out of the box. Easily change the default Security Headers to suit your needs.</p>
                         </div> -->
     </div>
+    <div>
+      <h1><center>Streams live right now</center></h1>
+      <div id="stream-list">
+      </div>
+      <center>Visit the <a href="https://directory.owncast.online">Owncast Directory</a> to see more examples when they're streaming.</center>
+    </div>
   </div>
 </section>
 {{ end }}
@@ -68,4 +74,30 @@
     </div>
   </div>
 </section>
+
+<script>
+  const url = 'https://yp.owncast.online/active';
+  getDirectory();
+
+  async function getDirectory() {
+    const response = await fetch(url, {
+      mode: "cors", // same-origin, no-cors
+    });
+    const streams = await response.json();
+    console.log(streams);
+
+    const container = document.getElementById("stream-list");
+    streams.forEach(function(stream) {
+      var node = document.createElement("a");
+      node.href = stream.url;
+      var img = document.createElement("img");
+      img.className = 'stream-item';
+      img.src = 'https://yp.owncast.online/image/thumb/' + stream.id;
+      
+      node.appendChild(img);
+
+      container.appendChild(node)
+    });
+  }
+</script>
 {{ end }}
