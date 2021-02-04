@@ -22,7 +22,7 @@ curl -s https://owncast.online/install.sh | bash
 
 ---
 
-If you would prefer to [download a release manually](manual) or use [Docker](docker) you have some other options.
+If you would prefer to [download a release manually](/quickstart/manual) or use [Docker](/quickstart/docker) you have some other options.
 
 ### See an example of getting running in under a minute.
 

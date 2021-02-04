@@ -86,7 +86,7 @@ Example request:
 
 ## Functionality
 
-You have the ability to get notified when certain actions take place on your Owncast server via [webhooks](webhooks) and are able to send actions into your server via specific [APIs secured by access tokens](accesstokens).
+You have the ability to get notified when certain actions take place on your Owncast server via [webhooks](/thirdparty/webhooks) and are able to send actions into your server via specific [APIs secured by access tokens](/thirdparty/accesstokens).
 
 ## Tools
 

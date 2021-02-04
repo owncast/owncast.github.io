@@ -80,4 +80,4 @@ Each bitrate variant adds significant CPU usage and slows down the overall gener
 
 ## Disk Usage
 
-More stream quality variants requires more disk space, since it's another copy of the video on disk.  If you're serving video locally and you have enough disk space then it's probably no big deal and files will rather quickly get rotated and cleaned up.  If you're using something like [S3 for storage](/docs/s3/) then files won't get cleaned up until some point in the future, so you'll have more remote storage use in play.
+More stream quality variants requires more disk space, since it's another copy of the video on disk.  If you're serving video locally and you have enough disk space then it's probably no big deal and files will rather quickly get rotated and cleaned up.  If you're using something like [S3 for storage](/docs/storage/) then files won't get cleaned up until some point in the future, so you'll have more remote storage use in play.

@@ -29,4 +29,4 @@ While not required, most people will want to support SSL on a public Owncast ser
 
 You can use any method you like to add SSL support but there are some popular options we've seen work well with people.  If you have any specific questions or would like to make suggestions on configurations or other setups [let us know](/contact).
 
-If you don't yet have a SSL proxy you're using for other things we generally suggest [Caddy](caddy), as it's the fastest to get up and running.  Otherwise you can add Owncast to your existing configurations.  Take a look at the documentation for example configurations for the following pieces of software.
+If you don't yet have a SSL proxy you're using for other things we generally suggest [Caddy](/docs/sslproxies/caddy), as it's the fastest to get up and running.  Otherwise you can add Owncast to your existing configurations.  Take a look at the documentation for example configurations for the following pieces of software.
