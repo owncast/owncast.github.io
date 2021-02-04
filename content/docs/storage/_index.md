@@ -1,10 +1,8 @@
 ---
 title: "External storage"
-description: "Welcome to Doks! This tutorial will guide you through setting up and deploying your first Doks site."
-lead: "Welcome to Doks! This tutorial will guide you through setting up and deploying your first Doks site."
-date: 2020-11-17T20:11:42+01:00
-lastmod: 2020-11-17T20:11:42+01:00
+description: "Use an external storage provider to distribute your Owncast video stream."
 draft: false
+aliases: [/docs/s3/]
 images: []
 menu:
   docs:

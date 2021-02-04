@@ -21,7 +21,7 @@ This video from Jon Dahl is gives a very good overview of internet video, starti
 
 {{< youtube id="rb83esfHnW8?start=539" >}}
 
-In this case Owncast works as the Media encoder, Stream segmenter, and distribution web server.  However [Owncast supports video being distributed via 3rd party storage as well](/docs/s3), so in that case the video segments would be distributed from there, instead.
+In this case Owncast works as the Media encoder, Stream segmenter, and distribution web server.  However [Owncast supports video being distributed via 3rd party storage as well](/docs/storage), so in that case the video segments would be distributed from there, instead.
 
 {{< img src="https://docs-assets.developer.apple.com/published/88e87744a3/de18e941-81de-482f-843d-834a4dd3aa71.png" align="center">}}
 
