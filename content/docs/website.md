@@ -9,13 +9,13 @@ toc: true
 
 ## Overview
 
-Owncast includes a web interface for your video with built-in chat that is available once you start the server.  It shows online/offline states, viewer counts, stream duration, your instance's description, images, links and more.  You can just start using it without making any changes and it'll reflect whatever you put in [the config file](/docs/configuration/#external-links).
+Owncast includes a web interface for your video with built-in chat that is available once you start the server.  It shows online/offline states, viewer counts, stream duration, your instance's description, images, links and more.  You can just start using it without making any changes, but you'll likely want to update the content displayed on your page by visiting your server admin page.
 
-However, the web interface was specifically built to be editable by anybody comfortable tweaking a web page.  It's not bundled or transpiled into anything, it's just HTML + Javascript + CSS that you can start editing.  Feel free to add your own branding, links, change the colors in the CSS, fonts, layout, or anything else you could possibly want.  No development environment is needed, just open the files in an editor and start tweaking.
+Additionally, the web interface was specifically built to be editable by anybody comfortable tweaking a web page.  It's not bundled or transpiled into anything, it's just HTML + Javascript + CSS that you can start editing.  Feel free to add your own branding, links, change the colors in the CSS, fonts, layout, or anything else you could possibly want.  No development environment is needed, just open the files in an editor and start tweaking.
 
 If you want to embed Owncast in your existing website, checkout our [documentation on embedding Owncast](/docs/embed/).
 
-## Customization
+Below are some items you'll likely want to customize to update the content that displays on your page.
 
 ### Name and description
 
@@ -27,13 +27,13 @@ You can add links to your profiles on other sites by adding them in the admin.
 
 ### Web page content
 
-The body of your page content can be customized in your admin.  Use standard Markdown syntax to add links, images, and more.
+The body of your page content can be customized in your admin.  Use standard [Markdown syntax](https://www.markdownguide.org/basic-syntax/) to add links, images, and more.
 
 ## Chat
 
 ### Text Formatting
 
-The web chat supports some basic formatting using markdown:
+The web chat supports some basic formatting using [Markdown](https://www.markdownguide.org/basic-syntax/):
 
 Italic: `*your text*`
 

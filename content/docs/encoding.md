@@ -53,7 +53,7 @@ Framerate is the number of frames per second in the video. Owncast defaults to 2
 
 ### CPU Usage
 
-The more CPU you use the better your output will be.  The more CPU you use to compress, the better the output image will be, or the smaller of a file the output will be for the same quality.  However, you will need to balance the amount of CPU you have available with the amount you can use to process video.
+The more CPU you use the better the output image will be, or the smaller of a file the output will be for the same quality.  However, you will need to balance the amount of CPU you have available with the amount you can use to process video.
 
 ### Latency Buffer
 

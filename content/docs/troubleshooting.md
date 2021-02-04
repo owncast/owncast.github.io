@@ -82,3 +82,12 @@ An example:
 {{< highlight bash >}}
 ffmpeg -input_format h264 -f video4linux2 -s 1920x1080 -i /dev/video0 -f lavfi -i anullsrc -c:v copy -c:a aac -shortest -f flv rtmp://192.168.0.10/live/abc123
 {{< / highlight >}}
+
+
+## Resetting a lost stream key
+
+If you change your stream key and forget to save it, or you lose it somehow, you can reset it on the command line by stopping owncast, and then running the following on the command line:
+
+{{< highlight bash >}}
+./owncast --streamkey yournewstreamkey
+{{< / highlight >}}
