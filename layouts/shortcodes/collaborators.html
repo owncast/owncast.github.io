@@ -8,6 +8,13 @@
     .contributor-item {
         flex: 1 0 30%;
     }
+    .contributor-item img {
+        background: rgb(199,185,174);
+        background: linear-gradient(90deg, rgba(199,185,174,1) 0%, rgba(205,215,224,1) 100%);
+        border-radius: 30px;
+        aspect-ratio: 1/1;
+        width: 60px;
+    }
 
     @media (min-width: 500px) {
         .contributor-item {
@@ -29,7 +36,7 @@
     <figure>
         <a href="{{.html_url}}">
             <center>
-            <img src="{{.avatar_url}}" width="60px" style="border-radius: 30px"/>
+            <img src="{{.avatar_url}}" loading="lazy"/>
             <figcaption><small>{{.login}}</small></figcaption>
             </center>
         </a>

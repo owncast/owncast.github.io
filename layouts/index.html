@@ -10,8 +10,14 @@
       <a class="btn btn-primary btn-lg px-4 mb-2" href="{{ "quickstart/" | absURL }}" role="button">Get started</a>
     </div>
     <figure class="col-lg-12 text-center">
-      <a href=/images/owncast-screenshot.png>
-        <img src=/images/owncast-screenshot.png alt="Owncast Screenshot" width=100%>
+      <a href="/images/owncast-screenshot.png" title="Owncast Screenshot">
+        <script>
+          function screenshotLoad() {
+            document.getElementById('owncastScreenshot').style.removeProperty('background-color');
+          }
+        </script>
+
+        <img src="/images/owncast-screenshot.png" alt="Owncast Screenshot" width="100%" loading="lazy" id="owncastScreenshot" style="aspect-ratio: 16 / 9; background-color: #e2e8f0;" onload="screenshotLoad()" />
       </a>
     </figure>
   </div>
@@ -84,7 +90,7 @@
       mode: "cors", // same-origin, no-cors
     });
     const streams = await response.json();
-    console.log(streams);
+    // console.log(streams);
 
     const container = document.getElementById("stream-list");
     streams.forEach(function(stream) {
@@ -93,6 +99,8 @@
       var img = document.createElement("img");
       img.className = 'stream-item';
       img.src = 'https://yp.owncast.online/image/thumb/' + stream.id;
+      img.style.setProperty("aspect-ratio", "16 / 9");
+      img.loading = "lazy";
       
       node.appendChild(img);
 
