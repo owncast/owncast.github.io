@@ -1,4 +1,8 @@
-<h3>{{ .CurrentSection.Title }}</h3>
+<a href="/docs/" class="page-links" title="Documentation">
+    <h3>&larr; Documentation</h3>
+</a>
+
+<h3 class="force-no-border-top">{{ .CurrentSection.Title }}</h3>
 <ol>
 {{ $currentSection := .CurrentSection }}
 {{ range where .Site.RegularPages.ByWeight "Section" .Section }}

@@ -51,7 +51,7 @@
   }
 }
 
-.docs-links h3:not(:first-child) {
+.docs-links h3:not(:first-child):not(.force-no-border-top) {
   border-top: 1px solid $gray-200;
 }
 
