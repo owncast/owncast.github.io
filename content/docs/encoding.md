@@ -31,7 +31,6 @@ In this case Owncast works as the Media encoder, Stream segmenter, and distribut
 1. The more work you need done to convert the video from one size, quality or format to another the more it will slow everything else down.
 1. The slower things go the slower the stream is provided to the user.
 1. If stream is provided to the user too slowly they'll start seeing buffering and errors.
-1. Converting audio counts as work, too.
 
 Here's what knobs can be tweaked when trying to determine the quality or qualities you want to provide your user while balancing the amount of server resources you're consuming.
 
@@ -63,7 +62,7 @@ You have some control over the live latency between the broadcaster and the view
 
 ## Audio
 
-Any changes to audio when streaming is additional work in the encoding process.  Luckily for most people what you're sending from your broadcasting software is generally reasonable and additional work won't be needed, even for low-bandwidth viewers. By default Owncast will not change the audio stream and instead just pass it along to the end users.  However, if you need to change the audio bitrate for some reason, such as you want your low quality stream to have much lower quality audio, it'll go through the transcoding process and become `AAC` encoded audio to your viewers.  But by default it's suggested to leave this as defaults and only change it if you need to.
+What you're sending from your broadcasting software is generally reasonable and additional conversation isn't required, even for low-bandwidth viewers. Owncast will not change the audio stream and instead just pass it along to the end users to save additional work being performed.
 
 ## How you configure your broadcasting software matters.
 
