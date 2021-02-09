@@ -8,6 +8,11 @@ description: "0.0.6 gives you the ability to configure your Owncast server via t
 
 0.0.6 has a lot of changes, so please help test. Some pre-release details are below.
 
+## How to test pre-release from source
+
+1. Change to the `0.0.6` branch.
+1. `go run main.go pkged.go`
+
 ## Things to test
 
 1. Change video settings and make sure they take effect. Add, delete, change stream output variants.
