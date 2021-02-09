@@ -55,17 +55,17 @@
   identifier = "quickstart"
   url = "/quickstart/"
 
-[[footer]]
-  name = "Contact"
-  url = "/contact"
-  weight = 10
+# [[footer]]
+#   name = "Contact"
+#   url = "/contact"
+#   weight = 10
 
-[[footer]]
-  name = "Contribute"
-  url = "/contribute"
-  weight = 10
+# [[footer]]
+#   name = "Contribute"
+#   url = "/contribute"
+#   weight = 10
 
-[[footer]]
-  name = "FAQ"
-  url = "/faq"
-  weight = 10
+# [[footer]]
+#   name = "FAQ"
+#   url = "/faq"
+#   weight = 10
