@@ -4,20 +4,20 @@ date: 2021-02-01
 description: "0.0.6 gives you the ability to configure your Owncast server via the web and adds new 3rd party APIs for you to build upon."
 ---
 
-# Pre-release notes
+{{< alert icon="💡" text="0.0.6 is not ready yet, it's still in development.  However, feel free to check out the 0.0.6 branch and try out new functionality, provide feedback and report back any problems." >}}
+<br/>
+{{< alert icon="💡" text="These are the in-progress release notes for 0.0.6.  Please read so you're up to date with the changes and know what to expect when testing." >}}
 
-0.0.6 has a lot of changes, so please help test. Some pre-release details are below.
-
-## How to test pre-release from source
+## Pre-release: How to test from source
 
 1. Change to the `0.0.6` branch.
 1. `go run main.go pkged.go`
 
-## Configuration migration
+## Pre-release: Configuration migration
 
 The first time you run the 0.0.6 branch it will migrate your `config.yaml` file to the new configuration store. In testing you should verify this migration is accurate. It will move your config file to the backup directory.
 
-## Things to test
+## Pre-release: Things to test
 
 1. Change video settings and make sure they take effect. Add, delete, change stream output variants.
 1. Enable/disable your S3 storage and make sure it's used when it should be, and isn't when it's not.
@@ -72,11 +72,25 @@ The [directory](https://directory.owncast.online) can now be easily enabled on y
 
 - The config file has been removed.
 - The "server title" value has been removed and the "server name" is used everywhere instead.
-- Audio transcoding has been disabled to simplify configuration. Audio will pass through the source audio as it has previously.
+- Audio transcoding settings have been hidden to simplify configuration as we haven't been encouraging people to convert audio, and as far as I can tell people haven't been using it. Audio will pass through the source audio as it has previously.
 
 # Changelog
 
 ## [[0.0.6](https://github.com/owncast/owncast/milestone/4)] - 2021-xx-xx
+
+### Added
+
+- Show a user-facing error when setting ffmpeg to an invalid path [#691](https://github.com/owncast/owncast/issues/691)
+- New WYSIWYG page content markdown editor [#546](https://github.com/owncast/owncast/issues/546)
+- New config file to 0.0.6 migrator [#576](https://github.com/owncast/owncast/issues/576)
+- Owncast database gets backed up hourly [#549](https://github.com/owncast/owncast/issues/549)
+- New admin page for managing access tokens [#603](https://github.com/owncast/owncast/issues/603), [#575](https://github.com/owncast/owncast/issues/575)
+- Outbound webhooks for 3rd party integration [#556](https://github.com/owncast/owncast/issues/556), [#574](https://github.com/owncast/owncast/pull/574), [#602](https://github.com/owncast/owncast/issues/602)
+- Toggle visibility of a single message for chat moderation [#568](https://github.com/owncast/owncast/issues/568)
+- Add support for current stream session title [#391](https://github.com/owncast/owncast/issues/391)
+- Create command line flag to reset the stream key [#665](https://github.com/owncast/owncast/issues/665)
+- Enable Spacebar key to pause/play video [#579](https://github.com/owncast/owncast/issues/579)
+- Add support to set web server port via command line [#674](https://github.com/owncast/owncast/issues/674)
 
 ### Changed
 
@@ -97,20 +111,6 @@ The [directory](https://directory.owncast.online) can now be easily enabled on y
 - Remove a crash on certain RTMP disconnects [#673](https://github.com/owncast/owncast/issues/673)
 - Some specific RTMP hardware is resulting in an admin error, work around that until we can get access to the hardware. [#635](https://github.com/owncast/owncast/issues/635)
 
-### Added
-
-- Show a user-facing error when setting ffmpeg to an invalid path [#691](https://github.com/owncast/owncast/issues/691)
-- New WYSIWYG page content markdown editor [#546](https://github.com/owncast/owncast/issues/546)
-- New config file to 0.0.6 migrator [#576](https://github.com/owncast/owncast/issues/576)
-- Owncast database gets backed up hourly [#549](https://github.com/owncast/owncast/issues/549)
-- New admin page for managing access tokens [#603](https://github.com/owncast/owncast/issues/603), [#575](https://github.com/owncast/owncast/issues/575)
-- Outbound webhooks for 3rd party integration [#556](https://github.com/owncast/owncast/issues/556), [#574](https://github.com/owncast/owncast/pull/574), [#602](https://github.com/owncast/owncast/issues/602)
-- Toggle visibility of a single message for chat moderation [#568](https://github.com/owncast/owncast/issues/568)
-- Add support for current stream session title [#391](https://github.com/owncast/owncast/issues/391)
-- Create command line flag to reset the stream key [#665](https://github.com/owncast/owncast/issues/665)
-- Enable Spacebar key to pause/play video [#579](https://github.com/owncast/owncast/issues/579)
-- Add support to set web server port via command line [#674](https://github.com/owncast/owncast/issues/674)
-
 ### Contributors
 
-[geekgonecrazy](https://github.com/geekgonecrazy), [gabek](https://github.com/gabek), [nebunez](https://github.com/nebunez), [petersveter108](https://github.com/petersveter108), [thilobillerbeck](https://github.com/thilobillerbeck), [gingervitis](https://github.com/gingervitis), [jeyemwey](https://github.com/jeyemwey)
+Thank you to [geekgonecrazy](https://github.com/geekgonecrazy), [gabek](https://github.com/gabek), [nebunez](https://github.com/nebunez), [petersveter108](https://github.com/petersveter108), [thilobillerbeck](https://github.com/thilobillerbeck), [gingervitis](https://github.com/gingervitis), [jeyemwey](https://github.com/jeyemwey), [felix-engelmann](https://github.com/felix-engelmann), [earnestma](https://github.com/earnestma) as well as all of the fantastic people helping out in the [Owncast chat](https://owncast.rocket.chat) answering questions for people trying out Owncast for the first time.
