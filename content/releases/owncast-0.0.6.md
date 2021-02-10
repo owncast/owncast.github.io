@@ -13,6 +13,10 @@ description: "0.0.6 gives you the ability to configure your Owncast server via t
 1. Change to the `0.0.6` branch.
 1. `go run main.go pkged.go`
 
+## Configuration migration
+
+The first time you run the 0.0.6 branch it will migrate your `config.yaml` file to the new configuration store. In testing you should verify this migration is accurate. It will move your config file to the backup directory.
+
 ## Things to test
 
 1. Change video settings and make sure they take effect. Add, delete, change stream output variants.
@@ -24,6 +28,38 @@ description: "0.0.6 gives you the ability to configure your Owncast server via t
 
 ---
 
+WIP Release notes:
+
+## Please read
+
+0.0.6 has quite a few changes that impact you, so please take a moment to read about the changes.
+
+## Configuration
+
+### Admin
+
+Beginning with 0.0.6 you will configure your Owncast server via the admin at `/admin`. You'll be able to make changes faster, easier, and without restarting your server. We hope with this updated interface that you'll be able to make simpler and more informed decisions about how to configure your server and video settings.
+
+Please share any feedback you have as we want to continue to improve and make it easier and faster for you to run and manage your streams.
+
+### Stream title
+
+You'll now see in the admin a text field for adding an optional "Stream Title", a way to describe what your current stream is. This is especially useful for people who may stream multiple different things in one session, or every day have new content that you'd like to call out. So you can set it to "Playing Assassin's Creed", and then change it to "Doing some live coding".
+
+## Third party integration & add-on APIs
+
+Owncast now has the ability for you to build your own add-ons and integrations on top of it. Some good examples are chat bots, video stream overlays, and sending external actions into chat such as notifying people when somebody has donated or followed.
+
+[Learn more about these APIs](/thirdparty) and you can start building on top of your Owncast server. Feel free to ask us any questions as this is brand new, and we want to give you what you need to build great things.
+
+## Backups
+
+The `backup` directory will include a periodic backup of your Owncast server data. Save this with other system data you backup and you'll be able to restore this data later if it's ever needed.
+
+### Owncast Directory
+
+The [directory](https://directory.owncast.online) can now be easily enabled on your General settings page. We look forward to seeing everyone's streams show up there if you're looking for viewers, or are streaming something that's publicly available.
+
 ## Upgrade instructions from 0.0.5
 
 1. Stop the service from running.
@@ -32,11 +68,11 @@ description: "0.0.6 gives you the ability to configure your Owncast server via t
 1. Unzip the file, allowing it to overwrite old files.
 1. Restart the service.
 
-## Configuration migration
-
-The first time you run the 0.0.6 branch it will migrate your `config.yaml` file to the new configuration store. In testing you should verify this migration is accurate. It will move your config file to the backup directory.
-
 ## Breaking changes
+
+- The config file has been removed.
+- The "server title" value has been removed and the "server name" is used everywhere instead.
+- Audio transcoding has been disabled to simplify configuration. Audio will pass through the source audio as it has previously.
 
 # Changelog
 
