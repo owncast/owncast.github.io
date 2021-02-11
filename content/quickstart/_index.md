@@ -6,7 +6,9 @@ images: []
 menu:
   quickstart:
     parent: "quickstart"
-weight: 010
+  docs:
+    parent: "guides"
+    weight: 010
 toc: false
 type: subpages
 ---

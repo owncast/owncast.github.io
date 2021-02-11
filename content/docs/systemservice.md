@@ -2,8 +2,8 @@
 title: "Run as a system service"
 menu:
   docs:
-    parent: "documentation"
-weight: 1900
+    parent: "guides"
+weight: 200
 toc: true
 ---
 
