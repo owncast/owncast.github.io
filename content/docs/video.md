@@ -1,5 +1,6 @@
 ---
 title: "Video"
+aliases: [/docs/encoding/]
 menu:
   docs:
     parent: "configure"
