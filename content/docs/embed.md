@@ -7,6 +7,8 @@ weight: 200
 toc: true
 ---
 
+{{< alert icon="💡" text="Embedding Owncast into an existing page who is using HTTPS will require your Owncast server to also be secured with SSL." >}}
+
 ## Embedding video
 
 Owncast supports embedding your video stream directly into any other web site or source without having to setup a player.
@@ -58,3 +60,7 @@ One common use is adding the chat into your live stream.
 1. Click ‘OK’ to save your chat settings and re-position the new chat source in your scene.
 
 {{<versionsupport feature="embedding chat" version="0.0.2">}}
+
+## SSL Requirements
+
+Embedding Owncast content that is not served via HTTPS will be [blocked by browsers](https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content/How_to_fix_website_with_mixed_content) if you embed it within a page that is using SSL. [Learn how you can use a SSL Proxy](/docs/sslproxies) to fulfill this browser requirement as well as secure your Owncast site.
