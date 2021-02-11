@@ -7,15 +7,16 @@ titleAddition = "Selfhosted Livestreaming"
 description = "Owncast is a self-hosted live video and web chat server for use with existing broadcasting software. Point your live stream at a Owncast server you personally control and regain ownership over your content."
 
 ## Open Graph + Twitter Cards
-images = ["doks.png"]
-twitterSite = "owncast"
-twitterCreator = "owncast"
+images = ["/images/owncast-logo-1000x1000.png"]
+twitterSite = "owncastlive"
+twitterCreator = "owncastlive"
 ogLocale = "en_US"
 
 ## JSON-LD
 schemaType = "Organization"
-schemaLogo = "logo-doks.png"
+schemaLogo = "/images/owncast-logo-1000x1000.png"
 schemaGitHub = "https://github.com/owncast"
+schemaTwitter = "https://twitter.com/owncastlive"
 schemaSection = "blog"
 
 ## Sitelinks Search Box
@@ -40,4 +41,4 @@ alertText = "Like Doks? <a class=\"alert-link\" href=\"https://github.com/h-enk/
 
 # Edit Page
 docsRepo = "https://github.com/owncast/owncast.github.io"
-editPage = true
+editPage = false
