@@ -89,3 +89,7 @@ If you change your stream key and forget to save it, or you lose it somehow, you
 {{< highlight bash >}}
 ./owncast --streamkey yournewstreamkey
 {{< / highlight >}}
+
+## Restoring a backup
+
+Owncast will backup its database periodically. You can keep these backups and restore them if needed. [Learn more about backups](/docs/backups).
