@@ -10,13 +10,11 @@ toc: true
 
 This document aims to outline what is being done to your content and the different knobs you can tweak to get the best output for your instance.
 
-Owncast is an implementation of HLS [Adaptive bitrate streaming](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming), or in other words, different video qualities will be used for different network conditions.
-
-{{< alert icon="💡" text="It's hard to give specific settings that will give you the best quality and performance with Owncast because people have different servers and requirements." >}}
+{{< alert icon="💡" text="Keep in mind it's hard to give specific settings that will give you the best quality and performance with Owncast because people have different servers and requirements." >}}
 
 ## How does an Owncast video stream work?
 
-Owncast takes your source stream and converts it to short, individual video segments. A list of these segments is created that your viewer's player will continue to read and play all the segments in order. This is all using a specification called [HLS](https://developer.apple.com/documentation/http_live_streaming/understanding_the_http_live_streaming_architecture) or HTTP Live Streaming.
+Owncast takes your source stream and converts it to short, individual video segments. A list of these segments is supplied to your viewer's player and will read and play all the segments in order. This is using a specification called [HLS](https://developer.apple.com/documentation/http_live_streaming/understanding_the_http_live_streaming_architecture) or HTTP Live Streaming. You can optionally generate multiple different qualities of video to allow lower bandwidth options. This is called [Adaptive bitrate streaming](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming).
 
 This video from Jon Dahl is gives a very good overview of internet video, starting with _"what happens when you press play in your web browser?"_ and touching on every piece of the stack, backend and frontend. It translates very well to how Owncast works and is suggested if you want to learn more.
 
@@ -58,7 +56,7 @@ The more CPU you use the better the output image will be, or the smaller of a fi
 
 You have some control over the live latency between the broadcaster and the viewer. While it's completely understandable to want to have as little latency as possible you may need to increase the latency buffer if you're experiencing issues. In general the lower the latency the less buffer is available for any possible slow transfers, network blips or errors.
 
-{{< alert icon="💡" text="If you require real-time, video conferencing style latency you may want to look for different solution than HLS video and scalable one-to-many distribution as it will never get to sub-second levels." >}}
+{{< alert icon="💡" text="If you require real-time, video conferencing style latency you may want to look for a different solution that doesn't use HLS video, as this scaling and distribution model will never get to sub-second levels." >}}
 
 ## Audio
 
