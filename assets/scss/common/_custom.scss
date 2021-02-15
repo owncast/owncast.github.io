@@ -41,8 +41,9 @@ tr:nth-child(even) {
 }
 
 // "Card" links 
-.card-list {
+.card-list, .docs-navigation {
     .card {
         border-color: rgba(182, 139, 231, 0.562);
     }
 }
+

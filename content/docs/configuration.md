@@ -32,14 +32,12 @@ Depending on your hardware you may be able to configure your server to support m
 Per default, Owncast will run a `http` web server on port `8080` and a RTMP server on port `1935`. You can change the ports in the the admin.  You must restart Owncast for these changes to take effect.
 
 {{< figure src="/docs/img/admin-server-settings.png" caption="Owncast server settings" width="80%" >}}
+{{<versionsupport feature="Custom Ports" version="0.0.4">}}
 
 ## External storage providers
 
 Instead of serving video directly from your personal server you can use a S3 compatible storage provider to offload the bandwidth and storage requirements elsewhere.  [See how to configure the storage provider of your choice](/docs/storage).
 
-
-
-{{<versionsupport feature="Custom Ports" version="0.0.4">}}
 
 
 

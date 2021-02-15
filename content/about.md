@@ -1,10 +1,8 @@
 ---
-title: "About"
+title: "About the Owncast Project"
 bookToC: false
 
 ---
-
-# About The Owncast Project
 
 In 2020 the world changed when everyone become stuck in their homes, looking for creative outlets to share their art, skills and themselves from inside their bedroom.
 
