@@ -39,3 +39,10 @@ tr:nth-child(even) {
         margin-bottom: 15px;
     }
 }
+
+// "Card" links 
+.card-list {
+    .card {
+        border-color: rgba(182, 139, 231, 0.562);
+    }
+}
