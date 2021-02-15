@@ -21,6 +21,8 @@ Below are some items you'll likely want to customize to update the content that 
 
 By setting your name, description and logo you can quickly update the contents of the website to reflect your stream. 
 
+{{< figure src="/docs/img/admin-general-settings.png" caption="Owncast general settings" width="80%" >}}
+
 ### External social links
 
 You can add links to your profiles on other sites by adding them in the admin.
