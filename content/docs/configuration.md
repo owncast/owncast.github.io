@@ -18,6 +18,7 @@ Some common items many people would want to update after installing Owncast are:
 ## Web site details
 
 Your site name, logo, description, and page content can be set in the admin.  You can also add links to your social profiles and web sites that exist elsewhere.  [See details about the web site and chat interface](/docs/website).
+{{<versionsupport feature="Changing page settings in the admin panel" version="0.0.6">}}
 
 {{< figure src="/docs/img/admin-general-settings.png" caption="Owncast general settings" width="80%" >}}
 
@@ -27,12 +28,15 @@ Depending on your hardware you may be able to configure your server to support m
 
 {{< figure src="/docs/img/admin-config-video-variant.png" caption="Owncast video settings" width="80%" >}}
 
+{{<versionsupport feature="Changing video settings in the admin panel" version="0.0.6">}}
+
 ## Custom Ports
 
 Per default, Owncast will run a `http` web server on port `8080` and a RTMP server on port `1935`. You can change the ports in the the admin.  You must restart Owncast for these changes to take effect.
 
 {{< figure src="/docs/img/admin-server-settings.png" caption="Owncast server settings" width="80%" >}}
 {{<versionsupport feature="Custom Ports" version="0.0.4">}}
+{{<versionsupport feature="Port settings in the admin panel" version="0.0.6">}}
 
 ## External storage providers
 

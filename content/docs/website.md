@@ -17,22 +17,24 @@ If you want to embed Owncast in your existing website, checkout our [documentati
 
 Below are some items you'll likely want to customize to update the content that displays on your page.
 
+{{<versionsupport feature="Changing settings in the admin panel" version="0.0.6">}}
+
 ### Name and description
 
 By setting your name, description and logo you can quickly update the contents of the website to reflect your stream. 
 
-{{< figure src="/docs/img/admin-general-settings.png" caption="Owncast general settings" width="80%" >}}
+{{< figure src="/docs/img/admin-general-settings.png" caption="Owncast general settings" width="100%" >}}
 
 ### Tags
 
 By setting tags you're showing potential viewers what categories of content you typically stream.
 
-{{< figure src="/docs/img/admin-settings-tags-social.png" caption="Add tags" width="80%" >}}
+{{< figure src="/docs/img/admin-settings-tags-social.png" caption="Add tags" width="100%" >}}
 
 ### External social links
 
 You can add links to your profiles on other sites by adding them in the admin.
-{{< figure src="/docs/img/admin-settings-social-handle.png" caption="Add social links" width="80%" >}}
+{{< figure src="/docs/img/admin-settings-social-handle.png" caption="Add social links" width="100%" >}}
 
 ### Web page content
 
