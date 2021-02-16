@@ -16,8 +16,17 @@ caddy reverse-proxy --from owncast.mydomain.com --to 127.0.0.1:8080
 
 Replace `owncast.mydomain.com` with the public hostname of your Owncast server like `watch.owncast.online` for example.
 
-You can also configure your [`Caddyfile`](https://caddyserver.com/docs/caddyfile-tutorial) (config file) to proxy to your server as seen in this example setup that is up and running in less than 30 seconds.
+You can also configure your [`Caddyfile`](https://caddyserver.com/docs/caddyfile-tutorial) to proxy Owncast.
+Add something like this to your Caddyfile:
 
-<iframe width="846" height="480" src="https://www.youtube.com/embed/nk4EWHvvZtI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{{< highlight bash >}}
+owncast.mydomain.com {
+    encode gzip
+    reverse_proxy 127.0.0.1:8080
+    tls webmaster@mydomain.com
+}
+{{</ highlight >}}
+
+If you specify `owncast.mydomain.com` without a protocol or a port, it will attempt to use the default `http` and `https` ports (80 and 443). Since these are [_privileged ports_](https://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html#:~:text=Priviliged%20ports,has%20put%20up%20for%20you.), you will need to run caddy with `sudo` or as `root`.
 
 Read more about Caddy's SSL setup [on their documentation](https://caddyserver.com/docs/automatic-https).
