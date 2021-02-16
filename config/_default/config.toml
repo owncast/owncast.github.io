@@ -44,7 +44,7 @@ rel  = "sitemap"
 [markup]
   [markup.goldmark]
     [markup.goldmark.extensions]
-      linkify = false
+      linkify = true
     [markup.goldmark.renderer]
       unsafe = true
   [markup.highlight]
