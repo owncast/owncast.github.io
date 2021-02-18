@@ -7,7 +7,7 @@ images: []
 type: subpages
 ---
 
-[Caddy](https://caddyserver.com/) is the fastest way to get a reverse proxy setup with a certificate from [Let's Encrypt](https://letsencrypt.org/).  It offers automatic configuration of SSL with a single command. 
+[Caddy](https://caddyserver.com/) is the fastest way to setup a SSL reverse proxy with a free certificate from [Let's Encrypt](https://letsencrypt.org/).  It offers automatic configuration of HTTPS with a single command. 
 
 {{< btn-copy text="caddy reverse-proxy --from owncast.mydomain.com --to 127.0.0.1:8080" >}}
 {{< highlight bash >}}
@@ -29,4 +29,4 @@ owncast.mydomain.com {
 
 If you specify `owncast.mydomain.com` without a protocol or a port, it will attempt to use the default `http` and `https` ports (80 and 443). Since these are [_privileged ports_](https://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html#:~:text=Priviliged%20ports,has%20put%20up%20for%20you.), you will need to run caddy with `sudo` or as `root`.
 
-Read more about Caddy's SSL setup [on their documentation](https://caddyserver.com/docs/automatic-https).
+Follow Caddy's [Reverse Proxy Quickstart](https://caddyserver.com/docs/quick-starts/reverse-proxy) for more documentation, examples and detailed information.
