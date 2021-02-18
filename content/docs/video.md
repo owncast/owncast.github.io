@@ -14,9 +14,9 @@ This document aims to outline what is being done to your content and the differe
 
 ## Overview
 
-1. Configure your broadcasting software to send a stream to Owncast that is reasonably close to what you expect to send to your viewers.  [How you configure your broadcasting software matters](/docs/video/#how-you-configure-your-broadcasting-software-matters).  Don't tell OBS to send to Owncast at 7000k at 60fps if you only expect to support bitrates of 4000k and 2000k at 30fps.
-1. Start with a single [output configuration](/docs/video/#things-you-can-configure) with average settings.  Test it.  See how your hardware handles it.  If you want to, and are able to, then add another and test that. Repeat until you arrive at the configuration you want to offer your viewers and that your hardware can handle.
-1. If your hardware can't handle your current configuration then reduce the number of output variants to only a single one, [reduce the quality of video you're sending to Owncast](/docs/video/#how-you-configure-your-broadcasting-software-matters), reduce your [framerate](/docs/video/#framerate), and reduce the [CPU usage](/docs/video/#cpu-usage) 
+1. Configure your broadcasting software to send a stream to Owncast that is reasonably close to what you expect to send to your viewers. [How you configure your broadcasting software matters](/docs/video/#how-you-configure-your-broadcasting-software-matters). Don't tell OBS to send to Owncast at 7000k at 60fps if you only expect to support bitrates of 4000k and 2000k at 30fps.
+1. Start with a single [output configuration](/docs/video/#things-you-can-configure) with average settings. Test it. See how your hardware handles it. If you want to, and are able to, then add another and test that. Repeat until you arrive at the configuration you want to offer your viewers and that your hardware can handle.
+1. If your hardware can't handle your current configuration then reduce the number of output variants to only a single one, [reduce the quality of video you're sending to Owncast](/docs/video/#how-you-configure-your-broadcasting-software-matters), reduce your [framerate](/docs/video/#framerate), and reduce the [CPU usage](/docs/video/#cpu-usage)
 
 ## How does an Owncast video stream work?
 
