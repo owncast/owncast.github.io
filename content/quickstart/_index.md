@@ -13,18 +13,20 @@ toc: false
 type: subpages
 ---
 
-Paste the following into your shell and the installer will download Owncast for you.
+Paste the following into your shell and the installer will download the most recent version of Owncast for your platform.
+It will download a copy of ffmpeg if you don't currently have one installed.
 
 {{< btn-copy text="curl -s https://owncast.online/install.sh | bash" >}}
 {{< highlight bash >}}
 curl -s https://owncast.online/install.sh | bash
 {{</ highlight >}}
 
+
 {{< asciicast "/install-owncast-ascii.cast">}}
 
 ---
 
-If you would prefer to [download a release manually](/quickstart/manual) or use [Docker](/quickstart/docker) you have some other options.
+If you would prefer to [download a release manually](/quickstart/manual) or use [Docker](/quickstart/docker) you also have those options.
 
 ### See an example of getting running in under a minute.
 
