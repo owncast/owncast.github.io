@@ -12,6 +12,12 @@ This document aims to outline what is being done to your content and the differe
 
 {{< alert icon="💡" text="Keep in mind it's hard to give specific settings that will give you the best quality and performance with Owncast because people have different servers and requirements." >}}
 
+## Overview
+
+1. Configure your broadcasting software to send a stream to Owncast that is reasonably close to what you expect to send to your viewers.  [How you configure your broadcasting software matters](/docs/video/#how-you-configure-your-broadcasting-software-matters).  Don't tell OBS to send to Owncast at 7000k at 60fps if you only expect to support bitrates of 4000k and 2000k at 30fps.
+1. Start with a single [output configuration](/docs/video/#things-you-can-configure) with average settings.  Test it.  See how your hardware handles it.  If you want to, and are able to, then add another and test that. Repeat until you arrive at the configuration you want to offer your viewers and that your hardware can handle.
+1. If your hardware can't handle your current configuration then reduce the number of output variants to only a single one, [reduce the quality of video you're sending to Owncast](/docs/video/#how-you-configure-your-broadcasting-software-matters), reduce your [framerate](/docs/video/#framerate), and reduce the [CPU usage](/docs/video/#cpu-usage) 
+
 ## How does an Owncast video stream work?
 
 Owncast takes your source stream and converts it to short, individual video segments. A list of these segments is supplied to your viewer's player and will read and play all the segments in order. This is using a specification called [HLS](https://developer.apple.com/documentation/http_live_streaming/understanding_the_http_live_streaming_architecture) or HTTP Live Streaming. You can optionally generate multiple different qualities of video to allow lower bandwidth options. This is called [Adaptive bitrate streaming](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming).
@@ -64,7 +70,7 @@ What you're sending from your broadcasting software is generally reasonable and 
 
 ## How you configure your broadcasting software matters.
 
-The more you send to Owncast, the more work it has do. This means you should generally not stream to Owncast at a significantly higher or lower quality than you expect to give to your viewers. It makes no sense to stream to Owncast at 1080p if you're resizing it and downsampling it to something way smaller, because your server has to do that work. On the other hand it makes no sense to stream to Owncast with a 1000k bitrate and then make it convert it to 2000k since it won't look any better.
+The more you send to Owncast, the more work it has do. This means you should generally not stream to Owncast at a significantly higher or lower quality than you expect to give to your viewers. It makes no sense to stream to Owncast at 6000k 60fps if you're telling Owncast to send to your viewers at 3000k 30fps, because your server has to do that conversion. On the other hand it makes no sense to stream to Owncast with a 1000k bitrate and then send to your viewers at 4000k, that would be wasted work and bandwidth.
 
 So in short: Try to reasonably figure out what you want to stream to your users and match that as best as possible when setting up your broadcasting software.
 
@@ -72,8 +78,8 @@ If you find yourself trying to squeeze better performance out of Owncast then tr
 
 ## CPU Usage
 
-Each bitrate variant adds significant CPU usage and slows down the overall generation of video segments. If you have a slow server running Owncast you should probably only have one bitrate variant in play. If you add more and you notice that playback becomes choppy it's likely that everything is running too slowly for consistent playback. Consider removing the additional variants and tweaking your single variant so it supports a wider variety of network conditions.
+Each stream output variant adds significant CPU usage and slows down the overall generation of video segments. If you have a slow server running Owncast you should probably only have one bitrate variant in play. If you add more and you notice that playback becomes choppy it's likely that everything is running too slowly for consistent playback. Consider removing the additional variants and tweaking your single variant so it supports a wider variety of network conditions.
 
 ## Disk Usage
 
-More stream quality variants requires more disk space, since it's another copy of the video on disk. If you're serving video locally and you have enough disk space then it's probably no big deal and files will rather quickly get rotated and cleaned up. If you're using something like [S3 for storage](/docs/storage/) then files won't get cleaned up until some point in the future, so you'll have more remote storage use in play.
+More stream output variants requires more disk space, since it's another copy of the video on disk. If you're serving video locally and you have enough disk space then it's probably no big deal and files will rather quickly get rotated and cleaned up. If you're using something like [S3 for storage](/docs/storage/) then files won't get cleaned up until some point in the future, so you'll have more remote storage use in play.

@@ -63,13 +63,7 @@ As an aside, ffmpeg installed via Snap packages do not work due to the sandboxin
 
 ## Server is not showing up in the directory
 
-The directory is new, and not something we're pushing heavily at the moment, but we're glad you want to be listed in it! There are a number of things you might want to look at.
-
-1. It's opt-in, so make sure you follow the [configuration directions](/docs/directory) to enable the directory for your server.
-1. You may want to run your server with `owncast --enableVerboseLogging` to see what errors show up.
-1. If you used to be listed, but no longer show up make sure you have a `.yp.key` file in your Owncast directory. This file identifies your server to the directory.
-1. If you recently changed the URL of your server delete the `.yp.key` file to allow your server to re-register with the new URL.
-1. If you lose the above key file, or there's some other issue that's causing you not to be listed [please file a GitHub issue](https://github.com/owncast/owncast/issues) so we can reset your registration with the directory.
+If you've enabled the directory in your admin setttings, [look at some next steps](/docs/directory/#if-your-server-is-not-showing-up-in-the-directory) if it's not working.
 
 {{<versionsupport feature="owncast directory" version="0.0.3">}}
 
