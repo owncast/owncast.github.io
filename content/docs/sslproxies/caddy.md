@@ -7,7 +7,7 @@ images: []
 type: subpages
 ---
 
-[Caddy](https://caddyserver.com/) is the fastest way to setup a SSL reverse proxy with a free certificate from [Let's Encrypt](https://letsencrypt.org/).  It offers automatic configuration of HTTPS with a single command. 
+[Caddy](https://caddyserver.com/) is the fastest way to setup a SSL reverse proxy with a free certificate from [Let's Encrypt](https://letsencrypt.org/). It offers automatic configuration of HTTPS with a single command.
 
 {{< btn-copy text="caddy reverse-proxy --from owncast.mydomain.com --to 127.0.0.1:8080" >}}
 {{< highlight bash >}}
@@ -21,9 +21,9 @@ Add something like this to your Caddyfile:
 
 {{< highlight bash >}}
 owncast.mydomain.com {
-    encode gzip
-    reverse_proxy 127.0.0.1:8080
-    tls webmaster@mydomain.com
+encode gzip
+reverse_proxy 127.0.0.1:8080
+tls webmaster@mydomain.com
 }
 {{</ highlight >}}
 
