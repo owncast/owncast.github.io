@@ -13,7 +13,8 @@ While we will try to walk you through some installation steps **it is highly sug
 
 ## 1. Make sure you don't have other web servers running.
 
-If you are running other pieces of web server software such as Apache or NGINX using port 80 or 443 then you won't be able to continue with this Caddy install.  Either remove the other pieces of software or read up on how to make them live in harmony.
+If you are running other pieces of web server software such as Apache or NGINX using port 80 or 443 then you won't be able to continue with this Caddy install. Either remove the other pieces of software or read up on how to make them live in harmony.
+
 ## 2. Install Caddy
 
 Depending on your system there may be different options on installing. Using APT is suggested if it's supported on your machine.
@@ -91,6 +92,7 @@ If you specify `owncast.mydomain.com` without a protocol or a port, it will atte
 Continue to run Owncast on port 8080.
 
 ## 5. Access Owncast through the proxy
+
 ---
 
 You should now be able to access your Owncast server by visiting https://owncast.mydomain.com instead of http://owncast.mydomain.com:8080.
