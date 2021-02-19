@@ -20,7 +20,7 @@ Here's some example HTML you can use.
 {{< highlight html >}}
 
 <iframe
-  src="http://your.host/embed/video"
+  src="https://your.host/embed/video"
   title="Owncast"
   height="350px" width="550px"
   referrerpolicy="origin"
