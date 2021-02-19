@@ -31,4 +31,4 @@ You can use any method you like to add SSL support but there are some popular op
 
 ## Suggested
 
-If you have no requirement to use other options else it is suggested you install [Caddy](caddy/) as it can be installed quickly and easily.  
+If you have no requirement to use other options else it is suggested you install [Caddy](caddy/) as it can be installed quickly and easily.

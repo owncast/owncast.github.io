@@ -9,11 +9,11 @@ type: subpages
 
 [Caddy](https://caddyserver.com/) is the fastest way to setup a SSL reverse proxy with a free certificate from [Let's Encrypt](https://letsencrypt.org/).
 
-While we will try to walk you through some installation steps **it is highly suggested you follow Caddy's [Install options](https://caddyserver.com/docs/install) and  [Reverse Proxy Quickstart](https://caddyserver.com/docs/quick-starts/reverse-proxy) for more documentation, examples and detailed information**.  Caddy is a well documented quality piece of software that you should get familiar with if you need to run a SSL reverse proxy.
+While we will try to walk you through some installation steps **it is highly suggested you follow Caddy's [Install options](https://caddyserver.com/docs/install) and [Reverse Proxy Quickstart](https://caddyserver.com/docs/quick-starts/reverse-proxy) for more documentation, examples and detailed information**. Caddy is a well documented quality piece of software that you should get familiar with if you need to run a SSL reverse proxy.
 
 ## 1. Install Caddy
 
-Depending on your system there may be different options on installing.  Using APT is suggested if it's supported on your machine.
+Depending on your system there may be different options on installing. Using APT is suggested if it's supported on your machine.
 
 <details>
   <summary>Using APT</summary>
@@ -26,7 +26,6 @@ curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo 
 sudo apt update
 sudo apt install caddy
 {{</ highlight >}}
-
 
 [Read the Caddy install steps for using apt](https://caddyserver.com/docs/install#debian-ubuntu-raspbian) for more details.
 
@@ -70,13 +69,14 @@ Add to your Caddyfile:
 
 {{< highlight caddyfile >}}
 owncast.mydomain.com {
-    encode gzip
-    reverse_proxy 127.0.0.1:8080
-    tls webmaster@mydomain.com
+encode gzip
+reverse_proxy 127.0.0.1:8080
+tls webmaster@mydomain.com
 }
 {{</ highlight >}}
 
 Replace `owncast.mydomain.com` with the public hostname of your Owncast server like `watch.owncast.online` for example.
+
 </details>
 
 ---
@@ -87,11 +87,10 @@ If you specify `owncast.mydomain.com` without a protocol or a port, it will atte
 
 Continue to run Owncast on port 8080.
 
-
 ## 4. Access Owncast through the proxy.
+
 ---
 
 You should now be able to access your Owncast server by visiting https://owncast.mydomain.com instead of http://owncast.mydomain.com:8080.
 
 Replace `owncast.mydomain.com` with the public hostname of your Owncast server like `watch.owncast.online` for example.
-
