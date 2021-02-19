@@ -4,8 +4,6 @@ date: 2021-02-01
 description: "0.0.6 gives you the ability to configure your Owncast server via the web and adds new 3rd party APIs for you to build upon."
 ---
 
-{{< alert icon="💡" text="0.0.6 is not ready yet, it's still in development.  However, feel free to check out the 0.0.6 branch and try out new functionality, provide feedback and report back any problems." >}}
-<br/>
 {{< alert icon="💡" text="These are the in-progress release notes for 0.0.6.  Please read so you're up to date with the changes and know what to expect when testing." >}}
 
 ## Pre-release: How to test from source
