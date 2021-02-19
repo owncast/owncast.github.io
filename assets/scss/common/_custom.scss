@@ -44,3 +44,13 @@ tr:nth-child(even) {
     border-color: rgba(182, 139, 231, 0.562);
   }
 }
+
+.footer {
+    .container {
+      max-width: unset;
+        .row {
+          margin-left: 5%;
+            // width: 90%;
+        }
+    }
+}
