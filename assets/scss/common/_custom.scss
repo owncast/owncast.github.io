@@ -46,11 +46,11 @@ tr:nth-child(even) {
 }
 
 .footer {
-    .container {
-      max-width: unset;
-        .row {
-          margin-left: 5%;
-            // width: 90%;
-        }
+  .container {
+    max-width: unset;
+    .row {
+      margin-left: 5%;
+      // width: 90%;
     }
+  }
 }
