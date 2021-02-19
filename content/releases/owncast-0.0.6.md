@@ -8,7 +8,7 @@ description: "0.0.6 gives you the ability to configure your Owncast server via t
 
 ## Pre-release: How to test from source
 
-1. Change to the `0.0.6` branch.
+1. Change to the `master` branch.
 1. `go run main.go pkged.go`
 
 ## Pre-release: Configuration migration
