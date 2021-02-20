@@ -68,7 +68,7 @@ You have some control over the live latency between the broadcaster and the view
 
 {{< alert icon="💡" text="Turning on video passthrough may make your stream unplayable. Read about Video Passthrough before turning it on and learn about the risks involved." >}}
 
-Owncast has an optional setting to turn off re-encoding of your inbound stream, potentially saving substantial hardware utilization and supporting a higher quality stream with less resources.  <span style="color: red;"> **However**, because your video will not be re-encoded  it's possible that certain video from certain sources may end up **not being playable at all**</span>.  This is the risk of enabling this.  
+Owncast has an optional setting to turn off re-encoding of your inbound stream, potentially saving substantial hardware utilization and supporting a higher quality stream with less resources. <span style="color: red;"> **However**, because your video will not be re-encoded it's possible that certain video from certain sources may end up **not being playable at all**</span>. This is the risk of enabling this.
 
 To enable, visit the advanced settings for a specific stream output. You can turn on "Video Passthrough".
 
@@ -77,8 +77,7 @@ To enable, visit the advanced settings for a specific stream output. You can tur
 1. If your video won't play, **then turn it off**.
 1. Only one output should be set as "passthrough".
 
-If you find you require this feature, but it's not working for you, you _may_ be able to change to a different broadcasting client solution to send video to Owncast differently.  For example, if you're using Restream, video passthrough will not work, but in general it's worked for people streaming from OBS.
-
+If you find you require this feature, but it's not working for you, you _may_ be able to change to a different broadcasting client solution to send video to Owncast differently. For example, if you're using Restream, video passthrough will not work, but in general it's worked for people streaming from OBS.
 
 ## Audio
 
