@@ -89,6 +89,7 @@ The [directory](https://directory.owncast.online) can now be easily enabled on y
 - Create command line flag to reset the stream key [#665](https://github.com/owncast/owncast/issues/665)
 - Enable Spacebar key to pause/play video [#579](https://github.com/owncast/owncast/issues/579)
 - Add support to set web server port via command line [#674](https://github.com/owncast/owncast/issues/674)
+- New "user joined" message in chat if you have previously saved your username.  [#268](https://github.com/owncast/owncast/pull/628)
 
 ### Changed
 
