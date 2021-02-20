@@ -58,8 +58,10 @@ If you're using a proxy in front of your Owncast instance make sure it is config
 
 ## Misc video issues
 
-If you're running into random video stability issues make sure you're running a supported version of ffmpeg. [Download ffmpeg 4.1.5 or above](https://ffmpeg.org/download.html).
-As an aside, ffmpeg installed via Snap packages do not work due to the sandboxing of Snap distributed software.
+If you're running into random video stability issues look at some of these common issues:
+
+1. Make sure you're running a supported version of ffmpeg. [Download ffmpeg 4.1.5 or above](https://ffmpeg.org/download.html).  As an aside, ffmpeg installed via Snap packages do not work due to the sandboxing of Snap distributed software.
+1. Make sure you have [video passthrough](/docs/video/#video-passthrough) disabled.
 
 ## Server is not showing up in the directory
 
