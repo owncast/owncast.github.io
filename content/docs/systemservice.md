@@ -29,12 +29,12 @@ RestartSec=5
 `WorkingDirectory` should be where you want the owncast folder to live.<br />
 
 **Example:**<br />
-```WorkingDirectory=/home/myuser/owncast```
+`WorkingDirectory=/home/myuser/owncast`
 
 Similarly the `ExecStart` is the actual owncast binary.<br />
 
 **Example:**<br />
-```ExecStart=/home/myuser/owncast/owncast```
+`ExecStart=/home/myuser/owncast/owncast`
 
 {{< highlight ini >}}
 [Install]
@@ -43,13 +43,13 @@ WantedBy=multi-user.target
 
 This just means, use runlevel 3 non-graphical.
 
-
 **INSTALLATION**
 Just create the file in your systemd configuration directory (typically /etc/systemd/system/), and update the systemd daemon with:
-```sudo systemd daemon-reload```
+`sudo systemd daemon-reload`
 
 **USAGE**
 Currently the following options work
+
 - Start
 - Stop
 - Status
