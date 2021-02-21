@@ -285,8 +285,8 @@
   padding-bottom: 0;
 }
 .logo-label {
-  font-size: 1.4em;
-  font-weight: 100;
+  font-size: 1.3em;
+  font-weight: 200;
   color: $purple;
   text-transform: uppercase;
 }
@@ -297,9 +297,20 @@
   border-radius: 9999px;
   width: 36px;
   height: 36px;
-  margin-right: 10px;
+  margin-right: 4px;
   img {
     transform: translateY(-5px);
+    @include media-breakpoint-up(md) {
+      transform: translateY(-6px);
+    }
+  }
+}
+@media(prefers-color-scheme: dark) {
+  .logo-label {
+    font-weight: 100;
+  }
+  .logo-container {
+    margin-right: 10px;
   }
 }
 

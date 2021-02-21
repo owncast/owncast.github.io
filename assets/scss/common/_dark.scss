@@ -8,7 +8,7 @@ $border-dark: darken($body-bg-dark, 2.5%);
 $body-color-dark: $gray-300;
 $dots-dark: darken($body-color-dark, 50%);
 
-$link-color-dark: $blue-300;
+$link-color-dark: $purple; // $blue-300;
 $button-color-dark: $link-color-dark;
 $focus-color-dark: lighten($link-color-dark, 2.5%);
 $selection-color-dark: lighten($link-color-dark, 2.5%);
@@ -43,7 +43,7 @@ $navbar-dark-active-color:          $link-color-dark;
   }
 
   body .navbar {
-    background: $body-bg-dark;
+    background: $black; // $body-bg-dark;
     opacity: 0.975;
     border-bottom: 1px solid $border-dark;
   }
