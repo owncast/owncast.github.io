@@ -62,7 +62,7 @@ If you're using a proxy in front of your Owncast instance make sure it is config
 If you're running into random video stability issues look at some of these common issues:
 
 1. Make sure you're running a supported version of ffmpeg. [Download ffmpeg 4.1.5 or above](https://ffmpeg.org/download.html).
-1. Make sure your copy of ffmpeg was not installed via Snap packages, as the sandboxing of Snap distributed software isn't compatible in this case.  If you see the error `Error: unable to open display`, this might be your problem.
+1. Make sure your copy of ffmpeg was not installed via Snap packages, as the sandboxing of Snap distributed software isn't compatible in this case. If you see the error `Error: unable to open display`, this might be your problem.
 1. Make sure you have [video passthrough](/docs/video/#video-passthrough) disabled.
 
 ## Server is not showing up in the directory
