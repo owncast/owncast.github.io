@@ -9,6 +9,8 @@
 
 /** Import theme styles */
 @import "common/fonts";
+@import "common/fonts2";
+
 @import "common/global";
 @import "common/dark";
 @import "components/alerts";
@@ -30,27 +32,3 @@
 
 @import "common/custom";
 
-// START CUSTOM STYLES
-
-.navbar-brand {
-  vertical-align: middle;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: 0;
-}
-.logo-container {
-  display: inline-block;
-  background-color: $white;
-  padding: 6px;
-  border-radius: 9999px;
-  width: 36px;
-  height: 36px;
-  margin-right: 6px;
-  img {
-    transform: translateY(-5px);
-    @include media-breakpoint-up(md) {
-      transform: translateY(-7px);
-    }
-  }
-}

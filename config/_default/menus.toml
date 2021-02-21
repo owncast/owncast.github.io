@@ -27,11 +27,6 @@
   weight = 20
 
 [[main]]
-  name = "Demo"
-  url = "https://watch.owncast.online"
-  weight = 30
-
-[[main]]
   name = "Directory"
   url = "https://directory.owncast.online"
   weight = 40
@@ -39,7 +34,7 @@
 [[main]]
   name = "Releases"
   url = "/releases"
-  weight = 50
+  weight = 30
 
 
 [[social]]

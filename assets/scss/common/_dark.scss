@@ -48,9 +48,9 @@ $navbar-dark-active-color:          $link-color-dark;
     border-bottom: 1px solid $border-dark;
   }
 
-  body.home .navbar {
-    border-bottom: 0;
-  }
+  // body.home .navbar {
+  //   border-bottom: 0;
+  // }
 
   body .navbar-light .navbar-brand {
     color: $navbar-dark-color !important;
