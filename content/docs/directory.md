@@ -1,5 +1,6 @@
 ---
 title: "The Directory"
+description: "The Owncast Directory is a centralized list of streams for people to discover."
 menu:
   docs:
     parent: "configure"

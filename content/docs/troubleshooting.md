@@ -1,5 +1,6 @@
 ---
 title: "Troubleshooting"
+description: "Some categories of issues you might run into and some next steps to help troubleshoot."
 menu:
   docs:
     parent: "guides"

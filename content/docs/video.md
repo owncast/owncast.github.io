@@ -1,5 +1,6 @@
 ---
 title: "Video"
+description: "Configure your video to manage the quality and hardware performance."
 aliases: [/docs/encoding/]
 menu:
   docs:
