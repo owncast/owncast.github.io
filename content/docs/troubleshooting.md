@@ -65,6 +65,10 @@ If you're running into random video stability issues look at some of these commo
 1. Make sure your copy of ffmpeg was not installed via Snap packages, as the sandboxing of Snap distributed software isn't compatible in this case. If you see the error `Error: unable to open display`, this might be your problem.
 1. Make sure you have [video passthrough](/docs/video/#video-passthrough) disabled.
 
+## Your software says your key is incorrect.
+
+If your broadcasting software says your streaming key is incorrect, but you're sure it's not, verify you're not using any [URL-unsafe characters](https://tools.ietf.org/html/rfc3986#section-2.1) in your key.  Characters such as `[ ] { } ? | \ / ” % ~ # < >` are particularly problematic as your broadcasting software may not be encoding them properly.
+
 ## Server is not showing up in the directory
 
 If you've enabled the directory in your admin setttings, [look at some next steps](/docs/directory/#if-your-server-is-not-showing-up-in-the-directory) if it's not working.
