@@ -67,7 +67,7 @@ If you're running into random video stability issues look at some of these commo
 
 ## Your software says your key is incorrect.
 
-If your broadcasting software says your streaming key is incorrect, but you're sure it's not, verify you're not using any [URL-unsafe characters](https://tools.ietf.org/html/rfc3986#section-2.1) in your key.  Characters such as `[ ] { } ? | \ / ” % ~ # < >` are particularly problematic as your broadcasting software may not be encoding them properly.
+If your broadcasting software says your streaming key is incorrect, but you're sure it's not, verify you're not using any [URL-unsafe characters](https://tools.ietf.org/html/rfc3986#section-2.1) in your key. Characters such as `[ ] { } ? | \ / ” % ~ # < >` are particularly problematic as your broadcasting software may not be encoding them properly.
 
 ## Server is not showing up in the directory
 
