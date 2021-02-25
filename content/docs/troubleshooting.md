@@ -69,6 +69,10 @@ If you're running into random video stability issues look at some of these commo
 
 If your broadcasting software says your streaming key is incorrect, but you're sure it's not, verify you're not using any [URL-unsafe characters](https://tools.ietf.org/html/rfc3986#section-2.1) in your key. Characters such as `[ ] { } ? | \ / ” % ~ # < >` are particularly problematic as your broadcasting software may not be encoding them properly.
 
+## Your stream looks low-quality
+
+Your stream, at the very least, is only as good as what you're sending to Owncast.  So make sure you're sending from your broadcasting software at a quality that you're happy with.  You may also want to increase the amount of CPU being used to process the video on your Owncast server.  As you go lower you will visibly see the quality degrade.  However, make sure your server can handle more CPU being used or you'll experience different problems.
+
 ## Server is not showing up in the directory
 
 If you've enabled the directory in your admin setttings, [look at some next steps](/docs/directory/#if-your-server-is-not-showing-up-in-the-directory) if it's not working.
