@@ -34,6 +34,8 @@ Depending on your hardware you may be able to configure your server to support m
 
 Per default, Owncast will run a `http` web server on port `8080` and a RTMP server on port `1935`. You can change the ports in the the admin.  You must restart Owncast for these changes to take effect.
 
+You can also set the port for the web server on the command line via the `-webserverport` flag.
+
 {{< figure src="/docs/img/admin-server-settings.png" caption="Owncast server settings" width="80%" >}}
 {{<versionsupport feature="Custom Ports" version="0.0.4">}}
 {{<versionsupport feature="Port settings in the admin panel" version="0.0.6">}}
