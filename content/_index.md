@@ -5,6 +5,6 @@ draft: false
 images: []
 ---
 
-# Contributors
+## Contributors
 
 {{< collaborators >}}

@@ -3,7 +3,7 @@
 </a>
 
 <h3 class="force-no-border-top">{{ .CurrentSection.Title }}</h3>
-<ol>
+<ol class="docs-sub-links">
 {{ $currentSection := .CurrentSection }}
 {{ range where .Site.RegularPages.ByWeight "Section" .Section }}
 {{ if in (.Permalink | string) $currentSection.RelPermalink }}

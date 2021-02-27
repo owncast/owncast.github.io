@@ -66,6 +66,9 @@
   background-color: rgba(255, 255, 255, 0.95);
   border-bottom: 1px solid $gray-200;
   margin-top: 4px;
+  @media(prefers-color-scheme: dark) {
+    border-bottom: 1px solid black;
+  }
 }
 
 .header-bar {
@@ -74,14 +77,16 @@
   border-image-slice: 1;
 }
 
-.home .navbar {
-  border-bottom: 0;
-}
+// .home .navbar {
+//   border-bottom: 0;
+// }
 
 .navbar-form {
   position: relative;
   margin-top: 0.25rem;
 }
+
+
 
 @include media-breakpoint-up(md) {
   .navbar-brand {
@@ -104,16 +109,21 @@
     margin-right: 1.5rem;
   }
 }
-
-@include media-breakpoint-up(lg) {
+@include media-breakpoint-up(md) {
   .navbar-form {
-    margin-left: 15rem;
+    margin-left: 2rem;
   }
 }
 
+// @include media-breakpoint-up(lg) {
+//   .navbar-form {
+//     margin-left: 15rem;
+//   }
+// }
+
 @include media-breakpoint-up(xl) {
   .navbar-form {
-    margin-left: 30rem;
+    margin-left: 15rem;
   }
 }
 
@@ -261,4 +271,51 @@
 .navbar .menu-btn:checked ~ .menu-icon:not(.steps) .navicon::before,
 .navbar .menu-btn:checked ~ .menu-icon:not(.steps) .navicon::after {
   top: 0;
+}
+
+
+/* custom overrides */
+
+.navbar-brand {
+  vertical-align: middle;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.logo-label {
+  font-size: 1.3em;
+  font-weight: 200;
+  letter-spacing: 2px;
+  color: $purple;
+  text-transform: uppercase;
+}
+.logo-container {
+  display: inline-block;
+  background-color: $white;
+  padding: 6px;
+  border-radius: 9999px;
+  width: 36px;
+  height: 36px;
+  margin-right: 4px;
+  img {
+    transform: translateY(-5px);
+    @include media-breakpoint-up(md) {
+      transform: translateY(-6px);
+    }
+  }
+}
+@media(prefers-color-scheme: dark) {
+  .logo-label {
+    font-weight: 100;
+  }
+  .logo-container {
+    margin-right: 10px;
+  }
+}
+
+.main-nav {
+  font-size: .9rem;
+  font-weight: 500;
 }

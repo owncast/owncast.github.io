@@ -3,45 +3,47 @@
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
+        padding: 0 2em;
     }
 
     .contributor-item {
-        flex: 1 0 30%;
+        list-style-type: none;
+        text-align: center;
+    }
+    .contributor-item figure {
+        margin: 1em;
+        width: 60px;
     }
     .contributor-item img {
         background: rgb(199,185,174);
         background: linear-gradient(90deg, rgba(199,185,174,1) 0%, rgba(205,215,224,1) 100%);
         border-radius: 30px;
         aspect-ratio: 1/1;
-        width: 60px;
+        width: 100%;
+    }
+    .contributor-item figcaption {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: .75em;
+        margin-top: 5px;
+        display: block;
     }
 
-    @media (min-width: 500px) {
-        .contributor-item {
-            flex: 1 0 21%;
-        }
-    }
-
-    @media (min-width: 1000px) {
-        .contributor-item {
-            flex: 1 0 15%;
-        }
-    }
 </style>
 
-<div class="contributor-box">
-{{ range $.Site.Data.contributors }}
-{{ if not (in .login "[bot]") }}
-<span class="contributor-item">
-    <figure>
-        <a href="{{.html_url}}">
-            <center>
-            <img src="{{.avatar_url}}" loading="lazy"/>
-            <figcaption><small>{{.login}}</small></figcaption>
-            </center>
-        </a>
-    </figure>
-</span>
-{{ end }}
-{{ end }}
-</div>
+<ul class="contributor-box">
+    {{ range $.Site.Data.contributors }}
+    {{ if not (in .login "[bot]") }}
+    <li class="contributor-item">
+        <figure>
+            <a href="{{.html_url}}" target="_blank">
+                <img src="{{.avatar_url}}" loading="lazy" alt="{{.login}}"/>
+                <figcaption>{{.login}}</figcaption>
+            </a>
+        </figure>
+    </li>
+    {{ end }}
+    {{ end }}
+</ul>

@@ -3,7 +3,14 @@
   <div class="container">
     <input class="menu-btn order-0" type="checkbox" id="menu-btn">
     <label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
-    <a class="navbar-brand order-1 order-md-0 mr-auto" href="{{ "/" | absURL }}">{{ .Site.Params.Title }}</a>
+    <a class="navbar-brand order-1 order-md-0 mr-auto" href="{{ "/" | absURL }}">
+      <span class="logo-container">
+        <img src="/images/logo.svg">
+      </span>
+      <span class="logo-label">
+        {{ .Site.Params.Title }}
+      </span>
+    </a>
     <ul class="navbar-nav social-nav order-3 order-md-5">
       {{ range .Site.Menus.social -}}
         <li class="nav-item">
