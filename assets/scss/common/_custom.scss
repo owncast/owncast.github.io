@@ -148,3 +148,18 @@ h3, .h3 {
   }
 }
 
+
+.nav-item-social {
+  margin: 0;
+  .nav-link {
+    display: inline-block;
+    height: 36px;
+    width: 36px;
+    padding: 0;
+    svg {
+      height: 100%;
+      width: 100%
+    }
+  }
+  
+}
