@@ -13,12 +13,12 @@ $button-color-dark: $link-color-dark;
 $focus-color-dark: lighten($link-color-dark, 2.5%);
 $selection-color-dark: lighten($link-color-dark, 2.5%);
 
-$navbar-dark-color:                 $body-color-dark;
-$navbar-dark-hover-color:           $link-color-dark;
-$navbar-dark-active-color:          $link-color-dark;
+$navbar-dark-color: $body-color-dark;
+$navbar-dark-hover-color: $link-color-dark;
+$navbar-dark-active-color: $link-color-dark;
 
 /** Theme styles */
-@media(prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   body {
     background: $body-bg-dark;
     color: $body-color-dark;
@@ -76,8 +76,8 @@ $navbar-dark-active-color:          $link-color-dark;
     color: $navbar-dark-active-color;
   }
 
-  body .navbar-light .navbar-nav .nav-link, 
-  body .navbar-light .navbar-nav .banner .nav a, 
+  body .navbar-light .navbar-nav .nav-link,
+  body .navbar-light .navbar-nav .banner .nav a,
   .banner .nav body .navbar-light .navbar-nav a {
     color: $white;
   }

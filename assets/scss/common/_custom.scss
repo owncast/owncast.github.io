@@ -45,19 +45,17 @@ tr:nth-child(even) {
   }
 }
 
-
-
-
-h1, .h1 {
+h1,
+.h1 {
   color: $pink-500;
   font-size: 2.2em;
 }
-h2, .h2,
-h3, .h3 {
+h2,
+.h2,
+h3,
+.h3 {
   color: $pink-500;
 }
-
-
 
 .home > .container {
   // max-width: unset;
@@ -89,14 +87,14 @@ h3, .h3 {
     list-style-type: none;
     position: relative;
     border-radius: 4px;
-    border: 1px solid rgba(255,255,255, .01);
+    border: 1px solid rgba(255, 255, 255, 0.01);
     background-color: $owncast-purple-25;
     margin: 1em;
     &:hover {
-      border-color: rgba(255,255,255, .5);
-      transition: border .25s;
+      border-color: rgba(255, 255, 255, 0.5);
+      transition: border 0.25s;
       .stream-name {
-        background-color: rgba(0,0,0,1);
+        background-color: rgba(0, 0, 0, 1);
       }
     }
 
@@ -104,7 +102,7 @@ h3, .h3 {
       position: absolute;
       display: inline-block;
       background-color: $red;
-      content: 'LIVE';
+      content: "LIVE";
       padding: 1px 5px;
       border-radius: 4px;
       top: 10px;
@@ -127,13 +125,13 @@ h3, .h3 {
       bottom: -1.25em;
       left: 0;
       width: 100%;
-      background-color: rgba(0,0,0,.75);
+      background-color: rgba(0, 0, 0, 0.75);
       text-align: right;
       padding: 5px 10px;
       font-size: $font-size-xs;
       text-transform: uppercase;
       color: $owncast-pink-dark;
-      transition: background-color .2s;
+      transition: background-color 0.2s;
     }
   }
 }
