@@ -1,5 +1,5 @@
 {{ define "main" }}
-<section class="section container-fluid pb-3">
+<section class="section xcontainer-fluid pb-3 hero-container">
   <div class="row justify-content-center">
     <div class="col-lg-12 text-center">
       <img width="20%" src="/images/logo.svg" />
@@ -22,30 +22,33 @@
     </figure>
   </div>
 </section>
-{{ end }}
 
-{{ define "sidebar-prefooter" }}
-<section class="section section-sm">
-  <div class="container">
-    <div class="row justify-content-center text-center">
-      <div class="col-lg-5">
-        <h2 class="h4">Works with your software</h2>
-        <p>If you're currently streaming it's likely you can point your <a href="/docs/broadcasting">existing video software</a> at your Owncast server and be ready to go.  <a href="/demo">Try it!</a></p>
+<section class="section section-sm key-points-container">
+  <div class="container row justify-content-center">
+    <div class="row justify-content-center text-center col-lg-8 col-sm-16">
+      <div class="col-md-8 col-sm-16 key-point-item">
+        <span class="key-icon mask" aria-hidden="true" style="-webkit-mask-image: url('/images/key-selfhosted.svg');mask-image: url('/images/key-selfhosted.svg')"></span>
+
+        <h2>Self hosted</h2>
+        <p>Why  self-hosted live video is great. If you're currently streaming it's likely you can point your <a href="/docs/broadcasting">existing video software</a> at your Owncast server and be ready to go.  <a href="/demo">Try it!</a></p>
       </div>
-      <div class="col-lg-5">
-        <h2 class="h4">Scalable Infrastructure</h2>
-        <p>Owncast works with <a href="/docs/storage/"
+      <div class="col-md-8 col-sm-16 key-point-item">
+        <span class="key-icon mask" aria-hidden="true" style="-webkit-mask-image: url('/images/key-chat.svg');mask-image: url('/images/key-chat.svg')"></span>
+        <h2>Chat Stuff</h2>
+        <p>The power the web chat server. Owncast works with <a href="/docs/storage/"
             title="Storage providers | Owncast Docs">different storage providers</a> to optionally scale your videos to many viewers using only low-powered hardware.
         </p>
       </div>
     </div>
-    <div class="row justify-content-center text-center">
-      <div class="col-lg-5">
-        <h2 class="h4">Open Community</h2>
-        <p>The Owncast community is vibrant and always ready to help. <a href="/contact">Visit us</a> for support or if you just want to hang out.</p>
+    <div class="row justify-content-center text-center col-lg-8 col-sm-16">
+      <div class="col-md-8 col-sm-16 key-point-item">
+        <span class="key-icon mask" aria-hidden="true" style="-webkit-mask-image: url('/images/key-videosoftware.svg');mask-image: url('/images/key-videosoftware.svg')"></span>
+        <h2>Works with Software</h2>
+        <p>Use with existing popular broadcasting software. The Owncast community is vibrant and always ready to help. <a href="/contact">Visit us</a> for support or if you just want to hang out.</p>
       </div>
-      <div class="col-lg-5">
-        <h2 class="h4">Permissive and Extendable</h2>
+      <div class="col-md-8 col-sm-16 key-point-item">
+        <span class="key-icon mask" aria-hidden="true" style="-webkit-mask-image: url('/images/key-storage.svg');mask-image: url('/images/key-storage.svg')"></span>
+        <h2>Storage</h2>
         <p>Owncast is licensed under the <a href="https://choosealicense.com/licenses/mit/" title="MIT license">MIT license</a>,
           so you can use it freely to build anything you like.  Even better, you can extend the functionality of your Owncast server with <a href="/thirdparty">3rd party APIs</a>.
         </p>
@@ -54,8 +57,16 @@
   </div>
 </section>
 
+{{ end }}
+
+{{ define "sidebar-prefooter" }}
+<section id="quotes" class="section section-sm text-center testimonials-container">
+  <h2>Quote section</h2>
+  These people love us! ...
+</section>
+
 <!-- Live now list -->
-<section id="container-live-now" class="section section-sm text-center">
+<section id="container-live-now" class="section section-sm text-center live-now-container">
   <h2>Streams live right now</h2>
   <div class="stream-list-holder scrollbar-hidden">
   <ul id="stream-list" role="list">
@@ -67,7 +78,7 @@
 
 {{ define "sidebar-footer" }}
 <!-- Contributors list -->
-<section class="section section-sm container-contributors text-center">
+<section class="section section-sm container-contributors text-center contributors-container">
   {{- .Content -}}
 </section>
 
