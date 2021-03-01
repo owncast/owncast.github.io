@@ -61,9 +61,9 @@ const QUOTES = [
       return;
     }
     const index = Math.floor(Math.random() * Math.floor(QUOTES.length));
-    const { quote, url, name } = QUOTES[index];
+    const { quote, url, name } = QUOTES.splice(index, 1)[0];
     container.className = 'quotebox ' + divId;
-    const content = '<span class="comment">' + quote + '</span><p class="commentor"><a href="'+ url +'" target="_blank" rel="noopener noreferrer">'+ name +'</a></p>';
+    const content = '<p class="comment">' + quote + '</p><p class="commentor"><a href="'+ url +'" target="_blank" rel="noopener noreferrer">- '+ name +'</a></p>';
     container.innerHTML = content;
   }
 
