@@ -13,7 +13,7 @@ toc: false
 type: subpages
 ---
 
-By using the installer you can get up and running in about a minute.  However, if you would prefer to [download a release manually](/quickstart/manual) or use [Docker](/quickstart/docker) you also have those options.
+By using the installer you can get up and running in about a minute. However, if you would prefer to [download a release manually](/quickstart/manual) or use [Docker](/quickstart/docker) you also have those options.
 
 ### Installer
 
@@ -28,7 +28,6 @@ curl -s https://owncast.online/install.sh | bash
 {{< asciicast "/install-owncast-ascii.cast">}}
 
 ---
-
 
 ### See an example of getting running in under a minute.
 
