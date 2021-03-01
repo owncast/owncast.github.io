@@ -14,7 +14,7 @@
     <ul class="navbar-nav social-nav order-3 order-md-5">
       {{ range .Site.Menus.social -}}
         <li class="nav-item nav-item-social">
-          <a class="nav-link" href="{{ .URL | absURL }}">{{ .Pre | safeHTML }}<span class="ml-2 sr-only">{{ .Name | safeHTML }}</span></a>
+          <a title="{{ .Name | safeHTML }}" class="nav-link" href="{{ .URL | absURL }}">{{ .Pre | safeHTML }}<span class="ml-2 sr-only">{{ .Name | safeHTML }}</span></a>
         </li>
       {{ end -}}
     </ul>

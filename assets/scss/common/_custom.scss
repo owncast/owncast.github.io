@@ -158,9 +158,15 @@ h3, .h3 {
     svg {
       height: 100%;
       width: 100%
-    }
+    }    
   }
-  
+  @include media-breakpoint-down(sm) {
+    margin: .25em;
+    .nav-link {
+      height: 28px;
+      width: 28px;
+    }
+  }  
 }
 
 
