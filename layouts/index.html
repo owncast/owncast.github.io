@@ -1,26 +1,29 @@
 {{ define "main" }}
-<section class="section xcontainer-fluid pb-3 hero-container">
-  <div class="row justify-content-center">
-    <div class="col-lg-12 text-center">
-      <img width="20%" src="/images/logo.svg" />
-      <h1 class="mt-0">{{ .Title }}</h1>
-    </div>
-    <div class="col-lg-9 col-xl-8 text-center">
-      <p class="lead">A self-hosted live video and web chat server for use with existing popular broadcasting software.</p>
+<section class="section hero-container">
+  <div class="container row justify-content-center align-items-center">
+    <figure class="hero-image-container col-lg-9 col-md-16">
+      <img src="/images/owncast-splash-loading.png" alt="" class="splash-image splash-image-loader" id="splash-image-loader" />
+      <img src="/images/owncast-splash.png" alt="Owncast on desktop and mobile" class="splash-image" loading="lazy" onLoad="handleHeroImageLoad()" id="splash-image-main" />
+    </figure>
+
+    <div class="intro col-lg-7 col-md-16">
+      <p class="lead">Owncast is a self-hosted live video and web chat server for use with existing popular broadcasting software.</p>
       <a class="btn btn-primary btn-lg px-4 mb-2" href="{{ "quickstart/" | absURL }}" role="button">Get started</a>
     </div>
-    <figure class="col-lg-12 text-center">
-      <a href="/images/owncast-screenshot.png" title="Owncast Screenshot">
-        <script>
-          function screenshotLoad() {
-            document.getElementById('owncastScreenshot').style.removeProperty('background-color');
-          }
-        </script>
-
-        <img src="/images/owncast-screenshot.png" alt="Owncast Screenshot" width="100%" loading="lazy" id="owncastScreenshot" style="aspect-ratio: 16 / 9; background-color: #e2e8f0;" onload="screenshotLoad()" />
-      </a>
-    </figure>
   </div>
+  <script>
+    function handleHeroImageLoad() {
+      console.log("loaded")
+      const loader = document.getElementById('splash-image-loader');
+      const main = document.getElementById('splash-image-main');
+      if (loader) {
+        loader.style.opacity = 0;
+      }
+      if (main) {
+        main.style.opacity = 1;
+      }
+    }
+  </script>
 </section>
 
 <!-- 4 key points section -->
