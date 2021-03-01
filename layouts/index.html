@@ -23,6 +23,7 @@
   </div>
 </section>
 
+<!-- 4 key points section -->
 <section class="section section-sm key-points-container">
   <div class="container row justify-content-center">
     <div class="row justify-content-center text-center col-lg-8 col-sm-16">
@@ -60,63 +61,27 @@
 {{ end }}
 
 {{ define "sidebar-prefooter" }}
+<!-- Quotes & testimonials section -->
 <section id="quotes" class="section section-sm text-center testimonials-container">
   <h2>Quote section</h2>
   These people love us! ...
 </section>
 
-<!-- Live now list -->
+<!-- Live now from Directory section -->
 <section id="container-live-now" class="section section-sm text-center live-now-container">
   <h2>Streams live right now</h2>
+  <p>Visit the <a href="https://directory.owncast.online">Owncast Directory</a> to see more examples when they're streaming.</p>
   <div class="stream-list-holder scrollbar-hidden">
   <ul id="stream-list" role="list">
   </ul>
 </div>
-  Visit the <a href="https://directory.owncast.online">Owncast Directory</a> to see more examples when they're streaming.
 </section>
 {{ end }}
 
 {{ define "sidebar-footer" }}
-<!-- Contributors list -->
+<!-- Contributors list Section -->
 <section class="section section-sm container-contributors text-center contributors-container">
   {{- .Content -}}
 </section>
 
-<script>
-  async function getDirectory() {
-    const response = await fetch('https://yp.owncast.online/active', {
-      mode: "cors", // same-origin, no-cors
-    });
-    const streams = await response.json();
-    if (!streams.length) {
-      return;
-    }
-    const reflex = () => {
-      const list = document.getElementById("stream-list");
-      if (list.clientWidth > window.innerWidth) {
-        list.parentElement.style.justifyContent = 'flex-start';
-      } else {
-        list.parentElement.style.justifyContent = 'center';
-      }
-    }
-    window.addEventListener('resize', reflex);
-    document.getElementById('container-live-now').style.display = "block";
-    const container = document.getElementById("stream-list");
-    streams.forEach(function(stream) {
-      const listItem = document.createElement("li");
-      listItem.className="stream-item";
-      
-      const itemMarkup = '<a href="'+ stream.url +'" target="_blank">' + 
-        '<img src="https://yp.owncast.online/image/thumb/' + stream.id +'" loading="lazy" aspect-ratio="16 / 9" alt="See '+ stream.name +'&apos; stream." />' +
-        '<span class="stream-name">'+ stream.name +'</span>' +
-      '</a>';
-
-      listItem.innerHTML = itemMarkup;
-      container.appendChild(listItem);
-    });
-    reflex();
-    
-  }
-  getDirectory();
-</script>
 {{ end }}

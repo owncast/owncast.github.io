@@ -67,6 +67,7 @@ h3, .h3 {
 #container-live-now {
   background-color: black;
   padding-bottom: 2em;
+  color: var(--white);
   display: none;
   .stream-list-holder {
     overflow: auto;
@@ -92,9 +93,6 @@ h3, .h3 {
     border: 1px solid rgba(255,255,255, .01);
     background-color: $owncast-purple-25;
     margin: .75em;
-    // &:first-of-type {
-    //   margin-left: 30px;
-    // }
     &:hover {
       border-color: rgba(255,255,255, .5);
       transition: border .25s;
@@ -134,8 +132,9 @@ h3, .h3 {
       text-align: right;
       padding: 5px 10px;
       font-size: $font-size-xs;
+      font-weight: 500; 
       text-transform: uppercase;
-      color: $owncast-pink-dark;
+      color: $blue;
       transition: background-color .2s;
     }
   }
