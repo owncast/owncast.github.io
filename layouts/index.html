@@ -24,7 +24,7 @@
 </section>
 
 <!-- 4 key points section -->
-<section class="section section-sm key-points-container">
+<section class="section key-points-container">
   <div class="container row justify-content-center">
     <div class="row justify-content-center text-center col-lg-8 col-sm-16">
       <div class="col-md-8 col-sm-16 key-point-item">
@@ -62,13 +62,15 @@
 
 {{ define "sidebar-prefooter" }}
 <!-- Quotes & testimonials section -->
-<section id="quotes" class="section section-sm text-center testimonials-container">
-  <h2>Quote section</h2>
-  These people love us! ...
+<section class="section quotes-container">
+  <div class="container row justify-content-center">
+    <div id="quote1" class="col-md-8 col-sm-16"></div>
+    <div id="quote2" class="col-md-8 col-sm-16"></div> 
+  </div>
 </section>
 
 <!-- Live now from Directory section -->
-<section id="container-live-now" class="section section-sm text-center live-now-container">
+<section id="container-live-now" class="section text-center live-now-container">
   <h2>Streams live right now</h2>
   <p>Visit the <a href="https://directory.owncast.online">Owncast Directory</a> to see more examples when they're streaming.</p>
   <div class="stream-list-holder scrollbar-hidden">
@@ -80,7 +82,7 @@
 
 {{ define "sidebar-footer" }}
 <!-- Contributors list Section -->
-<section class="section section-sm container-contributors text-center contributors-container">
+<section class="section container-contributors text-center contributors-container">
   {{- .Content -}}
 </section>
 

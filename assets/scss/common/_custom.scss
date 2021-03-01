@@ -194,7 +194,7 @@ h3, .h3 {
       mask:  top left / contain no-repeat;
     }
     .key-icon {
-      background-image: linear-gradient(#7871ff, #2e8ef9, );
+      background-image: linear-gradient(var(--purple), var(--blue), );
       height: 3em;
       width: 3em;
       margin: auto;
@@ -204,6 +204,67 @@ h3, .h3 {
         height: 100%;
         width: 100%;
         fill: white;
+      }
+    }
+  }
+}
+
+.quotes-container {
+  background: linear-gradient(30deg, var(--purple) 35%, var(--blue));
+  > .container {
+    margin: auto;
+  }
+  .quotebox {
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 1em;
+    height: 15em;
+    width: 92%;
+    max-width: 30em;
+    padding: 3em 3em 2em;
+    margin: 1em auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    .comment {
+      text-align: left;
+    }
+    .commentor {
+      text-align: right;
+      width: 100%;
+      font-size: .88em;
+      font-weight: 500;
+      margin: 1em;
+      text-transform: uppercase;
+      a {
+        color: var(--white);
+      }
+    }
+
+    &::before,
+    &::after {
+      display: block;
+      position: absolute;
+      content: '';
+      
+      background-repeat: no-repeat;
+      background-size: 5em 5em;
+      height: 5em;
+      width: 5em;
+    }
+    &.quote1 {
+      &::before {
+        top: -2.5em;
+        left: 1em;
+        background-image: url('/images/quote1.svg');
+      }
+    }
+    &.quote2 {
+      &::after {
+        bottom: -2.5em;
+        right: 1em;
+        background-image: url('/images/quote2.svg');
       }
     }
   }
