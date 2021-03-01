@@ -4,7 +4,7 @@ menu:
   docs:
     parent: "guides"
 weight: 200
-toc: true
+toc: false
 ---
 
 You can optionally setup Owncast to run under [systemd](https://systemd.io/) so it's a managed service on your machine that automatically starts when your machine does.
