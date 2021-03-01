@@ -11,7 +11,7 @@
         text-align: center;
     }
     .contributor-item figure {
-        margin: 1em;
+        margin: .5em;
         width: 60px;
     }
     .contributor-item img {
@@ -21,16 +21,6 @@
         aspect-ratio: 1/1;
         width: 100%;
     }
-    .contributor-item figcaption {
-        width: 100%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        font-size: .75em;
-        margin-top: 5px;
-        display: block;
-    }
-
 </style>
 
 <ul class="contributor-box">
@@ -40,7 +30,6 @@
         <figure>
             <a href="{{.html_url}}" target="_blank">
                 <img src="{{.avatar_url}}" loading="lazy" alt="{{.login}}"/>
-                <figcaption>{{.login}}</figcaption>
             </a>
         </figure>
     </li>

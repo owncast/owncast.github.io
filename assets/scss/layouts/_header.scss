@@ -86,8 +86,6 @@
   margin-top: 0.25rem;
 }
 
-
-
 @include media-breakpoint-up(md) {
   .navbar-brand {
     margin-right: 1rem !important;
@@ -107,8 +105,15 @@
     margin-top: 0;
     margin-left: 6rem;
     margin-right: 1.5rem;
+      
+    &:focus,
+    &:focus-within {
+      width: 200px;
+      margin-left: 0;
+    }
   }
 }
+
 @include media-breakpoint-up(md) {
   .navbar-form {
     margin-left: 2rem;
@@ -134,6 +139,10 @@
   padding-right: 2.5rem;
   background: $gray-100;
   border: 0;
+
+    // &:focus {
+    //   width: 300px;
+    // }
 
   /*
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-search'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E");
@@ -319,3 +328,27 @@
   font-size: .9rem;
   font-weight: 500;
 }
+
+
+.nav-item-social {
+  margin: 0;
+  .nav-link {
+    display: inline-block;
+    height: 36px;
+    width: 36px;
+    padding: 0;
+    svg {
+      height: 100%;
+      width: 100%
+    }    
+  }
+  @include media-breakpoint-down(sm) {
+    margin: .25em;
+    .nav-link {
+      height: 28px;
+      width: 28px;
+    }
+  }  
+}
+
+
