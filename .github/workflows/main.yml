@@ -39,7 +39,7 @@ jobs:
         run: "jq --argfile core data/contributors-core.json --argfile admin data/contributors-admin.json --argfile homepage data/contributors-homepage.json -n '$core + $admin + $homepage |unique_by(.login)' > data/contributors.json"
       
       - name: Fetch donors
-        run: "curl https://opencollective.com/owncast/members/users.json | jq '.[] | select(.role==\"BACKER\") | {login: .name, avatar_url: .image, html_url: .profile}' | jq --slurp '.' > data/donors.json"
+        run: "curl https://opencollective.com/owncast/members/all.json | jq 'map(.) | .[] | select(.role==\"BACKER\") | {login: .name, avatar_url: .image, html_url: .profile}' | jq --slurp '.' > data/donors.json"
 
       - name: Add current development documentation
         run: mkdir -p static/api/development && curl https://raw.githubusercontent.com/owncast/owncast/master/doc/api/index.html > static/api/development/index.html
