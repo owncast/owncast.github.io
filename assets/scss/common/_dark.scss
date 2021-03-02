@@ -5,7 +5,7 @@
 $body-bg-dark: $gray-900;
 $body-overlay-dark: darken($body-bg-dark, 2.5%);
 $border-dark: darken($body-bg-dark, 2.5%);
-$body-color-dark: $gray-100;
+$body-color-dark: darken($white, 12%);
 $dots-dark: darken($body-color-dark, 50%);
 
 $link-color-dark: $purple; // $blue-300;
@@ -91,8 +91,11 @@ $navbar-dark-active-color: $link-color-dark;
   }
 
   body .alert-warning {
-    background: $body-overlay-dark;
+    background: $owncast-gray;
     color: $body-color-dark;
+    a {
+      color: $purple;
+    }
   }
 
   body .page-links a {
