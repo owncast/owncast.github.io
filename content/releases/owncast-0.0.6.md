@@ -89,11 +89,12 @@ The [directory](https://directory.owncast.online) can now be easily enabled on y
 - Fix pinch zooming on mobile Safari affecting the responsive site behavior [#594](https://github.com/owncast/owncast/issues/594)
 - Remove a crash on certain RTMP disconnects [#673](https://github.com/owncast/owncast/issues/673)
 - Some specific RTMP hardware is resulting in an admin error, work around that until we can get access to the hardware. [#635](https://github.com/owncast/owncast/issues/635)
-- Return the optional scaled height and/or width value in admin `serverStatus` API.  [#769](https://github.com/owncast/owncast/pull/769/).
+- Return the optional scaled height and/or width value in admin `serverStatus` API. [#769](https://github.com/owncast/owncast/pull/769/).
+
 ### Contributors
 
 Thank you to [geekgonecrazy](https://github.com/geekgonecrazy), [gabek](https://github.com/gabek), [nebunez](https://github.com/nebunez), [petersveter108](https://github.com/petersveter108), [thilobillerbeck](https://github.com/thilobillerbeck), [gingervitis](https://github.com/gingervitis), [jeyemwey](https://github.com/jeyemwey), [felix-engelmann](https://github.com/felix-engelmann), [earnestma](https://github.com/earnestma), [graywolf336](https://github.com/graywolf336), [ForestJohnson](https://github.com/ForestJohnson) as well as all of the fantastic people helping out in the [Owncast chat](https://owncast.rocket.chat) answering questions for people trying out Owncast for the first time.
 
 ### Support the future of Owncast
 
-We've been asked to support donations so people can help support the project, so now we are!  We're ready to go on [OpenCollective](https://opencollective.com/owncast) and would love you to check it out.
+We've been asked to support donations so people can help support the project, so now we are! We're ready to go on [OpenCollective](https://opencollective.com/owncast) and would love you to check it out.
