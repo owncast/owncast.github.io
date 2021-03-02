@@ -4,35 +4,26 @@ date: 2021-02-01
 description: "0.0.6 gives you the ability to configure your Owncast server via the web and adds new 3rd party APIs for you to build upon."
 ---
 
-{{< alert icon="💡" text="These are the in-progress release notes for 0.0.6.  Please read so you're up to date with the changes and know what to expect when testing." >}}
+0.0.6 has quite a few changes that impact you, so please take a moment to read about this document in its entirety.
 
-## Pre-release: How to test from source
+## Upgrade instructions from 0.0.5
 
-1. Change to the `master` branch.
-1. `go run main.go pkged.go`
+1. Stop the service from running.
+1. Move the zip file of 0.0.6 to your previous install location.
+1. If you've customized your web interface in any way **you will want to back up the files you've changed or customized.**
+1. Unzip the file, allowing it to overwrite old files.
+1. Restart the service.
 
-## Pre-release: Configuration migration
+## Breaking changes
 
-The first time you run the 0.0.6 branch it will migrate your `config.yaml` file to the new configuration store. In testing you should verify this migration is accurate. It will move your config file to the backup directory.
-
-## Pre-release: Things to test
-
-1. Change video settings and make sure they take effect. Add, delete, change stream output variants.
-1. Enable/disable your S3 storage and make sure it's used when it should be, and isn't when it's not.
-1. Set your stream title in the header and make sure it's reflected on the web page.
-1. Use the new page content editor to update your page via markdown.
-1. The Owncast database gets backed up hourly. Verify that happens.
-1. Verify you can restore the backup: https://public.gabek.vercel.app/docs/maintenance/
+- The config file has been removed.
+- The "server title" value has been removed and the "server name" is used everywhere instead.
+- Audio transcoding settings have been removed to simplify configuration as we haven't been encouraging people to convert audio, and as far as I can tell people haven't been using it. Audio will pass through the source audio as it has previously.
+- Peak viewer counts have been removed from the public-facing `status` API. [#771](https://github.com/owncast/owncast/pull/771)
 
 ---
 
-WIP Release notes:
-
-## Please read
-
-0.0.6 has quite a few changes that impact you, so please take a moment to read about the changes.
-
-## Configuration
+## Major updates
 
 ### Admin
 
@@ -58,23 +49,9 @@ The `backup` directory will include a periodic backup of your Owncast server dat
 
 The [directory](https://directory.owncast.online) can now be easily enabled on your General settings page. We look forward to seeing everyone's streams show up there if you're looking for viewers, or are streaming something that's publicly available.
 
-## Upgrade instructions from 0.0.5
-
-1. Stop the service from running.
-1. Move the zip file of 0.0.6 to your previous install location.
-1. If you've customized your web interface in any way you will want to back up the files you've updated.
-1. Unzip the file, allowing it to overwrite old files.
-1. Restart the service.
-
-## Breaking changes
-
-- The config file has been removed.
-- The "server title" value has been removed and the "server name" is used everywhere instead.
-- Audio transcoding settings have been hidden to simplify configuration as we haven't been encouraging people to convert audio, and as far as I can tell people haven't been using it. Audio will pass through the source audio as it has previously.
-
 # Changelog
 
-## [[0.0.6](https://github.com/owncast/owncast/milestone/4)] - 2021-xx-xx
+## [[0.0.6](https://github.com/owncast/owncast/milestone/4)] - 2021-03-08
 
 ### Added
 
@@ -93,6 +70,7 @@ The [directory](https://directory.owncast.online) can now be easily enabled on y
 
 ### Changed
 
+- Completely manage your Owncast instance using the web admin.
 - Reduce the amount of chat backlog we return [#548](https://github.com/owncast/owncast/issues/548)
 - Change the offline visual state of admin viewers page [#662](https://github.com/owncast/owncast/issues/662)
 - Log hardware utilization messages as warnings instead of errors [#640](https://github.com/owncast/owncast/issues/640)
@@ -101,7 +79,9 @@ The [directory](https://directory.owncast.online) can now be easily enabled on y
 
 ### Removed
 
+- `config.yaml` has been removed and is no longer supported for configuration.
 - Remove showing the stream key in admin home page dashboard [#615](https://github.com/owncast/owncast/issues/615)
+- Peak viewer counts have been removed from the public-facing `status` API. [#771](https://github.com/owncast/owncast/pull/771)
 
 ### Fixed
 
@@ -109,7 +89,11 @@ The [directory](https://directory.owncast.online) can now be easily enabled on y
 - Fix pinch zooming on mobile Safari affecting the responsive site behavior [#594](https://github.com/owncast/owncast/issues/594)
 - Remove a crash on certain RTMP disconnects [#673](https://github.com/owncast/owncast/issues/673)
 - Some specific RTMP hardware is resulting in an admin error, work around that until we can get access to the hardware. [#635](https://github.com/owncast/owncast/issues/635)
-
+- Return the optional scaled height and/or width value in admin `serverStatus` API.  [#769](https://github.com/owncast/owncast/pull/769/).
 ### Contributors
 
-Thank you to [geekgonecrazy](https://github.com/geekgonecrazy), [gabek](https://github.com/gabek), [nebunez](https://github.com/nebunez), [petersveter108](https://github.com/petersveter108), [thilobillerbeck](https://github.com/thilobillerbeck), [gingervitis](https://github.com/gingervitis), [jeyemwey](https://github.com/jeyemwey), [felix-engelmann](https://github.com/felix-engelmann), [earnestma](https://github.com/earnestma) as well as all of the fantastic people helping out in the [Owncast chat](https://owncast.rocket.chat) answering questions for people trying out Owncast for the first time.
+Thank you to [geekgonecrazy](https://github.com/geekgonecrazy), [gabek](https://github.com/gabek), [nebunez](https://github.com/nebunez), [petersveter108](https://github.com/petersveter108), [thilobillerbeck](https://github.com/thilobillerbeck), [gingervitis](https://github.com/gingervitis), [jeyemwey](https://github.com/jeyemwey), [felix-engelmann](https://github.com/felix-engelmann), [earnestma](https://github.com/earnestma), [graywolf336](https://github.com/graywolf336), [ForestJohnson](https://github.com/ForestJohnson) as well as all of the fantastic people helping out in the [Owncast chat](https://owncast.rocket.chat) answering questions for people trying out Owncast for the first time.
+
+### Support the future of Owncast
+
+We've been asked to support donations so people can help support the project, so now we are!  We're ready to go on [OpenCollective](https://opencollective.com/owncast) and would love you to check it out.
