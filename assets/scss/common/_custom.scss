@@ -39,9 +39,8 @@ tr:nth-child(even) {
   scrollbar-width: none; /* moz only */
 }
 
-
-
-h1, .h1 {
+h1,
+.h1 {
   color: $pink-500;
   font-size: 2.2em;
 }
@@ -57,7 +56,6 @@ code,
   color: #9cdcfe;
   background-color: rgba(28, 26, 59, 1);
 }
-
 
 .hero-container {
   background-color: #121421;
@@ -97,7 +95,6 @@ code,
     opacity: 1;
   }
 
-
   @include media-breakpoint-down(md) {
     padding-bottom: 1rem;
     background-position: 0 -1em;
@@ -116,7 +113,7 @@ code,
   }
 }
 
-.key-points-container{
+.key-points-container {
   background-color: #000;
   color: var(--white);
   padding-bottom: 3em;
@@ -133,21 +130,22 @@ code,
       text-transform: uppercase;
       font-size: 1.1em;
       font-weight: 500;
-      margin-bottom: .5em;
+      margin-bottom: 0.5em;
     }
 
     .mask {
-      -webkit-mask:  top left / contain no-repeat;
-      mask:  top left / contain no-repeat;
+      -webkit-mask: top left / contain no-repeat;
+      mask: top left / contain no-repeat;
     }
     .key-icon {
-      background-image: linear-gradient(var(--purple), var(--blue), );
+      background-image: linear-gradient(var(--purple), var(--blue));
       height: 3em;
       width: 3em;
       margin: auto;
       display: block;
       margin-top: 1em;
-      svg,img {
+      svg,
+      img {
         height: 100%;
         width: 100%;
         fill: white;
@@ -162,7 +160,7 @@ code,
     margin: auto;
   }
   .quotebox {
-    border: 1px solid rgba(255,255,255,.25);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 1em;
     min-height: 15em;
     width: 92%;
@@ -195,8 +193,8 @@ code,
     &::after {
       display: block;
       position: absolute;
-      content: '';
-      
+      content: "";
+
       background-repeat: no-repeat;
       background-size: 5em 5em;
       height: 5em;
@@ -206,14 +204,14 @@ code,
       &::before {
         top: -2.5em;
         left: 1em;
-        background-image: url('/images/quote1.svg');
+        background-image: url("/images/quote1.svg");
       }
     }
     &.quote2 {
       &::after {
         bottom: -2.5em;
         right: 1em;
-        background-image: url('/images/quote2.svg');
+        background-image: url("/images/quote2.svg");
       }
     }
   }
@@ -221,7 +219,7 @@ code,
 
 .live-now-container {
   background-color: black;
-    color: var(--white);
+  color: var(--white);
   display: none;
   .stream-list-holder {
     overflow: auto;
@@ -246,7 +244,7 @@ code,
     border-radius: 4px;
     border: 1px solid rgba(255, 255, 255, 0.01);
     background-color: $owncast-purple-25;
-    margin: .75em;
+    margin: 0.75em;
     &:hover {
       border-color: rgba(255, 255, 255, 0.5);
       transition: border 0.25s;
@@ -286,10 +284,10 @@ code,
       text-align: right;
       padding: 5px 10px;
       font-size: $font-size-xs;
-      font-weight: 500; 
+      font-weight: 500;
       text-transform: uppercase;
       color: $blue;
-      transition: background-color .2s;
+      transition: background-color 0.2s;
     }
   }
   .stream-item-spacer {
