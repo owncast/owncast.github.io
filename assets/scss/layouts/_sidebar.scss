@@ -41,7 +41,7 @@
   font-size: $font-size-base;
   margin: 1.25rem 0 0.5rem 0;
   padding: 1.5rem 0 0 0;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 @include media-breakpoint-up(lg) {
@@ -108,11 +108,4 @@ a.docs-link {
 .docs-links h3.sidebar-link a:hover,
 .page-links h3.sidebar-link a:hover {
   text-decoration: underline;
-}
-
-
-.docs-sub-links {
-  li {
-    font-size: $font-size-sm;
-  }
 }
