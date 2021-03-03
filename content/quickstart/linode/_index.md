@@ -17,7 +17,7 @@ Follow the below steps and it'll setup Owncast for you automatically.
 
 ## Create your new server
 
-1. Visit the "StackScript" for Owncast located at https://cloud.linode.com/stackscripts/780643
+1. Visit the "StackScript" for Owncast located at [Linode](https://cloud.linode.com/stackscripts/780643?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d).
 1. Press the "Deploy New Linode" button and get sent to the create new Linode server page.
    <img src="linode1.png" width="90%">
 1. Under "Advanced Options" put in the hostname that you'll use for this server, such as owncast.mydomain.com
