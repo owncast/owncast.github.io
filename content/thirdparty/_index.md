@@ -23,65 +23,12 @@ Owncast has the ability for you to build things on top of it. Here's some exampl
 1. An OBS overlay so when an event happens in the chat an image or message shows up on the stream.
 1. An integration into some kind of 3rd party service, such as when the song you're listening to changes it shows up in the chat.
 1. Send out a message to your social networks each time you go live.
-## Outbound Webhooks (Owncast server -> Your code)
-
-Webhooks will send events to your code when things happen on your Owncast server.  The following are a list of events you can get notified about.
-
-| Description       | Name|
-| :------------- | :----------: |
-|  Stream started | STREAM_STARTED  |
-|  Stream stopped | STREAM_STOPPED  |
-|  User joined chat | USER_JOINED  |
-|  User sent chat message | CHAT  |
-|  User changed username | NAME_CHANGE  |
-
-### How to accept webhooks
-
-1. Visit `/admin/webhooks` on your owncast server.
-1. Click `Create Webhook`.
-1. Put in the full public URL to an endpoint that can receive this webhook.
-1. Select the events you want to be notified of.
-1. Save this new webhook.
 
 #### Your code
 
 1. In any language, on any kind of web server, create an endpoint that accepts a HTTP `POST` request.  This is where Owncast will be sending events.
 1. Each event payload will have a `type` property that states what of the above events are included, and an `eventData` object that includes all the specific properties of this event.
 1. If you need a starting point see our example projects.
-
-
-
-## Inbound APIs (Your code -> Owncast server)
-
-We currently support the following actions you can make via HTTP `POST`s from your code.
-
-1. Send chat message as the server (known as a `system` message) `/api/integrations/chat/system` (System scope)
-1. Send chat message as a user (known as a `user` message) `/api/integrations/chat/user` (User scope)
-1. Send a generic action message such as "Bob rolled a 15 on the dice" `/api/integrations/chat/action` (System scope)
-
-Your Owncast server will only accept actions from requests with a valid Access Token.  Follow the below steps to create an access token.
-
-1. visit `/admin/access-tokens` on your owncast server.
-1. Click `Create Access Token`.
-1. Select the scope of permissions you want to give this token.
-1. Save this access token.
-
-#### Your code
-
-1. Create a new request in your code.
-1. This request should send headers with `Authorization: Bearer` and your access token.
-
-Example request:
-
-{{< highlight javascript >}}
-{
-    headers: {
-        Content-Type: "application/json",
-        Authorization: "Bearer " + YOUR_ACCESS_TOKEN
-    },
-    {body: "this is a system chat message"}
-}
-{{< / highlight >}}
 
 ## Functionality
 
