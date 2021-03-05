@@ -33,7 +33,6 @@ Follow the below steps and it'll setup Owncast for you automatically.
 1. Enter a secure root password. Don't lose this.
 1. Click "Create"
 
-
 ## Setup DNS for your hostname
 
 1. Copy the IP Address for your new server from the new server status page.
