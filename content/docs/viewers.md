@@ -2,9 +2,6 @@
 title: "Viewer details"
 aliases: [/docs/geoip/]
 weight: 600
-menu:
-  docs:
-    parent: "configure"
 toc: false
 ---
 

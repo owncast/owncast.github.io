@@ -1,8 +1,6 @@
 ---
 title: "Building from Source"
-menu:
-  docs:
-    parent: "guides"
+description: "Build the Owncast codebase from the source code."
 weight: 1000
 toc: true
 ---
