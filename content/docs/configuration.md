@@ -1,5 +1,6 @@
 ---
 title: "Configuration"
+description: Configuration is done through the Owncast administration page.  Learn what you have control over and what customizations can be made.
 menu:
   docs:
     parent: "configure"

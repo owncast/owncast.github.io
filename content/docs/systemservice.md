@@ -1,5 +1,6 @@
 ---
 title: "Run as a system service"
+description: Setup owncast to run as a system service, automatically starting when your server does.
 menu:
   docs:
     parent: "guides"

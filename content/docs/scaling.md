@@ -1,5 +1,6 @@
 ---
 title: Scaling Owncast
+description: A place to start when needing to increase the capacity of your server.
 menu:
   docs:
     parent: "guides"

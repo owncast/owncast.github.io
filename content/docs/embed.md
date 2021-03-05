@@ -1,5 +1,6 @@
 ---
 title: Embedding into your site
+description: You can easily embed your chat or video into another site.
 menu:
   docs:
     parent: "guides"

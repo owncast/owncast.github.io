@@ -1,5 +1,6 @@
 ---
 title: "Web Site + Chat"
+description: "Customize your Owncast web page by adding additional content and links."
 menu:
   docs:
     parent: "configure"
