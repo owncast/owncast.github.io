@@ -32,6 +32,10 @@ Follow the below steps and it'll setup Owncast for you automatically.
    <img src="../linode/linode3.png" width="90%">
 1. Enter a secure root password. Don't lose this.
 1. Click "Create"
+
+
+## Setup DNS for your hostname
+
 1. Copy the IP Address for your new server from the new server status page.
    <img src="../linode/linode4.png" width="90%">
 1. Login to your DNS provider for your domain you used in step 3.
