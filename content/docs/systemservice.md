@@ -13,10 +13,11 @@ A full example can be found [here](https://github.com/owncast/owncast/blob/maste
 
 {{< highlight ini >}}
 [Unit]
-Description=Owncast Service
+Description=Owncast
 {{< / highlight >}}
 
-This is where the "functional" parts of the service live.<br />
+This is where the "functional" parts of the service live.
+
 {{< highlight ini >}}
 [Service]
 Type=simple
@@ -26,14 +27,16 @@ Restart=on-failure
 RestartSec=5
 {{< / highlight >}}
 
-`WorkingDirectory` should be where you want the owncast folder to live.<br />
+`WorkingDirectory` should be where you want the owncast folder to live.
 
-**Example:**<br />
+### Example
+
 `WorkingDirectory=/home/myuser/owncast`
 
-Similarly the `ExecStart` is the actual owncast binary.<br />
+Similarly the `ExecStart` is the actual owncast binary.
 
-**Example:**<br />
+### Example
+
 `ExecStart=/home/myuser/owncast/owncast`
 
 {{< highlight ini >}}
@@ -41,15 +44,7 @@ Similarly the `ExecStart` is the actual owncast binary.<br />
 WantedBy=multi-user.target
 {{< / highlight >}}
 
-This just means, use runlevel 3 non-graphical.
+### Installation
 
-**INSTALLATION**
 Just create the file in your systemd configuration directory (typically /etc/systemd/system/), and update the systemd daemon with:
 `sudo systemd daemon-reload`
-
-**USAGE**
-Currently the following options work
-
-- Start
-- Stop
-- Status
