@@ -8,7 +8,7 @@ toc: false
 type: subpages
 ---
 
-Currently the only hosting provider that supports having a server with Owncast pre-installed is [Linode](https://linode.com?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d).  If you choose to use Linode as your hosting provider you can use the Linode One-Click-Install method.
+Currently the only hosting provider that supports having a server with Owncast pre-installed is [Linode](https://linode.com?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d). If you choose to use Linode as your hosting provider you can use the Linode One-Click-Install method.
 
 Follow the below steps and it'll setup Owncast for you automatically.
 
