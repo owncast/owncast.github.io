@@ -4,7 +4,7 @@ date: 2021-02-01
 description: "0.0.6 gives you the ability to configure your Owncast server via the web and adds new 3rd party APIs for you to build upon."
 ---
 
-0.0.6 has quite a few changes that impact you, so please take a moment to read about this document in its entirety.
+0.0.6 has quite a few changes that impact you, so please take a moment to read about these changes in its entirety.
 
 ## Upgrade instructions from 0.0.5
 
@@ -17,7 +17,7 @@ description: "0.0.6 gives you the ability to configure your Owncast server via t
 
 ## Breaking changes
 
-- The config file has been removed.
+- The config file has been removed in favor of the web admin.
 - The "server title" value has been removed and the "server name" is used everywhere instead.
 - Audio transcoding settings have been removed to simplify configuration as we haven't been encouraging people to convert audio, and as far as I can tell people haven't been using it. Audio will pass through the source audio as it has previously.
 - Peak viewer counts have been removed from the public-facing `status` API. [#771](https://github.com/owncast/owncast/pull/771)
@@ -38,17 +38,17 @@ You'll now see in the admin a text field for adding an optional "Stream Title", 
 
 ## Third party integration & add-on APIs
 
-Owncast now has the ability for you to build your own add-ons and integrations on top of it. Some good examples are chat bots, video stream overlays, and sending external actions into chat such as notifying people when somebody has donated or followed.
+Owncast now lets you build add-ons and integrations on top of it. Some good examples are chat bots, video stream overlays, changing the stream title when things happen, or creating chat actions such as notifying people when somebody has donated or followed.
 
-[Learn more about these APIs](/thirdparty) and you can start building on top of your Owncast server. Feel free to ask us any questions as this is brand new, and we want to give you what you need to build great things.
+[Learn more about these APIs](/thirdparty) and you can start building for your Owncast server. Feel free to ask us any questions.  This is all brand new, and we want to give you what you need to build great things.
 
 ## Backups
 
-The `backup` directory will include a periodic backup of your Owncast server data. Save this with other system data you backup and you'll be able to restore this data later if it's ever needed.
+The `backup` directory will include a periodic backup of your Owncast server data. Save this with other system data you backup and you'll be able to restore this data later if it's ever needed.  [Learn more aboout backups](/docs/backups/).
 
 ### Owncast Directory
 
-The [directory](https://directory.owncast.online) can now be easily enabled on your General settings page. We look forward to seeing everyone's streams show up there if you're looking for viewers, or are streaming something that's publicly available.
+The [directory](https://directory.owncast.online) can be easily enabled in the admin via the General settings page. We look forward to seeing everyone's streams show up there if you're looking for viewers, or are streaming something that's publicly available.
 
 # Changelog
 
