@@ -9,6 +9,7 @@ description: "0.0.6 gives you the ability to configure your Owncast server via t
 ## Upgrade instructions from 0.0.5
 
 1. Stop the service from running.
+1. [Download the updated Owncast release](https://github.com/owncast/owncast/releases/tag/v0.0.6) for your platform.
 1. Move the zip file of 0.0.6 to your previous install location.
 1. If you've customized your web interface in any way **you will want to back up the files you've changed or customized.**
 1. Unzip the file, allowing it to overwrite old files.
