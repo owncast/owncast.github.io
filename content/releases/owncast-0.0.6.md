@@ -40,11 +40,11 @@ You'll now see in the admin a text field for adding an optional "Stream Title", 
 
 Owncast now lets you build add-ons and integrations on top of it. Some good examples are chat bots, video stream overlays, changing the stream title when things happen, or creating chat actions such as notifying people when somebody has donated or followed.
 
-[Learn more about these APIs](/thirdparty) and you can start building for your Owncast server. Feel free to ask us any questions.  This is all brand new, and we want to give you what you need to build great things.
+[Learn more about these APIs](/thirdparty) and you can start building for your Owncast server. Feel free to ask us any questions. This is all brand new, and we want to give you what you need to build great things.
 
 ## Backups
 
-The `backup` directory will include a periodic backup of your Owncast server data. Save this with other system data you backup and you'll be able to restore this data later if it's ever needed.  [Learn more aboout backups](/docs/backups/).
+The `backup` directory will include a periodic backup of your Owncast server data. Save this with other system data you backup and you'll be able to restore this data later if it's ever needed. [Learn more aboout backups](/docs/backups/).
 
 ### Owncast Directory
 
