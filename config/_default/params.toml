@@ -36,8 +36,8 @@ lqipWidth = "20x"
 footer = "Created by FOSS-loving people around the globe. Website based on <a href=\"https://getdoks.org/\">Doks</a>."
 
 # Alert
-alert = false
-alertText = "Like Doks? <a class=\"alert-link\" href=\"https://github.com/h-enk/doks/stargazers\">Star on GitHub</a>. Thanks!</a>"
+alert = true
+alertText = "Owncast v0.0.6 has been released. <a class=\"alert-link\" href=\"/releases/owncast-0.0.6/\">Check it out!</a></a>"
 
 # Edit Page
 docsRepo = "https://github.com/owncast/owncast.github.io"
