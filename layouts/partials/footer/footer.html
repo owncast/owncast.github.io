@@ -1,47 +1,26 @@
 <footer class="footer text-muted footer-container">
-  <!-- <div class="container"> -->
-    <!-- <div class="row" style="border: 1px solid blue"> -->
-      <!-- <div class="col-lg">
-        {{ range .Site.Menus.footer -}}
-          <div><a href="{{ .URL | absURL }}">{{ .Name }}</a></div>
-        {{ end -}}
-      </div> -->
+  <ul class="col-sm">
+    <li><a href="/about">About</a></li>
+    <li><a href="/faq">FAQ</a></li>
+    <li><a href="/contribute">Code of Conduct</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="https://opencollective.com/owncast">Donate</a></li>
+    </ul>
 
-      <ul class="xcol-md">
-        <li><a href="/about">About</a></li>
-        <li><a href="/faq">FAQ</a></li>
-        <li><a href="/contribute">Code of Conduct</a></li>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="https://opencollective.com/owncast">Donate</a></li>
-        </ul>
+  <ul class="col-sm">
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="https://owncast.rocket.chat/">Rocket.Chat</a></li>
+    <li><a href="https://github.com/owncast/owncast/issues/new/choose">GitHub</a></li>
+  </ul>      
 
-      <ul class="xcol-md">
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="https://owncast.rocket.chat/">Rocket.Chat</a></li>
-        <li><a href="https://github.com/owncast/owncast/issues/new/choose">GitHub</a></li>
-      </ul>      
+  <ul class="col-sm">
+    <li><a href="/demo">Demo</a></li>
+    <li><a href="https://watch.owncast.online">Watch</a></li>
+    <li><a href="https://broadcast.owncast.online">Broadcast</a></li>
+    <li><a href="https://directory.owncast.online">Directory</a></li>
+  </ul>
 
-      <ul class="xcol-md">
-        <li><a href="/demo">Demo</a></li>
-        <li><a href="https://watch.owncast.online">Watch</a></li>
-        <li><a href="https://broadcast.owncast.online">Broadcast</a></li>
-        <li><a href="https://directory.owncast.online">Directory</a></li>
-        </ul>
-
-        <!-- <ul class="list-inline">
-          <li class="list-inline-item">{{ .Site.Params.footer | safeHTML }}</li>
-        </ul>
-      </div> -->
-      <!-- <div class="col-lg-8 order-first order-lg-last text-lg-right">
-        <ul class="list-inline">
-          {{ range .Site.Menus.footer -}}
-            <li class="list-inline-item"><a href="{{ .URL | absURL }}">{{ .Name }}</a></li>
-          {{ end -}}
-        </ul>
-      </div> -->
-    <!-- </div> -->
-
-    
-  
-  <!-- </div> -->
+  <span class="footer-logo-container" aria-hidden="true">
+    <img src="/images/logo.svg" alt="">
+  </span>
 </footer>

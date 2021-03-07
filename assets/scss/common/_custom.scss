@@ -1,7 +1,7 @@
 table {
   border-collapse: collapse;
   width: 100%;
-  margin: 20px;
+  margin: 20px 0;
   border: 1px solid rgba(26, 4, 63, 0.5);
 }
 
@@ -25,11 +25,12 @@ tr:nth-child(even) {
   }
 }
 
+
 // "Card" links
 .card-list,
 .docs-navigation {
   .card {
-    border-color: rgba(182, 139, 231, 0.562);
+    border-color: $purple;
   }
 }
 
@@ -43,19 +44,50 @@ tr:nth-child(even) {
 
 h1,
 .h1 {
-  color: $pink-500;
+  color: #000;
+  font-weight: 600;
 }
 h2,
 .h2,
 h3,
 .h3 {
-  color: $pink-500;
+  color: #000;
+  font-weight: 600;
+}
+h2,.h2 {
+  font-size: calc(1.325rem + 0.25vw);
+}
+h3,.h3 {
+  font-size: calc(1.225rem + 0.25vw);
 }
 
 code,
 .chroma {
   color: #9cdcfe;
   background-color: rgba(28, 26, 59, 1);
+}
+a {
+  code {
+    color: #9cdcfe;
+  }
+}
+
+
+main,
+section {
+  a:not(.btn) {
+    text-underline-offset: 3px;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+      color: $primary;
+    }
+  }
+}
+
+
+.releases-page {
+  margin: 2em 0;
 }
 
 .hero-container {
@@ -178,6 +210,9 @@ code,
       text-align: left;
       font-size: 1.2em;
       color: var(--white);
+      @include media-breakpoint-down(sm) {
+        font-size: 1em;
+      }
     }
     .commentor {
       text-align: right;

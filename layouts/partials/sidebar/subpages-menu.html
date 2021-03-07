@@ -3,11 +3,11 @@
 {{ $currentSection := .CurrentSection }}
 {{ range where .Site.RegularPages.ByWeight "Section" .Section }}
 {{ if in (.Permalink | string) $currentSection.RelPermalink }}
-<li>
-            <a href="{{ .Permalink }}">
-            {{ .Params.title | title }}
-            </a>
-        </li>
+    <li>
+        <a class="docs-link" href="{{ .Permalink }}">
+        {{ .Params.title | title }}
+        </a>
+    </li>
 {{ end }}
 {{ end }}
 </ul>

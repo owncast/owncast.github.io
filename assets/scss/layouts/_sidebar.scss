@@ -37,11 +37,12 @@
 
 .docs-links h3,
 .page-links h3 {
+  color: $owncast-pink-dark;
   text-transform: uppercase;
   font-size: $font-size-base;
   margin: 1.25rem 0 0.5rem 0;
   padding: 1.5rem 0 0 0;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 @include media-breakpoint-up(lg) {
