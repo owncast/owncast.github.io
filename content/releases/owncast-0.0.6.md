@@ -15,6 +15,8 @@ description: "0.0.6 gives you the ability to configure your Owncast server via t
 1. Unzip the file, allowing it to overwrite old files.
 1. Restart the service.
 
+For installing from scratch, see the [Quickstart](/quickstart).
+
 ## Breaking changes
 
 - The config file has been removed in favor of the web admin.
@@ -44,7 +46,7 @@ Owncast now lets you build add-ons and integrations on top of it. Some good exam
 
 ## Backups
 
-The `backup` directory will include a periodic backup of your Owncast server data. Save this with other system data you backup and you'll be able to restore this data later if it's ever needed. [Learn more aboout backups](/docs/backups/).
+The `backup` directory will include a periodic backup of your Owncast server data. Save this with other system data you backup and you'll be able to restore this data later if it's ever needed. [Learn more about backups](/docs/backups/).
 
 ### Owncast Directory
 
