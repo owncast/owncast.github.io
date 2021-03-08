@@ -26,7 +26,7 @@ For installing from scratch, see the [Quickstart](/quickstart).
 
 ## Docker
 
-If you're running [Owncast under Docker]/quickstart/docker/) it's suggested you bind your `data` directory so you have access to your database file, backups, etc.
+If you're running [Owncast under Docker](/quickstart/docker/) it's suggested you bind your `data` directory so you have access to your database file, backups, etc.
 
 ---
 
