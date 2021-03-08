@@ -1,8 +1,7 @@
 ---
 title: "Build on top of Owncast"
 description: "Build addons, bots, overlays and other third party tools and apps on top of Owncast"
-date: 2020-11-17T20:11:42+01:00
-lastmod: 2020-11-17T20:11:42+01:00
+aliases: [/docs/thirdparty/]
 draft: false
 images: []
 menu:

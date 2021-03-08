@@ -2,6 +2,7 @@
 title: "Owncast Quickstart"
 description: "Start streaming to your own server in seconds."
 draft: false
+aliases: [/docs/quickstart/]
 images: []
 menu:
   quickstart:
