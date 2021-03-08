@@ -24,6 +24,10 @@ For installing from scratch, see the [Quickstart](/quickstart).
 - Audio transcoding settings have been removed to simplify configuration as we haven't been encouraging people to convert audio, and as far as I can tell people haven't been using it. Audio will pass through the source audio as it has previously.
 - Peak viewer counts have been removed from the public-facing `status` API. [#771](https://github.com/owncast/owncast/pull/771)
 
+## Docker
+
+If you're running [Owncast under Docker]/quickstart/docker/) it's suggested you bind your `data` directory so you have access to your database file, backups, etc.
+
 ---
 
 ## Major updates
