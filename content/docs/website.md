@@ -1,58 +1,51 @@
 ---
 title: "Web Site + Chat"
+description: "Customize your Owncast web page by adding additional content and links."
+menu:
+  docs:
+    parent: "configure"
+weight: 300
+toc: true
 ---
-
-# Web site with video player and chat
 
 ## Overview
 
-Owncast includes a web interface for your video with built-in chat that is available once you start the server.  It shows online/offline states, viewer counts, stream duration, your instance's description, images, links and more.  You can just start using it without making any changes and it'll reflect whatever you put in [the config file](/docs/configuration/#external-links).
+Owncast includes a web interface for your video with built-in chat that is available once you start the server. It shows online/offline states, viewer counts, stream duration, your instance's description, images, links and more. You can just start using it without making any changes, but you'll likely want to update the content displayed on your page by visiting your server admin page.
 
-However, the web interface was specifically built to be editable by anybody comfortable tweaking a web page.  It's not bundled or transpiled into anything, it's just HTML + Javascript + CSS that you can start editing.  Feel free to add your own branding, links, change the colors in the CSS, fonts, layout, or anything else you could possibly want.  No development environment is needed, just open the files in an editor and start tweaking.
+Additionally, the web interface was specifically built to be editable by anybody comfortable tweaking a web page. It's not bundled or transpiled into anything, it's just HTML + Javascript + CSS that you can start editing. Feel free to add your own branding, links, change the colors in the CSS, fonts, layout, or anything else you could possibly want. No development environment is needed, just open the files in an editor and start tweaking.
 
 If you want to embed Owncast in your existing website, checkout our [documentation on embedding Owncast](/docs/embed/).
 
-## Customization
+Below are some items you'll likely want to customize to update the content that displays on your page.
 
-By setting your name, description and logo you can quickly update the contents of the website to reflect your stream. 
+{{<versionsupport feature="Changing settings in the admin panel" version="0.0.6">}}
 
-You can add links to your profiles on other sites by simply setting `socialHandles` in the config file.
-`socialHandles` currently supports the following services by name:
+### Name and description
 
-* `facebook`
-* `twitter`
-* `instagram`
-* `snapchat`
-* `tiktok`
-* `soundcloud`
-* `bandcamp`
-* `patreon`
-* `youtube`
-* `spotify`
-* `twitch`
-* `paypal`
-* `github`
-* `linkedin`
-* `discord`
-* `mastodon`
+By setting your name, description and logo you can quickly update the contents of the website to reflect your stream.
 
-Here's an example.
+{{< figure src="/docs/img/admin-general-settings.png" caption="Owncast general settings" width="100%" >}}
 
-{{< highlight yaml >}}
-  socialHandles:
-    - platform: github
-      url: https://github.com/owncast/owncast
-    - platform: instagram
-      url: https://www.instagram.com/owncast
-{{< / highlight >}}
+### Tags
 
-For adding additional content you can edit the [`data/content.md`](https://github.com/owncast/owncast/blob/master/data/content-example.md) file.  Anything you put in this using [markdown](https://www.markdownguide.org/) or HTML will display on the page without you having to touch the existing page.  Some ideas here: Your Patreon or Paypal link to support donations, an embed of a Soundcloud track, some images, or an embedded social feed.
+By setting tags you're showing potential viewers what categories of content you typically stream.
+
+{{< figure src="/docs/img/admin-settings-tags-social.png" caption="Add tags" width="100%" >}}
+
+### External social links
+
+You can add links to your profiles on other sites by adding them in the admin.
+{{< figure src="/docs/img/admin-settings-social-handle.png" caption="Add social links" width="100%" >}}
+
+### Web page content
+
+The body of your page content can be customized in your admin. Use standard [Markdown syntax](https://www.markdownguide.org/basic-syntax/) to add links, images, and more.
 
 ## Chat
 
 ### Text Formatting
 
-The web chat supports some basic formatting using markdown:
+The web chat supports some basic formatting using [Markdown](https://www.markdownguide.org/basic-syntax/):
 
 Italic: `*your text*`
 

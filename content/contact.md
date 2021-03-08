@@ -3,8 +3,6 @@ title: Contact
 bookToC: false
 ---
 
-# Contact
-
 > Gabe Kangas
 >
 > Mastodon: [@gabek@mastodon.social](https://mastodon.social/@gabek)<br />

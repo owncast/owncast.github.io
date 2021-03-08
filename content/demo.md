@@ -2,8 +2,6 @@
 title: Owncast Demo Servers
 ---
 
-# Owncast Demo Servers
-
 We provide two public Owncast servers for you to see how it works.  One for streaming *to* and one for just watching.
 
 ### Stream your content to [broadcast.owncast.online](http://broadcast.owncast.online)

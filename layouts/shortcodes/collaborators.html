@@ -3,38 +3,60 @@
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
+        padding: 0 2em;
     }
 
     .contributor-item {
-        flex: 1 0 30%;
+        list-style-type: none;
+        text-align: center;
+    }
+    .contributor-item figure {
+        margin: .5em;
+        width: 60px;
+    }
+    .contributor-item img {
+        background: rgb(199,185,174);
+        background: linear-gradient(90deg, rgba(199,185,174,1) 0%, rgba(205,215,224,1) 100%);
+        border-radius: 30px;
+        aspect-ratio: 1/1;
+        width: 100%;
     }
 
-    @media (min-width: 500px) {
-        .contributor-item {
-            flex: 1 0 21%;
-        }
-    }
-
-    @media (min-width: 1000px) {
-        .contributor-item {
-            flex: 1 0 15%;
-        }
+    .donor-box {
+        margin-top: 50px;
     }
 </style>
 
-<div class="contributor-box">
-{{ range $.Site.Data.contributors }}
-{{ if not (in .login "[bot]") }}
-<span class="contributor-item">
-    <figure>
-        <a href="{{.html_url}}">
-            <center>
-            <img src="{{.avatar_url}}" width="60px" style="border-radius: 30px"/>
-            <figcaption><small>{{.login}}</small></figcaption>
-            </center>
-        </a>
-    </figure>
-</span>
-{{ end }}
-{{ end }}
-</div>
+<ul class="contributor-box">
+    {{ range $.Site.Data.contributors }}
+    {{ if not (in (lower .login) "bot") }}
+    <li class="contributor-item">
+        <figure>
+            <a href="{{.html_url}}" target="_blank">
+                <img src="{{.avatar_url}}" loading="lazy" alt="{{.login}}"/>
+            </a>
+        </figure>
+    </li>
+    {{ end }}
+    {{ end }}
+</ul>
+
+<section class="donor-box">
+<h2>Donors</h2>
+<p>Help support the project by making a contribution at &nbsp;<a href="https://opencollective.com/owncast" target="_blank">OpenCollective.</a>
+</p>
+
+<ul class="contributor-box">
+    {{ range $.Site.Data.donors }}
+    {{ if not (in (lower .login) "bot") }}
+    <li class="contributor-item">
+        <figure>
+            <a href="{{.html_url}}" target="_blank">
+                <img src="{{default "/images/logo.svg" .avatar_url }}" loading="lazy" alt="{{.login}}"/>
+            </a>
+        </figure>
+    </li>
+    {{ end }}
+    {{ end }}
+</ul>
+</section>

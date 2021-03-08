@@ -1,0 +1,451 @@
+/** Theme variables */
+
+// Source: https://material.io/design/color/dark-theme.html
+
+$body-bg-dark: $gray-900;
+$body-overlay-dark: darken($body-bg-dark, 2.5%);
+$border-dark: darken($body-bg-dark, 2.5%);
+$body-color-dark: darken($white, 12%);
+$dots-dark: darken($body-color-dark, 50%);
+
+$link-color-dark: lighten($owncast-purple, 2%); // $blue-300;
+$button-color-dark: $link-color-dark;
+$focus-color-dark: lighten($link-color-dark, 2.5%);
+$selection-color-dark: lighten($link-color-dark, 2.5%);
+
+$navbar-dark-color: $body-color-dark;
+$navbar-dark-hover-color: $link-color-dark;
+$navbar-dark-active-color: $link-color-dark;
+
+
+/** Theme styles */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: $body-bg-dark;
+    color: $body-color-dark;
+  }
+
+  body a {
+    color: $link-color-dark;
+
+    &:hover {
+      color: $link-color-dark;
+    }
+  }
+
+  body a.text-body {
+    color: $body-color-dark !important;
+  }
+
+  body .btn-primary {
+    @include button-variant($button-color-dark, $button-color-dark);
+
+    color: $body-bg-dark !important;
+  }
+
+  // NAV BAR COLORS
+  body .navbar {
+    background: $black; //$body-bg-dark;
+    opacity: 0.975;
+    border-bottom: 1px solid black;
+  }
+  body .navbar-light .navbar-brand {
+    color: $navbar-dark-color !important;
+  }
+
+  body .navbar-light .navbar-nav .nav-link {
+    color: $navbar-dark-color;
+  }
+
+  body .navbar-light .navbar-nav .nav-link:hover,
+  body .navbar-light .navbar-nav .nav-link:focus {
+    color: $navbar-dark-hover-color;
+  }
+
+  body .navbar-light .navbar-nav .nav-link.disabled {
+    color: $navbar-dark-disabled-color;
+  }
+
+  body .navbar-light .navbar-nav .show > .nav-link,
+  body .navbar-light .navbar-nav .active > .nav-link,
+  body .navbar-light .navbar-nav .nav-link.show,
+  body .navbar-light .navbar-nav .nav-link.active {
+    color: $navbar-dark-active-color;
+  }
+
+  body .navbar-light .navbar-nav .nav-link,
+  body .navbar-light .navbar-nav .banner .nav a,
+  .banner .nav body .navbar-light .navbar-nav a {
+    color: $white;
+  }
+
+  body .navbar-light .navbar-text {
+    color: $navbar-dark-color;
+  }
+
+  body .navbar-light .navbar-text a:hover,
+  body .navbar-light .navbar-text a:focus {
+    color: $navbar-dark-active-color;
+  }
+
+  body .navbar .btn-link {
+    color: $navbar-dark-color;
+  }
+  body .navbar .btn-link:hover {
+    color: $navbar-dark-hover-color;
+  }
+
+  body .navbar .btn-link:active {
+    color: $navbar-dark-active-color;
+  }
+
+  body .form-control.is-search {
+    background: $gray-400; //$body-overlay-dark;
+    color: $white;
+  }
+
+  body .navbar-form::after {
+    color: $gray-700;
+    border: 1px solid $body-bg-dark;
+  }
+
+  body .navbar .menu-icon .navicon {
+    background: $navbar-dark-color;
+  }
+
+  body .navbar .menu-icon .navicon::before,
+  body .navbar .menu-icon .navicon::after {
+    background: $navbar-dark-color;
+  }
+  // NAV BAR COLORS
+  /////////////////
+
+
+
+  body .alert-primary a {
+    color: $body-bg-dark;
+  }
+
+  body .alert-warning {
+    background: $owncast-gray;
+    color: $body-color-dark;
+    a {
+      color: $purple;
+    }
+  }
+
+  body .page-links a {
+    color: $body-color-dark;
+  }
+
+  body .showcase-meta a {
+    color: $body-color-dark;
+  }
+
+  body .showcase-meta a:hover,
+  body .showcase-meta a:focus {
+    color: $link-color-dark;
+  }
+
+  body .docs-link:hover,
+  body .docs-link.active,
+  body .page-links a:hover {
+    text-decoration: none;
+    color: $link-color-dark;
+  }
+
+  body .navbar-light .navbar-text a {
+    color: $navbar-dark-active-color;
+  }
+
+  body .docs-links h3.sidebar-link a,
+  body .page-links h3.sidebar-link a {
+    color: $body-color-dark;
+  }
+
+  
+
+  body .content .btn-link {
+    color: $link-color-dark;
+  }
+
+  body .content .btn-link:hover {
+    color: $link-color-dark;
+  }
+
+
+  body .logo-light {
+    display: none !important;
+  }
+
+  body .logo-dark {
+    display: inline-block !important;
+  }
+
+  body .form-control:focus {
+    box-shadow: 0 0 0 0.2rem $focus-color-dark;
+  }
+
+  body .border-top {
+    border-top: 1px solid $border-dark !important;
+  }
+
+  @include media-breakpoint-up(lg) {
+    body  {
+      .docs-sidebar {
+        order: 0;
+        border-color: rgba(255,255,255,.05);
+        // border-right: 1px solid $border-dark;
+      }
+      .docs-toc {
+        border-color: rgba(255,255,255,.05);
+      }
+    }
+
+  }
+
+  body .docs-navigation {
+    border-top: 1px solid $border-dark;
+  }
+
+  body ::selection {
+    background: $selection-color-dark;
+  }
+
+  body pre {
+    background: $body-overlay-dark;
+    color: $body-color-dark;
+  }
+
+  // body code {
+  //   background: $body-overlay-dark;
+  //   color: $body-color-dark;
+  // }
+
+  body blockquote {
+    border-left: 3px solid $border-dark;
+  }
+
+
+  
+
+  body .docs-links,
+  body .docs-toc {
+    scrollbar-width: thin;
+    scrollbar-color: $body-bg-dark $body-bg-dark;
+  }
+
+  body .docs-links::-webkit-scrollbar,
+  body .docs-toc::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  body .docs-links::-webkit-scrollbar-track,
+  body .docs-toc::-webkit-scrollbar-track {
+    background: $body-bg-dark;
+  }
+
+  body .docs-links::-webkit-scrollbar-thumb,
+  body .docs-toc::-webkit-scrollbar-thumb {
+    background: $body-bg-dark;
+  }
+
+  body .docs-links:hover,
+  body .docs-toc:hover {
+    scrollbar-width: thin;
+    scrollbar-color: $border-dark $body-bg-dark;
+  }
+
+  body .docs-links:hover::-webkit-scrollbar-thumb,
+  body .docs-toc:hover::-webkit-scrollbar-thumb {
+    background: $border-dark;
+  }
+
+  body .docs-links::-webkit-scrollbar-thumb:hover,
+  body .docs-toc::-webkit-scrollbar-thumb:hover {
+    background: $border-dark;
+  }
+
+  body .docs-links h3:not(:first-child) {
+    border-top: 1px solid $border-dark;
+  }
+
+  body a.docs-link {
+    // color: $body-color-dark;
+    color: $white;
+  }
+
+  body .page-links li:not(:first-child) {
+    border-top: 1px dashed $border-dark;
+  }
+
+  body .card {
+    background: $body-bg-dark;
+    border: 1px solid $border-dark;
+  }
+
+  body .card.bg-light {
+    background: $body-overlay-dark !important;
+  }
+
+  body .bg-light {
+    background: darken($body-bg-dark, 1.5%) !important;
+  }
+
+  body .bg-dots {
+    background-image: radial-gradient($dots-dark 15%, transparent 15%);
+  }
+
+  body .text-muted {
+    color: darken($body-color-dark, 7.5%) !important;
+  }
+
+  body .alert-primary {
+    background: $link-color-dark;
+    color: $body-bg-dark;
+  }
+
+  body .figure-caption {
+    color: $body-color-dark;
+  }
+
+  body {
+    h1,.h1,h2,.h2, h3,.h3 {
+      color: $pink-500;
+    }
+  
+    .logo-label {
+      font-weight: 100;
+    }
+    .logo-container {
+      margin-right: 10px;
+    }
+
+    .footer {
+      border-top: 1px solid $border-dark;
+      background-color: $black;
+      .footer-logo-container {
+        filter: none;
+        opacity: .5;
+      }
+      li {
+        a {
+          color: $gray-100;
+        }
+      }
+    }
+  }
+}
+
+
+body.home {
+  h1,.h1,h2,.h2, h3,.h3 {
+    color: $pink-500;
+  }
+  h2,.h2 {
+    font-size: calc(1.325rem + 0.75vw);
+  }
+  .navbar {
+    background: #000; //$body-bg-dark;
+    border-bottom: 1px solid rgba(120, 113, 255, .2);
+  }   
+  .navbar .btn-link {
+    color: $navbar-dark-color;
+  }
+  .logo-label {
+    font-weight: 100;
+    font-size: 1.5em;
+  }
+  .logo-container {
+    margin-right: 10px;
+  }
+
+  .navbar-light .navbar-brand {
+    color: $navbar-dark-color !important;
+  }
+
+  .navbar-light .navbar-nav .nav-link {
+    color: $navbar-dark-color;
+  }
+
+  .navbar-light .navbar-nav .nav-link:hover,
+  .navbar-light .navbar-nav .nav-link:focus {
+    color: $navbar-dark-hover-color;
+  }
+
+  .navbar-light .navbar-nav .nav-link.disabled {
+    color: $navbar-dark-disabled-color;
+  }
+
+  .navbar-light .navbar-nav .show > .nav-link,
+  .navbar-light .navbar-nav .active > .nav-link,
+  .navbar-light .navbar-nav .nav-link.show,
+  .navbar-light .navbar-nav .nav-link.active {
+    color: $navbar-dark-active-color;
+  }
+
+  .navbar-light .navbar-nav .nav-link,
+  .navbar-light .navbar-nav .banner .nav a,
+  .banner .nav .navbar-light .navbar-nav a {
+    color: $white;
+  }
+
+  .navbar-light .navbar-text {
+    color: $navbar-dark-color;
+  }
+
+  .navbar-light .navbar-text a:hover,
+  .navbar-light .navbar-text a:focus {
+    color: $navbar-dark-active-color;
+  }
+
+  .navbar .btn-link {
+    color: $navbar-dark-color;
+  }
+  .navbar .btn-link:hover {
+    color: $navbar-dark-hover-color;
+  }
+
+  .navbar .btn-link:active {
+    color: $navbar-dark-active-color;
+  }
+
+  .form-control.is-search {
+    background: $gray-400; //$body-overlay-dark;
+    color: $white;
+  }
+
+  .navbar-form::after {
+    color: $gray-700;
+    border: 1px solid $body-bg-dark;
+  }
+
+  .navbar .menu-icon .navicon {
+    background: $navbar-dark-color;
+  }
+
+  .navbar .menu-icon .navicon::before,
+  .navbar .menu-icon .navicon::after {
+    background: $navbar-dark-color;
+  }
+
+  .footer {
+    border-top: 1px solid $border-dark;
+    background-color: $black;
+    .footer-logo-container {
+      filter: none;
+      opacity: .65;
+    }
+    
+    li {
+      a {
+        color: $gray-100;
+      }
+    }
+  }
+  .alert {
+    width: 95%;
+    border: 2px solid $white;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+  }
+}
