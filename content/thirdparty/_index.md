@@ -25,7 +25,7 @@ Owncast has the ability for you to build things on top of it. Here's some exampl
 
 #### Your code
 
-1. In any language, on any kind of web server, create an endpoint that accepts a HTTP `POST` request.  This is where Owncast will be sending events.
+1. In any language, on any kind of web server, create an endpoint that accepts a HTTP `POST` request. This is where Owncast will be sending events.
 1. Each event payload will have a `type` property that states what of the above events are included, and an `eventData` object that includes all the specific properties of this event.
 1. If you need a starting point see our example projects.
 
