@@ -4,7 +4,7 @@ date: 2021-02-01
 description: "0.0.6 gives you the ability to configure your Owncast server via the web and adds new 3rd party APIs for you to build upon."
 ---
 
-0.0.6 has quite a few changes that impact you, so please take a moment to read about these changes in its entirety.
+0.0.6 has quite a few changes that impact you, so please take a moment to read about these changes in their entirety.
 
 ## Upgrade instructions from 0.0.5
 
