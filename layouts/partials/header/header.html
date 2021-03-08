@@ -7,7 +7,7 @@
       <span class="logo-container">
         <img src="/images/logo.svg">
       </span>
-      <span class="logo-label ">
+      <span class="logo-label">
         {{ .Site.Params.Title }}
       </span>
     </a>
@@ -31,6 +31,9 @@
             <a class="nav-link" href="{{ .URL | absURL }}">{{ .Name }}</a>
           </li>
         {{ end -}}
+          <li class="nav-item">
+            <a class="nav-link" href="https://directory.owncast.online" target="_blank" rel="noopener noreferrer">Directory</a>
+          </li>
       </ul>
       <div class="break order-6 d-md-none"></div>
       <form class="navbar-form flex-grow-1 order-7 order-md-3">

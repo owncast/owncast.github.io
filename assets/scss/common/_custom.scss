@@ -88,6 +88,10 @@ section {
 
 .releases-page {
   margin: 2em 0;
+
+  strong, b {
+    font-weight: 600;
+  }
 }
 
 .hero-container {

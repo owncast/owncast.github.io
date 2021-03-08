@@ -26,10 +26,6 @@
   url = "/docs/"
   weight = 20
 
-[[main]]
-  name = "Directory"
-  url = "https://directory.owncast.online"
-  weight = 40
 
 [[main]]
   name = "Releases"
