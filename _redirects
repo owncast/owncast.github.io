@@ -1,0 +1,6 @@
+# redirects for Netlify - https://www.netlify.com/docs/redirects/
+/docs/thirdparty/ /thirdparty/
+/docs/encoding/ /docs/video/
+/docs/s3/ /docs/storage/
+/docs/geoip/ /docs/viewers/
+/docs/quickstart/ /quickstart/
