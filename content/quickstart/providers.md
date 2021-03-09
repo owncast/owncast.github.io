@@ -16,7 +16,6 @@ Follow the below steps and it'll setup Owncast for you automatically.
 
 1. A domain name and access to your DNS settings. This is required for supporting [SSL](/docs/sslproxies/).
 1. A [Linode](https://linode.com?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d) account.
-1. Optionally follow the steps to setup [Linode Object Storage](/docs/storage/linode/) if you'd like to take advantage of [external storage](/docs/storage).
 
 ## Create your new server
 
@@ -27,7 +26,6 @@ Follow the below steps and it'll setup Owncast for you automatically.
 1. Put in your email address.
 1. If you skip this hostname and email step your server will not get automatically configured for SSL.
    <img src="../linode/linode2.png" width="90%">
-1. If you choose to optionally use [Linode Objects](https://cloud.linode.com/object-storage/buckets) for [external storage](/docs/storage/) you can set your bucket, access key, and secret from your Linode Objects settings.
 1. Select the region nearest to you.
 1. Select a monthly plan. The more CPU you can afford the better quality you'll have in the end.
    <img src="../linode/linode3.png" width="90%">
