@@ -40,7 +40,7 @@ Follow the below steps and it'll setup Owncast for you automatically.
    <img src="../linode/linode4.png" width="90%">
 1. Login to your DNS provider for your domain you used in step 3.
 1. Add an "A Record" pointing to this ip address and the name you specified in step 3 (if you used owncast.mydomain.com then type in owncast).
-1. Wait no less than 5 minutes for your server setup to complete and DNS to take effect.  It may take longer depending on your DNS provider.
+1. Wait no less than 5 minutes for your server setup to complete and DNS to take effect. It may take longer depending on your DNS provider.
 1. When you can access `http://ipaddress:8080` then the install is complete.
 1. Reboot your new server.
 
