@@ -16,7 +16,8 @@ type: subpages
 {{< img src="/docs/img/linodebucket.png" align="center">}}
 
 * Create a new bucket at the [Linode Object Storage](https://cloud.linode.com/object-storage/buckets) admin page.
-* Edit your config file and change the S3 `endpoint` to match the hostname listed below your newly created bucket that looks something like `myvideo.us-east-1.linodeobjects.com`, the bucket name to match the one you just created and the S3 region to match the `us-east-1` equivalent of the above hostname.
+* Make sure CORS is enabled on your new bucket.
+* In the Owncast Addmin change the S3 `endpoint` to match the hostname listed below your newly created bucket that looks something like `us-east-1.linodeobjects.com`, the bucket name to match the one you just created and the S3 region to match the `us-east-1` equivalent of the above hostname.
 * Using the [Linode Object Access Keys](https://cloud.linode.com/object-storage/access-keys) page create a new Access Key and add the Key and Secret in the admin.
 
 In the following steps Linode requires you to interact with your bucket using the s3cmd tool.  So install that on your terminal and configure it.

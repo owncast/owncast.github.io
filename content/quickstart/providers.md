@@ -16,6 +16,7 @@ Follow the below steps and it'll setup Owncast for you automatically.
 
 1. A domain name and access to your DNS settings. This is required for supporting [SSL](/docs/sslproxies/).
 1. A [Linode](https://linode.com?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d) account.
+1. Optionally follow the steps to setup [Linode Object Storage](/docs/storage/linode/) if you'd like to take advantage of [external storage](/docs/storage).
 
 ## Create your new server
 
@@ -39,11 +40,12 @@ Follow the below steps and it'll setup Owncast for you automatically.
    <img src="../linode/linode4.png" width="90%">
 1. Login to your DNS provider for your domain you used in step 3.
 1. Add an "A Record" pointing to this ip address and the name you specified in step 3 (if you used owncast.mydomain.com then type in owncast).
-1. Wait 5 minutes, but it may take longer depending on your DNS provider.
+1. Wait no less than 5 minutes for your server setup to complete and DNS to take effect.  It may take longer depending on your DNS provider.
+1. When you can access `http://ipaddress:8080` then the install is complete.
 1. Reboot your new server.
 
 ## Test
 
-1. In your browser paste the IP address:8080 and verify Owncast is running.
-1. If you configured SSL by specifying a hostname, put that hostname in your browser to make sure you can access it via https.
+1. In your browser make sure Owncast is running by visiting `http://ipaddress:8080`.
+1. If you configured SSL by specifying a hostname, put that hostname in your browser to make sure you can access it via https, for example: `https://owncast.mydomain.com`.
 1. Send a stream using your software to this hostname using abc123 as the stream key.
