@@ -29,13 +29,23 @@ server {
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection $connection_upgrade;
-        proxy_pass http://127.0.0.1:8080
-        
-        listen 443 ssl;
-        ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;
-        include /etc/letsencrypt/options-ssl-nginx.conf;
-        ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+        proxy_pass http://127.0.0.1:8080;
     }
+        
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+    
 }
+{{</ highlight >}}
+
+Most probably in /etc/nginx/nginx.conf you will need to add the following into the http{} stanza:
+
+{{< highlight nginx >}}
+    map $http_upgrade $connection_upgrade {
+		default upgrade;               
+                ''	close;
+	}    
 {{</ highlight >}}
