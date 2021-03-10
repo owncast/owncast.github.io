@@ -63,6 +63,7 @@ If you're running into random video stability issues look at some of these commo
 
 1. Make sure you're running a supported version of ffmpeg. [Download ffmpeg 4.1.5 or above](https://ffmpeg.org/download.html).
 1. Make sure your copy of ffmpeg was not installed via Snap packages, as the sandboxing of Snap distributed software isn't compatible in this case. If you see the error `Error: unable to open display`, this might be your problem.
+1. If you see `Unrecognized option var_stream_map` in `transcoder.log` it also means you need to update your copy of ffmpeg.
 1. Make sure you have [video passthrough](/docs/video/#video-passthrough) disabled.
 
 ## Your software says your key is incorrect.
