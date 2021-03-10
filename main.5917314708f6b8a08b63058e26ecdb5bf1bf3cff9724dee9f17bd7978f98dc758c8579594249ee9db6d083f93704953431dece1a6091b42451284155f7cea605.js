@@ -151,7 +151,7 @@ const QUOTES = [
  },
 
  {
-  quote: "I'm amazed, #owncast seems to perform as any proprietary platforms out there.",
+  quote: "I'm amazed, #owncast seems to perform as well as any proprietary platforms out there.",
   url: 'https://fosstodon.org/@lopeztel/105466043426592961',
   name: '@lopeztel',
  },
@@ -161,7 +161,7 @@ const QUOTES = [
   name: 'User digitalEarthling',
  },
  {
-  quote: "many thanks for your work, owncast is exactly what we where looking for !",
+  quote: "many thanks for your work, owncast is exactly what we were looking for !",
   url: 'https://owncast.rocket.chat/channel/general?msg=jTGXEkNTMcqyNcDTs',
   name: 'Juju',
  },
@@ -180,7 +180,12 @@ const QUOTES = [
   quote: "Ahh! I love it! I setup #owncast and it was super easy! Take that other streaming services!",
   url: 'https://vulpine.club/@latrans/105749660754537997',
   name: '@latrans',
- }
+ },
+ {
+  quote: "Owncast is the best open source project.  Well, at least in the top 10.",
+  url: 'https://stream.kylebronsdon.com/',
+  name: 'Kyle Bronsdon',
+ },
 ];
 
 (function(){
