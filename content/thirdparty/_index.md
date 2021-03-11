@@ -1,7 +1,7 @@
 ---
 title: "Build on top of Owncast"
 description: "Build addons, bots, overlays and other third party tools and apps on top of Owncast"
-aliases: [/docs/thirdparty/]
+aliases: [/docs/thirdparty/, docs/integrations]
 draft: false
 images: []
 menu:
