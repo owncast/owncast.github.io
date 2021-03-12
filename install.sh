@@ -61,7 +61,7 @@ errorAndExit() {
 requireTool() {
   which "$1" >> /dev/null && EC=$? || EC=$?
   if [ $EC != 0 ]; then
-    errorAndExit "Could not locate \"$1\", which is required for installation."
+    errorAndExit "Could not locate \"$1\", which is required for installation. Please it install it on your system."
   fi
 }
 
@@ -108,6 +108,7 @@ main () {
   requireTool "curl"
   requireTool "unzip"
   requireTool "tar"
+  requireTool "which"
 
   # Determine operating system & architecture
   case $(uname -s) in
