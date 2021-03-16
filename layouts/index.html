@@ -12,7 +12,14 @@
     </div>
   </div>
   <script>
+    //
+    const timeout = setTimeout(function() {
+      handleHeroImageLoad();
+    }, 2000);
+
     function handleHeroImageLoad() {
+      clearTimeout(timeout);
+
       const loader = document.getElementById('splash-image-loader');
       const main = document.getElementById('splash-image-main');
       if (loader) {
