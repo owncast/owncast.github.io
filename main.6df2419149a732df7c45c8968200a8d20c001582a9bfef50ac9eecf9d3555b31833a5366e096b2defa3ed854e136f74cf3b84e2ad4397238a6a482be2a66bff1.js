@@ -218,7 +218,7 @@ async function getDirectory() {
     return;
   }
 
-  const response = await fetch('https://yp.owncast.online/active', {
+  const response = await fetch('https://directory.owncast.online/api/active', {
     mode: "cors", // same-origin, no-cors
   });
   const streams = await response.json();
