@@ -19,6 +19,10 @@ This document aims to outline what is being done to your content and the differe
 1. Start with a single [output configuration](/docs/video/#things-you-can-configure) with average settings. Test it. See how your hardware handles it. If you want to, and are able to, then add another and test that. Repeat until you arrive at the configuration you want to offer your viewers and that your hardware can handle.
 1. If your hardware can't handle your current configuration then reduce the number of output variants to only a single one, [reduce the quality of video you're sending to Owncast](/docs/video/#how-you-configure-your-broadcasting-software-matters), reduce your [framerate](/docs/video/#framerate), and reduce the [CPU usage](/docs/video/#cpu-usage)
 
+## Your stream can be played outside of your web site.
+
+Because Owncast uses the HLS standard, almost any video player can play your stream.  Quicktime, VLC, mpv, etc.  You could even build your own app that plays it.  You can access your stream directly on your server by putting the path of `/hls/stream.m3u8` into your player.  For example: `https://owncast.mydomain.com/hls/stream.m3u8`.
+
 ## How does an Owncast video stream work?
 
 Owncast takes your source stream and converts it to short, individual video segments. A list of these segments is supplied to your viewer's player and will read and play all the segments in order. This is using a specification called [HLS](https://developer.apple.com/documentation/http_live_streaming/understanding_the_http_live_streaming_architecture) or HTTP Live Streaming. You can optionally generate multiple different qualities of video to allow lower bandwidth options. This is called [Adaptive bitrate streaming](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming).
