@@ -21,7 +21,7 @@ This document aims to outline what is being done to your content and the differe
 
 ## Your stream can be played outside of your web site.
 
-Because Owncast uses the HLS standard, almost any video player can play your stream.  Quicktime, VLC, mpv, etc.  You could even build your own app that plays it.  You can access your stream directly on your server by putting the path of `/hls/stream.m3u8` into your player.  For example: `https://owncast.mydomain.com/hls/stream.m3u8`.
+Because Owncast uses the HLS standard, almost any video player can play your stream. Quicktime, VLC, mpv, etc. You could even build your own app that plays it. You can access your stream directly on your server by putting the path of `/hls/stream.m3u8` into your player. For example: `https://owncast.mydomain.com/hls/stream.m3u8`.
 
 ## How does an Owncast video stream work?
 
