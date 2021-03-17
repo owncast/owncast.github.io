@@ -17,6 +17,7 @@ type: subpages
    1. [DigitalOcean](https://www.digitalocean.com/products/droplets/)
    1. [Hetzner](https://www.hetzner.com/cloud)
    1. [Linode](https://www.linode.com/products/nanodes/)
+   1. [Capsul](https://capsul.org/)
    1. ... have other suggestions? Let us know!
 
 1. [`ffmpeg`](https://ffmpeg.org/download.html) v4.1.5 or greater needs to be available on your machine. If you use the [quick installer](/quickstart) it will try to download a copy of ffmpeg for you if needed. If you're using Docker, the image already contains it for you. _Note:_ **The Snap package of ffmpeg is not compatible with Owncast.**
