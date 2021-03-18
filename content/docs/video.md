@@ -86,7 +86,7 @@ If you find you require this feature, but it's not working for you, you _may_ be
 
 ## Audio
 
-What you're sending from your broadcasting software is generally reasonable and additional conversation isn't required, even for low-bandwidth viewers. Owncast will not change the audio stream and instead just pass it along to the end users to save additional work being performed.
+What you're sending from your broadcasting software is generally reasonable and additional conversion isn't required, even for low-bandwidth viewers. Owncast will not change the audio stream and instead just pass it along to the end users to save additional work being performed.
 
 ## How you configure your broadcasting software matters.
 
