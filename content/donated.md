@@ -9,8 +9,7 @@ If you or your organization has content to share with the world, but doesn't hav
 
 Aligning with our mission to create a streaming option that lives outside the large corporate services, we would like to offer a small number of free, hosted instances to streamers.
 
-Our resources are limited, and we'll be picky and start small.  These servers will primarily be funded from whatever [donations](https://opencollective.com/owncast) we have available.
-
+Our resources are limited, and we'll be picky and start small. These servers will primarily be funded from whatever [donations](https://opencollective.com/owncast) we have available.
 
 ## Who would be a good candidate
 
@@ -23,7 +22,6 @@ Our resources are limited, and we'll be picky and start small.  These servers wi
 - A person who is technically able to easily run their own server.
 - An organization who can afford to have [somebody run a server for them](/quickstart/providers/).
 
-
 ## What we would ask of you
 
 - Be listed as a public streamer on our [Directory](https://directory.owncast.online) where people would discover you.
@@ -34,9 +32,9 @@ Our resources are limited, and we'll be picky and start small.  These servers wi
 
 ## Disclaimers
 
-Given this a donated service, used as a test bed for future Owncast functionality, we are unable to offer any service guarantees either in reliability, performance, or duration of what we're offering.  We will certainly keep you into the loop of any changes or downtime required.  If you stop using the server it will be decommissioned.
+Given this a donated service, used as a test bed for future Owncast functionality, we are unable to offer any service guarantees either in reliability, performance, or duration of what we're offering. We will certainly keep you into the loop of any changes or downtime required. If you stop using the server it will be decommissioned.
 
-We're not a service provider, and this isn't a hosting service.  We're just willing to do a little manual effort for people or groups who would benefit from it, in exchange for more independent streamers being in the world and growing the project.
+We're not a service provider, and this isn't a hosting service. We're just willing to do a little manual effort for people or groups who would benefit from it, in exchange for more independent streamers being in the world and growing the project.
 
 # Contact us
 
