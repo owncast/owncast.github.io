@@ -8,7 +8,7 @@ type: docs
 
 Using the Owncast _1-Click-Install_ on DigitalOcean's Marketplace you can get Owncast installed and configured with SSL support easily. Follow the below steps to get up and running.
 
-**Note:** The Owncast Project may receive referral credit for deploying Owncast with Digital Ocean, so it's an easy way to support the project.
+As a bonus you'll get **$100 worth of service for free** if you sign up with DigitalOcean, and the Owncast Project may receive referral credit so it's an easy way to support the project.
 
 [![Create a Droplet on Digital Ocean](do-btn-blue-ghost.svg)](https://marketplace.digitalocean.com/apps/owncast?refcode=492f098407b2)
 
