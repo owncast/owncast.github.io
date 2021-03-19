@@ -12,6 +12,10 @@ The following service providers offer 1-click-install options for Owncast where 
 
 **Note:** The Owncast Project may receive referral credit for deploying Owncast with these options, so it's an easy way to support the project.
 
-[![DigitalOcean](/quickstart/digitalocean/DO_Logo_horizontal_blue.svg)](/quickstart/digitalocean/)
+<p>
+    <a href="/quickstart/digitalocean/"><img src="/quickstart/digitalocean/DO_Logo_horizontal_blue.svg" width="50%"></a>
+</p>
 
-[![Linode](/quickstart/linode/linode.svg)](/quickstart/linode/)
+<p>
+    <a href="/quickstart/linode/"><img src="/quickstart/linode/linode.svg" width="50%"></a>
+</p>
