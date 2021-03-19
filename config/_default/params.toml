@@ -37,7 +37,7 @@ footer = "Created by FOSS-loving people around the globe. Website based on <a hr
 
 # Alert
 alert = true
-alertText = "Owncast v0.0.6 has been released. <a class=\"alert-link\" href=\"/releases/owncast-0.0.6/\">Check it out!</a></a>"
+alertText = "The Owncast project is offering free instances to those that could use them. <a class=\"alert-link\" href=\"/donated/\">Learn more!</a></a>"
 
 # Edit Page
 docsRepo = "https://github.com/owncast/owncast.github.io"
