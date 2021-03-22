@@ -186,6 +186,11 @@ const QUOTES = [
   url: 'https://stream.kylebronsdon.com/',
   name: 'Kyle Bronsdon',
  },
+ {
+  quote: "Owncast arrived right on time! I'm using it for my remote physics classes.",
+  url: 'https://mamot.fr/@lutzray/105925070357006477',
+  name: '@lutzray',
+ },
 ];
 
 (function(){
