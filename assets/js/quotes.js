@@ -62,6 +62,11 @@ const QUOTES = [
   url: 'https://mamot.fr/@lutzray/105925070357006477',
   name: '@lutzray',
  },
+ {
+  quote: "Seriously, #owncast is amazing!",
+  url: 'https://twitter.com/glider_space/status/1374856958650556417',
+  name: '@glider_space',
+ },
 ];
 
 (function(){
