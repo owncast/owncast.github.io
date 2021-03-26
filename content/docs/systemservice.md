@@ -48,4 +48,4 @@ WantedBy=multi-user.target
 ### Installation
 
 Just create the file in your systemd configuration directory (typically /etc/systemd/system/), and update the systemd daemon with:
-`sudo systemd daemon-reload`
+`sudo systemctl daemon-reload`
