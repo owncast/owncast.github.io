@@ -43,4 +43,4 @@ If all of that sounds good to you, and you'd like to talk more, you should reach
 - [Join our community chat](https://owncast.rocket.chat/) and say hi.
 - Email Gabe at gabek@real-ity.com
 
-If you would like to help fund these servers, and the project as a whole, the Owncast project accepts donations via [OpenCollective](https://opencollective.com/owncast).
+If you would like to help fund these servers, and the project as a whole, the Owncast project accepts donations via [OpenCollective](https://opencollective.com/owncast/donate).
