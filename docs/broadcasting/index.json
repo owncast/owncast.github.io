@@ -1,0 +1,107 @@
+{"data":[{"name":"OBS/Streamlabs OBS","content":"&lt;p&gt;OBS is a popular piece of free software that will get you streaming from your own computer right away.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Install &lt;a href=&#34;https://obsproject.com/&#34;&gt;OBS&lt;/a&gt; or &lt;a href=&#34;https://streamlabs.com/&#34;&gt;Streamlabs OBS&lt;/a&gt; and get it working with your local setup.&lt;/li&gt;
+&lt;li&gt;Open OBS Settings and go to &amp;ldquo;Stream&amp;rdquo;.&lt;/li&gt;
+&lt;li&gt;Select &amp;ldquo;Custom&amp;hellip;&amp;rdquo; as the service.&lt;/li&gt;
+&lt;li&gt;Enter the URL of the server running your streaming service in the format of rtmp://myserver.net/live.&lt;/li&gt;
+&lt;li&gt;Enter your &amp;ldquo;Stream Key&amp;rdquo; that matches your &lt;a href=&#34;/docs/configuration&#34;&gt;key&lt;/a&gt; file.&lt;/li&gt;
+&lt;li&gt;Start the server.&lt;/li&gt;
+&lt;li&gt;Press &amp;ldquo;Start Streaming&amp;rdquo; (OBS) or &amp;ldquo;Go Live&amp;rdquo; (Streamlabs) on OBS.&lt;/li&gt;
+&lt;/ol&gt;
+","permalink":"/docs/broadcasting/obs/"},{"name":"Restream.io","content":"&lt;p&gt;You must be a paid user of &lt;a href=&#34;http://restream.io&#34;&gt;Restream&lt;/a&gt; to point to your Owncast instance as a destination &amp;ldquo;channel&amp;rdquo;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Login and go to the &amp;ldquo;Add Channel&amp;rdquo; screen.
+
+
+&lt;div style=&#34;text-align: center;&#34;&gt;
+    &lt;figure &gt;
+        
+            &lt;img src=&#34;/docs/img/restream1.png&#34; width=&#34;100%&#34; loading=&#34;lazy&#34; /&gt;
+            
+        
+    &lt;/figure&gt;
+    &lt;/div&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Select &amp;ldquo;Custom RTMP&amp;rdquo;
+
+
+&lt;div style=&#34;text-align: center;&#34;&gt;
+    &lt;figure &gt;
+        
+            &lt;img src=&#34;/docs/img/restream2.png&#34; width=&#34;100%&#34; loading=&#34;lazy&#34; /&gt;
+            
+        
+    &lt;/figure&gt;
+    &lt;/div&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add your server information in the format of &lt;code&gt;rtmp://myserver/live&lt;/code&gt; for the RTMP URL and your Stream Key.
+
+
+&lt;div style=&#34;text-align: center;&#34;&gt;
+    &lt;figure &gt;
+        
+            &lt;img src=&#34;/docs/img/restream3.png&#34; width=&#34;100%&#34; loading=&#34;lazy&#34; /&gt;
+            
+        
+    &lt;/figure&gt;
+    &lt;/div&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+","permalink":"/docs/broadcasting/restream/"},{"name":"Zoom","content":"&lt;p&gt;&lt;a href=&#34;https://zoom.us/&#34;&gt;Zoom&lt;/a&gt; offers to stream your meeting to a livestreaming service like Owncast. Please mind that some changes might need to be done by your Zoom administrator.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Set up Owncast and configure it by your choosing. Since the RMTP stream comes directly from the Zoom servers, at least the RMTP port should be available from the internet.&lt;/li&gt;
+&lt;li&gt;Allow live streaming for the user account. In &lt;a href=&#34;https://zoom.us/profile/setting&#34;&gt;zoom.us/profile/setting&lt;/a&gt;, scroll down to &amp;ldquo;Allow live streaming meetings&amp;rdquo; and activate &lt;em&gt;Custom Live Streaming Service&lt;/em&gt;:
+
+
+
+    &lt;figure &gt;
+        
+            &lt;img src=&#34;/docs/img/zoom-activate-for-account.png&#34; width=&#34;100%&#34; loading=&#34;lazy&#34; /&gt;
+            
+        
+    &lt;/figure&gt;
+    &lt;/li&gt;
+&lt;li&gt;Schedule a meeting using the website and save it. Zoom will redirect you to a &amp;ldquo;Manage meeting&amp;rdquo; page which has a Live Streaming section at the very bottom. Click on the &amp;ldquo;configure live stream settings&amp;rdquo; link:
+
+
+
+    &lt;figure &gt;
+        
+            &lt;img src=&#34;/docs/img/zoom-manage-meeting.png&#34; width=&#34;100%&#34; loading=&#34;lazy&#34; /&gt;
+            
+        
+    &lt;/figure&gt;
+    &lt;/li&gt;
+&lt;li&gt;Fill in your Owncast server information. The &amp;ldquo;live streaming page URL&amp;rdquo; should be the Owncast Frontend, since Zoom will link to it from the meeting.
+
+
+
+    &lt;figure &gt;
+        
+            &lt;img src=&#34;/docs/img/zoom-server-settings.png&#34; width=&#34;100%&#34; loading=&#34;lazy&#34; /&gt;
+            
+        
+    &lt;/figure&gt;
+    &lt;/li&gt;
+&lt;li&gt;Once the meeting is started, click on &amp;ldquo;More&amp;rdquo; in the menu bar and then &amp;ldquo;Livestream to Custom service&amp;rdquo;. Zoom will open a browser window and then redirect you to the Owncast frontend (or whichever URL you specified).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The instructions for Webinars and Personal Meeting Rooms are similar, &lt;a href=&#34;https://support.zoom.us/hc/en-us/articles/115001777826-Live-Streaming-Meetings-or-Webinars-Using-a-Custom-Service&#34;&gt;see Zoom&amp;rsquo;s support page&lt;/a&gt; for more information.&lt;/p&gt;
+","permalink":"/docs/broadcasting/zoom/"},{"name":"ffmpeg","content":"&lt;p&gt;Streaming with ffmpeg is quite easy. You can stream any connected webcam or HDMI grabber that appears in &lt;code&gt;/dev/video*&lt;/code&gt; and incoming alsa audio devices. In this example, the &lt;code&gt;/dev/video2&lt;/code&gt; video device and the &lt;code&gt;hw:1,0&lt;/code&gt; alsa audio device are used:&lt;/p&gt;
+&lt;p&gt;&lt;button class=&#34;btn-clipboard btn btn-sm btn-link&#34; data-clipboard-text=&#34;ffmpeg -f alsa -ac 2 -i hw:1,0 -thread_queue_size 64 -f v4l2 -framerate 60 -video_size 1280x720 -input_format yuyv422 -i /dev/video2 -c:v libx264 -preset veryfast -b:v 1984k -maxrate 1984k -bufsize 3968k -vf &amp;#34;format=yuv420p&amp;#34; -g 60 -c:a aac -b:a 128k -ar 44100 -f flv rtmp:///live/&#34;&gt;&lt;span class=&#34;copy-status&#34;&gt;&lt;/span&gt;&lt;/button&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ffmpeg -f alsa -ac &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; -i hw:1,0 -thread_queue_size &lt;span class=&#34;m&#34;&gt;64&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -f v4l2 -framerate &lt;span class=&#34;m&#34;&gt;60&lt;/span&gt; -video_size 1280x720 -input_format yuyv422 -i /dev/video2 &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -c:v libx264 -preset veryfast -b:v 1984k -maxrate 1984k -bufsize 3968k &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -vf &lt;span class=&#34;s2&#34;&gt;&amp;#34;format=yuv420p&amp;#34;&lt;/span&gt; -g &lt;span class=&#34;m&#34;&gt;60&lt;/span&gt; -c:a aac -b:a 128k -ar &lt;span class=&#34;m&#34;&gt;44100&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -f flv rtmp://&amp;lt;ip-of-your-server&amp;gt;/live/&amp;lt;your-streaming-key&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+","permalink":"/docs/broadcasting/ffmpeg/"},{"name":"Compatible hardware","content":"&lt;p&gt;The following hardware with native live streaming have been tested and work.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://gopro.com/&#34;&gt;GoPro Hero 8&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mevo.com/&#34;&gt;Mevo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.blackmagicdesign.com/products/atemmini&#34;&gt;ATEM Mini Pro&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you have tested other hardware with Owncast we&amp;rsquo;d love to hear about it!&lt;/p&gt;
+","permalink":"/docs/broadcasting/hardware/"}]}

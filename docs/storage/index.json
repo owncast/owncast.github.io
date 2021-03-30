@@ -1,0 +1,189 @@
+{"data":[{"name":"AWS S3","content":"&lt;p&gt;AWS S3 is a good choice if you&amp;rsquo;re already using AWS for your server or are comfortable using AWS for other things. If you&amp;rsquo;re brand new to object storage and not using AWS already I&amp;rsquo;m not sure I&amp;rsquo;d recommend jumping into it just for Owncast. There are other options.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s some example usage and pricing for AWS S3:
+
+
+&lt;div style=&#34;text-align: center;&#34;&gt;
+    &lt;figure &gt;
+        
+            &lt;img src=&#34;/docs/img/aws-price-usage.png&#34; width=&#34;100%&#34; loading=&#34;lazy&#34; /&gt;
+            
+        
+    &lt;/figure&gt;
+    &lt;/div&gt;&lt;/p&gt;
+&lt;h3 id=&#34;file-expiration&#34;&gt;File expiration&lt;/h3&gt;
+&lt;p&gt;You should expire old segments on your S3 bucket. &lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html&#34;&gt;Here are some instructions on how to do that.&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Once an object expires you won&amp;rsquo;t be charged for storage, even if the object isn&amp;rsquo;t deleted immediately.&lt;/li&gt;
+&lt;li&gt;A one day object expiration lifecycle rule on objects is as low as you can go, so use that.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;cors&#34;&gt;CORS&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html#how-do-i-enable-cors&#34;&gt;You will need to enable CORS on your bucket&lt;/a&gt; so the web player can access the video.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;cdn&#34;&gt;CDN&lt;/h3&gt;
+&lt;p&gt;AWS (and other S3 compatible providers) offer a feature to change the HTTP host to support CDNs. You can configure Owncast to serve media files from this host by setting the &lt;code&gt;Serving Endpoint&lt;/code&gt; to your CDNed host. For testing try it without setting this value first to make sure things are working, and then add the additional configuration.&lt;/p&gt;
+","permalink":"/docs/storage/aws/"},{"name":"Backblaze B2","content":"&lt;p&gt;As of November 2020 &lt;a href=&#34;https://www.backblaze.com/b2/cloud-storage.html&#34;&gt;Backblaze&amp;rsquo;s B2&lt;/a&gt; is fully &lt;a href=&#34;https://www.backblaze.com/b2/docs/s3_compatible_api.html&#34;&gt;S3 compatible&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;B2&amp;rsquo;s first 10G of storage is free, and the first 1G of download per day is free after that.  Afterwards they charge $0.01/G.&lt;/p&gt;
+&lt;h3 id=&#34;keys&#34;&gt;Keys&lt;/h3&gt;
+&lt;p&gt;When creating your &lt;a href=&#34;https://secure.backblaze.com/app_keys.htm&#34;&gt;&amp;ldquo;Application Keys&amp;rdquo;&lt;/a&gt; keep in mind that the &lt;strong&gt;&amp;ldquo;Application Key ID&amp;rdquo;&lt;/strong&gt; is the &lt;strong&gt;&amp;ldquo;Access Key&amp;rdquo;&lt;/strong&gt; and the &lt;strong&gt;&amp;ldquo;Application Key&amp;rdquo;&lt;/strong&gt; is the &lt;strong&gt;&amp;ldquo;Secret&amp;rdquo;&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;cors-settings&#34;&gt;CORS settings&lt;/h3&gt;
+&lt;p&gt;While the specific origins you want to support are up to you, make sure the API for CORS support is set to either &lt;strong&gt;&amp;ldquo;S3&amp;rdquo;&lt;/strong&gt; or &lt;strong&gt;&amp;ldquo;Both&amp;rdquo;&lt;/strong&gt;.&lt;/p&gt;
+
+
+&lt;div style=&#34;text-align: center;&#34;&gt;
+    &lt;figure &gt;
+        
+            &lt;img src=&#34;/docs/img/b2_cors.png&#34; width=&#34;100%&#34; loading=&#34;lazy&#34; /&gt;
+            
+        
+    &lt;/figure&gt;
+    &lt;/div&gt;
+&lt;h3 id=&#34;expiration-of-old-files-on-b2&#34;&gt;Expiration of old files on B2&lt;/h3&gt;
+&lt;p&gt;You can have B2 delete old video files every day to keep your storage low by simply changing the &lt;strong&gt;Lifecycle Settings&lt;/strong&gt; in the B2 dashboard.&lt;/p&gt;
+
+
+&lt;div style=&#34;text-align: center;&#34;&gt;
+    &lt;figure &gt;
+        
+            &lt;img src=&#34;/docs/img/b2_delete_old_files.png&#34; width=&#34;100%&#34; loading=&#34;lazy&#34; /&gt;
+            
+        
+    &lt;/figure&gt;
+    &lt;/div&gt;
+","permalink":"/docs/storage/backblaze/"},{"name":"Digital Ocean Spaces","content":"&lt;p&gt;250 GB storage + 1 TB Outbound Transfer for $5/mo.&lt;/p&gt;
+&lt;p&gt;Digital Ocean Spaces is a good choice if you&amp;rsquo;re already using DigitalOcean to host your server. It should be fast to transfer your video from your server to their storage service, and their pricing will probably just be the flat $5/mo for you, so it&amp;rsquo;s easy to know what you&amp;rsquo;re paying.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create a new bucket in the &lt;a href=&#34;https://cloud.digitalocean.com/spaces&#34;&gt;DigitalOcean&lt;/a&gt; console.&lt;/li&gt;
+&lt;li&gt;Edit your storage config and change the S3 &lt;code&gt;endpoint&lt;/code&gt; to match the hostname listed below your newly created bucket that looks something like &lt;code&gt;myvideo.nyc3.digitaloceanspaces.com&lt;/code&gt;, the bucket name to match the one you just created. DigitalOcean doesn&amp;rsquo;t seem to care about the region provided but to be safe use an AWS s3 compatible region like: &lt;code&gt;us-east-1&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Using the &lt;a href=&#34;https://cloud.digitalocean.com/account/api/tokens&#34;&gt;DigitalOcean Applications and API&lt;/a&gt; page create a new Spaces Access Key and add the Key and Secret to your admin.&lt;/li&gt;
+&lt;li&gt;In DigitalOceans Console go into your new bucket and select the Settings tab&lt;/li&gt;
+&lt;li&gt;Click &lt;code&gt;Edit&lt;/code&gt; next to the File Listing&lt;/li&gt;
+&lt;li&gt;Toggle to &lt;code&gt;Enable File Listing&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Click &lt;code&gt;Save&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Click &lt;code&gt;Add&lt;/code&gt; next to the CORS Configurations&lt;/li&gt;
+&lt;li&gt;Add your owncast URL as the Origin with GET checked under the Allowed Methods&lt;/li&gt;
+&lt;li&gt;Click &lt;code&gt;Save Options&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You should now be ready to stream using DigitialOcean Spaces&lt;/p&gt;
+","permalink":"/docs/storage/digitalocean/"},{"name":"Wasabi","content":"&lt;p&gt;Most people would end up paying $5.99/mo with &lt;a href=&#34;https://wasabi.com/content-delivery/&#34;&gt;Wasabi&lt;/a&gt;, and there&amp;rsquo;s no additional costs for the amount of people or amount of times people access your video.  So if you have a ton of viewers, this is probably a good option.&lt;/p&gt;
+&lt;h3 id=&#34;create-a-user-and-access-key&#34;&gt;Create a user and access key.&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://wasabi.com/wp-content/themes/wasabi/docs/Getting_Started/index.html#t=topics%2FCreating_a_User.htm&#34;&gt;Create a new user on Wasabi&lt;/a&gt; for yourself.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://wasabi.com/wp-content/themes/wasabi/docs/Getting_Started/index.html#t=topics%2FAssigning_an_Access_Key.htm&#34;&gt;Create a new Access Key&lt;/a&gt; in the Users Panel.&lt;/li&gt;
+&lt;li&gt;Update your Owncast &lt;code&gt;config.json&lt;/code&gt; file with the above Access Key and Secret as well as the other required details.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Depending on the region where your bucket lives look up the service URL &lt;a href=&#34;https://wasabi-support.zendesk.com/hc/en-us/articles/360015106031-What-are-the-service-URLs-for-Wasabi-s-different-regions-&#34;&gt;from this page&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Endpoint: Is the &amp;ldquo;service URL&amp;rdquo; you looked up above.  Likely &lt;code&gt; s3.wasabisys.com&lt;/code&gt; or similar.&lt;/li&gt;
+&lt;li&gt;Bucket&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;making-files-public&#34;&gt;Making files public&lt;/h3&gt;
+&lt;p&gt;Wasabi makes it easy to make a bucket public.  &lt;a href=&#34;https://wasabi.com/wp-content/themes/wasabi/docs/Getting_Started/index.html#t=topics%2FMaking_Folders_and_or_Files_Public.htm&#34;&gt;Full documentation is here&lt;/a&gt;, but simply select the folder and choose &amp;ldquo;&lt;em&gt;Make Public&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;
+&lt;h3 id=&#34;expiration-of-old-files-on-wasabi&#34;&gt;Expiration of old files on Wasabi&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Important note!&lt;/strong&gt; Wasabi does &lt;strong&gt;NOT&lt;/strong&gt; seem to have a way to set a policy for deleting old files like AWS and Linode does.  You may have your own way of cleaning up old files, or some other solution.  But it&amp;rsquo;s something to keep in mind in case you really start to build up a lot of old video files.&lt;/p&gt;
+&lt;p&gt;If anybody knows how to enable Lifecycle Policies on Wasabi, please &lt;a href=&#34;https://github.com/owncast/owncast/issues&#34;&gt;file an issue with details&lt;/a&gt;.&lt;/p&gt;
+","permalink":"/docs/storage/wasabi/"},{"name":"Linode Object Storage","content":"&lt;p&gt;250 GB storage + 1 TB Outbound Transfer for $5/mo.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.linode.com/pricing/?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d/#row--storage&#34;&gt;Linode Object Storage&lt;/a&gt; is a good choice if you&amp;rsquo;re already using Linode to host your server. It should be fast to transfer your video from your server to their storage service, and their pricing will probably just be the flat $5/mo for you, so it&amp;rsquo;s easy to know what you&amp;rsquo;re paying.
+
+
+&lt;div style=&#34;text-align: center;&#34;&gt;
+    &lt;figure &gt;
+        
+            &lt;img src=&#34;/docs/img/linodebucket.png&#34; width=&#34;100%&#34; loading=&#34;lazy&#34; /&gt;
+            
+        
+    &lt;/figure&gt;
+    &lt;/div&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create a new bucket at the &lt;a href=&#34;https://cloud.linode.com/object-storage/buckets&#34;&gt;Linode Object Storage&lt;/a&gt; admin page.&lt;/li&gt;
+&lt;li&gt;Make sure CORS is enabled on your new bucket.&lt;/li&gt;
+&lt;li&gt;In the Owncast Addmin change the S3 &lt;code&gt;endpoint&lt;/code&gt; to match the hostname listed below your newly created bucket that looks something like &lt;code&gt;us-east-1.linodeobjects.com&lt;/code&gt;, the bucket name to match the one you just created and the S3 region to match the &lt;code&gt;us-east-1&lt;/code&gt; equivalent of the above hostname.&lt;/li&gt;
+&lt;li&gt;Using the &lt;a href=&#34;https://cloud.linode.com/object-storage/access-keys&#34;&gt;Linode Object Access Keys&lt;/a&gt; page create a new Access Key and add the Key and Secret in the admin.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In the following steps Linode requires you to interact with your bucket using the s3cmd tool. So install that on your terminal and configure it.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;s3cmd --configure&lt;/code&gt; and fill in the values with what is currently in your config file. It should look similar to this:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;k&#34;&gt;Access Key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;ABC12334&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;Secret Key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;fj3kd83jdkh&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;Default Region&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;US&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;S3 Endpoint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;us-east&lt;span class=&#34;m&#34;&gt;-1.&lt;/span&gt;linodeobjects.com&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;DNS-style bucket+hostname:port template for accessing a bucket&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;us-east&lt;span class=&#34;m&#34;&gt;-1.&lt;/span&gt;linodeobjects.com&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;Use HTTPS protocol&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;False&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;h3 id=&#34;add-permissions-to-access-video&#34;&gt;Add permissions to access video.&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;This part sucks&lt;/em&gt;. But you only have to do it once per bucket. &lt;a href=&#34;https://www.linode.com/docs/platform/object-storage/how-to-use-object-storage-acls-and-bucket-policies/#bucket-policies&#34;&gt;These are the full instructions&lt;/a&gt; but let me summarize.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Create a file called bucket_policy.json that has the following:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;   &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+   &lt;span class=&#34;nt&#34;&gt;&amp;#34;Statement&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+   &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+   &lt;span class=&#34;nt&#34;&gt;&amp;#34;Effect&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Allow&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+   &lt;span class=&#34;nt&#34;&gt;&amp;#34;Principal&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+   &lt;span class=&#34;nt&#34;&gt;&amp;#34;AWS&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+   &lt;span class=&#34;s2&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;
+   &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+   &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+   &lt;span class=&#34;nt&#34;&gt;&amp;#34;Action&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+   &lt;span class=&#34;s2&#34;&gt;&amp;#34;s3:GetObject&amp;#34;&lt;/span&gt;
+   &lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+   &lt;span class=&#34;nt&#34;&gt;&amp;#34;Resource&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+   &lt;span class=&#34;s2&#34;&gt;&amp;#34;arn:aws:s3::MYBUCKETNAME/*&amp;#34;&lt;/span&gt;
+   &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+   &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+   &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+   &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+   &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Replace &lt;code&gt;MYBUCKETNAME&lt;/code&gt; with your actual bucket name.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run &lt;code&gt;s3cmd setpolicy bucket_policy.json s3://MYBUCKETNAME&lt;/code&gt; replacing &lt;code&gt;MYBUCKETNAME&lt;/code&gt; with your bucket name.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run &lt;code&gt;s3cmd info s3://MYBUCKETNAME&lt;/code&gt; to make sure the new policy saved.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now files video saved to Linode Object Storage will be readable.&lt;/p&gt;
+&lt;p&gt;More details about how to get started using Linode Object Storage can be found &lt;a href=&#34;https://www.linode.com/docs/platform/object-storage/how-to-use-object-storage/&#34;&gt;on their documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;file-expiration&#34;&gt;File expiration&lt;/h3&gt;
+&lt;p&gt;Make files older than one day expire and delete themselves so you don&amp;rsquo;t pay for storage of old video.&lt;/p&gt;
+&lt;p&gt;Full details are in &lt;a href=&#34;https://www.linode.com/docs/platform/object-storage/how-to-manage-objects-with-lifecycle-policies/&#34;&gt;their documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Create a file called &lt;code&gt;lifecycle_policy.json&lt;/code&gt; with the following contents:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;LifecycleConfiguration&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;Rule&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;ID&amp;gt;&lt;/span&gt;delete-all-objects&lt;span class=&#34;nt&#34;&gt;&amp;lt;/ID&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;Prefix&amp;gt;&amp;lt;/Prefix&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;Status&amp;gt;&lt;/span&gt;Enabled&lt;span class=&#34;nt&#34;&gt;&amp;lt;/Status&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;Expiration&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;Days&amp;gt;&lt;/span&gt;1&lt;span class=&#34;nt&#34;&gt;&amp;lt;/Days&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;/Expiration&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;/Rule&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;/LifecycleConfiguration&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Run &lt;code&gt;s3cmd setlifecycle lifecycle_policy.xml s3://MYBUCKETNAME&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;s3cmd info s3://MYBUCKETNAME&lt;/code&gt; and you should now see &lt;code&gt; Expiration Rule: all objects in this bucket will expire in &#39;1&#39; day(s) after creation&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+","permalink":"/docs/storage/linode/"},{"name":"Minio","content":"&lt;p&gt;If you want to host the video segments on a self hosted S3 compatible &lt;a href=&#34;https://min.io/&#34;&gt;MinIO&lt;/a&gt; server, you get even more control over your data.&lt;/p&gt;
+&lt;h3 id=&#34;bucket&#34;&gt;Bucket&lt;/h3&gt;
+&lt;p&gt;Create a bucket, e.g. with the &lt;a href=&#34;https://docs.min.io/docs/minio-client-complete-guide.html&#34;&gt;MinIO client&lt;/a&gt; by&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;get the two strings &lt;code&gt;[YOUR-ACCESS-KEY]&lt;/code&gt; and &lt;code&gt;[YOUR-SECRET-KEY]&lt;/code&gt; from your MinIO deployment. (Sometimes they are referred to as ROOT USER and KEY)&lt;/li&gt;
+&lt;li&gt;add an alias &lt;code&gt;mc alias set &amp;lt;ALIAS&amp;gt; &amp;lt;YOUR-S3-ENDPOINT&amp;gt; [YOUR-ACCESS-KEY] [YOUR-SECRET-KEY]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;create a new bucket &lt;code&gt;mc mb &amp;lt;ALIAS&amp;gt;/stream&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;allow downloading from bucket &lt;code&gt;mc policy set download &amp;lt;ALIAS&amp;gt;/stream&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;cors&#34;&gt;CORS&lt;/h3&gt;
+&lt;p&gt;Make sure to allow access to the buckets file from your owncast domain.
+You require GET and OPTIONS methods.&lt;/p&gt;
+&lt;h3 id=&#34;owncast-config&#34;&gt;Owncast Config&lt;/h3&gt;
+&lt;p&gt;To point your owncast instance to the MinIO storage, configure the &lt;code&gt;s3&lt;/code&gt; section as&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;k&#34;&gt;s3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;enabled&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;endpoint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;https&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;//&amp;lt;s3-storage.your.org&lt;span class=&#34;sd&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;  servingEndpoint: https://&amp;lt;s3-storage.your.org&amp;gt;/stream&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;accessKey&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&amp;lt;KEY&lt;span class=&#34;sd&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;  secret: &amp;lt;SECRET&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;bucket&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;stream&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;region&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;anywhere&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;servingEndpoint&lt;/code&gt; is required as MinIO does not support subdomain based access out of the box.&lt;/p&gt;
+","permalink":"/docs/storage/minio/"}]}

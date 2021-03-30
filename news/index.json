@@ -1,0 +1,5 @@
+{"data":[{"name":"Example news content","content":"&lt;p&gt;This is some content that can be shown in the admin by parsing &lt;a href=&#34;https://owncast.online/news/index.json&#34;&gt;https://owncast.online/news/index.json&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It will be HTML inside JSON and we can just render it verbatim in the admin.&lt;/p&gt;
+&lt;p&gt;Ok, I&amp;rsquo;m done typing this test file now.&lt;/p&gt;
+","permalink":"/news/2021-03-29-test_content/"},{"name":"First news content","content":"&lt;p&gt;Here is some basic test content as an example news item.&lt;/p&gt;
+","permalink":"/news/2021-03-28-first_test/"}]}

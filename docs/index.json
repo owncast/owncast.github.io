@@ -1,0 +1,488 @@
+{"data":[{"name":"Broadcasting Software","content":"&lt;h3 id=&#34;compatibility&#34;&gt;Compatibility&lt;/h3&gt;
+&lt;p&gt;In general Owncast is compatible with any software that uses &lt;code&gt;RTMP&lt;/code&gt; to broadcast to a remote server.  &lt;code&gt;RTMP&lt;/code&gt; is what all the major live streaming services use, so if you&amp;rsquo;re currently using one of those it&amp;rsquo;s likely that you can point your existing software at your Owncast instance instead.&lt;/p&gt;
+&lt;p&gt;However, we haven&amp;rsquo;t tested with everything.  So if you&amp;rsquo;re using something specific &lt;a href=&#34;https://github.com/owncast/owncast/issues/new&#34;&gt;we&amp;rsquo;d love to hear what software you&amp;rsquo;re using and the results&lt;/a&gt;.  If you&amp;rsquo;re finding yourself running into issues, we&amp;rsquo;d love to help troubleshoot.&lt;/p&gt;
+","permalink":"/docs/broadcasting/"},{"name":"Configuration","content":"&lt;p&gt;Configuration is done through the Owncast administration page located on your server under &lt;code&gt;/admin&lt;/code&gt;. The login username is &lt;code&gt;admin&lt;/code&gt; and the password is your stream key, the default being &lt;code&gt;abc123&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Some common items many people would want to update after installing Owncast are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Your site name, logo, description and external links that are displayed on the &lt;a href=&#34;/docs/website&#34;&gt;web site&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;stream key&lt;/strong&gt; to gain access to broadcasting to your stream and your admin.&lt;/li&gt;
+&lt;li&gt;Enable your stream to show up in the &lt;a href=&#34;/docs/directory&#34;&gt;Owncast Directory&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;web-site-details&#34;&gt;Web site details&lt;/h2&gt;
+&lt;p&gt;Your site name, logo, description, and page content can be set in the admin. You can also add links to your social profiles and web sites that exist elsewhere. &lt;a href=&#34;/docs/website&#34;&gt;See details about the web site and chat interface&lt;/a&gt;.
+&lt;span class=&#34;version-support&#34;&gt;
+  Changing page settings in the admin panel was first supported in &lt;a href=&#34;https://github.com/owncast/owncast/releases/tag/v0.0.6&#34;&gt;Owncast 0.0.6&lt;/a&gt;.
+&lt;/span&gt;
+&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img src=&#34;/docs/img/admin-general-settings.png&#34;
+         alt=&#34;Owncast general settings&#34; width=&#34;80%&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;Owncast general settings&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&#34;video-output&#34;&gt;Video output&lt;/h2&gt;
+&lt;p&gt;Depending on your hardware you may be able to configure your server to support multiple output variants for multiple different viewing conditions. &lt;a href=&#34;/docs/encoding&#34;&gt;Learn how to configure your video and see how it directly effects your CPU usage&lt;/a&gt;.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img src=&#34;/docs/img/admin-config-video-variant.png&#34;
+         alt=&#34;Owncast video settings&#34; width=&#34;80%&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;Owncast video settings&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;span class=&#34;version-support&#34;&gt;
+  Changing video settings in the admin panel was first supported in &lt;a href=&#34;https://github.com/owncast/owncast/releases/tag/v0.0.6&#34;&gt;Owncast 0.0.6&lt;/a&gt;.
+&lt;/span&gt;
+
+&lt;h2 id=&#34;custom-ports&#34;&gt;Custom Ports&lt;/h2&gt;
+&lt;p&gt;Per default, Owncast will run a &lt;code&gt;http&lt;/code&gt; web server on port &lt;code&gt;8080&lt;/code&gt; and a RTMP server on port &lt;code&gt;1935&lt;/code&gt;. You can change the ports in the the admin. You must restart Owncast for these changes to take effect.&lt;/p&gt;
+&lt;p&gt;You can also set the port for the web server on the command line via the &lt;code&gt;-webserverport&lt;/code&gt; flag.&lt;/p&gt;
+&lt;p&gt;&lt;figure&gt;
+    &lt;img src=&#34;/docs/img/admin-server-settings.png&#34;
+         alt=&#34;Owncast server settings&#34; width=&#34;80%&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;Owncast server settings&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;span class=&#34;version-support&#34;&gt;
+  Custom ports was first supported in &lt;a href=&#34;https://github.com/owncast/owncast/releases/tag/v0.0.4&#34;&gt;Owncast 0.0.4&lt;/a&gt;.
+&lt;/span&gt;
+
+&lt;span class=&#34;version-support&#34;&gt;
+  Port settings in the admin panel was first supported in &lt;a href=&#34;https://github.com/owncast/owncast/releases/tag/v0.0.6&#34;&gt;Owncast 0.0.6&lt;/a&gt;.
+&lt;/span&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;external-storage-providers&#34;&gt;External storage providers&lt;/h2&gt;
+&lt;p&gt;Instead of serving video directly from your personal server you can use a S3 compatible storage provider to offload the bandwidth and storage requirements elsewhere. &lt;a href=&#34;/docs/storage&#34;&gt;See how to configure the storage provider of your choice&lt;/a&gt;.&lt;/p&gt;
+","permalink":"/docs/configuration/"},{"name":"SSL & HTTP Proxies","content":"&lt;p&gt;While not required, most people will want to support SSL on a public Owncast server. If you already have a &lt;a href=&#34;https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/&#34;&gt;reverse proxy&lt;/a&gt; that is used for SSL you can easily add Owncast to that. If you&amp;rsquo;ve never installed a proxy service before then you can quickly set one up.&lt;/p&gt;
+&lt;div class=&#34;alert alert-warning d-flex&#34; role=&#34;alert&#34;&gt;
+  &lt;div class=&#34;flex-shrink-1 alert-icon&#34;&gt;💡&lt;/div&gt;
+  &lt;div class=&#34;w-100&#34;&gt;People often overlook the need to proxy their websockets, so if you&#39;re having issues with chat make sure you configured your proxy to pass those through.&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;why-you-want-to-support-ssl&#34;&gt;Why you want to support SSL&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;If you want to embed your Owncast video into a page that is using SSL your Owncast server will also need to be secured.&lt;/li&gt;
+&lt;li&gt;Browsers will label your site as &lt;a href=&#34;https://support.apple.com/en-us/HT208672&#34;&gt;&amp;ldquo;Not Secure&amp;rdquo;&lt;/a&gt; without using SSL.&lt;/li&gt;
+&lt;li&gt;It looks more professional and your site will come off more trustworthy.&lt;/li&gt;
+&lt;li&gt;Securing web traffic on the public internet is the right thing to do.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;when-you-might-not-need-it&#34;&gt;When you might not need it&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;If you&amp;rsquo;re just testing and experimenting with Owncast.&lt;/li&gt;
+&lt;li&gt;You&amp;rsquo;re running the service internally and you don&amp;rsquo;t have any plans for a public audience.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;popular-options&#34;&gt;Popular options&lt;/h2&gt;
+&lt;p&gt;You can use any method you like to add SSL support but there are some popular options we&amp;rsquo;ve seen work well with people. If you have any specific questions or would like to make suggestions on configurations or other setups &lt;a href=&#34;/contact&#34;&gt;let us know&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;suggested&#34;&gt;Suggested&lt;/h2&gt;
+&lt;p&gt;If you have no requirement to use other options else it is suggested you install &lt;a href=&#34;caddy/&#34;&gt;Caddy&lt;/a&gt; as it can be installed quickly and easily.&lt;/p&gt;
+","permalink":"/docs/sslproxies/"},{"name":"Embedding into your site","content":"&lt;div class=&#34;alert alert-warning d-flex&#34; role=&#34;alert&#34;&gt;
+  &lt;div class=&#34;flex-shrink-1 alert-icon&#34;&gt;💡&lt;/div&gt;
+  &lt;div class=&#34;w-100&#34;&gt;Embedding Owncast into an existing page who is using HTTPS will require your Owncast server to also be secured with SSL.&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;embedding-video&#34;&gt;Embedding video&lt;/h2&gt;
+&lt;p&gt;Owncast supports embedding your video stream directly into any other web site or source without having to setup a player.&lt;/p&gt;
+&lt;p&gt;The video-only URL to your stream content lives at: &lt;code&gt;http://your.host/embed/video&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s some example HTML you can use.&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;iframe&lt;/span&gt;
+  &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;https://your.host/embed/video&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;na&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Owncast&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;na&#34;&gt;height&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;350px&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;550px&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;na&#34;&gt;referrerpolicy&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;origin&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;na&#34;&gt;scrolling&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;no&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;na&#34;&gt;allowfullscreen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;iframe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&#34;version-support&#34;&gt;
+  Embedding video was first supported in &lt;a href=&#34;https://github.com/owncast/owncast/releases/tag/v0.0.2&#34;&gt;Owncast 0.0.2&lt;/a&gt;.
+&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;It will look something like:&lt;/p&gt;
+&lt;iframe src=&#34;https://watch.owncast.online/embed/video&#34; title=&#34;Owncast&#34;
+height=&#34;350px&#34; width=&#34;550px&#34;
+referrerpolicy=&#34;origin&#34; scrolling=&#34;no&#34;
+allowfullscreen&gt;
+&lt;/iframe&gt;
+&lt;h2 id=&#34;embedding-chat&#34;&gt;Embedding chat&lt;/h2&gt;
+&lt;p&gt;Owncast supports embedding your chat directly into any other web site or source.&lt;/p&gt;
+&lt;p&gt;The chat-only URL lives at: &lt;code&gt;http://your.host/embed/chat&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;One common use is adding the chat into your live stream.&lt;/p&gt;
+&lt;h3 id=&#34;using-obs&#34;&gt;Using OBS&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Click the &lt;code&gt;+&lt;/code&gt; or right mouse click to add a new source. Choose &lt;code&gt;Browser&lt;/code&gt; from the list.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;For a new source, you will need to add the name. Type in &amp;ldquo;&lt;em&gt;Chat&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In the Browser Source settings, you will need to change the URL to your Owncast instance&amp;rsquo;s &lt;code&gt;/embed/chat&lt;/code&gt; url.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can use the &lt;em&gt;Custom CSS&lt;/em&gt; to tweak how the browser shows in your video. The following example will add some space around the box, give it a semi-transparent dark background; and increase the overall font size to a base unit of 24px. You may change any of these settings to fit your presentation layout. Note that the overall message text color is white.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-css&#34; data-lang=&#34;css&#34;&gt;   &lt;span class=&#34;nt&#34;&gt;html&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+   &lt;span class=&#34;k&#34;&gt;margin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;px&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+   &lt;span class=&#34;k&#34;&gt;padding&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;px&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+   &lt;span class=&#34;k&#34;&gt;background-color&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rgba&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+   &lt;span class=&#34;k&#34;&gt;font-size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;24&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;px&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+   &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+   &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Click ‘OK’ to save your chat settings and re-position the new chat source in your scene.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;span class=&#34;version-support&#34;&gt;
+  Embedding chat was first supported in &lt;a href=&#34;https://github.com/owncast/owncast/releases/tag/v0.0.2&#34;&gt;Owncast 0.0.2&lt;/a&gt;.
+&lt;/span&gt;
+
+&lt;h2 id=&#34;ssl-requirements&#34;&gt;SSL Requirements&lt;/h2&gt;
+&lt;p&gt;Embedding Owncast content that is not served via HTTPS will be &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content/How_to_fix_website_with_mixed_content&#34;&gt;blocked by browsers&lt;/a&gt; if you embed it within a page that is using SSL. &lt;a href=&#34;/docs/sslproxies&#34;&gt;Learn how you can use a SSL Proxy&lt;/a&gt; to fulfill this browser requirement as well as secure your Owncast site.&lt;/p&gt;
+","permalink":"/docs/embed/"},{"name":"Run as a system service","content":"&lt;p&gt;You can optionally setup Owncast to run under &lt;a href=&#34;https://systemd.io/&#34;&gt;systemd&lt;/a&gt; so it&amp;rsquo;s a managed service on your machine that automatically starts when your machine does.&lt;/p&gt;
+&lt;p&gt;A full example can be found &lt;a href=&#34;https://github.com/owncast/owncast/blob/master/examples/owncast-sample.service&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-ini&#34; data-lang=&#34;ini&#34;&gt;&lt;span class=&#34;k&#34;&gt;[Unit]&lt;/span&gt;
+&lt;span class=&#34;na&#34;&gt;Description&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;Owncast&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is where the &amp;ldquo;functional&amp;rdquo; parts of the service live.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-ini&#34; data-lang=&#34;ini&#34;&gt;&lt;span class=&#34;k&#34;&gt;[Service]&lt;/span&gt;
+&lt;span class=&#34;na&#34;&gt;Type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;simple&lt;/span&gt;
+&lt;span class=&#34;na&#34;&gt;WorkingDirectory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;[path_to_owncast_root_directory]&lt;/span&gt;
+&lt;span class=&#34;na&#34;&gt;ExecStart&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;[path_to_owncast_executable]&lt;/span&gt;
+&lt;span class=&#34;na&#34;&gt;Restart&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;on-failure&lt;/span&gt;
+&lt;span class=&#34;na&#34;&gt;RestartSec&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;5&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;WorkingDirectory&lt;/code&gt; should be where you want the owncast folder to live.&lt;/p&gt;
+&lt;h3 id=&#34;example&#34;&gt;Example&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;WorkingDirectory=/home/myuser/owncast&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Similarly the &lt;code&gt;ExecStart&lt;/code&gt; is the actual owncast binary.&lt;/p&gt;
+&lt;h3 id=&#34;example-1&#34;&gt;Example&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;ExecStart=/home/myuser/owncast/owncast&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-ini&#34; data-lang=&#34;ini&#34;&gt;&lt;span class=&#34;k&#34;&gt;[Install]&lt;/span&gt;
+&lt;span class=&#34;na&#34;&gt;WantedBy&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;multi-user.target&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
+&lt;p&gt;Just create the file in your systemd configuration directory (typically /etc/systemd/system/), and update the systemd daemon with:
+&lt;code&gt;sudo systemctl daemon-reload&lt;/code&gt;&lt;/p&gt;
+","permalink":"/docs/systemservice/"},{"name":"Troubleshooting","content":"&lt;h2 id=&#34;cpu-and-ram-usage-alerts&#34;&gt;CPU and RAM usage alerts&lt;/h2&gt;
+&lt;p&gt;If your hardware is being maxed out then your video may not be processed and delivered fast enough to keep up with the real-time requirements of live video.&lt;/p&gt;
+&lt;p&gt;Here are some steps you can try taking to resolve this.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;You may have too many video outputs defined in your settings. Try limiting yourself to a single output, and go from there.&lt;/li&gt;
+&lt;li&gt;Change your settings to use &lt;a href=&#34;/docs/encoding/#cpu-usage&#34;&gt;less cpu&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Try reducing &lt;a href=&#34;/docs/encoding/#how-you-configure-your-broadcasting-software-matters&#34;&gt;the quality of the video you&amp;rsquo;re sending to Owncast in your broadcasting software&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Experiment with reducing the bitrate and framerate of your video.&lt;/li&gt;
+&lt;li&gt;If you&amp;rsquo;ve gone down to a single output, changed to using less cpu, and experimented with different qualities in your broadcasting software, it&amp;rsquo;s possible the server you&amp;rsquo;re running Owncast is just not powerful enough for the task and you might need to try a different environment to run this on.&lt;/li&gt;
+&lt;li&gt;You may want to experiment with enabling &lt;a href=&#34;/docs/video/#video-passthrough&#34;&gt;video passthrough&lt;/a&gt;, where your video is not re-encoded.  However, this may not be a solution in all environments.  &lt;a href=&#34;/docs/video/#video-passthrough&#34;&gt;Read more&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In general, the easiest way to save CPU is to decrease the input size, decrease the output size, or both.&lt;/p&gt;
+&lt;h2 id=&#34;buffering-and-video-playback-issues&#34;&gt;Buffering and video playback issues&lt;/h2&gt;
+&lt;p&gt;Many things can be responsible for buffering and issues with the video playback. Here are some things to look into.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Make sure your &lt;strong&gt;hardware is not throwing errors&lt;/strong&gt; as detailed above.&lt;/li&gt;
+&lt;li&gt;Make sure your broadcasting computer is broadcasting live video reliably. If your own computer or network connection is having a hard time getting video to the internet then viewers will be stuck in a buffering state. &lt;strong&gt;Reduce the bitrate, resolution and/or framerate in your broadcasting software&lt;/strong&gt; on your computer or mobile device if needed.&lt;/li&gt;
+&lt;li&gt;Try &lt;strong&gt;increasing your latency buffer&lt;/strong&gt; in your settings. This will start the user further behind live but give the client more playable video before it gets stuck waiting for the live edge.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Change your video settings&lt;/strong&gt; to use &lt;a href=&#34;/docs/encoding/#cpu-usage&#34;&gt;less cpu&lt;/a&gt; for encoding video.  Possibly &lt;a href=&#34;/docs/video/#video-passthrough&#34;&gt;try passthrough&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Reduce your &lt;a href=&#34;/docs/configuration/#video-quality&#34;&gt;stream quality settings&lt;/a&gt; to a single output and a lower &lt;a href=&#34;/docs/encoding/#bitrate&#34;&gt;bitrate&lt;/a&gt;. Experiment with increasing the bitrate and adding another optional stream output once you find settings that work for you.&lt;/li&gt;
+&lt;li&gt;If you are using external storage, &lt;strong&gt;make sure you&amp;rsquo;re able to upload to this storage service fast enough&lt;/strong&gt;. See below.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To gain some insight into how your stream is performing for people, put your stream URL (https://yourserver/hls/stream.m3u8) into &lt;a href=&#34;https://hlsanalyzer.com/&#34;&gt;HLS Analyzer&lt;/a&gt; to get a nice overview. You can see any errors or warnings from the end user&amp;rsquo;s point of view by looking at its results.&lt;/p&gt;
+&lt;h2 id=&#34;slow-uploads-to-external-storage&#34;&gt;Slow uploads to external storage&lt;/h2&gt;
+&lt;p&gt;If you have a slow upload connection, or are uploading to an external storage service that is too far away, or not optimized for fast uploads, you may run into an issue where it takes too long to get the video segments uploaded, ultimately not making them available fast enough for them to be used.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Determine if there&amp;rsquo;s another endpoint for your storage service that might be geographically closer to you.&lt;/li&gt;
+&lt;li&gt;Use a storage service that&amp;rsquo;s as close (physically and logically) to where your Owncast instance is. For example if if you&amp;rsquo;re on an AWS machine, use a S3 bucket in the same region. If you&amp;rsquo;re on Digital Ocean, try DO Spaces. But maybe don&amp;rsquo;t use DO Spaces if you&amp;rsquo;re on a Linode machine, use Linode Object Storage instead. Run owncast with &lt;code&gt;--enableVerboseLogging&lt;/code&gt; to see if you get any slow upload warnings.&lt;/li&gt;
+&lt;li&gt;Try to increase your upload speed from your server provider.&lt;/li&gt;
+&lt;li&gt;Find out if your storage service offers something like &lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html&#34;&gt;AWS&amp;rsquo;s Transfer Acceleration&lt;/a&gt; to (possibly) try to increase the speed of uploads.&lt;/li&gt;
+&lt;li&gt;Reduce the quality of your video so the video segments are smaller and will take less time to upload. See the above tips for speeding up encoding.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;reducing-the-delay-between-the-viewer-and-live&#34;&gt;Reducing the delay between the viewer and live&lt;/h2&gt;
+&lt;p&gt;Try decreasing your latency level in the admin. This will keep the user closer to live, but give the client less playable segments to work with, possibly &lt;strong&gt;reducing the resiliency for errors&lt;/strong&gt; and network speed issues. If you have a machine that is able to process video quickly you may be able to get down to only a handful of seconds of latency, but with little room for error.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s up to you to decide you want lower delays over &lt;strong&gt;less reliability&lt;/strong&gt; or a more reliable stream with additional delay.&lt;/p&gt;
+&lt;h2 id=&#34;chat-is-disabled&#34;&gt;Chat is disabled&lt;/h2&gt;
+&lt;p&gt;The chat is only enabled when a stream is active. This is to stop drive-by spammy chat messages by people when no stream is taking place.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re using a proxy in front of your Owncast instance make sure it is configured properly to support websockets. By default some do not pass along the websocket properly. Read &lt;a href=&#34;/docs/sslproxies&#34;&gt;your proxy documentation&lt;/a&gt; to make sure websocket support is configured properly to support Owncast chat.&lt;/p&gt;
+&lt;h2 id=&#34;misc-video-issues&#34;&gt;Misc video issues&lt;/h2&gt;
+&lt;p&gt;If you&amp;rsquo;re running into random video stability issues look at some of these common issues:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Make sure you&amp;rsquo;re running a supported version of ffmpeg. &lt;a href=&#34;https://ffmpeg.org/download.html&#34;&gt;Download ffmpeg 4.1.5 or above&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Make sure your copy of ffmpeg was not installed via Snap packages, as the sandboxing of Snap distributed software isn&amp;rsquo;t compatible in this case. If you see the error &lt;code&gt;Error: unable to open display&lt;/code&gt;, this might be your problem.&lt;/li&gt;
+&lt;li&gt;If you see &lt;code&gt;Unrecognized option var_stream_map&lt;/code&gt; in &lt;code&gt;transcoder.log&lt;/code&gt; it also means you need to update your copy of ffmpeg.&lt;/li&gt;
+&lt;li&gt;Make sure you have &lt;a href=&#34;/docs/video/#video-passthrough&#34;&gt;video passthrough&lt;/a&gt; disabled.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;your-software-says-your-key-is-incorrect&#34;&gt;Your software says your key is incorrect.&lt;/h2&gt;
+&lt;p&gt;If your broadcasting software says your streaming key is incorrect, but you&amp;rsquo;re sure it&amp;rsquo;s not, verify you&amp;rsquo;re not using any &lt;a href=&#34;https://tools.ietf.org/html/rfc3986#section-2.1&#34;&gt;URL-unsafe characters&lt;/a&gt; in your key. Characters such as &lt;code&gt;[ ] { } ? | \ / ” % ~ # &amp;lt; &amp;gt;&lt;/code&gt; are particularly problematic as your broadcasting software may not be encoding them properly.&lt;/p&gt;
+&lt;h2 id=&#34;your-stream-looks-low-quality&#34;&gt;Your stream looks low-quality&lt;/h2&gt;
+&lt;p&gt;Your stream, at the very least, is only as good as what you&amp;rsquo;re sending to Owncast. So make sure you&amp;rsquo;re sending from your broadcasting software at a quality that you&amp;rsquo;re happy with. You may also want to increase the amount of CPU being used to process the video on your Owncast server. As you go lower you will visibly see the quality degrade. However, make sure your server can handle more CPU being used or you&amp;rsquo;ll experience different problems.&lt;/p&gt;
+&lt;h2 id=&#34;server-is-not-showing-up-in-the-directory&#34;&gt;Server is not showing up in the directory&lt;/h2&gt;
+&lt;p&gt;If you&amp;rsquo;ve enabled the directory in your admin setttings, &lt;a href=&#34;/docs/directory/#if-your-server-is-not-showing-up-in-the-directory&#34;&gt;look at some next steps&lt;/a&gt; if it&amp;rsquo;s not working.&lt;/p&gt;
+&lt;span class=&#34;version-support&#34;&gt;
+  Owncast directory was first supported in &lt;a href=&#34;https://github.com/owncast/owncast/releases/tag/v0.0.3&#34;&gt;Owncast 0.0.3&lt;/a&gt;.
+&lt;/span&gt;
+
+&lt;h2 id=&#34;streams-without-audio-are-currently-not-supported&#34;&gt;Streams without audio are currently not supported&lt;/h2&gt;
+&lt;p&gt;If you&amp;rsquo;re streaming content that has no audio component (such as a camera with no microphone, for example) you may run into issues. You&amp;rsquo;re only likely to run into this if you&amp;rsquo;re building a stream manually through something like ffmpeg. And in this case you can insert an audio stream that&amp;rsquo;s empty to resolve the issue.&lt;/p&gt;
+&lt;p&gt;An example:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ffmpeg -input_format h264 -f video4linux2 -s 1920x1080 -i /dev/video0 -f lavfi -i anullsrc -c:v copy -c:a aac -shortest -f flv rtmp://192.168.0.10/live/abc123&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;h2 id=&#34;resetting-a-lost-stream-key&#34;&gt;Resetting a lost stream key&lt;/h2&gt;
+&lt;p&gt;If you change your stream key and forget to save it, or you lose it somehow, you can reset it on the command line by stopping owncast, and then running the following on the command line:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;./owncast --streamkey yournewstreamkey&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;restoring-a-backup&#34;&gt;Restoring a backup&lt;/h2&gt;
+&lt;p&gt;Owncast will backup its database periodically. You can keep these backups and restore them if needed. &lt;a href=&#34;/docs/backups&#34;&gt;Learn more about backups&lt;/a&gt;.&lt;/p&gt;
+","permalink":"/docs/troubleshooting/"},{"name":"Web Site + Chat","content":"&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;Owncast includes a web interface for your video with built-in chat that is available once you start the server. It shows online/offline states, viewer counts, stream duration, your instance&amp;rsquo;s description, images, links and more. You can just start using it without making any changes, but you&amp;rsquo;ll likely want to update the content displayed on your page by visiting your server admin page.&lt;/p&gt;
+&lt;p&gt;Additionally, the web interface was specifically built to be editable by anybody comfortable tweaking a web page. It&amp;rsquo;s not bundled or transpiled into anything, it&amp;rsquo;s just HTML + Javascript + CSS that you can start editing. Feel free to add your own branding, links, change the colors in the CSS, fonts, layout, or anything else you could possibly want. No development environment is needed, just open the files in an editor and start tweaking.&lt;/p&gt;
+&lt;p&gt;If you want to embed Owncast in your existing website, checkout our &lt;a href=&#34;/docs/embed/&#34;&gt;documentation on embedding Owncast&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Below are some items you&amp;rsquo;ll likely want to customize to update the content that displays on your page.&lt;/p&gt;
+&lt;span class=&#34;version-support&#34;&gt;
+  Changing settings in the admin panel was first supported in &lt;a href=&#34;https://github.com/owncast/owncast/releases/tag/v0.0.6&#34;&gt;Owncast 0.0.6&lt;/a&gt;.
+&lt;/span&gt;
+
+&lt;h3 id=&#34;name-and-description&#34;&gt;Name and description&lt;/h3&gt;
+&lt;p&gt;By setting your name, description and logo you can quickly update the contents of the website to reflect your stream.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img src=&#34;/docs/img/admin-general-settings.png&#34;
+         alt=&#34;Owncast general settings&#34; width=&#34;100%&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;Owncast general settings&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&#34;tags&#34;&gt;Tags&lt;/h3&gt;
+&lt;p&gt;By setting tags you&amp;rsquo;re showing potential viewers what categories of content you typically stream.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img src=&#34;/docs/img/admin-settings-tags-social.png&#34;
+         alt=&#34;Add tags&#34; width=&#34;100%&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;Add tags&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&#34;external-social-links&#34;&gt;External social links&lt;/h3&gt;
+&lt;p&gt;You can add links to your profiles on other sites by adding them in the admin.
+&lt;figure&gt;
+    &lt;img src=&#34;/docs/img/admin-settings-social-handle.png&#34;
+         alt=&#34;Add social links&#34; width=&#34;100%&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;Add social links&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;web-page-content&#34;&gt;Web page content&lt;/h3&gt;
+&lt;p&gt;The body of your page content can be customized in your admin. Use standard &lt;a href=&#34;https://www.markdownguide.org/basic-syntax/&#34;&gt;Markdown syntax&lt;/a&gt; to add links, images, and more.&lt;/p&gt;
+&lt;h2 id=&#34;chat&#34;&gt;Chat&lt;/h2&gt;
+&lt;h3 id=&#34;text-formatting&#34;&gt;Text Formatting&lt;/h3&gt;
+&lt;p&gt;The web chat supports some basic formatting using &lt;a href=&#34;https://www.markdownguide.org/basic-syntax/&#34;&gt;Markdown&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;Italic: &lt;code&gt;*your text*&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Bold: &lt;code&gt;**your text**&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Strikethrough: &lt;code&gt;~~your text~~&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Code blocks: &lt;code&gt;`your text`&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;custom-emoji&#34;&gt;Custom Emoji&lt;/h3&gt;
+&lt;p&gt;Place your own custom emoji images into &lt;code&gt;/webroot/img/emoji/&lt;/code&gt; and the next time you refresh the web site you&amp;rsquo;ll see your images in the emoji picker, available for use in chat.&lt;/p&gt;
+&lt;span class=&#34;version-support&#34;&gt;
+  Emoji was first supported in &lt;a href=&#34;https://github.com/owncast/owncast/releases/tag/v0.0.2&#34;&gt;Owncast 0.0.2&lt;/a&gt;.
+&lt;/span&gt;
+
+","permalink":"/docs/website/"},{"name":"Video","content":"&lt;p&gt;This document aims to outline what is being done to your content and the different knobs you can tweak to get the best output for your instance.&lt;/p&gt;
+&lt;div class=&#34;alert alert-warning d-flex&#34; role=&#34;alert&#34;&gt;
+  &lt;div class=&#34;flex-shrink-1 alert-icon&#34;&gt;💡&lt;/div&gt;
+  &lt;div class=&#34;w-100&#34;&gt;Keep in mind it&#39;s hard to give specific settings that will give you the best quality and performance with Owncast because people have different servers and requirements.&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Configure your broadcasting software to send a stream to Owncast that is reasonably close to what you expect to send to your viewers. &lt;a href=&#34;/docs/video/#how-you-configure-your-broadcasting-software-matters&#34;&gt;How you configure your broadcasting software matters&lt;/a&gt;. Don&amp;rsquo;t tell OBS to send to Owncast at 7000k at 60fps if you only expect to support bitrates of 4000k and 2000k at 30fps.&lt;/li&gt;
+&lt;li&gt;Start with a single &lt;a href=&#34;/docs/video/#things-you-can-configure&#34;&gt;output configuration&lt;/a&gt; with average settings. Test it. See how your hardware handles it. If you want to, and are able to, then add another and test that. Repeat until you arrive at the configuration you want to offer your viewers and that your hardware can handle.&lt;/li&gt;
+&lt;li&gt;If your hardware can&amp;rsquo;t handle your current configuration then reduce the number of output variants to only a single one, &lt;a href=&#34;/docs/video/#how-you-configure-your-broadcasting-software-matters&#34;&gt;reduce the quality of video you&amp;rsquo;re sending to Owncast&lt;/a&gt;, reduce your &lt;a href=&#34;/docs/video/#framerate&#34;&gt;framerate&lt;/a&gt;, and reduce the &lt;a href=&#34;/docs/video/#cpu-usage&#34;&gt;CPU usage&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;your-stream-can-be-played-outside-of-your-web-site&#34;&gt;Your stream can be played outside of your web site.&lt;/h2&gt;
+&lt;p&gt;Because Owncast uses the HLS standard, almost any video player can play your stream. Quicktime, VLC, mpv, etc. You could even build your own app that plays it. You can access your stream directly on your server by putting the path of &lt;code&gt;/hls/stream.m3u8&lt;/code&gt; into your player. For example: &lt;code&gt;https://owncast.mydomain.com/hls/stream.m3u8&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;how-does-an-owncast-video-stream-work&#34;&gt;How does an Owncast video stream work?&lt;/h2&gt;
+&lt;p&gt;Owncast takes your source stream and converts it to short, individual video segments. A list of these segments is supplied to your viewer&amp;rsquo;s player and will read and play all the segments in order. This is using a specification called &lt;a href=&#34;https://developer.apple.com/documentation/http_live_streaming/understanding_the_http_live_streaming_architecture&#34;&gt;HLS&lt;/a&gt; or HTTP Live Streaming. You can optionally generate multiple different qualities of video to allow lower bandwidth options. This is called &lt;a href=&#34;https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming&#34;&gt;Adaptive bitrate streaming&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This video from Jon Dahl is gives a very good overview of internet video, starting with &lt;em&gt;&amp;ldquo;what happens when you press play in your web browser?&amp;quot;&lt;/em&gt; and touching on every piece of the stack, backend and frontend. It translates very well to how Owncast works and is suggested if you want to learn more.&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/rb83esfHnW8?start=539&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In this case Owncast works as the Media encoder, Stream segmenter, and distribution web server. However &lt;a href=&#34;/docs/storage&#34;&gt;Owncast supports video being distributed via 3rd party storage as well&lt;/a&gt;, so in that case the video segments would be distributed from there, instead.&lt;/p&gt;
+
+
+&lt;div style=&#34;text-align: center;&#34;&gt;
+    &lt;figure &gt;
+        
+            &lt;img src=&#34;https://docs-assets.developer.apple.com/published/88e87744a3/de18e941-81de-482f-843d-834a4dd3aa71.png&#34; width=&#34;100%&#34; loading=&#34;lazy&#34; /&gt;
+            
+        
+    &lt;/figure&gt;
+    &lt;/div&gt;
+&lt;h4 id=&#34;things-to-keep-in-mind&#34;&gt;Things to keep in mind.&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;The more work you need done to convert the video from one size, quality or format to another the more it will slow everything else down.&lt;/li&gt;
+&lt;li&gt;The slower things go the slower the stream is provided to the user.&lt;/li&gt;
+&lt;li&gt;If stream is provided to the user too slowly they&amp;rsquo;ll start seeing buffering and errors.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Here&amp;rsquo;s what knobs can be tweaked when trying to determine the quality or qualities you want to provide your user while balancing the amount of server resources you&amp;rsquo;re consuming.&lt;/p&gt;
+&lt;h2 id=&#34;things-you-can-configure&#34;&gt;Things you can configure&lt;/h2&gt;
+&lt;h3 id=&#34;bitrate&#34;&gt;Bitrate&lt;/h3&gt;
+&lt;p&gt;The bitrate is the amount of data you send when you stream. A higher bitrate takes up more available internet bandwidth and create larger sized segments of video, making it take longer for viewers to download. Increasing your bitrate can improve your video quality, but only up to a certain point.&lt;/p&gt;
+&lt;h3 id=&#34;resolution&#34;&gt;Resolution&lt;/h3&gt;
+&lt;p&gt;Resolution refers to the size of a video on a screen. Like bitrates you can provide multiple different sizes for different cases, but asking to resize a video amounts in additional work that needs to be performed.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s recommended if you have to change the size to only change the width &lt;strong&gt;or&lt;/strong&gt; the height, and it&amp;rsquo;ll keep the correct aspect ratio for you. If you change both the width and the height you may be changing the aspect ratio of the video you may end up with a squished picture if you don&amp;rsquo;t set it correctly.&lt;/p&gt;
+&lt;h3 id=&#34;framerate&#34;&gt;Framerate&lt;/h3&gt;
+&lt;p&gt;Framerate is the number of frames per second in the video. Owncast defaults to 24fps, but other common framerates are 30 or 60. Increasing the framerate will use more CPU on your server, and more bandwidth for your users as more frames of video have to be processed and made available to your viewers any given second.&lt;/p&gt;
+&lt;h3 id=&#34;cpu-usage&#34;&gt;CPU Usage&lt;/h3&gt;
+&lt;p&gt;The more CPU you use the better the output image will be, or the smaller of a file the output will be for the same quality. However, you will need to balance the amount of CPU you have available with the amount you can use to process video.&lt;/p&gt;
+&lt;h3 id=&#34;latency-buffer&#34;&gt;Latency Buffer&lt;/h3&gt;
+&lt;p&gt;You have some control over the live latency between the broadcaster and the viewer. While it&amp;rsquo;s completely understandable to want to have as little latency as possible you may need to increase the latency buffer if you&amp;rsquo;re experiencing issues. In general the lower the latency the less buffer is available for any possible slow transfers, network blips or errors.&lt;/p&gt;
+&lt;div class=&#34;alert alert-warning d-flex&#34; role=&#34;alert&#34;&gt;
+  &lt;div class=&#34;flex-shrink-1 alert-icon&#34;&gt;💡&lt;/div&gt;
+  &lt;div class=&#34;w-100&#34;&gt;If you require real-time, video conferencing style latency you may want to look for a different solution that doesn&#39;t use HLS video, as this scaling and distribution model will never get to sub-second levels.&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;video-passthrough&#34;&gt;Video Passthrough&lt;/h3&gt;
+&lt;div class=&#34;alert alert-warning d-flex&#34; role=&#34;alert&#34;&gt;
+  &lt;div class=&#34;flex-shrink-1 alert-icon&#34;&gt;💡&lt;/div&gt;
+  &lt;div class=&#34;w-100&#34;&gt;Turning on video passthrough may make your stream unplayable. Read about Video Passthrough before turning it on and learn about the risks involved.&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Owncast has an optional setting to turn off re-encoding of your inbound stream, potentially saving substantial hardware utilization and supporting a higher quality stream with less resources. &lt;span style=&#34;color: red;&#34;&gt; &lt;strong&gt;However&lt;/strong&gt;, because your video will not be re-encoded it&amp;rsquo;s possible that certain video from certain sources may end up &lt;strong&gt;not being playable at all&lt;/strong&gt;&lt;/span&gt;. This is the risk of enabling this.&lt;/p&gt;
+&lt;p&gt;To enable, visit the advanced settings for a specific stream output. You can turn on &amp;ldquo;Video Passthrough&amp;rdquo;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Turn it on if you require it.&lt;/li&gt;
+&lt;li&gt;Test it.&lt;/li&gt;
+&lt;li&gt;If your video won&amp;rsquo;t play, &lt;strong&gt;then turn it off&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Only one output should be set as &amp;ldquo;passthrough&amp;rdquo;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If you find you require this feature, but it&amp;rsquo;s not working for you, you &lt;em&gt;may&lt;/em&gt; be able to change to a different broadcasting client solution to send video to Owncast differently. For example, if you&amp;rsquo;re using Restream, video passthrough will not work, but in general it&amp;rsquo;s worked for people streaming from OBS.&lt;/p&gt;
+&lt;h2 id=&#34;audio&#34;&gt;Audio&lt;/h2&gt;
+&lt;p&gt;What you&amp;rsquo;re sending from your broadcasting software is generally reasonable and additional conversion isn&amp;rsquo;t required, even for low-bandwidth viewers. Owncast will not change the audio stream and instead just pass it along to the end users to save additional work being performed.&lt;/p&gt;
+&lt;h2 id=&#34;how-you-configure-your-broadcasting-software-matters&#34;&gt;How you configure your broadcasting software matters.&lt;/h2&gt;
+&lt;p&gt;The more you send to Owncast, the more work it has do. This means you should generally not stream to Owncast at a significantly higher or lower quality than you expect to give to your viewers. It makes no sense to stream to Owncast at 6000k 60fps if you&amp;rsquo;re telling Owncast to send to your viewers at 3000k 30fps, because your server has to do that conversion. On the other hand it makes no sense to stream to Owncast with a 1000k bitrate and then send to your viewers at 4000k, that would be wasted work and bandwidth.&lt;/p&gt;
+&lt;p&gt;So in short: Try to reasonably figure out what you want to stream to your users and match that as best as possible when setting up your broadcasting software.&lt;/p&gt;
+&lt;p&gt;If you find yourself trying to squeeze better performance out of Owncast then try setting your broadcasting software to a lower quality as well as lowering the quality in your Owncast instance.&lt;/p&gt;
+&lt;h2 id=&#34;cpu-usage-1&#34;&gt;CPU Usage&lt;/h2&gt;
+&lt;p&gt;Each stream output variant adds significant CPU usage and slows down the overall generation of video segments. If you have a slow server running Owncast you should probably only have one bitrate variant in play. If you add more and you notice that playback becomes choppy it&amp;rsquo;s likely that everything is running too slowly for consistent playback. Consider removing the additional variants and tweaking your single variant so it supports a wider variety of network conditions.&lt;/p&gt;
+&lt;h2 id=&#34;disk-usage&#34;&gt;Disk Usage&lt;/h2&gt;
+&lt;p&gt;More stream output variants requires more disk space, since it&amp;rsquo;s another copy of the video on disk. If you&amp;rsquo;re serving video locally and you have enough disk space then it&amp;rsquo;s probably no big deal and files will rather quickly get rotated and cleaned up. If you&amp;rsquo;re using something like &lt;a href=&#34;/docs/storage/&#34;&gt;S3 for storage&lt;/a&gt; then files won&amp;rsquo;t get cleaned up until some point in the future, so you&amp;rsquo;ll have more remote storage use in play.&lt;/p&gt;
+","permalink":"/docs/video/"},{"name":"API Documentation","content":"&lt;p&gt;Owncast offers an API to integrate its services in other interfaces, like the &lt;a href=&#34;https://github.com/owncast/owncast-admin&#34;&gt;Owncast Admin Panel&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;the-latest-api&#34;&gt;The latest API&lt;/h2&gt;
+&lt;h3 id=&#34;release&#34;&gt;Release&lt;/h3&gt;
+&lt;p&gt;The following documents the latest officially released APIs.&lt;/p&gt;
+
+
+
+  
+  
+
+
+&lt;a  href=&#34;/api/latest&#34;   target=&#34;_blank&#34;  class=&#34;book-btn&#34;&gt;
+  Latest Released API
+&lt;/a&gt;
+
+&lt;h3 id=&#34;development&#34;&gt;Development&lt;/h3&gt;
+&lt;p&gt;If you&amp;rsquo;re developing against the &lt;code&gt;master&lt;/code&gt; branch of Owncast the following documentation may be helpful to you.  Please mind that development versions may be unstable as they do not have the testing that Owncast releases endure.&lt;/p&gt;
+
+
+
+  
+  
+
+
+&lt;a  href=&#34;/api/development&#34;   target=&#34;_blank&#34;  class=&#34;book-btn&#34;&gt;
+  Development
+&lt;/a&gt;
+
+&lt;h2 id=&#34;more&#34;&gt;More&lt;/h2&gt;
+&lt;p&gt;Documentation for each release&amp;rsquo;s APIs can be found with the release notes of each version.&lt;/p&gt;
+
+
+
+  
+  
+
+
+&lt;a  href=&#34;/releases&#34;   target=&#34;_blank&#34;  class=&#34;book-btn&#34;&gt;
+  Releases
+&lt;/a&gt;
+
+&lt;p&gt;You can also checkout the API documentation at any point from the &lt;a href=&#34;https://github.com/owncast/owncast&#34;&gt;git repository&lt;/a&gt;.&lt;/p&gt;
+","permalink":"/docs/api/"},{"name":"External storage","content":"&lt;p&gt;Instead of serving video directly from your personal server you can use a S3 compatible storage provider to offload the bandwidth and storage requirements elsewhere.&lt;/p&gt;
+&lt;p&gt;Choose your storage provider of choice.  If your provider is not listed, you can &lt;a href=&#34;https://github.com/owncast/owncast/issues&#34;&gt;file an issue&lt;/a&gt; and we&amp;rsquo;ll test and write up some documentation for it.&lt;/p&gt;
+","permalink":"/docs/storage/"},{"name":"The Directory","content":"&lt;p&gt;To help people discover streams by people using Owncast we have an optional Owncast directory you can add yourself to.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Visit the &lt;strong&gt;&amp;ldquo;General&amp;rdquo;&lt;/strong&gt; settings in the admin.&lt;/li&gt;
+&lt;li&gt;Set the public URL to your Owncast instance that you want people to be linked to.&lt;/li&gt;
+&lt;li&gt;Set the &lt;strong&gt;&amp;ldquo;About&amp;rdquo;&lt;/strong&gt; with a brief description of your stream.&lt;/li&gt;
+&lt;li&gt;Set the &lt;strong&gt;tags&lt;/strong&gt; associated with the content you stream.&lt;/li&gt;
+&lt;li&gt;Mark if your content is &lt;em&gt;Not Safe For Work&lt;/em&gt; (nsfw).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;alert alert-warning d-flex&#34; role=&#34;alert&#34;&gt;
+  &lt;div class=&#34;flex-shrink-1 alert-icon&#34;&gt;💡&lt;/div&gt;
+  &lt;div class=&#34;w-100&#34;&gt;This directory is operated as a complimentary service by the Owncast project to share people&#39;s streams. There is no obligation to list any specific server or topic. Any server can be removed at any time for any reason.&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;if-your-server-is-not-showing-up-in-the-directory&#34;&gt;If your server is not showing up in the directory&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;It&amp;rsquo;s opt-in, so make sure you follow the &lt;a href=&#34;/docs/directory&#34;&gt;configuration directions&lt;/a&gt; to enable the directory for your server.&lt;/li&gt;
+&lt;li&gt;It will take approximately 5min for your server to show up the first time you stream after enabling this feature.&lt;/li&gt;
+&lt;li&gt;You may want to run your server with &lt;code&gt;owncast --enableVerboseLogging&lt;/code&gt; to see what errors show up.&lt;/li&gt;
+&lt;li&gt;If you used to be listed, but no longer show up you may need to reset your registration to the server in the admin&amp;rsquo;s Server Settings.&lt;/li&gt;
+&lt;li&gt;If you recently changed the URL of your server reset your registration in your Server Settings.&lt;/li&gt;
+&lt;li&gt;If there&amp;rsquo;s some issue that&amp;rsquo;s causing you not to be listed &lt;a href=&#34;https://github.com/owncast/owncast/issues&#34;&gt;please file a GitHub issue&lt;/a&gt; so we can help troubleshoot or reset your registration with the directory.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;span class=&#34;version-support&#34;&gt;
+  Owncast directory was first supported in &lt;a href=&#34;https://github.com/owncast/owncast/releases/tag/v0.0.3&#34;&gt;Owncast 0.0.3&lt;/a&gt;.
+&lt;/span&gt;
+
+","permalink":"/docs/directory/"},{"name":"Viewer details","content":"&lt;p&gt;Owncast can display high-level geographic information about your current viewers if you enable it in your instance.&lt;/p&gt;
+&lt;p&gt;Your server can optionally use the &lt;a href=&#34;https://dev.maxmind.com/geoip/geoip2/geolite2/&#34;&gt;MaxMind GeoLite2 Database&lt;/a&gt;. If you provide your own free copy of the database it will be used. Perform the following in order to add this feature.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.maxmind.com/en/geolite2/signup&#34;&gt;Create a free account&lt;/a&gt; with MaxMind.&lt;/li&gt;
+&lt;li&gt;Wait for an email and follow the link to your account.&lt;/li&gt;
+&lt;li&gt;Under &lt;code&gt;Database Products and Subscriptions&lt;/code&gt; click &lt;code&gt;Download Databases&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Download &lt;code&gt;GeoLite2 City (GeoIP2 Binary .mmdb)&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Unzip the file and place the &lt;code&gt;GeoLite2-City.mmdb&lt;/code&gt; file into the &lt;code&gt;data&lt;/code&gt; directory of your Owncast server. Create this directory if needed.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;span class=&#34;version-support&#34;&gt;
+  Location support was first supported in &lt;a href=&#34;https://github.com/owncast/owncast/releases/tag/v0.0.3&#34;&gt;Owncast 0.0.3&lt;/a&gt;.
+&lt;/span&gt;
+
+&lt;h2 id=&#34;disclaimer&#34;&gt;Disclaimer&lt;/h2&gt;
+&lt;p&gt;If enabled this product includes GeoLite2 data created by MaxMind, available from
+&lt;a href=&#34;https://www.maxmind.com&#34;&gt;&lt;a href=&#34;https://www.maxmind.com&#34;&gt;https://www.maxmind.com&lt;/a&gt;&lt;/a&gt;.&lt;/p&gt;
+","permalink":"/docs/viewers/"},{"name":"Building from Source","content":"&lt;ol&gt;
+&lt;li&gt;Ensure you have the gcc compiler installed for your system.&lt;/li&gt;
+&lt;li&gt;Install the &lt;a href=&#34;https://golang.org/dl/&#34;&gt;Go toolchain&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Clone the repo. &lt;code&gt;git clone https://github.com/owncast/owncast&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;go run main.go pkged.go&lt;/code&gt; will run the application.&lt;/li&gt;
+&lt;li&gt;Start a stream to your local instance &lt;a href=&#34;/quickstart/startstreaming/&#34;&gt;using your broadcasting software&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;A basic test can be run by running &lt;code&gt; ./test/ocTestStream.sh test/automated/test.mp4&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;using-docker&#34;&gt;Using Docker&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Download the code: &lt;code&gt;git clone https://github.com/owncast/owncast&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Make any &lt;a href=&#34;/docs/configuration&#34;&gt;configuration&lt;/a&gt; changes.&lt;/li&gt;
+&lt;li&gt;If you ever make any future config file changes you must rerun the &lt;code&gt;docker build&lt;/code&gt; step otherwise you can just run the &lt;code&gt;docker run&lt;/code&gt; step to run the service going forward.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;docker build -t owncast .&lt;/code&gt; and wait. It may take a few minutes to build depending on the speed of your server.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;docker run -p 8080:8080 -p 1935:1935 -it owncast&lt;/code&gt; to start the service with your custom configuration.&lt;/li&gt;
+&lt;/ol&gt;
+","permalink":"/docs/building/"},{"name":"Scaling Owncast","content":"&lt;h2 id=&#34;disclaimer&#34;&gt;Disclaimer&lt;/h2&gt;
+&lt;p&gt;Owncast works great out of the box as a personal streaming service. The ease of install and all-in-one architecture allows for people to get up and running quickly. The downside of this is it requires a bit more thought around large deployments, as you can&amp;rsquo;t just run more copies of Owncast for scale.&lt;/p&gt;
+&lt;p&gt;If you are not familiar with the topics below, or you don&amp;rsquo;t feel comfortable with the following steps it&amp;rsquo;s unlikely you should be taking on the additional responsibility of a larger deployment of any service. &lt;strong&gt;Basic system administration experience and understanding of the architecture is generally expected when trying to squeeze additional performance out of anything&lt;/strong&gt;, and this might not be for you. Don&amp;rsquo;t feel bad. &lt;strong&gt;Owncast will still work great for you out of the box&lt;/strong&gt;, but you might want to acquire some professional help if you need something more than that.&lt;/p&gt;
+&lt;h2 id=&#34;video&#34;&gt;Video&lt;/h2&gt;
+&lt;p&gt;The solution for scaling your video to a large number of concurrent viewers is to use the built-in support for &lt;a href=&#34;/docs/storage&#34;&gt;external storage services&lt;/a&gt;. This allows you to generate the video on your Owncast server, but serve it from a provider who has unlimited bandwidth and capacity at a low cost.&lt;/p&gt;
+&lt;p&gt;With this setup you don&amp;rsquo;t need extra CPU or a more powerful server in order to support more viewers, as they don&amp;rsquo;t technically touch your server once the video begins.&lt;/p&gt;
+&lt;h2 id=&#34;chat&#34;&gt;Chat&lt;/h2&gt;
+&lt;p&gt;Scaling chat is more difficult, as Owncast is an all-in-one, single server solution. You&amp;rsquo;re limited by what your single server will be able to handle as far as open connections. You&amp;rsquo;re likely, with a little tweaking, to get many hundreds of people connected to chat. But if you&amp;rsquo;re looking at 1,000 or more, Owncast&amp;rsquo;s chat is likely not the correct solution for your use case.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;You will want to have a more powerful server (cpu, ram) in order to handle additional chat connections.&lt;/li&gt;
+&lt;li&gt;You will need to increase the user&amp;rsquo;s maximum open resource limit on your machine (ulimit).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If you get the &lt;code&gt;too many open files&lt;/code&gt; error it&amp;rsquo;s because your &lt;code&gt;ulimit&lt;/code&gt; value is lower than the number of open resources Owncast is trying to to use.&lt;/p&gt;
+&lt;p&gt;The default for &lt;code&gt;ulimit -n&lt;/code&gt; is generally 1024, so you can increase from there by using the &lt;code&gt;ulimit&lt;/code&gt; command or editing your system files. &lt;a href=&#34;https://www.learnitguide.net/2015/07/how-to-increase-ulimit-values-in-linux.html&#34;&gt;Here is an overview of the different limits and how to change them&lt;/a&gt;. It&amp;rsquo;s beyond the scope of this documentation to go into detail of what numbers you should use and where to put them.&lt;/p&gt;
+","permalink":"/docs/scaling/"},{"name":"Backups","content":"&lt;p&gt;Owncast will create a backup of your data periodically. It can be found in your &lt;code&gt;backup&lt;/code&gt; directory as &lt;code&gt;owncastdb.bak&lt;/code&gt;. You can add this to your normal system backups to keep your Owncast data safe.&lt;/p&gt;
+&lt;span class=&#34;version-support&#34;&gt;
+  Data backup was first supported in &lt;a href=&#34;https://github.com/owncast/owncast/releases/tag/v0.0.6&#34;&gt;Owncast 0.0.6&lt;/a&gt;.
+&lt;/span&gt;
+
+&lt;h2 id=&#34;restore&#34;&gt;Restore&lt;/h2&gt;
+&lt;p&gt;Restoring an Owncast backup file will bring you back to the time the backup was created. This is useful if you want to move data to another machine, want to go back in time for some reason, or there&amp;rsquo;s some type of problem you&amp;rsquo;re looking to resolve.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Stop Owncast from running.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;./owncast --restoreDatabase &amp;lt;backupfile&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Restart Owncast as you normally would. It will be using the restored data.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;span class=&#34;version-support&#34;&gt;
+  Data restore was first supported in &lt;a href=&#34;https://github.com/owncast/owncast/releases/tag/v0.0.6&#34;&gt;Owncast 0.0.6&lt;/a&gt;.
+&lt;/span&gt;
+
+","permalink":"/docs/backups/"}]}
