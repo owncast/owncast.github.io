@@ -19,7 +19,7 @@ Here are some steps you can try taking to resolve this.
 1. Try reducing [the quality of the video you're sending to Owncast in your broadcasting software](/docs/encoding/#how-you-configure-your-broadcasting-software-matters).
 1. Experiment with reducing the bitrate and framerate of your video.
 1. If you've gone down to a single output, changed to using less cpu, and experimented with different qualities in your broadcasting software, it's possible the server you're running Owncast is just not powerful enough for the task and you might need to try a different environment to run this on.
-1. You may want to experiment with enabling [video passthrough](/docs/video/#video-passthrough), where your video is not re-encoded.  However, this may not be a solution in all environments.  [Read more](/docs/video/#video-passthrough).
+1. You may want to experiment with enabling [video passthrough](/docs/video/#video-passthrough), where your video is not re-encoded. However, this may not be a solution in all environments. [Read more](/docs/video/#video-passthrough).
 
 In general, the easiest way to save CPU is to decrease the input size, decrease the output size, or both.
 
@@ -30,7 +30,7 @@ Many things can be responsible for buffering and issues with the video playback.
 1. Make sure your **hardware is not throwing errors** as detailed above.
 1. Make sure your broadcasting computer is broadcasting live video reliably. If your own computer or network connection is having a hard time getting video to the internet then viewers will be stuck in a buffering state. **Reduce the bitrate, resolution and/or framerate in your broadcasting software** on your computer or mobile device if needed.
 1. Try **increasing your latency buffer** in your settings. This will start the user further behind live but give the client more playable video before it gets stuck waiting for the live edge.
-1. **Change your video settings** to use [less cpu](/docs/encoding/#cpu-usage) for encoding video.  Possibly [try passthrough](/docs/video/#video-passthrough).
+1. **Change your video settings** to use [less cpu](/docs/encoding/#cpu-usage) for encoding video. Possibly [try passthrough](/docs/video/#video-passthrough).
 1. Reduce your [stream quality settings](/docs/configuration/#video-quality) to a single output and a lower [bitrate](/docs/encoding/#bitrate). Experiment with increasing the bitrate and adding another optional stream output once you find settings that work for you.
 1. If you are using external storage, **make sure you're able to upload to this storage service fast enough**. See below.
 
