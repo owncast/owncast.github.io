@@ -201,6 +201,7 @@ allowfullscreen&gt;
 &lt;ol&gt;
 &lt;li&gt;Make sure you&amp;rsquo;re running a supported version of ffmpeg. &lt;a href=&#34;https://ffmpeg.org/download.html&#34;&gt;Download ffmpeg 4.1.5 or above&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;Make sure your copy of ffmpeg was not installed via Snap packages, as the sandboxing of Snap distributed software isn&amp;rsquo;t compatible in this case. If you see the error &lt;code&gt;Error: unable to open display&lt;/code&gt;, this might be your problem.&lt;/li&gt;
+&lt;li&gt;Take a look at &lt;code&gt;transcoder.log&lt;/code&gt; for any errors.&lt;/li&gt;
 &lt;li&gt;If you see &lt;code&gt;Unrecognized option var_stream_map&lt;/code&gt; in &lt;code&gt;transcoder.log&lt;/code&gt; it also means you need to update your copy of ffmpeg.&lt;/li&gt;
 &lt;li&gt;Make sure you have &lt;a href=&#34;/docs/video/#video-passthrough&#34;&gt;video passthrough&lt;/a&gt; disabled.&lt;/li&gt;
 &lt;/ol&gt;
