@@ -67,6 +67,12 @@ const QUOTES = [
   url: 'https://twitter.com/glider_space/status/1374856958650556417',
   name: '@glider_space',
  },
+ {
+  quote: "Very professional.  I hope to see this for every city council.",
+  url: 'https://uelfte.club/@jannik/105985943638208608',
+  name: 'Response from a German city council meeting using Owncast',
+ },
+
 ];
 
 (function(){
