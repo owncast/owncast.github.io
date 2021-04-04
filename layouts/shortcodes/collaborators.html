@@ -22,6 +22,11 @@
         width: 100%;
     }
 
+    .contributor-item .square-contributor-item {
+        border-radius: 0px;
+        background: transparent;
+    }
+
     .donor-box {
         margin-top: 50px;
     }
@@ -48,15 +53,20 @@
 
 <ul class="contributor-box">
     {{ range $.Site.Data.donors }}
-    {{ if not (in (lower .login) "bot") }}
+    {{ $defaultIcon := printf "https://robohash.org/%s?set=set4" .login| printf "%s" }}
+
+    {{ $square := ""}}
+    {{ if eq .avatar_url nil }}
+    {{ $square = "square-contributor-item"}}
+    {{ end }}
+
     <li class="contributor-item">
         <figure>
             <a href="{{.html_url}}" target="_blank">
-                <img src="{{default "/images/logo.svg" .avatar_url }}" loading="lazy" alt="{{.login}}"/>
+                <img src="{{default $defaultIcon .avatar_url }}" class="{{ $square }}" loading="lazy" alt="{{.login}}" title="{{.login}}" />
             </a>
         </figure>
     </li>
-    {{ end }}
     {{ end }}
 </ul>
 </section>
