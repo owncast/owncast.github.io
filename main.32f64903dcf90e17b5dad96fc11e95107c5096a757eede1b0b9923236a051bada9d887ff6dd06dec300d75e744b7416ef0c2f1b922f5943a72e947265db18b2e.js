@@ -202,7 +202,7 @@ const QUOTES = [
   name: 'Response from a German city council meeting using Owncast',
  },
  {
-  quote: "Video game live streaming, like so much of the internet, is controlled by massive corporations. When you broadcast your gaming sessions to huge audiences on Twitch or YouTube, you help Amazon and Google become even more powerful. Owncast shows that this doesn’t need to be the case. We shouldn’t need Amazon’s permission to goof off in a battle royale in front of our digital friends. Owncast offers a promising alternative glimpse into a more democratic, live streaming future that’s ripe for seizing.",
+  quote: "We shouldn’t need Amazon’s permission to goof off in a battle royale in front of our digital friends. Owncast offers a promising alternative glimpse into a more democratic, live streaming future that’s ripe for seizing.",
   url: 'https://www.pcmag.com/reviews/owncast',
   name: 'PC Mag Review',
  }
