@@ -72,6 +72,11 @@ const QUOTES = [
   url: 'https://uelfte.club/@jannik/105985943638208608',
   name: 'Response from a German city council meeting using Owncast',
  },
+ {
+  quote: "We shouldn’t need Amazon’s permission to goof off in a battle royale in front of our digital friends. Owncast offers a promising alternative glimpse into a more democratic, live streaming future that’s ripe for seizing.",
+  url: 'https://www.pcmag.com/reviews/owncast',
+  name: 'PC Mag Review',
+ }
 
 ];
 
