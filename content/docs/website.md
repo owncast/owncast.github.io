@@ -60,3 +60,18 @@ Code blocks: <code>\`your text\`</code>
 Place your own custom emoji images into `/webroot/img/emoji/` and the next time you refresh the web site you'll see your images in the emoji picker, available for use in chat.
 
 {{<versionsupport feature="emoji" version="0.0.2">}}
+
+
+## Player
+
+The web video player has a handful of keyboard shortcuts you can use.
+
+|Action |Shortcut  |
+--- | --- |
+|Play/Pause|_Spacebar_|
+|Volume up|_0_|
+|Volume down|_9_|
+|Mute|_m_|
+|Toggle full screen|_f_|
+
+{{<versionsupport feature="player shortcuts" version="0.0.7">}}
