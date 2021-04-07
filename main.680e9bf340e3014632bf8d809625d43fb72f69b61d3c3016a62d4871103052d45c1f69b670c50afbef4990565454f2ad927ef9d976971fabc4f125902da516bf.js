@@ -199,12 +199,17 @@ const QUOTES = [
  {
   quote: "Very professional.  I hope to see this for every city council.",
   url: 'https://uelfte.club/@jannik/105985943638208608',
-  name: 'Response from a German city council meeting using Owncast',
+  name: 'City council meeting using Owncast',
  },
  {
   quote: "We shouldn’t need Amazon’s permission to goof off in a battle royale in front of our digital friends. Owncast offers a promising alternative glimpse into a more democratic, live streaming future that’s ripe for seizing.",
   url: 'https://www.pcmag.com/reviews/owncast',
-  name: 'PC Mag Review',
+  name: 'PC Mag Review of Owncast',
+ },
+ {
+  quote: "For true democratic freedom, go with Owncast, a service that lets you stream whatever you want to whoever you want without corporate oversight.",
+  url: 'https://www.pcmag.com/picks/best-video-game-live-streaming-services',
+  name: 'PC Mag The Best Streaming Services for 2021',
  }
 
 ];
