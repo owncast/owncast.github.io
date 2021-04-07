@@ -73,5 +73,6 @@ The web video player has a handful of keyboard shortcuts you can use.
 |Volume down|_9_|
 |Mute|_m_|
 |Toggle full screen|_f_|
+|Toggle chat|_c_|
 
 {{<versionsupport feature="player shortcuts" version="0.0.7">}}

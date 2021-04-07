@@ -37,9 +37,9 @@ If you have Intel integrated graphics you may be able to use it using [VA-API](#
 
 ### Raspberry Pi
 
-If you have a recent Raspberry Pi and using the [NOOBS](https://www.raspberrypi.org/documentation/installation/noobs.md) operating system it's actually quite easy to get Owncast running in a hardware accelerated fashion.  NOOBS includes support for [OpenMax](#openmax) (OMX) out of the box and includes a version of `ffmpeg` that is built to support it.
+If you have a recent Raspberry Pi and using the [Raspberry Pi OS](https://www.raspberrypi.org/documentation/installation/noobs.md) operating system it's actually quite easy to get Owncast running in a hardware accelerated fashion.  Raspberry Pi OS includes support for [OpenMax](#openmax) (OMX) out of the box and includes a version of `ffmpeg` that is built to support it.
 
-However, this seems to only be true for 32 bit operating systems on a Raspberry Pi, as [omx seems to be deprecated under 64 bit environments](https://github.com/raspberrypi/firmware/issues/1366#issuecomment-612902082.
+However, this seems to only be true for 32 bit operating systems on a Raspberry Pi, as [omx seems to be deprecated under 64 bit environments](https://github.com/raspberrypi/firmware/issues/1366#issuecomment-612902082).
 
 <!-- Links:
 
@@ -85,7 +85,7 @@ V4L utilizes the `h264_v4l2m2m` codec if the driver is enabled in your kernel an
 
 ### OpenMAX
 
-OpenMAX is a unified abstraction layer that allows access to hardware that otherwise requires vendor specific APIs.  It will work out of the box on modern Raspberry Pi's running a recent version of the [NOOBS](https://www.raspberrypi.org/documentation/installation/noobs.md) operating system.
+OpenMAX is a unified abstraction layer that allows access to hardware that otherwise requires vendor specific APIs.  It will work out of the box on modern Raspberry Pi's running a recent version of the [Raspberry Pi OS](https://www.raspberrypi.org/documentation/installation/noobs.md) operating system.
 
 Verify your copy of ffmpeg has omx support by looking at the [ffmpeg](#ffmpeg) instructions below. If `h264_omx` is in the list you should be good to go.
 
