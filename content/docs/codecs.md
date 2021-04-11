@@ -1,6 +1,6 @@
 ---
-title: "Hardware accelerated encoding with supported hardware"
-description: "If you have direct access to specific hardware you may be able to increase the performance of your server."
+title: "Accelerated encoding with supported codecs and hardware"
+description: "If you have direct access to specific hardware you may be able to increase the performance of your server by using a compatible codec."
 weight: 060
 images: []
 toc: true
@@ -40,11 +40,6 @@ If you have Intel integrated graphics you may be able to use it using [VA-API](#
 If you have a recent Raspberry Pi and using the [Raspberry Pi OS](https://www.raspberrypi.org/documentation/installation/noobs.md) operating system it's actually quite easy to get Owncast running in a hardware accelerated fashion.  Raspberry Pi OS includes support for [OpenMax](#openmax) (OMX) out of the box and includes a version of `ffmpeg` that is built to support it.
 
 However, this seems to only be true for 32 bit operating systems on a Raspberry Pi, as [omx seems to be deprecated under 64 bit environments](https://github.com/raspberrypi/firmware/issues/1366#issuecomment-612902082).
-
-<!-- Links:
-
-- [Hardware Accelerated Video Encoding on the Raspberry Pi 4 on Ubuntu 20.04 64-bit](https://www.willusher.io/general/2020/11/15/hw-accel-encoding-rpi4) -->
-
 ### NVIDIA GPUs
 
 NVIDIA GPUs ship with an on-chip hardware encoder unit often referred to as NVENC. Separate from the CUDA cores, NVENC run encoding workloads without slowing the execution of graphics or CUDA workloads running at the same time.
@@ -77,11 +72,6 @@ Links:
 
 - [VA-API at Linux Reviews](https://linuxreviews.org/VAAPI)
 - [Intel Media Driver for VA-API](https://github.com/intel/media-driver/)
-
-
-<!-- ### Video4Linux
-
-V4L utilizes the `h264_v4l2m2m` codec if the driver is enabled in your kernel and the tools are enabled on your system. -->
 
 ### OpenMAX
 
