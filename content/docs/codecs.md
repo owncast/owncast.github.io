@@ -1,15 +1,17 @@
 ---
-title: "Accelerated encoding with supported codecs and hardware"
+title: "Codecs & Hardware Acceleration"
 description: "If you have direct access to specific hardware you may be able to increase the performance of your server by using a compatible codec."
-weight: 060
-images: []
+menu:
+  docs:
+    parent: "guides"
+weight: 400
 toc: true
 ---
 
 {{<versionsupport feature="Hardware accelerated encoding" version="0.0.7">}}
 
 
-{{< alert icon="💡" text="This should be viewed as an advanced topic that may require a substantial investment in time to get working. It may require downloading and compiling source code. It is highly recommended you configure and use your Owncast server without using specialized hardware first. Get Owncast working and improve performance later." >}}
+{{< alert icon="💡" text="This should be viewed as an advanced topic that may require a substantial investment in time to get working. It may require downloading and compiling source code. It is highly recommended you configure and use your Owncast server without using alternate codecs first. Get Owncast working and improve performance later." >}}
 
 {{< alert icon="💡" text="It is unlikely that any specific support can be provided to help you, as it very much depends on the hardware you have and the software, drivers and versions of libraries you have installed. Outside of this document you are mostly on your own." >}}
 
