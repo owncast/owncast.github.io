@@ -26,7 +26,7 @@ Some examples of this functionality might be things like:
 ## Limitations
 
 1. External actions must be hosted on a server that supports SSL and has a `https` protocol.  Unsecured URLs are not supported.
-1. These URLs must support existing inside an iframe via [X-FRAME-OPTIONS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) and the [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy).  If you are blocked then you're limited to loading this URL in a new tab and that's not a great experience.
+1. These URLs must support existing inside an iframe. This means [X-FRAME-OPTIONS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) and the [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) cannot be blocking.  If you are blocked then you're limited to loading this URL in a new tab and that's not a great experience.
 1. While you can experiment with using URLs that you don't personally control, it's often likely that many of them will not work due to limitations placed on the remote server.  An example of this is just throwing in a PayPal or Google URL.
 
 ## How to register actions
@@ -34,7 +34,7 @@ Some examples of this functionality might be things like:
 1. Visit the admin, and under "Integrations" go to the "External Actions" page.
 1. Add an action.
 1. Put the URL of this action.  It should be a HTTPS destination and follow the best practices listed.
-1. Give it a name that will be displayed on the button that launches this action, an optional description that will show in the modal that presents the action, and optionally a color that will be used for the button.
+1. Give it a name that will be displayed on the button that launches this action, an optional description that will show in the modal that presents the action, a URL to an optional icon for the button, and optionally a color that will be used for the button.
 1. If you really want to register a URL you don't control, but it doesn't work with the default functionality, you can tell it to "Open Externally" and it will open a new tab in your browser. This is not optimal, but it's an option.
 
 ## Best practices
