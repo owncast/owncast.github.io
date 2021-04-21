@@ -7,7 +7,7 @@ set -o pipefail
 
 # Install configuration
 if ! [ "${OWNCAST_VERSION:-}" ]; then
-  OWNCAST_VERSION="0.0.6"
+  OWNCAST_VERSION="0.0.7"
 fi
 
 if ! [ "${OWNCAST_INSTALL_DIRECTORY:-}" ]; then
