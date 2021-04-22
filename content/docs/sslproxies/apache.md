@@ -16,16 +16,18 @@ $ sudo a2enmod proxy proxy_http proxy_wstunnel ssl
 ```
 
 {{< highlight ApacheConf >}}
-<VirtualHost *:80>
-        ServerName live.example.com
-        ServerAdmin admin@example.com
+<VirtualHost \*:80>
+ServerName live.example.com
+ServerAdmin admin@example.com
 
         RewriteEngine on
         RewriteCond %{SERVER_NAME} =live.example.com
         RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+
 </VirtualHost>
 
 # live-le-ssl.conf
+
 <IfModule mod_ssl.c>
 <VirtualHost *:443>
         ServerName live.example.com
@@ -57,7 +59,7 @@ $ sudo a2enmod proxy proxy_http proxy_wstunnel ssl
         SSLCertificateFile /path/to/fullchain.pem
         SSLCertificateKeyFile /path/to/privkey.pem
         Include /etc/letsencrypt/options-ssl-apache.conf
+
 </VirtualHost>
 </IfModule>
 {{</ highlight >}}
-
