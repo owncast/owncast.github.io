@@ -9,6 +9,12 @@ type: subpages
 
 Apache requires the most boilerplate configuration, but if you're already using Apache as a web server you can [configure it as a reverse proxy](https://httpd.apache.org/docs/2.4/howto/reverse_proxy.html) in front of your Owncast server to enable SSL.
 
+Ensure required Apache modules are enabled using the `a2enmod` command.
+
+```
+$ sudo a2enmod proxy proxy_http proxy_wstunnel ssl
+```
+
 {{< highlight ApacheConf >}}
 <VirtualHost *:80>
         ServerName live.example.com
