@@ -48,5 +48,8 @@ description: "0.0.7 adds the ability to use some hardware accelerated codecs for
 
 * Limit image loading to only come from the local server. No more remote images in chat. [#756](https://github.com/owncast/owncast/issues/756)
 
+### Notes about future releases
+
+This will be the the last release to allow external access to the websocket. If you have built tools or utilities that utilize getting chat events it is recommended that you migrate to supported [3rd party APIs](https://owncast.online/thirdparty/) instead. If you have a use case that doesn't fit these APIs please let us know and in the future we may find a safe way to support the features you require.
 
 Thank you to the contributors for v0.0.7: [nebunez](https://github.com/nebunez), [gabek](https://github.com/gabek), [thilobillerbeck](https://github.com/thilobillerbeck), [aral](https://github.com/aral), [gingervitis](https://github.com/gingervitis) as well as all of the fantastic people helping out in the [Owncast chat](https://owncast.rocket.chat) answering questions, testing and providing feedback.
