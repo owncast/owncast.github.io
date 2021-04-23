@@ -14,9 +14,10 @@ The following service providers offer 1-click-install options for Owncast where 
 
 <p>
     <a href="/quickstart/digitalocean/"><img src="/quickstart/digitalocean/DO_Logo_horizontal_blue.svg" width="50%"></a>
-    <p style="font-size: 0.7em">Get $100 worth of service for free if you sign up with DigitalOcean.</p>
 </p>
 
 <p>
     <a href="/quickstart/linode/"><img src="/quickstart/linode/linode.svg" width="50%"></a>
 </p>
+
+<p style="font-size: 0.7em">Get $100 worth of service for free if you sign up with either of these providers.</p>

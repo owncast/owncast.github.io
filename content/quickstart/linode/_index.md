@@ -1,26 +1,28 @@
 ---
 title: "One-click-install with Linode"
-description: "Automatically have a server with Owncast pre-installed by using supported hosting providers."
+description: "Automatically have a server with Owncast pre-installed on a Linode server."
 type: docs
 ---
 
-[![Linode](linode.svg)](https://cloud.linode.com/stackscripts/780643?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d)
+[![Linode](linode.svg)](https://www.linode.com/marketplace/apps/owncast/owncast/?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d)
 
 If you choose to use Linode as your hosting provider you can use the Linode One-Click-Install method.
 
 **Note:** The Owncast Project may receive referral credit for deploying Owncast with Linode, so it's an easy way to support the project.
 
+Linode has [written up a guide](https://www.linode.com/docs/guides/deploy-owncast-with-marketplace-apps) as well that you may want to reference, but the following Owncast documentation goes into more detail that may be helpful to you.
+
 ## What you need
 
 1. A domain name and access to your DNS settings. This is required for supporting [SSL](/docs/sslproxies/).
-1. A [Linode](https://linode.com?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d) account.
+1. A [Linode](https://www.linode.com/marketplace/apps/owncast/owncast/?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d) account.
 
 ## Create your new server
 
-1. Visit the "StackScript" for Owncast located at [Linode](https://cloud.linode.com/stackscripts/780643?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d).
-1. Press the "Deploy New Linode" button and get sent to the create new Linode server page.
+1. Visit the [Owncast Linode Marketplace app](https://www.linode.com/marketplace/apps/owncast/owncast/?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d).
+1. Press the "Deploy this app" button and get sent to the page with the "Linode Summary" where you can press "Create Linode".
    <img src="../linode/linode1.png" width="90%">
-1. Under "Advanced Options" put in the hostname that you'll use for this server, such as owncast.mydomain.com
+1. Under "Advanced Options" put in the hostname that you'll use for this server, such as owncast.mydomain.com.
 1. Put in your email address.
 1. If you skip this hostname and email step your server will not get automatically configured for SSL.
    <img src="../linode/linode2.png" width="90%">
