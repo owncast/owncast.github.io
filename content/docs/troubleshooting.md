@@ -58,15 +58,20 @@ The chat is only enabled when a stream is active. This is to stop drive-by spamm
 
 If you're using a proxy in front of your Owncast instance make sure it is configured properly to support websockets. By default some do not pass along the websocket properly. Read [your proxy documentation](/docs/sslproxies) to make sure websocket support is configured properly to support Owncast chat.
 
+## If you are immediately disconnected and your stream won't begin.
+1. Make sure you're running a supported version of ffmpeg. [Download ffmpeg 4.1.5 or above](https://ffmpeg.org/download.html).
+1. Look at your owncast logs in the console or your admin. There may be specific error messages to tell you what you can do next.
+1. Take a look at `transcoder.log` for detailed logging that you can provide when asking for help if you don't see anything in the Owncast logs.
+1. Make sure your copy of ffmpeg was not installed via Snap packages, as the sandboxing of Snap distributed software isn't compatible in this case. If you see the error `Error: unable to open display` in `transcoder.log`, this might be your problem.
+
 ## Misc video issues
 
-If you're running into random video stability issues look at some of these common issues:
+If you're running into random video stability issues start by looking at some of the following:
 
-1. Make sure you're running a supported version of ffmpeg. [Download ffmpeg 4.1.5 or above](https://ffmpeg.org/download.html).
-1. Make sure your copy of ffmpeg was not installed via Snap packages, as the sandboxing of Snap distributed software isn't compatible in this case. If you see the error `Error: unable to open display`, this might be your problem.
-1. Take a look at `transcoder.log` for any errors.
-1. If you see `Unrecognized option var_stream_map` in `transcoder.log` it also means you need to update your copy of ffmpeg.
-1. Make sure you have [video passthrough](/docs/video/#video-passthrough) disabled.
+1. Make sure you have [video passthrough](/docs/video/#video-passthrough) **disabled**. I know you want to keep it on, but if you're having issues **TURN IT OFF**.  If that doesn't fix it, then you can turn it back on later when you figure out the problem.
+1. Look at your Owncast logs as well as `transcoder.log` to see if there are any errors that might be helpful.
+1. To troubleshoot try a different source and/or a different player so when you ask for help you can know that it works for X but doesn't work for Y. Your stream is available at `/hls/stream.m3u8` so try putting that into VLC, Quicktime, etc.
+1. If you're using a third party re-streaming, or web based streaming service, try streaming without it to see if it works. Again this helps when asking for help to let us know where the issue is.
 
 ## Your software says your key is incorrect.
 
