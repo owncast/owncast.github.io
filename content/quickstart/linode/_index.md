@@ -22,6 +22,8 @@ Linode has [written up a guide](https://www.linode.com/docs/guides/deploy-owncas
 1. Visit the [Owncast Linode Marketplace app](https://www.linode.com/marketplace/apps/owncast/owncast/?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d).
 1. Press the "Deploy this app" button and get sent to the page with the "Linode Summary" where you can press "Create Linode".
    <img src="../linode/linode1.png" width="90%">
+   <br/><br/>
+   <img src="../linode/linode-create-linode.png" width="90%">
 1. Under "Advanced Options" put in the hostname that you'll use for this server, such as owncast.mydomain.com.
 1. Put in your email address.
 1. If you skip this hostname and email step your server will not get automatically configured for SSL.
