@@ -4,6 +4,44 @@ date: 2021-02-01
 description: "0.0.7 adds the ability to use some hardware accelerated codecs for video encoding, as well as other smaller updates."
 ---
 
+
+## Upgrade instructions from 0.0.6
+
+1. Stop the service from running via whatever method you have Owncast running.
+1. [Download the updated Owncast release](https://github.com/owncast/owncast/releases/tag/v0.0.7) for your platform.
+1. Move the zip file of 0.0.7 to your previous install location.
+1. If you've customized your web interface in any way **you will want to back up the files you've changed or customized.**
+1. Unzip the file, allowing it to overwrite old files.
+1. Restart the service.
+
+**Beta:** The Owncast installer has support for upgrades, but this functionality is new. So feel free to give it a try by re-running it in your Owncast directory.
+
+For installing from scratch, see the [Quickstart](/quickstart).
+
+## Breaking changes
+
+Remote images will no longer be supported in chat. There were more cons than pros to have this, so it has been removed.
+
+# Major updates
+
+## Hardware + Codec support
+
+This release adds initial support for using different video codecs in your encoding.  If you have hardware, drivers, and software that supports it, you might be able to use VA-API, NVENC (nvidia) or OpenMAX (Raspberry Pi) codecs.  Read more about the effort involved and the requisite software you will need to have installed [in our documentation](/docs/codecs).
+
+
+## News in the admin
+
+We added a general purpose place to put information that may be of interest to people operating Owncast instances.  This simply pulls a static RSS from our web site that is hosted on Github pages.  There are no logs of these requests and we disable referrer values from being sent.
+
+## Others
+
+- You can now give stream output variants names and they'll be displayed in the player for viewers to manually select.
+- 3rd party content modal for building your own simple UI that can be popped up within the Owncast web page.
+- Chat can be hidden.
+- You can upload your logo via the admin.
+
+
+
 # Changelog
 ## [[0.0.7](https://github.com/owncast/owncast/milestone/12)] - 2021-xx-xx
 
@@ -52,4 +90,10 @@ description: "0.0.7 adds the ability to use some hardware accelerated codecs for
 
 This will be the the last release to allow external access to the websocket. If you have built tools or utilities that utilize getting chat events it is recommended that you migrate to supported [3rd party APIs](https://owncast.online/thirdparty/) instead. If you have a use case that doesn't fit these APIs please let us know and in the future we may find a safe way to support the features you require.
 
+## Thank you to our contributors and donors!
+
 Thank you to the contributors for v0.0.7: [nebunez](https://github.com/nebunez), [gabek](https://github.com/gabek), [thilobillerbeck](https://github.com/thilobillerbeck), [aral](https://github.com/aral), [gingervitis](https://github.com/gingervitis) as well as all of the fantastic people helping out in the [Owncast chat](https://owncast.rocket.chat) answering questions, testing and providing feedback.
+
+## Support the future of Owncast
+
+We've been asked to support donations so people can help support the project, so now we are! We're ready to go on [OpenCollective](https://opencollective.com/owncast) and would love you to check it out.
