@@ -10,7 +10,7 @@ toc: false
 type: subpages
 ---
 
-Most people would end up paying $5.99/mo with [Wasabi](https://wasabi.com/content-delivery/), and there's no additional costs for the amount of people or amount of times people access your video.  So if you have a ton of viewers, this is probably a good option.
+Most people would end up paying $5.99/mo with [Wasabi](https://wasabi.com/content-delivery/), and there's no additional costs for the amount of people or amount of times people access your video. So if you have a ton of viewers, this is probably a good option.
 
 ### Create a user and access key.
 
@@ -21,15 +21,15 @@ Most people would end up paying $5.99/mo with [Wasabi](https://wasabi.com/conten
 
 Depending on the region where your bucket lives look up the service URL [from this page](https://wasabi-support.zendesk.com/hc/en-us/articles/360015106031-What-are-the-service-URLs-for-Wasabi-s-different-regions-).
 
-* Endpoint: Is the "service URL" you looked up above, likely `https://s3.wasabisys.com` or similar (Don't forget to include "https://")
-* Access Key: Is the Access Key your created above
-* Secret Key: Is the Secret Key you created along with you Access Key above
-* Bucket: Is the name of the bucket you created
-* Region: Is the name of the region in which you created your bucket.  It should look something like `us-east-1`
+- Endpoint: Is the "service URL" you looked up above, likely `https://s3.wasabisys.com` or similar (Don't forget to include "https://")
+- Access Key: Is the Access Key your created above
+- Secret Key: Is the Secret Key you created along with you Access Key above
+- Bucket: Is the name of the bucket you created
+- Region: Is the name of the region in which you created your bucket. It should look something like `us-east-1`
 
 ### Making files public
 
-Wasabi makes it easy to make a bucket public.  [Full documentation is here](https://wasabi.com/wp-content/themes/wasabi/docs/Getting_Started/index.html#t=topics%2FMaking_Folders_and_or_Files_Public.htm), but simply select the folder and choose "_Make Public_".
+Wasabi makes it easy to make a bucket public. [Full documentation is here](https://wasabi.com/wp-content/themes/wasabi/docs/Getting_Started/index.html#t=topics%2FMaking_Folders_and_or_Files_Public.htm), but simply select the folder and choose "_Make Public_".
 
 ### Expiration of old files on Wasabi
 
