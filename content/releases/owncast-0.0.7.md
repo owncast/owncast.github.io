@@ -24,14 +24,18 @@ Remote images will no longer be supported in chat. There were more cons than pro
 
 # Major updates
 
-## Hardware + Codec support
+## Hardware + Additional Codec support
 
 This release adds initial support for using different video codecs in your encoding.  If you have hardware, drivers, and software that supports it, you might be able to use VA-API, NVENC (nvidia) or OpenMAX (Raspberry Pi) codecs.  Read more about the effort involved and the requisite software you will need to have installed [in our documentation](/docs/codecs).
 
 
 ## News in the admin
 
-We added a general purpose place to put information that may be of interest to people operating Owncast instances.  This simply pulls a static RSS from our web site that is hosted on Github pages.  There are no logs of these requests and we disable referrer values from being sent.
+We added a general purpose place to put information that may be of interest to people operating Owncast instances.  Since we're not focused on having a social media presence, we wanted a simple way to reach out to people running Owncast if there's anything useful or important. This simply pulls a static [RSS feed](https://owncast.online/news/index.json) from our web site that is hosted on Github pages, so we have no logs of this request.  Additionally we [wipe out the referrer value](https://github.com/owncast/owncast-admin/blob/develop/utils/apis.ts#L122) in this request. Feel free to reach out if you have any concerns.
+
+## More detailed logging
+
+To assist people in troubleshooting things that go wrong, this release offers more detailed logging around video. You may see more warnings than you're used to seeing, and generally if your server is functioning properly you can ignore them. However, feel free to reach out if you are seeing warnings that you're finding unhelpful and we will make sure those warnings are cleared up in future releases.
 
 ## Others
 
@@ -90,10 +94,10 @@ We added a general purpose place to put information that may be of interest to p
 
 This will be the the last release to allow external access to the websocket. If you have built tools or utilities that utilize getting chat events it is recommended that you migrate to supported [3rd party APIs](https://owncast.online/thirdparty/) instead. If you have a use case that doesn't fit these APIs please let us know and in the future we may find a safe way to support the features you require.
 
-## Thank you to our contributors and donors!
+## Thank you to our contributors!
 
 Thank you to the contributors for v0.0.7: [nebunez](https://github.com/nebunez), [gabek](https://github.com/gabek), [thilobillerbeck](https://github.com/thilobillerbeck), [aral](https://github.com/aral), [gingervitis](https://github.com/gingervitis) as well as all of the fantastic people helping out in the [Owncast chat](https://owncast.rocket.chat) answering questions, testing and providing feedback.
 
-## Support the future of Owncast
+## Thank you to our financial supporters!
 
-We've been asked to support donations so people can help support the project, so now we are! We're ready to go on [OpenCollective](https://opencollective.com/owncast) and would love you to check it out.
+Thank you to those financially supporting Owncast. The project sponsors [Noblestreet](https://opencollective.com/noblestreet), [Okta](https://opencollective.com/okta) and our awesome donors [incognito](https://opencollective.com/incognito959), [Guest](https://opencollective.com/guest-809e649f), [Simon Michalke](https://opencollective.com/simon-michalke), [GoMage](https://opencollective.com/gomage), [rootbeerdan](https://opencollective.com/rootbeerdan), [GTX](https://opencollective.com/gtx), [John DeAscentis](https://opencollective.com/john-deascentis), [Luka Prinčič](https://opencollective.com/luka-princic), [Kyle Bronsdon](https://opencollective.com/guest-7c7eb0e8), [Guest](https://opencollective.com/guest-b4f6cea0), [Alan Peterson](https://opencollective.com/alan-peterson).
