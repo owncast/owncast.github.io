@@ -20,7 +20,8 @@ For installing from scratch, see the [Quickstart](/quickstart).
 
 ## Breaking changes
 
-Remote images will no longer be supported in chat. There were more cons than pros to have this, so it has been removed.
+* Remote images will no longer be supported in chat. There were more cons than pros to have this, so it has been removed.
+* Values around the Latency Buffer have been changed and a setting you selected in a previous release may not result in the exact same functionality as we continue to tweak the values for best performance.
 
 # Major updates
 
