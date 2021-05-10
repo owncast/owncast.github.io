@@ -210,6 +210,16 @@ const QUOTES = [
   quote: "For true democratic freedom, go with Owncast, a service that lets you stream whatever you want to whoever you want without corporate oversight.",
   url: 'https://www.pcmag.com/picks/best-video-game-live-streaming-services',
   name: 'PC Mag The Best Streaming Services for 2021',
+ },
+ {
+  quote: "Went from hearing about Owncast to having it up and running in a frighteningly short amount of time.",
+  url: 'https://hexdsl.co.uk/log/20210507-owncast.html',
+  name: 'HexDSL',
+ },
+ {
+  quote: "The projects aim is simple. Provide a self-hosted alternative to Twitch. Sounds like one of those things that gets complicated fast doesn’t it? Well, you know what… they went and did it!",
+  url: 'https://hexdsl.co.uk/log/20210507-owncast.html',
+  name: 'HexDSL',
  }
 
 ];
