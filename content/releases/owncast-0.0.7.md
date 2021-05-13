@@ -1,9 +1,10 @@
 ---
 title: Owncast v0.0.7
-date: 2021-02-01
-description: "0.0.7 adds the ability to use some hardware accelerated codecs for video encoding, as well as other smaller updates."
+date: 2021-05-15
+description: "0.0.7 adds the ability to use some hardware accelerated codecs for video encoding, as well as a bunch of smaller, but helpful, updates."
 ---
 
+This release focuses on a handful of things that should improve the day to day usage of Owncast. The biggest being the ability to use hardware accelerated video codecs and free up your CPU if you're running on dedicated hardware.  This is great for people who are hosting from home, even on things like a Raspberry Pi.  Other additions people have asked for such as being able to upload your logo directly from the admin, hiding chat, custom CSS, being able to manually select a video stream quality from the player and more are included in this update.  Read the below changelog for more details.
 
 ## Upgrade instructions from 0.0.6
 
@@ -14,9 +15,9 @@ description: "0.0.7 adds the ability to use some hardware accelerated codecs for
 1. Unzip the file, allowing it to overwrite old files.
 1. Restart the service.
 
-**Beta:** The Owncast installer has support for upgrades, but this functionality is new. So feel free to give it a try by re-running it in your Owncast directory.
+**Beta:** The [Owncast installer](https://owncast.online/quickstart) has support for upgrades, but this functionality is new. So feel free to give it a try by re-running it in your Owncast directory.
 
-For installing from scratch, see the [Quickstart](/quickstart).
+For installing from scratch, see the [Quickstart](https://owncast.online/quickstart).
 
 ## Breaking changes
 
@@ -44,11 +45,11 @@ To assist people in troubleshooting things that go wrong, this release offers mo
 - 3rd party content modal for building your own simple UI that can be popped up within the Owncast web page.
 - Chat can be hidden.
 - You can upload your logo via the admin.
-
+- You can do some basic CSS overrides via the admin.
 
 
 # Changelog
-## [[0.0.7](https://github.com/owncast/owncast/milestone/12)] - 2021-xx-xx
+## [[0.0.7](https://github.com/owncast/owncast/milestone/12)] - 2021-05-15
 
 ### Added
 
@@ -82,6 +83,7 @@ To assist people in troubleshooting things that go wrong, this release offers mo
 * Use a unique path for the fifo pipe to allow multiple copies to run on a single machine [#883](https://github.com/owncast/owncast/issues/883)
 * Resolve an issue impacting chat moderation not hiding messages [#809](https://github.com/owncast/owncast/issues/809)
 * Fix issue where local hls storage may not exist if number of output streams changed [#940](https://github.com/owncast/owncast/issues/940)
+* Play button would display over the header bar when scrolling [#951](https://github.com/owncast/owncast/issues/951)
 
 ### Changed
 
@@ -97,8 +99,8 @@ This will be the the last release to allow external access to the websocket. If 
 
 ## Thank you to our contributors!
 
-Thank you to the contributors for v0.0.7: [nebunez](https://github.com/nebunez), [gabek](https://github.com/gabek), [thilobillerbeck](https://github.com/thilobillerbeck), [aral](https://github.com/aral), [gingervitis](https://github.com/gingervitis) as well as all of the fantastic people helping out in the [Owncast chat](https://owncast.rocket.chat) answering questions, testing and providing feedback.
+Thank you to the contributors for v0.0.7: [nebunez](https://github.com/nebunez), [gabek](https://github.com/gabek), [thilobillerbeck](https://github.com/thilobillerbeck), [aral](https://github.com/aral), [gingervitis](https://github.com/gingervitis), [controlfreakstudio](https://github.com/controlfreakstudio), [MFTabriz](https://github.com/MFTabriz) as well as all of the fantastic people helping out in the [Owncast chat](https://owncast.rocket.chat) answering questions, testing and providing feedback.
 
 ## Thank you to our financial supporters!
 
-Thank you to those financially supporting Owncast. The project sponsors [Noblestreet](https://opencollective.com/noblestreet), [Okta](https://opencollective.com/okta) and our awesome donors [incognito](https://opencollective.com/incognito959), [Guest](https://opencollective.com/guest-809e649f), [Simon Michalke](https://opencollective.com/simon-michalke), [GoMage](https://opencollective.com/gomage), [rootbeerdan](https://opencollective.com/rootbeerdan), [GTX](https://opencollective.com/gtx), [John DeAscentis](https://opencollective.com/john-deascentis), [Luka Prinčič](https://opencollective.com/luka-princic), [Kyle Bronsdon](https://opencollective.com/guest-7c7eb0e8), [Guest](https://opencollective.com/guest-b4f6cea0), [Alan Peterson](https://opencollective.com/alan-peterson).
+Thank you to those financially supporting Owncast. The project sponsors [Noblestreet](https://opencollective.com/noblestreet), [Okta](https://opencollective.com/okta) and our awesome donors [incognito](https://opencollective.com/incognito959), [Guest](https://opencollective.com/guest-809e649f), [Simon Michalke](https://opencollective.com/simon-michalke), [GoMage](https://opencollective.com/gomage), [rootbeerdan](https://opencollective.com/rootbeerdan), [GTX](https://opencollective.com/gtx), [John DeAscentis](https://opencollective.com/john-deascentis), [Luka Prinčič](https://opencollective.com/luka-princic), [Kyle Bronsdon](https://opencollective.com/guest-7c7eb0e8), [Guest](https://opencollective.com/guest-b4f6cea0) and [Alan Peterson](https://opencollective.com/alan-peterson).
