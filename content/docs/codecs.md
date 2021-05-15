@@ -10,7 +10,6 @@ toc: true
 
 {{<versionsupport feature="Hardware accelerated encoding" version="0.0.7">}}
 
-
 {{< alert icon="💡" text="This should be viewed as an advanced topic that may require a substantial investment in time to get working. It may require downloading and compiling source code. It is highly recommended you configure and use your Owncast server without using alternate codecs first. Get Owncast working and improve performance later." >}}
 
 {{< alert icon="💡" text="It is unlikely that any specific support can be provided to help you, as it very much depends on the hardware you have and the software, drivers and versions of libraries you have installed. Outside of this document you are mostly on your own." >}}
@@ -27,9 +26,8 @@ toc: true
 ## Things to keep in mind
 
 1. Most people won't be able to take advantage of this unless you're running your own hardware.
-1. Just because a specific hardware accelerated codec shows in the Owncast admin **does not mean your machine is configured to support it**.  It simply means Owncast believes that codec to be available.
-1. Very little of what is required to get your hardware working has anything to do with Owncast. Any questions you have about your particular hardware should be directed to your hardware manufacturer or whoever provides the drivers and libraries to utilize it.  There's likely a lot of information already online, so please do your research.
-
+1. Just because a specific hardware accelerated codec shows in the Owncast admin **does not mean your machine is configured to support it**. It simply means Owncast believes that codec to be available.
+1. Very little of what is required to get your hardware working has anything to do with Owncast. Any questions you have about your particular hardware should be directed to your hardware manufacturer or whoever provides the drivers and libraries to utilize it. There's likely a lot of information already online, so please do your research.
 
 ## Compatible hardware
 
@@ -39,9 +37,10 @@ If you have Intel integrated graphics you may be able to use it using [VA-API](#
 
 ### Raspberry Pi
 
-If you have a recent Raspberry Pi and using the [Raspberry Pi OS](https://www.raspberrypi.org/documentation/installation/noobs.md) operating system it's actually quite easy to get Owncast running in a hardware accelerated fashion.  Raspberry Pi OS includes support for [OpenMax](#openmax) (OMX) out of the box and includes a version of `ffmpeg` that is built to support it.
+If you have a recent Raspberry Pi and using the [Raspberry Pi OS](https://www.raspberrypi.org/documentation/installation/noobs.md) operating system it's actually quite easy to get Owncast running in a hardware accelerated fashion. Raspberry Pi OS includes support for [OpenMax](#openmax) (OMX) out of the box and includes a version of `ffmpeg` that is built to support it.
 
 However, this seems to only be true for 32 bit operating systems on a Raspberry Pi, as [omx seems to be deprecated under 64 bit environments](https://github.com/raspberrypi/firmware/issues/1366#issuecomment-612902082).
+
 ### NVIDIA GPUs
 
 NVIDIA GPUs ship with an on-chip hardware encoder unit often referred to as NVENC. Separate from the CUDA cores, NVENC run encoding workloads without slowing the execution of graphics or CUDA workloads running at the same time.
@@ -65,33 +64,31 @@ Links:
 - [Setting up QuickSync on Ubuntu](https://wiki.ubuntu.com/IntelQuickSyncVideo)
 - [Intel Graphics at Linux Reviews](https://linuxreviews.org/Intel_graphics) -->
 
-
 ### VA-API
 
-VA-API (video acceleration API) is a layer to support hardware accelerated encoding on linux.  You need the `libva` library installed for it to work. VA-API is not compatible with ARM chipsets.
+VA-API (video acceleration API) is a layer to support hardware accelerated encoding on linux. You need the `libva` library installed for it to work. VA-API is not compatible with ARM chipsets.
 
-Links: 
+Links:
 
 - [VA-API at Linux Reviews](https://linuxreviews.org/VAAPI)
 - [Intel Media Driver for VA-API](https://github.com/intel/media-driver/)
 
 ### OpenMAX
 
-OpenMAX is a unified abstraction layer that allows access to hardware that otherwise requires vendor specific APIs.  It will work out of the box on modern Raspberry Pi's running a recent version of the [Raspberry Pi OS](https://www.raspberrypi.org/documentation/installation/noobs.md) operating system.
+OpenMAX is a unified abstraction layer that allows access to hardware that otherwise requires vendor specific APIs. It will work out of the box on modern Raspberry Pi's running a recent version of the [Raspberry Pi OS](https://www.raspberrypi.org/documentation/installation/noobs.md) operating system.
 
 Verify your copy of ffmpeg has omx support by looking at the [ffmpeg](#ffmpeg) instructions below. If `h264_omx` is in the list you should be good to go.
 
 ### NVIDIA Encoder (nvenc)
 
-Follow the instructions on the [NVIDIA ffmpeg transcoding guide](https://developer.nvidia.com/blog/nvidia-ffmpeg-transcoding-guide/) to install all the required drivers and libraries.  This requires installing a driver from the [NVIDIA website](https://www.nvidia.com/drivers), Downloading and install the [CUDA toolkit](https://developer.nvidia.com/cuda-toolkit), [downloading nv-codec-headers](https://github.com/FFmpeg/nv-codec-headers), and building ffmpeg.  Scroll to the section entitled _Hardware accelerated transcoding with FFmpeg_ at the [NVIDIA transcoding guide](https://developer.nvidia.com/blog/nvidia-ffmpeg-transcoding-guide/) for more information.
+Follow the instructions on the [NVIDIA ffmpeg transcoding guide](https://developer.nvidia.com/blog/nvidia-ffmpeg-transcoding-guide/) to install all the required drivers and libraries. This requires installing a driver from the [NVIDIA website](https://www.nvidia.com/drivers), Downloading and install the [CUDA toolkit](https://developer.nvidia.com/cuda-toolkit), [downloading nv-codec-headers](https://github.com/FFmpeg/nv-codec-headers), and building ffmpeg. Scroll to the section entitled _Hardware accelerated transcoding with FFmpeg_ at the [NVIDIA transcoding guide](https://developer.nvidia.com/blog/nvidia-ffmpeg-transcoding-guide/) for more information.
 
-You may be able to find a pre-built version of ffmpeg that has `nvenc` support, however that's outside the scope of this document.  You still need NVIDIA drivers regardless.
+You may be able to find a pre-built version of ffmpeg that has `nvenc` support, however that's outside the scope of this document. You still need NVIDIA drivers regardless.
 
 Links:
 
 - [Tal.org instructions on building ffmpeg with nvenc](https://www.tal.org/tutorials/ffmpeg_nvidia_encode)
 - [Shell script that claims to automate the process on Ubuntu](https://gist.github.com/ransagy/3f6f1a9e5ede6212425f3b36b136216e)
-
 
 ## ffmpeg
 
