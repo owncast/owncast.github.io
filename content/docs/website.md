@@ -60,3 +60,34 @@ Code blocks: <code>\`your text\`</code>
 Place your own custom emoji images into `/webroot/img/emoji/` and the next time you refresh the web site you'll see your images in the emoji picker, available for use in chat.
 
 {{<versionsupport feature="emoji" version="0.0.2">}}
+
+
+## Player
+
+The web video player has a handful of keyboard shortcuts you can use.
+
+|Action |Shortcut  |
+--- | --- |
+|Play/Pause|_Spacebar_|
+|Volume up|_0_|
+|Volume down|_9_|
+|Mute|_m_|
+|Toggle full screen|_f_|
+|Toggle chat|_c_|
+
+{{<versionsupport feature="player shortcuts" version="0.0.7">}}
+
+
+## Custom Styles via CSS
+
+Under the General Settings in the admin you can write your own CSS that will get applied to the web page.  There is no validation or sanity checks, so anything you write will get inserted into a `<style>` tag on your page. So if you make a CSS mistake, you may mess something up on your page.
+
+### Some examples of things you can try.
+
+1. Customize your font.
+1. Change text sizes and colors.
+1. Set a new background color.
+1. Completely hide specific things you don't want or care about.
+
+{{<versionsupport feature="custom styles" version="0.0.7">}}
+

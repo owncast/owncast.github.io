@@ -15,8 +15,6 @@
 		{{ else -}}
 		<main class="docs-content col-lg-11 mx-xl-auto">
 		{{ end -}}
-			{{ $image := index .Params.images 0 -}}
-			{{ .Scratch.Set "src" $image -}}
 			{{ .Scratch.Set "alt" .Title -}}
 			{{ .Scratch.Set "class" "card-img-top m-0 p-1" -}}
 			<h1>{{ .Title }}</h1>
