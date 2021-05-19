@@ -52,7 +52,7 @@ Try decreasing your latency level in the admin. This will keep the user closer t
 
 It's up to you to decide you want lower delays over **less reliability** or a more reliable stream with additional delay.
 
-If you are using **Video Passthrough** in your video configuration it will likely **increase** your latency.  Because you're telling Owncast not to re-encode your video it can't optimally segment your video into the sized chunks required to manage your latency.  If you really want to micro-manage latency then you're better off turning off Passthrough.
+If you are using **Video Passthrough** in your video configuration it will likely **increase** your latency. Because you're telling Owncast not to re-encode your video it can't optimally segment your video into the sized chunks required to manage your latency. If you really want to micro-manage latency then you're better off turning off Passthrough.
 
 ## Chat is disabled
 
