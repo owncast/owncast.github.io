@@ -80,7 +80,6 @@ backupInstall() {
     "webroot/js"
     "webroot/img"
     "data/"
-    "*.yaml"
   )
 
   # Make backup directory if it doesn't exist
