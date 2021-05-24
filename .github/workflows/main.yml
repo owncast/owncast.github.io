@@ -27,13 +27,13 @@ jobs:
         uses: r26d/jq-action@master
 
       - name: Fetch Core Contributors
-        run: "curl https://api.github.com/repos/owncast/owncast/contributors | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > data/contributors-core.json"
+        run: "curl https://api.github.com/repos/owncast/owncast/contributors?per_page=100 | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > data/contributors-core.json"
 
       - name: Fetch Admin Contributors
-        run: "curl https://api.github.com/repos/owncast/owncast-admin/contributors | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > data/contributors-admin.json"
+        run: "curl https://api.github.com/repos/owncast/owncast-admin/contributors?per_page=100 | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > data/contributors-admin.json"
 
       - name: Fetch Home Page Contributors
-        run: "curl https://api.github.com/repos/owncast/owncast.github.io/contributors | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > data/contributors-homepage.json"
+        run: "curl https://api.github.com/repos/owncast/owncast.github.io/contributors?per_page=100 | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > data/contributors-homepage.json"
 
       - name: Combine Contributors
         run: "jq --argfile core data/contributors-core.json --argfile admin data/contributors-admin.json --argfile homepage data/contributors-homepage.json -n '$core + $admin + $homepage |unique_by(.login)' > data/contributors.json"
