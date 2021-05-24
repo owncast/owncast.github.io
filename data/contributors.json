@@ -85,6 +85,16 @@
     "html_url": "https://github.com/ateamlunchbox"
   },
   {
+    "login": "bgildson",
+    "avatar_url": "https://avatars.githubusercontent.com/u/4239610?v=4",
+    "html_url": "https://github.com/bgildson"
+  },
+  {
+    "login": "bitspill",
+    "avatar_url": "https://avatars.githubusercontent.com/u/6021929?v=4",
+    "html_url": "https://github.com/bitspill"
+  },
+  {
     "login": "brownchow",
     "avatar_url": "https://avatars.githubusercontent.com/u/8622915?v=4",
     "html_url": "https://github.com/brownchow"
@@ -145,6 +155,11 @@
     "html_url": "https://github.com/gustavohmsilva"
   },
   {
+    "login": "imgbot[bot]",
+    "avatar_url": "https://avatars.githubusercontent.com/in/4706?v=4",
+    "html_url": "https://github.com/apps/imgbot"
+  },
+  {
     "login": "jeyemwey",
     "avatar_url": "https://avatars.githubusercontent.com/u/2796271?v=4",
     "html_url": "https://github.com/jeyemwey"
@@ -153,6 +168,11 @@
     "login": "jmhobbs",
     "avatar_url": "https://avatars.githubusercontent.com/u/115059?v=4",
     "html_url": "https://github.com/jmhobbs"
+  },
+  {
+    "login": "leowmjw",
+    "avatar_url": "https://avatars.githubusercontent.com/u/920784?v=4",
+    "html_url": "https://github.com/leowmjw"
   },
   {
     "login": "leuc",
@@ -198,5 +218,10 @@
     "login": "thilobillerbeck",
     "avatar_url": "https://avatars.githubusercontent.com/u/7442383?v=4",
     "html_url": "https://github.com/thilobillerbeck"
+  },
+  {
+    "login": "tomleb",
+    "avatar_url": "https://avatars.githubusercontent.com/u/7152146?v=4",
+    "html_url": "https://github.com/tomleb"
   }
 ]
