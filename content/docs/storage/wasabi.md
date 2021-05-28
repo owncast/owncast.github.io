@@ -1,6 +1,6 @@
 ---
 title: "Wasabi"
-description: "$5.99/mo with no additional costs for the amount of people or amount of times people access your video."
+description: "*no longer recommended* $5.99/mo with no additional costs for the amount of people or amount of times people access your video."
 date: 2020-11-17T20:11:42+01:00
 lastmod: 2020-11-17T20:11:42+01:00
 draft: false
@@ -9,6 +9,10 @@ weight: 030
 toc: false
 type: subpages
 ---
+
+Please read the following [link](https://wasabi-support.zendesk.com/hc/en-us/articles/360000451052-Can-I-use-Wasabi-to-host-my-videos-) before using.
+
+- "However, we do not recommend the playback of video directly from object storage (Wasabi or AWS S3) as the costs may be higher than expected and the delivery quality will be sub-optimal (as compared to solutions that pair object storage with a CDN and/or encoding/decoding functions)." -Wasabi
 
 Most people would end up paying $5.99/mo with [Wasabi](https://wasabi.com/content-delivery/), and there's no additional costs for the amount of people or amount of times people access your video. So if you have a ton of viewers, this is probably a good option.
 
