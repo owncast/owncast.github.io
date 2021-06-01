@@ -39,22 +39,22 @@ _This part sucks_. But you only have to do it once per bucket. [These are the fu
 1. Create a file called bucket_policy.json that has the following:
    {{< highlight json >}}
    {
-   "Statement": [
-   {
-   "Effect": "Allow",
-   "Principal": {
-   "AWS": [
-   "*"
-   ]
-   },
-   "Action": [
-   "s3:GetObject"
-   ],
-   "Resource": [
-   "arn:aws:s3::MYBUCKETNAME/*"
-   ]
-   }
-   ]
+     "Statement": [
+       {
+         "Effect": "Allow",
+         "Principal": {
+         "AWS": [
+           "*"
+         ]
+         },
+         "Action": [
+           "s3:GetObject"
+         ],
+         "Resource": [
+           "arn:aws:s3::MYBUCKETNAME/*"
+         ]
+       }
+     ]
    }
    {{< / highlight >}}
 
@@ -72,7 +72,7 @@ Make files older than one day expire and delete themselves so you don't pay for 
 
 Full details are in [their documentation](https://www.linode.com/docs/platform/object-storage/how-to-manage-objects-with-lifecycle-policies/).
 
-Create a file called `lifecycle_policy.json` with the following contents:
+Create a file called `lifecycle_policy.xml` with the following contents:
 
 {{< highlight xml >}}
 <LifecycleConfiguration>
