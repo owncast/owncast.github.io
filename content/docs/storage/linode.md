@@ -39,22 +39,22 @@ _This part sucks_. But you only have to do it once per bucket. [These are the fu
 1. Create a file called bucket_policy.json that has the following:
    {{< highlight json >}}
    {
-     "Statement": [
-       {
-         "Effect": "Allow",
-         "Principal": {
-         "AWS": [
-           "*"
-         ]
-         },
-         "Action": [
-           "s3:GetObject"
-         ],
-         "Resource": [
-           "arn:aws:s3::MYBUCKETNAME/*"
-         ]
-       }
-     ]
+   "Statement": [
+   {
+   "Effect": "Allow",
+   "Principal": {
+   "AWS": [
+   "*"
+   ]
+   },
+   "Action": [
+   "s3:GetObject"
+   ],
+   "Resource": [
+   "arn:aws:s3::MYBUCKETNAME/*"
+   ]
+   }
+   ]
    }
    {{< / highlight >}}
 
