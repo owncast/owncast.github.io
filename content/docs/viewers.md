@@ -14,10 +14,6 @@ Your server can optionally use the [MaxMind GeoLite2 Database](https://dev.maxmi
 1. Under `Database Products and Subscriptions` click `Download Databases`.
 1. Download `GeoLite2 City (GeoIP2 Binary .mmdb)`.
 1. Unzip the file and place the `GeoLite2-City.mmdb` file into the `data` directory of your Owncast server. Create this directory if needed.
+1. Restart your Owncast service.
 
 {{<versionsupport feature="location support" version="0.0.3">}}
-
-## Disclaimer
-
-If enabled this product includes GeoLite2 data created by MaxMind, available from
-<a href="https://www.maxmind.com">https://www.maxmind.com</a>.
