@@ -12,8 +12,6 @@ toc: true
 type: subpages
 ---
 
-{{< alert icon="💡" text="You're one of the first people to try out our 3rd party APIs!  We really appreciate you taking the time to experiment with these additions to Owncast and putting your creativity to work.  Your feedback and testing will make it so both you and future developers will be able to make some really cool stuff on top of Owncast.<br/>The full API documentation can be found <a href=/api/latest/#tag/Integrations>here</a>." >}}
-
 {{< alert icon="💡" text="Note: while we will strive to keep these APIs as stable as possible, it's still early days with our integration hooks. As we learn more and continue to make things that are useful to other developers we may need to make changes or break functionality.  It's recommended if you're building on top of Owncast to stay current with the discussions and updates around the project and let us know how things are going." >}}
 
 Owncast has the ability for you to build things on top of it. Here's some examples of things you can build:
@@ -22,6 +20,10 @@ Owncast has the ability for you to build things on top of it. Here's some exampl
 1. An OBS overlay so when an event happens in the chat an image or message shows up on the stream.
 1. An integration into some kind of 3rd party service, such as when the song you're listening to changes it shows up in the chat.
 1. Send out a message to your social networks each time you go live.
+
+## Example
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eWE7HGJQI_4?start=547" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 #### Your code
 
