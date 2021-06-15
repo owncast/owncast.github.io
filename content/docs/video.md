@@ -90,11 +90,11 @@ What you're sending from your broadcasting software is generally reasonable and 
 
 ## How you configure your broadcasting software matters.
 
-The more you send to Owncast, the more work it has do. This means you should generally not stream to Owncast at a significantly higher or lower quality than you expect to give to your viewers. It makes no sense to stream to Owncast at 6000k 60fps if you're telling Owncast to send to your viewers at 3000k 30fps, because your server has to do that conversion. On the other hand it makes no sense to stream to Owncast with a 1000k bitrate and then send to your viewers at 4000k, that would be wasted work and bandwidth.
-
-So in short: Try to reasonably figure out what you want to stream to your users and match that as best as possible when setting up your broadcasting software.
+You will want to configure your broadcasting software to match the highest quality you can offer your viewers. **That means if your Owncast server can only handle 720p@2500k you should not configure your broadcasting software to send 1080p@6000k**. The more conversion work you ask Owncast to do the more resources it will use on your server, making it even harder to offer the best qualities to your viewers.
 
 If you find yourself trying to squeeze better performance out of Owncast then try setting your broadcasting software to a lower quality as well as lowering the quality in your Owncast instance.
+
+Read more about [configuring your broadcasting software](/docs/broadcasting/).
 
 ## CPU Usage
 
