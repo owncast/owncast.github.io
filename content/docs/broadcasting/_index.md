@@ -32,8 +32,8 @@ The following are some suggested settings for a high quality stream you can set 
 
 | Resolution | Framerate | Bitrate |
 | ---------- | --------- | ------- |
-| 1920x1080  | 60 fps    | 5000k   |
-| 1920x1080  | 30 fps    | 4500k   |
+| 1920x1080  | 60fps     | 5000k   |
+| 1920x1080  | 30fps     | 4500k   |
 | 1280x720   | 60fps     | 4000k   |
 | 1280x720   | 30fps     | 3000k   |
 
@@ -52,15 +52,16 @@ It is suggested you set your broadcasting software keyframe setting at _2_ and *
 ### Audio settings
 
 Set your broadcasting software to send Owncast `AAC` audio.
+
 ### Audio bitrate and quality
 
-When streaming also make sure to match your audio quality to what you're streaming.  If you're a music focused stream then maybe go higher.  If you're just talking, then maybe you can afford to go lower.
+When streaming also make sure to match your audio quality to what you're streaming. If you're a music focused stream then maybe go higher. If you're just talking, then maybe you can afford to go lower.
 
 Owncast will not re-encode audio, so it will go out exactly how it's sent.
 
 | Quality | Bitrate |
-| ------- | ------- | 
-| Low     | 96kbps  | 
+| ------- | ------- |
+| Low     | 96kbps  |
 | Medium  | 128kpbs |
 | High    | 192kbps |
 | Higher  | 256kbps |
