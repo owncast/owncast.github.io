@@ -1,9 +1,11 @@
- ---
+---
+
 title: "Future updates for chat APIs that may impact 3rd party developers"
 description: "Future releases will start locking down access to to some APIs."
 date: 2021-06-15T10:33:06-07:00
 lastmod: 2021-06-15T10:33:06-07:00
 images: []
+
 ---
 
 I wanted to highlight some changes that may impact those who use the Owncast chat APIs for building external tools.
