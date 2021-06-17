@@ -18,4 +18,4 @@ I wanted to highlight some changes that may impact those who use the Owncast cha
 
 If you have a use case that doesn’t fit [these and the other APIs](https://owncast.online/thirdparty/) please let us know and we may find a safe way to support the features you require.
 
-_Side note_: The next public Owncast sync-up chat is coming at the end of the month and you're invited! [Mark your availability](https://doodle.com/poll/btzzpprvxn7v8qfb) so you can join the conversation.
+_Side note_: The next public Owncast sync-up chat will be [June 24th](https://www.timeanddate.com/worldclock/converter.html?iso=20210624T200000&p1=224&p2=1440&p3=tz_et&p4=tz_cest) and you're invited!  Join us on [Jitsi](https://meet.jit.si/owncast-discovery-meeting) at [1:00PM Pacific, 10PM CEST, 20:00 UTC](https://www.timeanddate.com/worldclock/converter.html?iso=20210624T200000&p1=224&p2=1440&p3=tz_et&p4=tz_cest).
