@@ -51,10 +51,10 @@ With Owncast running you can begin to configure your new server by visiting the 
 
 ## Upgrading
 
-Since the DigitalOcean droplet comes with Owncast pre-installed you might find that it becomes out of date when a new version of Owncast is released.  You can update it with these steps.
+Since the DigitalOcean droplet comes with Owncast pre-installed you might find that it becomes out of date when a new version of Owncast is released. You can update it with these steps.
 
 1. ssh into your droplet as root: `ssh root@_your_droplet_ip`
 1. Run `cd /opt/owncast` to change directory.
 1. Stop Owncast from running by running `systemctl stop owncast`
-1. Run the Owncast installer as the owncast user: `su  -c "curl https://owncast.online/install.sh |bash" owncast`
+1. Run the Owncast installer as the owncast user: `su -c "curl https://owncast.online/install.sh |bash" owncast`
 1. Restart Owncast: `systemctl start owncast`
