@@ -13,4 +13,4 @@ type: subpages
 1. Make a directory to run the service from, and download a release from https://github.com/owncast/owncast/releases into that directory.
 1. Unzip the release.
 1. Run `./owncast` to start the service.
-1. Visit the admin at `/admin` to configure your server.
+1. Visit the admin at `/admin` to configure your server using the usernmae `admin` and the default stream key as the password, `abc123`.
