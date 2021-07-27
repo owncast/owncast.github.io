@@ -15,7 +15,7 @@ We currently support the following actions you can make via requests from your c
 | Event                 |                                                                      Endpoint                                                                      |                      Scope |
 | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------: |
 | System chat message   |               <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1streamtitle/post">/api/integrations/chat/system</a>                | `CAN_SEND_SYSTEM_MESSAGES` |
-| User chat message     |                                                     <a href="">/api/integrations/chat/user</a>                                                     |        `CAN_SEND_MESSAGES` |
+| Standard chat message     |                                                     <a href="">/api/integrations/chat/send</a>                                                     |        `CAN_SEND_MESSAGES` |
 | Chat action           |                <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1user/post">/api/integrations/chat/action</a>                | `CAN_SEND_SYSTEM_MESSAGES` |
 | Remove chat message   | <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1updatemessagevisibility/post">/api/integrations/chat/messagevisibility</a> |         `HAS_ADMIN_ACCESS` |
 | Get chat history      |                       <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat/get">/api/integrations/chat</a>                       |         `HAS_ADMIN_ACCESS` |
@@ -51,7 +51,7 @@ Example request:
 
 ### Test sending chat messages
 
-Change the following `curl` command to point to your server URL and use your auth token. It will send a system message to your chat.
+Change the following `curl` command to point to your server URL and use your auth token with "system message" access. It will send a system message to your chat.
 
 {{< highlight shell >}}
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer YOURAUTHTOKEN" -d '{"body": "I am a system message!"}' http://YOUR.OWNCAST.SERVER/api/integrations/chat/system
