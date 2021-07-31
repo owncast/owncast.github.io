@@ -41,7 +41,7 @@ Owncast supports embedding your chat directly into any other web site or source.
 
 There are two types of embed chats: A read-only chat which only shows the messages and an embed chat with full functionality which can also send message.
 
-## Embedding chat with full functionality 
+### Embedding chat with full functionality 
 
 The full-functionality chat URL lives at: `http://your.host/embed/chat/readwrite`.
 
@@ -51,13 +51,13 @@ It will look something like:
 
 {{< owncastembed "https://watch.owncast.online/embed/chat/readwrite" >}}
 
-## Embedding read-only chat
+### Embedding read-only chat
 
 The read-only chat URL lives at: `http://your.host/embed/chat/readonly`.
 
 One common use of read-only chat is adding the chat messages into your live stream.
 
-### Using OBS
+#### Using OBS
 
 1. Click the `+` or right mouse click to add a new source. Choose `Browser` from the list.
 1. For a new source, you will need to add the name. Type in "_Chat_".
