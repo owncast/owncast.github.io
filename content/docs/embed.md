@@ -37,17 +37,32 @@ It will look something like:
 
 ## Embedding chat
 
-Owncast supports embedding your chat directly into any other web site or source.
+Owncast supports embedding your chat directly into any other web site or source. 
 
-The chat-only URL lives at: `http://your.host/embed/chat`.
+There are two types of embed chats: A read-only chat which only shows the messages and an embed chat with full functionality which can also send messages. 
 
-One common use is adding the chat into your live stream.
+
+## Embedding chat with full functionality 
+
+The full-functionality chat URL lives at: `http://your.host/embed/chat/readwrite`.
+
+{{<versionsupport feature="embedding chat with full functionality " version="0.0.8">}}
+
+It will look something like:
+
+{{< owncastembed "https://watch.owncast.online/embed/chat/readwrite" >}}
+
+## Embedding read-only chat
+
+The read-only chat URL lives at: `http://your.host/embed/chat/readonly`.
+
+One common use of read-only chat is adding the chat messages into your live stream.
 
 ### Using OBS
 
 1. Click the `+` or right mouse click to add a new source. Choose `Browser` from the list.
 1. For a new source, you will need to add the name. Type in "_Chat_".
-1. In the Browser Source settings, you will need to change the URL to your Owncast instance's `/embed/chat` url.
+1. In the Browser Source settings, you will need to change the URL to your Owncast instance's `/embed/chat/readonly` url.
 1. You can use the _Custom CSS_ to tweak how the browser shows in your video. The following example will add some space around the box, give it a semi-transparent dark background; and increase the overall font size to a base unit of 24px. You may change any of these settings to fit your presentation layout. Note that the overall message text color is white.
    {{< highlight css >}}
    html {
@@ -60,7 +75,7 @@ One common use is adding the chat into your live stream.
 
 1. Click ‘OK’ to save your chat settings and re-position the new chat source in your scene.
 
-{{<versionsupport feature="embedding chat" version="0.0.2">}}
+{{<versionsupport feature="embedding readonly chat" version="0.0.2">}}
 
 ## SSL Requirements
 
