@@ -37,16 +37,15 @@ It will look something like:
 
 ## Embedding chat
 
-Owncast supports embedding your chat directly into any other web site or source. 
+Owncast supports embedding your chat directly into any other web site or source.
 
-There are two types of embed chats: A read-only chat which only shows the messages and an embed chat with full functionality which can also send messages. 
-
+There are two types of embed chats: A read-only chat which only shows the messages and an embed chat with full functionality which can also send message.
 
 ## Embedding chat with full functionality 
 
 The full-functionality chat URL lives at: `http://your.host/embed/chat/readwrite`.
 
-{{<versionsupport feature="embedding chat with full functionality " version="0.0.8">}}
+{{<versionsupport feature="embedding chat with full functionality" version="0.0.8">}}
 
 It will look something like:
 
