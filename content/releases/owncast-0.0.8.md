@@ -79,6 +79,8 @@ Previously we didn't suggest more than 1,000 people to be connected to the Ownca
 
 - You can specify the directory to save backups to [#1099](https://github.com/owncast/owncast/pull/1099)
 
+- Add standalone chat with ability to send messages [#531](https://github.com/owncast/owncast/issues/531)
+
 ### Changed
 
 - Replace viewer counting with a simple ping instead of websocket connections [#790](https://github.com/owncast/owncast/issues/790)
