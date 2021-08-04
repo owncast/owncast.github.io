@@ -22,6 +22,10 @@ Under the new Chat settings page in the admin you can add a list of names or wor
 
 Previously we didn't suggest more than 1,000 people to be connected to the Owncast chat, but with this revision it's been tested to 5,000 concurrent users, though you may see more or less depending on your server and how it's configured. In general most people should no longer be limited due to chat.
 
+### Custom chat emoji
+
+You can now input, and autocomplete, custom emoji in chat by typing :emojiname:.  Hover over emoji in the chat to see the name of it.  By typing part of an emoji, such as `:dancing` and hitting `tab` it will attempt to auto-complete it for you just like it does with usernames when you type `@user` and `tab`.
+
 ### Other notes
 
 - Chat welcome message will no longer be sent if chat isn't active (your stream is offline).
@@ -105,6 +109,8 @@ Previously we didn't suggest more than 1,000 people to be connected to the Ownca
 
 - Hopefully be able to run on Windows now [#390](https://github.com/owncast/owncast/issues/390)
 
+- Atomically save the thumbnail and preview Gif [#1279](https://github.com/owncast/owncast/pull/1279) 
+
 ### Fixed
 
 - Description text with a URL doesn't auto linkify [#1010](https://github.com/owncast/owncast/issues/1010)
@@ -172,7 +178,7 @@ Previously we didn't suggest more than 1,000 people to be connected to the Ownca
 ## Thank you to our contributors!
 
 The contributors for v0.0.8 were:
-[jeyemwey](https://github.com/jeyemwey), [soham4abc](https://github.com/soham4abc), [nodomain](https://github.com/nodomain), [leuc](https://github.com/leuc), [MFTabriz](https://github.com/MFTabriz), [gabek](https://github.com/gabek), [Patil2099](https://github.com/Patil2099), [RhnSharma](https://github.com/RhnSharma), [thilobillerbeck](https://github.com/thilobillerbeck), [geekgonecrazy](https://github.com/geekgonecrazy), [gingervitis](https://github.com/gingervitis), [jyggiz](https://github.com/jyggiz) and [tomleb](https://github.com/tomleb).
+[muesli](https://github.com/muesli), [jeyemwey](https://github.com/jeyemwey), [rAcHekLoS](https://github.com/rAcHekLoS), [geekgonecrazy](https://github.com/geekgonecrazy), [gingervitis](https://github.com/gingervitis), [gabek](https://github.com/gabek), [Patil2099](https://github.com/Patil2099), [thilobillerbeck](https://github.com/thilobillerbeck), [soham4abc](https://github.com/soham4abc), [leuc](https://github.com/leuc), [tomleb](https://github.com/tomleb), [RhnSharma](https://github.com/RhnSharma), [MFTabriz](https://github.com/MFTabriz), [jyggiz](https://github.com/jyggiz) and [nodomain](https://github.com/nodomain).
 We also thank all of the fantastic people helping out in the [Owncast chat](https://owncast.rocket.chat) answering questions, testing and providing feedback.
 
 ## Thank you to our [financial supporters](https://opencollective.com/owncast)!
