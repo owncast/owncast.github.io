@@ -1,14 +1,16 @@
-WIP draft changelog + release notes.
-
+---
+title: Owncast v0.0.8
+date: 2021-08-11
+description: "0.0.8 focuses on core chat updates to support things like user moderation."
 ---
 
-While 0.0.8 doesn't have a lot of user-facing changes, there's been a lot of behind the scenes changes to facilitate new features within chat.
+Owncast v0.0.8 features a rewrite of the chat system to improve performance, stability, and user moderation along with changes intended to reduce unauthorized access to chat and its history.
 
 ## Chat updates
 
 ### Moderation
 
-While Owncast has had existing support for hiding chat messages, this new release is the first time you can ban an entire user from chat.  By visiting the new Chat -> Users and seeing the list of currently connected chat users, you can press the "Ban" button to disconnect them from chat, hide all their messages, and ban that user from reconnecting.
+While Owncast has had existing support for hiding chat messages, this new release is the first time you can ban an entire user from chat.  By visiting the new `Chat -> Users` admin page and seeing the list of currently connected chat users, you can press the "Ban" button to disconnect them from chat, hide all their messages, and ban that user from reconnecting.
 
 ### Disabling chat
 
@@ -18,20 +20,21 @@ Turning off chat in the settings previously would hide the chat UI from your vie
 
 Under the new Chat settings page in the admin you can add a list of names or words you don't want to allow people to use in their chat usernames. This way you can stop people from having fake names like "Admin" to mislead people.
 
+Also, default usernames are no longer "UserXX", but instead a randomly generated string.
+
 ### Chat connection limits
 
-Previously we didn't suggest more than 1,000 people to be connected to the Owncast chat, but with this revision it's been tested to 5,000 concurrent users, though you may see more or less depending on your server and how it's configured. In general most people should no longer be limited due to chat.
+Previously we didn't suggest more than 1,000 people to be connected to the Owncast chat, but with this revision it's been tested to many times that, though you may see more or less depending on your server and how it's configured. In general most people should no longer be limited in chat capacity.
 
 ### Custom chat emoji
 
 You can now input, and autocomplete, custom emoji in chat by typing :emojiname:.  Hover over emoji in the chat to see the name of it.  By typing part of an emoji, such as `:dancing` and hitting `tab` it will attempt to auto-complete it for you just like it does with usernames when you type `@user` and `tab`.
 
-### Other notes
+### New standalone embeddable chat
 
-- Chat welcome message will no longer be sent if chat isn't active (your stream is offline).
-- Default chat username will be a randomly generated string instead of the previous "UserXX".
-- You can use :emojiname: to manually type in an emoji in a chat message.
+There's now a standalone chat interface located at `/embed/chat/readwrite` that you can embed in an iframe anywhere you like, allowing you to easily have the full chat in a custom interface that you design.
 
+This is also useful for streamers who just want to bring up a full-screen chat to use when streaming.
 
 # Changelog
 
@@ -109,7 +112,7 @@ You can now input, and autocomplete, custom emoji in chat by typing :emojiname:.
 
 - Hopefully be able to run on Windows now [#390](https://github.com/owncast/owncast/issues/390)
 
-- Atomically save the thumbnail and preview Gif [#1279](https://github.com/owncast/owncast/pull/1279) 
+- Atomically save the thumbnail and preview Gif [#1279](https://github.com/owncast/owncast/pull/1279)
 
 ### Fixed
 
@@ -185,6 +188,4 @@ We also thank all of the fantastic people helping out in the [Owncast chat](http
 
 A huge thanks to those giving us to the resources to run servers, have testing environments, host collaboration tools, pay for 3rd party services to test with and the means to experiment with new ideas we wouldn't be able to do otherwise.
 
-Our project sponsors [Noblestreet](https://opencollective.com/noblestreet) and [Okta](https://opencollective.com/okta).
-
-And our fantastic donors [Simon Michalke](https://opencollective.com/simon-michalke), [rootbeerdan](https://opencollective.com/rootbeerdan), [Luka Prinčič](https://opencollective.com/luka-princic), [Kyle Bronsdon](https://opencollective.com/guest-7c7eb0e8), [Guest](https://opencollective.com/guest-74d455b7), [Robin](https://opencollective.com/robin-mol1), [Flaki](https://opencollective.com/flaki), [ha2tim Gye-Nyame](https://opencollective.com/guest-d2606286), [Raffael Rehberger](https://opencollective.com/ruffy), [Chaim Krause](https://opencollective.com/chaim-krause), [Guest](https://opencollective.com/guest-85584a94) and [Jnktn.tv](https://opencollective.com/jnktn-tv).
+Our project sponsors [Noblestreet](https://opencollective.com/noblestreet), [Okta](https://opencollective.com/okta), and our fantastic donors [Simon Michalke](https://opencollective.com/simon-michalke), [rootbeerdan](https://opencollective.com/rootbeerdan), [Luka Prinčič](https://opencollective.com/luka-princic), [Kyle Bronsdon](https://opencollective.com/guest-7c7eb0e8), [Guest](https://opencollective.com/guest-74d455b7), [Robin](https://opencollective.com/robin-mol1), [Flaki](https://opencollective.com/flaki), [ha2tim Gye-Nyame](https://opencollective.com/guest-d2606286), [Raffael Rehberger](https://opencollective.com/ruffy), [Chaim Krause](https://opencollective.com/chaim-krause), [Guest](https://opencollective.com/guest-85584a94) and [Jnktn.tv](https://opencollective.com/jnktn-tv).
