@@ -15,7 +15,7 @@ While not required, most people will want to support SSL on a public Owncast ser
 
 ## Why you want to support SSL
 
-1. If you want to embed your Owncast video into a page that is using SSL your Owncast server will also need to be secured.
+1. If you want to embed your Owncast video or chat into a page that is using SSL your Owncast server will also need to be secured.
 1. Browsers will label your site as ["Not Secure"](https://support.apple.com/en-us/HT208672) without using SSL.
 1. It looks more professional and your site will come off more trustworthy.
 1. Securing web traffic on the public internet is the right thing to do.
