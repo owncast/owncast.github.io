@@ -38,7 +38,7 @@ This is also useful for streamers who just want to bring up a full-screen chat t
 
 # Changelog
 
-## [[0.0.8](https://github.com/owncast/owncast/milestone/13)] - 2021-xx-xx
+## [[0.0.8](https://github.com/owncast/owncast/milestone/13)] - 2021-08-11
 
 ## Upgrade instructions from 0.0.7
 
