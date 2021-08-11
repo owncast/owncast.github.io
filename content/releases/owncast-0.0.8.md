@@ -45,7 +45,7 @@ This is also useful for streamers who just want to bring up a full-screen chat t
 1. Stop the service from running. If you're using a pre-installed image through a hosting provider, or setup Owncast to run under systemd you can probably just simply run `systemctl stop owncast`.
 1. Change to the directory where Owncast is installed on your server. In a pre-installed hosting scenario it's likely in `/opt/owncast`.
 1. If you’ve customized your web interface in any way you will want to back up the files you’ve changed or customized.
-1. Re-run the installer as the user you run Owncast under. For example: `su -c "curl https://owncast.online/install.sh |bash" owncast`.
+1. Re-run the installer as the user you run Owncast under. For example if you are running owncast as the user "owncast": `su -c "curl https://owncast.online/install.sh |bash" owncast`
 1. Restart the service. If you're running under systemd `systemctl start owncast`.
 
 ## Breaking changes
@@ -172,9 +172,9 @@ This is also useful for streamers who just want to bring up a full-screen chat t
 
 - Remove the unnecessary websocket connection from the embed player [#1164](https://github.com/owncast/owncast/issues/1164)
 
-- /api/integrations/chat/user is no longer supported, removing the ability to send a chat message as arbitrary users. #1092
+- /api/integrations/chat/user is no longer supported, removing the ability to send a chat message as arbitrary users. [#1092](https://github.com/owncast/owncast/issues/1092)
 
-- /api/chat is no longer publicly available. #1085
+- /api/chat is no longer publicly available. [#1085](https://github.com/owncast/owncast/issues/1085)
 
 - Websocket is no longer publicly available.
 
