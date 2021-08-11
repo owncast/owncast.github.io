@@ -82,7 +82,7 @@ To enable, visit the advanced settings for a specific stream output. You can tur
 1. If your video won't play, **then turn it off**.
 1. Only one output should be set as "passthrough".
 
-Because enabling Passthrough tells Owncast to not encode your video at all, your stream is at the mercy of what your broadcasting software is sending, and that is often not highly compatible with live streaming.  For example your live latency may be substantially higher than expected because the stream is not able to be broken up into the specifically sized chunks, as expected.  This can also cause issues when switching between different video qualities. For example, switching between a passthrough quality and an properly encoded quality. Worst case your stream may not be playable at all with passthrough enabled.
+Because enabling Passthrough tells Owncast to not encode your video at all, your stream is at the mercy of what your broadcasting software is sending, and that is often not highly compatible with live streaming. For example your live latency may be substantially higher than expected because the stream is not able to be broken up into the specifically sized chunks, as expected. This can also cause issues when switching between different video qualities. For example, switching between a passthrough quality and an properly encoded quality. Worst case your stream may not be playable at all with passthrough enabled.
 
 If you find you require this feature, but it's not working for you, you _may_ be able to change to a different broadcasting client solution to send video to Owncast differently. For example, if you're using Restream, video passthrough will not work, but in general it's worked for people streaming from OBS.
 
