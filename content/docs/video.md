@@ -71,7 +71,7 @@ You have some control over the live latency between the broadcaster and the view
 
 ### Video Passthrough
 
-{{< alert icon="💡" text="Turning on video passthrough may make your stream unplayable. Read about Video Passthrough before turning it on and learn about the risks involved." >}}
+{{< alert icon="💡" text="Turning on video passthrough may make your stream unplayable or unreliable, and is not recommended. Read about Video Passthrough before turning it on and learn about the risks involved." >}}
 
 Owncast has an optional setting to turn off re-encoding of your inbound stream, potentially saving substantial hardware utilization and supporting a higher quality stream with less resources. <span style="color: red;"> **However**, because your video will not be re-encoded it's possible that certain video from certain sources may end up **not being playable at all**</span>. This is the risk of enabling this.
 
@@ -81,6 +81,8 @@ To enable, visit the advanced settings for a specific stream output. You can tur
 1. Test it.
 1. If your video won't play, **then turn it off**.
 1. Only one output should be set as "passthrough".
+
+Because enabling Passthrough tells Owncast to not encode your video at all, your stream is at the mercy of what your broadcasting software is sending, and that is often not highly compatible with live streaming.  For example your live latency may be substantially higher than expected because the stream is not able to be broken up into the specifically sized chunks, as expected.  This can also cause issues when switching between different video qualities. For example, switching between a passthrough quality and an properly encoded quality. Worst case your stream may not be playable at all with passthrough enabled.
 
 If you find you require this feature, but it's not working for you, you _may_ be able to change to a different broadcasting client solution to send video to Owncast differently. For example, if you're using Restream, video passthrough will not work, but in general it's worked for people streaming from OBS.
 
