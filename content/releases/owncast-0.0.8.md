@@ -4,9 +4,11 @@ date: 2021-08-11
 description: "0.0.8 focuses on core chat updates to support things like user moderation."
 ---
 
-Owncast v0.0.8 features a rewrite of the chat system to improve performance, stability, and user moderation along with changes intended to reduce unauthorized access to chat and its history. As with all updates it also includes many fixes and improvements to continue improving the self-hosted streaming experience. Please read through the below release notes and let us know what you think about this release. Your feedback drives the roadmap of Owncast, and we want to build the things that are most useful to you.
+Owncast v0.0.8 features a rewrite of the chat system to improve performance, stability, and user moderation along with changes intended to reduce unauthorized access to chat and its history.
 
-## Chat updates
+As with all updates it also includes many fixes and improvements to continue improving the self-hosted streaming experience. Please read through the below release notes and let us know what you think about this release. Your feedback drives the roadmap of Owncast, and we want to build the things that are most useful to you.
+
+Here are some notable chat updates you may be interested in:
 
 ### Moderation
 

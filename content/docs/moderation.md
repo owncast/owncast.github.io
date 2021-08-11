@@ -14,6 +14,8 @@ Using the Owncast Admin you can remove individual messages or entire users from 
 
 Visit `Chat & Users` > `Messages` in your admin to perform chat message moderation tasks.
 
+{{<versionsupport feature="Chat message moderation" version="0.0.5">}}
+
 ### Single message
 
 You can toggle the visibility of a single message in your chat by clicking the visibility toggle button (that looks like an eyeball) on the far right of each message.
@@ -33,6 +35,8 @@ Visit `Chat & Users` > `Users` in your admin to perform user moderation tasks.
 Banning a user will immediately disconnect them from chat and hide the chat interface from their browser. It will also remove all previous messages sent by this user from the chat feed.
 
 You can un-ban a previously banned user, but note that it will not restore these removed messages. You may restore them manually if needed.
+
+{{<versionsupport feature="Chat user moderation" version="0.0.8">}}
 
 {{< img src="/docs/img/user-moderation-ban-user.png" align="center">}}
 
