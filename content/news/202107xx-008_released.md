@@ -6,9 +6,10 @@ lastmod: 2021-06-15T10:33:06-07:00
 images: []
 ---
 
-0.0.8 has been released!  It's primarily focused on chat.  To facilitate the changes some API updates took place that may impact you if you use any 3rd party code.
+0.0.8 has been released! It's primarily focused on chat. To facilitate the changes some API updates took place that may impact you if you use any 3rd party code.
 
 [Please read the changelog](/admin/upgrade) for the full list of changes in this update and let us know what you think of the update!
+
 ## API changes
 
 - The websocket used for chat within Owncast will no longer be generally externally available beginning with 0.0.8. Instead it is suggested you use [Webhooks](https://owncast.online/thirdparty/webhooks/) to get real-time updates of chat messages.

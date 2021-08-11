@@ -10,7 +10,6 @@ toc: true
 
 Using the Owncast Admin you can remove individual messages or entire users from your chat.
 
-
 ## Removing chat messages
 
 Visit `Chat & Users` > `Messages` in your admin to perform chat message moderation tasks.
@@ -29,11 +28,11 @@ Alternately, you can select, via checkboxes, the messages you want to change all
 
 ## Banning users from your chat
 
-Visit `Chat & Users` > `Users` in your admin to perform user moderation tasks. 
+Visit `Chat & Users` > `Users` in your admin to perform user moderation tasks.
 
-Banning a user will immediately disconnect them from chat and hide the chat interface from their browser.  It will also remove all previous messages sent by this user from the chat feed.
+Banning a user will immediately disconnect them from chat and hide the chat interface from their browser. It will also remove all previous messages sent by this user from the chat feed.
 
-You can un-ban a previously banned user, but note that it will not restore these removed messages.  You may restore them manually if needed.
+You can un-ban a previously banned user, but note that it will not restore these removed messages. You may restore them manually if needed.
 
 {{< img src="/docs/img/user-moderation-ban-user.png" align="center">}}
 

@@ -4,17 +4,17 @@ date: 2021-08-11
 description: "0.0.8 focuses on core chat updates to support things like user moderation."
 ---
 
-Owncast v0.0.8 features a rewrite of the chat system to improve performance, stability, and user moderation along with changes intended to reduce unauthorized access to chat and its history. As with all updates it also includes many fixes and improvements to continue improving the self-hosted streaming experience.  Please read through the below release notes and let us know what you think about this release.  Your feedback drives the roadmap of Owncast, and we want to build the things that are most useful to you.
+Owncast v0.0.8 features a rewrite of the chat system to improve performance, stability, and user moderation along with changes intended to reduce unauthorized access to chat and its history. As with all updates it also includes many fixes and improvements to continue improving the self-hosted streaming experience. Please read through the below release notes and let us know what you think about this release. Your feedback drives the roadmap of Owncast, and we want to build the things that are most useful to you.
 
 ## Chat updates
 
 ### Moderation
 
-While Owncast has had existing support for hiding chat messages, this new release is the first time you can ban an entire user from chat.  By visiting the new `Chat -> Users` admin page and seeing the list of currently connected chat users, you can press the "Ban" button to disconnect them from chat, hide all their messages, and ban that user from reconnecting.
+While Owncast has had existing support for hiding chat messages, this new release is the first time you can ban an entire user from chat. By visiting the new `Chat -> Users` admin page and seeing the list of currently connected chat users, you can press the "Ban" button to disconnect them from chat, hide all their messages, and ban that user from reconnecting.
 
 ### Disabling chat
 
-Turning off chat in the settings previously would hide the chat UI from your viewers, but the chat functionality still was enabled behind the scenes. Now if you turn it off chat is no longer supported.  Because you can turn off chat completely the number of viewers is no longer counted by the number of people connected to chat, instead it is counted separately.
+Turning off chat in the settings previously would hide the chat UI from your viewers, but the chat functionality still was enabled behind the scenes. Now if you turn it off chat is no longer supported. Because you can turn off chat completely the number of viewers is no longer counted by the number of people connected to chat, instead it is counted separately.
 
 ### Chat usernames
 
@@ -28,7 +28,7 @@ Previously we didn't suggest more than 1,000 people to be connected to the Ownca
 
 ### Custom chat emoji
 
-You can now input, and autocomplete, custom emoji in chat by typing :emojiname:.  Hover over emoji in the chat to see the name of it.  By typing part of an emoji, such as `:dancing` and hitting `tab` it will attempt to auto-complete it for you just like it does with usernames when you type `@user` and `tab`.
+You can now input, and autocomplete, custom emoji in chat by typing :emojiname:. Hover over emoji in the chat to see the name of it. By typing part of an emoji, such as `:dancing` and hitting `tab` it will attempt to auto-complete it for you just like it does with usernames when you type `@user` and `tab`.
 
 ### New standalone embeddable chat
 
