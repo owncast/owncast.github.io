@@ -30,7 +30,7 @@ Previously we didn't suggest more than 1,000 people to be connected to the Ownca
 
 ### Custom chat emoji
 
-You can now input, and autocomplete, custom emoji in chat by typing :emojiname:. Hover over emoji in the chat to see the name of it. By typing part of an emoji, such as `:dancing` and hitting `tab` it will attempt to auto-complete it for you just like it does with usernames when you type `@user` and `tab`.
+You can now input, and autocomplete, custom emoji in chat by typing `:emojiname:`. Hover over emoji in the chat to see the name of it. By typing part of an emoji name, such as `:dancing` and hitting `tab` it will attempt to auto-complete it for you just like it does with usernames when you type `@user` and hit `tab`.
 
 ### New standalone embeddable chat
 
@@ -174,11 +174,11 @@ This is also useful for streamers who just want to bring up a full-screen chat t
 
 - Remove the unnecessary websocket connection from the embed player [#1164](https://github.com/owncast/owncast/issues/1164)
 
-- /api/integrations/chat/user is no longer supported, removing the ability to send a chat message as arbitrary users. [#1092](https://github.com/owncast/owncast/issues/1092)
+- /api/integrations/chat/user is no longer supported, removing the ability to send a chat message as arbitrary users [#1092](https://github.com/owncast/owncast/issues/1092)
 
-- /api/chat is no longer publicly available. [#1085](https://github.com/owncast/owncast/issues/1085)
+- /api/chat is no longer publicly available [#1085](https://github.com/owncast/owncast/issues/1085)
 
-- Websocket is no longer publicly available.
+- Websocket is no longer publicly available
 
 ## Thank you to our contributors!
 
