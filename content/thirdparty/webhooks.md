@@ -183,7 +183,7 @@ Note: the request body is identical to a "NAME_CHANGE" webhook (also the type is
 
 ### Test webhooks before writing any code
 
-If you want to test how webhooks work before you write any code, create a test endpoint at https://requestcatcher.com/, and add the URL it gives you as a webhook in your admin and see the requests come through.
+If you want to test how webhooks work before you write any code, create a test endpoint at [RequestCatcher](https://requestcatcher.com/), and add the URL it gives you as a webhook in your admin and see the requests come through.
 
 ### Test webhooks from a production instance of Owncast
 
