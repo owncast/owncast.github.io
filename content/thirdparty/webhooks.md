@@ -102,7 +102,7 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 
 ```json
 {
-    "type": "NAME_CHANGE",
+    "type": "USER_JOINED",
     "eventData": {
         "type": "",
         "id": "wAgcTeM7g",
@@ -117,8 +117,6 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
     }
 }
 ```
-
-Note: the request body is identical to a "NAME_CHANGE" webhook (also the type is "NAME_CHANGE"). You can differentiate a USER_JOIN event with a NAME_CHANGE event based on the additional "type"-field in the "eventData"-object. If this field is present, a user joined.
 
 #### STREAM_STARTED
 
