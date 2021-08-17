@@ -22,13 +22,8 @@ With this setup you don't need extra CPU or a more powerful server in order to s
 
 ## Chat
 
-Scaling chat is more difficult, as Owncast is an all-in-one, single server solution. You're limited by what your single server will be able to handle as far as open connections. You're likely, with a little tweaking, to get many hundreds of people connected to chat. But if you're looking at 1,000 or more, Owncast's chat is likely not the correct solution for your use case.
+When scaling chat you're limited by what your single server will be able to handle as far as open connections.  For most people the standard configuration is likely going to suffice, as it's been tested to thousands of concurrent clients.
 
-**Steps**
+Owncast will automatically increase the amount of concurrent sockets that your operating system will allow.  However, if you still get the `too many open files` error it's because your `ulimit` value is lower than the number of open resources Owncast is trying to to use.  You will want to have a more powerful server (cpu, ram) when raising the max limit and handle more chat connections.
 
-1. You will want to have a more powerful server (cpu, ram) in order to handle additional chat connections.
-1. You will need to increase the user's maximum open resource limit on your machine (ulimit).
-
-If you get the `too many open files` error it's because your `ulimit` value is lower than the number of open resources Owncast is trying to to use.
-
-The default for `ulimit -n` is generally 1024, so you can increase from there by using the `ulimit` command or editing your system files. [Here is an overview of the different limits and how to change them](https://www.learnitguide.net/2015/07/how-to-increase-ulimit-values-in-linux.html). It's beyond the scope of this documentation to go into detail of what numbers you should use and where to put them.
+You can increase concurrent connections by using the `ulimit` command or editing your system files. [Here is an overview of the different limits and how to change them](https://www.learnitguide.net/2015/07/how-to-increase-ulimit-values-in-linux.html). It's beyond the scope of this documentation to go into detail of what numbers you should use and where to put them.
