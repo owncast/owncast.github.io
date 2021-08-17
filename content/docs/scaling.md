@@ -22,8 +22,8 @@ With this setup you don't need extra CPU or a more powerful server in order to s
 
 ## Chat
 
-When scaling chat you're limited by what your single server will be able to handle as far as open connections.  For most people the standard configuration is likely going to suffice, as it's been tested to thousands of concurrent clients.
+When scaling chat you're limited by what your single server will be able to handle as far as open connections. For most people the standard configuration is likely going to suffice, as it's been tested to thousands of concurrent clients.
 
-Owncast will automatically increase the amount of concurrent sockets that your operating system will allow.  However, if you still get the `too many open files` error it's because your `ulimit` value is lower than the number of open resources Owncast is trying to to use.  You will want to have a more powerful server (cpu, ram) when raising the max limit and handle more chat connections.
+Owncast will automatically increase the amount of concurrent sockets that your operating system will allow. However, if you still get the `too many open files` error it's because your `ulimit` value is lower than the number of open resources Owncast is trying to to use. You will want to have a more powerful server (cpu, ram) when raising the max limit and handle more chat connections.
 
 You can increase concurrent connections by using the `ulimit` command or editing your system files. [Here is an overview of the different limits and how to change them](https://www.learnitguide.net/2015/07/how-to-increase-ulimit-values-in-linux.html). It's beyond the scope of this documentation to go into detail of what numbers you should use and where to put them.
