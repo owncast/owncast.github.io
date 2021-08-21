@@ -7,7 +7,7 @@ draft: false
 images: []
 ---
 
-We'd like to kinow if you take advantage of the supplied HTML, Javascript and CSS to customize your page.
+We'd like to know if you take advantage of the supplied HTML, Javascript and CSS to customize your page.
 
 <a href="https://gabekangas.typeform.com/to/P5uXL74P" rel="noreferrer" target="_blank">
 Click to answer.
