@@ -68,6 +68,7 @@ where
             "createdAt": "2021-08-12T07:51:37.470812684Z",
             "previousNames": ["lazyDaisy"]
         },
+        "clientId": 2,
         "body": "hello world \u003cimg class=\"emoji\" alt=\":beerparrot:\" title=\":beerparrot:\" src=\"/img/emoji/beerparrot.gif\"\u003e","rawBody": "hello world \u003cimg class=\"emoji\" alt=\":beerparrot:\" title=\":beerparrot:\" src=\"/img/emoji/beerparrot.gif\"\u003e",
         "id": "j-rXteG7R",
         "visible": true,
@@ -113,7 +114,8 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
             "displayColor": 257,
             "createdAt": "2021-08-12T08:19:28.759651178Z",
             "previousNames": ["laughing-cray"]
-        }
+        },
+        "clientId": 2
     }
 }
 ```
