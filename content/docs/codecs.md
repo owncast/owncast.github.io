@@ -90,6 +90,8 @@ Links:
 - [Tal.org instructions on building ffmpeg with nvenc](https://www.tal.org/tutorials/ffmpeg_nvidia_encode)
 - [Shell script that claims to automate the process on Ubuntu](https://gist.github.com/ransagy/3f6f1a9e5ede6212425f3b36b136216e)
 
+{{< alert icon="💡" text="Note for OBS users: It has been found that enabling nvenc while running the OBS auto-configuration wizard can result in errors. If you intend to run this configuration wizard against your Owncast server you may need to turn off nvenc temporarily in your Owncast settings while running it." >}}
+
 ## ffmpeg
 
 Once your system is configured to use the correct drivers and libraries required you'll need to make sure your copy of `ffmpeg` supports it.
