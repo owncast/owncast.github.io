@@ -42,12 +42,12 @@ Scroll down to the CORS section and click Edit, then paste in this JSON, to allo
 
 ```json
 [
-    {
-        "AllowedHeaders": [],
-        "AllowedMethods": ["GET"],
-        "AllowedOrigins": ["*"],
-        "ExposeHeaders": []
-    }
+  {
+    "AllowedHeaders": [],
+    "AllowedMethods": ["GET"],
+    "AllowedOrigins": ["*"],
+    "ExposeHeaders": []
+  }
 ]
 ```
 
@@ -78,6 +78,7 @@ Navigate to the "Storage" tab.
 - Secret Key: The secret key you created earlier
 - Bucket: The short name of your S3 bucket you created, e.g. "livestream-example"
 - Region: "us-west-2" in my example
+
 ### CDN
 
 AWS (and other S3 compatible providers) offer a feature to change the HTTP host to support CDNs. You can configure Owncast to serve media files from this host by setting the `Serving Endpoint` to your CDNed host. For testing try it without setting this value first to make sure things are working, and then add the additional configuration.
