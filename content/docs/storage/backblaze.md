@@ -13,9 +13,11 @@ type: subpages
 As of November 2020 [Backblaze's B2](https://www.backblaze.com/b2/cloud-storage.html) is fully [S3 compatible](https://www.backblaze.com/b2/docs/s3_compatible_api.html).
 
 B2's first 10G of storage is free, and the first 1G of download per day is free after that.  Afterwards they charge $0.01/G.
-
 ### Keys
+
 When creating your ["Application Keys"](https://secure.backblaze.com/app_keys.htm) keep in mind that the **"Application Key ID"** is the **"Access Key"** and the **"Application Key"** is the **"Secret"**.
+
+It has been suggested that you make sure you set your key setting of "Allow access to Bucket" to `All`.
 
 ### CORS settings
 While the specific origins you want to support are up to you, make sure the API for CORS support is set to either **"S3"** or **"Both"**.
