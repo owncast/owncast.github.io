@@ -132,6 +132,10 @@ main () {
         FFMPEG_ARCH="linux-arm"
         OWNCAST_ARCH="arm7"
         ;;
+      aarch64)
+        FFMPEG_ARCH="linux-arm64"
+        OWNCAST_ARCH="arm64"
+        ;;
       *)
         errorAndExit "Unsupported CPU architecture $(uname -m)"
         ;;
