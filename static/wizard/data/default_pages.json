@@ -14,7 +14,7 @@
 					"en": "How do you want to install Owncast?"
 				},
 				"instructions": {
-					"en": "The first decision you will need to make is how you plan on installing Owncast."
+					"en": "The first decision you will need to make is how you plan on installing Owncast.<br>If you'd prefer you can <a href=\"/quickstart\">browse our entire installation documentation</a>."
 				},
 				"choices": [
 					{
@@ -26,7 +26,7 @@
 					},
 					{
 						"text": {
-							"en": "I want Owncast to be installed for me."
+							"en": "I want Owncast to be installed for me on a hosting provider."
 						},
 						"type": "radio",
 						"value": "hostingprovider"
@@ -40,7 +40,7 @@
 					},
 					{
 						"text": {
-							"en": "Other."
+							"en": "Other specific hardware or hosting environments."
 						},
 						"type": "radio",
 						"value": "other"
@@ -53,7 +53,7 @@
 					"en": "How would you like to manually install Owncast?"
 				},
 				"instructions": {
-					"en": "blah description goes here"
+					"en": "Owncast supplies a quick install script that will always install the most recent version and get you running very quickly. However, there's other options."
 				},
 				"choices": [
 					{
@@ -72,7 +72,7 @@
 					},
 					{
 						"text": {
-							"en": "I want to use my operating system's package manager"
+							"en": "I want to use my operating system's package manager."
 						},
 						"type": "radio",
 						"value": "packagemanager"
@@ -82,7 +82,7 @@
 							"en": "I want to use Site.js to setup Owncast."
 						},
 						"type": "radio",
-						"value": "two"
+						"value": "sitejs"
 					}
 				],
 				"required": true
@@ -126,7 +126,7 @@
 					"en": "Use your Operating System's package manager."
 				},
 				"instructions": {
-					"en": "What Operating System or distribution do you use?"
+					"en": "<strong>Note</strong>: These packages may be out of date. These packages are not built or maintained by the Owncast project and any specific concerns or support regarding these install methods should be directed at the maintainers of the packages.<br><br>What Operating System or distribution do you use?"
 				},
 				"choices": [
 					{
@@ -146,16 +146,30 @@
 				],
 				"required": true
 			},
-			"arch-linux-page": {
-				"pageName": "arch-linux",
-				"required": false,
+			"other-install-page": {
 				"title": {
-					"": "Arch Linux"
+					"en": "Other specific hardware and environments."
 				},
 				"instructions": {
-					"": "Directions for Arch Linux go here."
+					"en": "The following are other methods you can use to setup Owncast. These are not packaged or maintained by the Owncast project and any support or concerns about these alternative install methods should be directed at the maintainer of the following options."
 				},
-				"choices": []
+				"choices": [
+					{
+						"text": {
+							"en": "I run Yunohost"
+						},
+						"type": "radio",
+						"value": "yunohost"
+					},
+					{
+						"text": {
+							"en": "I own a Qnap NAS"
+						},
+						"type": "radio",
+						"value": "qnap"
+					}
+				],
+				"required": true
 			}
 		}
 	}

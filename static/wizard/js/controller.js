@@ -202,10 +202,11 @@ function showPage(dataset, newTimeline, language) {
   var page = data.content.pages[name];
 
   try {
+	// Test if this is a real URL and then navigate to it
+	// if it is.
 	const parsedURL = new URL(name);
-	console.log(parsedURL.protocol)
 	if (parsedURL && parsedURL.protocol === 'https:') {
-		window.location = parsedURL.toString();
+    window.open(parsedURL.toString(), '_blank');
 		return;
 	}
   } catch(e) {}

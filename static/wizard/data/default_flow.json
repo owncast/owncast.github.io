@@ -8,11 +8,11 @@
 				"name": "_decision",
 				"test": "string",
 				"if": "docker",
-				"is_open": true,
+				"is_open": false,
 				"id": 2,
 				"children": [
 					{
-						"name": "docker-install-page",
+						"name": "https://owncast.online/quickstart/docker",
 						"id": 3
 					}
 				]
@@ -27,34 +27,86 @@
 					{
 						"name": "manual-install-method-page",
 						"id": 5,
-						"is_open": true,
+						"is_open": false,
 						"children": [
 							{
 								"name": "_decision",
 								"test": "string",
 								"if": "packagemanager",
-								"is_open": true,
+								"is_open": false,
 								"id": 6,
 								"children": [
 									{
 										"name": "os-package-manager-page",
 										"id": 7,
-										"is_open": true,
+										"is_open": false,
 										"children": [
 											{
 												"name": "_decision",
 												"test": "string",
 												"if": "arch",
-												"is_open": true,
+												"is_open": false,
 												"id": 8,
 												"children": [
 													{
-														"name": "arch-linux-page",
+														"name": "https://aur.archlinux.org/packages/owncast/",
 														"id": 9
+													}
+												]
+											},
+											{
+												"name": "_decision",
+												"test": "string",
+												"if": "freebsd",
+												"is_open": false,
+												"id": 10,
+												"children": [
+													{
+														"name": "https://www.freshports.org/www/owncast/",
+														"id": 11
 													}
 												]
 											}
 										]
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "quickinstaller",
+								"is_open": false,
+								"id": 12,
+								"children": [
+									{
+										"name": "https://owncast.online/quickstart",
+										"id": 13
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "download",
+								"is_open": false,
+								"id": 14,
+								"children": [
+									{
+										"name": "https://owncast.online/quickstart/manual/",
+										"id": 15
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "sitejs",
+								"is_open": false,
+								"id": 16,
+								"children": [
+									{
+										"name": "https://owncast.online/quickstart/sitejs/",
+										"id": 17
 									}
 								]
 							}
@@ -66,12 +118,83 @@
 				"name": "_decision",
 				"test": "string",
 				"if": "hostingprovider",
-				"is_open": true,
-				"id": 10,
+				"is_open": false,
+				"id": 18,
 				"children": [
 					{
 						"name": "hostingprovider-install-method-page",
-						"id": 11
+						"id": 19,
+						"is_open": false,
+						"children": [
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "digitalocean",
+								"is_open": false,
+								"id": 20,
+								"children": [
+									{
+										"name": "https://owncast.online/quickstart/digitalocean/",
+										"id": 21
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "linode",
+								"is_open": false,
+								"id": 22,
+								"children": [
+									{
+										"name": "https://owncast.online/quickstart/linode/",
+										"id": 23
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "other",
+				"is_open": false,
+				"id": 24,
+				"children": [
+					{
+						"name": "other-install-page",
+						"id": 25,
+						"is_open": false,
+						"children": [
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "yunohost",
+								"is_open": false,
+								"id": 26,
+								"children": [
+									{
+										"name": "https://dash.yunohost.org/appci/app/owncast",
+										"id": 27
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "qnap",
+								"is_open": false,
+								"id": 28,
+								"children": [
+									{
+										"name": "https://qnapclub.eu/en/qpkg/1138",
+										"id": 29
+									}
+								]
+							}
+						]
 					}
 				]
 			}
