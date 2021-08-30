@@ -1,0 +1,162 @@
+{
+	"googleTrackingId": "",
+	"defaultLanguage": "en",
+	"content": {
+		"title": {
+			"en": "Owncast Quickstart Wizard"
+		},
+		"button": {
+			"en": "Next"
+		},
+		"pages": {
+			"install-method-page": {
+				"title": {
+					"en": "How do you want to install Owncast?"
+				},
+				"instructions": {
+					"en": "The first decision you will need to make is how you plan on installing Owncast."
+				},
+				"choices": [
+					{
+						"text": {
+							"en": "I want to manually install Owncast myself."
+						},
+						"type": "radio",
+						"value": "manual"
+					},
+					{
+						"text": {
+							"en": "I want Owncast to be installed for me."
+						},
+						"type": "radio",
+						"value": "hostingprovider"
+					},
+					{
+						"text": {
+							"en": "I want to use Docker."
+						},
+						"type": "radio",
+						"value": "docker"
+					},
+					{
+						"text": {
+							"en": "Other."
+						},
+						"type": "radio",
+						"value": "other"
+					}
+				],
+				"required": true
+			},
+			"manual-install-method-page": {
+				"title": {
+					"en": "How would you like to manually install Owncast?"
+				},
+				"instructions": {
+					"en": "blah description goes here"
+				},
+				"choices": [
+					{
+						"text": {
+							"en": "I want to use the Owncast Quick Installer Script."
+						},
+						"type": "radio",
+						"value": "quickinstaller"
+					},
+					{
+						"text": {
+							"en": "I want to download a release of Owncast."
+						},
+						"type": "radio",
+						"value": "download"
+					},
+					{
+						"text": {
+							"en": "I want to use my operating system's package manager"
+						},
+						"type": "radio",
+						"value": "packagemanager"
+					},
+					{
+						"text": {
+							"en": "I want to use Site.js to setup Owncast."
+						},
+						"type": "radio",
+						"value": "two"
+					}
+				],
+				"required": true
+			},
+			"hostingprovider-install-method-page": {
+				"title": {
+					"en": "What hosting provider would you like to use to install Owncast for you?"
+				},
+				"instructions": {
+					"en": "Owncast is supported by default on the following hosting providers and can install Owncast for you."
+				},
+				"choices": [
+					{
+						"text": {
+							"en": "Linode"
+						},
+						"type": "radio",
+						"value": "linode"
+					},
+					{
+						"text": {
+							"en": "DigitalOcean"
+						},
+						"type": "radio",
+						"value": "digitalocean"
+					}
+				],
+				"required": true
+			},
+			"docker-install-page": {
+				"title": {
+					"en": "Owncast under Docker"
+				},
+				"instructions": {
+					"en": "Owncast can be installed via Docker by blah blah blah"
+				},
+				"choices": []
+			},
+			"os-package-manager-page": {
+				"title": {
+					"en": "Use your Operating System's package manager."
+				},
+				"instructions": {
+					"en": "What Operating System or distribution do you use?"
+				},
+				"choices": [
+					{
+						"text": {
+							"en": "Arch Linux"
+						},
+						"type": "radio",
+						"value": "arch"
+					},
+					{
+						"text": {
+							"en": "FreeBSD"
+						},
+						"type": "radio",
+						"value": "freebsd"
+					}
+				],
+				"required": true
+			},
+			"arch-linux-page": {
+				"pageName": "arch-linux",
+				"required": false,
+				"title": {
+					"": "Arch Linux"
+				},
+				"instructions": {
+					"": "Directions for Arch Linux go here."
+				},
+				"choices": []
+			}
+		}
+	}
+}

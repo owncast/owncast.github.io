@@ -1,0 +1,80 @@
+[
+	{
+		"name": "install-method-page",
+		"id": 1,
+		"is_open": true,
+		"children": [
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "docker",
+				"is_open": true,
+				"id": 2,
+				"children": [
+					{
+						"name": "docker-install-page",
+						"id": 3
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "manual",
+				"is_open": true,
+				"id": 4,
+				"children": [
+					{
+						"name": "manual-install-method-page",
+						"id": 5,
+						"is_open": true,
+						"children": [
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "packagemanager",
+								"is_open": true,
+								"id": 6,
+								"children": [
+									{
+										"name": "os-package-manager-page",
+										"id": 7,
+										"is_open": true,
+										"children": [
+											{
+												"name": "_decision",
+												"test": "string",
+												"if": "arch",
+												"is_open": true,
+												"id": 8,
+												"children": [
+													{
+														"name": "arch-linux-page",
+														"id": 9
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "hostingprovider",
+				"is_open": true,
+				"id": 10,
+				"children": [
+					{
+						"name": "hostingprovider-install-method-page",
+						"id": 11
+					}
+				]
+			}
+		]
+	}
+]
