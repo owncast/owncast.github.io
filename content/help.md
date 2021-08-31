@@ -8,6 +8,12 @@ Owncast is a growing open source project that is giving freedom, flexibility and
 
 We abide by our [Code of Conduct](/contribute/) and feel strongly about open, appreciative, and empathetic people joining us. We've been very lucky to have this so far, so maybe you can help us with your skills and passion, too!
 
+As you continue to read, and you find the project interesting, I urge you to do any of the following:
+
+- [Join our chat](https://owncast.rocket.chat) where you can say hello and introduce yourself.
+- [Feel free to email Gabe directly](mailto:gabek@real-ity.com) if you'd like to talk one-on-one.
+- [Visit our GitHub issues](https://github.com/owncast/owncast/issues) and take a look to see if there's anything you'd like to work on. If not, feel free to file a new issue with ideas you might have.
+
 ## Do you want to help in a way that's not writing code?
 
 Awesome.
@@ -37,7 +43,7 @@ If you're a people person that enjoys what we're doing and wants to take part, w
 
 Whether you have an idea for a new feature, have something specific you want to work on, or you just want to jump in and be involved, we've taken pride in making Owncast as easy as possible to jump into.
 
-We've kept our dependencies to a minimum so you can get our source code up and running quickly. We know the feeling of being unable to get your development environment working, so we don't want that for people who want to work on Owncast. In fact, I can't think of a single example of somebody having issues contributing, and that's awesome.
+We've kept our dependencies to a minimum so you can get our source code up and running quickly. We know the feeling of being unable to get your development environment working, so we don't want that for people who want to work on Owncast.
 
 ### Frontend and UI
 
