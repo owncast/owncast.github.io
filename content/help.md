@@ -4,9 +4,9 @@ description: Want to help out a growing open source project? Use your skills her
 toc: true
 ---
 
-Owncast is a growing open source project that is giving freedom, flexibility and fun to live streamers.  And while we have a small team of kind, talented and thoughtful volunteers, we have gaps in our skillset that we'd love to fill so we can get even better at building tools that make a difference for people.
+Owncast is a growing open source project that is giving freedom, flexibility and fun to live streamers. And while we have a small team of kind, talented and thoughtful volunteers, we have gaps in our skillset that we'd love to fill so we can get even better at building tools that make a difference for people.
 
-We abide by our [Code of Conduct](/contribute/) and feel strongly about open, appreciative, and empathetic people joining us.  We've been very lucky to have this so far, so maybe you can help us with your skills and passion, too!
+We abide by our [Code of Conduct](/contribute/) and feel strongly about open, appreciative, and empathetic people joining us. We've been very lucky to have this so far, so maybe you can help us with your skills and passion, too!
 
 ## Do you want to help in a way that's not writing code?
 
@@ -27,24 +27,23 @@ To accomplish this we want to get in touch with people who have a passion for cr
 
 We've done a pretty good job at building a live streaming server, but not so good at talking to people about it.
 
-Having a public presence takes investment and effort, and early on we decided that spending the effort to always stay relevant on social networks or keep a blog current is a challenge that a small group wouldn't be able to execute well.  But it's time to move past that.
+Having a public presence takes investment and effort, and early on we decided that spending the effort to always stay relevant on social networks or keep a blog current is a challenge that a small group wouldn't be able to execute well. But it's time to move past that.
 
-We want to tell more people about Owncast, answer their questions, keep people up to date, and be available where the people are.  But we need help to accomplish this.
+We want to tell more people about Owncast, answer their questions, keep people up to date, and be available where the people are. But we need help to accomplish this.
 
 If you're a people person that enjoys what we're doing and wants to take part, we'd love to have you help us fill in this gap.
-
 
 ## Want to write some code?
 
 Whether you have an idea for a new feature, have something specific you want to work on, or you just want to jump in and be involved, we've taken pride in making Owncast as easy as possible to jump into.
 
-We've kept our dependencies to a minimum so you can get our source code up and running quickly.  We know the feeling of being unable to get your development environment working, so we don't want that for people who want to work on Owncast.  In fact, I can't think of a single example of somebody having issues contributing, and that's awesome.
+We've kept our dependencies to a minimum so you can get our source code up and running quickly. We know the feeling of being unable to get your development environment working, so we don't want that for people who want to work on Owncast. In fact, I can't think of a single example of somebody having issues contributing, and that's awesome.
 
 ### Frontend and UI
 
-We can use some help with the number of people who have a passion for, and focus on the frontend user interfaces.  Like a lot of open source projects we started small and simple, keeping our interfaces as trim as possible.  But as we received feedback and started to add more features interfaces started to get more complex. As we grow to support more use cases and feature sets it's important to have more people involved and opinionated from different backgrounds about these types of things.
+We can use some help with the number of people who have a passion for, and focus on the frontend user interfaces. Like a lot of open source projects we started small and simple, keeping our interfaces as trim as possible. But as we received feedback and started to add more features interfaces started to get more complex. As we grow to support more use cases and feature sets it's important to have more people involved and opinionated from different backgrounds about these types of things.
 
-Our web stack is nothing super crazy.  And anybody who's interested in, or familliar with React would feel at home.  Though if you're not a React person and want to be, it's super easy to jump in to our code.  Handfuls of people who never used React-style development in the past have contributed, so don't let that scare you away!
+Our web stack is nothing super crazy. And anybody who's interested in, or familliar with React would feel at home. Though if you're not a React person and want to be, it's super easy to jump in to our code. Handfuls of people who never used React-style development in the past have contributed, so don't let that scare you away!
 
 Some of our frontend stack:
 
@@ -58,7 +57,7 @@ Some of our frontend stack:
 
 ### Backend and APIs
 
-Every feature request, bug fix or investigation requires jumping into the backend codebase.  Ours is in Go.  It's been a good fit for us, as Go let's you see exactly what's going on without hiding a lot behind the scenes, making it easier for contributors to jump in without prior experience with our codebase or even Go at all.
+Every feature request, bug fix or investigation requires jumping into the backend codebase. Ours is in Go. It's been a good fit for us, as Go let's you see exactly what's going on without hiding a lot behind the scenes, making it easier for contributors to jump in without prior experience with our codebase or even Go at all.
 
 If you have a passion for the Go language and you want to put your expertise to work to help a project that people are enjoying daily, or you're somebody wanting to try something new, both are fantastic reasons to help us out.
 
