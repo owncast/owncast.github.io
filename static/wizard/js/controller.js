@@ -168,6 +168,10 @@ function initSystem3() {
       $j(document).on("click", ".nextButton", function (e) {
         controller(this);
       });
+
+      $j(document).on("click", ".restartButton", function (e) {
+        restart();
+      });
       // end: button listener
 
     }
@@ -284,11 +288,25 @@ function showPage(dataset, newTimeline, language) {
     "value",
     ifLanguageExists(data.content.button, language)
   );
+
+  const nextButtonStyle = timelineArray.length > 0 ? 'inline-block' : 'none';
+  $j(".restartButton").css('display', nextButtonStyle);
+
   // end: set some page text
 
   // begin: prettyficiation width
   // widen();
   // end: prettyficiation width
+}
+
+function restart() {
+  var previousTimeline = timelineArray[0];
+  if (typeof previousTimeline != "undefined") {
+    timelineArray.pop();
+    pathArray.splice(0, 3);
+    showPage(dataset, previousTimeline, language);
+  }
+  $j(".restartButton").css('display', 'none');
 }
 
 function controller() {

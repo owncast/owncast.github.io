@@ -66,15 +66,21 @@ THE SOFTWARE.
       .choice {
         color: #270e63;
       }
-	  .choices {
-		  max-width: unset;
-	  }
-	  .nextButton {
-		background: #4c4896;
-	  }
-	  .nextButton:hover {
-		background: #827bff;
-	  }
+      .choices {
+        max-width: unset;
+      }
+      .nextButton {
+        background: #4c4896;
+      }
+      .nextButton:hover {
+        background: #827bff;
+      }
+	  .restartButton {
+        background: transparent;
+      }
+      .restartButton:hover {
+        background: #7672b3;
+      }
     </style>
 
     <div class="headerTestMode">DEVELOPER TESTING MODE - NOT REAL DATA</div>
@@ -147,6 +153,7 @@ THE SOFTWARE.
       	</div>
       	<div class="nextButtonContainer">
       		<input class="nextButton" type="button" value="Next">
+			<input class="restartButton" type="button" value="Restart">
       	</div>
       </div>
     </script>
@@ -156,6 +163,18 @@ THE SOFTWARE.
 
     <!-- footer -->
     <script>
+      window.onpopstate = function (
+        event // back button
+      ) {
+        var previousTimeline = timelineArray[timelineArray.length - 1];
+        if (typeof previousTimeline != "undefined") {
+          timelineArray.pop();
+          pathArray.splice(0, 3);
+          showPage(dataset, previousTimeline, language);
+        }
+      };
+
+
       $j(document).ready(function () {
         initSystem();
       });

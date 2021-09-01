@@ -498,7 +498,7 @@ input[type="checkbox"]
 	background: #E9E9E9;
 	}
 		
-.nextButton
+.nextButton,.restartButton
 	{
 	background: #0071e3;
 	color: #ffffff;
