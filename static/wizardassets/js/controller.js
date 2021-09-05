@@ -22,13 +22,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-function initSystem() {
+function initSystem(specificDataSet) {
   // begin: did we specify a data file?
-  if (getUrlVars().dataset) {
-    dataset = getUrlVars().dataset;
-  } else {
-    dataset = "default";
-  }
+    if (specificDataSet) {
+      dataset = specificDataSet
+    } else if (getUrlVars().dataset) {
+      dataset = getUrlVars().dataset;
+    } else {
+      dataset = "default";
+    }
   // end: did we specify a data file?
 
   // begin: what is the full path to the site? (for testing locally)
@@ -91,7 +93,7 @@ function initSystem() {
     initSystem2();
   } else {
     var myGet = $j.getJSON(
-      fullPath + "data/" + dataset + "_pages.json?cachebuster=" + uuid(),
+      fullPath + "/wizardassets/data/" + dataset + "_pages.json?cachebuster=" + uuid(),
       function (response) {
         data = response;
         initSystem2();
@@ -137,7 +139,7 @@ function initSystem2() {
     initSystem3();
   } else {
     var myGet = $j.getJSON(
-      fullPath + "data/" + dataset + "_flow.json?cachebuster=" + uuid(),
+      fullPath + "/wizardassets/data/" + dataset + "_flow.json?cachebuster=" + uuid(),
       function (response) {
         flow = response;
         initSystem3();
@@ -149,7 +151,7 @@ function initSystem2() {
 
 function initSystem3() {
   var myGet = $j.getJSON(
-    fullPath + "data/" + dataset + "_flow.json?cachebuster=" + uuid(),
+    fullPath + "/wizardassets/data/" + dataset + "_flow.json?cachebuster=" + uuid(),
     function (response) {
       // begin: init history (for back button)
       timelineArray = [];
@@ -210,7 +212,7 @@ function showPage(dataset, newTimeline, language) {
 	// if it is.
 	const parsedURL = new URL(name);
 	if (parsedURL && parsedURL.protocol === 'https:') {
-    window.open(parsedURL.toString(), '_blank');
+    window.open(parsedURL.toString());
 		return;
 	}
   } catch(e) {}
