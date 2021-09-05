@@ -33,7 +33,7 @@
 					},
 					{
 						"text": {
-							"en": "I want to use Docker."
+							"en": "I want to run Owncast inside a containerized environment such as Docker, Kubernetes, containerd or others."
 						},
 						"type": "radio",
 						"value": "docker"
@@ -53,7 +53,7 @@
 					"en": "How would you like to manually install Owncast?"
 				},
 				"instructions": {
-					"en": "Owncast supplies a quick install script that will always install the most recent version and get you running very quickly. However, there's other options."
+					"en": "Owncast supplies a quick install script that will always install the most recent version and get you running very quickly. However, there are other options."
 				},
 				"choices": [
 					{
@@ -92,7 +92,7 @@
 					"en": "What hosting provider would you like to use to install Owncast for you?"
 				},
 				"instructions": {
-					"en": "Owncast is supported by default on the following hosting providers and can install Owncast for you."
+					"en": "Owncast is supported by default on the following hosting providers and they can install Owncast for you."
 				},
 				"choices": [
 					{
@@ -112,21 +112,12 @@
 				],
 				"required": true
 			},
-			"docker-install-page": {
-				"title": {
-					"en": "Owncast under Docker"
-				},
-				"instructions": {
-					"en": "Owncast can be installed via Docker by blah blah blah"
-				},
-				"choices": []
-			},
 			"os-package-manager-page": {
 				"title": {
 					"en": "Use your Operating System's package manager."
 				},
 				"instructions": {
-					"en": "<strong>Note</strong>: These packages may be out of date. These packages are not built or maintained by the Owncast project and any specific concerns or support regarding these install methods should be directed at the maintainers of the packages.<br><br>What Operating System or distribution do you use?"
+					"en": "<strong>Note</strong>: These packages may be out of date. These packages are not built or maintained by the Owncast project and any specific concerns or support regarding their installation should be directed at the maintainers of the packages.<br><br>What Operating System or distribution do you use?"
 				},
 				"choices": [
 					{
@@ -151,7 +142,7 @@
 					"en": "Other specific hardware and environments."
 				},
 				"instructions": {
-					"en": "The following are other methods you can use to setup Owncast. These are not packaged or maintained by the Owncast project and any support or concerns about these alternative install methods should be directed at the maintainer of the following options."
+					"en": "The following are other methods you can use to setup Owncast. These are not packaged or maintained by the Owncast project and any support or concerns about these alternative install methods should be directed at the maintainers of the respective options."
 				},
 				"choices": [
 					{
