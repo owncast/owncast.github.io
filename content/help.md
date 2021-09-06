@@ -12,7 +12,7 @@ As you continue to read, and you find the project interesting, I urge you to do 
 
 - [Join our chat](https://owncast.rocket.chat) where you can say hello and introduce yourself.
 - [Feel free to email Gabe directly](mailto:gabek@real-ity.com) if you'd like to talk one-on-one.
-- [Visit our GitHub issues](https://github.com/owncast/owncast/issues) and take a look to see if there's anything you'd like to work on. If not, feel free to file a new issue with ideas you might have.
+- [Visit our GitHub issues](https://github.com/owncast/owncast/issues) and take a look to see if there's anything you'd like to work on. If not, feel free to file a new issue with ideas you might have.  Our [Good First Issues](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22good+first+issue%22) list might be a good place to start.
 
 ## Do you want to help in a way that's not writing code?
 
@@ -60,6 +60,8 @@ Some of our frontend stack:
 - ESM native modules
 - VideoJS
 - Next.js
+
+Take a look at our current list of [web frontend](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3A%22Web+frontend%22) and [web admin](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3Aadmin) items currently filed to get a taste of what's currently going on.
 
 ### Backend and APIs
 
