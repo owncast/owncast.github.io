@@ -5,7 +5,6 @@ draft: false
 images: []
 weight: 060
 toc: false
-type: subpages
 ---
 
 Any piece of software you're already using for live streaming is likely compatible with Owncast.  Visit our [broadcasting software](/docs/broadcasting) page to see some specific pieces of software and how they're configured.

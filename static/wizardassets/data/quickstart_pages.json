@@ -14,7 +14,7 @@
 					"en": "How do you want to install Owncast?"
 				},
 				"instructions": {
-					"en": "The first decision you will need to make is how you plan on installing Owncast.<br>If you'd prefer you can <a href=\"/quickstart\">browse our entire installation documentation</a>."
+					"en": "<p>By using the <a href=\"installer\">installer</a> you can get up and running in about a minute. However, if you would prefer to <a href=\"/quickstart/manual\">download a release manually</a>, use a <a href=\"/quickstart/providers\">one-click install</a> at a supported hosting provider, use a <a href=\"/quickstart/container\">container</a> you have those options and more.</p>If you'd prefer you can <a href=\"installation\">browse our entire installation documentation</a>."
 				},
 				"choices": [
 					{
@@ -33,7 +33,7 @@
 					},
 					{
 						"text": {
-							"en": "I want to run Owncast inside a containerized environment such as Docker, Kubernetes, containerd or others."
+							"en": "I want to run Owncast inside a containerized environment such as Docker or Kubernetes."
 						},
 						"type": "radio",
 						"value": "docker"
@@ -44,7 +44,15 @@
 						},
 						"type": "radio",
 						"value": "other"
+					},
+					{
+						"text": {
+							"en": "Owncast is installed and I'm ready to start streaming."
+						},
+						"type": "radio",
+						"value": "startstreaming"
 					}
+
 				],
 				"required": true
 			},
@@ -92,7 +100,7 @@
 					"en": "What hosting provider would you like to use to install Owncast for you?"
 				},
 				"instructions": {
-					"en": "Owncast is supported by default on the following hosting providers and they can install Owncast for you."
+					"en": "Owncast is supported on the following hosting providers and they can install Owncast for you."
 				},
 				"choices": [
 					{

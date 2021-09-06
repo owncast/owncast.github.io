@@ -79,7 +79,7 @@
 								"id": 12,
 								"children": [
 									{
-										"name": "https://owncast.online/quickstart",
+										"name": "https://owncast.online/quickstart/installer",
 										"id": 13
 									}
 								]
@@ -195,6 +195,19 @@
 								]
 							}
 						]
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "startstreaming",
+				"is_open": false,
+				"id": 12,
+				"children": [
+					{
+						"name": "https://owncast.online/quickstart/startstreaming",
+						"id": 13
 					}
 				]
 			}

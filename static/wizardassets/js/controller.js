@@ -212,6 +212,11 @@ function showPage(dataset, newTimeline, language) {
 	// if it is.
 	const parsedURL = new URL(name);
 	if (parsedURL && parsedURL.protocol === 'https:') {
+    if (parsedURL.host == 'owncast.online') {
+      console.log(parsedURL)
+      window.open(parsedURL.pathname);
+      return;
+    }
     window.open(parsedURL.toString());
 		return;
 	}
