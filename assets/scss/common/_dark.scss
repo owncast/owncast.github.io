@@ -216,7 +216,9 @@ $navbar-dark-active-color: $link-color-dark;
   // }
 
   body blockquote {
-    border-left: 3px solid $border-dark;
+    border-left: 2px solid #ffffff54;
+    font-style: italic;
+    font-size: 1.1rem;
   }
 
   body .docs-links,
