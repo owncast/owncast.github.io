@@ -18,7 +18,7 @@ As you continue to read, and you find the project interesting, I urge you to do 
 
 Awesome.
 
-### Content creators
+### Create Content
 
 The Owncast project would like to increase the amount of content we put into the world to encourage the democratization and demystification of live streaming.
 
@@ -29,7 +29,7 @@ To accomplish this we want to get in touch with people who have a passion for cr
 - Design and illustration.
 - Other!
 
-### Community management
+### Expanding the Community
 
 We've done a pretty good job at building a live streaming server, but not so good at talking to people about it.
 
@@ -63,7 +63,7 @@ Some of our frontend stack:
 
 ### Backend and APIs
 
-Every feature request, bug fix or investigation requires jumping into the backend codebase. Ours is in Go. It's been a good fit for us, as Go let's you see exactly what's going on without hiding a lot behind the scenes, making it easier for contributors to jump in without prior experience with our codebase or even Go at all.
+The core of our logic, video pipeline, chat and APIs live in our self-hosted and self-contained backend. Ours is written in Go. It's been a good fit for us, as Go let's you see exactly what's going on without hiding a lot behind the scenes, making it easier for contributors to jump in without prior experience with our codebase or even Go at all.
 
 If you have a passion for the Go language and you want to put your expertise to work to help a project that people are enjoying daily, or you're somebody wanting to try something new, both are fantastic reasons to help us out.
 
@@ -77,3 +77,7 @@ Here's our backend stack and protocols:
 - Websockets
 - HLS video
 - ffmpeg
+
+## Can't contribute with any of the above, but still want to help?
+
+[Donate!](https://opencollective.com/owncast)
