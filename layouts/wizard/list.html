@@ -70,6 +70,7 @@ THE SOFTWARE.
         max-width: unset;
       }
       .nextButton {
+        display: none;
         background: #4c4896;
       }
       .nextButton:hover {
@@ -84,7 +85,7 @@ THE SOFTWARE.
       .choice {
         border-color: #8781ff61;
         background: #e7e4eb;
-        border-radius: 13px;
+        border-radius: 9px;
         padding: 13px;
         margin-top: 0px;
       }
@@ -96,6 +97,15 @@ THE SOFTWARE.
         .restartButton:hover {
           background: #7672b3;
         }
+      }
+
+      /* Hide the browser's default checkbox */
+      .choice input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
       }
     </style>
 
@@ -127,7 +137,7 @@ THE SOFTWARE.
       	</div>
       	<div class="nextButtonContainer">
       		<input class="nextButton" type="button" value="Next">
-			<input class="restartButton" type="button" value="Restart">
+    			<input class="restartButton" type="button" value="Restart">
       	</div>
       </div>
     </script>

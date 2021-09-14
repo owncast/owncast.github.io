@@ -171,6 +171,11 @@ function initSystem3() {
         controller(this);
       });
 
+      $j(document).on("click", ".answer", function (e) {
+        controller(this);
+      });
+
+
       $j(document).on("click", ".restartButton", function (e) {
         restart();
       });
@@ -296,8 +301,8 @@ function showPage(dataset, newTimeline, language) {
     ifLanguageExists(data.content.button, language)
   );
 
-  const nextButtonStyle = timelineArray.length > 0 ? 'inline-block' : 'none';
-  $j(".restartButton").css('display', nextButtonStyle);
+  const restartButtonStyle = timelineArray.length > 0 ? 'inline-block' : 'none';
+  $j(".restartButton").css('display', restartButtonStyle);
 
   // end: set some page text
 
@@ -321,15 +326,15 @@ function controller() {
   var dataset = button.parents(".page:visible").attr("dataset");
   var name = button.parents(".page:visible").attr("name");
   var logic = document.newTimeline.children;
-  var isRequired = data.content.pages[name].required;
+  // var isRequired = data.content.pages[name].required;
 
   // begin: is a selection required?
-  if (isRequired) {
-    if ($j(".answer:checked:visible").length == 0) {
-      swal.fire("", "Please make a selection", "error");
-      return false;
-    }
-  }
+  // if (isRequired) {
+  //   if ($j(".answer:checked:visible").length == 0) {
+  //     swal.fire("", "Please make a selection", "error");
+  //     return false;
+  //   }
+  // }
   // end: is a selection required?
 
   // begin: get sum
