@@ -1,6 +1,11 @@
 ---
 title: "Backups"
 description: "Owncast makes period backups of your data that can be restored."
+menu:
+  docs:
+    parent: "guides"
+weight: 1100
+toc: true
 ---
 
 Owncast will create a backup of your data periodically. It can be found in your `backup` directory as `owncastdb.bak`. You can add this to your normal system backups to keep your Owncast data safe.
