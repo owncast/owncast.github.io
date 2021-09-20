@@ -3,6 +3,7 @@ title: "Broadcasting Software"
 description: "Welcome to Doks! This tutorial will guide you through setting up and deploying your first Doks site."
 draft: false
 images: []
+tags: ["streaming", "rtmp", "streaming key", "password", "obs", "broadcasting"]
 menu:
   docs:
     parent: "integrations"
@@ -15,6 +16,13 @@ type: subpages
 In general Owncast is compatible with any software that uses `RTMP` to broadcast to a remote server. `RTMP` is what all the major live streaming services use, so if you're currently using one of those it's likely that you can point your existing software at your Owncast instance instead.
 
 However, we haven't tested with everything. So if you're using something specific [we'd love to hear what software you're using and the results](https://github.com/owncast/owncast/issues/new). If you're finding yourself running into issues, we'd love to help troubleshoot.
+
+
+## Pointing your software to Owncast
+
+Most broadcasting software will have a way to specify a "custom" location as a RTMP endpoint.  In this case you would specify `rtmp://yourserver/live` as the RTMP destination, specifying your streaming key where it asks for it.  The default stream key is `abc123` but you should change this immediately after setting up Owncast.
+
+If your software doesn't have a place to specify a streaming key you can simply append it to your RTMP location, for example: `rtmp://yourserver/live/abc123`.
 
 ## How you configure your broadcasting software matters
 
