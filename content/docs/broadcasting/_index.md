@@ -17,10 +17,9 @@ In general Owncast is compatible with any software that uses `RTMP` to broadcast
 
 However, we haven't tested with everything. So if you're using something specific [we'd love to hear what software you're using and the results](https://github.com/owncast/owncast/issues/new). If you're finding yourself running into issues, we'd love to help troubleshoot.
 
-
 ## Pointing your software to Owncast
 
-Most broadcasting software will have a way to specify a "custom" location as a RTMP endpoint.  In this case you would specify `rtmp://yourserver/live` as the RTMP destination, specifying your streaming key where it asks for it.  The default stream key is `abc123` but you should change this immediately after setting up Owncast.
+Most broadcasting software will have a way to specify a "custom" location as a RTMP endpoint. In this case you would specify `rtmp://yourserver/live` as the RTMP destination, specifying your streaming key where it asks for it. The default stream key is `abc123` but you should change this immediately after setting up Owncast.
 
 If your software doesn't have a place to specify a streaming key you can simply append it to your RTMP location, for example: `rtmp://yourserver/live/abc123`.
 
