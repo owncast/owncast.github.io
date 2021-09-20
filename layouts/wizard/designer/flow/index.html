@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+<!--
+The MIT License (MIT)
+
+Copyright (c) DistroKid
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->	
+	
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+<script src="../../js/jquery-3.4.1.min.js"></script>
+<script>$j = jQuery.noConflict();</script>
+<script src="../../js/promise.min.js"></script>
+<script src="../../js/sweetalert2.js"></script>
+<script src="../../js/pud.js?cachebuster=24"></script>
+<script src="../../js/tree.jquery.js"></script>
+<link href="../../css/pud.css?cachebuster=24" rel="stylesheet" type="text/css"/>
+<link href="../../css/jqtree.css" rel="stylesheet" type="text/css"/>
+<link href="../../css/spinner.css" rel="stylesheet" type="text/css"/>
+
+<div class="header">
+	<!--- menu --->
+	<div style="position: absolute;right:1rem;top: 1rem;">
+		<span class="checkMark">&#x2705;</span>
+		<div class="menuLink" onclick="$j('.menuItemContainer').toggle();">
+			<div style="display: inline-block;vertical-align: middle;margin-right: 7px;">
+				<div class="hamburgerSlice"></div><div class="hamburgerSlice"></div><div class="hamburgerSlice"></div>
+			</div>
+			<div style="display: inline-block;vertical-align: middle;">
+				Menu
+			</div>
+		</div>
+	</div>
+	<div class="menuItemContainer" style="display: none;">
+		<div class="menuItem" onclick="saveState()">
+			<span>Save local work</span>
+		</div>
+		<div class="menuItem" onclick="loadState();">
+			<span>Load local work</span>
+		</div>
+		<div class="menuItem" onclick="testData();">
+			<span>Test local work</span>
+		</div>
+		<div class="menuItem" onclick="exportData();">
+			<span>Download</span>
+		</div>
+		<div class="menuItem" onclick="uploadJsonButton();">
+			<span>Import...</span>
+		</div>
+	</div>
+	<script>
+	$j('.menuLink').bind('clickoutside', function (event)
+		{
+		$j('.menuItemContainer').hide();
+		});
+	</script>
+	<!--- /menu --->
+
+	<a href="" style="text-decoration: none;color: #333333;" class="headerText">Expedition Demo</a>
+	<div style="font-size: 8pt;line-height: 1.5em">
+		Expedition - Tree designer 
+	</div>
+</div>
+
+<div class="designerModal modalStuff" onclick="modalClose();" style="display: none;"></div>
+<div class="designerModalBox modalStuff" style="display: none;">
+	<div style="padding: 1em;background: #0071e3;color: #FFFFFF;">
+		<div style="float: right;color:#FFFFFF;" class="linklike" onclick="modalClose()">Close</div>
+		<div class="modalTitle">
+			Title will go here
+		</div>
+	</div>
+	<div class="uploadJson modalInsides" style="padding: 1em;display: none;">
+		Paste JSON here
+		<div>
+			<textarea class="coolTextarea loadJson" style="width: 100%;height: 150px;box-sizing: border-box;margin-top: 5px;"></textarea>
+		</div>
+		<div style="text-align: center;">
+			<input class="button" type="button" style="min-width: 160px;" value="Load JSON" onclick="loadJson();">
+		</div>
+	</div>
+	<div class="newIfThen modalInsides" style="padding:1em;display: none;">
+		When user makes "<span class="pageName bold"></span>" decision...
+		<div style="margin-top: 20px;">
+			<div style="font-size: 9pt;">
+				IF:
+			</div>
+			<div style="display: block;">
+				<table cellpadding="0" cellspacing="0">
+					<tr>
+						<td style="padding-right: 4px;" valign="top">
+							<select onchange="changeTestSelect();" class="coolSelect testSelect" style="vertical-align: middle;">
+								<option value="string" instructions="Enter a string (ex: yes)">String</option>
+								<option value="sum" instructions="Enter a number (ex: 1) or range (ex: 2-3)">Sum</option>
+								<option value="else">Else</option>
+							</select>
+						</td>
+						<td valign="top" style="line-height: 1em;width: 100%;">
+							<div>
+								<input onkeydown="if (event.which == 13){$j('.saveButton:visible').click()}" class="coolInput ifValue" type="text" style="width: 100%;box-sizing: border-box;vertical-align: middle;">
+							</div>
+							<div style="font-size: 8pt;color: #666666;" class="testInstructions">
+								<!-- instructions go here -->
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div style="margin-top: 20px;">
+				<div style="font-size: 9pt;">
+					THEN:
+				</div>
+				<div style="line-height: 1em;">
+					<input onkeydown="if (event.which == 13){$j('.saveButton:visible').click()}" class="coolInput ifDestination" type="text" style="box-sizing: border-box;width: 100%;">
+					<div style="font-size: 8pt;color: #666666;">
+						Enter the name of the page to show (ex: mypagename)
+					</div>
+				</div>
+			</div>
+			<div class="buttonsNew">
+				<input type="button" value="Save" class="button saveButton" onclick="newIfThen();">
+			</div>
+			<div class="buttonsEdit">
+				<input type="button" value="Save" class="button saveButton" onclick="saveEdit();">
+				<input type="button" value="Delete" class="buttonGray" onclick="deleteIfThen();">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div style="margin-bottom: 100px;">
+	<div id="tree1" class="pageGoesHere"></div>
+</div>
+
+<div class="designerFooter">
+	<div class="designerExpanderButtons">
+		<input type="button" value="Expand All" class="button fixedWidthButton" onclick="expandAll();">
+		<input type="button" value="Collapse All" class="button fixedWidthButton" onclick="collapseAll();">
+	</div>
+</div>
+
+<script>
+function iterate(obj) {
+    Object.keys(obj).forEach(key => {
+
+	if (key == 'name')
+		{
+		// debug('key:');
+		// debug(key);
+		// debug('value:');
+		debug(obj[key]);
+		}
+
+    if (typeof obj[key] === 'object') {
+            iterate(obj[key])
+        }
+    })
+}
+
+function paths(root) {
+  let paths = [];
+  let nodes = [{
+    obj: root,
+    path: []
+  }];
+  while (nodes.length > 0) {
+    let n = nodes.pop();
+    Object.keys(n.obj).forEach(k => {
+      if (typeof n.obj[k] === 'object') {
+        let path = n.path.concat(k);
+        paths.push(path);
+        nodes.unshift({
+          obj: n.obj[k],
+          path: path
+        });
+      }
+    });
+  }
+  return paths;
+}
+
+/* original magic
+	$j('li').click(function(e) {
+
+    var path = [];
+    var el = $j(this);
+
+    do {
+        path.unshift(el.attr("id"));
+        el = el.parent().closest('li');
+    } while(el.length != 0);
+
+    debug(path.join('/'));
+    e.stopPropagation();
+});
+*/
+
+$j('li').click(function(e) {
+
+    var path = [];
+    var el = $j(this);
+
+    do {
+        // path.unshift(el.find('.treeIf').first().text());
+        path.unshift(el.find('.treePage').first().text());
+        el = el.parent().closest('li');
+    } while(el.length != 0);
+
+    debug(path.join('/'));
+});
+
+function newIfThen()
+	{
+	var myData = {}
+	myData.test = $j('.testSelect').val();
+	myData.ifValue = $j('.ifValue').val();
+	myData.ifDestination = $j('.ifDestination').val();
+	debug(myData);
+	var newNode = $j('#tree1').tree(
+	    'appendNode',
+	    {
+		"name":"_decision",
+		"test":myData.test.toLowerCase(),
+		"if":myData.ifValue,
+		"children":
+			[
+			{
+			"name":myData.ifDestination,
+			"children":[]
+			}
+			]
+	    },
+	    document.currentNode
+	);
+	$j('#tree1').tree('openNode',newNode);
+	modalClose();
+	}
+	
+function deleteIfThen()
+	{
+	if (confirm('Delete this if-then. Are you sure?'))
+		{
+		$j('#tree1').tree('removeNode', document.currentNode);
+		modalClose();
+		}
+	}
+	
+function saveEdit()
+	{
+	var myData = {};
+	myData.test = $j('.testSelect').val();
+	myData.ifValue = $j('.ifValue').val();
+	myData.ifDestination = $j('.ifDestination').val();
+
+	$j('#tree1').tree('openNode',document.currentNode);
+	document.currentNode.name = '_decision';
+	document.currentNode.test = myData.test;
+	document.currentNode['if'] = myData.ifValue;
+	document.currentNode.children[0].name = myData.ifDestination;
+	var newJson = $j('#tree1').tree('toJson');
+	$j('#tree1').tree('loadData', JSON.parse(newJson));
+	modalClose();
+	}
+	
+function assignIdsToAllNodes()
+	{
+	var $tree = $j('#tree1');
+	var myId = 0;
+	$j('li').each(function()
+		{
+		myId++;
+		var node = $tree.tree('getNodeByHtmlElement', this);
+		node.id = myId;
+		})
+	};
+
+function collapseAll()
+	{
+	var $tree = $j('#tree1');
+	$j('li').each(function()
+		{
+		var node = $tree.tree('getNodeByHtmlElement', this);
+		$tree.tree('closeNode', node, false);
+		})
+	};
+
+function expandAll()
+	{
+	var $tree = $j('#tree1');
+	$j('li').each(function()
+		{
+		var node = $tree.tree('getNodeByHtmlElement', this);
+		$tree.tree('openNode', node, false);
+		})
+	};
+
+function treeCreateLi(node,li)
+	{
+	var name = node.name;
+	var test = node.if;
+	if (name == '_decision') 
+		{
+		// decisions 
+		var ifValue = node.if;
+		var title = li.find('.jqtree-title').text();	
+		if (ifValue === '')
+			{
+			title = '<div class="treeTest radius">' + node.test + '</div><div class="treeIf">' + node.if + '</div> <span style="margin-left:-88px;" onclick="modalOpen($j(this).closest(\'li\'));" class="linklike editLink">edit</span>';
+			}
+		else 
+			{
+			title = '<div class="treeTest">' + node.test + '</div><div class="treeIf">' + node.if + '</div> <span class="linklike editLink" onclick="modalOpen($j(this).closest(\'li\'));">edit</span>';
+			}
+		li.find('.jqtree-title').html(title);
+		}
+	else 
+		{
+		// pages 
+		if (node.children.length > 0)
+			{
+			var title = li.find('.jqtree-title').text();	
+			var title = '<div class="treePage">' + title + '</div> <span class="linklike addCondition" onclick="modalOpen($j(this).closest(\'li\'));">add condition</span>';
+			li.find('.jqtree-title').html(title);
+			}
+		else 
+			{
+			var title = li.find('.jqtree-title').text();	
+			var title = '<div class="treePage redBg">' + title + '</div> <span class="linklike addCondition" onclick="modalOpen($j(this).closest(\'li\'));">add condition</span>';
+			li.find('.jqtree-title').html(title);
+			}
+		}
+	}
+	
+function changeTestSelect()
+	{
+	var test = $j('.testSelect option:selected').val();
+	var instructions = $j('.testSelect option:selected').attr('instructions');
+	$j('.testInstructions').text('');
+	$j('.testInstructions').text(instructions);
+	
+	if (test == 'else')
+		{
+		$j('.ifValue').val('').hide();	
+		}
+	else 
+		{
+		$j('.ifValue').show();	
+		}
+	}
+
+function modalClose()
+	{
+	$j('.modalStuff').hide();
+	$j('.testSelect').val($j('.testSelect option:first').val());
+	$j('.ifValue').val('');
+	$j('.ifDestination').val('');
+	assignIdsToAllNodes();
+	}
+	
+function modalOpen(nodeHtml)
+	{
+	var node = $j('#tree1').tree('getNodeByHtmlElement',nodeHtml);
+	debug(node);
+	$j('.modalInsides').hide();
+	$j('.buttonsEdit,.buttonsNew').hide();
+	if (node.name == '_decision')
+		{
+		$j('.modalTitle').text('EDIT');
+		$j('.pageName').text(node.parent.name);
+		$j('.testSelect').val(node.test);
+		changeTestSelect();
+		$j('.ifValue').val(node.if);
+		$j('.ifDestination').val(node.children[0].name);
+		$j('.newIfThen').show();
+		$j('.modalStuff').show();
+		$j('.buttonsEdit').show();
+		setTimeout(function()
+			{
+			$j('.ifValue').focus();
+			},50)
+		}
+	else 
+		{
+		$j('.modalTitle').text('NEW');
+		$j('.pageName').text(node.name);
+		$j('.newIfThen').show();
+		$j('.modalStuff').show();
+		$j('.buttonsNew').show();
+		setTimeout(function()
+			{
+			$j('.ifValue').focus();
+			},50)
+		}
+	changeTestSelect();
+	}
+	
+function clickNode(event)
+	{
+	document.currentNode = event.node;
+	/*
+	if (event.node.is_open)
+		{
+		$j('#tree1').tree('closeNode',document.currentNode);
+		}
+	else 
+		{
+		$j('#tree1').tree('openNode',document.currentNode);
+		}
+	*/
+	}
+	
+var saveData = (function ()
+	{
+	var a = document.createElement("a");
+	document.body.appendChild(a);
+	a.style = "display: none";
+	return function (data, fileName) {
+	    var json = data,
+	        blob = new Blob([json], {type: "octet/stream"}),
+	        url = window.URL.createObjectURL(blob);
+	        
+	    // begin: IE 
+		 if (navigator.msSaveOrOpenBlob) 
+		    {
+		        navigator.msSaveOrOpenBlob(blob, fileName);
+		        return;
+		    }
+		    else if (window.navigator.msSaveBlob)
+		    { // for IE browser
+		        window.navigator.msSaveBlob(blob, fileName);
+		        return;
+		    }
+ 	    // end: IE	        
+
+	    a.href = url;
+	    a.download = fileName;
+	    a.click();
+	    window.URL.revokeObjectURL(url);
+	};
+	}());
+
+function exportData()
+	{
+	var newJson = $j('#tree1').tree('toJson');
+	var prettyJson = JSON.parse(newJson);
+	prettyJson = JSON.stringify(prettyJson, null, "\t");
+	saveData(prettyJson, dataset + '_flow.json');
+	}
+	
+function testData()
+	{
+	var newJson = $j('#tree1').tree('toJson');
+	localStorage.setItem('testJson', newJson);
+	window.open('../../index.html?test=' + localStorage.getItem('pud_was_here'), 'expeditionTest');
+	}
+	
+function saveTreeToLocalStorage(varName)
+	{
+	var newJson = $j('#tree1').tree('toJson');
+	localStorage.setItem(varName, newJson);
+	// window.open('../../index.html?test=' + localStorage.getItem('pud_was_here'), '_blank');
+	}
+	
+function checkMark()
+	{
+	$j('.checkMark').show();
+	setTimeout(function()
+		{
+		$j('.checkMark').fadeOut(300);
+		},500)
+	}
+	
+function saveState()
+	{
+	saveTreeToLocalStorage('tree1');
+	checkMark();
+	}
+
+function loadState()
+	{
+	if (confirm('Discard unsaved changes and load your previously saved work?'))
+		{
+		reloadTreeWithNewData(JSON.parse(localStorage.getItem('tree1')));
+		checkMark()
+		}
+	}
+	
+function loadJson()
+	{
+	var myJson = $j('.loadJson').val();
+	if (!isJson(myJson))
+		{
+		swal.fire('','That doesn\'t appear to be valid Json','error');
+		}
+	else 
+		{
+		if (confirm('Discard unsaved changes and load this JSON?'))
+			{
+			var myJson = $j('.loadJson').val();
+			reloadTreeWithNewData(JSON.parse(myJson));
+			modalClose();
+			checkMark();
+			}
+		}
+	}
+	
+function uploadJsonButton()
+	{
+	$j('.modalTitle').text('Import JSON...');
+	$j('.uploadJson').show();
+	$j('.modalStuff').show();
+	$j('.loadJson').focus();
+	}
+	
+function drawTree(data) 
+	{
+    $j('#tree1').tree(
+    	{
+        data: data,
+        dragAndDrop: true,
+        animationSpeed: 70,
+        useContextMenu: false,
+	    onCreateLi: function(node, $li) 
+	    	{
+			treeCreateLi(node,$li)
+	        }
+		});
+	}
+	
+function reloadTreeWithNewData(treeObj)
+	{
+	$j('#tree1').tree('loadData', treeObj);
+	}
+
+function initDesigner()
+	{
+	debug('starting');
+	
+	// begin: set session variable 
+	if (!localStorage.getItem('pud_was_here'))
+		{
+		localStorage.setItem('pud_was_here',uuid());
+		}
+	// end: set session variable 
+	
+	// begin: did we specify a data file? 
+	if (getUrlVars().dataset)
+		{
+		dataset = getUrlVars().dataset
+		}
+	else 
+		{
+		dataset = 'default'
+		}
+	// end: did we specify a data file? 
+	
+	// begin: did we specify a data file? 
+	if (getUrlVars().language)
+		{
+		language = getUrlVars().language
+		}
+	else 
+		{
+		language = navigator.language || navigator.userLanguage;
+		language = language.split('-')[0]
+		}
+	// end: did we specify a data file? 
+	
+ 	$j('.pageGoesHere').html(showSpinner());
+	var myGet = $j.getJSON('../../data/' + dataset + '_pages.json?cachebuster=' + uuid(),function(response)
+		{
+		data = response; 
+		var myGet = $j.getJSON('../../data/' + dataset + '_flow.json?cachebuster=' + uuid(),function(response)
+			{
+			flow = response; 
+			
+			// begin: set page language 
+			$j('html').attr('lang',language);
+			$j('.headerText').text(data.content.title[language]);
+			// end: set page language 
+			
+			var myJson = $j.getJSON('../../data/' + dataset + '_flow.json?cachebuster=' + uuid(),drawTree);
+			myJson.fail(function()
+				{
+				alert('failed getting object');
+				})
+
+			// bind 'tree.click' event
+			$j('#tree1').on(
+			    'tree.click',
+			    function(event) {
+			        // The clicked node is 'event.node'
+			        clickNode(event)
+			    }
+			);
+
+			// begin: when tree is successfully rendered to the screen 			
+			$j('#tree1').on(
+			    'tree.init',
+			    function() 
+			    	{
+			        collapseAll();
+			        assignIdsToAllNodes();
+			        saveTreeToLocalStorage('originalTree');
+			    	});
+			// end: when tree is successfully rendered to the screen 			
+ 			
+			$j(document).on('keydown', function(event) {
+			       if (event.key == "Escape") {
+			           modalClose();
+			       }
+			   });
+			
+			})
+		myGet.fail(function()
+			{
+			$j('.pageGoesHere').html('We had a problem loading the flow (or the flow file isn\'t valid JSON).<br><br>Please try again.');
+			})
+		})
+	myGet.fail(function()
+		{
+		$j('.pageGoesHere').html('We had a problem loading the data (or the data file isn\'t valid JSON).<br><br>Please try again.');
+		})
+	}
+	
+$j(document).ready(function()
+	{
+	initDesigner()
+	changeTestSelect();
+	})
+</script>
+
+</html>

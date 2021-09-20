@@ -1,11 +1,11 @@
 ---
-title: "Use a Docker image"
-description: "Docker images are available for releases, and is a quick way to get up and running."
+title: "Use a container image"
+description: "Images for running Owncast within a containerized environment are available for releases."
 draft: false
 images: []
+aliases: [/quickstart/container, /quickstart/docker]
 weight: 030
 toc: false
-type: subpages
 ---
 
 1. Pull the `latest` version [from Dockerhub](https://hub.docker.com/r/gabekangas/owncast/tags): `docker pull gabekangas/owncast:latest`.

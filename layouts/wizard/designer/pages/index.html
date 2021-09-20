@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+<!--
+The MIT License (MIT)
+
+Copyright (c) DistroKid
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->	
+	
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+<script src="../../js/jquery-3.4.1.min.js"></script>
+<script>$j = jQuery.noConflict();</script>
+<script src="../../js/promise.min.js"></script>
+<script src="../../js/sweetalert2.js"></script>
+<script src="../../js/pud.js?cachebuster=24"></script>
+<script src="../../js/tree.jquery.js"></script>
+<script src="../../js/languages.js"></script>
+<link href="../../css/pud.css?cachebuster=24" rel="stylesheet" type="text/css"/>
+<link href="../../css/jqtree.css" rel="stylesheet" type="text/css"/>
+<link href="../../css/spinner.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+	
+<script type="text/template" id="languageTextTemplate">
+	<div>
+		<div class="langSection" style="display: flex;flex-wrap: nowrap;">
+			<div>
+				<select onchange="savePage();" class="coolSelect languagePulldown" style="margin-right:5px;vertical-align: middle;">
+					<option value="_empty" selected></option>
+				</select>
+			</div>
+			<div style="min-width: 500px;">
+				<input onblur="savePage();" type="text" class="coolInput languageText [class]" style="max-width: 500px;width: 100%;vertical-align: middle;" placeholder="[placeholder]">
+			</div>
+			<div>
+				<div style="vertical-align: middle;">
+					<span onclick="delTranslation($j(this).closest('.langSection'));" class="xIcon">&#x2716;</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="choiceTemplate">
+	<div>
+		<div class="choiceSection">
+			<div style="margin-bottom: 5px;background: #0F78B8;padding: 1rem;">
+				<select class="coolSelect choiceType" style="margin-right:5px;float:left;vertical-align: top;width: 120px;">
+					<option value="radio">Radio</option>
+					<option value="checkbox">Checkbox</option>
+				</select>
+				<input type="text" class="coolInput choiceValue" style="max-width: 100px;float:left;" placeholder="Value">
+				<div style="clear: both;"></div>
+			</div>
+			<div class="myChoice" key="data.content.pages.[pageName].choices[[choiceNum]].text"></div>
+			<div style="padding: 0rem 1rem 1.2rem 1rem;">
+				<input onclick="newTranslation($j(this).closest('.choiceSection').find('.myChoice'),'Choice');" type="button" value="New translation" class="button">
+			</div>
+		</div>
+	</div>
+</script>
+
+<!--- modal --->
+<div class="designerModal modalStuff" onclick="modalClose();" style="display: none;"></div>
+<div class="designerModalBox modalStuff" style="display: none;">
+	<div style="padding: 1em;background: #0071e3;color: #FFFFFF;">
+		<div style="float: right;color:#FFFFFF;" class="linklike" onclick="modalClose()">Close</div>
+		<div class="modalTitle">
+			Title will go here
+		</div>
+	</div>
+	<div class="uploadJson modalInsides" style="padding: 1em;display: none;">
+		Paste JSON here
+		<div>
+			<textarea class="coolTextarea loadJson" style="width: 100%;height: 150px;box-sizing: border-box;margin-top: 5px;"></textarea>
+		</div>
+		<div style="text-align: center;">
+			<input class="button" type="button" style="min-width: 160px;" value="Load JSON" onclick="loadJson();">
+		</div>
+	</div>
+</div>
+<!--- /modal --->
+
+<script type="text/template" id="pageTemplate">
+	<div style="margin-top: 1em;">
+		<div>
+			<div class="bold" style="margin-bottom: 1rem;margin-top: 2rem;">
+				Edit Page
+			</div>
+			<div>
+				Internal name (not displayed)
+			</div>
+			<div>
+				<input onblur="savePage();" type="text" class="coolInput pageName" maxlength="100" style="max-width: 300px;">
+			</div>
+		</div>
+		
+		<div class="editSection">
+			<div>
+				Headline
+			</div>
+			<div class="pageTitle">
+			</div>
+			<div>
+				<input onclick="newTranslation($j(this).closest('.editSection').find('.pageTitle'),'Title');" type="button" class="button" value="New translation">
+			</div>
+		</div>
+
+		<div class="editSection">
+			<div>
+				Instructions
+			</div>
+			<div class="pageInstructions">
+			</div>
+			<div>
+				<input onclick="newTranslation($j(this).closest('.editSection').find('.pageInstructions'),'Page instructions');" type="button" class="button" value="New translation">
+			</div>
+		</div>
+		
+		<div class="editSection">
+			<div class="bold" style="margin-bottom: 1rem;margin-top: 2rem;">
+				Choices
+			</div>
+
+			<div style="margin-bottom: 1.5rem;">
+				<div>
+					<label><input onchange="savePage();" class="pageRequired" type="checkbox" style="margin-right: 6px;">Require an answer</label>
+				</div>
+			</div>
+	
+			<div class="putChoicesHere">
+			</div>
+			<div>
+				<span onclick="newChoice(this);" class="button">Add new choice</span>
+			</div>
+		</div>
+		
+
+
+	</div>
+</script>
+
+
+<div class="header">
+	<a href="" style="text-decoration: none;color: #333333;" class="headerText">Expedition Demo</a>
+	<div style="font-size: 8pt;line-height: 1.5em">
+		Expedition - Page designer 
+	</div>
+</div>
+
+<script>
+function initDesigner()
+	{
+	// begin: set session variable 
+	if (!localStorage.getItem('pud_was_here'))
+		{
+		localStorage.setItem('pud_was_here',uuid());
+		}
+	// end: set session variable 
+
+	makeLanguageObject();
+	
+	// begin: did we specify a data file? 
+	if (getUrlVars().dataset)
+		{
+		dataset = getUrlVars().dataset
+		}
+	else 
+		{
+		dataset = 'default'
+		}
+	// end: did we specify a data file? 
+
+	$j('.spinnerHere').prepend(showSpinner());
+	var myGet = $j.getJSON('../../data/' + dataset + '_pages.json?cachebuster=' + uuid(),function(response)
+		{
+		debug(response);
+		loadPagesWithNewData(response)
+		})
+	}
+	
+function loadPagesWithNewData(newData)
+	{
+	data = newData;
+	debug('newdata: ');
+	debug(newData);
+	$j('.spinnerHere').hide();
+	$j('.pageGoesHere').show();
+	
+	// populate nav select list 
+	populatePageSelectList();
+	
+	// google tracking id 
+	$j('#googleTrackingId').val(newData.googleTrackingId);
+	
+	
+	// title 
+	languageTextMaker(newData.content.title, containerSelector = '#treeTitle','');
+
+	// next button 
+	languageTextMaker(newData.content.button, containerSelector = '#nextButton','');
+	}
+	
+function newChoice(obj)
+	{
+	var choiceTemplate = $j('#choiceTemplate').html();
+	$j(obj).closest('.editSection').find('.putChoicesHere').append(choiceTemplate);
+	newTranslation($j('.myChoice:last'),'Choice');
+	savePage();
+	}
+	
+function newTranslation(obj)
+	{
+	placeholder = typeof placeholder !== 'undefined' ? placeholder : '';
+	debug(obj.length);
+	var isoLang = this.toString();
+	var template = $j('#languageTextTemplate').html();
+	template = template.replace(/\[placeholder\]/gi, placeholder);
+	template = template.replace(/\[class\]/gi, 'treeName');
+	$j(obj).append(template);
+	populateLanguagePulldowns();
+	savePage();
+	}
+	
+function delTranslation(obj)
+	{
+	$j(obj).remove();
+	savePage();
+	}
+	
+function languageTextMaker(key,containerSelector,placeholder)
+	{
+	var langArray = Object.getOwnPropertyNames(key);
+	$j(langArray).each(function()
+		{
+		var isoLang = this.toString();
+		var template = $j('#languageTextTemplate').html();
+		template = template.replace(/\[placeholder\]/gi, placeholder);
+		template = template.replace(/\[class\]/gi, 'treeName');
+		$j(containerSelector).append(template);
+		populateLanguagePulldowns();
+		$j('.languagePulldown').last().val(isoLang);
+		$j('.languageText').last().val(key[isoLang]);
+		})
+	}
+	
+function showPageEdit(pageName)
+	{
+	// pages
+	var template = $j('#pageTemplate').html();
+	var page = data.content.pages[pageName];
+	$j('.putPagesHere').append(template);
+	$j('.pageName').last().val(pageName);
+	
+	// making a new page? 
+	if (pageName.trim() == '')
+		{
+		return false 
+		}
+		
+	$j('.pageRequired').last().attr('checked',page.required);
+	
+	languageTextMaker(key = page.title, containerSelector = '.pageTitle:last', placeholder = 'Page Title');
+	languageTextMaker(key = page.instructions, containerSelector = '.pageInstructions:last', placeholder = 'Page Instructions');
+	
+	// choices 
+	var choiceTemplate = $j('#choiceTemplate').html();
+	choiceTemplate = choiceTemplate.replace(/\[pageName\]/gi, pageName);
+	$j(page.choices).each(function(count)
+		{
+		choiceTemplate = choiceTemplate.replace(/\[choiceNum\]/gi, count-1);
+		$j('.putChoicesHere:last').append(choiceTemplate);
+		$j('.choiceType').last().val(page.choices[count].type);
+		$j('.choiceValue').last().val(page.choices[count].value);
+		languageTextMaker(key = page.choices[count].text, containerSelector = '.myChoice:last', placeholder = 'Choice');
+		})
+	}
+	
+function makeLanguageObject()
+	{
+	languageObject = {};
+	$j(languageArray).each(function()
+		{
+		languageObject[this.alpha2] = this.English;
+		})
+	}
+	
+function populateLanguagePulldowns()
+	{
+	var myHtml = '';
+	$j(languageArray).each(function()
+		{
+		myHtml = myHtml + '<option value="' + this.alpha2 + '">' + this.English + '</option>';
+		})
+		
+	$j('.languagePulldown option:selected[value="_empty"]').parent().each(function() // just get unpopulated ones 
+		{
+		$j(this).html(myHtml);
+		SortSelect($j(this));
+		$j(this).prepend('<option selected value="">Language...</option>');
+		})
+	}
+	
+function selectPageToEdit()
+	{
+	var value = $j('.selectPageToEdit').val();
+	var admin = $j('.selectPageToEdit option:selected').attr('admin');
+	debug(admin);
+	$j('.showingMeContent').html('');
+	$j('.putSettingsHere').hide();
+	if (admin == 'settings')
+		{
+		$j('.putSettingsHere').show();
+		}
+	else if ((admin == 'page') || (admin == 'newpage'))
+		{
+		$j('.putPagesHere').show();
+		showPageEdit(value);
+		}
+	}
+
+function populatePageSelectList()
+	{
+	var pageArray = Object.getOwnPropertyNames(data.content.pages);
+	$j('.selectPageToEdit option[admin="page"').remove();
+	$j(pageArray).each(function()
+		{
+		$j('.selectPageToEdit').append('<option admin="page">' + this + '</option>')
+		})
+	}
+
+function savePage_settings()
+	{
+	// google tracking id 
+	data.googleTrackingId = $j('#googleTrackingId').val(); 
+
+	// title 
+	data.content.title = {}
+	$j('#treeTitle').find('.langSection').each(function(count)
+		{
+		var language = $j(this).find('.languagePulldown').val();
+		var text = $j(this).find('.languageText').val();
+		data.content.title[language] = text;
+		})
+
+	// next button 
+	data.content.button = {}
+	$j('#nextButton').find('.langSection').each(function(count)
+		{
+		var language = $j(this).find('.languagePulldown').val();
+		var text = $j(this).find('.languageText').val();
+		data.content.button[language] = text;
+		})
+	debug(data);
+	}
+
+function savePage_Page()
+	{
+	var pageName = $j('.selectPageToEdit').val();
+	newPageData = {}
+	
+	// new page name 
+	newPageData.pageName = $j('.pageName:visible').val();
+	
+	// is required? 
+	newPageData.required = ($j('.pageRequired:checked').length == true);
+	
+	// page title 
+	newPageData.title = {}
+	$j('.pageTitle').find('.langSection').each(function()
+		{
+		var language = $j(this).find('.languagePulldown').val();
+		var text = $j(this).find('.languageText').val();
+		newPageData.title[language] = text
+		})
+	
+	// page instructions 
+	newPageData.instructions = {}
+	$j('.pageInstructions').find('.langSection').each(function()
+		{
+		var language = $j(this).find('.languagePulldown').val();
+		var text = $j(this).find('.languageText').val();
+		newPageData.instructions[language] = text
+		})
+		
+	// choices 
+	newPageData.choices = []
+	$j('.choiceSection').each(function()
+		{
+		var choice = {}
+		choice.type = $j(this).find('.choiceType').val();
+		choice.value = $j(this).find('.choiceValue').val();
+		choice.text = {}
+		$j(this).find('.langSection').each(function(count)
+			{
+			var language = $j(this).find('.languagePulldown').val();
+			var text = $j(this).find('.languageText').val();
+			choice.text[language] = text;
+			})
+		newPageData.choices.push(choice);
+		})
+	
+	// delete old page
+	delete data.content.pages[pageName];
+	
+	// save new page 
+	data.content.pages[newPageData.pageName] = newPageData;
+
+	// repopuate page select list 
+	populatePageSelectList();
+	$j('.selectPageToEdit').val(newPageData.pageName)
+
+	debug(newPageData);
+	return newPageData
+	}
+
+function modalClose()
+	{
+	$j('.modalStuff').hide();
+	}
+
+function savePage()
+	{
+	var whatAreWeEditing = $j('.selectPageToEdit option:checked').attr('admin');
+	debug(whatAreWeEditing);
+	if ((whatAreWeEditing == 'page') ||  (whatAreWeEditing == 'newpage'))
+		{
+		debug('save page');
+		savePage_Page()
+		}
+	else 
+		{
+		savePage_settings();
+		}
+		
+	}
+
+/*
+function saveEdit(obj)
+	{
+	debug('saveEdit()');
+	var key = $j(obj).closest('[key]').attr('key');
+	var value = $j(obj).val().trim();
+	var valueEscaped = JSON.stringify(value);
+	var hasTranslations = $j(obj).closest('[key]').find('.langSection').length
+	
+	if (hasTranslations)
+		{
+		debug('has translations: ' + hasTranslations);
+		var translation = {}
+		$j(obj).closest('[key]').find('.langSection').each(function()
+			{
+			var language = $j(this).find('.languagePulldown').val();
+			var text = $j(this).find('.languageText').val();
+			translation[language] = text;
+			debug(translation)
+			})
+		eval(key + ' = ' + JSON.stringify(translation));
+		}
+	else 
+		{
+		debug(key);
+		debug(valueEscaped);
+		eval(key + ' = ' + valueEscaped);
+		}
+	}
+*/
+
+function downloadPages()
+	{
+	var prettyJson = JSON.stringify(data, null, "\t");
+	saveData(prettyJson, dataset + '_pages.json');
+	}
+	
+var saveData = (function ()
+	{
+	var a = document.createElement("a");
+	document.body.appendChild(a);
+	a.style = "display: none";
+	return function (data, fileName) {
+	    var json = data,
+	        blob = new Blob([json], {type: "octet/stream"}),
+	        url = window.URL.createObjectURL(blob);
+	        
+	    // begin: IE 
+		 if (navigator.msSaveOrOpenBlob) 
+		    {
+		        navigator.msSaveOrOpenBlob(blob, fileName);
+		        return;
+		    }
+		    else if (window.navigator.msSaveBlob)
+		    { // for IE browser
+		        window.navigator.msSaveBlob(blob, fileName);
+		        return;
+		    }
+ 	    // end: IE	        
+	        
+	    a.href = url;
+	    a.download = fileName;
+	    a.click();
+	    window.URL.revokeObjectURL(url);
+	};
+	}());
+	
+function testNewPages()
+	{
+	var newJson = JSON.stringify(data);
+	localStorage.setItem('testJsonPages', newJson);
+	window.open('../../index.html?test=' + localStorage.getItem('pud_was_here'), 'expeditionTest');
+	}
+	
+function uploadJsonButton()
+	{
+	$j('.modalTitle').text('Import JSON...');
+	$j('.uploadJson').show();
+	$j('.modalStuff').show();
+	$j('.loadJson').focus();
+	}
+	
+function loadJson()
+	{
+	var myJson = $j('.loadJson').val();
+	if (!isJson(myJson))
+		{
+		swal.fire('','That doesn\'t appear to be valid Json','error');
+		}
+	else 
+		{
+		if (confirm('Discard unsaved changes and load this JSON?'))
+			{
+			var myJson = $j('.loadJson').val();
+			loadPagesWithNewData(JSON.parse(myJson));
+			modalClose();
+			selectPageToEdit();
+			}
+		}
+	}
+	
+$j(document).ready(function()
+	{
+	initDesigner();
+	})
+</script>
+
+<div class="spinnerHere" style="padding:1rem;">
+</div>
+
+<div class="pageGoesHere" style="display: none;">
+	<div>
+		<select onchange="selectPageToEdit();" class="coolSelect selectPageToEdit" style="width: 250px;">
+			<option value="">Select page to edit...</option>
+			<option value="" admin="settings">Settings...</option>
+			<option value="" admin="newpage">New page...</option>
+		</select>
+	</div>
+	
+	<div class="putSettingsHere" style="display: none;">
+		<div class="bold" style="margin-bottom: 1rem;margin-top: 2rem;">
+			Settings
+		</div>
+		
+		<div>
+			<div>
+				Google Analytics ID
+			</div>
+			<div key="data.googleTrackingId">
+				<input onblur="savePage();" id="googleTrackingId" type="text" class="coolInput" style="max-width: 100px;" placeholder="UA-XXXXXXXXX-1">
+			</div>
+		</div>
+	
+		<div class="editSection">
+			<div>
+				Title
+			</div>
+			<div id="treeTitle" key="data.content.title">
+			</div>
+			<div>
+				<input onclick="newTranslation($j(this).closest('.editSection').find('#treeTitle'),'');" type="button" value="New translation" class="button">
+			</div>
+		</div>
+		
+		<div class="editSection">
+			<div>
+				Next button
+			</div>
+			<div id="nextButton" key="data.content.button">
+			</div>
+			<div>
+				<input onclick="newTranslation($j(this).closest('.editSection').find('#nextButton'),'');" type="button" value="New translation" class="button">
+			</div>
+		</div>
+	</div>
+	
+	<div class="putPagesHere showingMeContent" style="display: none;margin-bottom: 8rem;">
+	</div>	
+
+	<div class="designerFooter">
+		<div class="designerExpanderButtons">
+			<input type="button" value="Test" class="button " onclick="testNewPages();">
+			<input type="button" value="Import..." class="button " onclick="uploadJsonButton();">
+			<input type="button" value="Download" class="button " onclick="downloadPages();">
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
