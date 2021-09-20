@@ -24,22 +24,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
-    />
-    <meta
-      http-equiv="Cache-Control"
-      content="no-cache, no-store, must-revalidate"
-    />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <title>Owncast Quickstart Wizard</title>
-  </head>
+<link href="/wizardassets/css/spinner.css" rel="stylesheet" type="text/css" />
+<link
+  href="/wizardassets/css/pud.css?cachebuster=24"
+  rel="stylesheet"
+  type="text/css"
+/>
 
+  {{ partial "head/head.html" . }}
   <body>
     <cfoutput>
       <script type="text/javascript" src="/wizardassets/js/jquery-3.4.1.min.js"></script>
@@ -52,14 +44,7 @@ THE SOFTWARE.
         type="text/javascript"
         src="/wizardassets/js/pud.js?css?cachebuster=24"
       ></script>
-      <link href="/wizardassets/css/spinner.css" rel="stylesheet" type="text/css" />
-      <link
-        href="/wizardassets/css/pud.css?cachebuster=24"
-        rel="stylesheet"
-        type="text/css"
-      />
       <script src="/wizardassets/js/controller.js?cachebuster=24"></script>
-      <link rel="stylesheet" href="/main.css" rel="preload" />
     </cfoutput>
 
     <style>
