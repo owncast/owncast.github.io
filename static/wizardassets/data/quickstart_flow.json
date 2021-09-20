@@ -21,7 +21,7 @@
 				"name": "_decision",
 				"test": "string",
 				"if": "manual",
-				"is_open": true,
+				"is_open": false,
 				"id": 4,
 				"children": [
 					{
@@ -201,13 +201,81 @@
 			{
 				"name": "_decision",
 				"test": "string",
-				"if": "startstreaming",
-				"is_open": false,
-				"id": 12,
+				"if": "installed-what-is-next",
+				"is_open": true,
+				"id": 30,
 				"children": [
 					{
-						"name": "https://owncast.online/quickstart/startstreaming",
-						"id": 13
+						"name": "installed-what-is-next-page",
+						"id": 31,
+						"is_open": true,
+						"children": [
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "directory",
+								"is_open": false,
+								"id": 32,
+								"children": [
+									{
+										"name": "https://owncast.online/docs/directory/",
+										"id": 33
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "configure-ssl",
+								"is_open": false,
+								"id": 34,
+								"children": [
+									{
+										"name": "https://owncast.online/docs/sslproxies/",
+										"id": 35
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "configure-video",
+								"is_open": false,
+								"id": 36,
+								"children": [
+									{
+										"name": "https://owncast.online/docs/video/",
+										"id": 37
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "startstreaming",
+								"is_open": false,
+								"id": 38,
+								"children": [
+									{
+										"name": "https://owncast.online/docs/broadcasting/",
+										"id": 39
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "configure-system-service",
+								"is_open": true,
+								"id": 40,
+								"children": [
+									{
+										"name": "https://owncast.online/docs/systemservice/",
+										"id": 41
+									}
+								]
+							}
+						]
 					}
 				]
 			}
