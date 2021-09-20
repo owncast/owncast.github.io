@@ -4,7 +4,7 @@ description: "Start streaming to your own server in seconds."
 draft: false
 aliases: [/docs/quickstart/]
 toc: false
-menu: 
+menu:
   docs:
     parent: "guides"
 weight: 100
