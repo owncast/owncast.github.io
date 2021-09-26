@@ -6,6 +6,8 @@ description: "0.0.9 is a smaller release with a handful of tweaks and fixes for 
 
 Owncast v0.0.9 is a smaller release with a handful of tweaks and fixes.  There's not a lot of user-facing changes this time around, but take a look through the below changes and see if there's anything that might impact you.
 
+One thing that might make your life more convenient going forward is instead of putting in the full video URL /hls/stream.m3u8 when viewing an Owncast stream in an external video player (MPV, Quicktime, VLC) you can just put your root URL to your Owncast server.
+
 ## Upgrade instructions from 0.0.8
 
 1. Stop the service from running. If you're using a pre-installed image through a hosting provider, or setup Owncast to run under systemd you can probably just simply run `systemctl stop owncast`.
