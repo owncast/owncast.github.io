@@ -1,6 +1,6 @@
 ---
-title: Owncast v0.0.8
-date: 2021-08-11
+title: Owncast v0.0.9
+date: 2021-09-26
 description: "0.0.9 is a smaller release with a handful of tweaks and fixes for Owncast."
 ---
 
