@@ -32,6 +32,10 @@
   url = "/releases"
   weight = 30
 
+[[main]]
+  name = "Troubleshoot"
+  url = "/troubleshoot"
+  weight = 40
 
 [[social]]
   name = "Visit the GitHub repo"
