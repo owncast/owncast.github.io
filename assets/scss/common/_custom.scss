@@ -380,7 +380,7 @@ section {
     display: flex;
     background-size: cover;
     background-position: center;
-    box-shadow: 0 0 5em -1em black;
+    box-shadow: 0 0 4em -1em black;
     transition: all, var(--transition-time);
     position: relative;
     overflow: hidden;
@@ -392,6 +392,7 @@ section {
       font-size: 1.3em;
       line-height: 1.2em;
       font-weight: 500;
+      color: var(--purple);
     }
     p {
       font-size: 0.7em;
