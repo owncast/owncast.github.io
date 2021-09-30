@@ -26,7 +26,7 @@ Each stream output variant configuration results in more hardware utilization.
 
 ## Match your highest output quality
 
-The highest bitrate & resolution that you offer your viewers should match the quality that you're sending to Owncast.  If it's higher or lower than what you're sending, your server will have to perform additional unnecessary work.  Lower qualities, of course, should be offered for people with slower network conditions or are geographically distant.
+The highest bitrate and resolution that you offer your viewers should match the quality that you're sending to Owncast. If it's higher or lower than what you're sending, your server will have to perform additional unnecessary work.  Lower qualities, of course, should be offered for people with slower network connections or are geographically distant.
 
 ## Experiment with Passthrough Mode
 

@@ -28,7 +28,7 @@ Read more about [video encoding and quality](/docs/video).
 
 **Drawback**: Reducing your video quality may visibly decrease the quality of of your stream for some content.
 
-## Don't stream over wireless
+## Don't stream over a wireless connection
 
 In many cases, wireless connections can cause issues because of their unstable nature. Streaming really requires a stable connection. Often wireless connections are fine, but if you have problems it's a very good change to make.
 
