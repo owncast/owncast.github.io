@@ -1,0 +1,17 @@
+<div class="card-grid-space">
+    <a class="card" target="_blank" rel="noreferrer noopener" href="{{.Get "link"}}"
+        style="--bg-img: url({{.Get "image"}})">
+        <div>
+            <h1>{{.Get "title"}}</h1>
+            <p>{{.Get "description"}}</p>
+            <!-- store .Params in var -->
+            {{$tags := split (.Get "tags") ","}}
+
+            <div class="tags">
+                {{ range $tags }}
+                <div class="tag">{{.}}</div>
+                {{end}}
+            </div>    
+        </div>
+    </a>
+</div>
