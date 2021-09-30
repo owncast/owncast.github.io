@@ -47,7 +47,7 @@ You will need to restart a stream after changing this value in the Owncast video
 
 Higher quality video means larger video sizes that take longer to download.
 
-As quoted from the [OBS Wiki](https://github.com/obsproject/obs-studio/wiki/Stream-Buffering-Issues):
+As quoted from the [OBS Wiki](https://github.com/obsproject/obs-studio/wiki/Stream-Buffering-Issues/d65033b24e4a4c81c87323f05a59c12f78de620b):
 
 > This is a very common mistake that new streamers make. Streamers will tend to use as much bitrate as they have upload available, with no regard to how that might affect their viewers. Of course, we understand you want your stream to look good. Upping your bitrate is a simple way to accomplish that, but it must be within reason.
 > 
@@ -59,8 +59,8 @@ The larger each segment of video is the longer it takes to download. So in gener
 
 **When decreasing the framerate and/or bitrate on your server you should also decrease what you send Owncast on your broadcasting software. This helps because:**
 
-1. It decreases the amount of network traffic your internet connection is using, reducing the chance that your upstream connection is a bottleneck in streaming.
-1. It decreases the amount of video that's being ingested into Owncast.
+1. It decreases the amount of network traffic your internet connection is using, reducing the chance of your upstream being a bottleneck in streaming.
+1. It decreases the amount of data that's being ingested into Owncast.
 1. The less conversation work that needs to take place within Owncast the faster things are.
 
 Check against [HLS Analyzer](https://hlsanalyzer.com) and if you see warnings such as
@@ -69,23 +69,23 @@ Check against [HLS Analyzer](https://hlsanalyzer.com) and if you see warnings su
 
 It means it took 2.43 seconds to download 2 seconds of video. Obviously playback can't continue if it takes longer to download video than it takes to play. So reducing the size of your video by reducing the quality should speed up this segment download time.
 
-**Drawback**: Reducing your video quality may visibly decrease the quality of of your stream for some content.
+**Drawback**: Reducing your video framerate and/or bitrate may noticeably decrease the quality of of your stream for some content.
 
 ## Framerate
 
-Decreasing the framerate of your video is often an easy way to reduce buffering.  FPS means "frames per second", therefore if you cut your video framerate from 60fps to 30fps there are literally half as many frames of video for your viewers to download, reducing the amount of video data that needs to be in half.
+Decreasing the framerate of your video is often an easy way to reduce buffering. FPS means "frames per second", therefore if you cut your video framerate from 60fps to 30fps there are literally half as many frames of video for your viewers to download, reducing the amount of video data in half.
 
 **Drawback**: Reducing the framerate may visibly decrease the quality of your stream for some content.
 
 ## Use external storage
 
-If the core problem is your server isn't able to handle supporting the number of viewers you have then you can take advantage of 3rd party storage providers so your viewers will download the video from there instead of your server.  This means if you have 1 or 1000 viewers the video download traffic to your server will be exactly the same.  Keep in mind each viewer will still be accessing your server directly for chat.
+If the core problem is your server isn't able to handle your number of viewers you can take advantage of 3rd party storage providers so your viewers will download the video from there instead of your server. This means if you have 1 or 1000 viewers the video download traffic to your server will be exactly the same. Keep in mind each viewer will still be accessing your server directly for chat.
 
 [Read more about configuring external storage with Owncast](/docs/storage).
 
 ## Use a CDN
 
-To support more people all around the world a CDN is generally the next step. Putting a CDN (content delivery network) in front of your video allows your video to be distributed by servers that are geographically closer to the viewer.
+To support more people all around the world a CDN (content delivery network) is generally the next step. Putting a CDN in front of your video allows your video to be distributed by servers that are geographically closer to the viewer.
 
 ## Move to a server that is more centrally located or hosted by a faster provider
 
@@ -95,10 +95,10 @@ You may have better luck running Owncast on a server that could be more geograph
 
 If you are using external storage, make sure you’re able to upload to this storage service fast enough. Otherwise the delay in your files arriving at the storage provider that everyone is using to view the video will cause buffering.
 
-If you have a slow upload connection, or are uploading to an external storage service that is too far away, or not optimized for fast uploads, you may run into an issue where it takes too long to get the video segments uploaded, ultimately not making them available fast enough for them to be used.
+If you have a slow upload connection, or you're uploading to an external storage service that is too far away, or not optimized for fast uploads, you may run into an issue where it takes too long to get the video segments uploaded, ultimately not making them available fast enough to be used.
 
 1. Determine if there's another endpoint for your storage service that might be geographically closer to you.
 1. Use a storage service that's as close (physically and logically) to where your Owncast instance is. For example if if you're on an AWS machine, use a S3 bucket in the same region. If you're on Digital Ocean, try DO Spaces. But maybe don't use DO Spaces if you're on a Linode machine, use Linode Object Storage instead. Run owncast with `--enableVerboseLogging` to see if you get any slow upload warnings.
 1. Try to increase your upload speed from your server provider.
 1. Find out if your storage service offers something like [AWS's Transfer Acceleration](https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html) to (possibly) try to increase the speed of uploads.
-1. Reduce the quality of your video so the video segments are smaller and will take less time to upload.
+1. Reduce the quality of your video so the video segments are smaller and take less time to upload.

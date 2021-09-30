@@ -15,7 +15,7 @@
 					"en": "What issue are you trying to resolve?"
 				},
 				"instructions": {
-					"en": "<p>Most questions and issues fall into one of the below categories. While all environments are different, hopefully some major classes of concerns can be fixed by walking through the following topics.</p><p>Keep in mind many suggestions have tradeoffs and it's always suggested that you test your stream before your scheduled event.</p>"
+					"en": "<p>Most questions and issues fall into one of the below categories. While each environment is different, hopefully some major classes of concerns can be fixed by walking through the following topics.</p><p>Keep in mind many suggestions have tradeoffs and it's always suggested that you test your stream before your scheduled event.</p>"
 				},
 				"choices": [
 					{
