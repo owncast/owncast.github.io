@@ -4,6 +4,8 @@ description: "Some extensions, add-ons, and projects that take advantage of Ownc
 type: subpages
 ---
 
+The following are examples of projects people have built that either extend or take advantage of Owncast.
+
 Want your project shared here? Please let us know about it!
 
 <div id="blog-previews">
