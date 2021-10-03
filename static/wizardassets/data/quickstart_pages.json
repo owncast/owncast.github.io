@@ -3,51 +3,60 @@
 	"defaultLanguage": "en",
 	"content": {
 		"title": {
-			"en": "Owncast Quickstart Wizard"
+			"en": "Owncast Quickstart Wizard",
+			"de": "Owncast Schnellstart-Hilfe"
 		},
 		"button": {
-			"en": "Next"
+			"en": "Next",
+			"de": "Weiter"
 		},
 		"pages": {
 			"install-method-page": {
 				"title": {
-					"en": "How do you want to install Owncast?"
+					"en": "How do you want to install Owncast?",
+					"de": "Wie möchtest du Owncast installieren?"
 				},
 				"instructions": {
-					"en": "<p>By using the <a href=\"installer\">installer</a> you can get up and running in about a minute. However, if you would prefer to <a href=\"/quickstart/manual\">download a release manually</a>, use a <a href=\"/quickstart/providers\">one-click install</a> at a supported hosting provider, use a <a href=\"/quickstart/container\">container</a> you have those options and more.</p>If you'd prefer you can <a href=\"installation\">browse our entire installation documentation</a>."
+					"en": "<p>By using the <a href=\"installer\">installer</a> you can get up and running in about a minute. However, if you would prefer to <a href=\"/quickstart/manual\">download a release manually</a>, use a <a href=\"/quickstart/providers\">one-click install</a> at a supported hosting provider, use a <a href=\"/quickstart/container\">container</a> you have those options and more.</p>If you'd prefer you can <a href=\"installation\">browse our entire installation documentation</a>.",
+					"de": "<p>Mit dem <a href=\"installer\">Installationsskript</a> bist du in etwa einer Minute fertig. Du kannst aber auch ein <a href=\"/quickstart/manual\">stabiles Release herunterladen</a>, einen <a href=\"/quickstart/providers\">One-Click-Installer</a> bei einem unterstützten Hoster</a> verwenden, oder einen <a href=\"/quickstart/container\">Container</a> verwenden.</p> Hier geht es zur <a href=\"installation\">kompletten Dokumentation zur Installation</a>."
 				},
 				"choices": [
 					{
 						"text": {
-							"en": "I want to manually install Owncast myself."
+							"en": "I want to manually install Owncast myself.",
+							"de": "Ich möchte Owncast selbst installieren."
 						},
 						"type": "radio",
 						"value": "manual"
 					},
 					{
 						"text": {
-							"en": "I want Owncast to be installed for me on a hosting provider."
+							"en": "I want Owncast to be installed for me on a hosting provider.",
+							"de": "Ich möchte Owncast bei einem Hostingprovider installieren."
 						},
 						"type": "radio",
 						"value": "hostingprovider"
 					},
 					{
 						"text": {
-							"en": "I want to run Owncast inside a containerized environment such as Docker or Kubernetes."
+							"en": "I want to run Owncast inside a containerized environment such as Docker or Kubernetes.",
+							"de": "Ich möchte Owncast in einer Container-Umgebung wie Docker oder Kubernetes nutzen."
 						},
 						"type": "radio",
 						"value": "docker"
 					},
 					{
 						"text": {
-							"en": "Other specific hardware or hosting environments."
+							"en": "Other specific hardware or hosting environments.",
+							"de": "Andere spezifische Hardware oder Hosting-Umgebungen."
 						},
 						"type": "radio",
 						"value": "other"
 					},
 					{
 						"text": {
-							"en": "Owncast is installed and I'm not sure what to do next."
+							"en": "Owncast is installed and I'm not sure what to do next.",
+							"de": "Ich habe Owncast installiert und komme nicht weiter."
 						},
 						"type": "radio",
 						"value": "installed-what-is-next"
@@ -58,36 +67,42 @@
 			},
 			"manual-install-method-page": {
 				"title": {
-					"en": "How would you like to manually install Owncast?"
+					"en": "How would you like to manually install Owncast?",
+					"de": "Wie möchtest Du Owncast manuell installieren?"
 				},
 				"instructions": {
-					"en": "Owncast supplies a quick install script that will always install the most recent version and get you running very quickly. However, there are other options."
+					"en": "Owncast supplies a quick install script that will always install the most recent version and get you running very quickly. However, there are other options.",
+					"de": "Owncast bietet ein Installationsskript an, welches immer die aktuellste Version installiert und sehr schnell funktioniert. Es gibt jedoch auch andere Möglichkeiten:"
 				},
 				"choices": [
 					{
 						"text": {
-							"en": "I want to use the Owncast Quick Installer Script."
+							"en": "I want to use the Owncast Quick Installer Script.",
+							"de": "Ich möchte das Installationsskript nutzen."
 						},
 						"type": "radio",
 						"value": "quickinstaller"
 					},
 					{
 						"text": {
-							"en": "I want to download a release of Owncast."
+							"en": "I want to download a release of Owncast.",
+							"de": "Ich möchte ein Release von Owncast herunterladen."
 						},
 						"type": "radio",
 						"value": "download"
 					},
 					{
 						"text": {
-							"en": "I want to use my operating system's package manager."
+							"en": "I want to use my operating system's package manager.",
+							"de": "Ich möchte den Paketmanager meines Betriebssystems nutzen"
 						},
 						"type": "radio",
 						"value": "packagemanager"
 					},
 					{
 						"text": {
-							"en": "I want to use Site.js to setup Owncast."
+							"en": "I want to use Site.js to setup Owncast.",
+							"de": "Ich möchte Site.js nutzen, um Owncast einzurichten"
 						},
 						"type": "radio",
 						"value": "sitejs"
@@ -97,22 +112,26 @@
 			},
 			"hostingprovider-install-method-page": {
 				"title": {
-					"en": "What hosting provider would you like to use to install Owncast for you?"
+					"en": "What hosting provider would you like to use to install Owncast for you?",
+					"de": "Welchen Hostingprovider möchtest Du für Owncast nutzen?"
 				},
 				"instructions": {
-					"en": "Owncast is supported on the following hosting providers and they can install Owncast for you."
+					"en": "Owncast is supported on the following hosting providers and they can install Owncast for you.",
+					"de": "Die folgenden Hostingprovider bieten eine schnelle Installation von Owncast an:"
 				},
 				"choices": [
 					{
 						"text": {
-							"en": "Linode"
+							"en": "Linode",
+							"de": "Linode"
 						},
 						"type": "radio",
 						"value": "linode"
 					},
 					{
 						"text": {
-							"en": "DigitalOcean"
+							"en": "DigitalOcean",
+							"de": "DigitalOcean"
 						},
 						"type": "radio",
 						"value": "digitalocean"
@@ -122,22 +141,26 @@
 			},
 			"os-package-manager-page": {
 				"title": {
-					"en": "Use your Operating System's package manager."
+					"en": "Use your Operating System's package manager.",
+					"de": "Nutzung des Paketmanagers des Betriebssystems."
 				},
 				"instructions": {
-					"en": "<strong>Note</strong>: These packages may be out of date. These packages are not built or maintained by the Owncast project and any specific concerns or support regarding their installation should be directed at the maintainers of the packages.<br><br>What Operating System or distribution do you use?"
+					"en": "<strong>Note</strong>: These packages may be out of date. These packages are not built or maintained by the Owncast project and any specific concerns or support regarding their installation should be directed at the maintainers of the packages.<br><br>What Operating System or distribution do you use?",
+					"de": "<strong>Achtung</strong>: Diese Pakete sind eventuell veraltet. Die Pakete werden nicht durch das Owncast-Projekt verwaltet, bitte richte deine Fragen direkt an die Paket-Verwalter*innen.<br><br>Welches Betriebssystem oder Distribution verwendest du?"
 				},
 				"choices": [
 					{
 						"text": {
-							"en": "Arch Linux"
+							"en": "Arch Linux",
+							"de": "Arch Linux"
 						},
 						"type": "radio",
 						"value": "arch"
 					},
 					{
 						"text": {
-							"en": "FreeBSD"
+							"en": "FreeBSD",
+							"de": "FreeBSD"
 						},
 						"type": "radio",
 						"value": "freebsd"
@@ -147,22 +170,26 @@
 			},
 			"other-install-page": {
 				"title": {
-					"en": "Other specific hardware and environments."
+					"en": "Other specific hardware and environments.",
+					"de": "Andere spezifische Hardware oder Umgebungen."
 				},
 				"instructions": {
-					"en": "The following are other methods you can use to setup Owncast. These are not packaged or maintained by the Owncast project and any support or concerns about these alternative install methods should be directed at the maintainers of the respective options."
+					"en": "The following are other methods you can use to setup Owncast. These are not packaged or maintained by the Owncast project and any support or concerns about these alternative install methods should be directed at the maintainers of the respective options.",
+					"de": "Die folgenden Informationen sollen dir helfen, Owncast einzurichten. Die Pakete werden nicht durch das Owncast-Projekt verwaltet, bitte richte deine Fragen über diese alternativen Installationsmethoden direkt an die Paket-Verwalter*innen."
 				},
 				"choices": [
 					{
 						"text": {
-							"en": "I run Yunohost"
+							"en": "I run Yunohost",
+							"de": "Ich verwende Yunohost"
 						},
 						"type": "radio",
 						"value": "yunohost"
 					},
 					{
 						"text": {
-							"en": "I own a Qnap NAS"
+							"en": "I own a Qnap NAS",
+							"de": "Ich habe ein Qnap NAS"
 						},
 						"type": "radio",
 						"value": "qnap"
@@ -172,43 +199,50 @@
 			},
 			"installed-what-is-next-page": {
 				"title": {
-					"en": "Owncast is installed. What's next?"
+					"en": "Owncast is installed. What's next?",
+					"de": "Owncast ist installiert. Und nun?"
 				},
 				"instructions": {
-					"en": "If Owncast is installed and running but you're not sure what to do next you might be ready to go! But there are other things you might want to check such as making sure you support SSL."
+					"en": "If Owncast is installed and running but you're not sure what to do next you might be ready to go! But there are other things you might want to check such as making sure you support SSL.",
+					"de": "Wenn du Owncast installiert hast, kannst du direkt mit dem Streamen loslegen. Es gibt jedoch auch andere Möglichkeiten, zum Beispiel kannst du einen HTTPS-Proxy einrichten."
 				},
 				"choices": [
 					{
 						"text": {
-							"en": "I want to learn how to start streaming."
+							"en": "I want to learn how to start streaming.",
+							"de": "Ich möchte mehr über das Streamen lernen."
 						},
 						"type": "radio",
 						"value": "startstreaming"
 					},
 					{
 						"text": {
-							"en": "My server doesn't yet support SSL (https) and I want to configure that."
+							"en": "My server doesn't yet support SSL (https) and I want to configure that.",
+							"de": "Mein Server unterstützt noch kein SSL (HTTPS) und ich möchte das einrichten."
 						},
 						"type": "radio",
 						"value": "configure-ssl"
 					},
 					{
 						"text": {
-							"en": "I want to setup Owncast to automatically start and run in the background as a service."
+							"en": "I want to setup Owncast to automatically start and run in the background as a service.",
+							"de": "Ich möchte Owncast als System-Dienst starten, sodass es im Hintergrund läuft."
 						},
 						"type": "radio",
 						"value": "configure-system-service"
 					},
 					{
 						"text": {
-							"en": "I want to list my stream in the public directory so others can discover it."
+							"en": "I want to list my stream in the public directory so others can discover it.",
+							"de": "Ich möchte meinen Stream im Owncast Directory bewerben, sodass andere ihn entdecken können."
 						},
 						"type": "radio",
 						"value": "directory"
 					},
 					{
 						"text": {
-							"en": "I want to learn more about configuring my video quality."
+							"en": "I want to learn more about configuring my video quality.",
+							"de": "Ich möchte mehr über die Einstellungsmöglichkeiten zur Videoqualität lernen"
 						},
 						"type": "radio",
 						"value": "configure-video"
