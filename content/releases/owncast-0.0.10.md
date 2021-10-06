@@ -6,7 +6,7 @@ description: "Owncast v0.0.10 is a hotfix release."
 
 v0.0.10 is a hot fix to resolve an issue when using external S3 compatible storage in v0.0.9.
 
-There are no other changes and this only impacts those using that feature.  See the release notes for [v0.0.9](https://github.com/owncast/owncast/releases/tag/v0.0.9) for details around the previous release.
+There are no other changes and this only impacts those using that feature. See the release notes for [v0.0.9](https://github.com/owncast/owncast/releases/tag/v0.0.9) for details around the previous release.
 
 ## Upgrade instructions from 0.0.9
 
