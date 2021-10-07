@@ -7,11 +7,11 @@ images: []
 type: subpages
 ---
 
-NGINX is a popular web server used as a reverse proxy with free Let's Encrypt certificates.  Visit the [official documentation](https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/) for detailed instructions.
+NGINX is a popular web server used as a reverse proxy with free Let's Encrypt certificates. Visit the [official documentation](https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/) for detailed instructions.
 
 ## Websockets
 
-People often look over the need to tell NGINX to proxy websockets correctly, leading to chat being disabled.  Please read the quick [documentation by nginx around websocket support](https://nginx.org/en/docs/http/websocket.html) to make sure you're doing it properly.
+People often look over the need to tell NGINX to proxy websockets correctly, leading to chat being disabled. Please read the quick [documentation by nginx around websocket support](https://nginx.org/en/docs/http/websocket.html) to make sure you're doing it properly.
 
 You'll end up with a configuration that looks somewhat like the following when you're done setting up NGINX.
 

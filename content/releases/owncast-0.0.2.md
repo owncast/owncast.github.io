@@ -14,14 +14,14 @@ contributors: ["Gabe Kangas"]
 * Add support for embedding the video player externally. {{< githubissue 110 >}}
 * Your username will get highlighted in chat when mentioned. {{< githubissue 100 >}}
 * Emoji picker w/ custom emoji support. {{< githubissue 86 >}}
-* Autocomplete usernames in composing chat messages by hitting `tab`.  {{< githubissue 99 >}}
+* Autocomplete usernames in composing chat messages by hitting `tab`. {{< githubissue 99 >}}
 * Improve support for autolinking, and embedding YouTube or Instagram links in chat. {{< githubissue 93 >}}
-* Server alerts to the console when there is excessive hardware utilization.  {{< githubissue 115 >}}
+* Server alerts to the console when there is excessive hardware utilization. {{< githubissue 115 >}}
 * Updated version of Video.js and associated http-streaming library. {{< githubissue 133 >}}
 * Improve max bitrate compatibility with HLS spec. {{< githubissue 106 >}}
 * Stop jumping to bottom of chat when scrolling and reading previous messages. {{< githubissue 101 >}}
 * Username colors are tweaked to be easier to read. {{< githubissue 170 >}}
-* Improved mobile layout in the web UI.  {{< githubissue 140 >}}
+* Improved mobile layout in the web UI. {{< githubissue 140 >}}
 * Remove Cache-Control header when sending to external S3 storage to support Digital Ocean Spaces. {{< githubissue 117 >}}
 * Stream gets cleaned up after 5 minutes of being disconnected. {{< githubissue 152 >}}
 
@@ -31,7 +31,7 @@ You can get the release from [GitHub](https://github.com/owncast/owncast/release
 
 ### Upgrading from v0.0.1
 
-This release has a rewrite of the web frontend, so any customization you made previously will need to be re-applied to this new web app.  The simplest way to upgrade is just overwrite the old version with the new version, but it won't delete any old files that are no longer used.
+This release has a rewrite of the web frontend, so any customization you made previously will need to be re-applied to this new web app. The simplest way to upgrade is just overwrite the old version with the new version, but it won't delete any old files that are no longer used.
 
 However, you're free to upgrade any way you like, but make sure your `chat.db`, `config.yaml`, `webroot/static/content.md` and `stats.json` files are saved.
 

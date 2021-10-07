@@ -23,15 +23,15 @@ We will continue to add functionality to this over time, so please [let us know 
 1. Backup your `config.yaml` and any other files you may have customized and want to save or refer to later.
 1. Move the zip file of 0.0.3 to your previous install location.
 1. Unzip the file, allowing it to overwrite old files.
-1. Edit your `config.yaml` file and change the `logo` entry to be a single item, no longer a `small` and `large`.  If you're using the default then it should look like the following: `logo: /img/logo.svg`.  Take note the old `logo` images have been changed to `logo.svg`.
+1. Edit your `config.yaml` file and change the `logo` entry to be a single item, no longer a `small` and `large`. If you're using the default then it should look like the following: `logo: /img/logo.svg`. Take note the old `logo` images have been changed to `logo.svg`.
 1. Move the `stats.json` file to `data`.
 1. Move your `content.md` file to `data` if you have one.
 1. Restart the service.
 
 ## Breaking changes
 
-- How your logo is set in the config file has changed.  See upgrade instructions.
-- `chat.db` has been renamed to `owncast.db` and moved to the `data` directory.  You should delete your old `chat.db` file.
+- How your logo is set in the config file has changed. See upgrade instructions.
+- `chat.db` has been renamed to `owncast.db` and moved to the `data` directory. You should delete your old `chat.db` file.
 - `content.md` has moved to to `/data`.
 - `stats.json` has moved to `/data`.
 - Optional `chatDatabase` command line flag is moved to `database`. `chatDatabaseFile` in config changed to `databaseFile`.
@@ -53,13 +53,13 @@ We will continue to add functionality to this over time, so please [let us know 
 * Fix for video getting cut off on Firefox. {{< githubissue 210 >}} 
 * Large play button is re-displayed when the video player is paused. {{< githubissue 201 >}} 
 * Seek bar has been removed from the player. {{< githubissue 171 >}}
-* Fix for crash when some RTMP sources send unexpected payloads.  {{< githubissue 340 >}} 
+* Fix for crash when some RTMP sources send unexpected payloads. {{< githubissue 340 >}} 
 * An internal refactor of the video pipeline. {{< githubissue 151 >}}
 * `offlineContent` is no longer specified in the config file.
 
 ## APIs
 
-This release added some basic read-only APIs for use in the new admin dashboards.  They are authenticated against your stream key just like the admin site is.
+This release added some basic read-only APIs for use in the new admin dashboards. They are authenticated against your stream key just like the admin site is.
 
 You can find the complete set of APIs by visiting the API documentation.
 

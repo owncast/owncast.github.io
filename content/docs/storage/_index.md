@@ -15,5 +15,5 @@ type: subpages
 
 Instead of serving video directly from your personal server you can use a S3 compatible storage provider to offload the bandwidth and storage requirements elsewhere.
 
-Choose your storage provider of choice.  If your provider is not listed, you can [file an issue](https://github.com/owncast/owncast/issues) and we'll test and write up some documentation for it.
+Choose your storage provider of choice. If your provider is not listed, you can [file an issue](https://github.com/owncast/owncast/issues) and we'll test and write up some documentation for it.
 

@@ -30,7 +30,7 @@ Web Interface:
 * Fix: Layout of tags if there are too many for the width of the window. {{< githubissue 500 >}}
 * Fix: Problem where in some rare cases the player can get into an infinite loop trying to update the HLS playlist. {{< githubissue 415 >}}
 * Feat: Hide viewer count when offline. {{< githubissue 428 >}}
-* Feat: Display notification in the title if a message comes in or a stream starts and you've navigated away.  {{< githubissue 426 >}}
+* Feat: Display notification in the title if a message comes in or a stream starts and you've navigated away. {{< githubissue 426 >}}
 * Fix: Rename social icons Javascript file so uBlock Origin doesn't block it. {{< githubissue 491 >}}
 
 Admin Interface:

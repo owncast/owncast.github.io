@@ -12,7 +12,7 @@ type: subpages
 
 While Owncast will work for you out of the box, there are things most people will want to customize after getting it up and running.
 
-Configuration is done through the Owncast administration page located on your server under `/admin`.  The login username is `admin` and the password is your stream key, the default being `abc123`.
+Configuration is done through the Owncast administration page located on your server under `/admin`. The login username is `admin` and the password is your stream key, the default being `abc123`.
 
 Some common items many people would want to update after installing Owncast are:
 

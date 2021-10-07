@@ -12,7 +12,7 @@ toc: true
 type: subpages
 ---
 
-{{< alert icon="💡" text="Note: while we will strive to keep these APIs as stable as possible, it's still early days with our integration hooks. As we learn more and continue to make things that are useful to other developers we may need to make changes or break functionality.  It's recommended if you're building on top of Owncast to stay current with the discussions and updates around the project and let us know how things are going." >}}
+{{< alert icon="💡" text="Note: while we will strive to keep these APIs as stable as possible, it's still early days with our integration hooks. As we learn more and continue to make things that are useful to other developers we may need to make changes or break functionality. It's recommended if you're building on top of Owncast to stay current with the discussions and updates around the project and let us know how things are going." >}}
 
 Owncast has the ability for you to build things on top of it. Here's some examples of things you can build:
 

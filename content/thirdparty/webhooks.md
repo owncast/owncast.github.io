@@ -10,7 +10,7 @@ toc: true
 type: subpages
 ---
 
-Owncast supports HTTP Webhooks to notify third-party applications (such as chatbots) about events on the stream. In other words: Webhooks will send events to your code when things happen on your Owncast server.  
+Owncast supports HTTP Webhooks to notify third-party applications (such as chatbots) about events on the stream. In other words: Webhooks will send events to your code when things happen on your Owncast server.
 
 The following are a list of events you can get notified about.
 
