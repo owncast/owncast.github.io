@@ -118,13 +118,13 @@
 				"name": "_decision",
 				"test": "string",
 				"if": "hostingprovider",
-				"is_open": false,
+				"is_open": true,
 				"id": 18,
 				"children": [
 					{
 						"name": "hostingprovider-install-method-page",
 						"id": 19,
-						"is_open": false,
+						"is_open": true,
 						"children": [
 							{
 								"name": "_decision",
@@ -151,6 +151,19 @@
 										"id": 23
 									}
 								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "vultr",
+								"is_open": true,
+								"id": 24,
+								"children": [
+									{
+										"name": "https://www.vultr.com/marketplace/apps/owncast",
+										"id": 25
+									}
+								]
 							}
 						]
 					}
@@ -161,11 +174,11 @@
 				"test": "string",
 				"if": "other",
 				"is_open": false,
-				"id": 24,
+				"id": 26,
 				"children": [
 					{
 						"name": "other-install-page",
-						"id": 25,
+						"id": 27,
 						"is_open": false,
 						"children": [
 							{
@@ -173,11 +186,11 @@
 								"test": "string",
 								"if": "yunohost",
 								"is_open": false,
-								"id": 26,
+								"id": 28,
 								"children": [
 									{
 										"name": "https://dash.yunohost.org/appci/app/owncast",
-										"id": 27
+										"id": 29
 									}
 								]
 							},
@@ -186,11 +199,11 @@
 								"test": "string",
 								"if": "qnap",
 								"is_open": false,
-								"id": 28,
+								"id": 30,
 								"children": [
 									{
 										"name": "https://qnapclub.eu/en/qpkg/1138",
-										"id": 29
+										"id": 31
 									}
 								]
 							}
@@ -202,24 +215,24 @@
 				"name": "_decision",
 				"test": "string",
 				"if": "installed-what-is-next",
-				"is_open": true,
-				"id": 30,
+				"is_open": false,
+				"id": 32,
 				"children": [
 					{
 						"name": "installed-what-is-next-page",
-						"id": 31,
-						"is_open": true,
+						"id": 33,
+						"is_open": false,
 						"children": [
 							{
 								"name": "_decision",
 								"test": "string",
 								"if": "directory",
 								"is_open": false,
-								"id": 32,
+								"id": 34,
 								"children": [
 									{
 										"name": "https://owncast.online/docs/directory/",
-										"id": 33
+										"id": 35
 									}
 								]
 							},
@@ -228,11 +241,11 @@
 								"test": "string",
 								"if": "configure-ssl",
 								"is_open": false,
-								"id": 34,
+								"id": 36,
 								"children": [
 									{
 										"name": "https://owncast.online/docs/sslproxies/",
-										"id": 35
+										"id": 37
 									}
 								]
 							},
@@ -241,11 +254,11 @@
 								"test": "string",
 								"if": "configure-video",
 								"is_open": false,
-								"id": 36,
+								"id": 38,
 								"children": [
 									{
 										"name": "https://owncast.online/docs/video/",
-										"id": 37
+										"id": 39
 									}
 								]
 							},
@@ -254,11 +267,11 @@
 								"test": "string",
 								"if": "startstreaming",
 								"is_open": false,
-								"id": 38,
+								"id": 40,
 								"children": [
 									{
 										"name": "https://owncast.online/docs/broadcasting/",
-										"id": 39
+										"id": 41
 									}
 								]
 							},
@@ -266,12 +279,12 @@
 								"name": "_decision",
 								"test": "string",
 								"if": "configure-system-service",
-								"is_open": true,
-								"id": 40,
+								"is_open": false,
+								"id": 42,
 								"children": [
 									{
 										"name": "https://owncast.online/docs/systemservice/",
-										"id": 41
+										"id": 43
 									}
 								]
 							}

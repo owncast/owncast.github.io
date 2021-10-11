@@ -116,6 +116,13 @@
 						},
 						"type": "radio",
 						"value": "digitalocean"
+					},
+					{
+						"text": {
+							"en": "Vultr"
+						},
+						"type": "radio",
+						"value": "vultr"
 					}
 				],
 				"required": true
