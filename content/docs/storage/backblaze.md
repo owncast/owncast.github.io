@@ -1,6 +1,6 @@
 ---
 title: "Backblaze B2"
-description: "Backblaze B2's first 10G of storage is free, and the first 1G of download per day is free after that.  Afterwards they charge $0.01/G."
+description: "Backblaze B2's first 10G of storage is free, and the first 1G of download per day is free after that. Afterwards they charge $0.01/G."
 date: 2020-11-17T20:11:42+01:00
 lastmod: 2020-11-17T20:11:42+01:00
 draft: false

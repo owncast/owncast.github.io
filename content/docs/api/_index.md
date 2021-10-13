@@ -19,7 +19,7 @@ The following documents the latest officially released APIs.
 
 ### Development
 
-If you're developing against the `master` branch of Owncast the following documentation may be helpful to you.  Please mind that development versions may be unstable as they do not have the testing that Owncast releases endure.
+If you're developing against the `master` branch of Owncast the following documentation may be helpful to you. Please mind that development versions may be unstable as they do not have the testing that Owncast releases endure.
 
 {{< button href="/api/development" >}}Development{{< /button >}}
 
