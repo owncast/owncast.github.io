@@ -148,6 +148,13 @@
 						},
 						"type": "radio",
 						"value": "freebsd"
+					},
+					{
+						"text": {
+							"en": "nixos"
+						},
+						"type": "radio",
+						"value": "nixos"
 					}
 				],
 				"required": true
