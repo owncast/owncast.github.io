@@ -66,6 +66,19 @@
 														"id": 11
 													}
 												]
+											},
+											{
+												"name": "_decision",
+												"test": "string",
+												"if": "nixos",
+												"is_open": false,
+												"id": 44,
+												"children": [
+													{
+														"name": "https://search.nixos.org/packages?channel=unstable&show=owncast&from=0&size=50&sort=relevance&type=packages&query=owncast",
+														"id": 45
+													}
+												]
 											}
 										]
 									}
