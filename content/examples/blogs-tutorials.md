@@ -23,10 +23,22 @@ Want your content shared here? Please let us know about it!
 
 ## Videos
 
+### Self-hosting your live stream with Owncast
+
 {{< youtube id="zIpedUqXlZc" >}}
+
+### Installing Owncast on Linode & using Owncast's APIs
 
 {{< youtube id="eWE7HGJQI_4" >}}
 
+### Installing Owncast on Reclaim Cloud
+
 {{< youtube id="Ws0oKFW0DBA" >}}
 
+### A walkthrough of the Owncast Admin
+
 {{< youtube id="q4NasIng3yA" >}}
+
+### Owncast + Nginx in German
+
+{{< youtube id="rQjaxLm2_5E" >}}
