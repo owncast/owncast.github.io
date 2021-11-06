@@ -28,13 +28,25 @@ shutdown () {
 trap shutdown INT TERM ABRT EXIT
 
 # Formatting escape codes.
-RED='\033[0;31m'
-PURPLE='\033[0;35m'
-BLUE='\033[1;34m'
-GREEN='\033[1;32m'
-BOLD='\033[1m'
-UNDERLINE='\033[4m'
-NC='\033[0m' # No Color
+
+if [[ -v NO_COLOR ]]
+then
+  RED=''
+  PURPLE=''
+  BLUE=''
+  GREEN=''
+  BOLD=''
+  UNDERLINE=''
+  NC=''
+else
+  RED='\033[0;31m'
+  PURPLE='\033[0;35m'
+  BLUE='\033[1;34m'
+  GREEN='\033[1;32m'
+  BOLD='\033[1m'
+  UNDERLINE='\033[4m'
+  NC='\033[0m' # No Color
+fi
 
 # Activity spinner for background processes.
 spinner() {
