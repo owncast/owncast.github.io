@@ -37,7 +37,7 @@ If you have Intel integrated graphics you may be able to use it using [VA-API](#
 
 ### Raspberry Pi
 
-**Note:** The most recent version of the Raspberry Pi OS has a bug with the OpenMax codec.  Use the previous version of the OS [by downloading it](https://downloads.raspberrypi.org/raspios_full_armhf/images/raspios_full_armhf-2021-05-28/2021-05-07-raspios-buster-armhf-full.zip), unzipping it, and using the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) to save it to your SD card for installation.
+**Note:** The most recent version of the Raspberry Pi OS has a bug with the OpenMax codec. Use the previous version of the OS [by downloading it](https://downloads.raspberrypi.org/raspios_full_armhf/images/raspios_full_armhf-2021-05-28/2021-05-07-raspios-buster-armhf-full.zip), unzipping it, and using the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) to save it to your SD card for installation.
 
 Using that version of the Raspberry Pi operating system it's actually quite easy to get Owncast running in a hardware accelerated fashion. Raspberry Pi OS includes support for [OpenMax](#openmax) (OMX) out of the box and includes a version of `ffmpeg` that is built to support it.
 
