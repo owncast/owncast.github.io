@@ -15,5 +15,6 @@ Want your project shared here? Please let us know about it!
         {{< bloglink title="hatbot" description="A basic Owncast chat bot. Very easy to add your own !commands. Written in Python." tags="bot,chat" link="https://github.com/hatniX/hatbot">}}
         {{< bloglink title="Kodi Plugin" description="A plugin for Kodi that lets you browse and watch the Owncast Directory directly from your TV." tags="extension,tv" link="https://github.com/rAcHekLoS/plugin.video.owncast/" image="https://github.com/rAcHekLoS/plugin.video.owncast/raw/main/resources/screenshot-01.jpg">}}
         {{< bloglink title="Mastodon Announce Bot" description="Announce to the Fediverse via your Mastodon account each time you go live." tags="bot" link="https://glitch.com/edit/#!/owncast-mastodon-announce">}}
+         {{< bloglink title="wowncast" description="Subscribe to and open your favorite Owncast streamers from the terminal." tags="terminal,viewing" link="https://codeberg.org/yarmo/wowncast">}}
     </section>
 </div>
