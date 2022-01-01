@@ -1,9 +1,9 @@
 ---
-title: "Join us for the first Owncast Call of 2021"
+title: "Join us for the first Owncast Call of 2022"
 description: "In January we'll be getting together to talk about the new features, new releases and brainstorm about Owncast."
 date: 2021-12-31T17:58:25-08:00
 lastmod: 2021-12-31T17:58:25-08:00
-draft: true
+draft: false
 images: []
 ---
 
@@ -20,6 +20,6 @@ To make sure people who want to attend can make it please [mark the date and tim
 1. The new ActivityPub-powered social features will be demoed.
 1. The new inline chat moderation tools will be demoed.
 1. Go over the testing required of the new features to be able to release them.
-1. Talk about some of the outreach attempts to add missing skillets to the project.
+1. Talk about some of the outreach attempts to add missing skill sets to the project.
 
 I look forward to seeing you all in 2022 and building some really cool things with all of you!
