@@ -36,7 +36,7 @@ lqipWidth = "20x"
 footer = "Created by FOSS-loving people around the globe. Website based on <a href=\"https://getdoks.org/\">Doks</a>."
 
 # Alert
-alert = true
+alert = false
 alertText = "The Owncast project is offering free instances to those that could use them. <a class=\"alert-link\" href=\"/donated/\">Learn more!</a></a>"
 
 # Edit Page
