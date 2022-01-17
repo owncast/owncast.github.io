@@ -35,6 +35,14 @@ It will look something like:
 
 {{< owncastembed "https://watch.owncast.online/embed/video" >}}
 
+### Using the HLS feed
+
+As long as the player supports it, it is recommended to open the homepage of your Owncast instance directly.
+The player will automatically find the correct playlist and will start playing.
+This will guarantee forward compability if the way how Owncast publishes HLS is ever changed.
+
+However, if you _really_ need the HLS feed (i.e. for sharing your stream to OpenSlides), you can access the HLS feed directly via this URL: `http://your.host/hls/stream.m3u8`.
+
 ## Embedding chat
 
 Owncast supports embedding your chat directly into any other web site or source.
