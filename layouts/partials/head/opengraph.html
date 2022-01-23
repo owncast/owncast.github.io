@@ -10,7 +10,8 @@
 
 {{ with $.Params.images -}}
   {{ range first 6 . -}}
-  <meta property="og:image" content="{{ $.Permalink }}{{ . }}">
+  <meta property="og:image" content="https://owncast.online/images/owncast-logo-1000x1000.png"/>
+  <meta property="twitter:image" content="https://owncast.online/images/owncast-logo-1000x1000.png"/>
   {{ end -}}
 {{ else -}}
   {{ $images := $.Resources.ByType "image" -}}
