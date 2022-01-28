@@ -10,7 +10,7 @@ weight: 200
 toc: true
 ---
 
-Owncast supports a set of social features to allow people to follow, engage with your server, and share your stream with others.
+Owncast people to follow, engage with your server, and share your stream with others on what is known as the Fediverse, a decentralized network of services.
 
 {{<versionsupport feature="Social functionality" version="0.0.11">}}
 
@@ -21,7 +21,11 @@ Owncast supports a set of social features to allow people to follow, engage with
 1. You can send out posts to your followers via the admin.
 1. Your followers will automatically get notified when you go live.
 1. Your followers can share that you've gone live with their circle of followers.
-1. Engagement taken by people such as following, liking or sharing get exposed within your stream's chat.
+1. Actions such as following, liking or sharing get exposed within your stream's chat.
+
+## Why?
+
+It's a good way for your audience to get notified when you go live, share it with their circle, and to be highlighted within your page and chat.
 
 ## How to enable
 
@@ -38,16 +42,17 @@ Visit the _Configuration -> Social_ page to configure.
 
 1. You can set the username that you're seen as.
 1. You can set the text that is sent out each time you go live.
+1. You can toggle "Private mode".
 
 ### Private mode
 
-Enabling _Private Mode_ will require those who wish to follow your server to be approved by you first. Approving followers can be done via the _Followers_ page in the admin.
+Enabling _Private Mode_ will require those who wish to follow your server to be approved by you first. Approving followers can be done via the _Followers_ section in the admin.
 
-Private Mode will also make it so any posts you send out are only visible to your followers, not others.
+Private Mode will also make it so any posts you send out are only visible to your followers, not others, as they cannot be shared.
 
 ## How do people follow your Owncast server?
 
-Any person on the Fediverse using a service that is compatible with following Owncast, such as [Pleroma](https://pleroma.social/), [Misskey](https://join.misskey.page/) or [Mastodon](https://joinmastodon.org/) can follow your server.
+Any person on the Fediverse using a service that is compatible with following Owncast, such as [Pleroma](https://pleroma.social/) or [Mastodon](https://joinmastodon.org/) can follow your server.
 
 [Learn more about The Fediverse](#learn-more).
 
@@ -65,7 +70,7 @@ By clicking the _Compose_ button in the admin header you can create a post to se
 
 ## Engagement
 
-If somebody follows you, likes a post you send out, or shares any of your posts while a stream is live it will display that these actions took place within the chat feed. This can be disabled under the social settings.
+If somebody **follows** you, **likes** a post you send out, or **shares** any of your posts while a stream is live it will display that these actions took place within the chat feed. This can be disabled under the social settings.
 
 
 <center>
