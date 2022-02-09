@@ -41,7 +41,6 @@ VLC for tvOS
 
 ### Samsung TVs
 
-
 ## Browsing the Owncast Directory on your TV
 
 Almost any application that supports adding _IPTV_ or _M3U_ playlists can support the directory.
