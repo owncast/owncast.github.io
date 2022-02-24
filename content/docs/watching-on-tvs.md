@@ -31,11 +31,28 @@ VLC for tvOS
 1. Type the server you wish to watch `https://owncast.server`
 1. Select it from the list.
 
+AirPlay
+
+[Visit Apple's AirPlay documentation](https://support.apple.com/en-us/HT204289)
+
+1. Open the Owncast stream you want to watch on your iPhone or Mac computer.
+1. Play the Owncast stream.
+1. Press the _AirPlay_ button.
+1. Select your AppleTV.
 ### Amazon Fire TV
 
 ### Google TV
 
 ### Roku
+
+AirPlay
+
+[Visit Apple's AirPlay documentation](https://support.apple.com/en-us/HT204289)
+
+1. Open the Owncast stream you want to watch on your iPhone or Mac computer.
+1. Play the Owncast stream.
+1. Press the _AirPlay_ button.
+1. Select your Roku.
 
 ### LG TVs (WebOS)
 
