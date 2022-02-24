@@ -10,7 +10,7 @@ weight: 200
 toc: true
 ---
 
-Owncast people to follow, engage with your server, and share your stream with others on what is known as the Fediverse, a decentralized network of services.
+Owncast allows people to follow, engage with your server, and share your stream with others on what is known as the Fediverse, a decentralized network of services.
 
 {{<versionsupport feature="Social functionality" version="0.0.11">}}
 
