@@ -69,7 +69,7 @@ If failed, do this:
 8. Click "Close"
 9. Copy & save "Access Key"
 
-## Configure OwnCast
+## Configure Owncast
 
 Navigate to the "Storage" tab.
 
