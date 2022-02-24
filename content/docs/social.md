@@ -1,7 +1,7 @@
 ---
 title: "Social features"
-description: "xxx"
-tags: ["social","fediverse","mastodon","pleroma","follow","like","share"]
+description: "Allow people to follow your server, know when you go live, share and interact with your stream."
+tags: ["social","fediverse","mastodon","pleroma","follow","like","share","followers"]
 image: "/docs/img/fediverse.svg"
 menu:
   docs:

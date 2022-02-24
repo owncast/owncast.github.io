@@ -1,6 +1,6 @@
 ---
 title: Chat moderation
-description: Remove messages and users from your chat
+description: Add moderators, remove messages and users from your chat.
 menu:
   docs:
     parent: "guides"
@@ -22,7 +22,7 @@ By default there are no moderators, so at the very least you might want to make 
 Moderators will be notified when they become one, and have a moderator icon next to their name in chat
 that everyone can see.
 
-{{<versionsupport feature="Moderators" version="0.0.11">}}
+{{<versionsupport feature="Moderation" version="0.0.11">}}
 
 
 ## How to moderate
