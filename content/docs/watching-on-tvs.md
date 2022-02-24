@@ -39,6 +39,7 @@ AirPlay
 1. Play the Owncast stream.
 1. Press the _AirPlay_ button.
 1. Select your AppleTV.
+
 ### Amazon Fire TV
 
 ### Google TV
