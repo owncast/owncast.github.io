@@ -33,6 +33,8 @@ You can use any method you like to add SSL support but there are some popular op
 
 Owncast usually assigns a random display name when new users are joining the chat. Upstream reverse proxies can influence this behavior by setting a `X-Forwarded-User` HTTP header. This header will be used instead of a random name to derive a user's display name. A user will still be able to change it's own display name to any desired value.
 
+{{<versionsupport feature="Inherit display name from reverse proxy" version="0.0.11">}}
+
 ## Suggested
 
 If you have no requirement to use other options else it is suggested you install [Caddy](caddy/) as it can be installed quickly and easily.
