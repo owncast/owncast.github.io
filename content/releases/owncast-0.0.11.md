@@ -7,19 +7,23 @@ description: "Owncast v0.0.11 adds Fediverse social features and moderators."
 
 ## Welcome to The Fediverse!
 
-With Owncast v0.0.11 your server can optionally become a part of the [Fediverse](https://en.wikipedia.org/wiki/Fediverse), an interconnected, but completely independent network of servers where people can discover your stream and get notified of when you go live. Some popular Fediverse services are [Mastodon](https://joinmastodon.org/) and [Pleroma](https://pleroma.social/) but many services that make up the Fediverse can start to receive posts from your Owncast server.
+With Owncast v0.0.11 your server can optionally become a part of the [Fediverse](https://en.wikipedia.org/wiki/Fediverse), an interconnected, but completely independent network of servers where people can discover your stream. Some popular Fediverse services are [Mastodon](https://joinmastodon.org/) and [Pleroma](https://pleroma.social/) but many services that make up the Fediverse can start to receive posts from your Owncast server.
 
 With this ability, it gives you something pretty cool: the ability for people to follow your server and share it with their own followers. Your followers now show in a new "Followers" tab in the interface, and as people interact with your server by following, sharing and liking, it will show up in the chat so your biggest supporters get highlighted.
 
 You'll automatically let your followers know each time you go live, and you can send them messages from the admin letting them know about your future streaming plans.
 
-This functionality, of course, is disabled by default, as Owncast always wants you to be completely private out of the box. It's up to you to enable this in the admin under the new "Social" config section. But if you'd prefer, you can turn on social "Private Mode" where you have to manually approve each follower that wants to know about your streams, and in that case they will be unable to share your server with others.
+This functionality, of course, is disabled by default, as Owncast always wants you to be completely private out of the box. It's up to you to enable this in the admin under the new "Social" config section. If you'd like to turn this on, but still only allow specific people be involved, you can turn on social "Private Mode" where you have to manually approve each follower that wants to know about your streams, and in that case they will be unable to share your server with others.
 
 We look forward to continued features being built now that federation with Owncast is enabled.
 
 A **huge** thank you to [NLnet](https://nlnet.nl/project/Owncast/) for funding the development of Owncast Federation through the [NGI0 Discovery Fund](https://nlnet.nl/discovery).
 
-Note: The Fediverse is the wild west, and while people have been running with this functionality for some time in testing, we don't know what you'll run into. Please let us know if you discover any issues or any services that are not being compatible with Owncast or causing problems with your server.
+If you'd like to hear a discussion around the thoughts behind these new features, [check out our conversation on the topic](https://www.youtube.com/watch?v=aeVvS0E-z3g).
+
+**Note**: The Fediverse is the wild west, and while people have been running with this functionality for some time in testing, we don't know what you'll run into. Please let us know if you discover any issues or any services that are not being compatible with Owncast or causing problems with your server.
+
+We hope to allow further interoperability with more ActivityPub services in the future.
 
 ## Moderators
 
