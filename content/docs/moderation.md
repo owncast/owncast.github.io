@@ -1,6 +1,6 @@
 ---
 title: Chat moderation
-description: Remove messages and users from your site's chat
+description: Add moderators, remove messages and users from your chat.
 menu:
   docs:
     parent: "guides"
@@ -8,9 +8,34 @@ weight: 300
 toc: true
 ---
 
-Using the Owncast Admin you can remove individual messages or entire users from your chat.
+Using either the Owncast admin, or inline moderation controls within your chat, you can remove individual messages or entire users.
 
-## Removing chat messages
+## Chat Moderators
+
+Moderators have no access to the admin, and exist to help you keep your chat in order.
+
+In your admin Visit `Chat & Users` > `Users` to find the user you want to grant Moderator privileges.
+Bring up their details and you can add them as a moderator.
+
+By default there are no moderators, so at the very least you might want to make yourself one.
+
+Moderators will be notified when they become one, and have a moderator icon next to their name in chat
+that everyone can see.
+
+{{<versionsupport feature="Moderation" version="0.0.11">}}
+
+
+## How to moderate
+
+Once you become a moderator you can hover over a chat message and open a menu where you can remove a single message,
+or ban the user from the chat completely.
+
+Using the "More info" action you can get a short overview of the user such as when they first joined. This information
+is useful when trolls are trying to impersonate somebody.
+
+<img src="/images/moderator-menu.png"/>
+
+## Removing chat messages using the Admin
 
 Visit `Chat & Users` > `Messages` in your admin to perform chat message moderation tasks.
 
@@ -28,7 +53,7 @@ You can toggle the visibility of a single message in your chat by clicking the v
 
 Alternately, you can select, via checkboxes, the messages you want to change all at once, and then press the _"show"_ or _"hide"_ buttons.
 
-## Banning users from your chat
+## Banning users from your chat using the Admin
 
 Visit `Chat & Users` > `Users` in your admin to perform user moderation tasks.
 
