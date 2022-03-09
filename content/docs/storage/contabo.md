@@ -26,12 +26,12 @@ After that it should look like this:
 Navigate to the "S3 Storage" page.
 
 - **Endpoint:**<br>See **Bucket URL** column without path!<br>(e.g. `https://eu2.contabostorage.com`)
-- **Access Key** and **Secret Key:**<br>Take from *Account > Security & Access > S3 Object Storage Credentials* (https://new.contabo.com/account/security)
+- **Access Key** and **Secret Key:**<br>Take from _Account > Security & Access > S3 Object Storage Credentials_ (https://new.contabo.com/account/security)
 - **Bucket:** Your Bucket name (e.g. `owncast-demo`)
 - **Region:** Endpoint subdomain (e.g. `eu2`)
 - **Serving Endpoint:**<br>
-Click again on the share button of your bucket and take the public URL.<br>
-(e.g. `https://eu2.contabostorage.com/de0eb80beb7f432590520366121b0ef0:owncast-demo`)
+  Click again on the share button of your bucket and take the public URL.<br>
+  (e.g. `https://eu2.contabostorage.com/de0eb80beb7f432590520366121b0ef0:owncast-demo`)
 - **Force path-style**: Needs to be enabled!
 
 ## Create an expiration policy
@@ -43,27 +43,28 @@ Here we use [S3cmd](https://github.com/s3tools/s3cmd).<br>
 Make sure you have Python and pip installed!
 
 ### Setup S3cmd
+
 - Install S3cmd: `pip install s3cmd`
-- Start configuration: `s3cmd --configure` 
+- Start configuration: `s3cmd --configure`
 - Enter **Access Key** and **Secret Key**
 - **Region:** Leave empty (just hit enter)
 - **S3 Endpoint:** Use only the domain without path and protocol!<br>(e.g. `eu2.contabostorage.com`)
 - **DNS-style:** Same as S3 endpoint only with `/%(bucket)` at the end<br>(e.g. `eu2.contabostorage.com/%(bucket)`)
 
 ### Set Lifecycle
+
 - Create a file called `lifecycle_policy.xml` with the following contents:
-{{< highlight xml >}}
-<LifecycleConfiguration>
-    <Rule>
-        <ID>delete-all-objects</ID>
-        <Prefix></Prefix>
-        <Status>Enabled</Status>
-        <Expiration>
-            <Days>1</Days>
-        </Expiration>
-    </Rule>
-</LifecycleConfiguration>
-{{< / highlight >}}
+  {{< highlight xml >}}
+  <LifecycleConfiguration>
+  <Rule>
+  <ID>delete-all-objects</ID>
+  <Prefix></Prefix>
+  <Status>Enabled</Status>
+  <Expiration>
+  <Days>1</Days>
+  </Expiration>
+  </Rule>
+  </LifecycleConfiguration>
+  {{< / highlight >}}
 - Run `s3cmd setlifecycle lifecycle_policy.xml s3://YOURBUCKETNAME`
 - Run `s3cmd info s3://YOURBUCKETNAME` and you should see `Expiration Rule: all objects in this bucket will expire in '1' day(s) after creation`. If so, you are now ready!
-
