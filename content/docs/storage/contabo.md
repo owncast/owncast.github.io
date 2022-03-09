@@ -25,11 +25,11 @@ After that it should look like this:
 
 Navigate to the "S3 Storage" page.
 
-- **Endpoint:**<br>See **Bucket URL** column without path!<br>(e.g. `https://eu2.contabostorage.com`)
-- **Access Key** and **Secret Key:**<br>Take from _Account > Security & Access > S3 Object Storage Credentials_ (https://new.contabo.com/account/security)
+- **Endpoint**:<br>See **Bucket URL** column without path!<br>(e.g. `https://eu2.contabostorage.com`)
+- **Access Key** and **Secret Key**:<br>Take from _Account > Security & Access > S3 Object Storage Credentials_ (https://new.contabo.com/account/security)
 - **Bucket:** Your Bucket name (e.g. `owncast-demo`)
 - **Region:** Endpoint subdomain (e.g. `eu2`)
-- **Serving Endpoint:**<br>
+- **Serving Endpoint**:<br>
   Click again on the share button of your bucket and take the public URL.<br>
   (e.g. `https://eu2.contabostorage.com/de0eb80beb7f432590520366121b0ef0:owncast-demo`)
 - **Force path-style**: Needs to be enabled!
