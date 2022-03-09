@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.6 (2022-03-09)
+
+
+### Features
+
+* add real content to homepage ([dd63f34](https://github.com/owncast/owncast.github.io/commit/dd63f346eb5e6dade640e443af616d1d776da2f7))
+* Remove Bots from the Contributors list ([e997378](https://github.com/owncast/owncast.github.io/commit/e997378326c3b8cec5f923352a355af871566b53))
+
+
+### Bug Fixes
+
+* code formatting ([35cc543](https://github.com/owncast/owncast.github.io/commit/35cc543216a56ff8a988baa90b6e90da0bd4de0a))
+* move the admin off the index page. now in the blog post and in quickstart. ([6678e3d](https://github.com/owncast/owncast.github.io/commit/6678e3d1b3d32929166cd87605d0ebddbbaba77a))
+* Remove suggestions of streaming illegal content ([ec237fe](https://github.com/owncast/owncast.github.io/commit/ec237fe7ffcc171b1d5fbfc2e7921b8ca065a69e))
+* use the normal highlighter for one code section ([321ac2e](https://github.com/owncast/owncast.github.io/commit/321ac2e9467d9a9afff60e5ec95eea489e1a2fb7))
+
 ### [0.1.5](https://github.com/h-enk/doks/compare/v0.1.4...v0.1.5) (2021-01-12)
 
 
