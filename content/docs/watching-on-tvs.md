@@ -11,6 +11,8 @@ different devices. On this page we'll try to share some.
 
 ## Watching on your Television
 
+Any application that supports HLS video will play back an Owncast stream. Install any video playback application for your platform of choice, and put in the URL `https://owncast.server/hls/stream.m3u8` to access the stream directly.
+
 ### Chromecast
 
 [Visit the official Chromecast documentation](https://support.google.com/chromecast/answer/3228332).
