@@ -89,7 +89,7 @@ Of course this relies on people keeping their identity between visits to your ch
 
 ### Changed
 
-* Replace redirect of /embed URLs to random html files and instead return content directly [#1281](https://github.com/owncast/owncast/issues/1281) 
+* Replace redirect of /embed URLs to html files and instead return content directly [#1281](https://github.com/owncast/owncast/issues/1281) 
 
 * refactor: move from io/ioutil to io and os packages [#1546](https://github.com/owncast/owncast/pull/1546) 
 
