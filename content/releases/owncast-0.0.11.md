@@ -2,7 +2,6 @@
 title: Owncast v0.0.11
 date: 2022-02-05
 description: "Owncast v0.0.11 adds Fediverse social features and moderators."
-
 ---
 
 ## Welcome to The Fediverse!
@@ -41,89 +40,85 @@ Of course this relies on people keeping their identity between visits to your ch
 1. Re-run the installer as the user you run Owncast under. For example if you are running owncast as the user "owncast": `su -c "curl https://owncast.online/install.sh |bash" owncast`
 1. Restart the service. If you're running under systemd `systemctl start owncast`.
 
-
-
 # Changelog
 
 ## [[0.0.11](https://github.com/owncast/owncast/milestone/14)] - 2022-03-05
 
-
 # Major updates
-
 
 ### Added
 
-* Promote chat participants to moderators [#499](https://github.com/owncast/owncast/issues/499) 
+- Promote chat participants to moderators [#499](https://github.com/owncast/owncast/issues/499)
 
-* Additional target framerates [#1138](https://github.com/owncast/owncast/issues/1138) 
+- Additional target framerates [#1138](https://github.com/owncast/owncast/issues/1138)
 
-* Support path-based S3 storage [#1495](https://github.com/owncast/owncast/issues/1495) 
+- Support path-based S3 storage [#1495](https://github.com/owncast/owncast/issues/1495)
 
-* Inline UI to allow people to perform moderation actions within chat [#1291](https://github.com/owncast/owncast/issues/1291) 
+- Inline UI to allow people to perform moderation actions within chat [#1291](https://github.com/owncast/owncast/issues/1291)
 
-* Add a recommendation in the admin to add a second, lower quality if only one is set [#1491](https://github.com/owncast/owncast/issues/1491) 
+- Add a recommendation in the admin to add a second, lower quality if only one is set [#1491](https://github.com/owncast/owncast/issues/1491)
 
-* Add support for checking the local filesystem for static resources [#1507](https://github.com/owncast/owncast/issues/1507) 
+- Add support for checking the local filesystem for static resources [#1507](https://github.com/owncast/owncast/issues/1507)
 
-* Add list of moderators in user admin [#1511](https://github.com/owncast/owncast/issues/1511) 
+- Add list of moderators in user admin [#1511](https://github.com/owncast/owncast/issues/1511)
 
-* New admin section for managing ActivityPub settings. [#1210](https://github.com/owncast/owncast/issues/1210) 
+- New admin section for managing ActivityPub settings. [#1210](https://github.com/owncast/owncast/issues/1210)
 
-* Set a short cache expiration on some APIs [#1530](https://github.com/owncast/owncast/issues/1530) 
+- Set a short cache expiration on some APIs [#1530](https://github.com/owncast/owncast/issues/1530)
 
-* Add Matrix chat client(s) user agent to our bot list [#1581](https://github.com/owncast/owncast/issues/1581) 
+- Add Matrix chat client(s) user agent to our bot list [#1581](https://github.com/owncast/owncast/issues/1581)
 
-* Return user scopes as a part of the chat history API [#1586](https://github.com/owncast/owncast/issues/1586) 
+- Return user scopes as a part of the chat history API [#1586](https://github.com/owncast/owncast/issues/1586)
 
-* Add admin support for manually composing a post to fediverse followers [#1610](https://github.com/owncast/owncast/issues/1610) 
+- Add admin support for manually composing a post to fediverse followers [#1610](https://github.com/owncast/owncast/issues/1610)
 
-* Set username via optional request headers [#1365](https://github.com/owncast/owncast/issues/1365) 
+- Set username via optional request headers [#1365](https://github.com/owncast/owncast/issues/1365)
 
-* Add Rocket.Chat to our bot user-agent list [#1639](https://github.com/owncast/owncast/issues/1639) 
+- Add Rocket.Chat to our bot user-agent list [#1639](https://github.com/owncast/owncast/issues/1639)
 
-* Add user icon in header next to user name change form [#1655](https://github.com/owncast/owncast/issues/1655) 
+- Add user icon in header next to user name change form [#1655](https://github.com/owncast/owncast/issues/1655)
 
-* Add alternative configurable list of default usernames [#1497](https://github.com/owncast/owncast/issues/1497) 
+- Add alternative configurable list of default usernames [#1497](https://github.com/owncast/owncast/issues/1497)
 
-* Add steam as a Social Platform [#1501](https://github.com/owncast/owncast/issues/1501) 
+- Add steam as a Social Platform [#1501](https://github.com/owncast/owncast/issues/1501)
 
 ### Changed
 
-* Replace redirect of /embed URLs to html files and instead return content directly [#1281](https://github.com/owncast/owncast/issues/1281) 
+- Replace redirect of /embed URLs to html files and instead return content directly [#1281](https://github.com/owncast/owncast/issues/1281)
 
-* refactor: move from io/ioutil to io and os packages [#1546](https://github.com/owncast/owncast/pull/1546) 
+- refactor: move from io/ioutil to io and os packages [#1546](https://github.com/owncast/owncast/pull/1546)
 
-* Increase the number of HLS segments in a playlist to increase stability [#1552](https://github.com/owncast/owncast/issues/1552) 
+- Increase the number of HLS segments in a playlist to increase stability [#1552](https://github.com/owncast/owncast/issues/1552)
 
-* Increase the max size of the chat welcome message [#1595](https://github.com/owncast/owncast/issues/1595) 
+- Increase the max size of the chat welcome message [#1595](https://github.com/owncast/owncast/issues/1595)
 
-* Change styling for chat message links [#1551](https://github.com/owncast/owncast/issues/1551) 
+- Change styling for chat message links [#1551](https://github.com/owncast/owncast/issues/1551)
 
-* "Disable chat" setting is confusing [#1330](https://github.com/owncast/owncast/issues/1330) 
+- "Disable chat" setting is confusing [#1330](https://github.com/owncast/owncast/issues/1330)
 
-* Build outbound webhook execution queue [#1510](https://github.com/owncast/owncast/issues/1510) 
+- Build outbound webhook execution queue [#1510](https://github.com/owncast/owncast/issues/1510)
 
-* Limit "external site requested your logo" warning message [#1668](https://github.com/owncast/owncast/issues/1668) 
+- Limit "external site requested your logo" warning message [#1668](https://github.com/owncast/owncast/issues/1668)
 
 ### Fixed
 
-* Binding to ::1 fails: too many colons in address [#1398](https://github.com/owncast/owncast/issues/1398) 
+- Binding to ::1 fails: too many colons in address [#1398](https://github.com/owncast/owncast/issues/1398)
 
-* Fix possible crash on stream disconnect  [#1439](https://github.com/owncast/owncast/issues/1439) 
+- Fix possible crash on stream disconnect [#1439](https://github.com/owncast/owncast/issues/1439)
 
-* Fix hashes for standalone video/chat [#1472](https://github.com/owncast/owncast/pull/1472) 
+- Fix hashes for standalone video/chat [#1472](https://github.com/owncast/owncast/pull/1472)
 
-* Fix Windows support [#1377](https://github.com/owncast/owncast/issues/1377) 
+- Fix Windows support [#1377](https://github.com/owncast/owncast/issues/1377)
 
-* When a ban occurs not all messages by that user are visibly removed [#1350](https://github.com/owncast/owncast/issues/1350) 
+- When a ban occurs not all messages by that user are visibly removed [#1350](https://github.com/owncast/owncast/issues/1350)
 
-* OMX codec no longer showing friendly name and description in admin [#1521](https://github.com/owncast/owncast/issues/1521) 
+- OMX codec no longer showing friendly name and description in admin [#1521](https://github.com/owncast/owncast/issues/1521)
 
-* doing a ctrl+c to copy something closes the chat panel [#1201](https://github.com/owncast/owncast/issues/1201) 
+- doing a ctrl+c to copy something closes the chat panel [#1201](https://github.com/owncast/owncast/issues/1201)
 
-* Messages Sent column in admin should either center the value or make column narrower [#1580](https://github.com/owncast/owncast/issues/1580) 
+- Messages Sent column in admin should either center the value or make column narrower [#1580](https://github.com/owncast/owncast/issues/1580)
 
-* Fix where banned user cannot be added back [#1518](https://github.com/owncast/owncast/issues/1518) 
+- Fix where banned user cannot be added back [#1518](https://github.com/owncast/owncast/issues/1518)
 
 ## Thank you to our contributors!
 
