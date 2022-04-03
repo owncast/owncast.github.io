@@ -8,7 +8,7 @@ toc: true
 1. Ensure you have the gcc compiler installed for your system.
 1. Install the [Go toolchain](https://golang.org/dl/).
 1. Clone the repo. `git clone https://github.com/owncast/owncast`
-1. `go run main.go pkged.go` will run the application.
+1. `go run main.go` will run the application.
 1. Start a stream to your local instance [using your broadcasting software](/quickstart/startstreaming/).
 1. A basic test can be run by running ` ./test/ocTestStream.sh test/automated/test.mp4`.
 
