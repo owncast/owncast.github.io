@@ -21,6 +21,6 @@ If you have any general usage or support questions, you'll find responses in our
 
 > Maintainer: Gabe Kangas
 >
-> Fediverse: [@gabek@mastodon.social](https://mastodon.social/@gabek)<br />
+> Fediverse: [@gabek@fosstodon.org](https://fosstodon.org/@gabek)<br />
 >
 > Email: [gabek@real-ity.com](mailto:gabek@real-ity.com)
