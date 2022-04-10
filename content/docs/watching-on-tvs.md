@@ -88,4 +88,3 @@ Choose an application, and add `https://directory.owncast.online/api/iptv` as yo
 1. Save this playlist.
 1. It will refresh the current live streams each time you launch the SATV app.
 1. Choose the live stream you want to watch.
-
