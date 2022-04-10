@@ -9,6 +9,8 @@ tags: ["watching", "tv", "television", "chromecast", "vlc", "casting", "kodi"]
 There are numerous ways for you to watch an Owncast live stream on many
 different devices. On this page we'll try to share some.
 
+**Note:** None of the applications listed on this page are provided by, endorsed by, or supported by Owncast. You should make your own choices about what applications you choose to install. Products listed here are simply suggestions that have been tested and found to work with Owncast.
+
 ## Watching on your Television
 
 Any application that supports HLS video will play back an Owncast stream. Install any video playback application for your platform of choice, and put in the URL `https://owncast.server/hls/stream.m3u8` to access the stream directly.
@@ -76,3 +78,14 @@ Choose an application, and add `https://directory.owncast.online/api/iptv` as yo
 ### Kodi
 
 - Install the [Owncast Kodi Plugin](https://github.com/rAcHekLoS/plugin.video.owncast) by rAcHekLoS.
+
+### LG TVs (WebOS and possibly other smart TVs)
+
+1. Install **SATV** (free) from your smart TV's app store.
+1. Run it and press button to **"Add Playlist"**.
+1. Type in: `https://directory.owncast.online/api/iptv`. Make sure it's _https_.
+1. Double check you typed it in correctly.
+1. Save this playlist.
+1. It will refresh the current live streams each time you launch the SATV app.
+1. Choose the live stream you want to watch.
+
