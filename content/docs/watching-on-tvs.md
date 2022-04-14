@@ -89,6 +89,11 @@ Choose an application, and add `https://directory.owncast.online/api/iptv` as yo
 
 - Install the [Owncast Kodi Plugin](https://github.com/rAcHekLoS/plugin.video.owncast) by rAcHekLoS.
 
+### Roku
+
+- Install the [Owncast Directory App](https://channelstore.roku.com/details/7419f1032ebbfe1c7dcc6e2f3f5c8767/owncast)
+- Browse, or search for the stream name you wish to watch.
+
 ### LG TVs (WebOS and possibly other smart TVs)
 
 1. Install **SATV** (free) from your smart TV's app store.
