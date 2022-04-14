@@ -32,7 +32,7 @@ VLC for tvOS
 1. Install [VLC](https://www.videolan.org/vlc/download-appletv.html) from the tvOS App Store.
 1. Visit the "Network Stream" tab.
 1. Select the text input field.
-1. Type the server you wish to watch `https://owncast.server`
+1. Type the server you wish to watch.  For example: `https://watch.owncast.online`
 1. Select it from the list.
 
 AirPlay
@@ -46,7 +46,18 @@ AirPlay
 
 ### Amazon Fire TV
 
+1. Install [VLC for Amazon Fire TV](https://www.amazon.com/VLC-Mobile-Team-for-Fire/dp/B00U65KQMQ) from the Amazon App Store.
+1. Select "Streams" from the "Browsing" section.
+1. Type in the name of the stream you wish to watch. For example: `https://watch.owncast.online`.
+1. Select "Next".
+
+
 ### Google TV
+
+1. Install VLC from the Google Play store.
+1. Select "Streams" from the "Browsing" section.
+1. Type in the name of the stream you wish to watch. For example: `https://watch.owncast.online`.
+1. Select "Next".
 
 ### Roku
 
