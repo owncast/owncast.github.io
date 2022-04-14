@@ -32,7 +32,7 @@ VLC for tvOS
 1. Install [VLC](https://www.videolan.org/vlc/download-appletv.html) from the tvOS App Store.
 1. Visit the "Network Stream" tab.
 1. Select the text input field.
-1. Type the server you wish to watch.  For example: `https://watch.owncast.online`
+1. Type the server you wish to watch. For example: `https://watch.owncast.online`
 1. Select it from the list.
 
 AirPlay
@@ -50,7 +50,6 @@ AirPlay
 1. Select "Streams" from the "Browsing" section.
 1. Type in the name of the stream you wish to watch. For example: `https://watch.owncast.online`.
 1. Select "Next".
-
 
 ### Google TV
 
