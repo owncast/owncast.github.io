@@ -1,10 +1,20 @@
 ---
 title: "Help contribute to Owncast!"
 description: Want to help out a growing open source project? Use your skills here!
-toc: true
 ---
 
-Owncast is a growing open source project that is giving freedom, flexibility and fun to live streamers. And while we have a small team of kind, talented and thoughtful volunteers, we have gaps in our skillset that we'd love to fill so we can get even better at building tools that make a difference for people.
+Owncast is a growing open source project that is giving freedom, flexibility and fun to live streamers. 
+
+Unfortunately the project is lacking in contributors and there's gaps in skillsets that we'd love to fill so we can get even better at building tools that make a difference for people.
+
+## Current needs
+
+- Web frontend development.
+- UI Accessibility knowledge.
+- Web design.
+- Experienced Go developer to help level-up the backend.
+
+If you want to be a part of a project that a lot of people think is pretty cool, please reach out.
 
 We abide by our [Code of Conduct](/contribute/) and feel strongly about open, appreciative, and empathetic people joining us. We've been very lucky to have this so far, so maybe you can help us with your skills and passion, too!
 
@@ -13,31 +23,6 @@ As you continue to read, and you find the project interesting, I urge you to do 
 - [Join our chat](https://owncast.rocket.chat) where you can say hello and introduce yourself.
 - [Feel free to email Gabe directly](mailto:gabek@real-ity.com) if you'd like to talk one-on-one.
 - [Visit our GitHub issues](https://github.com/owncast/owncast/issues) and take a look to see if there's anything you'd like to work on. If not, feel free to file a new issue with ideas you might have. Our [Good First Issues](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22good+first+issue%22) list might be a good place to start.
-
-## Do you want to help in a way that's not writing code?
-
-Awesome.
-
-### Create Content
-
-The Owncast project would like to increase the amount of content we put into the world to encourage the democratization and demystification of live streaming.
-
-To accomplish this we want to get in touch with people who have a passion for creating content who wants to be involved.
-
-- Video creators.
-- Tutorial/example/article writers.
-- Design and illustration.
-- Other!
-
-### Expanding the Community
-
-We've done a pretty good job at building a live streaming server, but not so good at talking to people about it.
-
-Having a public presence takes investment and effort, and early on we decided that spending the effort to always stay relevant on social networks or keep a blog current is a challenge that a small group wouldn't be able to execute well. But it's time to move past that.
-
-We want to tell more people about Owncast, answer their questions, keep people up to date, and be available where the people are. But we need help to accomplish this.
-
-If you're a people person that enjoys what we're doing and wants to take part, we'd love to have you help us fill in this gap.
 
 ## Want to write some code?
 
@@ -79,6 +64,31 @@ Here's our backend stack and protocols:
 - Websockets
 - HLS video
 - ffmpeg
+## Do you want to help in a way that's not writing code?
+
+Awesome.
+
+### Create Content
+
+The Owncast project would like to increase the amount of content we put into the world to encourage the democratization and demystification of live streaming.
+
+To accomplish this we want to get in touch with people who have a passion for creating content who wants to be involved.
+
+- Video creators.
+- Tutorial/example/article writers.
+- Design and illustration.
+- Other!
+
+### Expanding the Community
+
+We've done a pretty good job at building a live streaming server, but not so good at talking to people about it.
+
+Having a public presence takes investment and effort, and early on we decided that spending the effort to always stay relevant on social networks or keep a blog current is a challenge that a small group wouldn't be able to execute well. But it's time to move past that.
+
+We want to tell more people about Owncast, answer their questions, keep people up to date, and be available where the people are. But we need help to accomplish this.
+
+If you're a people person that enjoys what we're doing and wants to take part, we'd love to have you help us fill in this gap.
+
 
 ## Can't contribute with any of the above, but still want to help?
 

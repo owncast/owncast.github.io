@@ -36,8 +36,8 @@ lqipWidth = "20x"
 footer = "Created by FOSS-loving people around the globe. Website based on <a href=\"https://getdoks.org/\">Doks</a>."
 
 # Alert
-alert = false
-alertText = "The Owncast project is offering free instances to those that could use them. <a class=\"alert-link\" href=\"/donated/\">Learn more!</a></a>"
+alert = true
+alertText = "The Owncast project is looking for contributors to help and influence the project as we grow. <a style=\"text-decoration: underline black;\" href=\"/help/\">Learn more about how you can help!</a></a>"
 
 # Edit Page
 docsRepo = "https://github.com/owncast/owncast.github.io"
