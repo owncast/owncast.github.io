@@ -24,6 +24,13 @@ As you continue to read, and you find the project interesting, I urge you to do 
 - [Feel free to email Gabe directly](mailto:gabek@real-ity.com) if you'd like to talk one-on-one.
 - [Visit our GitHub issues](https://github.com/owncast/owncast/issues) and take a look to see if there's anything you'd like to work on. If not, feel free to file a new issue with ideas you might have. Our [Good First Issues](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22good+first+issue%22) list might be a good place to start.
 
+## What do current users think of Owncast?
+
+If you're curious what the status of the project is, and what some of its
+active users think, you can hear what they have to say.
+
+<iframe src="https://inv.riverside.rocks/embed/wc3spGMq-Uo" frameBorder=0></iframe>
+
 ## Want to write some code?
 
 Whether you have an idea for a new feature, have something specific you want to work on, or you just want to jump in and be involved, we've taken pride in making Owncast as easy as possible to jump into.
