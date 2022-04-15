@@ -3,7 +3,7 @@ title: "Help contribute to Owncast!"
 description: Want to help out a growing open source project? Use your skills here!
 ---
 
-Owncast is a growing open source project that is giving freedom, flexibility and fun to live streamers. 
+Owncast is a growing open source project that is giving freedom, flexibility and fun to live streamers.
 
 Unfortunately the project is lacking in contributors and there's gaps in skillsets that we'd love to fill so we can get even better at building tools that make a difference for people.
 
@@ -64,6 +64,7 @@ Here's our backend stack and protocols:
 - Websockets
 - HLS video
 - ffmpeg
+
 ## Do you want to help in a way that's not writing code?
 
 Awesome.
@@ -88,7 +89,6 @@ Having a public presence takes investment and effort, and early on we decided th
 We want to tell more people about Owncast, answer their questions, keep people up to date, and be available where the people are. But we need help to accomplish this.
 
 If you're a people person that enjoys what we're doing and wants to take part, we'd love to have you help us fill in this gap.
-
 
 ## Can't contribute with any of the above, but still want to help?
 
