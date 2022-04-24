@@ -20,6 +20,11 @@ Using browser push notifications your viewers can choose to be notified each tim
 
 Not all browser support this feature, and browser that do may handle it differently. Brave Browser, for example, require you to choose the duration the notifications are valid. They will likely want to select "Forever" to keep the notification active.
 
+### Browser extension
+
+Another suggested way to receive browser notifications from any number of streams is by using the
+[Owncast Browser Extension by craftamap](https://github.com/craftamap/owncast-browser-extension). It's available for [Chrome](https://chrome.google.com/webstore/detail/owncast-extension/djgneammmklaajinkihpibdpaflehgio) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/owncast-extension/).
+
 ## Fediverse
 
 The Fediverse social features have built in support to notify your followers when you go live. [Visit the documentation](/docs/social/) for more information.
