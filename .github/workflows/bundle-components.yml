@@ -1,0 +1,26 @@
+name: Bundle component library + style guide into web site
+
+on:
+  repository_dispatch:
+    types: [bundle-components-library]
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Bundle Storybook
+      run: ./scripts/bundleComponentGuide.sh
+
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v5
+      with:
+        author_name: Owncast
+        author_email: owncast@owncast.online
+        message: "Update component library and style guide"
+        add: "static/components"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
