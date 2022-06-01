@@ -20,6 +20,11 @@ When creating your ["Application Keys"](https://secure.backblaze.com/app_keys.ht
 
 It has been suggested that you make sure you set your key setting of "Allow access to Bucket" to `All`.
 
+### Bucket settings
+
+The bucket must be public (`Type: Public`) else end users could not watch your stream.
+Note that in Owncast you must enter the bucket name, the endpoint (with `https://` prepended) and the region. The region is the bit in the endpoint URL after `s3.` and before `.backblazeb2.com`. For example, if my endpoint is `https://s3.eu-central-003.backblazeb2.com` then the region is `eu-central-003`.
+
 ### CORS settings
 
 While the specific origins you want to support are up to you, make sure the API for CORS support is set to either **"S3"** or **"Both"**.
