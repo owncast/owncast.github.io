@@ -52,7 +52,6 @@
 						"type": "radio",
 						"value": "installed-what-is-next"
 					}
-
 				],
 				"required": true
 			},
@@ -84,13 +83,6 @@
 						},
 						"type": "radio",
 						"value": "packagemanager"
-					},
-					{
-						"text": {
-							"en": "I want to use Site.js to setup Owncast."
-						},
-						"type": "radio",
-						"value": "sitejs"
 					}
 				],
 				"required": true
@@ -173,6 +165,13 @@
 						},
 						"type": "radio",
 						"value": "yunohost"
+					},
+					{
+						"text": {
+							"en": "I run Cloudron"
+						},
+						"type": "radio",
+						"value": "cloudron"
 					},
 					{
 						"text": {

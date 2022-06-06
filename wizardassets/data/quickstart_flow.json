@@ -210,6 +210,19 @@
 							{
 								"name": "_decision",
 								"test": "string",
+								"if": "cloudron",
+								"is_open": false,
+								"id": 28,
+								"children": [
+									{
+										"name": "https://docs.cloudron.io/apps/owncast/",
+										"id": 29
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
 								"if": "qnap",
 								"is_open": false,
 								"id": 30,
