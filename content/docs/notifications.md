@@ -14,6 +14,8 @@ This is not an endorsement of any particular service, but it may help some strea
 
 If you'd like to expand on this and send automated notifications to other destinations, create a custom [webhook](/thirdparty/webhooks/).
 
+{{<versionsupport feature="External notification" version="0.0.12">}}
+
 ## Browser notifications
 
 Using browser push notifications your viewers can choose to be notified each time you go live.
@@ -56,4 +58,3 @@ These steps should help you, but you may need to contact Twitter directly if you
 10. Generate bearer token.
 
 After you've gone through all the Twitter setup, paste the API key, API secret, access token, access token secret, and the bearer token into the Owncast configuration.
-
