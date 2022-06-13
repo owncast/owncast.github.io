@@ -11,6 +11,8 @@ toc: true
 
 This document aims to outline what is being done to your content and the different knobs you can tweak to get the best output for your instance.
 
+To see how your specific stream is performing, visit the [Stream Health](/docs/metrics) page in the admin.
+
 {{< alert icon="💡" text="Keep in mind it's hard to give specific settings that will give you the best quality and performance with Owncast because people have different servers and requirements." >}}
 
 ## Overview
@@ -68,6 +70,12 @@ The more CPU you use the better the output image will be, or the smaller of a fi
 You have some control over the live latency between the broadcaster and the viewer. While it's completely understandable to want to have as little latency as possible you may need to increase the latency buffer if you're experiencing issues. In general the lower the latency the less buffer is available for any possible slow transfers, network blips or errors.
 
 {{< alert icon="💡" text="If you require real-time, video conferencing style latency you may want to look for a different solution that doesn't use HLS video, as this scaling and distribution model will never get to sub-second levels." >}}
+
+### Player Lower Latency Mode
+
+For some browsers, a "Lower latency" option is available in the web player. This should be seen as an experimental feature that will improve over time. If you turn it on and experience a negative playback experience with increased buffering you will probably want to turn it off.
+
+{{<versionsupport feature="Experimental player lower latency mode" version="0.0.12">}}
 
 ### Video Passthrough
 

@@ -31,14 +31,14 @@ You can point your Prometheus config at your Owncast instance with the endpoint 
 
 For example:
 
-```
-  - job_name: owncast
-    scrape_interval: 1m
-    metrics_path: /api/admin/prometheus
-    scheme: https
-    basic_auth:
-      username: admin
-      password: my_stream_key
-    static_configs:
-      - targets: ["my.owncast.server"]
+```yaml
+- job_name: owncast
+  scrape_interval: 1m
+  metrics_path: /api/admin/prometheus
+  scheme: https
+  basic_auth:
+    username: admin
+    password: my_stream_key
+  static_configs:
+    - targets: ["my.owncast.server"]
 ```
