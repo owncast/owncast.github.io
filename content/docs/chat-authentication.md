@@ -5,11 +5,11 @@ menu:
   docs:
     parent: "guides"
 weight: 200
-tags: [chat, fediverse, indieauth]
+tags: [chat, fediverse, indieauth, authentication, login, accounts]
 ---
 
 There is no requirement to authenticate when using Owncast chat. However, some prefer
-to authenticate themselves to verify their identity to others, and to support using the same chat
+to authenticate themselves to verify their identity to others, and to continue using the same chat
 identity across multiple devices and browsers. This is especially helpful for those with [moderator](/docs/moderation/)
 privileges.
 
@@ -34,4 +34,3 @@ This is done by sending a direct message to your account. If you do not receive 
 direct messages.
 
 These codes expire, so you will need to request a new one if necessary.
-
