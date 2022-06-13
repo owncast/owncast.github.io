@@ -17,5 +17,6 @@ Want your project shared here? Please let us know about it!
         {{< bloglink title="Mastodon Announce Bot" description="Announce to the Fediverse via your Mastodon account each time you go live." tags="bot" link="https://glitch.com/edit/#!/owncast-mastodon-announce">}}
         {{< bloglink title="wowncast" description="Subscribe to and open your favorite Owncast streamers from the terminal." tags="terminal,viewing" link="https://codeberg.org/yarmo/wowncast">}}
         {{< bloglink title="Social stream" description="Consolidate your live social messaging streams Supports Owncast chat." tags="terminal,viewing" link="https://github.com/steveseguin/social_stream">}}
+        {{< bloglink title="Chat Bot" description="A chat bot with a ton of features and fun interactions for viewers." tags="extension,chat,overlay" link="https://framagit.org/owncast-things/owncast-chatbot">}}
     </section>
 </div>
