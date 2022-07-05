@@ -185,7 +185,7 @@ This update will impact most users, so as time goes on I'll make sure to update 
 ## Thank you to our contributors!
 
 The contributors for v0.0.12 were:
-[lfuelling](https://github.com/lfuelling), [tsmethurst](https://github.com/tsmethurst), [cr0ax](https://github.com/cr0ax), [hufman](https://github.com/hufman), [t1enne](https://github.com/t1enne), [gabek](https://github.com/gabek), [zerodytrash](https://github.com/zerodytrash) and [funkyhippo](https://github.com/funkyhippo).
+[funkyhippo](https://github.com/funkyhippo), [tsmethurst](https://github.com/tsmethurst), [MFTabriz](https://github.com/MFTabriz), [t1enne](https://github.com/t1enne), [cr0ax](https://github.com/cr0ax), [hufman](https://github.com/hufman), [zerodytrash](https://github.com/zerodytrash), [lfuelling](https://github.com/lfuelling) and [gabek](https://github.com/gabek).
 We also thank all of the fantastic people helping out in the [Owncast chat](https://owncast.rocket.chat) answering questions, testing and providing feedback.
 
 ## Thank you to our [financial supporters](https://opencollective.com/owncast)!
