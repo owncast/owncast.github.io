@@ -40,6 +40,10 @@ There are two different ways you can authenticate with Owncast chat, allowing yo
 
 [IndieAuth](https://indieauth.net/) is a decentralized identity protocol that allows an individual's web site to become its own identity provider. Owncast itself, is now an IndieAuth provider you can use to authenticate against Owncast instances, or any other site that supports IndieAuth.
 
+The clear use case is using your Owncast instance to authenticate with chat on other Owncast instances. Alternatively you can test this functionality by logging into [The IndieWeb Wiki](https://indieweb.org/), [Telegraph](https://telegraph.p3k.io/), or [This IndieAuth test page](https://pin13.net/login/). Simply put in the URL of v0.0.12+ Owncast server when logging in.
+
+Keep in mind this is just for Owncast instance admins, and you use the same username/password as you do when logging into the Owncast Admin.
+
 ### Fediverse Auth
 
 For Owncast instances with Fediverse functionality enabled you can be sent a one-time-password that works similarly to when you log in with your phone number on different services. You can use this code to authenticate with Owncast chat. You must allow direct/private messages on your Fediverse account from the Owncast instance.
