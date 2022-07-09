@@ -24,7 +24,6 @@ that everyone can see.
 
 {{<versionsupport feature="Moderation" version="0.0.11">}}
 
-
 ## How to moderate
 
 Once you become a moderator you can hover over a chat message and open a menu where you can remove a single message,
@@ -75,8 +74,8 @@ When banning a user Owncast will automatically block their known IP address. Whi
 like anything else, it is possible to evade.
 
 - Owncast uses the IP address as provided in the `x-forwarded-for` header if it's provided, meaning it may be possible
-for somebody to override this value with a fake address. If you're concerned about this, make sure your reverse proxy
-is configured to explicitly set the correct header value.
+  for somebody to override this value with a fake address. If you're concerned about this, make sure your reverse proxy
+  is configured to explicitly set the correct header value.
 - VPNs are a thing. By using a VPN it's trivial to evade the IP address ban.
 
 This is all to say: This feature will help keep abuse down, but in no way does it garuntee that it will keep the
