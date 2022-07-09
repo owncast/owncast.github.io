@@ -5,7 +5,7 @@ menu:
   docs:
     parent: "guides"
 weight: 300
-toc: true
+tags: [moderation, chat, bans, block, "ip address"]
 ---
 
 Using either the Owncast admin, or inline moderation controls within your chat, you can remove individual messages or entire users.
@@ -68,3 +68,20 @@ You can un-ban a previously banned user, but note that it will not restore these
 Alternatively, you can click on the user display name and bring up the user info modal and ban them from there.
 
 {{< img src="/docs/img/user-moderation-ban-user-modal.png" align="center">}}
+
+## IP Address Blocking
+
+When banning a user Owncast will automatically block their known IP address. While this can deter most trolls,
+like anything else, it is possible to evade.
+
+- Owncast uses the IP address as provided in the `x-forwarded-for` header if it's provided, meaning it may be possible
+for somebody to override this value with a fake address. If you're concerned about this, make sure your reverse proxy
+is configured to explicitly set the correct header value.
+- VPNs are a thing. By using a VPN it's trivial to evade the IP address ban.
+
+This is all to say: This feature will help keep abuse down, but in no way does it garuntee that it will keep the
+worst of the worst away. Moderation is still the responsibility of each individual stream.
+
+A list of blocked IPs can be viewed in the Admin Chat Users interface and can be un-banned via the same interface.
+
+{{<versionsupport feature="IP address bans" version="0.0.12">}}
