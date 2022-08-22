@@ -8,7 +8,7 @@ weight: 200
 toc: true
 ---
 
-{{< alert icon="💡" text="Embedding Owncast into an existing page who is using HTTPS will require your Owncast server to also be secured with SSL." >}}
+{{< alert icon="💡" text="Embedding Owncast into an existing page which is using HTTPS will require your Owncast server to also be secured with SSL/TLS." >}}
 
 ## Embedding video
 
@@ -39,7 +39,7 @@ It will look something like:
 
 As long as the player supports it, it is recommended to open the homepage of your Owncast instance directly.
 The player will automatically find the correct playlist and will start playing.
-This will guarantee forward compability if the way how Owncast publishes HLS is ever changed.
+This will guarantee forward compatibility if the way how Owncast publishes HLS is ever changed.
 
 However, if you _really_ need the HLS feed (i.e. for sharing your stream to OpenSlides), you can access the HLS feed directly via this URL: `http://your.host/hls/stream.m3u8`.
 
@@ -70,7 +70,7 @@ One common use of read-only chat is adding the chat messages to your broadcastin
 1. Click the `+` or right mouse click to add a new source. Choose `Browser` from the list.
 1. For a new source, you will need to add the name. Type in "_Chat_".
 1. In the Browser Source settings, you will need to change the URL to your Owncast instance's `/embed/chat/readonly` url.
-1. You can use the _Custom CSS_ to tweak how the browser shows in your video. The following example will add some space around the box, give it a semi-transparent dark background; and increase the overall font size to a base unit of 24px. You may change any of these settings to fit your presentation layout. Note that the overall message text color is white.
+1. You can use the _Custom CSS_ to tweak how the browser shows your video. The following example will add some space around the box, give it a semi-transparent dark background; and increase the overall font size to a base unit of 24px. You may change any of these settings to fit your presentation layout. Note that the overall message text color is white.
    {{< highlight css >}}
    html {
    margin: 0px;
@@ -86,4 +86,4 @@ One common use of read-only chat is adding the chat messages to your broadcastin
 
 ## SSL Requirements
 
-Embedding Owncast content that is not served via HTTPS will be [blocked by browsers](https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content/How_to_fix_website_with_mixed_content) if you embed it within a page that is using SSL. [Learn how you can use a SSL Proxy](/docs/sslproxies) to fulfill this browser requirement as well as secure your Owncast site.
+Embedded Owncast content that is not served via HTTPS within a page that is using SSL/TLS gets [blocked by browsers](https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content/How_to_fix_website_with_mixed_content). [Learn how you can use a SSL Proxy](/docs/sslproxies) to fulfil this browser requirement and secure your Owncast site.
