@@ -70,7 +70,7 @@ One common use of read-only chat is adding the chat messages to your broadcastin
 1. Click the `+` or right mouse click to add a new source. Choose `Browser` from the list.
 1. For a new source, you will need to add the name. Type in "_Chat_".
 1. In the Browser Source settings, you will need to change the URL to your Owncast instance's `/embed/chat/readonly` url.
-1. You can use the _Custom CSS_ to tweak how the browser shows your video. The following example will add some space around the box, giving it a semi-transparent dark background; and increase the overall font size to a base unit of 24px. You may change any of these settings to fit your presentation layout. Note that the overall message text color is white.
+1. You can use the _Custom CSS_ to tweak how the browser shows your video. The following example will add some space around the box, give it a semi-transparent dark background; and increase the overall font size to a base unit of 24px. You may change any of these settings to fit your presentation layout. Note that the overall message text color is white.
    {{< highlight css >}}
    html {
    margin: 0px;
