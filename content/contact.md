@@ -25,6 +25,6 @@ The project is always looking for people to help build, support and keep Owncast
 
 > Maintainer: Gabe Kangas
 >
-> Fediverse: [@gabek@fosstodon.org](https://social.gabekangas.com/gabek)<br />
+> Fediverse: [@gabek@social.gabekangas.com](https://social.gabekangas.com/gabek)<br />
 >
 > Email: [gabek@real-ity.com](mailto:gabek@real-ity.com)
