@@ -45,13 +45,13 @@ Our web stack is nothing super crazy. And anybody who's interested in, or famill
 
 Some of our frontend stack:
 
+- React
 - Javascript
 - Websockets
-- React (and Preact!)
 - Ant Design components
-- ESM native modules
 - VideoJS
 - Next.js
+- [Storybook](https://owncast.online/components)
 
 Take a look at our current list of [web frontend](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3A%22Web+frontend%22) and [web admin](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3Aadmin) items currently filed to get a taste of what's currently going on.
 
