@@ -1,7 +1,7 @@
 ---
 title: "Participate in Hacktoberfest with Owncast"
 description: Contribute to Owncast during October and get a Hacktoberfest and Owncast t-shirt!
-tags: [hacktoberfest, open-source, contribute, tshirt, t-shirt]
+tags: [hacktoberfest, open-source, contribute, contributing, tshirt, t-shirt]
 images: ["../images/hacktoberfest.jpg"]
 ---
 
@@ -61,11 +61,11 @@ Contributing to Open Source isn’t just for technical folks who want to write c
 
 The Owncast project is always looking for ways to get in front of more people and share the project with the world. If you're interested in helping with that, here are some ideas:
 
-- Discuss Owncast on your Podcast, YouTube channel, Twitch stream, or blog.
+- Discuss Owncast on your Podcast, YouTube channel, PeerTube account, Twitch stream, or blog.
 - Create a screencast or video showing Owncast in action.
 - Taking part in talks or presentations that feature Owncast.
 - Invite somebody from Owncast to discuss the project somewhere.
-- Social media blogs, posts, and general advocacy.
+- Social media posts and general advocacy.
 
 ## Usage Contributions
 
@@ -78,6 +78,7 @@ If you've been thinking about trying Owncast for the first time but haven't foun
 - Visit the Owncast [Good first Issues](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) list to see what has been designated as a good place to start.
 - [Install your own instance](/quickstart) of Owncast in about a minute.
 - [Join our chat](https://owncast.rocket.chat) and introduce yourself.
+- [Read how to get started](/development) working on the Owncast codebase if you're interested in contributing code.
 
 See you soon!
 
