@@ -78,6 +78,7 @@ Source:
           'href',
           'title',
           'description',
+          'tags',
         ],
     },
   });
