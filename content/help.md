@@ -11,7 +11,7 @@ Unfortunately the project is lacking in contributors and there's gaps in skillse
 
 - Web frontend development.
 - UI Accessibility knowledge.
-- Web design.
+- Web UI/UX and layout.
 - Experienced Go developer to help level-up the backend.
 
 If you want to be a part of a project that a lot of people think is pretty cool, please reach out.
@@ -22,6 +22,7 @@ As you continue to read, and you find the project interesting, I urge you to do 
 
 - [Join our chat](https://owncast.rocket.chat) where you can say hello and introduce yourself.
 - [Feel free to email Gabe directly](mailto:gabek@real-ity.com) if you'd like to talk one-on-one.
+- [Learn about how to get a development environment running](/development) if you'd like to write code.
 - [Visit our GitHub issues](https://github.com/owncast/owncast/issues) and take a look to see if there's anything you'd like to work on. If not, feel free to file a new issue with ideas you might have. Our [Good First Issues](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22good+first+issue%22) list might be a good place to start.
 
 ## What do current users think of Owncast?
@@ -36,6 +37,12 @@ active users think, you can hear what they have to say.
 Whether you have an idea for a new feature, have something specific you want to work on, or you just want to jump in and be involved, we've taken pride in making Owncast as easy as possible to jump into.
 
 We've kept our dependencies to a minimum so you can get our source code up and running quickly. We know the feeling of being unable to get your development environment working, so we don't want that for people who want to work on Owncast.
+
+### Web UI/UX
+
+There's a stereotype that developers make ugly and difficult to use things. Unfortunately there's often truth to that. Owncast needs a dedicated individual that can help us create something that people want to use. The user experience of things like the video player, chat, modals, admin, and all the little pieces and parts that make up this single page are important to do right, and we're currently lacking in having anybody with the skillset to help.
+
+If you're an opinionated person about layout, color, user experience, iconography and all that makes the web a beautiful and useful place, please reach out.
 
 ### Frontend and UI
 
@@ -53,7 +60,7 @@ Some of our frontend stack:
 - Next.js
 - [Storybook](https://owncast.online/components)
 
-Take a look at our current list of [web frontend](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3A%22Web+frontend%22) and [web admin](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3Aadmin) items currently filed to get a taste of what's currently going on.
+Take a look at our current list of [web frontend](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3A%22Web+frontend%22) and [web admin](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3Aadmin) items currently filed to get a taste of what's currently going on and [learn about how to get a development environment running](/development)
 
 ### Backend and APIs
 
@@ -72,6 +79,8 @@ Here's our backend stack and protocols:
 - HLS video
 - ffmpeg
 
+[Learn about how to get a development environment running](/development) if you'd like to help work on this exciting piece of server software!
+
 ## Do you want to help in a way that's not writing code?
 
 Awesome.
@@ -84,6 +93,7 @@ To accomplish this we want to get in touch with people who have a passion for cr
 
 - Video creators.
 - Tutorial/example/article writers.
+- General advocacy.
 - Design and illustration.
 - Other!
 
