@@ -44,6 +44,10 @@ You can browse the React components in the project using our [Storybook](https:/
 
 You must have an instance of Owncast running locally to connect to. You can run one with `go run main.go` from the root of the repository. Read more details about running development Owncast under the backend section.
 
+### Learn about how to write React Components with Owncast
+
+We have a [short document](https://github.com/owncast/owncast/blob/webv2/web/components/_COMPONENT_HOW_TO.md) outlining the specifics of the hows and whys of our specific component approach.
+
 ### Use Storybook to update and create components
 
 Storybook is a tool that allows you to create and test components in isolation. It's a great way to develop new components and test them out without running a copy of the Owncast server.
