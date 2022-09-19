@@ -12,16 +12,16 @@ type: subpages
 
 Owncast supports HTTP Webhooks to notify third-party applications (such as chatbots) about events on the stream. In other words: Webhooks will send events to your code when things happen on your Owncast server.
 
-The following are a list of events you can get notified about.
+The following is a list of events you can get notified about.
 
-| eventType                               | webhook triggered when ...                                                                     |
+| Event Type                              | webhook triggers when ...                                                                      |
 |:----------------------------------------|:-----------------------------------------------------------------------------------------------|
-| [CHAT](#chat)                           | a user sends a chat message                                                                    |
-| [NAME_CHANGED](#name_changed)           | a user changes the username                                                                    |
-| [USER_JOINED](#user_joined)             | a user joins in the chat                                                                       |
+| [CHAT](#chat)                           | user sends a chat message                                                                      |
+| [NAME_CHANGED](#name_changed)           | user changes their username                                                                    |
+| [USER_JOINED](#user_joined)             | user joins the chat                                                                            |
 | [STREAM_STARTED](#stream_started)       | an incoming RTMP stream is detected                                                            |
 | [STREAM_STOPPED](#stream_stopped)       | an incoming RTMP stream disconnects (e.g. OBS stops)                                           |
-| [VISIBILITY-UPDATE](#visibility-update) | a previously sent chat-message becomes visible/invisible (set through Administrator/Moderator) |
+| [VISIBILITY-UPDATE](#visibility-update) | a previously sent chat message becomes visible/invisible (set by an Administrator/Moderator)   |
 
 
 ### How to accept webhooks
@@ -35,12 +35,12 @@ The following are a list of events you can get notified about.
 ### Your code
 
 1. In any language, on any kind of web server, create an endpoint that accepts a HTTP `POST` request.  This is where Owncast will be sending events.
-1. Each event payload will have a `type` property that states what of the above events are included, and an `eventData` object that includes all the specific properties of this event.
+1. Each event payload will have a `type` property that states which event type it is, and an `eventData` object that includes specific properties of that event.
 1. If you need a starting point see our example projects.
 
 ### High level webhooks
 
-Webhooks utilize the `HTTP POST` method to push Data to an endpoint. The request body of the webhook is plain `JSON`.
+Webhooks utilize the `HTTP POST` method to push data to an endpoint. The request body of the webhook is plain `JSON`.
 Thus the ContentType header for the request is `application/json`. Each webhook body follows a simple JSON structure.
 
 ```json
@@ -51,10 +51,12 @@ Thus the ContentType header for the request is `application/json`. Each webhook 
 ```
 
 where
-- **type** gives information about what kind of event it is (the eventType from the supported events table above) 
-- **eventData** gives more detailed information on the Event. The structure in EventData always depends on the `type`-field.
+- **type** gives information about what kind of event it is (one of the types from the table above).
+- **eventData** gives more information on the event. The structure of `eventData` is different for each `type`.
 
+Examples of what `eventData` to expect for each event type are below.
 
+## Webhook Examples
 #### CHAT
 
 ```json
@@ -180,21 +182,23 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 ```
 - `ids` is a list of IDs of messages that had their visibility changed.
 
-## clientId vs. user.id
+### clientId vs. user.id
 
-in cases where a user is connected from multiple devices (or multiple browsers) at the same time with the same username, Owncast differentiates between the sessions with the "clientId". A user (by its username) might have multiple clientIds - a single clientId represents a single connection to Owncast. The clientId is numeric only, whereas the user.id might container uppercase, lowercase and numeric characters.
+When a user is connected from multiple devices (or multiple browsers) at the same time with the same username, Owncast differentiates between their sessions with a `clientId`. Users can have multiple clientIds - a single clientId represents a single connection to Owncast.
+
+`clientId` is a number, whereas `user.id` can container uppercase, lowercase and numeric characters.
 
 ### Test webhooks on a local development environment
 
-1. Start Owncast locally (e.g. via docker)
-1. visit `localhost:8080/admin`, authenticate with Username: `admin` and the default-streaming key: `abc123`
-1. navigate to the "Integration" menu-block on the left-side, click "Webhooks" and add a Webhook
-1. Set the Webhook Address to point to your application/integration (something like: `http://localhost:8100/webhooks/incoming`)
-1. select the types of webhooks that you are interested in
-1. Save.
-1. start your integration/application listening on the previously configured address
-1.1. optionally, start an interception proxy (e.g. Burp) if you want to inspect the HTTP messages beforehand
-1. trigger events yourself (e.g. write a message to the chat, connect/disconnect your streaming software to Owncast)
+1. Start Owncast locally (e.g. via docker).
+1. Visit `localhost:8080/admin`, authenticate with Username: `admin` and the default streaming key: `abc123`.
+1. Navigate to the "Integration" menu-block on the left side, click "Webhooks", then "Create Webhook".
+1. Set the Webhook Address to point to your application/integration (something like: `http://localhost:8100/webhooks/incoming`).
+1. Select the types of events that you want to receive.
+1. Press "OK" to save the webhook.
+1. Start your integration/application listening on the previously configured address.
+   1. Optionally, start an interception proxy (e.g. Burp) if you want to inspect the HTTP messages beforehand.
+1. Trigger events yourself (e.g. write a message to the chat, connect/disconnect your streaming software to Owncast).
 
 
 ### Test webhooks before writing any code
@@ -203,4 +207,4 @@ If you want to test how webhooks work before you write any code, create a test e
 
 ### Test webhooks from a production instance of Owncast
 
-If you already have an Owncast instance running in production, listening to the world wide web, you might want to make use [ngrok](https://ngrok.com/) to tunnel HTTP requests to your local development environment
+If you already have an Owncast instance running in production, listening to the world wide web, you might want to make use [ngrok](https://ngrok.com/) to tunnel HTTP requests to your local development environment.
