@@ -66,7 +66,10 @@ where
             "displayName": "lazyDaisy",
             "displayColor": 182,
             "createdAt": "2021-08-12T07:51:37.470812684Z",
-            "previousNames": ["lazyDaisy"]
+            "previousNames": ["lazyDaisy"],
+            "nameChangedAt": "2022-09-19T12:33:59.42313245+02:00",
+            "isBot": False,
+            "authenticated": False
         },
         "clientId": 2,
         "body": "hello world \u003cimg class=\"emoji\" alt=\":beerparrot:\" title=\":beerparrot:\" src=\"/img/emoji/beerparrot.gif\"\u003e",
@@ -94,8 +97,12 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
             "displayName": "NotSoLazyDaisy",
             "displayColor": 182,
             "createdAt": "2021-08-12T07:51:37.470812684Z",
-            "previousNames": ["lazyDaisy"]
+            "previousNames": ["lazyDaisy"],
+            "nameChangedAt": "2022-09-19T12:33:59.423278816+02:00",
+            "isBot": False,
+            "authenticated": False
         },
+        "clientId": 2,
         "newName": "NotSoLazyDaisy"
     }
 }
@@ -107,7 +114,6 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 {
     "type": "USER_JOINED",
     "eventData": {
-        "type": "",
         "id": "wAgcTeM7g",
         "timestamp": "2021-08-12T08:19:28.921355401Z",
         "user": {
@@ -115,7 +121,10 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
             "displayName": "laughing-cray",
             "displayColor": 257,
             "createdAt": "2021-08-12T08:19:28.759651178Z",
-            "previousNames": ["laughing-cray"]
+            "previousNames": ["laughing-cray"],
+            "nameChangedAt": "0001-01-01T00:00:00Z",
+            "isBot": False,
+            "authenticated": False
         },
         "clientId": 2
     }
@@ -128,9 +137,11 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 {
     "type": "STREAM_STARTED",
     "eventData": {
+        "id": "WtokptnVR",
         "name": "Owncast",
         "streamTitle": "",
-        "summary": "Welcome to your new Owncast server! This description can be changed in the admin. Visit https://owncast.online/docs/configuration/ to learn more."
+        "summary": "Welcome to your new Owncast server! This description can be changed in the admin. Visit https://owncast.online/docs/configuration/ to learn more.",
+        "timestamp": "2022-09-19T12:30:26.97907142+02:00"
     }
 }
 ```
@@ -141,9 +152,11 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 {
     "type": "STREAM_STOPPED",
     "eventData": {
+        "id": "YP-aptn4g",
         "name": "Owncast",
         "streamTitle": "",
-        "summary": "Welcome to your new Owncast server! This description can be changed in the admin. Visit https://owncast.online/docs/configuration/ to learn more."
+        "summary": "Welcome to your new Owncast server! This description can be changed in the admin. Visit https://owncast.online/docs/configuration/ to learn more.",
+        "timestamp": "2022-09-19T12:40:21.205872269+02:00"
     }
 }
 ```
@@ -152,23 +165,20 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 
 ```json
 {
-    "type": "CHAT",
+    "type": "VISIBILITY-UPDATE",
     "eventData": {
-        "user": {
-            "id": "qSRQpeM7R",
-            "displayName": "NotSoLazyDaisy",
-            "displayColor": 182,
-            "createdAt": "2021-08-12T07:51:37.470812684Z",
-            "previousNames": ["lazyDaisy","NotSoLazyDaisy"],
-            "nameChangedAt": "2021-08-12T08:12:18.499263066Z"
-        },
-        "body": "hello world \u003cimg class=\"emoji\" alt=\":beerparrot:\" title=\":beerparrot:\" src=\"/img/emoji/beerparrot.gif\"\u003e",
-        "id": "cZHGheGnR",
-        "visible": false,
-        "timestamp": "2021-08-12T07:57:45.964484633Z"
+        "id": "zqGupt7VR",
+        "ids": [
+            "-Zzltt74g",
+            "rvd2ppn4g"
+        ],
+        "timestamp": "2022-09-19T12:44:28.225779601+02:00",
+        "type": "VISIBILITY-UPDATE",
+        "visible": False
     }
 }
 ```
+- `ids` is a list of IDs of messages that had their visibility changed.
 
 ## clientId vs. user.id
 
