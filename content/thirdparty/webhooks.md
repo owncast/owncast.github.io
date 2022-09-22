@@ -70,8 +70,8 @@ Examples of what `eventData` to expect for each event type are below.
             "createdAt": "2021-08-12T07:51:37.470812684Z",
             "previousNames": ["lazyDaisy"],
             "nameChangedAt": "2022-09-19T12:33:59.42313245+02:00",
-            "isBot": False,
-            "authenticated": False
+            "isBot": false,
+            "authenticated": false
         },
         "clientId": 2,
         "body": "hello world \u003cimg class=\"emoji\" alt=\":beerparrot:\" title=\":beerparrot:\" src=\"/img/emoji/beerparrot.gif\"\u003e",
@@ -101,8 +101,8 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
             "createdAt": "2021-08-12T07:51:37.470812684Z",
             "previousNames": ["lazyDaisy"],
             "nameChangedAt": "2022-09-19T12:33:59.423278816+02:00",
-            "isBot": False,
-            "authenticated": False
+            "isBot": false,
+            "authenticated": false
         },
         "clientId": 2,
         "newName": "NotSoLazyDaisy"
@@ -125,8 +125,8 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
             "createdAt": "2021-08-12T08:19:28.759651178Z",
             "previousNames": ["laughing-cray"],
             "nameChangedAt": "0001-01-01T00:00:00Z",
-            "isBot": False,
-            "authenticated": False
+            "isBot": false,
+            "authenticated": false
         },
         "clientId": 2
     }
@@ -176,7 +176,7 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
         ],
         "timestamp": "2022-09-19T12:44:28.225779601+02:00",
         "type": "VISIBILITY-UPDATE",
-        "visible": False
+        "visible": false
     }
 }
 ```
