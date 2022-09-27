@@ -29,7 +29,7 @@ Owncast is a single-user live streaming server with chat features that allows yo
 
 ## What do you receive by contributing to Owncast during Hacktoberfest?
 
-- Quality contributions[^1] to Owncast will receive an **Owncast t-shirt**.
+- Quality contributions[^1] to Owncast will receive an **Owncast t-shirt**. If you feel like you have qualified for a shirt, please [register for your t-shirt here!](https://gabekangas.typeform.com/to/Wfx9UHVZ).
 - The first 40,000 participants across all of Hacktoberfest to have 4 accepted pull/merge requests between October 1 and October 31 can elect to receive one of two prizes: **a tree planted in their name**, or the **Hacktoberfest 2022 t-shirt**.[^2]
 - You get added to the Owncast list of contributors on the [Owncast website](https://owncast.online), [GitHub repository](https://github.com/owncast/owncast) **and** the contributors thank-you video on [Owncast TV](https://watch.owncast.online).
 - You take part in a **global event**, contribute to **a cool project**, and be a part of the **open source community**.
