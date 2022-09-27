@@ -22,18 +22,16 @@ Owncast is a straightforward web application and compared to many projects is ve
 
 - The backend is written in [Go](https://go.dev/).
 - The frontend is written in [React](https://reactjs.org/).
-- It uses [SQLite](https://www.sqlite.org/index.html) for its database.
-- Websockets are used for chat.
 
 If you're interested in contributing to Owncast, here's how you can get started.
 
 ## How to start with Frontend development
 
-The web frontend of Owncast is written in React with TypeScript built using Nextjs. It's a standard React application with an easy to follow layout.
+The web frontend of Owncast is written in React with TypeScript built using [Next.js](https://nextjs.org/).
 
 You can browse the React components in the project using our [Storybook](https://owncast.online/components) page to get an idea of how the frontend is structured.
 
-1. Clone the Owncast respository with `git clone https://github.com/owncast/owncast`.
+1. Clone the Owncast repository with `git clone https://github.com/owncast/owncast`.
 1. Change to the `webv2` branch with `git checkout webv2`.
 
 ### Run the web project
@@ -76,3 +74,7 @@ Many features are only enabled when a stream is live. You can run a local stream
 ```bash
 ./test/ocTestStream.sh somevideofile.mp4
 ```
+
+## If you haven't yet, find an issue to work on
+
+Visit our [Good First Issues](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) list to find something that might be a good fit for you to start on. Otherwise, feel free to drop into our [community chat](https://owncast.rocket.chat) and say hi and we can get to know you and see where you'd like to take part.
