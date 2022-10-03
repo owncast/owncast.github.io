@@ -59,7 +59,7 @@ Storybook is a tool that allows you to create and test components in isolation. 
 The backend of Owncast is written in Go. It operates as a web and API server, inbound RTMP ingestion server, outbound HLS distribution server, and chat server.
 
 1. Ensure you have the [Go programming language](https://go.dev/dl/) tools installed for your system.
-1. Clone the Owncast respository with `git clone https://github.com/owncast/owncast`.
+1. Clone the Owncast repository with `git clone https://github.com/owncast/owncast`.
 1. A c compiler and tooling must be available on your system. Generally this means installing `gcc` and its development libraries.
 1. Run `go run main.go` from the root of the repository.
 
