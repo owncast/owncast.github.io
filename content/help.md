@@ -48,7 +48,7 @@ If you're an opinionated person about layout, color, user experience, iconograph
 
 We can use some help with the number of people who have a passion for, and focus on the frontend user interfaces. Like a lot of open source projects we started small and simple, keeping our interfaces as trim as possible. But as we received feedback and started to add more features interfaces started to get more complex. As we grow to support more use cases and feature sets it's important to have more people involved and opinionated from different backgrounds about these types of things.
 
-Our web stack is nothing super crazy. And anybody who's interested in, or familliar with React would feel at home. Though if you're not a React person and want to be, it's super easy to jump in to our code. Handfuls of people who never used React-style development in the past have contributed, so don't let that scare you away!
+Our web stack is nothing super crazy. And anybody who's interested in, or familiar with React would feel at home. Though if you're not a React person and want to be, it's super easy to jump in to our code. Handfuls of people who never used React-style development in the past have contributed, so don't let that scare you away!
 
 Some of our frontend stack:
 

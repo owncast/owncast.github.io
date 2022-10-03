@@ -88,7 +88,7 @@ Your stream, at the very least, is only as good as what you're sending to Owncas
 
 ## Server is not showing up in the directory
 
-If you've enabled the directory in your admin setttings, [look at some next steps](/docs/directory/#if-your-server-is-not-showing-up-in-the-directory) if it's not working.
+If you've enabled the directory in your admin settings, [look at some next steps](/docs/directory/#if-your-server-is-not-showing-up-in-the-directory) if it's not working.
 
 {{<versionsupport feature="owncast directory" version="0.0.3">}}
 

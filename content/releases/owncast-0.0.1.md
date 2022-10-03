@@ -11,7 +11,7 @@ We've been testing, doing events and enjoying using Owncast, so I think it's tim
 
 Still lots of exciting updates going on, but here's finally something that you can start using. Feel free to reach out and let us know what you're using Owncast for, or if you have any questions.
 
-This release is also on Dockerhub if that's convinient for you.
+This release is also on Dockerhub if that's convenient for you.
 
 ```sh
 docker pull gabekangas/owncast:0.0.1

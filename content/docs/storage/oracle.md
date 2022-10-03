@@ -1,6 +1,6 @@
 ---
 title: "Oracle Cloud Object Storage"
-description: "Oracle Cloud Object Storage is AWS S3 compatibile, but requires a little bit different configuration. And 10GB are Always Free!"
+description: "Oracle Cloud Object Storage is AWS S3 compatible, but requires a little bit different configuration. And 10GB are Always Free!"
 draft: false
 images: []
 weight: 070
@@ -8,7 +8,7 @@ toc: false
 type: subpages
 ---
 
-AWS S3 compatibile Oracle Cloud Object Storage (https://www.oracle.com/cloud/storage/object-storage/) is a great choice when you don't want to invest cash, because it contains 10GB of storage in Always Free Tier (https://www.oracle.com/cloud/free/#always-free).
+AWS S3 compatible Oracle Cloud Object Storage (https://www.oracle.com/cloud/storage/object-storage/) is a great choice when you don't want to invest cash, because it contains 10GB of storage in Always Free Tier (https://www.oracle.com/cloud/free/#always-free).
 
 ## Create a Bucket
 
