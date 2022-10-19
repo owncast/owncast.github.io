@@ -1,0 +1,91 @@
+---
+name: Test the install script
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'static/install.sh'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'static/install.sh'
+
+jobs:
+  debian:
+    strategy:
+      matrix:
+        images:
+          - docker.io/debian:latest
+          - docker.io/ubuntu:20.04
+          - docker.io/ubuntu:22.04
+          - docker.io/ubuntu:latest
+    runs-on: ubuntu-latest
+    container:
+      image: ${{matrix.images}}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install needed packages
+        run: |
+          apt update &&
+          apt install -y curl unzip procps
+
+      - name: Run install script
+        run: static/install.sh
+
+  arch:
+    strategy:
+      matrix:
+        images:
+          - docker.io/archlinux:latest
+    runs-on: ubuntu-latest
+    container:
+      image: ${{matrix.images}}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install needed packages
+        run: pacman -Sy --noconfirm unzip
+
+      - name: Run install script
+        run: static/install.sh
+
+  rhel:
+    strategy:
+      matrix:
+        images:
+          - docker.io/fedora:latest
+          - registry.access.redhat.com/ubi7
+          - registry.access.redhat.com/ubi8/ubi:8.1
+    runs-on: ubuntu-latest
+    container:
+      image: ${{matrix.images}}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install needed packages
+        run: yum install -y curl unzip procps-ng
+
+      - name: Run install script
+        run: static/install.sh
+
+  opensuse:
+    strategy:
+      matrix:
+        images:
+          - docker.io/opensuse/leap:latest
+          - docker.io/opensuse/tumbleweed:latest
+    runs-on: ubuntu-latest
+    container:
+      image: ${{matrix.images}}
+    steps:
+      - name: Install needed packages
+        run: zypper install -y curl unzip tar gzip
+
+      - uses: actions/checkout@v3
+
+      - name: Run install script
+        run: static/install.sh
