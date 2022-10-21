@@ -70,8 +70,8 @@ errorAndExit() {
 
 # Check for a required tool, or exit
 requireTool() {
-  which "$1" >> /dev/null && EC=$? || EC=$?
-  if [ $EC != 0 ]; then
+  if ! command -v $1 &> /dev/null
+  then
     errorAndExit "Could not locate \"$1\", which is required for installation. Please it install it on your system."
   fi
 }
@@ -118,7 +118,6 @@ main () {
   requireTool "curl"
   requireTool "unzip"
   requireTool "tar"
-  requireTool "which"
 
   # Determine operating system & architecture
   case $(uname -s) in
@@ -195,8 +194,8 @@ main () {
   rm "$OWNCAST_TARGET_FILE"
 
   # Check for ffmpeg
-  which ffmpeg >> /dev/null && EC=$? || EC=$?
-  if [ $EC -ne 0 ]; then
+  if ! command -v ffmpeg &> /dev/null
+  then
     # Download ffmpeg
     printf "${BLUE}Downloading${NC} ffmpeg v${FFMPEG_VERSION} "
     curl -s -L ${FFMPEG_DOWNLOAD_URL} --output "${FFMPEG_TARGET_FILE}" &
