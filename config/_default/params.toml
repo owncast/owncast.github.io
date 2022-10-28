@@ -3,8 +3,8 @@
 ## Homepage
 title = "Owncast"
 titleSeparator = "-"
-titleAddition = "Selfhosted Livestreaming"
-description = "Owncast is a self-hosted live video and web chat server for use with existing broadcasting software. Point your live stream at a Owncast server you personally control and regain ownership over your content."
+titleAddition = "Free and Open Source Livestreaming"
+description = "Owncast is a free and open source live video and web chat server for use with existing broadcasting software. Point your live stream at a Owncast server you personally control and regain ownership over your content."
 
 ## Open Graph + Twitter Cards
 images = ["/images/owncast-logo-1000x1000.png"]

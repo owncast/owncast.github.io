@@ -1,6 +1,6 @@
 ---
 title: "About the Owncast Project"
-description: "Owncast is a self-hosted streaming and chat server for use with popular broadcasting software."
+description: "Owncast is a free and open source streaming and chat server for use with popular broadcasting software."
 bookToC: false
 ---
 
