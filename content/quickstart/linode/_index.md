@@ -14,6 +14,10 @@ Linode has [written up a guide](https://www.linode.com/docs/guides/deploy-owncas
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eWE7HGJQI_4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+## FAQ
+
+[Look here](/quickstart/linode/faq/)
+
 ## What you need
 
 1. A domain name and access to your DNS settings. This is required for supporting [SSL](/docs/sslproxies/).
