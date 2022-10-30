@@ -12,6 +12,7 @@ You need to add the new domain to the reverse proxy config in `/etc/caddy/Caddyf
 2. Edit the file via `sudo nano /etc/caddy/Caddyfile`
 
 It should look like this:
+
 ```caddyfile
 your.old.domain {
 	reverse_proxy 127.0.0.1:8080
@@ -20,10 +21,9 @@ your.old.domain {
 }
 ```
 
-* Change `your.old.domain` to your new domain name
-* Save the file `CTRL+s`
-* Close the editor `CTRL+x`
+- Change `your.old.domain` to your new domain name
+- Save the file `CTRL+s`
+- Close the editor `CTRL+x`
 
 3. Restart the reverse proxy `systemctl restart caddy`
 4. Wait up to a few minutes for your new certificate to be generated
-
