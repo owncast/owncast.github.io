@@ -78,7 +78,7 @@ like anything else, it is possible to evade.
   is configured to explicitly set the correct header value.
 - VPNs are a thing. By using a VPN it's trivial to evade the IP address ban.
 
-This is all to say: This feature will help keep abuse down, but in no way does it garuntee that it will keep the
+This is all to say: This feature will help keep abuse down, but in no way does it guarantee that it will keep the
 worst of the worst away. Moderation is still the responsibility of each individual stream.
 
 A list of blocked IPs can be viewed in the Admin Chat Users interface and can be un-banned via the same interface.
