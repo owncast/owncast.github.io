@@ -18,5 +18,7 @@ Want your project shared here? Please let us know about it!
         {{< bloglink title="wowncast" description="Subscribe to and open your favorite Owncast streamers from the terminal." tags="terminal,viewing" link="https://codeberg.org/yarmo/wowncast">}}
         {{< bloglink title="Social stream" description="Consolidate your live social messaging streams Supports Owncast chat." tags="terminal,viewing" link="https://github.com/steveseguin/social_stream">}}
         {{< bloglink title="Chat Bot" description="A chat bot with a ton of features and fun interactions for viewers." tags="extension,chat,overlay" link="https://framagit.org/owncast-things/owncast-chatbot">}}
+        {{< bloglink title="Smol Stream Emoji Wall" description="A floating emoji wall for chat interaction." tags="extension,chat,overlay" link="https://smol.stream/emojiwall" image="https://smol.stream/emojiwall/smolstream-logo-b.png">}}
+        {{< bloglink title="tlapbot channel points" description="Channel points and channel point redeems for Owncast." tags="extension,bot,points" link="https://github.com/SleepyLili/tlapbot">}}
     </section>
 </div>
