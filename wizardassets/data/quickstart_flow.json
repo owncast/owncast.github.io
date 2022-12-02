@@ -177,6 +177,19 @@
 										"id": 25
 									}
 								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "Zeus Cloud",
+								"is_open": true,
+								"id": 126,
+								"children": [
+									{
+										"name": "https://www.zeuscloud.co.uk/apps/owncast",
+										"id": 127
+									}
+								]
 							}
 						]
 					}
