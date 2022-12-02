@@ -115,6 +115,13 @@
 						},
 						"type": "radio",
 						"value": "vultr"
+					},
+					{
+						"text": {
+							"en": "Zeus Cloud"
+						},
+						"type": "radio",
+						"value": "zeuscloud"
 					}
 				],
 				"required": true
