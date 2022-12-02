@@ -181,7 +181,7 @@
 							{
 								"name": "_decision",
 								"test": "string",
-								"if": "Zeus Cloud",
+								"if": "zeuscloud",
 								"is_open": true,
 								"id": 126,
 								"children": [
