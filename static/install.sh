@@ -24,8 +24,9 @@ INSTALL_TEMP_DIRECTORY="$(mktemp -d)"
 _success=false
 shutdown () {
   if [ $_success = false ]; then
-    printf "Your Owncast installation did not complete successfully.\n"
-    printf "Please report your issue at https://github.com/owncast/owncast/issues\n"
+    printf "\n\n"
+    printf "${RED}ERROR:${NC} Your Owncast installation did not complete successfully.\n"
+    printf "Please report your issue at https://github.com/owncast/owncast/issues\n\n"
   fi
   rm -rf "$INSTALL_TEMP_DIRECTORY"
 }
@@ -74,16 +75,16 @@ errorAndExit() {
 
 # Check for a required tool, or exit
 requireTool() {
-  if ! command -v $1 &> /dev/null
+  if ! command -v "$1" &> /dev/null
   then
-    errorAndExit "Could not locate \"$1\", which is required for installation. Please it install it on your system."
+    errorAndExit "Could not locate \"$1\", which is required for installation. Please install it on your system."
   fi
 }
 
 # Backup the existing install
 backupInstall() {
   BACKUP_STAGING="$(mktemp -d)"
-  mkdir ${BACKUP_STAGING}/backup
+  mkdir "${BACKUP_STAGING}"/backup
   TIMESTAMP=$(date +%s)
   BACKUP_FILE="${TIMESTAMP}-v${OWNCAST_VERSION}".tar.gz
   printf "${BLUE}Backing up${NC} your files to ${OWNCAST_BACKUP_DIRECTORY} before upgrading to v${OWNCAST_VERSION}"
@@ -93,20 +94,20 @@ backupInstall() {
   )
 
   # Make backup directory if it doesn't exist
-  [[ -d $OWNCAST_BACKUP_DIRECTORY ]] || mkdir $OWNCAST_BACKUP_DIRECTORY
+  [[ -d $OWNCAST_BACKUP_DIRECTORY ]] || mkdir "$OWNCAST_BACKUP_DIRECTORY"
 
   for i in "${FILE_LIST[@]}"
   do
-    cp -r ${FILE_LIST[@]} ${BACKUP_STAGING}/backup
+    cp -r "$i" "${BACKUP_STAGING}"/backup
   done
 
-  pushd ${BACKUP_STAGING} >> /dev/null
-  tar zcf ${BACKUP_FILE} backup & >> /dev/null
+  pushd "${BACKUP_STAGING}" >> /dev/null
+  tar zcf "${BACKUP_FILE}" backup &
   spinner $!
   popd >> /dev/null
-  mv ${BACKUP_STAGING}/${BACKUP_FILE} ${OWNCAST_BACKUP_DIRECTORY}/
+  mv "${BACKUP_STAGING}"/"${BACKUP_FILE}" "${OWNCAST_BACKUP_DIRECTORY}"/
 
-  rm -rf ${BACKUP_STAGING}
+  rm -rf "${BACKUP_STAGING}"
   printf "${GREEN}Backed up${NC} your files before upgrading to v${OWNCAST_VERSION}  [${GREEN}✓${NC}]\n"
 }
 
@@ -165,7 +166,7 @@ main () {
   # If the install directory exists already then cd into it and upgrade
   if [[ -d "$OWNCAST_INSTALL_DIRECTORY" && -x "$OWNCAST_INSTALL_DIRECTORY/owncast" ]]; then
     printf "${BLUE}Existing install found${NC} in ${OWNCAST_INSTALL_DIRECTORY}. Will update it to v${OWNCAST_VERSION}. If this is incorrect remove the directory and rerun the installer.\n"
-    cd $OWNCAST_INSTALL_DIRECTORY
+    cd "$OWNCAST_INSTALL_DIRECTORY"
     OWNCAST_INSTALL_DIRECTORY="./"
     backupInstall
   # If the owncast binary exists then upgrade
@@ -181,7 +182,7 @@ main () {
  
   # Download release
   printf "${BLUE}Downloading${NC} Owncast v${OWNCAST_VERSION} for ${PLATFORM}"
-  curl -s -L ${OWNCAST_URL} --output "${OWNCAST_TARGET_FILE}" &
+  curl -s -L "${OWNCAST_URL}" --output "${OWNCAST_TARGET_FILE}" &
   spinner $!
   printf "${GREEN}Downloaded${NC} Owncast v${OWNCAST_VERSION} for ${PLATFORM}  [${GREEN}✓${NC}]\n"
 
@@ -195,7 +196,7 @@ main () {
   if ! [[ -x "$(command -v ffmpeg)" || -x "$(command -v ${OWNCAST_INSTALL_DIRECTORY}/ffmpeg)" ]]; then
     # Download ffmpeg
     printf "${BLUE}Downloading${NC} ffmpeg v${FFMPEG_VERSION} "
-    curl -s -L ${FFMPEG_DOWNLOAD_URL} --output "${FFMPEG_TARGET_FILE}" &
+    curl -s -L "${FFMPEG_DOWNLOAD_URL}" --output "${FFMPEG_TARGET_FILE}" &
     spinner $!
     printf "${GREEN}Downloaded${NC} ffmpeg because it was not found on your system [${GREEN}✓${NC}]\n"
     if [[ "$FFMPEG_TARGET_FILE" == *.zip ]]; then
