@@ -1,4 +1,4 @@
-name: Build website and deploy to GitHub Pages
+name: Build and deploy website
 
 on:
   push:
@@ -72,6 +72,7 @@ jobs:
           path: ./public 
 
   Deploy:
+    name: Deploy to GitHub Pages
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-22.04
     steps:
@@ -81,7 +82,7 @@ jobs:
           name: website
           path: ./public
 
-      - name: Deploy on GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
