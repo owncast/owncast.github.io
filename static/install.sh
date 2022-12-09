@@ -86,10 +86,6 @@ backupInstall() {
   printf "${BLUE}Backing up${NC} your files before upgrading to v${OWNCAST_VERSION}"
 
   FILE_LIST=(
-    "webroot/*.html"
-    "webroot/styles/"
-    "webroot/js"
-    "webroot/img"
     "data/"
   )
 
