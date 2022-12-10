@@ -23,6 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: docker.io/ubuntu:22.04
+    env:
+      OWNCAST_BACKUP_DIRECTORY: tmpbk
     steps:
       - uses: actions/checkout@v3
       - name: Install needed packages
@@ -31,6 +33,8 @@ jobs:
         run: OWNCAST_VERSION=${{ matrix.old_version }} static/install.sh
       - name: Upgrade to the latest version of Owncast
         run: static/install.sh
+      - name: Check backup file
+        run: ls -A owncast/${OWNCAST_BACKUP_DIRECTORY}/*.tar.gz
 
   debian:
     name: Install on Debian/Ubuntu
