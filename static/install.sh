@@ -189,8 +189,7 @@ main () {
   rm "$OWNCAST_TARGET_FILE"
 
   # Check for ffmpeg
-  if ! command -v ffmpeg &> /dev/null
-  then
+  if ! [[ -x "$(command -v ffmpeg)" || -x "$(command -v ${OWNCAST_INSTALL_DIRECTORY}/ffmpeg)" ]]; then
     # Download ffmpeg
     printf "${BLUE}Downloading${NC} ffmpeg v${FFMPEG_VERSION} "
     curl -s -L ${FFMPEG_DOWNLOAD_URL} --output "${FFMPEG_TARGET_FILE}" &
