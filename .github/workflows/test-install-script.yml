@@ -33,7 +33,7 @@ jobs:
         run: static/install.sh
 
   debian:
-    name: On Debian/Ubuntu
+    name: Install on Debian/Ubuntu
     strategy:
       matrix:
         images:
@@ -56,7 +56,7 @@ jobs:
         run: static/install.sh
 
   arch:
-    name: On Arch
+    name: Install on Arch
     strategy:
       matrix:
         images:
@@ -74,7 +74,7 @@ jobs:
         run: static/install.sh
 
   rhel:
-    name: On RHEL/Fedora
+    name: Install on RHEL/Fedora
     strategy:
       matrix:
         images:
@@ -94,7 +94,7 @@ jobs:
         run: static/install.sh
 
   opensuse:
-    name: On OpenSUSE
+    name: Install on OpenSUSE
     strategy:
       matrix:
         images:
