@@ -101,7 +101,7 @@ backupInstall() {
   tar zcf ${BACKUP_FILE} backup & >> /dev/null
   spinner $!
   popd >> /dev/null
-  mv ${BACKUP_STAGING}/${BACKUP_FILE} backup/
+  mv ${BACKUP_STAGING}/${BACKUP_FILE} ${BACKUP_DIR}/
   
   rm -rf ${BACKUP_STAGING}
   printf "${BLUE}Backed up${NC} your files before upgrading to v${OWNCAST_VERSION}  [${GREEN}✓${NC}]\n"
