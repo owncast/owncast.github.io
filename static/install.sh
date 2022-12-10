@@ -14,6 +14,10 @@ if ! [ "${OWNCAST_INSTALL_DIRECTORY:-}" ]; then
   OWNCAST_INSTALL_DIRECTORY="$(pwd)/owncast"
 fi
 
+if ! [ "${OWNCAST_BACKUP_DIRECTORY:-}" ]; then
+  OWNCAST_BACKUP_DIRECTORY="${OWNCAST_INSTALL_DIRECTORY}/backup"
+fi
+
 INSTALL_TEMP_DIRECTORY="$(mktemp -d)"
 
 # Set up an exit handler so we can print a help message on failures.
@@ -80,17 +84,16 @@ requireTool() {
 backupInstall() {
   BACKUP_STAGING="$(mktemp -d)"
   mkdir ${BACKUP_STAGING}/backup
-  BACKUP_DIR="backup"
   TIMESTAMP=$(date +%s)
   BACKUP_FILE="${TIMESTAMP}-v${OWNCAST_VERSION}".tar.gz
-  printf "${BLUE}Backing up${NC} your files before upgrading to v${OWNCAST_VERSION}"
+  printf "${BLUE}Backing up${NC} your files to ${OWNCAST_BACKUP_DIRECTORY} before upgrading to v${OWNCAST_VERSION}"
 
   FILE_LIST=(
     "data/"
   )
 
   # Make backup directory if it doesn't exist
-  [[ -d $BACKUP_DIR ]] || mkdir $BACKUP_DIR
+  [[ -d $OWNCAST_BACKUP_DIRECTORY ]] || mkdir $OWNCAST_BACKUP_DIRECTORY
 
   for i in "${FILE_LIST[@]}"
   do
@@ -101,7 +104,7 @@ backupInstall() {
   tar zcf ${BACKUP_FILE} backup & >> /dev/null
   spinner $!
   popd >> /dev/null
-  mv ${BACKUP_STAGING}/${BACKUP_FILE} ${BACKUP_DIR}/
+  mv ${BACKUP_STAGING}/${BACKUP_FILE} ${OWNCAST_BACKUP_DIRECTORY}/
   
   rm -rf ${BACKUP_STAGING}
   printf "${BLUE}Backed up${NC} your files before upgrading to v${OWNCAST_VERSION}  [${GREEN}✓${NC}]\n"
