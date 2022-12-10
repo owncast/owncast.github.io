@@ -94,7 +94,6 @@ backupInstall() {
 
   for i in "${FILE_LIST[@]}"
   do
-    : 
     cp -r ${FILE_LIST[@]} ${BACKUP_STAGING}/backup
   done
 
@@ -162,13 +161,13 @@ main () {
 
   # If the install directory exists already then cd into it and upgrade
   if [[ -d "$OWNCAST_INSTALL_DIRECTORY" && -x "$OWNCAST_INSTALL_DIRECTORY/owncast" ]]; then
-    printf "${BLUE}Existing install found${NC} in ${OWNCAST_INSTALL_DIRECTORY}.  Will update it to v${OWNCAST_VERSION}. If this is incorrect remove the directory and rerun the installer.\n"
+    printf "${BLUE}Existing install found${NC} in ${OWNCAST_INSTALL_DIRECTORY}. Will update it to v${OWNCAST_VERSION}. If this is incorrect remove the directory and rerun the installer.\n"
     cd $OWNCAST_INSTALL_DIRECTORY
     OWNCAST_INSTALL_DIRECTORY="./"
     backupInstall
   # If the owncast binary exists then upgrade
   elif [ -x ./owncast ]; then
-    printf "${BLUE}Existing install found${NC} in this directory.  Will update it to v${OWNCAST_VERSION}. If this is incorrect remove the directory and rerun the installer.\n"
+    printf "${BLUE}Existing install found${NC} in this directory. Will update it to v${OWNCAST_VERSION}. If this is incorrect remove the directory and rerun the installer.\n"
     backupInstall
     OWNCAST_INSTALL_DIRECTORY="./"
   else
