@@ -105,7 +105,7 @@ backupInstall() {
   spinner $!
   popd >> /dev/null
   mv ${BACKUP_STAGING}/${BACKUP_FILE} ${OWNCAST_BACKUP_DIRECTORY}/
-  
+
   rm -rf ${BACKUP_STAGING}
   printf "${GREEN}Backed up${NC} your files before upgrading to v${OWNCAST_VERSION}  [${GREEN}✓${NC}]\n"
 }
