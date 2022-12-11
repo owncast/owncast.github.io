@@ -107,7 +107,7 @@ backupInstall() {
   mv ${BACKUP_STAGING}/${BACKUP_FILE} ${OWNCAST_BACKUP_DIRECTORY}/
   
   rm -rf ${BACKUP_STAGING}
-  printf "${BLUE}Backed up${NC} your files before upgrading to v${OWNCAST_VERSION}  [${GREEN}✓${NC}]\n"
+  printf "${GREEN}Backed up${NC} your files before upgrading to v${OWNCAST_VERSION}  [${GREEN}✓${NC}]\n"
 }
 
 main () {
