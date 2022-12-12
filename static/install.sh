@@ -7,7 +7,7 @@ set -o pipefail
 
 # Install configuration
 if ! [ "${OWNCAST_VERSION:-}" ]; then
-  OWNCAST_VERSION="0.0.13"
+  OWNCAST_VERSION=$(curl -sL https://api.github.com/repos/owncast/owncast/tags | grep "name" | head -1 | sed -E "s|.*\"v(.*)\".*|\1|g")
 fi
 
 if ! [ "${OWNCAST_INSTALL_DIRECTORY:-}" ]; then
