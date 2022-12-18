@@ -7,9 +7,12 @@ on:
   schedule:
     # Every six hours update the web site
     - cron:  '0 */6 * * *'
+  pull_request:
+      branches:
+        - 'master'
 
 jobs:
-  deploy:
+  Build:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
@@ -44,7 +47,8 @@ jobs:
       - name: Add current development documentation
         run: mkdir -p static/api/development && curl https://raw.githubusercontent.com/owncast/owncast/master/doc/api/index.html > static/api/development/index.html
 
-      - name: Commit changes
+      - name: Update dynamic content
+        if: github.event_name == 'push'
         uses: EndBug/add-and-commit@v5
         with:
           author_name: Owncast
@@ -57,7 +61,24 @@ jobs:
       - name: Build
         run: npm install && hugo --minify
 
-      - name: Deploy
+      - name: Upload artifacts
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@master
+        with:
+          name: website
+          path: ./public 
+
+  deploy:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@master
+        with:
+          name: website
+          path: ./public
+
+      - name: Deploy on GH
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
