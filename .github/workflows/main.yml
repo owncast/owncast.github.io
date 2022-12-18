@@ -1,4 +1,4 @@
-name: Hugo Build to GitHub Pages
+name: Build website and deploy to GitHub Pages
 
 on:
   push:
@@ -8,9 +8,11 @@ on:
     # Every six hours update the web site
     - cron:  '0 */6 * * *'
   pull_request:
-      branches:
-        - 'master'
-        - 'v0.1.0'
+    branches:
+      - 'master'
+      - 'v0.1.0'
+    paths-ignore:
+    - 'static/install.sh'
 
 jobs:
   Build:
@@ -79,7 +81,7 @@ jobs:
           name: website
           path: ./public
 
-      - name: Deploy on GH
+      - name: Deploy on GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
