@@ -10,6 +10,7 @@ on:
   pull_request:
       branches:
         - 'master'
+        - 'v0.1.0'
 
 jobs:
   Build:
