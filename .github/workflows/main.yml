@@ -51,7 +51,7 @@ jobs:
         run: mkdir -p static/api/development && curl https://raw.githubusercontent.com/owncast/owncast/master/doc/api/index.html > static/api/development/index.html
 
       - name: Update dynamic content
-        if: github.event_name == 'push'
+        if: github.event_name != 'pull_request'
         uses: EndBug/add-and-commit@v5
         with:
           author_name: Owncast
@@ -65,14 +65,14 @@ jobs:
         run: npm install && hugo --minify
 
       - name: Upload artifacts
-        if: github.event_name == 'push'
+        if: github.event_name != 'pull_request'
         uses: actions/upload-artifact@master
         with:
           name: website
           path: ./public 
 
   deploy:
-    if: github.event_name == 'push'
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-22.04
     steps:
       - name: Download artifacts
