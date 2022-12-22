@@ -14,6 +14,10 @@ if ! [ "${OWNCAST_INSTALL_DIRECTORY:-}" ]; then
   OWNCAST_INSTALL_DIRECTORY="$(pwd)/owncast"
 fi
 
+if ! [ "${OWNCAST_BACKUP_DIRECTORY:-}" ]; then
+  OWNCAST_BACKUP_DIRECTORY="${OWNCAST_INSTALL_DIRECTORY}/backup"
+fi
+
 INSTALL_TEMP_DIRECTORY="$(mktemp -d)"
 
 # Set up an exit handler so we can print a help message on failures.
@@ -80,21 +84,19 @@ requireTool() {
 backupInstall() {
   BACKUP_STAGING="$(mktemp -d)"
   mkdir ${BACKUP_STAGING}/backup
-  BACKUP_DIR="backup"
   TIMESTAMP=$(date +%s)
   BACKUP_FILE="${TIMESTAMP}-v${OWNCAST_VERSION}".tar.gz
-  printf "${BLUE}Backing up${NC} your files before upgrading to v${OWNCAST_VERSION}"
+  printf "${BLUE}Backing up${NC} your files to ${OWNCAST_BACKUP_DIRECTORY} before upgrading to v${OWNCAST_VERSION}"
 
   FILE_LIST=(
     "data/"
   )
 
   # Make backup directory if it doesn't exist
-  [[ -d $BACKUP_DIR ]] || mkdir $BACKUP_DIR
+  [[ -d $OWNCAST_BACKUP_DIRECTORY ]] || mkdir $OWNCAST_BACKUP_DIRECTORY
 
   for i in "${FILE_LIST[@]}"
   do
-    : 
     cp -r ${FILE_LIST[@]} ${BACKUP_STAGING}/backup
   done
 
@@ -102,10 +104,10 @@ backupInstall() {
   tar zcf ${BACKUP_FILE} backup & >> /dev/null
   spinner $!
   popd >> /dev/null
-  mv ${BACKUP_STAGING}/${BACKUP_FILE} backup/
-  
+  mv ${BACKUP_STAGING}/${BACKUP_FILE} ${OWNCAST_BACKUP_DIRECTORY}/
+
   rm -rf ${BACKUP_STAGING}
-  printf "${BLUE}Backed up${NC} your files before upgrading to v${OWNCAST_VERSION}  [${GREEN}✓${NC}]\n"
+  printf "${GREEN}Backed up${NC} your files before upgrading to v${OWNCAST_VERSION}  [${GREEN}✓${NC}]\n"
 }
 
 main () {
@@ -162,13 +164,13 @@ main () {
 
   # If the install directory exists already then cd into it and upgrade
   if [[ -d "$OWNCAST_INSTALL_DIRECTORY" && -x "$OWNCAST_INSTALL_DIRECTORY/owncast" ]]; then
-    printf "${BLUE}Existing install found${NC} in ${OWNCAST_INSTALL_DIRECTORY}.  Will update it to v${OWNCAST_VERSION}. If this is incorrect remove the directory and rerun the installer.\n"
+    printf "${BLUE}Existing install found${NC} in ${OWNCAST_INSTALL_DIRECTORY}. Will update it to v${OWNCAST_VERSION}. If this is incorrect remove the directory and rerun the installer.\n"
     cd $OWNCAST_INSTALL_DIRECTORY
     OWNCAST_INSTALL_DIRECTORY="./"
     backupInstall
   # If the owncast binary exists then upgrade
   elif [ -x ./owncast ]; then
-    printf "${BLUE}Existing install found${NC} in this directory.  Will update it to v${OWNCAST_VERSION}. If this is incorrect remove the directory and rerun the installer.\n"
+    printf "${BLUE}Existing install found${NC} in this directory. Will update it to v${OWNCAST_VERSION}. If this is incorrect remove the directory and rerun the installer.\n"
     backupInstall
     OWNCAST_INSTALL_DIRECTORY="./"
   else
@@ -190,8 +192,7 @@ main () {
   rm "$OWNCAST_TARGET_FILE"
 
   # Check for ffmpeg
-  if ! command -v ffmpeg &> /dev/null
-  then
+  if ! [[ -x "$(command -v ffmpeg)" || -x "$(command -v ${OWNCAST_INSTALL_DIRECTORY}/ffmpeg)" ]]; then
     # Download ffmpeg
     printf "${BLUE}Downloading${NC} ffmpeg v${FFMPEG_VERSION} "
     curl -s -L ${FFMPEG_DOWNLOAD_URL} --output "${FFMPEG_TARGET_FILE}" &

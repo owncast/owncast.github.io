@@ -10,11 +10,38 @@ on:
   pull_request:
     branches:
       - master
+      - v0.1.0
     paths:
       - 'static/install.sh'
 
 jobs:
+  upgrade:
+    name: Upgrade on Ubuntu from
+    strategy:
+      matrix:
+        old_version: [0.0.7, 0.0.8, 0.0.9, 0.0.10, 0.0.11, 0.0.12]
+    runs-on: ubuntu-latest
+    container:
+      image: docker.io/ubuntu:22.04
+    env:
+      OWNCAST_BACKUP_DIRECTORY: tmpbk
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install needed packages
+        run: apt update && apt install -y curl unzip procps
+      - name: Install old version of Owncast
+        run: OWNCAST_VERSION=${{ matrix.old_version }} static/install.sh
+      - name: Initialize Owncast
+        run: cd owncast && timeout 5 ./owncast || true
+      - name: Upgrade to the latest version of Owncast
+        run: static/install.sh
+      - name: Check backup file is created
+        run: ls -lAH owncast/data owncast/${OWNCAST_BACKUP_DIRECTORY}/*.tar.gz
+      - name: Check backup has the expected content
+        run: tar -tf owncast/${OWNCAST_BACKUP_DIRECTORY}/*.tar.gz --wildcards '*/data/owncast\.db*' 
+
   debian:
+    name: Install on Debian/Ubuntu
     strategy:
       matrix:
         images:
@@ -37,6 +64,7 @@ jobs:
         run: static/install.sh
 
   arch:
+    name: Install on Arch
     strategy:
       matrix:
         images:
@@ -54,6 +82,7 @@ jobs:
         run: static/install.sh
 
   rhel:
+    name: Install on RHEL/Fedora
     strategy:
       matrix:
         images:
@@ -73,6 +102,7 @@ jobs:
         run: static/install.sh
 
   opensuse:
+    name: Install on OpenSUSE
     strategy:
       matrix:
         images:
