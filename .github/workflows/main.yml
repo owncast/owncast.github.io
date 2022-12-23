@@ -35,17 +35,6 @@ jobs:
       - name: Fetch dynamic content
         run: scripts/fetch_dynamic_content.sh
 
-      - name: Commit updated dynamic content to git
-        if: github.event_name != 'pull_request'
-        uses: EndBug/add-and-commit@v5
-        with:
-          author_name: Owncast
-          author_email: owncast@owncast.online
-          message: "Update dynamic content"
-          add: "static/api/development/index.html data/contributors.json"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Build
         run: npm install && hugo --minify
 
