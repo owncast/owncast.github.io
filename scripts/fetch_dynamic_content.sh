@@ -7,13 +7,27 @@ rm -f data/contributors*.json
 rm -f data/donors*.json
 
 json_response_validate() {
-    response_size=$(($(wc -c <"$1")))
-    printf "[got $response_size bytes] "
-    if [ $response_size -le 5 ]; then
-        printf '\nERROR: got invalid response: %s\n'"$1"
-        return 1
+    _json_error=0
+    _placeholder_file=${1/%.json/.old.json}
+
+    if [[ -f $1 ]]; then
+        _json_response=$(cat "$1")
+        _json_response_size=$((${#_json_response}))
+
+        printf '[got %i bytes] ' $_json_response_size
+        if [ $_json_response_size -le 5 ]; then # TODO: need a better test
+            printf '\nERROR: got invalid response: %s\n' "$_json_response"
+            _json_error=1
+        fi
+    else
+        printf '\nERROR: could not open json file: %s\n' "$1"
+        _json_error=1
     fi
-     return 0
+
+    if [[ _json_error -ne 0 ]]; then
+        echo "will use placeholder data instead: $_placeholder_file"
+        mv "$_placeholder_file" "$1"
+    fi
 }
 
 printf "Fetching Core Contributors... "
