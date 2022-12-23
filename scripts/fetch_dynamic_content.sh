@@ -58,9 +58,9 @@ printf "Combining Contributors... "
 jq --argfile core data/contributors-core.json --argfile admin data/contributors-admin.json --argfile homepage data/contributors-homepage.json -n '$core + $admin + $homepage |unique_by(.login)' > data/contributors.json
 printf "done!\n"
 
-printf "Adding current development documentation... "
+printf "Adding current development documentation... " #TODO: add fallback files
 mkdir -p static/api/development
-curl -f -s -o static/api/development/index.html https://raw.githubusercontent.com/owncast/owncast/master/doc/api/index.html || true
+curl -f -s -o static/api/development/index.html https://raw.githubusercontent.com/owncast/owncast/master/docs/api/index.html || true
 printf "done!\n"
 
 # Clean-up Environment 
