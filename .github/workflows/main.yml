@@ -32,23 +32,8 @@ jobs:
       - name: Install jq
         uses: r26d/jq-action@master
 
-      - name: Fetch Core Contributors
-        run: "curl https://api.github.com/repos/owncast/owncast/contributors?per_page=100 | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > data/contributors-core.json"
-
-      - name: Fetch Admin Contributors
-        run: "curl https://api.github.com/repos/owncast/owncast-admin/contributors?per_page=100 | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > data/contributors-admin.json"
-
-      - name: Fetch Home Page Contributors
-        run: "curl https://api.github.com/repos/owncast/owncast.github.io/contributors?per_page=100 | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > data/contributors-homepage.json"
-
-      - name: Combine Contributors
-        run: "jq --argfile core data/contributors-core.json --argfile admin data/contributors-admin.json --argfile homepage data/contributors-homepage.json -n '$core + $admin + $homepage |unique_by(.login)' > data/contributors.json"
-      
-      - name: Fetch donors
-        run: "curl https://opencollective.com/owncast/members/all.json | jq 'map(.) | .[] | select(.role==\"BACKER\") | {login: .name, avatar_url: .image, html_url: .profile}' | jq --slurp '.' > data/donors.json"
-
-      - name: Add current development documentation
-        run: mkdir -p static/api/development && curl https://raw.githubusercontent.com/owncast/owncast/master/doc/api/index.html > static/api/development/index.html
+      - name: Fetch dynamic content
+        run: scripts/fetch_dynamic_content.sh
 
       - name: Commit updated dynamic content to git
         if: github.event_name != 'pull_request'
