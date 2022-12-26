@@ -6,6 +6,10 @@ menu:
     parent: "guides"
 ---
 
+{{<versionsupport feature="Appearance customization" version="0.1.0">}}
+
+{{< alert icon="💡" text="TODO: Share some examples of setting appearance via CSS and the admin." >}}
+
 ## CSS Selectors
 
 - `header`
