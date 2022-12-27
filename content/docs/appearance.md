@@ -26,3 +26,16 @@ menu:
 - `.chat-message_system` A system-sent chat message.
 - `.chat-message_social` A social message from the Fediverse.
 - `.followers-follower` A single Follower in the followers collection.
+
+## CSS Variables
+
+You can override the values assigned to CSS variables manually by setting them in the CSS editor in the admin.
+You can find a list of [variable names](/components/?path=%2Fstory%2Fowncast-style-guide-default-theme--page) you can override.
+
+For example, if you'd like to make all action items red, you can set the following CSS variable as follows:
+
+```css
+:root {
+  --theme-color-action: red;
+}
+```
