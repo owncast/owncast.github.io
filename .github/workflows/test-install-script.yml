@@ -1,4 +1,3 @@
----
 name: Test installation script
 
 on:
@@ -15,22 +14,6 @@ on:
       - 'static/install.sh'
 
 jobs:
-  shellcheck:
-    name: Validate with shellcheck
-    runs-on: ubuntu-latest
-    env:
-      LANG: C.UTF-8
-    container:
-      image: docker.io/ubuntu:22.04
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Install shellcheck
-        run: apt update && apt install -y shellcheck && shellcheck --version
-
-      - name: Check Owncast installation bash script
-        run: shellcheck --severity=info static/install.sh
-
   debian:
     name: Install on Debian/Ubuntu
     strategy:
