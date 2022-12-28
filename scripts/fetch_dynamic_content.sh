@@ -12,11 +12,24 @@ valid_response_file() {
         _response_file_content=$(cat "$1")
         _response_file_size=$((${#_response_file_content}))
 
-        printf '[got %i bytes]... ' $_response_file_size
+        printf '[%i bytes]' $_response_file_size
+
         if [ $_response_file_size -le 5 ]; then # TODO: need a better test
             printf '\n> ERROR: got invalid response: %s\n' "$_response_file_content"
             _response_file_error=1
         fi
+
+        if [[ $1 == *.json ]]; then
+            _response_file_items=$(jq '. | length' "$1" 2>/dev/null) || true
+            if [[ $_response_file_items -gt 1 ]]; then
+                printf '[%i items]' "$_response_file_items"
+            else
+                printf '\n> ERROR: could not parse the json response: \n%s\n' "$_response_file_content"
+                _response_file_error=1
+            fi
+        fi
+        printf '... '
+
     else
         printf '\n> ERROR: could not open file: %s\n' "$1"
         _response_file_error=1
