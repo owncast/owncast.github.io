@@ -48,3 +48,7 @@ As a participant in the chat you can now change your color, not just your name.
 ## Your own public assets
 
 If you need to copy your own images, fonts, css files or anything you want, really, to make them publicly available you can now do so via the new "public" directory. Most people will not need this, but if you previously used to put assets in your `webroot` directory to make them publicly accessible, this would be the replacement of that.
+
+## Admin page sections
+
+Some admin pages have been combined and some URLs have changed. Particularly have a look at the "General" and the "Server config" pages to find additional sections.
