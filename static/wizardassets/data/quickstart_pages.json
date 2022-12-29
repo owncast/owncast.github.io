@@ -122,6 +122,13 @@
 						},
 						"type": "radio",
 						"value": "zeuscloud"
+					},
+					{
+						"text": {
+							"en": "Elestio (Fully managed)"
+						},
+						"type": "radio",
+						"value": "elestio"
 					}
 				],
 				"required": true
