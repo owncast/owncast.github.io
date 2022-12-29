@@ -190,6 +190,19 @@
 										"id": 127
 									}
 								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "elestio",
+								"is_open": true,
+								"id": 128,
+								"children": [
+									{
+										"name": "https://elest.io/open-source/owncast",
+										"id": 129
+									}
+								]
 							}
 						]
 					}
