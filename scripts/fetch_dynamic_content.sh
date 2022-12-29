@@ -2,10 +2,22 @@
 set -e
 set -o pipefail
 
-# TODO: check jq and curl exist
-# TODO: add json parser/validator
+# This script fetches the dynamic content for the website.
+# If a request for fetching content was unsuccessful, data from a backup file is used instead.
+# This script should not fail after it finds a directory named “data”
+#
+# requires: jq, curl
 
+
+# basic file validator with these checks:
+# - file exists and its size is at least $_minimum_file_size
+# if file extension is .json:
+# - json content is valid
+# - has at least $_minimum_json_items
 valid_response_file() {
+    _minimum_file_size=100
+    _minimum_json_items=2
+
     _response_file_error=0
 
     if [[ -f $1 ]]; then
@@ -14,14 +26,14 @@ valid_response_file() {
 
         printf '[%i bytes]' $_response_file_size
 
-        if [ $_response_file_size -le 5 ]; then # TODO: need a better test
+        if [ $_response_file_size -lt $_minimum_file_size ]; then
             printf '\n> ERROR: got invalid response: %s\n' "$_response_file_content"
             _response_file_error=1
         fi
 
         if [[ $1 == *.json ]]; then
             _response_file_items=$(jq '. | length' "$1" 2>/dev/null) || true
-            if [[ $_response_file_items -gt 1 ]]; then
+            if [[ $_response_file_items -ge $_minimum_json_items ]]; then
                 printf '[%i items]' "$_response_file_items"
             else
                 printf '\n> ERROR: could not parse the json response: \n%s\n' "$_response_file_content"
@@ -31,7 +43,7 @@ valid_response_file() {
         printf '... '
 
     else
-        printf '\n> ERROR: could not open file: %s\n' "$1"
+        printf '\n> ERROR: could not open the response file: %s\n' "$1"
         _response_file_error=1
     fi
 
@@ -42,7 +54,14 @@ valid_response_file() {
     fi
 }
 
-printf "Cleanup tmp files... "
+printf "Checking Owncast data directory... "
+if ! [[ -d 'data' ]]; then
+    printf "\nERROR: data directory could not be found. Please run this script in the Owncast root directory as:\nscripts/fetch_dynamic_content.sh\n"
+    exit 1
+fi
+printf "done!\n"
+
+printf "Removing old tmp files... "
 rm -f data/*-raw.json
 rm -f static/api/development/*-raw.html
 printf "done!\n"
@@ -70,7 +89,7 @@ if valid_response_file data/contributors-homepage-raw.json; then
     jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' data/contributors-homepage-raw.json | jq --slurp '.' > data/contributors-homepage.json
 fi
 printf "done!\n"
-    
+
 printf "Fetching donors... "
 curl -f -s -o data/donors-raw.json https://opencollective.com/owncast/members/all.json || true
 if valid_response_file data/donors-raw.json; then
@@ -83,10 +102,11 @@ printf "Combining Contributors... "
 jq --argfile core data/contributors-core.json --argfile admin data/contributors-admin.json --argfile homepage data/contributors-homepage.json -n '$core + $admin + $homepage |unique_by(.login)' > data/contributors.json
 printf "done!\n"
 
-printf "Adding current development documentation... "
-mkdir -p static/api/development
+printf "Fetching current development documentation... "
 curl -f -s -o static/api/development/index-raw.html https://raw.githubusercontent.com/owncast/owncast/master/docs/api/index.html || true
-mv -f static/api/development/index-raw.html static/api/development/index.html
+if valid_response_file static/api/development/index-raw.html; then
+    mv -f static/api/development/index-raw.html static/api/development/index.html
+fi
 printf "done!\n"
 
 printf "Removing tmp files... "
