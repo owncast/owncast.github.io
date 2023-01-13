@@ -41,7 +41,11 @@ As long as the player supports it, it is recommended to open the homepage of you
 The player will automatically find the correct playlist and will start playing.
 This will guarantee forward compatibility if the way how Owncast publishes HLS is ever changed.
 
-However, if you _really_ need the HLS feed (i.e. for sharing your stream to OpenSlides), you can access the HLS feed directly via this URL: `http://your.host/hls/stream.m3u8`.
+However, if you need the HLS feed (i.e. for sharing your stream to a 3rd party player), you can access the HLS feed directly via this URL: `http://your.host/hls/stream.m3u8`.
+
+### Mute by default
+
+If you'd prefer your embedded video to be muted by default, you can add `?initiallyMuted=true` to the end of the `/embed/video` URL.
 
 ## Embedding chat
 
