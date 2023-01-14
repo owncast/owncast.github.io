@@ -4,7 +4,7 @@ set -o pipefail
 
 # This script fetches the dynamic content for the website.
 # If a request for fetching content was unsuccessful, data from a backup file is used instead.
-# This script should not fail after it finds a directory named “data”
+# This script should not fail with write permission to “data”, and " static/api/development" directories, and read permission to placeholder files.
 #
 # requires: jq, curl
 
@@ -19,6 +19,11 @@ valid_response_file() {
     _minimum_json_items=2
 
     _response_file_error=0
+    _placeholder_file=${1//-raw\./\.}
+
+    if ! [[ -f $_placeholder_file ]]; then
+        printf '\n> WARNING: placeholder file not found: %s\n' "$_placeholder_file"
+    fi
 
     if [[ -f $1 ]]; then
         _response_file_content=$(cat "$1")
@@ -48,9 +53,12 @@ valid_response_file() {
     fi
 
     if [[ _response_file_error -ne 0 ]]; then
-        _placeholder_file=${1//-raw\./\.}
-         echo "> will use the placeholder file instead: $_placeholder_file"
-        return 1
+        if ! [[ -f $_placeholder_file ]]; then
+            printf '\n> ... cannot continue without the placeholder file: %s\n' "$_placeholder_file"
+            exit 1
+        else
+            echo "> will use the placeholder file instead: $_placeholder_file"
+        fi
     fi
 }
 
