@@ -17,7 +17,7 @@ Here's some example usage and pricing for AWS S3:
 
 https://s3.console.aws.amazon.com/s3
 
-Uncheck "Block all public access" since you want all files to be readable. Leave the rest of the default values.
+Uncheck "Block all public access" since you want all files to be readable. Check "ACLs Enabled" to allow non-owner AWS users to manage objects in the bucket. Leave the rest of the default values.
 
 ## Create an expiration policy
 
