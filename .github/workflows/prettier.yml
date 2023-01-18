@@ -20,9 +20,26 @@ jobs:
 
     - name: Prettify code
       uses: creyD/prettier_action@v3.1
+      continue-on-error: true
       with:
         # This part is also where you can pass other options, for example:
         prettier_options: --write **/*.{html,md,css,scss}
         only_changed: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # The prettier step attempts to push automatically. However, it does no
+    # rebase before pushing, so if commits were pushed while prettier was
+    # running (which happens, e.g. due to automatic contributors.json update)
+    # the push fails. This step will re-attempt the push, but this time with
+    # a rebase.
+    # The `git restore` is necessary in case prettier changes code that
+    # isn't committed due to not being part of the current changes (see
+    # the `only_changed` option)
+    - name: Push with rebase
+      run: |
+        git restore .
+        git config user.email "actions@github.com"
+        git config user.name "GitHub Action"
+        git pull --rebase
+        git push
