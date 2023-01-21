@@ -6,7 +6,7 @@ menu:
     parent: "guides"
 ---
 
-If you have some Javascript you need to run when your Owncast web page loads, you can add it to the Javascript editor in the admin.
+If you have some Javascript you need to run when your Owncast web page loads, you can add it to the Javascript editor under the **General** settings page in the admin.
 
 {{<versionsupport feature="Adding custom Javascript" version="0.1.0">}}
 
