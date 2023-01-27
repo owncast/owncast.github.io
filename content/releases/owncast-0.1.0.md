@@ -31,19 +31,19 @@ We hope the addition of additional customization options in the admin will make 
 
 ### Webroot directory
 
-While the `webroot` directory will not be automatically deleted, as to save anything you may have put in there, it will no longer be used for anything and you are free to delete it yourself.
+While the `webroot` directory will not be automatically deleted, and any files you had previously manually put there will be safe, it will no longer be used for anything and you are free to delete it yourself when you're ready.
 
 ## Appearance customization
 
-The new appearance page in the Owncast admin allows you for an easier approach to customizing your instance. While you could, and still can, write your own CSS, the new page allows you to customize the appearance of your Owncast instance without writing any CSS by selecting colors other miscellaneous options.
+The new appearance page in the Owncast admin allows for an easier approach to customizing your instance. While you could, and still can, write your own CSS, the new page allows you to customize the appearance of your Owncast instance without writing any CSS by selecting colors other miscellaneous options.
 
-While not every single individual component or element can be customized via point-and-click, we hope this at least gives most people an easier way to get customization out of the box. Via CSS you can still customize anything you want and CSS variables can be set manually.
+While not every single individual component or element can be customized via point-and-click, we hope this at least gives most people a simpler to customize right out of the box. Via CSS you can still customize anything you want and CSS variables can be set manually.
 
 Note that any CSS you had written for previous releases of Owncast will not be compatible with the new version, as the entire web frontend changed.
 
 Read more about the appearance customization page in the [Appearance customization](/docs/appearance/) guide.
 
-## Custom Javascript
+## Insert custom Javascript
 
 Under the **General** settings page you can add custom Javascript to your Owncast instance's web page. Read more about this in the [documentation](/docs/custom-javascript/).
 
@@ -65,10 +65,22 @@ Read more details about custom emoji in the [documentation](/docs/chat/emoji/)
 
 As a participant in the chat you can now change your color, not just your name. The selection of colors can be customized via the appearance customization page.
 
+## Hide viewer count
+
+Some people prefer to not display a viewer count, and now that can be accomplished by turning it off in the admin under `General` settings.
+
 ## Host your own public assets
 
-If you need to copy your own images, fonts, css files or anything you need to make publicly available you can do so via the new "public" directory. Most people will not need this, but if you previously used to put assets in your `webroot` directory to make them publicly accessible, this would be the replacement of that.
+If you need to host your own images, fonts, css files or anything you need to make publicly available you can do so via the new `data/public` directory. Most people will not need this, but if you previously used to put assets in your `webroot` directory to make them publicly accessible, this would be the replacement of that.
 
 ## Admin pages
 
 Some admin pages have been combined and some URLs have changed. Particularly have a look at the "General" and the "Server config" pages to find additional sections.
+
+## Built-in Twitter notifications have been removed
+
+Primarily due to Twitter removing external API access to their service, but also due to Twitter being Twitter, this feature has been removed and will no longer be internally supported. If you still require this specific functionality you can use Webhooks to build something custom.
+
+---
+
+Paste changelog here.
