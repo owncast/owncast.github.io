@@ -24,7 +24,7 @@ If in testing you find there are things you used to be able to customize with Ow
 
 ### Docker image
 
-We are slowly deprecating the existing location of the Docker image. While it will still be available and updated for the next couple releases, you should migrate to `owncast/owncast` when you get a chance.
+We are slowly changing the location of the Docker image. While the [old location](https://hub.docker.com/repository/docker/gabekangas/owncast/) will still be available and updated for the next couple releases, you should migrate to [`owncast/owncast`](https://hub.docker.com/repository/docker/owncast/owncast/) when you get a chance.
 
 ### In progress release notes
 
