@@ -6,9 +6,6 @@ git clone https://github.com/owncast/owncast.git
 cd owncast || exit
 rm -rf static/components
 
-# TODO: Delete this line when webv2 merges into develop
-git checkout webv2
-
 cd web || exit
 pwd
 npm install
