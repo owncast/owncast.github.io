@@ -3,10 +3,10 @@ name: Hugo Build to GitHub Pages
 on:
   push:
     branches:
-    - 'master'
+      - "master"
   schedule:
     # Every six hours update the web site
-    - cron:  '0 */6 * * *'
+    - cron: "0 */6 * * *"
 
 jobs:
   deploy:
@@ -14,13 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: '0.74.2'
+          hugo-version: "0.74.2"
           extended: true
 
       - name: Install jq
@@ -29,17 +29,14 @@ jobs:
       - name: Fetch Core Contributors
         run: "curl https://api.github.com/repos/owncast/owncast/contributors?per_page=100 | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > data/contributors-core.json"
 
-      - name: Fetch Admin Contributors
-        run: "curl https://api.github.com/repos/owncast/owncast-admin/contributors?per_page=100 | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > data/contributors-admin.json"
-
       - name: Fetch Home Page Contributors
         run: "curl https://api.github.com/repos/owncast/owncast.github.io/contributors?per_page=100 | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > data/contributors-homepage.json"
 
       - name: Combine Contributors
-        run: "jq --argfile core data/contributors-core.json --argfile admin data/contributors-admin.json --argfile homepage data/contributors-homepage.json -n '$core + $admin + $homepage |unique_by(.login)' > data/contributors.json"
-      
+        run: "jq --argfile core data/contributors-core.json --argfile homepage data/contributors-homepage.json -n '$core + $admin + $homepage |unique_by(.login)' > data/contributors.json"
+
       - name: Fetch donors
-        run: "curl https://opencollective.com/owncast/members/all.json | jq 'map(.) | .[] | select(.role==\"BACKER\") | {login: .name, avatar_url: .image, html_url: .profile}' | jq --slurp '.' > data/donors.json"
+        run: 'curl https://opencollective.com/owncast/members/all.json | jq ''map(.) | .[] | select(.role=="BACKER") | {login: .name, avatar_url: .image, html_url: .profile}'' | jq --slurp ''.'' > data/donors.json'
 
       - name: Add current development documentation
         run: mkdir -p static/api/development && curl https://raw.githubusercontent.com/owncast/owncast/master/doc/api/index.html > static/api/development/index.html
