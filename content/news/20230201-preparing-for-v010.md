@@ -1,7 +1,7 @@
 ---
 title: "Preparing for v0.1.0 - With your help!"
 description: "As we get close to the next release everyone should be prepared for changes."
-date: 2023-01-15
+date: 2023-01-30
 draft: false
 images: []
 ---
