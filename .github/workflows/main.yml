@@ -33,7 +33,7 @@ jobs:
         run: "curl https://api.github.com/repos/owncast/owncast.github.io/contributors?per_page=100 | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > data/contributors-homepage.json"
 
       - name: Combine Contributors
-        run: "jq --argfile core data/contributors-core.json --argfile homepage data/contributors-homepage.json -n '$core + $admin + $homepage |unique_by(.login)' > data/contributors.json"
+        run: "jq --argfile core data/contributors-core.json --argfile homepage data/contributors-homepage.json -n '$core + $homepage |unique_by(.login)' > data/contributors.json"
 
       - name: Fetch donors
         run: 'curl https://opencollective.com/owncast/members/all.json | jq ''map(.) | .[] | select(.role=="BACKER") | {login: .name, avatar_url: .image, html_url: .profile}'' | jq --slurp ''.'' > data/donors.json'
