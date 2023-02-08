@@ -486,3 +486,34 @@ section {
     }
   }
 }
+
+.sponsors {
+  background: linear-gradient(30deg, #311c88 1%, #15132b);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: #ffffff70;
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    li {
+      margin: 0 1rem;
+      list-style-type: none;
+
+      img {
+        height: 3rem;
+        margin-left: 2rem;
+        margin-right: 2rem;
+
+        &:hover {
+          filter: drop-shadow(0.2rem 0.2rem 0.4rem #ffffff7d);
+        }
+      }
+    }
+  }
+}
