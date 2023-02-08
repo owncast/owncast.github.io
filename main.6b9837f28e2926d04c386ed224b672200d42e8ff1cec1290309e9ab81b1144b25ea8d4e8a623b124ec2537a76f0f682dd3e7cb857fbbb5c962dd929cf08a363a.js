@@ -136,41 +136,10 @@ const QUOTES = [
   },
   {
     quote:
-      "wow, i rented a linode server and managed to set up owncast in like 5 minutes. This is fun and very promising",
-    url: "https://twitter.com/stamp_gal/status/1349088683887104002",
-    name: "@stamp_gal",
-  },
-  {
-    quote:
-      "Want to stream without worrying about the music you're going to play? Just run OwnCast and have an equivalent to Twitch.",
-    url: "https://twitter.com/strycore/status/1347825083503427585",
-    name: "@strycore",
-  },
-  {
-    quote:
-      "This is exactly what I was looking for a couple of years ago. This might be a good way to break from Twitch.",
-    url: "https://twitter.com/veridical_22/status/1341916444909588481",
-    name: "@veridical_22",
-  },
-
-  {
-    quote:
       "I'm amazed, #owncast seems to perform as well as any proprietary platforms out there.",
     url: "https://fosstodon.org/@lopeztel/105466043426592961",
     name: "@lopeztel",
   },
-  {
-    quote: "Finally",
-    url: "https://old.reddit.com/r/selfhosted/comments/kgo6ct/selfhosted_live_video_streaming_server_with/gggfudh/",
-    name: "User digitalEarthling",
-  },
-  {
-    quote:
-      "many thanks for your work, owncast is exactly what we were looking for !",
-    url: "https://owncast.rocket.chat/channel/general?msg=jTGXEkNTMcqyNcDTs",
-    name: "Juju",
-  },
-
   {
     quote:
       "With new tools like Owncast, you can run a livestream for all the guests who can't make it to your event in person. And you can do so without giving up control of your content, or acceding to the whims of companies who might not have your best interest at heart.",
@@ -196,17 +165,6 @@ const QUOTES = [
     name: "Kyle Bronsdon",
   },
   {
-    quote:
-      "Owncast arrived right on time! I'm using it for my remote physics classes.",
-    url: "https://mamot.fr/@lutzray/105925070357006477",
-    name: "@lutzray",
-  },
-  {
-    quote: "Seriously, #owncast is amazing!",
-    url: "https://twitter.com/glider_space/status/1374856958650556417",
-    name: "@glider_space",
-  },
-  {
     quote: "Very professional.  I hope to see this for every city council.",
     url: "https://uelfte.club/@jannik/105985943638208608",
     name: "City council meeting using Owncast",
@@ -226,12 +184,6 @@ const QUOTES = [
   {
     quote:
       "Went from hearing about Owncast to having it up and running in a frighteningly short amount of time.",
-    url: "https://hexdsl.co.uk/log/20210507-owncast.html",
-    name: "HexDSL",
-  },
-  {
-    quote:
-      "The projects aim is simple. Provide a self-hosted alternative to Twitch. Sounds like one of those things that gets complicated fast doesn’t it? Well, you know what… they went and did it!",
     url: "https://hexdsl.co.uk/log/20210507-owncast.html",
     name: "HexDSL",
   },
