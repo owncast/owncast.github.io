@@ -68,3 +68,6 @@ Make sure you have Python and pip installed!
   {{< / highlight >}}
 - Run `s3cmd setlifecycle lifecycle_policy.xml s3://YOURBUCKETNAME`
 - Run `s3cmd info s3://YOURBUCKETNAME` and you should see `Expiration Rule: all objects in this bucket will expire in '1' day(s) after creation`. If so, you are now ready!
+
+## Rate limiting
+Please note that Contabo [has rate limiting](https://docs.contabo.com/docs/products/Object-Storage/technical-description/#limits) for public files in their Object Storage. Each file can be requested 250 times per second. This sound like a lot, but keep in mind you might hit this when hosting high traffic streams.
