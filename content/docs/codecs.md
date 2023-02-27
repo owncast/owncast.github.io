@@ -53,6 +53,8 @@ As of July 2019 Kepler, Maxwell, Pascal, Volta and Turing generation GPUs suppor
 
 [VA-API](#va-api) is supported on AMD and ATI GPUs by the [libva-mesa-driver](https://is.gd/ZvSdpo).
 
+Note: ffmpeg 5 is not currently supported with VA-API. Please use a version less than 5. Read the [issue](https://github.com/owncast/owncast/issues/2071) about this particular issue to learn more.
+
 ## Compatible codecs/libraries
 
 <!-- ### Intel QuickSync
@@ -70,6 +72,8 @@ Links:
 
 VA-API (video acceleration API) is a layer to support hardware accelerated encoding on linux. You need the `libva` library installed for it to work. VA-API is not compatible with ARM chipsets.
 
+Note: ffmpeg 5 is not currently supported with VA-API. Please use a version less than 5. Read the [issue](https://github.com/owncast/owncast/issues/2071) about this particular issue to learn more.
+
 Links:
 
 - [VA-API at Linux Reviews](https://linuxreviews.org/VAAPI)
@@ -80,6 +84,8 @@ Links:
 OpenMAX is a unified abstraction layer that allows access to hardware that otherwise requires vendor specific APIs. It will work out of the box on modern Raspberry Pi's running a recent version of the [Raspberry Pi OS](https://www.raspberrypi.org/documentation/installation/noobs.md) operating system.
 
 Verify your copy of ffmpeg has omx support by looking at the [ffmpeg](#ffmpeg) instructions below. If `h264_omx` is in the list you should be good to go.
+
+Note: OpenMAX support has unfortunately been disconnected with the Raspberry Pi OS. To get hardware accelerated encoding working on a Raspberry Pi it will require running an older 32 bit version of the operating system.
 
 ### NVIDIA Encoder (nvenc)
 
