@@ -75,7 +75,7 @@ If you need to host your own images, fonts, css files or anything you need to ma
 
 ## Admin pages
 
-Some admin pages have been combined and some URLs have changed. Particularly have a look at the "General" and the "Server config" pages to find additional sections.
+Some admin pages have been combined and some URLs have changed. Particularly have a look at the "General" and the "Server config" pages to find additional sections like S3 Object Storage and custom CSS.
 
 ## Built-in Twitter notifications have been removed
 
