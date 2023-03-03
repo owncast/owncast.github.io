@@ -26,7 +26,7 @@ jobs:
       - name: Install jq
         uses: r26d/jq-action@master
 
-      - name: Fetch Core Contributors
+      - name: Fetch Contributors
         run: "curl https://api.github.com/repos/owncast/owncast/contributors?per_page=100 | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > data/contributors-core.json"
 
       - name: Fetch Home Page Contributors
@@ -41,7 +41,11 @@ jobs:
       - name: Add current development documentation
         run: mkdir -p static/api/development && curl https://raw.githubusercontent.com/owncast/owncast/master/doc/api/index.html > static/api/development/index.html
 
+      - name: Generate project roadmap
+        run: cd scripts && ./build-roadmap --accessToken ${{ secrets.GITHUB_TOKEN }} --milestone 18 > ../content/roadmap/index.html
+
       - name: Commit changes
+
         uses: EndBug/add-and-commit@v5
         with:
           author_name: Owncast

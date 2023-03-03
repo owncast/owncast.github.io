@@ -1,0 +1,138 @@
+---
+title: "Owncast public roadmap"
+description: "While nothing is set in stone, Owncast tries to set a relatively clear roadmap for future work and features. This enables the project to discuss things far in advance to make the best possible decisions as well as allowing Owncast users to know what types of updates they can expect."
+tags: ["roadmap", "planning", "features", "releases"]
+---
+
+<link rel="stylesheet" href="roadmap.css" />
+
+<section class="introduction">
+  <p>
+    While nothing is set in stone, Owncast tries to set a relatively clear
+    roadmap for future work and features. This enables the project to discuss
+    things far in advance to make the best possible decisions as well as
+    allowing Owncast users to know what types of updates they can expect.
+  </p>
+  <p>
+    As time goes on planning for specific releases get more detailed, and it's
+    very common for additional, smaller, releases to get slipped in between
+    larger features to fix bugs and address feedback.
+  </p>
+</section>
+
+<hr />
+
+<div class="roadmap-page-container">
+  <section class="current-milestone">
+    <h2>Current Milestone: {{.Milestone.Title}}</h2>
+    There are <strong>{{.Milestone.OpenIssues}}</strong> open issues left to be addressed, with <strong>{{.Milestone.ClosedIssues}}</strong> previously completed and closed.
+    <a href="{{.Milestone.HtmlURL}}" target="_blank">View more details and interact with this milestone on Github.</a>
+    <h3>Overview and Goals</h3>
+    <p>
+      {{.Description}}
+    </p>
+
+    <h3>In Progress</h3>
+    These items are assigned to a person and are being worked on.
+    <div class="leaderboard__profiles">
+    {{range .InProgress}}
+    <a href="{{.HtmlURL}}" target="_blank">
+      <article class="leaderboard__profile">
+        <img
+          src="{{.Assignee.AvatarURL}}"
+          alt="{{.Assignee.Login}}"
+          class="leaderboard__picture"
+        />
+        <span class="leaderboard__name"
+          >{{.Title}}</span
+        >
+        <span class="leaderboard__value">
+        {{ range .Labels }}
+          <span class="issue-tag" style="background-color: #{{.Color}}">{{.Name}}</span>
+        {{end}}
+        </span>
+      </article>
+    </a>
+    {{end}}
+
+    </div>
+
+   <h3>To Do</h3>
+   These issues are not currently assigned to anybody and still need to be completed for a release to take place.
+    <div class="leaderboard__profiles">
+    {{range .Todo}}
+        <a href="{{.HtmlURL}}" target="_blank">
+
+      <article class="leaderboard__profile">
+        <img
+          src="https://owncast.online/images/logo.svg"
+          class="leaderboard__picture"
+        />
+        <span class="leaderboard__name"
+          >{{.Title}}</span
+        >
+        <span class="leaderboard__value">
+        {{ range .Labels }}
+          <span class="issue-tag" style="background-color: #{{.Color}}">{{.Name}}</span>
+        {{end}}
+        </span>
+      </article>
+      </a>
+    {{end}}
+
+    <a href="/help">Perhaps you can help with the above issues?</a>
+    </div>
+
+  </section>
+
+  <section id="timeline">
+    <article>
+      <div class="inner">
+        <h2>v0.1.0 New web interface</h2>
+        <p>
+          A brand new web interface for Owncast to make it easier to use,
+          maintain and contribute to.
+        </p>
+      </div>
+    </article>
+    <article>
+      <div class="inner">
+        <span class="date"> </span>
+        <h2>v0.1.1 Feedback updates & bug fixes</h2>
+        <p>
+          With all the big changes in v0.1.1 a dedicated release for bug fixes
+          and addressing feedback is likely needed.
+        </p>
+      </div>
+    </article>
+    <article>
+      <div class="inner">
+        <span class="date"> </span>
+        <h2>v0.2.0 Backend refactor and feature prep</h2>
+        <p>Much like the frontend was refactored, it's time to reorganize and clean up the architecture of the backend.</p>
+      </div>
+    </article>
+    <article>
+      <div class="inner">
+        <span class="date"> </span>
+        <h2>v0.3.0 Scheduled streams</h2>
+        <p>Add the ability to schedule future streams and enable features that take advantage of scheduling.</p>
+      </div>
+    </article>
+    <article>
+      <div class="inner">
+        <span class="date"> </span>
+        <h2>v0.4.0 Stream replays</h2>
+        <p>Add support for viewers being able to replay previous streams.</p>
+      </div>
+    </article>
+    <article>
+      <div class="inner">
+        <span class="date"> </span>
+        <h2>v0.5.0 Federated Instance Follows</h2>
+        <p>Allow an Owncast instance to follow other Owncast instances and federate stream state and schedule.</p>
+      </div>
+    </article>
+  </section>
+</div>
+
