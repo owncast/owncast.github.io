@@ -17,7 +17,6 @@ $navbar-dark-color: $body-color-dark;
 $navbar-dark-hover-color: $link-color-dark;
 $navbar-dark-active-color: $link-color-dark;
 
-
 /** Theme styles */
 @media (prefers-color-scheme: dark) {
   body {
@@ -120,8 +119,6 @@ $navbar-dark-active-color: $link-color-dark;
   // NAV BAR COLORS
   /////////////////
 
-
-
   body .alert-primary a {
     color: $body-bg-dark;
   }
@@ -163,8 +160,6 @@ $navbar-dark-active-color: $link-color-dark;
     color: $body-color-dark;
   }
 
-  
-
   body .content .btn-link {
     color: $link-color-dark;
   }
@@ -172,7 +167,6 @@ $navbar-dark-active-color: $link-color-dark;
   body .content .btn-link:hover {
     color: $link-color-dark;
   }
-
 
   body .logo-light {
     display: none !important;
@@ -191,17 +185,16 @@ $navbar-dark-active-color: $link-color-dark;
   }
 
   @include media-breakpoint-up(lg) {
-    body  {
+    body {
       .docs-sidebar {
         order: 0;
-        border-color: rgba(255,255,255,.05);
+        border-color: rgba(255, 255, 255, 0.05);
         // border-right: 1px solid $border-dark;
       }
       .docs-toc {
-        border-color: rgba(255,255,255,.05);
+        border-color: rgba(255, 255, 255, 0.05);
       }
     }
-
   }
 
   body .docs-navigation {
@@ -225,9 +218,6 @@ $navbar-dark-active-color: $link-color-dark;
   body blockquote {
     border-left: 3px solid $border-dark;
   }
-
-
-  
 
   body .docs-links,
   body .docs-toc {
@@ -310,12 +300,17 @@ $navbar-dark-active-color: $link-color-dark;
   }
 
   body {
-    h1,.h1,h2,.h2, h3,.h3 {
+    h1,
+    .h1,
+    h2,
+    .h2,
+    h3,
+    .h3 {
       color: $pink-500;
     }
-  
+
     .logo-label {
-      font-weight: 100;
+      font-weight: 300;
     }
     .logo-container {
       margin-right: 10px;
@@ -326,7 +321,7 @@ $navbar-dark-active-color: $link-color-dark;
       background-color: $black;
       .footer-logo-container {
         filter: none;
-        opacity: .5;
+        opacity: 0.5;
       }
       li {
         a {
@@ -337,23 +332,28 @@ $navbar-dark-active-color: $link-color-dark;
   }
 }
 
-
 body.home {
-  h1,.h1,h2,.h2, h3,.h3 {
+  h1,
+  .h1,
+  h2,
+  .h2,
+  h3,
+  .h3 {
     color: $pink-500;
   }
-  h2,.h2 {
+  h2,
+  .h2 {
     font-size: calc(1.325rem + 0.75vw);
   }
   .navbar {
     background: #000; //$body-bg-dark;
-    border-bottom: 1px solid rgba(120, 113, 255, .2);
-  }   
+    border-bottom: 1px solid rgba(120, 113, 255, 0.2);
+  }
   .navbar .btn-link {
     color: $navbar-dark-color;
   }
   .logo-label {
-    font-weight: 100;
+    font-weight: 300;
     font-size: 1.5em;
   }
   .logo-container {
@@ -434,9 +434,9 @@ body.home {
     background-color: $black;
     .footer-logo-container {
       filter: none;
-      opacity: .65;
+      opacity: 0.65;
     }
-    
+
     li {
       a {
         color: $gray-100;
