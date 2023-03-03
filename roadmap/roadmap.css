@@ -4,6 +4,10 @@
   }
 }
 
+body {
+    font-weight: 400;
+}
+
 section {
   margin-left: 2vw;
   margin-right: 2vw;
@@ -59,24 +63,6 @@ section#timeline article div.inner {
   }
 }
 
-/* section#timeline article div.inner span.date {
-    display: block;
-    width: 60px;
-    height: 50px;
-    padding: 5px 0;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    margin: 0 0 0 -32px;
-    border-radius: 100%;
-    font-size: 12px;
-    font-weight: 900;
-    text-transform: uppercase;
-    background: #25303B;
-    color: rgba(255,255,255,0.5);
-    border: 2px solid rgba(255,255,255,0.2);
-    box-shadow: 0 0 0 7px #25303B;
-  } */
 section#timeline article div.inner span.date span {
   display: block;
   text-align: center;
@@ -285,22 +271,9 @@ section#timeline article:nth-child(6) div.inner h2:after {
   border-radius: 5px;
   margin: 2px;
   text-shadow: 1 1 rgba(0, 0, 0, 0.9);
+  text-transform: uppercase;
 }
 
-/* .leaderboard__value > span {
-    opacity: 0.8;
-    font-weight: 600;
-    font-size: 13px;
-    margin-left: 3px;
-} */
-/* body {
-    margin: 0;
-    background-color: #eaeaea;
-    display: grid;
-    height: 100vh;
-    place-items: center;
-    font-family: 'Source Sans Pro', sans-serif;
-} */
 .leaderboard {
   box-shadow: 0 0 40px -10px rgba(0, 0, 0, 0.4);
 }
