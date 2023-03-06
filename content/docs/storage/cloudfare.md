@@ -1,6 +1,6 @@
 ---
 title: "Cloudfare R2"
-description: "Zero egress fee object storage"
+description: "Cloudflare R2 Object Storage is S3-compatible"
 date: 2022-10-04T18:20:28+00:00	
 lastmod: 2023-03-02T12:00:00+00:00
 draft: false
@@ -10,14 +10,18 @@ toc: true
 type: subpages
 ---
 
-Zero egress fee object storage
+Cloudflare R2 Object Storage is S3-compatible
 
-[Cloudfare R2](https://www.cloudflare.com/en-gb/products/r2/) gives you the freedom to create the multi-cloud architectures you desire with an S3-compatible global object storage. You pay no egress charges for data accessed from R2.
+[Cloudfare R2](https://www.cloudflare.com/en-gb/products/r2/) gives you the freedom to create the multi-cloud architectures you desire with an S3-compatible global object storage. 
 
-Here's an example of usage and pricing for Cloudflare R2:
+## Pricing
+
+R2 provides zero-cost egress for stored objects — no matter your request rate
+
+Here's a snapshot of usage and pricing for Cloudflare R2:
 {{< img src="/docs/img/cloudflare-r2-pricing.png" align="center">}}
 
-### Create an R2 Bucket
+## Create an R2 Bucket
 
 1. Before creating a bucket, you have to purchase the R2 plan in the Cloudflare dahboard [Purchase R2](https://www.cloudflare.com/pg-lp/r2/)
 
@@ -25,7 +29,7 @@ Here's an example of usage and pricing for Cloudflare R2:
 
 3. Enter your preferred unique bucket name > Click "Create bucket"
 
-### Generate an S3 Auth Token
+## Generate an S3 Auth Token
 
 1. In **Account Home**, select R2
 2. Select **Manage R2 API Tokens** on the right side of the dashboard
