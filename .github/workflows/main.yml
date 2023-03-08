@@ -51,7 +51,7 @@ jobs:
           author_name: Owncast
           author_email: owncast@owncast.online
           message: "Update dynamic content"
-          add: "static/api/development/index.html data/contributors.json"
+          add: "static/api/development/index.html data/contributors.json content/roadmap/index.html"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
