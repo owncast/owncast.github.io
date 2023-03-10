@@ -57,6 +57,13 @@ section#timeline article div.inner {
   border-radius: 6px;
 }
 
+section#timeline article div.inner a {
+  color: currentColor;
+  text-decoration-line: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.2);
+  text-decoration-thickness: 0.1rem;
+}
+
 @media (max-width: 800px) {
   section#timeline article div.inner {
     width: 80%;

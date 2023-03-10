@@ -25,8 +25,12 @@ tags: ["roadmap", "planning", "features", "releases"]
 <div class="roadmap-page-container">
   <section class="current-milestone">
     <h2>Current Milestone: {{.Milestone.Title}}</h2>
-    There are <strong>{{.Milestone.OpenIssues}}</strong> open issues left to be addressed, with <strong>{{.Milestone.ClosedIssues}}</strong> previously completed and closed.
-    <a href="{{.Milestone.HtmlURL}}" target="_blank">View more details and interact with this milestone on Github.</a>
+    There are <strong>{{.Milestone.OpenIssues}}</strong> open issues left to be
+    addressed, with <strong>{{.Milestone.ClosedIssues}}</strong> previously
+    completed and closed.
+    <a href="{{.Milestone.HtmlURL}}" target="_blank"
+      >View more details and interact with this milestone on Github.</a
+    >
     <h3>Overview and Goals</h3>
     <p>
       {{.Description}}
@@ -35,54 +39,56 @@ tags: ["roadmap", "planning", "features", "releases"]
     <h3>In Progress</h3>
     These items are assigned to a person and are being worked on.
     <div class="leaderboard__profiles">
-    {{range .InProgress}}
-    <a href="{{.HtmlURL}}" target="_blank">
-      <article class="leaderboard__profile">
-        <img
-          src="{{.Assignee.AvatarURL}}"
-          alt="{{.Assignee.Login}}"
-          class="leaderboard__picture"
-        />
-        <span class="leaderboard__name"
-          >{{.Title}}</span
-        >
-        <span class="leaderboard__value">
-        {{ range .Labels }}
-          <span class="issue-tag" style="background-color: #{{.Color}}">{{.Name}}</span>
-        {{end}}
-        </span>
-      </article>
-    </a>
-    {{end}}
-
-    </div>
-
-   <h3>To Do</h3>
-   These issues are not currently assigned to anybody and still need to be completed for a release to take place.
-    <div class="leaderboard__profiles">
-    {{range .Todo}}
-        <a href="{{.HtmlURL}}" target="_blank">
-
-      <article class="leaderboard__profile">
-        <img
-          src="https://owncast.online/images/logo.svg"
-          class="leaderboard__picture"
-        />
-        <span class="leaderboard__name"
-          >{{.Title}}</span
-        >
-        <span class="leaderboard__value">
-        {{ range .Labels }}
-          <span class="issue-tag" style="background-color: #{{.Color}}">{{.Name}}</span>
-        {{end}}
-        </span>
-      </article>
+      {{ range.InProgress }}
+      <a href="{{.HtmlURL}}" target="_blank">
+        <article class="leaderboard__profile">
+          <img
+            src="{{.Assignee.AvatarURL}}"
+            alt="{{.Assignee.Login}}"
+            class="leaderboard__picture"
+          />
+          <span class="leaderboard__name">{{.Title}}</span>
+          <span class="leaderboard__value">
+            {{ range.Labels }}
+            <span
+              class="issue-tag"
+              style="background-color: #{{.Color}}"
+              >{{.Name}}</span
+            >
+            {{ end }}
+          </span>
+        </article>
       </a>
-    {{end}}
-
-    <a href="/help">Perhaps you can help with the above issues?</a>
+      {{ end }}
     </div>
 
+    <h3>To Do</h3>
+    These issues are not currently assigned to anybody and still need to be
+    completed for a release to take place.
+    <div class="leaderboard__profiles">
+      {{ range.Todo }}
+      <a href="{{.HtmlURL}}" target="_blank">
+        <article class="leaderboard__profile">
+          <img
+            src="https://owncast.online/images/logo.svg"
+            class="leaderboard__picture"
+          />
+          <span class="leaderboard__name">{{.Title}}</span>
+          <span class="leaderboard__value">
+            {{ range.Labels }}
+            <span
+              class="issue-tag"
+              style="background-color: #{{.Color}}"
+              >{{.Name}}</span
+            >
+            {{ end }}
+          </span>
+        </article>
+      </a>
+      {{ end }}
+
+      <a href="/help">Perhaps you can help with the above issues?</a>
+    </div>
   </section>
 
   <section id="timeline">
@@ -92,6 +98,9 @@ tags: ["roadmap", "planning", "features", "releases"]
         <p>
           A brand new web interface for Owncast to make it easier to use,
           maintain and contribute to.
+          <a href="https://github.com/owncast/owncast/milestone/18"
+            >See milestone.</a
+          >
         </p>
       </div>
     </article>
@@ -102,6 +111,9 @@ tags: ["roadmap", "planning", "features", "releases"]
         <p>
           With all the big changes in v0.1.1 a dedicated release for bug fixes
           and addressing feedback is likely needed.
+          <a href="https://github.com/owncast/owncast/milestone/21"
+            >See milestone.</a
+          >
         </p>
       </div>
     </article>
@@ -109,30 +121,53 @@ tags: ["roadmap", "planning", "features", "releases"]
       <div class="inner">
         <span class="date"> </span>
         <h2>v0.2.0 Backend refactor and feature prep</h2>
-        <p>Much like the frontend was refactored, it's time to reorganize and clean up the architecture of the backend.</p>
+        <p>
+          Much like the frontend was refactored, it's time to reorganize and
+          clean up the architecture of the backend.
+          <a href="https://github.com/owncast/owncast/milestone/22"
+            >See milestone.</a
+          >
+        </p>
       </div>
     </article>
     <article>
       <div class="inner">
         <span class="date"> </span>
         <h2>v0.3.0 Scheduled streams</h2>
-        <p>Add the ability to schedule future streams and enable features that take advantage of scheduling.</p>
+        <p>
+          Add the ability to schedule future streams and enable features that
+          take advantage of scheduling.
+          <a href="https://github.com/owncast/owncast/milestone/20"
+            >See milestone.</a
+          >
+        </p>
       </div>
     </article>
     <article>
       <div class="inner">
         <span class="date"> </span>
         <h2>v0.4.0 Stream Clips</h2>
-        <p>Add support for viewers being able to replay clips of previous streams.</p>
+        <p>
+          Add support for viewers being able to replay clips of previous
+          streams.
+          <a href="https://github.com/owncast/owncast/milestone/5"
+            >See milestone.</a
+          >
+        </p>
       </div>
     </article>
     <article>
       <div class="inner">
         <span class="date"> </span>
         <h2>v0.5.0 Federated Instance Follows</h2>
-        <p>Allow an Owncast instance to follow other Owncast instances and federate stream state and schedule.</p>
+        <p>
+          Allow an Owncast instance to follow other Owncast instances and
+          federate stream state and schedule.
+          <a href="https://github.com/owncast/owncast/milestone/23"
+            >See milestone.</a
+          >
+        </p>
       </div>
     </article>
   </section>
 </div>
-
