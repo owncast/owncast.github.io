@@ -14,6 +14,8 @@ Cloudflare R2 Object Storage is S3-compatible
 
 [Cloudfare R2](https://www.cloudflare.com/en-gb/products/r2/) gives you the freedom to create the multi-cloud architectures you desire with an S3-compatible global object storage. 
 
+><font size="2.5" color="#ff0f0f"> **:warning:  This provider doesn't currently support object lifecycles so if you don't handle the deletion of unused objects yourself you'll be paying for more storage than necessary.**</font>
+
 ## Pricing
 
 R2 provides zero-cost egress for stored objects — no matter your request rate
