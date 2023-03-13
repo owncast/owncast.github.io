@@ -225,11 +225,6 @@
     "html_url": "https://github.com/bgildson"
   },
   {
-    "login": "bitspill",
-    "avatar_url": "https://avatars.githubusercontent.com/u/6021929?v=4",
-    "html_url": "https://github.com/bitspill"
-  },
-  {
     "login": "brokenintuition",
     "avatar_url": "https://avatars.githubusercontent.com/u/7634845?v=4",
     "html_url": "https://github.com/brokenintuition"
@@ -363,6 +358,11 @@
     "login": "imgbot[bot]",
     "avatar_url": "https://avatars.githubusercontent.com/in/4706?v=4",
     "html_url": "https://github.com/apps/imgbot"
+  },
+  {
+    "login": "jackgris",
+    "avatar_url": "https://avatars.githubusercontent.com/u/2231462?v=4",
+    "html_url": "https://github.com/jackgris"
   },
   {
     "login": "jahway603",
