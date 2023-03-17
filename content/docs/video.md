@@ -117,3 +117,7 @@ More stream output variants requires more disk space, since it's another copy of
 ## Hardware accelerated video encoding
 
 If you are running on physical hardware you may be able to increase the performance of your Owncast instance by using your hardware along with a compatible codec, taking the heavy load off of your CPU. There is no guarantee all hardware configurations, drivers or operating systems will work and it may take some effort on your part to install all of the additional software required to get it working. Read more about what is supported, and how, at our [hardware accelerated encoding with additional codecs](/docs/codecs) document.
+
+## Resource and requirement examples
+
+Visit the [resources and requirements](/docs/resources-requirements/) page to see some examples of what you can expect from your server hardware and network connection and how it may affect your viewers.
