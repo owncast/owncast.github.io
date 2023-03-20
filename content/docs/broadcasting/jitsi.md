@@ -1,10 +1,6 @@
 ---
 title: "Jitsi"
 description: "Jitsi is an open source video conferencing provider."
-draft: false
-images: []
-weight: 030
-toc: false
 type: subpages
 ---
 
