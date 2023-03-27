@@ -25,7 +25,7 @@ map $http_upgrade $connection_upgrade {
 }
 {{</ highlight >}}
 
-You'll end up with a configuration that looks somewhat like the following when you're done setting up NGINX.
+You'll end up with a configuration that looks somewhat like the following when you're done setting up NGINX. The below should be added to `/etc/nginx/sites-available/my.site.com.conf` and enabled with `ln /etc/nginx/sites-available/my.site.com.conf /etc/nginx/sites-enabled/my.site.com.conf` and tested with `sudo nginx -t`, then restart `sudo service nginx restart`
 
 {{< highlight nginx >}}
 server {
