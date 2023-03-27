@@ -13,7 +13,7 @@ NGINX is a popular web server used as a reverse proxy with free Let's Encrypt ce
 
 People often look over the need to tell NGINX to proxy websockets correctly, leading to chat being disabled. Please read the quick [documentation by nginx around websocket support](https://nginx.org/en/docs/http/websocket.html) to make sure you're doing it properly.
 
-Essentially, you'll need to edit /etc/nginx/nginx.conf to add the following map block to the http section
+Essentially, you'll need to edit `/etc/nginx/nginx.conf` to add the following map block to the http section
 {{< highlight nginx >}}
 http {
 ...
@@ -25,7 +25,7 @@ map $http_upgrade $connection_upgrade {
 }
 {{</ highlight >}}
 
-You'll end up with a configuration that looks somewhat like the following when you're done setting up NGINX. The below should be added to `/etc/nginx/sites-available/my.site.com.conf` and enabled with `ln /etc/nginx/sites-available/my.site.com.conf /etc/nginx/sites-enabled/my.site.com.conf` and tested with `sudo nginx -t`, then restart `sudo service nginx restart`
+You'll end up with a configuration that looks somewhat like the following when you're done setting up NGINX. The below should be added to `/etc/nginx/sites-available/my.site.com.conf` and enabled with `ln /etc/nginx/sites-available/my.site.com.conf /etc/nginx/sites-enabled/my.site.com.conf` and tested with `sudo nginx -t`, then restarted `sudo service nginx restart`
 
 {{< highlight nginx >}}
 server {
