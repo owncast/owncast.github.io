@@ -22,7 +22,7 @@ The following is a list of events you can get notified about.
 | [STREAM_STARTED](#stream_started)       | an incoming RTMP stream is detected                                                            |
 | [STREAM_STOPPED](#stream_stopped)       | an incoming RTMP stream disconnects (e.g. OBS stops)                                           |
 | [VISIBILITY-UPDATE](#visibility-update) | a previously sent chat message becomes visible/invisible (set by an Administrator/Moderator)   |
-
+| [STREAM_TITLE_UPDATED](#stream_title_updated)       | the stream title is updated                   |
 
 ### How to accept webhooks
 
@@ -181,6 +181,21 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 }
 ```
 - `ids` is a list of IDs of messages that had their visibility changed.
+
+#### STREAM_TITLE_UPDATED
+
+```json
+{
+  "type": "STREAM_TITLE_UPDATED",
+  "eventData": {
+    "id": "DmeikEf4Rz",
+    "name": "New Owncast Server",
+    "streamTitle": "Test stream title change",
+    "summary": "This is a new live video streaming server powered by Owncast.",
+    "timestamp": "2023-03-27T21:50:10.121391094-07:00"
+  }
+}
+```
 
 ### clientId vs. user.id
 
