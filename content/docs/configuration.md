@@ -10,6 +10,8 @@ toc: true
 
 Configuration is done through the Owncast administration page located on your server under `/admin`. The login username is `admin` and the password is your stream key, the default being `abc123`.
 
+**It's highly encouraged to change both your stream key and your admin passwords immediately after installation by visiting `/admin/config/server/`**
+
 Some common items many people would want to update after installing Owncast are:
 
 - Your site name, logo, description and external links that are displayed on the [web site](/docs/website).
