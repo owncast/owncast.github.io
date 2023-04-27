@@ -4,7 +4,7 @@ description: "Automatically have Owncast setup on a Hetzner Cloud server"
 type: docs
 ---
 
-Using the Owncast _1-Click-Install_ on Hetzner Cloud apps you can get Owncast installed and configured with SSL support easily. Follow the below steps to get up and running.
+Using the Owncast app on Hetzner Cloud you can get Owncast installed and configured with SSL support easily. Follow the below steps to get up and running.
 
 ## What you need
 
