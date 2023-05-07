@@ -22,6 +22,17 @@ Using browser push notifications your viewers can choose to be notified each tim
 
 Not all browser support this feature, and browser that do may handle it differently. Brave Browser, for example, require you to choose the duration the notifications are valid. They will likely want to select "Forever" to keep the notification active.
 
+### Enabling browser notifications on iOS
+
+You can request to be notified when a stream goes live on iOS by following these steps:
+
+1. Open Safari and navigate to your Owncast instance.
+2. Tap the share icon at the bottom of your browser.
+3. Tap "Add to Home Screen".
+4. Tap the new Owncast icon on your home screen.
+5. Press the "Notify" button.
+6. Tap "Allow" when prompted.
+
 ### Browser extension
 
 Another suggested way to receive browser notifications from any number of streams is by using the
