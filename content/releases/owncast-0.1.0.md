@@ -15,6 +15,8 @@ The first commit to Owncast was May 23, 2020. It's been a wild ride seeing what 
 
 Owncast v0.1.0 is a large update with many changes to the web interface. It is a complete rewrite of the frontend and like any rewrite it results in many improvements, but also room for bugs and regressions. Please report any issues you find to the [issue tracker](https://github.com/owncast/owncast/issues).
 
+This release is made up of over [380 completed tasks](https://github.com/owncast/owncast/milestone/18?closed=1). That's not 380 commits, 380 standalone tasks. That's so much stuff. If you're interested in some behind the scenes there's blog posts about [Owncast design](https://gabekangas.com/blog/2023/02/owncast-v0.1.0-retrospective-redesign/) and [the web project](https://gabekangas.com/blog/2023/02/owncast-v0.1.0-retrospective-frontend-web-rewrite/).
+
 ## A special thank you to the contributors for this release
 
 This release was a large undertaking and would not have been possible without the help of all the people who pitched in their skills to make it happen. A full list is at the bottom of these release notes.
@@ -105,7 +107,7 @@ Primarily due to Twitter removing external API access to their service, but also
 
 # Changelog
 
-## [[0.1.0](https://github.com/owncast/owncast/milestone/18)] - 2023-05-23
+## [[0.1.0](https://github.com/owncast/owncast/milestone/18)] - 2023-05-30 aka "Gabe's Birthday Release"
 
 ## Upgrade instructions from 0.0.13
 
