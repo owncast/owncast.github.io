@@ -1098,7 +1098,8 @@ These steps should help you, but you may need to contact Twitter directly if you
 \u003cli\u003eGenerate bearer token.\u003c/li\u003e
 \u003c/ol\u003e
 \u003cp\u003eAfter you\u0026rsquo;ve gone through all the Twitter setup, paste the API key, API secret, access token, access token secret, and the bearer token into the Owncast configuration.\u003c/p\u003e
-`},{id:26,href:"/docs/resources-requirements/",title:"Resources and requirements",description:"There is no hard and fast rule for how much resources Owncast will use, since it depends on your configuration and requirements, but here are some examples.",content:`\u003cp\u003eLet\u0026rsquo;s use this single example to illustrate how your configuration can impact your server\u0026rsquo;s resources, and most importantly, your viewers\u0026rsquo; experience. It\u0026rsquo;s a little simplistic and the actual numbers can vary in real life, but it should help answer the question of \u0026ldquo;approximately how much bandwidth and CPU will Owncast use?\u0026rdquo;\u003c/p\u003e
+`},{id:26,href:"/docs/resources-requirements/",title:"Resources and requirements",description:"There is no hard and fast rule for how much resources Owncast will use, since it depends on your configuration and requirements, but here are some examples.",content:`\u003cp\u003eIt\u0026rsquo;s impossible to give a single answer about what the requirements are for you to run Owncast, or what it will cost. It\u0026rsquo;s your server, and it\u0026rsquo;s completely up to you how you choose to configure it, and in what environments you choose to run it. Every environment has different prices and features.\u003c/p\u003e
+\u003cp\u003eHowever, let\u0026rsquo;s use an example to illustrate how your configuration can impact your server\u0026rsquo;s resources, and most importantly, your viewers\u0026rsquo; experience. It\u0026rsquo;s a little simplistic and the actual numbers can vary in real life, but it could help answer the question of \u0026ldquo;approximately how much bandwidth and CPU will Owncast use?\u0026rdquo;\u003c/p\u003e
 \u003ch2 id="example-scenario"\u003eExample Scenario\u003c/h2\u003e
 \u003cp\u003eYou\u0026rsquo;ve configured your broadcasting source (such as OBS) to stream to your Owncast instance at \u003cstrong\u003e5000kbps\u003c/strong\u003e. You have \u003cstrong\u003e25 viewers\u003c/strong\u003e. \u003cstrong\u003e5\u003c/strong\u003e of them are on slow or mobile networks, \u003cstrong\u003e17\u003c/strong\u003e of them have fast, stable internet, and \u003cstrong\u003e3\u003c/strong\u003e of them have fast internet most of the time but the speed fluctuates. All 25 viewers watched an entire stream that lasts two hours. You have a hosting provider that gives you 4TB of bandwidth per month.\u003c/p\u003e
 \u003ch3 id="offer-a-high-and-low-quality-option"\u003eOffer a high and low quality option\u003c/h3\u003e
@@ -1145,11 +1146,11 @@ These steps should help you, but you may need to contact Twitter directly if you
 \u003ctbody\u003e
 \u003ctr\u003e
 \u003ctd\u003e5000kbps\u003c/td\u003e
-\u003ctd\u003eSome\u003c/td\u003e
+\u003ctd\u003eSome (It matches the input)\u003c/td\u003e
 \u003c/tr\u003e
 \u003ctr\u003e
 \u003ctd\u003e1500kbps\u003c/td\u003e
-\u003ctd\u003eMore\u003c/td\u003e
+\u003ctd\u003eMore (CPU needs to be used to compress the video)\u003c/td\u003e
 \u003c/tr\u003e
 \u003c/tbody\u003e
 \u003c/table\u003e
@@ -1208,7 +1209,7 @@ These steps should help you, but you may need to contact Twitter directly if you
 \u003ctbody\u003e
 \u003ctr\u003e
 \u003ctd\u003e5000kbps\u003c/td\u003e
-\u003ctd\u003eAlmost none\u003c/td\u003e
+\u003ctd\u003eLittle\u003c/td\u003e
 \u003c/tr\u003e
 \u003c/tbody\u003e
 \u003c/table\u003e
@@ -1303,13 +1304,13 @@ These steps should help you, but you may need to contact Twitter directly if you
 \u003cp\u003e\u003cstrong\u003eResult\u003c/strong\u003e: You\u0026rsquo;ve provided both a high and low quality option for your viewers so those with a slow network have an option, and those with a fast network that might periodically slow down can dip down into the low quality when needed. However, these video qualities are not being served from your Owncast server, but instead an external S3 compatible storage provider. This allows for increasing your viewership and adding additional video qualities without concern of you exhausting your server\u0026rsquo;s bandwidth allocation. You would be able to stream 24/7 without worry using this configuration, however you\u0026rsquo;d be using the same amount of your server bandwidth if you had zero viewers or 100 viewers. Your CPU usage would be the same as if you were serving the video directly from your server.\u003c/p\u003e
 \u003ch2 id="summarized-faq"\u003eSummarized FAQ\u003c/h2\u003e
 \u003ch3 id="how-much-bandwidth-will-owncast-use"\u003eHow much bandwidth will Owncast use?\u003c/h3\u003e
-\u003cp\u003eIt depends on your configuration and how many viewers you have.\u003c/p\u003e
+\u003cp\u003eIt depends on your configuration and how many viewers you have. If you offer more video quality options you will often reduce your network transfer requirements. Look into object storage (S3) to reduce your server\u0026rsquo;s network requirements.\u003c/p\u003e
 \u003ch3 id="how-much-cpu-will-owncast-use"\u003eHow much CPU will Owncast use?\u003c/h3\u003e
 \u003cp\u003eIt depends on how many different quality output options you are offering your viewers.\u003c/p\u003e
 \u003ch3 id="how-much-disk-space-will-owncast-use"\u003eHow much disk space will Owncast use?\u003c/h3\u003e
 \u003cp\u003eAlmost none.\u003c/p\u003e
 \u003ch3 id="does-cpu-usage-increase-with-more-viewers"\u003eDoes CPU usage increase with more viewers?\u003c/h3\u003e
-\u003cp\u003eNot in a meaningful way.\u003c/p\u003e
+\u003cp\u003eNot in a meaningful way for video.\u003c/p\u003e
 \u003ch3 id="how-much-cpu-is-used-for-each-output-quality"\u003eHow much CPU is used for each output quality?\u003c/h3\u003e
 \u003cp\u003eIt depends on your configuration, but generally if you said one CPU core for each quality you\u0026rsquo;re offering, that\u0026rsquo;s a good rule of thumb. But it\u0026rsquo;s not a hard rule and can be less.\u003c/p\u003e
 \u003ch3 id="how-does-frame-rate-affect-cpu-usage"\u003eHow does frame rate affect CPU usage?\u003c/h3\u003e
