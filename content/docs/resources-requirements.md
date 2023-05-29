@@ -30,10 +30,10 @@ You decide to offer both a high and low quality option, and you set the high qua
 
 **How much CPU?**
 
-| Quality  | CPU Usage |
-| -------- | --------- |
-| 5000kbps | Some (It matches the input)      |
-| 1500kbps | More (CPU needs to be used to compress the video)     |
+| Quality  | CPU Usage                                         |
+| -------- | ------------------------------------------------- |
+| 5000kbps | Some (It matches the input)                       |
+| 1500kbps | More (CPU needs to be used to compress the video) |
 
 **How is the viewer experience?**
 
@@ -56,9 +56,9 @@ You've decided you want to use as little CPU on your Owncast server as possible 
 
 **How much CPU?**
 
-| Quality  | CPU Usage   |
-| -------- | ----------- |
-| 5000kbps | Little |
+| Quality  | CPU Usage |
+| -------- | --------- |
+| 5000kbps | Little    |
 
 **How is the viewer experience?**
 
