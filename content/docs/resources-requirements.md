@@ -8,7 +8,9 @@ weight: 200
 type: docs
 ---
 
-Let's use this single example to illustrate how your configuration can impact your server's resources, and most importantly, your viewers' experience. It's a little simplistic and the actual numbers can vary in real life, but it should help answer the question of "approximately how much bandwidth and CPU will Owncast use?"
+It's impossible to give a single answer about what the requirements are for you to run Owncast, or what it will cost. It's your server, and it's completely up to you how you choose to configure it, and in what environments you choose to run it. Every environment has different prices and features.
+
+However, let's use an example to illustrate how your configuration can impact your server's resources, and most importantly, your viewers' experience. It's a little simplistic and the actual numbers can vary in real life, but it could help answer the question of "approximately how much bandwidth and CPU will Owncast use?"
 
 ## Example Scenario
 
@@ -30,8 +32,8 @@ You decide to offer both a high and low quality option, and you set the high qua
 
 | Quality  | CPU Usage |
 | -------- | --------- |
-| 5000kbps | Some      |
-| 1500kbps | More      |
+| 5000kbps | Some (It matches the input)      |
+| 1500kbps | More (CPU needs to be used to compress the video)     |
 
 **How is the viewer experience?**
 
@@ -56,7 +58,7 @@ You've decided you want to use as little CPU on your Owncast server as possible 
 
 | Quality  | CPU Usage   |
 | -------- | ----------- |
-| 5000kbps | Almost none |
+| 5000kbps | Little |
 
 **How is the viewer experience?**
 
@@ -94,7 +96,7 @@ If you have concerns about your hosting plan, bandwidth allocation or viewership
 
 ### How much bandwidth will Owncast use?
 
-It depends on your configuration and how many viewers you have.
+It depends on your configuration and how many viewers you have. If you offer more video quality options you will often reduce your network transfer requirements. Look into object storage (S3) to reduce your server's network requirements.
 
 ### How much CPU will Owncast use?
 
@@ -106,7 +108,7 @@ Almost none.
 
 ### Does CPU usage increase with more viewers?
 
-Not in a meaningful way.
+Not in a meaningful way for video.
 
 ### How much CPU is used for each output quality?
 
