@@ -15,14 +15,14 @@ if ! [ "${OWNCAST_INSTALL_DIRECTORY:-}" ]; then
 fi
 
 if ! [ "${OWNCAST_BACKUP_DIRECTORY:-}" ]; then
-  OWNCAST_BACKUP_DIRECTORY="${OWNCAST_INSTALL_DIRECTORY}/backup"
+  OWNCAST_BACKUP_DIRECTORY="$(pwd)/owncast-install-backups)"
 fi
 
 INSTALL_TEMP_DIRECTORY="$(mktemp -d)"
 
 # Set up an exit handler so we can print a help message on failures.
 _success=false
-shutdown () {
+shutdown() {
   if [ $_success = false ]; then
     printf "\n\n"
     printf "${RED}ERROR:${NC} Your Owncast installation did not complete successfully.\n"
@@ -57,7 +57,7 @@ spinner() {
   local -r delay='0.3'
   local spinstr='\|/-'
   local temp
-  while ps -p "$1" >> /dev/null; do
+  while ps -p "$1" >>/dev/null; do
     temp="${spinstr#?}"
     printf " [${BLUE}%c${NC}]  " "${spinstr}"
     spinstr=${temp}${spinstr%"${temp}"}
@@ -70,13 +70,12 @@ spinner() {
 # Print an error message and exit the program.
 errorAndExit() {
   printf "${RED}ERROR:${NC} %s" "$1"
-  exit 1;
+  exit 1
 }
 
 # Check for a required tool, or exit
 requireTool() {
-  if ! command -v "$1" &> /dev/null
-  then
+  if ! command -v "$1" &>/dev/null; then
     errorAndExit "Could not locate \"$1\", which is required for installation. Please install it on your system."
   fi
 }
@@ -96,22 +95,21 @@ backupInstall() {
   # Make backup directory if it doesn't exist
   [[ -d $OWNCAST_BACKUP_DIRECTORY ]] || mkdir "$OWNCAST_BACKUP_DIRECTORY"
 
-  for i in "${FILE_LIST[@]}"
-  do
+  for i in "${FILE_LIST[@]}"; do
     cp -r "$i" "${BACKUP_STAGING}"/backup
   done
 
-  pushd "${BACKUP_STAGING}" >> /dev/null
+  pushd "${BACKUP_STAGING}" >>/dev/null
   tar zcf "${BACKUP_FILE}" backup &
   spinner $!
-  popd >> /dev/null
+  popd >>/dev/null
   mv "${BACKUP_STAGING}"/"${BACKUP_FILE}" "${OWNCAST_BACKUP_DIRECTORY}"/
 
   rm -rf "${BACKUP_STAGING}"
   printf "${GREEN}Backed up${NC} your files before upgrading to v${OWNCAST_VERSION}  [${GREEN}✓${NC}]\n"
 }
 
-main () {
+main() {
   printf "${PURPLE}${BOLD}Owncast Installer v%s ${NC}\n\n" "$OWNCAST_VERSION"
 
   requireTool "curl"
@@ -120,43 +118,43 @@ main () {
 
   # Determine operating system & architecture
   case $(uname -s) in
-    "Darwin")
+  "Darwin")
+    OWNCAST_ARCH="64bit"
+    PLATFORM="macOS"
+    FFMPEG_VERSION="4.3.1"
+    FFMPEG_DOWNLOAD_URL="https://evermeet.cx/ffmpeg/ffmpeg-${FFMPEG_VERSION}.zip"
+    FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"
+    ;;
+  "Linux")
+    case "$(uname -m)" in
+    "x86_64")
+      FFMPEG_ARCH="linux-x64"
       OWNCAST_ARCH="64bit"
-      PLATFORM="macOS"
-      FFMPEG_VERSION="4.3.1"
-      FFMPEG_DOWNLOAD_URL="https://evermeet.cx/ffmpeg/ffmpeg-${FFMPEG_VERSION}.zip"
-      FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"
       ;;
-    "Linux")
-      case "$(uname -m)" in
-      "x86_64")
-        FFMPEG_ARCH="linux-x64"
-        OWNCAST_ARCH="64bit"
-        ;;
-      i?86)
-        FFMPEG_ARCH="linux-ia32"
-        OWNCAST_ARCH="32bit"
-        ;;
-      armv7?)
-        FFMPEG_ARCH="linux-arm"
-        OWNCAST_ARCH="arm7"
-        ;;
-      aarch64)
-        FFMPEG_ARCH="linux-arm64"
-        OWNCAST_ARCH="arm64"
-        ;;
-      *)
-        errorAndExit "Unsupported CPU architecture $(uname -m)"
-        ;;
-      esac
-      PLATFORM="linux"
-      FFMPEG_VERSION="b4.3.1"
-      FFMPEG_DOWNLOAD_URL="https://github.com/eugeneware/ffmpeg-static/releases/download/${FFMPEG_VERSION}/${FFMPEG_ARCH}"
-      FFMPEG_TARGET_FILE="${OWNCAST_INSTALL_DIRECTORY}/ffmpeg"
+    i?86)
+      FFMPEG_ARCH="linux-ia32"
+      OWNCAST_ARCH="32bit"
+      ;;
+    armv7?)
+      FFMPEG_ARCH="linux-arm"
+      OWNCAST_ARCH="arm7"
+      ;;
+    aarch64)
+      FFMPEG_ARCH="linux-arm64"
+      OWNCAST_ARCH="arm64"
       ;;
     *)
-      errorAndExit "Unsupported operating system $(uname -s)"
+      errorAndExit "Unsupported CPU architecture $(uname -m)"
       ;;
+    esac
+    PLATFORM="linux"
+    FFMPEG_VERSION="b4.3.1"
+    FFMPEG_DOWNLOAD_URL="https://github.com/eugeneware/ffmpeg-static/releases/download/${FFMPEG_VERSION}/${FFMPEG_ARCH}"
+    FFMPEG_TARGET_FILE="${OWNCAST_INSTALL_DIRECTORY}/ffmpeg"
+    ;;
+  *)
+    errorAndExit "Unsupported operating system $(uname -s)"
+    ;;
   esac
 
   # Build release download URL
@@ -175,11 +173,11 @@ main () {
     backupInstall
     OWNCAST_INSTALL_DIRECTORY="./"
   else
-     # Create target directory
+    # Create target directory
     mkdir -p "$OWNCAST_INSTALL_DIRECTORY"
     printf "${GREEN}Created${NC} directory  [${GREEN}✓${NC}]\n"
   fi
- 
+
   # Download release
   printf "${BLUE}Downloading${NC} Owncast v${OWNCAST_VERSION} for ${PLATFORM}"
   curl -s -L "${OWNCAST_URL}" --output "${OWNCAST_TARGET_FILE}" &
