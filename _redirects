@@ -4,6 +4,8 @@
 /docs/quickstart/ /quickstart/installation/
 /docs/thirdparty/ /thirdparty/
 docs/integrations /thirdparty/
+/docs/chat-authentication /docs/chat/chat-authentication/
+/docs/moderation/ /docs/chat/moderation/
 /docs/encoding/ /docs/video/
 /docs/s3/ /docs/storage/
 /docs/geoip/ /docs/viewers/
