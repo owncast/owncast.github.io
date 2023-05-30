@@ -1,6 +1,6 @@
 ---
 title: Owncast v0.1.0
-date: 2022-12-5
+date: 2023-05-30
 description: "Owncast v0.1.0 is a large update with many changes."
 weight: 100
 ---
@@ -16,6 +16,8 @@ The first commit to Owncast was May 23, 2020. It's been a wild ride seeing what 
 Owncast v0.1.0 is a large update with many changes to the web interface. It is a complete rewrite of the frontend and like any rewrite it results in many improvements, but also room for bugs and regressions. Please report any issues you find to the [issue tracker](https://github.com/owncast/owncast/issues).
 
 This release is made up of over [380 completed tasks](https://github.com/owncast/owncast/milestone/18?closed=1). That's not 380 commits, 380 standalone tasks. That's so much stuff. If you're interested in some behind the scenes there's blog posts about [Owncast design](https://gabekangas.com/blog/2023/02/owncast-v0.1.0-retrospective-redesign/) and [the web project](https://gabekangas.com/blog/2023/02/owncast-v0.1.0-retrospective-frontend-web-rewrite/).
+
+It may make sense for some who relied on heavy customization in previous versions to test out this release outside of your production install of Owncast to make sure any visual customization you previously made can be moved over.
 
 ## A special thank you to the contributors for this release
 
