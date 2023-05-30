@@ -15,7 +15,7 @@ if ! [ "${OWNCAST_INSTALL_DIRECTORY:-}" ]; then
 fi
 
 if ! [ "${OWNCAST_BACKUP_DIRECTORY:-}" ]; then
-  OWNCAST_BACKUP_DIRECTORY="$(pwd)/owncast-install-backups)"
+  OWNCAST_BACKUP_DIRECTORY="$(pwd)/owncast-install-backups"
 fi
 
 INSTALL_TEMP_DIRECTORY="$(mktemp -d)"
