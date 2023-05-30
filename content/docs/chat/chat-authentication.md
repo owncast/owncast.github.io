@@ -3,9 +3,10 @@ title: "Chat authentication"
 description: Verify your and keep your chat identity.
 menu:
   docs:
-    parent: "guides"
+    parent: "chat"
 weight: 200
 tags: [chat, fediverse, indieauth, authentication, login, accounts]
+aliases: [/docs/chat-authentication]
 ---
 
 There is no requirement to authenticate when using Owncast chat. However, some prefer

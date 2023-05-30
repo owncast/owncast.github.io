@@ -17,3 +17,5 @@ $RECYCLE.BIN/
 # Node stuff
 node_modules
 .vercel
+
+.hugo_build.lock

@@ -22,6 +22,17 @@ Using browser push notifications your viewers can choose to be notified each tim
 
 Not all browser support this feature, and browser that do may handle it differently. Brave Browser, for example, require you to choose the duration the notifications are valid. They will likely want to select "Forever" to keep the notification active.
 
+### Enabling browser notifications on iOS
+
+You can request to be notified when a stream goes live on iOS by following these steps:
+
+1. Open Safari and navigate to your Owncast instance.
+2. Tap the share icon at the bottom of your browser.
+3. Tap "Add to Home Screen".
+4. Tap the new Owncast icon on your home screen.
+5. Press the "Notify" button.
+6. Tap "Allow" when prompted.
+
 ### Browser extension
 
 Another suggested way to receive browser notifications from any number of streams is by using the
@@ -39,22 +50,6 @@ You can notify a Discord channel when your stream goes live. Visit the [Discord 
 - Create a webhook.
 - Provide URL in the Owncast configuration.
 
-## Twitter
+## Twitter (deprecated)
 
-You can notify your Twitter followers when your stream goes live.
-
-It requires you to have Twitter API credentials, and Twitter does not make it easy for you to acquire those.
-These steps should help you, but you may need to contact Twitter directly if you have questions.
-
-1. Visit https://developer.twitter.com. Apply to be a developer if it prompts you to.
-2. After being approved visit "Projects and apps" -> Your project name. Create a new project if needed.
-3. Go to the "Settings" area.
-4. Scroll down to "User authentication settings" and click on "Edit".
-5. Enable OAuth 1.0a with Read/Write permissions.
-6. Fill out the form with your information. Callback can be anything. Leave optional fields empty.
-7. Go to your project under the "Keys and tokens" section.
-8. Generate API key and secret.
-9. Generate access token and secret. Verify it says "Read and write permissions."
-10. Generate bearer token.
-
-After you've gone through all the Twitter setup, paste the API key, API secret, access token, access token secret, and the bearer token into the Owncast configuration.
+Since [access to Twitter's API has been revoked](https://9to5google.com/2023/01/12/twitter-api-appears-to-be-down-breaking-tweetbot-and-third-party-clients/), Twitter notifications are no longer supported. For more details, please refer to [this issue on GitHub](https://github.com/owncast/owncast/issues/2597).

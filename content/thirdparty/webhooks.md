@@ -21,6 +21,7 @@ The following is a list of events you can get notified about.
 | [USER_JOINED](#user_joined)             | user joins the chat                                                                            |
 | [STREAM_STARTED](#stream_started)       | an incoming RTMP stream is detected                                                            |
 | [STREAM_STOPPED](#stream_stopped)       | an incoming RTMP stream disconnects (e.g. OBS stops)                                           |
+| [STREAM_TITLE_UPDATED](#stream_title_updated)       | the title of the stream is updated  |
 | [VISIBILITY-UPDATE](#visibility-update) | a previously sent chat message becomes visible/invisible (set by an Administrator/Moderator)   |
 
 
@@ -160,6 +161,20 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
         "summary": "Welcome to your new Owncast server! This description can be changed in the admin. Visit https://owncast.online/docs/configuration/ to learn more.",
         "timestamp": "2022-09-19T12:40:21.205872269+02:00"
     }
+}
+```
+#### STREAM_TITLE_UPDATED 
+
+```json
+{
+  "type": "STREAM_TITLE_UPDATED",
+  "eventData": {
+    "id": "DmeikEf4Rz",
+    "name": "New Owncast Server",
+    "streamTitle": "Test stream title change",
+    "summary": "This is a new live video streaming server powered by Owncast.",
+    "timestamp": "2023-03-27T21:50:10.121391094-07:00"
+  }
 }
 ```
 

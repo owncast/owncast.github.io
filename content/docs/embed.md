@@ -35,13 +35,19 @@ It will look something like:
 
 {{< owncastembed "https://watch.owncast.online/embed/video" >}}
 
+Embedded videos will not start playing before the user presses the play button. This means that no sound will appear when a page with an embedded video is loaded. If you would like the player to additionally be muted once it does start playing, you can append `?initiallyMuted=true` to the URL (so it looks something like `http://your.host/embed/video?initiallyMuted=true`). Users will still be able to unmute the video manually once it's playing.
+
 ### Using the HLS feed
 
 As long as the player supports it, it is recommended to open the homepage of your Owncast instance directly.
 The player will automatically find the correct playlist and will start playing.
 This will guarantee forward compatibility if the way how Owncast publishes HLS is ever changed.
 
-However, if you _really_ need the HLS feed (i.e. for sharing your stream to OpenSlides), you can access the HLS feed directly via this URL: `http://your.host/hls/stream.m3u8`.
+However, if you need the HLS feed (i.e. for sharing your stream to a 3rd party player), you can access the HLS feed directly via this URL: `http://your.host/hls/stream.m3u8`.
+
+### Mute by default
+
+If you'd prefer your embedded video to be muted by default, you can add `?initiallyMuted=true` to the end of the `/embed/video` URL.
 
 ## Embedding chat
 

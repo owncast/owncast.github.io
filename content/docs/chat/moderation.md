@@ -3,9 +3,10 @@ title: Chat moderation
 description: Add moderators, remove messages and users from your chat.
 menu:
   docs:
-    parent: "guides"
+    parent: "chat"
 weight: 300
 tags: [moderation, chat, bans, block, "ip address"]
+aliases: [/docs/moderation/]
 ---
 
 Using either the Owncast admin, or inline moderation controls within your chat, you can remove individual messages or entire users.

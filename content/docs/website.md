@@ -12,7 +12,7 @@ toc: true
 
 Owncast includes a web interface for your video with built-in chat that is available once you start the server. It shows online/offline states, viewer counts, stream duration, your instance's description, images, links and more. You can just start using it without making any changes, but you'll likely want to update the content displayed on your page by visiting your server admin page.
 
-Additionally, the web interface was specifically built to be editable by anybody comfortable tweaking a web page. It's not bundled or transpiled into anything, it's just HTML + Javascript + CSS that you can start editing. Feel free to add your own branding, links, change the colors in the CSS, fonts, layout, or anything else you could possibly want. No development environment is needed, just open the files in an editor and start tweaking.
+Additionally, the web interface was specifically built to be customizable by anybody comfortable tweaking colors and styles. No development environment is needed, just open the admin and start tweaking.
 
 If you want to embed Owncast in your existing website, checkout our [documentation on embedding Owncast](/docs/embed/).
 
