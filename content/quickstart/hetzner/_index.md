@@ -30,3 +30,14 @@ Continue the configuration of your server with the following options:
 - Volumes, Firewalls, Backups, Placement Groups, Labels and Cloud config: You can skip these unless you have a specific reason for them
 - Name: Give your server a logical name. For example 'Gabe's Owncast'
 - Click on 'Create & Buy now'
+
+## Add DNS records for your server
+For `https` to work you need to set-up some DNS records. You need to create an A-record for ipv4 and an AAAA-record for ipv6. You can find the ip adresses of your server on the server overview page. They are located right under the name of the server.
+
+![hetzner3](https://github.com/rmens/owncast.github.io/assets/6742496/49f068db-29a4-49bd-89dd-619395d25381)
+
+- Copy the IP Address for your new server from the new server status page. 
+- Login to your DNS provider for your domain
+- Add an “A Record” pointing to the ipv4 ip address and the domain you want to run Owncast on (if you used owncast.mydomain.com then type in owncast).
+- Do the same for an 'AAAA-record' but use the ipv6 address now.
+- Wait no less than 5 minutes for your server setup to complete and DNS to take effect. It may take longer depending on your DNS provider.
