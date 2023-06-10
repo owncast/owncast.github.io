@@ -21,3 +21,12 @@ Create your server as usual using the Hetzner Cloud Console. As an alternative t
 Hetzner recommends a CPX21 AMD server with 3 cores, but Owncast works well with the ARM servers from Hetzner too. They offer more cores for the same amount of money. For example the ARM server of the type CAX21 has 4 cores and costs less.
 
 <img width="1432" alt="hetzner2" src="https://github.com/rmens/owncast.github.io/assets/6742496/9daec19e-06db-45ec-b4df-8d289bca8310">
+
+## Add networking and SSH keys
+Continue the configuration of your server with the following options:
+
+- Networking: Asssign an ipv4 and ipv6 address to your server. You don't need to enable private networks.
+- SSH Keys: It's recommended to add an ssh key to your server. If you don't assign one you will receive the root password via email.
+- Volumes, Firewalls, Backups, Placement Groups, Labels and Cloud config: You can skip these unless you have a specific reason for them
+- Name: Give your server a logical name. For example 'Gabe's Owncast'
+- Click on 'Create & Buy now'
