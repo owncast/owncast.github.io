@@ -41,3 +41,10 @@ For `https` to work you need to set-up some DNS records. You need to create an A
 - Add an “A Record” pointing to the ipv4 ip address and the domain you want to run Owncast on (if you used owncast.mydomain.com then type in owncast).
 - Do the same for an 'AAAA-record' but use the ipv6 address now. Replace the `/64` from the address that is showing in the console with a `1`. So `2a01:4f8:c17:e4d3::/64` becomes `2a01:4f8:c17:e4d3::1`
 - Wait no less than 5 minutes for your server setup to complete and DNS to take effect. It may take longer depending on your DNS provider.
+
+## Finish set-up via SSH
+- Login to your server by SSH’ing your new server: ssh `root@yourip`
+- The server will ask for 'Your Owncast Domain'. Here you enter the hostname you added to your DNS provider above, and your email address. These are only used to configure SSL on your new server so it’ll be accessible via HTTPS.
+
+## Access your Owncast server
+You should now be able to access Owncast via `https://your.owncast.domain/admin` with the user `admin` and the password `abc123`. You should change it via the web interface right away.
