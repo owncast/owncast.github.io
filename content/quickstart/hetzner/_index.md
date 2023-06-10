@@ -22,7 +22,7 @@ Hetzner recommends a CPX21 AMD server with 3 cores, but Owncast works well with 
 
 <img width="1432" alt="hetzner2" src="https://github.com/rmens/owncast.github.io/assets/6742496/9daec19e-06db-45ec-b4df-8d289bca8310">
 
-## Add networking and SSH keys
+## Finish set-up by adding networking and SSH keys
 Continue the configuration of your server with the following options:
 
 - Networking: Asssign an ipv4 and ipv6 address to your server. You don't need to enable private networks.
