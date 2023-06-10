@@ -39,5 +39,5 @@ For `https` to work you need to set-up some DNS records. You need to create an A
 - Copy the IP Address for your new server from the new server status page. 
 - Login to your DNS provider for your domain
 - Add an “A Record” pointing to the ipv4 ip address and the domain you want to run Owncast on (if you used owncast.mydomain.com then type in owncast).
-- Do the same for an 'AAAA-record' but use the ipv6 address now.
+- Do the same for an 'AAAA-record' but use the ipv6 address now. Replace the `/64` from the address that is showing in the console with a `1`. So `2a01:4f8:c17:e4d3::/64` becomes `2a01:4f8:c17:e4d3::1`
 - Wait no less than 5 minutes for your server setup to complete and DNS to take effect. It may take longer depending on your DNS provider.
