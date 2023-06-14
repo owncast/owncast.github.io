@@ -1,5 +1,5 @@
 ---
-title: "Looking for a designer"
+title: "Looking for a designer to help with future features!"
 description: "Owncast is planning for upcoming features and needs a talented designer to help!"
 date: 2023-06-14T11:50:56-07:00
 lastmod: 2023-06-14T11:50:56-07:00
@@ -18,3 +18,5 @@ We’re still young in our design goals and would love your experience to inform
 If you’re curious and would like to learn more you’re welcome to visit our [public roadmap](https://owncast.online/roadmap) and read our [design overview](https://owncast.online/components/?path=/story/owncast-documentation-design--page).
 
 If you're not a designer, but knows someone who is, please share this with them. Owncast continues to grow and we need your help to make it happen.
+
+If you're interested, or have any questions, [please reach out](https://owncast.online/contact)!
