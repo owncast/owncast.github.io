@@ -1,6 +1,6 @@
 ---
-title: Designer wanted!
-description: Owncast is growing and needs a designer to help us focus on the experience of streamers and viewers alike.
+title: User Experience Designer wanted!
+description: Owncast is growing and is looking for a UX designer to help us focus on the experience of streamers and viewers alike.
 images: ["/images/designer-wanted.jpg"]
 ---
 
