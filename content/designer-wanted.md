@@ -11,7 +11,7 @@ Owncast is a growing free and open source live video streaming and chat project 
 
 With the number of streamers and viewers growing, and new features on the horizon, the project is looking to add a dedicated user experience designer to help us focus on the experience of streamers and viewers alike.
 
-The role would be responsible for more structural issues such as understanding how best to add new features and improve overall flow, in addition to ongoing detailed improvements to the existing visual layout and design.
+The volunteer role would be responsible for more structural issues such as understanding how best to add new features and improve overall flow, in addition to ongoing detailed improvements to the existing visual layout and design.
 
 Some upcoming features you would be heavily involved with:
 
