@@ -129,6 +129,13 @@
 						},
 						"type": "radio",
 						"value": "elestio"
+					},
+					{
+						"text": {
+							"en": "Hetzner"
+						},
+						"type": "radio",
+						"value": "hetzner"
 					}
 				],
 				"required": true

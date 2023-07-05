@@ -203,6 +203,19 @@
 										"id": 129
 									}
 								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "hetzner",
+								"is_open": true,
+								"id": 130,
+								"children": [
+									{
+										"name": "https://docs.hetzner.com/cloud/apps/list/owncast/",
+										"id": 131
+									}
+								]
 							}
 						]
 					}
