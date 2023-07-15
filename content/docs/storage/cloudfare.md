@@ -61,7 +61,8 @@ R2 allows you to directly apply CORS policy in the Cloudflare dashboard.
 - Copy the JSON template below into the textbox
 
   {{< highlight json >}}
-  {
+  [
+ {
   "AllowedOrigins": [
   "*"
   ],
@@ -71,6 +72,7 @@ R2 allows you to directly apply CORS policy in the Cloudflare dashboard.
   "AllowedHeaders": [],
   "ExposeHeaders": []
   }
+]
   {{< / highlight >}}
 
 You can also configure your AWS SDK for R2 in your favorite language [here](https://developers.cloudflare.com/r2/examples/)
