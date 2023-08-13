@@ -42,7 +42,7 @@ jobs:
         run: mkdir -p static/api/development && curl https://raw.githubusercontent.com/owncast/owncast/master/doc/api/index.html > static/api/development/index.html
 
       - name: Generate project roadmap
-        run: cd scripts && ./build-roadmap --accessToken ${{ secrets.GITHUB_TOKEN }} --milestone 21 > ../content/roadmap/index.html
+        run: cd scripts && ./build-roadmap --accessToken ${{ secrets.GITHUB_TOKEN }} --milestone 24 > ../content/roadmap/index.html
 
       - name: Commit changes
 
