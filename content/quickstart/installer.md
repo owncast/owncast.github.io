@@ -20,7 +20,7 @@ curl -s https://owncast.online/install.sh | bash
 
 **Note**: It is not suggested you run this as root, as you're downloading and running a script off the internet. It's also recommended you inspect the contents of any remote script before executing it.
 
-{{< asciicast "/install-owncast-ascii.cast">}}
+<img src="/owncast-install.gif" width="90%"/>
 
 ---
 

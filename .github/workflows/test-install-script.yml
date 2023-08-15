@@ -5,13 +5,12 @@ on:
     branches:
       - master
     paths:
-      - 'static/install.sh'
+      - "static/install.sh"
   pull_request:
     branches:
       - master
-      - v0.1.0
     paths:
-      - 'static/install.sh'
+      - "static/install.sh"
 
 jobs:
   debian:

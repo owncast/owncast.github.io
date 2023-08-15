@@ -1,0 +1,33 @@
+name: Generate installer preview video
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "static/install.sh"
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "static/install.sh"
+
+jobs:
+  generate-installer-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run
+        run: |
+          cd scripts/preview-generator
+          docker build -t owncast-installer-preview-generator .
+          docker run --rm -v $PWD:/vhs owncast-installer-preview-generator ./installer.tape
+          mv owncast-install.* ../../static
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v5
+        with:
+          author_name: Owncast
+          author_email: owncast@owncast.online
+          message: "Update installer preview"
+          add: "static/owncast-install.*"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
