@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run
+        working-directory: scripts/preview-generator
         run: |
-          cd scripts/preview-generator
           docker build -t owncast-installer-preview-generator .
           docker run --rm -v $PWD:/vhs owncast-installer-preview-generator ./installer.tape
-          mv owncast-install.* ../../static
+          mv owncast-install.* ../../static/
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v5
