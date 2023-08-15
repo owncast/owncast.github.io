@@ -208,7 +208,7 @@ main() {
 
   printf "\n"
   printf "${GREEN}Success!${NC} Run owncast by changing to the ${BOLD}owncast${NC} directory and run ${BOLD}./owncast${NC}.\n"
-  printf "The default port is ${BOLD}8080${NC} and the default streaming key is ${BOLD}abc123${NC}.\n"
+  printf "The default port is ${BOLD}8080${NC} and the default streaming key and admin password is ${BOLD}abc123${NC}.\n"
   printf "Visit ${UNDERLINE}https://owncast.online/docs/configuration/${NC} to learn how to configure your new Owncast server."
   printf "\n\n"
 }
