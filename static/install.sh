@@ -119,12 +119,28 @@ main() {
   # Determine operating system & architecture
   case $(uname -s) in
   "Darwin")
-    OWNCAST_ARCH="64bit"
-    PLATFORM="macOS"
-    FFMPEG_VERSION="4.3.1"
-    FFMPEG_DOWNLOAD_URL="https://evermeet.cx/ffmpeg/ffmpeg-${FFMPEG_VERSION}.zip"
-    FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"
+    case "$(uname -m)" in
+    "x86_64")
+      OWNCAST_ARCH="64bit"
+      PLATFORM="macOS"
+      FFMPEG_VERSION="4.3.1"
+      FFMPEG_DOWNLOAD_URL="https://evermeet.cx/ffmpeg/ffmpeg-${FFMPEG_VERSION}.zip"
+      FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"  
+      ;;
+    "arm64")
+      OWNCAST_ARCH="arm64"
+      PLATFORM="macOS"
+      FFMPEG_VERSION="6"
+      FFMPEG_DOWNLOAD_URL="https://www.osxexperts.net/ffmpeg${FFMPEG_VERSION}arm.zip"
+      FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"      
     ;;
+    *)
+      errorAndExit "Unsupported CPU architecture $(uname -m)"
+      ;;
+    esac
+  ;;
+
+    # ;;
   "Linux")
     case "$(uname -m)" in
     "x86_64")
