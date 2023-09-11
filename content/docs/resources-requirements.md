@@ -8,9 +8,20 @@ weight: 200
 type: docs
 ---
 
-It's impossible to give a single answer about what the requirements are for you to run Owncast, or what it will cost. It's your server, and it's completely up to you how you choose to configure it, and in what environments you choose to run it. Every environment has different prices and features.
+It's impossible to give a single answer about what the requirements are for you to run Owncast, or what it will cost. It's your server, and it's completely up to you how you choose to configure it, and in what environments you choose to run it. Every environment has different performance, prices and features.
 
-However, let's use an example to illustrate how your configuration can impact your server's resources, and most importantly, your viewers' experience. It's a little simplistic and the actual numbers can vary in real life, but it could help answer the question of "approximately how much bandwidth and CPU will Owncast use?"
+## Base knowledge
+
+It's very helpful for you to understand the basics included in video streaming.
+
+- CPU: Used to transcode the video to multiple qualities so viewers can watch it on different speed networks.
+- Network bandwidth: Used to distribute the video to your viewers.
+
+### Viewer count does not impact CPU use
+
+Knowing this, you see that **CPU usage is the same regardless of how many viewers you have**. 0 or 100, the CPU is still performing the work. Think of it like creating a zip file. If you have a 100MB file, and you zip it, and it becomes 70MB, you can send that 70MB file to as many people as you want without zipping that file again for each person. But you still need to send the file to each person seperately, requiring network bandwidth for each time you send it. However, if you want to send some people a 70MB version and others a 50MB version, you'll need to create two seperate files. That 50MB version will take longer and use more CPU to create, because of the additional work it takes to compress the file more. This is the same with video. The more work required to encode your video, the more CPU that's required. Generally, the more you need to reduce the size and bitrate of your video, the more CPU that will be used. But offering low bitrate/lower quality versions of your stream is important to enable more viewers to watch it from across the world, on any kind of network.
+
+Now that you understand the basics, let's use an example to illustrate how your configuration can impact your server's resources, and most importantly, your viewers' experience. It's a little simplistic and the actual numbers can vary in real life, but it could help answer the question of "approximately how much bandwidth and CPU will Owncast use?"
 
 ## Example Scenario
 
@@ -46,7 +57,7 @@ You decide to offer both a high and low quality option, and you set the high qua
 
 ### Offer a single high quality option using the least amount of CPU
 
-You've decided you want to use as little CPU on your Owncast server as possible so you enable "Video Passthrough" mode as the only output available. This means the exact video you're generating in your broadcasting software is what is sent to your viewers.
+You've decided you want to use as little CPU on your Owncast server as possible so you enable "Video Passthrough" mode as the only output available. This means the exact video you're sending from your local broadcasting software is what is sent to your viewers.
 
 **How much bandwidth is used on your server for this stream?**
 
@@ -100,15 +111,11 @@ It depends on your configuration and how many viewers you have. If you offer mor
 
 ### How much CPU will Owncast use?
 
-It depends on how many different quality output options you are offering your viewers.
-
-### How much disk space will Owncast use?
-
-Almost none.
+It depends on how many different quality output options you are offering your viewers and what those qualities are.
 
 ### Does CPU usage increase with more viewers?
 
-Not in a meaningful way for video.
+Not in a meaningful way. There are limits when you're talking tens of thousands of chat participants, however.
 
 ### How much CPU is used for each output quality?
 
@@ -118,9 +125,13 @@ It depends on your configuration, but generally if you said one CPU core for eac
 
 The fewer frames, the less CPU that is used. If you want to reduce the CPU being used on one of your video qualities you can reduce the frame rate. If you want to reduce the CPU being used for all of Owncast you can reduce the frame rate of your inbound source content in your broadcasting software, such as OBS.
 
-### Should I only care about the highest quality to reduce CPU usage?
+### How much disk space will Owncast use?
 
-It's not about you, your bandwidth, or your CPU. It's about your viewers. If they can't watch your stream because you didn't have them in mind then it's not worth streaming in the first place.
+Almost none, as the live stream is cleaned up in real-time as you stream.
+
+### Can I just offer one quality, the highest possible, to lower the CPU requirements? I only want people to see the best quality video, anyway.
+
+It's not about you, your bandwidth, or your CPU. It's about your viewers. Not everyone can watch the highest quality. If they can't watch your stream because you didn't have them in mind then it's not worth streaming in the first place.
 
 ## Learn more
 
