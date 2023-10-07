@@ -25,7 +25,6 @@ Here's some example HTML you can use.
   title="Owncast"
   height="350px" width="550px"
   referrerpolicy="origin"
-  scrolling="no"
   allowfullscreen>
 </iframe>
 {{< / highlight >}}
@@ -36,6 +35,50 @@ It will look something like:
 {{< owncastembed "https://watch.owncast.online/embed/video" >}}
 
 Embedded videos will not start playing before the user presses the play button. This means that no sound will appear when a page with an embedded video is loaded. If you would like the player to additionally be muted once it does start playing, you can append `?initiallyMuted=true` to the URL (so it looks something like `http://your.host/embed/video?initiallyMuted=true`). Users will still be able to unmute the video manually once it's playing.
+
+## Customizing the Embedded Stream Styling
+
+You can easily customize the styling of the embedded Owncast stream to match your website's design by applying CSS styles. Here's how you can do it:
+
+1. **Create a CSS File:** First, create a CSS file (e.g., `stream-styles.css`) where you'll define your custom styles.
+
+2. **Link the CSS File:** In the `<head>` section of your HTML document where you embed the Owncast stream, add a `<link>` tag to include your CSS file. Make sure to add this line before the closing `</head>` tag:
+
+   ```html
+   <link rel="stylesheet" href="path/to/stream-styles.css">
+   ```
+   Replace "path/to/stream-styles.css" with the actual path to your CSS file.
+
+3. **Apply Styles:** Customize the styles in your stream-styles.css file according to your preferences. You can target the <iframe> element using CSS selectors, as shown in the example below:
+   ```css
+    /* Customize the embedded stream container */
+    iframe {
+      border: none; /* Remove iframe border */
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow for depth */
+      border-radius: 10px; /* Rounded corners for a modern look */
+      overflow: hidden; /* Hide horizontal overflow */
+      background-color: #fff; /* Set background color to white */
+      margin: 0 auto; /* Center the iframe horizontally */
+    }
+    
+    /* Style the iframe title (optional) */
+    iframe[title="Owncast"] {
+      font-size: 18px; /* Adjust the title font size */
+      font-weight: bold; /* Make the title bold */
+      padding: 10px; /* Add some padding around the title */
+    }
+    
+    /* Style the iframe content (optional) */
+    iframe[title="Owncast"] body {
+      margin: 0; /* Reset margin inside the iframe */
+      padding: 10px; /* Add padding inside the iframe content */
+    }
+   ```
+
+4. **Customize to Your Needs:** Feel free to modify the styles provided in the example above to match your website's design and layout.
+
+Following these steps, you can seamlessly integrate your Owncast stream into your website while maintaining control over its visual appearance.
+
 
 ### Using the HLS feed
 
@@ -51,7 +94,7 @@ If you'd prefer your embedded video to be muted by default, you can add `?initia
 
 ## Embedding chat
 
-Owncast supports embedding your chat directly into any other web site or source.
+Owncast supports embedding your chat directly into any other website or source.
 
 There are two types of embed chats: A read-only chat which only shows the messages and a standalone chat which has the same functionality as the one within the main Owncast web interface.
 
