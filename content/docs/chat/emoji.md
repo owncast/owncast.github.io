@@ -22,4 +22,4 @@ You can manually add or remove custom emoji images in the `data/emoji` directory
 
 ## Bundled emoji images
 
-The images bundled with Owncast out of the box are freely licensed by different authors. See the [directory of emoji](https://github.com/owncast/owncast/static/img/emoji) for the respective licenses associated to each collection.
+The images bundled with Owncast out of the box are freely licensed by different authors. See the [directory of emoji](https://github.com/owncast/owncast/tree/develop/static/img/emoji) for the respective licenses associated to each collection.
