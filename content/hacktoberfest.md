@@ -23,11 +23,7 @@ For the past 9 years, thousands of people—coders and non-coders alike—have p
 
 ## What is Owncast?
 
-Owncast is a single-user live streaming server with chat features that allows you to run your own live stream. It's volunteer run, donation funded, and 100% free and open source software that exists for the community. [See some examples in use](https://directory.owncast.online). If you're curious what some of the users have to say about the software and what they're doing with it, here's some discussing why they like it.
-
-<video id="video" controls preload="metadata" poster="https://videos.owncast.online/t/GbUWuPQzFvN88SGuihfrS9">
-  <source src="https://videos.owncast.online/v/GbUWuPQzFvN88SGuihfrS9.mp4 type="video/mp4" />
-</video>
+Owncast is a single-user live streaming server with chat features that allows you to run your own live stream. It's volunteer run, donation funded, and 100% free and open source software that exists for the community. [See some examples in use](https://directory.owncast.online). If you're curious what some of the users have to say about the software and what they're doing with it, [here's some discussing why they like it](https://videos.owncast.online/v/GbUWuPQzFvN88SGuihfrS9).
 
 ## What do you receive by contributing to Owncast during Hacktoberfest?
 
