@@ -72,7 +72,7 @@ If you've been thinking about trying Owncast for the first time but haven't foun
 ## Where to Begin
 
 - Read the [Hacktoberfest Values](https://hacktoberfest.com/participation/#values).
-- Register for [Hacktoberfest 2022](https://hacktoberfest.com/participation/) starting September 26th.
+- Register for [Hacktoberfest 2023](https://hacktoberfest.com/participation/) starting September 26th.
 - Visit the Owncast [Good first Issues](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) list to see what has been designated as a good place to start.
 - [Install your own instance](/quickstart) of Owncast in about a minute.
 - [Join our chat](https://owncast.rocket.chat) and introduce yourself.
