@@ -49,7 +49,7 @@ You can easily customize the styling of the embedded Owncast stream to match you
    ```
    Replace "path/to/stream-styles.css" with the actual path to your CSS file.
 
-3. **Apply Styles:** Customize the styles in your stream-styles.css file according to your preferences. You can target the <iframe> element using CSS selectors, as shown in the example below:
+3. **Apply Styles:** Customize the styles in your stream-styles.css file according to your preferences. You can target the `<iframe>` element using CSS selectors, as shown in the example below:
    ```css
     /* Customize the embedded stream container */
     iframe {
