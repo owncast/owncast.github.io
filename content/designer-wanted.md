@@ -21,7 +21,7 @@ Some upcoming features you would be heavily involved with:
 
 We’re still young in our design goals and would love your experience to inform both the process and the pixels around building a cohesive product that people love to use.
 
-If you would like to learn more you’re welcome to visit our public [roadmap](https://owncast.online/roadmap) and our [design overview](https://owncast.online/components/?path=/story/owncast-documentation-design--page).
+If you would like to learn more you’re welcome to visit our public [roadmap](https://owncast.online/roadmap) and our [visual design overview (colors, fonts)](https://owncast.online/components/?path=/docs/owncast-documentation-design--docs).
 
 Feel free to reach out with any questions you might have by contacting Gabe, the maintainer, directly at gabek@real-ity.com, on [The Fediverse](https://social.gabekangas.com/users/gabek), or by joining the Owncast community chat at https://owncast.rocket.chat.
 
