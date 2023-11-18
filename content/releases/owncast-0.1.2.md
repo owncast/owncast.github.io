@@ -1,3 +1,10 @@
+---
+title: Owncast v0.1.2
+date: 2023-11-18
+description: A smaller update with some fixes and additions.
+weight: 100
+---
+
 # Changelog
 
 ## [[0.1.2](https://github.com/owncast/owncast/milestone/24)] - 2023-11-18
