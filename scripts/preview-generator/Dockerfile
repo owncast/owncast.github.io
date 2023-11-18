@@ -6,6 +6,6 @@ VOLUME /vhs
 WORKDIR /vhs
 
 # Install Dependencies
-RUN apt-get -y install ffmpeg chromium bash curl unzip
+RUN apt-get update && apt-get -y install ffmpeg chromium bash curl unzip
 
 ENTRYPOINT ["/usr/bin/vhs"]
