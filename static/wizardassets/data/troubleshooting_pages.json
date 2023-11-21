@@ -15,21 +15,14 @@
 					"en": "What issue are you trying to resolve?"
 				},
 				"instructions": {
-					"en": "<p>Most questions and issues fall into one of the below categories. While each environment is different, hopefully some major classes of concerns can be fixed by walking through the following topics.</p><p>Keep in mind many suggestions have tradeoffs and it's always suggested that you test your stream before your scheduled event.</p>"
+					"en": "<p>While each environment is different, hopefully many questions and issues can be answered by walking through the following topics.</p><p>If you'd like additional information about what it takes to run Owncast, visit <a href='/docs/resources-requirements/'>server requirements and resources.</a></p>"
 				},
 				"choices": [
 					{
 						"type": "radio",
 						"value": "streaming",
 						"text": {
-							"en": "My stream is buffering."
-						}
-					},
-					{
-						"type": "radio",
-						"value": "latency",
-						"text": {
-							"en": "I want to reduce the live latency of my stream."
+							"en": "My stream is buffering for viewers."
 						}
 					},
 					{
@@ -41,9 +34,9 @@
 					},
 					{
 						"type": "radio",
-						"value": "low-quality",
+						"value": "misc-video-errors",
 						"text": {
-							"en": "My stream's output is low quality."
+							"en": "I'm seeing video related errors in my logs."
 						}
 					},
 					{
@@ -62,6 +55,20 @@
 					},
 					{
 						"type": "radio",
+						"value": "latency",
+						"text": {
+							"en": "I want to reduce the live latency of my stream."
+						}
+					},
+					{
+						"type": "radio",
+						"value": "low-quality",
+						"text": {
+							"en": "My stream's output is low quality."
+						}
+					},
+					{
+						"type": "radio",
 						"value": "immediate-disconnect",
 						"text": {
 							"en": "My broadcasting software immediately disconnects after I start streaming. "
@@ -71,7 +78,21 @@
 						"type": "radio",
 						"value": "change-streamkey",
 						"text": {
-							"en": "I want to reset my stream key/admin password."
+							"en": "I want to reset my stream key or admin password."
+						}
+					},
+					{
+						"type": "radio",
+						"value": "misc-video-errors",
+						"text": {
+							"en": "I'm seeing errors about thumbnails in my logs."
+						}
+					},
+					{
+						"type": "radio",
+						"value": "visit-chat",
+						"text": {
+							"en": "I have no idea what's going on. Can't I just talk to somebody?"
 						}
 					}
 				]

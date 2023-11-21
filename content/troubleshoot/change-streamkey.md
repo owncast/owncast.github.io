@@ -1,20 +1,25 @@
 ---
 title: "Change your streaming key & admin password"
 description: "Change the key you use for streaming and logging into your admin."
-tags: ["admin","key", "password"]
-draft: false
-toc: false
+tags: ["admin", "key", "password"]
+type: toc
 ---
 
 ## The admin
 
-If you have access to the web admin you can change the stream key/admin password under the Server settings.
+You can set the admin password and add stream keys in the Server settings.
 
-## Command line flag
+## Stream keys
 
-If you lost all access to your Owncast server you can reset the key via the command line.
+### Command line flag
+
+You can set a single valid stream key at run time with the `--streamkey` command line flag. Run Owncast with `--help` to see all the available options.
 
 1. Stop the service from running.
-1. Run `owncast --streamKey newkey`
+1. Run `owncast --streamkey newkey`
 
-This will change it to "newkey" and restart Owncast.
+This will start Owncast using your new stream key.
+
+## Admin password
+
+You can set the admin password at run time with the `--adminpassword` command line flag. Run Owncast with `--help` to see all the available options.

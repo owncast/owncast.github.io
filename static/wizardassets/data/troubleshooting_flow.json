@@ -172,6 +172,19 @@
 			{
 				"name": "_decision",
 				"test": "string",
+				"if": "visit-chat",
+				"is_open": true,
+				"id": 35,
+				"children": [
+					{
+						"name": "https://owncast.online/contact",
+						"id": 36
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
 				"if": "dropping-frames",
 				"is_open": true,
 				"id": 26,
@@ -204,6 +217,19 @@
 				"children": [
 					{
 						"name": "https://owncast.online/troubleshoot/hardware-usage",
+						"id": 31
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "misc-video-errors",
+				"is_open": true,
+				"id": 30,
+				"children": [
+					{
+						"name": "https://owncast.online/troubleshoot/video-errors",
 						"id": 31
 					}
 				]

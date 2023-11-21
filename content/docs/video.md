@@ -65,6 +65,10 @@ Framerate is the number of frames per second in the video. Owncast defaults to 2
 
 The more CPU you use the better the output image will be, or the smaller of a file the output will be for the same quality. However, you will need to balance the amount of CPU you have available with the amount you can use to process video.
 
+{{<embedcontent file="/content/troubleshoot/shared/cpu-usage.md">}}
+
+{{<embedcontent file="/content/troubleshoot/shared/match-highest-output-quality.md">}}
+
 ### Latency Buffer
 
 You have some control over the live latency between the broadcaster and the viewer. While it's completely understandable to want to have as little latency as possible you may need to increase the latency buffer if you're experiencing issues. In general the lower the latency the less buffer is available for any possible slow transfers, network blips or errors.
@@ -81,18 +85,7 @@ For some browsers, a "Lower latency" option is available in the web player. This
 
 {{< alert icon="💡" text="Turning on video passthrough may make your stream unplayable or unreliable, and is not recommended. Read about Video Passthrough before turning it on and learn about the risks involved." >}}
 
-Owncast has an optional setting to turn off re-encoding of your inbound stream, potentially saving substantial hardware utilization and supporting a higher quality stream with less resources. <span style="color: red;"> **However**, because your video will not be re-encoded it's possible that certain video from certain sources may end up **not being playable at all**</span>. This is the risk of enabling this.
-
-To enable, visit the advanced settings for a specific stream output. You can turn on "Video Passthrough".
-
-1. Turn it on if you require it.
-1. Test it.
-1. If your video won't play, **then turn it off**.
-1. Only one output should be set as "passthrough".
-
-Because enabling Passthrough tells Owncast to not encode your video at all, your stream is at the mercy of what your broadcasting software is sending, and that is often not highly compatible with live streaming. For example your live latency may be substantially higher than expected because the stream is not able to be broken up into the specifically sized chunks, as expected. This can also cause issues when switching between different video qualities. For example, switching between a passthrough quality and an properly encoded quality. Worst case your stream may not be playable at all with passthrough enabled.
-
-If you find you require this feature, but it's not working for you, you _may_ be able to change to a different broadcasting client solution to send video to Owncast differently. For example, if you're using Restream, video passthrough will not work, but in general it's worked for people streaming from OBS.
+{{<embedcontent file="/content/troubleshoot/shared/video-passthrough-mode.md">}}
 
 ## Audio
 
@@ -105,14 +98,6 @@ You will want to configure your broadcasting software to match the highest quali
 If you find yourself trying to squeeze better performance out of Owncast then try setting your broadcasting software to a lower quality as well as lowering the quality in your Owncast instance.
 
 Read more about [configuring your broadcasting software](/docs/broadcasting/).
-
-## CPU Usage
-
-Each stream output variant adds significant CPU usage and slows down the overall generation of video segments. If you have a slow server running Owncast you should probably only have one bitrate variant in play. If you add more and you notice that playback becomes choppy it's likely that everything is running too slowly for consistent playback. Consider removing the additional variants and tweaking your single variant so it supports a wider variety of network conditions.
-
-## Disk Usage
-
-More stream output variants requires more disk space, since it's another copy of the video on disk. If you're serving video locally and you have enough disk space then it's probably no big deal and files will rather quickly get rotated and cleaned up. If you're using something like [S3 for storage](/docs/storage/) then files won't get cleaned up until some point in the future, so you'll have more remote storage use in play.
 
 ## Hardware accelerated video encoding
 

@@ -2,15 +2,12 @@
 title: "Low Quality Video"
 description: "Adjust settings both on your broadcasting software and your server to adjust the video quality of your stream."
 tags: ["video", "quality"]
-draft: false
-toc: false
+type: toc
 ---
 
 ## Make sure you're streaming what you expect
 
-Your stream, at best, is only as good as what you're sending to Owncast. So make sure you're sending from your broadcasting software at a quality that you're happy with.
-
-Read through our [Broadcasting Software Suggestions](/docs/broadcasting/) where some specifics are listed for your software.
+{{<embedcontent file="/content/troubleshoot/shared/low-quality-video.md">}}
 
 ## Increase the bitrate configured on your server
 
@@ -18,7 +15,7 @@ The Owncast stream bitrate is the amount of data your Owncast server sends to th
 
 If you're increasing the bitrate within Owncast make sure you're streaming at least that bitrate from your broadcasting software as well. There is never a reason to offer a bitrate configuration on your Owncast server that is higher than what you're streaming from your broadcasting software.
 
-**Drawback**: A higher bitrate takes up more available internet bandwidth and create larger sized segments of video, making it take longer for viewers to download, leading to a possibility of people buffering if they cannot download the video in time. Think about offering lower quality options for viewers as well.  Increasing your bitrate also increases the demand on the internet connection of your Owncast server, so make sure this is not a bottleneck. Talk to your viewers and test with [HLS Analyzer](https://hlsanalyzer.com) when making changes.
+**Drawback**: A higher bitrate takes up more available internet bandwidth and create larger sized segments of video, making it take longer for viewers to download, leading to a possibility of people buffering if they cannot download the video in time. Think about offering lower quality options for viewers as well. Increasing your bitrate also increases the demand on the internet connection of your Owncast server, so make sure this is not a bottleneck. Talk to your viewers and test with [HLS Analyzer](https://hlsanalyzer.com) when making changes.
 
 ## Dedicate more resources on your server to increase visual quality
 
