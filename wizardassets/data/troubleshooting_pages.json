@@ -1,0 +1,180 @@
+{
+	"defaultLanguage": "en",
+	"content": {
+		"title": {
+			"en": "Owncast Troubleshooting"
+		},
+		"button": {
+			"en": "Next"
+		},
+		"pages": {
+			"firstpage": {
+				"pageName": "firstpage",
+				"required": true,
+				"title": {
+					"en": "What issue are you trying to resolve?"
+				},
+				"instructions": {
+					"en": "<p>While each environment is different, hopefully many questions and issues can be answered by walking through the following topics.</p><p>If you'd like additional information about what it takes to run Owncast, visit <a href='/docs/resources-requirements/'>server requirements and resources.</a></p>"
+				},
+				"choices": [
+					{
+						"type": "radio",
+						"value": "streaming",
+						"text": {
+							"en": "My stream is buffering for viewers."
+						}
+					},
+					{
+						"type": "radio",
+						"value": "dropping-frames",
+						"text": {
+							"en": "I am dropping frames while streaming."
+						}
+					},
+					{
+						"type": "radio",
+						"value": "misc-video-errors",
+						"text": {
+							"en": "I'm seeing video related errors in my logs."
+						}
+					},
+					{
+						"type": "radio",
+						"value": "hardware-usage",
+						"text": {
+							"en": "My server hardware is being over-utilized."
+						}
+					},
+					{
+						"type": "radio",
+						"value": "chat-offline",
+						"text": {
+							"en": "Chat is being shown as offline."
+						}
+					},
+					{
+						"type": "radio",
+						"value": "latency",
+						"text": {
+							"en": "I want to reduce the live latency of my stream."
+						}
+					},
+					{
+						"type": "radio",
+						"value": "low-quality",
+						"text": {
+							"en": "My stream's output is low quality."
+						}
+					},
+					{
+						"type": "radio",
+						"value": "immediate-disconnect",
+						"text": {
+							"en": "My broadcasting software immediately disconnects after I start streaming. "
+						}
+					},
+					{
+						"type": "radio",
+						"value": "change-streamkey",
+						"text": {
+							"en": "I want to reset my stream key or admin password."
+						}
+					},
+					{
+						"type": "radio",
+						"value": "misc-video-errors",
+						"text": {
+							"en": "I'm seeing errors about thumbnails in my logs."
+						}
+					},
+					{
+						"type": "radio",
+						"value": "visit-chat",
+						"text": {
+							"en": "I have no idea what's going on. Can't I just talk to somebody?"
+						}
+					}
+				]
+			},
+			"streaming-page": {
+				"pageName": "streaming-page",
+				"required": true,
+				"title": {
+					"en": "Buffering problems"
+				},
+				"instructions": {
+					"en": "<p>Make sure you collect some information about the buffering.</p><p>Is it buffering for everyone, or just a specific group? Or is it just one person? If you're not sure, ask your viewers.</p>"
+				},
+				"choices": [
+					{
+						"type": "radio",
+						"value": "buffering-foreveryone",
+						"text": {
+							"en": "My stream is buffering for everyone."
+						}
+					},
+					{
+						"type": "radio",
+						"value": "buffering-forsome",
+						"text": {
+							"en": "My stream is fine for some, but buffering for others."
+						}
+					}
+				]
+			},
+			"chat-offline-page": {
+				"pageName": "chat-offline",
+				"required": true,
+				"title": {
+					"en": "My chat is offline."
+				},
+				"instructions": {
+					"en": ""
+				},
+				"choices": [
+					{
+						"type": "radio",
+						"value": "chat-offline-while-streaming",
+						"text": {
+							"en": "My chat is offline while streaming."
+						}
+					},
+					{
+						"type": "radio",
+						"value": "chat-offline-not-streaming",
+						"text": {
+							"en": "My chat is offline only when I'm not streaming."
+						}
+					}
+				]
+			},
+			"buffering-for-some-page": {
+				"pageName": "buffering-for-some",
+				"required": true,
+				"title": {
+					"en": "My chat is buffering for some, but not others."
+				},
+				"instructions": {
+					"en": "Find out if the people experiencing buffering are because of a specific reason. If you're not sure, ask your viewers."
+				},
+				"choices": [
+					{
+						"type": "radio",
+						"value": "buffering-geo",
+						"text": {
+							"en": "It's buffering only for people who are geographically further away from my streaming server."
+						}
+					},
+					{
+						"type": "radio",
+						"value": "buffering-slow-networks",
+						"text": {
+							"en": "It's buffering only for people with slower or mobile networks."
+						}
+					}
+				]
+			}
+		}
+	}
+}

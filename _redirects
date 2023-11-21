@@ -10,3 +10,6 @@ docs/integrations /thirdparty/
 /docs/s3/ /docs/storage/
 /docs/geoip/ /docs/viewers/
 /docs/building /development/
+/troubleshooting /troubleshoot/
+/troubleshoot /troubleshoot/
+/docs/troubleshooting /troubleshoot/
