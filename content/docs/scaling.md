@@ -16,9 +16,15 @@ If you are not familiar with the topics below, or you don't feel comfortable wit
 
 ## Video
 
-The solution for scaling your video to a large number of concurrent viewers is to use the built-in support for [external storage services](/docs/storage). This allows you to generate the video on your Owncast server, but serve it from a provider who has unlimited bandwidth and capacity at a low cost.
+### Object Storage
 
-With this setup you don't need extra CPU or a more powerful server in order to support more viewers, as they don't technically touch your server once the video begins.
+The first step for scaling your video to a large number of concurrent viewers is to use the built-in support for [external storage services](/docs/storage).
+
+{{<embedcontent file="/content/troubleshoot/shared/use-storage.md">}}
+
+### Content Delivery Networks (CDNs)
+
+{{<embedcontent file="/content/troubleshoot/shared/use-cdn.md">}}
 
 ## Chat
 

@@ -1,6 +1,6 @@
 ---
 title: "Broadcasting Software"
-description: "Welcome to Doks! This tutorial will guide you through setting up and deploying your first Doks site."
+description: "How you configure your broadcasting software can impact the quality and performance of your stream"
 draft: false
 images: []
 tags: ["streaming", "rtmp", "streaming key", "password", "obs", "broadcasting"]
@@ -73,3 +73,11 @@ Owncast will not re-encode audio, so it will go out exactly how it's sent.
 | High    | 192kbps |
 | Higher  | 256kbps |
 | Highest | 320kbps |
+
+## Dropping frames
+
+Read more about troubleshooting [Dropped frames](/troubleshoot/dropped-frames) being reported in your broadcasting software.
+
+## Errors or disconnections
+
+{{<embedcontent file="/content/troubleshoot/shared/broadcasting-software.md">}}
