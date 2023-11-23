@@ -27,9 +27,28 @@ Digital Ocean Spaces is a good choice if you're already using DigitalOcean to ho
 
 ### Expiring files
 
-You'll want to configure your bucket to auto-expire things saved there as soon as possible, as Owncast only needs to save things for a very short time.
+You'll want to configure your bucket to auto-expire things saved there as soon as possible, as Owncast only needs to save things for a very short time. The easiest way to do this with Digital Ocean is via [`s3cmd`](https://github.com/s3tools/s3cmd).
 
-See [this discussion](https://www.digitalocean.com/community/questions/spaces-lifecycle-is-not-expiring-files) for configuring this on Digital Ocean. Refer to their documentation or contact Digital Ocean for further details.
+It is recommended to separate access keys between the Owncast server and `s3cmd` so you'll need to create another access key for your bucket, similar to the one you create above.
+
+You can then configure `s3cmd`. For this example we will assume your bucket is in the `fra1` region and is called `my_bucket`. Change those below for the values that apply to you.
+
+- Type `s3cmd --configure`
+- Enter your newly created access key and secret key as provided by Digital Ocean.
+- Default regian does not matter but you can set it to `fra1` if you want.
+- S3 endpoint should be set to `fra1.digitaloceanspaces.com`.
+- DNS template should be set to `%(bucket)s.fra1.digitaloceanspaces.com`.
+- Encryption is recommended and the password can be set to whatever value you want as long as it's kept secret.
+- Set `Path to GPG program` to point to your local install of GPG if you're using encryption above.
+- Set `Use HTTPS protocol` to `Yes`.
+- Leave `HTTP Proxy server name` blank unless this applies to you.
+- Test the setting and don't forget to say `y` to saving them.
+
+File expiration policy can then be set with:
+```
+s3cmd expire --expiry-days=1 s3://my_bucket
+```
+for your files to be deleted, for example, after one day.
 
 ### Double check
 
