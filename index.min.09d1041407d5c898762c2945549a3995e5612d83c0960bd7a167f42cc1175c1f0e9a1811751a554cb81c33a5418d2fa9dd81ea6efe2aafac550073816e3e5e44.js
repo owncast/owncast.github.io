@@ -158,8 +158,24 @@ Note that in Owncast you must enter the bucket name, the endpoint (with <code>ht
 <li>Click <code>Save Options</code></li>
 </ul>
 <h3 id="expiring-files">Expiring files</h3>
-<p>You&rsquo;ll want to configure your bucket to auto-expire things saved there as soon as possible, as Owncast only needs to save things for a very short time.</p>
-<p>See <a href="https://www.digitalocean.com/community/questions/spaces-lifecycle-is-not-expiring-files">this discussion</a> for configuring this on Digital Ocean. Refer to their documentation or contact Digital Ocean for further details.</p>
+<p>You&rsquo;ll want to configure your bucket to auto-expire things saved there as soon as possible, as Owncast only needs to save things for a very short time. The easiest way to do this with Digital Ocean is via <a href="https://github.com/s3tools/s3cmd"><code>s3cmd</code></a>.</p>
+<p>It is recommended to separate access keys between the Owncast server and <code>s3cmd</code> so you&rsquo;ll need to create another access key for your bucket, similar to the one you create above.</p>
+<p>You can then configure <code>s3cmd</code>. For this example we will assume your bucket is in the <code>fra1</code> region and is called <code>my_bucket</code>. Change those below for the values that apply to you.</p>
+<ul>
+<li>Type <code>s3cmd --configure</code></li>
+<li>Enter your newly created access key and secret key as provided by Digital Ocean.</li>
+<li>Default regian does not matter but you can set it to <code>fra1</code> if you want.</li>
+<li>S3 endpoint should be set to <code>fra1.digitaloceanspaces.com</code>.</li>
+<li>DNS template should be set to <code>%(bucket)s.fra1.digitaloceanspaces.com</code>.</li>
+<li>Encryption is recommended and the password can be set to whatever value you want as long as it&rsquo;s kept secret.</li>
+<li>Set <code>Path to GPG program</code> to point to your local install of GPG if you&rsquo;re using encryption above.</li>
+<li>Set <code>Use HTTPS protocol</code> to <code>Yes</code>.</li>
+<li>Leave <code>HTTP Proxy server name</code> blank unless this applies to you.</li>
+<li>Test the setting and don&rsquo;t forget to say <code>y</code> to saving them.</li>
+</ul>
+<p>File expiration policy can then be set with:</p>
+<pre tabindex="0"><code>s3cmd expire --expiry-days=1 s3://my_bucket
+</code></pre><p>for your files to be deleted, for example, after one day.</p>
 <h3 id="double-check">Double check</h3>
 <ul>
 <li>Your API endpoint doesn&rsquo;t have your bucket name in it.</li>
