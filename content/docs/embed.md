@@ -60,14 +60,14 @@ You can easily customize the styling of the embedded Owncast stream to match you
       background-color: #fff; /* Set background color to white */
       margin: 0 auto; /* Center the iframe horizontally */
     }
-    
+
     /* Style the iframe title (optional) */
     iframe[title="Owncast"] {
       font-size: 18px; /* Adjust the title font size */
       font-weight: bold; /* Make the title bold */
       padding: 10px; /* Add some padding around the title */
     }
-    
+
     /* Style the iframe content (optional) */
     iframe[title="Owncast"] body {
       margin: 0; /* Reset margin inside the iframe */
@@ -124,8 +124,12 @@ One common use of read-only chat is adding the chat messages to your broadcastin
    html {
    margin: 0px;
    padding: 20px;
-   background-color: rgba(0,0,0,0.5);
+   background-color: rgba(0,0,0,0);
    font-size: 24px;
+   }
+
+   \#chat-container {
+   background-color: rgba(0,0,0,0.5);
    }
    {{< / highlight >}}
 
