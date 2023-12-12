@@ -1237,7 +1237,7 @@ allowfullscreen>
 </span></span><span class="line"><span class="cl"><span class="k">font-size</span><span class="p">:</span> <span class="mi">24</span><span class="kt">px</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="err">\\</span><span class="p">#</span><span class="nn">chat-container</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">#</span><span class="nn">chat-container</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="k">background-color</span><span class="p">:</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></p>
 </li>
