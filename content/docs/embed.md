@@ -128,7 +128,7 @@ One common use of read-only chat is adding the chat messages to your broadcastin
    font-size: 24px;
    }
 
-   \#chat-container {
+   #chat-container {
    background-color: rgba(0,0,0,0.5);
    }
    {{< / highlight >}}
