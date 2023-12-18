@@ -5,11 +5,6 @@ on:
       - master
     paths:
       - "static/install.sh"
-  pull_request:
-    branches:
-      - master
-    paths:
-      - "static/install.sh"
 
 jobs:
   generate-installer-preview:
