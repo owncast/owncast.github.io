@@ -123,22 +123,22 @@ main() {
     "x86_64")
       OWNCAST_ARCH="64bit"
       PLATFORM="macOS"
-      FFMPEG_VERSION="4.3.1"
+      FFMPEG_VERSION="6.1"
       FFMPEG_DOWNLOAD_URL="https://evermeet.cx/ffmpeg/ffmpeg-${FFMPEG_VERSION}.zip"
-      FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"  
+      FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"
       ;;
     "arm64")
       OWNCAST_ARCH="arm64"
       PLATFORM="macOS"
-      FFMPEG_VERSION="6"
+      FFMPEG_VERSION="61"
       FFMPEG_DOWNLOAD_URL="https://www.osxexperts.net/ffmpeg${FFMPEG_VERSION}arm.zip"
-      FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"      
-    ;;
+      FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"
+      ;;
     *)
       errorAndExit "Unsupported CPU architecture $(uname -m)"
       ;;
     esac
-  ;;
+    ;;
 
     # ;;
   "Linux")
@@ -164,9 +164,9 @@ main() {
       ;;
     esac
     PLATFORM="linux"
-    FFMPEG_VERSION="b4.3.1"
-    FFMPEG_DOWNLOAD_URL="https://github.com/eugeneware/ffmpeg-static/releases/download/${FFMPEG_VERSION}/${FFMPEG_ARCH}"
-    FFMPEG_TARGET_FILE="${OWNCAST_INSTALL_DIRECTORY}/ffmpeg"
+    FFMPEG_VERSION="6.1"
+    FFMPEG_DOWNLOAD_URL="https://assets.owncast.tv/ffmpeg/ffmpeg-release-${FFMPEG_VERSION}-${FFMPEG_ARCH}-static.tar.xz"
+    FFMPEG_TARGET_FILE="${OWNCAST_INSTALL_DIRECTORY}/ffmpeg.tar.xz"
     ;;
   *)
     errorAndExit "Unsupported operating system $(uname -s)"
@@ -213,10 +213,17 @@ main() {
     curl -s -L "${FFMPEG_DOWNLOAD_URL}" --output "${FFMPEG_TARGET_FILE}" &
     spinner $!
     printf "${GREEN}Downloaded${NC} ffmpeg because it was not found on your system [${GREEN}✓${NC}]\n"
+
+    # Uncompress ffmpeg
     if [[ "$FFMPEG_TARGET_FILE" == *.zip ]]; then
       unzip -oq "$FFMPEG_TARGET_FILE" -d "$OWNCAST_INSTALL_DIRECTORY"
-      rm "$FFMPEG_TARGET_FILE"
+    elif [[ "$FFMPEG_TARGET_FILE" == *.tar.xz ]]; then
+      mkdir -p ffmpeg-temp
+      tar -xJf "$FFMPEG_TARGET_FILE" --strip-components=1 -C ffmpeg-temp
+      mv ffmpeg-temp/ffmpeg "${OWNCAST_INSTALL_DIRECTORY}/ffmpeg"
+      rm -rf ffmpeg-temp
     fi
+    rm "$FFMPEG_TARGET_FILE"
     chmod u+x "${OWNCAST_INSTALL_DIRECTORY}/ffmpeg"
   fi
 
