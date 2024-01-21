@@ -27,6 +27,11 @@ Any application that supports HLS video will play back an Owncast stream. Instal
 
 ### AppleTV
 
+Owncasts for tvOS
+
+1. Install [Owncasts for tvOS](https://apps.apple.com/us/app/owncasts/id6451178968?platform=appleTV) from the tvOS App Store.
+1. Add your own Owncast server in the settings to watch any Owncast-powered live stream.
+
 VLC for tvOS
 
 1. Install [VLC](https://www.videolan.org/vlc/download-appletv.html) from the tvOS App Store.
@@ -43,6 +48,13 @@ AirPlay
 1. Play the Owncast stream.
 1. Press the _AirPlay_ button.
 1. Select your AppleTV.
+
+Owncasts for iOS
+
+1. Install [Owncasts for iOS](https://apps.apple.com/us/app/owncasts/id6451178968?platform=iphone) from the iPhone App Store.
+1. Launch the application and browse the directory or add your own Owncast-powered live stream in the settings.
+1. Begin playback of the live stream.
+1. Press the AirPlay button and select your AirPlay compatible device.
 
 ### Amazon Fire TV
 
@@ -79,6 +91,14 @@ Almost any application that supports adding _IPTV_ or _M3U_ playlists can suppor
 Choose an application, and add `https://directory.owncast.online/api/iptv` as your playlist URL.
 
 ### AppleTV
+
+Owncasts for tvOS
+
+1. Install [Owncasts for tvOS](https://apps.apple.com/us/app/owncasts/id6451178968?platform=iphone) from the tvOS App Store.
+1. Launch the application and browse the directory.
+1. Add your own private Owncast server in the settings if it is not listed in the directory.
+
+iPlayTV
 
 1. Install [iPlayTV](https://apps.apple.com/us/app/iplaytv-iptv-m3u-player/id1072226801) from the tvOS App Store.
 1. Visit Settings -> Edit
