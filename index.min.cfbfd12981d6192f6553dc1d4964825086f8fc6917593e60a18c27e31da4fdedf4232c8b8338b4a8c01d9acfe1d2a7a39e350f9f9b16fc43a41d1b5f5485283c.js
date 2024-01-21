@@ -2372,6 +2372,11 @@ different devices. On this page we&rsquo;ll try to share some.</p>
 <li>If you&rsquo;re already using the Chromecast, your content will replace what&rsquo;s on your TV.</li>
 </ol>
 <h3 id="appletv">AppleTV</h3>
+<p>Owncasts for tvOS</p>
+<ol>
+<li>Install <a href="https://apps.apple.com/us/app/owncasts/id6451178968?platform=appleTV">Owncasts for tvOS</a> from the tvOS App Store.</li>
+<li>Add your own Owncast server in the settings to watch any Owncast-powered live stream.</li>
+</ol>
 <p>VLC for tvOS</p>
 <ol>
 <li>Install <a href="https://www.videolan.org/vlc/download-appletv.html">VLC</a> from the tvOS App Store.</li>
@@ -2387,6 +2392,13 @@ different devices. On this page we&rsquo;ll try to share some.</p>
 <li>Play the Owncast stream.</li>
 <li>Press the <em>AirPlay</em> button.</li>
 <li>Select your AppleTV.</li>
+</ol>
+<p>Owncasts for iOS</p>
+<ol>
+<li>Install <a href="https://apps.apple.com/us/app/owncasts/id6451178968?platform=iphone">Owncasts for iOS</a> from the iPhone App Store.</li>
+<li>Launch the application and browse the directory or add your own Owncast-powered live stream in the settings.</li>
+<li>Begin playback of the live stream.</li>
+<li>Press the AirPlay button and select your AirPlay compatible device.</li>
 </ol>
 <h3 id="amazon-fire-tv">Amazon Fire TV</h3>
 <ol>
@@ -2417,6 +2429,13 @@ different devices. On this page we&rsquo;ll try to share some.</p>
 <p>Almost any application that supports adding <em>IPTV</em> or <em>M3U</em> playlists can support the directory.
 Choose an application, and add <code>https://directory.owncast.online/api/iptv</code> as your playlist URL.</p>
 <h3 id="appletv-1">AppleTV</h3>
+<p>Owncasts for tvOS</p>
+<ol>
+<li>Install <a href="https://apps.apple.com/us/app/owncasts/id6451178968?platform=iphone">Owncasts for tvOS</a> from the tvOS App Store.</li>
+<li>Launch the application and browse the directory.</li>
+<li>Add your own private Owncast server in the settings if it is not listed in the directory.</li>
+</ol>
+<p>iPlayTV</p>
 <ol>
 <li>Install <a href="https://apps.apple.com/us/app/iplaytv-iptv-m3u-player/id1072226801">iPlayTV</a> from the tvOS App Store.</li>
 <li>Visit Settings -&gt; Edit</li>
