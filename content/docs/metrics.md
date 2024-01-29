@@ -22,7 +22,7 @@ If you see your hardware is being over utilized, you may wish to [troubleshoot](
 
 For people who prefer to use external monitoring solutions, Owncast supports using [Prometheus](https://prometheus.io/) to collect a set of metrics.
 
-You can point your Prometheus config at your Owncast instance with the endpoint of `/api/admin/prometheus`, using basic auth and your stream key.
+You can point your Prometheus config at your Owncast instance with the endpoint of `/api/admin/prometheus`, using basic auth and the admin login data.
 
 For example:
 
@@ -33,7 +33,7 @@ For example:
   scheme: https
   basic_auth:
     username: admin
-    password: my_stream_key
+    password: my_admin_password
   static_configs:
     - targets: ["my.owncast.server"]
 ```
