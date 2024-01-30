@@ -1641,7 +1641,7 @@ th {
 <p>If you see your hardware is being over utilized, you may wish to <a href="/troubleshoot">troubleshoot</a>.</p>
 <h2 id="prometheus">Prometheus</h2>
 <p>For people who prefer to use external monitoring solutions, Owncast supports using <a href="https://prometheus.io/">Prometheus</a> to collect a set of metrics.</p>
-<p>You can point your Prometheus config at your Owncast instance with the endpoint of <code>/api/admin/prometheus</code>, using basic auth and your stream key.</p>
+<p>You can point your Prometheus config at your Owncast instance with the endpoint of <code>/api/admin/prometheus</code>, using basic auth and the admin login data.</p>
 <p>For example:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="l">owncast</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">scrape_interval</span><span class="p">:</span><span class="w"> </span><span class="l">1m</span><span class="w">
@@ -1649,7 +1649,7 @@ th {
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">scheme</span><span class="p">:</span><span class="w"> </span><span class="l">https</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">basic_auth</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">admin</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">my_stream_key</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">my_admin_password</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">static_configs</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;my.owncast.server&#34;</span><span class="p">]</span><span class="w">
 </span></span></span></code></pre></div>`},{id:35,href:"/docs/chat/moderation/",title:"Chat moderation",description:"Add moderators, remove messages and users from your chat.",content:`<p>Using either the Owncast admin, or inline moderation controls within your chat, you can remove individual messages or entire users.</p>
