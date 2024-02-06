@@ -1,7 +1,11 @@
 on:
   schedule:
     - cron: 0 0 * * 5
-  page_build
+  page_build:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 name: Broken Link Check
 jobs:
@@ -12,6 +16,6 @@ jobs:
       - name: Broken Link Check
         uses: technote-space/broken-link-checker-action@v2
         with:
-          target: https://owncast.online/docs
-          title: "Broken link: ${URL}"
-          recursive: true
+          TARGET: https://owncast.online/docs
+          TITLE: "Broken link: ${URL}"
+          RECURSIVE: true
