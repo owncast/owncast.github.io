@@ -2,6 +2,9 @@ on:
   schedule:
     - cron: 0 0 * * 5
   page_build:
+  push:
+    branches:
+      - gh-pages
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
