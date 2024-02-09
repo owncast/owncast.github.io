@@ -2,10 +2,6 @@ name: Broken Link Check
 
 on:
   workflow_dispatch:
-  page_build:
-  push:
-    branches:
-      - gh-pages
   schedule:
     - cron: '3 3 * * 0'
 
@@ -17,9 +13,24 @@ jobs:
   broken-link-checker:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.120.4"
+          extended: true
+
+      - name: Build
+        run: npm install && hugo --minify
+
       - name: Check broken links
         uses: ruzickap/action-my-broken-link-checker@v2
         with:
           url: https://owncast.online/docs
+          pages_path: ./public/
           cmd_params: '--buffer-size=8192 --max-connections=10 --color=always --rate-limit=1 --max-connections-per-host 3 --exclude="opencollective.com|github.com|example.com|mydomain.com|sitemap" --verbose'
           debug: true
