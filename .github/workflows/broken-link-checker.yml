@@ -1,24 +1,24 @@
+name: Broken Link Check
+
 on:
-  schedule:
-    - cron: 0 0 * * 5
+  workflow_dispatch:
   page_build:
   push:
     branches:
       - gh-pages
+  schedule:
+    - cron: '3 3 * * 0'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-name: Broken Link Check
 jobs:
-  check:
-    name: Broken Link Check
+  broken-link-checker:
     runs-on: ubuntu-latest
     steps:
-      - name: Broken Link Check
-        uses: technote-space/broken-link-checker-action@v2
+      - name: Check broken links
+        uses: ruzickap/action-my-broken-link-checker@v2
         with:
-          TARGET: https://owncast.online/docs
-          TITLE: "Broken link: ${URL}"
-          RECURSIVE: true
+          url: https://owncast.online/docs
+          cmd_params: '--buffer-size=8192 --max-connections=10 --color=always --rate-limit=2 --max-connections-per-host 10 --exclude="opencollective.com|github.com|example.com|mydomain.com|sitemap"'
