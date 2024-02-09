@@ -32,5 +32,5 @@ jobs:
         with:
           url: https://owncast.online/docs
           pages_path: ./public/
-          cmd_params: '--buffer-size=8192 --max-connections=10 --color=always --rate-limit=1 --max-connections-per-host 3 --exclude="opencollective.com|github.com|example.com|mydomain.com|sitemap" --verbose'
+          cmd_params: '--buffer-size=8192 --max-connections=10 --color=always --rate-limit=1 --max-connections-per-host 3 --skip-tls-verification --exclude="opencollective.com|github.com|example.com|mydomain.com|sitemap" --verbose'
           debug: true
