@@ -2,12 +2,12 @@
 title: "Participate in Hacktoberfest with Owncast"
 description: Contribute to Owncast during October and get a Hacktoberfest and Owncast t-shirt!
 tags: [hacktoberfest, open-source, contribute, contributing, tshirt, t-shirt]
-images: ["../images/hacktoberfest.jpg"]
+images: ["./images/hacktoberfest.jpg"]
 ---
 
 <center>
     <a href="https://hacktoberfest.com">
-        <img src="../images/hacktoberfest.jpg" alt="hacktoberfest 2022 logo" width="80%"/>
+        <img src="./images/hacktoberfest.jpg" alt="hacktoberfest 2022 logo" width="80%"/>
     </a>
 </center>
 

@@ -33,7 +33,7 @@ This video from Jon Dahl is gives a very good overview of internet video, starti
 
 {{< youtube id="rb83esfHnW8?start=539" >}}
 
-In this case Owncast works as the Media encoder, Stream segmenter, and distribution web server. However [Owncast supports video being distributed via 3rd party storage as well](/docs/storage), so in that case the video segments would be distributed from there, instead.
+In this case Owncast works as the Media encoder, Stream segmenter, and distribution web server. However [Owncast supports video being distributed via 3rd party storage as well](/content/docs/storage/_index.md), so in that case the video segments would be distributed from there, instead.
 
 {{< img src="https://docs-assets.developer.apple.com/published/88e87744a3/de18e941-81de-482f-843d-834a4dd3aa71.png" align="center">}}
 
@@ -97,12 +97,12 @@ You will want to configure your broadcasting software to match the highest quali
 
 If you find yourself trying to squeeze better performance out of Owncast then try setting your broadcasting software to a lower quality as well as lowering the quality in your Owncast instance.
 
-Read more about [configuring your broadcasting software](/docs/broadcasting/).
+Read more about [configuring your broadcasting software](/content/docs/broadcasting/_index.md).
 
 ## Hardware accelerated video encoding
 
-If you are running on physical hardware you may be able to increase the performance of your Owncast instance by using your hardware along with a compatible codec, taking the heavy load off of your CPU. There is no guarantee all hardware configurations, drivers or operating systems will work and it may take some effort on your part to install all of the additional software required to get it working. Read more about what is supported, and how, at our [hardware accelerated encoding with additional codecs](/docs/codecs) document.
+If you are running on physical hardware you may be able to increase the performance of your Owncast instance by using your hardware along with a compatible codec, taking the heavy load off of your CPU. There is no guarantee all hardware configurations, drivers or operating systems will work and it may take some effort on your part to install all of the additional software required to get it working. Read more about what is supported, and how, at our [hardware accelerated encoding with additional codecs](/content/docs/codecs.md) document.
 
 ## Resource and requirement examples
 
-Visit the [resources and requirements](/docs/resources-requirements/) page to see some examples of what you can expect from your server hardware and network connection and how it may affect your viewers.
+Visit the [resources and requirements](/content/docs/resources-requirements.md) page to see some examples of what you can expect from your server hardware and network connection and how it may affect your viewers.

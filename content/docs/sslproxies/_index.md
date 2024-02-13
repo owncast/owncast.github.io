@@ -27,7 +27,7 @@ While not required, most people will want to support SSL on a public Owncast ser
 
 ## Popular options
 
-You can use any method you like to add SSL support but there are some popular options we've seen work well with people. If you have any specific questions or would like to make suggestions on configurations or other setups [let us know](/contact).
+You can use any method you like to add SSL support but there are some popular options we've seen work well with people. If you have any specific questions or would like to make suggestions on configurations or other setups [let us know](/content/contact.md).
 
 ## Inherit display name from reverse proxy
 
@@ -37,4 +37,4 @@ Owncast usually assigns a random display name when new users are joining the cha
 
 ## Suggested
 
-If you have no requirement to use other options else it is suggested you install [Caddy](caddy/) as it can be installed quickly and easily.
+If you have no requirement to use other options else it is suggested you install [Caddy](caddy.md) as it can be installed quickly and easily.
