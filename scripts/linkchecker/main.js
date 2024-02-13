@@ -24,8 +24,11 @@ async function run() {
     if (links.fail_map.hasOwnProperty(key)) {
       const failedUrls = links.fail_map[key];
       for (const failedUrl of failedUrls) {
-        let link = failedUrl.url;
-        let issueTitle = `Documentation broken link: ${link}`;
+        const link = failedUrl.url;
+        const displaySource = key.replace("../../", "");
+        const issueTitle = `Documentation broken link: ${link}`;
+        const sourceLink = `https://github.com/owncast/owncast.github.io/tree/master/${displaySource}`;
+        const sourceLinkEditor = `https://github.dev/owncast/owncast.github.io/tree/master/${displaySource}`;
 
         let issueCheck;
         try {
@@ -39,9 +42,13 @@ async function run() {
           let issueBody = `
 # Broken link found in Owncast documentation
 
-Please fix or remove the broken link ${link} from ${key.replace("../../", "")}.
+Please fix or remove the broken link ${link} from [${displaySource}](${sourceLink}).
 
 You can find the Owncast documentation site repository at https://github.com/owncast/owncast.github.io, and that is where you would make any fixes to broken links, or documentation in general. Thank you for helping improve our documentation!
+
+[Open documentation repository in editor](${sourceLinkEditor})
+
+Source file: ${sourceLink}
         ${
           failedUrl.status.text &&
           `
