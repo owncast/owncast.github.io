@@ -32,7 +32,7 @@ async function run() {
 
         let issueCheck;
         try {
-          issueCheck = await searchForIssue(failedUrl);
+          issueCheck = await searchForIssue(link);
           await sleep(2000);
           if (issueCheck) {
             console.log("Issue already exists");

@@ -1,9 +1,9 @@
-name: Broken Link Check
+name: Broken Links Check
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '3 3 * * 0'
+    - cron: "3 3 * * 0"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -12,25 +12,31 @@ concurrency:
 jobs:
   broken-link-checker:
     runs-on: ubuntu-latest
+    if: github.repository == 'owncast/owncast.github.io'
+
+    defaults:
+      run:
+        working-directory: ./scripts/linkchecker
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out web site code
+        uses: actions/checkout@v2
         with:
-          submodules: true # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+          fetch-depth: 0
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+      - name: Download lychee
+        run: |
+          wget https://github.com/lycheeverse/lychee/releases/download/v0.14.3/lychee-v0.14.3-x86_64-unknown-linux-gnu.tar.gz && tar xvf lychee-v0.14.3-x86_64-unknown-linux-gnu.tar.gz
+
+      - name: Setup nodejs
+        uses: actions/setup-node@v4
         with:
-          hugo-version: "0.120.4"
-          extended: true
+          node-version: latest
 
-      - name: Build
-        run: npm install && hugo --minify
+      - name: Install dependencies
+        run: npm install
 
-      - name: Check broken links
-        uses: ruzickap/action-my-broken-link-checker@v2
-        with:
-          url: https://owncast.online/docs
-          pages_path: ./public/
-          cmd_params: '--buffer-size=8192 --max-connections=10 --color=always --rate-limit=1 --max-connections-per-host 3 --skip-tls-verification --exclude="opencollective.com|github.com|example.com|mydomain.com|sitemap" --verbose'
-          debug: true
+      - name: Run link checker
+        run: ./run.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
