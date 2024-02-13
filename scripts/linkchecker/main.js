@@ -12,8 +12,6 @@ async function searchForIssue(issueTitle) {
   });
 
   if (response.data.total_count > 0) {
-    // console.log("Issue found:");
-    // console.log(response.data.items[0]);
     return response.data.items[0];
   } else {
   }
@@ -31,7 +29,7 @@ async function run() {
 
         let issueCheck;
         try {
-          issueCheck = await searchForIssue(issueTitle);
+          issueCheck = await searchForIssue(failedUrl);
           await sleep(2000);
           if (issueCheck) {
             console.log("Issue already exists");
