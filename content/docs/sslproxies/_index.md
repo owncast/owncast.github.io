@@ -37,4 +37,6 @@ Owncast usually assigns a random display name when new users are joining the cha
 
 ## Suggested
 
-If you have no requirement to use other options else it is suggested you install [Caddy](caddy/) as it can be installed quickly and easily.
+If you have no requirement to use other options else it is suggested you install Caddy as it can be installed quickly and easily.
+
+
