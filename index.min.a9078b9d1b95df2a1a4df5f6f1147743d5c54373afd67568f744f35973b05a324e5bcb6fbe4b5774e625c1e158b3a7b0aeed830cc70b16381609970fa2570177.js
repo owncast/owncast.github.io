@@ -2312,13 +2312,13 @@ You can find a list of <a href="https://owncast.online/components/?path=%2Fdocs%
 </span></span><span class="line"><span class="cl">  <span class="nv">--theme-text-body-font-family</span><span class="p">:</span> <span class="kc">serif</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div>`},{id:49,href:"/docs/",title:"Documentation",description:null,content:`<p>For most people Owncast will be completely usable out of the box without additional configuration. Simply following the <a href="/quickstart">Quickstart</a> will have you streaming in minutes.</p>
-<p>There are, however, handfuls of items you can configure to tweak the <a href="website">content of your page</a>, the <a href="encoding">video quality</a>, server performance and more.</p>
+<p>There are, however, handfuls of items you can configure to tweak the <a href="website">content of your page</a>, the <a href="video">video quality</a>, server performance and more.</p>
 <p>You can also extend Owncast&rsquo;s functionality by building your own bots, overlays, tools and integrations by taking advantage of the <a href="/thirdparty">third party APIs</a>.</p>
 <p>Some things you might be interested in:</p>
 <ol>
 <li><a href="/faq">FAQ</a></li>
 <li><a href="/docs/storage">Using an external storage provider instead of your own bandwidth</a></li>
-<li><a href="/docs/encoding">Customize your video output</a></li>
+<li><a href="/docs/video">Customize your video output</a></li>
 <li><a href="/docs/sslproxies">Enable SSL using a web proxy</a></li>
 </ol>
 `},{id:50,href:"/docs/broadcasting/jitsi/",title:"Jitsi",description:"Jitsi is an open source video conferencing provider.",content:`<p><a href="https://jit.org">Jitsi</a> is both a video conferencing provider and a software suite. It is open source and can be self-hosted. It is also available as a service at <a href="https://meet.jit.si">meet.jit.si</a>.</p>
