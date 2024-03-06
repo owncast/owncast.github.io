@@ -220,11 +220,6 @@
     "html_url": "https://github.com/controlfreakstudio"
   },
   {
-    "login": "craftamap",
-    "avatar_url": "https://avatars.githubusercontent.com/u/6420231?v=4",
-    "html_url": "https://github.com/craftamap"
-  },
-  {
     "login": "dependabot[bot]",
     "avatar_url": "https://avatars.githubusercontent.com/in/29110?v=4",
     "html_url": "https://github.com/apps/dependabot"
@@ -493,6 +488,11 @@
     "login": "renovate[bot]",
     "avatar_url": "https://avatars.githubusercontent.com/in/2740?v=4",
     "html_url": "https://github.com/apps/renovate"
+  },
+  {
+    "login": "riybha216",
+    "avatar_url": "https://avatars.githubusercontent.com/u/45548395?v=4",
+    "html_url": "https://github.com/riybha216"
   },
   {
     "login": "rmens",
