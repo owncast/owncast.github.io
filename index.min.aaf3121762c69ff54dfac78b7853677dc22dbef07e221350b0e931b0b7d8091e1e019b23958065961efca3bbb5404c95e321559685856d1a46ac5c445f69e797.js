@@ -2321,7 +2321,7 @@ You can find a list of <a href="https://owncast.online/components/?path=%2Fdocs%
 <li><a href="/docs/video">Customize your video output</a></li>
 <li><a href="/docs/sslproxies">Enable SSL using a web proxy</a></li>
 </ol>
-`},{id:50,href:"/docs/broadcasting/jitsi/",title:"Jitsi",description:"Jitsi is an open source video conferencing provider.",content:`<p><a href="https://jit.org">Jitsi</a> is both a video conferencing provider and a software suite. It is open source and can be self-hosted. It is also available as a service at <a href="https://meet.jit.si">meet.jit.si</a>.</p>
+`},{id:50,href:"/docs/broadcasting/jitsi/",title:"Jitsi",description:"Jitsi is an open source video conferencing provider.",content:`<p><a href="https://jitsi.org">Jitsi</a> is both a video conferencing provider and a software suite. It is open source and can be self-hosted. It is also available as a service at <a href="https://meet.jit.si">meet.jit.si</a>.</p>
 <ol>
 <li>Visit your Jitsi meeting page.</li>
 <li>Click on the three dots in the lower right.</li>
