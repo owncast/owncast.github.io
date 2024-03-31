@@ -25,6 +25,8 @@ weight: 100
 
 - Set content-type for customjavascript [#3612](https://github.com/owncast/owncast/pull/3612)
 
+- Added "rel-me" attribute to server-rendered bot/metadata/search page template [#3290](https://github.com/owncast/owncast/issues/3290)
+
 ### Changed
 
 - Do not send a join chat event if that user is already in the chat [#3487](https://github.com/owncast/owncast/issues/3487)
@@ -50,6 +52,8 @@ weight: 100
 - Sharing Owncast fediverse posts to a few thousand accounts causes video buffering [#3189](https://github.com/owncast/owncast/issues/3189)
 
 - Thumbnail not consistently generated when using S3 [#3522](https://github.com/owncast/owncast/issues/3522)
+
+- Player timestamp is sometimes shown as undefined [#3652](https://github.com/owncast/owncast/issues/3652)
 
 - Changing Log-Entries-Per-Page in Admin Console Doesn't Work [#3511](https://github.com/owncast/owncast/issues/3511)
 
