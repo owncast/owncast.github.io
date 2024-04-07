@@ -61,6 +61,8 @@ weight: 100
 
 - Pagination Doesn't Work in 'Followers' Console [#3510](https://github.com/owncast/owncast/issues/3510)
 
+- Protect emoji delete API from possible path traversal exploit [1b14800c7d7f54be14ed4d130bfe7f480645076e](https://github.com/owncast/owncast/commit/1b14800c7d7f54be14ed4d130bfe7f480645076e)
+
 - Unable to create Webhooks on 0.1.2 when "When a user leaves the chat" checked. [#3524](https://github.com/owncast/owncast/issues/3524)
 
 - mobile-chat-button is displayed for mobile users when chat is disabled. [#3535](https://github.com/owncast/owncast/issues/3535)
