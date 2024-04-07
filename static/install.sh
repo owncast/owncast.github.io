@@ -7,7 +7,7 @@ set -o pipefail
 
 # Install configuration
 if ! [ "${OWNCAST_VERSION:-}" ]; then
-  OWNCAST_VERSION="0.1.2"
+  OWNCAST_VERSION="0.1.3"
 fi
 
 if ! [ "${OWNCAST_INSTALL_DIRECTORY:-}" ]; then
@@ -125,20 +125,20 @@ main() {
       PLATFORM="macOS"
       FFMPEG_VERSION="4.3.1"
       FFMPEG_DOWNLOAD_URL="https://evermeet.cx/ffmpeg/ffmpeg-${FFMPEG_VERSION}.zip"
-      FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"  
+      FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"
       ;;
     "arm64")
       OWNCAST_ARCH="arm64"
       PLATFORM="macOS"
       FFMPEG_VERSION="6"
       FFMPEG_DOWNLOAD_URL="https://www.osxexperts.net/ffmpeg${FFMPEG_VERSION}arm.zip"
-      FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"      
-    ;;
+      FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"
+      ;;
     *)
       errorAndExit "Unsupported CPU architecture $(uname -m)"
       ;;
     esac
-  ;;
+    ;;
 
     # ;;
   "Linux")
