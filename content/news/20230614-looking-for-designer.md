@@ -3,7 +3,7 @@ title: "Looking for a designer to help with future features!"
 description: "Owncast is planning for upcoming features and needs a talented designer to help!"
 date: 2023-06-14T11:50:56-07:00
 lastmod: 2023-06-14T11:50:56-07:00
-draft: false
+draft: true
 images: []
 ---
 
