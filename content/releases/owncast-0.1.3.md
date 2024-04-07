@@ -1,13 +1,13 @@
 ---
 title: Owncast v0.1.3
-date: 2024-03-02
+date: 2024-04-07
 description: Another smaller update with requested changes and additions.
 weight: 100
 ---
 
 # Changelog
 
-## [[0.1.3](https://github.com/owncast/owncast/milestone/25)] - 2024-03-xx
+## [[0.1.3](https://github.com/owncast/owncast/milestone/25)] - 2024-04-07
 
 ## Upgrade instructions from 0.1.2
 
