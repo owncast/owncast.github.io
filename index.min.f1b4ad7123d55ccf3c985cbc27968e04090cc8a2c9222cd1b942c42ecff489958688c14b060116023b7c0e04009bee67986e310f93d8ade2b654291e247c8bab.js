@@ -2364,6 +2364,7 @@ different devices. On this page we&rsquo;ll try to share some.</p>
 <p>Any application that supports HLS video will play back an Owncast stream. Install any video playback application for your platform of choice, and put in the URL <code>https://owncast.server/hls/stream.m3u8</code> to access the stream directly.</p>
 <h2 id="browsing-the-directory">Browsing the directory</h2>
 <p>If your application has <em>IPTV</em> or <em>M3U</em> support, you can also browse the directory directly from the application by adding <code>https://directory.owncast.online/api/iptv</code> to the application. Not all apps support this.</p>
+<h2 id="device-and-platform-support">Device and Platform support</h2>
 <h3 id="chromecast">Chromecast</h3>
 <p><a href="https://support.google.com/chromecast/answer/3228332">Visit the official Chromecast documentation</a>.</p>
 <ol>
