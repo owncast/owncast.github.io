@@ -19,6 +19,8 @@ Any application that supports HLS video will play back an Owncast stream. Instal
 
 If your application has _IPTV_ or _M3U_ support, you can also browse the directory directly from the application by adding `https://directory.owncast.online/api/iptv` to the application. Not all apps support this.
 
+## Device and Platform support
+
 ### Chromecast
 
 [Visit the official Chromecast documentation](https://support.google.com/chromecast/answer/3228332).
