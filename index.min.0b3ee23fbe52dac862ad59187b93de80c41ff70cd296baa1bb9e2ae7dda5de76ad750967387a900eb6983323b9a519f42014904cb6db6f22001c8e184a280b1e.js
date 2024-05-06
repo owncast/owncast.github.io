@@ -2451,8 +2451,8 @@ Choose an application, and add <code>https://directory.owncast.online/api/iptv</
 </ul>
 <h3 id="roku-1">Roku</h3>
 <ul>
-<li>Install the <a href="https://channelstore.roku.com/details/7419f1032ebbfe1c7dcc6e2f3f5c8767/owncast">Owncast Directory App</a></li>
-<li>Browse, or search for the stream name you wish to watch.</li>
+<li>Install the [Owncasts for Roku]https://channelstore.roku.com/details/2179326b6b85869a1a3a18d48ca76de6/owncasts). It currently shows what Owncast servers are on the directory.</li>
+<li>Browse for the stream you wish to watch.</li>
 </ul>
 <a href="https://channelstore.roku.com/details/7419f1032ebbfe1c7dcc6e2f3f5c8767/owncast">
     <img src="/images/owncast-directory-roku.png" width="100%"/>
