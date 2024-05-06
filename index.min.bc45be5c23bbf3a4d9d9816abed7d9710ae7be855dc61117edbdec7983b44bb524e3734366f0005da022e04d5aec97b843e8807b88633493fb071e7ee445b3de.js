@@ -2359,9 +2359,11 @@ You can find a list of <a href="https://owncast.online/components/?path=%2Fdocs%
 </div>
 <p>There are numerous ways for you to watch an Owncast live stream on many
 different devices. On this page we&rsquo;ll try to share some.</p>
-<p><strong>Note:</strong> None of the applications listed on this page are provided by, endorsed by, or supported by Owncast. You should make your own choices about what applications you choose to install. Products listed here are simply suggestions that have been tested and found to work with Owncast.</p>
-<h2 id="watching-on-your-television">Watching on your Television</h2>
+<p><strong>Note:</strong> Most of the applications listed on this page are not provided by, endorsed by, or supported by Owncast. You should make your own choices about what applications you choose to install. Products listed here are simply suggestions that have been tested and found to work with Owncast. Those that are built and provided by Owncast should be seen as side projects to assist viewers in watching more streams.</p>
+<h2 id="watching-on-your-any-video-player-including-on-your-television">Watching on your any video player, including on your television</h2>
 <p>Any application that supports HLS video will play back an Owncast stream. Install any video playback application for your platform of choice, and put in the URL <code>https://owncast.server/hls/stream.m3u8</code> to access the stream directly.</p>
+<h2 id="browsing-the-directory">Browsing the directory</h2>
+<p>If your application has <em>IPTV</em> or <em>M3U</em> support, you can also browse the directory directly from the application by adding <code>https://directory.owncast.online/api/iptv</code> to the application. Not all apps support this.</p>
 <h3 id="chromecast">Chromecast</h3>
 <p><a href="https://support.google.com/chromecast/answer/3228332">Visit the official Chromecast documentation</a>.</p>
 <ol>
@@ -2451,7 +2453,7 @@ Choose an application, and add <code>https://directory.owncast.online/api/iptv</
 </ul>
 <h3 id="roku-1">Roku</h3>
 <ul>
-<li>Install the [Owncasts for Roku]https://channelstore.roku.com/details/2179326b6b85869a1a3a18d48ca76de6/owncasts). It currently shows what Owncast servers are on the directory.</li>
+<li>Install the <a href="https://channelstore.roku.com/details/2179326b6b85869a1a3a18d48ca76de6/owncasts">Owncasts for Roku</a>. It currently shows what Owncast servers are on the directory.</li>
 <li>Browse for the stream you wish to watch.</li>
 </ul>
 <a href="https://channelstore.roku.com/details/7419f1032ebbfe1c7dcc6e2f3f5c8767/owncast">
