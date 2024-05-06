@@ -9,11 +9,15 @@ tags: ["watching", "tv", "television", "chromecast", "vlc", "casting", "kodi"]
 There are numerous ways for you to watch an Owncast live stream on many
 different devices. On this page we'll try to share some.
 
-**Note:** None of the applications listed on this page are provided by, endorsed by, or supported by Owncast. You should make your own choices about what applications you choose to install. Products listed here are simply suggestions that have been tested and found to work with Owncast.
+**Note:** Most of the applications listed on this page are not provided by, endorsed by, or supported by Owncast. You should make your own choices about what applications you choose to install. Products listed here are simply suggestions that have been tested and found to work with Owncast. Those that are built and provided by Owncast should be seen as side projects to assist viewers in watching more streams.
 
-## Watching on your Television
+## Watching on your any video player, including on your television
 
 Any application that supports HLS video will play back an Owncast stream. Install any video playback application for your platform of choice, and put in the URL `https://owncast.server/hls/stream.m3u8` to access the stream directly.
+
+## Browsing the directory
+
+If your application has _IPTV_ or _M3U_ support, you can also browse the directory directly from the application by adding `https://directory.owncast.online/api/iptv` to the application. Not all apps support this.
 
 ### Chromecast
 
@@ -115,7 +119,7 @@ iPlayTV
 
 ### Roku
 
-- Install the [Owncasts for Roku]https://channelstore.roku.com/details/2179326b6b85869a1a3a18d48ca76de6/owncasts). It currently shows what Owncast servers are on the directory.
+- Install the [Owncasts for Roku](https://channelstore.roku.com/details/2179326b6b85869a1a3a18d48ca76de6/owncasts). It currently shows what Owncast servers are on the directory.
 - Browse for the stream you wish to watch.
 
 <a href="https://channelstore.roku.com/details/7419f1032ebbfe1c7dcc6e2f3f5c8767/owncast">
