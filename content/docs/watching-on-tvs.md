@@ -115,8 +115,8 @@ iPlayTV
 
 ### Roku
 
-- Install the [Owncast Directory App](https://channelstore.roku.com/details/7419f1032ebbfe1c7dcc6e2f3f5c8767/owncast)
-- Browse, or search for the stream name you wish to watch.
+- Install the [Owncasts for Roku]https://channelstore.roku.com/details/2179326b6b85869a1a3a18d48ca76de6/owncasts). It currently shows what Owncast servers are on the directory.
+- Browse for the stream you wish to watch.
 
 <a href="https://channelstore.roku.com/details/7419f1032ebbfe1c7dcc6e2f3f5c8767/owncast">
     <img src="/images/owncast-directory-roku.png" width="100%"/>
