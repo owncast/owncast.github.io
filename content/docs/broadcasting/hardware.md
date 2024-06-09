@@ -13,7 +13,7 @@ The following hardware with native live streaming have been tested and work.
 - [GoPro Hero 8](https://gopro.com/)
 - [Mevo](https://mevo.com/)
 - [ATEM Mini Pro](https://www.blackmagicdesign.com/products/atemmini)
-- [TriCaster Mini](https://www.newtek.com/tricaster/mini/) \*you have to send the Stream Key as an unencrypted parameter called "Stream ID"
+- [TriCaster Mini](https://www.vizrt.com/tricaster/mini/) \*you have to send the Stream Key as an unencrypted parameter called "Stream ID"
 - [Kiloview E1](https://www.kiloview.com/en/encoder/h264-wired/)
 - [Blackmagic Web Presenter HD](https://www.blackmagicdesign.com/products/blackmagicwebpresenter)
 
