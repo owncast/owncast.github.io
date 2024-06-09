@@ -951,7 +951,7 @@ backend owncastws
 <li><a href="https://gopro.com/">GoPro Hero 8</a></li>
 <li><a href="https://mevo.com/">Mevo</a></li>
 <li><a href="https://www.blackmagicdesign.com/products/atemmini">ATEM Mini Pro</a></li>
-<li><a href="https://www.newtek.com/tricaster/mini/">TriCaster Mini</a> *you have to send the Stream Key as an unencrypted parameter called &ldquo;Stream ID&rdquo;</li>
+<li><a href="https://www.vizrt.com/tricaster/mini/">TriCaster Mini</a> *you have to send the Stream Key as an unencrypted parameter called &ldquo;Stream ID&rdquo;</li>
 <li><a href="https://www.kiloview.com/en/encoder/h264-wired/">Kiloview E1</a></li>
 <li><a href="https://www.blackmagicdesign.com/products/blackmagicwebpresenter">Blackmagic Web Presenter HD</a></li>
 </ul>
