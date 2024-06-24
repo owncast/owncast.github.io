@@ -189,7 +189,7 @@ Note that in Owncast you must enter the bucket name, the endpoint (with <code>ht
 <li>Open OBS Settings and go to &ldquo;Stream&rdquo;.</li>
 <li>Select &ldquo;Custom&hellip;&rdquo; as the service.</li>
 <li>Enter the URL of the server running your streaming service in the format of rtmp://myserver.net/live.</li>
-<li>Enter your &ldquo;Stream Key&rdquo; that matches your <a href="/docs/configuration">key</a> file.</li>
+<li>Enter your &ldquo;Stream Key&rdquo; that matches a stream key defined in the Owncast admin. By default there is a single stream key that matches the default admin password of <code>abc123</code> but this should be changed.</li>
 <li>Start the server.</li>
 <li>Press &ldquo;Start Streaming&rdquo; (OBS) or &ldquo;Go Live&rdquo; (Streamlabs) on OBS.</li>
 </ol>
