@@ -9,36 +9,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Bundle Storybook
-      run: ./scripts/bundleComponentGuide.sh
+      - name: Bundle Storybook
+        run: ./scripts/bundleComponentGuide.sh
 
-    - name: Bundle latest API docs
-      run: curl https://raw.githubusercontent.com/owncast/owncast/develop/docs/api/index.html -o static/api/latest/index.html
+      - name: Bundle latest API docs
+        run: curl https://raw.githubusercontent.com/owncast/owncast/develop/docs/api/index.html -o static/api/latest/index.html
 
-    - name: Commit changes
-      uses: EndBug/add-and-commit@v5
-      with:
-        author_name: Owncast
-        author_email: owncast@owncast.online
-        message: "Update component library and style guide"
-        add: "static/components"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v5
+        with:
+          author_name: Owncast
+          author_email: owncast@owncast.online
+          message: "Update component library and style guide"
+          add: "static"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
-      with:
-        hugo-version: '0.120.4'
-        extended: true
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.120.4"
+          extended: true
 
-    - name: Build
-      run: npm install && hugo --minify
+      - name: Build
+        run: npm install && hugo --minify
 
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public  
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
