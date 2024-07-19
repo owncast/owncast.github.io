@@ -205,11 +205,6 @@
     "html_url": "https://github.com/brownchow"
   },
   {
-    "login": "captainwasabi",
-    "avatar_url": "https://avatars.githubusercontent.com/u/8583375?v=4",
-    "html_url": "https://github.com/captainwasabi"
-  },
-  {
     "login": "christianhorn",
     "avatar_url": "https://avatars.githubusercontent.com/u/1409927?v=4",
     "html_url": "https://github.com/christianhorn"
@@ -218,6 +213,11 @@
     "login": "controlfreakstudio",
     "avatar_url": "https://avatars.githubusercontent.com/u/67573032?v=4",
     "html_url": "https://github.com/controlfreakstudio"
+  },
+  {
+    "login": "craftamap",
+    "avatar_url": "https://avatars.githubusercontent.com/u/6420231?v=4",
+    "html_url": "https://github.com/craftamap"
   },
   {
     "login": "dependabot[bot]",
