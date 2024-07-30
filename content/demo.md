@@ -2,19 +2,13 @@
 title: Owncast Demo Servers
 ---
 
-We provide two public Owncast servers for you to see how it works. One for streaming *to* and one for just watching.
+Seeing is believing! We provide a public Owncast server for you to see how it works.
 
-### Stream your content to [broadcast.owncast.online](http://broadcast.owncast.online)
+### Browse Owncast instances at [directory.owncast.online](http://directory.owncast.online/)
 
-You can point **your own software and content** at [broadcast.owncast.online](http://broadcast.owncast.online) to test live streaming with Owncast. [Go there](http://broadcast.owncast.online) and find the current key in the description and chat messages.
+The directory allows streams to list themselves for discovery by potential viewers and the Owncast community. Operated as a complimentary service by Owncast, it lists servers that have [explicitly opted in](https://owncast.online/docs/directory/) to be public. There is no obligation to list any specific server or topic, and objectionable content can be removed at any time. 
 
-Read more about how to configure your software by reading the [broadcasting software documentation](/docs/broadcasting/).
-
-Some limitations and restrictions:
-
-* You can only stream for a few minutes. Long enough to test out the service and verify your software.
-* You can't connect if somebody else is already streaming.
-* The streaming key will change over time and you'll see it show up as a chat message.
+You can browse the directory using compatible applications. Learn more about watching Owncast streams and [browsing the directory on other devices](https://owncast.online/docs/watching-on-tvs/).
 
 ---
 
