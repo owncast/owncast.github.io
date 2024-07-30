@@ -1,6 +1,6 @@
 ---
-title: "One-click-install with DigitalOcean"
-description: "Automatically have Owncast setup on a DigitalOcean server"
+title: "One-click-install with Elestio"
+description: "Automatically have Owncast setup on Elestio"
 type: docs
 ---
 
