@@ -4,7 +4,7 @@ description: "Automatically have Owncast setup on Elestio"
 type: docs
 ---
 
-# Elestio
+<a href="https://elest.io/open-source/owncast"><img src="Elestio.svg" alt="Elestio logo" width="50%"></a>
 
 ## Step 1: Initiate Deployment
 
