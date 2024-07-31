@@ -30,7 +30,9 @@ As you continue to read, and you find the project interesting, I urge you to do 
 If you're curious what the status of the project is, and what some of its
 active users think, you can hear what they have to say.
 
-<iframe src="https://inv.riverside.rocks/embed/wc3spGMq-Uo" frameBorder=0></iframe>
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden">
+  <iframe src="https://www.youtube.com/embed/wc3spGMq-Uo" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allowfullscreen="" title="Live streamers tell their stories about why they made the change to go independent and self-hosted."></iframe>
+</div>
 
 ## Want to write some code?
 
