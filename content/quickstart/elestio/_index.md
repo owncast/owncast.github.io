@@ -1,10 +1,10 @@
 ---
-title: "One-click-install with DigitalOcean"
-description: "Automatically have Owncast setup on a DigitalOcean server"
+title: "One-click-install with Elestio"
+description: "Automatically have Owncast setup on Elestio"
 type: docs
 ---
 
-# Elestio
+<a href="https://elest.io/open-source/owncast"><img src="Elestio.svg" alt="Elestio logo" width="50%"></a>
 
 ## Step 1: Initiate Deployment
 
