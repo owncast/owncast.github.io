@@ -100,6 +100,15 @@ Links:
 
 {{< alert icon="💡" text="Note for OBS users: It has been found that enabling nvenc while running the OBS auto-configuration wizard can result in errors. If you intend to run this configuration wizard against your Owncast server you may need to turn off nvenc temporarily in your Owncast settings while running it." >}}
 
+### Rokchip (h264_rkmpp)
+
+Hardware support for rockchip chipset boards like Orange Pi 5.
+
+Rockchip uses **h264_rkmpp** encoder to encode via hardware to increase the speed of the encoding and use less cpu, you can download it from **jellyfin** project:
+
+https://repo.jellyfin.org/?path=/ffmpeg
+
+
 ## ffmpeg
 
 Once your system is configured to use the correct drivers and libraries required you'll need to make sure your copy of `ffmpeg` supports it.
