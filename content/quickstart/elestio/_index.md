@@ -10,7 +10,7 @@ type: docs
 
 Begin by clicking the "Deploy" button below to kickstart the deployment process. This will set up Owncast on Elestio seamlessly.
 
-[![Deploy](https://pub-da36157c854648669813f3f76c526c2b.r2.dev/deploy-on-elestio-black.png)](https://elest.io/open-source/owncast)
+[![Deploy on Elestio](https://elest.io/images/logos/deploy-to-elestio-btn.png)](https://elest.io/open-source/owncast)
 
 ## Step 2: Choose Your Providers
 
