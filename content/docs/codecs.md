@@ -89,7 +89,7 @@ Note: OpenMAX support has unfortunately been disconnected with the Raspberry Pi 
 
 ### NVIDIA Encoder (nvenc)
 
-Follow the instructions on the [NVIDIA ffmpeg transcoding guide](https://developer.nvidia.com/blog/nvidia-ffmpeg-transcoding-guide/) to install all the required drivers and libraries. This requires installing a driver from the [NVIDIA website](https://www.nvidia.com/drivers), Downloading and install the [CUDA toolkit](https://developer.nvidia.com/cuda-toolkit), [downloading nv-codec-headers](https://github.com/FFmpeg/nv-codec-headers), and building ffmpeg. Scroll to the section entitled _Hardware accelerated transcoding with FFmpeg_ at the [NVIDIA transcoding guide](https://developer.nvidia.com/blog/nvidia-ffmpeg-transcoding-guide/) for more information.
+Follow the instructions on the [NVIDIA ffmpeg transcoding guide](https://developer.nvidia.com/blog/nvidia-ffmpeg-transcoding-guide/) to install all the required drivers and libraries. This requires installing a driver from the [NVIDIA website](https://www.nvidia.com/en-us/drivers/), Downloading and install the [CUDA toolkit](https://developer.nvidia.com/cuda-toolkit), [downloading nv-codec-headers](https://github.com/FFmpeg/nv-codec-headers), and building ffmpeg. Scroll to the section entitled _Hardware accelerated transcoding with FFmpeg_ at the [NVIDIA transcoding guide](https://developer.nvidia.com/blog/nvidia-ffmpeg-transcoding-guide/) for more information.
 
 You may be able to find a pre-built version of ffmpeg that has `nvenc` support, however that's outside the scope of this document. You still need NVIDIA drivers regardless.
 
