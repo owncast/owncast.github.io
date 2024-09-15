@@ -1535,6 +1535,8 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
 
 <p>You can also checkout the API documentation at any point from the <a href="https://github.com/owncast/owncast">git repository</a>.</p>
 `},{id:30,href:"/docs/storage/",title:"Object Storage",description:"Use an external storage provider to distribute your Owncast video stream.",content:`<p>Instead of serving video directly from your personal server you can use a S3 compatible storage provider to offload the bandwidth and storage requirements elsewhere. This is not for permanent storage of recordings or archival purposes, just for live streams.</p>
+<p>To learn more about how your bandwidth may be affected by your video configuration and how using object storage could help for some use cases, visit the <a href="/docs/resources-requirements/">resources and requirements</a> page.</p>
+<p>If your storage provider is S3 compatible it will likely work with Owncast. Read the documentation for your provider to learn how to setup an object storage bucket, enable CORS, make the files public, and get the necessary credentials to provide to your Owncast configuration.</p>
 <h2 id="configuration">Configuration</h2>
 <ol>
 <li>Visit your Owncast server setup page in the admin and view the Object Storage settings.</li>
