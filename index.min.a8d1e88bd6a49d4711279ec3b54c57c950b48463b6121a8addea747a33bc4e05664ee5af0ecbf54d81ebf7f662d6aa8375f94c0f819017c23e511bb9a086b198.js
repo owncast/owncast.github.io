@@ -1534,10 +1534,23 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
 </a>
 
 <p>You can also checkout the API documentation at any point from the <a href="https://github.com/owncast/owncast">git repository</a>.</p>
-`},{id:30,href:"/docs/storage/",title:"Object (S3) Storage",description:"Use an external object storage provider to distribute your Owncast video stream.",content:`<p>Instead of serving video directly from your personal server you can use a S3 compatible storage provider to offload the bandwidth and storage requirements elsewhere. This is not for permanent storage of recordings or archival purposes, just for live streams.</p>
-<p>To learn more about how your bandwidth may be affected by your video configuration and how using object storage could help for some use cases, visit the <a href="/docs/resources-requirements/">resources and requirements</a> page.</p>
-<p>If your storage provider is S3 compatible it will likely work with Owncast. Read the documentation for your provider to learn how to setup an object storage bucket, enable CORS, make the files public, and get the necessary credentials to provide to your Owncast configuration.</p>
-<p>Some storage providers, such as Oracle Cloud Objects, require the &ldquo;path-style&rdquo; configuration option to be enabled in your Owncast configuration. Refer to your storage provider to learn more.</p>
+`},{id:30,href:"/docs/storage/",title:"Object Storage",description:"Use an external storage provider to distribute your Owncast video stream.",content:`<p>Instead of serving video directly from your personal server you can use a S3 compatible storage provider to offload the bandwidth and storage requirements elsewhere. This is not for permanent storage of recordings or archival purposes, just for live streams.</p>
+<h2 id="configuration">Configuration</h2>
+<ol>
+<li>Visit your Owncast server setup page in the admin and view the Object Storage settings.</li>
+<li>Enable it.</li>
+<li>Visit your storage provider and create a new bucket.</li>
+<li>Enter the bucket name, access key, secret key, and endpoint that your object storage provider&rsquo;s interface gave you into the Owncast settings. These have to be correct, so double check them. Contact your storage provider&rsquo;s support if you&rsquo;re not sure what these are.</li>
+<li>Make sure your bucket is publicly accessible, and anybody can read files from it. Some storage providers may set your bucket as private by default, so you may need to change this setting.</li>
+<li>If your storage provider requires you to setup any kind of <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a> policy in order for your files to be accessed, make sure you do that. Visit your object storage provider&rsquo;s documentation to learn how to configure your CORS policy, as it&rsquo;s different for every provider. It&rsquo;s generally a good idea to allow all origins, but you can restrict it to your Owncast server if you have a specific need to do that, and you don&rsquo;t anticipate using your stream in other web pages. If your stream is not working and your browser console error log shows errors about <code>CORS</code> or <code>Access-Control-Allow-Origin</code>, this is likely the problem. This is often very common, so make sure your bucket is setup correctly.</li>
+</ol>
+<h3 id="optional-settings">Optional settings</h3>
+<p>Most people won&rsquo;t need to touch these settings, but they&rsquo;re available if you need them.</p>
+<ul>
+<li><strong>ACL</strong>: If you are required to specify a specific access control option when uploading files, you can specify it here. Refer to your object storage provider&rsquo;s documentation.</li>
+<li><strong>Path Prefix</strong>: If you want to store your files in a subdirectory within your bucket, you can specify that here. For example, if you want to store your files in a folder called <code>mystream</code>, you would enter <code>mystream</code> here. This is only useful if you&rsquo;re using a single bucket for multiple purposes, or have multiple Owncast servers pointing to the same bucket.</li>
+<li><strong>Path-style configuration</strong>: Some storage providers, such as Oracle Cloud Objects, require the &ldquo;path-style&rdquo; configuration option to be enabled. Refer to your storage provider documentation to learn if this is required.</li>
+</ul>
 <span class="version-support">
   Path style configuration was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.11">Owncast 0.0.11</a>.
 </span>
