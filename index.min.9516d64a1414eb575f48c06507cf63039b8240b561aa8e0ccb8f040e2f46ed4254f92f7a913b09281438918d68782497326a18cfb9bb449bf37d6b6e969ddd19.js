@@ -1319,10 +1319,6 @@ worst of the worst away. Moderation is still the responsibility of each individu
 <h2 id="compatible-hardware">Compatible hardware</h2>
 <h3 id="intel-graphics">Intel Graphics</h3>
 <p>If you have Intel integrated graphics you may be able to use it using <a href="#va-api">VA-API</a>.</p>
-<h3 id="raspberry-pi">Raspberry Pi</h3>
-<p><strong>Note:</strong> The most recent version of the Raspberry Pi OS has a bug with the OpenMax codec. Use the previous version of the OS <a href="https://downloads.raspberrypi.org/raspios_full_armhf/images/raspios_full_armhf-2021-05-28/2021-05-07-raspios-buster-armhf-full.zip">by downloading it</a>, unzipping it, and using the <a href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a> to save it to your SD card for installation.</p>
-<p>Using that version of the Raspberry Pi operating system it&rsquo;s actually quite easy to get Owncast running in a hardware accelerated fashion. Raspberry Pi OS includes support for <a href="#openmax">OpenMax</a> (OMX) out of the box and includes a version of <code>ffmpeg</code> that is built to support it.</p>
-<p>However, this seems to only be true for 32 bit operating systems on a Raspberry Pi, as <a href="https://github.com/raspberrypi/firmware/issues/1366#issuecomment-612902082">omx seems to be deprecated under 64 bit environments</a>.</p>
 <h3 id="nvidia-gpus">NVIDIA GPUs</h3>
 <p>NVIDIA GPUs ship with an on-chip hardware encoder unit often referred to as NVENC. Separate from the CUDA cores, NVENC run encoding workloads without slowing the execution of graphics or CUDA workloads running at the same time.</p>
 <p>As of July 2019 Kepler, Maxwell, Pascal, Volta and Turing generation GPUs support hardware encoding. Visit the <a href="https://developer.nvidia.com/video-encode-and-decode-gpu-support-matrix-new#Encoder">NVIDIA GPU Support Matrix</a> to verify your GPU is listed in the &ldquo;encoder&rdquo; list.</p>
@@ -1348,10 +1344,6 @@ Links:
 <li><a href="https://linuxreviews.org/VAAPI">VA-API at Linux Reviews</a></li>
 <li><a href="https://github.com/intel/media-driver/">Intel Media Driver for VA-API</a></li>
 </ul>
-<h3 id="openmax">OpenMAX</h3>
-<p>OpenMAX is a unified abstraction layer that allows access to hardware that otherwise requires vendor specific APIs. It will work out of the box on modern Raspberry Pi&rsquo;s running a recent version of the <a href="https://www.raspberrypi.org/documentation/installation/noobs.md">Raspberry Pi OS</a> operating system.</p>
-<p>Verify your copy of ffmpeg has omx support by looking at the <a href="#ffmpeg">ffmpeg</a> instructions below. If <code>h264_omx</code> is in the list you should be good to go.</p>
-<p>Note: OpenMAX support has unfortunately been disconnected with the Raspberry Pi OS. To get hardware accelerated encoding working on a Raspberry Pi it will require running an older 32 bit version of the operating system.</p>
 <h3 id="nvidia-encoder-nvenc">NVIDIA Encoder (nvenc)</h3>
 <p>Follow the instructions on the <a href="https://developer.nvidia.com/blog/nvidia-ffmpeg-transcoding-guide/">NVIDIA ffmpeg transcoding guide</a> to install all the required drivers and libraries. This requires installing a driver from the <a href="https://www.nvidia.com/en-us/drivers/">NVIDIA website</a>, Downloading and install the <a href="https://developer.nvidia.com/cuda-toolkit">CUDA toolkit</a>, <a href="https://github.com/FFmpeg/nv-codec-headers">downloading nv-codec-headers</a>, and building ffmpeg. Scroll to the section entitled <em>Hardware accelerated transcoding with FFmpeg</em> at the <a href="https://developer.nvidia.com/blog/nvidia-ffmpeg-transcoding-guide/">NVIDIA transcoding guide</a> for more information.</p>
 <p>You may be able to find a pre-built version of ffmpeg that has <code>nvenc</code> support, however that&rsquo;s outside the scope of this document. You still need NVIDIA drivers regardless.</p>
