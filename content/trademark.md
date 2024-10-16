@@ -2,282 +2,94 @@
 title: Trademark Policy
 description: The technical details for those wishing to take part in Owncast development.
 tags: [trademark, name, logo, branding]
-date: 2023-06-14T11:50:56-07:00
-lastmod: 2023-06-14T11:50:56-07:00
 ---
 
-# Model Trademark Guidelines
+This document outlines the rules for using Owncast's trademarks. While our software is distributed under a free and open-source license, this does not give an automatic right to use our trademarks in all cases. Trademarks serve to identify the origin of products and services, so it’s important they are used correctly.
+
+You may use our trademarks under certain conditions outlined here. If your use is not described in this document, it is either not allowed, or you will need to seek permission. The purpose of these guidelines is to ensure our trademarks continue to represent high quality, without limiting the community's ability to engage with the Owncast project.
 
 {{< lastmodified >}}
 
-## Model Trademark Guidelines 1.0
-
-## Contents
+# Contents
 
 {{< toc >}}
 
-## Introduction
+## Commitment to Open Source
 
-This document, the "Policy," outlines the Owncast project's (the "Project") policy for the use of our trademarks. While our software is available under a free and open source software license, the copyright license does not include an implied right or license to use our trademark.
+We want to support community participation and the use of our trademarks in ways that benefit the project, its users, and the community as a whole. However, it’s important that our trademarks remain clear indicators of our software’s origin and limit confusion. This policy strikes a balance between protecting the integrity of our marks and allowing the community to use them appropriately.
 
-The role of trademarks is to provide assurance about the quality of the products or services with which the trademark is associated. But because an open source license allows your unrestricted modification of the copyrighted software, we cannot be sure that your modifications to the software are ones that will not be misleading if distributed under the same name. Instead, this Policy describes the circumstances under which you may use our trademarks.
+## What is a Trademark?
 
-In this Policy we are not trying to limit the lawful use of our trademarks, but rather describe for you what we consider the parameters of lawful use to be. Trademark law can be ambiguous, so we hope to provide enough clarity for you to understand whether we will consider your use licensed or non-infringing.
+A trademark is a name, logo, or other visual element that identifies the source of a product or service. Trademarks help ensure that consumers know where a product comes from and can trust its quality and origin.
 
-The sections that follow describe what trademarks are covered by this Policy, as well as uses of the trademarks that are allowed without additional permission from us. If you want to use our trademarks in ways that are not described in this Policy, please see ["Where to get further information"](#Where_to_get_further_information) below for contact information. Any use that does not comply with this Policy or for which we have not separately provided written permission is not a use that we have approved, so you must decide for yourself whether the use is nevertheless lawful.
+### Likelihood of Confusion
 
-## Our commitment to open source principles
+Trademark infringement occurs when the use of a mark confuses people about the source of a product or service. For example, if two different software products are marketed under similar names, consumers may be misled into thinking they are from the same source. Or if Owncast has been modified, and then distributed under the same name, this could cause confusion about the official version and make supporting users more difficult.
 
-We want to encourage and facilitate the use of our trademarks by the community, but do so in a way that still ensures that the trademarks are meaningful as a source and quality indicator for our software and the associated goods and services and continue to embody the high reputation of the software and the community associated with it. This Policy therefore tries to strike the proper balance between: 1) our need to ensure that our trademarks remain reliable indicators of the qualities that they are meant to preserve and 2) our community members' desire to be full participants in the Project.
+## Trademarks Covered by This Policy
 
-## Trademarks subject to the guidelines
+This policy applies to:
 
-### Our trademarks
+1. **Word Marks** such as **Owncast®**
+2. **Logos**, including visual representations of our project
+3. **Trade Dress**, which refers to the overall look and feel of our website or packaging.
 
-This Policy covers:
+The policy applies to both registered and unregistered trademarks.
 
-1\. Our word trademarks and service marks (the "Word Marks"):
+## Nominative Use
 
-<<List below what you consider to be your word marks, including any umbrella name, like "Apache," as well as individual project names>>
+In some cases, you can use a trademark without permission if it’s necessary to describe a relationship between products or services. This is known as "nominative use." For example, you may say that your software is "compatible with Owncast," but you must avoid implying endorsement by the Owncast project.
 
-| Mark         | Common descriptive name for the goods or services |
-| ------------ | ------------------------------------------------- |
-| **Owncast**® | The Owncast video streaming server                |
+## Logos
 
-2\. Our logos (the "Logos"):
+ <p xmlns:cc="http://creativecommons.org/ns#" >The Owncast logo is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Creative Commons Attribution-NonCommercial 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a>&nbsp; license and may be used for creative "remixes", interpretations, documentation, and other non-commercial uses. If you provide Owncast hosting you may use the logo in your documentation and installation tools. It should not be used for branding of other software.</p>
 
-<<Insert your logos, including standalone logos, like the Hadoop elephant; any logotype of a word, like the color and font weight treatment used for "LibreOffice"; or a combination of a logo and word, like the Debian swirl with the word "Debian">>
+## General Rules for All Uses
 
-3\. And the unique visual styling of our website and packaging (the "Trade Dress").
+Always use trademarks in their exact form—don’t abbreviate, modify, or pluralize them. For example:
 
-This Policy encompasses all trademarks and service marks, whether Word Marks, Logos or Trade Dress, which are collectively referred to as the “Marks.” Some Marks may not be registered, but registration does not equal ownership of trademarks. This Policy covers our Marks whether they are registered or not.
+- Unacceptable: Own-cast, OwnCast
+- Acceptable: Owncast
 
-## Universal considerations for all uses
+When using our trademarks, you must ensure that your use does not confuse others about what they are receiving and from whom. This is a key legal requirement and must guide all uses of our trademarks. For example, if you distribute a modified version of Owncast, you must not imply that it is the official version.
 
-Whenever you use one of the Marks, you must always do so in a way that does not mislead anyone, either directly or by omission, about exactly what they are getting and from whom. The law reflects this requirement in two major ways described in more detail [below](#What_trademark_law_is_about): it prohibits creating a ["likelihood of confusion"](#What_is_.22likelihood_of_confusion.22.3F) but allows for ["nominative use."](#What_is_.22nominative.22_use.3F) For example, you cannot say you are distributing the Owncast software when you're distributing a modified version of it, because people would be confused when they are not getting the same features and functionality they would get if they downloaded the software directly from us. You also cannot use our logo on your website in a way that suggests that your website is an official website or that we endorse your website. You can, though, say you like the Owncast software, that you participate in the Owncast community, that you are providing an unmodified version of the Owncast software, or that you wrote a book describing how to use the Owncast software.
+### Allowed Uses
 
-This fundamental requirement, that it is always clear to people what they are getting and from whom, is reflected throughout this Policy. It should also serve as your guide if you are not sure about how you are using the Marks.
+- You may distribute the unmodified Owncast software and use our Word Marks and Logos as long as the software has not been altered. This applies whether you distribute it on physical media or via download.
+- If you distribute modified versions of Owncast, you may use the Word Marks (e.g., "based on Owncast software") but not the Logos, as long as the modifications are made clear. You should describe your version as "powered by", "derived from" or "compatible with" Owncast, but it must be clear it’s not the official version and has features and functionality that cannot be supported by the Project.
+- You can use Word Marks to describe how your software works with or is compatible with Owncast, as long as you don’t suggest it’s endorsed by us.
+- You may use the Word Marks to describe services related to Owncast, such as hosting, support, or consulting, but you may not brand your services using our marks. For example: "Owncast Hosting" is not permitted, but "Live Stream Hosting powered by Owncast" is.
 
-In addition:
+### Infringing Uses
 
-You may not use the Marks in association with the use or distribution of software if you are also not in compliance with the copyright license for the software.
+- Selling Owncast software (as it is otherwise available for free) is likely to be seen as infringing. Offering paid services, like support or hosting, is allowed, but charging for the software under the Owncast name is not. It is suggested you create your own commercial version of Owncast, under a different name to limit confusion.
+- If you are not in compliance with the software's copyright license you may not use our marks.
+- Registering or using any similar or derivative marks that could confuse others into thinking they are affiliated with Owncast.
+- Using trademarks as adjectives rather than nouns or verbs. Avoid using them in possessive form or translating them into other languages.
 
-You may not use or register, in whole or in part, the Marks as part of your own trademark, service mark, domain name, company name, trade name, product name or service name.
+### Websites
 
-Trademark law does not allow your use of names or trademarks that are too similar to ours. You therefore may not use an obvious variation of any of our Marks or any phonetic equivalent, foreign language equivalent, takeoff, or abbreviation for a similar or compatible product or service. We would consider the following too similar to one of our Marks:
+You may use our Word Marks and Logos on your website to show support for Owncast. Additionally, you can use Word Marks in domains or branding for your Owncast server instances like `owncast.example.com` or "Bob's Owncast Stream".
 
-<<Example for UBUNTU: "Any mark ending with the letters UBUNTU or BUNTU">>  
-<<Example for ARCHLINUX: "Any mark beginning with the letters ARCH">>
+You may use our Trademarks on your website if:
 
-You agree that you will not acquire any rights in the Marks and that any goodwill generated by your use of the Marks inures solely to our benefit.
+- Your site’s branding is distinct from our official branding.
+- Your branding is more prominent than our Marks.
+- You link back to the official Owncast site.
+- Your site makes it clear that you are not endorsed by or affiliated with Owncast.
 
-## Use for software
+### Commercial Services
 
-See [Universal considerations for all uses](#Universal_considerations_for_all_uses), above, which also apply.
+You may use Word Marks to advertise services for Owncast (such as installation, configuration, or hosting) but cannot use our marks to imply endorsement by the Owncast project.
 
-### Uses we consider non-infringing
+### Publications and Presentations
 
-#### Distribution of unmodified source code or unmodified executable code we have compiled
+Using Word Marks in books, articles, and presentations is allowed, as long as it’s clear that the material is not published or endorsed by Owncast.
 
-When you redistribute an unmodified copy of our software, you are not changing the quality or nature of it. Therefore, you may retain the Word Marks and the Logos we have placed on the software to identify your redistribution -- whether that redistribution is made by optical media, memory stick or download of unmodified source and executable code. This kind of use only applied if you are redistributing an official distribution from this Project that has not been changed in any way. You can find files for the Logos and approved designs for packaging on our <<Brand Standards>> page.
+### Events
 
-#### Distribution of executable code that you have compiled, or modified code
+You can use our Marks to promote Owncast at community events, as long as it’s clear that the event is independent of the official Owncast project.
 
-You may use the Word Marks, but not the Logos, to truthfully describe the origin of the software that you are providing, that is, that the code you are distributing is a modification of our software. You may say, for example, that "this software is derived from the source code for Owncast software."
+---
 
-**Examples:**
-
-1. The source code or Owncast binary is distributed with a "--enableDebugFeatures" flag enabled by default. Since you're enabling features that already exist within the software, any use of the Owncast in the compiled code is noninfringing.
-
-Of course, you can place your own trademarks or logos on versions of the software to which you have made substantive modifications, because by modifying the software you have become the origin of that exact version. In that case, you should not use our Logos. You may describe your software as "based on the Owncast software" or "derived from the Owncast software."
-
-#### Statements about compatibility, interoperability, or derivation
-
-You may use the Word Marks, but not the Logos, to truthfully describe the relationship between your software and ours. Our Mark should be used after a verb or preposition that describes the relationship between your software and ours. So you may say, for example, "Bob's software for the Owncast platform" but may not say "Bob's Owncast software." Some other examples that may work for you are:
-
-\[Your software\] works with Owncast  
-\[Your software\] for Owncast
-\[Your software\] uses Owncast software  
-\[Your software\] is compatible with Owncast  
-\[Your software\] is powered by Owncast  
-\[Your software\] runs on Owncast software  
-\[Your software\] for use with the Owncast video streaming server
-
-#### Use of trademarks to show community affiliation
-
-This section discusses the use of our Marks for software such an application themes, skins and personas. The use of our Marks on websites is discussed below.
-
-You may use the Word Marks and the Logos in themes, personas, or skins for applications to show your support for the Project, provided that the use is non-commercial and the use is clearly decorative, as contrasted with a use that appears to be the branding for a website or application.
-
-### Uses for which we are granting a license
-
-#### Distribution of modified software
-
-1. You may use the Word Marks and the Logos for the distribution of code (source or executable) on the condition that any executable is built from the official Project source code and that any modifications are limited to switching on or off features already included in the software, translations into other languages, and incorporating bug-fix patches.
-
-1. You may use the Word Marks and the Logos for the distribution of executable code on the condition that it is made from official Project source code using the procedure documented for creating an executable found at https://github.com/owncast/owncast
-
-#### Domains, subdomains and branding of Owncast server instances
-
-1. You may use the Word Marks and logos on your running Owncast instance to describe what your server is. This can be for the domain, subdomain, title of your server, and other identifying information. For example: _Bob's Owncast Stream_ or `owncast.example.com`.
-
-#### Distribution of software preloaded on hardware
-
-1. You may use the Word Marks and the Logos in association with hardware devices on the condition that the executable installed on the device is the official source executable for the Project, and that you do not suggest that the Project is the source of the hardware device itself but rather than the Marks are for the software incorporated into the device.
-
-1. You may use use the Word Marks and the Logos in association with hardware devices on the condition that the software installed on the device is modified only so far as necessary to operate on the hardware platforms and the essential functions of the software are unchanged, and that you do not suggest that the Project is the source of the hardware device itself but rather than the Marks are for the software incorporated into the device.
-
-## Uses we consider infringing without seeking further permission from us
-
-### Combining the Owncast software with another piece of software
-
-We will likely consider using the Marks in a software distribution that combines our software with any other software program an infringement of our Marks. We would consider your software "combined" with ours if you create a single executable for both software programs, as well as if by installing our software it automatically installs yours. We would not consider your software "combined" with ours if it is on the same media but requires separate, independent action to install it.
-
-### Commercial distributions of the software
-
-Selling the Owncast software would be seen as infringing, and creates a likelihood of confusion about who is profiting, and the source of the software. We would consider selling the software to include charging for the software where they could have got it for free from the Project directly. If you are charging for only hosting, installation, or support services, see the section on [Offering support services](#offering-support-services) below.
-
-## Use for non-software goods and services[\[6\]](#cite_note-6)
-
-See [Universal considerations for all uses](#universal-considerations-for-all-uses), above, which also apply.
-
-### Uses we consider non-infringing
-
-#### Websites
-
-You may use the Word Marks and Logos, but not the Trade Dress, on your webpage to show your support for the Project as long as:
-
-- The website has branding that is easily distinguished from the Project Trade Dress;
-- You own branding or naming is more prominent than any Project Marks;
-- The Logos hyperlink to the Project website;
-- The site does not mislead customers into thinking that either your website, service, or product is our website, service, or product; and
-- The site clearly states that you are not affiliated with or endorsed by the Project.
-
-#### Offering support services
-
-You may freely use the Word Marks to describe any support services you offer around the software. This includes, for example, offering to install or configure the software, offering support to somebody for the software, offering to host the software, or offering to provide training on the software. You may not use the Logos in association with these services or in any way that suggests that you are the Project, that the Project is endorsing your services, or that the Project is profiting from your services.
-
-#### Publications and presentations
-
-You can use the Word Marks in book and article titles, and the Logo in illustrations within the document, as long as the use does not suggest that we have published, endorse, or agree with your work.
-
-#### Events
-
-You can use the signage in the <<Brand Standards>> to promote the software and Project at events.
-
-### Uses for which we are granting a license
-
-#### User groups
-
-You can use the Word Marks as part of your user group name provided that:
-
-- The main focus of the group is the software;
-- Any software or services the group provides are without cost;
-- The group does not make a profit;
-- Any charge to attend meetings are to cover the cost of the venue, software required to run the event, food and drink only.
-
-Note that the [Universal considerations for all uses](#Universal_considerations_for_all_uses), above, still apply, specifically, that you may not use or register the Marks as part of your own trademark, service mark, domain name, company name, trade name, product name or service name.
-
-#### Promotional goods
-
-"Promotional goods" are non-software goods that use the Marks and that are intended to advertise the Project, promote the Project, or show membership in the Project community.
-
-<<Example #1>> You may make promotional goods for free giveaway at open source conferences and events using only the designs found on our <<Brand Standards>> site.
-
-<<Example #2>> You may make promotional goods for free giveaway at open source conferences and events provided that the goods are obtained from <<contractor for promotional goods.>>
-
-### Uses we consider infringing without seeking further permission from us
-
-We will likely consider using the Marks as part of a domain name or subdomain an infringement of our Marks unless it falls into the use case where a license is granted, above. This would include examples like `www.owncasthosting.com` or `owncast.example.com`.
-
-We would likely consider using the Marks on promotional goods for sale an infringement of our Marks.
-
-## General Information
-
-### Trademark marking and legends
-
-The first or most prominent mention of a Mark on a webpage, document, packaging, or documentation should be accompanied by a symbol indicating whether the mark is a registered trademark ("®") or an unregistered trademark ("™"). See our [Trademark List](#our-trademarks) for the correct symbol to use.
-
-Also, if you are using our Marks in a way described in the sections "Uses for which we are granting a license," please put following notice at the foot of the page where you have used the Mark (or, if in a book, on the credits page), on any packaging or labeling, and on advertising or marketing materials: "Owncast is trademark of <<Open Source Collective>><<", registered in the United States and other countries" if correct>>. Used with permission from the <<Open Source Collective>>."
-
-### What to do when you see abuse
-
-If you are aware of any confusing use or misuse of the Marks in any way, we would appreciate you bringing this to our attention. Please contact us as described [below](#Where_to_find_further_information) so that we can investigate it further.
-
-### Where to get further information
-
-If you have any questions about this Policy, would like to speak with us about the use of our Marks in ways not described in the Policy, or see any abuse of our Marks, please <<insert contact information.>>
-
-## General considerations about trademarks and their use[\[8\]](#cite_note-8)
-
-### What trademark law is about
-
-#### What is a trademark?
-
-A trademark is a word, phrase, symbol or design, or a combination of words, phrases, symbols or designs, that identifies and distinguishes the source of the goods of one party from those of others. A service mark is the same as a trademark, except that it identifies and distinguishes the source of a service rather than a product. "Trade dress" or "get up" refers to the look and feel of the packaging, which in this context can include the layout, colors, images, and design choices in a web page. Throughout this Policy, the terms "trademark" and "mark" refer to both trademarks, service marks and trade dress.
-
-However, the use of a word is "not as a trademark" when it is used functionally as part of the software program, for example, in a file, folder, directory, or path name. Use in this way is not a trademark infringement.
-
-#### What is "likelihood of confusion"?
-
-There is trademark infringement if your use of a trademark has created a "likelihood of confusion." This means using a trademark in a way that will likely confuse or deceive the relevant consuming public about the source of a product or service using the mark in question. For example, if the "Foo" software extension removes all double spaces after periods, but someone else later creates "Foo" software that adds a third space after periods, consumers would be confused between the two and the newcomer will likely be a trademark infringer. As another example, if a company makes "Foobar" software and a third party offers training called "Foobar Certification," a person is likely to believe, wrongly, that the certification is being offered by the makers of Foobar software. The third party has likely misled consumers about the source of its training and is a trademark infringer.
-
-#### What is "nominative" use?
-
-So-called "nominative use" (or "nominative fair use"), which is the name of the doctrine under U.S. trademark law, allows the use of another's trademark where it is necessary for understanding. Other countries' trademark laws also have similar provisions. For example, a car repair shop that specializes in a particular brand of automobile, VW for example, must be allowed to say that they repair VW cars. Here is what you should consider when deciding whether your use of a trademark is a nominative fair use:
-
-- Whether you can identify the product or service in question without using the trademark;
-- Whether you are avoiding a likelihood of confusion in the way that you have used the trademark; and
-- Whether you have used only as much as is necessary to identify the product or service.
-
-With our "Foobar Certification" example above, the person offering the certification would be allowed to say, under the nominative fair use doctrine, that she is offering "Maude's Certification for Foobar software."
-
-It is rarely the case that using a Logo will be a nominative fair use since it will be a rare case where the logo is needed for strictly informational purposes.
-
-### Proper trademark use
-
-These rules hold true for all trademarks, not just ours, so you should follow them for our Marks as well as anyone else's.
-
-#### Use of trademarks in text
-
-**Always use trademarks in their exact form with the correct spelling, neither abbreviated, hyphenated, or combined with any other word or words.  
-**Unacceptable: Own-cast
-\*\*Unacceptable: OwnCast
-Acceptable: Owncast
-
-**Don't pluralize a trademark.  
-**Unacceptable: I have seventeen <<~Marks>> running in my lab.  
-Acceptable: I have seventeen Owncast systems running in my lab.
-
-**Don't use "a" or "the" to refer to an instance of the trademark.  
-**Unacceptable: I put a Owncast on my mom's computer.  
-Acceptable: I put an Owncast stream on my server.
-Acceptable: I put Owncast on my server.
-Acceptable: I put the Owncast server on my computer.
-
-**Always use a trademark as an adjective modifying a noun.** You can see the nouns we prefer under ["Our trademarks."](#Our_trademarks)  
-Unacceptable: This is a Owncast. Anyone can install it.  
-Acceptable: This is an Owncast application. Anyone can install it.
-Acceptable: This is Owncast. Anyone can install it.
-
-**Don't use a trademark as a verb. Trademarks are products or services, never actions.  
-**Unacceptable: I Owncasted my computer today!  
-Acceptable: I installed the Owncast server on my computer today!
-
-**Don't use a trademark as a possessive. Instead, the following noun should be used in possessive form or the sentence reworded so there is no possessive.  
-**Unacceptable: <<~Mark's>> desktop interface is very clean.  
-Acceptable: The Owncast desktop's interface is very clean.
-
-**Don't translate a trademark into another language.  
-**Acceptable: Quiero instalar Owncast en mi sistema.  
-Unacceptable: Quiero instalar reparto propio en mi sistema.
-
-#### Use of Logos
-
-You may not change any Logo except to scale it. This means you may not add decorative elements, change the colors, change the proportions, distort it, add elements, or combine it with other logos.
-
-However, when the context requires the use of black-and-white graphics and the logo is color, you may reproduce the logo in a manner that produces a black-and-white image.
-
-These guidelines are based on the Model Trademark Guidelines, available at [http://www.modeltrademarkguidelines.org](http://www.modeltrademarkguidelines.org/)., used under a Creative Commons Attribution 3.0 Unported license: [https://creativecommons.org/licenses/by/3.0/deed.en_US](https://creativecommons.org/licenses/by/3.0/deed.en_US)
-
-- The text on this site is licensed under a [Creative Commons Attribution 4.0 Unported License](http://creativecommons.org/licenses/by/4.0/legalcode). Attribution: Model Trademark Guidelines, available at www.modeltrademarkguidelines.org.
+This policy is originally based on the [Model Trademark Guidelines](http://modeltrademarkguidelines.org/index.php/Model_Trademark_Guidelines).
