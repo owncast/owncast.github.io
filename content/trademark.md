@@ -1,6 +1,6 @@
 ---
 title: Trademark Policy
-description: The technical details for those wishing to take part in Owncast development.
+description: This document outlines the rules for using Owncast's trademarks.
 tags: [trademark, name, logo, branding]
 ---
 
