@@ -1,6 +1,4 @@
-{{ with .GitInfo }}
 {{ $published := .Page.PublishDate | time.Format ":date_medium" }}
 {{ $modified := .Page.Lastmod | time.Format ":date_medium" }}
 
 <strong>Last modified</strong>: {{ $modified }}
-{{ end }}
