@@ -195,17 +195,16 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
     "type": "VISIBILITY-UPDATE",
     "eventData": {
         "id": "zqGupt7VR",
-        "ids": [
+        "MessageIDs": [
             "-Zzltt74g",
             "rvd2ppn4g"
         ],
         "timestamp": "2022-09-19T12:44:28.225779601+02:00",
-        "type": "VISIBILITY-UPDATE",
-        "visible": false
+        "Visible": false
     }
 }
 ```
-- `ids` is a list of IDs of messages that had their visibility changed.
+- `MessageIDs` is a list of IDs of messages that had their visibility changed.
 
 ### clientId vs. user.id
 
