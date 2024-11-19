@@ -96,5 +96,4 @@ A decentralized network of different services built on standards is the future o
 
 ### Communities discussing The Fediverse
 
-- [Fediverse Town](https://fediverse.town)
 - [SocialHub](https://socialhub.activitypub.rocks/)
