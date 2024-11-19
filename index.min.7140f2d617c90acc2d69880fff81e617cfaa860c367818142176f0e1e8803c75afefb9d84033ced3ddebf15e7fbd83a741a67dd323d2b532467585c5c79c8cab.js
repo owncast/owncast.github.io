@@ -1051,7 +1051,6 @@ th {
 </ul>
 <h3 id="communities-discussing-the-fediverse">Communities discussing The Fediverse</h3>
 <ul>
-<li><a href="https://fediverse.town">Fediverse Town</a></li>
 <li><a href="https://socialhub.activitypub.rocks/">SocialHub</a></li>
 </ul>
 `},{id:22,href:"/docs/stream-keys/",title:"Stream Keys",description:"Add multiple stream keys for your streamers",content:`<p>Beginning with Owncast v0.1.0 the admin password and stream keys are managed independently, allowing you to add as many stream keys as you&rsquo;d like.</p>
