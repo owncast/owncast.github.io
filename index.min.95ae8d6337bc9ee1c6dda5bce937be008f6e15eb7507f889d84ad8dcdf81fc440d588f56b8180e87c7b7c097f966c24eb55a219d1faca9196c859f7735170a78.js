@@ -499,9 +499,7 @@ backend owncastws
 
 <h2 id="suggested">Suggested</h2>
 <p>If you have no requirement to use other options else it is suggested you install <a href="caddy/">Caddy</a> as it can be installed quickly and easily.</p>
-`},{id:13,href:"/docs/sslproxies/sitejs/",title:"Site.js",description:"Site.js will setup Owncast with SSL as a system service.",content:`<p><a href="https://sitejs.org/">Site.js</a> is a toolset by the <a href="https://small-tech.org/">Small Technology Foundation</a> that allows you to easily setup a production web server. Additionally it can install Owncast for you, supporting <a href="/docs/sslproxies/">SSL</a>, configured to run <a href="/docs/systemservice/">as a service</a>.</p>
-<p>Visit the <a href="/quickstart/sitejs">install using Site.js</a> page for more details.</p>
-`},{id:14,href:"/docs/chat/chat-authentication/",title:"Chat authentication",description:"Verify your and keep your chat identity.",content:`<p>There is no requirement to authenticate when using Owncast chat. However, some prefer
+`},{id:13,href:"/docs/chat/chat-authentication/",title:"Chat authentication",description:"Verify your and keep your chat identity.",content:`<p>There is no requirement to authenticate when using Owncast chat. However, some prefer
 to authenticate themselves to verify their identity to others, and to continue using the same chat
 identity across multiple devices and browsers. This is especially helpful for those with <a href="/docs/moderation/">moderator</a>
 privileges.</p>
@@ -517,7 +515,7 @@ yourself with Owncast chat. Fediverse support must be enabled on the Owncast ser
 <p>This is done by sending a direct message to your account. If you do not receive this message make sure you can accept
 direct messages.</p>
 <p>These codes expire, so you will need to request a new one if necessary.</p>
-`},{id:15,href:"/docs/cdns/",title:"Content Delivery Networks (CDNs)",description:"A CDN can help improve the network performance of your Owncast instance by caching and distributing content from servers located closer to users.",content:`<h2 id="what-is-a-cdn">What is a CDN?</h2>
+`},{id:14,href:"/docs/cdns/",title:"Content Delivery Networks (CDNs)",description:"A CDN can help improve the network performance of your Owncast instance by caching and distributing content from servers located closer to users.",content:`<h2 id="what-is-a-cdn">What is a CDN?</h2>
 <p>A CDN, or Content Delivery Network, is a service used to geographically distribute your content to end users. It helps to improve performance by reducing the time it takes to load content.</p>
 <span class="version-support">
   Cdn support was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.1.0">Owncast 0.1.0</a>.
@@ -558,7 +556,7 @@ direct messages.</p>
 <li>In some cases using a CDN in front of your Owncast server makes it more difficult for Owncast to have an accurate count of how many viewers you have. This is a tradeoff you&rsquo;ll need to consider. Generally if you have a low number of viewers it will report a higher number of viewers than you actually have (due to multiple CDN servers fetching your content), and if you have a large number of users it will report a lower number of viewers than you actually have (due to multiple viewers watching the same cached content). Updates to Owncast to help improve this are planned.</li>
 <li>The more viewers you have, the more useful a CDN will be. If you have a small number of viewers it&rsquo;s likely every request will be hitting your origin server anyway, so a CDN won&rsquo;t be as useful, and even potentially detrimental to viewers in some cases since it requires an additional network hop. Refer to your CDN statistics to see how many requests are being served from the CDN cache (hits) vs your origin server (misses).</li>
 </ul>
-`},{id:16,href:"/docs/embed/",title:"Embedding into your site",description:"You can easily embed your chat or video into another site.",content:`<div class="alert alert-warning d-flex" role="alert">
+`},{id:15,href:"/docs/embed/",title:"Embedding into your site",description:"You can easily embed your chat or video into another site.",content:`<div class="alert alert-warning d-flex" role="alert">
   <div class="flex-shrink-1 alert-icon">💡</div>
   <div class="w-100">Embedding Owncast into an existing page which is using HTTPS will require your Owncast server to also be secured with SSL/TLS.</div>
 </div>
@@ -684,7 +682,7 @@ allowfullscreen>
 
 <h2 id="ssl-requirements">SSL Requirements</h2>
 <p>Embedded Owncast content that is not served via HTTPS within a page that is using SSL/TLS gets <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content/How_to_fix_website_with_mixed_content">blocked by browsers</a>. <a href="/docs/sslproxies">Learn how you can use a SSL Proxy</a> to fulfil this browser requirement and secure your Owncast site.</p>
-`},{id:17,href:"/docs/custom-assets/",title:"Host public assets",description:"Make your own files publicly available.",content:`<p>By creating a <code>data/public</code> directory and putting your own files there you can serve any assets that you wish to make publicly available for any reason.</p>
+`},{id:16,href:"/docs/custom-assets/",title:"Host public assets",description:"Make your own files publicly available.",content:`<p>By creating a <code>data/public</code> directory and putting your own files there you can serve any assets that you wish to make publicly available for any reason.</p>
 <span class="version-support">
   Custom public assets was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.1.0">Owncast 0.1.0</a>.
 </span>
@@ -695,7 +693,7 @@ allowfullscreen>
 <li>You have images you wish to use in your page content.</li>
 <li>Some arbitrary files that you want people to download have no other place to be hosted.</li>
 </ul>
-`},{id:18,href:"/docs/notifications/",title:"Live stream notifications",description:"Send notifications when your stream goes live.",content:`<p>Some streams benefit from announcing to their audience when they go live.</p>
+`},{id:17,href:"/docs/notifications/",title:"Live stream notifications",description:"Send notifications when your stream goes live.",content:`<p>Some streams benefit from announcing to their audience when they go live.</p>
 <p>This is not an endorsement of any particular service, but it may help some streamers integrate into their existing communities.</p>
 <p>If you&rsquo;d like to expand on this and send automated notifications to other destinations, create a custom <a href="/thirdparty/webhooks/">webhook</a>.</p>
 <span class="version-support">
@@ -729,7 +727,7 @@ allowfullscreen>
 </ul>
 <h2 id="twitter-deprecated">Twitter (deprecated)</h2>
 <p>Since <a href="https://9to5google.com/2023/01/12/twitter-api-appears-to-be-down-breaking-tweetbot-and-third-party-clients/">access to Twitter&rsquo;s API has been revoked</a>, Twitter notifications are no longer supported. For more details, please refer to <a href="https://github.com/owncast/owncast/issues/2597">this issue on GitHub</a>.</p>
-`},{id:19,href:"/docs/resources-requirements/",title:"Resources and requirements",description:"There is no hard and fast rule for how much resources Owncast will use, since it depends on your configuration and requirements, but here are some examples.",content:`<p>It&rsquo;s impossible to give a single answer about what the requirements are for you to run Owncast, or what it will cost. It&rsquo;s your server, and it&rsquo;s completely up to you how you choose to configure it, and in what environments you choose to run it. Every environment has different performance, prices and features.</p>
+`},{id:18,href:"/docs/resources-requirements/",title:"Resources and requirements",description:"There is no hard and fast rule for how much resources Owncast will use, since it depends on your configuration and requirements, but here are some examples.",content:`<p>It&rsquo;s impossible to give a single answer about what the requirements are for you to run Owncast, or what it will cost. It&rsquo;s your server, and it&rsquo;s completely up to you how you choose to configure it, and in what environments you choose to run it. Every environment has different performance, prices and features.</p>
 <h2 id="base-knowledge">Base knowledge</h2>
 <p>It&rsquo;s very helpful for you to understand the basics included in video streaming.</p>
 <ul>
@@ -981,13 +979,13 @@ th {
 }
 
 </style>
-`},{id:20,href:"/docs/systemservice/",title:"Run as a system service",description:"Setup owncast to run as a system service, automatically starting when your server does.",content:`<p>You can optionally setup Owncast to run under <a href="https://systemd.io/">systemd</a> so it&rsquo;s a managed service on your machine that automatically starts when your machine does.</p>
+`},{id:19,href:"/docs/systemservice/",title:"Run as a system service",description:"Setup owncast to run as a system service, automatically starting when your server does.",content:`<p>You can optionally setup Owncast to run under <a href="https://systemd.io/">systemd</a> so it&rsquo;s a managed service on your machine that automatically starts when your machine does.</p>
 <p>While we can&rsquo;t explicitly support every possible machine&rsquo;s configuration you might be able to find some user-supplied examples in our <a href="https://github.com/owncast/owncast/tree/develop/contrib">contrib directory</a> that might point you in the correct direction.</p>
 <p>These files are not part of the Owncast project and are not supported by us, but there is ample documentation about how to configure systemd online if you&rsquo;re unable to find examples that work for you.</p>
 <h3 id="installation">Installation</h3>
 <p>Create your systemd unit file in your systemd configuration directory (typically /etc/systemd/system/), and update the systemd daemon with:
 <code>sudo systemctl daemon-reload</code> when you&rsquo;re done.</p>
-`},{id:21,href:"/docs/social/",title:"Social features",description:"Allow people to follow your server, know when you go live, share and interact with your stream.",content:`<p>Owncast allows people to follow, engage with your server, and share your stream with others on what is known as the Fediverse, a decentralized network of services.</p>
+`},{id:20,href:"/docs/social/",title:"Social features",description:"Allow people to follow your server, know when you go live, share and interact with your stream.",content:`<p>Owncast allows people to follow, engage with your server, and share your stream with others on what is known as the Fediverse, a decentralized network of services.</p>
 <span class="version-support">
   Social functionality was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.11">Owncast 0.0.11</a>.
 </span>
@@ -1053,14 +1051,14 @@ th {
 <ul>
 <li><a href="https://socialhub.activitypub.rocks/">SocialHub</a></li>
 </ul>
-`},{id:22,href:"/docs/stream-keys/",title:"Stream Keys",description:"Add multiple stream keys for your streamers",content:`<p>Beginning with Owncast v0.1.0 the admin password and stream keys are managed independently, allowing you to add as many stream keys as you&rsquo;d like.</p>
+`},{id:21,href:"/docs/stream-keys/",title:"Stream Keys",description:"Add multiple stream keys for your streamers",content:`<p>Beginning with Owncast v0.1.0 the admin password and stream keys are managed independently, allowing you to add as many stream keys as you&rsquo;d like.</p>
 <span class="version-support">
   Multiple stream keys was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.1.0">Owncast 0.1.0</a>.
 </span>
 
 <p>While most people won&rsquo;t require having multiple stream keys, there are some specific scenarios where having this ability may be helpful.</p>
 <p>In the admin server setup page you can add and remove these keys.</p>
-`},{id:23,href:"/docs/metrics/",title:"Stream performance",description:"It's important to know if your Owncast stream is performing well. There are a few tools within the admin to assist with this.",content:`<h2 id="overall-stream-health">Overall stream health</h2>
+`},{id:22,href:"/docs/metrics/",title:"Stream performance",description:"It's important to know if your Owncast stream is performing well. There are a few tools within the admin to assist with this.",content:`<h2 id="overall-stream-health">Overall stream health</h2>
 
 
 <p>There’s no point streaming if nobody is able to watch it. Using the “Stream Health” screen in the admin you can get an overview of some important metrics that may give you an idea if what you’re offering your viewers is leading to a good experience.</p>
@@ -1084,7 +1082,7 @@ th {
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">my_admin_password</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">static_configs</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;my.owncast.server&#34;</span><span class="p">]</span><span class="w">
-</span></span></span></code></pre></div>`},{id:24,href:"/docs/chat/moderation/",title:"Chat moderation",description:"Add moderators, remove messages and users from your chat.",content:`<p>Using either the Owncast admin, or inline moderation controls within your chat, you can remove individual messages or entire users.</p>
+</span></span></span></code></pre></div>`},{id:23,href:"/docs/chat/moderation/",title:"Chat moderation",description:"Add moderators, remove messages and users from your chat.",content:`<p>Using either the Owncast admin, or inline moderation controls within your chat, you can remove individual messages or entire users.</p>
 <h2 id="chat-moderators">Chat Moderators</h2>
 <p>Moderators have no access to the admin, and exist to help you keep your chat in order.</p>
 <p>In your admin Visit <code>Chat &amp; Users</code> &gt; <code>Users</code> to find the user you want to grant Moderator privileges.
@@ -1177,7 +1175,7 @@ worst of the worst away. Moderation is still the responsibility of each individu
   IP address bans was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.12">Owncast 0.0.12</a>.
 </span>
 
-`},{id:25,href:"/docs/chat/emoji/",title:"Custom emoji",description:"Add your own custom emoji for use in chat.",content:`<p>Your stream&rsquo;s chat can be customized with your own custom emoji. You can add as many as you&rsquo;d like and they&rsquo;ll be available to use in chat.</p>
+`},{id:24,href:"/docs/chat/emoji/",title:"Custom emoji",description:"Add your own custom emoji for use in chat.",content:`<p>Your stream&rsquo;s chat can be customized with your own custom emoji. You can add as many as you&rsquo;d like and they&rsquo;ll be available to use in chat.</p>
 <h2 id="in-the-admin">In the Admin</h2>
 <p>By visiting the chat custom emoji page in the admin located at <code>/admin/chat/emojis</code> you can add and remove images that are available to chat participants.</p>
 <span class="version-support">
@@ -1188,7 +1186,7 @@ worst of the worst away. Moderation is still the responsibility of each individu
 <p>You can manually add or remove custom emoji images in the <code>data/emoji</code> directory on your filesystem.</p>
 <h2 id="bundled-emoji-images">Bundled emoji images</h2>
 <p>The images bundled with Owncast out of the box are freely licensed by different authors. See the <a href="https://github.com/owncast/owncast/tree/develop/static/img/emoji">directory of emoji</a> for the respective licenses associated to each collection.</p>
-`},{id:26,href:"/docs/website/",title:"Web Site + Chat",description:"Customize your Owncast web page by adding additional content and links.",content:`<h2 id="overview">Overview</h2>
+`},{id:25,href:"/docs/website/",title:"Web Site + Chat",description:"Customize your Owncast web page by adding additional content and links.",content:`<h2 id="overview">Overview</h2>
 <p>Owncast includes a web interface for your video with built-in chat that is available once you start the server. It shows online/offline states, viewer counts, stream duration, your instance&rsquo;s description, images, links and more. You can just start using it without making any changes, but you&rsquo;ll likely want to update the content displayed on your page by visiting your server admin page.</p>
 <p>Additionally, the web interface was specifically built to be customizable by anybody comfortable tweaking colors and styles. No development environment is needed, just open the admin and start tweaking.</p>
 <p>If you want to embed Owncast in your existing website, checkout our <a href="/docs/embed/">documentation on embedding Owncast</a>.</p>
@@ -1289,7 +1287,7 @@ worst of the worst away. Moderation is still the responsibility of each individu
   Custom styles was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.7">Owncast 0.0.7</a>.
 </span>
 
-`},{id:27,href:"/docs/codecs/",title:"Codecs & Hardware Acceleration",description:"If you have direct access to specific hardware you may be able to increase the performance of your server by using a compatible codec.",content:`<span class="version-support">
+`},{id:26,href:"/docs/codecs/",title:"Codecs & Hardware Acceleration",description:"If you have direct access to specific hardware you may be able to increase the performance of your server by using a compatible codec.",content:`<span class="version-support">
   Hardware accelerated encoding was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.7">Owncast 0.0.7</a>.
 </span>
 
@@ -1365,7 +1363,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
 <pre tabindex="0"><code>$ ffmpeg -hide_banner -codecs | grep 264
  DEV.LS h264                 H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10 (decoders: h264 h264_v4l2m2m h264_mmal ) (encoders: libx264 libx264rgb h264_omx h264_v4l2m2m h264_vaapi )
 </code></pre><p>If the codec you hope to use is not in this list then you may need to build your own copy of ffmpeg that supports it.</p>
-`},{id:28,href:"/docs/video/",title:"Video",description:"Configure your video to manage the quality and hardware performance.",content:`<p>This document aims to outline what is being done to your content and the different knobs you can tweak to get the best output for your instance.</p>
+`},{id:27,href:"/docs/video/",title:"Video",description:"Configure your video to manage the quality and hardware performance.",content:`<p>This document aims to outline what is being done to your content and the different knobs you can tweak to get the best output for your instance.</p>
 <p>To see how your specific stream is performing, visit the <a href="/docs/metrics">Stream Health</a> page in the admin.</p>
 <div class="alert alert-warning d-flex" role="alert">
   <div class="flex-shrink-1 alert-icon">💡</div>
@@ -1477,7 +1475,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
 <p>If you are running on physical hardware you may be able to increase the performance of your Owncast instance by using your hardware along with a compatible codec, taking the heavy load off of your CPU. There is no guarantee all hardware configurations, drivers or operating systems will work and it may take some effort on your part to install all of the additional software required to get it working. Read more about what is supported, and how, at our <a href="/docs/codecs">hardware accelerated encoding with additional codecs</a> document.</p>
 <h2 id="resource-and-requirement-examples">Resource and requirement examples</h2>
 <p>Visit the <a href="/docs/resources-requirements/">resources and requirements</a> page to see some examples of what you can expect from your server hardware and network connection and how it may affect your viewers.</p>
-`},{id:29,href:"/docs/api/",title:"API Documentation",description:null,content:`<p>Owncast offers an API to integrate its services in other interfaces, like the <a href="https://github.com/owncast/owncast-admin">Owncast Admin Panel</a>.</p>
+`},{id:28,href:"/docs/api/",title:"API Documentation",description:null,content:`<p>Owncast offers an API to integrate its services in other interfaces, like the <a href="https://github.com/owncast/owncast-admin">Owncast Admin Panel</a>.</p>
 <h2 id="internal-vs-external-apis">Internal vs. External APIs</h2>
 <p>API endpoints are split up between the internal (including admin) and external (aka integration) APIs. The internal APIs are used by the Owncast server itself to function. Some are required by just the web frontend, and others are used for management of the server via the admin interface. The external (or integrations) APIs are used by external clients such as integrations, bots, or custom tooling to perform actions and build additional functionality.</p>
 <p>Internal APIs can change frequently as they are required to be in sync with the feature sets and requirements for the current version of Owncast. The goal of external APIs are to allow external tools to be integrated into Owncast without major changes breaking them. They are also secured via an access token instead of your admin password so you don&rsquo;t have to hand over full access to your Owncast server, and you can revoke access to external integrations at any time.</p>
@@ -1525,7 +1523,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
 </a>
 
 <p>You can also checkout the API documentation at any point from the <a href="https://github.com/owncast/owncast">git repository</a>.</p>
-`},{id:30,href:"/docs/storage/",title:"Object Storage",description:"Use an external storage provider to distribute your Owncast video stream.",content:`<p>Instead of serving video directly from your personal server you can use a S3 compatible storage provider to offload the bandwidth and storage requirements elsewhere. This is not for permanent storage of recordings or archival purposes, just for live streams.</p>
+`},{id:29,href:"/docs/storage/",title:"Object Storage",description:"Use an external storage provider to distribute your Owncast video stream.",content:`<p>Instead of serving video directly from your personal server you can use a S3 compatible storage provider to offload the bandwidth and storage requirements elsewhere. This is not for permanent storage of recordings or archival purposes, just for live streams.</p>
 <p>To learn more about how your bandwidth may be affected by your video configuration and how using object storage could help for some use cases, visit the <a href="/docs/resources-requirements/">resources and requirements</a> page.</p>
 <p>If your storage provider is S3 compatible it will likely work with Owncast. Read the documentation for your provider to learn how to setup an object storage bucket, enable CORS, make the files public, and get the necessary credentials to provide to your Owncast configuration.</p>
 <h2 id="configuration">Configuration</h2>
@@ -1548,7 +1546,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
   Path style configuration was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.11">Owncast 0.0.11</a>.
 </span>
 
-`},{id:31,href:"/docs/directory/",title:"The Directory",description:"The Owncast Directory is a centralized list of streams for people to discover.",content:`<p>To help people discover streams by people using Owncast we have an optional Owncast directory you can add yourself to.</p>
+`},{id:30,href:"/docs/directory/",title:"The Directory",description:"The Owncast Directory is a centralized list of streams for people to discover.",content:`<p>To help people discover streams by people using Owncast we have an optional Owncast directory you can add yourself to.</p>
 <ol>
 <li>Visit the <strong>&ldquo;General&rdquo;</strong> settings in the admin.</li>
 <li>Set the public URL to your Owncast instance that you want people to be linked to.</li>
@@ -1573,7 +1571,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
   Owncast directory was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.3">Owncast 0.0.3</a>.
 </span>
 
-`},{id:32,href:"/docs/viewers/",title:"Viewer details",description:null,content:`<p>Owncast can display high-level geographic information about your current viewers if you enable it in your instance.</p>
+`},{id:31,href:"/docs/viewers/",title:"Viewer details",description:null,content:`<p>Owncast can display high-level geographic information about your current viewers if you enable it in your instance.</p>
 <p>Your server can optionally use the <a href="https://dev.maxmind.com/geoip/geoip2/geolite2/">MaxMind GeoLite2 Database</a>. If you provide your own free copy of the database it will be used. Perform the following in order to add this feature.</p>
 <ol>
 <li><a href="https://www.maxmind.com/en/geolite2/signup">Create a free account</a> with MaxMind.</li>
@@ -1587,7 +1585,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
   Location support was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.3">Owncast 0.0.3</a>.
 </span>
 
-`},{id:33,href:"/docs/scaling/",title:"Scaling Owncast",description:"A place to start when needing to increase the capacity of your server.",content:`<h2 id="disclaimer">Disclaimer</h2>
+`},{id:32,href:"/docs/scaling/",title:"Scaling Owncast",description:"A place to start when needing to increase the capacity of your server.",content:`<h2 id="disclaimer">Disclaimer</h2>
 <p>Owncast works great out of the box as a personal streaming service. The ease of install and all-in-one architecture allows for people to get up and running quickly. The downside of this is it requires a bit more thought around large deployments, as you can&rsquo;t just run more copies of Owncast for scale.</p>
 <p>If you are not familiar with the topics below, or you don&rsquo;t feel comfortable with the following steps it&rsquo;s unlikely you should be taking on the additional responsibility of a larger deployment of any service. <strong>Basic system administration experience and understanding of the architecture is generally expected when trying to squeeze additional performance out of anything</strong>, and this might not be for you. Don&rsquo;t feel bad. <strong>Owncast will still work great for you out of the box</strong>, but you might want to acquire some professional help if you need something more than that.</p>
 <h2 id="video">Video</h2>
@@ -1610,7 +1608,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
 <p>When scaling chat you&rsquo;re limited by what your single server will be able to handle as far as open connections. For most people the standard configuration is likely going to suffice, as it&rsquo;s been tested to thousands of concurrent clients.</p>
 <p>Owncast will automatically increase the amount of concurrent sockets that your operating system will allow. However, if you still get the <code>too many open files</code> error it&rsquo;s because your <code>ulimit</code> value is lower than the number of open resources Owncast is trying to to use. You will want to have a more powerful server (cpu, ram) when raising the max limit and handle more chat connections.</p>
 <p>You can increase concurrent connections by using the <code>ulimit</code> command or editing your system files. <a href="https://www.learnitguide.net/2015/07/how-to-increase-ulimit-values-in-linux.html">Here is an overview of the different limits and how to change them</a>. It&rsquo;s beyond the scope of this documentation to go into detail of what numbers you should use and where to put them.</p>
-`},{id:34,href:"/docs/backups/",title:"Backups",description:"Owncast makes period backups of your data that can be restored.",content:`<p>Owncast will create a backup of your data periodically. It can be found in your <code>backup</code> directory as <code>owncastdb.bak</code>. You can add this to your normal system backups to keep your Owncast data safe.</p>
+`},{id:33,href:"/docs/backups/",title:"Backups",description:"Owncast makes period backups of your data that can be restored.",content:`<p>Owncast will create a backup of your data periodically. It can be found in your <code>backup</code> directory as <code>owncastdb.bak</code>. You can add this to your normal system backups to keep your Owncast data safe.</p>
 <span class="version-support">
   Data backup was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.6">Owncast 0.0.6</a>.
 </span>
@@ -1626,7 +1624,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
   Data restore was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.6">Owncast 0.0.6</a>.
 </span>
 
-`},{id:35,href:"/docs/old_troubleshooting/",title:"",description:null,content:`<h2 id="cpu-and-ram-usage-alerts">CPU and RAM usage alerts</h2>
+`},{id:34,href:"/docs/old_troubleshooting/",title:"",description:null,content:`<h2 id="cpu-and-ram-usage-alerts">CPU and RAM usage alerts</h2>
 
 
 <p>If your hardware is being maxed out then your video may not be processed and delivered fast enough to keep up with the real-time requirements of live video.</p>
@@ -1704,7 +1702,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./owncast --streamkey yournewstreamkey</span></span></code></pre></div>
 <h2 id="restoring-a-backup">Restoring a backup</h2>
 <p>Owncast will backup its database periodically. You can keep these backups and restore them if needed. <a href="/docs/backups">Learn more about backups</a>.</p>
-`},{id:36,href:"/docs/custom-javascript/",title:"Adding custom Javascript",description:"Run custom Javascript on your Owncast web page.",content:`<p>If you have some Javascript you need to run when your Owncast web page loads, you can add it to the Javascript editor under the <strong>General</strong> settings page in the admin.</p>
+`},{id:35,href:"/docs/custom-javascript/",title:"Adding custom Javascript",description:"Run custom Javascript on your Owncast web page.",content:`<p>If you have some Javascript you need to run when your Owncast web page loads, you can add it to the Javascript editor under the <strong>General</strong> settings page in the admin.</p>
 <span class="version-support">
   Adding custom javascript was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.1.0">Owncast 0.1.0</a>.
 </span>
@@ -1717,7 +1715,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
 </ul>
 <h2 id="warning">Warning</h2>
 <p>Double check your Javascript. Any incorrect syntax or errors that you insert into the page may create errors and stop the page from loading or functionality from working.</p>
-`},{id:37,href:"/docs/appearance/",title:"Customizing appearance",description:"Customize the appearance of your Owncast instance.",content:`<span class="version-support">
+`},{id:36,href:"/docs/appearance/",title:"Customizing appearance",description:"Customize the appearance of your Owncast instance.",content:`<span class="version-support">
   Appearance customization was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.1.0">Owncast 0.1.0</a>.
 </span>
 
@@ -1751,7 +1749,7 @@ You can find a list of <a href="https://owncast.online/components/?path=%2Fdocs%
 </span></span><span class="line"><span class="cl">  <span class="nv">--theme-color-components-primary-button-border</span><span class="p">:</span> <span class="kc">green</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="nv">--theme-text-body-font-family</span><span class="p">:</span> <span class="kc">serif</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div>`},{id:38,href:"/docs/",title:"Documentation",description:null,content:`<p>For most people Owncast will be completely usable out of the box without additional configuration. Simply following the <a href="/quickstart">Quickstart</a> will have you streaming in minutes.</p>
+</span></span></code></pre></div>`},{id:37,href:"/docs/",title:"Documentation",description:null,content:`<p>For most people Owncast will be completely usable out of the box without additional configuration. Simply following the <a href="/quickstart">Quickstart</a> will have you streaming in minutes.</p>
 <p>There are, however, handfuls of items you can configure to tweak the <a href="website">content of your page</a>, the <a href="video">video quality</a>, server performance and more.</p>
 <p>You can also extend Owncast&rsquo;s functionality by building your own bots, overlays, tools and integrations by taking advantage of the <a href="/thirdparty">third party APIs</a>.</p>
 <p>Some things you might be interested in:</p>
@@ -1761,7 +1759,7 @@ You can find a list of <a href="https://owncast.online/components/?path=%2Fdocs%
 <li><a href="/docs/video">Customize your video output</a></li>
 <li><a href="/docs/sslproxies">Enable SSL using a web proxy</a></li>
 </ol>
-`},{id:39,href:"/docs/broadcasting/jitsi/",title:"Jitsi",description:"Jitsi is an open source video conferencing provider.",content:`<p><a href="https://jitsi.org">Jitsi</a> is both a video conferencing provider and a software suite. It is open source and can be self-hosted. It is also available as a service at <a href="https://meet.jit.si">meet.jit.si</a>.</p>
+`},{id:38,href:"/docs/broadcasting/jitsi/",title:"Jitsi",description:"Jitsi is an open source video conferencing provider.",content:`<p><a href="https://jitsi.org">Jitsi</a> is both a video conferencing provider and a software suite. It is open source and can be self-hosted. It is also available as a service at <a href="https://meet.jit.si">meet.jit.si</a>.</p>
 <ol>
 <li>Visit your Jitsi meeting page.</li>
 <li>Click on the three dots in the lower right.</li>
@@ -1793,7 +1791,7 @@ You can find a list of <a href="https://owncast.online/components/?path=%2Fdocs%
 <ol start="5">
 <li>Note that the error &ldquo;Live stream key may be incorrect&rdquo; will display. This is expected and can be ignored.</li>
 </ol>
-`},{id:40,href:"/docs/watching-on-tvs/",title:"Watching an Owncast Stream on Televisions",description:"The web isn't the only option for watching an Owncast stream.",content:`<div class="alert alert-warning d-flex" role="alert">
+`},{id:39,href:"/docs/watching-on-tvs/",title:"Watching an Owncast Stream on Televisions",description:"The web isn't the only option for watching an Owncast stream.",content:`<div class="alert alert-warning d-flex" role="alert">
   <div class="flex-shrink-1 alert-icon">💡</div>
   <div class="w-100">This document is a work in progress. Please submit any applications or methods that work for you.</div>
 </div>
