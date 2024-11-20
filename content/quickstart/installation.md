@@ -11,7 +11,7 @@ weight: 100
 type: subpages
 ---
 
-By using the installer you can get up and running in about a minute. However, if you would prefer to [download a release manually](/quickstart/manual), use a [one-click install](/quickstart/providers) at a supported hosting provider, run under [Site.js](/quickstart/sitejs) or use [Docker](/quickstart/docker) you have those options.
+By using the installer you can get up and running in about a minute. However, if you would prefer to [download a release manually](/quickstart/manual), use a [one-click install](/quickstart/providers) at a supported hosting provider, or use [Docker](/quickstart/docker) you have those options.
 
 Visit the [Quickstart](/quickstart) to be walked through the installation options.
 

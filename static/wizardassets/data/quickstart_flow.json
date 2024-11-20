@@ -109,19 +109,6 @@
 										"id": 15
 									}
 								]
-							},
-							{
-								"name": "_decision",
-								"test": "string",
-								"if": "sitejs",
-								"is_open": false,
-								"id": 16,
-								"children": [
-									{
-										"name": "https://owncast.online/quickstart/sitejs/",
-										"id": 17
-									}
-								]
 							}
 						]
 					}
