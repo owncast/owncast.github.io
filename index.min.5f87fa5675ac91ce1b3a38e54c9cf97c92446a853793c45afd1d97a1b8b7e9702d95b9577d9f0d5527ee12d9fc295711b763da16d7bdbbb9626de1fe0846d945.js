@@ -1572,7 +1572,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
 </span>
 
 `},{id:31,href:"/docs/viewers/",title:"Viewer details",description:null,content:`<p>Owncast can display high-level geographic information about your current viewers if you enable it in your instance.</p>
-<p>Your server can optionally use the <a href="https://dev.maxmind.com/geoip/geoip2/geolite2/">MaxMind GeoLite2 Database</a>. If you provide your own free copy of the database it will be used. Perform the following in order to add this feature.</p>
+<p>Your server can optionally use the <a href="https://dev.maxmind.com/geoip/geolocate-an-ip/databases/">MaxMind GeoLite2 Database</a>. If you provide your own free copy of the database it will be used. Perform the following in order to add this feature.</p>
 <ol>
 <li><a href="https://www.maxmind.com/en/geolite2/signup">Create a free account</a> with MaxMind.</li>
 <li>Wait for an email and follow the link to your account.</li>
