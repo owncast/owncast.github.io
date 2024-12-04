@@ -18,7 +18,7 @@ By visiting the chat custom emoji page in the admin located at `/admin/chat/emoj
 
 ## Manual management
 
-You can manually add or remove custom emoji images in the `data/emoji` directory on your filesystem.
+You can manually bulk upload and remove custom emoji images in the `data/emoji` directory on your filesystem.
 
 ## Bundled emoji images
 
