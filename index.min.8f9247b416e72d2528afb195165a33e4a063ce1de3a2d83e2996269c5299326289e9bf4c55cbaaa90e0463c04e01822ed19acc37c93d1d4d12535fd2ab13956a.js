@@ -1742,7 +1742,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
 </ul>
 <h2 id="css-variables">CSS Variables</h2>
 <p>You can override the values assigned to CSS variables manually by setting them in the CSS editor in the admin.
-You can find a list of <a href="https://owncast.online/components/?path=%2Fdocs%2Fowncast-styles-colors--default-theme">variable names</a> you can override.</p>
+You can find a list of <a href="https://owncast.online/components/?path=/docs/owncast-styles-colors-palette--docs">variable names</a> you can override.</p>
 <p>For example, if you&rsquo;d like to make all action items (links, buttons) red, button borders green, and change the body font to a <code>serif</code> font, you can set the following CSS variables as follows:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">:</span><span class="nd">root</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nv">--theme-color-action</span><span class="p">:</span> <span class="kc">red</span><span class="p">;</span>
