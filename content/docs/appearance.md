@@ -30,7 +30,7 @@ menu:
 ## CSS Variables
 
 You can override the values assigned to CSS variables manually by setting them in the CSS editor in the admin.
-You can find a list of [variable names](https://owncast.online/components/?path=%2Fdocs%2Fowncast-styles-colors--default-theme) you can override.
+You can find a list of [variable names](https://owncast.online/components/?path=/docs/owncast-styles-colors-palette--docs) you can override.
 
 For example, if you'd like to make all action items (links, buttons) red, button borders green, and change the body font to a `serif` font, you can set the following CSS variables as follows:
 
