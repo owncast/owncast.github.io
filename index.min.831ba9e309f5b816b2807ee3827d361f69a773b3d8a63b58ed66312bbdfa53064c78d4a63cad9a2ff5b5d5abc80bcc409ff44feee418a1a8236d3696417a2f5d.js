@@ -1183,7 +1183,13 @@ worst of the worst away. Moderation is still the responsibility of each individu
 </span>
 
 <h2 id="manual-management">Manual management</h2>
-<p>You can manually add or remove custom emoji images in the <code>data/emoji</code> directory on your filesystem.</p>
+<p>You can manage your custom emoji images in the <code>data/emoji</code> directory on your filesystem. Here&rsquo;s what you can do:</p>
+<ul>
+<li>Add multiple static and/or animated emoji image files at once</li>
+<li>Delete an entire set of emojis</li>
+<li>Rename all emoji files</li>
+<li>Back up your custom emojis by copying them to another folder</li>
+</ul>
 <h2 id="bundled-emoji-images">Bundled emoji images</h2>
 <p>The images bundled with Owncast out of the box are freely licensed by different authors. See the <a href="https://github.com/owncast/owncast/tree/develop/static/img/emoji">directory of emoji</a> for the respective licenses associated to each collection.</p>
 `},{id:25,href:"/docs/website/",title:"Web Site + Chat",description:"Customize your Owncast web page by adding additional content and links.",content:`<h2 id="overview">Overview</h2>
