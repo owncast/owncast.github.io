@@ -25,7 +25,7 @@ It will also download a copy of ffmpeg if you don't currently have one installed
 curl -s https://owncast.online/install.sh | bash
 {{</ highlight >}}
 
-{{< asciicast "/install-owncast-ascii.cast">}}
+<img src="/owncast-install.gif" width="90%"/>
 
 ---
 
