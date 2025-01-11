@@ -85,3 +85,15 @@ worst of the worst away. Moderation is still the responsibility of each individu
 A list of blocked IPs can be viewed in the Admin Chat Users interface and can be un-banned via the same interface.
 
 {{<versionsupport feature="IP address bans" version="0.0.12">}}
+
+## Profanity / Slur filter
+
+A basic profanity filter can be enabled in the chat settings. This will reject messages that match an internal list.
+
+{{<versionsupport feature="Profanity filter" version="0.2.0">}}
+
+## Rate limiter
+
+By default there is a built-in rate limter that will attempt to prevent users from sending too many messages in a short period of time. This is to help prevent spam and abuse. The rate limiter can be disabled in the chat settings.
+
+{{<versionsupport feature="Disabling rate limiter" version="0.2.0">}}
