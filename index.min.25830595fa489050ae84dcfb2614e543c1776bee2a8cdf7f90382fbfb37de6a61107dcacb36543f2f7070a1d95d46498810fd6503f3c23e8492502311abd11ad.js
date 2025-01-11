@@ -1175,6 +1175,18 @@ worst of the worst away. Moderation is still the responsibility of each individu
   IP address bans was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.12">Owncast 0.0.12</a>.
 </span>
 
+<h2 id="profanity--slur-filter">Profanity / Slur filter</h2>
+<p>A basic profanity filter can be enabled in the chat settings. This will reject messages that match an internal list.</p>
+<span class="version-support">
+  Profanity filter was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.2.0">Owncast 0.2.0</a>.
+</span>
+
+<h2 id="rate-limiter">Rate limiter</h2>
+<p>By default there is a built-in rate limter that will attempt to prevent users from sending too many messages in a short period of time. This is to help prevent spam and abuse. The rate limiter can be disabled in the chat settings.</p>
+<span class="version-support">
+  Disabling rate limiter was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.2.0">Owncast 0.2.0</a>.
+</span>
+
 `},{id:24,href:"/docs/chat/emoji/",title:"Custom emoji",description:"Add your own custom emoji for use in chat.",content:`<p>Your stream&rsquo;s chat can be customized with your own custom emoji. You can add as many as you&rsquo;d like and they&rsquo;ll be available to use in chat.</p>
 <h2 id="in-the-admin">In the Admin</h2>
 <p>By visiting the chat custom emoji page in the admin located at <code>/admin/chat/emojis</code> you can add and remove images that are available to chat participants.</p>
