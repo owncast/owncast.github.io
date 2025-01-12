@@ -7,7 +7,7 @@ weight: 100
 
 # Changelog
 
-## [[0.2.0](https://github.com/owncast/owncast/milestone/26)] - 2024-01-11
+## [[0.2.0](https://github.com/owncast/owncast/milestone/26)] - 2025-01-11
 
 This release includes a handful of behind-the-scenes changes to position the project for future feature work, a bunch of bug fixes and a few smaller quality of life improvements. See the below changelog for details.
 
