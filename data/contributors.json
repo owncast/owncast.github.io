@@ -215,11 +215,6 @@
     "html_url": "https://github.com/bennett1412"
   },
   {
-    "login": "bgildson",
-    "avatar_url": "https://avatars.githubusercontent.com/u/4239610?v=4",
-    "html_url": "https://github.com/bgildson"
-  },
-  {
     "login": "brendenehlers",
     "avatar_url": "https://avatars.githubusercontent.com/u/28796708?v=4",
     "html_url": "https://github.com/brendenehlers"
@@ -248,6 +243,11 @@
     "login": "controlfreakstudio",
     "avatar_url": "https://avatars.githubusercontent.com/u/67573032?v=4",
     "html_url": "https://github.com/controlfreakstudio"
+  },
+  {
+    "login": "curious-companion",
+    "avatar_url": "https://avatars.githubusercontent.com/u/105918194?v=4",
+    "html_url": "https://github.com/curious-companion"
   },
   {
     "login": "dependabot[bot]",
