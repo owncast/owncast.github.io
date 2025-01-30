@@ -4,9 +4,11 @@ description: This document outlines the rules for using Owncast's trademarks.
 tags: [trademark, name, logo, branding]
 ---
 
-This document outlines the rules for using Owncast's trademarks. While our software is distributed under a free and open-source license, this does not give an automatic right to use our trademarks in all cases. Trademarks serve to identify the origin of products and services, so it’s important they are used correctly.
+This document outlines the guidelines for using the Owncast® name and trademarks. While our software is distributed under a free and open-source license, this does not give an automatic right to use our trademarks in all cases. Trademarks serve to identify the origin of products and services, so it’s important they are used correctly.
 
 You may use our trademarks under certain conditions outlined here. If your use is not described in this document, it is either not allowed, or you will need to seek permission. The purpose of these guidelines is to ensure our trademarks continue to represent high quality, without limiting the community's ability to engage with the Owncast project.
+
+US Serial number: [98526082](https://tsdr.uspto.gov/#caseNumber=98526082&caseSearchType=US_APPLICATION&caseType=DEFAULT&searchType=statusSearch)
 
 {{< lastmodified >}}
 
