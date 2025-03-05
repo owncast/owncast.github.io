@@ -18,6 +18,6 @@ type: toc
 toc: true
 ---
 
-<meta http-equiv="refresh" content="0; url=https://owncast.dev/owncast/Development-e9dda43167c048968a308c4dadac66c4" />
+<meta http-equiv="refresh" content="0; url=https://docs.owncast.dev/development" />
 
-Click <a href="https://owncast.dev/owncast/Development-e9dda43167c048968a308c4dadac66c4">here</a> if you are not redirected.
+Click <a href="https://docs.owncast.dev/development">here</a> if you are not redirected.
