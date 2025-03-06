@@ -46,6 +46,8 @@ server {
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection $connection_upgrade;
+        proxy_set_header  Authorization $http_authorization;
+        proxy_pass_header Authorization;
         proxy_pass http://127.0.0.1:8080;
     }
 }
