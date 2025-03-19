@@ -11,6 +11,8 @@ jobs:
   generate-installer-preview:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+
       - name: Run
         working-directory: scripts/preview-generator
         run: |
