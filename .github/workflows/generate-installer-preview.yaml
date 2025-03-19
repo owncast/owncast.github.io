@@ -5,7 +5,7 @@ on:
       - master
     paths:
       - "static/install.sh"
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   generate-installer-preview:
