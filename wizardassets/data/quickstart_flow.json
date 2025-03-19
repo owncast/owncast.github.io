@@ -1,0 +1,349 @@
+[
+	{
+		"name": "install-method-page",
+		"id": 1,
+		"is_open": true,
+		"children": [
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "docker",
+				"is_open": false,
+				"id": 2,
+				"children": [
+					{
+						"name": "https://owncast.online/quickstart/docker",
+						"id": 3
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "manual",
+				"is_open": false,
+				"id": 4,
+				"children": [
+					{
+						"name": "manual-install-method-page",
+						"id": 5,
+						"is_open": false,
+						"children": [
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "packagemanager",
+								"is_open": false,
+								"id": 6,
+								"children": [
+									{
+										"name": "os-package-manager-page",
+										"id": 7,
+										"is_open": false,
+										"children": [
+											{
+												"name": "_decision",
+												"test": "string",
+												"if": "arch",
+												"is_open": false,
+												"id": 8,
+												"children": [
+													{
+														"name": "https://aur.archlinux.org/packages/owncast/",
+														"id": 9
+													}
+												]
+											},
+											{
+												"name": "_decision",
+												"test": "string",
+												"if": "freebsd",
+												"is_open": false,
+												"id": 10,
+												"children": [
+													{
+														"name": "https://www.freshports.org/www/owncast/",
+														"id": 11
+													}
+												]
+											},
+											{
+												"name": "_decision",
+												"test": "string",
+												"if": "nixos",
+												"is_open": false,
+												"id": 44,
+												"children": [
+													{
+														"name": "https://search.nixos.org/packages?channel=unstable&show=owncast&from=0&size=50&sort=relevance&type=packages&query=owncast",
+														"id": 45
+													}
+												]
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "quickinstaller",
+								"is_open": false,
+								"id": 12,
+								"children": [
+									{
+										"name": "https://owncast.online/quickstart/installer",
+										"id": 13
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "download",
+								"is_open": false,
+								"id": 14,
+								"children": [
+									{
+										"name": "https://owncast.online/quickstart/manual/",
+										"id": 15
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "hostingprovider",
+				"is_open": true,
+				"id": 18,
+				"children": [
+					{
+						"name": "hostingprovider-install-method-page",
+						"id": 19,
+						"is_open": true,
+						"children": [
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "digitalocean",
+								"is_open": false,
+								"id": 20,
+								"children": [
+									{
+										"name": "https://owncast.online/quickstart/digitalocean/",
+										"id": 21
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "linode",
+								"is_open": false,
+								"id": 22,
+								"children": [
+									{
+										"name": "https://owncast.online/quickstart/linode/",
+										"id": 23
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "vultr",
+								"is_open": true,
+								"id": 24,
+								"children": [
+									{
+										"name": "https://www.vultr.com/marketplace/apps/owncast",
+										"id": 25
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "zeuscloud",
+								"is_open": true,
+								"id": 126,
+								"children": [
+									{
+										"name": "https://www.zeuscloud.co.uk/apps/owncast",
+										"id": 127
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "elestio",
+								"is_open": true,
+								"id": 128,
+								"children": [
+									{
+										"name": "https://owncast.online/quickstart/elestio/",
+										"id": 129
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "hetzner",
+								"is_open": true,
+								"id": 130,
+								"children": [
+									{
+										"name": "https://docs.hetzner.com/cloud/apps/list/owncast/",
+										"id": 131
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "other",
+				"is_open": false,
+				"id": 26,
+				"children": [
+					{
+						"name": "other-install-page",
+						"id": 27,
+						"is_open": false,
+						"children": [
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "yunohost",
+								"is_open": false,
+								"id": 28,
+								"children": [
+									{
+										"name": "https://dash.yunohost.org/appci/app/owncast",
+										"id": 29
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "cloudron",
+								"is_open": false,
+								"id": 28,
+								"children": [
+									{
+										"name": "https://docs.cloudron.io/apps/owncast/",
+										"id": 29
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "qnap",
+								"is_open": false,
+								"id": 30,
+								"children": [
+									{
+										"name": "https://qnapclub.eu/en/qpkg/1138",
+										"id": 31
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "installed-what-is-next",
+				"is_open": false,
+				"id": 32,
+				"children": [
+					{
+						"name": "installed-what-is-next-page",
+						"id": 33,
+						"is_open": false,
+						"children": [
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "directory",
+								"is_open": false,
+								"id": 34,
+								"children": [
+									{
+										"name": "https://owncast.online/docs/directory/",
+										"id": 35
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "configure-ssl",
+								"is_open": false,
+								"id": 36,
+								"children": [
+									{
+										"name": "https://owncast.online/docs/sslproxies/",
+										"id": 37
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "configure-video",
+								"is_open": false,
+								"id": 38,
+								"children": [
+									{
+										"name": "https://owncast.online/docs/video/",
+										"id": 39
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "startstreaming",
+								"is_open": false,
+								"id": 40,
+								"children": [
+									{
+										"name": "https://owncast.online/docs/broadcasting/",
+										"id": 41
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "configure-system-service",
+								"is_open": false,
+								"id": 42,
+								"children": [
+									{
+										"name": "https://owncast.online/docs/systemservice/",
+										"id": 43
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+]

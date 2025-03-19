@@ -1,0 +1,15 @@
+# redirects for Netlify - https://www.netlify.com/docs/redirects/
+/quickstart/container /quickstart/container/
+/quickstart/docker /quickstart/container/
+/docs/quickstart/ /quickstart/installation/
+/docs/thirdparty/ /thirdparty/
+docs/integrations /thirdparty/
+/docs/chat-authentication /docs/chat/chat-authentication/
+/docs/moderation/ /docs/chat/moderation/
+/docs/encoding/ /docs/video/
+/docs/s3/ /docs/storage/
+/docs/geoip/ /docs/viewers/
+/docs/building /development/
+/troubleshooting /troubleshoot/
+/troubleshoot /troubleshoot/
+/docs/troubleshooting /troubleshoot/

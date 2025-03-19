@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Examples on</title><link>/examples/</link><description>Recent content in Examples on</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><atom:link href="/examples/index.xml" rel="self" type="application/rss+xml"/><item><title>Blogs and Tutorials</title><link>/examples/blogs-tutorials/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/examples/blogs-tutorials/</guid><description>Below are a small collection of blog posts, videos, examples and tutorials that the community have put together.
+Want your content shared here? Please let us know about it!
+Blog posts, articles and tutorials Owncast on a free Oracle Cloud computer Oracle has a “Always Free” tier that is capable of running Owncast.
+tutorial hosting Livestreaming your Wedding with Owncast Here&amp;#39;s the recipe I used for my wedding.
+tutorial example Owncast with podman behind nginx How great it’d be if Owncast replaces all these proprietary streaming services?</description></item><item><title>Projects</title><link>/examples/projects/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/examples/projects/</guid><description>The following are examples of projects people have built that either extend or take advantage of Owncast.
+Want your project shared here? Please let us know about it!
+Owncast Browser Extension Extension used to follow various Owncast Instances.
+extension notifications Ownextend A set of OBS/browser compatible tools to extend Owncast.
+extension chat obs hatbot A basic Owncast chat bot. Very easy to add your own !commands. Written in Python.
+bot chat Kodi Plugin A plugin for Kodi that lets you browse and watch the Owncast Directory directly from your TV.</description></item></channel></rss>
