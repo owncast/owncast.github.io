@@ -270,16 +270,15 @@ backend owncastws
 </span></span><span class="line"><span class="cl">        <span class="kn">proxy_pass</span> <span class="s">http://127.0.0.1:8080</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
-`},{id:8,href:"/docs/sslproxies/apache/",title:"Apache",description:"If you're already using Apache you can use it as a proxy.",content:`<p>Apache requires the most boilerplate configuration, but if you&rsquo;re already using Apache as a web server you can <a href="https://httpd.apache.org/docs/2.4/howto/reverse_proxy.html">configure it as a reverse proxy</a> in front of your Owncast server to enable SSL.</p>
+`},{id:8,href:"/docs/sslproxies/apache/",title:"Apache",description:"If you're already using Apache you can use it as a proxy.",content:`<p>If you&rsquo;re already using Apache as a web server you can <a href="https://httpd.apache.org/docs/2.4/howto/reverse_proxy.html">configure it as a reverse proxy</a> in front of your Owncast server to enable SSL.
+The following configuration example requires Apache &gt;= 2.4.47.</p>
 <p>Ensure required Apache modules are enabled using the <code>a2enmod</code> command.</p>
-<pre tabindex="0"><code>$ sudo a2enmod proxy proxy_http proxy_wstunnel ssl
-</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ApacheConf" data-lang="ApacheConf"><span class="line"><span class="cl"><span class="nt">&lt;VirtualHost</span> <span class="s">\\*:80</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">ServerName</span> live.example.com
-</span></span><span class="line"><span class="cl"><span class="nb">ServerAdmin</span> admin@example.com
+<pre tabindex="0"><code>$ sudo a2enmod proxy proxy_http ssl
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ApacheConf" data-lang="ApacheConf"><span class="line"><span class="cl"><span class="nt">&lt;VirtualHost</span> <span class="s">*:80</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">ServerName</span> live.example.com
+</span></span><span class="line"><span class="cl">        <span class="nb">ServerAdmin</span> admin@example.com
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="nb">RewriteEngine</span> <span class="k">on</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">RewriteCond</span> %{SERVER_NAME} =live.example.com
-</span></span><span class="line"><span class="cl">        <span class="nb">RewriteRule</span> ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+</span></span><span class="line"><span class="cl">        <span class="nb">Redirect</span> permanent / https://live.example.com
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nt">&lt;/VirtualHost&gt;</span>
 </span></span><span class="line"><span class="cl">
@@ -294,24 +293,11 @@ backend owncastws
 </span></span><span class="line"><span class="cl">        <span class="nb">ProxyPreserveHost</span>   <span class="k">On</span>
 </span></span><span class="line"><span class="cl">        <span class="nb">AllowEncodedSlashes</span> NoDecode
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;Proxy</span> <span class="s">*</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">          <span class="nb">Order</span> deny,allow
-</span></span><span class="line"><span class="cl">          <span class="nb">Allow</span> from <span class="k">all</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/Proxy&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="nb">ProxyPass</span>        / http://localhost:8080/
+</span></span><span class="line"><span class="cl">        <span class="nb">ProxyPass</span>        / http://localhost:8080/ upgrade=websocket
 </span></span><span class="line"><span class="cl">        <span class="nb">ProxyPassReverse</span> / http://localhost:8080/
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="nb">RequestHeader</span>    set X-Forwarded-Proto <span class="s2">&#34;https&#34;</span>
 </span></span><span class="line"><span class="cl">        <span class="nb">RequestHeader</span>    set X-Forwarded-Port <span class="s2">&#34;443&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c"># setup the proxy to forward websocket requests properly</span>
-</span></span><span class="line"><span class="cl">        <span class="c"># (note: this proxy automatically converts the secure websocket (wss)</span>
-</span></span><span class="line"><span class="cl">        <span class="c"># to a normal websocket and vice versa.</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">RewriteEngine</span> <span class="k">On</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">RewriteCond</span> %{HTTP:UPGRADE} ^WebSocket$           [NC,OR]
-</span></span><span class="line"><span class="cl">        <span class="nb">RewriteCond</span> %{HTTP:CONNECTION} ^Upgrade$          [NC]
-</span></span><span class="line"><span class="cl">        <span class="nb">RewriteRule</span> .* ws://127.0.0.1:8080%{REQUEST_URI}  [P,QSA,L]
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="nb">SSLCertificateFile</span> <span class="sx">/path/to/fullchain.pem</span>
 </span></span><span class="line"><span class="cl">        <span class="nb">SSLCertificateKeyFile</span> <span class="sx">/path/to/privkey.pem</span>
