@@ -3,7 +3,7 @@ title: Contact
 description: Get in touch with the project, get help, or report problems.
 ---
 
-Fediverse: [@owncast@fosstodon.org](https://fosstodon.org/@owncast)
+Fediverse: [@owncast@social.owncast.online](https://social.owncast.online/@owncast)
 
 Use any of the below options to get in touch with the Owncast team. If you're experiencing issues please open an issue. Drop by our chat if you'd like to talk with Owncast community members or want to talk through something in real time with those who may be able to help.
 
