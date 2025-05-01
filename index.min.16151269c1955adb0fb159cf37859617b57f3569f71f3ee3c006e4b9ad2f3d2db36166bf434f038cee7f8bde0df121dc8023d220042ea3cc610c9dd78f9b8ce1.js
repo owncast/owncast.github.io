@@ -1552,7 +1552,14 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
   Path style configuration was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.11">Owncast 0.0.11</a>.
 </span>
 
-`},{id:30,href:"/docs/directory/",title:"The Directory",description:"The Owncast Directory is a centralized list of streams for people to discover.",content:`<p>To help people discover streams by people using Owncast we have an optional Owncast directory you can add yourself to.</p>
+`},{id:30,href:"/docs/storage/",title:"Object Storage",description:"Use an external storage provider to distribute your Owncast video stream.",content:`<p>Instead of serving video directly from your personal server you can use a S3 compatible storage provider to offload the bandwidth and storage requirements elsewhere. This is not for permanent storage of recordings or archival purposes, just for live streams.</p>
+<h2 id="configuration">Configuration</h2>
+<p>Some storage providers, such as Oracle Cloud Objects, require the &ldquo;path-style&rdquo; configuration option to be enabled. Refer to your storage provider documentation to learn if this is required.</p>
+<span class="version-support">
+  Path style configuration was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.11">Owncast 0.0.11</a>.
+</span>
+
+`},{id:31,href:"/docs/directory/",title:"The Directory",description:"The Owncast Directory is a centralized list of streams for people to discover.",content:`<p>To help people discover streams by people using Owncast we have an optional Owncast directory you can add yourself to.</p>
 <ol>
 <li>Visit the <strong>&ldquo;General&rdquo;</strong> settings in the admin.</li>
 <li>Set the public URL to your Owncast instance that you want people to be linked to.</li>
@@ -1577,7 +1584,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
   Owncast directory was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.3">Owncast 0.0.3</a>.
 </span>
 
-`},{id:31,href:"/docs/viewers/",title:"Viewer details",description:null,content:`<p>Owncast can display high-level geographic information about your current viewers if you enable it in your instance.</p>
+`},{id:32,href:"/docs/viewers/",title:"Viewer details",description:null,content:`<p>Owncast can display high-level geographic information about your current viewers if you enable it in your instance.</p>
 <p>Your server can optionally use the <a href="https://dev.maxmind.com/geoip/geolocate-an-ip/databases/">MaxMind GeoLite2 Database</a>. If you provide your own free copy of the database it will be used. Perform the following in order to add this feature.</p>
 <ol>
 <li><a href="https://www.maxmind.com/en/geolite2/signup">Create a free account</a> with MaxMind.</li>
@@ -1591,7 +1598,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
   Location support was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.3">Owncast 0.0.3</a>.
 </span>
 
-`},{id:32,href:"/docs/scaling/",title:"Scaling Owncast",description:"A place to start when needing to increase the capacity of your server.",content:`<h2 id="disclaimer">Disclaimer</h2>
+`},{id:33,href:"/docs/scaling/",title:"Scaling Owncast",description:"A place to start when needing to increase the capacity of your server.",content:`<h2 id="disclaimer">Disclaimer</h2>
 <p>Owncast works great out of the box as a personal streaming service. The ease of install and all-in-one architecture allows for people to get up and running quickly. The downside of this is it requires a bit more thought around large deployments, as you can&rsquo;t just run more copies of Owncast for scale.</p>
 <p>If you are not familiar with the topics below, or you don&rsquo;t feel comfortable with the following steps it&rsquo;s unlikely you should be taking on the additional responsibility of a larger deployment of any service. <strong>Basic system administration experience and understanding of the architecture is generally expected when trying to squeeze additional performance out of anything</strong>, and this might not be for you. Don&rsquo;t feel bad. <strong>Owncast will still work great for you out of the box</strong>, but you might want to acquire some professional help if you need something more than that.</p>
 <h2 id="video">Video</h2>
@@ -1614,7 +1621,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
 <p>When scaling chat you&rsquo;re limited by what your single server will be able to handle as far as open connections. For most people the standard configuration is likely going to suffice, as it&rsquo;s been tested to thousands of concurrent clients.</p>
 <p>Owncast will automatically increase the amount of concurrent sockets that your operating system will allow. However, if you still get the <code>too many open files</code> error it&rsquo;s because your <code>ulimit</code> value is lower than the number of open resources Owncast is trying to to use. You will want to have a more powerful server (cpu, ram) when raising the max limit and handle more chat connections.</p>
 <p>You can increase concurrent connections by using the <code>ulimit</code> command or editing your system files. <a href="https://www.learnitguide.net/2015/07/how-to-increase-ulimit-values-in-linux.html">Here is an overview of the different limits and how to change them</a>. It&rsquo;s beyond the scope of this documentation to go into detail of what numbers you should use and where to put them.</p>
-`},{id:33,href:"/docs/backups/",title:"Backups",description:"Owncast makes period backups of your data that can be restored.",content:`<p>Owncast will create a backup of your data periodically. It can be found in your <code>backup</code> directory as <code>owncastdb.bak</code>. You can add this to your normal system backups to keep your Owncast data safe.</p>
+`},{id:34,href:"/docs/backups/",title:"Backups",description:"Owncast makes period backups of your data that can be restored.",content:`<p>Owncast will create a backup of your data periodically. It can be found in your <code>backup</code> directory as <code>owncastdb.bak</code>. You can add this to your normal system backups to keep your Owncast data safe.</p>
 <span class="version-support">
   Data backup was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.6">Owncast 0.0.6</a>.
 </span>
@@ -1630,7 +1637,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
   Data restore was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.0.6">Owncast 0.0.6</a>.
 </span>
 
-`},{id:34,href:"/docs/old_troubleshooting/",title:"",description:null,content:`<h2 id="cpu-and-ram-usage-alerts">CPU and RAM usage alerts</h2>
+`},{id:35,href:"/docs/old_troubleshooting/",title:"",description:null,content:`<h2 id="cpu-and-ram-usage-alerts">CPU and RAM usage alerts</h2>
 
 
 <p>If your hardware is being maxed out then your video may not be processed and delivered fast enough to keep up with the real-time requirements of live video.</p>
@@ -1708,7 +1715,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./owncast --streamkey yournewstreamkey</span></span></code></pre></div>
 <h2 id="restoring-a-backup">Restoring a backup</h2>
 <p>Owncast will backup its database periodically. You can keep these backups and restore them if needed. <a href="/docs/backups">Learn more about backups</a>.</p>
-`},{id:35,href:"/docs/custom-javascript/",title:"Adding custom Javascript",description:"Run custom Javascript on your Owncast web page.",content:`<p>If you have some Javascript you need to run when your Owncast web page loads, you can add it to the Javascript editor under the <strong>General</strong> settings page in the admin.</p>
+`},{id:36,href:"/docs/custom-javascript/",title:"Adding custom Javascript",description:"Run custom Javascript on your Owncast web page.",content:`<p>If you have some Javascript you need to run when your Owncast web page loads, you can add it to the Javascript editor under the <strong>General</strong> settings page in the admin.</p>
 <span class="version-support">
   Adding custom javascript was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.1.0">Owncast 0.1.0</a>.
 </span>
@@ -1721,7 +1728,7 @@ built with gcc 8 (Raspbian 8.3.0-6+rpi1)
 </ul>
 <h2 id="warning">Warning</h2>
 <p>Double check your Javascript. Any incorrect syntax or errors that you insert into the page may create errors and stop the page from loading or functionality from working.</p>
-`},{id:36,href:"/docs/appearance/",title:"Customizing appearance",description:"Customize the appearance of your Owncast instance.",content:`<span class="version-support">
+`},{id:37,href:"/docs/appearance/",title:"Customizing appearance",description:"Customize the appearance of your Owncast instance.",content:`<span class="version-support">
   Appearance customization was first supported in <a href="https://github.com/owncast/owncast/releases/tag/v0.1.0">Owncast 0.1.0</a>.
 </span>
 
@@ -1755,7 +1762,7 @@ You can find a list of <a href="https://owncast.online/components/?path=/docs/ow
 </span></span><span class="line"><span class="cl">  <span class="nv">--theme-color-components-primary-button-border</span><span class="p">:</span> <span class="kc">green</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="nv">--theme-text-body-font-family</span><span class="p">:</span> <span class="kc">serif</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div>`},{id:37,href:"/docs/",title:"Documentation",description:null,content:`<p>For most people Owncast will be completely usable out of the box without additional configuration. Simply following the <a href="/quickstart">Quickstart</a> will have you streaming in minutes.</p>
+</span></span></code></pre></div>`},{id:38,href:"/docs/",title:"Documentation",description:null,content:`<p>For most people Owncast will be completely usable out of the box without additional configuration. Simply following the <a href="/quickstart">Quickstart</a> will have you streaming in minutes.</p>
 <p>There are, however, handfuls of items you can configure to tweak the <a href="website">content of your page</a>, the <a href="video">video quality</a>, server performance and more.</p>
 <p>You can also extend Owncast&rsquo;s functionality by building your own bots, overlays, tools and integrations by taking advantage of the <a href="/thirdparty">third party APIs</a>.</p>
 <p>Some things you might be interested in:</p>
@@ -1765,7 +1772,7 @@ You can find a list of <a href="https://owncast.online/components/?path=/docs/ow
 <li><a href="/docs/video">Customize your video output</a></li>
 <li><a href="/docs/sslproxies">Enable SSL using a web proxy</a></li>
 </ol>
-`},{id:38,href:"/docs/broadcasting/jitsi/",title:"Jitsi",description:"Jitsi is an open source video conferencing provider.",content:`<p><a href="https://jitsi.org">Jitsi</a> is both a video conferencing provider and a software suite. It is open source and can be self-hosted. It is also available as a service at <a href="https://meet.jit.si">meet.jit.si</a>.</p>
+`},{id:39,href:"/docs/broadcasting/jitsi/",title:"Jitsi",description:"Jitsi is an open source video conferencing provider.",content:`<p><a href="https://jitsi.org">Jitsi</a> is both a video conferencing provider and a software suite. It is open source and can be self-hosted. It is also available as a service at <a href="https://meet.jit.si">meet.jit.si</a>.</p>
 <ol>
 <li>Visit your Jitsi meeting page.</li>
 <li>Click on the three dots in the lower right.</li>
@@ -1797,7 +1804,7 @@ You can find a list of <a href="https://owncast.online/components/?path=/docs/ow
 <ol start="5">
 <li>Note that the error &ldquo;Live stream key may be incorrect&rdquo; will display. This is expected and can be ignored.</li>
 </ol>
-`},{id:39,href:"/docs/watching-on-tvs/",title:"Watching an Owncast Stream on Televisions",description:"The web isn't the only option for watching an Owncast stream.",content:`<div class="alert alert-warning d-flex" role="alert">
+`},{id:40,href:"/docs/watching-on-tvs/",title:"Watching an Owncast Stream on Televisions",description:"The web isn't the only option for watching an Owncast stream.",content:`<div class="alert alert-warning d-flex" role="alert">
   <div class="flex-shrink-1 alert-icon">💡</div>
   <div class="w-100">This document is a work in progress. Please submit any applications or methods that work for you.</div>
 </div>

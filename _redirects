@@ -8,6 +8,7 @@ docs/integrations /thirdparty/
 /docs/moderation/ /docs/chat/moderation/
 /docs/encoding/ /docs/video/
 /docs/s3/ /docs/storage/
+/docs/s3/ /docs/storage/
 /docs/geoip/ /docs/viewers/
 /docs/building /development/
 /troubleshooting /troubleshoot/
