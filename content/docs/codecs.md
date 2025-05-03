@@ -45,8 +45,6 @@ As of July 2019 Kepler, Maxwell, Pascal, Volta and Turing generation GPUs suppor
 
 [VA-API](#va-api) is supported on AMD and ATI GPUs by the [libva-mesa-driver](https://is.gd/ZvSdpo).
 
-Note: ffmpeg 5+ is not currently supported with VA-API. Please use a version less than 5. Read the [issue](https://github.com/owncast/owncast/issues/2071) about this particular issue to learn more.
-
 ## Compatible codecs/libraries
 
 ### Intel QuickSync
