@@ -1,23 +1,49 @@
 ---
 title: Owncast v0.2.2
-date:
+date: 2025-05-03
 description: Handfuls of behind the scenes updates, bug fixes, and feature requests.
 weight: 100
 ---
 
-# Changelog
+## Happy 5 years!
 
-## [[0.2.2](https://github.com/owncast/owncast/milestone/27)] - 2021-xx-xx
+This month marks 5 years of Owncast. It's been a lot of fun, and there's still so much more planned. Thank you for being patient during this time when it's primarily architectural updates, bug fixes, and small quality of life improvements that are being shipped before we can get to the big features. You can keep an eye on the roadmap at https://owncast.online/roadmap.
 
-## Upgrade instructions from 0.0.X
+## New Fediverse account
+
+If you follow Owncast on the Fediverse, please follow the new account at [owncast@social.owncast.online](https://social.owncast.online/@owncast).
+
+## Owncast newsletter
+
+Every month or two you get updates on what is happening in the world of Owncast via the community newsletter. https://owncast.online/newsletter.
+
+## Roku app
+
+Have you tried the new [Roku app](https://channelstore.roku.com/details/2ac2d693f541d13ff5c5d240a92261df:2aac018ca556a6b44febaf65735ade5d/owncasts), built specifically for watching Owncast-powered streams?
+
+# Owncast v0.2.2
+
+[Download](https://github.com/owncast/owncast/releases/tag/v0.2.2)
+
+## Translation support
+
+This release features some translation support in the web interface for the first time. The amount is limited, however. We still need to go through the web code and mark up all the strings so they can be translated. This is a time consuming, but relatively simple task. If you're interested in contributing to the project, this might be for you. [Read how you can help here](https://docs.owncast.dev/web-translations) and you can directly help Owncast users in a visible way.
+
+## Updated codec support
+
+With this release we now support the new implementation of VA-API in the more recent versions of ffmpeg. You're no longer limited to an old version if you're a VA-API user. Additionally, QuickSync is now available.
+
+## Changelog
+
+### [[0.2.2](https://github.com/owncast/owncast/milestone/27)] - 2025-05-03
+
+### Upgrade instructions from 0.2.1
 
 1. Stop the service from running. If you're using a pre-installed image through a hosting provider, or setup Owncast to run under systemd you can probably just simply run `systemctl stop owncast`.
 1. Change to the directory where Owncast is installed on your server.
 1. If you’ve customized your web interface in any way you will want to back up the files you’ve changed or customized.
 1. Re-run the installer as the user you run Owncast under. For example if you are running owncast as the user "owncast": `su -c "curl https://owncast.online/install.sh |bash" owncast`
 1. Restart the service. If you're running under systemd `systemctl start owncast`.
-
-# Major updates
 
 ### Added
 
