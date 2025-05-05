@@ -33,7 +33,7 @@ toc: true
 
 ### Intel Graphics
 
-If you have Intel integrated graphics you may be able to use it using [VA-API](#va-api).
+If you have Intel integrated graphics you may be able to use it using [VA-API](#va-api) or [Quicksync](#intel-quicksync).
 
 ### NVIDIA GPUs
 
@@ -45,11 +45,9 @@ As of July 2019 Kepler, Maxwell, Pascal, Volta and Turing generation GPUs suppor
 
 [VA-API](#va-api) is supported on AMD and ATI GPUs by the [libva-mesa-driver](https://is.gd/ZvSdpo).
 
-Note: ffmpeg 5 is not currently supported with VA-API. Please use a version less than 5. Read the [issue](https://github.com/owncast/owncast/issues/2071) about this particular issue to learn more.
-
 ## Compatible codecs/libraries
 
-<!-- ### Intel QuickSync
+### Intel QuickSync
 
 "Intel Quick Sync Video" is the marketing name for the hardware video decoding and encoding features on Intel processors with integrated graphics. Processors with an Intel iGPU can be used to do hardware video encoding as long as you have `libva` installed and the processors iGPU supports the video codec and resolution you want to use.
 
@@ -58,7 +56,7 @@ Follow the instructions on Intel's site on [how to get QuickSync setup on Linux]
 Links:
 
 - [Setting up QuickSync on Ubuntu](https://wiki.ubuntu.com/IntelQuickSyncVideo)
-- [Intel Graphics at Linux Reviews](https://linuxreviews.org/Intel_graphics) -->
+- [Intel Graphics at Linux Reviews](https://linuxreviews.org/Intel_graphics)
 
 ### VA-API
 
