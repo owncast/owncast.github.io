@@ -1,7 +1,7 @@
 ---
 title: "Owncast Newsletter May 2025"
 source: https://owncast.ghost.io/owncast-newsletter-may-2025/
-date: 2025-05-15 13:36
+date: 2025-05-15T11:00:00-07:00
 description: "Five years of Owncast!"
 ---
 
