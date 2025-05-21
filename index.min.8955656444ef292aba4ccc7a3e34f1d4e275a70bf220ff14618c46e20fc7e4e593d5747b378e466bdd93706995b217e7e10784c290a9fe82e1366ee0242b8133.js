@@ -1033,7 +1033,6 @@ th {
 <li><a href="https://en.wikipedia.org/wiki/Fediverse">Fediverse</a> on Wikipedia.</li>
 <li><a href="https://fediverse.party/">Fediverse.party</a></li>
 <li><a href="https://fediverse.observer/">Fediverse.observer</a></li>
-<li><a href="https://www.fediverse.to/">Fediverse.to</a></li>
 </ul>
 <h3 id="communities-discussing-the-fediverse">Communities discussing The Fediverse</h3>
 <ul>
