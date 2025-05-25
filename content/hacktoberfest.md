@@ -8,7 +8,7 @@ type: toc
 
 <center>
     <a href="https://hacktoberfest.com">
-        <img src="../images/hacktoberfest.png" alt="hacktoberfest 2024 logo" width="80%"/>
+        <img src="../images/hacktoberfest.png" alt="hacktoberfest 2025 logo" width="80%"/>
     </a>
 </center>
 
@@ -74,8 +74,8 @@ If you've been thinking about trying Owncast for the first time but haven't foun
 
 ## Where to Begin
 
-- Read the [Hacktoberfest Values](https://hacktoberfest.com/participation/#values).
-- Register for [Hacktoberfest 2024](https://hacktoberfest.com/participation/) starting September 26th.
+- Read the [Hacktoberfest Values](https://hacktoberfest.com).
+- Register for [Hacktoberfest 2025](https://hacktoberfest.com) starting August.
 - Read the Owncast [Contributor Guide](https://owncast.online/contribute/).
 - Visit the Owncast [Good first Issues](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) list to see what has been designated as a good place to start.
 - [Install your own instance](/quickstart) of Owncast in about a minute.
