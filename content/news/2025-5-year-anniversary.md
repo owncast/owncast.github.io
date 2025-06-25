@@ -55,7 +55,7 @@ And as mentioned at the top of the newsletter, we're announcing the new [Owncast
 
 ### Maho Pacheco On Installing Owncast On A Livestream
 
-Fediverse member [Maho Pacheco](https://hachyderm.io/@mapache?ref=owncast.ghost.io), who operates a livestream series called "@TheRaccoonBytes" with [Luis Quintanilla](https://toot.lqdev.tech/@lqdev?ref=owncast.ghost.io), recently demonstrated the setup and configuration of Owncast. One unique aspect of Maho's approach is choosing to not read documentation ahead of time and have a planned, polished approach ready to go. The goal is to demonstrate how the average maker has to work through issues as they arise rather than to do a polished showroom demo of a software package.
+Fediverse member [Maho Pacheco](https://hachyderm.io/@mapache?ref=owncast.ghost.io), who operates a livestream series called "@TheRaccoonBytes" with Luis Quintanilla, recently demonstrated the setup and configuration of Owncast. One unique aspect of Maho's approach is choosing to not read documentation ahead of time and have a planned, polished approach ready to go. The goal is to demonstrate how the average maker has to work through issues as they arise rather than to do a polished showroom demo of a software package.
 
 Maho's approach also used a provider that's less common for your typical Owncast streamer-- [Microsoft Azure](https://azure.microsoft.com/?ref=owncast.ghost.io). "I know people are not super fan of Azure, but that was on purpose," Maho shared with me. "I want more diversity of platforms, which is where fediverse thrives." Indeed, one of the bigger advantages of a FOSS project is for it to be adaptable to platforms and resource stacks that are uncommon or unfashionable, and the install showed Owncast was fit for purpose.
 
