@@ -8,7 +8,15 @@ weight: 100
 toc: true
 ---
 
-Configuration is done through the Owncast administration page located on your server under `/admin`. The login username is `admin` and the password is your stream key, the default being `abc123`.
+Configuration is done through the Owncast administration page located on your server under `/admin`. 
+
+**Admin Authentication:**
+- **Username:** `admin`  
+- **Password:** your admin password (not your stream key)
+
+The default admin password is `abc123`.
+
+**Note:** Your stream key is only used by your streaming software to publish video; it is not your admin password.
 
 **It's highly encouraged to change both your stream key and your admin passwords immediately after installation by visiting `/admin/config/server/`**
 
