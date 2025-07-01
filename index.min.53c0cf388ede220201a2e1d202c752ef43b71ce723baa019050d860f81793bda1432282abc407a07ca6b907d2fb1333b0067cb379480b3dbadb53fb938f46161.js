@@ -409,7 +409,14 @@ The following configuration example requires Apache &gt;= 2.4.47.</p>
 <li><a href="https://www.blackmagicdesign.com/products/blackmagicwebpresenter">Blackmagic Web Presenter HD</a></li>
 </ul>
 <p>If you have tested other hardware with Owncast we&rsquo;d love to hear about it!</p>
-`},{id:11,href:"/docs/configuration/",title:"Configuration",description:"Configuration is done through the Owncast administration page. Learn what you have control over and what customizations can be made.",content:`<p>Configuration is done through the Owncast administration page located on your server under <code>/admin</code>. The login username is <code>admin</code> and the password is your stream key, the default being <code>abc123</code>.</p>
+`},{id:11,href:"/docs/configuration/",title:"Configuration",description:"Configuration is done through the Owncast administration page. Learn what you have control over and what customizations can be made.",content:`<p>Configuration is done through the Owncast administration page located on your server under <code>/admin</code>.</p>
+<p><strong>Admin Authentication:</strong></p>
+<ul>
+<li><strong>Username:</strong> <code>admin</code></li>
+<li><strong>Password:</strong> your admin password (not your stream key)</li>
+</ul>
+<p>The default admin password is <code>abc123</code>.</p>
+<p><strong>Note:</strong> Your stream key is only used by your streaming software to publish video; it is not your admin password.</p>
 <p><strong>It&rsquo;s highly encouraged to change both your stream key and your admin passwords immediately after installation by visiting <code>/admin/config/server/</code></strong></p>
 <p>Some common items many people would want to update after installing Owncast are:</p>
 <ul>
