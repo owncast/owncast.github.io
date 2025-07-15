@@ -12,12 +12,6 @@ type: subpages
 
 The following example projects are a work-in-progress. If you'd like to help with them, we'd love to have you contribute! Also, if you want to write some basic examples in a different language, that would be awesome.
 
-### Empty Project
-
-The following is a project setup for you to simply add your logic to a basic scaffolding of a Node.js project. If you're looking to start a new Node.js project then this might be a good place to start.
-
-https://glitch.com/edit/#!/owncast-addon
-
 ### Dancing Banana
 
 https://github.com/geekgonecrazy/livestream-banana-bot
