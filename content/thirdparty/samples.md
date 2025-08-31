@@ -37,4 +37,3 @@ This project includes a page where people can tip you during your stream. It use
 
 This project is a simple embed that listens on that chat for people sending custom emojis. If one or more custom emoji are sent in a message then they float by on the embed.
 
-https://glitch.com/edit/#!/owncast-example-emoji-wall
