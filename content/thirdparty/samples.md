@@ -22,7 +22,6 @@ https://github.com/geekgonecrazy/livestream-banana-bot
 
 This project allows people to put in their phone number or email address to get notified any time you go live. It uses Mailgun for email and Twilio for text messages. It also has an embed where it thanks the user for following you on your stream.
 
-https://glitch.com/edit/#!/owncast-example-follow
 
 
 ### Tip Jar
