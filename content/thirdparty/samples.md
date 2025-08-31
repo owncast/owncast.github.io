@@ -29,7 +29,7 @@ https://glitch.com/edit/#!/owncast-example-follow
 
 This project includes a page where people can tip you during your stream. It uses Stripe as a payment processor. When a payment is successful it sends a message to your chat. TODO: Add an embed so you thank tippers via an image/message on your stream.
 
-https://glitch.com/edit/#!/owncast-example-tip-jar
+
 
 
 
