@@ -112,7 +112,7 @@ components:
     AdminBasicAuth:
       type: http
       scheme: basic
-      description: The username for admin basic auth is `admin` and the password is the stream key.
+      description: The username for admin basic auth is `admin` and the password is your admin password (not your stream key). The default password is `abc123`.
 
   responses:
     BasicResponse:

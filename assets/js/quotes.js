@@ -72,11 +72,7 @@ const QUOTES = [
     const content =
       '<p class="comment">' +
       quote +
-      '</p><p class="commentor"><a href="' +
-      url +
-      '" target="_blank" rel="noopener noreferrer">- ' +
-      name +
-      "</a></p>";
+      '</p><p class="commentor">' + name + '</p>';
     container.innerHTML = content;
   }
 
