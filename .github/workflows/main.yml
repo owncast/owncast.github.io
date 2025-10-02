@@ -49,6 +49,13 @@ jobs:
 
       - name: Build
         run: npm install && npm run build
+      - name: Deploy to surge
+        uses: dswistowski/surge-sh-action@v1
+        with:
+          domain: owncast-preview.surge.sh
+          project: ./build
+          login: ${{ secrets.SURGE_LOGIN }}
+          token: ${{ secrets.SURGE_TOKEN }}
 
       # - name: Deploy
       #   uses: peaceiris/actions-gh-pages@v4

@@ -5,7 +5,7 @@
 
 .heroBanner {
   background-color: #121421;
-  background-image: url(/img/hero-bgdecor.svg);
+  /* background-image: url(/img/hero-bgdecor.svg); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 -8em;
