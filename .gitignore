@@ -21,3 +21,11 @@ node_modules
 .hugo_build.lock
 .docusaurus
 .claude
+
+# Contributors data (generated at build time)
+.contributors-data.json
+.contributors-cache.json
+static/img/contributors/
+
+# Environment variables
+.env

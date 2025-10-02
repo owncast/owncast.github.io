@@ -3,7 +3,7 @@ name: Hugo Build to GitHub Pages
 on:
   push:
     branches:
-      - "master"
+      - "owncast-docusaurus"
   schedule:
     # Every six hours update the web site
     - cron: "0 */6 * * *"
@@ -16,13 +16,6 @@ jobs:
         with:
           submodules: true # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: "0.120.4"
-          extended: true
-
       - name: Install jq
         uses: r26d/jq-action@master
 
@@ -39,27 +32,26 @@ jobs:
         run: 'curl https://opencollective.com/owncast/members/all.json | jq ''map(.) | .[] | select(.role=="BACKER") | {login: .name, avatar_url: .image, html_url: .profile}'' | jq --slurp ''.'' > data/donors.json'
 
       - name: Add current development documentation
-        run: mkdir -p static/api/development && curl https://raw.githubusercontent.com/owncast/owncast/master/doc/api/index.html > static/api/development/index.html
+        run: mkdir -p static/api/development && curl https://raw.githubusercontent.com/owncast/owncast/refs/heads/develop/docs/api/index.html > static/api/development/index.html
 
       - name: Generate project roadmap
-        run: cd scripts && ./build-roadmap --accessToken ${{ secrets.GITHUB_TOKEN }} --milestone 28 > ../content/roadmap/index.html
+        run: mkdir -p static/roadmap && cd scripts && ./build-roadmap --accessToken ${{ secrets.GITHUB_TOKEN }} --milestone 28 > ../static/roadmap/index.html
 
       - name: Commit changes
-
         uses: EndBug/add-and-commit@v5
         with:
           author_name: Owncast
           author_email: owncast@owncast.online
           message: "Update dynamic content"
-          add: "static/api/development/index.html data/contributors.json content/roadmap/index.html"
+          add: "static/api/development/index.html data/contributors.json static/roadmap/index.html"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
-        run: npm install && hugo --minify
+        run: npm install && npm run build
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+      # - name: Deploy
+      #   uses: peaceiris/actions-gh-pages@v4
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./public

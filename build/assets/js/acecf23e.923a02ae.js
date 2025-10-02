@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkowncast_docusaurus=self.webpackChunkowncast_docusaurus||[]).push([[1903],{1912:s=>{s.exports=JSON.parse('{"blogBasePath":"/blog","blogTitle":"Owncast News & Releases","authorsListPath":"/blog/authors"}')}}]);
