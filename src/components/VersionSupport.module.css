@@ -1,0 +1,26 @@
+.versionSupport {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-700);
+  background-color: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem 0;
+}
+
+.versionLink {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.versionLink:hover {
+  text-decoration: underline;
+}
+
+/* Dark theme adjustments */
+[data-theme='dark'] .versionSupport {
+  background-color: var(--ifm-background-surface-color);
+  border-color: var(--ifm-color-emphasis-300);
+}

@@ -1,5 +1,0 @@
-{
-    "name": "{{ .Title }}",
-    "content" : "{{ .Content | htmlEscape }}",
-    "permalink" : "{{ .Permalink }}"
-}

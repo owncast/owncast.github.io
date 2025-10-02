@@ -1,0 +1,87 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* Owncast color palette and theme customizations */
+:root {
+  /* Primary colors using Owncast palette */
+  --ifm-color-primary: #6544e9;
+  --ifm-color-primary-dark: #5338e4;
+  --ifm-color-primary-darker: #4a31df;
+  --ifm-color-primary-darkest: #3622c7;
+  --ifm-color-primary-light: #7a5cf3;
+  --ifm-color-primary-lighter: #8665f4;
+  --ifm-color-primary-lightest: #a181f8;
+
+  /* Owncast specific colors */
+  --owncast-unknown: #7a5cf3;
+  --owncast-unknown-2: #fffffe;
+
+  /* Owncast palette colors */
+  --owncast-dark-primary: #12161d;
+  --owncast-dark-secondary: #2D3748;
+  --owncast-dark-alternate: #000000;
+  --owncast-light-primary: #e2e8f0;
+  --owncast-light-secondary: #ffffff;
+  --owncast-light-alternate: #c3dafe;
+  --owncast-text-link: #6544e9;
+  --owncast-text-link-hover: #7a5cf3;
+  --owncast-disabled-bg: #b6b3c6;
+  --owncast-neutral-dark: #39373d;
+  --owncast-neutral-gray-light: #5d5f72;
+  --owncast-fun-1: #2386e2;
+  --owncast-fun-2: #da9eff;
+  --owncast-fun-3: #42bea6;
+  --owncast-light-bg: #f0f3f8;
+  --owncast-lighter-bg: #eff1f4;
+  --owncast-error: #ff4b39;
+  --owncast-warning: #ffc655;
+
+  /* Chat user colors */
+  --owncast-user-0: #FF717B;
+  --owncast-user-1: #F4E413;
+  --owncast-user-2: #B99C45;
+  --owncast-user-3: #58F40B;
+  --owncast-user-4: #0BF4F4;
+  --owncast-user-5: #16a8f7;
+  --owncast-user-6: #9A92FF;
+  --owncast-user-7: #FF53FF;
+
+  /* Fonts */
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --ifm-font-family-monospace: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  --ifm-heading-font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+
+  /* Other customizations */
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-background-color: var(--owncast-light-bg);
+  --ifm-background-surface-color: var(--owncast-light-secondary);
+}
+
+/* Dark mode colors */
+[data-theme='dark'] {
+  /* Primary colors adjusted for dark mode */
+  --ifm-color-primary: #7a5cf3;
+  --ifm-color-primary-dark: #6544e9;
+  --ifm-color-primary-darker: #5338e4;
+  --ifm-color-primary-darkest: #4a31df;
+  --ifm-color-primary-light: #8665f4;
+  --ifm-color-primary-lighter: #9378f5;
+  --ifm-color-primary-lightest: #a181f8;
+
+  /* Dark mode backgrounds */
+  --ifm-background-color: var(--owncast-dark-primary);
+  --ifm-background-surface-color: var(--owncast-dark-secondary);
+  --ifm-color-content: var(--owncast-light-primary);
+  --ifm-color-content-secondary: var(--owncast-neutral-gray-light);
+
+  /* Code highlighting for dark mode */
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}

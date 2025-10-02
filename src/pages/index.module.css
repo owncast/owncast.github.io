@@ -1,0 +1,149 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.heroBanner {
+  background-color: #121421;
+  background-image: url(/img/hero-bgdecor.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 -8em;
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroBanner .container {
+  margin: auto;
+}
+
+.lead {
+  font-size: 1.8em;
+  color: var(--ifm-color-white);
+}
+
+.heroBanner .buttons .button {
+  color: var(--ifm-color-black);
+}
+
+.heroImageContainer {
+  position: relative;
+}
+
+.splashImage {
+  display: block;
+  width: 100%;
+  transition: opacity 0.5s;
+  aspect-ratio: 20 / 12;
+}
+
+.splashImageLoader {
+  filter: blur(1em);
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  transform: translateX(-2em);
+  opacity: 1;
+}
+
+.splashImage:not(.splashImageLoader) {
+  opacity: 0;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 1rem 0;
+    background-position: 0 -1em;
+  }
+
+  .heroBanner .container .row {
+    flex-direction: column-reverse;
+  }
+
+  .heroBanner .col:last-child {
+    text-align: center;
+  }
+
+  .splashImage {
+    transform: translateX(-2em);
+  }
+
+  .splashImageLoader {
+    transform: translateX(-4em);
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Key Points Section */
+.keyPointsContainer {
+  background-color: #000;
+  color: var(--ifm-color-white);
+  padding: 3em 0 2em;
+}
+
+.keyPointsContainer .container {
+  margin: auto;
+  max-width: 95%;
+}
+
+.keyPointItem {
+  text-align: center;
+  padding: 1em;
+}
+
+.keyPointItem h2 {
+  color: #2086e1;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+}
+
+.keyIcon {
+  background: linear-gradient(#7871ff, #2086e1);
+  -webkit-mask: top left / contain no-repeat;
+  mask: top left / contain no-repeat;
+  height: 3em;
+  width: 3em;
+  margin: 1em auto;
+  display: block;
+}
+
+/* Sponsors Section */
+.sponsors {
+  background: linear-gradient(30deg, #311c88 1%, #15132b);
+  padding: 2rem 1rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sponsorsList {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.sponsorsList li {
+  margin: 0 1rem;
+  list-style-type: none;
+}
+
+.sponsorsList img {
+  height: 2.5rem;
+  margin: 0.5rem;
+  transition: filter 0.2s;
+}
+
+.sponsorsList img:hover {
+  filter: drop-shadow(0.2rem 0.2rem 0.4rem rgba(255, 255, 255, 0.5));
+}

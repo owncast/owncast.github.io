@@ -1,0 +1,154 @@
+import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+
+/**
+ * Creating a sidebar enables you to:
+ - create an ordered group of docs
+ - render a sidebar for each doc of that group
+ - provide next/previous navigation
+
+ The sidebars can be generated from the filesystem, or explicitly defined here.
+
+ Create as many sidebars as you want.
+ */
+const sidebars: SidebarsConfig = {
+  // Main documentation sidebar
+  docs: [
+    'intro',
+    {
+      type: 'category',
+      label: 'Quick Start',
+      collapsed: false,
+      items: [
+        'quickstart/installation',
+        'quickstart/installer',
+        'quickstart/manual',
+        'quickstart/container',
+        'quickstart/providers',
+        'quickstart/configure',
+        'quickstart/startstreaming',
+        'quickstart/nextsteps',
+        {
+          type: 'category',
+          label: 'Hosting Providers',
+          items: [
+            'quickstart/linode/faq',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Configuration',
+      items: [
+        'configuration',
+        'website',
+        'stream-keys',
+        'video',
+        'codecs',
+        'resources-requirements',
+        'appearance',
+        'custom-assets',
+        'custom-javascript',
+        'social',
+        'notifications',
+        'directory',
+        'embed',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Broadcasting',
+      items: [
+        'broadcasting/obs',
+        'broadcasting/ffmpeg',
+        'broadcasting/hardware',
+        'broadcasting/zoom',
+        'broadcasting/jitsi',
+        'broadcasting/restream',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Chat',
+      items: [
+        'chat/chat-authentication',
+        'chat/moderation',
+        'chat/emoji',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Storage & CDN',
+      items: [
+        'storage',
+        'cdns',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'SSL/Proxies',
+      items: [
+        'sslproxies/caddy',
+        'sslproxies/nginx',
+        'sslproxies/apache',
+        'sslproxies/lighttpd',
+        'sslproxies/haproxy',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'API & Integrations',
+      items: [
+        'api/apis',
+        'api/webhooks',
+        'api/actions',
+        'api/samples',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Troubleshooting',
+      items: [
+        'troubleshooting/video-errors',
+        'troubleshooting/stream-disconnect',
+        'troubleshooting/low-quality-video',
+        'troubleshooting/latency',
+        'troubleshooting/hardware-usage',
+        'troubleshooting/dropped-frames',
+        'troubleshooting/change-streamkey',
+        {
+          type: 'category',
+          label: 'Buffering Issues',
+          items: [
+            'troubleshooting/buffering/all',
+            'troubleshooting/buffering/slow-networks',
+            'troubleshooting/buffering/geo',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Chat Issues',
+          items: [
+            'troubleshooting/chat/offline',
+            'troubleshooting/chat/offline-while-streaming',
+            'troubleshooting/chat/offline-while-not-streaming',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Advanced',
+      items: [
+        'scaling',
+        'metrics',
+        'systemservice',
+        'backups',
+        'viewers',
+        'watching-on-tvs',
+      ],
+    },
+  ],
+};
+
+export default sidebars;

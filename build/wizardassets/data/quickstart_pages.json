@@ -1,0 +1,255 @@
+{
+	"googleTrackingId": "",
+	"defaultLanguage": "en",
+	"content": {
+		"title": {
+			"en": "Owncast Quickstart Wizard"
+		},
+		"button": {
+			"en": "Next"
+		},
+		"pages": {
+			"install-method-page": {
+				"title": {
+					"en": "How do you want to install Owncast?"
+				},
+				"instructions": {
+					"en": "<p>By using the <a href=\"installer\">installer</a> you can get up and running in about a minute. However, if you would prefer to <a href=\"/quickstart/manual\">download a release manually</a>, use a <a href=\"/quickstart/providers\">one-click install</a> at a supported hosting provider, use a <a href=\"/quickstart/container\">container</a> you have those options and more.</p>If you'd prefer you can <a href=\"installation\">browse our entire installation documentation</a>."
+				},
+				"choices": [
+					{
+						"text": {
+							"en": "I want to manually install Owncast myself."
+						},
+						"type": "radio",
+						"value": "manual"
+					},
+					{
+						"text": {
+							"en": "I want Owncast to be installed for me on a hosting provider."
+						},
+						"type": "radio",
+						"value": "hostingprovider"
+					},
+					{
+						"text": {
+							"en": "I want to run Owncast inside a containerized environment such as Docker or Kubernetes."
+						},
+						"type": "radio",
+						"value": "docker"
+					},
+					{
+						"text": {
+							"en": "Other specific hardware or hosting environments."
+						},
+						"type": "radio",
+						"value": "other"
+					},
+					{
+						"text": {
+							"en": "Owncast is installed and I'm not sure what to do next."
+						},
+						"type": "radio",
+						"value": "installed-what-is-next"
+					}
+				],
+				"required": true
+			},
+			"manual-install-method-page": {
+				"title": {
+					"en": "How would you like to manually install Owncast?"
+				},
+				"instructions": {
+					"en": "Owncast supplies a quick install script that will always install the most recent version and get you running very quickly. However, there are other options."
+				},
+				"choices": [
+					{
+						"text": {
+							"en": "I want to use the Owncast Quick Installer Script."
+						},
+						"type": "radio",
+						"value": "quickinstaller"
+					},
+					{
+						"text": {
+							"en": "I want to download a release of Owncast."
+						},
+						"type": "radio",
+						"value": "download"
+					},
+					{
+						"text": {
+							"en": "I want to use my operating system's package manager."
+						},
+						"type": "radio",
+						"value": "packagemanager"
+					}
+				],
+				"required": true
+			},
+			"hostingprovider-install-method-page": {
+				"title": {
+					"en": "What hosting provider would you like to use to install Owncast for you?"
+				},
+				"instructions": {
+					"en": "Owncast is supported on the following hosting providers and they can install Owncast for you."
+				},
+				"choices": [
+					{
+						"text": {
+							"en": "Linode"
+						},
+						"type": "radio",
+						"value": "linode"
+					},
+					{
+						"text": {
+							"en": "DigitalOcean"
+						},
+						"type": "radio",
+						"value": "digitalocean"
+					},
+					{
+						"text": {
+							"en": "Vultr"
+						},
+						"type": "radio",
+						"value": "vultr"
+					},
+					{
+						"text": {
+							"en": "Zeus Cloud"
+						},
+						"type": "radio",
+						"value": "zeuscloud"
+					},
+					{
+						"text": {
+							"en": "Elestio (Fully managed)"
+						},
+						"type": "radio",
+						"value": "elestio"
+					},
+					{
+						"text": {
+							"en": "Hetzner"
+						},
+						"type": "radio",
+						"value": "hetzner"
+					}
+				],
+				"required": true
+			},
+			"os-package-manager-page": {
+				"title": {
+					"en": "Use your Operating System's package manager."
+				},
+				"instructions": {
+					"en": "<strong>Note</strong>: These packages may be out of date. These packages are not built or maintained by the Owncast project and any specific concerns or support regarding their installation should be directed at the maintainers of the packages.<br><br>What Operating System or distribution do you use?"
+				},
+				"choices": [
+					{
+						"text": {
+							"en": "Arch Linux"
+						},
+						"type": "radio",
+						"value": "arch"
+					},
+					{
+						"text": {
+							"en": "FreeBSD"
+						},
+						"type": "radio",
+						"value": "freebsd"
+					},
+					{
+						"text": {
+							"en": "nixos"
+						},
+						"type": "radio",
+						"value": "nixos"
+					}
+				],
+				"required": true
+			},
+			"other-install-page": {
+				"title": {
+					"en": "Other specific hardware and environments."
+				},
+				"instructions": {
+					"en": "The following are other methods you can use to setup Owncast. These are not packaged or maintained by the Owncast project and any support or concerns about these alternative install methods should be directed at the maintainers of the respective options."
+				},
+				"choices": [
+					{
+						"text": {
+							"en": "I run Yunohost"
+						},
+						"type": "radio",
+						"value": "yunohost"
+					},
+					{
+						"text": {
+							"en": "I run Cloudron"
+						},
+						"type": "radio",
+						"value": "cloudron"
+					},
+					{
+						"text": {
+							"en": "I own a Qnap NAS"
+						},
+						"type": "radio",
+						"value": "qnap"
+					}
+				],
+				"required": true
+			},
+			"installed-what-is-next-page": {
+				"title": {
+					"en": "Owncast is installed. What's next?"
+				},
+				"instructions": {
+					"en": "If Owncast is installed and running but you're not sure what to do next you might be ready to go! But there are other things you might want to check such as making sure you support SSL."
+				},
+				"choices": [
+					{
+						"text": {
+							"en": "I want to learn how to start streaming."
+						},
+						"type": "radio",
+						"value": "startstreaming"
+					},
+					{
+						"text": {
+							"en": "My server doesn't yet support SSL (https) and I want to configure that."
+						},
+						"type": "radio",
+						"value": "configure-ssl"
+					},
+					{
+						"text": {
+							"en": "I want to setup Owncast to automatically start and run in the background as a service."
+						},
+						"type": "radio",
+						"value": "configure-system-service"
+					},
+					{
+						"text": {
+							"en": "I want to list my stream in the public directory so others can discover it."
+						},
+						"type": "radio",
+						"value": "directory"
+					},
+					{
+						"text": {
+							"en": "I want to learn more about configuring my video quality."
+						},
+						"type": "radio",
+						"value": "configure-video"
+					}
+				],
+				"required": true
+			}
+		}
+	}
+}

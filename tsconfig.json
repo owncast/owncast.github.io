@@ -1,0 +1,29 @@
+{
+  // This file is not used in compilation. It is here just for a nice editor experience.
+  "extends": "@docusaurus/tsconfig",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "src/**/*",
+    "docs/**/*",
+    "blog/**/*",
+    "*.config.ts",
+    "*.config.js"
+  ],
+  "exclude": [
+    ".docusaurus",
+    "build",
+    "node_modules"
+  ]
+}

@@ -1,0 +1,39 @@
+.responsiveImage {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.figure {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.caption {
+  margin-top: 0.5rem;
+  color: var(--ifm-color-emphasis-600);
+  text-align: center;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+/* Dark theme adjustments */
+[data-theme='dark'] .responsiveImage {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .caption {
+  color: var(--ifm-color-emphasis-500);
+}

@@ -1,7 +1,0 @@
-enableGitInfo = true
-
-[markup]
-[markup.tableOfContents]
-endLevel = 4
-ordered = true
-startLevel = 2

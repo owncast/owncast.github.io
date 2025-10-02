@@ -1,0 +1,62 @@
+[
+  {
+    "from": "/docs/building",
+    "to": "/development"
+  },
+  {
+    "from": "/troubleshooting",
+    "to": "/troubleshoot"
+  },
+  {
+    "from": "/troubleshoot",
+    "to": "/troubleshoot"
+  },
+  {
+    "from": "/docs/troubleshooting",
+    "to": "/troubleshoot"
+  },
+  {
+    "from": "/docs/thirdparty/",
+    "to": "/thirdparty"
+  },
+  {
+    "from": "docs/integrations",
+    "to": "/thirdparty"
+  },
+  {
+    "from": "/docs/quickstart/",
+    "to": "/quickstart/installation"
+  },
+  {
+    "from": "/quickstart/container",
+    "to": "/quickstart/container"
+  },
+  {
+    "from": "/quickstart/docker",
+    "to": "/quickstart/container"
+  },
+  {
+    "from": "/docs/geoip/",
+    "to": "/docs/viewers"
+  },
+  {
+    "from": "/docs/encoding/",
+    "to": "/docs/video"
+  },
+  {
+    "from": "/docs/s3/",
+    "to": "/docs/storage"
+  },
+  {
+    "from": "/docs/s3/",
+    "to": "/docs/storage"
+  },
+  {
+    "from": "/docs/moderation/",
+    "to": "/docs/chat/moderation"
+  },
+  {
+    "from": "/docs/chat-authentication",
+    "to": "/docs/chat/chat-authentication"
+  }
+]
