@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkowncast_docusaurus=self.webpackChunkowncast_docusaurus||[]).push([[8146],{29328:e=>{e.exports=JSON.parse('{"metadata":{"permalink":"/blog","page":1,"postsPerPage":7,"totalPages":3,"totalCount":21,"nextPage":"/blog/page/2","blogDescription":"Latest news, updates, and releases from the Owncast project","blogTitle":"Owncast News & Releases"}}')}}]);

@@ -1,0 +1,296 @@
+{
+  "title": "Owncast Troubleshooting",
+  "showQuestionNumbers": "off",
+  "showNavigationButtons": false,
+  "showProgressBar": false,
+  "progressBarLocation": "top",
+  "autoAdvanceEnabled": true,
+  "clearInvisibleValues": "onHidden",
+  "pages": [
+    {
+      "name": "firstpage",
+      "title": "What issue are you trying to resolve?",
+      "description": "While each environment is different, hopefully many questions and issues can be answered by walking through the following topics.",
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "issue",
+          "isRequired": true,
+          "title": "Select one:",
+          "colCount": 1,
+          "goNextPageAutomatic": true,
+          "choices": [
+            {
+              "value": "streaming",
+              "text": "My stream is buffering for viewers."
+            },
+            {
+              "value": "dropping-frames",
+              "text": "I am dropping frames while streaming."
+            },
+            {
+              "value": "misc-video-errors",
+              "text": "I'm seeing video related errors in my logs."
+            },
+            {
+              "value": "hardware-usage",
+              "text": "My server hardware is being over-utilized."
+            },
+            {
+              "value": "chat-offline",
+              "text": "Chat is being shown as offline."
+            },
+            {
+              "value": "latency",
+              "text": "I want to reduce the live latency of my stream."
+            },
+            {
+              "value": "low-quality",
+              "text": "My stream's output is low quality."
+            },
+            {
+              "value": "immediate-disconnect",
+              "text": "My broadcasting software immediately disconnects after I start streaming."
+            },
+            {
+              "value": "change-streamkey",
+              "text": "I want to reset my stream key or admin password."
+            },
+            {
+              "value": "visit-chat",
+              "text": "I have no idea what's going on. Can't I just talk to somebody?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "streaming-page",
+      "title": "Buffering problems",
+      "visibleIf": "{issue} = 'streaming'",
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "streaming_sub",
+          "isRequired": true,
+          "title": "Is buffering affecting everyone or only some viewers?",
+          "goNextPageAutomatic": true,
+          "choices": [
+            {
+              "value": "buffering-foreveryone",
+              "text": "My stream is buffering for everyone."
+            },
+            {
+              "value": "buffering-forsome",
+              "text": "My stream is fine for some, but buffering for others."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "buffering-for-some-page",
+      "title": "Some viewers experience buffering",
+      "visibleIf": "{issue} = 'streaming' and {streaming_sub} = 'buffering-forsome'",
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "buffering_some_sub",
+          "isRequired": true,
+          "title": "Which group is impacted?",
+          "goNextPageAutomatic": true,
+          "choices": [
+            {
+              "value": "buffering-geo",
+              "text": "Viewers that are geographically far from my server."
+            },
+            {
+              "value": "buffering-slow-networks",
+              "text": "Viewers on slower or mobile networks."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "chat-offline-page",
+      "title": "My chat is offline.",
+      "visibleIf": "{issue} = 'chat-offline'",
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "chat_offline_sub",
+          "isRequired": true,
+          "title": "When is chat offline?",
+          "goNextPageAutomatic": true,
+          "choices": [
+            {
+              "value": "chat-offline-while-streaming",
+              "text": "Chat is offline while streaming."
+            },
+            {
+              "value": "chat-offline-not-streaming",
+              "text": "Chat is offline only when I'm not streaming."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "result_stream_all",
+      "visibleIf": "{issue} = 'streaming' and {streaming_sub} = 'buffering-foreveryone'",
+      "redirect": "/troubleshoot/buffering/all",
+      "elements": [
+        {
+          "type": "html",
+          "name": "r1",
+          "html": "<h3>Recommended Guide</h3><p><a href='https://owncast.online/troubleshoot/buffering/all' target='_blank' rel='noopener'>Fix buffering for all viewers</a></p>"
+        }
+      ]
+    },
+    {
+      "name": "result_stream_geo",
+      "visibleIf": "{issue} = 'streaming' and {streaming_sub} = 'buffering-forsome' and {buffering_some_sub} = 'buffering-geo'",
+      "redirect": "/troubleshoot/buffering/geo",
+      "elements": [
+        {
+          "type": "html",
+          "name": "r2",
+          "html": "<h3>Recommended Guide</h3><p><a href='https://owncast.online/troubleshoot/buffering/geo' target='_blank' rel='noopener'>Fix buffering for geographically distant viewers</a></p>"
+        }
+      ]
+    },
+    {
+      "name": "result_stream_slow",
+      "visibleIf": "{issue} = 'streaming' and {streaming_sub} = 'buffering-forsome' and {buffering_some_sub} = 'buffering-slow-networks'",
+      "redirect": "/troubleshoot/buffering/slow-networks",
+      "elements": [
+        {
+          "type": "html",
+          "name": "r3",
+          "html": "<h3>Recommended Guide</h3><p><a href='https://owncast.online/troubleshoot/buffering/slow-networks' target='_blank' rel='noopener'>Fix buffering on slow/mobile networks</a></p>"
+        }
+      ]
+    },
+    {
+      "name": "result_latency",
+      "visibleIf": "{issue} = 'latency'",
+      "redirect": "/troubleshoot/latency",
+      "elements": [
+        {
+          "type": "html",
+          "name": "r4",
+          "html": "<h3>Recommended Guide</h3><p><a href='https://owncast.online/troubleshoot/latency' target='_blank' rel='noopener'>Reduce live latency</a></p>"
+        }
+      ]
+    },
+    {
+      "name": "result_hw_usage",
+      "visibleIf": "{issue} = 'hardware-usage'",
+      "redirect": "/troubleshoot/hardware-usage",
+      "elements": [
+        {
+          "type": "html",
+          "name": "r5",
+          "html": "<h3>Recommended Guide</h3><p><a href='https://owncast.online/troubleshoot/hardware-usage' target='_blank' rel='noopener'>Lower server hardware utilization</a></p>"
+        }
+      ]
+    },
+    {
+      "name": "result_chat_streaming",
+      "visibleIf": "{issue} = 'chat-offline' and {chat_offline_sub} = 'chat-offline-while-streaming'",
+      "redirect": "/troubleshoot/chat/offline-while-streaming",
+      "elements": [
+        {
+          "type": "html",
+          "name": "r6",
+          "html": "<h3>Recommended Guide</h3><p><a href='https://owncast.online/troubleshoot/chat/offline-while-streaming' target='_blank' rel='noopener'>Chat offline while streaming</a></p>"
+        }
+      ]
+    },
+    {
+      "name": "result_chat_not_streaming",
+      "visibleIf": "{issue} = 'chat-offline' and {chat_offline_sub} = 'chat-offline-not-streaming'",
+      "redirect": "/troubleshoot/chat/offline-while-not-streaming",
+      "elements": [
+        {
+          "type": "html",
+          "name": "r7",
+          "html": "<h3>Recommended Guide</h3><p><a href='https://owncast.online/troubleshoot/chat/offline-while-not-streaming' target='_blank' rel='noopener'>Chat offline when not streaming</a></p>"
+        }
+      ]
+    },
+    {
+      "name": "result_immediate_disconnect",
+      "visibleIf": "{issue} = 'immediate-disconnect'",
+      "redirect": "/troubleshoot/stream-disconnect",
+      "elements": [
+        {
+          "type": "html",
+          "name": "r8",
+          "html": "<h3>Recommended Guide</h3><p><a href='https://owncast.online/troubleshoot/stream-disconnect' target='_blank' rel='noopener'>Broadcaster immediately disconnects</a></p>"
+        }
+      ]
+    },
+    {
+      "name": "result_change_streamkey",
+      "visibleIf": "{issue} = 'change-streamkey'",
+      "redirect": "/troubleshoot/change-streamkey",
+      "elements": [
+        {
+          "type": "html",
+          "name": "r9",
+          "html": "<h3>Recommended Guide</h3><p><a href='https://owncast.online/troubleshoot/change-streamkey' target='_blank' rel='noopener'>Reset stream key or admin password</a></p>"
+        }
+      ]
+    },
+    {
+      "name": "result_visit_chat",
+      "visibleIf": "{issue} = 'visit-chat'",
+      "redirect": "/contact",
+      "elements": [
+        {
+          "type": "html",
+          "name": "r10",
+          "html": "<h3>Get Help</h3><p><a href='https://owncast.online/contact' target='_blank' rel='noopener'>Talk to the Owncast team</a></p>"
+        }
+      ]
+    },
+    {
+      "name": "result_dropping_frames",
+      "visibleIf": "{issue} = 'dropping-frames'",
+      "redirect": "/troubleshoot/dropped-frames",
+      "elements": [
+        {
+          "type": "html",
+          "name": "r11",
+          "html": "<h3>Recommended Guide</h3><p><a href='https://owncast.online/troubleshoot/dropped-frames' target='_blank' rel='noopener'>Fix dropped frames</a></p>"
+        }
+      ]
+    },
+    {
+      "name": "result_low_quality",
+      "visibleIf": "{issue} = 'low-quality'",
+      "redirect": "/troubleshoot/low-quality-video",
+      "elements": [
+        {
+          "type": "html",
+          "name": "r12",
+          "html": "<h3>Recommended Guide</h3><p><a href='https://owncast.online/troubleshoot/low-quality-video' target='_blank' rel='noopener'>Improve output quality</a></p>"
+        }
+      ]
+    },
+    {
+      "name": "result_misc_video_errors",
+      "visibleIf": "{issue} = 'misc-video-errors'",
+      "redirect": "/troubleshoot/video-errors",
+      "elements": [
+        {
+          "type": "html",
+          "name": "r13",
+          "html": "<h3>Recommended Guide</h3><p><a href='https://owncast.online/troubleshoot/video-errors' target='_blank' rel='noopener'>Fix video-related errors</a></p>"
+        }
+      ]
+    }
+  ]
+}

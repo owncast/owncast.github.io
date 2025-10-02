@@ -1,0 +1,150 @@
+{
+    "title": "Decision Wizard",
+    "pages": [
+        {
+            "name": "start",
+            "elements": [
+                {
+                    "type": "radiogroup",
+                    "name": "path",
+                    "title": "Choose a path",
+                    "isRequired": true,
+                    "renderAs": "buttonGroup",
+                    "choices": [
+                        "A",
+                        "B"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "stepA",
+            "visibleIf": "{path} = 'A'",
+            "elements": [
+                {
+                    "type": "radiogroup",
+                    "name": "aChoice",
+                    "title": "Pick an A-option",
+                    "isRequired": true,
+                    "renderAs": "buttonGroup",
+                    "choices": [
+                        "A1",
+                        "A2"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "infoA",
+            "visibleIf": "{aChoice} = 'A1'",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "infoAHtml",
+                    "html": "<p>You chose A → A1</p>"
+                }
+            ]
+        },
+        {
+            "name": "resultA1",
+            "visibleIf": "{aChoice} = 'A1'",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "resultA1Html",
+                    "html": "<h3>Result: A → A1</h3>"
+                }
+            ]
+        },
+        {
+            "name": "resultA2",
+            "visibleIf": "{aChoice} = 'A2'",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "resultA2Html",
+                    "html": "<h3>Result: A → A2</h3>"
+                }
+            ]
+        },
+        {
+            "name": "stepB",
+            "visibleIf": "{path} = 'B'",
+            "elements": [
+                {
+                    "type": "radiogroup",
+                    "name": "bChoice",
+                    "title": "Pick a B-option",
+                    "isRequired": true,
+                    "renderAs": "buttonGroup",
+                    "choices": [
+                        "B1",
+                        "B2"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "gateForB2",
+            "visibleIf": "{bChoice} = 'B2'",
+            "elements": [
+                {
+                    "type": "radiogroup",
+                    "name": "eligible",
+                    "title": "Do you meet a condition?",
+                    "isRequired": true,
+                    "renderAs": "buttonGroup",
+                    "choices": [
+                        {
+                            "value": true,
+                            "text": "Yes"
+                        },
+                        {
+                            "value": false,
+                            "text": "No"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "resultB1",
+            "visibleIf": "{bChoice} = 'B1'",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "rB1",
+                    "html": "<h3>Result: B → B1</h3>"
+                }
+            ]
+        },
+        {
+            "name": "resultB2Eligible",
+            "visibleIf": "{bChoice} = 'B2' and {eligible} = true",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "rB2Y",
+                    "html": "<h3>Result: B → B2 (Eligible)</h3>"
+                }
+            ]
+        },
+        {
+            "name": "resultB2Ineligible",
+            "visibleIf": "{bChoice} = 'B2' and {eligible} = false",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "rB2N",
+                    "html": "<h3>Result: B → B2 (Not Eligible)</h3>"
+                }
+            ]
+        }
+    ],
+    "showNavigationButtons": false,
+    "showProgressBar": true,
+    "progressBarLocation": "top",
+    "autoAdvanceEnabled": true,
+    "clearInvisibleValues": "onHidden",
+    "headerView": "advanced"
+}

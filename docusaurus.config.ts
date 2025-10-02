@@ -222,6 +222,11 @@ const config: Config = {
           label: 'Releases',
           position: 'left',
         },
+                {
+          to: '/troubleshoot',
+          label: 'Troubleshooting',
+          position: 'left',
+        },
         {
           href: 'https://github.com/owncast',
           label: 'GitHub',

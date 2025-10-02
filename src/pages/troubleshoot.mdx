@@ -1,0 +1,13 @@
+---
+title: Wizard Test
+---
+
+import Wizard from '../components/Wizard'
+import { Model } from 'survey-core'
+import tree from '../data/troubleshooting_tree.json'
+
+import KapaChat from '../components/KapaChat';
+export const treeModel = new Model(tree);
+
+<Wizard model={treeModel}/>
+

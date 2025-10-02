@@ -1,0 +1,101 @@
+/* Wizard.module.css */
+.wizard {
+  padding: 1rem;
+}
+
+/* Put the group into flexbox so items wrap and stay uniform */
+.wizard :global(.sd-radiogroup) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-start; /* buttons just flow, not full row fill */
+}
+
+/* Each choice styled like a button */
+.wizard :global(label.sd-selectbase__label) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;             /* all buttons at least this wide */
+  padding: 0.75rem 1rem;
+  border: 1px solid #0ea5e9;
+  border-radius: 8px;
+  background: #f8f9fa;
+  color: #0ea5e9;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  transition: background .2s, color .2s, border-color .2s, box-shadow .2s;
+  min-height: 44px;             /* consistent height */
+  flex: 0 0 auto;               /* don’t stretch, stay auto-sized */
+}
+
+/* Hide the default circle */
+.wizard :global(.sd-item__decorator) {
+  display: none !important;
+}
+
+/* Make the input fill the entire button */
+.wizard :global(label.sd-selectbase__label > input.sd-radio__control) {
+  appearance: none;
+  position: absolute !important;
+  inset: 0 !important;
+  opacity: 0 !important;
+  margin: 0;
+  width: 100% !important;
+  height: 100% !important;
+  cursor: pointer;
+  clip: auto !important;
+  clip-path: none !important;
+  overflow: visible !important;
+  white-space: normal !important;
+}
+
+/* Ensure text fills and centers */
+.wizard :global(.sd-item__control-label),
+.wizard :global(.sd-item__control-label .sv-string-viewer) {
+  flex: 1;
+  text-align: center;
+  pointer-events: none; /* so clicks go to the input */
+}
+
+/* Hover state */
+.wizard :global(label.sd-selectbase__label:hover) {
+  background: #e6f6fb;
+  color: #0c4a6e;
+}
+
+/* Focus state */
+.wizard :global(label.sd-selectbase__label:focus-within) {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.4);
+}
+
+/* Checked state */
+.wizard :global(label.sd-selectbase__label:has(input:checked)) {
+  background: #0ea5e9;
+  color: #ffffff;
+  border-color: #0ea5e9;
+}
+
+/* Checked + hover */
+.wizard :global(label.sd-selectbase__label:has(input:checked):hover) {
+  background: #0284c7;
+  border-color: #0284c7;
+}
+
+/* Disabled */
+.wizard :global(label.sd-selectbase__label[disabled]) {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.wizard :global(.sd-item__control-label) {
+  color: unset;
+}
+
+.wizard :global(.sv-title-actions) {
+  display: none;
+}
