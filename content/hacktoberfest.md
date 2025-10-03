@@ -68,7 +68,7 @@ The Owncast project is always looking for ways to get in front of more people an
 
 ## Usage Contributions
 
-If you've been thinking about trying Owncast for the first time but haven't found the right time to be inspired to try it out, **this is your chance**. If you spin up a new public Owncast server and list it on the [Owncast Directory](https://owncast.online/directory) during Hacktoberfest, you'll receive a t-shirt from us.
+If you've been thinking about trying Owncast for the first time but haven't found the right time to be inspired to try it out, **this is your chance**. If you spin up a new public Owncast server and list it on the [Owncast Directory](https://directory.owncast.onlin) during Hacktoberfest, you'll receive a t-shirt from us.
 
 ## Where to Begin
 
