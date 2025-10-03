@@ -7,7 +7,15 @@ sidebar_position: 200
 sidebar_label: Resources and requirements
 ---
 
+import ResourcesCalculator from '@site/src/components/ResourcesCalculator';
+
 It is impossible to give a single answer about what the requirements are for you to run Owncast, or what it will cost. It is your server, and it is completely up to you how you choose to configure it, and in what environments you choose to run it. Every environment has different performance, prices and features.
+
+## Resources Calculator
+
+Use this interactive calculator to estimate your bandwidth and CPU requirements based on your specific streaming configuration:
+
+<ResourcesCalculator />
 
 ## Base knowledge
 

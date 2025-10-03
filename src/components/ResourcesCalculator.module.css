@@ -1,0 +1,455 @@
+.calculator {
+  max-width: 700px;
+  height: 400px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  box-shadow: var(--ifm-global-shadow-lw);
+  font-size: 0.9rem;
+}
+
+/* Controls Section - Left Side */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-right: 1px solid var(--ifm-color-emphasis-200);
+  padding-right: 1.5rem;
+}
+
+.controlGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.controlGroup label {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+  display: flex;
+  justify-content: space-between;
+}
+
+.controlGroup strong {
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+.controlGroup input[type="range"] {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--ifm-color-emphasis-200);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.controlGroup input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+  cursor: pointer;
+}
+
+.controlGroup input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+  cursor: pointer;
+  border: none;
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.checkboxGroup label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+  cursor: pointer;
+}
+
+.checkboxGroup input[type="checkbox"] {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+/* Results Section - Right Side */
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  min-height: 0;
+}
+
+.metricsRow {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  flex-shrink: 0;
+}
+
+.metricItem {
+  text-align: center;
+  flex: 1;
+}
+
+.metricLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.metricValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  line-height: 1.2;
+}
+
+/* Recommendations Box */
+.recommendationsBox {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.recommendationsTitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 0.5rem;
+  padding: 0 0.25rem;
+  flex-shrink: 0;
+}
+
+.recommendationsList {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-right: 0.5rem;
+  min-height: 0;
+}
+
+.recommendationsList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.recommendationsList::-webkit-scrollbar-track {
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 3px;
+}
+
+.recommendationsList::-webkit-scrollbar-thumb {
+  background: var(--ifm-color-emphasis-400);
+  border-radius: 3px;
+}
+
+.recommendationsList::-webkit-scrollbar-thumb:hover {
+  background: var(--ifm-color-emphasis-600);
+}
+
+.recommendation {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  border-left: 3px solid;
+}
+
+.recIcon {
+  flex-shrink: 0;
+  font-size: 0.9rem;
+}
+
+.recommendation.info {
+  background: var(--ifm-color-info-contrast-background);
+  border-left-color: var(--ifm-color-info);
+  color: var(--ifm-color-info-dark);
+}
+
+.recommendation.warning {
+  background: var(--ifm-color-warning-contrast-background);
+  border-left-color: var(--ifm-color-warning);
+  color: var(--ifm-color-warning-dark);
+}
+
+.recommendation.danger {
+  background: var(--ifm-color-danger-contrast-background);
+  border-left-color: var(--ifm-color-danger);
+  color: var(--ifm-color-danger-dark);
+}
+
+.noRecommendations {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2rem 1rem;
+  color: var(--ifm-color-success-dark);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.checkmark {
+  font-size: 1.5rem;
+  color: var(--ifm-color-success);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .calculator {
+    max-width: 100%;
+    max-height: none;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .controls {
+    border-right: none;
+    border-bottom: 1px solid var(--ifm-color-emphasis-200);
+    padding-right: 0;
+    padding-bottom: 1.5rem;
+  }
+
+  .metricValue {
+    font-size: 1.25rem;
+  }
+
+  .recommendationsBox {
+    max-height: 200px;
+  }
+}
+
+/* Quality chips display */
+.qualitiesDisplay {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.qualitiesLabel {
+  font-size: 0.75rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.qualityChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.qualityChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--ifm-color-primary-lightest);
+  border: 1px solid var(--ifm-color-primary-light);
+  border-radius: 12px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--ifm-color-primary-dark);
+}
+
+.qualityChipText {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.qualityChipText:hover {
+  text-decoration: underline;
+}
+
+.chipRemove {
+  background: none;
+  border: none;
+  color: var(--ifm-color-danger);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+  margin-left: 0.25rem;
+  font-weight: bold;
+}
+
+.chipRemove:hover {
+  color: var(--ifm-color-danger-dark);
+}
+
+.addChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--ifm-color-emphasis-200);
+  border: 1px dashed var(--ifm-color-emphasis-400);
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--ifm-color-emphasis-700);
+  padding: 0;
+}
+
+.addChip:hover {
+  background: var(--ifm-color-emphasis-300);
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: var(--ifm-card-background-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  min-width: 300px;
+  max-width: 400px;
+  box-shadow: var(--ifm-global-shadow-md);
+}
+
+.modalContent h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.125rem;
+  color: var(--ifm-heading-color);
+}
+
+.modalField {
+  margin-bottom: 1rem;
+}
+
+.modalField label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.modalField input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-right: 0.5rem;
+}
+
+.modalField .select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.modalInfo {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: var(--ifm-color-info-contrast-background);
+  border-left: 3px solid var(--ifm-color-info);
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: var(--ifm-color-info-dark);
+}
+
+.modalButtons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.saveBtn,
+.cancelBtn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.saveBtn {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+.saveBtn:hover {
+  background: var(--ifm-color-primary-dark);
+}
+
+.cancelBtn {
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-800);
+}
+
+.cancelBtn:hover {
+  background: var(--ifm-color-emphasis-300);
+}
+
+/* Dark mode */
+[data-theme='dark'] .calculator {
+  border-color: var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] .modalContent {
+  background: var(--ifm-background-surface-color);
+}
+
+[data-theme='dark'] .modalInfo {
+  background: rgba(84, 199, 236, 0.1);
+}
+
+[data-theme='dark'] .recommendation.info {
+  background: rgba(84, 199, 236, 0.1);
+}
+
+[data-theme='dark'] .recommendation.warning {
+  background: rgba(255, 186, 0, 0.1);
+}
+
+[data-theme='dark'] .recommendation.danger {
+  background: rgba(250, 82, 82, 0.1);
+}
