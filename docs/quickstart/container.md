@@ -3,7 +3,6 @@ title: Use a container image
 description: >-
   Images for running Owncast within a containerized environment are available
   for releases.
-sidebar_position: 24
 slug: /quickstart/container
 redirects:
   - /quickstart/container

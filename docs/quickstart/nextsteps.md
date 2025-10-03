@@ -2,7 +2,7 @@
 slug: /quickstart/nextsteps
 title: Next Steps
 description: You're likely to want to setup a SSL Proxy or run Owncast as a system service.
-sidebar_position: 080
+tags: [installation]
 ---
 
 ## Support HTTPS

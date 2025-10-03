@@ -1,22 +1,14 @@
-import React, {type ReactNode} from 'react';
-import Footer from '@theme-original/DocItem/Footer';
-import type FooterType from '@theme/DocItem/Footer';
-import type {WrapperProps} from '@docusaurus/types';
-import {useDoc} from '@docusaurus/plugin-content-docs/client';
-import ContributorsList from '@site/src/components/ContributorsList';
+import React from "react";
+import OriginalFooter from "@theme-original/DocItem/Footer";
+import RelatedDocs from "@site/src/components/RelatedDocs";
 
-type Props = WrapperProps<typeof FooterType>;
-
-export default function FooterWrapper(props: Props): ReactNode {
-  const {metadata} = useDoc();
-
-  // Get the source file path relative to the repo root
-  const filePath = metadata.source;
-
+export default function FooterWrapper(
+  props: React.ComponentProps<typeof OriginalFooter>
+) {
   return (
     <>
-      <Footer {...props} />
-      <ContributorsList filePath={filePath} />
+      <OriginalFooter {...props} />
+      <RelatedDocs title="Related" showScores={false} />
     </>
   );
 }

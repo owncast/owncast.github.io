@@ -1,6 +1,7 @@
 ---
 slug: /quickstart/installer
 title: Owncast Quick Installer
+tags: [installation]
 description: Start streaming to your own server in seconds.
 ---
 

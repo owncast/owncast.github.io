@@ -4,7 +4,7 @@ title: Supported one-click installs
 description: >-
   Automatically have a server with Owncast pre-installed by using supported
   hosting providers.
-sidebar_position: 1000
+tags: [installation]
 ---
 
 The following service providers offer 1-click-install options for Owncast where you can get up and running without manually installing the software.

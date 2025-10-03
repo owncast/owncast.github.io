@@ -85,3 +85,7 @@
   /* Code highlighting for dark mode */
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+.pagination-nav {
+  display: none;
+}

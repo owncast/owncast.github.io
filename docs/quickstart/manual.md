@@ -2,7 +2,7 @@
 slug: /quickstart/manual
 title: Manual Install
 description: If you don't want to use the automated installer you can download it yourself.
-sidebar_position: 24
+tags: [installation]
 date: 2020-11-17T19:11:42.000Z
 ---
 
