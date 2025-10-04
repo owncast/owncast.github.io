@@ -1,7 +1,5 @@
 {{ $type := .Get "type" | default "year" }}
 {{ $currentYear := now.Year }}
-
-
 {{ if eq $type "image" }}
    <a href="https://hacktoberfest.com">
        <img src="../images/hacktoberfest.png" alt="hacktoberfest {{ $currentYear }} logo" width="80%"/>
