@@ -7,9 +7,7 @@ type: toc
 ---
 
 <center>
-    <a href="https://hacktoberfest.com">
-        <img src="../images/hacktoberfest.png" alt="hacktoberfest 2024 logo" width="80%"/>
-    </a>
+    {{< hacktoberfest type="image" >}}
 </center>
 
 Some of the information about Hacktoberfest was copied here from the official [Hacktoberfest website](https://hacktoberfest.com/participation/) and should be referenced for more information.
@@ -24,18 +22,13 @@ For the past 10 years, thousands of people—coders and non-coders alike—have 
 
 ## What is Owncast?
 
-Owncast is a single-user live streaming server with chat features that allows you to run your own live stream. It's volunteer run, donation funded, and 100% free and open source software that exists for the community. [See some examples in use](https://directory.owncast.online). If you're curious what some of the users have to say about the software and what they're doing with it, [here's some discussing why they like it](https://videos.owncast.online/v/GbUWuPQzFvN88SGuihfrS9).
+Owncast is a single-user live streaming server with chat features that allows you to run your own live stream. It's volunteer run, donation funded, and 100% free and open source software that exists for the community. [See some examples in use](https://owncast.directory). If you're curious what some of the users have to say about the software and what they're doing with it, [here's some discussing why they like it](https://videos.owncast.online/v/GbUWuPQzFvN88SGuihfrS9).
 
 ## What do you receive by contributing to Owncast during Hacktoberfest?
 
 - You’ll unlock a digital badge when you register for Hacktoberfest, and level it up with each of your four pull/merge requests accepted during Hacktoberfest.
-- Quality contributions[^1] to Owncast will receive an **Owncast t-shirt**. If you feel like you have qualified for a shirt, please [register for your t-shirt here!](https://gabekangas.typeform.com/to/Wfx9UHVZ).
 - You get added to the Owncast list of contributors on the [Owncast website](https://owncast.online), [GitHub repository](https://github.com/owncast/owncast) **and** the contributors thank-you video on [Owncast TV](https://watch.owncast.online).
 - You take part in a **global event**, contribute to **a cool project**, and be a part of the **open source community**.
-
-<div style="display: flex; flex-direction: row; justify-content: center">
-    {{< figure src="../images/owncast-tshirt.png" caption="Owncast<br/>Contributor t-shirt" height="200px" >}}
-</div>
 
 ## Code Contributions
 
@@ -70,19 +63,15 @@ The Owncast project is always looking for ways to get in front of more people an
 
 ## Usage Contributions
 
-If you've been thinking about trying Owncast for the first time but haven't found the right time to be inspired to try it out, **this is your chance**. If you spin up a new public Owncast server and list it on the [Owncast Directory](https://owncast.online/directory) during Hacktoberfest, you'll receive a t-shirt from us.
+If you've been thinking about trying Owncast for the first time but haven't found the right time to be inspired to try it out, **this is your chance**. If you spin up a new public Owncast server and list it on the [Owncast Directory](https://owncast.directory) during Hacktoberfest, you'll receive a t-shirt from us.
 
 ## Where to Begin
 
 - Read the [Hacktoberfest Values](https://hacktoberfest.com/participation/#values).
-- Register for [Hacktoberfest 2024](https://hacktoberfest.com/participation/) starting September 26th.
+- {{< hacktoberfest type="registration" >}}
 - Read the Owncast [Contributor Guide](https://owncast.online/contribute/).
 - Visit the Owncast [Good first Issues](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) list to see what has been designated as a good place to start.
 - [Install your own instance](/quickstart) of Owncast in about a minute.
 - [Join our chat](https://owncast.rocket.chat) and introduce yourself.
 
 See you soon!
-
----
-
-[^1]: A quality contribution is generally seen as that needed to be completed, fixing a bug that was reported, writing useful documentation, creating content around Owncast, or performing some piece of work within the Owncast organization that previously was determined to be needed. Coming up with your own arbitrary ideas, fixing typos, or making up changes just for the sake of getting PRs merged in are not seen as a quality contribution.
