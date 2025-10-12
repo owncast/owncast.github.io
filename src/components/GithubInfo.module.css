@@ -1,0 +1,27 @@
+.githubInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--ifm-navbar-link-color);
+  padding: 0 0.75rem;
+}
+
+.version {
+  font-weight: 600;
+  cursor: help;
+}
+
+.separator {
+  opacity: 0.5;
+}
+
+.stars {
+  cursor: help;
+}
+
+@media (max-width: 996px) {
+  .githubInfo {
+    display: none;
+  }
+}

@@ -376,6 +376,13 @@ const config: Config = {
       minScore: 0.06,
     },
     ],
+    [
+      require.resolve("./plugins/github-info"),
+      {
+        owner: 'owncast',
+        repo: 'owncast',
+      },
+    ],
   ],
 
   themeConfig: {
