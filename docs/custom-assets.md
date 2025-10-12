@@ -7,6 +7,12 @@ sidebar_label: Host public assets
 
 By creating a `data/public` directory and putting your own files there you can serve any assets that you wish to make publicly available for any reason.
 
+Afterward, will be able to access these assets via the `/public` path on your Owncast web. For example:
+
+`https://stream.example.com/public/image.png`
+
+`https://stream.example.com/public/style.css`
+
 Some exmples of reasons you might want to take advantage of this:
 
 - Making a CSS font available so you can reference it in your custom CSS.
