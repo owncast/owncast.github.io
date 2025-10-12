@@ -3,10 +3,12 @@ import React from "react";
 import Link from "@docusaurus/Link";
 import { useDoc } from "@docusaurus/plugin-content-docs/client";
 import { usePluginData } from "@docusaurus/useGlobalData";
+import styles from "./RelatedDocs.module.css";
 
 type RelatedItem = {
   id: string;
   title: string;
+  description?: string;
   permalink: string;
   score: number;
 };
@@ -54,20 +56,30 @@ export default function RelatedDocs({
   const perma = metadata?.permalink ?? "";
   const permaNorm = normalizePermalink(perma);
 
-  const related =
+  const allRelated =
     (perma && data?.relatedByPermalink?.[perma]) ||
     (permaNorm && data?.relatedByPermalink?.[permaNorm]) ||
     [];
 
+  // Filter out blog/release posts
+  const related = allRelated.filter(
+    (item) => !item.permalink.includes("/blog/") && !item.permalink.includes("/releases/")
+  );
+
   return (
-    <section className="margin-top--lg">
+    <section className={styles.container}>
       {related.length ? (
         <>
-          <h3 className="margin-bottom--sm">{title}</h3>
-          <ul className="clean-list">
+          <h3 className={styles.title}>{title}</h3>
+          <ul className={styles.cardList}>
             {related.slice(0, max).map((r) => (
-              <li key={r.permalink} className="margin-bottom--xs">
-                <Link to={r.permalink}>{r.title}</Link>
+              <li key={r.permalink}>
+                <Link to={r.permalink} className={styles.card}>
+                  <div className={styles.cardTitle}>{r.title}</div>
+                  {r.description && (
+                    <div className={styles.cardDescription}>{r.description}</div>
+                  )}
+                </Link>
               </li>
             ))}
           </ul>
@@ -86,6 +98,9 @@ export default function RelatedDocs({
                 strategy: data?.strategy,
                 computed: data?.computed,
                 totalDocs: data?.debug?.totalDocs,
+                allRelatedCount: allRelated.length,
+                filteredRelatedCount: related.length,
+                relatedItems: related.map(r => ({ title: r.title, permalink: r.permalink })),
                 sample: data?.debug?.sample,
               },
               null,

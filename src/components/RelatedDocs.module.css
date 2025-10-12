@@ -1,0 +1,59 @@
+.container {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cardList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card {
+  display: block;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  background-color: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  text-decoration: none;
+  color: var(--ifm-color-content);
+  transition: all 0.2s ease;
+  height: 100%;
+}
+
+.card:hover {
+  background-color: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-emphasis-300);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: var(--ifm-color-content);
+}
+
+.cardTitle {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.cardDescription {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-700);
+  margin: 0;
+}

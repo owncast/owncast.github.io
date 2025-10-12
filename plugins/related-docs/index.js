@@ -335,6 +335,7 @@ module.exports = function relatedDocsPlugin(context, options = {}) {
             scored.push({
               id: B.id,
               title: B.title,
+              description: B.description,
               permalink: B.permalink,
               score,
             });
@@ -387,6 +388,7 @@ module.exports = function relatedDocsPlugin(context, options = {}) {
                 pinned.push({
                   id: doc.id,
                   title: doc.title,
+                  description: doc.description,
                   permalink: doc.permalink,
                   score: Number.MAX_SAFE_INTEGER,
                 });
