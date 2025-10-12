@@ -63,7 +63,9 @@ export default function RelatedDocs({
 
   // Filter out blog/release posts
   const related = allRelated.filter(
-    (item) => !item.permalink.includes("/blog/") && !item.permalink.includes("/releases/")
+    (item) =>
+      !item.permalink.includes("/blog/") &&
+      !item.permalink.includes("/releases/")
   );
 
   return (
@@ -77,7 +79,9 @@ export default function RelatedDocs({
                 <Link to={r.permalink} className={styles.card}>
                   <div className={styles.cardTitle}>{r.title}</div>
                   {r.description && (
-                    <div className={styles.cardDescription}>{r.description}</div>
+                    <div className={styles.cardDescription}>
+                      {r.description}
+                    </div>
                   )}
                 </Link>
               </li>
@@ -100,7 +104,10 @@ export default function RelatedDocs({
                 totalDocs: data?.debug?.totalDocs,
                 allRelatedCount: allRelated.length,
                 filteredRelatedCount: related.length,
-                relatedItems: related.map(r => ({ title: r.title, permalink: r.permalink })),
+                relatedItems: related.map((r) => ({
+                  title: r.title,
+                  permalink: r.permalink,
+                })),
                 sample: data?.debug?.sample,
               },
               null,

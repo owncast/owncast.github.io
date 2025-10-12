@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import styles from './Contributors.module.css';
+import React, { useState, useEffect } from "react";
+import styles from "./Contributors.module.css";
 
 interface Contributor {
   login: string;
@@ -24,8 +24,8 @@ export interface ContributorsProps {
 
 export default function Contributors({
   showDonors = true,
-  contributorsTitle = 'Contributors',
-  donorsTitle = 'Donors'
+  contributorsTitle = "Contributors",
+  donorsTitle = "Donors",
 }: ContributorsProps): JSX.Element {
   const [contributors, setContributors] = useState<Contributor[]>([]);
   const [donors, setDonors] = useState<Donor[]>([]);
@@ -39,30 +39,30 @@ export default function Contributors({
         setError(null);
 
         // Fetch contributors
-        const contributorsResponse = await fetch('/data/contributors.json');
+        const contributorsResponse = await fetch("/data/contributors.json");
         if (!contributorsResponse.ok) {
-          throw new Error('Failed to fetch contributors data');
+          throw new Error("Failed to fetch contributors data");
         }
         const contributorsData = await contributorsResponse.json();
 
         // Filter out bots
         const filteredContributors = contributorsData.filter(
           (contributor: Contributor) =>
-            !contributor.login.toLowerCase().includes('bot')
+            !contributor.login.toLowerCase().includes("bot")
         );
         setContributors(filteredContributors);
 
         // Fetch donors if enabled
         if (showDonors) {
-          const donorsResponse = await fetch('/data/donors.json');
+          const donorsResponse = await fetch("/data/donors.json");
           if (donorsResponse.ok) {
             const donorsData = await donorsResponse.json();
             setDonors(donorsData);
           }
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load data');
-        console.error('Error loading contributors/donors data:', err);
+        setError(err instanceof Error ? err.message : "Failed to load data");
+        console.error("Error loading contributors/donors data:", err);
       } finally {
         setLoading(false);
       }
@@ -126,7 +126,7 @@ export default function Contributors({
         <section className={styles.donorBox}>
           <h2>{donorsTitle}</h2>
           <p>
-            Help support the project by making a contribution at{' '}
+            Help support the project by making a contribution at{" "}
             <a
               href="https://opencollective.com/owncast/donate"
               target="_blank"
@@ -137,7 +137,7 @@ export default function Contributors({
           </p>
 
           <p className={styles.browserTesting}>
-            Browser testing via{' '}
+            Browser testing via{" "}
             <a
               href="https://www.lambdatest.com/"
               target="_blank"
@@ -156,7 +156,8 @@ export default function Contributors({
           {donors.length > 0 && (
             <ul className={styles.contributorBox}>
               {donors.map((donor) => {
-                const avatarUrl = donor.avatar_url || generateDefaultAvatar(donor.login);
+                const avatarUrl =
+                  donor.avatar_url || generateDefaultAvatar(donor.login);
                 const isSquareAvatar = !donor.avatar_url;
 
                 return (
@@ -173,7 +174,7 @@ export default function Contributors({
                           alt={donor.login}
                           loading="lazy"
                           className={`${styles.contributorAvatar} ${
-                            isSquareAvatar ? styles.squareContributorItem : ''
+                            isSquareAvatar ? styles.squareContributorItem : ""
                           }`}
                         />
                       </a>

@@ -14,9 +14,9 @@ export default function FooterWrapper(
 
   return (
     <>
-      <OriginalFooter {...props} />
-      <RelatedDocs title="Related" showScores={false} />
       <ContributorsList filePath={filePath} />
+      <OriginalFooter {...props} />
+      <RelatedDocs title="Related Documents" showScores={false} />
     </>
   );
 }
