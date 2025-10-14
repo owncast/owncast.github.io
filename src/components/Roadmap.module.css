@@ -1,0 +1,439 @@
+.roadmap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* Error state */
+.error {
+  padding: 2rem;
+  background: var(--ifm-color-danger-lightest);
+  border: 1px solid var(--ifm-color-danger);
+  border-radius: 8px;
+  color: var(--ifm-color-danger-darkest);
+}
+
+/* Current Milestone */
+.currentMilestone {
+  background: var(--ifm-card-background-color);
+  border: 2px solid var(--ifm-color-primary);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.currentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.currentTitle {
+  font-size: 2rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: var(--ifm-color-primary);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.milestoneLink {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.milestoneLink:hover {
+  text-decoration: underline;
+}
+
+.description {
+  color: var(--ifm-color-content-secondary);
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+
+/* Progress Section */
+.progressSection {
+  margin: 1.5rem 0 2rem;
+  padding: 1.5rem;
+  background: var(--ifm-background-surface-color);
+  border-radius: 8px;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.progressLabel {
+  font-weight: 600;
+  color: var(--ifm-color-content);
+}
+
+.progressPercent {
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  font-size: 1.125rem;
+}
+
+.progressBar {
+  height: 12px;
+  background: var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ifm-color-primary), var(--ifm-color-primary-dark));
+  transition: width 0.3s ease;
+}
+
+.progressStats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+/* Issues Grid */
+.issuesGrid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.issueSection {
+  background: var(--ifm-background-surface-color);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.sectionTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.statusBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.collapseIcon {
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.statusBadge[data-status="in-progress"] {
+  background: var(--ifm-color-warning-lightest);
+  color: var(--ifm-color-warning-darkest);
+  border: 1px solid var(--ifm-color-warning-light);
+}
+
+.statusBadge[data-status="todo"] {
+  background: var(--ifm-color-info-lightest);
+  color: var(--ifm-color-info-darkest);
+  border: 1px solid var(--ifm-color-info-light);
+}
+
+.statusBadge[data-status="completed"] {
+  background: var(--ifm-color-success-lightest);
+  color: var(--ifm-color-success-darkest);
+  border: 1px solid var(--ifm-color-success-light);
+}
+
+.count {
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-content);
+  padding: 0.125rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+}
+
+.issueList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.issueItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.issueItem:last-child {
+  border-bottom: none;
+}
+
+.issueLink {
+  flex: 1;
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  text-decoration: none;
+  color: var(--ifm-color-content);
+}
+
+.issueLink:hover {
+  color: var(--ifm-color-primary);
+}
+
+.issueNumber {
+  color: var(--ifm-color-content-secondary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.issueTitle {
+  line-height: 1.4;
+}
+
+.assignees {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.assignee {
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--ifm-background-surface-color);
+  transition: transform 0.2s;
+}
+
+.assignee:hover {
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Future Milestones */
+.futureSection {
+  margin-top: 3rem;
+}
+
+.futureSectionTitle {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  color: var(--ifm-color-content);
+}
+
+.futureTimeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  padding: 0 2rem;
+}
+
+.futureTimeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--ifm-color-emphasis-300);
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+
+.futureMilestone {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative;
+  transition: all 0.2s ease;
+  width: calc(50% - 2rem);
+}
+
+.futureMilestone:nth-child(odd) {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.futureMilestone:nth-child(even) {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.futureMilestone:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.futureMilestone:nth-child(odd):hover {
+  transform: translateX(-4px);
+}
+
+.futureMilestone:nth-child(even):hover {
+  transform: translateX(4px);
+}
+
+.futureMilestone::before {
+  content: '';
+  position: absolute;
+  top: 1.5rem;
+  width: 12px;
+  height: 12px;
+  background: var(--ifm-background-color);
+  border: 3px solid var(--ifm-color-primary);
+  border-radius: 50%;
+}
+
+.futureMilestone:nth-child(odd)::before {
+  right: -2.25rem;
+}
+
+.futureMilestone:nth-child(even)::before {
+  left: -2.25rem;
+}
+
+.futureHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.futureTitle {
+  font-size: 1.25rem;
+  margin: 0;
+  color: var(--ifm-color-content);
+}
+
+.dueDate {
+  font-size: 0.875rem;
+  color: var(--ifm-color-content-secondary);
+  background: var(--ifm-background-surface-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.futureFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.issueCount {
+  font-size: 0.875rem;
+  color: var(--ifm-color-content-secondary);
+  font-weight: 500;
+}
+
+.futureLink {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.futureLink:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .roadmap {
+    padding: 1rem 0;
+  }
+
+  .currentMilestone {
+    padding: 1.5rem;
+  }
+
+  .currentTitle {
+    font-size: 1.5rem;
+  }
+
+  .currentHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .issuesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .futureTimeline {
+    padding: 0;
+  }
+
+  .futureTimeline::before {
+    left: 0;
+    transform: none;
+  }
+
+  .futureMilestone {
+    width: 100%;
+    margin-left: 2rem !important;
+    margin-right: 0 !important;
+  }
+
+  .futureMilestone::before {
+    left: -2.25rem !important;
+    right: auto !important;
+  }
+
+  .futureMilestone:hover {
+    transform: translateX(4px) !important;
+  }
+
+  .issueLink {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}

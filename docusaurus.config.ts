@@ -383,6 +383,14 @@ const config: Config = {
         repo: 'owncast',
       },
     ],
+    [
+      require.resolve("./plugins/milestones-plugin"),
+      {
+        owner: 'owncast',
+        repo: 'owncast',
+        milestones: [28, 5, 23, 20, 31], // Milestone numbers to fetch
+      },
+    ],
   ],
 
   themeConfig: {
@@ -450,6 +458,10 @@ const config: Config = {
             {
               label: "Quick Start",
               to: "/docs/quickstart/installation",
+            },
+            {
+              label: "Roadmap",
+              to: "/roadmap",
             },
           ],
         },
