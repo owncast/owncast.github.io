@@ -1,4 +1,4 @@
-name: Hugo Build to GitHub Pages
+name: Build and deploy to GitHub Pages
 
 on:
   push:
@@ -33,10 +33,6 @@ jobs:
 
       - name: Add current development documentation
         run: mkdir -p static/api/development && curl https://raw.githubusercontent.com/owncast/owncast/refs/heads/develop/docs/api/index.html > static/api/development/index.html
-
-      - name: Generate project roadmap
-        run: mkdir -p static/roadmap && cd scripts && ./build-roadmap --accessToken ${{ secrets.GITHUB_TOKEN }} --milestone 28 > ../static/roadmap/index.html
-
       - name: Commit changes
         uses: EndBug/add-and-commit@v5
         with:
