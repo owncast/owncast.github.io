@@ -89,7 +89,6 @@ const config: Config = {
         redirects: [
           // Root level pages
           { to: "/docs/1-1", from: "/1-1" },
-          { to: "/docs/donated", from: "/donated" },
           { to: "/docs/hacktoberfest", from: "/hacktoberfest" },
           { to: "/docs/tshirt", from: "/tshirt" },
           { to: "/docs/trademark", from: "/trademark" },
