@@ -396,7 +396,7 @@ const config: Config = {
       "@scalar/docusaurus",
       {
         label: "Owncast Web APIs",
-        route: "/api",
+        route: "/api/development",
         showNavLink: false, // optional, default is true
         configuration: {
           url: "https://raw.githubusercontent.com/owncast/owncast/refs/heads/develop/openapi.yaml",
