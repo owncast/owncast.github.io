@@ -1,6 +1,7 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
+import type { ScalarOptions } from "@scalar/docusaurus";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -50,6 +51,7 @@ const config: Config = {
           path: "docs",
           // Enable edit URLs to allow contributors to edit documentation on GitHub
           editUrl: "https://github.com/owncast/owncast.github.io/edit/main/",
+          // docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: {
           routeBasePath: "blog",
@@ -362,33 +364,44 @@ const config: Config = {
     [
       require.resolve("./plugins/related-docs"),
       {
-      pluginId: 'related-docs',
-      docsPath: 'docs',
-      routeBasePath: 'docs',
-      maxRelated: 6,
+        pluginId: "related-docs",
+        docsPath: "docs",
+        routeBasePath: "docs",
+        maxRelated: 6,
 
-      // Scoring knobs (good defaults below)
-      tfidfWeight: 1.0,
-      tagWeight: 0.6,
-      headingWeight: 0.4,
-      sameSectionBoost: 0.15,
-      minScore: 0.06,
-    },
+        // Scoring knobs (good defaults below)
+        tfidfWeight: 1.0,
+        tagWeight: 0.6,
+        headingWeight: 0.4,
+        sameSectionBoost: 0.15,
+        minScore: 0.06,
+      },
     ],
     [
       require.resolve("./plugins/github-info"),
       {
-        owner: 'owncast',
-        repo: 'owncast',
+        owner: "owncast",
+        repo: "owncast",
       },
     ],
     [
       require.resolve("./plugins/milestones-plugin"),
       {
-        owner: 'owncast',
-        repo: 'owncast',
+        owner: "owncast",
+        repo: "owncast",
         milestones: [28, 5, 23, 20, 31], // Milestone numbers to fetch
       },
+    ],
+    [
+      "@scalar/docusaurus",
+      {
+        label: "Owncast Web APIs",
+        route: "/api",
+        showNavLink: false, // optional, default is true
+        configuration: {
+          url: "https://raw.githubusercontent.com/owncast/owncast/refs/heads/develop/openapi.yaml",
+        },
+      } as ScalarOptions,
     ],
   ],
 
