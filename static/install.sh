@@ -144,7 +144,7 @@ main() {
 	"Linux")
 		case "$(uname -m)" in
 		"x86_64")
-			FFMPEG_ARCH="linux-x64"
+			FFMPEG_ARCH="amd64"
 			OWNCAST_ARCH="64bit"
 			;;
 		i?86)
@@ -156,7 +156,7 @@ main() {
 			OWNCAST_ARCH="arm7"
 			;;
 		aarch64)
-			FFMPEG_ARCH="linux-arm64"
+			FFMPEG_ARCH="arm64"
 			OWNCAST_ARCH="arm64"
 			;;
 		*)
@@ -164,9 +164,15 @@ main() {
 			;;
 		esac
 		PLATFORM="linux"
-		FFMPEG_VERSION="b4.3.1"
-		FFMPEG_DOWNLOAD_URL="https://github.com/eugeneware/ffmpeg-static/releases/download/${FFMPEG_VERSION}/${FFMPEG_ARCH}"
-		FFMPEG_TARGET_FILE="${OWNCAST_INSTALL_DIRECTORY}/ffmpeg"
+		FFMPEG_VERSION="8.0"
+		FFMPEG_RELEASE="20251014144538"
+		if [[ "$FFMPEG_ARCH" == "amd64" || "$FFMPEG_ARCH" == "arm64" ]]; then
+			FFMPEG_DOWNLOAD_URL="https://github.com/owncast/ffmpeg-builds/releases/download/${FFMPEG_RELEASE}/ffmpeg${FFMPEG_VERSION}-${FFMPEG_ARCH}-static.tar.gz"
+			FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.tar.gz"
+		else
+			FFMPEG_DOWNLOAD_URL="https://github.com/eugeneware/ffmpeg-static/releases/download/b4.3.1/${FFMPEG_ARCH}"
+			FFMPEG_TARGET_FILE="${OWNCAST_INSTALL_DIRECTORY}/ffmpeg"
+		fi
 		;;
 	*)
 		errorAndExit "Unsupported operating system $(uname -s)"
@@ -215,6 +221,9 @@ main() {
 		printf "${GREEN}Downloaded${NC} ffmpeg because it was not found on your system [${GREEN}✓${NC}]\n"
 		if [[ "$FFMPEG_TARGET_FILE" == *.zip ]]; then
 			unzip -oq "$FFMPEG_TARGET_FILE" -d "$OWNCAST_INSTALL_DIRECTORY"
+			rm "$FFMPEG_TARGET_FILE"
+		elif [[ "$FFMPEG_TARGET_FILE" == *.tar.gz ]]; then
+			tar -xzf "$FFMPEG_TARGET_FILE" -C "$OWNCAST_INSTALL_DIRECTORY"
 			rm "$FFMPEG_TARGET_FILE"
 		fi
 		chmod u+x "${OWNCAST_INSTALL_DIRECTORY}/ffmpeg"
