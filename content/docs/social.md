@@ -97,7 +97,7 @@ A decentralized network of different services built on standards is the future o
 
 ### Discover services and sites that make up The Fediverse
 
-- [What is The Fediverse?](https://joinfediverse.wiki/What_is_the_Fediverse%3F) on Fediverse.wiki.
+- [What is The Fediverse?](https://jointhefediverse.net/?lang=en-us) on Fediverse's website.
 - [Fediverse](https://en.wikipedia.org/wiki/Fediverse) on Wikipedia.
 - [Fediverse.party](https://fediverse.party/)
 - [Fediverse.observer](https://fediverse.observer/)
