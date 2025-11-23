@@ -165,7 +165,7 @@ main() {
 		esac
 		PLATFORM="linux"
 		FFMPEG_VERSION="8.0"
-		FFMPEG_RELEASE="20251014144538"
+		FFMPEG_RELEASE="20251122180033"
 		if [[ "$FFMPEG_ARCH" == "amd64" || "$FFMPEG_ARCH" == "arm64" ]]; then
 			FFMPEG_DOWNLOAD_URL="https://github.com/owncast/ffmpeg-builds/releases/download/${FFMPEG_RELEASE}/ffmpeg${FFMPEG_VERSION}-${FFMPEG_ARCH}-static.tar.gz"
 			FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.tar.gz"
