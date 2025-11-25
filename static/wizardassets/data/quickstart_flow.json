@@ -245,19 +245,6 @@
 										"id": 29
 									}
 								]
-							},
-							{
-								"name": "_decision",
-								"test": "string",
-								"if": "qnap",
-								"is_open": false,
-								"id": 30,
-								"children": [
-									{
-										"name": "https://qnapclub.eu/en/qpkg/1138",
-										"id": 31
-									}
-								]
 							}
 						]
 					}
