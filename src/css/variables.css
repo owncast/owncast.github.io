@@ -1,0 +1,41 @@
+/* Map Owncast token YAML values to CSS variables.
+   These are the raw palette tokens from owncast-colors.yaml. */
+:root {
+  /* Owncast palette (from owncast-colors.yaml) */
+  --color-owncast-palette-0: #12161d; /* Dark primary */
+  --color-owncast-palette-1: #2D3748; /* Dark secondary */
+  --color-owncast-palette-2: #000000; /* Dark alternate */
+  --color-owncast-palette-3: #e2e8f0; /* Light primary */
+  --color-owncast-palette-4: #ffffff; /* Light secondary */
+  --color-owncast-palette-5: #c3dafe; /* Light alternate */
+  --color-owncast-palette-6: #6544e9; /* Text link/secondary light text */
+  --color-owncast-palette-7: #7a5cf3; /* Text link hover */
+  --color-owncast-palette-8: #b6b3c6; /* Disabled background */
+  --color-owncast-palette-9: #39373d; /* Neutral dark */
+  --color-owncast-palette-10: #5d5f72; /* Neutral gray light */
+  --color-owncast-palette-11: #2386e2; /* Fun color 1 */
+  --color-owncast-palette-12: #da9eff; /* Fun color 2 */
+  --color-owncast-palette-13: #42bea6; /* Fun color 3 */
+  --color-owncast-palette-14: #f0f3f8; /* Light background */
+  --color-owncast-palette-15: #eff1f4; /* Lighter background */
+  --color-owncast-palette-error: #ff4b39; /* Error */
+  --color-owncast-palette-warning: #ffc655; /* Warning */
+
+  /* User colors (chat), included for completeness */
+  --color-owncast-user-0: #FF717B;
+  --color-owncast-user-1: #F4E413;
+  --color-owncast-user-2: #B99C45;
+  --color-owncast-user-3: #58F40B;
+  --color-owncast-user-4: #0BF4F4;
+  --color-owncast-user-5: #16a8f7;
+  --color-owncast-user-6: #9A92FF;
+  --color-owncast-user-7: #FF53FF;
+
+  /* Fonts from owncast-colors.yaml */
+  --font-owncast-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-owncast-display: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+}

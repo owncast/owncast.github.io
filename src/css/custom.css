@@ -1,91 +1,141 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
+@import url('./variables.css');
 
-/* Owncast color palette and theme customizations */
+/* Root brand tokens (adjust to your brand) */
 :root {
-  /* Primary colors using Owncast palette */
-  --ifm-color-primary: #6544e9;
-  --ifm-color-primary-dark: #5338e4;
-  --ifm-color-primary-darker: #4a31df;
-  --ifm-color-primary-darkest: #3622c7;
-  --ifm-color-primary-light: #7a5cf3;
-  --ifm-color-primary-lighter: #8665f4;
-  --ifm-color-primary-lightest: #a181f8;
+  /* Brand accent used for actions (buttons, highlights) */
+  --theme-color-action: var(--color-owncast-palette-7); /* example purple accent */
 
-  /* Owncast specific colors */
-  --owncast-unknown: #7a5cf3;
-  --owncast-unknown-2: #fffffe;
+  /* Brand foreground and background for light mode */
+  --theme-color-foreground: var(--color-owncast-palette-0); /* primary text color (dark) */
+  --theme-color-background: var(--color-owncast-palette-14);  /* page background (light) */
 
-  /* Owncast palette colors */
-  --owncast-dark-primary: #12161d;
-  --owncast-dark-secondary: #2D3748;
-  --owncast-dark-alternate: #000000;
-  --owncast-light-primary: #e2e8f0;
-  --owncast-light-secondary: #ffffff;
-  --owncast-light-alternate: #c3dafe;
-  --owncast-text-link: #6544e9;
-  --owncast-text-link-hover: #7a5cf3;
-  --owncast-disabled-bg: #b6b3c6;
-  --owncast-neutral-dark: #39373d;
-  --owncast-neutral-gray-light: #5d5f72;
-  --owncast-fun-1: #2386e2;
-  --owncast-fun-2: #da9eff;
-  --owncast-fun-3: #42bea6;
-  --owncast-light-bg: #f0f3f8;
-  --owncast-lighter-bg: #eff1f4;
-  --owncast-error: #ff4b39;
-  --owncast-warning: #ffc655;
-
-  /* Chat user colors */
-  --owncast-user-0: #FF717B;
-  --owncast-user-1: #F4E413;
-  --owncast-user-2: #B99C45;
-  --owncast-user-3: #58F40B;
-  --owncast-user-4: #0BF4F4;
-  --owncast-user-5: #16a8f7;
-  --owncast-user-6: #9A92FF;
-  --owncast-user-7: #FF53FF;
-
-  /* Fonts */
-  --ifm-font-family-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
-  --ifm-font-family-monospace: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-  --ifm-heading-font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
-
-  /* Other customizations */
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --ifm-background-color: var(--owncast-light-bg);
-  --ifm-background-surface-color: var(--owncast-light-secondary);
+  /* Spacing and radius tokens (optional) */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
 }
 
-/* Dark mode colors */
+/* Light mode overrides */
+[data-theme='light'] {
+  /* Primary color should be high-contrast on light backgrounds */
+  --ifm-color-primary: var(--theme-color-foreground); /* darker shade for links/headings */
+  --ifm-color-primary-dark: #111111;
+  --ifm-color-primary-darker: #0c0c0c;
+  --ifm-color-primary-light: #2a2a2a;
+  --ifm-color-primary-lighter: #3a3a3a;
+
+  /* Body and headings */
+  --ifm-font-color-base: #222222;
+  --ifm-heading-color: #111111;
+  --ifm-link-color: var(--color-owncast-palette-6);
+
+  /* Backgrounds */
+  --ifm-background-color: var(--theme-color-background);
+  --ifm-background-surface-color: #f7f7f9; /* subtle surface for cards */
+
+  /* Navbar */
+  --ifm-navbar-background-color: var(--color-owncast-palette-7);
+  --ifm-navbar-link-color: var(--color-owncast-palette-3);
+  --ifm-navbar-link-hover-color: var(--ifm-color-primary);
+
+  /* Menus and sidebars */
+  --ifm-menu-color: var(--theme-color-foreground);
+  --ifm-menu-color-active: var(--ifm-color-primary);
+
+  /* Buttons: keep action accent but ensure readable text */
+  --ifm-button-color: #ffffff;
+  --ifm-button-background-color: var(--theme-color-action);
+  --ifm-button-hover-background-color: #6e3eff;
+
+  /* Code blocks */
+  --prism-background-color: #f5f7fa;
+  --prism-color: #1a1a1a;
+}
+
+/* Dark mode overrides */
 [data-theme='dark'] {
-  /* Primary colors adjusted for dark mode */
-  --ifm-color-primary: #7a5cf3;
-  --ifm-color-primary-dark: #6544e9;
-  --ifm-color-primary-darker: #5338e4;
-  --ifm-color-primary-darkest: #4a31df;
-  --ifm-color-primary-light: #8665f4;
-  --ifm-color-primary-lighter: #9378f5;
-  --ifm-color-primary-lightest: #a181f8;
+  /* Strong foreground text */
+  --ifm-font-color-base: #e8eaed;
+  --ifm-heading-color: #f5f7fa;
 
-  /* Dark mode backgrounds */
-  --ifm-background-color: var(--owncast-dark-primary);
-  --ifm-background-surface-color: var(--owncast-dark-secondary);
-  --ifm-color-content: var(--owncast-light-primary);
-  --ifm-color-content-secondary: var(--owncast-neutral-gray-light);
+  /* Accessible accent for links/buttons on dark backgrounds */
+  /* Replace with your brand’s dark-mode accent that meets contrast */
+  --ifm-color-primary: #8ab4f8;
+  --ifm-color-primary-dark: #6fa0f6;
+  --ifm-color-primary-darker: #5a8cf2;
+  --ifm-color-primary-light: #a5c6fb;
+  --ifm-color-primary-lighter: #c4d8fd;
 
-  /* Code highlighting for dark mode */
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  /* Dark backgrounds */
+  --ifm-background-color: #0f1115;
+  --ifm-background-surface-color: #121417;
+
+  /* Navbar and sidebar */
+  --ifm-navbar-background-color: var(--color-owncast-palette-1);
+  --ifm-navbar-link-color: var(--ifm-font-color-base);
+  --ifm-navbar-link-hover-color: var(--ifm-color-primary);
+  --ifm-menu-color: var(--ifm-font-color-base);
+  --ifm-menu-color-active: var(--ifm-color-primary);
+
+  /* Buttons */
+  --ifm-button-color: #0b0d12;
+  --ifm-button-background-color: var(--ifm-color-primary);
+  --ifm-button-hover-background-color: var(--ifm-color-primary-dark);
+
+  /* Code blocks */
+  --prism-background-color: #0b0d12;
+  --prism-color: #e8eaed;
 }
 
-.pagination-nav {
-  display: none;
+/* Global resets to avoid “washed out” look in dark mode due to overlays/opacity/blur */
+html[data-theme='dark'] .main-wrapper,
+html[data-theme='dark'] .container,
+html[data-theme='dark'] .theme-doc-markdown,
+html[data-theme='dark'] .theme-doc-sidebar-container,
+html[data-theme='dark'] .theme-doc-toc-desktop,
+html[data-theme='dark'] .markdown {
+  opacity: 1 !important;
+  filter: none !important;
 }
+
+html[data-theme='dark'] .overlay,
+html[data-theme='dark'] .backdrop,
+html[data-theme='dark'] .glass,
+html[data-theme='dark'] .blur,
+html[data-theme='dark'] [class*='overlay'],
+html[data-theme='dark'] [class*='backdrop'],
+html[data-theme='dark'] [class*='glass'],
+html[data-theme='dark'] [class*='blur'] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: transparent !important;
+  opacity: 1 !important;
+}
+
+/* Ensure base text color applies if something overrides body color */
+html[data-theme='dark'] body {
+  color: var(--ifm-font-color-base) !important;
+}
+
+/* Optional: ensure content surfaces don’t introduce unintended lightness in dark mode */
+html[data-theme='dark'] .theme-doc-markdown,
+html[data-theme='dark'] .card,
+/* html[data-theme='dark'] .navbar, */
+html[data-theme='dark'] .sidebar,
+html[data-theme='dark'] .menu,
+html[data-theme='dark'] .docMainWrapper {
+  background-color: transparent !important;
+}
+
+/* Spacing/radius examples (optional) */
+.button {
+  border-radius: var(--radius-md);
+}
+.card {
+  border-radius: var(--radius-lg);
+}
+
