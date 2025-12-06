@@ -6,6 +6,8 @@ const https = require('https');
 
 function fetchJson(url) {
   const token = process.env.GH_ACCESS_TOKEN;
+  console.log(`[github-info] Token available: ${token ? 'yes' : 'no'}`);
+
   const headers = {
     'User-Agent': 'Owncast-Docs-Site',
     'Accept': 'application/vnd.github.v3+json',

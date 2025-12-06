@@ -12,7 +12,7 @@ const DOCS_DIR = path.join(__dirname, '..', 'docs');
 const OUTPUT_FILE = path.join(__dirname, '..', '.contributors-data.json');
 const AVATARS_DIR = path.join(__dirname, '..', 'static', 'img', 'contributors');
 const CACHE_FILE = path.join(__dirname, '..', '.contributors-cache.json');
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_TOKEN = process.env.GH_ACCESS_TOKEN;
 
 // Ensure avatars directory exists
 if (!fs.existsSync(AVATARS_DIR)) {
