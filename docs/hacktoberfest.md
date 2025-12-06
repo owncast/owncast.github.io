@@ -35,7 +35,7 @@ Owncast is a single-user live streaming server with chat features that allows yo
 - You take part in a **global event**, contribute to **a cool project**, and be a part of the **open source community**.
 
 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-    ![Owncast Contributor t-shirt](/images/owncast-tshirt.png)
+    ![Owncast Contributor t-shirt](./images/owncast-tshirt.png)
 </div>
 
 ## Code Contributions

@@ -14,7 +14,7 @@ Using the Owncast app on Hetzner Cloud you can get Owncast installed and configu
 
 Create your server as usual using the Hetzner Cloud Console. As an alternative to the operating system image, you can choose Owncast as app that you would like to have pre-installed. It is under the 'Apps' tab in the 'Images' section.
 
-<img src="../hetzner/hetzner1.png" alt="Hetzner Cloud interface with the apps tab open and Owncast selected" width="90%" />
+<img src="/docs/quickstart/providers/hetzner/hetzner1.png" alt="Hetzner Cloud interface with the apps tab open and Owncast selected" width="90%" />
 
 Hetzner has several server types. Ranging from Intel to ARM. Owncast works on all CPU types.
 
@@ -32,7 +32,7 @@ Continue the configuration of your server with the following options:
 
 For `https` to work you need to set-up some DNS records. You need to create an A-record for ipv4 and an AAAA-record for ipv6. You can find the ip adresses of your server on the server overview page. They are located right under the name of the server.
 
-<img src="../hetzner/hetzner2.png" alt="Close-up of the Hetzner Cloud interface with two IP address showing" width="90%" />
+<img src="/docs/quickstart/providers/hetzner/hetzner2.png" alt="Close-up of the Hetzner Cloud interface with two IP address showing" width="90%" />
 
 - Copy the IP Address for your new server from the new server status page.
 - Login to your DNS provider for your domain

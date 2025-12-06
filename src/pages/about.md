@@ -9,7 +9,7 @@ In 2020 the world changed when everyone become stuck in their homes, looking for
 
 This created an explosion of live streaming on Facebook Live, YouTube Live, Instagram, and Twitch. These services provided everything they needed, an easy way to live stream to the world, and a chat for users to be a part of their community.
 
-![Owncast Screenshot](/img/owncast-screenshot.png)
+![Owncast Screenshot](/images/owncast-screenshot.png)
 
 There deserves to be a better option for people. Something you could run yourself and get all the functionality of these services, where you could live stream to an audience and and allow them to take part in the chat, just like they've been used to on all the other services. But instead of handing control over to somebody else, you run it. **You own it all, just like it should be.**
 
