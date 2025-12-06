@@ -99,17 +99,17 @@ const config: Config = {
           { to: "/docs/quickstart", from: "/quickstart" },
           { to: "/docs/quickstart/container", from: "/quickstart/container" },
           {
-            to: "/docs/quickstart/digitalocean",
+            to: "/docs/quickstart/providers/digitalocean",
             from: "/quickstart/digitalocean",
           },
-          { to: "/docs/quickstart/elestio", from: "/quickstart/elestio" },
-          { to: "/docs/quickstart/hetzner", from: "/quickstart/hetzner" },
+          { to: "/docs/quickstart/providers/elestio", from: "/quickstart/elestio" },
+          { to: "/docs/quickstart/providers/hetzner", from: "/quickstart/hetzner" },
           {
             to: "/docs/quickstart/installation",
             from: "/quickstart/installation",
           },
           { to: "/docs/quickstart/installer", from: "/quickstart/installer" },
-          { to: "/docs/quickstart/linode", from: "/quickstart/linode" },
+          { to: "/docs/quickstart/providers/linode", from: "/quickstart/linode" },
           { to: "/docs/quickstart/linode/faq", from: "/quickstart/linode/faq" },
           { to: "/docs/quickstart/manual", from: "/quickstart/manual" },
           { to: "/docs/getting-started/configure-first-stream", from: "/quickstart/nextsteps" },
@@ -299,10 +299,6 @@ const config: Config = {
           {
             to: "/docs/troubleshooting/shared/misc-video-issues",
             from: "/troubleshoot/shared/misc-video-issues",
-          },
-          {
-            to: "/docs/troubleshooting/shared",
-            from: "/troubleshoot/shared/readme",
           },
           {
             to: "/docs/troubleshooting/shared/reduce-framerate",
