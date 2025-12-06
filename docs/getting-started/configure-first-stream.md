@@ -10,6 +10,12 @@ To begin streaming you'll first need your stream key and the RTMP URL of your Ow
 
 **Note:** Your stream key is only used by your streaming software to publish video; it is not your admin password.
 
+Beginning with Owncast v0.1.0 the admin password and stream keys are managed independently, allowing you to add as many stream keys as you'd like.
+
+While most people won't require having multiple stream keys, there are some specific scenarios where having this ability may be helpful.
+
+In the admin server setup page you can add and remove these keys.
+
 Any piece of software you're already using for live streaming is likely compatible with Owncast. Visit our [broadcasting software](/docs/broadcasting) page to see some specific pieces of software and how they're configured.
 
 1. Point your broadcasting software at your new server using `rtmp://yourserver/live` with your stream key. If your software doesn't have a way to specify a stream key use the url `rtmp://yourserver/live/streamkey` and use your stream key instead.

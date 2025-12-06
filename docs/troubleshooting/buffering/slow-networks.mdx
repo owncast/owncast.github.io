@@ -6,12 +6,20 @@ tags:
   - slow
   - mobile
 ---
+import { IncludeMarkdown } from '@site/src/components';
+import AddLowerQualityOutputs from '../shared/add-lower-quality-outputs.md';
+import ReduceVideoQuality from '../shared/reduce-video-quality.md';
 
 If some people are experiencing your stream without issues, but others are unable to enjoy your stream at the quality or qualities you have configured due to their own internet connection or mobile circumstances, their network or [location](/docs/troubleshooting/buffering/geo) may be to blame. Instead of trying to speed anything up on your side you need to offer additional options that they can download faster.
 
 After reading below you might also find helpful tips browsing the [OBS Troubleshooting Guide](https://github.com/obsproject/obs-studio/wiki/Stream-Buffering-Issues), even if you don't use OBS.
 
 ## Add additional lower output qualities
+
+<IncludeMarkdown>
+  <AddLowerQualityOutputs />
+  <ReduceVideoQuality />
+</IncludeMarkdown>
 
 ## The viewer will switch between qualities as needed
 
