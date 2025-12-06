@@ -27,8 +27,8 @@ Owncast is a self-hosted live video and web chat server for use with existing br
 The easiest way to get started:
 
 1. **[Install Owncast](/docs/quickstart/installation)** - Choose from multiple installation methods
-2. **[Configure your stream](/docs/quickstart/configure)** - Set up your streaming settings
-3. **[Start broadcasting](/docs/quickstart/startstreaming)** - Point your broadcasting software to Owncast
+2. **[Configure your stream](/docs/getting-started/configure-first-stream)** - Set up your streaming settings
+3. **[Start broadcasting](/docs/quickstart/broadcasting)** - Point your broadcasting software to Owncast
 4. **[Customize](/docs/website)** - Make it your own
 
 ## Popular Topics

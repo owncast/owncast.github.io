@@ -1,8 +1,8 @@
 ---
-title: Custom emoji
+title: Upload Custom emoji
 description: Add your own custom emoji for use in chat.
 sidebar_position: 300
-sidebar_label: Custom emoji
+sidebar_label: Upload custom emoji
 tags:
   - emoji
   - chat

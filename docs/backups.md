@@ -1,8 +1,8 @@
 ---
-title: Backups
+title: Back Up Your Stream Data and Configuration
 description: Owncast makes period backups of your data that can be restored.
 sidebar_position: 1100
-sidebar_label: Backups
+sidebar_label: Backup your stream data and configuration
 ---
 
 Owncast will create a backup of your data periodically. It can be found in your `backup` directory as `owncastdb.bak`. You can add this to your normal system backups to keep your Owncast data safe.

@@ -1,44 +1,45 @@
 ---
-title: Configuration
+title: Configuration via Runtime Flags
 description: >-
-  Configuration is done through the Owncast administration page. Learn what you
-  have control over and what customizations can be made.
+  Configuration is generally done through the Owncast administration page located on your server under `/admin`, however, there are a number of runtime flags you can set when starting Owncast to modify its behavior.
 sidebar_position: 100
-sidebar_label: Configuration
+sidebar_label: Configuration via runtime flags
 ---
 
-Configuration is done through the Owncast administration page located on your server under `/admin`. 
+Configuration is generally done through the Owncast administration site located on your server under `/admin`, however, there are a number of runtime flags you can set when starting Owncast to modify its behavior.
 
-**Admin Authentication:**
-- **Username:** `admin`  
-- **Password:** your admin password (not your stream key)
+You can run Owncast with `--help` to see a full list of available runtime flags.
 
-The default admin password is `abc123`.
+## Admin Password
 
-**Note:** Your stream key is only used by your streaming software to publish video; it is not your admin password.
+You can reset the admin password on startup via the `--adminpassword` flag. For example:
 
-**It's highly encouraged to change both your stream key and your admin passwords immediately after installation by visiting `/admin/config/server/`**
+```bash
+owncast --adminpassword mynewpassword
+```
 
-Some common items many people would want to update after installing Owncast are:
+## Stream Key
 
-- Your site name, logo, description and external links that are displayed on the [web site](/docs/website).
-- The **stream key** to gain access to broadcasting to your stream and your admin.
-- Enable your stream to show up in the [Owncast Directory](/docs/directory).
+You can set a temporary stream key on startup via the `--streamkey` flag. For example:
 
-## Web site details
-
-Your site name, logo, description, and page content can be set in the admin. You can also add links to your social profiles and web sites that exist elsewhere. [See details about the web site and chat interface](/docs/website).
-
-## Video output
-
-Depending on your hardware you may be able to configure your server to support multiple output variants for multiple different viewing conditions. [Learn how to configure your video and see how it directly effects your CPU usage](/docs/broadcasting/obs).
+```bash
+owncast --streamkey mystreamkey
+```
 
 ## Custom Ports
 
 Per default, Owncast will run a `http` web server on port `8080` and a RTMP server on port `1935`. You can change the ports in the the admin. You must restart Owncast for these changes to take effect.
 
-You can also set the port for the web server on the command line via the `-webserverport` flag.
+You can also set the port on the command line via the `--webserverport` and `-rtmpport` flags respectively. For example:
 
-## External storage providers
+```bash
+owncast --webserverport 9090 --rtmpport 2945
+```
 
-Instead of serving video directly from your personal server you can use a S3 compatible storage provider to offload the bandwidth and storage requirements elsewhere. [See how to configure the storage provider of your choice](/docs/storage).
+## Backups
+
+You can specify where backups are saved via the `--backupdir` flag. For example:
+
+```bash
+owncast --backupdir /path/to/backup/directory
+```

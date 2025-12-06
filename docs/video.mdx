@@ -1,12 +1,14 @@
 ---
-title: Video
+title: Choose the Right Video Quality Settings
 description: Configure your video to manage the quality and hardware performance.
 sidebar_position: 400
-sidebar_label: Video
+sidebar_label: Choose the right video quality settings
 slug: /docs/encoding/
 redirects:
   - /docs/encoding/
 ---
+
+import ResourcesCalculator from '@site/src/components/ResourcesCalculator';
 
 This document aims to outline what is being done to your content and the different knobs you can tweak to get the best output for your instance.
 
@@ -74,6 +76,8 @@ For some browsers, a "Lower latency" option is available in the web player. This
 
 What you're sending from your broadcasting software is generally reasonable and additional conversion isn't required, even for low-bandwidth viewers. Owncast will not change the audio stream and instead just pass it along to the end users to save additional work being performed.
 
+<ResourcesCalculator />
+
 ## How you configure your broadcasting software matters.
 
 You will want to configure your broadcasting software to match the highest quality you can offer your viewers. **That means if your Owncast server can only handle 720p@2500k you should not configure your broadcasting software to send 1080p@6000k**. The more conversion work you ask Owncast to do the more resources it will use on your server, making it even harder to offer the best qualities to your viewers.
@@ -89,3 +93,4 @@ If you are running on physical hardware you may be able to increase the performa
 ## Resource and requirement examples
 
 Visit the [resources and requirements](/docs/resources-requirements/) page to see some examples of what you can expect from your server hardware and network connection and how it may affect your viewers.
+

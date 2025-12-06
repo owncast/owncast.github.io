@@ -1,8 +1,8 @@
 ---
-title: Scaling Owncast
+title: Support Increased Viewer Capacity
 description: A place to start when needing to increase the capacity of your server.
 sidebar_position: 1000
-sidebar_label: Scaling Owncast
+sidebar_label: Support increased viewer capacity
 ---
 
 ## Disclaimer

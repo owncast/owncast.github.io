@@ -1,10 +1,10 @@
 ---
-title: Run as a system service
+title: Run Owncast as a Background Service
 description: >-
   Setup owncast to run as a system service, automatically starting when your
   server does.
 sidebar_position: 200
-sidebar_label: Run as a system service
+sidebar_label: Run Owncast as a background service
 ---
 
 You can optionally setup Owncast to run under [systemd](https://systemd.io/) so it's a managed service on your machine that automatically starts when your machine does.

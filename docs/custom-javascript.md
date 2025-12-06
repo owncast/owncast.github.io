@@ -1,7 +1,7 @@
 ---
-title: Adding custom Javascript
+title: Add custom Javascript
 description: Run custom Javascript on your Owncast web page.
-sidebar_label: Adding custom Javascript
+sidebar_label: Add custom Javascript
 ---
 
 If you have some Javascript you need to run when your Owncast web page loads, you can add it to the Javascript editor under the **General** settings page in the admin.

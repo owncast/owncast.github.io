@@ -2,7 +2,7 @@
 title: Stream Keys
 description: Add multiple stream keys for your streamers
 sidebar_position: 200
-sidebar_label: Stream Keys
+sidebar_label: Stream keys
 ---
 
 Beginning with Owncast v0.1.0 the admin password and stream keys are managed independently, allowing you to add as many stream keys as you'd like.

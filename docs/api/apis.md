@@ -1,7 +1,8 @@
 ---
-title: APIs & Access Tokens
+title: Build Chat Bots and Overlays Using the Owncast API
 description: Learn about access tokens and APIs
 sidebar_position: 48
+sidebar_label: Build chat bots and overlays using the Owncast API
 date: 2020-11-17T19:11:42.000Z
 ---
 

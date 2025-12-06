@@ -1,10 +1,10 @@
 ---
-title: Broadcasting Software
+title: Set Up Broadcasting Software
 description: >-
   How you configure your broadcasting software can impact the quality and
   performance of your stream
 sidebar_position: 100
-sidebar_label: Broadcasting Software
+sidebar_label: Set up broadcasting software
 tags:
   - streaming
   - rtmp

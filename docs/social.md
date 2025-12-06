@@ -1,10 +1,10 @@
 ---
-title: Social features
+title: Enable Social Features
 description: >-
   Allow people to follow your server, know when you go live, share and interact
   with your stream.
 sidebar_position: 200
-sidebar_label: Social features
+sidebar_label: Enable social features
 tags:
   - social
   - fediverse

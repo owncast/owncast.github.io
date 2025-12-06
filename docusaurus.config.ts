@@ -97,7 +97,6 @@ const config: Config = {
 
           // Quickstart pages
           { to: "/docs/quickstart", from: "/quickstart" },
-          { to: "/docs/quickstart/configure", from: "/quickstart/configure" },
           { to: "/docs/quickstart/container", from: "/quickstart/container" },
           {
             to: "/docs/quickstart/digitalocean",
@@ -120,10 +119,6 @@ const config: Config = {
             from: "/quickstart_old/prerequisites",
           },
           { to: "/docs/quickstart/providers", from: "/quickstart/providers" },
-          {
-            to: "/docs/quickstart/startstreaming",
-            from: "/quickstart/startstreaming",
-          },
 
           // Release pages
           { to: "/blog", from: "/releases" },

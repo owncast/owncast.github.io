@@ -1,7 +1,8 @@
 ---
-title: Viewer details
+title: Show Where Your Viewers Are From
 description: ''
 sidebar_position: 600
+sidebar_label: Show where your viewers are from
 slug: /docs/geoip/
 redirects:
   - /docs/geoip/

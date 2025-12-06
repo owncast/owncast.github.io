@@ -1,10 +1,10 @@
 ---
-title: Resources and requirements
+title: What You Need to Run Owncast
 description: >-
   There is no hard and fast rule for how much resources Owncast will use, since
   it depends on your configuration and requirements, but here are some examples.
 sidebar_position: 200
-sidebar_label: Resources and requirements
+sidebar_label: What you need to run Owncast
 ---
 
 import ResourcesCalculator from '@site/src/components/ResourcesCalculator';

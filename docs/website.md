@@ -1,8 +1,8 @@
 ---
-title: Web Site + Chat
+title: Customize Your Owncast Site
 description: Customize your Owncast web page by adding additional content and links.
 sidebar_position: 300
-sidebar_label: Web Site + Chat
+sidebar_label: Customize your Owncast site
 ---
 
 ## Overview
