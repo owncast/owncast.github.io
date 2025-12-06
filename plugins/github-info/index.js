@@ -1,15 +1,22 @@
 // plugins/github-info/index.js
 // Build-time GitHub info fetcher for owncast/owncast repo
 
+require('dotenv').config();
 const https = require('https');
 
 function fetchJson(url) {
+  const token = process.env.GH_ACCESS_TOKEN;
+  const headers = {
+    'User-Agent': 'Owncast-Docs-Site',
+    'Accept': 'application/vnd.github.v3+json',
+  };
+
+  if (token) {
+    headers['Authorization'] = `token ${token}`;
+  }
+
   return new Promise((resolve, reject) => {
-    https.get(url, {
-      headers: {
-        'User-Agent': 'Owncast-Docs-Site'
-      }
-    }, (res) => {
+    https.get(url, { headers }, (res) => {
       let data = '';
       res.on('data', (chunk) => data += chunk);
       res.on('end', () => {

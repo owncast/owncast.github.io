@@ -101,7 +101,7 @@ async function fetchMilestone(owner, repo, milestoneNumber, token) {
 
 module.exports = function milestonesPlugin(context, options) {
   const { owner = 'owncast', repo = 'owncast' } = options;
-  const token = process.env.GITHUB_TOKEN;
+  const token = process.env.GH_ACCESS_TOKEN;
 
   return {
     name: 'milestones-plugin',
