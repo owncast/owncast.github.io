@@ -1,0 +1,12 @@
+.includeMarkdown {
+  /* Seamless integration with surrounding content */
+}
+
+/* Remove any extra margin from the first and last elements */
+.includeMarkdown > *:first-child {
+  margin-top: 0;
+}
+
+.includeMarkdown > *:last-child {
+  margin-bottom: 0;
+}
