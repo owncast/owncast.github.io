@@ -112,7 +112,7 @@ const config: Config = {
           { to: "/docs/quickstart/linode", from: "/quickstart/linode" },
           { to: "/docs/quickstart/linode/faq", from: "/quickstart/linode/faq" },
           { to: "/docs/quickstart/manual", from: "/quickstart/manual" },
-          { to: "/docs/quickstart/nextsteps", from: "/quickstart/nextsteps" },
+          { to: "/docs/getting-started/configure-first-stream", from: "/quickstart/nextsteps" },
           { to: "/docs/quickstart", from: "/quickstart_old" },
           {
             to: "/docs/quickstart_old/prerequisites",
@@ -208,8 +208,8 @@ const config: Config = {
           },
 
           // Thirdparty pages
-          { to: "/docs/thirdparty", from: "/thirdparty" },
-          { to: "/docs/thirdparty/actions", from: "/thirdparty/actions" },
+          { to: "/docs/api", from: "/thirdparty" },
+          { to: "/docs/api/actions", from: "/thirdparty/actions" },
           { to: "/docs/api/apis", from: "/thirdparty/apis" },
           { to: "/docs/api/samples", from: "/thirdparty/samples" },
           { to: "/docs/api/webhooks", from: "/thirdparty/webhooks" },
