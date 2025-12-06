@@ -81,22 +81,22 @@ function KeyPoints() {
   const keyPoints = [
     {
       title: 'Self hosted and Independent',
-      icon: '/img/key-selfhosted.svg',
+      icon: '/images/key-selfhosted.svg',
       description: 'Have complete control and ownership over your stream, allowing you to create the content and community you want.',
     },
     {
       title: 'Chat',
-      icon: '/img/key-chat.svg',
+      icon: '/images/key-chat.svg',
       description: 'The frictionless built-in chat allows your viewers to be a part of the action. Include custom emotes and build chat bots to encourage engagement from your viewers.',
     },
     {
       title: 'Works with your software',
-      icon: '/img/key-videosoftware.svg',
+      icon: '/images/key-videosoftware.svg',
       description: 'Point your existing broadcasting software at your Owncast server and begin streaming on your own server in minutes.',
     },
     {
       title: 'The Fediverse',
-      icon: '/img/key-fediverse.svg',
+      icon: '/images/key-fediverse.svg',
       description: 'Your live stream can reach a wider audience on The Fediverse, allowing people to follow and share your stream on Mastodon and other Fediverse services.',
     },
   ];
@@ -128,12 +128,12 @@ function KeyPoints() {
 
 function Sponsors() {
   const sponsors = [
-    { name: 'cypress', src: '/img/sponsors/cypress.png', url: 'https://cloud.cypress.io/projects/wwi3xe' },
-    { name: 'fastly', src: '/img/sponsors/fastly.png', url: 'https://www.fastly.com/fast-forward' },
-    { name: 'chromatic', src: '/img/sponsors/chromatic.png', url: 'https://www.chromatic.com/builds?appId=629132c6e23893003a9e89c5' },
-    { name: 'docker', src: '/img/sponsors/docker.png', url: 'https://hub.docker.com/u/owncast' },
-    { name: 'rocket chat', src: '/img/sponsors/rocketchat.png', url: 'https://rocket.chat' },
-    { name: 'digital ocean', src: '/img/sponsors/digitalocean.svg', url: 'https://digitalocean.com?utm_medium=opensource&utm_source=owncast' },
+    { name: 'cypress', src: '/images/sponsors/cypress.png', url: 'https://cloud.cypress.io/projects/wwi3xe' },
+    { name: 'fastly', src: '/images/sponsors/fastly.png', url: 'https://www.fastly.com/fast-forward' },
+    { name: 'chromatic', src: '/images/sponsors/chromatic.png', url: 'https://www.chromatic.com/builds?appId=629132c6e23893003a9e89c5' },
+    { name: 'docker', src: '/images/sponsors/docker.png', url: 'https://hub.docker.com/u/owncast' },
+    { name: 'rocket chat', src: '/images/sponsors/rocketchat.png', url: 'https://rocket.chat' },
+    { name: 'digital ocean', src: '/images/sponsors/digitalocean.svg', url: 'https://digitalocean.com?utm_medium=opensource&utm_source=owncast' },
   ];
 
   return (
