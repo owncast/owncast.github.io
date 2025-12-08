@@ -94,6 +94,10 @@ const config: Config = {
           { to: "/docs/hacktoberfest", from: "/hacktoberfest" },
           { to: "/docs/tshirt", from: "/tshirt" },
           { to: "/docs/trademark", from: "/trademark" },
+          { to: "/docs/quickstart/installation", from: "/install" },
+          { to: "/docs/quickstart/installation", from: "/installation" },
+          { to: "/docs/quickstart/installation", from: "/docs/install" },
+          { to: "/docs/quickstart/installation", from: "/docs/installation" },
 
           // Quickstart pages
           { to: "/docs/quickstart", from: "/quickstart" },
