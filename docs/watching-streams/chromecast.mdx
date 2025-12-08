@@ -1,0 +1,60 @@
+---
+id: devices-chromecast
+title: Chromecast
+sidebar_label: Chromecast
+
+deviceId: chromecast
+deviceType: casting
+reliability: high
+hide_title: true
+tags:
+  - chromecast
+  - casting
+  - google
+  - chrome
+  - television
+  - watching
+summary: >
+  Cast Owncast streams to your Chromecast device directly from Chrome browser.
+icon: /images/devices/chromecast.svg
+---
+
+import DeviceLayout from '@site/src/components/tv/DeviceLayout';
+import { DeviceOptionsGrid } from '@site/src/components/tv/DeviceOptionsGrid';
+import { DeviceOptionCard } from '@site/src/components/tv/DeviceOptionCard';
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard
+    id="chrome-cast"
+    title="Chrome Browser Casting"
+    badge="Recommended"
+    difficulty="easy"
+    reliability="high"
+    summary="Cast your Owncast stream directly from Chrome browser to your Chromecast device."
+  >
+    <ul>
+      <li>Works with any Owncast stream in Chrome browser.</li>
+      <li>Simple casting process with just a few clicks.</li>
+      <li>No additional apps required on the Chromecast.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. On your computer, open **Chrome**.
+      2. Visit the Owncast server you want to watch.
+      3. At the top right, click the **More** button and then **Cast**.
+      4. Choose the Chromecast device where you want to watch the content.
+      5. If you're already using the Chromecast, your content will replace what's on your TV.
+
+    </details>
+
+    For more details, visit the [official Chromecast documentation](https://support.google.com/chromecast/answer/3228332).
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

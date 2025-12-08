@@ -1,0 +1,63 @@
+---
+id: devices-amazon-fire-tv
+title: Amazon Fire TV
+sidebar_label: Amazon Fire TV
+
+deviceId: amazon-fire-tv
+deviceType: streaming-box
+reliability: high
+hide_title: true
+tags:
+  - amazon
+  - fire-tv
+  - vlc
+  - streaming-box
+  - television
+  - watching
+summary: >
+  Watch Owncast streams on Amazon Fire TV using VLC or other compatible apps.
+icon: /images/devices/amazon-fire-tv.svg
+---
+
+import DeviceLayout from '@site/src/components/tv/DeviceLayout';
+import { DeviceOptionsGrid } from '@site/src/components/tv/DeviceOptionsGrid';
+import { DeviceOptionCard } from '@site/src/components/tv/DeviceOptionCard';
+import StoreButton from '@site/src/components/StoreButton';
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard
+    id="vlc-fire-tv"
+    title="VLC for Fire TV"
+    badge="Recommended"
+    difficulty="easy"
+    reliability="high"
+    summary="Use VLC to play Owncast streams directly on your Fire TV device."
+  >
+    <ul>
+      <li>Reliable media player with excellent stream support.</li>
+      <li>Direct URL input for any Owncast server.</li>
+      <li>Free and widely available.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Install VLC for Amazon Fire TV from the Amazon App Store.
+      2. Select **"Streams"** from the **"Browsing"** section.
+      3. Type in the name of the stream you wish to watch. For example: `https://watch.owncast.online`.
+      4. Select **"Next"**.
+
+    </details>
+
+    <StoreButton 
+      url="https://www.amazon.com/VLC-Mobile-Team-for-Fire/dp/B00U65KQMQ" 
+      type="amazon" 
+    />
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

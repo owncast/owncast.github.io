@@ -34,10 +34,6 @@ Owncast is a single-user live streaming server with chat features that allows yo
 - You get added to the Owncast list of contributors on the [Owncast website](https://owncast.online), [GitHub repository](https://github.com/owncast/owncast) **and** the contributors thank-you video on [Owncast TV](https://watch.owncast.online).
 - You take part in a **global event**, contribute to **a cool project**, and be a part of the **open source community**.
 
-<div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-    ![Owncast Contributor t-shirt](./images/owncast-tshirt.png)
-</div>
-
 ## Code Contributions
 
 Visit our [Owncast contributor guide](https://owncast.online/contribute/) to learn how to get started with contributing to Owncast.

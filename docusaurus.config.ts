@@ -340,6 +340,10 @@ const config: Config = {
             to: "/docs/troubleshooting/video-errors",
             from: "/troubleshoot/video-errors",
           },
+          {
+            to: "/docs/watching-streams",
+            from: "/docs/watching-on-tvs",
+          },
         ],
       },
     ],

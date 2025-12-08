@@ -1,0 +1,73 @@
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.icon {
+  width: 14vw;
+  /* height: 100x; */
+  object-fit: cover;
+}
+
+.heading {
+  flex: 1;
+}
+
+.title {
+  margin: 0 0 0.25rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.chip,
+.chipSecondary {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.chip {
+  background: var(--ifm-color-primary);
+  color: #fff;
+}
+
+.chipSecondary {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-300);
+}
+
+.summary {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.tag {
+  font-size: 0.7rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  background: var(--ifm-color-emphasis-100);
+}
+
+.content {
+  margin-top: 1rem;
+}

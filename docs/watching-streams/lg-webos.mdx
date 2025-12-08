@@ -1,0 +1,86 @@
+---
+id: devices-lg-webos
+title: LG Smart TVs (WebOS)
+sidebar_label: LG TVs (WebOS)
+
+deviceId: lg-webos
+deviceType: smart-tv
+reliability: medium
+hide_title: true
+tags:
+  - lg
+  - webos
+  - smart-tv
+  - satv
+  - iptv
+  - television
+  - watching
+summary: >
+  Watch Owncast streams on LG WebOS TVs using SATV or other IPTV-compatible apps.
+icon: /images/devices/lg-tv.svg
+---
+
+import DeviceLayout from '@site/src/components/tv/DeviceLayout';
+import { DeviceOptionsGrid } from '@site/src/components/tv/DeviceOptionsGrid';
+import { DeviceOptionCard } from '@site/src/components/tv/DeviceOptionCard';
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard
+    id="satv-webos"
+    title="SATV App"
+    badge="Recommended"
+    difficulty="medium"
+    reliability="medium"
+    summary="Use the SATV app to browse the Owncast directory via IPTV playlist on your LG WebOS TV."
+  >
+    <ul>
+      <li>Browse the entire Owncast directory directly on your TV.</li>
+      <li>Free app available on LG Content Store.</li>
+      <li>Automatic refresh of live streams.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Install **SATV** (free) from your LG TV's app store.
+      2. Run it and press button to **"Add Playlist"**.
+      3. Type in: `https://directory.owncast.online/api/iptv`. Make sure it's https.
+      4. Double check you typed it in correctly.
+      5. Save this playlist.
+      6. It will refresh the current live streams each time you launch the SATV app.
+      7. Choose the live stream you want to watch.
+
+    </details>
+  </DeviceOptionCard>
+
+  <DeviceOptionCard
+    id="direct-url-webos"
+    title="Direct URL Input"
+    difficulty="hard"
+    reliability="low"
+    summary="Some WebOS browsers may support direct playback of Owncast streams."
+  >
+    <ul>
+      <li>May work with built-in browser on newer LG TVs.</li>
+      <li>Requires manual URL entry.</li>
+      <li>Limited compatibility and reliability.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Open the web browser on your LG WebOS TV (if available).
+      2. Navigate to your Owncast server URL.
+      3. Try to play the stream directly in the browser.
+      
+      **Note:** This method has limited success and may not work on all LG TV models.
+
+    </details>
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

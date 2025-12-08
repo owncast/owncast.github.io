@@ -1,0 +1,179 @@
+---
+id: devices-apple-tv
+title: Apple TV
+sidebar_label: Apple TV
+
+deviceId: apple-tv              # used for anchors / grids if you want
+deviceType: streaming-box       # streaming-box | smart-tv | console | casting | other
+reliability: high               # high | medium | low
+hide_title: true
+tags:
+  - airplay
+  - official-app
+  - appletv
+  - tvos
+  - ios
+  - ipados
+  - macos
+  - television
+  - watching
+summary: >
+  Apple TV works best with Owncasts for tvOS, VLC, or AirPlay from iOS/macOS.
+icon: /images/devices/apple-tv.svg
+---
+
+import DeviceLayout from '@site/src/components/tv/DeviceLayout';
+import { DeviceOptionsGrid } from '@site/src/components/tv/DeviceOptionsGrid';
+import { DeviceOptionCard } from '@site/src/components/tv/DeviceOptionCard';
+import StoreButton from '@site/src/components/StoreButton';
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard
+    id="owncasts-tvos"
+    title="Owncasts for tvOS"
+    badge="Recommended"
+    difficulty="easy"
+    reliability="high"
+    screenshot="/img/devices/apple-tv/owncasts-tvos-home.png"
+    screenshotAlt="Owncasts for tvOS home screen"
+    summary="Use the native Owncasts for tvOS app to browse the Owncast directory or connect directly to your own server."
+  >
+    <ul>
+      <li>Best experience if you primarily watch Owncast streams.</li>
+      <li>Simple interface with directory browsing built in.</li>
+      <li>No casting or mirroring required.</li>
+    </ul>
+
+    <StoreButton 
+      url="https://apps.apple.com/app/owncasts/id1669506909" 
+      type="tvos" 
+    />
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Open the **App Store** on your Apple TV.  
+      2. Search for **Owncasts** and install the app.  
+      3. Launch Owncasts for tvOS.  
+      4. Browse the directory or add your Owncast server URL in settings.  
+      5. Select a stream and start watching.
+
+    </details>
+  </DeviceOptionCard>
+
+  <DeviceOptionCard
+    id="vlc-tvos"
+    title="VLC for tvOS"
+    difficulty="medium"
+    reliability="high"
+    screenshot="/img/devices/apple-tv/vlc-network-stream.png"
+    screenshotAlt="VLC for tvOS network stream screen"
+    summary="Use VLC to open your Owncast URL directly as a network stream."
+  >
+    <ul>
+      <li>Good if you already use VLC on other devices.</li>
+      <li>Works with the main Owncast page URL or direct HLS URL.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Install **VLC** from the tvOS App Store.  
+      2. Open VLC and navigate to **Network Stream**.  
+      3. Enter your Owncast URL (for example `https://watch.yourserver.tld`).  
+      4. Select the stream and start playback.
+
+    </details>
+
+    <StoreButton 
+      url="https://apps.apple.com/app/vlc-for-mobile/id650377962" 
+      type="tvos" 
+    />
+  </DeviceOptionCard>
+
+  <DeviceOptionCard
+    id="airplay-ios"
+    title="AirPlay from iPhone or iPad"
+    difficulty="easy"
+    reliability="high"
+    screenshot="/img/devices/apple-tv/airplay-control-center.png"
+    screenshotAlt="iOS Control Center with AirPlay target"
+    summary="Play the Owncast stream on your iPhone/iPad and AirPlay to your Apple TV."
+  >
+    <ul>
+      <li>Great if you primarily watch on your phone but want to send it to TV occasionally.</li>
+      <li>No extra tvOS apps required.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Open the Owncast stream in a browser on iOS or iPadOS. Alternatively open using the Owncasts iOS app.  
+      2. Start playback.  
+      3. Open **Control Center** and tap the AirPlay icon.  
+      4. Select your Apple TV.  
+
+    </details>
+  </DeviceOptionCard>
+
+  <DeviceOptionCard
+    id="airplay-mac"
+    title="AirPlay from Mac"
+    difficulty="medium"
+    reliability="high"
+    summary="Play the Owncast stream on your Mac and mirror or AirPlay the video to Apple TV."
+  >
+    <ul>
+      <li>Good if you want to use your laptop to stream to your AppleTV.</li>
+      <li>Works from Safari or screen sharing from macOS.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Open the Owncast stream in Safari on your Mac.  
+      2. Start playback.  
+      3. Use the **Screen Mirroring / AirPlay** icon in the menu bar, or in the video player if available.  
+      4. Select your Apple TV.  
+
+    </details>
+  </DeviceOptionCard>
+
+  <DeviceOptionCard
+    id="iplaytv-tvos"
+    title="iPlayTV for tvOS"
+    difficulty="medium"
+    reliability="medium"
+    summary="Use iPlayTV to browse the Owncast directory via IPTV playlist on your Apple TV."
+  >
+    <ul>
+      <li>Browse the entire Owncast directory directly on your TV.</li>
+      <li>IPTV playlist support for directory integration.</li>
+      <li>Automatic refresh of live streams.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Install **iPlayTV** from the tvOS App Store.
+      2. Visit Settings → Edit.
+      3. For the `M3U` Playlist URL: `https://directory.owncast.online/api/iptv`
+      4. Change the `Channels Refresh` to the lowest value it offers.
+      5. Save and browse available Owncast streams.
+
+    </details>
+
+    <StoreButton 
+      url="https://apps.apple.com/app/iplaytv-iptv-m3u-player/id1072226801" 
+      type="tvos" 
+    />
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+
+
+</DeviceLayout>

@@ -1,0 +1,179 @@
+---
+id: devices-iphone-ipad
+title: iPhone & iPad
+sidebar_label: iPhone & iPad
+
+deviceId: iphone-ipad
+deviceType: other
+reliability: high
+hide_title: true
+tags:
+  - iphone
+  - ipad
+  - ios
+  - ipados
+  - official-app
+  - safari
+  - mobile
+  - airplay
+  - watching
+summary: >
+  Watch Owncast streams on iPhone and iPad using the native Owncasts app, Safari browser, or AirPlay to other devices.
+icon: /images/devices/iphone-ipad.svg
+---
+
+import DeviceLayout from '@site/src/components/tv/DeviceLayout';
+import { DeviceOptionsGrid } from '@site/src/components/tv/DeviceOptionsGrid';
+import { DeviceOptionCard } from '@site/src/components/tv/DeviceOptionCard';
+import StoreButton from '@site/src/components/StoreButton';
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard
+    id="owncasts-ios"
+    title="Owncasts for iOS"
+    badge="Recommended"
+    difficulty="easy"
+    reliability="high"
+    screenshot="/img/devices/iphone-ipad/owncasts-ios-directory.png"
+    screenshotAlt="Owncasts for iOS directory screen"
+    summary="Use the native Owncasts app to browse the directory or connect directly to your own server."
+  >
+    <ul>
+      <li>Best experience for watching Owncast streams on mobile.</li>
+      <li>Directory browsing built in.</li>
+      <li>Picture-in-picture support for multitasking.</li>
+      <li>AirPlay integration for casting to TV.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Install **Owncasts for iOS** from the App Store.
+      2. Launch the application and browse the directory or add your own Owncast server in settings.
+      3. Select a stream to start watching.
+      4. Use the AirPlay button to cast to compatible devices like Apple TV or AirPlay-enabled TVs.
+
+    </details>
+
+    <StoreButton 
+      url="https://apps.apple.com/app/owncasts/id1669506909" 
+      type="ios" 
+    />
+  </DeviceOptionCard>
+
+  <DeviceOptionCard
+    id="safari-browser"
+    title="Safari Browser"
+    difficulty="easy"
+    reliability="high"
+    summary="Watch Owncast streams directly in Safari with full-screen and AirPlay support."
+  >
+    <ul>
+      <li>No app installation required.</li>
+      <li>Works with any Owncast server.</li>
+      <li>Built-in AirPlay controls in video player.</li>
+      <li>Picture-in-picture support on supported devices.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Open **Safari** on your iPhone or iPad.
+      2. Navigate to your Owncast server URL (e.g., `https://watch.owncast.online`).
+      3. Tap the play button to start the stream.
+      4. Use the AirPlay button in the video controls to cast to other devices.
+      5. Tap the full-screen button for immersive viewing.
+
+    </details>
+  </DeviceOptionCard>
+
+  <DeviceOptionCard
+    id="vlc-ios"
+    title="VLC for iOS"
+    difficulty="medium"
+    reliability="high"
+    summary="Use VLC to play Owncast streams with advanced playback controls and options."
+  >
+    <ul>
+      <li>Advanced media player with extensive format support.</li>
+      <li>Network stream support for direct URL input.</li>
+      <li>Offline playback capabilities.</li>
+      <li>Built-in AirPlay support.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Install **VLC for iOS** from the App Store.
+      2. Open VLC and tap the **Network** tab.
+      3. Enter your Owncast server URL (e.g., `https://watch.owncast.online`).
+      4. Tap the stream to start playback.
+      5. Use AirPlay button to cast to other devices if desired.
+
+    </details>
+
+    <StoreButton 
+      url="https://apps.apple.com/app/vlc-for-mobile/id650377962" 
+      type="ios" 
+    />
+  </DeviceOptionCard>
+
+  <DeviceOptionCard
+    id="airplay-casting"
+    title="AirPlay to TV"
+    difficulty="easy"
+    reliability="high"
+    summary="Stream from your iPhone or iPad to Apple TV, AirPlay-compatible TVs, or other AirPlay receivers."
+  >
+    <ul>
+      <li>Works from both the Owncasts app and Safari.</li>
+      <li>High-quality video streaming to large screens.</li>
+      <li>Control playback from your mobile device.</li>
+      <li>Continue using your phone while streaming.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Start playing an Owncast stream on your iPhone or iPad (using either the Owncasts app or Safari).
+      2. Look for the **AirPlay** button in the video controls or app interface.
+      3. Tap the AirPlay button and select your target device (Apple TV, smart TV, etc.).
+      4. The stream will begin playing on the selected device.
+      5. Use your iPhone/iPad as a remote control.
+
+    </details>
+
+    For more details, visit [Apple's AirPlay documentation](https://support.apple.com/en-us/HT204289).
+  </DeviceOptionCard>
+
+  <DeviceOptionCard
+    id="control-center-airplay"
+    title="Control Center AirPlay"
+    difficulty="easy"
+    reliability="high"
+    summary="Use Control Center to quickly AirPlay any Owncast stream to compatible devices."
+  >
+    <ul>
+      <li>System-wide AirPlay access from Control Center.</li>
+      <li>Works with any app or browser playing Owncast streams.</li>
+      <li>Quick device switching.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Start playing an Owncast stream in any app or Safari.
+      2. Open **Control Center** (swipe down from top-right on newer iPhones, swipe up from bottom on older models).
+      3. Tap the **AirPlay** icon (rectangle with triangle).
+      4. Select your AirPlay-compatible device from the list.
+      5. The audio and video will stream to the selected device.
+
+    </details>
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>
