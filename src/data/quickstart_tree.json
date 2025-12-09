@@ -1,0 +1,478 @@
+{
+    "title": "Owncast Quickstart Wizard",
+    "showQuestionNumbers": "off",
+    "showNavigationButtons": true,
+    "showProgressBar": true,
+    "progressBarLocation": "top",
+    "autoAdvanceEnabled": true,
+    "clearInvisibleValues": "onHidden",
+    "pages": [
+        {
+            "name": "install-method-page",
+            "title": "How do you want to install Owncast?",
+            "description": "By using the installer you can get up and running in about a minute. However, if you would prefer to download a release manually, use a one-click install at a supported hosting provider, use a container you have those options and more. If you'd prefer you can browse our entire installation documentation.",
+            "elements": [
+                {
+                    "type": "radiogroup",
+                    "name": "install_method",
+                    "isRequired": true,
+                    "title": "Select your preferred installation method:",
+                    "colCount": 1,
+                    "goNextPageAutomatic": true,
+                    "choices": [
+                        {
+                            "value": "manual",
+                            "text": "I want to manually install Owncast myself."
+                        },
+                        {
+                            "value": "hostingprovider",
+                            "text": "I want Owncast to be installed for me on a hosting provider."
+                        },
+                        {
+                            "value": "docker",
+                            "text": "I want to run Owncast inside a containerized environment such as Docker or Kubernetes."
+                        },
+                        {
+                            "value": "other",
+                            "text": "Other specific hardware or hosting environments."
+                        },
+                        {
+                            "value": "installed-what-is-next",
+                            "text": "Owncast is installed and I'm not sure what to do next."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "docker-result",
+            "title": "Docker Installation",
+            "visibleIf": "{install_method} = 'docker'",
+            "redirect": "/docs/getting-started/install/container",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "docker_guide",
+                    "html": "<h3>Docker Installation Guide</h3><p><a href='/quickstart/docker' target='_blank' rel='noopener'>Follow the Docker installation guide</a></p><p>This guide will walk you through running Owncast in a containerized environment.</p>"
+                }
+            ]
+        },
+        {
+            "name": "manual-install-method-page",
+            "title": "How would you like to manually install Owncast?",
+            "description": "Owncast supplies a quick install script that will always install the most recent version and get you running very quickly. However, there are other options.",
+            "visibleIf": "{install_method} = 'manual'",
+            "elements": [
+                {
+                    "type": "radiogroup",
+                    "name": "manual_method",
+                    "isRequired": true,
+                    "title": "Choose your manual installation method:",
+                    "colCount": 1,
+                    "goNextPageAutomatic": true,
+                    "choices": [
+                        {
+                            "value": "quickinstaller",
+                            "text": "I want to use the Owncast Quick Installer Script."
+                        },
+                        {
+                            "value": "download",
+                            "text": "I want to download a release of Owncast."
+                        },
+                        {
+                            "value": "packagemanager",
+                            "text": "I want to use my operating system's package manager."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "quickinstaller-result",
+            "title": "Quick Installer",
+            "visibleIf": "{install_method} = 'manual' and {manual_method} = 'quickinstaller'",
+            "redirect": "/quickstart/installer",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "quickinstaller_guide",
+                    "html": "<h3>Quick Installer Guide</h3><p><a href='/quickstart/installer' target='_blank' rel='noopener'>Use the Owncast Quick Installer</a></p><p>The quick installer will download and set up Owncast for you automatically.</p>"
+                }
+            ]
+        },
+        {
+            "name": "download-result",
+            "title": "Manual Download",
+            "visibleIf": "{install_method} = 'manual' and {manual_method} = 'download'",
+            "redirect": "/quickstart/manual/",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "download_guide",
+                    "html": "<h3>Manual Download Guide</h3><p><a href='/quickstart/manual/' target='_blank' rel='noopener'>Download and install Owncast manually</a></p><p>This guide will show you how to download and set up Owncast step by step.</p>"
+                }
+            ]
+        },
+        {
+            "name": "os-package-manager-page",
+            "title": "Use your Operating System's package manager",
+            "description": "<strong>Note</strong>: These packages may be out of date. These packages are not built or maintained by the Owncast project and any specific concerns or support regarding their installation should be directed at the maintainers of the packages.<br><br>What Operating System or distribution do you use?",
+            "visibleIf": "{install_method} = 'manual' and {manual_method} = 'packagemanager'",
+            "elements": [
+                {
+                    "type": "radiogroup",
+                    "name": "os_package",
+                    "isRequired": true,
+                    "title": "Select your operating system:",
+                    "colCount": 1,
+                    "goNextPageAutomatic": true,
+                    "choices": [
+                        {
+                            "value": "arch",
+                            "text": "Arch Linux"
+                        },
+                        {
+                            "value": "freebsd",
+                            "text": "FreeBSD"
+                        },
+                        {
+                            "value": "nixos",
+                            "text": "nixos"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "arch-result",
+            "title": "Arch Linux Package",
+            "visibleIf": "{install_method} = 'manual' and {manual_method} = 'packagemanager' and {os_package} = 'arch'",
+            "redirect": "https://aur.archlinux.org/packages/owncast/",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "arch_guide",
+                    "html": "<h3>Arch Linux Package</h3><p><a href='https://aur.archlinux.org/packages/owncast/' target='_blank' rel='noopener'>Install Owncast from AUR</a></p><p>You can install Owncast using your preferred AUR helper.</p>"
+                }
+            ]
+        },
+        {
+            "name": "freebsd-result",
+            "title": "FreeBSD Package",
+            "visibleIf": "{install_method} = 'manual' and {manual_method} = 'packagemanager' and {os_package} = 'freebsd'",
+            "redirect": "https://www.freshports.org/www/owncast/",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "freebsd_guide",
+                    "html": "<h3>FreeBSD Package</h3><p><a href='https://www.freshports.org/www/owncast/' target='_blank' rel='noopener'>Install Owncast on FreeBSD</a></p><p>Install Owncast using the FreeBSD ports system.</p>"
+                }
+            ]
+        },
+        {
+            "name": "nixos-result",
+            "title": "NixOS Package",
+            "visibleIf": "{install_method} = 'manual' and {manual_method} = 'packagemanager' and {os_package} = 'nixos'",
+            "redirect": "https://search.nixos.org/packages?channel=unstable&show=owncast&from=0&size=50&sort=relevance&type=packages&query=owncast",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "nixos_guide",
+                    "html": "<h3>NixOS Package</h3><p><a href='https://search.nixos.org/packages?channel=unstable&show=owncast&from=0&size=50&sort=relevance&type=packages&query=owncast' target='_blank' rel='noopener'>Install Owncast on NixOS</a></p><p>Install Owncast using the Nix package manager.</p>"
+                }
+            ]
+        },
+        {
+            "name": "hostingprovider-install-method-page",
+            "title": "What hosting provider would you like to use to install Owncast for you?",
+            "description": "Owncast is supported on the following hosting providers and they can install Owncast for you.",
+            "visibleIf": "{install_method} = 'hostingprovider'",
+            "elements": [
+                {
+                    "type": "radiogroup",
+                    "name": "hosting_provider",
+                    "isRequired": true,
+                    "title": "Select your hosting provider:",
+                    "colCount": 1,
+                    "goNextPageAutomatic": true,
+                    "choices": [
+                        {
+                            "value": "linode",
+                            "text": "Linode"
+                        },
+                        {
+                            "value": "digitalocean",
+                            "text": "DigitalOcean"
+                        },
+                        {
+                            "value": "vultr",
+                            "text": "Vultr"
+                        },
+                        {
+                            "value": "zeuscloud",
+                            "text": "Zeus Cloud"
+                        },
+                        {
+                            "value": "elestio",
+                            "text": "Elestio (Fully managed)"
+                        },
+                        {
+                            "value": "hetzner",
+                            "text": "Hetzner"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "linode-result",
+            "title": "Linode Installation",
+            "visibleIf": "{install_method} = 'hostingprovider' and {hosting_provider} = 'linode'",
+            "redirect": "/quickstart/linode/",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "linode_guide",
+                    "html": "<h3>Linode Installation Guide</h3><p><a href='/quickstart/linode/' target='_blank' rel='noopener'>Install Owncast on Linode</a></p><p>Follow the step-by-step guide to set up Owncast on Linode.</p>"
+                }
+            ]
+        },
+        {
+            "name": "digitalocean-result",
+            "title": "DigitalOcean Installation",
+            "visibleIf": "{install_method} = 'hostingprovider' and {hosting_provider} = 'digitalocean'",
+            "redirect": "/quickstart/digitalocean/",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "digitalocean_guide",
+                    "html": "<h3>DigitalOcean Installation Guide</h3><p><a href='/quickstart/digitalocean/' target='_blank' rel='noopener'>Install Owncast on DigitalOcean</a></p><p>Follow the step-by-step guide to set up Owncast on DigitalOcean.</p>"
+                }
+            ]
+        },
+        {
+            "name": "vultr-result",
+            "title": "Vultr Installation",
+            "visibleIf": "{install_method} = 'hostingprovider' and {hosting_provider} = 'vultr'",
+            "redirect": "https://www.vultr.com/marketplace/apps/owncast",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "vultr_guide",
+                    "html": "<h3>Vultr Marketplace</h3><p><a href='https://www.vultr.com/marketplace/apps/owncast' target='_blank' rel='noopener'>Install Owncast from Vultr Marketplace</a></p><p>Deploy Owncast with one click from the Vultr marketplace.</p>"
+                }
+            ]
+        },
+        {
+            "name": "zeuscloud-result",
+            "title": "Zeus Cloud Installation",
+            "visibleIf": "{install_method} = 'hostingprovider' and {hosting_provider} = 'zeuscloud'",
+            "redirect": "https://www.zeuscloud.co.uk/apps/owncast",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "zeuscloud_guide",
+                    "html": "<h3>Zeus Cloud</h3><p><a href='https://www.zeuscloud.co.uk/apps/owncast' target='_blank' rel='noopener'>Install Owncast on Zeus Cloud</a></p><p>Deploy Owncast with Zeus Cloud's managed hosting.</p>"
+                }
+            ]
+        },
+        {
+            "name": "elestio-result",
+            "title": "Elestio Installation",
+            "visibleIf": "{install_method} = 'hostingprovider' and {hosting_provider} = 'elestio'",
+            "redirect": "/quickstart/elestio/",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "elestio_guide",
+                    "html": "<h3>Elestio Installation Guide</h3><p><a href='/quickstart/elestio/' target='_blank' rel='noopener'>Install Owncast on Elestio</a></p><p>Fully managed Owncast hosting with Elestio.</p>"
+                }
+            ]
+        },
+        {
+            "name": "hetzner-result",
+            "title": "Hetzner Installation",
+            "visibleIf": "{install_method} = 'hostingprovider' and {hosting_provider} = 'hetzner'",
+            "redirect": "https://docs.hetzner.com/cloud/apps/list/owncast/",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "hetzner_guide",
+                    "html": "<h3>Hetzner Cloud Apps</h3><p><a href='https://docs.hetzner.com/cloud/apps/list/owncast/' target='_blank' rel='noopener'>Install Owncast on Hetzner</a></p><p>Deploy Owncast using Hetzner Cloud Apps.</p>"
+                }
+            ]
+        },
+        {
+            "name": "other-install-page",
+            "title": "Other specific hardware and environments",
+            "description": "The following are other methods you can use to setup Owncast. These are not packaged or maintained by the Owncast project and any support or concerns about these alternative install methods should be directed at the maintainers of the respective options.",
+            "visibleIf": "{install_method} = 'other'",
+            "elements": [
+                {
+                    "type": "radiogroup",
+                    "name": "other_method",
+                    "isRequired": true,
+                    "title": "Select your environment:",
+                    "colCount": 1,
+                    "goNextPageAutomatic": true,
+                    "choices": [
+                        {
+                            "value": "yunohost",
+                            "text": "I run Yunohost"
+                        },
+                        {
+                            "value": "cloudron",
+                            "text": "I run Cloudron"
+                        },
+                        {
+                            "value": "qnap",
+                            "text": "I own a Qnap NAS"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "yunohost-result",
+            "title": "Yunohost Installation",
+            "visibleIf": "{install_method} = 'other' and {other_method} = 'yunohost'",
+            "redirect": "https://dash.yunohost.org/appci/app/owncast",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "yunohost_guide",
+                    "html": "<h3>Yunohost App</h3><p><a href='https://dash.yunohost.org/appci/app/owncast' target='_blank' rel='noopener'>Install Owncast on Yunohost</a></p><p>Install Owncast through the Yunohost app catalog.</p>"
+                }
+            ]
+        },
+        {
+            "name": "cloudron-result",
+            "title": "Cloudron Installation",
+            "visibleIf": "{install_method} = 'other' and {other_method} = 'cloudron'",
+            "redirect": "https://docs.cloudron.io/apps/owncast/",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "cloudron_guide",
+                    "html": "<h3>Cloudron App</h3><p><a href='https://docs.cloudron.io/apps/owncast/' target='_blank' rel='noopener'>Install Owncast on Cloudron</a></p><p>Deploy Owncast through your Cloudron platform.</p>"
+                }
+            ]
+        },
+        {
+            "name": "qnap-result",
+            "title": "QNAP NAS Installation",
+            "visibleIf": "{install_method} = 'other' and {other_method} = 'qnap'",
+            "redirect": "https://qnapclub.eu/en/qpkg/1138",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "qnap_guide",
+                    "html": "<h3>QNAP Package</h3><p><a href='https://qnapclub.eu/en/qpkg/1138' target='_blank' rel='noopener'>Install Owncast on QNAP</a></p><p>Install the Owncast package on your QNAP NAS.</p>"
+                }
+            ]
+        },
+        {
+            "name": "installed-what-is-next-page",
+            "title": "Owncast is installed. What's next?",
+            "description": "If Owncast is installed and running but you're not sure what to do next you might be ready to go! But there are other things you might want to check such as making sure you support SSL.",
+            "visibleIf": "{install_method} = 'installed-what-is-next'",
+            "elements": [
+                {
+                    "type": "radiogroup",
+                    "name": "next_step",
+                    "isRequired": true,
+                    "title": "What would you like to do next?",
+                    "colCount": 1,
+                    "goNextPageAutomatic": true,
+                    "choices": [
+                        {
+                            "value": "startstreaming",
+                            "text": "I want to learn how to start streaming."
+                        },
+                        {
+                            "value": "configure-ssl",
+                            "text": "My server doesn't yet support SSL (https) and I want to configure that."
+                        },
+                        {
+                            "value": "configure-system-service",
+                            "text": "I want to setup Owncast to automatically start and run in the background as a service."
+                        },
+                        {
+                            "value": "directory",
+                            "text": "I want to list my stream in the public directory so others can discover it."
+                        },
+                        {
+                            "value": "configure-video",
+                            "text": "I want to learn more about configuring my video quality."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "startstreaming-result",
+            "title": "Broadcasting Guide",
+            "visibleIf": "{install_method} = 'installed-what-is-next' and {next_step} = 'startstreaming'",
+            "redirect": "/docs/broadcasting/",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "streaming_guide",
+                    "html": "<h3>Broadcasting Guide</h3><p><a href='/docs/broadcasting/' target='_blank' rel='noopener'>Learn how to start streaming</a></p><p>This guide covers how to configure your broadcasting software and start streaming to your Owncast server.</p>"
+                }
+            ]
+        },
+        {
+            "name": "configure-ssl-result",
+            "title": "SSL Configuration",
+            "visibleIf": "{install_method} = 'installed-what-is-next' and {next_step} = 'configure-ssl'",
+            "redirect": "/docs/sslproxies/",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "ssl_guide",
+                    "html": "<h3>SSL Configuration Guide</h3><p><a href='/docs/sslproxies/' target='_blank' rel='noopener'>Configure SSL and reverse proxies</a></p><p>Learn how to set up SSL/TLS encryption for your Owncast server.</p>"
+                }
+            ]
+        },
+        {
+            "name": "configure-system-service-result",
+            "title": "System Service Setup",
+            "visibleIf": "{install_method} = 'installed-what-is-next' and {next_step} = 'configure-system-service'",
+            "redirect": "/docs/systemservice/",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "service_guide",
+                    "html": "<h3>System Service Guide</h3><p><a href='/docs/systemservice/' target='_blank' rel='noopener'>Configure Owncast as a system service</a></p><p>Set up Owncast to automatically start and run in the background.</p>"
+                }
+            ]
+        },
+        {
+            "name": "directory-result",
+            "title": "Directory Listing",
+            "visibleIf": "{install_method} = 'installed-what-is-next' and {next_step} = 'directory'",
+            "redirect": "/docs/directory/",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "directory_guide",
+                    "html": "<h3>Directory Listing Guide</h3><p><a href='/docs/directory/' target='_blank' rel='noopener'>List your stream in the directory</a></p><p>Learn how to make your stream discoverable in the public directory.</p>"
+                }
+            ]
+        },
+        {
+            "name": "configure-video-result",
+            "title": "Video Configuration",
+            "visibleIf": "{install_method} = 'installed-what-is-next' and {next_step} = 'configure-video'",
+            "redirect": "/docs/video/",
+            "elements": [
+                {
+                    "type": "html",
+                    "name": "video_guide",
+                    "html": "<h3>Video Configuration Guide</h3><p><a href='/docs/video/' target='_blank' rel='noopener'>Configure video quality and settings</a></p><p>Learn how to optimize your video quality and configure encoding settings.</p>"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+---
+title: Quickstart Wizard
+description: Get started with Owncast using this step-by-step wizard.
+---
+
+import Wizard from '../components/Wizard'
+import { Model } from 'survey-core'
+import tree from '../data/quickstart_tree.json'
+
+import KapaChat from '../components/KapaChat';
+export const treeModel = new Model(tree);
+
+<Wizard model={treeModel}/>
+
