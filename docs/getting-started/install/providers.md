@@ -1,5 +1,4 @@
 ---
-slug: /quickstart/providers
 title: Supported one-click installs
 description: >-
   Automatically have a server with Owncast pre-installed by using supported

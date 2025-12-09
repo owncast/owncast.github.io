@@ -100,25 +100,21 @@ const config: Config = {
           { to: "/docs/getting-started/install", from: "/docs/installation" },
           { to: "/docs/getting-started/install", from: "/docs/quickstart" },
 
-          // Quickstart pages
-          { to: "/docs/getting-started", from: "/quickstart" },
-          { to: "/docs/getting-started/container", from: "/getting-started/container" },
           {
-            to: "/docs/getting-started/providers/digitalocean",
+            to: "/docs/getting-started/install/providers/digitalocean",
             from: "/quickstart/digitalocean",
           },
-          { to: "/docs/getting-started/providers/elestio", from: "/quickstart/elestio" },
-          { to: "/docs/getting-started/providers/hetzner", from: "/quickstart/hetzner" },
+          { to: "/docs/getting-started/install/providers/elestio", from: "/quickstart/elestio" },
+          { to: "/docs/getting-started/install/providers/hetzner", from: "/quickstart/hetzner" },
           {
             to: "/docs/getting-started/install",
             from: "/quickstart/installation",
           },
-          { to: "/docs/getting-started/installer", from: "/quickstart/installer" },
-          { to: "/docs/getting-started/providers/linode", from: "/quickstart/linode" },
-          { to: "/docs/getting-started/linode/faq", from: "/quickstart/linode/faq" },
-          { to: "/docs/getting-started/manual", from: "/quickstart/manual" },
-          { to: "/docs/getting-started-started/configure-first-stream", from: "/quickstart/nextsteps" },
-          { to: "/docs/getting-started", from: "/quickstart_old" },
+          { to: "/docs/getting-started/install/installer", from: "/quickstart/installer" },
+          { to: "/docs/getting-started/install/providers/linode", from: "/quickstart/linode" },
+          { to: "/docs/getting-started/install/providers/linode/faq", from: "/quickstart/linode/faq" },
+          { to: "/docs/getting-started/install/manual", from: "/quickstart/manual" },
+          { to: "/docs/getting-started/configure-first-stream", from: "/quickstart/nextsteps" },
           { to: "/docs/getting-started/install/providers", from: "/quickstart/providers" },
 
           // Release pages

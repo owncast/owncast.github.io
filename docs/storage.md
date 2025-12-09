@@ -3,7 +3,6 @@ title: Use Object Storage to Save Bandwidth
 description: Use an external storage provider to distribute your Owncast video stream.
 sidebar_position: 500
 sidebar_label: Use object storage to save bandwidth
-slug: /docs/s3/
 redirects:
   - /docs/s3/
 ---

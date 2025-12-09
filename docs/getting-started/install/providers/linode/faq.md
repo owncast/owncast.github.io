@@ -1,5 +1,4 @@
 ---
-slug: /quickstart/linode/faq
 title: FAQ for Linode
 description: A selection of questions and answers for the Linode marketplace app
 ---

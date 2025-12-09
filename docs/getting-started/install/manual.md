@@ -1,5 +1,4 @@
 ---
-slug: /quickstart/manual
 title: Manual Install
 description: If you don't want to use the automated installer you can download it yourself.
 tags: [installation]
