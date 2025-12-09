@@ -1,16 +1,17 @@
-import React from 'react';
-import { usePluginData } from '@docusaurus/useGlobalData';
-import styles from './GithubInfo.module.css';
+import React from "react";
+import { usePluginData } from "@docusaurus/useGlobalData";
+import styles from "./GithubInfo.module.css";
 
 interface GithubInfoData {
   version: string;
   releaseDate: string;
+  releaseUrl: string;
   starCount: number;
   fetched: boolean;
 }
 
-export default function GithubInfo(): React.ReactElement {
-  const data = usePluginData('github-info') as GithubInfoData;
+export default function GithubInfo(): React.ReactElement | null {
+  const data = usePluginData("github-info") as GithubInfoData;
 
   if (!data?.fetched) {
     return null;
@@ -20,9 +21,24 @@ export default function GithubInfo(): React.ReactElement {
 
   return (
     <div className={styles.githubInfo}>
-      <span className={styles.version} title={`Released: ${data.releaseDate}`}>
-        {data.version}
-      </span>
+      {data.releaseUrl ? (
+        <a
+          href={data.releaseUrl}
+          className={styles.version}
+          title={`Released: ${data.releaseDate} - Click to view release notes`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {data.version}
+        </a>
+      ) : (
+        <span
+          className={styles.version}
+          title={`Released: ${data.releaseDate}`}
+        >
+          {data.version}
+        </span>
+      )}
       <span className={styles.separator}>•</span>
       <span className={styles.stars} title="GitHub stars">
         ⭐ {formattedStars}

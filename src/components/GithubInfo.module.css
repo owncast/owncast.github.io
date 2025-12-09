@@ -9,7 +9,15 @@
 
 .version {
   font-weight: 600;
-  cursor: help;
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.version:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
 }
 
 .separator {
