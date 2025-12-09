@@ -3,8 +3,6 @@ title: Use Object Storage to Save Bandwidth
 description: Use an external storage provider to distribute your Owncast video stream.
 sidebar_position: 500
 sidebar_label: Use object storage to save bandwidth
-redirects:
-  - /docs/s3/
 ---
 
 Instead of serving video directly from your personal server you can use a S3 compatible storage provider to offload the bandwidth and storage requirements elsewhere. This is not for permanent storage of recordings or archival purposes, just for live streams.

@@ -93,7 +93,6 @@ const config: Config = {
           { to: "/docs/1-1", from: "/1-1" },
           { to: "/docs/hacktoberfest", from: "/hacktoberfest" },
           { to: "/docs/tshirt", from: "/tshirt" },
-          { to: "/docs/trademark", from: "/trademark" },
           { to: "/docs/getting-started/install", from: "/install" },
           { to: "/docs/getting-started/install", from: "/installation" },
           { to: "/docs/getting-started/install", from: "/docs/install" },
@@ -212,7 +211,6 @@ const config: Config = {
           { to: "/docs/api/webhooks", from: "/thirdparty/webhooks" },
 
           // Troubleshoot pages
-          { to: "/docs/troubleshooting", from: "/troubleshoot" },
           {
             to: "/docs/troubleshooting/buffering/all",
             from: "/troubleshoot/buffering/all",
@@ -341,6 +339,17 @@ const config: Config = {
             to: "/docs/watching-streams",
             from: "/docs/watching-on-tvs",
           },
+
+          // Redirects from frontmatter
+          { to: "/docs/getting-started/install/container", from: "/quickstart/container" },
+          { to: "/docs/getting-started/install/container", from: "/quickstart/docker" },
+          { to: "/docs/getting-started/install/container", from: "/quickstart/container/" },
+          { to: "/docs/getting-started/configure-first-stream", from: "/quickstart/configure" },
+          { to: "/docs/storage", from: "/docs/s3/" },
+          { to: "/docs/viewers", from: "/docs/geoip/" },
+          { to: "/docs/video", from: "/docs/encoding/" },
+          { to: "/docs/chat/moderation", from: "/docs/moderation/" },
+          { to: "/docs/chat/chat-authentication", from: "/docs/chat-authentication" },
         ],
       },
     ],

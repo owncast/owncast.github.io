@@ -3,8 +3,6 @@ title: Show Where Your Viewers Are From
 description: ''
 sidebar_position: 600
 sidebar_label: Show where your viewers are from
-redirects:
-  - /docs/geoip/
 ---
 
 Owncast can display high-level geographic information about your current viewers if you enable it in your instance.

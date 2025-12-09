@@ -3,8 +3,6 @@ title: Enable Chat authentication
 description: Verify your and keep your chat identity.
 sidebar_position: 200
 sidebar_label: Enable chat authentication
-redirects:
-  - /docs/chat-authentication
 tags:
   - chat
   - fediverse

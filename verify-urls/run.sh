@@ -1,6 +1,8 @@
 #!/bin/bash
 
-python3 find_broken_urls.py --old old-sitemap.xml --new-base https://owncast-preview.surge.sh --old-base https://owncast.online
+NEW_BASE="http://owncast-preview.surge.sh"
+
+python3 find_broken_urls.py --old old-sitemap.xml --new-base $NEW_BASE --old-base https://owncast.online
 
 # Display broken links table
 echo ""
