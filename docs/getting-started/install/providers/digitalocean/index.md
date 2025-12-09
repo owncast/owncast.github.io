@@ -19,7 +19,7 @@ As a bonus you'll get **$100 worth of service for free** if you sign up with Dig
 ## Create your new server
 
 1. Visit the [Owncast page on DigitalOcean](https://marketplace.digitalocean.com/apps/owncast?refcode=492f098407b2) and create a new Droplet.
-1. Keep in mind when selecting a monthly plan that the more CPU you can provide, the better quality and flexibility you'll have in the end. [Read more about CPU usage](/docs/video/#cpu-usage-1) with Owncast.
+1. Keep in mind when selecting a monthly plan that the more CPU you can provide, the better quality and flexibility you'll have in the end. [Read more about CPU usage](/docs/video/#cpu-usage) with Owncast.
 
 ## Setting up DNS
 

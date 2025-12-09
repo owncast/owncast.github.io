@@ -36,10 +36,10 @@ If your application has what is often called "IPTV" or M3U support, you can brow
 
 ### Streaming Boxes and Devices
 
-- **[Apple TV](./apple-tv)** - Owncasts for tvOS, VLC, or AirPlay
-- **[Roku](./roku)** - Owncasts for Roku or AirPlay
-- **[Amazon Fire TV](./amazon-fire-tv)** - VLC for Fire TV
-- **[Google TV](./google-tv)** - VLC for Android TV
+- **[Apple TV](/docs/watching-streams/apple-tv)** - Owncasts for tvOS, VLC, or AirPlay
+- **[Roku](/docs/watching-streams/roku)** - Owncasts for Roku or AirPlay
+- **[Amazon Fire TV](/docs/watching-streams/amazon-fire-tv)** - VLC for Fire TV
+- **[Google TV](/docs/watching-streams/google-tv)** - VLC for Android TV
 
 ## Recommended Setup
 

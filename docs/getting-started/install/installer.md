@@ -5,7 +5,7 @@ description: Start streaming to your own server in seconds.
 sidebar_label: Owncast quick installer
 ---
 
-By using the installer you can get up and running in about a minute. However, if you would prefer to [download a release manually](/docs/quickstart/manual), use a [one-click install](/docs/quickstart/providers) at a supported hosting provider, or other methods visit the [Quickstart](/quickstart) to find the installation method that best matches your needs.
+By using the installer you can get up and running in about a minute. However, if you would prefer to [download a release manually](/docs/getting-started/install/manual), use a [one-click install](/docs/getting-started/install/providers) at a supported hosting provider, or other methods visit the [Installation page](/docs/getting-started/install/) to find the installation method that best matches your needs.
 
 ### Installer
 

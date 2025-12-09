@@ -17,7 +17,7 @@ date: 2021-02-01T00:00:00.000Z
 1. Unzip the file, allowing it to overwrite old files.
 1. Restart the service.
 
-For installing from scratch, see the [Quickstart](/docs/quickstart/installation).
+For installing from scratch, see the [Quickstart](/docs/getting-started/install/).
 
 ## Breaking changes
 
@@ -28,7 +28,7 @@ For installing from scratch, see the [Quickstart](/docs/quickstart/installation)
 
 ## Docker
 
-If you're running [Owncast under Docker](/docs/quickstart/container) it's suggested you bind your `data` directory so you have access to your database file, backups, etc.
+If you're running [Owncast under Docker](/docs/getting-started/install/container) it's suggested you bind your `data` directory so you have access to your database file, backups, etc.
 
 ---
 

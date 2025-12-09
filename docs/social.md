@@ -85,7 +85,7 @@ If somebody **follows** you, **likes** a post you send out, or **shares** any of
 </figure>
 </center>
 
-## Where to learn more about The Fediverse
+## Where to learn more about The Fediverse {#learn-more}
 
 A decentralized network of different services built on standards is the future of social networking. Learn more about all the different services that make up The Fediverse and see how, much like Owncast can empower you to operate your own live streams, there are other opportunities to leave the centralized corporate social networking services in the past.
 
