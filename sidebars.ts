@@ -23,7 +23,6 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Install Owncast',
           items: [
-            'getting-started/install/index',
             'getting-started/install/installer',
             'getting-started/install/manual',
             'getting-started/install/container',
@@ -71,6 +70,8 @@ const sidebars: SidebarsConfig = {
             },
         'video',
         'storage',
+        'latency',
+        'metrics',
       ],
     },
     {
