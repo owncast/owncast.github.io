@@ -3,10 +3,10 @@ title: Use a container image
 description: >-
   Images for running Owncast within a containerized environment are available
   for releases.
-slug: /quickstart/container
 redirects:
   - /quickstart/container
   - /quickstart/docker
+  - /quickstart/container
 tags: [docker, container, portainer, installation, compose]
 ---
 
