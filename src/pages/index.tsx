@@ -5,6 +5,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import Layout from "@theme/Layout";
 import Contributors from "@site/src/components/Contributors";
+import Store from "@site/src/components/Store";
 import styles from "./index.module.css";
 
 function HomepageHeader() {
@@ -191,7 +192,7 @@ function Sponsors() {
   );
 }
 
-export default function Home(): JSX.Element {
+export default function Home(): React.JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
@@ -201,6 +202,7 @@ export default function Home(): JSX.Element {
       <HomepageHeader />
       <main>
         <KeyPoints />
+        <Store />
         <Contributors />
         <Sponsors />
       </main>
