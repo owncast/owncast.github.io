@@ -71,7 +71,7 @@ function HomepageHeader() {
             <div className={styles.buttons}>
               <Link
                 className="button button--secondary button--lg"
-                to="/docs/quickstart/installation"
+                to="/docs/quickstart"
               >
                 Get started
               </Link>
@@ -167,6 +167,11 @@ function Sponsors() {
       name: "digital ocean",
       src: "/images/sponsors/digitalocean.svg",
       url: "https://digitalocean.com?utm_medium=opensource&utm_source=owncast",
+    },
+    {
+      name: "lambda test",
+      src: "https://www.lambdatest.com/resources/images/logo-white.svg",
+      url: "https://www.lambdatest.com",
     },
   ];
 

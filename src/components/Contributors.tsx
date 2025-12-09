@@ -45,19 +45,50 @@ export default function Contributors({
         }
         const contributorsData = await contributorsResponse.json();
 
-        // Filter out bots
+        // Filter out bots and copilot
         const filteredContributors = contributorsData.filter(
           (contributor: Contributor) =>
-            !contributor.login.toLowerCase().includes("bot")
+            !contributor.login.toLowerCase().includes("bot") &&
+            !contributor.login.toLowerCase().includes("copilot")
         );
-        setContributors(filteredContributors);
+
+        // Deduplicate contributors based on html_url
+        const deduplicatedContributors = filteredContributors.filter(
+          (contributor: Contributor, index: number, self: Contributor[]) =>
+            self.findIndex((c) => c.html_url === contributor.html_url) === index
+        );
+
+        // Sort contributors alphabetically by login
+        const sortedContributors = deduplicatedContributors.sort(
+          (a: Contributor, b: Contributor) =>
+            a.login.toLowerCase().localeCompare(b.login.toLowerCase())
+        );
+        setContributors(sortedContributors);
 
         // Fetch donors if enabled
         if (showDonors) {
           const donorsResponse = await fetch("/data/donors.json");
           if (donorsResponse.ok) {
             const donorsData = await donorsResponse.json();
-            setDonors(donorsData);
+
+            // Filter out guest and incognito donors
+            const filteredDonors = donorsData.filter(
+              (donor: Donor) =>
+                !donor.login.toLowerCase().includes("guest") &&
+                !donor.login.toLowerCase().includes("incognito")
+            );
+
+            // Deduplicate donors based on html_url
+            const deduplicatedDonors = filteredDonors.filter(
+              (donor: Donor, index: number, self: Donor[]) =>
+                self.findIndex((d) => d.html_url === donor.html_url) === index
+            );
+
+            // Sort donors alphabetically by login
+            const sortedDonors = deduplicatedDonors.sort((a: Donor, b: Donor) =>
+              a.login.toLowerCase().localeCompare(b.login.toLowerCase())
+            );
+            setDonors(sortedDonors);
           }
         }
       } catch (err) {
@@ -133,23 +164,6 @@ export default function Contributors({
               rel="noopener noreferrer"
             >
               OpenCollective.
-            </a>
-          </p>
-
-          <p className={styles.browserTesting}>
-            Browser testing via{" "}
-            <a
-              href="https://www.lambdatest.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://www.lambdatest.com/resources/images/logo-white.svg"
-                alt="LambdaTest"
-                className={styles.lambdaTestLogo}
-                width="147"
-                height="26"
-              />
             </a>
           </p>
 
