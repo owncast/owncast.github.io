@@ -1,0 +1,57 @@
+---
+title: Owncast Newsletter
+description: Get updates and community highlights. Be the first to know about new features, get behind-the-scenes access.
+---
+
+import React, { useEffect } from 'react';
+
+export const NewsletterSignup = () => {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/ghost/signup-form@~0.1/umd/signup-form.min.js';
+    script.setAttribute('data-label-1', 'via-signup-form');
+    script.setAttribute('data-button-color', '#6544e9');
+    script.setAttribute('data-button-text-color', '#FFFFFF');
+    script.setAttribute('data-site', 'https://owncast.ghost.io/');
+    script.async = true;
+    
+    const container = document.getElementById('newsletter-signup-container');
+    if (container && !container.querySelector('script')) {
+      container.appendChild(script);
+    }
+    
+    return () => {
+      // Cleanup if needed
+      const existingScript = container?.querySelector('script');
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, []);
+
+  return (
+    <div
+      id="newsletter-signup-container"
+      style={{minHeight: '58px', maxWidth: '440px', width: '100%', margin: '0 auto'}}
+    />
+  );
+};
+
+## Keep updated with the Owncast community
+
+With the Owncast community growing it can be difficult to keep track of all
+the different streamers, special events, tools, and new initiatives around all
+things Owncast.
+
+We plan to send out a newsletter periodically with project updates and
+featured community content. We'll never spam you or sell your email address.
+You can unsubscribe at any time.
+
+<NewsletterSignup />
+
+<br />
+
+If you'd like to be involved in the creation of this newsletter, and submit
+ideas for the next issue, drop by the
+[Owncast community chat](https://owncast.rocket.chat/channel/owncast-community)
+and join the conversation!
