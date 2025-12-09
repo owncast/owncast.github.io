@@ -1,4 +1,5 @@
 import React from "react";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
 export type PlayStoreType = "android";
 
@@ -26,7 +27,11 @@ const PlayStoreButton: React.FC<PlayStoreButtonProps> = ({
         rel="noopener noreferrer"
         aria-label={altText}
       >
-        <img src={imageSrc} alt={altText} style={{ width, height: "auto" }} />
+        <img
+          src={useBaseUrl(imageSrc)}
+          alt={altText}
+          style={{ width, height: "auto" }}
+        />
       </a>
     </div>
   );

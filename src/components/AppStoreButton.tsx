@@ -1,4 +1,5 @@
 import React from "react";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
 export type AppStoreType = "iphone" | "appletv";
 
@@ -32,7 +33,11 @@ const AppStoreButton: React.FC<AppStoreButtonProps> = ({
         rel="noopener noreferrer"
         aria-label={altText}
       >
-        <img src={imageSrc} alt={altText} style={{ width, height: "auto" }} />
+        <img
+          src={useBaseUrl(imageSrc)}
+          alt={altText}
+          style={{ width, height: "auto" }}
+        />
       </a>
     </div>
   );

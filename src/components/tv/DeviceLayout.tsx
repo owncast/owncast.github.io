@@ -1,5 +1,6 @@
 import React from "react";
 import { useDoc } from "@docusaurus/plugin-content-docs/client";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./DeviceLayout.module.css";
 
 interface DeviceFrontMatter {
@@ -46,7 +47,7 @@ export default function DeviceLayout({
       <header className={styles.header}>
         {fm.icon && (
           <img
-            src={fm.icon}
+            src={useBaseUrl(fm.icon)}
             alt={fm.title}
             className={styles.icon}
             loading="lazy"

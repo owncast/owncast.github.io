@@ -1,4 +1,5 @@
 import React from "react";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
 export type StoreType = "ios" | "tvos" | "android" | "amazon" | "roku";
 
@@ -60,7 +61,11 @@ const StoreButton: React.FC<StoreButtonProps> = ({
         rel="noopener noreferrer"
         aria-label={altText}
       >
-        <img src={imageSrc} alt={altText} style={{ width, height: "auto" }} />
+        <img
+          src={useBaseUrl(imageSrc)}
+          alt={altText}
+          style={{ width, height: "auto" }}
+        />
       </a>
     </div>
   );

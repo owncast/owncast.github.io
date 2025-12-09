@@ -1,4 +1,5 @@
 import React from "react";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./DeviceOptions.module.css";
 
 interface DeviceOptionCardProps {
@@ -63,7 +64,7 @@ export function DeviceOptionCard({
       {screenshot && (
         <div className={styles.screenshotWrapper}>
           <img
-            src={screenshot}
+            src={useBaseUrl(screenshot)}
             alt={screenshotAlt ?? title}
             className={styles.screenshot}
             loading="lazy"

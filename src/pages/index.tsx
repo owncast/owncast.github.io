@@ -2,6 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from "@theme/Layout";
 import Contributors from "@site/src/components/Contributors";
 import styles from "./index.module.css";
@@ -119,8 +120,8 @@ function KeyPoints() {
                 <div
                   className={styles.keyIcon}
                   style={{
-                    WebkitMaskImage: `url('${point.icon}')`,
-                    maskImage: `url('${point.icon}')`,
+                    WebkitMaskImage: `url('${useBaseUrl(point.icon)}')`,
+                    maskImage: `url('${useBaseUrl(point.icon)}')`,
                   }}
                 ></div>
                 <h2>{point.title}</h2>
@@ -176,7 +177,7 @@ function Sponsors() {
           {sponsors.map((sponsor, idx) => (
             <li key={idx}>
               <a href={sponsor.url} target="_blank" rel="noopener noreferrer">
-                <img src={sponsor.src} alt={sponsor.name} />
+                <img src={useBaseUrl(sponsor.src)} alt={sponsor.name} />
               </a>
             </li>
           ))}
