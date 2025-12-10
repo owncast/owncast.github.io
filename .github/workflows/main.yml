@@ -17,16 +17,20 @@ jobs:
           submodules: true # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
       - name: Install jq
-        uses: r26d/jq-action@master
+        run: sudo apt-get update && sudo apt-get install -y jq
 
       - name: Create static/data directory
         run: mkdir -p static/data
 
-      - name: Fetch Contributors
-        run: "curl https://api.github.com/repos/owncast/owncast/contributors?per_page=100 | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > static/data/contributors-core.json"
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-      - name: Fetch Home Page Contributors
-        run: "curl https://api.github.com/repos/owncast/owncast.github.io/contributors?per_page=100 | jq 'map(.) | .[] | {login: .login, avatar_url: .avatar_url, html_url: .html_url}' | jq --slurp '.' > static/data/contributors-homepage.json"
+      - name: Fetch All Contributors
+        run: node scripts/fetch-contributors.js
+        env:
+          GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
 
       - name: Combine Contributors
         run: "jq -n 'input | . as $core | (input | . as $homepage | $core + $homepage) | unique_by(.login)' static/data/contributors-core.json static/data/contributors-homepage.json > static/data/contributors.json"
@@ -34,8 +38,6 @@ jobs:
       - name: Fetch donors
         run: 'curl https://opencollective.com/owncast/members/all.json | jq ''map(.) | .[] | select(.role=="BACKER") | {login: .name, avatar_url: .image, html_url: .profile}'' | jq --slurp ''.'' > static/data/donors.json'
 
-      # - name: Add current development documentation
-      #   run: mkdir -p static/api/development && curl https://raw.githubusercontent.com/owncast/owncast/refs/heads/develop/docs/api/index.html > static/api/development/index.html
       - name: Commit changes
         uses: EndBug/add-and-commit@v5
         with:
