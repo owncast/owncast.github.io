@@ -1,6 +1,8 @@
 # Hugo default output directory
 /public
 
+build
+
 # Hugo's place for Generated SCSS
 resources/_gen/*
 
@@ -26,6 +28,9 @@ node_modules
 .contributors-data.json
 .contributors-cache.json
 static/img/contributors/
+
+# API configuration (generated at build time)
+api-config.json
 
 # Environment variables
 .env
