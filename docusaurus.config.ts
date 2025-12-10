@@ -5,6 +5,40 @@ import type { ScalarOptions } from "@scalar/docusaurus";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+// All redirect configurations - both wildcards and regular redirects
+const ALL_REDIRECTS = [
+  // Wildcard redirects
+  { to: "/blog/*", from: "/releases/*" },
+  { to: "/docs/troubleshooting/*", from: "/troubleshoot/*", excludePaths: ["/troubleshoot/"] },
+  { to: "/docs/api/*", from: "/thirdparty/*" },
+  { to: "/docs/getting-started/install/providers/*", from: "/quickstart/*" },
+  
+  // Regular redirects
+  { to: "/docs/1-1", from: "/1-1" },
+  { to: "/docs/hacktoberfest", from: "/hacktoberfest" },
+  { to: "/docs/tshirt", from: "/tshirt" },
+  { to: "/docs/getting-started/install", from: "/install" },
+  { to: "/docs/getting-started/install", from: "/installation" },
+  { to: "/docs/getting-started/install", from: "/docs/install" },
+  { to: "/docs/getting-started/install", from: "/docs/installation" },
+  { to: "/quickstart", from: "/docs/quickstart" },
+  { to: "/docs/getting-started/install", from: "/quickstart/installation" },
+  { to: "/docs/getting-started/install/installer", from: "/quickstart/installer" },
+  { to: "/docs/getting-started/install/manual", from: "/quickstart/manual" },
+  { to: "/docs/getting-started/configure-first-stream", from: "/quickstart/nextsteps" },
+  { to: "/docs/getting-started/install/providers", from: "/quickstart/providers" },
+  { to: "/blog", from: "/releases" },
+  { to: "/docs/watching-streams", from: "/docs/watching-on-tvs" },
+  { to: "/docs/getting-started/install/container", from: "/quickstart/container" },
+  { to: "/docs/getting-started/install/container", from: "/quickstart/docker" },
+  { to: "/docs/getting-started/configure-first-stream", from: "/quickstart/configure" },
+  { to: "/docs/storage", from: "/docs/s3/" },
+  { to: "/docs/viewers", from: "/docs/geoip/" },
+  { to: "/docs/video", from: "/docs/encoding/" },
+  { to: "/docs/chat/moderation", from: "/docs/moderation/" },
+  { to: "/docs/chat/chat-authentication", from: "/docs/chat-authentication" },
+];
+
 const config: Config = {
   title: "Owncast",
   tagline: "Free and Open Source Livestreaming",
@@ -88,269 +122,41 @@ const config: Config = {
     [
       "@docusaurus/plugin-client-redirects",
       {
-        redirects: [
-          // Root level pages
-          { to: "/docs/1-1", from: "/1-1" },
-          { to: "/docs/hacktoberfest", from: "/hacktoberfest" },
-          { to: "/docs/tshirt", from: "/tshirt" },
-          { to: "/docs/getting-started/install", from: "/install" },
-          { to: "/docs/getting-started/install", from: "/installation" },
-          { to: "/docs/getting-started/install", from: "/docs/install" },
-          { to: "/docs/getting-started/install", from: "/docs/installation" },
-          { to: "/docs/getting-started/install", from: "/docs/quickstart" },
-
-          {
-            to: "/docs/getting-started/install/providers/digitalocean",
-            from: "/quickstart/digitalocean",
-          },
-          { to: "/docs/getting-started/install/providers/elestio", from: "/quickstart/elestio" },
-          { to: "/docs/getting-started/install/providers/hetzner", from: "/quickstart/hetzner" },
-          {
-            to: "/docs/getting-started/install",
-            from: "/quickstart/installation",
-          },
-          { to: "/docs/getting-started/install/installer", from: "/quickstart/installer" },
-          { to: "/docs/getting-started/install/providers/linode", from: "/quickstart/linode" },
-          { to: "/docs/getting-started/install/providers/linode/faq", from: "/quickstart/linode/faq" },
-          { to: "/docs/getting-started/install/manual", from: "/quickstart/manual" },
-          { to: "/docs/getting-started/configure-first-stream", from: "/quickstart/nextsteps" },
-          { to: "/docs/getting-started/install/providers", from: "/quickstart/providers" },
-
-          // Release pages
-          { to: "/blog", from: "/releases" },
-          {
-            to: "/blog/releases/owncast-0.0.1",
-            from: "/releases/owncast-0.0.1",
-          },
-          {
-            to: "/blog/releases/owncast-0.0.2",
-            from: "/releases/owncast-0.0.2",
-          },
-          {
-            to: "/blog/releases/owncast-0.0.3",
-            from: "/releases/owncast-0.0.3",
-          },
-          {
-            to: "/blog/releases/owncast-0.0.4",
-            from: "/releases/owncast-0.0.4",
-          },
-          {
-            to: "/blog/releases/owncast-0.0.5",
-            from: "/releases/owncast-0.0.5",
-          },
-          {
-            to: "/blog/releases/owncast-0.0.6",
-            from: "/releases/owncast-0.0.6",
-          },
-          {
-            to: "/blog/releases/owncast-0.0.7",
-            from: "/releases/owncast-0.0.7",
-          },
-          {
-            to: "/blog/releases/owncast-0.0.8",
-            from: "/releases/owncast-0.0.8",
-          },
-          {
-            to: "/blog/releases/owncast-0.0.9",
-            from: "/releases/owncast-0.0.9",
-          },
-          {
-            to: "/blog/releases/owncast-0.0.10",
-            from: "/releases/owncast-0.0.10",
-          },
-          {
-            to: "/blog/releases/owncast-0.0.11",
-            from: "/releases/owncast-0.0.11",
-          },
-          {
-            to: "/blog/releases/owncast-0.0.12",
-            from: "/releases/owncast-0.0.12",
-          },
-          {
-            to: "/blog/releases/owncast-0.0.13",
-            from: "/releases/owncast-0.0.13",
-          },
-          {
-            to: "/blog/releases/owncast-0.1.0",
-            from: "/releases/owncast-0.1.0",
-          },
-          {
-            to: "/blog/releases/owncast-0.1.1",
-            from: "/releases/owncast-0.1.1",
-          },
-          {
-            to: "/blog/releases/owncast-0.1.2",
-            from: "/releases/owncast-0.1.2",
-          },
-          {
-            to: "/blog/releases/owncast-0.1.3",
-            from: "/releases/owncast-0.1.3",
-          },
-          {
-            to: "/blog/releases/owncast-0.2.0",
-            from: "/releases/owncast-0.2.0",
-          },
-          {
-            to: "/blog/releases/owncast-0.2.1",
-            from: "/releases/owncast-0.2.1",
-          },
-          {
-            to: "/blog/releases/owncast-0.2.2",
-            from: "/releases/owncast-0.2.2",
-          },
-          {
-            to: "/blog/releases/owncast-0.2.3",
-            from: "/releases/owncast-0.2.3",
-          },
-
-          // Thirdparty pages
-          { to: "/docs/api", from: "/thirdparty" },
-          { to: "/docs/api/actions", from: "/thirdparty/actions" },
-          { to: "/docs/api/apis", from: "/thirdparty/apis" },
-          { to: "/docs/api/samples", from: "/thirdparty/samples" },
-          { to: "/docs/api/webhooks", from: "/thirdparty/webhooks" },
-
-          // Troubleshoot pages
-          {
-            to: "/docs/troubleshooting/buffering/all",
-            from: "/troubleshoot/buffering/all",
-          },
-          {
-            to: "/docs/troubleshooting/buffering/geo",
-            from: "/troubleshoot/buffering/geo",
-          },
-          {
-            to: "/docs/troubleshooting/buffering/slow-networks",
-            from: "/troubleshoot/buffering/slow-networks",
-          },
-          {
-            to: "/docs/troubleshooting/change-streamkey",
-            from: "/troubleshoot/change-streamkey",
-          },
-          {
-            to: "/docs/troubleshooting/chat/offline",
-            from: "/troubleshoot/chat/offline",
-          },
-          {
-            to: "/docs/troubleshooting/chat/offline-while-not-streaming",
-            from: "/troubleshoot/chat/offline-while-not-streaming",
-          },
-          {
-            to: "/docs/troubleshooting/chat/offline-while-streaming",
-            from: "/troubleshoot/chat/offline-while-streaming",
-          },
-          {
-            to: "/docs/troubleshooting/dropped-frames",
-            from: "/troubleshoot/dropped-frames",
-          },
-          {
-            to: "/docs/troubleshooting/hardware-usage",
-            from: "/troubleshoot/hardware-usage",
-          },
-          {
-            to: "/docs/troubleshooting/latency",
-            from: "/troubleshoot/latency",
-          },
-          {
-            to: "/docs/troubleshooting/low-quality-video",
-            from: "/troubleshoot/low-quality-video",
-          },
-          {
-            to: "/docs/troubleshooting/shared/add-lower-quality-outputs",
-            from: "/troubleshoot/shared/add-lower-quality-outputs",
-          },
-          {
-            to: "/docs/troubleshooting/shared/broadcasting-disconnected",
-            from: "/troubleshoot/shared/broadcasting-disconnected",
-          },
-          {
-            to: "/docs/troubleshooting/shared/broadcasting-software",
-            from: "/troubleshoot/shared/broadcasting-software",
-          },
-          {
-            to: "/docs/troubleshooting/shared/chat-disabled",
-            from: "/troubleshoot/shared/chat-disabled",
-          },
-          {
-            to: "/docs/troubleshooting/shared/cpu-usage",
-            from: "/troubleshoot/shared/cpu-usage",
-          },
-          {
-            to: "/docs/troubleshooting/shared/hardware-usage",
-            from: "/troubleshoot/shared/hardware-usage",
-          },
-          {
-            to: "/docs/troubleshooting/shared/hls-analyzer",
-            from: "/troubleshoot/shared/hls-analyzer",
-          },
-          {
-            to: "/docs/troubleshooting/shared/low-quality-video",
-            from: "/troubleshoot/shared/low-quality-video",
-          },
-          {
-            to: "/docs/troubleshooting/shared/match-highest-output-quality",
-            from: "/troubleshoot/shared/match-highest-output-quality",
-          },
-          {
-            to: "/docs/troubleshooting/shared/misc-video-issues",
-            from: "/troubleshoot/shared/misc-video-issues",
-          },
-          {
-            to: "/docs/troubleshooting/shared/reduce-framerate",
-            from: "/troubleshoot/shared/reduce-framerate",
-          },
-          {
-            to: "/docs/troubleshooting/shared/reduce-video-quality",
-            from: "/troubleshoot/shared/reduce-video-quality",
-          },
-          {
-            to: "/docs/troubleshooting/shared/reducing-viewer-latency",
-            from: "/troubleshoot/shared/reducing-viewer-latency",
-          },
-          {
-            to: "/docs/troubleshooting/shared/relocate-physical-server",
-            from: "/troubleshoot/shared/relocate-physical-server",
-          },
-          {
-            to: "/docs/troubleshooting/shared/slow-storage-uploads",
-            from: "/troubleshoot/shared/slow-storage-uploads",
-          },
-          {
-            to: "/docs/troubleshooting/shared/stream-health",
-            from: "/troubleshoot/shared/stream-health",
-          },
-          {
-            to: "/docs/troubleshooting/shared/use-cdn",
-            from: "/troubleshoot/shared/use-cdn",
-          },
-          {
-            to: "/docs/troubleshooting/shared/use-storage",
-            from: "/troubleshoot/shared/use-storage",
-          },
-          {
-            to: "/docs/troubleshooting/stream-disconnect",
-            from: "/troubleshoot/stream-disconnect",
-          },
-          {
-            to: "/docs/troubleshooting/video-errors",
-            from: "/troubleshoot/video-errors",
-          },
-          {
-            to: "/docs/watching-streams",
-            from: "/docs/watching-on-tvs",
-          },
-
-          // Redirects from frontmatter
-          { to: "/docs/getting-started/install/container", from: "/quickstart/container" },
-          { to: "/docs/getting-started/install/container", from: "/quickstart/docker" },
-          { to: "/docs/getting-started/install/container", from: "/quickstart/container/" },
-          { to: "/docs/getting-started/configure-first-stream", from: "/quickstart/configure" },
-          { to: "/docs/storage", from: "/docs/s3/" },
-          { to: "/docs/viewers", from: "/docs/geoip/" },
-          { to: "/docs/video", from: "/docs/encoding/" },
-          { to: "/docs/chat/moderation", from: "/docs/moderation/" },
-          { to: "/docs/chat/chat-authentication", from: "/docs/chat-authentication" },
-        ],
+        createRedirects(existingPath: string) {
+          const redirects: string[] = [];
+          
+          // Process ALL wildcard redirects generically
+          for (const config of ALL_REDIRECTS) {
+            const { to, from, excludePaths = [] } = config;
+            
+            // Only process entries that have wildcards in both to and from
+            if (to.includes('*') && from.includes('*')) {
+              const toPrefix = to.replace('*', '');
+              const fromPrefix = from.replace('*', '');
+              
+              // If existing path matches the "to" pattern, create redirect from "from" pattern
+              if (existingPath.startsWith(toPrefix)) {
+                const suffix = existingPath.substring(toPrefix.length);
+                const oldPath = fromPrefix + suffix;
+                
+                // Skip excluded paths
+                if (excludePaths.includes(oldPath)) {
+                  continue;
+                }
+                
+                // Skip if the redirect source would be the base path without suffix
+                if (oldPath === fromPrefix.replace('*', '')) {
+                  continue;
+                }
+                
+                redirects.push(oldPath);
+              }
+            }
+          }
+          
+          return redirects.length > 0 ? redirects : undefined;
+        },
+        redirects: ALL_REDIRECTS.filter(r => !r.to.includes('*')), // Only non-wildcard redirects
       },
     ],
     [
