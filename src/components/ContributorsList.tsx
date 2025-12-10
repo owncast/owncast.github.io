@@ -43,7 +43,7 @@ export default function ContributorsList({
 
   return (
     <div className={styles.contributorsContainer}>
-      <div className={styles.contributorsTitle}>Editors</div>
+      <div className={styles.contributorsTitle}>Contributors to this page</div>
       <div className={styles.contributorsList}>
         {deduplicatedContributors.map((contributor, index) => (
           <ContributorAvatar key={index} contributor={contributor} />

@@ -52,7 +52,7 @@ function ChatUI() {
   return (
     <div
       style={{
-        border: "1px solid #e5e7eb",
+        border: "3px solid #e5e7eb",
         borderRadius: 12,
         padding: 12,
         height: 520,
@@ -131,7 +131,7 @@ function ChatUI() {
         <input
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Ask anything…"
+          placeholder="Ask anything about Owncast…"
           disabled={isGeneratingAnswer}
           style={{
             flex: 1,

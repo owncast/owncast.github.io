@@ -37,6 +37,7 @@ const ALL_REDIRECTS = [
   { to: "/docs/video", from: "/docs/encoding/" },
   { to: "/docs/chat/moderation", from: "/docs/moderation/" },
   { to: "/docs/chat/chat-authentication", from: "/docs/chat-authentication" },
+  { to: "/contribute", from: "/help" },
 ];
 
 const config: Config = {
@@ -263,6 +264,11 @@ const config: Config = {
           position: "left",
         },
         {
+          href: "https://merch.owncast.online",
+          label: "Merch Store",
+          position: "right",
+        },
+        {
           href: "https://github.com/owncast",
           label: "GitHub",
           position: "right",
@@ -301,19 +307,19 @@ const config: Config = {
               href: "https://owncast.rocket.chat",
             },
             {
-              label: "Twitter",
-              href: "https://twitter.com/owncastlive",
+              label: "Contribute",
+              href: "/contribute",
             },
           ],
         },
       ],
       copyright:
-        'Owncast is a <a href="/trademark">regitered trademark</a> owned by the Owncast Project and held by the <a href="https://docs.oscollective.org/for-hosted-member-projects/trademarks-and-ip">Open Source Collective</a>.',
+        'Owncast® is a <a href="/trademark">registered trademark</a> for the Owncast Project.',
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
-      additionalLanguages: ["bash", "diff", "json", "yaml", "toml"],
+      additionalLanguages: ["bash", "diff", "json", "yaml", "toml", "javascript"],
     },
   } satisfies Preset.ThemeConfig,
 };

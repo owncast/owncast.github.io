@@ -91,7 +91,7 @@ export default function Store(): React.JSX.Element {
     <section className={styles.store}>
       <div className="container text--center">
         <h2>
-          <a href="https://merch.owncast.online/">Owncast Merch Store</a>
+          <a href="https://merch.owncast.online/">Get Some Owncast Gear</a>
         </h2>
         <p>Support the project and show your Owncast pride</p>
         {showRightFade && (

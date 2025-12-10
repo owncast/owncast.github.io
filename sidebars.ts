@@ -46,6 +46,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Initial configuration of your Owncast server',
       items: [
+        'configuration/index',
         'website',
         'appearance',
         'custom-javascript',
@@ -56,7 +57,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'Streaming and video setup',
+      label: 'Configure video quality & performance',
       items: [
             {
               type: 'category',
@@ -86,7 +87,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'Embedding, integration & extensions',
+      label: 'Embed, integrate & extend with your existing apps',
       items: [
           {
             type: 'category',
@@ -130,7 +131,7 @@ const sidebars: SidebarsConfig = {
         'codecs',
         'cdns',
         'backups',
-        'configuration',
+        'configuration-runtime-flags',
         'scaling',
         'viewers',
       ],
