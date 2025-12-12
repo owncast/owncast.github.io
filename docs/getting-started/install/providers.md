@@ -1,26 +1,37 @@
 ---
-title: Supported one-click installs
+title: Pre-installed Owncast with hosting providers
+sidebar_label: Installed by hosting providers
 description: >-
   Automatically have a server with Owncast pre-installed by using supported
   hosting providers.
-tags: [installation]
+tags: [installation, hosting, providers, automated]
 ---
 
-The following service providers offer 1-click-install options for Owncast where you can get up and running without manually installing the software.
+Some service providers offer 1-click-install options for Owncast where you can get up and running without manually installing the software yourself.
 
-**Note:** The Owncast Project may receive referral credit for deploying Owncast with these options, so it's an easy way to support the project.
+## Follow your hosting provider's instructions
 
-<p>
-    <a href="/quickstart/digitalocean/"><img src="/quickstart/digitalocean/DO_Logo_horizontal_blue.svg" width="50%" /></a>
-</p>
+Follow the instructions from your chosen hosting provider to get started, as each will have their own specific process. The Owncast project will generally not be able to support issues specific to your hosting provider, so please reach out to their support if you have any issues.
 
-<p>
-    <a href="/quickstart/linode/"><img src="/quickstart/linode/linode.svg" width="50%" /></a>
-</p>
 
-<p style={{ fontSize: '0.7em' }}>Get $100 worth of service for free if you sign up with either of these providers.</p>
+## What you need
 
-<p>
-    <a href="/quickstart/elestio/"><img src="/quickstart/elestio/Elestio.svg" width="50%" /></a>
-</p>
-<p style={{ fontSize: '0.7em' }}>Elestio shares portion of its revenue with Owncast if you choose to deploy on Elestio</p>
+1. A domain name and access to your DNS settings. This is required for supporting [SSL](/docs/sslproxies).
+1. An account with a hosting provider that supports automatic Owncast installs.
+
+### Some known providers
+
+- [DigitalOcean](https://marketplace.digitalocean.com/apps/owncast?refcode=492f098407b2)
+- [Elestio](https://elest.io/open-source/owncast). They are fully managed, meaning they handle updates, backups, etc.
+- [Hetzner](https://docs.hetzner.com/cloud/apps/list/owncast/)
+- [Linode/Akamai](https://www.linode.com/marketplace/apps/owncast/owncast/?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d)
+
+Some of these providers may offer free credits for new accounts, or give credit to Owncast for referrals.
+
+## Setting up DNS
+
+1. Login to your DNS provider.
+1. Add an **"A Record"** pointing to the new server your hosting provider created, and the hostname you wish to use for Owncast.
+1. Wait approximately 5 minutes, but it may take longer depending on your DNS provider.
+1. When `http://your_new_server:8080` in your browser loads then your install is complete.
+1. You may need to reboot your new server so the SSL proxy starts, depending on your hosting provider.

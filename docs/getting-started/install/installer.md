@@ -1,6 +1,6 @@
 ---
 title: Owncast Quick Installer
-tags: [installation]
+tags: [installation, automated]
 description: Start streaming to your own server in seconds.
 sidebar_label: Owncast quick installer
 ---

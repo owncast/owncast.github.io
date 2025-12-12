@@ -187,40 +187,12 @@
             "title": "What hosting provider would you like to use to install Owncast for you?",
             "description": "Owncast is supported on the following hosting providers and they can install Owncast for you.",
             "visibleIf": "{install_method} = 'hostingprovider'",
+            "redirect": "/docs/getting-started/install/providers",
             "elements": [
                 {
-                    "type": "radiogroup",
-                    "name": "hosting_provider",
-                    "isRequired": true,
-                    "title": "Select your hosting provider:",
-                    "colCount": 1,
-                    "goNextPageAutomatic": true,
-                    "choices": [
-                        {
-                            "value": "linode",
-                            "text": "Linode"
-                        },
-                        {
-                            "value": "digitalocean",
-                            "text": "DigitalOcean"
-                        },
-                        {
-                            "value": "vultr",
-                            "text": "Vultr"
-                        },
-                        {
-                            "value": "zeuscloud",
-                            "text": "Zeus Cloud"
-                        },
-                        {
-                            "value": "elestio",
-                            "text": "Elestio (Fully managed)"
-                        },
-                        {
-                            "value": "hetzner",
-                            "text": "Hetzner"
-                        }
-                    ]
+                    "type": "html",
+                    "name": "hosting",
+                    "html": "<h3>Hosting Providers Installation Guide</h3><p><a href='//docs/getting-started/install/providers' target='_blank' rel='noopener'>Install Owncast on a hosting provider</a></p>"
                 }
             ]
         },
