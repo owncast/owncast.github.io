@@ -195,23 +195,35 @@ export default function Contributors({
   };
 
   const generateDefaultAvatar = (): string => {
-    const colors = [
-      "blue",
-      "red",
-      "green",
-      "orange",
-      "pink",
-      "yellow",
-      "teal",
-      "indigo",
-      "coral",
-      "lime",
-      "maroon",
-      "",
+    // Variety of cat fur types with different shirt colors
+    const catTypes = [
+      // Fur + shirt color combinations
+      "ginger-blue",    // Ginger cat with blue shirt
+      "ginger-green",   // Ginger cat with green shirt
+      "gray-red",       // Gray cat with red shirt
+      "gray-teal",      // Gray cat with teal shirt
+      "black-red",      // Black cat with red shirt
+      "black-orange",   // Black cat with orange shirt
+      "white-pink",     // White cat with pink shirt
+      "white-blue",     // White cat with blue shirt
+      "siamese-teal",   // Siamese cat with teal shirt
+      "tuxedo-red",     // Tuxedo cat with red shirt
+      "brown-green",    // Brown cat with green shirt
+      "cream-coral",    // Cream cat with coral shirt
+      // Original fur types (purple shirt)
+      "ginger",
+      "gray",
+      "black",
+      "white",
+      "siamese",
+      "tuxedo",
+      "brown",
+      "cream",
+      "",               // Original purple cat
     ];
-    const colorIndex = Math.floor(Math.random() * colors.length);
-    const color = colors[colorIndex];
-    const suffix = color ? `-${color}` : "";
+    const catIndex = Math.floor(Math.random() * catTypes.length);
+    const catType = catTypes[catIndex];
+    const suffix = catType ? `-${catType}` : "";
     return `/images/owncat-head${suffix}.svg`;
   };
 
