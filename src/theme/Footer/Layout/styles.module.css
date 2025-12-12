@@ -1,0 +1,27 @@
+.footer {
+  position: relative;
+  overflow: hidden;
+}
+
+.footerWatermark {
+  position: absolute;
+  bottom: -40px;
+  left: -50px;
+  width: 180px;
+  opacity: 0.2;
+  transform: rotate(15deg);
+  transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+  display: block;
+  filter: drop-shadow(5px 8px 5px rgba(0, 0, 0, 0.6));
+}
+
+.footerWatermark img {
+  width: 100%;
+  height: auto;
+}
+
+.footerWatermark:hover {
+  opacity: 0.5;
+  transform: rotate(15deg) scale(1.05);
+}

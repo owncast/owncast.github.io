@@ -1,0 +1,35 @@
+.notFoundContainer {
+  text-align: center;
+  padding: 2rem;
+}
+
+.catImage {
+  width: 120px;
+  height: auto;
+  margin-bottom: 1.5rem;
+  opacity: 0.85;
+  filter: grayscale(15%);
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.catImage:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+
+.title {
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 2rem;
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
