@@ -61,6 +61,7 @@ const config: Config = {
     hooks: {
       onBrokenMarkdownImages: "warn",
     },
+    mermaid: true,
   },
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -130,6 +131,8 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
+
+  themes: ["@docusaurus/theme-mermaid"],
 
   plugins: [
     [
@@ -264,7 +267,8 @@ const config: Config = {
       title: "Owncast",
       logo: {
         alt: "Owncast Logo",
-        src: "img/owncast-logo.svg",
+        src: "images/logo-black.svg",
+        srcDark: "images/logo-white.svg",
       },
       items: [
         {
