@@ -27,6 +27,9 @@ jobs:
         with:
           node-version: '24.9.0'
 
+      - name: Install npm dependencies
+        run: npm install
+
       - name: Fetch All Contributors
         run: node scripts/fetch-contributors.js
         env:
@@ -52,7 +55,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
-        run: npm install && npm run build
+        run: npm run build
         env:
           GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
       - name: Deploy to surge
