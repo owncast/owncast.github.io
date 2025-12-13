@@ -16,8 +16,8 @@ jobs:
         with:
           submodules: true # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
-      - name: Install jq
-        run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y jq build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
 
       - name: Create static/data directory
         run: mkdir -p static/data
@@ -38,13 +38,16 @@ jobs:
       - name: Fetch donors
         run: 'curl https://opencollective.com/owncast/members/all.json | jq ''map(.) | .[] | select(.role=="BACKER") | {login: .name, avatar_url: .image, html_url: .profile}'' | jq --slurp ''.'' > static/data/donors.json'
 
+      - name: Process donors
+        run: node scripts/process-donors.js
+
       - name: Commit changes
         uses: EndBug/add-and-commit@v5
         with:
           author_name: Owncast
           author_email: owncast@owncast.online
           message: "Update dynamic content"
-          add: "static/data/contributors.json static/data/donors.json static/roadmap/index.html"
+          add: "static/data/contributors.json static/data/donors.json static/data/contributors-processed.json static/data/donors-processed.json static/roadmap/index.html"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
