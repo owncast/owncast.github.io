@@ -6,6 +6,10 @@ sidebar_label: Choose the right video quality settings
 ---
 
 import ResourcesCalculator from '@site/src/components/ResourcesCalculator';
+import OwncastBasic from './shared/diagrams/owncast-basic.md';
+import OwncastWithQualities from './shared/diagrams/owncast-with-qualities.md';
+
+import { IncludeMarkdown } from '@site/src/components';
 
 This document aims to outline what is being done to your content and the different knobs you can tweak to get the best output for your instance.
 
@@ -23,13 +27,14 @@ Because Owncast uses the HLS standard, almost any video player can play your str
 
 ## How does an Owncast video stream work?
 
+<IncludeMarkdown>
+  <OwncastBasic />
+</IncludeMarkdown>
+
+
 Owncast takes your source stream and converts it to short, individual video segments. A list of these segments is supplied to your viewer's player and will read and play all the segments in order. This is using a specification called [HLS](https://developer.apple.com/documentation/http-live-streaming) or HTTP Live Streaming. You can optionally generate multiple different qualities of video to allow lower bandwidth options. This is called [Adaptive bitrate streaming](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming).
 
-This video from Jon Dahl is gives a very good overview of internet video, starting with _"what happens when you press play in your web browser?"_ and touching on every piece of the stack, backend and frontend. It translates very well to how Owncast works and is suggested if you want to learn more.
-
 In this case Owncast works as the Media encoder, Stream segmenter, and distribution web server. However [Owncast supports video being distributed via 3rd party storage as well](/docs/storage), so in that case the video segments would be distributed from there, instead.
-
-![Image](https://docs-assets.developer.apple.com/published/88e87744a3/de18e941-81de-482f-843d-834a4dd3aa71.png)
 
 #### Things to keep in mind.
 
@@ -63,11 +68,12 @@ The more CPU you use the better the output image will be, or the smaller of a fi
 
 You have some control over the live latency between the broadcaster and the viewer. While it's completely understandable to want to have as little latency as possible you may need to increase the latency buffer if you're experiencing issues. In general the lower the latency the less buffer is available for any possible slow transfers, network blips or errors.
 
-### Player Lower Latency Mode
-
-For some browsers, a "Lower latency" option is available in the web player. This should be seen as an experimental feature that will improve over time. If you turn it on and experience a negative playback experience with increased buffering you will probably want to turn it off.
 
 ### Video Passthrough
+
+<IncludeMarkdown>
+  <OwncastWithQualities />
+</IncludeMarkdown>
 
 ## Audio
 

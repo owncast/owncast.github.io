@@ -3,10 +3,23 @@ title: Support Increased Viewer Capacity
 description: A place to start when needing to increase the capacity of your server.
 sidebar_position: 1000
 sidebar_label: Support increased viewer capacity
+tags:
+  - object storage
+  - cdn
+  - viewers
+  - s3
+  - scaling
+  - optimization
+  - advanced
+  - networking
 ---
 
 import UseStorage from './troubleshooting/shared/use-storage.md';
 import UseCDN from './troubleshooting/shared/use-cdn.md';
+import OwncastWithCDN from './shared/diagrams/owncast-cdn.md';
+import OwncastObjectStorage from './shared/diagrams/owncast-object-storage.md';
+import OwncastObjectStorageCDN from './shared/diagrams/owncast-object-storage-cdn.md';
+
 import { IncludeMarkdown } from '@site/src/components';
 
 ## Disclaimer
@@ -20,13 +33,16 @@ If you are not familiar with the topics below, or you don't feel comfortable wit
 ### Object Storage
 
 <IncludeMarkdown>
+  <OwncastObjectStorage/>
   <UseStorage />
 </IncludeMarkdown>
 
 ### Content Delivery Networks (CDNs)
 
 <IncludeMarkdown>
+  <OwncastWithCDN/>
   <UseCDN />
+  <OwncastObjectStorageCDN/>
 </IncludeMarkdown>
 
 ## Chat
