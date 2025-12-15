@@ -10,6 +10,7 @@ interface QualityOutput {
 interface CalculationResults {
   bandwidthGB: number;
   cpuCores: string;
+  cpuLevel: string;
   viewerExperience: number;
   viewerExperienceText: string;
   recommendations: Recommendation[];
@@ -72,11 +73,12 @@ const ResourcesCalculator: React.FC = () => {
     }
 
     // CPU calculation based on documentation
+    // Uses scale: Minimal → Light → Moderate → Heavy
     let totalCpu = 0;
 
     qualities.forEach((quality) => {
       if (quality.isPassthrough) {
-        // Passthrough uses minimal CPU
+        // Passthrough: Minimal CPU (no transcoding)
         totalCpu += 0.4;
       } else {
         // Transcoded quality
@@ -84,13 +86,13 @@ const ResourcesCalculator: React.FC = () => {
         let cpuForQuality = 0;
 
         if (compressionRatio >= 0.9) {
-          // Matches input or close - "Some" CPU
+          // Light CPU (minimal transcoding, matches input)
           cpuForQuality = 0.6;
         } else if (compressionRatio >= 0.5) {
-          // Medium compression
+          // Moderate CPU (active encoding to reduce bitrate)
           cpuForQuality = 1.0;
         } else {
-          // High compression - "More" CPU
+          // Heavy CPU (significant compression required)
           cpuForQuality = 1.3;
         }
 
@@ -106,6 +108,18 @@ const ResourcesCalculator: React.FC = () => {
     const cpuMin = totalCpu * 0.8;
     const cpuMax = totalCpu * 1.2;
     const cpuCores = cpuMin === cpuMax ? `${cpuMin.toFixed(1)}` : `${cpuMin.toFixed(1)}-${cpuMax.toFixed(1)}`;
+
+    // Determine CPU level label based on total CPU usage
+    let cpuLevel: string;
+    if (cpuMax <= 0.5) {
+      cpuLevel = 'Minimal';
+    } else if (cpuMax <= 1.0) {
+      cpuLevel = 'Light';
+    } else if (cpuMax <= 2.0) {
+      cpuLevel = 'Moderate';
+    } else {
+      cpuLevel = 'Heavy';
+    }
 
     // Viewer experience based on available quality options
     // Fast stable: 65%, Fast fluctuating: 12%, Slow/mobile: 23%
@@ -259,6 +273,7 @@ const ResourcesCalculator: React.FC = () => {
     return {
       bandwidthGB: Math.round(bandwidthGB * 10) / 10,
       cpuCores,
+      cpuLevel,
       viewerExperience: roundedExperience,
       viewerExperienceText,
       recommendations,
@@ -360,7 +375,7 @@ const ResourcesCalculator: React.FC = () => {
 
           <div className={styles.metricItem}>
             <div className={styles.metricLabel}>CPU</div>
-            <div className={styles.metricValue}>{results.cpuCores}</div>
+            <div className={styles.metricValue}>{results.cpuLevel}</div>
           </div>
 
           <div className={styles.metricItem}>
