@@ -1,8 +1,6 @@
 name: Generate installer preview video
 on:
   push:
-    branches:
-      - master
     paths:
       - "static/install.sh"
   workflow_dispatch:
