@@ -13,7 +13,7 @@ Ensure required Apache modules are enabled using the `a2enmod` command.
 $ sudo a2enmod proxy proxy_http ssl
 ```
 
-```apache
+```apacheconf
 <VirtualHost *:80>
         ServerName live.example.com
         ServerAdmin admin@example.com
@@ -46,4 +46,3 @@ $ sudo a2enmod proxy proxy_http ssl
 </VirtualHost>
 </IfModule>
 ```
-

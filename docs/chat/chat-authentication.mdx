@@ -12,6 +12,9 @@ tags:
   - accounts
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 There is no requirement to authenticate when using Owncast chat. However, some prefer
 to authenticate themselves to verify their identity to others, and to continue using the same chat
 identity across multiple devices and browsers. This is especially helpful for those with [moderator](/docs/chat/)
@@ -19,6 +22,8 @@ privileges.
 
 You can access the authentication options via the chat dropdown menu in the upper right of the page.
 
+<Tabs queryString="authentication-method" defaultValue="FediAuth">
+  <TabItem value="FediAuth" label="FediAuth" default>
 ## Fediverse Authentication (FediAuth)
 
 Using your Fediverse account you can be sent a one time use code to verify your identity and authenticate
@@ -28,8 +33,10 @@ This is done by sending a direct message to your account. If you do not receive 
 direct messages.
 
 These codes expire, so you will need to request a new one if necessary.
+  </TabItem>
 
-## IndieAuth
+  <TabItem value="IndieAuth" label="IndieAuth">
+    ## IndieAuth
 
 IndieAuth is an open standard decentralized authentication protocol that enables services to verify the identity of a user represented by a URL. This means anybody that has an existing URL that supports IndieAuth can use it to authenticate with Owncast chat.
 
@@ -38,3 +45,7 @@ Visit [IndieAuth.net](https://indieauth.net/) to learn more.
 ### Owncast is an IndieAuth server
 
 If you run an Owncast server you can use it to authenticate yourself on other Owncast instances by using the URL of your server.
+  </TabItem>
+</Tabs>
+
+

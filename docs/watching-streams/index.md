@@ -10,8 +10,9 @@ tags:
   - television
   - devices
   - streaming
-summary: >
-  Overview of all supported devices and platforms for watching Owncast streams on televisions and streaming devices.
+  - iptv
+  - m3u8
+description: Overview of all supported devices and platforms for watching Owncast streams on televisions and streaming devices.
 ---
 
 There are numerous ways to watch Owncast live streams on many different devices. This section provides detailed guides for each supported platform and device type.
@@ -30,7 +31,7 @@ Install or open any video playback application for your platform and use the URL
 
 ### Browsing the Directory
 
-If your application has what is often called "IPTV" or M3U support, you can browse the directory directly by adding `https://directory.owncast.online/api/iptv` to the application. Not all apps support this.
+If your application has what is often called "IPTV" or M3U support, you can browse the directory directly by adding `https://owncast.directory/api/iptv` to the application. Not all apps support this.
 
 ## Device-Specific Guides
 

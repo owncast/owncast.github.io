@@ -3,25 +3,46 @@ title: Embed Owncast Into Your Website
 description: You can easily embed your chat or video into another site.
 sidebar_position: 200
 sidebar_label: Embed Owncast into your website
+hide_table_of_contents: false
+tags:
+  - embed
+  - website
+  - iframe
+  - chat
+  - video
+  - css
 ---
 
 ## Embedding video
 
 Owncast supports embedding your video stream directly into any other web site or source without having to setup a player.
 
-The video-only URL to your stream content lives at: `http://your.host/embed/video`.
+The video-only URL to your stream content lives at: `http://owncast.example.com/embed/video`.
 
 Here's some example HTML you can use.
 
-<iframe src="https://your.host/embed/video" title="Owncast"
-  height="350px" width="550px"
+```html
+<iframe
+  src="https://owncast.example.com/embed/video"
+  title="Owncast"
+  height="350px"
+  width="550px"
   referrerpolicy="origin"
-  allowfullscreen>
+  allowfullscreen
+>
 </iframe>
+```
 
 It will look something like:
 
-[Owncast Embed](https://watch.owncast.online/embed/video)
+<iframe
+  src="https://watch.owncast.online/embed/video"
+  title="Owncast"
+  height="350px"
+  width="550px"
+  referrerpolicy="origin"
+  allowfullscreen
+></iframe>
 
 Embedded videos will not start playing before the user presses the play button. This means that no sound will appear when a page with an embedded video is loaded. If you would like the player to additionally be muted once it does start playing, you can append `?initiallyMuted=true` to the URL (so it looks something like `http://your.host/embed/video?initiallyMuted=true`). Users will still be able to unmute the video manually once it's playing.
 
@@ -34,31 +55,36 @@ You can easily customize the styling of the embedded Owncast stream to match you
 2. **Link the CSS File:** In the `<head>` section of your HTML document where you embed the Owncast stream, add a `<link>` tag to include your CSS file. Make sure to add this line before the closing `</head>` tag:
 
    ```html
-   <link rel="stylesheet" href="path/to/stream-styles.css">
+   <link rel="stylesheet" href="path/to/stream-styles.css" />
    ```
+
    Replace "path/to/stream-styles.css" with the actual path to your CSS file.
 
 3. **Apply Styles:** Customize the styles in your stream-styles.css file according to your preferences. You can target the `<iframe>` element using CSS selectors, as shown in the example below:
+
    ```css
-    /* Customize the embedded stream container */
-    iframe {
-      border: none; /* Remove iframe border */
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow for depth */
-      border-radius: 10px; /* Rounded corners for a modern look */
-      overflow: hidden; /* Hide horizontal overflow */
-      background-color: #fff; /* Set background color to white */
-      margin: 0 auto; /* Center the iframe horizontally */     }
+   /* Customize the embedded stream container */
+   iframe {
+     border: none; /* Remove iframe border */
+     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow for depth */
+     border-radius: 10px; /* Rounded corners for a modern look */
+     overflow: hidden; /* Hide horizontal overflow */
+     background-color: #fff; /* Set background color to white */
+     margin: 0 auto; /* Center the iframe horizontally */
+   }
 
-    /* Style the iframe title (optional) */
-    iframe[title="Owncast"] {
-      font-size: 18px; /* Adjust the title font size */
-      font-weight: bold; /* Make the title bold */
-      padding: 10px; /* Add some padding around the title */     }
+   /* Style the iframe title (optional) */
+   iframe[title="Owncast"] {
+     font-size: 18px; /* Adjust the title font size */
+     font-weight: bold; /* Make the title bold */
+     padding: 10px; /* Add some padding around the title */
+   }
 
-    /* Style the iframe content (optional) */
-    iframe[title="Owncast"] body {
-      margin: 0; /* Reset margin inside the iframe */
-      padding: 10px; /* Add padding inside the iframe content */     }
+   /* Style the iframe content (optional) */
+   iframe[title="Owncast"] body {
+     margin: 0; /* Reset margin inside the iframe */
+     padding: 10px; /* Add padding inside the iframe content */
+   }
    ```
 
 4. **Customize to Your Needs:** Feel free to modify the styles provided in the example above to match your website's design and layout.
@@ -85,7 +111,7 @@ There are two types of embed chats: A read-only chat which only shows the messag
 
 ### Embedding standalone chat
 
-The standalone chat URL lives at: `http://your.host/embed/chat/readwrite`.
+The standalone chat URL lives at: `http://owncast.example.com/embed/chat/readwrite`.
 
 It will look something like:
 
@@ -93,7 +119,7 @@ It will look something like:
 
 ### Embedding read-only chat
 
-The read-only chat URL lives at: `http://your.host/embed/chat/readonly`.
+The read-only chat URL lives at: `http://owncast.example.com/embed/chat/readonly`.
 
 One common use of read-only chat is adding the chat messages to your broadcasting software, such as a web layer in OBS.
 
@@ -108,15 +134,14 @@ One common use of read-only chat is adding the chat messages to your broadcastin
    html {
      margin: 0px;
      padding: 20px;
-     background-color: rgba(0,0,0,0);
+     background-color: rgba(0, 0, 0, 0);
      font-size: 24px;
    }
 
    #chat-container {
-     background-color: rgba(0,0,0,0.5);
+     background-color: rgba(0, 0, 0, 0.5);
    }
    ```
-   
 
 1. Click ‘OK’ to save your chat settings and re-position the new chat source in your scene.
 

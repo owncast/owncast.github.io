@@ -1,0 +1,36 @@
+---
+title: Configure Your Stream Key and First Stream
+description: >-
+  xxx
+sidebar_position: 200
+sidebar_label: Configure your stream key and first stream
+---
+
+Any piece of software you're already using for live streaming is likely compatible with Owncast. Visit our [broadcasting software](/docs/broadcasting) page to see some specific pieces of software and how they're configured.
+
+import { IncludeMarkdown } from "@site/src/components";
+import AdminLogin from "../shared/admin-login.md";
+
+<IncludeMarkdown>
+  <AdminLogin />
+</IncludeMarkdown>
+
+## Stream Key
+
+To begin streaming you'll first need your stream key and the RTMP URL of your Owncast server. Out of the box your stream key is the same as the admin password: `abc123`. You'll want to change these both as soon as possible.
+
+Beginning with Owncast v0.1.0 the admin password and stream keys are managed independently, allowing you to add as many stream keys as you'd like.
+
+While most people won't require having multiple stream keys, there are some specific scenarios where having this ability may be helpful.
+
+In the admin server setup page you can add and remove these keys.
+
+## Admin
+
+Some common items many people would want to update after installing Owncast are:
+
+- Your site name, logo, description and external links that are displayed on the [web site](/docs/website).
+- The **stream key** to gain access to broadcasting to your stream and your admin.
+- Enable your stream to show up in the [Owncast Directory](/docs/directory).
+
+Read more about [what you can configure and how](/docs/configuration).

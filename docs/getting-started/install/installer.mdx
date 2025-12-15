@@ -18,16 +18,23 @@ curl -s https://owncast.online/install.sh | bash
 
 **Note**: It is not suggested you run this as root, as you're downloading and running a script off the internet. It's also recommended you inspect the contents of any remote script before executing it.
 
-<img src="/owncast-install.gif" width="90%"/>
+<img src="/owncast-install.gif" width="90%" />
 
 ---
 
 ### See an example of getting running in under a minute.
 
-_[Video demonstration would be shown here]_
-
----
+## <iframe title="vimeo-player" src="https://player.vimeo.com/video/484707748?h=7c3ac21415" width="800" height="450" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"   allowfullscreen></iframe>
 
 ### That's it!
 
 While the above installer will be enough for most people to get up and running quickly, you may want to learn about server configuration, broadcasting, and optional next steps such as [SSL proxies](/docs/sslproxies/nginx) and running Owncast as a [system service](/docs/systemservice/).
+
+## Login to the admin and set up your stream
+
+import { IncludeMarkdown } from "@site/src/components";
+import AdminLogin from "../../shared/admin-login.md";
+
+<IncludeMarkdown>
+  <AdminLogin />
+</IncludeMarkdown>

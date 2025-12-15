@@ -1,0 +1,46 @@
+---
+title: Enable Social Features
+description: >-
+  Allow people to follow your server, know when you go live, share and interact
+  with your stream.
+sidebar_position: 2
+sidebar_label: Enable Social Features
+hide_table_of_contents: false
+tags:
+  - social
+  - fediverse
+  - mastodon
+  - pleroma
+  - follow
+  - like
+  - share
+  - followers
+  - fediauth
+---
+
+## How to enable
+
+This functionality is disabled by default. To enable social features on your Owncast server visit the _Configuration -> Social_ page.
+
+### Requirements
+
+1. You must be hosting your Owncast server behind SSL, with a _https_ URL. Setup a [HTTP Proxy](/docs/sslproxies/nginx) if needed.
+1.
+
+### Configuration
+
+Visit the _Configuration -> Social_ page to configure.
+
+1. You can set the username that you're seen as.
+1. You can set the text that is sent out each time you go live.
+1. You can toggle "Private mode".
+
+:::warning
+Once you set your server name and your username that's how people will see you. If you change either of those two settings you'll show up as a different user and your existing followers may no longer be following you. It is not suggested you change these after you set them.
+:::
+
+### Private mode
+
+Enabling _Private Mode_ will require those who wish to follow your server to be approved by you first. Approving followers can be done via the _Followers_ section in the admin.
+
+Private Mode will also make it so any posts you send out are only visible to your followers, not others, as they cannot be shared.

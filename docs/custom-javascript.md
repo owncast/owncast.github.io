@@ -12,6 +12,7 @@ Some examples of reasons you might need this:
 - Initializing a payment processor you have embedded on your page.
 - Use Javascript to manipulate the interface.
 
-## Warning
+:::warning
 
 Double check your Javascript. Any incorrect syntax or errors that you insert into the page may create errors and stop the page from loading or functionality from working.
+:::

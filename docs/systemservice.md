@@ -9,7 +9,11 @@ sidebar_label: Run Owncast as a background service
 
 You can optionally setup Owncast to run under [systemd](https://systemd.io/) so it's a managed service on your machine that automatically starts when your machine does.
 
+:::tip
+
 While we can't explicitly support every possible machine's configuration you might be able to find some user-supplied examples in our [contrib directory](https://github.com/owncast/owncast/tree/develop/contrib) that might point you in the correct direction.
+
+:::
 
 These files are not part of the Owncast project and are not supported by us, but there is ample documentation about how to configure systemd online if you're unable to find examples that work for you.
 

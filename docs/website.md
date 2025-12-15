@@ -3,6 +3,15 @@ title: Customize Your Owncast Site
 description: Customize your Owncast web page by adding additional content and links.
 sidebar_position: 300
 sidebar_label: Customize your Owncast site
+hide_table_of_contents: false
+tags:
+  - website
+  - customize
+  - css
+  - chat
+  - player
+  - colors
+  - shortcuts
 ---
 
 ## Overview
@@ -72,4 +81,3 @@ Under the General Settings in the admin you can write your own CSS that will get
 1. Change text sizes and colors.
 1. Set a new background color.
 1. Completely hide specific things you don't want or care about.
-
