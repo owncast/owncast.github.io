@@ -25,7 +25,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '24.9.0'
+          node-version: "24.9.0"
 
       - name: Install npm dependencies
         run: npm install
@@ -44,13 +44,20 @@ jobs:
       - name: Process donors
         run: node scripts/process-donors.js
 
+      - name: Run preview generator
+        working-directory: scripts/preview-generator
+        run: |
+          docker build -t owncast-installer-preview-generator .
+          docker run --rm -v $PWD:/vhs owncast-installer-preview-generator ./installer.tape
+          mv owncast-install.* ../../static/
+
       - name: Commit changes
         uses: EndBug/add-and-commit@v5
         with:
           author_name: Owncast
           author_email: owncast@owncast.online
           message: "Update dynamic content"
-          add: "static/data/contributors.json static/data/donors.json static/data/contributors-processed.json static/data/donors-processed.json static/roadmap/index.html"
+          add: "static/data/contributors.json static/data/donors.json static/data/contributors-processed.json static/data/donors-processed.json static/roadmap/index.html static/owncast-install.*"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
