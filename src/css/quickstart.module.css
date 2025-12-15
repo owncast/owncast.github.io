@@ -1,0 +1,47 @@
+/* Quickstart wizard header with Owncat */
+.quickstartHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+}
+
+.quickstartOwncat {
+  width: 56px;
+  height: auto;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.quickstartOwncat:hover {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.quickstartIntro {
+  font-size: 1.1rem;
+  color: var(--ifm-color-emphasis-700);
+  margin: 0;
+  max-width: 400px;
+}
+
+[data-theme='dark'] .quickstartIntro {
+  color: var(--ifm-color-emphasis-500);
+}
+
+@media screen and (max-width: 480px) {
+  .quickstartHeader {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .quickstartOwncat {
+    width: 48px;
+  }
+
+  .quickstartIntro {
+    font-size: 1rem;
+  }
+}

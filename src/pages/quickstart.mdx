@@ -6,8 +6,14 @@ description: Get started with Owncast using this step-by-step wizard.
 import Wizard from '../components/Wizard'
 import { Model } from 'survey-core'
 import tree from '../data/quickstart_tree.json'
+import styles from '../css/quickstart.module.css'
 
 export const treeModel = new Model(tree);
+
+<div className={styles.quickstartHeader}>
+  <img src="/images/owncat-head.svg" alt="" className={styles.quickstartOwncat} aria-hidden="true" />
+  <p className={styles.quickstartIntro}>Answer a few questions to get personalized setup instructions.</p>
+</div>
 
 <Wizard model={treeModel}/>
 

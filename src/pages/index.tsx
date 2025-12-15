@@ -79,6 +79,12 @@ function HomepageHeader() {
           </div>
         </div>
       </div>
+      <img
+        src="/images/owncat-full.png"
+        alt=""
+        className={styles.heroOwncat}
+        aria-hidden="true"
+      />
     </header>
   );
 }

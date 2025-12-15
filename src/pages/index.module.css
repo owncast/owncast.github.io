@@ -11,7 +11,26 @@
   background-position: 0 -8em;
   padding: 4rem 0;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+}
+
+/* Owncat mascot peeking from bottom-right of hero */
+.heroOwncat {
+  position: absolute;
+  bottom: -60px;
+  right: 40px;
+  width: 140px;
+  height: auto;
+  opacity: 0.9;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+  pointer-events: auto;
+  z-index: 10;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+.heroOwncat:hover {
+  transform: translateY(-10px) rotate(-3deg);
+  opacity: 1;
 }
 
 .heroBanner .container {
@@ -72,6 +91,20 @@
 
   .splashImageLoader {
     transform: translateX(-4em);
+  }
+
+  .heroOwncat {
+    width: 100px;
+    right: 10px;
+    bottom: -45px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .heroOwncat {
+    width: 70px;
+    right: 5px;
+    bottom: -35px;
   }
 }
 

@@ -90,10 +90,20 @@ export default function Store(): React.JSX.Element {
   return (
     <section className={styles.store}>
       <div className="container text--center">
-        <h2>
-          <a href="https://merch.owncast.online/">Get Some Owncast Gear</a>
-        </h2>
-        <p>Support the project and show your Owncast pride</p>
+        <div className={styles.storeHeader}>
+          <img
+            src="/images/owncat-head.svg"
+            alt=""
+            className={styles.storeOwncat}
+            aria-hidden="true"
+          />
+          <div>
+            <h2>
+              <a href="https://merch.owncast.online/">Get Some Owncast Gear</a>
+            </h2>
+            <p>Support the project and show your Owncast pride</p>
+          </div>
+        </div>
         {showRightFade && (
           <p className={styles.scrollHint}>← Scroll to see more items →</p>
         )}

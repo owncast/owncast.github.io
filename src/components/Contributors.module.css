@@ -2,6 +2,29 @@
   margin: 2rem 0;
 }
 
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.sectionHeader h2 {
+  margin-bottom: 0;
+}
+
+.sectionOwncat {
+  width: 36px;
+  height: auto;
+  opacity: 0.7;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.sectionOwncat:hover {
+  transform: scale(1.15) rotate(8deg);
+  opacity: 1;
+}
+
 .contributorBox {
   display: flex;
   flex-wrap: wrap;

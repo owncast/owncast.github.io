@@ -45,7 +45,15 @@ export default function Contributors({
       {/* Contributors Section */}
       {contributors.length > 0 && (
         <section>
-          <h2>{contributorsTitle}</h2>
+          <div className={styles.sectionHeader}>
+            <h2>{contributorsTitle}</h2>
+            <img
+              src="/images/owncat-head.svg"
+              alt=""
+              className={styles.sectionOwncat}
+              aria-hidden="true"
+            />
+          </div>
           <ul className={styles.contributorBox}>
             {contributors.map((contributor) => (
               <li key={contributor.login} className={styles.contributorItem}>

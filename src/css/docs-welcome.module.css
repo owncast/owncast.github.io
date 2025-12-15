@@ -1,0 +1,52 @@
+/* Documentation welcome banner with Owncat */
+.welcomeBanner {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, rgba(101, 68, 233, 0.08) 0%, rgba(35, 134, 226, 0.08) 100%);
+  border-radius: 12px;
+  border-left: 4px solid var(--ifm-color-primary);
+}
+
+.welcomeOwncat {
+  width: 64px;
+  height: auto;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.welcomeOwncat:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.welcomeText {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--ifm-heading-color);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .welcomeBanner {
+  background: linear-gradient(135deg, rgba(101, 68, 233, 0.15) 0%, rgba(35, 134, 226, 0.12) 100%);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .welcomeBanner {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  .welcomeOwncat {
+    width: 50px;
+  }
+
+  .welcomeText {
+    font-size: 1.25rem;
+  }
+}

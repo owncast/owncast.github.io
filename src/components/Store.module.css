@@ -5,6 +5,33 @@
   color: var(--ifm-color-white);
 }
 
+.storeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.storeOwncat {
+  width: 80px;
+  height: auto;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.storeOwncat:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.storeHeader h2 {
+  margin-bottom: 0.25rem;
+}
+
+.storeHeader p {
+  margin-bottom: 0;
+}
+
 .store h2 {
   color: #2086e1;
   font-size: 2.5rem;
@@ -167,30 +194,39 @@
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
+  .storeHeader {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .storeOwncat {
+    width: 60px;
+  }
+
   .storeGrid {
     gap: 1.5rem;
     padding: 10px 0.5rem 1rem 0.5rem;
   }
-  
+
   .storeItem {
     flex: 0 0 180px;
     min-width: 180px;
     padding: 1rem;
   }
-  
+
   .storeItemImage {
     height: 140px;
   }
-  
+
   .store h2 {
     font-size: 2rem;
   }
-  
+
   .storeContainer.showLeftFade::before {
     width: 20px;
     top: 10px;
   }
-  
+
   .storeContainer.showRightFade::after {
     width: 20px;
     top: 10px;
