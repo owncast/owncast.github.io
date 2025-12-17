@@ -274,6 +274,7 @@ function HeroSection() {
       withBackgroundGlow
       variant="secondary"
       backgroundGlowVariant="secondary"
+      effectComponent={<LandingPathsCtaBg variant="primary" />}
     >
       <Button size="xl" variant="secondary" asChild>
         <a href="#">Get Started</a>
@@ -317,6 +318,7 @@ function FeaturesSection() {
       title="Pixel-Perfect Precision"
       withBackground
       withBackgroundGlow
+      effectComponent={<LandingShapesCtaBg variant="primary" />}
       descriptionComponent={
         <>
           <LandingProductFeatureKeyPoints
@@ -543,6 +545,13 @@ import {
   LandingPriceComparisonSection,
   LandingPriceComparisonColumn,
   LandingPriceComparisonItem,
+  LandingCurvedLinesCtaBg,
+  LandingGridPatternCtaBg,
+  LandingFlickeringGridCtaBg,
+  LandingFlyingParticleCtaBg,
+  LandingDiagonalCtaBg,
+  LandingPathsCtaBg,
+  LandingShapesCtaBg,
 } from "@/components/landing";
 
 interface StoreItem {
@@ -623,6 +632,7 @@ function StoreSection() {
         description="Support the project and show your Owncast pride."
         textPosition="center"
         className="!pb-0"
+        effectComponent={<LandingCurvedLinesCtaBg variant="primary" />}
       ></LandingPrimaryTextCtaSection>
 
       <LandingMarquee innerClassName="gap-8 -mt-4">
