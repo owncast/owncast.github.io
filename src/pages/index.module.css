@@ -181,3 +181,162 @@
   filter: drop-shadow(0.2rem 0.2rem 0.4rem rgba(255, 255, 255, 0.5));
 }
 
+
+/* New Page UI components */
+
+@import url('https://fonts.googleapis.com/css?family=Inter:400,500,600,700,800&display=swap'); /* Optional: import any Google font from https://fonts.google.com/ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-space-default: 'Inter';
+    --font-space-display: 'Inter';
+    --hard-shadow: 0px 29px 52px 0px rgba(0, 0, 0, 0.4),
+      22px 25px 16px 0px rgba(0, 0, 0, 0.2);
+    --hard-shadow-left: 0px 29px 52px 0px rgba(0, 0, 0, 0.4),
+      -22px 25px 16px 0px rgba(0, 0, 0, 0.2);
+    /* If you use Shadcn UI already, you should already have these variables defined */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --radius: 0.5rem;
+    --primary-lighter-hex: theme('colors.primary.200');
+    --secondary-lighter-hex: theme('colors.secondary.200');
+    --primary-dark-hex: theme('colors.primary.800');
+    --secondary-dark-hex: theme('colors.secondary.800');
+  }
+
+  .dark {
+    /* If you use Shadcn UI already, you can skip this block. */
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+    --primary-foreground: 144.9 80.4% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+  }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  *,
+  ::before,
+  ::after {
+    @apply border-gray-100 dark:border-neutral-800;
+  }
+
+  * {
+    @apply font-sans;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold font-display;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /**
+   * Perspective (used for images etc.)
+   */
+  .perspective-none {
+    transform: none;
+  }
+
+  .perspective-left {
+    box-shadow: var(--hard-shadow);
+    transform: perspective(400em) rotateY(-15deg) rotateX(6deg)
+      skew(-8deg, 4deg) translate3d(-4%, -2%, 0) scale(0.8);
+  }
+
+  .perspective-right {
+    box-shadow: var(--hard-shadow-left);
+    transform: perspective(400em) rotateY(15deg) rotateX(6deg) skew(8deg, -4deg)
+      translate3d(4%, -2%, 0) scale(0.8);
+  }
+
+  .perspective-bottom {
+    box-shadow: var(--hard-shadow);
+    transform: translateY(-4%) perspective(400em) rotateX(18deg) scale(0.9);
+  }
+
+  .perspective-bottom-lg {
+    box-shadow: var(--hard-shadow);
+    transform: perspective(400em) translate3d(0, -6%, 0) rotateX(34deg)
+      scale(0.8);
+  }
+
+  .perspective-paper {
+    box-shadow: var(--hard-shadow);
+    transform: rotateX(40deg) rotate(40deg) scale(0.8);
+  }
+
+  .perspective-paper-left {
+    box-shadow: var(--hard-shadow-left);
+    transform: rotateX(40deg) rotate(-40deg) scale(0.8);
+  }
+
+  /**
+   * Custom shadows
+   */
+  .hard-shadow {
+    box-shadow: var(--hard-shadow);
+  }
+
+  .hard-shadow-left {
+    box-shadow: var(--hard-shadow-left);
+  }
+
+  /**
+   * Container utilities
+   */
+  .container-narrow {
+    @apply max-w-4xl;
+  }
+
+  .container-wide {
+    @apply xl:max-w-6xl;
+  }
+
+  .container-ultrawide {
+    @apply xl:max-w-7xl;
+  }
+}
+

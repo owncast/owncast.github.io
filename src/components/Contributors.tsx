@@ -1,4 +1,4 @@
-import React from "react";
+import React, { JSX } from "react";
 import styles from "./Contributors.module.css";
 
 // Import pre-processed data at build time
@@ -68,7 +68,11 @@ export default function Contributors({
                       src={contributor.avatar_url}
                       alt={contributor.login}
                       loading="lazy"
-                      className={`${styles.contributorAvatar} ${isOwncatAvatar(contributor.avatar_url) ? styles.squareContributorItem : ""}`}
+                      className={`${styles.contributorAvatar} ${
+                        isOwncatAvatar(contributor.avatar_url)
+                          ? styles.squareContributorItem
+                          : ""
+                      }`}
                     />
                   </a>
                 </figure>
@@ -108,7 +112,11 @@ export default function Contributors({
                         src={donor.avatar_url}
                         alt={donor.login}
                         loading="lazy"
-                        className={`${styles.contributorAvatar} ${isOwncatAvatar(donor.avatar_url) ? styles.squareContributorItem : ""}`}
+                        className={`${styles.contributorAvatar} ${
+                          isOwncatAvatar(donor.avatar_url)
+                            ? styles.squareContributorItem
+                            : ""
+                        }`}
                       />
                     </a>
                   </figure>

@@ -1,6 +1,7 @@
 import React from "react";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./Store.module.css";
+import { LandingMarquee } from "@/components/landing/LandingMarquee";
 
 interface StoreItem {
   name: string;
@@ -24,24 +25,24 @@ export default function Store(): React.JSX.Element {
     }
   }, []);
 
-  React.useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (container) {
-      // Check initial state
-      checkScrollability();
+  // React.useEffect(() => {
+  //   const container = scrollContainerRef.current;
+  //   if (container) {
+  //     // Check initial state
+  //     checkScrollability();
 
-      // Add scroll listener
-      container.addEventListener("scroll", checkScrollability);
+  //     // Add scroll listener
+  //     container.addEventListener("scroll", checkScrollability);
 
-      // Add resize listener to handle window resize
-      window.addEventListener("resize", checkScrollability);
+  //     // Add resize listener to handle window resize
+  //     window.addEventListener("resize", checkScrollability);
 
-      return () => {
-        container.removeEventListener("scroll", checkScrollability);
-        window.removeEventListener("resize", checkScrollability);
-      };
-    }
-  }, [checkScrollability]);
+  //     return () => {
+  //       container.removeEventListener("scroll", checkScrollability);
+  //       window.removeEventListener("resize", checkScrollability);
+  //     };
+  //   }
+  // }, [checkScrollability]);
   const storeItems: StoreItem[] = [
     {
       name: "Straight Cut Logo T-Shirt",
@@ -107,24 +108,18 @@ export default function Store(): React.JSX.Element {
         {showRightFade && (
           <p className={styles.scrollHint}>← Scroll to see more items →</p>
         )}
-        <div
-          className={`${styles.storeContainer} ${
-            showRightFade ? styles.showRightFade : ""
-          } ${showLeftFade ? styles.showLeftFade : ""}`}
-        >
-          <div className={styles.storeGrid} ref={scrollContainerRef}>
-            {storeItems.map((item, idx) => (
-              <div key={idx} className={styles.storeItem}>
-                <a href={item.url} target="_blank" rel="noopener noreferrer">
-                  <div className={styles.storeItemImage}>
-                    <img src={useBaseUrl(item.image)} alt={item.name} />
-                  </div>
-                  <h3 className={styles.storeItemName}>{item.name}</h3>
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
+        <LandingMarquee>
+          {storeItems.map((item, idx) => (
+            <div key={idx} className={styles.storeItem}>
+              <a href={item.url} target="_blank" rel="noopener noreferrer">
+                <div className={styles.storeItemImage}>
+                  <img src={useBaseUrl(item.image)} alt={item.name} />
+                </div>
+                <h3 className={styles.storeItemName}>{item.name}</h3>
+              </a>
+            </div>
+          ))}
+        </LandingMarquee>
       </div>
     </section>
   );
