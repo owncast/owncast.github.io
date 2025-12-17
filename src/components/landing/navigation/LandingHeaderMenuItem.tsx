@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import { Button } from '@/components/shared/ui/button';
-import Link from 'next/link';
+import Link from '@docusaurus/Link';
 
 /**
  * A component meant to be used as a child of LandingHeader.

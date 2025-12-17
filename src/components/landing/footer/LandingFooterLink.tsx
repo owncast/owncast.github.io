@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import Link from 'next/link';
+import Link from '@docusaurus/Link';
 
 /**
  * A component meant to be used with LandingFooter / LandingFooterColumn.

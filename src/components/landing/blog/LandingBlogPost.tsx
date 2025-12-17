@@ -1,5 +1,5 @@
 import Image from '@/components/shared/Image';
-import Link from 'next/link';
+import Link from '@docusaurus/Link';
 import { clsx } from 'clsx';
 
 export interface BlogPost {

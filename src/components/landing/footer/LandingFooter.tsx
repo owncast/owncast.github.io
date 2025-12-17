@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import Link from 'next/link';
+import Link from '@docusaurus/Link';
 import { OrbitIcon } from 'lucide-react';
 import { GlowBg } from '@/components/shared/ui/glow-bg';
 

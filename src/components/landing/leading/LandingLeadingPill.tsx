@@ -1,8 +1,6 @@
-'use client';
-
 import { convertToRgba } from '@/lib/utils';
 import { clsx } from 'clsx';
-import Link from 'next/link';
+import Link from '@docusaurus/Link';
 import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 

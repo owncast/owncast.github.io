@@ -1,16 +1,15 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
 import { Button } from '@/components/shared/ui/button';
 import clsx from 'clsx';
 
-const IosAppStoreWhite = dynamic(() => import('./buttons/IosAppStoreBlack'));
-const IosAppStoreBlack = dynamic(() => import('./buttons/IosAppStoreWhite'));
-const MacAppStoreWhite = dynamic(() => import('./buttons/MacAppStoreBlack'));
-const MacAppStoreBlack = dynamic(() => import('./buttons/MacAppStoreWhite'));
-const MicrosoftWhite = dynamic(() => import('./buttons/MicrosoftStoreBlack'));
-const MicrosoftBlack = dynamic(() => import('./buttons/MicrosoftStoreWhite'));
-const GooglePlayWhite = dynamic(() => import('./buttons/GooglePlayStoreBlack'));
-const GooglePlayBlack = dynamic(() => import('./buttons/GooglePlayStoreWhite'));
+import IosAppStoreWhite from './buttons/IosAppStoreBlack';
+import IosAppStoreBlack from './buttons/IosAppStoreWhite';
+import MacAppStoreWhite from './buttons/MacAppStoreBlack';
+import MacAppStoreBlack from './buttons/MacAppStoreWhite';
+import MicrosoftWhite from './buttons/MicrosoftStoreBlack';
+import MicrosoftBlack from './buttons/MicrosoftStoreWhite';
+import GooglePlayWhite from './buttons/GooglePlayStoreBlack';
+import GooglePlayBlack from './buttons/GooglePlayStoreWhite';
 
 const STORE_IMAGES = {
   'ios-appstore': {

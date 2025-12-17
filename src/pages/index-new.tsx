@@ -210,9 +210,10 @@ export default function Home(): React.JSX.Element {
       <HeroSection />
       <FeaturePreviewSection />
       <SoftwareCompatList />
-      <StoreSection />
+      <FeatureComparisonSection />
       <FeaturesSection />
       <FeatureGrid />
+      <StoreSection />
       <SponsorsSection />
       <FAQSection />
       <NewsletterSection />
@@ -538,6 +539,11 @@ import { LandingRating } from "@/components/landing/rating/LandingRating";
 import { LandingMarquee } from "@/components/landing/LandingMarquee";
 import { LandingPrimaryTextCtaSection } from "@/components/landing/cta/LandingPrimaryCta";
 import { LandingNewsletterSection } from "@/components/landing/newsletter/LandingNewsletterSection";
+import {
+  LandingPriceComparisonSection,
+  LandingPriceComparisonColumn,
+  LandingPriceComparisonItem,
+} from "@/components/landing";
 
 interface StoreItem {
   name: string;
@@ -641,6 +647,100 @@ function StoreSection() {
         ))}
       </LandingMarquee>
     </section>
+  );
+}
+
+function FeatureComparisonSection() {
+  return (
+    <LandingPriceComparisonSection
+      title="Feature Comparison"
+      description="See how different solutions stack up"
+      withBackground
+      withBackgroundGlow
+      backgroundGlowVariant="secondary"
+      className="[&>div>div]:!grid-cols-[auto_minmax(250px,350px)_minmax(250px,350px)] [&>div>div]:justify-center [&>div>div]:!w-auto [&>div>div]:!max-w-none"
+    >
+      <LandingPriceComparisonColumn header="Features">
+        <LandingPriceComparisonItem showText text="Cost model" />
+        <LandingPriceComparisonItem showText text="Limits" />
+        <LandingPriceComparisonItem showText text="Branding" />
+        <LandingPriceComparisonItem showText text="Deployment" />
+        <LandingPriceComparisonItem showText text="Lock-in" />
+        <LandingPriceComparisonItem showText text="Standard, open protocols" />
+      </LandingPriceComparisonColumn>
+
+      <LandingPriceComparisonColumn
+        featured
+        header="Owncast"
+        ctaText="Get started"
+        ctaTextComponent={
+          <Button size="lg" variant="secondary" asChild>
+            <a href="#">Get Started</a>
+          </Button>
+        }
+      >
+        <LandingPriceComparisonItem
+          state="check"
+          text="Free, open-source software"
+          showText
+        />
+
+        <LandingPriceComparisonItem state="check" text="None" showText />
+
+        <LandingPriceComparisonItem
+          state="check"
+          text="Customizable branding"
+          showText
+        />
+
+        <LandingPriceComparisonItem
+          state="check"
+          text="Deploy anywhere"
+          showText
+        />
+        <LandingPriceComparisonItem state="check" text="None" showText />
+        <LandingPriceComparisonItem
+          state="check"
+          text="Built on open standards"
+          showText
+        />
+      </LandingPriceComparisonColumn>
+
+      <LandingPriceComparisonColumn header="Hosted solutions">
+        <LandingPriceComparisonItem
+          state="cross"
+          text="Monthly plans, usage fees, or both"
+          showText
+        />
+        <LandingPriceComparisonItem
+          state="cross"
+          text="Plan-based or platform-defined"
+          showText
+        />
+        <LandingPriceComparisonItem
+          state="cross"
+          text="Limited or locked behind paywalls"
+          showText
+        />
+        <LandingPriceComparisonItem
+          state="cross"
+          text="Platform-owned"
+          showText
+        />
+
+        <LandingPriceComparisonItem
+          state="cross"
+          text="Total lock-in"
+          showText
+        />
+
+        <LandingPriceComparisonItem
+          state="cross"
+          text="Either none, or abstracted away"
+          showText
+        />
+      </LandingPriceComparisonColumn>
+    </LandingPriceComparisonSection>
   );
 }
 
