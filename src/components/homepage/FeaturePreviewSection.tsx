@@ -6,6 +6,20 @@ import {
   LandingProductTourContent,
 } from "@/components/landing/LandingProductTour";
 import { VideoPlayer } from "@/components/shared/VideoPlayer";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+
+function FeatureImage({ src, alt }: { src: string; alt: string }) {
+  const resolvedSrc = useBaseUrl(src);
+  return (
+    <div className="overflow-visible rounded-md">
+      <img
+        className="w-full transition-transform duration-300 ease-in-out hover:scale-110"
+        src={resolvedSrc}
+        alt={alt}
+      />
+    </div>
+  );
+}
 
 interface Feature {
   id: string;
@@ -80,13 +94,10 @@ export function FeaturePreviewSection() {
                 loop={true}
               />
             ) : feature.imageSrc ? (
-              <div className="overflow-visible rounded-md">
-                <img
-                  className="w-full transition-transform duration-300 ease-in-out hover:scale-110"
-                  src={feature.imageSrc}
-                  alt={feature.imageAlt || feature.title}
-                />
-              </div>
+              <FeatureImage
+                src={feature.imageSrc}
+                alt={feature.imageAlt || feature.title}
+              />
             ) : null}
           </LandingProductTourContent>
         ))}
