@@ -5,7 +5,7 @@ export function FAQSection() {
   return (
     <LandingFaqCollapsibleSection
       title="FAQ"
-      description="Get answers to your questions about transforming your garden with Gnomie."
+      description="Get answers to common questions people want to know about Owncast."
       faqItems={[
         {
           question: "Do the Owncast developers know what I'm streaming?",
