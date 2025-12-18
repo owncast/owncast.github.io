@@ -6,6 +6,7 @@ import StreamLabsIcon from "./streamlabs.svg";
 import FfmpegIcon from "./ffmpeg.svg";
 import GoProIcon from "./gopro.svg";
 import BlackMagicDesignIcon from "./blackmagicdesign.svg";
+import VmixIcon from "./vmix.svg";
 
 export function SoftwareCompatList() {
   return (
@@ -27,6 +28,7 @@ export function SoftwareCompatList() {
             stroke="currentColor"
             strokeWidth="1.3"
           />
+          <VmixIcon className="w-14 h-14" />
         </>
       }
     />
