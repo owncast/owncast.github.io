@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175 40" role="img" aria-label="Object Storage">
+  <g fill="currentColor">
+    <!-- bucket -->
+    <path d="M12 10h20l-2 18a6 6 0 0 1-6 5h-4a6 6 0 0 1-6-5z"></path>
+    <path d="M10 10a12 6 0 0 0 24 0a12 6 0 0 0-24 0z"></path>
+
+    <!-- text -->
+    <text x="45" y="26" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="16" font-weight="500">
+      Object Storage
+    </text>
+  </g>
+</svg>

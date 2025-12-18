@@ -60,11 +60,12 @@ export const VideoPlayer = ({
           <button
             onClick={togglePlay}
             className={clsx(
-              'w-full h-full flex items-center justify-center absolute inset-0 bg-gradient-to-r group',
+              'w-full h-full flex items-center justify-center absolute inset-0 group',
               variant === 'primary'
-                ? 'from-primary-900/30 to-black/70'
-                : 'from-secondary-900/40 to-black/70',
+                ? 'bg-primary-900/30'
+                : 'bg-secondary-900/40',
             )}
+            style={poster ? { backgroundImage: `url(${poster})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
           >
             <div className="relative w-28 h-28">
               <PlayIcon

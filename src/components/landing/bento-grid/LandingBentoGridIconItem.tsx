@@ -1,8 +1,8 @@
-import React from 'react';
-import clsx from 'clsx';
-import { LandingBentoGridItem, ItemVariant } from './LandingBentoGridItem';
+import React from "react";
+import clsx from "clsx";
+import { LandingBentoGridItem, ItemVariant } from "./LandingBentoGridItem";
 
-export type ColorVariant = 'default' | 'primary' | 'secondary';
+export type ColorVariant = "default" | "primary" | "secondary";
 
 export interface LandingBentoGridIconItemProps {
   topText?: string;
@@ -39,7 +39,7 @@ export function LandingBentoGridIconItem({
   rowSpan,
   className,
   href,
-  variant = 'default',
+  variant = "default",
   asChild = false,
   children,
   ...props
@@ -49,11 +49,11 @@ export function LandingBentoGridIconItem({
       {topTextComponent || (
         <div
           className={clsx(
-            'flex items-start justify-center text-sm text-center',
-            variant === 'primary' && 'text-primary-500 dark:text-primary-400',
-            variant === 'secondary' &&
-              'text-secondary-500 dark:text-secondary-400',
-            variant === 'default' && 'text-foreground',
+            "flex items-start justify-center text-sm text-center",
+            variant === "primary" && "text-primary-500 dark:text-primary-200",
+            variant === "secondary" &&
+              "text-secondary-500 dark:text-secondary-200",
+            variant === "default" && "text-gray-900 dark:text-gray-400"
           )}
         >
           {topText}
@@ -63,11 +63,11 @@ export function LandingBentoGridIconItem({
       {icon && (
         <div
           className={clsx(
-            'flex items-center justify-center text-3xl',
-            variant === 'primary' && 'text-primary-500 dark:text-primary-400',
-            variant === 'secondary' &&
-              'text-secondary-500 dark:text-secondary-400',
-            variant === 'default' && 'text-foreground',
+            "flex items-center justify-center text-3xl",
+            variant === "primary" && "text-primary-500 dark:text-primary-200",
+            variant === "secondary" &&
+              "text-secondary-500 dark:text-secondary-200",
+            variant === "default" && "text-gray-900 dark:text-gray-400"
           )}
         >
           {icon}
@@ -77,11 +77,11 @@ export function LandingBentoGridIconItem({
       {bottomTextComponent || (
         <div
           className={clsx(
-            'flex items-end justify-center text-sm text-center',
-            variant === 'primary' && 'text-primary-500 dark:text-primary-400',
-            variant === 'secondary' &&
-              'text-secondary-500 dark:text-secondary-400',
-            variant === 'default' && 'text-muted-foreground',
+            "flex items-end justify-center text-sm text-center",
+            variant === "primary" && "text-primary-500 dark:text-primary-200",
+            variant === "secondary" &&
+              "text-secondary-500 dark:text-secondary-200",
+            variant === "default" && "text-gray-900 dark:text-gray-400"
           )}
         >
           {bottomText}

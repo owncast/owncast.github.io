@@ -67,7 +67,7 @@ export const LandingBandSection = ({
 
         <div
           className={clsx(
-            'flex gap-8 lg:gap-12 ml-auto mt-12 lg:mt-0 lg:max-w-lg xl:max-w-none flex-shrink',
+            'flex gap-4 lg:gap-6 ml-auto mt-12 lg:mt-0 lg:max-w-lg xl:max-w-none flex-shrink',
             withBackground ? 'text-black' : '',
             className,
           )}

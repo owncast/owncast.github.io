@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 115 40" role="img" aria-label="RTMP">
+  <g fill="currentColor">
+    <!-- camera body -->
+    <rect x="6" y="12" width="28" height="16" rx="3"></rect>
+    <!-- lens -->
+    <polygon points="34,14 44,10 44,30 34,26"></polygon>
+
+    <!-- text -->
+    <text x="52" y="26" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" letter-spacing="0.08em">
+      RTMP
+    </text>
+  </g>
+</svg>

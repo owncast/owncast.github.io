@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 40" role="img" aria-label="HLS">
+  <g fill="currentColor">
+    <!-- play button -->
+    <circle cx="20" cy="20" r="14" fill="none" stroke="currentColor" stroke-width="2"></circle>
+    <polygon points="16,13 28,20 16,27"></polygon>
+
+    <!-- text -->
+    <text x="42" y="26" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" letter-spacing="0.08em">
+      HLS
+    </text>
+  </g>
+</svg>
