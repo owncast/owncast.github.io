@@ -48,7 +48,7 @@ export function FeaturePreviewSection() {
         }
         descriptionComponent={
           <div className="flex flex-col max-w-xl">
-            <p className="mt-4 md:text-xl">
+            {/* <p className="mt-4 md:text-xl">
               Gnomie is an intuitive garden design tool that makes your outdoor
               space look beautiful.
             </p>
@@ -56,7 +56,7 @@ export function FeaturePreviewSection() {
             <p className="mt-4 md:text-xl opacity-50">
               It automatically suggests plants, flowers, and landscaping
               features based on your region's climate and soil conditions.
-            </p>
+            </p> */}
           </div>
         }
         defaultValue="feature-1"

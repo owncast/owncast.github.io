@@ -2,6 +2,7 @@
 import { useRef, useState } from 'react';
 import { CircleIcon, PlayIcon } from 'lucide-react';
 import clsx from 'clsx';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 export const VideoPlayer = ({
   autoPlay = true,
@@ -32,6 +33,8 @@ export const VideoPlayer = ({
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
+  const resolvedPoster = useBaseUrl(poster);
+  const resolvedSrc = useBaseUrl(src);
 
   const togglePlay = () => {
     if (!videoRef.current) {
@@ -65,7 +68,7 @@ export const VideoPlayer = ({
                 ? 'bg-primary-900/30'
                 : 'bg-secondary-900/40',
             )}
-            style={poster ? { backgroundImage: `url(${poster})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
+            style={resolvedPoster ? { backgroundImage: `url(${resolvedPoster})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
           >
             <div className="relative w-28 h-28">
               <PlayIcon
@@ -91,21 +94,21 @@ export const VideoPlayer = ({
 
         <video
           ref={videoRef}
-          src={src}
+          src={resolvedSrc}
           width={width}
           height={height}
           controls={autoPlay || isPlaying || controls}
           autoPlay={autoPlay}
           loop={loop}
           className={className}
-          poster={poster}
+          poster={resolvedPoster}
           muted={muted}
           onClick={togglePlay}
           playsInline
           preload={preload}
         >
           <track kind="captions" />
-          <source src={src} type="video/mp4" />
+          <source src={resolvedSrc} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
