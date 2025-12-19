@@ -77,7 +77,7 @@ export const LandingFeatureList = ({
           descriptionComponent
         )}
 
-        <div className="mt-12 flex flex-col sm:grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-12">
+        <div className="mt-12 flex flex-col sm:grid sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-1 md:gap-x-12 md:gap-y-2">
           {featureItems.map((featureItem, index) => (
             <LandingFeature
               key={index}

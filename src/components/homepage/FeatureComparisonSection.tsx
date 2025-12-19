@@ -16,13 +16,12 @@ export function FeatureComparisonSection() {
       backgroundGlowVariant="secondary"
       className="[&>div>div]:!grid-cols-[auto_minmax(250px,350px)_minmax(250px,350px)] [&>div>div]:justify-center [&>div>div]:!w-auto [&>div>div]:!max-w-none"
     >
-      <LandingPriceComparisonColumn header="Features">
+      <LandingPriceComparisonColumn header="What you get">
         <LandingPriceComparisonItem showText text="Cost model" />
-        <LandingPriceComparisonItem showText text="Limits" />
         <LandingPriceComparisonItem showText text="Branding" />
         <LandingPriceComparisonItem showText text="Deployment" />
         <LandingPriceComparisonItem showText text="Privacy" />
-        <LandingPriceComparisonItem showText text="Lock-in" />
+        <LandingPriceComparisonItem showText text="Terms of Service" />
         <LandingPriceComparisonItem showText text="Video standards" />
         <LandingPriceComparisonItem showText text="Social features" />
       </LandingPriceComparisonColumn>
@@ -43,11 +42,9 @@ export function FeatureComparisonSection() {
           showText
         />
 
-        <LandingPriceComparisonItem state="check" text="None" showText />
-
         <LandingPriceComparisonItem
           state="check"
-          text="Customizable branding"
+          text="Customizable branding on your own domain"
           showText
         />
 
@@ -63,7 +60,12 @@ export function FeatureComparisonSection() {
           showText
         />
 
-        <LandingPriceComparisonItem state="check" text="None" showText />
+        <LandingPriceComparisonItem
+          state="check"
+          text="You decide what is acceptable, and take reponsibility for it"
+          showText
+        />
+
         <LandingPriceComparisonItem
           state="check"
           text="Built on standards, video is playable across devices and software"
@@ -83,11 +85,7 @@ export function FeatureComparisonSection() {
           text="Monthly plans, usage fees, or ad-supported"
           showText
         />
-        <LandingPriceComparisonItem
-          state="cross"
-          text="Plan-based, platform-defined, or content restricted"
-          showText
-        />
+
         <LandingPriceComparisonItem
           state="cross"
           text="None or limited"
@@ -102,13 +100,13 @@ export function FeatureComparisonSection() {
 
         <LandingPriceComparisonItem
           state="cross"
-          text="Everything you do is tracked and monitored"
+          text="Everything you do is tracked, monitored and sold"
           showText
         />
 
         <LandingPriceComparisonItem
           state="cross"
-          text="Total lock-in"
+          text="ToS changes arbitrarily and frequently"
           showText
         />
 

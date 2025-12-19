@@ -14,21 +14,29 @@ import { NewsletterSection } from "../components/homepage/NewsletterSection";
 import Contributors from "@/components/Contributors";
 import Sponsors from "@/components/Sponsors";
 import { HomePageSpecsSection } from "@/components/homepage/HomePageSpecsSection";
+import { AppsList } from "@/components/homepage/AppsList";
+import { ArchetypesSection } from "@/components/homepage/Archetypes";
 
 export default function Home(): React.JSX.Element {
   return (
     <Layout>
       <HeroSection />
       <FeaturePreviewSection />
+      <SoftwareCompatList />
+      <FeatureGrid />
+
+      <ArchetypesSection />
+
       {/* <HomePageSpecsSection /> */}
 
-      <SoftwareCompatList />
       <FeatureComparisonSection />
       <InstallerSection />
-      <FeatureGrid />
-      <StoreSection />
       <ProtocolCompatList />
+
       <FAQSection />
+
+      <StoreSection />
+      <AppsList />
       <SponsorsSection />
       <Contributors />
       {/* <Sponsors /> */}

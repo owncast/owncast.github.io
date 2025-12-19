@@ -12,6 +12,7 @@ export function ProtocolCompatList() {
       title="Uses open protocols and standards"
       description="Choose the tools and services of your choice to work with Owncast."
       withBackground
+      className="!py-0 md:!py-0 [&>div]:!py-2"
       supportingComponent={
         <>
           <HLSIcon className="w-40 h-40" />

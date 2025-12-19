@@ -97,6 +97,17 @@ export function FAQSection() {
             </>
           ),
         },
+        {
+          question:
+            "I'm a representative of a media company looking to take down a live stream. What do I do?",
+          answer: (
+            <>
+              Sounds like a you problem. Owncast is not involved and cannot be
+              of any help to you. You'd be surprised how many people refuse to
+              understand this.
+            </>
+          ),
+        },
       ]}
       withBackground
       withBackgroundGlow

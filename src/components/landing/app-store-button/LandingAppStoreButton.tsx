@@ -10,6 +10,10 @@ import MicrosoftWhite from './buttons/MicrosoftStoreBlack';
 import MicrosoftBlack from './buttons/MicrosoftStoreWhite';
 import GooglePlayWhite from './buttons/GooglePlayStoreBlack';
 import GooglePlayBlack from './buttons/GooglePlayStoreWhite';
+import TvosAppStoreWhite from './buttons/TvosAppStoreBlack';
+import TvosAppStoreBlack from './buttons/TvosAppStoreWhite';
+import RokuChannelStoreWhite from './buttons/RokuChannelStoreBlack';
+import RokuChannelStoreBlack from './buttons/RokuChannelStoreWhite';
 
 const STORE_IMAGES = {
   'ios-appstore': {
@@ -28,6 +32,14 @@ const STORE_IMAGES = {
     black: GooglePlayWhite,
     white: GooglePlayBlack,
   },
+  'tvos-appstore': {
+    black: TvosAppStoreWhite,
+    white: TvosAppStoreBlack,
+  },
+  'roku-channelstore': {
+    black: RokuChannelStoreWhite,
+    white: RokuChannelStoreBlack,
+  },
 };
 
 const STORE_NAMES = {
@@ -35,6 +47,8 @@ const STORE_NAMES = {
   'mac-appstore': 'Mac AppStore',
   'microsoft-store': 'Microsoft Store',
   'google-playstore': 'Google Play Store',
+  'tvos-appstore': 'Apple TV App Store',
+  'roku-channelstore': 'Roku Channel Store',
 };
 
 export interface LandingAppStoreButtonProps

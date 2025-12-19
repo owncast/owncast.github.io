@@ -32,24 +32,31 @@ interface Feature {
 
 const features: Feature[] = [
   {
-    id: "feature-1",
-    title: "Built in chat",
-    description:
-      "Allow your viewers to chat and interact during your live stream without any kind of complex registration process or account creation. But you still have moderation tools to keep things under control.",
+    id: "feature-3",
+    title: "Built-in chat",
+    description: "Real-time chat included, no third-party services required",
     imageSrc: "/images/screenshots/screenshot-chat.png",
   },
   {
-    id: "feature-2",
-    title: "Notify when you're live",
-    description:
-      "Notify followers when you go live. Or support browser and Discord notifications. Build your own notification system using the built-in webhooks.",
+    id: "feature-4",
+    title: "Custom domains & branding",
+    description: "Stream from your own domain with your own look and feel",
+  },
+  {
+    id: "feature-6",
+    title: "Notifications",
+    description: "Notify followers when you go live",
     imageSrc: "/images/screenshots/screenshot-offline-notify.png",
   },
   {
-    id: "feature-3",
-    title: "Expand your reach",
-    description:
-      "Your followers can share your stream on the Fediverse, or people can discover it through hashtags on Mastodon and other Fediverse compatible services.",
+    id: "feature-7",
+    title: "Fediverse support",
+    description: "Share streams and reach viewers across the fediverse",
+  },
+  {
+    id: "feature-10",
+    title: "Extensible",
+    description: "Integrates with existing tools and workflows",
   },
 ];
 
@@ -79,7 +86,7 @@ export function FeaturePreviewSection() {
           {features.map((feature) => (
             <LandingProductTourTrigger key={feature.id} value={feature.id}>
               <p className="text-xl font-bold">{feature.title}</p>
-              <p>{feature.description}</p>
+              <p className="leading-relaxed">{feature.description}</p>
             </LandingProductTourTrigger>
           ))}
         </LandingProductTourList>
