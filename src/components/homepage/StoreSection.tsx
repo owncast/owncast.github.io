@@ -80,7 +80,7 @@ export function StoreSection() {
         effectComponent={<LandingCurvedLinesCtaBg variant="primary" />}
       ></LandingPrimaryTextCtaSection>
 
-      <LandingMarquee className="!overflow-visible" innerClassName="gap-8 -mt-12">
+      <LandingMarquee innerClassName="gap-8 -mt-12">
         {storeItems.map((item, idx) => (
           <div
             key={idx}
