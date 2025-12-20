@@ -37,7 +37,7 @@ export function InstallerSection() {
           />
 
           <Button className="mt-8" variant="primary" asChild>
-            <a href="#">Install now</a>
+            <a href="/quickstart">Install now</a>
           </Button>
         </>
       }

@@ -4,7 +4,7 @@
  */
 
 .heroBanner {
-  background-color: #121421;
+  background-color: #12161d; /* --color-owncast-palette-0 Dark primary */
   /* background-image: url(/img/hero-bgdecor.svg); */
   background-repeat: no-repeat;
   background-size: cover;
@@ -132,7 +132,7 @@
 }
 
 .keyPointItem h2 {
-  color: #2086e1;
+  color: #6544e9; /* --color-owncast-palette-6 */
   text-transform: uppercase;
   font-size: 1.1em;
   font-weight: 500;
@@ -140,7 +140,7 @@
 }
 
 .keyIcon {
-  background: linear-gradient(#7871ff, #2086e1);
+  background: linear-gradient(#7a5cf3, #6544e9); /* palette-7 to palette-6 */
   -webkit-mask: top left / contain no-repeat;
   mask: top left / contain no-repeat;
   height: 3em;
@@ -151,7 +151,7 @@
 
 /* Sponsors Section */
 .sponsors {
-  background: linear-gradient(30deg, #311c88 1%, #15132b);
+  background: linear-gradient(30deg, #6544e9 1%, #12161d); /* palette-6 to palette-0 */
   padding: 2rem 1rem;
   color: rgba(255, 255, 255, 0.7);
 }

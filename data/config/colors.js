@@ -8,10 +8,10 @@ export const colors = {
     darker: '#4330a5',   // Even darker
   },
   secondary: {
-    lighter: '#7dd4c4',  // Lighter teal
-    light: '#5ac9b5',    // Light teal
-    main: '#42bea6',     // --color-owncast-palette-13 (fun color 3)
-    dark: '#359988',     // Darker teal
-    darker: '#2a7a6d',   // Even darker
+    lighter: '#7db4f4',  // Lighter variant of #2386e2
+    light: '#4a9de8',    // Light variant
+    main: '#2386e2',     // Blue accent
+    dark: '#1a6bb8',     // Darker variant
+    darker: '#12508e',   // Even darker
   },
 };

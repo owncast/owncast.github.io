@@ -29,7 +29,7 @@ export default function Home(): React.JSX.Element {
 
       {/* <HomePageSpecsSection /> */}
 
-      <FeatureComparisonSection />
+      {/* <FeatureComparisonSection /> */}
       <InstallerSection />
       <ProtocolCompatList />
 

@@ -40,7 +40,7 @@ export const LandingFeatureList = ({
   return (
     <section
       className={clsx(
-        'relative w-full flex justify-center items-center gap-8 py-12 lg:py-16 flex-col',
+        'relative w-full flex justify-center items-center gap-8 py-6 lg:py-8 flex-col',
         withBackground && variant === 'primary'
           ? 'bg-primary-100/20 dark:bg-primary-900/10'
           : '',

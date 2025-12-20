@@ -8,6 +8,7 @@ export function AppsList() {
   return (
     <LandingProductCardSection
       title="Owncast works everywhere"
+      withBackground
       description="Because Owncast is built on open standards you can watch an Owncast-powered stream on any device. But if you want, we've built some easy ways to watch that work out of the box."
       products={[
         {

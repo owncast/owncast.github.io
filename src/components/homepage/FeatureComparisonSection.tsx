@@ -9,14 +9,15 @@ import {
 export function FeatureComparisonSection() {
   return (
     <LandingPriceComparisonSection
-      title="Comparisons"
+      title="The Owncast Difference"
       // description="See how different solutions stack up"
       withBackground
       withBackgroundGlow
       backgroundGlowVariant="secondary"
+      variant="primary"
       className="[&>div>div]:!grid-cols-[auto_minmax(250px,350px)_minmax(250px,350px)] [&>div>div]:justify-center [&>div>div]:!w-auto [&>div>div]:!max-w-none"
     >
-      <LandingPriceComparisonColumn header="What you get">
+      <LandingPriceComparisonColumn header="Aspects">
         <LandingPriceComparisonItem showText text="Cost model" />
         <LandingPriceComparisonItem showText text="Branding" />
         <LandingPriceComparisonItem showText text="Deployment" />
@@ -32,7 +33,7 @@ export function FeatureComparisonSection() {
         ctaText="Get started"
         ctaTextComponent={
           <Button size="lg" variant="primary" asChild>
-            <a href="#">Get Started</a>
+            <a href="/quickstart">Get Started</a>
           </Button>
         }
       >

@@ -1,17 +1,13 @@
 import React from "react";
 import { LandingFeatureList } from "@/components/landing/feature/LandingFeatureList";
 import {
-  BanIcon,
-  CalculatorIcon,
-  CodeIcon,
-  GithubIcon,
+  DollarSignIcon,
+  DownloadIcon,
   LineChartIcon,
-  ServerIcon,
   SparklesIcon,
   TvMinimalPlayIcon,
-  Unlink2Icon,
-  UsersIcon,
 } from "lucide-react";
+import FediverseIcon from "./fediverse-mono.svg";
 
 export function FeatureGrid() {
   const featureItems = [
@@ -25,7 +21,7 @@ export function FeatureGrid() {
       title: "Software you own, not a service you rent",
       description:
         "Download it without any registration or sign-up, and it's yours to run anywhere you like. It can be your existing corporate infrastructure, a cloud provider, or even your own computer at home. Once you download it, we're no longer involved.",
-      icon: <GithubIcon />,
+      icon: <DownloadIcon />,
     },
     {
       title: "Works where public platforms can't",
@@ -40,15 +36,16 @@ export function FeatureGrid() {
       icon: <TvMinimalPlayIcon />,
     },
     {
-      title: "No forced ads",
+      title: "You control monetization",
       description:
-        "Your stream is never interrupted by a service looking to monetize your viewers.",
-      icon: <BanIcon />,
+        "Decide how you want to monetize your stream, if at all. Whether it's tips through direct donations, or third-party services, you have full control. Through custom UI and webhook integrations you can build this directly into your stream experience.",
+      icon: <DollarSignIcon />,
     },
     {
-      title: "Unlimited viewers. No required size.",
-      description: "Audience size doesn't unlock or restrict features.",
-      icon: <UsersIcon />,
+      title: "You're on the Fediverse",
+      description:
+        "Owncast integrates with the Fediverse, allowing you to connect and interact with a broader community across decentralized social networks.",
+      icon: <FediverseIcon className="w-7 h-7" />,
     },
   ];
 
@@ -59,7 +56,9 @@ export function FeatureGrid() {
         "Different people have different use cases for live streaming. And different streams have different reasons for using Owncast. Here are some of the most common ones."
       }
       featureItems={featureItems}
-      variant="secondary"
+      variant="primary"
+      withBackgroundGlow
+      backgroundGlowVariant="primary"
     />
   );
 }

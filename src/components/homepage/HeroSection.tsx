@@ -22,7 +22,7 @@ export function HeroSection() {
       effectComponent={<LandingPathsCtaBg variant="primary" />}
     >
       <Button size="xl" variant="primary" asChild>
-        <a href="#">Get Started</a>
+        <a href="/quickstart">Get Started</a>
       </Button>
     </LandingPrimaryVideoCtaSection>
   );

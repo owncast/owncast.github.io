@@ -32,7 +32,7 @@ interface Feature {
 
 const features: Feature[] = [
   {
-    id: "feature-3",
+    id: "chat",
     title: "Built-in chat",
     description: "Real-time chat included, no third-party services required",
     imageSrc: "/images/screenshots/screenshot-chat.png",
@@ -67,20 +67,8 @@ export function FeaturePreviewSection() {
         titleComponent={
           <h2 className="text-5xl font-semibold leading-tight"></h2>
         }
-        descriptionComponent={
-          <div className="flex flex-col max-w-xl">
-            {/* <p className="mt-4 md:text-xl">
-              Gnomie is an intuitive garden design tool that makes your outdoor
-              space look beautiful.
-            </p>
-
-            <p className="mt-4 md:text-xl opacity-50">
-              It automatically suggests plants, flowers, and landscaping
-              features based on your region's climate and soil conditions.
-            </p> */}
-          </div>
-        }
-        defaultValue="feature-1"
+        descriptionComponent={<div className="flex flex-col max-w-xl"></div>}
+        defaultValue="chat"
       >
         <LandingProductTourList>
           {features.map((feature) => (

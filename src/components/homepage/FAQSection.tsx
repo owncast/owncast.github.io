@@ -4,9 +4,35 @@ import { LandingFaqCollapsibleSection } from "@/components/landing/LandingFaqCol
 export function FAQSection() {
   return (
     <LandingFaqCollapsibleSection
+      className="py-4 lg:py-6"
       title="FAQ"
       description="Get answers to common questions people want to know about Owncast."
       faqItems={[
+        {
+          question:
+            "Should I move to Owncast from Twitch, YouTube, Facebook, or another platform?",
+          answer: (
+            <>
+              Honestly, for most people, probably not. Owncast is an alternative
+              for when those platforms no longer meet your needs. If you are
+              happy with your current platform, and the tradeoffs involved,
+              there's no need to switch.
+              <br />
+              <br />
+              But if you're building a project that requires a live streaming
+              component, or have an internal streaming requirement, or you're a
+              media company who wants to create a 24/7 stream, then Owncast
+              makes sense where other options do not.
+              <br />
+              <br />
+              Or if you're somebody who has found other platforms no longer
+              welcoming to you and your content, or you want to go a different
+              direction, then building your own thing, taking your existing
+              audience with you, and being responsible for your own destiny also
+              makes a lot of sense.
+            </>
+          ),
+        },
         {
           question: "Do the Owncast developers know what I'm streaming?",
           answer: (
@@ -22,7 +48,8 @@ export function FAQSection() {
           ),
         },
         {
-          question: "Is it expensive to run Owncast?",
+          question:
+            "Is it expensive to run Owncast? Somebody on Twitch said it's really expensive.",
           answer: (
             <>
               <div>
@@ -49,7 +76,8 @@ export function FAQSection() {
           ),
         },
         {
-          question: "Is it hard to set up Owncast?",
+          question:
+            "Is it hard to set up Owncast? Somebody on YouTube said it's really hard.",
           answer: (
             <>
               Owncast is designed to be user-friendly and straightforward to set
@@ -61,45 +89,42 @@ export function FAQSection() {
         },
         {
           question:
-            "I want to grow my audience. Can Owncast get me more viewers?",
+            "I want to grow my audience. Can Owncast get me more viewers? TikTok gives me more viewers.",
           answer: (
             <>
-              In general, we've all become accustomed to platforms hand feeding
-              our content to the masses, and creators having to do nothing. In
-              return, creators have to live by strict rules, limitations, data
-              harvesting, and no-good, very bad stuff.
+              If you were in a band, and went through all the work to write
+              songs, practice, book a show, but didn't tell anybody about it,
+              you'd be pretty disappointed when nobody showed up.
               <br />
               <br />
-              Owncast is live streaming software that you control. It gives you
-              the tools to build your own audience on your own terms. It does
-              not do it for you, that's your job.
+              We've all become accustomed to platforms hand feeding our content
+              to the masses. In return, creators live by strict rules,
+              limitations, and data harvesting.
               <br />
               <br />
-              However, there are some options.
+              Owncast gives you the tools to build your own audience on your own
+              terms. It does not do it for you, that's your job. However, there
+              are some opportunities:
               <ul className="list-disc pl-5">
                 <li>
-                  Owncast can optionally connect to the{" "}
-                  <a href="/docs/social">Fediverse</a>, allowing your stream to
-                  be discovered by a wider audience by users using software like
-                  Pleroma, Misskey, and Mastodon. Make sure you encourage people
-                  to follow your stream, and ask them to share it with their
-                  followers.
+                  Connect to the <a href="/docs/social">Fediverse</a>, allowing
+                  your stream to be discovered by users on Mastodon, Pleroma,
+                  and Misskey. Encourage people to follow and share your stream.
                 </li>
                 <li>
-                  You can list your stream in the{" "}
+                  List your stream in the{" "}
                   <a href="/docs/directory">Owncast directory</a>, making it
-                  discoverable by people browsing for new streams to watch.
-                  Additionally, some applications and services pull from the
-                  directory, so your stream may be featured in other places as
-                  well.
+                  discoverable by people browsing for new streams.
                 </li>
               </ul>
+              Owncast may not be a good fit if you're looking to press "Go Live"
+              and expect people to just show up.
             </>
           ),
         },
         {
           question:
-            "I'm a representative of a media company looking to take down a live stream. What do I do?",
+            "I'm a representative of a media company looking to take down a live stream that says it's run by Owncast. Take it down, or else!",
           answer: (
             <>
               Sounds like a you problem. Owncast is not involved and cannot be
@@ -108,10 +133,22 @@ export function FAQSection() {
             </>
           ),
         },
+        {
+          question:
+            "Where can I chat with people about Owncast if I have questions?",
+          answer: (
+            <>
+              If our <a href="/docs">documentation</a> isn't answering your
+              question, visit our <a href="/contact">contact page</a> for links
+              to community chat rooms, issue trackers, and other ways to get in
+              touch with the Owncast community and developers.
+            </>
+          ),
+        },
       ]}
       withBackground
       withBackgroundGlow
-      backgroundGlowVariant="primary"
+      backgroundGlowVariant="secondary"
       variant="primary"
     />
   );

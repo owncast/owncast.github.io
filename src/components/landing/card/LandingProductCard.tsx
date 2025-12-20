@@ -58,8 +58,14 @@ export function LandingProductCard({
 
   return (
     <Component className={cardClasses} {...hrefProps}>
+      {topComponent && (
+        <div className="absolute left-0 top-2 w-full flex items-center justify-center z-10">
+          {topComponent}
+        </div>
+      )}
+
       {imageSrc && (
-        <div className="flex-shrink-0 w-1/3 md:w-full md:h-48 relative rounded-md overflow-hidden">
+        <div className="flex-shrink-0 w-1/3 md:w-full md:h-48 relative overflow-hidden">
           <Image
             src={imageSrc}
             alt={imageAlt || title}
@@ -69,12 +75,7 @@ export function LandingProductCard({
       )}
 
       {/* Content section */}
-      <div className="flex-1 flex flex-col justify-between gap-4 px-4 pb-4">
-        {topComponent && (
-          <div className="absolute left-0 top-2 w-full flex items center justify-center">
-            {topComponent}
-          </div>
-        )}
+      <div className="flex-1 flex flex-col justify-between gap-2 px-4 pb-2">
 
         <div className="text-left space-y-2">
           {titleComponent || (
