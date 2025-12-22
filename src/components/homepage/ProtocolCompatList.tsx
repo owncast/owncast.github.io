@@ -11,6 +11,7 @@ export function ProtocolCompatList() {
       title="Uses open protocols and standards"
       description="Choose the tools and services of your choice to work with Owncast."
       className="!mt-0 lg:!mt-0"
+      variant="secondary"
       supportingComponent={
         <div className="grid grid-cols-2 gap-4 w-full lg:flex lg:gap-4">
           <HLSIcon className="w-full h-auto lg:w-40 lg:h-40" />

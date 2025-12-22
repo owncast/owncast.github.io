@@ -16,7 +16,11 @@ export function SoftwareCompatList() {
       supportingComponent={
         <div className="grid grid-cols-3 gap-2 w-full place-items-center lg:contents">
           <a href="https://obsproject.com/" target="_blank" rel="noreferrer">
-            <OBSIcon className="w-12 h-auto lg:w-12 lg:h-12" stroke="black" strokeWidth="1.3" />
+            <OBSIcon
+              className="w-12 h-auto lg:w-12 lg:h-12"
+              stroke="black"
+              strokeWidth="1.3"
+            />
           </a>
           <a href="https://streamlabs.com/" target="_blank" rel="noreferrer">
             <StreamLabsIcon className="w-12 h-auto lg:w-12 lg:h-12" />
