@@ -21,9 +21,11 @@ export function HeroSection() {
       backgroundGlowVariant="primary"
       effectComponent={<LandingPathsCtaBg variant="primary" />}
     >
-      <Button size="xl" variant="primary" asChild>
-        <a href="/quickstart">Get Started</a>
-      </Button>
+      <div className="hidden md:block">
+        <Button size="xl" variant="primary" asChild>
+          <a href="/quickstart">Get Started</a>
+        </Button>
+      </div>
     </LandingPrimaryVideoCtaSection>
   );
 }
