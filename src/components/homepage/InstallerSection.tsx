@@ -36,7 +36,7 @@ export function InstallerSection() {
             keyPoints={keyPoints}
           />
 
-          <Button className="mt-8" variant="primary" asChild>
+          <Button className="mt-8 hidden md:inline-flex" variant="primary" asChild>
             <a href="/quickstart">Install now</a>
           </Button>
         </>
@@ -45,6 +45,7 @@ export function InstallerSection() {
       imageAlt="Screenshot of the product"
       imagePosition="left"
       imagePerspective="bottom"
+      imageClassName="hidden md:block"
       variant="primary"
     />
   );
