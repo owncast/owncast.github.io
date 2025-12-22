@@ -5,6 +5,7 @@ import HLSIcon from "./hls.svg";
 import RTMPIcon from "./rtmp.svg";
 import FediverseIcon from "./fediverse.svg";
 import ObjectStorageIcon from "./objectstorage.svg";
+import ActivityPubLogo from "./activitypub-logo.svg";
 
 export function ProtocolCompatList() {
   return (
@@ -18,7 +19,8 @@ export function ProtocolCompatList() {
           <HLSIcon className="w-40 h-40" />
           <ObjectStorageIcon className="w-40 h-40" />
           <RTMPIcon className="w-40 h-40" />
-          <FediverseIcon className="w-40 h-40" />
+          <ActivityPubLogo className="w-40 h-40" />
+          {/* <FediverseIcon className="w-40 h-40" /> */}
         </>
       }
     />
