@@ -209,3 +209,10 @@ html[data-theme='dark'] .docMainWrapper {
   filter: brightness(0) invert(0.9);
 }
 
+/* Hide Kapa.ai widget on mobile */
+@media (max-width: 768px) {
+  #kapa-widget-container {
+    display: none !important;
+  }
+}
+
