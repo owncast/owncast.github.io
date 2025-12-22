@@ -64,6 +64,10 @@ export function FeaturePreviewSection() {
   return (
     <>
       <LandingProductTourSection
+        // withBackground
+        // variant="secondary"
+        withBackgroundGlow
+        backgroundGlowVariant="secondary"
         titleComponent={
           <h2 className="text-5xl font-semibold leading-tight"></h2>
         }

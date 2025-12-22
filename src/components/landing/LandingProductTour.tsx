@@ -136,7 +136,7 @@ const LandingProductTourContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "w-full max-w-[500px] mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      "w-full max-w-[700px] mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
       className
     )}
     {...props}
