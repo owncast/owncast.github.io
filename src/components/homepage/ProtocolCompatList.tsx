@@ -1,9 +1,7 @@
 import React from "react";
 import { LandingBandSection } from "@/components/landing/LandingBand";
-import { ChromeIcon, FigmaIcon, GithubIcon, FramerIcon } from "lucide-react";
 import HLSIcon from "./hls.svg";
 import RTMPIcon from "./rtmp.svg";
-import FediverseIcon from "./fediverse.svg";
 import ObjectStorageIcon from "./objectstorage.svg";
 import ActivityPubLogo from "./activitypub-logo.svg";
 
@@ -12,16 +10,14 @@ export function ProtocolCompatList() {
     <LandingBandSection
       title="Uses open protocols and standards"
       description="Choose the tools and services of your choice to work with Owncast."
-      withBackground
-      className="!py-0 md:!py-0 [&>div]:!py-2"
+      className="!mt-0 lg:!mt-0"
       supportingComponent={
-        <>
-          <HLSIcon className="w-40 h-40" />
-          <ObjectStorageIcon className="w-40 h-40" />
-          <RTMPIcon className="w-40 h-40" />
-          <ActivityPubLogo className="w-40 h-40" />
-          {/* <FediverseIcon className="w-40 h-40" /> */}
-        </>
+        <div className="grid grid-cols-2 gap-4 w-full lg:flex lg:gap-4">
+          <HLSIcon className="w-full h-auto lg:w-40 lg:h-40" />
+          <ObjectStorageIcon className="w-full h-auto lg:w-40 lg:h-40" />
+          <RTMPIcon className="w-full h-auto lg:w-40 lg:h-40" />
+          <ActivityPubLogo className="w-full h-auto lg:w-40 lg:h-40" />
+        </div>
       }
     />
   );
