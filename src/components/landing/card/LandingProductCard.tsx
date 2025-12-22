@@ -38,7 +38,7 @@ export function LandingProductCard({
   href,
 }: ProductCardProps) {
   const cardClasses = clsx(
-    'relative group flex flex-row md:flex-col gap-4 rounded-xl border shadow-sm transition-all duration-200 overflow-hidden h-full',
+    'relative group flex flex-col gap-4 rounded-xl border shadow-sm transition-all duration-200 overflow-hidden h-full',
     featured && 'border-2 shadow-md',
     featured &&
       variant === 'primary' &&
@@ -65,7 +65,7 @@ export function LandingProductCard({
       )}
 
       {imageSrc && (
-        <div className="flex-shrink-0 w-1/3 md:w-full md:h-48 relative overflow-hidden">
+        <div className="flex-shrink-0 w-full h-40 md:h-48 relative overflow-hidden">
           <Image
             src={imageSrc}
             alt={imageAlt || title}
