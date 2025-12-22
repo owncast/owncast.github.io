@@ -1,5 +1,6 @@
 import React from 'react';
 import { clsx } from 'clsx';
+import { cn } from '@/lib/utils';
 
 /**
  * A component meant to be used in the landing page.
@@ -10,6 +11,7 @@ import { clsx } from 'clsx';
 export const LandingBandSection = ({
   children,
   className,
+  innerClassName,
   title,
   titleComponent,
   description,
@@ -20,6 +22,7 @@ export const LandingBandSection = ({
 }: {
   children?: React.ReactNode;
   className?: string;
+  innerClassName?: string;
   title?: string | React.ReactNode;
   titleComponent?: React.ReactNode;
   description?: string | React.ReactNode;
@@ -41,7 +44,7 @@ export const LandingBandSection = ({
         className,
       )}
     >
-      <div className="w-full p-6 max-w-full container-wide gap-6 items-center lg:flex lg:flex-row">
+      <div className={cn("w-full px-6 py-2 max-w-full container-wide gap-6 items-center lg:flex lg:flex-row", innerClassName)}>
         <div
           className={clsx(
             'w-full lg:w-auto flex flex-col flex-shrink-0 max-w-lg xl:max-w-3xl',
