@@ -62,7 +62,7 @@ export function StoreSection() {
   ];
 
   return (
-    <section>
+    <section className="hidden md:block">
       <LandingPrimaryTextCtaSection
         titleComponent={
           <h1 className="font-normal text-2xl md:text-3xl lg:text-4xl leading-tight md:max-w-2xl">
