@@ -77,7 +77,7 @@ const ALL_REDIRECTS = [
 const config: Config = {
   title: "Owncast",
   tagline: "Free and Open Source Livestreaming",
-  favicon: "img/favicon.ico",
+  favicon: "/favicon.png",
 
   markdown: {
     hooks: {
@@ -312,12 +312,7 @@ const config: Config = {
           type: "docSidebar",
           sidebarId: "docs",
           position: "left",
-          label: "Docs",
-        },
-        {
-          to: "/blog",
-          label: "Releases",
-          position: "left",
+          label: "Documentation",
         },
         {
           to: "/troubleshoot",
@@ -355,7 +350,12 @@ const config: Config = {
             },
             {
               label: "Quick Start",
-              to: "/docs/getting-started/install",
+              to: "/quickstart",
+            },
+            {
+              to: "/blog",
+              label: "Releases",
+              position: "left",
             },
             {
               label: "Roadmap",
@@ -371,18 +371,22 @@ const config: Config = {
               href: "https://github.com/owncast",
             },
             {
-              label: "Rocket.Chat",
-              href: "https://owncast.rocket.chat",
+              label: "Community Chat",
+              href: "https://matrix.to/#/#owncast:matrix.org",
             },
             {
               label: "Contribute",
               href: "/contribute",
             },
+            {
+              label: "Contact",
+              href: "/contact",
+            },
           ],
         },
       ],
       copyright:
-        'Owncast® is a <a href="/trademark">registered trademark</a> for the Owncast Project.',
+        'Owncast® is a <a href="/trademark">registered trademark</a> of the Owncast Project.',
     },
     prism: {
       theme: prismThemes.github,
