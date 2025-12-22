@@ -40,9 +40,9 @@ const archetypes: {
     examples: [Mic, Gamepad2, Music, Disc3, Palette],
   },
   {
-    title: "Communities",
+    title: "Groups",
     description:
-      "Groups that want a space they own to connect and broadcast together.",
+      "Organizations that want a space they own to connect and broadcast together.",
     icon: UsersIcon,
     examples: [Church, Theater, Megaphone, Trophy],
   },
@@ -54,7 +54,7 @@ const archetypes: {
     examples: [Code, Terminal, Wrench],
   },
   {
-    title: "Organizations",
+    title: "Enterprises",
     description:
       "Businesses powering events, apps, and broadcasts with live video.",
     icon: BuildingIcon,

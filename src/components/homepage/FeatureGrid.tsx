@@ -1,9 +1,9 @@
 import React from "react";
 import { LandingFeatureList } from "@/components/landing/feature/LandingFeatureList";
 import {
-  DollarSignIcon,
   DownloadIcon,
   LineChartIcon,
+  MessageCircleIcon,
   SparklesIcon,
   TvMinimalPlayIcon,
 } from "lucide-react";
@@ -36,10 +36,10 @@ export function FeatureGrid() {
       icon: <TvMinimalPlayIcon />,
     },
     {
-      title: "You control monetization",
+      title: "Built-in chat out of the box",
       description:
-        "Decide how you want to monetize your stream, if at all. Whether it's tips through direct donations, or third-party services, you have full control. Through custom UI and webhook integrations you can build this directly into your stream experience.",
-      icon: <DollarSignIcon />,
+        "Engage your audience with built-in chat functionality. Viewers can immediately start chatting with the streamer, or other viewers to build a community around your content. You can even build bots and addons to enhance the chat experience.",
+      icon: <MessageCircleIcon />,
     },
     {
       title: "You're on the Fediverse",
