@@ -8,13 +8,13 @@ import styles from "./styles.module.css";
 
 // Owncat-themed titles for each admonition type
 const owncatTitles: Record<string, string> = {
-  note: "Owncat notes",
+  note: "Owncat says",
   tip: "Owncat suggests",
   info: "Owncat informs you",
   warning: "Owncat warns you",
   danger: "Owncat alerts you",
   caution: "Owncat cautions you",
-  secondary: "Owncat notes",
+  secondary: "Owncat says",
   important: "Owncat informs you",
   success: "Owncat celebrates",
 };
