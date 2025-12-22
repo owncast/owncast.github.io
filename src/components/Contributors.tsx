@@ -1,5 +1,6 @@
 import React, { JSX } from "react";
 import styles from "./Contributors.module.css";
+import { LandingAvatar } from "./landing/social-proof/LandingAvatar";
 
 // Import pre-processed data at build time
 import contributorsData from "@site/static/data/contributors-processed.json";
@@ -35,11 +36,6 @@ export default function Contributors({
   contributorsTitle = "Contributors",
   donorsTitle = "Donors",
 }: ContributorsProps): JSX.Element {
-  // Check if avatar is an owncat (for styling purposes)
-  const isOwncatAvatar = (url: string): boolean => {
-    return url.includes("owncat-head");
-  };
-
   return (
     <div className={styles.contributorsContainer}>
       {/* Contributors Section */}
@@ -47,12 +43,6 @@ export default function Contributors({
         <section>
           <div className={styles.sectionHeader}>
             <h2>{contributorsTitle}</h2>
-            <img
-              src="/images/owncat-head.svg"
-              alt=""
-              className={styles.sectionOwncat}
-              aria-hidden="true"
-            />
           </div>
           <ul className={styles.contributorBox}>
             {contributors.map((contributor) => (
@@ -64,15 +54,10 @@ export default function Contributors({
                     rel="noopener noreferrer"
                     title={contributor.login}
                   >
-                    <img
-                      src={contributor.avatar_url}
-                      alt={contributor.login}
-                      loading="lazy"
-                      className={`${styles.contributorAvatar} ${
-                        isOwncatAvatar(contributor.avatar_url)
-                          ? styles.squareContributorItem
-                          : ""
-                      }`}
+                    <LandingAvatar
+                      imageSrc={contributor.avatar_url}
+                      name={contributor.login}
+                      className={styles.contributorAvatar}
                     />
                   </a>
                 </figure>
@@ -108,15 +93,10 @@ export default function Contributors({
                       rel="noopener noreferrer"
                       title={donor.login}
                     >
-                      <img
-                        src={donor.avatar_url}
-                        alt={donor.login}
-                        loading="lazy"
-                        className={`${styles.contributorAvatar} ${
-                          isOwncatAvatar(donor.avatar_url)
-                            ? styles.squareContributorItem
-                            : ""
-                        }`}
+                      <LandingAvatar
+                        imageSrc={donor.avatar_url}
+                        name={donor.login}
+                        className={styles.contributorAvatar}
                       />
                     </a>
                   </figure>
