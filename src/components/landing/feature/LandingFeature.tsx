@@ -23,7 +23,7 @@ export const LandingFeature = ({
     <div className={clsx("flex flex-col gap-4 py-4", className)}>
       <div
         className={clsx(
-          "flex items-center justify-center w-16 h-16 rounded-md",
+          "hidden sm:flex items-center justify-center w-16 h-16 rounded-md",
           variant === "primary"
             ? "bg-primary-100/30 border border-primary-100/70 dark:border-primary-900 dark:bg-primary-900/70 text-gray-200"
             : "bg-secondary-100/30 border border-secondary-100/70 dark:border-secondary-900 dark:bg-secondary-900/70 text-gray-200"

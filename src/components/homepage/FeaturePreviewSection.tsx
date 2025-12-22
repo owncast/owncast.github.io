@@ -60,12 +60,56 @@ const features: Feature[] = [
   },
 ];
 
+function MobileFeatureCard({ feature }: { feature: Feature }) {
+  return (
+    <div className="flex flex-col gap-4 p-4 rounded-lg bg-neutral-500/10 h-full">
+      <div>
+        <p className="text-xl font-bold">{feature.title}</p>
+        <p className="leading-relaxed text-muted-foreground">
+          {feature.description}
+        </p>
+      </div>
+      {feature.videoSrc ? (
+        <VideoPlayer
+          className="w-full rounded-md"
+          src={feature.videoSrc}
+          autoPlay={true}
+          controls={false}
+          loop={true}
+        />
+      ) : feature.imageSrc ? (
+        <FeatureImage
+          src={feature.imageSrc}
+          alt={feature.imageAlt || feature.title}
+        />
+      ) : null}
+    </div>
+  );
+}
+
+function MobileFeatureList() {
+  return (
+    <section className="lg:hidden py-6">
+      <div className="flex gap-4 overflow-x-auto px-6 pb-4 snap-x snap-mandatory scrollbar-hide">
+        {features.map((feature) => (
+          <div key={feature.id} className="snap-center shrink-0 w-[85vw] max-w-sm">
+            <MobileFeatureCard feature={feature} />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function FeaturePreviewSection() {
   return (
     <>
+      {/* Mobile: Vertical cards stack */}
+      <MobileFeatureList />
+
+      {/* Desktop: Interactive tab-based tour */}
       <LandingProductTourSection
-        // withBackground
-        // variant="secondary"
+        className="hidden lg:flex"
         withBackgroundGlow
         backgroundGlowVariant="secondary"
         titleComponent={
