@@ -13,7 +13,7 @@ export function FAQSection() {
             "Should I move to Owncast from Twitch, YouTube, Facebook, or another platform?",
           answer: (
             <>
-              Honestly, for most people, probably not. Owncast is an alternative
+              Honestly, <strong>probably not.</strong> Owncast is an alternative
               for when those platforms no longer meet your needs. If you are
               happy with your current platform, and the tradeoffs involved,
               there's no need to switch.
@@ -58,8 +58,11 @@ export function FAQSection() {
                 <a href="/docs/resources-requirements">
                   up to you how much you wish{" "}
                 </a>
-                to pay. The more you ask of your server, the more you'll need to
-                pay for computing.
+                to pay.{" "}
+                <strong>
+                  The more you ask of your server, the more you'll need to pay
+                  for computing.
+                </strong>
                 <br />
                 <br />
               </div>
@@ -69,8 +72,8 @@ export function FAQSection() {
                 manageable. As your audience grows, you can{" "}
                 <a href="/docs/scaling">scale up</a> your hosting solution
                 accordingly to manage increased traffic. Moving to{" "}
-                <a href="/docs/storage">Object Storage</a> generally removes
-                most bandwidth concerns for around $5 a month.
+                <a href="/docs/storage">Object Storage</a> generally{" "}
+                <strong>removes</strong> most bandwidth concerns.
               </div>
             </>
           ),
@@ -94,7 +97,10 @@ export function FAQSection() {
             <>
               If you were in a band, and went through all the work to write
               songs, practice, book a show, but didn't tell anybody about it,
-              you'd be pretty disappointed when nobody showed up.
+              <strong>
+                {" "}
+                you'd be pretty disappointed when nobody showed up.
+              </strong>
               <br />
               <br />
               We've all become accustomed to platforms hand feeding our content
@@ -127,9 +133,9 @@ export function FAQSection() {
             "I'm a representative of a media company looking to take down a live stream that says it's run by Owncast. Take it down, or else!",
           answer: (
             <>
-              Sounds like a you problem. Owncast is not involved and cannot be
-              of any help to you. You'd be surprised how many people refuse to
-              understand this.
+              <strong>Sounds like a you problem.</strong> Owncast is not
+              involved and cannot be of any help to you. You'd be surprised how
+              many people refuse to understand this.
             </>
           ),
         },
