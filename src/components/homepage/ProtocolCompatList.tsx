@@ -10,7 +10,7 @@ export function ProtocolCompatList() {
     <LandingBandSection
       title="Uses open protocols and standards"
       description="Choose the tools and services of your choice to work with Owncast."
-      className="!mt-0 lg:!mt-0"
+      className="!mt-0 lg:!mt-0 !py-0 !p-2"
       variant="secondary"
       supportingComponent={
         <div className="grid grid-cols-2 gap-4 w-full lg:flex lg:gap-4">

@@ -3,7 +3,7 @@ import { LandingFeatureList } from "@/components/landing/feature/LandingFeatureL
 import {
   DownloadIcon,
   LineChartIcon,
-  MessageCircleIcon,
+  ShieldCheckIcon,
   SparklesIcon,
   TvMinimalPlayIcon,
 } from "lucide-react";
@@ -36,10 +36,10 @@ export function FeatureGrid() {
       icon: <TvMinimalPlayIcon />,
     },
     {
-      title: "Built-in chat out of the box",
+      title: "Privacy focused",
       description:
-        "Engage your audience with built-in chat functionality. Viewers can immediately start chatting with the streamer, or other viewers to build a community around your content. You can even build bots and addons to enhance the chat experience.",
-      icon: <MessageCircleIcon />,
+        "No tracking, no accounts required, no data harvesting. You and your viewers can stay anonymous while still being part of the community. When you run your own services, you don't have to identify yourself.",
+      icon: <ShieldCheckIcon />,
     },
     {
       title: "You're on the Fediverse",
@@ -53,7 +53,7 @@ export function FeatureGrid() {
     <LandingFeatureList
       title={"Why Owncast?"}
       description={
-        "Different people have different use cases for live streaming. And different streams have different reasons for using Owncast. Here are some of the most common ones."
+        "There are many different reasons for using Owncast. Here are some common ones."
       }
       featureItems={featureItems}
       variant="primary"

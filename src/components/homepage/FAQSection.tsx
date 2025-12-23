@@ -6,7 +6,7 @@ export function FAQSection() {
     <LandingFaqCollapsibleSection
       className="py-4 lg:py-6"
       title="FAQ"
-      description="Get answers to common questions people want to know about Owncast."
+      description="Answers to common questions people ask about Owncast."
       faqItems={[
         {
           question:

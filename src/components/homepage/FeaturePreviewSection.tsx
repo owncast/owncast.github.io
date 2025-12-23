@@ -34,24 +34,26 @@ const features: Feature[] = [
   {
     id: "chat",
     title: "Built-in chat",
-    description: "Real-time chat included, no third-party services required",
+    description: "Real-time chat included, no third-party services required.",
     imageSrc: "/images/screenshots/screenshot-chat.png",
   },
   {
     id: "feature-4",
-    title: "Custom domains & branding",
-    description: "Stream from your own domain with your own look and feel",
+    title: "Custom branding on your domain",
+    description:
+      "Stream from your own domain with your own look and feel, truly owning the experience.",
   },
   {
     id: "feature-6",
     title: "Notifications",
-    description: "Notify followers when you go live",
+    description: "Notify followers via various channels when you go live.",
     imageSrc: "/images/screenshots/screenshot-offline-notify.png",
   },
   {
     id: "feature-7",
     title: "Fediverse support",
-    description: "Share streams and reach viewers across the fediverse",
+    description:
+      "Encourage engagement and reach new viewers across the fediverse.",
   },
   {
     id: "feature-10",
@@ -92,7 +94,10 @@ function MobileFeatureList() {
     <section className="lg:hidden py-6">
       <div className="flex gap-4 overflow-x-auto px-6 pb-4 snap-x snap-mandatory scrollbar-hide">
         {features.map((feature) => (
-          <div key={feature.id} className="snap-center shrink-0 w-[85vw] max-w-sm">
+          <div
+            key={feature.id}
+            className="snap-center shrink-0 w-[85vw] max-w-sm"
+          >
             <MobileFeatureCard feature={feature} />
           </div>
         ))}

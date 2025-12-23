@@ -72,7 +72,8 @@ export function StoreSection() {
         descriptionComponent={
           <p className="md:text-lg md:max-w-2xl">
             Support the project and show your Owncast pride. Each purchase
-            supports the open source project.
+            supports the open source project.{" "}
+            <a href="https://merch.owncast.online">Shop now</a>.
           </p>
         }
         textPosition="center"

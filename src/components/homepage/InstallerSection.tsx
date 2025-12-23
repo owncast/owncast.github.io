@@ -7,14 +7,14 @@ import { LandingShapesCtaBg } from "@/components/landing";
 export function InstallerSection() {
   const keyPoints = [
     {
-      title: "Built to be ran",
+      title: "Built to be run quickly",
       description:
         "We won't expect you to clone a git repo, install dependencies, and understand the development environment it was built with by making you fight with npm, pip or ruby gems.",
     },
     {
       title: "Choose how you want to install it",
       description:
-        "Use our installer, or download the single file yourself. Otherwise, use the Docker image or sign up for a hosting provider that will install it for you automatically.",
+        "Use our installer, download the single file yourself, or spin up a Docker container. Otherwise, sign up for a hosting provider that will install it for you automatically.",
     },
     {
       title: "Start simple. Increase complexity as you need it",
@@ -36,7 +36,11 @@ export function InstallerSection() {
             keyPoints={keyPoints}
           />
 
-          <Button className="mt-8 hidden md:inline-flex" variant="primary" asChild>
+          <Button
+            className="mt-8 hidden md:inline-flex"
+            variant="primary"
+            asChild
+          >
             <a href="/quickstart">Install now</a>
           </Button>
         </>
