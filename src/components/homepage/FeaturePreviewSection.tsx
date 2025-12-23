@@ -60,7 +60,9 @@ const features: Feature[] = [
   {
     id: "feature-10",
     title: "Extensible",
-    description: "Integrates with existing tools and workflows",
+    description:
+      "Integrates with existing tools, and build your own internal and external utilities on top of the API.",
+    imageSrc: "/images/screenshots/screenshot-expand.png",
   },
 ];
 
