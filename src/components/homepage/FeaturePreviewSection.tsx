@@ -39,9 +39,10 @@ const features: Feature[] = [
   },
   {
     id: "feature-4",
-    title: "Custom branding on your domain",
+    title: "Custom branding on your page, served by your domain",
     description:
-      "Stream from your own domain with your own look and feel, truly owning the experience.",
+      "Stream from your own domain with your own look and feel. Create your own UI, truly owning the experience.",
+    imageSrc: "/images/screenshots/screenshot-customize.png",
   },
   {
     id: "feature-6",
@@ -54,6 +55,7 @@ const features: Feature[] = [
     title: "Fediverse support",
     description:
       "Encourage engagement and reach new viewers across the fediverse.",
+    videoSrc: "/images/screenshots/screenshot-fediverse-scroll.mp4",
   },
   {
     id: "feature-10",
@@ -73,7 +75,7 @@ function MobileFeatureCard({ feature }: { feature: Feature }) {
       </div>
       {feature.videoSrc ? (
         <VideoPlayer
-          className="w-full rounded-md"
+          className="w-full max-w-md mx-auto rounded-md"
           src={feature.videoSrc}
           autoPlay={true}
           controls={false}
@@ -135,7 +137,7 @@ export function FeaturePreviewSection() {
           <LandingProductTourContent key={feature.id} value={feature.id}>
             {feature.videoSrc ? (
               <VideoPlayer
-                className={"w-full rounded-md"}
+                className={"w-full max-w-md mx-auto rounded-md"}
                 src={feature.videoSrc}
                 autoPlay={true}
                 controls={false}
