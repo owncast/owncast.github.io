@@ -304,8 +304,8 @@ const config: Config = {
       title: "Owncast",
       logo: {
         alt: "Owncast Logo",
-        src: "images/logo-black.svg",
-        srcDark: "images/logo-white.svg",
+        src: "images/logo-white.svg",
+        // srcDark: "images/logo-white.svg",
       },
       items: [
         {
