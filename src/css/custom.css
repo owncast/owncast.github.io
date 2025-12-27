@@ -38,6 +38,8 @@
   --border: 214 32% 91%;            /* #e2e8f0 */
   --input: 214 32% 91%;
   --ring: 252 79% 59%;              /* #6544e9 - palette-6 purple */
+
+  /* --ifm-menu-link-padding-vertical: 10px; */
 }
 
 /* Dark mode Tailwind/shadcn CSS variables (Owncast theme) */
@@ -216,3 +218,24 @@ html[data-theme='dark'] .docMainWrapper {
   }
 }
 
+.theme-doc-sidebar-item-category-level-1 {
+  padding-top: 4px;
+}
+
+/* Make top-level category names bold */
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link {
+  font-weight: 600;
+  padding-top: 10px;
+}
+
+.menu__link {
+  transition: padding 0.2s ease-in-out;
+  font-weight: 400;
+}
+
+.menu__link--active {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-weight: bold;
+  /* text-transform: uppercase; */
+}
