@@ -8,6 +8,7 @@
 //   max: 8
 //   minScore: 0.02
 //   disable: false
+//   excludeFromAll: false   # if true, this doc will never appear in any related docs list
 //
 // Notes:
 // - Paths in include/exclude may be:
@@ -256,6 +257,7 @@ module.exports = function relatedDocsPlugin(context, options = {}) {
           minScore:
             typeof relCfg.minScore === "number" ? relCfg.minScore : undefined,
           disable: Boolean(relCfg.disable),
+          excludeFromAll: Boolean(relCfg.excludeFromAll),
         };
 
         return {
@@ -316,6 +318,9 @@ module.exports = function relatedDocsPlugin(context, options = {}) {
         for (let j = 0; j < allDocs.length; j++) {
           if (i === j) continue;
           const B = allDocs[j];
+
+          // Skip docs that have opted out of appearing in all related lists
+          if (B.related.excludeFromAll) continue;
 
           let score = 0;
 
