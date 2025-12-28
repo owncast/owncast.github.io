@@ -17,7 +17,8 @@ const sidebars: SidebarsConfig = {
     {
       type: "category",
       label: "Get started",
-      collapsed: false,
+      className: "get-started-category",
+      collapsed: true,
       items: [
         {
           type: "category",

@@ -79,6 +79,14 @@ const config: Config = {
   tagline: "Free and Open Source Livestreaming",
   favicon: "/favicon.png",
 
+  // Static scripts (loaded outside of webpack/React)
+  scripts: [
+    {
+      src: "/js/expand-get-started.js",
+      async: true,
+    },
+  ],
+
   markdown: {
     hooks: {
       onBrokenMarkdownImages: "warn",
@@ -339,10 +347,10 @@ const config: Config = {
           label: "Quickstart",
           position: "left",
         },
-        // {
-        //   type: "localeDropdown",
-        //   position: "right",
-        // },
+        {
+          type: "localeDropdown",
+          position: "right",
+        },
         {
           href: "https://github.com/owncast",
           position: "right",

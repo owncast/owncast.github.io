@@ -20,3 +20,7 @@ Bold: `**your text**`
 Strikethrough: `~~your text~~`
 
 Code blocks: <code>\`your text\`</code>
+
+:::info
+Fill in this page
+:::
