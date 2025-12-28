@@ -1,0 +1,22 @@
+{
+  "title": {
+    "message": "Owncast",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "Owncast Logo",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Documentation": {
+    "message": "Documentation",
+    "description": "Navbar item with label Documentation"
+  },
+  "item.label.Troubleshooting": {
+    "message": "Troubleshooting",
+    "description": "Navbar item with label Troubleshooting"
+  },
+  "item.label.Quickstart": {
+    "message": "Quickstart",
+    "description": "Navbar item with label Quickstart"
+  }
+}

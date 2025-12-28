@@ -1,12 +1,19 @@
 import React from "react";
+import { translate } from "@docusaurus/Translate";
 import { LandingFaqCollapsibleSection } from "@/components/landing/LandingFaqCollapsible";
 
 export function FAQSection() {
   return (
     <LandingFaqCollapsibleSection
       className="py-4 lg:py-6"
-      title="FAQ"
-      description="Answers to common questions people ask about Owncast."
+      title={translate({
+        id: "homepage.faq.title",
+        message: "FAQ",
+      })}
+      description={translate({
+        id: "homepage.faq.description",
+        message: "Answers to common questions people ask about Owncast.",
+      })}
       faqItems={[
         {
           question:

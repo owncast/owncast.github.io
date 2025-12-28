@@ -1,4 +1,5 @@
 import React from "react";
+import Translate, { translate } from "@docusaurus/Translate";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "../../pages/index.module.css";
 
@@ -44,7 +45,9 @@ export function SponsorsSection() {
   return (
     <section className={styles.sponsors}>
       <div className="container text--center">
-        <h2>Supported by</h2>
+        <h2>
+          <Translate id="homepage.sponsors.title">Supported by</Translate>
+        </h2>
         <ul className={styles.sponsorsList}>
           {sponsors.map((sponsor, idx) => (
             <li key={idx}>
@@ -55,8 +58,10 @@ export function SponsorsSection() {
           ))}
         </ul>
         <p>
-          These organizations support Owncast via non-monetary support and
-          services.
+          <Translate id="homepage.sponsors.description">
+            These organizations support Owncast via non-monetary support and
+            services.
+          </Translate>
         </p>
       </div>
     </section>

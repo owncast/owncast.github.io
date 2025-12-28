@@ -1,0 +1,66 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.docs.category.Get started": {
+    "message": "Get started",
+    "description": "The label for category Get started in sidebar docs"
+  },
+  "sidebar.docs.category.Install Owncast": {
+    "message": "Install Owncast",
+    "description": "The label for category Install Owncast in sidebar docs"
+  },
+  "sidebar.docs.category.Initial configuration of your Owncast server": {
+    "message": "Initial configuration of your Owncast server",
+    "description": "The label for category Initial configuration of your Owncast server in sidebar docs"
+  },
+  "sidebar.docs.category.Configure video quality & performance": {
+    "message": "Configure video quality & performance",
+    "description": "The label for category Configure video quality & performance in sidebar docs"
+  },
+  "sidebar.docs.category.Setup your broadcasting software": {
+    "message": "Setup your broadcasting software",
+    "description": "The label for category Setup your broadcasting software in sidebar docs"
+  },
+  "sidebar.docs.category.Customize chat features": {
+    "message": "Customize chat features",
+    "description": "The label for category Customize chat features in sidebar docs"
+  },
+  "sidebar.docs.category.Increase social reach and engagement": {
+    "message": "Increase social reach and engagement",
+    "description": "The label for category Increase social reach and engagement in sidebar docs"
+  },
+  "sidebar.docs.category.Embed, integrate & extend with your existing apps": {
+    "message": "Embed, integrate & extend with your existing apps",
+    "description": "The label for category Embed, integrate & extend with your existing apps in sidebar docs"
+  },
+  "sidebar.docs.category.APIs": {
+    "message": "APIs",
+    "description": "The label for category APIs in sidebar docs"
+  },
+  "sidebar.docs.category.API Reference": {
+    "message": "API Reference",
+    "description": "The label for category API Reference in sidebar docs"
+  },
+  "sidebar.docs.category.Optional / Advanced Features & Maintenance": {
+    "message": "Optional / Advanced Features & Maintenance",
+    "description": "The label for category Optional / Advanced Features & Maintenance in sidebar docs"
+  },
+  "sidebar.docs.category.Add SSL & reverse proxies": {
+    "message": "Add SSL & reverse proxies",
+    "description": "The label for category Add SSL & reverse proxies in sidebar docs"
+  },
+  "sidebar.docs.category.Watching Owncast Streams": {
+    "message": "Watching Owncast Streams",
+    "description": "The label for category Watching Owncast Streams in sidebar docs"
+  },
+  "sidebar.docs.link.In development API documentation": {
+    "message": "In development API documentation",
+    "description": "The label for link In development API documentation in sidebar docs, linking to /api/development"
+  },
+  "sidebar.docs.link.Released API documentation": {
+    "message": "Released API documentation",
+    "description": "The label for link Released API documentation in sidebar docs, linking to /api/release"
+  }
+}

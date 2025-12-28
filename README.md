@@ -222,3 +222,140 @@ This command starts a local development server and opens up a browser window. Mo
 ```bash
 npm run build
 ```
+
+## Localization (i18n)
+
+This site supports multiple languages using Docusaurus's built-in internationalization system.
+
+### How it works
+
+Translations are stored in the `i18n/` directory:
+
+```
+i18n/
+├── es/                          # Spanish translations
+│   ├── code.json                # React component strings (homepage, etc.)
+│   ├── docusaurus-theme-classic/
+│   │   ├── navbar.json          # Navbar labels
+│   │   └── footer.json          # Footer labels
+│   └── docusaurus-plugin-content-docs/
+│       └── current.json         # Doc sidebar labels
+├── fr/                          # French translations
+└── de/                          # German translations
+```
+
+### Translating documentation
+
+To translate documentation pages, copy them to the locale directory:
+
+```bash
+# Copy docs to translate
+mkdir -p i18n/es/docusaurus-plugin-content-docs/current
+cp -r docs/* i18n/es/docusaurus-plugin-content-docs/current/
+```
+
+### Translating React components
+
+For JSX/React components, use `translate()` for string props and `<Translate>` for JSX content:
+
+```tsx
+import Translate, { translate } from "@docusaurus/Translate";
+
+// For props/attributes - use translate()
+<MyComponent
+  title={translate({
+    id: "homepage.hero.title",
+    message: "Default English text",
+  })}
+/>
+
+// For JSX content - use <Translate>
+<button>
+  <Translate id="homepage.hero.cta">Get Started</Translate>
+</button>
+```
+
+### Extracting translation strings
+
+After adding `translate()` or `<Translate>` calls, extract strings to JSON files:
+
+```bash
+# Extract for a specific locale
+npm run write-translations -- --locale es
+npm run write-translations -- --locale fr
+npm run write-translations -- --locale de
+```
+
+This generates/updates the `i18n/<locale>/code.json` file with all translatable strings.
+
+Then translate the copied Markdown files.
+
+### Development with locales
+
+```bash
+# Start dev server for a specific locale
+npm run start -- --locale es
+
+# Build for a specific locale
+npm run build -- --locale es
+
+# Build all locales
+npm run build
+```
+
+### Adding a new locale
+
+1. Update `docusaurus.config.ts`:
+
+```ts
+i18n: {
+  defaultLocale: "en",
+  locales: ["en", "es", "fr", "de", "NEW_LOCALE"],
+  localeConfigs: {
+    // ... existing configs
+    NEW_LOCALE: {
+      label: "Language Name",
+      htmlLang: "locale-code",
+    },
+  },
+},
+```
+
+2. Extract translation strings:
+
+```bash
+npm run write-translations -- --locale NEW_LOCALE
+```
+
+3. Translate the generated JSON files in `i18n/NEW_LOCALE/`
+
+### Translation file format
+
+The `code.json` files contain key-value pairs:
+
+```json
+{
+  "homepage.hero.title": {
+    "message": "Text to translate",
+    "description": "Optional context for translators"
+  }
+}
+```
+
+Replace the `message` value with the translated text. The `description` field (if present) provides context and should not be translated.
+
+## How to contribute translations
+
+This project supports Crowdin for managing translations. For details on setting up Crowdin sync, refer to the [Docusaurus Crowdin documentation](https://docusaurus.io/docs/i18n/crowdin).
+
+### Translate a documentation file
+
+Visit the [Crowdin documentation](https://docusaurus.io/docs/i18n/crowdin#translate-the-sources) for how to perform the translation process for more details.
+
+Select the document you want to translate and translate all or part of it.
+
+![Crowdin Translate](https://docusaurus.io/assets/images/crowdin-translate-markdown-0651cd22b5f07f0e9b3031ffaebbc5b6.png)
+
+Hide strings from translation that should not be translated.
+
+![Hide strings from translation](https://docusaurus.io/assets/images/crowdin-hide-string-5e470a33a42e044379bf6860ff534b50.png)

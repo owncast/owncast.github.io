@@ -1,4 +1,5 @@
 import React from "react";
+import Translate, { translate } from "@docusaurus/Translate";
 import { Button } from "@/components/shared/ui/button";
 import {
   LandingPrimaryImageCtaSection,
@@ -9,8 +10,15 @@ import { LandingPathsCtaBg } from "@/components/landing";
 export function HeroSection() {
   return (
     <LandingPrimaryVideoCtaSection
-      title="Open source software for running your own live stream"
-      description="It runs on your server and works with standard streaming protocols. There are no subscriptions, viewer limits, or forced ads. Flexible, customizable, and it's as private or public as you want it to be."
+      title={translate({
+        id: "homepage.hero.title",
+        message: "Open source software for running your own live stream",
+      })}
+      description={translate({
+        id: "homepage.hero.description",
+        message:
+          "It runs on your server and works with standard streaming protocols. There are no subscriptions, viewer limits, or forced ads. Flexible, customizable, and it's as private or public as you want it to be.",
+      })}
       videoPoster="/images/explainer-video-preview.gif"
       videoSrc="/explainer-video.mp4"
       // autoPlay
@@ -23,7 +31,9 @@ export function HeroSection() {
     >
       <div className="hidden md:block">
         <Button size="xl" variant="primary" asChild>
-          <a href="/quickstart">Get Started</a>
+          <a href="/quickstart">
+            <Translate id="homepage.hero.cta">Get Started</Translate>
+          </a>
         </Button>
       </div>
     </LandingPrimaryVideoCtaSection>

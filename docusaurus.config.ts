@@ -103,12 +103,27 @@ const config: Config = {
 
   onBrokenLinks: "warn",
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "en",
-    locales: ["en"],
+    locales: ["en", "es", "fr", "de"],
+    localeConfigs: {
+      en: {
+        label: "English",
+        htmlLang: "en-US",
+      },
+      es: {
+        label: "Español",
+        htmlLang: "es",
+      },
+      fr: {
+        label: "Français",
+        htmlLang: "fr",
+      },
+      de: {
+        label: "Deutsch",
+        htmlLang: "de",
+      },
+    },
   },
 
   presets: [
@@ -324,6 +339,10 @@ const config: Config = {
           label: "Quickstart",
           position: "left",
         },
+        // {
+        //   type: "localeDropdown",
+        //   position: "right",
+        // },
         {
           href: "https://github.com/owncast",
           position: "right",

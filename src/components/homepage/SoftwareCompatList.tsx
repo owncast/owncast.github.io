@@ -1,4 +1,5 @@
 import React from "react";
+import { translate } from "@docusaurus/Translate";
 import { LandingBandSection } from "@/components/landing/LandingBand";
 import OBSIcon from "./obsstudio.svg";
 import StreamLabsIcon from "./streamlabs.svg";
@@ -10,8 +11,15 @@ import VmixIcon from "./vmix.svg";
 export function SoftwareCompatList() {
   return (
     <LandingBandSection
-      title="Compatible with your favorite broadcasting tools"
-      description="Point your broadcast at your new Owncast server and you'll be live using a server you control."
+      title={translate({
+        id: "homepage.softwareCompat.title",
+        message: "Compatible with your favorite broadcasting tools",
+      })}
+      description={translate({
+        id: "homepage.softwareCompat.description",
+        message:
+          "Point your broadcast at your new Owncast server and you'll be live using a server you control.",
+      })}
       className="!mt-2 lg:!mt-0"
       supportingComponent={
         <div className="grid grid-cols-3 gap-2 w-full place-items-center lg:contents">

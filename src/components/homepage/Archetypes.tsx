@@ -1,3 +1,4 @@
+import Translate, { translate } from "@docusaurus/Translate";
 import {
   RadioIcon,
   UsersIcon,
@@ -26,51 +27,82 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-const archetypes: {
+function useArchetypes(): {
   title: string;
   description: string;
   icon: LucideIcon;
   examples: LucideIcon[];
-}[] = [
-  {
-    title: "Independents",
-    description:
-      "Creators who want full control over their streaming presence.",
-    icon: RadioIcon,
-    examples: [Mic, Gamepad2, Music, Disc3, Palette],
-  },
-  {
-    title: "Groups",
-    description:
-      "Organizations that want a space they own to connect and broadcast together.",
-    icon: UsersIcon,
-    examples: [Church, Theater, Megaphone, Trophy],
-  },
-  {
-    title: "Builders",
-    description:
-      "Developers who want to self-host and customize their streaming.",
-    icon: ServerIcon,
-    examples: [Code, Terminal, Wrench],
-  },
-  {
-    title: "Enterprises",
-    description:
-      "Businesses powering events, apps, and broadcasts with live video.",
-    icon: BuildingIcon,
-    examples: [Briefcase, GraduationCap, Landmark, Newspaper, Tv],
-  },
-];
+}[] {
+  return [
+    {
+      title: translate({
+        id: "homepage.archetypes.independents.title",
+        message: "Independents",
+      }),
+      description: translate({
+        id: "homepage.archetypes.independents.description",
+        message: "Creators who want full control over their streaming presence.",
+      }),
+      icon: RadioIcon,
+      examples: [Mic, Gamepad2, Music, Disc3, Palette],
+    },
+    {
+      title: translate({
+        id: "homepage.archetypes.groups.title",
+        message: "Groups",
+      }),
+      description: translate({
+        id: "homepage.archetypes.groups.description",
+        message:
+          "Organizations that want a space they own to connect and broadcast together.",
+      }),
+      icon: UsersIcon,
+      examples: [Church, Theater, Megaphone, Trophy],
+    },
+    {
+      title: translate({
+        id: "homepage.archetypes.builders.title",
+        message: "Builders",
+      }),
+      description: translate({
+        id: "homepage.archetypes.builders.description",
+        message: "Developers who want to self-host and customize their streaming.",
+      }),
+      icon: ServerIcon,
+      examples: [Code, Terminal, Wrench],
+    },
+    {
+      title: translate({
+        id: "homepage.archetypes.enterprises.title",
+        message: "Enterprises",
+      }),
+      description: translate({
+        id: "homepage.archetypes.enterprises.description",
+        message:
+          "Businesses powering events, apps, and broadcasts with live video.",
+      }),
+      icon: BuildingIcon,
+      examples: [Briefcase, GraduationCap, Landmark, Newspaper, Tv],
+    },
+  ];
+}
 
 export function ArchetypesSection() {
+  const archetypes = useArchetypes();
+
   return (
     <section className="w-full py-8 px-6 bg-[#2d3748]/10 dark:bg-[#2d3748]/20">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-2xl font-semibold text-center mb-6">
-          Who is Owncast for?
+          <Translate id="homepage.archetypes.title">
+            Who is Owncast for?
+          </Translate>
         </h2>
         <h3 className="text-center text-gray-600 dark:text-gray-400 mb-10 max-w-4xl mx-auto">
-          Owncast works for all kinds of streams. Here's some of who's using it.
+          <Translate id="homepage.archetypes.subtitle">
+            Owncast works for all kinds of streams. Here's some of who's using
+            it.
+          </Translate>
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {archetypes.map((archetype) => (

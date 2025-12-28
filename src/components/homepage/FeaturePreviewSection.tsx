@@ -1,4 +1,5 @@
 import React from "react";
+import { translate } from "@docusaurus/Translate";
 import {
   LandingProductTourSection,
   LandingProductTourList,
@@ -30,41 +31,73 @@ interface Feature {
   imageAlt?: string;
 }
 
-const features: Feature[] = [
-  {
-    id: "chat",
-    title: "Built-in chat",
-    description: "Real-time chat included, no third-party services required.",
-    imageSrc: "/images/screenshots/screenshot-chat.png",
-  },
-  {
-    id: "feature-4",
-    title: "Custom branding on your page, served by your domain",
-    description:
-      "Stream from your own domain with your own look and feel. Create your own UI, truly owning the experience.",
-    imageSrc: "/images/screenshots/screenshot-customize.png",
-  },
-  {
-    id: "feature-6",
-    title: "Notifications",
-    description: "Notify followers via various channels when you go live.",
-    imageSrc: "/images/screenshots/screenshot-offline-notify.png",
-  },
-  {
-    id: "feature-7",
-    title: "Fediverse support",
-    description:
-      "Encourage engagement and reach new viewers across the fediverse.",
-    videoSrc: "/images/screenshots/screenshot-fediverse-scroll.mp4",
-  },
-  {
-    id: "feature-10",
-    title: "Extensible",
-    description:
-      "Integrates with existing tools, and build your own internal and external utilities on top of the API.",
-    imageSrc: "/images/screenshots/screenshot-expand.png",
-  },
-];
+function useFeatures(): Feature[] {
+  return [
+    {
+      id: "chat",
+      title: translate({
+        id: "homepage.featurePreview.chat.title",
+        message: "Built-in chat",
+      }),
+      description: translate({
+        id: "homepage.featurePreview.chat.description",
+        message: "Real-time chat included, no third-party services required.",
+      }),
+      imageSrc: "/images/screenshots/screenshot-chat.png",
+    },
+    {
+      id: "feature-4",
+      title: translate({
+        id: "homepage.featurePreview.branding.title",
+        message: "Custom branding on your page, served by your domain",
+      }),
+      description: translate({
+        id: "homepage.featurePreview.branding.description",
+        message:
+          "Stream from your own domain with your own look and feel. Create your own UI, truly owning the experience.",
+      }),
+      imageSrc: "/images/screenshots/screenshot-customize.png",
+    },
+    {
+      id: "feature-6",
+      title: translate({
+        id: "homepage.featurePreview.notifications.title",
+        message: "Notifications",
+      }),
+      description: translate({
+        id: "homepage.featurePreview.notifications.description",
+        message: "Notify followers via various channels when you go live.",
+      }),
+      imageSrc: "/images/screenshots/screenshot-offline-notify.png",
+    },
+    {
+      id: "feature-7",
+      title: translate({
+        id: "homepage.featurePreview.fediverse.title",
+        message: "Fediverse support",
+      }),
+      description: translate({
+        id: "homepage.featurePreview.fediverse.description",
+        message:
+          "Encourage engagement and reach new viewers across the fediverse.",
+      }),
+      videoSrc: "/images/screenshots/screenshot-fediverse-scroll.mp4",
+    },
+    {
+      id: "feature-10",
+      title: translate({
+        id: "homepage.featurePreview.extensible.title",
+        message: "Extensible",
+      }),
+      description: translate({
+        id: "homepage.featurePreview.extensible.description",
+        message:
+          "Integrates with existing tools, and build your own internal and external utilities on top of the API.",
+      }),
+      imageSrc: "/images/screenshots/screenshot-expand.png",
+    },
+  ];
+}
 
 function MobileFeatureCard({ feature }: { feature: Feature }) {
   return (
@@ -93,7 +126,7 @@ function MobileFeatureCard({ feature }: { feature: Feature }) {
   );
 }
 
-function MobileFeatureList() {
+function MobileFeatureList({ features }: { features: Feature[] }) {
   return (
     <section className="lg:hidden py-6">
       <div className="flex gap-4 overflow-x-auto px-6 pb-4 snap-x snap-mandatory scrollbar-hide">
@@ -111,10 +144,12 @@ function MobileFeatureList() {
 }
 
 export function FeaturePreviewSection() {
+  const features = useFeatures();
+
   return (
     <>
       {/* Mobile: Vertical cards stack */}
-      <MobileFeatureList />
+      <MobileFeatureList features={features} />
 
       {/* Desktop: Interactive tab-based tour */}
       <LandingProductTourSection

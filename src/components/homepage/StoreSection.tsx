@@ -1,4 +1,5 @@
 import React from "react";
+import Translate, { translate } from "@docusaurus/Translate";
 import { LandingPrimaryTextCtaSection } from "@/components/landing/cta/LandingPrimaryCta";
 import { LandingMarquee } from "@/components/landing/LandingMarquee";
 import { LandingProductCard } from "@/components/landing/card/LandingProductCard";
@@ -66,14 +67,19 @@ export function StoreSection() {
       <LandingPrimaryTextCtaSection
         titleComponent={
           <h1 className="font-normal text-2xl md:text-3xl lg:text-4xl leading-tight md:max-w-2xl">
-            Get some Owncast gear
+            <Translate id="homepage.store.title">Get some Owncast gear</Translate>
           </h1>
         }
         descriptionComponent={
           <p className="md:text-lg md:max-w-2xl">
-            Support the project and show your Owncast pride. Each purchase
-            supports the open source project.{" "}
-            <a href="https://merch.owncast.online">Shop now</a>.
+            <Translate id="homepage.store.description">
+              Support the project and show your Owncast pride. Each purchase
+              supports the open source project.
+            </Translate>{" "}
+            <a href="https://merch.owncast.online">
+              <Translate id="homepage.store.shopNow">Shop now</Translate>
+            </a>
+            .
           </p>
         }
         textPosition="center"
@@ -95,7 +101,11 @@ export function StoreSection() {
           >
             {item.popular && (
               <div className="absolute left-0 top-2 w-full flex items-center justify-center z-20">
-                <Badge>Popular Item</Badge>
+                <Badge>
+                  <Translate id="homepage.store.popularItem">
+                    Popular Item
+                  </Translate>
+                </Badge>
               </div>
             )}
             <a
