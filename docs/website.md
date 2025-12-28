@@ -40,24 +40,6 @@ You can add links to your profiles on other sites by adding them in the admin.
 
 The body of your page content can be customized in your admin. Use standard [Markdown syntax](https://www.markdownguide.org/basic-syntax/) to add links, images, and more.
 
-## Chat
-
-### Text Formatting
-
-The web chat supports some basic formatting using [Markdown](https://www.markdownguide.org/basic-syntax/):
-
-Italic: `*your text*`
-
-Bold: `**your text**`
-
-Strikethrough: `~~your text~~`
-
-Code blocks: <code>\`your text\`</code>
-
-### Custom Emoji
-
-Place your own custom emoji images into `/webroot/img/emoji/` and the next time you refresh the web site you'll see your images in the emoji picker, available for use in chat.
-
 ## Player
 
 The web video player has a handful of keyboard shortcuts you can use.
@@ -70,14 +52,3 @@ The web video player has a handful of keyboard shortcuts you can use.
 | Mute               | _m_        |
 | Toggle full screen | _f_        |
 | Toggle chat        | _c_        |
-
-## Custom Styles via CSS
-
-Under the General Settings in the admin you can write your own CSS that will get applied to the web page. There is no validation or sanity checks, so anything you write will get inserted into a `<style>` tag on your page. So if you make a CSS mistake, you may mess something up on your page.
-
-### Some examples of things you can try.
-
-1. Customize your font.
-1. Change text sizes and colors.
-1. Set a new background color.
-1. Completely hide specific things you don't want or care about.

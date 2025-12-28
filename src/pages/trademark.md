@@ -55,7 +55,7 @@ The Owncast logo is licensed under [Creative Commons Attribution-NonCommercial 4
 
 ## General Rules for All Uses
 
-Always use trademarks in their exact form—don't abbreviate, modify, or pluralize them. For example:
+Always use trademarks in their exact form, don't abbreviate, modify, or pluralize them. For example:
 
 - Unacceptable: Own-cast, OwnCast
 - Acceptable: Owncast
