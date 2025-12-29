@@ -18,14 +18,17 @@
       return "already-expanded";
     }
 
-    // Click the category link to expand
-    var expandLink = getStartedCategory.querySelector(".menu__link--sublist");
-    if (expandLink) {
-      expandLink.click();
-      return "expanded";
+    // Remove the collapsed class directly to expand without triggering navigation
+    // Don't click the link as it would navigate to the first doc in the category
+    getStartedCategory.classList.remove("menu__list-item--collapsed");
+
+    // Also update aria-expanded attribute on the link
+    var categoryLink = getStartedCategory.querySelector(".menu__link--sublist");
+    if (categoryLink) {
+      categoryLink.setAttribute("aria-expanded", "true");
     }
 
-    return "no-button";
+    return "expanded";
   }
 
   function tryExpand(attempts) {
