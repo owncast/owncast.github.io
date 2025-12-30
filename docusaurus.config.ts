@@ -332,8 +332,7 @@ const config: Config = {
       },
       items: [
         {
-          type: "docSidebar",
-          sidebarId: "docs",
+          to: "/docs/",
           position: "left",
           label: "Documentation",
         },

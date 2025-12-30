@@ -1,10 +1,10 @@
 {
   "link.title.Getting Started": {
-    "message": "Getting Started",
+    "message": "Commencer",
     "description": "The title of the footer links column with title=Getting Started in the footer"
   },
   "link.title.Community": {
-    "message": "Community",
+    "message": "Communauté",
     "description": "The title of the footer links column with title=Community in the footer"
   },
   "link.item.label.Documentation": {
@@ -12,15 +12,15 @@
     "description": "The label of footer link with label=Documentation linking to /docs/"
   },
   "link.item.label.Quick Start": {
-    "message": "Quick Start",
+    "message": "Démarrage rapide",
     "description": "The label of footer link with label=Quick Start linking to /quickstart"
   },
   "link.item.label.Releases": {
-    "message": "Releases",
+    "message": "Versions",
     "description": "The label of footer link with label=Releases linking to /blog"
   },
   "link.item.label.Roadmap": {
-    "message": "Roadmap",
+    "message": "Feuille de route",
     "description": "The label of footer link with label=Roadmap linking to /roadmap"
   },
   "link.item.label.GitHub": {
@@ -28,15 +28,15 @@
     "description": "The label of footer link with label=GitHub linking to https://github.com/owncast"
   },
   "link.item.label.Community Chat": {
-    "message": "Community Chat",
+    "message": "Chat de la communauté",
     "description": "The label of footer link with label=Community Chat linking to https://matrix.to/#/#owncast:matrix.org"
   },
   "link.item.label.Contribute": {
-    "message": "Contribute",
+    "message": "Contribuer",
     "description": "The label of footer link with label=Contribute linking to /contribute"
   },
   "link.item.label.Contact": {
-    "message": "Contact",
+    "message": "Contacter",
     "description": "The label of footer link with label=Contact linking to /contact"
   },
   "copyright": {

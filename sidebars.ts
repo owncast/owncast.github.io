@@ -13,7 +13,11 @@ import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 const sidebars: SidebarsConfig = {
   // Main documentation sidebar
   docs: [
-    "index", // Add the docs index page first
+    {
+      type: "doc",
+      id: "index",
+      label: "Owncast Documentation",
+    },
     {
       type: "category",
       label: "Get started",

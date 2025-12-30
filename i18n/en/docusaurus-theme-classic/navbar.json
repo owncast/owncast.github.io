@@ -1,22 +1,22 @@
 {
   "title": {
-    "message": "Propiedad",
+    "message": "Owncast",
     "description": "The title in the navbar"
   },
   "logo.alt": {
-    "message": "Logo de posesión",
+    "message": "Owncast Logo",
     "description": "The alt text of navbar logo"
   },
   "item.label.Documentation": {
-    "message": "Documentación",
+    "message": "Documentation",
     "description": "Navbar item with label Documentation"
   },
   "item.label.Troubleshooting": {
-    "message": "Solución de problemas",
+    "message": "Troubleshooting",
     "description": "Navbar item with label Troubleshooting"
   },
   "item.label.Quickstart": {
-    "message": "Inicio rápido",
+    "message": "Quickstart",
     "description": "Navbar item with label Quickstart"
   }
 }

@@ -1,209 +1,209 @@
 {
   "homepage.apps.title": {
-    "message": "Owncast works everywhere"
+    "message": "Owncast funktioniert überall"
   },
   "homepage.apps.description": {
-    "message": "Because Owncast is built on open standards you can watch an Owncast-powered stream on any device. But if you want, we've built some easy ways to watch that work out of the box."
+    "message": "Da Owncast auf offenen Standards aufgebaut ist, kannst du einen eigenständigen Stream auf jedem Gerät beobachten. Aber wenn Sie wollen, haben wir einige einfache Wege gebaut, um diese Arbeit aus der Box zu beobachten."
   },
   "homepage.apps.ios.title": {
-    "message": "Owncasts for iOS"
+    "message": "Owncasts für iOS"
   },
   "homepage.apps.ios.description": {
-    "message": "Browse the directory, add private servers, and get notified when streams go live on the iPhone."
+    "message": "Durchsuchen Sie das Verzeichnis, fügen Sie private Server und werden benachrichtigt, wenn Streams live auf dem iPhone gehen."
   },
   "homepage.apps.roku.title": {
-    "message": "Owncasts for Roku"
+    "message": "Owncasts für Roku"
   },
   "homepage.apps.roku.description": {
-    "message": "The Roku channel lets you browse the Owncasst directory and add private servers. A very convenient way to watch live streams on the most popular set-top box."
+    "message": "Der Roku Kanal erlaubt es dir das Owncasst Verzeichnis zu durchsuchen und private Server hinzuzufügen. Eine sehr bequeme Möglichkeit, Live-Streams auf der beliebtesten Set-Top-Box zu sehen."
   },
   "homepage.apps.appletv.title": {
-    "message": "Owncasts for AppleTV"
+    "message": "Owncasts für AppleTV"
   },
   "homepage.apps.appletv.description": {
-    "message": "For users of AppleTV, this app provides an easy way to access the Owncast directory and your favorite streams right from your TV."
+    "message": "Für Benutzer von AppleTV bietet diese App eine einfache Möglichkeit, direkt von Ihrem Fernseher auf das Owncast-Verzeichnis und Ihre Lieblings-Streams zuzugreifen."
   },
   "homepage.archetypes.independents.title": {
-    "message": "Independents"
+    "message": "Unabhängige"
   },
   "homepage.archetypes.independents.description": {
-    "message": "Creators who want full control over their streaming presence."
+    "message": "Schöpfer, die die volle Kontrolle über ihre Streaming-Präsenz wollen."
   },
   "homepage.archetypes.groups.title": {
-    "message": "Groups"
+    "message": "Gruppen"
   },
   "homepage.archetypes.groups.description": {
-    "message": "Organizations that want a space they own to connect and broadcast together."
+    "message": "Organisationen, die einen Raum wollen, den sie besitzen, um sich miteinander zu verbinden und zu übertragen."
   },
   "homepage.archetypes.builders.title": {
-    "message": "Builders"
+    "message": "Baumeister"
   },
   "homepage.archetypes.builders.description": {
-    "message": "Developers who want to self-host and customize their streaming."
+    "message": "Entwickler, die ihre Streamings selbst organisieren und anpassen möchten."
   },
   "homepage.archetypes.enterprises.title": {
-    "message": "Enterprises"
+    "message": "Unternehmen"
   },
   "homepage.archetypes.enterprises.description": {
-    "message": "Businesses powering events, apps, and broadcasts with live video."
+    "message": "Unternehmen, die Veranstaltungen, Apps und Übertragungen mit Live-Video betreiben."
   },
   "homepage.archetypes.title": {
-    "message": "Who is Owncast for?"
+    "message": "Für wen ist Owncast?"
   },
   "homepage.archetypes.subtitle": {
-    "message": "Owncast works for all kinds of streams. Here's some of who's using it."
+    "message": "Owncast funktioniert für alle Arten von Streams. Hier sind einige von denen es benutzt."
   },
   "homepage.faq.title": {
     "message": "FAQ"
   },
   "homepage.faq.description": {
-    "message": "Answers to common questions people ask about Owncast."
+    "message": "Antworten auf häufig gestellte Fragen zu Owncast."
   },
   "homepage.features.customAppearance.title": {
-    "message": "Customized appearance and domain"
+    "message": "Benutzerdefiniertes Aussehen und Domäne"
   },
   "homepage.features.customAppearance.description": {
-    "message": "Quickly pick colors, or go completely custom by writing your own CSS to style your Owncast page to look any way you like. It runs on your own domain, so it has your identity."
+    "message": "Schnell Farben auswählen, oder ganz benutzerdefiniert, indem du dein eigenes CSS schreibst, um deine Owncast-Seite so zu gestalten, wie du möchtest. Es läuft auf Ihrer eigenen Domain, also hat es Ihre Identität."
   },
   "homepage.features.softwareOwn.title": {
-    "message": "Software you own, not a service you rent"
+    "message": "Software, die Sie besitzen, kein Service, den Sie mieten"
   },
   "homepage.features.softwareOwn.description": {
-    "message": "Download it without any registration or sign-up, and it's yours to run anywhere you like. It can be your existing corporate infrastructure, a cloud provider, or even your own computer at home. Once you download it, we're no longer involved."
+    "message": "Laden Sie es ohne Registrierung oder Registrierung herunter, und es ist Ihre Aufgabe, wo Sie wollen. Es kann Ihre bestehende Unternehmensinfrastruktur, ein Cloud-Anbieter oder sogar Ihr eigener Computer zu Hause sein. Sobald Sie sie herunterladen, sind wir nicht mehr beteiligt."
   },
   "homepage.features.worksEverywhere.title": {
-    "message": "Works where public platforms can't"
+    "message": "Arbeiten, wo öffentliche Plattformen nicht möglich sind"
   },
   "homepage.features.worksEverywhere.description": {
-    "message": "Not every live stream's goal is to get maximum exposure. Owncast lets you stream privately or to a limited audience, perfect for corporate events, private gatherings, or sensitive content."
+    "message": "Nicht jeder Live-Stream hat sich zum Ziel gesetzt, maximale Belichtung zu erhalten. Owncast ermöglicht Ihnen das Streamen privat oder an ein begrenztes Publikum, ideal für Firmenveranstaltungen, private Versammlungen oder sensible Inhalte."
   },
   "homepage.features.multiDevice.title": {
-    "message": "Watch on different devices and players"
+    "message": "Beobachten Sie verschiedene Geräte und Spieler"
   },
   "homepage.features.multiDevice.description": {
-    "message": "Because Owncast is built on open standards, you can watch your stream on a variety of devices and media players. Including custom applications you build yourself for mobile, the web, smart TVs, and more."
+    "message": "Da Owncast auf offenen Standards basiert, können Sie Ihren Stream auf einer Vielzahl von Geräten und Medienspielern beobachten. Inklusive benutzerdefinierter Anwendungen, die Sie selbst für das Handy, das Web, Smart TVs und vieles mehr bauen."
   },
   "homepage.features.privacy.title": {
-    "message": "Privacy focused"
+    "message": "Datenschutz fokussiert"
   },
   "homepage.features.privacy.description": {
-    "message": "No tracking, no accounts required, no data harvesting. You and your viewers can stay anonymous while still being part of the community. When you run your own services, you don't have to identify yourself."
+    "message": "Keine Tracking, keine Konten erforderlich, keine Datenerfassung. Du und deine Zuschauer können anonym bleiben, während sie noch Teil der Community sind. Wenn Sie Ihre eigenen Dienste betreiben, müssen Sie sich nicht identifizieren."
   },
   "homepage.features.fediverse.title": {
-    "message": "You're on the Fediverse"
+    "message": "Du bist auf der Feuchte"
   },
   "homepage.features.fediverse.description": {
-    "message": "Owncast integrates with the Fediverse, allowing you to connect and interact with a broader community across decentralized social networks."
+    "message": "Der Owncast integriert sich in die Fediverse, so dass Sie sich über dezentrale soziale Netzwerke hinweg mit einer breiteren Community verbinden und mit ihnen interagieren können."
   },
   "homepage.features.sectionTitle": {
-    "message": "Why Owncast?"
+    "message": "Warum Owncast?"
   },
   "homepage.features.sectionDescription": {
-    "message": "There are many different reasons for using Owncast. Here are some common ones."
+    "message": "Es gibt viele verschiedene Gründe für die Verwendung von Owncast. Hier sind einige häufige Gründe."
   },
   "homepage.featurePreview.chat.title": {
-    "message": "Built-in chat"
+    "message": "Integrierter Chat"
   },
   "homepage.featurePreview.chat.description": {
-    "message": "Real-time chat included, no third-party services required."
+    "message": "Echtzeit-Chat eingeschlossen, keine Dienstleistungen von Drittanbietern erforderlich."
   },
   "homepage.featurePreview.branding.title": {
-    "message": "Custom branding on your page, served by your domain"
+    "message": "Benutzerdefiniertes Branding auf Ihrer Seite, von Ihrer Domain geliefert"
   },
   "homepage.featurePreview.branding.description": {
-    "message": "Stream from your own domain with your own look and feel. Create your own UI, truly owning the experience."
+    "message": "Streamen Sie von Ihrer eigenen Domain mit Ihrem eigenen Look & Feel. Erstellen Sie Ihre eigene Benutzeroberfläche, die das Erlebnis wirklich besitzt."
   },
   "homepage.featurePreview.notifications.title": {
-    "message": "Notifications"
+    "message": "Benachrichtigungen"
   },
   "homepage.featurePreview.notifications.description": {
-    "message": "Notify followers via various channels when you go live."
+    "message": "Follower über verschiedene Kanäle benachrichtigen, wenn du live gehst."
   },
   "homepage.featurePreview.fediverse.title": {
-    "message": "Fediverse support"
+    "message": "Vielfältige Unterstützung"
   },
   "homepage.featurePreview.fediverse.description": {
-    "message": "Encourage engagement and reach new viewers across the fediverse."
+    "message": "Ermutigen Sie Engagement und erreichen Sie neue Zuschauer über die Faust."
   },
   "homepage.featurePreview.extensible.title": {
-    "message": "Extensible"
+    "message": "Erweiterbar"
   },
   "homepage.featurePreview.extensible.description": {
-    "message": "Integrates with existing tools, and build your own internal and external utilities on top of the API."
+    "message": "Integriert sich mit bestehenden Werkzeugen und baut eigene interne und externe Hilfsprogramme auf der API."
   },
   "homepage.hero.title": {
-    "message": "Open source software for running your own live stream"
+    "message": "Open-Source-Software für den eigenen Live-Stream"
   },
   "homepage.hero.description": {
-    "message": "It runs on your server and works with standard streaming protocols. There are no subscriptions, viewer limits, or forced ads. Flexible, customizable, and it's as private or public as you want it to be."
+    "message": "Es läuft auf Ihrem Server und funktioniert mit Standard-Streaming-Protokollen. Es gibt keine Abonnements, Viewer-Limits oder erzwungene Anzeigen. Flexibel, anpassbar, und es ist so privat oder öffentlich wie Sie wollen."
   },
   "homepage.hero.cta": {
-    "message": "Get Started"
+    "message": "Los geht's"
   },
   "homepage.installer.keypoint1.title": {
-    "message": "Built to be run quickly"
+    "message": "Erstellt um schnell ausgeführt zu werden"
   },
   "homepage.installer.keypoint1.description": {
-    "message": "We won't expect you to clone a git repo, install dependencies, and understand the development environment it was built with by making you fight with npm, pip or ruby gems."
+    "message": "Wir werden nicht erwarten, dass Sie ein Git Repo klonen, Abhängigkeiten installieren und verstehen Sie die Entwicklungsumgebung, mit der Sie mit npm, pip oder ruby Edelsteinen kämpfen."
   },
   "homepage.installer.keypoint2.title": {
-    "message": "Choose how you want to install it"
+    "message": "Wählen Sie, wie Sie es installieren möchten"
   },
   "homepage.installer.keypoint2.description": {
-    "message": "Use our installer, download the single file yourself, or spin up a Docker container. Otherwise, sign up for a hosting provider that will install it for you automatically."
+    "message": "Nutzen Sie unseren Installer, laden Sie die einzelne Datei selbst herunter oder spinnen Sie einen Docker Container. Andernfalls melden Sie sich bei einem Hosting-Provider an, der ihn automatisch für Sie installiert."
   },
   "homepage.installer.keypoint3.title": {
-    "message": "Start simple. Increase complexity as you need it"
+    "message": "Einfach anfangen. Erhöhe die Komplexität während du sie benötigst"
   },
   "homepage.installer.keypoint3.description": {
-    "message": "If you're jumping in for the first time, start with a simple setup. As you get more comfortable, you can explore advanced configurations and optimizations."
+    "message": "Wenn Sie zum ersten Mal einspringen, beginnen Sie mit einer einfachen Einrichtung, und Sie werden noch komfortabler durch erweiterte Konfigurationen und Optimierungen untersuchen können."
   },
   "homepage.installer.title": {
-    "message": "Install in seconds. Stream in minutes."
+    "message": "Installieren in Sekunden. Stream in Minuten."
   },
   "homepage.installer.cta": {
-    "message": "Install now"
+    "message": "Jetzt installieren"
   },
   "homepage.protocolCompat.title": {
-    "message": "Uses open protocols and standards"
+    "message": "Verwendet offene Protokolle und Standards"
   },
   "homepage.protocolCompat.description": {
-    "message": "Choose the tools and services of your choice to work with Owncast."
+    "message": "Wählen Sie die Werkzeuge und Dienste Ihrer Wahl, um mit Owncast zu arbeiten."
   },
   "homepage.softwareCompat.title": {
-    "message": "Compatible with your favorite broadcasting tools"
+    "message": "Kompatibel mit Ihren Lieblings-Rundfunk-Tools"
   },
   "homepage.softwareCompat.description": {
-    "message": "Point your broadcast at your new Owncast server and you'll be live using a server you control."
+    "message": "Zeigen Sie Ihre Sendung auf Ihren neuen Owncast Server und Sie werden mit einem Server leben, den Sie kontrollieren."
   },
   "homepage.sponsors.title": {
-    "message": "Supported by"
+    "message": "Unterstützt von"
   },
   "homepage.sponsors.description": {
-    "message": "These organizations support Owncast via non-monetary support and services."
+    "message": "Diese Organisationen unterstützen Owncast über nicht-monetäre Unterstützung und Dienstleistungen."
   },
   "homepage.store.title": {
-    "message": "Get some Owncast gear"
+    "message": "Hol dir ein paar Owncast Ausrüstung"
   },
   "homepage.store.description": {
-    "message": "Support the project and show your Owncast pride. Each purchase supports the open source project."
+    "message": "Unterstützen Sie das Projekt und zeigen Sie Ihren Owncast Stolz. Jeder Kauf unterstützt das Open Source Projekt."
   },
   "homepage.store.shopNow": {
-    "message": "Shop now"
+    "message": "Jetzt einkaufen"
   },
   "homepage.store.popularItem": {
-    "message": "Popular Item"
+    "message": "Beliebtes Element"
   },
   "theme.NotFound.title": {
     "message": "Seite nicht gefunden",
     "description": "The title of the 404 page"
   },
   "theme.NotFound.p1": {
-    "message": "Wir konnten nicht finden, wonach Sie gesucht haben.",
+    "message": "Wir konnten nicht finden, was Sie suchten.",
     "description": "The first paragraph of the 404 page"
   },
   "theme.ErrorPageContent.title": {
-    "message": "Die Seite ist abgestürzt.",
+    "message": "Diese Seite ist abgestürzt.",
     "description": "The title of the fallback page when the page crashed"
   },
   "theme.BackToTopButton.buttonAriaLabel": {
@@ -211,15 +211,15 @@
     "description": "The ARIA label for the back to top button"
   },
   "theme.blog.archive.title": {
-    "message": "Archiv",
+    "message": "Archivieren",
     "description": "The page & hero title of the blog archive page"
   },
   "theme.blog.archive.description": {
-    "message": "Archiv",
+    "message": "Archivieren",
     "description": "The page & hero description of the blog archive page"
   },
   "theme.blog.paginator.navAriaLabel": {
-    "message": "Navigation der Blog-Listenseite",
+    "message": "Navigation der Blog-Liste",
     "description": "The ARIA label for the blog pagination"
   },
   "theme.blog.paginator.newerEntries": {
@@ -231,15 +231,15 @@
     "description": "The label used to navigate to the older blog posts page (next page)"
   },
   "theme.blog.post.paginator.navAriaLabel": {
-    "message": "Blog Post Seiten Navigation",
+    "message": "Blog-Beitragsseiten-Navigation",
     "description": "The ARIA label for the blog posts pagination"
   },
   "theme.blog.post.paginator.newerPost": {
-    "message": "Neuer Post",
+    "message": "Neuerer Beitrag",
     "description": "The blog post button label to navigate to the newer/previous post"
   },
   "theme.blog.post.paginator.olderPost": {
-    "message": "Älterer Post",
+    "message": "Älterer Beitrag",
     "description": "The blog post button label to navigate to the older/next post"
   },
   "theme.tags.tagsPageLink": {
@@ -247,11 +247,11 @@
     "description": "The label of the link targeting the tag list page"
   },
   "theme.colorToggle.ariaLabel.mode.system": {
-    "message": "system mode",
+    "message": "systemmodus",
     "description": "The name for the system color mode"
   },
   "theme.colorToggle.ariaLabel.mode.light": {
-    "message": "heller Modus",
+    "message": "lichtmodus",
     "description": "The name for the light color mode"
   },
   "theme.colorToggle.ariaLabel.mode.dark": {
@@ -259,7 +259,7 @@
     "description": "The name for the dark color mode"
   },
   "theme.colorToggle.ariaLabel": {
-    "message": "Umschalten zwischen dunkler und heller Ansicht (momentan {mode})",
+    "message": "Wechseln Sie zwischen dem dunklen und dem hellen Modus (derzeit {mode})",
     "description": "The ARIA label for the color mode toggle"
   },
   "theme.docs.breadcrumbs.navAriaLabel": {
@@ -267,23 +267,23 @@
     "description": "The ARIA label for the breadcrumbs"
   },
   "theme.docs.DocCard.categoryDescription.plurals": {
-    "message": "1 Eintrag|{count} Einträge",
+    "message": "1 Artikel |{count} Artikel",
     "description": "The default description for a category card in the generated index about how many items this category includes"
   },
   "theme.docs.paginator.navAriaLabel": {
-    "message": "Dokumentation Seiten",
+    "message": "Docs-Seiten",
     "description": "The ARIA label for the docs pagination"
   },
   "theme.docs.paginator.previous": {
-    "message": "Zurück",
+    "message": "Vorherige",
     "description": "The label used to navigate to the previous doc"
   },
   "theme.docs.paginator.next": {
-    "message": "Weiter",
+    "message": "Nächste",
     "description": "The label used to navigate to the next doc"
   },
   "theme.docs.tagDocListPageTitle.nDocsTagged": {
-    "message": "Ein doc getaggt|{count} docs getaggt",
+    "message": "One doc tagged|{count} docs tagged",
     "description": "Pluralized label for \"{count} docs tagged\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
   },
   "theme.docs.tagDocListPageTitle": {
@@ -294,19 +294,19 @@
     "message": "Version: {versionLabel}"
   },
   "theme.docs.versions.unreleasedVersionLabel": {
-    "message": "Das ist die unveröffentlichte Dokumentation für {siteTitle} {versionLabel}.",
+    "message": "Dies ist eine unveröffentlichte Dokumentation für {siteTitle} {versionLabel} Version.",
     "description": "The label used to tell the user that he's browsing an unreleased doc version"
   },
   "theme.docs.versions.unmaintainedVersionLabel": {
-    "message": "Das ist die Dokumentation für {siteTitle} {versionLabel} und wird nicht weiter gewartet.",
+    "message": "Dies ist eine Dokumentation für {siteTitle} {versionLabel}, die nicht mehr aktiv gewartet wird.",
     "description": "The label used to tell the user that he's browsing an unmaintained doc version"
   },
   "theme.docs.versions.latestVersionSuggestionLabel": {
-    "message": "Für die aktuellste Dokumentation bitte auf {latestVersionLink} ({versionLabel}) gehen.",
+    "message": "Aktuelle Dokumentation finden Sie im {latestVersionLink} ({versionLabel}).",
     "description": "The label used to tell the user to check the latest version"
   },
   "theme.docs.versions.latestVersionLinkLabel": {
-    "message": "letzte Version",
+    "message": "neueste Version",
     "description": "The label used for the latest version suggestion link label"
   },
   "theme.common.editThisPage": {
@@ -314,11 +314,11 @@
     "description": "The link label to edit the current page"
   },
   "theme.common.headingLinkTitle": {
-    "message": "Direkter Link zur {heading}",
+    "message": "Direkter Link zu {heading}",
     "description": "Title for link to heading"
   },
   "theme.lastUpdated.atDate": {
-    "message": " am {date}",
+    "message": " auf {date}",
     "description": "The words used to describe on which date a page has been last updated"
   },
   "theme.lastUpdated.byUser": {
@@ -326,7 +326,7 @@
     "description": "The words used to describe by who the page has been last updated"
   },
   "theme.lastUpdated.lastUpdatedAtBy": {
-    "message": "Letztes Update{atDate}{byUser}",
+    "message": "Zuletzt aktualisierte{atDate}{byUser}",
     "description": "The sentence used to display when a page has been last updated, and by who"
   },
   "theme.navbar.mobileVersionsDropdown.label": {
@@ -342,7 +342,7 @@
     "description": "The ARIA label for close button of announcement bar"
   },
   "theme.admonition.caution": {
-    "message": "vorsicht",
+    "message": "Vorsicht",
     "description": "The default label used for the Caution admonition (:::caution)"
   },
   "theme.admonition.danger": {
@@ -354,11 +354,11 @@
     "description": "The default label used for the Info admonition (:::info)"
   },
   "theme.admonition.note": {
-    "message": "hinweis",
+    "message": "notiz",
     "description": "The default label used for the Note admonition (:::note)"
   },
   "theme.admonition.tip": {
-    "message": "tipp",
+    "message": "tip",
     "description": "The default label used for the Tip admonition (:::tip)"
   },
   "theme.admonition.warning": {
@@ -366,11 +366,11 @@
     "description": "The default label used for the Warning admonition (:::warning)"
   },
   "theme.blog.sidebar.navAriaLabel": {
-    "message": "Navigation der letzten Beiträge im Blog",
+    "message": "Aktuelle Blog-Beitragsnavigation",
     "description": "The ARIA label for recent posts in the blog sidebar"
   },
   "theme.DocSidebarItem.expandCategoryAriaLabel": {
-    "message": "Expand sidebar category '{label}'",
+    "message": "Sidebar Kategorie '{label} ' erweitern",
     "description": "The ARIA label to expand the sidebar category"
   },
   "theme.DocSidebarItem.collapseCategoryAriaLabel": {
@@ -378,35 +378,35 @@
     "description": "The ARIA label to collapse the sidebar category"
   },
   "theme.IconExternalLink.ariaLabel": {
-    "message": "(opens in new tab)",
+    "message": "(öffnet sich in neuem Tab)",
     "description": "The ARIA label for the external link icon"
   },
   "theme.NavBar.navAriaLabel": {
-    "message": "Main",
+    "message": "Haupt",
     "description": "The ARIA label for the main navigation"
-  },
-  "theme.NotFound.p2": {
-    "message": "Bitte kontaktieren Sie den Besitzer der Seite, die Sie mit der ursprünglichen URL verlinkt hat, und teilen Sie ihm mit, dass der Link nicht mehr funktioniert.",
-    "description": "The 2nd paragraph of the 404 page"
   },
   "theme.navbar.mobileLanguageDropdown.label": {
     "message": "Sprachen",
     "description": "The label for the mobile language switcher dropdown"
+  },
+  "theme.NotFound.p2": {
+    "message": "Bitte wenden Sie sich an den Besitzer der Website, die Sie mit der ursprünglichen URL verlinkt und lassen Sie sie wissen, dass der Link defekt ist.",
+    "description": "The 2nd paragraph of the 404 page"
   },
   "theme.TOCCollapsible.toggleButtonLabel": {
     "message": "Auf dieser Seite",
     "description": "The label used by the button on the collapsible TOC component"
   },
   "theme.blog.post.readMore": {
-    "message": "Mehr lesen",
+    "message": "Lesen Sie mehr",
     "description": "The label used in blog post item excerpts to link to full blog posts"
   },
   "theme.blog.post.readMoreLabel": {
-    "message": "Mehr lesen über {title}",
+    "message": "Lesen Sie mehr über {title}",
     "description": "The ARIA label for the link to full blog posts from excerpts"
   },
   "theme.blog.post.readingTime.plurals": {
-    "message": "Eine Minute Lesezeit|{readingTime} Minuten Lesezeit",
+    "message": "1 min gelesen|{readingTime} min gelesen",
     "description": "Pluralized label for \"{readingTime} min read\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
   },
   "theme.CodeBlock.copy": {
@@ -418,15 +418,15 @@
     "description": "The copied button label on code blocks"
   },
   "theme.CodeBlock.copyButtonAriaLabel": {
-    "message": "In die Zwischenablage kopieren",
+    "message": "Code in Zwischenablage kopieren",
     "description": "The ARIA label for copy code blocks button"
   },
   "theme.CodeBlock.wordWrapToggle": {
-    "message": "Toggle word wrap",
+    "message": "Wortumbruch umschalten",
     "description": "The title attribute for toggle word wrapping button of code block lines"
   },
   "theme.docs.breadcrumbs.home": {
-    "message": "Home page",
+    "message": "Startseite",
     "description": "The ARIA label for the home page in the breadcrumbs"
   },
   "theme.docs.sidebar.collapseButtonTitle": {
@@ -442,7 +442,7 @@
     "description": "The ARIA label for the sidebar navigation"
   },
   "theme.docs.sidebar.closeSidebarButtonAriaLabel": {
-    "message": "Close navigation bar",
+    "message": "Navigationsleiste schließen",
     "description": "The ARIA label for close button of mobile sidebar"
   },
   "theme.navbar.mobileSidebarSecondaryMenu.backButtonLabel": {
@@ -450,31 +450,47 @@
     "description": "The label of the back button to return to main menu, inside the mobile navbar sidebar secondary menu (notably used to display the docs sidebar)"
   },
   "theme.docs.sidebar.toggleSidebarButtonAriaLabel": {
-    "message": "Toggle navigation bar",
+    "message": "Navigationsleiste umschalten",
     "description": "The ARIA label for hamburger menu button of mobile navigation"
   },
   "theme.navbar.mobileDropdown.collapseButton.expandAriaLabel": {
-    "message": "Expand the dropdown",
+    "message": "Dropdown-Liste erweitern",
     "description": "The ARIA label of the button to expand the mobile dropdown navbar item"
   },
   "theme.navbar.mobileDropdown.collapseButton.collapseAriaLabel": {
-    "message": "Collapse the dropdown",
+    "message": "Dropdown einklappen",
     "description": "The ARIA label of the button to collapse the mobile dropdown navbar item"
   },
   "theme.docs.sidebar.expandButtonTitle": {
-    "message": "Seitenleiste ausklappen",
+    "message": "Expand sidebar",
     "description": "The ARIA label and title attribute for expand button of doc sidebar"
   },
   "theme.docs.sidebar.expandButtonAriaLabel": {
-    "message": "Seitenleiste ausklappen",
+    "message": "Expand sidebar",
     "description": "The ARIA label and title attribute for expand button of doc sidebar"
+  },
+  "theme.SearchBar.noResultsText": {
+    "message": "Keine Ergebnisse"
+  },
+  "theme.SearchBar.seeAllOutsideContext": {
+    "message": "Alle Ergebnisse ausserhalb von \"{context} \" anzeigen"
+  },
+  "theme.SearchBar.searchInContext": {
+    "message": "Alle Ergebnisse innerhalb von \"{context} \" anzeigen"
+  },
+  "theme.SearchBar.seeAll": {
+    "message": "Alle Ergebnisse anzeigen"
+  },
+  "theme.SearchBar.label": {
+    "message": "Suchen",
+    "description": "The ARIA label and placeholder for search button"
   },
   "theme.SearchPage.existingResultsTitle": {
     "message": "Suchergebnisse für \"{query}\"",
     "description": "The search page title for non-empty query"
   },
   "theme.SearchPage.emptyResultsTitle": {
-    "message": "Suche in der Dokumentation",
+    "message": "Die Dokumentation durchsuchen",
     "description": "The search page title for empty query"
   },
   "theme.SearchPage.searchContext.everywhere": {
@@ -488,24 +504,8 @@
     "message": "Es wurden keine Dokumente gefunden",
     "description": "The paragraph for empty search result"
   },
-  "theme.SearchBar.noResultsText": {
-    "message": "Keine Ergebnisse"
-  },
-  "theme.SearchBar.seeAllOutsideContext": {
-    "message": "Alle Ergebnisse außerhalb von \"{context}\" anzeigen"
-  },
-  "theme.SearchBar.searchInContext": {
-    "message": "Alle Ergebnisse innerhalb von \"{context}\" anzeigen"
-  },
-  "theme.SearchBar.seeAll": {
-    "message": "Alle Ergebnisse anzeigen"
-  },
-  "theme.SearchBar.label": {
-    "message": "Suche",
-    "description": "The ARIA label and placeholder for search button"
-  },
   "theme.blog.post.plurals": {
-    "message": "Ein Post|{count} Posts",
+    "message": "Ein Beitrag|{count} Beiträge",
     "description": "Pluralized label for \"{count} posts\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
   },
   "theme.blog.tagTitle": {
@@ -517,35 +517,35 @@
     "description": "The title of the page for a blog author"
   },
   "theme.blog.authorsList.pageTitle": {
-    "message": "Authors",
+    "message": "Autoren",
     "description": "The title of the authors page"
   },
   "theme.blog.authorsList.viewAll": {
-    "message": "View All Authors",
+    "message": "Alle Autoren anzeigen",
     "description": "The label of the link targeting the blog authors page"
   },
   "theme.blog.author.noPosts": {
-    "message": "This author has not written any posts yet.",
+    "message": "Dieser Autor hat noch keine Beiträge geschrieben.",
     "description": "The text for authors with 0 blog post"
   },
   "theme.contentVisibility.unlistedBanner.title": {
-    "message": "Unlisted page",
+    "message": "Nicht gelistete Seite",
     "description": "The unlisted content banner title"
   },
   "theme.contentVisibility.unlistedBanner.message": {
-    "message": "This page is unlisted. Search engines will not index it, and only users having a direct link can access it.",
+    "message": "Diese Seite ist nicht aufgelistet. Suchmaschinen indizieren sie nicht und nur Benutzer, die einen direkten Link haben, können darauf zugreifen.",
     "description": "The unlisted content banner message"
   },
   "theme.contentVisibility.draftBanner.title": {
-    "message": "Draft page",
+    "message": "Entwurfsseite",
     "description": "The draft content banner title"
   },
   "theme.contentVisibility.draftBanner.message": {
-    "message": "This page is a draft. It will only be visible in dev and be excluded from the production build.",
+    "message": "Diese Seite ist ein Entwurf. Sie wird nur in dev sichtbar und wird von der Produktion ausgenommen.",
     "description": "The draft content banner message"
   },
   "theme.ErrorPageContent.tryAgain": {
-    "message": "Nochmal versuchen",
+    "message": "Erneut versuchen",
     "description": "The label of the button to try again rendering when the React error boundary captures an error"
   },
   "theme.common.skipToMainContent": {

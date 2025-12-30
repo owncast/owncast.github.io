@@ -1,26 +1,34 @@
 ---
 title: Welcome
+slug: /
 sidebar_label: Owncast Documentation
 description: Welcome to the official Owncast documentation. Here you'll find resources to help you install, configure, and troubleshoot your Owncast instance.
 sidebar_position: 1
+hide_title: true
 tags:
-    - introduction
-    - overview
-    - getting-started
-    - configuration
-    - troubleshooting
+  - introduction
+  - overview
+  - getting-started
+  - configuration
+  - troubleshooting
 ---
 
-import styles from '../src/css/docs-welcome.module.css';
+import styles from "../src/css/docs-welcome.module.css";
 
 <div className={styles.welcomeBanner}>
-  <img src="/images/owncat-head.svg" alt="Owncat" className={styles.welcomeOwncat} />
+  <img
+    src="/images/owncat-head.svg"
+    alt="Owncat"
+    className={styles.welcomeOwncat}
+  />
   <div>
     <p className={styles.welcomeText}>Welcome to the Owncast documentation!</p>
+  <p>
+  Owncast is a self-hosted live video and web chat server that allows you to stream your content to your audience without relying on third-party platforms. Whether you're a beginner looking to set up your first stream or an experienced user seeking advanced configuration options, this documentation aims to point you in the right direction.
+  </p>
   </div>
-</div>
 
-Owncast is a self-hosted live video and web chat server that allows you to stream your content to your audience without relying on third-party platforms. Whether you're a beginner looking to set up your first stream or an experienced user seeking advanced configuration options, this documentation aims to point you in the right direction.
+</div>
 
 ## Installation
 
@@ -48,7 +56,7 @@ Looking to build [bots, overlays](http://localhost:3000/docs/api/apis), [integra
 
 Here's an AI chatbot that may help answer your questions about Owncast that uses the same documentation you're reading now. But it's only as good as a chatbot is, so you may be better off reading the documentation yourself.
 
-import KapaChat from '../src/components/KapaChat.tsx'
+import KapaChat from "../src/components/KapaChat.tsx";
 
 <KapaChat />
 

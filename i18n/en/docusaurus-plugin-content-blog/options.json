@@ -4,11 +4,11 @@
     "description": "The title for the blog used in SEO"
   },
   "description": {
-    "message": "Neueste Nachrichten, Updates und Veröffentlichungen aus dem Owncast-Projekt",
+    "message": "Latest news, updates, and releases from the Owncast project",
     "description": "The description for the blog used in SEO"
   },
   "sidebar.title": {
-    "message": "Neueste Beiträge",
+    "message": "Recent posts",
     "description": "The label for the left sidebar"
   }
 }

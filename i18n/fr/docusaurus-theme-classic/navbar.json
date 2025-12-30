@@ -1,10 +1,10 @@
 {
   "title": {
-    "message": "Owncast",
+    "message": "Discussion personnelle",
     "description": "The title in the navbar"
   },
   "logo.alt": {
-    "message": "Owncast Logo",
+    "message": "Logo de Owncast",
     "description": "The alt text of navbar logo"
   },
   "item.label.Documentation": {
@@ -12,11 +12,11 @@
     "description": "Navbar item with label Documentation"
   },
   "item.label.Troubleshooting": {
-    "message": "Troubleshooting",
+    "message": "Dépannage",
     "description": "Navbar item with label Troubleshooting"
   },
   "item.label.Quickstart": {
-    "message": "Quickstart",
+    "message": "Démarrage rapide",
     "description": "Navbar item with label Quickstart"
   }
 }
