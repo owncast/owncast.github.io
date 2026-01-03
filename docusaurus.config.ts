@@ -25,17 +25,19 @@ const ALL_REDIRECTS = [
   // Wildcard redirects
   { to: "/blog/*", from: "/releases/*" },
   {
-    to: "/docs/troubleshooting/*",
+    to: "/docs/troubleshoot/*",
     from: "/troubleshoot/*",
     excludePaths: ["/troubleshoot/"],
   },
+  // {
+  //   to: "/docs/troubleshooting/*",
+  //   from: "/troubleshoot/*",
+  //   excludePaths: ["/troubleshoot/"],
+  // },
   { to: "/docs/api/*", from: "/thirdparty/*" },
   { to: "/docs/getting-started/install/providers/*", from: "/quickstart/*" },
 
   // Regular redirects
-  { to: "/docs/1-1", from: "/1-1" },
-  { to: "/docs/hacktoberfest", from: "/hacktoberfest" },
-  { to: "/docs/tshirt", from: "/tshirt" },
   { to: "/docs/getting-started/install", from: "/install" },
   { to: "/docs/getting-started/install", from: "/installation" },
   { to: "/docs/getting-started/install", from: "/docs/install" },
@@ -168,7 +170,7 @@ const config: Config = {
           // Useful options to enforce blogging best practices
           onInlineTags: "warn",
           onInlineAuthors: "warn",
-          onUntruncatedBlogPosts: "warn",
+          onUntruncatedBlogPosts: "ignore", //"warn",
         },
         theme: {
           customCss: "./src/css/custom.css",

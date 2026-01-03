@@ -1,18 +1,18 @@
 ---
 title: Viewers further away are experiencing buffering
-description: ''
+description: ""
 tags:
   - buffering
   - geo
   - viewing
 ---
 
-import RelocatePhysicalServer from '../../troubleshooting/shared/relocate-physical-server.md';
-import AddLowerQualityOutputs from '../../troubleshooting/shared/add-lower-quality-outputs.md';
-import UseCDN from '../../troubleshooting/shared/use-cdn.md';
-import UseStorage from '../../troubleshooting/shared/use-storage.md';
+import RelocatePhysicalServer from "../../troubleshoot/shared/relocate-physical-server.md";
+import AddLowerQualityOutputs from "../../troubleshoot/shared/add-lower-quality-outputs.md";
+import UseCDN from "../../troubleshoot/shared/use-cdn.md";
+import UseStorage from "../../troubleshoot/shared/use-storage.md";
 
-import { IncludeMarkdown } from '@site/src/components';
+import { IncludeMarkdown } from "@site/src/components";
 
 Because live video can have very narrow tolerances, it's possible that the physical location of viewers compared to the location of your server can cause enough delays that the viewer experiences buffering.
 
@@ -35,6 +35,7 @@ After reading below you might also find helpful tips browsing the [OBS Troublesh
 Using a technology called Adaptive Bitrate Streaming the viewer will switch transparently between different video qualities as needed. Read more about how this, and other pieces of video works by reading our more detailed [Video Document](/docs/video).
 
 ## Use external storage
+
 <IncludeMarkdown>
   <UseStorage />
 </IncludeMarkdown>

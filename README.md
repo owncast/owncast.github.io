@@ -52,7 +52,7 @@ For content that appears on multiple pages, create a shared file and include it 
 Shared content files are typically stored in:
 
 - `docs/shared/` - General shared content
-- `docs/troubleshooting/shared/` - Shared troubleshooting content
+- `docs/troubleshoot/shared/` - Shared troubleshooting content
 - `docs/shared/diagrams/` - Reusable diagrams
 
 ```jsx
