@@ -4,11 +4,27 @@
   /* border-top: 1px solid var(--ifm-color-emphasis-300); */
 }
 
+.editLink {
+  margin-bottom: 1rem;
+}
+
+.editLink a {
+  font-size: 0.875rem;
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.editLink a:hover {
+  text-decoration: underline;
+}
+
 .contributorsTitle {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--ifm-color-emphasis-700);
   margin-bottom: 1rem;
+  margin-top: 1rem;
+
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }

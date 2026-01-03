@@ -21,10 +21,12 @@ interface Contributor {
 
 interface ContributorsListProps {
   filePath: string;
+  editUrl?: string;
 }
 
 export default function ContributorsList({
   filePath,
+  editUrl,
 }: ContributorsListProps): JSX.Element | null {
   // Normalize the file path - remove @site/ prefix if present
   let normalizedPath = filePath;
@@ -43,7 +45,22 @@ export default function ContributorsList({
 
   return (
     <div className={styles.contributorsContainer}>
-      <div className={styles.contributorsTitle}>Contributors to this page</div>
+      <div>
+        {editUrl && (
+          <>
+            <hr style={{ marginTop: "50px", opacity: 0.4 }} />
+            <h3 className={styles.editTitle}>Improve this page</h3>
+            See something missing or incorrect?{" "}
+            <a href={editUrl} target="_blank" rel="noopener noreferrer">
+              Edit this page
+            </a>{" "}
+            and improve the documentation for everyone.
+          </>
+        )}
+      </div>
+      <div className={styles.contributorsTitle}>
+        Contributors to this documentation
+      </div>
       <div className={styles.contributorsList}>
         {deduplicatedContributors.map((contributor, index) => (
           <ContributorAvatar key={index} contributor={contributor} />

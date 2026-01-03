@@ -145,7 +145,8 @@ const config: Config = {
           routeBasePath: "docs",
           path: "docs",
           // Enable edit URLs to allow contributors to edit documentation on GitHub
-          editUrl: "https://github.com/owncast/owncast.github.io/edit/main/",
+          editUrl:
+            "https://github.com/owncast/owncast.github.io/edit/owncast-docusaurus/",
           // docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: {

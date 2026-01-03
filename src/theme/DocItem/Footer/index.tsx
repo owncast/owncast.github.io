@@ -14,9 +14,9 @@ export default function FooterWrapper(
 
   return (
     <>
-      <ContributorsList filePath={filePath} />
-      <OriginalFooter {...props} />
+      <ContributorsList filePath={filePath} editUrl={metadata.editUrl} />
       <RelatedDocs title="Related Documents" showScores={false} />
+      <OriginalFooter {...props} />
     </>
   );
 }
