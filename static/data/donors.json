@@ -573,5 +573,10 @@
     "login": "Ставки на спорт",
     "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/c56d2fe2-f9fb-4d63-947c-77575f4b15c6/stavki.jpg",
     "html_url": "https://opencollective.com/stavki-na-sport-ua"
+  },
+  {
+    "login": "MATSUDA RYUKI",
+    "avatar_url": null,
+    "html_url": "https://opencollective.com/guest-07d84ecb"
   }
 ]
