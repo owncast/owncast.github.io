@@ -1,0 +1,96 @@
+---
+title: Wählen Sie die richtigen Videoqualitätseinstellungen
+description: Konfigurieren Sie Ihr Video, um die Qualität und die Hardwareleistung zu verwalten.
+sidebar_position: 400
+sidebar_label: Wählen Sie die richtigen Videoqualitätseinstellungen
+---
+
+import ResourcesCalculator from '@site/src/components/ResourcesCalculator';
+import OwncastBasic from './shared/diagrams/owncast-basic.md';
+import OwncastWithQualities from './shared/diagrams/owncast-with-qualities.md';
+
+import { IncludeMarkdown } from '@site/src/components';
+
+Dieses Dokument soll umreißen, was mit Ihren Inhalten geschieht und die verschiedenen Regler, die Sie anpassen können, um die beste Ausgabe für Ihre Instanz zu erhalten.
+
+Um zu sehen, wie Ihr spezifischer Stream performt, besuchen Sie die [Stream Health](/docs/metrics) Seite im Admin-Bereich.
+
+## Überblick
+
+1. Konfigurieren Sie Ihre Streaming-Software so, dass sie einen Stream an Owncast sendet, der vernünftigerweise dem entspricht, was Sie Ihren Zuschauern senden möchten. [Wie Sie Ihre Broadcasting-Software konfigurieren, ist wichtig](/docs/video/#how-you-configure-your-broadcasting-software-matters). Sagen Sie OBS nicht, dass es an Owncast bei 7000k und 60fps senden soll, wenn Sie nur Bitraten von 4000k und 2000k bei 30fps erwarten.
+2. Beginnen Sie mit einer einzigen [Ausgabe-Konfiguration](/docs/video/#things-you-can-configure) mit durchschnittlichen Einstellungen. Testen Sie es. Sehen Sie, wie Ihre Hardware damit umgeht. Wenn Sie möchten und in der Lage sind, fügen Sie einen weiteren hinzu und testen Sie das. Wiederholen Sie dies, bis Sie die Konfiguration erreichen, die Sie Ihren Zuschauern anbieten möchten und die Ihre Hardware bewältigen kann.
+3. Wenn Ihre Hardware mit der aktuellen Konfiguration nicht umgehen kann, reduzieren Sie die Anzahl der Ausgabevarianten auf nur eine, [reduzieren Sie die Qualität des Videos, das Sie an Owncast senden](/docs/video/#how-you-configure-your-broadcasting-software-matters), reduzieren Sie Ihre [Bildrate](/docs/video/#framerate) und verringern Sie die [CPU-Auslastung](/docs/video/#cpu-usage)
+
+## Ihr Stream kann außerhalb Ihrer Website abgespielt werden.
+
+Da Owncast den HLS-Standard verwendet, kann fast jeder Video-Player Ihren Stream abspielen. Sie können auch Ihre eigene App erstellen, die ihn abspielt. Gängige Video-Player wie Quicktime, VLC und mpv können Ihren Stream einfach abspielen, indem sie die Basis-URL als `https://owncast.mydomain.com` verwenden. Alternativ können Sie Ihren Stream auch direkt auf Ihrem Server aufrufen, indem Sie den Pfad von `/hls/stream.m3u8` in Ihren Player eingeben. Zum Beispiel: `https://owncast.mydomain.com/hls/stream.m3u8`.
+
+## Wie funktioniert ein Owncast-Video-Stream?
+
+<IncludeMarkdown>
+  <OwncastBasic />
+</IncludeMarkdown>
+
+Owncast nimmt Ihren Quellstream und wandelt ihn in kurze, einzelne Video-Segmente um. Eine Liste dieser Segmente wird an den Player Ihres Zuschauers geliefert und wird alle Segmente in der richtigen Reihenfolge lesen und abspielen. Das geschieht nach einer Spezifikation namens [HLS](https://developer.apple.com/documentation/http-live-streaming) oder HTTP Live Streaming. Optional können Sie mehrere verschiedene Videoqualitäten erzeugen, um Optionen für eine niedrigere Bandbreite zu ermöglichen. Dies wird [Adaptive Bitrate Streaming](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming) genannt.
+
+In diesem Fall fungiert Owncast als Mediakodierer, Stream-Segmentierer und Verteilungs-Webserver. Allerdings [unterstützt Owncast auch die Verteilung von Videos über 3rd Party-Speicher](/docs/storage), sodass in diesem Fall die Video-Segmente von dort verteilt würden.
+
+#### Dinge, die Sie beachten sollten.
+
+1. Je mehr Arbeit Sie anfordern, um das Video von einer Größe, Qualität oder Format in ein anderes zu konvertieren, desto langsamer wird alles andere.
+2. Je langsamer die Dinge laufen, desto langsamer wird der Stream dem Benutzer bereitgestellt.
+3. Wenn der Stream dem Benutzer zu langsam bereitgestellt wird, wird er anfangen, Pufferung und Fehler zu sehen.
+
+Hier sind die Regler, die Sie anpassen können, wenn Sie versuchen zu bestimmen, welche Qualität oder Qualitäten Sie Ihrem Benutzer anbieten möchten, während Sie die Menge an Serverressourcen, die Sie verbrauchen, ausbalancieren.
+
+## Dinge, die Sie konfigurieren können
+
+### Bitrate
+
+Die Bitrate ist die Menge an Daten, die Sie bei der Übertragung senden. Eine höhere Bitrate benötigt mehr verfügbare Internet-Bandbreite und erstellt größere Video-Segmente, was es länger dauert, für die Zuschauer herunterzuladen. Die Erhöhung Ihrer Bitrate kann die Videoqualität verbessern, aber nur bis zu einem bestimmten Punkt.
+
+### Auflösung
+
+Die Auflösung bezieht sich auf die Größe eines Videos auf einem Bildschirm. Wie bei Bitraten können Sie mehrere verschiedene Größen für unterschiedliche Fälle angeben, aber das Anfordern einer Größenänderung eines Videos bedeutet zusätzliche Arbeit, die erledigt werden muss.
+
+Es wird empfohlen, wenn Sie die Größe ändern müssen, nur die Breite **oder** die Höhe zu ändern, und es wird das richtige Seitenverhältnis für Sie beibehalten. Wenn Sie sowohl die Breite als auch die Höhe ändern, ändern Sie möglicherweise das Seitenverhältnis des Videos und enden mit einem verzerrten Bild, wenn Sie es nicht korrekt einstellen.
+
+### Bildrate
+
+Die Bildrate ist die Anzahl der Bilder pro Sekunde im Video. Owncast verwendet standardmäßig 24fps, aber andere gängige Bildraten sind 30 oder 60. Die Erhöhung der Bildrate verbraucht mehr CPU auf Ihrem Server und mehr Bandbreite für Ihre Benutzer, da mehr Videobilder verarbeitet und den Zuschauern in jeder Sekunde zur Verfügung gestellt werden müssen.
+
+### CPU-Auslastung
+
+Je mehr CPU Sie verwenden, desto besser wird das Ausgabebild sein, oder desto kleiner wird die Ausgabedatei bei derselben Qualität sein. Sie müssen jedoch die verfügbare CPU mit der Menge abgleichen, die Sie für die Videobearbeitung nutzen können.
+
+### Latenzpuffer
+
+Sie haben eine gewisse Kontrolle über die Live-Latenz zwischen dem Sender und dem Zuschauer. Obwohl es völlig verständlich ist, so wenig Latenz wie möglich haben zu wollen, müssen Sie möglicherweise den Latenzpuffer erhöhen, wenn Sie Probleme haben. Im Allgemeinen gilt: Je niedriger die Latenz, desto weniger Puffer steht für mögliche langsame Übertragungen, Netzwerkstörungen oder Fehler zur Verfügung.
+
+### Video-Passthrough
+
+<IncludeMarkdown>
+  <OwncastWithQualities />
+</IncludeMarkdown>
+
+## Audio
+
+Was Sie von Ihrer Streaming-Software senden, ist im Allgemeinen angemessen und eine zusätzliche Konvertierung ist nicht erforderlich, selbst für Low-Bandwidth-Zuschauer. Owncast wird den Audiostream nicht ändern und ihn stattdessen einfach an die Endbenutzer weitergeben, um zusätzliche Arbeit zu vermeiden.
+
+<ResourcesCalculator />
+
+## Wie Sie Ihre Broadcasting-Software konfigurieren, ist wichtig.
+
+Sie sollten Ihre Broadcasting-Software so konfigurieren, dass sie die höchste Qualität bietet, die Sie Ihren Zuschauern anbieten können. **Das bedeutet, wenn Ihr Owncast-Server nur 720p@2500k verarbeiten kann, sollten Sie Ihre Broadcasting-Software nicht so konfigurieren, dass sie 1080p@6000k sendet**. Je mehr Umwandlungsarbeit Sie Owncast abverlangen, desto mehr Ressourcen benötigt es auf Ihrem Server, was es noch schwieriger macht, die besten Qualitäten für Ihre Zuschauer anzubieten.
+
+Wenn Sie versuchen, eine bessere Leistung aus Owncast zu gewinnen, probieren Sie, Ihre Broadcasting-Software auf eine niedrigere Qualität einzustellen und die Qualität in Ihrer Owncast-Instanz zu senken.
+
+Lesen Sie mehr über [die Konfiguration Ihrer Broadcasting-Software](/docs/broadcasting/obs).
+
+## Hardwarebeschleunigte Videokodierung
+
+Wenn Sie auf physischer Hardware laufen, können Sie möglicherweise die Leistung Ihrer Owncast-Instanz steigern, indem Sie Ihre Hardware zusammen mit einem kompatiblen Codec verwenden, wodurch die hohe Last von Ihrer CPU genommen wird. Es gibt keine Garantie, dass alle Hardwarekonfigurationen, Treiber oder Betriebssysteme funktionieren, und es kann einige Mühe Ihrerseits kosten, alle zusätzlichen benötigten Software zu installieren, um es zum Laufen zu bringen. Lesen Sie mehr darüber, was unterstützt wird, und wie, im Dokument [Hardwarebeschleunigte Kodierung mit zusätzlichen Codecs](/docs/codecs).
+
+## Beispiele für Ressourcen und Anforderungen
+
+Besuchen Sie die Seite [Ressourcen und Anforderungen](/docs/resources-requirements/), um einige Beispiele dafür zu sehen, was Sie von Ihrer Serverhardware und Ihrer Netzwerkverbindung erwarten können und wie sich dies auf Ihre Zuschauer auswirken können.

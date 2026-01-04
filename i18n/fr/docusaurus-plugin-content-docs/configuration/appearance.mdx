@@ -1,0 +1,69 @@
+---
+title: Personnalisation des couleurs et de l'apparence
+description: Personnalisez l'apparence de votre instance Owncast.
+sidebar_label: Personnalisation des couleurs et de l'apparence
+hide_table_of_contents: false
+tags:
+  - apparence
+  - css
+  - personnalisation
+  - thèmes
+  - couleurs
+  - stylisation
+  - polices
+---
+
+import ColorThemeBuilder from "@site/src/components/ColorThemeBuilder";
+
+Il est fortement recommandé de <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Basic_selectors" target="_blank" rel="noopener noreferrer">vous familiariser avec les sélecteurs CSS</a> et la <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties" target="_blank" rel="noopener noreferrer">syntaxe des variables CSS</a> pour tirer le meilleur parti de la personnalisation de votre instance Owncast. Bientôt, vous pourrez faire en sorte que votre page Owncast ressemble à ce que vous souhaitez.
+Utiliser le <a href="#owncast-css-helper">helper CSS d'Owncast</a> ci-dessous est un excellent moyen de commencer.
+
+## Sélecteurs CSS
+
+| Sélecteur               | Description                                             |
+| ----------------------- | ------------------------------------------------------- |
+| `header`                | L'élément d'en-tête de la page                          |
+| `footer`                | L'élément de pied de page de la page                    |
+| `#global-header-text`   | Le texte dans l'en-tête                                 |
+| `#offline-banner`       | La bannière qui apparaît lorsque le flux est hors ligne |
+| `#custom-page-content`  | Le contenu personnalisé de la page                      |
+| `#notify-button`        | Bouton pour afficher la modal de notification           |
+| `#follow-button`        | Bouton pour afficher la modal de suivi                  |
+| `#followers-collection` | La collection de followers                              |
+| `#modal-container`      | Le conteneur pour les modaux                            |
+| `#chat-container`       | Le conteneur pour le chat                               |
+| `.chat-message_user`    | Un message de chat envoyé par un utilisateur            |
+| `.chat-message_system`  | Un message de chat envoyé par le système                |
+| `.chat-message_social`  | Un message social du Fediverse                          |
+| `.followers-follower`   | Un seul follower dans la collection de followers        |
+
+## Variables CSS
+
+Vous pouvez remplacer les valeurs attribuées aux variables CSS manuellement en les définissant dans l'éditeur CSS de l'administrateur.
+Vous pouvez trouver une liste de [noms de variables](https://owncast.online/components/?path=/docs/owncast-styles-colors-palette--docs) que vous pouvez remplacer.
+
+Par exemple, si vous souhaitez que tous les éléments d'action (liens, boutons) soient rouges, que les bordures de boutons soient vertes et que la police principale soit une police `serif`, vous pouvez définir les variables CSS suivantes comme suit :
+
+```css
+:root {
+  --theme-color-action: red;
+  --theme-color-components-primary-button-border: green;
+  --theme-text-body-font-family: serif;
+}
+```
+
+### Sélecteurs et variables supplémentaires
+
+Bien qu'en utilisant CSS, vous puissiez cibler n'importe quel élément sur la page, si certains éléments vous posent des difficultés pour la personnalisation, veuillez ouvrir un problème sur le <a href="https://github.com/owncast/owncast/issues" target="_blank" rel="noopener noreferrer">dépôt GitHub d'Owncast</a> afin que nous puissions envisager d'ajouter des sélecteurs supplémentaires ou des variables CSS pour faciliter la personnalisation.
+Nous ajouterons probablement également davantage d'options de personnalisation directement sur la page d'apparence d'Owncast au fil du temps pour les cas d'utilisation courants. Si vous souhaitez personnaliser quelque chose de spécifique, les contributions sont les bienvenues !
+
+## Helper CSS d'Owncast
+
+Pour aider à personnaliser vos couleurs Owncast via des variables CSS et à personnaliser des éléments spécifiques, utilisez l'helper CSS ci-dessous. Ceci est destiné à vous donner un bon départ dans l'écriture de votre propre CSS, pas une solution complète.
+Sélectionnez des couleurs à l'aide des sélecteurs de couleurs, modifiez le CSS directement si nécessaire, puis copiez et collez le résultat dans votre administration Owncast sous <em>Paramètres généraux → Apparence.</em>
+
+:::tip
+Vous pouvez copier et coller votre CSS personnalisé et le partager avec d'autres utilisateurs d'Owncast en tant que thèmes !
+:::
+
+<ColorThemeBuilder />

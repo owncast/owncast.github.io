@@ -1,0 +1,96 @@
+---
+title: Choisissez les bons paramètres de qualité vidéo
+description: Configurez votre vidéo pour gérer la qualité et la performance matérielle.
+sidebar_position: 400
+sidebar_label: Choisissez les bons paramètres de qualité vidéo
+---
+
+import ResourcesCalculator from '@site/src/components/ResourcesCalculator';
+import OwncastBasic from './shared/diagrams/owncast-basic.md';
+import OwncastWithQualities from './shared/diagrams/owncast-with-qualities.md';
+
+import { IncludeMarkdown } from '@site/src/components';
+
+Ce document vise à décrire ce qui est fait à votre contenu et les différents réglages que vous pouvez ajuster pour obtenir la meilleure sortie pour votre instance.
+
+Pour voir comment votre flux spécifique se comporte, visitez la page [Santé de la diffusion](/docs/metrics) dans l'administration.
+
+## Aperçu
+
+1. Configurez votre logiciel de diffusion pour envoyer un flux à Owncast qui se rapproche raisonnablement de ce que vous vous attendez à envoyer à vos spectateurs. [Comment vous configurez votre logiciel de diffusion est important](/docs/video/#how-you-configure-your-broadcasting-software-matters). Ne demandez pas à OBS d'envoyer à Owncast à 7000k à 60fps si vous ne prévoyez que de supporter des débits de 4000k et 2000k à 30fps.
+2. Commencez par une seule [configuration de sortie](/docs/video/#things-you-can-configure) avec des paramètres moyens. Testez-le. Voyez comment votre matériel le gère. Si vous le souhaitez et que vous le pouvez, ajoutez-en un autre et testez cela. Réitérez jusqu'à ce que vous arriviez à la configuration que vous souhaitez offrir à vos spectateurs et que votre matériel peut gérer.
+3. Si votre matériel ne peut pas gérer votre configuration actuelle, réduisez le nombre de variantes de sortie à une seule, [réduisez la qualité de la vidéo que vous envoyez à Owncast](/docs/video/#how-you-configure-your-broadcasting-software-matters), réduisez votre [framerate](/docs/video/#framerate), et réduisez l'[utilisation du CPU](/docs/video/#cpu-usage)
+
+## Votre flux peut être joué en dehors de votre site web.
+
+Parce qu'Owncast utilise la norme HLS, presque n'importe quel lecteur vidéo peut lire votre flux. Vous pouvez également créer votre propre application qui le lit. Des lecteurs vidéo couramment utilisés tels que Quicktime, VLC et mpv peuvent lire votre flux simplement en utilisant son URL de base comme `https://owncast.mydomain.com`. Alternativement, vous pouvez également accéder à votre flux directement sur votre serveur en mettant le chemin de `/hls/stream.m3u8` dans votre lecteur. Par exemple : `https://owncast.mydomain.com/hls/stream.m3u8`.
+
+## Comment fonctionne un flux vidéo Owncast ?
+
+<IncludeMarkdown>
+  <OwncastBasic />
+</IncludeMarkdown>
+
+Owncast prend votre flux source et le convertit en segments vidéo courts et individuels. Une liste de ces segments est fournie au lecteur de votre spectateur qui lira et jouera tous les segments dans l'ordre. Ceci utilise une spécification appelée [HLS](https://developer.apple.com/documentation/http-live-streaming) ou Streaming en direct HTTP. Vous pouvez générer plusieurs qualités différentes de vidéo pour permettre des options à faible bande passante. Ceci s'appelle [le streaming à débit adaptable](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming).
+
+Dans ce cas, Owncast fonctionne en tant qu'encodeur multimédia, segmentateur de flux et serveur web de distribution. Cependant, [Owncast prend également en charge la distribution vidéo via un stockage tiers](/docs/storage), donc dans ce cas, les segments vidéo seraient distribués à partir de là.
+
+#### Choses à garder à l'esprit.
+
+1. Plus vous avez besoin de travail pour convertir la vidéo d'une taille, qualité ou format à un autre, plus cela ralentira tout le reste.
+2. Plus les choses se passent lentement, plus le flux est fourni à l'utilisateur lentement.
+3. Si le flux est fourni à l'utilisateur trop lentement, il commencera à voir des mises en mémoire tampon et des erreurs.
+
+Voici les réglages qui peuvent être ajustés lors de la détermination de la qualité ou des qualités que vous souhaitez fournir à votre utilisateur tout en équilibrant la quantité de ressources serveur que vous consommez.
+
+## Choses que vous pouvez configurer
+
+### Débit binaire
+
+Le débit binaire est la quantité de données que vous envoyez lors de la diffusion. Un débit binaire plus élevé utilise plus de bande passante internet disponible et crée des segments vidéo de plus grande taille, ce qui prend plus de temps aux spectateurs pour les télécharger. Augmenter votre débit binaire peut améliorer la qualité de votre vidéo, mais seulement jusqu'à un certain point.
+
+### Résolution
+
+La résolution désigne la taille d'une vidéo sur un écran. Comme les débits binaires, vous pouvez fournir plusieurs tailles différentes pour différents cas, mais demander de redimensionner une vidéo implique un travail supplémentaire à réaliser.
+
+Il est recommandé que si vous devez changer la taille, vous ne changiez que la largeur **ou** la hauteur, et cela conservera le bon rapport d'aspect pour vous. Si vous changez à la fois la largeur et la hauteur, vous pourriez changer le rapport d'aspect de la vidéo et vous pourriez vous retrouver avec une image déformée si vous ne la définissez pas correctement.
+
+### Fréquence d'images
+
+La fréquence d'images est le nombre d'images par seconde dans la vidéo. Owncast par défaut à 24fps, mais d'autres fréquences d'images courantes sont 30 ou 60. Augmenter la fréquence d'images utilisera plus de CPU sur votre serveur, et plus de bande passante pour vos utilisateurs, car plus d'images vidéo doivent être traitées et mises à disposition auprès de vos spectateurs chaque seconde donnée.
+
+### Utilisation du CPU
+
+Plus vous utilisez de CPU, meilleure sera l'image de sortie, ou plus petit sera le fichier de sortie pour la même qualité. Cependant, vous devrez équilibrer la quantité de CPU que vous avez disponible avec la quantité que vous pouvez utiliser pour traiter la vidéo.
+
+### Tampon de latence
+
+Vous avez un certain contrôle sur la latence en direct entre le diffuseur et le spectateur. Bien qu'il soit tout à fait compréhensible de vouloir avoir aussi peu de latence que possible, vous devrez peut-être augmenter le tampon de latence si vous rencontrez des problèmes. En général, plus la latence est basse, moins de tampon est disponible pour d'éventuels transferts lents, des coupures de réseau ou des erreurs.
+
+### Passage de vidéo
+
+<IncludeMarkdown>
+  <OwncastWithQualities />
+</IncludeMarkdown>
+
+## Audio
+
+Ce que vous envoyez depuis votre logiciel de diffusion est généralement raisonnable et aucune conversion supplémentaire n'est requise, même pour les spectateurs à faible bande passante. Owncast ne changera pas le flux audio et se contentera de le transmettre aux utilisateurs finaux pour économiser un travail supplémentaire.
+
+<ResourcesCalculator />
+
+## Comment vous configurez votre logiciel de diffusion est important.
+
+Vous voudrez configurer votre logiciel de diffusion pour correspondre à la qualité la plus élevée que vous pouvez offrir à vos spectateurs. **Cela signifie que si votre serveur Owncast ne peut gérer que 720p@2500k, vous ne devez pas configurer votre logiciel de diffusion pour envoyer 1080p@6000k.** Plus vous demandez à Owncast de faire de travail de conversion, plus il utilisera de ressources sur votre serveur, rendant encore plus difficile d'offrir les meilleures qualités à vos spectateurs.
+
+Si vous vous retrouvez à essayer d'extraire de meilleures performances d'Owncast, essayez de régler votre logiciel de diffusion sur une qualité inférieure ainsi que de baisser la qualité dans votre instance Owncast.
+
+En savoir plus sur [la configuration de votre logiciel de diffusion](/docs/broadcasting/obs).
+
+## Codage vidéo accéléré par matériel
+
+Si vous utilisez un matériel physique, vous pourrez peut-être augmenter les performances de votre instance Owncast en utilisant votre matériel avec un codec compatible, afin de réduire la charge de votre CPU. Il n'y a aucune garantie que toutes les configurations matérielles, pilotes ou systèmes d'exploitation fonctionneront et vous devrez peut-être fournir un certain effort pour installer tout le logiciel supplémentaire nécessaire pour le faire fonctionner. En savoir plus sur ce qui est supporté, et comment, dans notre document sur [le codage accéléré par matériel avec des codecs supplémentaires](/docs/codecs).
+
+## Exemples de ressources et de besoins
+
+Visitez la page [ressources et exigences](/docs/resources-requirements/) pour voir quelques exemples de ce à quoi vous pouvez vous attendre de la part de votre matériel serveur et de votre connexion réseau et comment cela peut affecter vos spectateurs.

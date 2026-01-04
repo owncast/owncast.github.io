@@ -1,0 +1,96 @@
+---
+title: Elige la configuración de calidad de video adecuada
+description: Configura tu video para gestionar la calidad y el rendimiento del hardware.
+sidebar_position: 400
+sidebar_label: Elige la configuración de calidad de video adecuada
+---
+
+import ResourcesCalculator from '@site/src/components/ResourcesCalculator';
+import OwncastBasic from './shared/diagrams/owncast-basic.md';
+import OwncastWithQualities from './shared/diagrams/owncast-with-qualities.md';
+
+import { IncludeMarkdown } from '@site/src/components';
+
+Este documento tiene como objetivo describir lo que se está haciendo a tu contenido y los diferentes ajustes que puedes modificar para obtener la mejor salida para tu instancia.
+
+Para ver cómo está funcionando tu transmisión específica, visita la página de [Estado de la Transmisión](/docs/metrics) en el administrador.
+
+## Resumen
+
+1. Configura tu software de transmisión para enviar una transmisión a Owncast que esté razonablemente cerca de lo que esperas enviar a tus espectadores. [Cómo configuras tu software de transmisión es importante](/docs/video/#how-you-configure-your-broadcasting-software-matters). No le digas a OBS que envíe a Owncast a 7000k a 60fps si solo esperas soportar tasas de bits de 4000k y 2000k a 30fps.
+2. Comienza con una sola [configuración de salida](/docs/video/#things-you-can-configure) con configuraciones promedio. Pruébalo. Ve cómo maneja tu hardware. Si lo deseas y puedes, añade otra y prueba eso. Repite hasta que llegues a la configuración que deseas ofrecer a tus espectadores y que tu hardware pueda manejar.
+3. Si tu hardware no puede manejar tu configuración actual, reduce el número de variantes de salida a solo una, [reduce la calidad del video que estás enviando a Owncast](/docs/video/#how-you-configure-your-broadcasting-software-matters), reduce tu [frecuencia de imagen](/docs/video/#framerate) y reduce el [uso de CPU](/docs/video/#cpu-usage)
+
+## Tu transmisión puede ser reproducida fuera de tu sitio web.
+
+Debido a que Owncast utiliza el estándar HLS, casi cualquier reproductor de video puede reproducir tu transmisión. También puedes construir tu propia aplicación que la reproduzca. Reproductores de video comúnmente usados como Quicktime, VLC y mpv pueden reproducir tu transmisión simplemente usando su URL base como `https://owncast.mydomain.com`. Alternativamente, también puedes acceder a tu transmisión directamente en tu servidor poniendo la ruta de `/hls/stream.m3u8` en tu reproductor. Por ejemplo: `https://owncast.mydomain.com/hls/stream.m3u8`.
+
+## ¿Cómo funciona una transmisión de video de Owncast?
+
+<IncludeMarkdown>
+  <OwncastBasic />
+</IncludeMarkdown>
+
+Owncast toma tu transmisión de origen y la convierte en segmentos de video cortos e individuales. Una lista de estos segmentos se proporciona al reproductor de tus espectadores y leerá y reproducirá todos los segmentos en orden. Esto utiliza una especificación llamada [HLS](https://developer.apple.com/documentation/http-live-streaming) o HTTP Live Streaming. Opcionalmente, puedes generar múltiples calidades diferentes de video para permitir opciones de menor ancho de banda. Esto se llama [transmisión de tasa de bits adaptable](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming).
+
+En este caso, Owncast funciona como el codificador de medios, segmentador de transmisión y servidor web de distribución. Sin embargo, [Owncast también admite la distribución de video a través de almacenamiento de terceros](/docs/storage), por lo que en ese caso, los segmentos de video se distribuirían desde allí, en su lugar.
+
+#### Cosas a tener en cuenta.
+
+1. Cuanto más trabajo necesites hacer para convertir el video de un tamaño, calidad o formato a otro, más ralentizará todo lo demás.
+2. Cuanto más lentas vayan las cosas, más lenta será la transmisión proporcionada al usuario.
+3. Si la transmisión se proporciona al usuario demasiado lentamente, comenzarán a ver almacenamiento en búfer y errores.
+
+Aquí están los ajustes que se pueden modificar al intentar determinar la calidad o calidades que deseas ofrecer a tus usuarios mientras equilibras la cantidad de recursos del servidor que consumes.
+
+## Cosas que puedes configurar
+
+### Tasa de bits
+
+La tasa de bits es la cantidad de datos que envías cuando transmites. Una tasa de bits más alta ocupa más ancho de banda de internet disponible y crea segmentos de video de mayor tamaño, haciendo que tarde más en descargarse. Aumentar tu tasa de bits puede mejorar la calidad de tu video, pero solo hasta un cierto punto.
+
+### Resolución
+
+La resolución se refiere al tamaño de un video en una pantalla. Al igual que las tasas de bits, puedes proporcionar múltiples tamaños diferentes para diferentes casos, pero pedir redimensionar un video equivale a trabajo adicional que necesita ser realizado.
+
+Se recomienda que si necesitas cambiar el tamaño, solo cambies el ancho **o** la altura, y mantendrá la proporción de aspecto correcta para ti. Si cambias tanto el ancho como la altura, puedes estar cambiando la proporción de aspecto del video y podrías terminar con una imagen distorsionada si no lo configuras correctamente.
+
+### Frecuencia de imagen
+
+La frecuencia de imagen es el número de cuadros por segundo en el video. Owncast tiene como predeterminado 24fps, pero otras frecuencias de imagen comunes son 30 o 60. Aumentar la frecuencia de imagen utilizará más CPU en tu servidor, y más ancho de banda para tus usuarios ya que más cuadros de video deben ser procesados y puestos a disposición de tus espectadores cada segundo.
+
+### Uso de CPU
+
+Cuanto más CPU uses, mejor será la imagen de salida, o más pequeño será el archivo de salida para la misma calidad. Sin embargo, necesitarás equilibrar la cantidad de CPU que tienes disponible con la cantidad que puedes usar para procesar video.
+
+### Búfer de latencia
+
+Tienes cierto control sobre la latencia en vivo entre el emisor y el espectador. Aunque es completamente comprensible querer tener la menor latencia posible, puedes necesitar aumentar el búfer de latencia si estás experimentando problemas. En general, cuanto menor sea la latencia, menos búfer estará disponible para cualquier posible transferencia lenta, problemas de red o errores.
+
+### Transmisión de video
+
+<IncludeMarkdown>
+  <OwncastWithQualities />
+</IncludeMarkdown>
+
+## Audio
+
+Lo que estás enviando desde tu software de transmisión es generalmente razonable y no se requiere conversión adicional, incluso para espectadores con ancho de banda bajo. Owncast no cambiará el flujo de audio y simplemente lo pasará a los usuarios finales para ahorrar trabajo adicional que se realiza.
+
+<ResourcesCalculator />
+
+## Cómo configuras tu software de transmisión es importante.
+
+Querrás configurar tu software de transmisión para que coincida con la mejor calidad que puedes ofrecer a tus espectadores. **Eso significa que si tu servidor Owncast solo puede manejar 720p@2500k, no debes configurar tu software de transmisión para enviar 1080p@6000k**. Cuanto más trabajo de conversión le pidas a Owncast, más recursos utilizará en tu servidor, haciendo que sea aún más difícil ofrecer las mejores calidades a tus espectadores.
+
+Si te encuentras tratando de obtener un mejor rendimiento de Owncast, intenta configurar tu software de transmisión a una calidad más baja así como reducir la calidad en tu instancia de Owncast.
+
+Lee más sobre [configuración de tu software de transmisión](/docs/broadcasting/obs).
+
+## Codificación de video acelerada por hardware
+
+Si estás utilizando hardware físico, es posible que puedas aumentar el rendimiento de tu instancia de Owncast usando tu hardware junto con un códec compatible, aliviando la carga pesada en tu CPU. No hay garantía de que todas las configuraciones de hardware, controladores o sistemas operativos funcionen y puede que requiera un poco de esfuerzo de tu parte para instalar todo el software adicional necesario para que funcione. Lee más sobre lo que se admite y cómo en nuestro documento de [codificación acelerada por hardware con códecs adicionales](/docs/codecs).
+
+## Ejemplos de recursos y requisitos
+
+Visita la página de [recursos y requisitos](/docs/resources-requirements/) para ver algunos ejemplos de lo que puedes esperar de tu hardware del servidor y conexión de red y cómo puede afectar a tus espectadores.
