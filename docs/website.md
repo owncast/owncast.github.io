@@ -39,16 +39,3 @@ You can add links to your profiles on other sites by adding them in the admin.
 ### Web page content
 
 The body of your page content can be customized in your admin. Use standard [Markdown syntax](https://www.markdownguide.org/basic-syntax/) to add links, images, and more.
-
-## Player
-
-The web video player has a handful of keyboard shortcuts you can use.
-
-| Action             | Shortcut   |
-| ------------------ | ---------- |
-| Play/Pause         | _Spacebar_ |
-| Volume up          | _0_        |
-| Volume down        | _9_        |
-| Mute               | _m_        |
-| Toggle full screen | _f_        |
-| Toggle chat        | _c_        |

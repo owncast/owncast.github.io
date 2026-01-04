@@ -1,11 +1,14 @@
 ---
 title: All viewers are experiencing buffering
-description: ''
+description: Steps to troubleshoot if all viewers are experiencing buffering issues.
 tags:
   - buffer
   - buffering
   - spinner
   - loading
+unlisted: true
+related:
+  excludeFromAll: true
 ---
 
 After reading below you might also find helpful tips browsing the [OBS Troubleshooting Guide](https://github.com/obsproject/obs-studio/wiki/Stream-Buffering-Issues/d65033b24e4a4c81c87323f05a59c12f78de620b), even if you don't use OBS.
@@ -37,4 +40,3 @@ You will need to restart a stream after changing this value in the Owncast video
 ## Move to a server that is more centrally located or hosted by a faster provider
 
 ## If you're experiencing slow uploads to external storage
-

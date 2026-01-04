@@ -1,6 +1,9 @@
 ---
-title: ""
-description: ""
+title: Troubleshoot Hardware Usage
+description: Check your server's hardware usage to troubleshoot issues.
+unlisted: true
+related:
+  excludeFromAll: true
 ---
 
 Visit the hardware usage page in the admin to see how your server's resources are performing.

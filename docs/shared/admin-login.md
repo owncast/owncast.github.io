@@ -1,3 +1,11 @@
+---
+title: Default Login Information
+description: Instructions for logging into the Owncast admin interface and default credentials.
+unlisted: true
+related:
+  excludeFromAll: true
+---
+
 The admin interface can be found by navigating to `/admin` on your Owncast server (e.g., `https://owncast.example.com/admin`).
 
 [Configuring your broadcasting software](/docs/broadcasting) to stream to your Owncast server requires you to use the `/live` endpoint along with providing the stream key. (e.g., `rtmp://owncast.example.com/live` with stream key `abc123`). If your software does not allow specifying the stream key separately, you may need to append it to the URL as `rtmp://owncast.example.com/live/abc123`.
