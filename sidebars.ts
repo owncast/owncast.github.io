@@ -43,11 +43,11 @@ const sidebars: SidebarsConfig = {
       label: "Initial configuration of your Owncast server",
       items: [
         "configuration/index",
-        "website",
-        "appearance",
-        "custom-javascript",
-        "notifications",
-        "systemservice",
+        "configuration/website",
+        "configuration/appearance",
+        "configuration/custom-javascript",
+        "configuration/notifications",
+        "configuration/systemservice",
       ],
     },
     {
