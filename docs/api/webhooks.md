@@ -1,23 +1,29 @@
 ---
 title: Webhooks
-description: Webhooks description
+description: Learn how to set up and use webhooks to get notified about events on your Owncast server.
 sidebar_position: 48
-date: 2020-11-17T19:11:42.000Z
+tags:
+  - webhooks
+  - integration
+  - api
+  - events
+  - notifications
+  - customization
 ---
 
 Owncast supports HTTP Webhooks to notify third-party applications (such as chatbots) about events on the stream. In other words: Webhooks will send events to your code when things happen on your Owncast server.
 
 The following is a list of events you can get notified about.
 
-| Event Type                              | webhook triggers when ...                                                                      |
-|:----------------------------------------|:-----------------------------------------------------------------------------------------------|
-| [CHAT](#chat)                           | user sends a chat message                                                                      |
-| [NAME_CHANGED](#name_changed)           | user changes their username                                                                    |
-| [USER_JOINED](#user_joined)             | user joins the chat                                                                            |
-| [STREAM_STARTED](#stream_started)       | an incoming RTMP stream is detected                                                            |
-| [STREAM_STOPPED](#stream_stopped)       | an incoming RTMP stream disconnects (e.g. OBS stops)                                           |
-| [STREAM_TITLE_UPDATED](#stream_title_updated)       | the title of the stream is updated  |
-| [VISIBILITY-UPDATE](#visibility-update) | a previously sent chat message becomes visible/invisible (set by an Administrator/Moderator)   |
+| Event Type                                    | webhook triggers when ...                                                                    |
+| :-------------------------------------------- | :------------------------------------------------------------------------------------------- |
+| [CHAT](#chat)                                 | user sends a chat message                                                                    |
+| [NAME_CHANGED](#name_changed)                 | user changes their username                                                                  |
+| [USER_JOINED](#user_joined)                   | user joins the chat                                                                          |
+| [STREAM_STARTED](#stream_started)             | an incoming RTMP stream is detected                                                          |
+| [STREAM_STOPPED](#stream_stopped)             | an incoming RTMP stream disconnects (e.g. OBS stops)                                         |
+| [STREAM_TITLE_UPDATED](#stream_title_updated) | the title of the stream is updated                                                           |
+| [VISIBILITY-UPDATE](#visibility-update)       | a previously sent chat message becomes visible/invisible (set by an Administrator/Moderator) |
 
 ### How to accept webhooks
 
@@ -29,7 +35,7 @@ The following is a list of events you can get notified about.
 
 ### Your code
 
-1. In any language, on any kind of web server, create an endpoint that accepts a HTTP `POST` request.  This is where Owncast will be sending events.
+1. In any language, on any kind of web server, create an endpoint that accepts a HTTP `POST` request. This is where Owncast will be sending events.
 1. Each event payload will have a `type` property that states which event type it is, and an `eventData` object that includes specific properties of that event.
 1. If you need a starting point see our example projects.
 
@@ -40,39 +46,43 @@ Thus the ContentType header for the request is `application/json`. Each webhook 
 
 ```json
 {
-    "type": "",     "eventData": {}
+  "type": "",
+  "eventData": {}
 }
 ```
 
 where
+
 - **type** gives information about what kind of event it is (one of the types from the table above).
 - **eventData** gives more information on the event. The structure of `eventData` is different for each `type`.
 
 Examples of what `eventData` to expect for each event type are below.
 
 ## Webhook Examples
+
 #### CHAT
 
 ```json
 {
-    "type": "CHAT",
-    "eventData": {
-        "user": {
-            "id": "qSRQpeM7R",
-            "displayName": "lazyDaisy",
-            "displayColor": 182,
-            "createdAt": "2021-08-12T07:51:37.470812684Z",
-            "previousNames": ["lazyDaisy"],
-            "nameChangedAt": "2022-09-19T12:33:59.42313245+02:00",
-            "isBot": false,
-            "authenticated": false         },
-        "clientId": 2,
-        "body": "hello world \u003cimg class=\"emoji\" alt=\":beerparrot:\" title=\":beerparrot:\" src=\"/img/emoji/beerparrot.gif\"\u003e",
-        "rawBody": "hello world \u003cimg class=\"emoji\" alt=\":beerparrot:\" title=\":beerparrot:\" src=\"/img/emoji/beerparrot.gif\"\u003e",
-        "id": "j-rXteG7R",
-        "visible": true,
-        "timestamp": "2021-08-12T07:53:12.061982913Z"
-    }
+  "type": "CHAT",
+  "eventData": {
+    "user": {
+      "id": "qSRQpeM7R",
+      "displayName": "lazyDaisy",
+      "displayColor": 182,
+      "createdAt": "2021-08-12T07:51:37.470812684Z",
+      "previousNames": ["lazyDaisy"],
+      "nameChangedAt": "2022-09-19T12:33:59.42313245+02:00",
+      "isBot": false,
+      "authenticated": false
+    },
+    "clientId": 2,
+    "body": "hello world \u003cimg class=\"emoji\" alt=\":beerparrot:\" title=\":beerparrot:\" src=\"/img/emoji/beerparrot.gif\"\u003e",
+    "rawBody": "hello world \u003cimg class=\"emoji\" alt=\":beerparrot:\" title=\":beerparrot:\" src=\"/img/emoji/beerparrot.gif\"\u003e",
+    "id": "j-rXteG7R",
+    "visible": true,
+    "timestamp": "2021-08-12T07:53:12.061982913Z"
+  }
 }
 ```
 
@@ -82,23 +92,24 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 
 ```json
 {
+  "type": "NAME_CHANGE",
+  "eventData": {
     "type": "NAME_CHANGE",
-    "eventData": {
-        "type": "NAME_CHANGE",
-        "id": "",
-        "timestamp": "0001-01-01T00:00:00Z",
-        "user": {
-            "id": "qSRQpeM7R",
-            "displayName": "NotSoLazyDaisy",
-            "displayColor": 182,
-            "createdAt": "2021-08-12T07:51:37.470812684Z",
-            "previousNames": ["lazyDaisy"],
-            "nameChangedAt": "2022-09-19T12:33:59.423278816+02:00",
-            "isBot": false,
-            "authenticated": false         },
-        "clientId": 2,
-        "newName": "NotSoLazyDaisy"
-    }
+    "id": "",
+    "timestamp": "0001-01-01T00:00:00Z",
+    "user": {
+      "id": "qSRQpeM7R",
+      "displayName": "NotSoLazyDaisy",
+      "displayColor": 182,
+      "createdAt": "2021-08-12T07:51:37.470812684Z",
+      "previousNames": ["lazyDaisy"],
+      "nameChangedAt": "2022-09-19T12:33:59.423278816+02:00",
+      "isBot": false,
+      "authenticated": false
+    },
+    "clientId": 2,
+    "newName": "NotSoLazyDaisy"
+  }
 }
 ```
 
@@ -106,21 +117,22 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 
 ```json
 {
-    "type": "USER_JOINED",
-    "eventData": {
-        "id": "wAgcTeM7g",
-        "timestamp": "2021-08-12T08:19:28.921355401Z",
-        "user": {
-            "id": "yFgco6M7R",
-            "displayName": "laughing-cray",
-            "displayColor": 257,
-            "createdAt": "2021-08-12T08:19:28.759651178Z",
-            "previousNames": ["laughing-cray"],
-            "nameChangedAt": "0001-01-01T00:00:00Z",
-            "isBot": false,
-            "authenticated": false         },
-        "clientId": 2
-    }
+  "type": "USER_JOINED",
+  "eventData": {
+    "id": "wAgcTeM7g",
+    "timestamp": "2021-08-12T08:19:28.921355401Z",
+    "user": {
+      "id": "yFgco6M7R",
+      "displayName": "laughing-cray",
+      "displayColor": 257,
+      "createdAt": "2021-08-12T08:19:28.759651178Z",
+      "previousNames": ["laughing-cray"],
+      "nameChangedAt": "0001-01-01T00:00:00Z",
+      "isBot": false,
+      "authenticated": false
+    },
+    "clientId": 2
+  }
 }
 ```
 
@@ -128,30 +140,33 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 
 ```json
 {
-    "type": "STREAM_STARTED",
-    "eventData": {
-        "id": "WtokptnVR",
-        "name": "Owncast",
-        "streamTitle": "",
-        "summary": "Welcome to your new Owncast server! This description can be changed in the admin. Visit https://owncast.online/docs/configuration/ to learn more.",
-        "timestamp": "2022-09-19T12:30:26.97907142+02:00"     }
+  "type": "STREAM_STARTED",
+  "eventData": {
+    "id": "WtokptnVR",
+    "name": "Owncast",
+    "streamTitle": "",
+    "summary": "Welcome to your new Owncast server! This description can be changed in the admin. Visit https://owncast.online/docs/configuration/ to learn more.",
+    "timestamp": "2022-09-19T12:30:26.97907142+02:00"
+  }
 }
 ```
 
-#### STREAM_STOPPED 
+#### STREAM_STOPPED
 
 ```json
 {
-    "type": "STREAM_STOPPED",
-    "eventData": {
-        "id": "YP-aptn4g",
-        "name": "Owncast",
-        "streamTitle": "",
-        "summary": "Welcome to your new Owncast server! This description can be changed in the admin. Visit https://owncast.online/docs/configuration/ to learn more.",
-        "timestamp": "2022-09-19T12:40:21.205872269+02:00"     }
+  "type": "STREAM_STOPPED",
+  "eventData": {
+    "id": "YP-aptn4g",
+    "name": "Owncast",
+    "streamTitle": "",
+    "summary": "Welcome to your new Owncast server! This description can be changed in the admin. Visit https://owncast.online/docs/configuration/ to learn more.",
+    "timestamp": "2022-09-19T12:40:21.205872269+02:00"
+  }
 }
 ```
-#### STREAM_TITLE_UPDATED 
+
+#### STREAM_TITLE_UPDATED
 
 ```json
 {
@@ -167,7 +182,8 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
       "viewerCount": 0,
       "overallMaxViewerCount": 7,
       "sessionMaxViewerCount": 2,
-      "online": false     },
+      "online": false
+    },
     "streamTitle": "Test stream title change",
     "summary": "This is a new live video streaming server powered by Owncast.",
     "timestamp": "2023-03-27T21:50:10.121391094-07:00"
@@ -179,17 +195,16 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 
 ```json
 {
-    "type": "VISIBILITY-UPDATE",
-    "eventData": {
-        "id": "zqGupt7VR",
-        "MessageIDs": [
-            "-Zzltt74g",
-            "rvd2ppn4g"
-        ],
-        "timestamp": "2022-09-19T12:44:28.225779601+02:00",
-        "Visible": false     }
+  "type": "VISIBILITY-UPDATE",
+  "eventData": {
+    "id": "zqGupt7VR",
+    "MessageIDs": ["-Zzltt74g", "rvd2ppn4g"],
+    "timestamp": "2022-09-19T12:44:28.225779601+02:00",
+    "Visible": false
+  }
 }
 ```
+
 - `MessageIDs` is a list of IDs of messages that had their visibility changed.
 
 ### clientId vs. user.id
