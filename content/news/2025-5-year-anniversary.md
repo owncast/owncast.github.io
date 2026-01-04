@@ -46,7 +46,7 @@ The newsletter reached out to the Fediverse to solicit some birthday wishes for 
 
 > "I am very appreciative of the lightweightness of Owncast! I am running a server off a refurbished office PC and I have been able to run some very nice streams!" --[DingusMacDongle](https://mastodon.social/@dingusmacdongle?ref=owncast.ghost.io)
 
-> " I personally built my entire community thanks to Owncast and the Fediverse. :-D It's what got me into creating Fireside Fedi. I've met so many amazing folks that have taken Owncast and made it their own. And thank you Kit for doing the newsletter." --[Ozoned](https://social.ozoned.net/@ozoned?ref=owncast.ghost.io)
+> " I personally built my entire community thanks to Owncast and the Fediverse. :-D It's what got me into creating Fireside Fedi. I've met so many amazing folks that have taken Owncast and made it their own. And thank you Kit for doing the newsletter." --[Ozoned](https://btfree.social/@ozoned)
 
 > "Owncast has been a fantastic tool for me. Socially, it has enabled me to meet some really cool people and foster a community. On the technical side, it's helped me deepen my understanding of video technology and see it applied in the real world for my viewers. I'm excited to celebrate its 5th anniversary!" --[Logan Fick](https://social.logal.dev/@logan?ref=owncast.ghost.io)
 
