@@ -29,7 +29,7 @@
   },
   "link.item.label.Community Chat": {
     "message": "Community Chat",
-    "description": "The label of footer link with label=Community Chat linking to https://matrix.to/#/#owncast:matrix.org"
+    "description": "The label of footer link with label=Community Chat linking to https://app.element.io/#/room/#owncast.support:matrix.org"
   },
   "link.item.label.Contribute": {
     "message": "Contribute",
