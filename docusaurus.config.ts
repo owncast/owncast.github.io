@@ -23,7 +23,6 @@ try {
 // All redirect configurations - both wildcards and regular redirects
 const ALL_REDIRECTS = [
   // Wildcard redirects
-  { to: "/blog/*", from: "/releases/*" },
   {
     to: "/docs/troubleshoot/*",
     from: "/troubleshoot/*",
@@ -57,7 +56,6 @@ const ALL_REDIRECTS = [
     to: "/docs/getting-started/install/providers",
     from: "/quickstart/providers",
   },
-  { to: "/blog", from: "/releases" },
   { to: "/docs/watching-streams", from: "/docs/watching-on-tvs" },
   {
     to: "/docs/getting-started/install/container",
@@ -149,30 +147,7 @@ const config: Config = {
             "https://github.com/owncast/owncast.github.io/edit/owncast-docusaurus/",
           // docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
-        blog: {
-          routeBasePath: "blog",
-          path: "blog",
-          blogTitle: "Owncast News & Releases",
-          blogDescription:
-            "Latest news, updates, and releases from the Owncast project",
-          showReadingTime: true,
-          postsPerPage: 7, // Match Hugo paginate setting
-          feedOptions: {
-            type: ["rss", "atom"],
-            title: "Owncast Releases",
-            description:
-              "Latest news, updates, and releases from the Owncast project",
-            copyright: `Copyright © ${new Date().getFullYear()} Owncast`,
-            language: "en-US",
-            limit: 10, // Match Hugo rssLimit setting
-            xslt: true,
-          },
-          editUrl: undefined, // Edit URLs disabled as per Hugo config
-          // Useful options to enforce blogging best practices
-          onInlineTags: "warn",
-          onInlineAuthors: "warn",
-          onUntruncatedBlogPosts: "ignore", //"warn",
-        },
+        blog: false, // Disabled - using multi-instance blog plugins instead
         theme: {
           customCss: "./src/css/custom.css",
         },
@@ -183,6 +158,58 @@ const config: Config = {
   themes: ["@docusaurus/theme-mermaid"],
 
   plugins: [
+    // Releases blog - for version releases
+    [
+      "@docusaurus/plugin-content-blog",
+      {
+        id: "releases",
+        routeBasePath: "releases",
+        path: "./releases",
+        blogTitle: "Owncast Releases",
+        blogDescription: "Version releases and changelogs for Owncast",
+        showReadingTime: true,
+        postsPerPage: 10,
+        feedOptions: {
+          type: ["rss", "atom"],
+          title: "Owncast Releases",
+          description: "Version releases and changelogs for Owncast",
+          copyright: `Copyright © ${new Date().getFullYear()} Owncast`,
+          language: "en-US",
+          limit: 20,
+          xslt: true,
+        },
+        onInlineTags: "warn",
+        onInlineAuthors: "warn",
+        onUntruncatedBlogPosts: "ignore",
+      },
+    ],
+    // News blog - for announcements, updates, and general news
+    [
+      "@docusaurus/plugin-content-blog",
+      {
+        id: "news",
+        routeBasePath: "news",
+        path: "./news",
+        blogTitle: "Owncast News",
+        blogDescription:
+          "Announcements, updates, and news from the Owncast project",
+        showReadingTime: true,
+        postsPerPage: 10,
+        feedOptions: {
+          type: ["rss", "atom"],
+          title: "Owncast News",
+          description:
+            "Announcements, updates, and news from the Owncast project",
+          copyright: `Copyright © ${new Date().getFullYear()} Owncast`,
+          language: "en-US",
+          limit: 20,
+          xslt: true,
+        },
+        onInlineTags: "warn",
+        onInlineAuthors: "warn",
+        onUntruncatedBlogPosts: "ignore",
+      },
+    ],
     // Custom plugin to support @/ path alias for imports
     function webpackAliasPlugin() {
       return {
@@ -245,6 +272,7 @@ const config: Config = {
         language: ["en"],
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
+        blogDir: ["releases", "news"],
       },
     ],
     [
@@ -340,6 +368,11 @@ const config: Config = {
           label: "Documentation",
         },
         {
+          to: "/releases",
+          label: "Releases",
+          position: "left",
+        },
+        {
           to: "/troubleshoot",
           label: "Troubleshooting",
           position: "left",
@@ -382,9 +415,12 @@ const config: Config = {
               to: "/quickstart",
             },
             {
-              to: "/blog",
+              to: "/releases",
               label: "Releases",
-              position: "left",
+            },
+            {
+              to: "/news",
+              label: "News",
             },
             {
               label: "Roadmap",
