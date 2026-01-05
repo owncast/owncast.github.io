@@ -34,3 +34,4 @@ api-config.json
 
 # Environment variables
 .env
+i18n/

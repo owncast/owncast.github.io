@@ -15,7 +15,9 @@
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
     "generate-contributors": "node scripts/generate-contributors.js",
-    "crowdin": "crowdin"
+    "crowdin": "crowdin",
+    "crowdin:sync": "docusaurus write-translations && crowdin download",
+    "crowdin:upload-existing": "docusaurus write-translations &&node scripts/crowdin-upload-existing.js"
   },
   "dependencies": {
     "@codemirror/lang-css": "^6.3.1",
