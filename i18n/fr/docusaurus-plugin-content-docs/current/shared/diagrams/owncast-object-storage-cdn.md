@@ -1,0 +1,47 @@
+---
+unlisted: true
+related:
+  excludeFromAll: true
+---
+
+```mermaid
+flowchart LR
+    subgraph Broadcasting
+        OBS[OBS / Broadcasting Software]
+    end
+
+    subgraph Owncast[Owncast Server]
+        direction TB
+        RTMP[RTMP Ingest]
+        Encoder[Video Encoder]
+        WebServer[Web Server]
+        RTMP --> Encoder
+    end
+
+    subgraph Storage[Object Storage]
+        S3[Storage Provider]
+    end
+
+    subgraph CDN[CDN Network]
+        direction TB
+        Edge1[Edge Node<br/>North America]
+        Edge2[Edge Node<br/>Europe]
+        Edge3[Edge Node<br/>Asia]
+    end
+
+    subgraph Viewers[Video Clients]
+        direction TB
+        US[US Viewer]
+        EU[EU Viewer]
+        AS[Asia Viewer]
+    end
+
+    OBS -->|RTMP Stream| RTMP
+    Encoder -->|Upload HLS Segments| S3
+    S3 -->|Origin| Edge1
+    S3 -->|Origin| Edge2
+    S3 -->|Origin| Edge3
+    Edge1 -->|HLS Video| US
+    Edge2 -->|HLS Video| EU
+    Edge3 -->|HLS Video| AS
+```
