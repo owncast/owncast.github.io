@@ -47,7 +47,7 @@ export const LandingBandSection = ({
       <div className={cn("w-full px-6 py-2 max-w-full container-wide gap-6 items-center lg:flex lg:flex-row", innerClassName)}>
         <div
           className={clsx(
-            'w-full lg:w-auto flex flex-col flex-shrink-0 max-w-lg xl:max-w-3xl',
+            'w-full lg:w-auto flex flex-col lg:flex-shrink max-w-lg xl:max-w-3xl min-w-0',
             withBackground ? 'text-black' : '',
           )}
         >
