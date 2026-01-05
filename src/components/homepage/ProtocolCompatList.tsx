@@ -16,7 +16,7 @@ export function ProtocolCompatList() {
       description={translate({
         id: "homepage.protocolCompat.description",
         message:
-          "Choose the tools and services of your choice to work with Owncast.",
+          "Choose the tools, services, and software of your choice to work with Owncast.",
       })}
       className="!mt-0 lg:!mt-0 !py-0 !p-2"
       variant="secondary"
