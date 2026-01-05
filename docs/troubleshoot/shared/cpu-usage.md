@@ -1,7 +1,11 @@
 ---
-title: ''
-description: ''
+title: ""
+description: ""
+unlisted: true
+related:
+  excludeFromAll: true
 ---
+
 If your hardware is being maxed out then your video may not be processed and delivered fast enough to keep up with the real-time requirements of live video.
 
 Each stream output quality adds significant CPU usage and slows down the overall generation of video segments. It's generally advised to start with one output, and then add additional, one at a time, to see how it impacts your CPU usage.

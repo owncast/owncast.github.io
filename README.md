@@ -359,3 +359,9 @@ Select the document you want to translate and translate all or part of it.
 Hide strings from translation that should not be translated.
 
 ![Hide strings from translation](https://docusaurus.io/assets/images/crowdin-hide-string-5e470a33a42e044379bf6860ff534b50.png)
+
+### Note about moving documentation files with translations
+
+If you move documentation files around in the repository, Crowdin will treat them as new files and the existing translations will not be associated with the new location.
+
+If you need to move files, please reach out to the maintainers so they can help with updating Crowdin to avoid losing existing translations.

@@ -1,7 +1,11 @@
 ---
-title: ''
-description: ''
+title: ""
+description: ""
+unlisted: true
+related:
+  excludeFromAll: true
 ---
+
 There’s no point streaming if nobody is able to watch it. Using the “Stream Health” screen in the admin you can get an overview of some important metrics that may give you an idea if what you’re offering your viewers is leading to a good experience.
 
 Seeing errors, low network speeds, and excessive download times for your content may mean you need to add additional video qualities to improve the playback performance for lower bandwidth viewers, mobile networks, or other factors.

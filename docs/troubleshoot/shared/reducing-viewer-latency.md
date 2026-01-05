@@ -1,7 +1,11 @@
 ---
-title: ''
-description: ''
+title: ""
+description: ""
+unlisted: true
+related:
+  excludeFromAll: true
 ---
+
 Try decreasing your latency buffer level in the admin. This will keep the user closer to live, but give the client less playable segments to work with, possibly **reducing the resiliency for errors** and network speed issues. If you have a machine that is able to process video quickly you may be able to get down to only a handful of seconds of latency, but with little room for error.
 
 It's up to you to decide you want lower delays over **less reliability** or a more reliable stream with additional delay.

@@ -6,6 +6,9 @@ description: >-
 tags:
   - video
   - quality
+unlisted: true
+related:
+  excludeFromAll: true
 ---
 
 ## Make sure you're streaming what you expect

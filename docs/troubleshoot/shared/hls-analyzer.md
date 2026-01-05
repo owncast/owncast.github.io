@@ -1,7 +1,11 @@
 ---
-title: ''
-description: ''
+title: ""
+description: ""
+unlisted: true
+related:
+  excludeFromAll: true
 ---
+
 Visit [HLS Analyzer](https://hlsanalyzer.com/) to assist in troubleshooting. Put in your stream URL when asked, it is `<yourserver>/hls/stream.m3u8`. Hit _Analyze .m3u8_.
 
 Take note of the following values:

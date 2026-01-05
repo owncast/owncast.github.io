@@ -1,6 +1,9 @@
 ---
 title: Video related errors
 description: Troubleshoot video related errors in Owncast logs
+unlisted: true
+related:
+  excludeFromAll: true
 tags:
   - video
   - errors

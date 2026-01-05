@@ -1,6 +1,9 @@
 ---
 title: Change your streaming key & admin password
 description: Change the key you use for streaming and logging into your admin.
+unlisted: true
+related:
+  excludeFromAll: true
 tags:
   - admin
   - key

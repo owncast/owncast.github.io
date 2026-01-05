@@ -1,7 +1,11 @@
 ---
-title: ''
-description: ''
+title: ""
+description: ""
+unlisted: true
+related:
+  excludeFromAll: true
 ---
+
 If you are using external storage, make sure you’re able to upload to this storage service fast enough. Otherwise the delay in your files arriving at the storage provider that everyone is using to view the video will cause buffering.
 
 If you have a slow upload connection, or you're uploading to an external storage service that is too far away, or not optimized for fast uploads, you may run into an issue where it takes too long to get the video segments uploaded, ultimately not making them available fast enough to be used.
