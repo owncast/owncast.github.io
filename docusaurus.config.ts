@@ -360,7 +360,7 @@ const config: Config = {
           "aria-label": "GitHub repository",
         },
         {
-          href: "https://matrix.to/#/#owncast:matrix.org",
+          href: "https://app.element.io/#/room/#owncast.support:matrix.org",
           position: "right",
           className: "header-matrix-link",
           "aria-label": "Matrix chat",
@@ -401,7 +401,7 @@ const config: Config = {
             },
             {
               label: "Community Chat",
-              href: "https://matrix.to/#/#owncast:matrix.org",
+              href: "https://app.element.io/#/room/#owncast.support:matrix.org",
             },
             {
               label: "Contribute",
