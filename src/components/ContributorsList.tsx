@@ -22,50 +22,90 @@ interface Contributor {
 interface ContributorsListProps {
   filePath: string;
   editUrl?: string;
+  locale?: string;
 }
+
+// Map Docusaurus locale codes to Crowdin locale codes
+const crowdinLocaleMap: Record<string, string> = {
+  es: "es-ES",
+  fr: "fr",
+  de: "de",
+};
 
 export default function ContributorsList({
   filePath,
   editUrl,
+  locale,
 }: ContributorsListProps): JSX.Element | null {
+  // Build Crowdin URL for non-English locales
+  const crowdinLocale = locale ? crowdinLocaleMap[locale] : null;
+  const crowdinUrl = crowdinLocale
+    ? `https://crowdin.com/project/owncast-docs/${crowdinLocale}`
+    : null;
   // Normalize the file path - remove @site/ prefix if present
   let normalizedPath = filePath;
   if (filePath.startsWith("@site/")) {
     normalizedPath = filePath.replace("@site/", "");
   }
 
-  const contributors = contributorsData[normalizedPath];
+  const contributors = contributorsData[normalizedPath] || [];
+  const hasContributors = contributors.length > 0;
 
-  if (!contributors || contributors.length === 0) {
+  // Return null only if there's nothing to show
+  if (!hasContributors && !editUrl && !crowdinUrl) {
     return null;
   }
 
   // Deduplicate contributors by username, prioritizing entries with proper names
-  const deduplicatedContributors = deduplicateContributors(contributors);
+  const deduplicatedContributors = hasContributors
+    ? deduplicateContributors(contributors)
+    : [];
 
   return (
     <div className={styles.contributorsContainer}>
       <div>
-        {editUrl && (
+        {(editUrl || crowdinUrl) && (
           <>
             <hr style={{ marginTop: "50px", opacity: 0.4 }} />
             <h3 className={styles.editTitle}>Improve this page</h3>
-            See something missing or incorrect?{" "}
-            <a href={editUrl} target="_blank" rel="noopener noreferrer">
-              Edit this page
-            </a>{" "}
-            and improve the documentation for everyone.
+            {crowdinUrl ? (
+              <p>
+                See something missing or incorrect?{" "}
+                <a href={editUrl} target="_blank" rel="noopener noreferrer">
+                  Edit the English version of this page
+                </a>
+                {" or "}
+                <a href={crowdinUrl} target="_blank" rel="noopener noreferrer">
+                  help improve translations
+                </a>
+                .
+              </p>
+            ) : (
+              editUrl && (
+                <p>
+                  See something missing or incorrect?{" "}
+                  <a href={editUrl} target="_blank" rel="noopener noreferrer">
+                    Edit this page
+                  </a>{" "}
+                  and improve the documentation for everyone.
+                </p>
+              )
+            )}
           </>
         )}
       </div>
-      <div className={styles.contributorsTitle}>
-        Contributors to this documentation
-      </div>
-      <div className={styles.contributorsList}>
-        {deduplicatedContributors.map((contributor, index) => (
-          <ContributorAvatar key={index} contributor={contributor} />
-        ))}
-      </div>
+      {hasContributors && (
+        <>
+          <div className={styles.contributorsTitle}>
+            Contributors to this documentation
+          </div>
+          <div className={styles.contributorsList}>
+            {deduplicatedContributors.map((contributor, index) => (
+              <ContributorAvatar key={index} contributor={contributor} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
