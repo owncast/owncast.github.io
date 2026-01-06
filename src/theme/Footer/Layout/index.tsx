@@ -16,23 +16,21 @@ export default function FooterLayout({
 }): React.JSX.Element {
   return (
     <footer
-      className={clsx(ThemeClassNames.layout.footer.container, "footer", styles.footer, {
-        "footer--dark": style === "dark",
-      })}
+      className={clsx(
+        ThemeClassNames.layout.footer.container,
+        "footer",
+        styles.footer,
+        {
+          "footer--dark": style === "dark",
+        }
+      )}
     >
-      <a
-        href="https://merch.owncast.online"
-        target="_blank"
-        rel="noopener noreferrer"
+      <img
+        src="/images/owncat-head.svg"
         className={styles.footerWatermark}
-        aria-label="Visit Owncast merch store"
-      >
-        <img
-          src="/images/owncat-head.svg"
-          alt=""
-        />
-      </a>
-      <div className="container container-fluid">
+        alt=""
+      />
+      <div className={clsx("container container-fluid", styles.footerContent)}>
         {links}
         <div className="footer__bottom text--center">
           {logo && <div className="margin-bottom--sm">{logo}</div>}

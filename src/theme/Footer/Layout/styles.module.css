@@ -14,6 +14,7 @@
   cursor: pointer;
   display: block;
   filter: drop-shadow(5px 8px 5px rgba(0, 0, 0, 0.6));
+  z-index: 0;
 }
 
 .footerWatermark img {
@@ -24,4 +25,9 @@
 .footerWatermark:hover {
   opacity: 0.5;
   transform: rotate(15deg) scale(1.05);
+}
+
+.footerContent {
+  position: relative;
+  z-index: 1;
 }

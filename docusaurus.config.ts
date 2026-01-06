@@ -418,14 +418,6 @@ const config: Config = {
               to: "/releases",
               label: "Releases",
             },
-            {
-              to: "/news",
-              label: "News",
-            },
-            {
-              label: "Roadmap",
-              to: "/roadmap",
-            },
           ],
         },
         {
@@ -444,8 +436,29 @@ const config: Config = {
               href: "/contribute",
             },
             {
+              label: "Donate",
+              href: "https://opencollective.com/owncast/donate",
+            },
+            {
               label: "Contact",
               href: "/contact",
+            },
+          ],
+        },
+        {
+          title: "More",
+          items: [
+            {
+              label: "Demo Server",
+              href: "https://watch.owncast.online",
+            },
+            {
+              label: "Merch store",
+              href: "https://merch.owncast.online",
+            },
+            {
+              label: "Roadmap",
+              to: "/roadmap",
             },
           ],
         },
