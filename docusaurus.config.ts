@@ -383,10 +383,6 @@ const config: Config = {
           position: "left",
         },
         {
-          type: "localeDropdown",
-          position: "right",
-        },
-        {
           href: "https://github.com/owncast",
           position: "right",
           className: "header-github-link",
@@ -397,6 +393,10 @@ const config: Config = {
           position: "right",
           className: "header-matrix-link",
           "aria-label": "Matrix chat",
+        },
+        {
+          type: "localeDropdown",
+          position: "right",
         },
       ],
     },
