@@ -1,0 +1,30 @@
+.dropdownToggle {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+/* Fix dropdown caret arrow */
+:global(.dropdown) > :global(.navbar__link):has(.dropdownToggle)::after {
+  border-color: currentColor transparent;
+  border-style: solid;
+  border-width: 0.4em 0.4em 0;
+  content: '';
+  margin-left: 0.4em;
+  position: relative;
+  top: 2px;
+}
+
+.localeItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flag {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.localeName {
+  font-size: 0.875rem;
+}

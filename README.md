@@ -344,6 +344,83 @@ The `code.json` files contain key-value pairs:
 
 Replace the `message` value with the translated text. The `description` field (if present) provides context and should not be translated.
 
+### Language switcher
+
+The site includes a custom language switcher in the navbar that displays flag emojis for each supported locale. The implementation is in `src/theme/NavbarItem/LocaleDropdownNavbarItem/`.
+
+**Behavior:**
+
+- Displays the current locale's flag in the navbar
+- Dropdown shows all available locales with flags and full language names
+- Only visible when the browser's language is not English OR the user has already navigated to a non-English locale
+- English-speaking users with English browsers won't see the switcher unless they're on a translated page
+
+**Supported locales and flags:**
+
+| Locale | Language | Flag |
+| ------ | -------- | ---- |
+| `en`   | English  | US   |
+| `es`   | Spanish  | ES   |
+| `fr`   | French   | FR   |
+| `de`   | German   | DE   |
+
+### Automatic locale detection
+
+The site automatically detects the user's browser language and redirects to the appropriate locale on their first visit. This is implemented in `src/theme/Root.tsx`.
+
+**How it works:**
+
+1. On first visit, checks the browser's preferred languages (`navigator.languages`)
+2. If a supported non-English locale (Spanish, French, or German) is detected, redirects to that locale's version of the current page
+3. Stores a flag (`owncast_locale_redirected`) in localStorage to prevent future automatic redirects
+4. Users who manually switch languages will have their choice preserved
+
+**When redirect occurs:**
+
+- User's browser language is Spanish, French, or German
+- User has not been redirected before (no localStorage flag)
+- User is not already on a localized path (e.g., `/es/docs/`)
+
+**When redirect does NOT occur:**
+
+- User's browser language is English or unsupported
+- User has already been redirected (localStorage flag exists)
+- User is already viewing a localized page
+
+**Testing locale detection:**
+
+To test the automatic redirect, clear the localStorage flag:
+
+```javascript
+localStorage.removeItem("owncast_locale_redirected");
+```
+
+Then change your browser's language settings and reload the page.
+
+### Adding a new locale to the language switcher
+
+When adding a new locale, update the following files:
+
+1. **`docusaurus.config.ts`** - Add the locale configuration (see "Adding a new locale" above)
+
+2. **`src/theme/NavbarItem/LocaleDropdownNavbarItem/index.tsx`** - Add the flag emoji:
+
+```tsx
+const localeFlags: Record<string, string> = {
+  en: "\u{1F1FA}\u{1F1F8}", // US flag
+  es: "\u{1F1EA}\u{1F1F8}", // Spain flag
+  fr: "\u{1F1EB}\u{1F1F7}", // France flag
+  de: "\u{1F1E9}\u{1F1EA}", // Germany flag
+  // Add new locale here
+};
+```
+
+3. **`src/theme/Root.tsx`** - Add to the supported locales array for auto-detection:
+
+```tsx
+const SUPPORTED_LOCALES = ["es", "fr", "de"]; // Add new locale here
+```
+
 ## How to contribute translations
 
 This project supports Crowdin for managing translations. For details on setting up Crowdin sync, refer to the [Docusaurus Crowdin documentation](https://docusaurus.io/docs/i18n/crowdin).

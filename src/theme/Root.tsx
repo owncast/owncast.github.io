@@ -1,6 +1,55 @@
 import React, { useEffect } from "react";
 
+// Supported locales (excluding default 'en')
+const SUPPORTED_LOCALES = ["es", "fr", "de"];
+const LOCALE_REDIRECT_KEY = "owncast_locale_redirected";
+
+// Get the user's preferred locale from browser settings
+function getPreferredLocale(): string | null {
+  if (typeof navigator === "undefined") return null;
+
+  const languages = navigator.languages || [navigator.language];
+
+  for (const lang of languages) {
+    const langCode = lang.toLowerCase().split("-")[0];
+    if (SUPPORTED_LOCALES.includes(langCode)) {
+      return langCode;
+    }
+  }
+
+  return null;
+}
+
+// Check if we're already on a localized path
+function isOnLocalizedPath(): boolean {
+  if (typeof window === "undefined") return false;
+
+  const path = window.location.pathname;
+  return SUPPORTED_LOCALES.some(
+    (locale) => path === `/${locale}` || path.startsWith(`/${locale}/`)
+  );
+}
+
 export default function Root({ children }) {
+  // Handle automatic locale redirect on first visit
+  useEffect(() => {
+    // Skip if SSR, already redirected, or already on a localized path
+    if (typeof window === "undefined") return;
+    if (localStorage.getItem(LOCALE_REDIRECT_KEY)) return;
+    if (isOnLocalizedPath()) return;
+
+    const preferredLocale = getPreferredLocale();
+    if (preferredLocale) {
+      // Mark as redirected so we don't do it again
+      localStorage.setItem(LOCALE_REDIRECT_KEY, "true");
+
+      // Redirect to the localized version of the current page
+      const currentPath = window.location.pathname;
+      const newPath = `/${preferredLocale}${currentPath}`;
+      window.location.replace(newPath + window.location.search + window.location.hash);
+    }
+  }, []);
+
   useEffect(() => {
     // Load Plausible analytics script
     const analyticsScript = document.createElement("script");
