@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { translate } from "@docusaurus/Translate";
 import {
   LandingProductTourSection,
@@ -145,6 +145,19 @@ function MobileFeatureList({ features }: { features: Feature[] }) {
 
 export function FeaturePreviewSection() {
   const features = useFeatures();
+  const [activeFeature, setActiveFeature] = useState(features[0].id);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveFeature((current) => {
+        const currentIndex = features.findIndex((f) => f.id === current);
+        const nextIndex = (currentIndex + 1) % features.length;
+        return features[nextIndex].id;
+      });
+    }, 15000);
+
+    return () => clearInterval(interval);
+  }, [features]);
 
   return (
     <>
@@ -160,11 +173,16 @@ export function FeaturePreviewSection() {
           <h2 className="text-5xl font-semibold leading-tight"></h2>
         }
         descriptionComponent={<div className="flex flex-col max-w-xl"></div>}
-        defaultValue="chat"
+        value={activeFeature}
+        onValueChange={setActiveFeature}
       >
         <LandingProductTourList>
           {features.map((feature) => (
-            <LandingProductTourTrigger key={feature.id} value={feature.id}>
+            <LandingProductTourTrigger
+              key={feature.id}
+              value={feature.id}
+              className="my-1 data-[state=active]:bg-primary-500/10"
+            >
               <p className="text-xl font-bold">{feature.title}</p>
               <p className="leading-relaxed">{feature.description}</p>
             </LandingProductTourTrigger>
