@@ -48,6 +48,16 @@ export default function ContributorsList({
     normalizedPath = filePath.replace("@site/", "");
   }
 
+  // Map translated doc paths to their English equivalents for contributor lookup
+  // Translated paths look like: i18n/{locale}/docusaurus-plugin-content-docs/current/...
+  // English paths look like: docs/...
+  const i18nPathMatch = normalizedPath.match(
+    /^i18n\/[^/]+\/docusaurus-plugin-content-docs\/current\/(.+)$/
+  );
+  if (i18nPathMatch) {
+    normalizedPath = `docs/${i18nPathMatch[1]}`;
+  }
+
   const contributors = contributorsData[normalizedPath] || [];
   const hasContributors = contributors.length > 0;
 
