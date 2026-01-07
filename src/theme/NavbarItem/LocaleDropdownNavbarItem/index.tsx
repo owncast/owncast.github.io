@@ -21,16 +21,32 @@ function isBrowserLanguageEnglish(): boolean {
   return browserLang.toLowerCase().startsWith("en");
 }
 
-// Map locale codes to flag emojis
-const localeFlags: Record<string, string> = {
-  en: "\u{1F1FA}\u{1F1F8}", // US flag
-  es: "\u{1F1EA}\u{1F1F8}", // Spain flag
-  fr: "\u{1F1EB}\u{1F1F7}", // France flag
-  de: "\u{1F1E9}\u{1F1EA}", // Germany flag
+// Map locale codes to country codes for circle-flags
+// Add new languages here as needed
+const localeToCountry: Record<string, string> = {
+  en: "us",
+  es: "es",
+  fr: "fr",
+  de: "de",
 };
 
-function getFlag(locale: string): string {
-  return localeFlags[locale] || locale.toUpperCase();
+function getCountryCode(locale: string): string {
+  return localeToCountry[locale] || locale;
+}
+
+function FlagIcon({ locale, className }: { locale: string; className?: string }) {
+  const countryCode = getCountryCode(locale);
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const flagSrc = require(`circle-flags/flags/${countryCode}.svg`).default;
+  return (
+    <img
+      src={flagSrc}
+      alt={`${locale} flag`}
+      className={className}
+      width={22}
+      height={22}
+    />
+  );
 }
 
 function useLocaleDropdownUtils() {
@@ -143,7 +159,7 @@ export default function LocaleDropdownNavbarItem({
         id: "theme.navbar.mobileLanguageDropdown.label",
         description: "The label for the mobile language switcher dropdown",
       })
-    : getFlag(currentLocale);
+    : <FlagIcon locale={currentLocale} className={styles.flagIcon} />;
 
   return (
     <DropdownNavbarItem
