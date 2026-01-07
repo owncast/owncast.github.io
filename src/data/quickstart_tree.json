@@ -411,12 +411,12 @@
             "name": "configure-system-service-result",
             "title": "System Service Setup",
             "visibleIf": "{install_method} = 'installed-what-is-next' and {next_step} = 'configure-system-service'",
-            "redirect": "/docs/systemservice/",
+            "redirect": "/docs/configuration/systemservice",
             "elements": [
                 {
                     "type": "html",
                     "name": "service_guide",
-                    "html": "<h3>System Service Guide</h3><p><a href='/docs/systemservice/' target='_blank' rel='noopener'>Configure Owncast as a system service</a></p><p>Set up Owncast to automatically start and run in the background.</p>"
+                    "html": "<h3>System Service Guide</h3><p><a href='/docs/configuration/systemservice' target='_blank' rel='noopener'>Configure Owncast as a system service</a></p><p>Set up Owncast to automatically start and run in the background.</p>"
                 }
             ]
         },

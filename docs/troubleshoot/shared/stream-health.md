@@ -10,6 +10,6 @@ There’s no point streaming if nobody is able to watch it. Using the “Stream 
 
 Seeing errors, low network speeds, and excessive download times for your content may mean you need to add additional video qualities to improve the playback performance for lower bandwidth viewers, mobile networks, or other factors.
 
-If you're seeing on this page that people are experiencing issues playing back your stream, you may wish to [troubleshoot](/docs/troubleshooting/).
+If you're seeing on this page that people are experiencing issues playing back your stream, you may wish to [troubleshoot](/docs/troubleshoot).
 
 Note: Not all players will be represented in playback metrics as Owncast can only get detailed playback details in certain browsers, and not at all from external players (QuickTime, VLC, mpv, smart tvs, etc).

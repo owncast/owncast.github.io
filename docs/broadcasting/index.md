@@ -1,5 +1,6 @@
 ---
 title: Set Up Broadcasting Software
+slug: /broadcasting
 description: >-
   How you configure your broadcasting software can impact the quality and
   performance of your stream
@@ -79,7 +80,7 @@ Owncast will not re-encode audio, so it will go out exactly how it's sent.
 
 ## Dropping frames
 
-Read more about troubleshooting [Dropped frames](/troubleshoot/dropped-frames) being reported in your broadcasting software.
+Read more about troubleshooting [Dropped frames](/docs/troubleshoot/dropped-frames) being reported in your broadcasting software.
 
 ## Errors or disconnections
 

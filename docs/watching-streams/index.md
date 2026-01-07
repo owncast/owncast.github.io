@@ -1,6 +1,7 @@
 ---
 id: watching-streams
 title: Watching on TVs and Devices
+slug: /watching-streams
 sidebar_label: Overview & Generic Methods
 hide_title: true
 sidebar_position: 1

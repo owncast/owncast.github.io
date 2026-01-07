@@ -57,11 +57,11 @@ While not every single individual component or element can be customized via poi
 
 **Note** that any CSS you had written for previous releases of Owncast will not be compatible with the new version, as the entire web frontend changed.
 
-Read more about the appearance customization page in the [Appearance customization](/docs/appearance/) guide.
+Read more about the appearance customization page in the [Appearance customization](/docs/configuration/appearance) guide.
 
 ## Insert custom Javascript
 
-Under the **General** settings page you can add custom Javascript to your Owncast instance's web page. Read more about this in the [documentation](/docs/custom-javascript/).
+Under the **General** settings page you can add custom Javascript to your Owncast instance's web page. Read more about this in the [documentation](/docs/configuration/custom-javascript).
 
 ## Streaming keys and admin password
 
