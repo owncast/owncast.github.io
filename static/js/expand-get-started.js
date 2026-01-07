@@ -13,22 +13,27 @@
       return "element-not-found";
     }
 
-    // Check if already expanded
-    if (!getStartedCategory.classList.contains("menu__list-item--collapsed")) {
+    // Check if already expanded via aria-expanded attribute
+    var categoryLink = getStartedCategory.querySelector(".menu__link--sublist");
+    if (categoryLink && categoryLink.getAttribute("aria-expanded") === "true") {
       return "already-expanded";
     }
 
-    // Remove the collapsed class directly to expand without triggering navigation
-    // Don't click the link as it would navigate to the first doc in the category
-    getStartedCategory.classList.remove("menu__list-item--collapsed");
-
-    // Also update aria-expanded attribute on the link
-    var categoryLink = getStartedCategory.querySelector(".menu__link--sublist");
-    if (categoryLink) {
-      categoryLink.setAttribute("aria-expanded", "true");
+    // Find the caret/toggle button and click it to expand
+    // Docusaurus uses a button with menu__caret class for toggling
+    var caretButton = getStartedCategory.querySelector(".menu__caret");
+    if (caretButton) {
+      caretButton.click();
+      return "expanded-via-caret";
     }
 
-    return "expanded";
+    // Fallback: click the category link itself (works when no link prop is set)
+    if (categoryLink) {
+      categoryLink.click();
+      return "expanded-via-link";
+    }
+
+    return "no-expandable-element";
   }
 
   function tryExpand(attempts) {
