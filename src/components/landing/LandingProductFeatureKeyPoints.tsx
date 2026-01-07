@@ -62,12 +62,15 @@ export const LandingProductFeatureKeyPoints = ({
               keyPoint.description ? 'mb-8' : 'mb-2',
             )}
           >
-            <dt className="inline font-semibold text-gray-900 dark:text-gray-100">
+            <dt className="inline text-lg font-semibold text-gray-900 dark:text-gray-100">
               {iconWithProps} {keyPoint.title}.
             </dt>{' '}
             {keyPoint.description ? (
               <dd
-                className={clsx(descriptionStyle === 'inline' ? 'inline' : '')}
+                className={clsx(
+                  'leading-normal',
+                  descriptionStyle === 'inline' ? 'inline' : '',
+                )}
               >
                 {keyPoint.description}
               </dd>

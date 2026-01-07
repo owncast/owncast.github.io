@@ -66,12 +66,12 @@ export function StoreSection() {
     <section className="hidden md:block">
       <LandingPrimaryTextCtaSection
         titleComponent={
-          <h1 className="font-normal text-2xl md:text-3xl lg:text-4xl leading-tight md:max-w-2xl">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight m-0">
             <Translate id="homepage.store.title">Get some Owncast gear</Translate>
-          </h1>
+          </h2>
         }
         descriptionComponent={
-          <p className="md:text-lg md:max-w-2xl">
+          <p className="text-gray-600 dark:text-gray-300 text-lg font-semibold max-w-4xl m-0">
             <Translate id="homepage.store.description">
               Support the project and show your Owncast pride. Each purchase
               supports the open source project.

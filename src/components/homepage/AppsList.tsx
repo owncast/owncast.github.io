@@ -1,5 +1,5 @@
 import React from "react";
-import { translate } from "@docusaurus/Translate";
+import Translate, { translate } from "@docusaurus/Translate";
 import {
   LandingProductCardSection,
   LandingAppStoreButton,
@@ -13,11 +13,15 @@ export function AppsList() {
         message: "Owncast works everywhere",
       })}
       withBackground
-      description={translate({
-        id: "homepage.apps.description",
-        message:
-          "Because Owncast is built on open standards you can watch an Owncast-powered stream on any device. But if you want, we've built some easy ways to watch that work out of the box.",
-      })}
+      descriptionComponent={
+        <p className="text-gray-600 dark:text-gray-300 text-lg font-semibold max-w-4xl mb-8">
+          <Translate id="homepage.apps.description">
+            Because Owncast is built on open standards you can watch an
+            Owncast-powered stream on any device. But if you want, we've built
+            some easy ways to watch that work out of the box.
+          </Translate>
+        </p>
+      }
       products={[
         {
           title: translate({

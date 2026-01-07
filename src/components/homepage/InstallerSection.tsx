@@ -54,12 +54,13 @@ export function InstallerSection() {
       descriptionComponent={
         <>
           <LandingProductFeatureKeyPoints
+            className="mt-4"
             variant="secondary"
             keyPoints={keyPoints}
           />
 
           <Button
-            className="mt-8 hidden md:inline-flex"
+            className="mt-4 hidden md:inline-flex"
             variant="primary"
             asChild
           >

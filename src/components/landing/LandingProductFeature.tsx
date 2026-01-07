@@ -167,7 +167,7 @@ export const LandingProductFeature = ({
             {imagePosition === 'left' || imagePosition === 'right' ? (
               <Image
                 className={clsx(
-                  'relative w-full rounded-md lg:scale-90',
+                  'relative w-full h-auto rounded-md lg:scale-90',
                   zoomOnHover ? 'hover:scale-100 transition-all' : '',
                   imageShadow === 'none' && '!shadow-none',
                   imageShadow === 'soft' && 'shadow-md',

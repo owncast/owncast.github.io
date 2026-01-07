@@ -45,7 +45,7 @@ export function SponsorsSection() {
   return (
     <section className={styles.sponsors}>
       <div className="container text--center">
-        <h2>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-4">
           <Translate id="homepage.sponsors.title">Supported by</Translate>
         </h2>
         <ul className={styles.sponsorsList}>
@@ -57,7 +57,7 @@ export function SponsorsSection() {
             </li>
           ))}
         </ul>
-        <p>
+        <p className="text-gray-600 dark:text-gray-300 text-lg font-semibold max-w-2xl mx-auto">
           <Translate id="homepage.sponsors.description">
             These organizations support Owncast via non-monetary support and
             services.

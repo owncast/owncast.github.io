@@ -104,7 +104,7 @@ function MobileFeatureCard({ feature }: { feature: Feature }) {
     <div className="flex flex-col gap-4 p-4 rounded-lg bg-neutral-500/10 h-full">
       <div>
         <p className="text-xl font-bold">{feature.title}</p>
-        <p className="leading-relaxed text-muted-foreground">
+        <p className="text-base leading-relaxed text-muted-foreground">
           {feature.description}
         </p>
       </div>
@@ -184,7 +184,7 @@ export function FeaturePreviewSection() {
               className="my-1 data-[state=active]:bg-primary-500/10"
             >
               <p className="text-xl font-bold">{feature.title}</p>
-              <p className="leading-relaxed">{feature.description}</p>
+              <p className="text-base leading-relaxed">{feature.description}</p>
             </LandingProductTourTrigger>
           ))}
         </LandingProductTourList>

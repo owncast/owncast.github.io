@@ -1,4 +1,5 @@
 import React, { JSX } from "react";
+import Translate from "@docusaurus/Translate";
 import styles from "./Contributors.module.css";
 import { LandingAvatar } from "./landing/social-proof/LandingAvatar";
 
@@ -21,10 +22,6 @@ interface Donor {
 export interface ContributorsProps {
   /** Whether to show donors section (default: true) */
   showDonors?: boolean;
-  /** Custom title for contributors section */
-  contributorsTitle?: string;
-  /** Custom title for donors section */
-  donorsTitle?: string;
 }
 
 // Type the imported data
@@ -33,8 +30,6 @@ const donors: Donor[] = donorsData as Donor[];
 
 export default function Contributors({
   showDonors = true,
-  contributorsTitle = "Contributors",
-  donorsTitle = "Donors",
 }: ContributorsProps): JSX.Element {
   return (
     <div className={styles.contributorsContainer}>
@@ -42,7 +37,19 @@ export default function Contributors({
       {contributors.length > 0 && (
         <section>
           <div className={styles.sectionHeader}>
-            <h2>{contributorsTitle}</h2>
+            <h2>
+              <Translate id="contributors.title">Contributors</Translate>
+            </h2>
+            <p>
+              <Translate id="contributors.description">
+                Contribute in technical, or non-technical ways.
+              </Translate>{" "}
+              <a href="/contribute">
+                <Translate id="contributors.learnHow">
+                  Learn how to get involved.
+                </Translate>
+              </a>
+            </p>
           </div>
           <ul className={styles.contributorBox}>
             {contributors.map((contributor) => (
@@ -70,17 +77,21 @@ export default function Contributors({
       {/* Donors Section */}
       {showDonors && (
         <section className={styles.donorBox}>
-          <h2>{donorsTitle}</h2>
-          <p>
-            Help support the project by making a contribution at{" "}
-            <a
-              href="https://opencollective.com/owncast/donate"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              OpenCollective.
-            </a>
-          </p>
+          <div className={styles.sectionHeader}>
+            <h2>
+              <Translate id="donors.title">Donors</Translate>
+            </h2>
+            <p>
+              <Translate id="donors.description">Help support the project by making a financial donation at</Translate>{" "}
+              <a
+                href="https://opencollective.com/owncast/donate"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                OpenCollective.
+              </a>
+            </p>
+          </div>
 
           {donors.length > 0 && (
             <ul className={styles.contributorBox}>

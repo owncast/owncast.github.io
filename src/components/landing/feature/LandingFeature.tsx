@@ -35,7 +35,7 @@ export const LandingFeature = ({
 
       <div className="flex flex-col gap-1">
         <h3 className="text-lg font-semibold">{title}</h3>
-        <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed">{description}</p>
+        <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed font-semibold">{description}</p>
       </div>
     </div>
   );

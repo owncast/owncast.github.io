@@ -93,17 +93,17 @@ export function ArchetypesSection() {
   return (
     <section className="w-full py-8 px-6 bg-[#2d3748]/10 dark:bg-[#2d3748]/20">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl font-semibold text-center mb-6">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-center mb-4">
           <Translate id="homepage.archetypes.title">
             Who is Owncast for?
           </Translate>
         </h2>
-        <h3 className="text-center text-gray-600 dark:text-gray-400 mb-10 max-w-4xl mx-auto">
+        <p className="text-gray-600 dark:text-gray-300 text-lg font-semibold text-center max-w-2xl mx-auto mb-8">
           <Translate id="homepage.archetypes.subtitle">
             Owncast works for all kinds of streams. Here's some of who's using
             it.
           </Translate>
-        </h3>
+        </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {archetypes.map((archetype) => (
             <div

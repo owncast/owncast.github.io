@@ -6,14 +6,18 @@ export function FAQSection() {
   return (
     <LandingFaqCollapsibleSection
       className="py-4 lg:py-6"
-      title={translate({
-        id: "homepage.faq.title",
-        message: "FAQ",
-      })}
-      description={translate({
-        id: "homepage.faq.description",
-        message: "Answers to common questions people ask about Owncast.",
-      })}
+      titleComponent={
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
+          <Translate id="homepage.faq.title">FAQ</Translate>
+        </h2>
+      }
+      descriptionComponent={
+        <p className="text-gray-600 dark:text-gray-300 text-lg font-semibold mt-4">
+          <Translate id="homepage.faq.description">
+            Answers to common questions people ask about Owncast.
+          </Translate>
+        </p>
+      }
       faqItems={[
         {
           question: translate({

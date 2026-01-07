@@ -4,11 +4,38 @@
 }
 
 .sectionHeader {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .sectionHeader h2 {
-  margin-bottom: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .sectionHeader h2 {
+    font-size: 1.875rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sectionHeader h2 {
+    font-size: 2.25rem;
+  }
+}
+
+.sectionHeader p {
+  color: #4b5563; /* gray-600 */
+  font-size: 1.125rem;
+  font-weight: 600;
+  max-width: 42rem;
+  margin: 0 auto 2rem;
+}
+
+[data-theme='dark'] .sectionHeader p {
+  color: #d1d5db; /* gray-300 */
 }
 
 .sectionOwncat {
@@ -111,6 +138,16 @@
 
 .donorBox {
   margin-top: 3rem;
+}
+
+/* Larger avatars for donors */
+.donorBox .contributorItem {
+  margin-right: -10px;
+}
+
+.donorBox .contributorItem figure {
+  width: 72px;
+  height: 72px;
 }
 
 .browserTesting {
