@@ -75,7 +75,7 @@ const ALL_REDIRECTS = [
 ];
 
 const config: Config = {
-  title: "Owncast",
+  title: "Owncast - Free and Open Source Livestreaming",
   tagline: "Free and Open Source Livestreaming",
   favicon: "/favicon.png",
 
