@@ -391,8 +391,8 @@ const config: Config = {
         {
           href: "https://app.element.io/#/room/#owncast.support:matrix.org",
           position: "right",
-          className: "header-matrix-link",
-          "aria-label": "Matrix chat",
+          className: "header-chat-link",
+          "aria-label": "Community chat",
         },
         {
           type: "localeDropdown",

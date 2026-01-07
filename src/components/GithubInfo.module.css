@@ -1,13 +1,16 @@
 .githubInfo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   font-size: 0.9rem;
   color: var(--ifm-navbar-link-color);
   padding: 0 0.75rem;
 }
 
 .version {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
   font-weight: 600;
   cursor: pointer;
   color: inherit;
@@ -15,17 +18,23 @@
   transition: color 0.2s ease;
 }
 
+.downloadIcon {
+  flex-shrink: 0;
+}
+
 .version:hover {
   color: var(--ifm-color-primary);
   text-decoration: none;
 }
 
-.separator {
-  opacity: 0.5;
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
-.stars {
-  cursor: help;
+.starIcon {
+  flex-shrink: 0;
 }
 
 @media (max-width: 996px) {

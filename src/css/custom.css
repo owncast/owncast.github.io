@@ -196,18 +196,18 @@ html[data-theme='dark'] .docMainWrapper {
     no-repeat;
 }
 
-/* Matrix icon in navbar */
-.header-matrix-link::before {
+/* Chat icon in navbar */
+.header-chat-link::before {
   content: '';
   width: 24px;
   height: 24px;
   display: flex;
-  background: url('/img/matrix.svg') no-repeat center;
+  background: url('/img/chat.svg') no-repeat center;
   background-size: contain;
   filter: brightness(0) invert(1);
 }
 
-[data-theme='dark'] .header-matrix-link::before {
+[data-theme='dark'] .header-chat-link::before {
   filter: brightness(0) invert(0.9);
 }
 
