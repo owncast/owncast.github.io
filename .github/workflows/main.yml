@@ -40,7 +40,9 @@ jobs:
         run: "jq -n 'input | . as $core | (input | . as $homepage | $core + $homepage) | unique_by(.login)' static/data/contributors-core.json static/data/contributors-homepage.json > static/data/contributors.json"
 
       - name: Fetch donors
-        run: 'curl https://opencollective.com/owncast/members/all.json | jq ''map(.) | .[] | select(.role=="BACKER") | {login: .name, avatar_url: .image, html_url: .profile}'' | jq --slurp ''.'' > static/data/donors.json'
+        run: |
+          CUTOFF_DATE=$(date -d '90 days ago' '+%Y-%m-%d')
+          curl https://opencollective.com/owncast/members/all.json | jq --arg cutoff "$CUTOFF_DATE" 'map(.) | .[] | select(.role=="BACKER" and .lastTransactionAt >= $cutoff) | {login: .name, avatar_url: .image, html_url: .profile}' | jq --slurp '.' > static/data/donors.json
 
       - name: Process donors
         run: node scripts/process-donors.js

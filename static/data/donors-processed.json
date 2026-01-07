@@ -1,183 +1,18 @@
 [
   {
-    "login": "2000staFM",
-    "avatar_url": "/images/owncat-head-gray-red.svg",
-    "html_url": "https://opencollective.com/guest-b2e5fccd"
-  },
-  {
-    "login": "Alan Peterson",
-    "avatar_url": "/images/owncat-head-white.svg",
-    "html_url": "https://opencollective.com/alan-peterson"
-  },
-  {
-    "login": "Alex O'Carroll",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/aaa79430-9b0e-11ed-a5dc-1db492c3af84.png",
-    "html_url": "https://opencollective.com/alex-ocarroll"
-  },
-  {
-    "login": "Andy Clemenko",
-    "avatar_url": "/images/owncat-head-black-orange.svg",
-    "html_url": "https://opencollective.com/guest-23bccee3"
-  },
-  {
     "login": "Anthony Zone",
-    "avatar_url": "/images/owncat-head-siamese-teal.svg",
+    "avatar_url": "/images/owncat-head-gray-red.svg",
     "html_url": "https://opencollective.com/anthony-zone"
   },
   {
-    "login": "Aqaba",
-    "avatar_url": "/images/owncat-head-ginger.svg",
-    "html_url": "https://opencollective.com/guest-7d044239"
-  },
-  {
-    "login": "Bjoern Wessling",
-    "avatar_url": "/images/owncat-head-cream-coral.svg",
-    "html_url": "https://opencollective.com/guest-8b9bf890"
-  },
-  {
-    "login": "box464",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/2e20c665-d1f1-4930-8c9f-1482504c5797/KoFiProfilePicBox464WithDog04.png",
-    "html_url": "https://opencollective.com/box464"
-  },
-  {
-    "login": "Catfish Da Man",
-    "avatar_url": "/images/owncat-head-tuxedo-red.svg",
-    "html_url": "https://opencollective.com/guest-da78333a"
-  },
-  {
-    "login": "Chaim Krause",
-    "avatar_url": "https://www.gravatar.com/avatar/ee7a5c80d156540db086d5289af4c35a?default=404",
-    "html_url": "https://opencollective.com/chaim-krause"
-  },
-  {
-    "login": "Chris Heino",
-    "avatar_url": "/images/owncat-head-gray.svg",
-    "html_url": "https://opencollective.com/user-e27f435c"
-  },
-  {
-    "login": "darkapex",
-    "avatar_url": "/images/owncat-head-white-pink.svg",
-    "html_url": "https://opencollective.com/guest-b6b72233"
-  },
-  {
-    "login": "Denman Rooke",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/56665125-3ae2-4c81-9fa2-8f5a7989b063/PixelArt_Portrait_DNMN.png",
-    "html_url": "https://opencollective.com/denman-rooke"
-  },
-  {
-    "login": "Didier Malenfant",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/95737bb1-8f6c-4734-991e-ef2a8fe2e29c/Ko-Fi_ProfilePic_Didier_04.png",
-    "html_url": "https://opencollective.com/didier-malenfant"
-  },
-  {
     "login": "emacsen",
-    "avatar_url": "/images/owncat-head-brown-green.svg",
+    "avatar_url": "/images/owncat-head-white.svg",
     "html_url": "https://opencollective.com/guest-618ea119"
-  },
-  {
-    "login": "ETKMusic.dance",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/2a0431c4-4a82-46e1-b530-3f8649139003/384515cc-de35-45df-a35e-1b49612c38d3.png",
-    "html_url": "https://opencollective.com/etkmusicdance"
   },
   {
     "login": "Flaki",
     "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/0ae2e4e0-3e92-11e9-9337-47b341a8c2c8.jpg",
     "html_url": "https://opencollective.com/flaki"
-  },
-  {
-    "login": "Fred Luetkemeier",
-    "avatar_url": "/images/owncat-head-black.svg",
-    "html_url": "https://opencollective.com/guest-553ff5bb"
-  },
-  {
-    "login": "Gabe Kangas",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/a4f48530-7805-11eb-a908-07d2b00fb9f8.png",
-    "html_url": "https://opencollective.com/gabe-kangas"
-  },
-  {
-    "login": "GoMage",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/81975804-9c1a-4b7a-b4cd-cd518d784c2b/d30cf901-e52b-4197-96bd-be849350ea47.png",
-    "html_url": "https://opencollective.com/gomage"
-  },
-  {
-    "login": "gravitons loves the Fediverse <3",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/3a656bab-19aa-4939-be4f-7d199f626b46/gravitons_logo-small.jpg",
-    "html_url": "https://opencollective.com/gravitons1"
-  },
-  {
-    "login": "GreenPromoCode.com",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/f1160a04-f5dc-4661-aa66-f0cdd8c976a0/greenpromocode_full_1618294538.jpg",
-    "html_url": "https://opencollective.com/greenpromocode-com"
-  },
-  {
-    "login": "GTX",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/b89560b0-98fc-11eb-af2e-eb711370443d.png",
-    "html_url": "https://opencollective.com/gtx"
-  },
-  {
-    "login": "Guest",
-    "avatar_url": "/images/owncat-head-ginger-blue.svg",
-    "html_url": "https://opencollective.com/guest-809e649f"
-  },
-  {
-    "login": "Guest",
-    "avatar_url": "/images/owncat-head-siamese.svg",
-    "html_url": "https://opencollective.com/guest-b4f6cea0"
-  },
-  {
-    "login": "Guest",
-    "avatar_url": "/images/owncat-head-gray-teal.svg",
-    "html_url": "https://opencollective.com/guest-74d455b7"
-  },
-  {
-    "login": "Guest",
-    "avatar_url": "/images/owncat-head-cream.svg",
-    "html_url": "https://opencollective.com/guest-85584a94"
-  },
-  {
-    "login": "Guest",
-    "avatar_url": "/images/owncat-head-black-red.svg",
-    "html_url": "https://opencollective.com/guest-ef71fba6"
-  },
-  {
-    "login": "Guest",
-    "avatar_url": "/images/owncat-head-tuxedo.svg",
-    "html_url": "https://opencollective.com/guest-bef18650"
-  },
-  {
-    "login": "Guest",
-    "avatar_url": "/images/owncat-head-white-blue.svg",
-    "html_url": "https://opencollective.com/guest-fc35aaea"
-  },
-  {
-    "login": "Guest",
-    "avatar_url": "/images/owncat-head-ginger-green.svg",
-    "html_url": "https://opencollective.com/guest-e0844f5f"
-  },
-  {
-    "login": "GunghoGeoduck",
-    "avatar_url": "/images/owncat-head-brown.svg",
-    "html_url": "https://opencollective.com/guest-78ad01d4"
-  },
-  {
-    "login": "ha2tim Gye-Nyame",
-    "avatar_url": "/images/owncat-head.svg",
-    "html_url": "https://opencollective.com/guest-d2606286"
-  },
-  {
-    "login": "Hamish The PolarBear",
-    "avatar_url": "/images/owncat-head-gray-red.svg",
-    "html_url": "https://opencollective.com/guest-92a76f2a"
-  },
-  {
-    "login": "hatniX",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/b0918163-bf1e-4492-b065-4bb690b3a8ff/avatar_big.png",
-    "html_url": "https://opencollective.com/hatnix"
-  },
-  {
-    "login": "incognito",
-    "avatar_url": "/images/owncat-head-white.svg",
-    "html_url": "https://opencollective.com/incognito959"
   },
   {
     "login": "Incognito",
@@ -190,59 +25,9 @@
     "html_url": "https://opencollective.com/user-5bdb86e0"
   },
   {
-    "login": "Incognito",
-    "avatar_url": "/images/owncat-head-ginger.svg",
-    "html_url": "https://opencollective.com/incognito-5c38b018"
-  },
-  {
-    "login": "Incognito",
-    "avatar_url": "/images/owncat-head-cream-coral.svg",
-    "html_url": "https://opencollective.com/incognito-92e7aa0d"
-  },
-  {
-    "login": "Incognito",
-    "avatar_url": "/images/owncat-head-tuxedo-red.svg",
-    "html_url": "https://opencollective.com/user-be0b67ae"
-  },
-  {
-    "login": "Incognito",
-    "avatar_url": "/images/owncat-head-gray.svg",
-    "html_url": "https://opencollective.com/user-9fd67848"
-  },
-  {
     "login": "inpc",
-    "avatar_url": "/images/owncat-head-white-pink.svg",
+    "avatar_url": "/images/owncat-head-ginger.svg",
     "html_url": "https://opencollective.com/inpc"
-  },
-  {
-    "login": "Jacky Alcine",
-    "avatar_url": "https://www.gravatar.com/avatar/4abe121cada34b52a2d7f2935ae1a3a6?default=404",
-    "html_url": "https://opencollective.com/jackyalcine"
-  },
-  {
-    "login": "James Carpenter",
-    "avatar_url": "/images/owncat-head-brown-green.svg",
-    "html_url": "https://opencollective.com/guest-63e91d50"
-  },
-  {
-    "login": "Jason",
-    "avatar_url": "/images/owncat-head-black.svg",
-    "html_url": "https://opencollective.com/guest-9ef09d2d"
-  },
-  {
-    "login": "Jeff Moe",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/f7800ee0-378b-11ed-9bfc-5d3b5bc48565.jpg",
-    "html_url": "https://opencollective.com/jebba"
-  },
-  {
-    "login": "Jenkin Schibel",
-    "avatar_url": "/images/owncat-head-ginger-blue.svg",
-    "html_url": "https://opencollective.com/user-c90ba93e"
-  },
-  {
-    "login": "Jnktn.tv",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/fb140060-e346-11eb-a39f-63dba0de24b2.png",
-    "html_url": "https://opencollective.com/jnktn-tv"
   },
   {
     "login": "Joel Bradshaw",
@@ -250,99 +35,14 @@
     "html_url": "https://opencollective.com/joel-bradshaw"
   },
   {
-    "login": "John Brubaker",
-    "avatar_url": "/images/owncat-head-siamese.svg",
-    "html_url": "https://opencollective.com/guest-ff353a2f"
-  },
-  {
-    "login": "John DeAscentis",
-    "avatar_url": "/images/owncat-head-gray-teal.svg",
-    "html_url": "https://opencollective.com/john-deascentis"
-  },
-  {
-    "login": "Julian Koritnik",
-    "avatar_url": "/images/owncat-head-cream.svg",
-    "html_url": "https://opencollective.com/julian-koritnik"
-  },
-  {
-    "login": "Kev Mul",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/015a7a6e-8160-4421-a903-c4f040556de6/25k-icon.jpg",
-    "html_url": "https://opencollective.com/kev-mul"
-  },
-  {
-    "login": "Kit Aultman",
-    "avatar_url": "/images/owncat-head-black-red.svg",
-    "html_url": "https://opencollective.com/guest-5ec71b6f"
-  },
-  {
-    "login": "Kyle Bronsdon",
-    "avatar_url": "/images/owncat-head-tuxedo.svg",
-    "html_url": "https://opencollective.com/kyle-bronsdon"
-  },
-  {
-    "login": "Lee",
-    "avatar_url": "/images/owncat-head-white-blue.svg",
-    "html_url": "https://opencollective.com/guest-194ec786"
-  },
-  {
-    "login": "Lucas",
-    "avatar_url": "/images/owncat-head-ginger-green.svg",
-    "html_url": "https://opencollective.com/guest-f1850b43"
-  },
-  {
     "login": "Luka Prinčič",
-    "avatar_url": "/images/owncat-head-brown.svg",
+    "avatar_url": "/images/owncat-head-cream-coral.svg",
     "html_url": "https://opencollective.com/luka-princic"
   },
   {
-    "login": "luobo",
-    "avatar_url": "/images/owncat-head.svg",
-    "html_url": "https://opencollective.com/guest-f7964564"
-  },
-  {
-    "login": "Marius Hoel",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/049176f0-bf00-11ec-b081-dfccd9ad7881.png",
-    "html_url": "https://opencollective.com/mhoel"
-  },
-  {
-    "login": "Markus Ressel",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/a89207e0-6dee-11ed-a2be-5936e5761f99.jpeg",
-    "html_url": "https://opencollective.com/markus-ressel"
-  },
-  {
-    "login": "Martijn",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/c55175ec-cf28-476b-8d7b-49a021770d70/157fef4d0c9d1904.png",
-    "html_url": "https://opencollective.com/martijn"
-  },
-  {
     "login": "MATSUDA RYUKI",
-    "avatar_url": "/images/owncat-head-gray-red.svg",
+    "avatar_url": "/images/owncat-head-tuxedo-red.svg",
     "html_url": "https://opencollective.com/guest-07d84ecb"
-  },
-  {
-    "login": "Max Schnabel",
-    "avatar_url": "/images/owncat-head-white.svg",
-    "html_url": "https://opencollective.com/guest-2124a284"
-  },
-  {
-    "login": "Merlin",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/8bae3f10-7897-11ec-a066-f5548535d53d.jpg",
-    "html_url": "https://opencollective.com/johnathan-shunn"
-  },
-  {
-    "login": "michcia",
-    "avatar_url": "/images/owncat-head-black-orange.svg",
-    "html_url": "https://opencollective.com/michcio"
-  },
-  {
-    "login": "Mike",
-    "avatar_url": "/images/owncat-head-siamese-teal.svg",
-    "html_url": "https://opencollective.com/mike-r"
-  },
-  {
-    "login": "Mohamed Elsheiry",
-    "avatar_url": "/images/owncat-head-ginger.svg",
-    "html_url": "https://opencollective.com/mohamed-elsheiry"
   },
   {
     "login": "nebunez",
@@ -350,139 +50,9 @@
     "html_url": "https://opencollective.com/nebunez"
   },
   {
-    "login": "Niels Digital",
-    "avatar_url": "/images/owncat-head-cream-coral.svg",
-    "html_url": "https://opencollective.com/guest-80892d29"
-  },
-  {
-    "login": "Noblestreet",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/288f52f6-bd80-46fa-af5d-efb81428886a/0ff826a6-98f6-4dd3-8189-abc5ddd4f962.png",
-    "html_url": "https://opencollective.com/noblestreet"
-  },
-  {
-    "login": "Nullcasting",
-    "avatar_url": "/images/owncat-head-tuxedo-red.svg",
-    "html_url": "https://opencollective.com/guest-7e5ea2e1"
-  },
-  {
-    "login": "Okta",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/eede97d0-f702-11e7-8adf-518d7986ad90.png",
-    "html_url": "https://opencollective.com/okta"
-  },
-  {
-    "login": "Ole",
-    "avatar_url": "/images/owncat-head-gray.svg",
-    "html_url": "https://opencollective.com/guest-c741c302"
-  },
-  {
-    "login": "Ozoned",
-    "avatar_url": "/images/owncat-head-white-pink.svg",
-    "html_url": "https://opencollective.com/guest-ffa58d26"
-  },
-  {
     "login": "Paul Lindner",
     "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/2d14fd80-14b1-11ec-9b88-278a4820449a.jpeg",
     "html_url": "https://opencollective.com/lindner"
-  },
-  {
-    "login": "PlayBox Technology",
-    "avatar_url": "/images/owncat-head-brown-green.svg",
-    "html_url": "https://opencollective.com/playbox-technology"
-  },
-  {
-    "login": "pwxlwrk",
-    "avatar_url": "/images/owncat-head-black.svg",
-    "html_url": "https://opencollective.com/guest-3bb3ecf0"
-  },
-  {
-    "login": "Raffael Rehberger",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/ee1b0100-ed4b-11ec-9807-fbe1d87ad3b3.png",
-    "html_url": "https://opencollective.com/ruffy"
-  },
-  {
-    "login": "Raymon Mens",
-    "avatar_url": "/images/owncat-head-ginger-blue.svg",
-    "html_url": "https://opencollective.com/guest-3f3a82d6"
-  },
-  {
-    "login": "Real Targeted Traffic",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/cfb72b69-b5ca-4be9-8987-19eb1d7f7978/7f56b9bb-82e0-4735-b4a4-def04b4a4041.png",
-    "html_url": "https://opencollective.com/seo25-com"
-  },
-  {
-    "login": "Rick",
-    "avatar_url": "/images/owncat-head-siamese.svg",
-    "html_url": "https://opencollective.com/patrick-materla"
-  },
-  {
-    "login": "Robert Wolniak",
-    "avatar_url": "/images/owncat-head-gray-teal.svg",
-    "html_url": "https://opencollective.com/robert-wolniak"
-  },
-  {
-    "login": "Robin",
-    "avatar_url": "/images/owncat-head-cream.svg",
-    "html_url": "https://opencollective.com/robin-mol1"
-  },
-  {
-    "login": "rootbeerdan",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/54541210-8eea-11ec-8ab3-bb761d539e0b.jpeg",
-    "html_url": "https://opencollective.com/rootbeerdan"
-  },
-  {
-    "login": "Roy Adams",
-    "avatar_url": "https://www.gravatar.com/avatar/37426f3907c40c746215cc84dd477203?default=404",
-    "html_url": "https://opencollective.com/roy-adams"
-  },
-  {
-    "login": "Runzhi He",
-    "avatar_url": "/images/owncat-head-black-red.svg",
-    "html_url": "https://opencollective.com/guest-5d97e4b1"
-  },
-  {
-    "login": "ruut",
-    "avatar_url": "/images/owncat-head-tuxedo.svg",
-    "html_url": "https://opencollective.com/guest-d5b81ff0"
-  },
-  {
-    "login": "Ryusei",
-    "avatar_url": "/images/owncat-head-white-blue.svg",
-    "html_url": "https://opencollective.com/ryusei"
-  },
-  {
-    "login": "Sam",
-    "avatar_url": "/images/owncat-head-ginger-green.svg",
-    "html_url": "https://opencollective.com/guest-e5c5ea51"
-  },
-  {
-    "login": "Samsai",
-    "avatar_url": "/images/owncat-head-brown.svg",
-    "html_url": "https://opencollective.com/guest-983413e7"
-  },
-  {
-    "login": "Sarah Elson",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/8a695c40-76e1-11e8-b91b-33798e15183d.jpeg",
-    "html_url": "https://opencollective.com/lambdatesting"
-  },
-  {
-    "login": "SillySam",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/32890d80-14cc-11ed-bb51-6f9278c554d2.png",
-    "html_url": "https://opencollective.com/sillysam"
-  },
-  {
-    "login": "Simon Michalke",
-    "avatar_url": "/images/owncat-head.svg",
-    "html_url": "https://opencollective.com/simon-michalke"
-  },
-  {
-    "login": "Stripe",
-    "avatar_url": "/images/owncat-head-gray-red.svg",
-    "html_url": "https://opencollective.com/11004-stripe-50798cdb"
-  },
-  {
-    "login": "TargetedVisitors",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/80325590-380f-11ec-9460-9b81799a208f.png",
-    "html_url": "https://opencollective.com/targeted-traffic"
   },
   {
     "login": "Teklynk",
@@ -490,44 +60,9 @@
     "html_url": "https://opencollective.com/teklynk"
   },
   {
-    "login": "The Green Wizard",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/6dda34a8-592b-4445-9784-7c164ec63ac0/green%20wizard%20transparent.png",
-    "html_url": "https://opencollective.com/the-green-wizard"
-  },
-  {
-    "login": "Theodore Jones",
-    "avatar_url": "/images/owncat-head-white.svg",
-    "html_url": "https://opencollective.com/theodore-jones"
-  },
-  {
-    "login": "Thomas OConnor",
-    "avatar_url": "/images/owncat-head-black-orange.svg",
-    "html_url": "https://opencollective.com/thomas-oconnor"
-  },
-  {
     "login": "Tom",
     "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/523261ef-fc85-4ddf-811b-ad765b3aba71/Me2024.png",
     "html_url": "https://opencollective.com/tom31"
-  },
-  {
-    "login": "Tom Hansen",
-    "avatar_url": "/images/owncat-head-siamese-teal.svg",
-    "html_url": "https://opencollective.com/user-eca9a6e4"
-  },
-  {
-    "login": "Tom Ryder",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/8d191bb0-c0b4-11e9-8cb7-6526273556df.png",
-    "html_url": "https://opencollective.com/tejrnz"
-  },
-  {
-    "login": "Vencabot",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/148f60c8-0f52-43d2-9785-67f56789ccc5/color_photo_square.png",
-    "html_url": "https://opencollective.com/vencabot"
-  },
-  {
-    "login": "Vince",
-    "avatar_url": "/images/owncat-head-ginger.svg",
-    "html_url": "https://opencollective.com/guest-08e5b6de"
   },
   {
     "login": "Walter Ebert",
