@@ -352,7 +352,9 @@ const config: Config = {
       { property: "og:type", content: "website" },
     ],
     colorMode: {
-      respectPrefersColorScheme: true,
+      defaultMode: "dark",
+      disableSwitch: true, // removes the light/dark toggle
+      respectPrefersColorScheme: false,
     },
     navbar: {
       title: "Owncast",
