@@ -87,20 +87,22 @@ export function FeatureGrid() {
   ];
 
   return (
-    <LandingFeatureList
-      title={translate({
-        id: "homepage.features.sectionTitle",
-        message: "Why Owncast?",
-      })}
-      description={translate({
-        id: "homepage.features.sectionDescription",
-        message:
-          "There are many different reasons for using Owncast. Here are some common ones.",
-      })}
-      featureItems={featureItems}
-      variant="primary"
-      withBackgroundGlow
-      backgroundGlowVariant="primary"
-    />
+    <div style={{ maxWidth: "95%", margin: "0 auto" }}>
+      <LandingFeatureList
+        title={translate({
+          id: "homepage.features.sectionTitle",
+          message: "Why Owncast?",
+        })}
+        description={translate({
+          id: "homepage.features.sectionDescription",
+          message:
+            "There are many different reasons for using Owncast. Here are some common ones.",
+        })}
+        featureItems={featureItems}
+        variant="primary"
+        withBackgroundGlow
+        backgroundGlowVariant="primary"
+      />
+    </div>
   );
 }

@@ -175,6 +175,8 @@ export const LandingPrimaryImageCtaSection = ({
         )}
         style={{
           minHeight,
+          maxWidth: "95%",
+          margin: "0 auto",
         }}
       >
         <LandingPrimaryCtaContent
@@ -338,6 +340,8 @@ export const LandingPrimaryVideoCtaSection = ({
         )}
         style={{
           minHeight,
+          maxWidth: "95%",
+          margin: "0 auto",
         }}
       >
         <LandingPrimaryCtaContent
@@ -502,6 +506,7 @@ export const LandingPrimaryTextCtaSection = ({
           textPosition === 'center' ? 'items-center' : 'items-start',
           innerClassName,
         )}
+        style={{ maxWidth: "95%", margin: "0 auto" }}
       >
         <LandingPrimaryCtaContent
           className={clsx(

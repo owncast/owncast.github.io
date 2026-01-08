@@ -44,7 +44,7 @@ export const LandingBandSection = ({
         className,
       )}
     >
-      <div className={cn("w-full px-6 py-2 max-w-full container-wide gap-6 items-center lg:flex lg:flex-row", innerClassName)}>
+      <div className={cn("w-full px-6 py-2 max-w-full container-wide gap-6 items-center lg:flex lg:flex-row", innerClassName)} style={{ maxWidth: "95%", margin: "0 auto" }}>
         <div
           className={clsx(
             'w-full lg:w-auto flex flex-col lg:flex-shrink max-w-lg xl:max-w-3xl min-w-0',

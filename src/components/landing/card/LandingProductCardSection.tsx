@@ -77,6 +77,7 @@ export function LandingProductCardSection({
             : 'items-start text-left',
           innerClassName,
         )}
+        style={{ maxWidth: "95%", margin: "0 auto" }}
       >
         {titleComponent ||
           (title && (

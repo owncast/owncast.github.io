@@ -62,7 +62,7 @@ export const LandingFaqCollapsibleSection = ({
         </div>
       ) : null}
 
-      <div className={clsx(className, 'w-full p-6 container-narrow')}>
+      <div className={clsx(className, 'w-full p-6 container-narrow')} style={{ maxWidth: "95%", margin: "0 auto" }}>
         {title ? (
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight max-w-xs sm:max-w-none fancyHeading">
             {title}
