@@ -82,7 +82,9 @@ export default function Contributors({
               <Translate id="donors.title">Donors</Translate>
             </h2>
             <p>
-              <Translate id="donors.description">Help support the project by making a financial donation at</Translate>{" "}
+              <Translate id="donors.description">
+                Help support the project by making a financial donation at
+              </Translate>{" "}
               <a
                 href="https://opencollective.com/owncast/donate"
                 target="_blank"
@@ -115,6 +117,12 @@ export default function Contributors({
               ))}
             </ul>
           )}
+          <div className="text-muted-foreground text-sm mt-3">
+            <Translate id="donors.note">
+              This list reflects active financial supporters helping fund
+              ongoing development, initiatives and infrastructure.
+            </Translate>
+          </div>
         </section>
       )}
     </div>

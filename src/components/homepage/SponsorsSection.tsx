@@ -57,7 +57,7 @@ export function SponsorsSection() {
             </li>
           ))}
         </ul>
-        <p className="text-gray-600 dark:text-gray-300 text-lg font-semibold max-w-2xl mx-auto">
+        <p className="text-gray-600 dark:text-gray-300 text-lg font-semibold max-w-4xl mx-auto">
           <Translate id="homepage.sponsors.description">
             These organizations support Owncast via non-monetary support and
             services.

@@ -150,6 +150,12 @@
   height: 72px;
 }
 
+.donorBox .donorNote {
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-top: 1rem;
+}
+
 .browserTesting {
   font-size: 1.3125rem;
   color: var(--ifm-color-emphasis-800);
