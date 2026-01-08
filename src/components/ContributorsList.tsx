@@ -172,6 +172,8 @@ function ContributorAvatar({
           src={contributor.avatarPath}
           alt={contributor.name}
           className={styles.avatar}
+          loading="lazy"
+          decoding="async"
         />
       ) : (
         <div className={styles.avatarPlaceholder} title={contributor.name}>
