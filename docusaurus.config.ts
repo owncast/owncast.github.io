@@ -462,6 +462,10 @@ const config: Config = {
               label: "Roadmap",
               to: "/roadmap",
             },
+            {
+              label: "Additional Resources",
+              to: "/resources",
+            },
           ],
         },
       ],
