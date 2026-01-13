@@ -1,9 +1,9 @@
 ---
 title: Owncast v0.0.12
 description: >-
-  Owncast v0.0.12 has a handful of additions to improve the streaming and chat
-  experience.
-date: 2022-02-08T00:00:00.000Z
+  This release has a handful of features, big and small, to improve the overall Owncast experience, primarily around the core streaming and chat functionality.
+sidebar_position: 12
+date: 2022-07-09T21:24:54.000Z
 ---
 
 This release has a handful of features, big and small, to improve the overall Owncast experience, primarily around the core streaming and chat functionality.
@@ -41,10 +41,6 @@ There are two different ways you can authenticate with Owncast chat, allowing yo
 ### IndieAuth
 
 [IndieAuth](https://indieauth.net/) is a decentralized identity protocol that allows an individual's web site to become its own identity provider. Owncast itself, is now an IndieAuth provider you can use to authenticate against Owncast instances, or any other site that supports IndieAuth.
-
-The clear use case is using your Owncast instance to authenticate with chat on other Owncast instances. Alternatively you can test this functionality by logging into [The IndieWeb Wiki](https://indieweb.org/), [Telegraph](https://telegraph.p3k.io/), or [This IndieAuth test page](https://pin13.net/login/). Simply put in the URL of v0.0.12+ Owncast server when logging in.
-
-Keep in mind this is just for Owncast instance admins, and you use the same username/password as you do when logging into the Owncast Admin.
 
 ### Fediverse Auth
 
@@ -92,101 +88,101 @@ This update will impact most users, so as time goes on I'll make sure to update 
 
 ### Added
 
-- Option to disable join messages in chat [\#1582](https://github.com/owncast/owncast/issues/1582)
+- Option to disable join messages in chat [#1582](https://github.com/owncast/owncast/issues/1582)
 
-- Can set separately set the chat server host [\#1378](https://github.com/owncast/owncast/issues/1378)
+- Can set separately set the chat server host [#1378](https://github.com/owncast/owncast/issues/1378)
 
-- Prometheus compatible metrics endpoint [\#1303](https://github.com/owncast/owncast/issues/1303)
+- Prometheus compatible metrics endpoint [#1303](https://github.com/owncast/owncast/issues/1303)
 
-- Opttionally show geo location data from video viewers [\#1477](https://github.com/owncast/owncast/issues/1477)
+- Opttionally show geo location data from video viewers [#1477](https://github.com/owncast/owncast/issues/1477)
 
-- Extend the viewers timeline [\#1478](https://github.com/owncast/owncast/issues/1478)
+- Extend the viewers timeline [#1478](https://github.com/owncast/owncast/issues/1478)
 
-- Add a small indicator visually showing a message is from a bot/external service [\#1172](https://github.com/owncast/owncast/issues/1172)
+- Add a small indicator visually showing a message is from a bot/external service [#1172](https://github.com/owncast/owncast/issues/1172)
 
-- IP banning of users [\#1534](https://github.com/owncast/owncast/issues/1534)
+- IP banning of users [#1534](https://github.com/owncast/owncast/issues/1534)
 
-- Add videotoolbox codec for macOS [\#1771](https://github.com/owncast/owncast/pull/1771)
+- Add videotoolbox codec for macOS [#1771](https://github.com/owncast/owncast/pull/1771)
 
-- Video playback health and performance metrics [\#793](https://github.com/owncast/owncast/issues/793)
+- Video playback health and performance metrics [#793](https://github.com/owncast/owncast/issues/793)
 
-- Experimental lower latency playback mode [\#837](https://github.com/owncast/owncast/issues/837)
+- Experimental lower latency playback mode [#837](https://github.com/owncast/owncast/issues/837)
 
-- Auto-poster for some 3rd party notification channels [\#1609](https://github.com/owncast/owncast/issues/1609)
+- Auto-poster for some 3rd party notification channels [#1609](https://github.com/owncast/owncast/issues/1609)
 
-- Web push notifications [\#1656](https://github.com/owncast/owncast/issues/1656)
+- Web push notifications [#1656](https://github.com/owncast/owncast/issues/1656)
 
-- Owncast can function as an Indieauth provider. [\#1272](https://github.com/owncast/owncast/issues/1272)
+- Owncast can function as an Indieauth provider. [#1272](https://github.com/owncast/owncast/issues/1272)
 
-- Authenticated users' display names are no longer available to others. [\#1810](https://github.com/owncast/owncast/issues/1810)
+- Authenticated users' display names are no longer available to others. [#1810](https://github.com/owncast/owncast/issues/1810)
 
-- Add “services” and “metadata” to NodeInfo/2.0 [\#1922](https://github.com/owncast/owncast/pull/1922)
+- Add “services” and “metadata” to NodeInfo/2.0 [#1922](https://github.com/owncast/owncast/pull/1922)
 
-- manifest - Add fullscreen mode/change name [\#1934](https://github.com/owncast/owncast/pull/1934)
+- manifest - Add fullscreen mode/change name [#1934](https://github.com/owncast/owncast/pull/1934)
 
-- Troll/Established chat user Mode (like +m on IRC) [\#1587](https://github.com/owncast/owncast/issues/1587)
+- Troll/Established chat user Mode (like +m on IRC) [#1587](https://github.com/owncast/owncast/issues/1587)
 
-- Chat auth using the Fediverse [\#1774](https://github.com/owncast/owncast/issues/1774)
+- Chat auth using the Fediverse [#1774](https://github.com/owncast/owncast/issues/1774)
 
 ### Breaking Changes
 
-- API endpoint rename: "integrations/chat/updatemessagevisibility" -> /api/integrations/chat/messagevisibility [\#1966](https://github.com/owncast/owncast/issues/1966)
+- API endpoint rename: "integrations/chat/updatemessagevisibility" -> /api/integrations/chat/messagevisibility [#1966](https://github.com/owncast/owncast/issues/1966)
 
 ### Changed
 
-- Auto-select old text when changing display name. [\#1754](https://github.com/owncast/owncast/pull/1754)
+- Auto-select old text when changing display name. [#1754](https://github.com/owncast/owncast/pull/1754)
 
-- Change cachebust param to random string to support CDNs [\#1781](https://github.com/owncast/owncast/issues/1781)
+- Change cachebust param to random string to support CDNs [#1781](https://github.com/owncast/owncast/issues/1781)
 
-- Change CMD to ENTRYPOINT in Dockerfile [\#1831](https://github.com/owncast/owncast/pull/1831)
+- Change CMD to ENTRYPOINT in Dockerfile [#1831](https://github.com/owncast/owncast/pull/1831)
 
-- Replace hide chat toggle and username change form with chat user dropdown [\#1648](https://github.com/owncast/owncast/issues/1648)
+- Replace hide chat toggle and username change form with chat user dropdown [#1648](https://github.com/owncast/owncast/issues/1648)
 
-- changed followers tab to 24 per page [\#1855](https://github.com/owncast/owncast/pull/1855)
+- changed followers tab to 24 per page [#1855](https://github.com/owncast/owncast/pull/1855)
 
 ### Fixed
 
-- Selecting an emoji immediately when visiting page without focusing text input ignores selection [\#1419](https://github.com/owncast/owncast/issues/1419)
+- Selecting an emoji immediately when visiting page without focusing text input ignores selection [#1419](https://github.com/owncast/owncast/issues/1419)
 
-- Fix exception when using emoji input in chrome [\#1782](https://github.com/owncast/owncast/pull/1782)
+- Fix exception when using emoji input in chrome [#1782](https://github.com/owncast/owncast/pull/1782)
 
-- Framerate slider is broken. Can only select lowest and highest values. [\#1791](https://github.com/owncast/owncast/issues/1791)
+- Framerate slider is broken. Can only select lowest and highest values. [#1791](https://github.com/owncast/owncast/issues/1791)
 
-- Fix stat components in hardware admin page [\#1815](https://github.com/owncast/owncast/issues/1815)
+- Fix stat components in hardware admin page [#1815](https://github.com/owncast/owncast/issues/1815)
 
-- The "no" button in the codec confirmation popup does nothing [\#1809](https://github.com/owncast/owncast/issues/1809)
+- The "no" button in the codec confirmation popup does nothing [#1809](https://github.com/owncast/owncast/issues/1809)
 
-- Issue: chat unscrollabe on some resize operations [\#1830](https://github.com/owncast/owncast/issues/1830)
+- Issue: chat unscrollabe on some resize operations [#1830](https://github.com/owncast/owncast/issues/1830)
 
-- Fix datastore cache warming not firing [\#1889](https://github.com/owncast/owncast/issues/1889)
+- Fix datastore cache warming not firing [#1889](https://github.com/owncast/owncast/issues/1889)
 
-- fix the server name in nodeinfo/2.0 [\#1907](https://github.com/owncast/owncast/pull/1907)
+- fix the server name in nodeinfo/2.0 [#1907](https://github.com/owncast/owncast/pull/1907)
 
-- "invalid cross-device link" error when running on a different filesystem [\#1768](https://github.com/owncast/owncast/issues/1768)
+- "invalid cross-device link" error when running on a different filesystem [#1768](https://github.com/owncast/owncast/issues/1768)
 
-- [bug] Follow request from GoToSocial causes nil pointer exception [\#1955](https://github.com/owncast/owncast/issues/1955)
+- [bug] Follow request from GoToSocial causes nil pointer exception [#1955](https://github.com/owncast/owncast/issues/1955)
 
-- Fix API documentation "integrations/chat/updatemessagevisibility" -> /api/integrations/chat/messagevisibility [\#1966](https://github.com/owncast/owncast/issues/1966)
+- Fix API documentation "integrations/chat/updatemessagevisibility" -> /api/integrations/chat/messagevisibility [#1966](https://github.com/owncast/owncast/issues/1966)
 
-- Remove doubled paragraphs around stream title for Fediverse messages. [\#1927](https://github.com/owncast/owncast/pull/1927)
+- Remove doubled paragraphs around stream title for Fediverse messages. [#1927](https://github.com/owncast/owncast/pull/1927)
 
-- Prevent CSS class injection and directory traversal via custom emojis [\#1772](https://github.com/owncast/owncast/pull/1772)
+- Prevent CSS class injection and directory traversal via custom emojis [#1772](https://github.com/owncast/owncast/pull/1772)
 
-- HLS segment name collision when using the lowest latency buffer option [\#1778](https://github.com/owncast/owncast/issues/1778)
+- HLS segment name collision when using the lowest latency buffer option [#1778](https://github.com/owncast/owncast/issues/1778)
 
-- Remote Fediverse servers are caching the instance logo even after its changed, add a cachebust. [\#1776](https://github.com/owncast/owncast/issues/1776)
+- Remote Fediverse servers are caching the instance logo even after its changed, add a cachebust. [#1776](https://github.com/owncast/owncast/issues/1776)
 
-- Remote Fediverse preview images get cached, add a cachebust [\#1777](https://github.com/owncast/owncast/issues/1777)
+- Remote Fediverse preview images get cached, add a cachebust [#1777](https://github.com/owncast/owncast/issues/1777)
 
-- Viewer chart Y axis strings are formatted weird [\#1816](https://github.com/owncast/owncast/issues/1816)
+- Viewer chart Y axis strings are formatted weird [#1816](https://github.com/owncast/owncast/issues/1816)
 
-- Cursor when composing chat message appears on the right-hand side of the text field in Firefox [\#1561](https://github.com/owncast/owncast/issues/1561)
+- Cursor when composing chat message appears on the right-hand side of the text field in Firefox [#1561](https://github.com/owncast/owncast/issues/1561)
 
-- Unable to follow an Owncast account from Misskey [\#1690](https://github.com/owncast/owncast/issues/1690)
+- Unable to follow an Owncast account from Misskey [#1690](https://github.com/owncast/owncast/issues/1690)
 
 ### Removed
 
-- Remove support for uploading SVG logos [\#1773](https://github.com/owncast/owncast/issues/1773)
+- Remove support for uploading SVG logos [#1773](https://github.com/owncast/owncast/issues/1773)
 
 ## Thank you to our contributors!
 
@@ -201,3 +197,18 @@ A huge thanks to those giving us to the resources to run servers, have testing e
 Our project sponsors [Noblestreet](https://opencollective.com/noblestreet), [Okta](https://opencollective.com/okta) and [hexploitation](https://opencollective.com/hexploitation).
 
 And our fantastic donors [Simon Michalke](https://opencollective.com/simon-michalke), [rootbeerdan](https://opencollective.com/rootbeerdan), [Luka Prinčič](https://opencollective.com/luka-princic), [Kyle Bronsdon](https://opencollective.com/guest-7c7eb0e8), [Flaki](https://opencollective.com/flaki), [Raffael Rehberger](https://opencollective.com/ruffy), [Joel Bradshaw](https://opencollective.com/joel-bradshaw), [Paul Lindner](https://opencollective.com/lindner), [Real Targeted Traffic](https://opencollective.com/seo25-com), [TargetedVisitors](https://opencollective.com/targeted-traffic), [Incognito](https://opencollective.com/incognito-3b4cd5c7), [nebunez](https://opencollective.com/guest-50d297d1), [Merlin](https://opencollective.com/johnathan-shunn), [Teklynk](https://opencollective.com/guest-87b42e0e), [Ole](https://opencollective.com/guest-c741c302), [PlayBox Technology](https://opencollective.com/playbox-technology), [Guest](https://opencollective.com/guest-ef71fba6) and [Guest](https://opencollective.com/guest-7c9c2080).
+
+
+---
+
+## Downloads
+
+View all downloads on the [GitHub release page](https://github.com/owncast/owncast/releases/tag/v0.0.12).
+
+| Platform | Download |
+|----------|----------|
+| owncast-0.0.12-linux-32bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.12/owncast-0.0.12-linux-32bit.zip) (17.7 MB) |
+| owncast-0.0.12-linux-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.12/owncast-0.0.12-linux-64bit.zip) (18.5 MB) |
+| owncast-0.0.12-linux-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.12/owncast-0.0.12-linux-arm64.zip) (17.5 MB) |
+| owncast-0.0.12-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.12/owncast-0.0.12-linux-arm7.zip) (17.9 MB) |
+| owncast-0.0.12-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.12/owncast-0.0.12-macOS-64bit.zip) (19.2 MB) |

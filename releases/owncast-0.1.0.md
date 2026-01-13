@@ -1,8 +1,9 @@
 ---
 title: Owncast v0.1.0
-description: Owncast v0.1.0 is a large update with many changes.
+description: >-
+  The first commit to Owncast was May 23, 2020. It's been a wild ride seeing what everyone has been streaming and all the creative use cases people have come up with. Thank you to everyone who has contr...
 sidebar_position: 100
-date: 2023-05-30T00:00:00.000Z
+date: 2023-05-30T16:18:06.000Z
 ---
 
 **Note:** Please read these release notes in their entirety. There are many changes and it's important for you to know what has changed and how it will affect you.
@@ -57,17 +58,17 @@ While not every single individual component or element can be customized via poi
 
 **Note** that any CSS you had written for previous releases of Owncast will not be compatible with the new version, as the entire web frontend changed.
 
-Read more about the appearance customization page in the [Appearance customization](/docs/configuration/appearance) guide.
+Read more about the appearance customization page in the [Appearance customization](/docs/appearance/) guide.
 
 ## Insert custom Javascript
 
-Under the **General** settings page you can add custom Javascript to your Owncast instance's web page. Read more about this in the [documentation](/docs/configuration/custom-javascript).
+Under the **General** settings page you can add custom Javascript to your Owncast instance's web page. Read more about this in the [documentation](/docs/custom-javascript/).
 
 ## Streaming keys and admin password
 
 Previously the admin password and stream key were the same. Due to requests these have been split up, and you can now create any number of streaming keys. Most people will continue to not need this functionality, but if you have a specific use case where you have multiple streamers, and you don't want any of them to access the admin for some reason, this is now possible.
 
-**By default the admin password and single stream key are both the same**. So you should see no difference when upgrading to this new release.
+**By default the admin password and single stream key are both the same**, however. So you should see no difference when upgrading to this new release.
 
 ## Custom emoji
 
@@ -123,77 +124,77 @@ Primarily due to Twitter removing external API access to their service, but also
 
 ### Added
 
-- New setting: Allow hiding viewer count [\#1939](https://github.com/owncast/owncast/issues/1939)
+- New setting: Allow hiding viewer count [#1939](https://github.com/owncast/owncast/issues/1939)
 
-- Add support for optional public web assets directory [\#2234](https://github.com/owncast/owncast/issues/2234)
+- Add support for optional public web assets directory [#2234](https://github.com/owncast/owncast/issues/2234)
 
-- New admin page for customization [\#1915](https://github.com/owncast/owncast/issues/1915)
+- New admin page for customization [#1915](https://github.com/owncast/owncast/issues/1915)
 
-- Allow uploading custom emoji through the admin [\#2378](https://github.com/owncast/owncast/issues/2378)
+- Allow uploading custom emoji through the admin [#2378](https://github.com/owncast/owncast/issues/2378)
 
-- Option to mute embed by default [\#2420](https://github.com/owncast/owncast/issues/2420)
+- Option to mute embed by default [#2420](https://github.com/owncast/owncast/issues/2420)
 
-- Add support for arbitrary Javascript in page [\#2604](https://github.com/owncast/owncast/issues/2604)
+- Add support for arbitrary Javascript in page [#2604](https://github.com/owncast/owncast/issues/2604)
 
-- Auto-generate a complex, stream key when adding [\#2631](https://github.com/owncast/owncast/issues/2631)
+- Auto-generate a complex, stream key when adding [#2631](https://github.com/owncast/owncast/issues/2631)
 
-- Allow providing HTML instead of a link for external actions [\#1718](https://github.com/owncast/owncast/issues/1718)
+- Allow providing HTML instead of a link for external actions [#1718](https://github.com/owncast/owncast/issues/1718)
 
-- Webhook for stream title change [\#2795](https://github.com/owncast/owncast/issues/2795)
+- Webhook for stream title change [#2795](https://github.com/owncast/owncast/issues/2795)
 
-- Feature Request: Sortable social media links [\#1818](https://github.com/owncast/owncast/issues/1818)
+- Feature Request: Sortable social media links [#1818](https://github.com/owncast/owncast/issues/1818)
 
-- Ability to edit external actions [\#1884](https://github.com/owncast/owncast/issues/1884)
+- Ability to edit external actions [#1884](https://github.com/owncast/owncast/issues/1884)
 
-- Implement WCAG 2.1 compliance [\#1826](https://github.com/owncast/owncast/issues/1826)
+- Implement WCAG 2.1 compliance [#1826](https://github.com/owncast/owncast/issues/1826)
 
-- Support brotli encoding [\#2697](https://github.com/owncast/owncast/issues/2697)
+- Support brotli encoding [#2697](https://github.com/owncast/owncast/issues/2697)
 
 ### Changed
 
-- Do not allow Federation if running on a non-standard port [\#2008](https://github.com/owncast/owncast/issues/2008)
+- Do not allow Federation if running on a non-standard port [#2008](https://github.com/owncast/owncast/issues/2008)
 
-- Make streaming key and admin password different values [\#2320](https://github.com/owncast/owncast/issues/2320)
+- Make streaming key and admin password different values [#2320](https://github.com/owncast/owncast/issues/2320)
 
-- Enforce username requirements at register (API or headers) [\#2527](https://github.com/owncast/owncast/issues/2527)
+- Enforce username requirements at register (API or headers) [#2527](https://github.com/owncast/owncast/issues/2527)
 
-- Player "Live" indicator circle should use the action CSS variable color [\#2890](https://github.com/owncast/owncast/issues/2890)
+- Player "Live" indicator circle should use the action CSS variable color [#2890](https://github.com/owncast/owncast/issues/2890)
 
 ### Fixed
 
-- Admin message moderation errors [\#2020](https://github.com/owncast/owncast/issues/2020)
+- Admin message moderation errors [#2020](https://github.com/owncast/owncast/issues/2020)
 
-- Admin only allows selecting 24fps or 120fps, nothing in between [\#2159](https://github.com/owncast/owncast/issues/2159)
+- Admin only allows selecting 24fps or 120fps, nothing in between [#2159](https://github.com/owncast/owncast/issues/2159)
 
-- I get an error about 40 seconds into launching the server --> "panic: runtime error: index out of range [0] with length 0" [\#2423](https://github.com/owncast/owncast/issues/2423)
+- I get an error about 40 seconds into launching the server --> "panic: runtime error: index out of range [0] with length 0" [#2423](https://github.com/owncast/owncast/issues/2423)
 
-- fix minimum bitrate detection for system health report [\#2455](https://github.com/owncast/owncast/pull/2455)
+- fix minimum bitrate detection for system health report [#2455](https://github.com/owncast/owncast/pull/2455)
 
-- Admin logo upload UI sending empty payloads [\#2524](https://github.com/owncast/owncast/issues/2524)
+- Admin logo upload UI sending empty payloads [#2524](https://github.com/owncast/owncast/issues/2524)
 
-- Android: Page doesn't scroll when keyboard is displayed [\#2595](https://github.com/owncast/owncast/issues/2595)
+- Android: Page doesn't scroll when keyboard is displayed [#2595](https://github.com/owncast/owncast/issues/2595)
 
-- Fix Owncast Avatar URL for discord webhooks [\#2748](https://github.com/owncast/owncast/pull/2748)
+- Fix Owncast Avatar URL for discord webhooks [#2748](https://github.com/owncast/owncast/pull/2748)
 
-- Give friendlier error in the admin when it cannot connect to Owncast service [\#2698](https://github.com/owncast/owncast/issues/2698)
+- Give friendlier error in the admin when it cannot connect to Owncast service [#2698](https://github.com/owncast/owncast/issues/2698)
 
-- Crashes on 32-bit ARM (likely a bug in Metrics dependency) [\#2746](https://github.com/owncast/owncast/issues/2746)
+- Crashes on 32-bit ARM (likely a bug in Metrics dependency) [#2746](https://github.com/owncast/owncast/issues/2746)
 
-- Nitpicky detail: resolution placeholders aren't 16x9 [\#2799](https://github.com/owncast/owncast/issues/2799)
+- Nitpicky detail: resolution placeholders aren't 16x9 [#2799](https://github.com/owncast/owncast/issues/2799)
 
-- Hardware info screen empty after start [\#2805](https://github.com/owncast/owncast/issues/2805)
+- Hardware info screen empty after start [#2805](https://github.com/owncast/owncast/issues/2805)
 
-- Viewer graph should always use 0 as minimal value [\#2806](https://github.com/owncast/owncast/issues/2806)
+- Viewer graph should always use 0 as minimal value [#2806](https://github.com/owncast/owncast/issues/2806)
 
-- Set correct content-type and cache-control for S3 uploads [\#2771](https://github.com/owncast/owncast/issues/2771)
+- Set correct content-type and cache-control for S3 uploads [#2771](https://github.com/owncast/owncast/issues/2771)
 
-- Loose div in Utilities \> Stream health screen [\#2804](https://github.com/owncast/owncast/issues/2804)
+- Loose div in Utilities > Stream health screen [#2804](https://github.com/owncast/owncast/issues/2804)
 
-- Video variant admin interface should start with the default setting values [\#1946](https://github.com/owncast/owncast/issues/1946)
+- Video variant admin interface should start with the default setting values [#1946](https://github.com/owncast/owncast/issues/1946)
 
 ### Removed
 
-- Remove Twitter notification support [\#2597](https://github.com/owncast/owncast/issues/2597)
+- Remove Twitter notification support [#2597](https://github.com/owncast/owncast/issues/2597)
 
 ## Thank you to our contributors!
 
@@ -205,10 +206,25 @@ We also thank all of the fantastic people helping out in the [Owncast chat](http
 
 A **huge** thanks to those giving us to the resources to run servers, have testing environments, host collaboration tools, pay for 3rd party services to test with and the means to experiment with new ideas we wouldn't be able to do otherwise.
 
-Our fantastic corporate sponsors [Noblestreet](https://opencollective.com/noblestreet), [Okta](https://opencollective.com/okta) and generous donors [Simon Michalke](https://opencollective.com/simon-michalke), [rootbeerdan](https://opencollective.com/rootbeerdan), [Luka Prinčič](https://opencollective.com/luka-princic), [Kyle Bronsdon](https://opencollective.com/kyle-bronsdon), [Flaki](https://opencollective.com/flaki), [Raffael Rehberger](https://opencollective.com/ruffy), [Jnktn.tv](https://opencollective.com/jnktn-tv), [Joel Bradshaw](https://opencollective.com/joel-bradshaw), [Paul Lindner](https://opencollective.com/lindner), [Real Targeted Traffic](https://opencollective.com/seo25-com), [TargetedVisitors](https://opencollective.com/targeted-traffic), [Incognito](https://opencollective.com/incognito-3b4cd5c7), [nebunez](https://opencollective.com/nebunez), [Merlin](https://opencollective.com/johnathan-shunn), [Teklynk](https://opencollective.com/teklynk), [Marius Hoel](https://opencollective.com/mhoel), [Ole](https://opencollective.com/guest-c741c302), [PlayBox Technology](https://opencollective.com/playbox-technology), [Guest](https://opencollective.com/guest-ef71fba6), [Incognito](https://opencollective.com/user-5bdb86e0), [Aqaba](https://opencollective.com/guest-7d044239), [Michał Sidor](https://opencollective.com/michcio), [Jacky Alcine](https://opencollective.com/jackyalcine), [2000staFM](https://opencollective.com/guest-b2e5fccd), [Guest](https://opencollective.com/guest-bef18650), [SillySam](https://opencollective.com/sillysam), [ruut](https://opencollective.com/guest-d5b81ff0), [Ozoned](https://opencollective.com/guest-ffa58d26), [emacsen](https://opencollective.com/guest-618ea119), [Incognito](https://opencollective.com/incognito-5c38b018), [Jeff Moe](https://opencollective.com/jebba), [GunghoGeoduck](https://opencollective.com/guest-78ad01d4), [Patrick](https://opencollective.com/patrick-materla), [Chris Heino](https://opencollective.com/guest-e27f435c), [Didier Malenfant](https://opencollective.com/didier-malenfant), [Markus Ressel](https://opencollective.com/markus-ressel), [Kit Aultman](https://opencollective.com/guest-5ec71b6f), [Mohamed Elsheiry](https://opencollective.com/mohamed-elsheiry), [Tom](https://opencollective.com/tom31), [Michael](https://opencollective.com/michael67), [Theodore Jones](https://opencollective.com/theodore-jones), [Alex O'Carroll](https://opencollective.com/alex-ocarroll), [Alex O'Carroll](https://opencollective.com/alex-ocarroll), [Raymon Mens](https://opencollective.com/guest-3f3a82d6), [Vencabot](https://opencollective.com/vencabot), [James Carpenter](https://opencollective.com/guest-63e91d50), [Vince](https://opencollective.com/guest-08e5b6de), [Robert Wolniak](https://opencollective.com/robert-wolniak), [Nullcasting](https://opencollective.com/guest-7e5ea2e1) and [Martijn](https://opencollective.com/martijn).
+Our fantastic corporate sponsors [Noblestreet](https://opencollective.com/noblestreet) and [Okta](https://opencollective.com/okta) and generous donors [Simon Michalke](https://opencollective.com/simon-michalke), [rootbeerdan](https://opencollective.com/rootbeerdan), [Luka Prinčič](https://opencollective.com/luka-princic), [Kyle Bronsdon](https://opencollective.com/kyle-bronsdon), [Flaki](https://opencollective.com/flaki), [Raffael Rehberger](https://opencollective.com/ruffy), [Jnktn.tv](https://opencollective.com/jnktn-tv), [Joel Bradshaw](https://opencollective.com/joel-bradshaw), [Paul Lindner](https://opencollective.com/lindner), [Real Targeted Traffic](https://opencollective.com/seo25-com), [TargetedVisitors](https://opencollective.com/targeted-traffic), [Incognito](https://opencollective.com/incognito-3b4cd5c7), [nebunez](https://opencollective.com/nebunez), [Merlin](https://opencollective.com/johnathan-shunn), [Teklynk](https://opencollective.com/teklynk), [Marius Hoel](https://opencollective.com/mhoel), [Ole](https://opencollective.com/guest-c741c302), [PlayBox Technology](https://opencollective.com/playbox-technology), [Guest](https://opencollective.com/guest-ef71fba6), [Incognito](https://opencollective.com/user-5bdb86e0), [Aqaba](https://opencollective.com/guest-7d044239) and [Michał Sidor](https://opencollective.com/michcio).
 
 ## In-kind support
 
 A special **thank you** to the organizations that offer services to help Owncast build, test and support and distribute the software.
 
 [Fastly](https://www.fastly.com/fast-forward), [Cypress](https://cloud.cypress.io/projects/wwi3xe), [BrowserStack](https://www.browserstack.com/open-source), [Chromatic](https://www.chromatic.com/builds?appId=629132c6e23893003a9e89c5), [Docker](https://hub.docker.com/u/owncast) and [Rocket.Chat](https://owncast.rocket.chat/).
+
+
+---
+
+## Downloads
+
+View all downloads on the [GitHub release page](https://github.com/owncast/owncast/releases/tag/v0.1.0).
+
+| Platform | Download |
+|----------|----------|
+| owncast-0.1.0-linux-32bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.0/owncast-0.1.0-linux-32bit.zip) (16.1 MB) |
+| owncast-0.1.0-linux-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.0/owncast-0.1.0-linux-64bit.zip) (16.6 MB) |
+| owncast-0.1.0-linux-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.0/owncast-0.1.0-linux-arm64.zip) (15.6 MB) |
+| owncast-0.1.0-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.0/owncast-0.1.0-linux-arm7.zip) (15.6 MB) |
+| owncast-0.1.0-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.0/owncast-0.1.0-macOS-64bit.zip) (17.0 MB) |

@@ -1,12 +1,17 @@
 ---
 title: Owncast v0.0.9
-description: 0.0.9 is a smaller release with a handful of tweaks and fixes for Owncast.
-date: 2021-09-26T00:00:00.000Z
+description: >-
+  Owncast v0.0.9 is a smaller release with a handful of tweaks and fixes.  There's not a lot of user-facing changes this time around, but take a look through the below changes and see if there's anythin...
+sidebar_position: 9
+date: 2021-09-26T21:37:40.000Z
 ---
 
-Owncast v0.0.9 is a smaller release with a handful of tweaks and fixes. There's not a lot of user-facing changes this time around, but take a look through the below changes and see if there's anything that might impact you.
+Owncast v0.0.9 is a smaller release with a handful of tweaks and fixes.  There's not a lot of user-facing changes this time around, but take a look through the below changes and see if there's anything that might impact you.
 
-One thing that might make your life more convenient going forward is instead of putting in the full video URL /hls/stream.m3u8 when viewing an Owncast stream in an external video player (MPV, Quicktime, VLC) you can just put your root URL to your Owncast server.
+One thing that might make your life more convenient going forward is instead of putting in the full video URL `/hls/stream.m3u8` when viewing an Owncast stream in an external video player (MPV, Quicktime, VLC) you can just put your root URL to your Owncast server.  
+
+# Changelog
+## [[0.0.9](https://github.com/owncast/owncast/milestone/16)] - 2021-09-26
 
 ## Upgrade instructions from 0.0.8
 
@@ -20,59 +25,61 @@ One thing that might make your life more convenient going forward is instead of 
 
 ### Added
 
-- Add support for loading the root owncast URL directly in 3rd party video applications. [\#1356](https://github.com/owncast/owncast/pull/1356)
+* Add support for loading the root owncast URL directly in 3rd party video applications. [#1356](https://github.com/owncast/owncast/pull/1356) 
 
-- Add proper landing page for browsers without the JS support [\#1139](https://github.com/owncast/owncast/issues/1139)
+* Add proper landing page for browsers without the JS support [#1139](https://github.com/owncast/owncast/issues/1139) 
 
-- Create external API to enable sending a message directly to a client instead of publicly [\#1316](https://github.com/owncast/owncast/issues/1316)
+* Create external API to enable sending a message directly to a client instead of publicly [#1316](https://github.com/owncast/owncast/issues/1316) 
+
 
 ### Breaking Changes
 
-- No longer exit after successful stream key change via the CLI argument [\#1355](https://github.com/owncast/owncast/pull/1355)
+* No longer exit after successful stream key change via the CLI argument [#1355](https://github.com/owncast/owncast/pull/1355) 
 
 ### Changed
 
-- Auto expand the "Utilities" menu item in admin if an Owncast update is available [\#1299](https://github.com/owncast/owncast/issues/1299)
+* Auto expand the "Utilities" menu item in admin if an Owncast update is available [#1299](https://github.com/owncast/owncast/issues/1299) 
 
-- Increase the sensitivity of the chat rate limiter [\#1349](https://github.com/owncast/owncast/issues/1349)
+* Increase the sensitivity of the chat rate limiter [#1349](https://github.com/owncast/owncast/issues/1349) 
 
-- Make the emoji directory configurable [\#1174](https://github.com/owncast/owncast/issues/1174)
+* Make the emoji directory configurable  [#1174](https://github.com/owncast/owncast/issues/1174) 
 
-- Stop logging 404s to the admin logs [\#1341](https://github.com/owncast/owncast/issues/1341)
+* Stop logging 404s to the admin logs [#1341](https://github.com/owncast/owncast/issues/1341) 
 
-- Mark viewer as active when downloading an HLS playlist [\#1343](https://github.com/owncast/owncast/issues/1343)
+* Mark viewer as active when downloading an HLS playlist [#1343](https://github.com/owncast/owncast/issues/1343) 
 
-- Simplify where HLS segments live on the filesystem so they always live in `data` [\#875](https://github.com/owncast/owncast/issues/875)
+* Simplify where HLS segments live on the filesystem so they always live in `data` [#875](https://github.com/owncast/owncast/issues/875) 
 
-- In the admin don't show the connected client count if we're not showing a list of the clients [\#1306](https://github.com/owncast/owncast/issues/1306)
+* In the admin don't show the connected client count if we're not showing a list of the clients [#1306](https://github.com/owncast/owncast/issues/1306) 
 
-- Do not show user joined chat message if user has recently joined [\#1406](https://github.com/owncast/owncast/issues/1406)
+* Do not show user joined chat message if user has recently joined [#1406](https://github.com/owncast/owncast/issues/1406) 
 
 ### Fixed
 
-- Chat disables when stream ends instead of 5 minutes later [\#1268](https://github.com/owncast/owncast/issues/1268)
+* Chat disables when stream ends instead of 5 minutes later [#1268](https://github.com/owncast/owncast/issues/1268) 
 
-- GeoIP support not working with 0.0.8 [\#1304](https://github.com/owncast/owncast/issues/1304)
+* GeoIP support not working with 0.0.8 [#1304](https://github.com/owncast/owncast/issues/1304) 
 
-- Previous display names are not being displayed in the admin user modal [\#1277](https://github.com/owncast/owncast/issues/1277)
+* Previous display names are not being displayed in the admin user modal [#1277](https://github.com/owncast/owncast/issues/1277) 
 
-- Re-joining chat in the 5min window after disconnect shows the chat as disabled [\#1311](https://github.com/owncast/owncast/issues/1311)
+* Re-joining chat in the 5min window after disconnect shows the chat as disabled [#1311](https://github.com/owncast/owncast/issues/1311) 
 
-- Set a value for player maxPlaylistRetries in the player [\#1335](https://github.com/owncast/owncast/issues/1335)
+* Set a value for player maxPlaylistRetries in the player [#1335](https://github.com/owncast/owncast/issues/1335) 
 
-- Markdown rendering ends up with excessive spacing with lists [\#1315](https://github.com/owncast/owncast/issues/1315)
+* Markdown rendering ends up with excessive spacing with lists [#1315](https://github.com/owncast/owncast/issues/1315) 
 
-- Improve chat auto-scrolling [\#1324](https://github.com/owncast/owncast/issues/1324)
+* Improve chat auto-scrolling [#1324](https://github.com/owncast/owncast/issues/1324) 
 
-- Fix Windows tests [\#1376](https://github.com/owncast/owncast/pull/1376)
+* Fix Windows tests [#1376](https://github.com/owncast/owncast/pull/1376) 
 
-- Fix transcoding error text [\#1381](https://github.com/owncast/owncast/pull/1381)
+* Fix transcoding error text [#1381](https://github.com/owncast/owncast/pull/1381) 
 
-- Potential local client security problem(s) when pasting DOM elements into chat [\#1357](https://github.com/owncast/owncast/issues/1357)
+* Potential local client security problem(s) when pasting DOM elements into chat [#1357](https://github.com/owncast/owncast/issues/1357) 
 
-- Fixed USER_JOINED webhooks to have the correct event type name. [\#1302](https://github.com/owncast/owncast/issues/1302)
+* Fixed USER_JOINED webhooks to have the correct event type name. [#1302](https://github.com/owncast/owncast/issues/1302) 
 
-- Fix building on FreeBSD [\#1243](https://github.com/owncast/owncast/issues/1243)
+* Fix building on FreeBSD [#1243](https://github.com/owncast/owncast/issues/1243) 
+
 
 ## Thank you to our contributors!
 
@@ -87,3 +94,18 @@ A huge thanks to those giving us to the resources to run servers, have testing e
 Our project sponsors [Noblestreet](https://opencollective.com/noblestreet) and [Okta](https://opencollective.com/okta).
 
 And our fantastic donors [Simon Michalke](https://opencollective.com/simon-michalke), [rootbeerdan](https://opencollective.com/rootbeerdan), [Luka Prinčič](https://opencollective.com/luka-princic), [Kyle Bronsdon](https://opencollective.com/guest-7c7eb0e8), [Robin](https://opencollective.com/robin-mol1), [Flaki](https://opencollective.com/flaki), [Joel Bradshaw](https://opencollective.com/joel-bradshaw) and [Paul Lindner](https://opencollective.com/lindner).
+
+
+---
+
+## Downloads
+
+View all downloads on the [GitHub release page](https://github.com/owncast/owncast/releases/tag/v0.0.9).
+
+| Platform | Download |
+|----------|----------|
+| owncast-0.0.9-linux-32bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.9/owncast-0.0.9-linux-32bit.zip) (13.7 MB) |
+| owncast-0.0.9-linux-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.9/owncast-0.0.9-linux-64bit.zip) (14.1 MB) |
+| owncast-0.0.9-linux-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.9/owncast-0.0.9-linux-arm64.zip) (13.6 MB) |
+| owncast-0.0.9-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.9/owncast-0.0.9-linux-arm7.zip) (13.6 MB) |
+| owncast-0.0.9-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.9/owncast-0.0.9-macOS-64bit.zip) (14.7 MB) |

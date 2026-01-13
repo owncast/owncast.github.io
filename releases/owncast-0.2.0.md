@@ -1,8 +1,9 @@
 ---
 title: Owncast v0.2.0
-description: 'Handfuls of behind the scenes updates, bug fixes, and feature requests.'
-sidebar_position: 100
-date: 2025-01-11T00:00:00.000Z
+description: >-
+  This release includes a handful of behind-the-scenes changes to position the project for future feature work, a bunch of bug fixes and a few smaller quality of life improvements. See the below changel...
+sidebar_position: 200
+date: 2025-01-11T23:07:48.000Z
 ---
 
 # Changelog
@@ -25,131 +26,132 @@ Additional `v0.2.x` releases will continue until the backend refactor work is co
 
 ### Added
 
-- Add modal state for browser notifications being denied [\#3771](https://github.com/owncast/owncast/pull/3771)
+* Add modal state for browser notifications being denied [#3771](https://github.com/owncast/owncast/pull/3771) 
 
-- Create and change to spec-first API design [\#3302](https://github.com/owncast/owncast/issues/3302)
+* Create and change to spec-first API design [#3302](https://github.com/owncast/owncast/issues/3302) 
 
-- Create UserRepository [\#3079](https://github.com/owncast/owncast/issues/3079)
+* Create UserRepository [#3079](https://github.com/owncast/owncast/issues/3079) 
 
-- Support disabling inbound chat message rate limiter [\#3523](https://github.com/owncast/owncast/issues/3523)
+* Support disabling inbound chat message rate limiter [#3523](https://github.com/owncast/owncast/issues/3523) 
 
-- Add Slur / Profanity Filter to chat [\#3139](https://github.com/owncast/owncast/issues/3139)
+* Add Slur / Profanity Filter to chat [#3139](https://github.com/owncast/owncast/issues/3139) 
 
-- Add persistent HTTP connection flag from transcoder to internal video receiver service [\#3985](https://github.com/owncast/owncast/issues/3985)
+* Add persistent HTTP connection flag from transcoder to internal video receiver service [#3985](https://github.com/owncast/owncast/issues/3985) 
 
-- Create ConfigRepository [\#3080](https://github.com/owncast/owncast/issues/3080)
+* Create ConfigRepository [#3080](https://github.com/owncast/owncast/issues/3080) 
 
-- Create an external version of the user details /api/moderation/chat/user/`{userId}` API [\#4015](https://github.com/owncast/owncast/issues/4015)
+* Create an external version of the user details /api/moderation/chat/user/{userId} API [#4015](https://github.com/owncast/owncast/issues/4015) 
 
-- implement admin password hashing [\#2495](https://github.com/owncast/owncast/issues/2495)
+* implement admin password hashing [#2495](https://github.com/owncast/owncast/issues/2495) 
+
 
 ### Changed
 
-- Update project to Go 1.22 [\#3707](https://github.com/owncast/owncast/issues/3707)
+* Update project to Go 1.22 [#3707](https://github.com/owncast/owncast/issues/3707) 
 
-- Update Patreon social link icon [\#3807](https://github.com/owncast/owncast/issues/3807)
+* Update Patreon social link icon [#3807](https://github.com/owncast/owncast/issues/3807) 
 
-- Update the label of stupid 𝕏 🙄 [\#3817](https://github.com/owncast/owncast/issues/3817)
+* Update the label of stupid 𝕏 🙄 [#3817](https://github.com/owncast/owncast/issues/3817) 
 
-- Change websocket mock from empty function to empty class [\#3998](https://github.com/owncast/owncast/pull/3998)
+* Change websocket mock from empty function to empty class [#3998](https://github.com/owncast/owncast/pull/3998) 
 
-- Communicate and handle apub outgoing updates being delayed [\#4009](https://github.com/owncast/owncast/pull/4009)
+* Communicate and handle apub outgoing updates being delayed [#4009](https://github.com/owncast/owncast/pull/4009) 
 
-- Make the FediAuth code show up earlier in the message [\#3123](https://github.com/owncast/owncast/issues/3123)
+* Make the FediAuth code show up earlier in the message [#3123](https://github.com/owncast/owncast/issues/3123) 
 
-- Increase outbound worker pool size to use follower count [\#4049](https://github.com/owncast/owncast/pull/4049)
+* Increase outbound worker pool size to use follower count [#4049](https://github.com/owncast/owncast/pull/4049) 
 
-- Validate and troubleshoot any issues dealing with the pagination middleware after the router change [\#3732](https://github.com/owncast/owncast/issues/3732)
+* Validate and troubleshoot any issues dealing with the pagination middleware after the router change [#3732](https://github.com/owncast/owncast/issues/3732) 
 
-- Update some platform logos [\#4081](https://github.com/owncast/owncast/pull/4081)
+* Update some platform logos [#4081](https://github.com/owncast/owncast/pull/4081) 
 
-- Mute the 'stream ended' clip's audio [\#3630](https://github.com/owncast/owncast/pull/3630)
+* Mute the 'stream ended' clip's audio [#3630](https://github.com/owncast/owncast/pull/3630) 
 
-- Set stream title in video tag for iframe embed of owncast streaming url [\#2702](https://github.com/owncast/owncast/issues/2702)
+* Set stream title in video tag for iframe embed of owncast streaming url [#2702](https://github.com/owncast/owncast/issues/2702) 
 
-- Usability: Volume Bar UI Fades Too Fast [\#3497](https://github.com/owncast/owncast/issues/3497)
+* Usability: Volume Bar UI Fades Too Fast [#3497](https://github.com/owncast/owncast/issues/3497) 
 
-- Feature request: enable word wrap on the Markdown editor [\#3870](https://github.com/owncast/owncast/issues/3870)
+* Feature request: enable word wrap on the Markdown editor [#3870](https://github.com/owncast/owncast/issues/3870) 
 
-- Replace unsupported Picmo emoji picker with something else [\#3598](https://github.com/owncast/owncast/issues/3598) [\#4001](https://github.com/owncast/owncast/pull/4001)
+* Replace unsupported Picmo emoji picker with something else [#3598](https://github.com/owncast/owncast/issues/3598) [#4001](https://github.com/owncast/owncast/pull/4001) 
 
 ### Fixed
 
-- New offline embed state not handling HTML [\#3682](https://github.com/owncast/owncast/issues/3682)
+* New offline embed state not handling HTML [#3682](https://github.com/owncast/owncast/issues/3682) 
 
-- Firefox requires clearing cache often to log into the admin [\#3097](https://github.com/owncast/owncast/issues/3097)
+* Firefox requires clearing cache often to log into the admin [#3097](https://github.com/owncast/owncast/issues/3097) 
 
-- aria live: html entities are not decoded [\#3665](https://github.com/owncast/owncast/issues/3665)
+* aria live: html entities are not decoded [#3665](https://github.com/owncast/owncast/issues/3665) 
 
-- Live streams that are between 24 and 25 hours display the time as "Live for 1 day undefined hours" [\#3727](https://github.com/owncast/owncast/issues/3727)
+* Live streams that are between 24 and 25 hours display the time as "Live for 1 day undefined hours" [#3727](https://github.com/owncast/owncast/issues/3727) 
 
-- fixing grammar [\#3801](https://github.com/owncast/owncast/pull/3801)
+* fixing grammar [#3801](https://github.com/owncast/owncast/pull/3801) 
 
-- Admin Edit Social Handle save without name [\#3812](https://github.com/owncast/owncast/issues/3812)
+* Admin Edit Social Handle save without name [#3812](https://github.com/owncast/owncast/issues/3812) 
 
-- Fix admin prompting an upgrade to an incorrect release [\#4097](https://github.com/owncast/owncast/issues/4097
+* Fix admin prompting an upgrade to an incorrect release [#4097](https://github.com/owncast/owncast/issues/4097
 
-- owncast_instance_active_viewer_count for prometheus doesn't reset to 0 at the end of the stream [\#3830](https://github.com/owncast/owncast/issues/3830)
+* owncast_instance_active_viewer_count for prometheus doesn't reset to 0 at the end of the stream [#3830](https://github.com/owncast/owncast/issues/3830) 
 
-- Filtering Admin Logs shows no data [\#3813](https://github.com/owncast/owncast/issues/3813)
+* Filtering Admin Logs shows no data [#3813](https://github.com/owncast/owncast/issues/3813) 
 
-- Fix crash in video metrics handler [\#3984](https://github.com/owncast/owncast/issues/3984)
+* Fix crash in video metrics handler [#3984](https://github.com/owncast/owncast/issues/3984) 
 
-- Service worker throw error Cannot read properties of undefined (reading 'startsWith') [\#3967](https://github.com/owncast/owncast/issues/3967)
+* Service worker throw error Cannot read properties of undefined (reading 'startsWith') [#3967](https://github.com/owncast/owncast/issues/3967) 
 
-- Player stream time can show "undefined" [\#3857](https://github.com/owncast/owncast/issues/3857)
+* Player stream time can show "undefined"  [#3857](https://github.com/owncast/owncast/issues/3857) 
 
-- fix: update Alpine base image [\#3938](https://github.com/owncast/owncast/pull/3938)
+* fix: update Alpine base image [#3938](https://github.com/owncast/owncast/pull/3938) 
 
-- Browser Notifications Modal Message is incorrect on browser [\#3752](https://github.com/owncast/owncast/issues/3752)
+* Browser Notifications Modal Message is incorrect on browser [#3752](https://github.com/owncast/owncast/issues/3752) 
 
-- aria live: user name remains logged in name [\#3664](https://github.com/owncast/owncast/issues/3664)
+* aria live: user name remains logged in name [#3664](https://github.com/owncast/owncast/issues/3664) 
 
-- Federation enabled state does not respect the "Enable Social Features" modal cancellation [\#4021](https://github.com/owncast/owncast/issues/4021)
+* Federation enabled state does not respect the "Enable Social Features" modal cancellation [#4021](https://github.com/owncast/owncast/issues/4021) 
 
-- Admin Follower Sorting shows no data [\#3799](https://github.com/owncast/owncast/issues/3799)
+* Admin Follower Sorting shows no data [#3799](https://github.com/owncast/owncast/issues/3799) 
 
-- Enabling the social features switch in the admin no longer works [\#4055](https://github.com/owncast/owncast/issues/4055)
+* Enabling the social features switch in the admin no longer works [#4055](https://github.com/owncast/owncast/issues/4055) 
 
-- Follow button no longer shows up in offline video embed [\#4053](https://github.com/owncast/owncast/issues/4053)
+* Follow button no longer shows up in offline video embed [#4053](https://github.com/owncast/owncast/issues/4053) 
 
-- Can't fix incorrectly entered fediverse account in Offline embed [\#4056](https://github.com/owncast/owncast/issues/4056)
+* Can't fix incorrectly entered fediverse account in Offline embed [#4056](https://github.com/owncast/owncast/issues/4056) 
 
-- Updating server details are not reflected in the UI when social features are enabled [\#3229](https://github.com/owncast/owncast/issues/3229)
+* Updating server details are not reflected in the UI when social features are enabled [#3229](https://github.com/owncast/owncast/issues/3229) 
 
-- fix skip link visibility and it moving logo upon focus [\#4078](https://github.com/owncast/owncast/pull/4078)
+* fix skip link visibility and it moving logo upon focus [#4078](https://github.com/owncast/owncast/pull/4078) 
 
-- Copying stream key without revealing it only copies asterisks (when using clipboard manager?) [\#3460](https://github.com/owncast/owncast/issues/3460)
+* Copying stream key without revealing it only copies asterisks (when using clipboard manager?) [#3460](https://github.com/owncast/owncast/issues/3460) 
 
-- Large gap in sentence in modal on Mobile [\#3748](https://github.com/owncast/owncast/issues/3748)
+* Large gap in sentence in modal on Mobile [#3748](https://github.com/owncast/owncast/issues/3748) 
 
-- Admin video passthrough banner: Low contrast between the text color and the background [\#3798](https://github.com/owncast/owncast/issues/3798)
+* Admin video passthrough banner: Low contrast between the text color and the background [#3798](https://github.com/owncast/owncast/issues/3798) 
 
-- Admin Configuration small typo [\#3827](https://github.com/owncast/owncast/issues/3827)
+* Admin Configuration small typo [#3827](https://github.com/owncast/owncast/issues/3827) 
 
-- Admin checkbox item selected has poor legibility [\#3800](https://github.com/owncast/owncast/issues/3800)
+* Admin checkbox item selected has poor legibility [#3800](https://github.com/owncast/owncast/issues/3800) 
 
-- Adjust CleanupDirectory function to support tmpfs mounts. [\#3818](https://github.com/owncast/owncast/pull/3818)
+* Adjust CleanupDirectory function to support tmpfs mounts. [#3818](https://github.com/owncast/owncast/pull/3818) 
 
-- Chat - Long Username is clipped when chat is narrow [\#3749](https://github.com/owncast/owncast/issues/3749)
+* Chat - Long Username is clipped when chat is narrow [#3749](https://github.com/owncast/owncast/issues/3749) 
 
-- Incorrect artifact timestamps on builds [\#3282](https://github.com/owncast/owncast/issues/3282)
+* Incorrect artifact timestamps on builds [#3282](https://github.com/owncast/owncast/issues/3282) 
 
-- Update chat websocket reconnect logic [\#3958](https://github.com/owncast/owncast/issues/3958)
+* Update chat websocket reconnect logic [#3958](https://github.com/owncast/owncast/issues/3958) 
 
-- Chat - Join/leave messages layout breaks on narrow chat viewports [\#3842](https://github.com/owncast/owncast/issues/3842)
+* Chat - Join/leave messages layout breaks on narrow chat viewports [#3842](https://github.com/owncast/owncast/issues/3842) 
 
-- Vjs Deprecation warning: beforeRequest is deprecated, use onRequest instead [\#3874](https://github.com/owncast/owncast/issues/3874)
+* Vjs Deprecation warning: beforeRequest is deprecated, use onRequest instead [#3874](https://github.com/owncast/owncast/issues/3874) 
 
-- .well-known/nodeinfo and .well-known/host-meta paths respond even if federation is disabled [\#3892](https://github.com/owncast/owncast/issues/3892)
+* .well-known/nodeinfo and .well-known/host-meta paths respond even if federation is disabled [#3892](https://github.com/owncast/owncast/issues/3892) 
 
-- New offline embed has overflow problems [\#3683](https://github.com/owncast/owncast/issues/3683)
+* New offline embed has overflow problems [#3683](https://github.com/owncast/owncast/issues/3683) 
 
-- Slightly tweak the offline embed layout [\#4051](https://github.com/owncast/owncast/issues/4051)
+* Slightly tweak the offline embed layout [#4051](https://github.com/owncast/owncast/issues/4051) 
 
 ### Removed
 
-- Remove usage of utils/restendpointhelper.go in favor of the new router [\#3712](https://github.com/owncast/owncast/issues/3712)
+* Remove usage of utils/restendpointhelper.go in favor of the new router [#3712](https://github.com/owncast/owncast/issues/3712) 
 
 ## Thank you to our contributors!
 
@@ -161,10 +163,25 @@ We also thank all of the fantastic people helping out in the [Owncast chat](http
 
 A **huge** thanks to those giving us to the resources to run servers, have testing environments, host collaboration tools, pay for 3rd party services to test with and the means to experiment with new ideas we wouldn't be able to do otherwise.
 
-Our fantastic corporate sponsors [Gabe Kangas](https://opencollective.com/gabe-kangas) and generous donors [Simon Michalke](https://opencollective.com/simon-michalke), [Luka Prinčič](https://opencollective.com/luka-princic), [Flaki](https://opencollective.com/flaki), [Joel Bradshaw](https://opencollective.com/joel-bradshaw), [Paul Lindner](https://opencollective.com/lindner), [Incognito](https://opencollective.com/incognito-3b4cd5c7), [nebunez](https://opencollective.com/nebunez), [Teklynk](https://opencollective.com/teklynk), [Marius Hoel](https://opencollective.com/mhoel), [Incognito](https://opencollective.com/user-5bdb86e0), [Guest](https://opencollective.com/guest-bef18650), [emacsen](https://opencollective.com/guest-618ea119), [GunghoGeoduck](https://opencollective.com/guest-78ad01d4), [Rick](https://opencollective.com/patrick-materla), [Didier Malenfant](https://opencollective.com/didier-malenfant), [Vencabot](https://opencollective.com/vencabot), [Kev Mul](https://opencollective.com/kev-mul), [gravitons loves the Fediverse ❤️](https://opencollective.com/gravitons1), [Tom Ryder](https://opencollective.com/tejrnz), [Guest](https://opencollective.com/guest-fc35aaea), [GreenPromoCode.com](https://opencollective.com/greenpromocode-com), [Samsai](https://opencollective.com/guest-983413e7), [Gabe Kangas](https://opencollective.com/gabe-kangas), [luobo](https://opencollective.com/guest-f7964564), [Roy Adams](https://opencollective.com/roy-adams), [Sarah Elson](https://opencollective.com/lambdatesting), [Incognito](https://opencollective.com/user-be0b67ae), [Julian Koritnik](https://opencollective.com/julian-koritnik), [Thomas OConnor](https://opencollective.com/guest-38ca477c), [Ryusei](https://opencollective.com/ryusei) and [Jason](https://opencollective.com/guest-9ef09d2d).
+Our fantastic corporate sponsors [Gabe Kangas](https://opencollective.com/gabe-kangas) and generous donors [Simon Michalke](https://opencollective.com/simon-michalke), [Luka Prinčič](https://opencollective.com/luka-princic), [Flaki](https://opencollective.com/flaki), [Joel Bradshaw](https://opencollective.com/joel-bradshaw), [Paul Lindner](https://opencollective.com/lindner), [Incognito](https://opencollective.com/incognito-3b4cd5c7), [nebunez](https://opencollective.com/nebunez), [Teklynk](https://opencollective.com/teklynk), [Marius Hoel](https://opencollective.com/mhoel), [Incognito](https://opencollective.com/user-5bdb86e0), [Guest](https://opencollective.com/guest-bef18650), [emacsen](https://opencollective.com/guest-618ea119), [GunghoGeoduck](https://opencollective.com/guest-78ad01d4), [Rick](https://opencollective.com/patrick-materla), [Didier Malenfant](https://opencollective.com/didier-malenfant), [Vencabot](https://opencollective.com/vencabot), [Kev Mul](https://opencollective.com/kev-mul), [gravitons loves the Fediverse <3](https://opencollective.com/gravitons1), [Tom Ryder](https://opencollective.com/tejrnz), [Guest](https://opencollective.com/guest-fc35aaea), [GreenPromoCode.com](https://opencollective.com/greenpromocode-com), [Samsai](https://opencollective.com/guest-983413e7), [Gabe Kangas](https://opencollective.com/gabe-kangas), [luobo](https://opencollective.com/guest-f7964564), [Roy Adams](https://opencollective.com/roy-adams), [Sarah Elson](https://opencollective.com/lambdatesting), [Incognito](https://opencollective.com/user-be0b67ae), [Julian Koritnik](https://opencollective.com/julian-koritnik), [Thomas OConnor](https://opencollective.com/guest-38ca477c), [Ryusei](https://opencollective.com/ryusei) and [Jason](https://opencollective.com/guest-9ef09d2d).
 
 ## In-kind support
 
 A special **thank you** to the organizations that offer services to help Owncast build, test and support and distribute the software.
 
 [Fastly](https://www.fastly.com/fast-forward), [Cypress](https://cloud.cypress.io/projects/wwi3xe), [BrowserStack](https://www.browserstack.com/open-source), [LambdaTest](https://www.lambdatest.com/), [Chromatic](https://www.chromatic.com/builds?appId=629132c6e23893003a9e89c5), [Docker](https://hub.docker.com/u/owncast) and [Rocket.Chat](https://owncast.rocket.chat/).
+
+---
+
+## Downloads
+
+View all downloads on the [GitHub release page](https://github.com/owncast/owncast/releases/tag/v0.2.0).
+
+| Platform | Download |
+|----------|----------|
+| owncast-0.2.0-linux-32bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.0/owncast-0.2.0-linux-32bit.zip) (16.4 MB) |
+| owncast-0.2.0-linux-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.0/owncast-0.2.0-linux-64bit.zip) (17.1 MB) |
+| owncast-0.2.0-linux-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.0/owncast-0.2.0-linux-arm64.zip) (15.9 MB) |
+| owncast-0.2.0-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.0/owncast-0.2.0-linux-arm7.zip) (15.9 MB) |
+| owncast-0.2.0-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.0/owncast-0.2.0-macOS-64bit.zip) (24.6 MB) |
+| owncast-0.2.0-macOS-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.0/owncast-0.2.0-macOS-arm64.zip) (23.9 MB) |

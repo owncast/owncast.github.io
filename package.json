@@ -5,7 +5,8 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "prebuild": "node scripts/update-api-urls.js && node scripts/generate-contributors.js",
+    "prebuild": "node scripts/update-api-urls.js && node scripts/generate-contributors.js && node scripts/fetch-releases.js",
+    "fetch-releases": "node scripts/fetch-releases.js",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",

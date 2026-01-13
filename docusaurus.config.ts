@@ -88,6 +88,9 @@ const config: Config = {
   ],
 
   markdown: {
+    // Use 'detect' so .md files use CommonMark (no JSX) and .mdx files use MDX
+    // This allows auto-generated release notes from GitHub to work without escaping
+    format: 'detect',
     hooks: {
       onBrokenMarkdownImages: "warn",
     },

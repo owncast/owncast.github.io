@@ -29,6 +29,9 @@ node_modules
 .contributors-cache.json
 static/img/contributors/
 
+# Releases cache - persisted to reduce GitHub API calls during builds
+# .releases-cache.json
+
 # API configuration (generated at build time)
 api-config.json
 
