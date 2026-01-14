@@ -4,9 +4,37 @@ slug: /sslproxies
 description: Put your Owncast server behind a proxy to enable SSL.
 sidebar_position: 1
 sidebar_label: SSL & HTTP Proxies
+hide_table_of_contents: false
+tags:
+  - ssl
+  - https
+  - reverse-proxy
+  - embed
+  - proxy
+  - security
+  - browser
 ---
 
-While not required, most people will want to support SSL on a public Owncast server. If you already have a [reverse proxy](https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/) that is used for SSL you can easily add Owncast to that. If you've never installed a proxy service before then you can quickly set one up.
+If you’re setting up Owncast and confused by terms like reverse proxy, SSL, or HTTPS, perhaps this can help. This page explains what they are, why Owncast can need them, and how everything fits together.
+
+## What a reverse proxy is
+
+A reverse proxy is a small server that sits in front of Owncast. It:
+
+- Listens on the public internet (ports 80 and 443)
+- Handles HTTPS / SSL
+- Forwards traffic to Owncast running privately (usually on port 8080)
+- Owns the certificate
+- Encrypts traffic
+- Decrypts it before sending it to Owncast
+  Owncast never sees HTTPS — it sees plain internal traffic.
+
+Think of it like a **front desk**:
+
+- The public talks to the front desk.
+- The front desk hands things to Owncast.
+
+Owncast relies on standard, battle-tested tools (like Caddy, Nginx, Traefik) to do it correctly. Many who already self-host, or own their own infrastructure will have a reverse proxy setup already that they can add Owncast to.
 
 ## Why you want to support SSL
 
@@ -15,10 +43,42 @@ While not required, most people will want to support SSL on a public Owncast ser
 1. It looks more professional and your site will come off more trustworthy.
 1. Securing web traffic on the public internet is the right thing to do.
 
-## When you might not need it
+### When you might not need it
 
 1. If you're just testing and experimenting with Owncast.
 1. You're running the service internally and you don't have any plans for a public audience.
+
+## Common misunderstanding (and why it breaks things)
+
+- ❌ “I enabled HTTPS in Owncast”
+- ❌ “I forwarded port 443 to Owncast”
+- ❌ “I don’t need a reverse proxy”
+- ❌ "I forwarded RTMP port 1943 to the web proxy"
+
+These usually cause:
+
+- OBS connection failures
+- Admin UI works but video doesn’t
+- Embeds not working
+- Mixed content warnings in browsers
+- You can still load Owncast on port 8080 but not over https port 443
+- Your stream not being available in mobile apps
+
+## A correct setup (simplified)
+
+1. DNS points your domain to your server
+2. Reverse proxy listens on ports 80 / 443 (not RTMP 1943)
+3. Reverse proxy gets an SSL certificate
+4. Reverse proxy forwards traffic to Owncast
+5. Owncast runs privately (usually :8080)
+6. OBS sends RTMP to Owncast
+
+## If something isn’t working, the most helpful questions to ask are:
+
+- “Where does HTTPS terminate?”
+- “Which service is listening on port 443?”
+- “Is OBS talking to Owncast or the proxy?”
+  Answering those almost always reveals the issue.
 
 ## Popular options
 
@@ -26,7 +86,7 @@ You can use any method you like to add SSL support but there are some popular op
 
 ## Inherit display name from reverse proxy
 
-Owncast usually assigns a random display name when new users are joining the chat. Upstream reverse proxies can influence this behavior by setting a `X-Forwarded-User` HTTP header. This header will be used instead of a random name to derive a user's display name. A user will still be able to change it's own display name to any desired value.
+Owncast usually assigns a random display name when new users are joining the chat. Upstream reverse proxies can influence this behavior by setting a `X-Forwarded-User` HTTP header when passing along the web traffic. This header will be used instead of a random name to derive a user's display name. A user will still be able to change it's own display name to any desired value.
 
 ## Suggested
 
