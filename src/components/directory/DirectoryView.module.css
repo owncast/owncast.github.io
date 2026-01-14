@@ -156,3 +156,43 @@
 [data-theme='dark'] .emptyState {
   color: var(--ifm-color-emphasis-500);
 }
+
+/* Edit Section */
+.editSection {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  /* border-top: 1px solid var(--ifm-color-emphasis-200); */
+  text-align: center;
+}
+
+[data-theme='dark'] .editSection {
+  border-top-color: var(--ifm-color-emphasis-700);
+}
+
+.editLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-600);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.editLink:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+[data-theme='dark'] .editLink {
+  color: var(--ifm-color-emphasis-500);
+}
+
+[data-theme='dark'] .editLink:hover {
+  color: var(--ifm-color-primary-light);
+}
+
+.editIcon {
+  width: 1rem;
+  height: 1rem;
+}

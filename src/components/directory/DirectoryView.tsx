@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation, useHistory } from "@docusaurus/router";
+import Translate from "@docusaurus/Translate";
 import { directoryData } from "@/data/directory";
 import { DirectoryCategoryCard } from "./DirectoryCategoryCard";
 import { DirectoryLinkItem } from "./DirectoryLinkItem";
@@ -104,6 +105,34 @@ export function DirectoryView() {
         {directoryData.length === 0 && (
           <p className={styles.emptyState}>No categories yet.</p>
         )}
+
+        {/* Edit section */}
+        <div className={styles.editSection}>
+          <a
+            href="https://github.com/owncast/owncast.github.io/edit/owncast-docusaurus/src/data/directory.ts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.editLink}
+          >
+            <svg
+              className={styles.editIcon}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+              />
+            </svg>
+            <Translate id="directory.editPage">
+              Have resources to share? Improve this page by adding them.
+            </Translate>
+          </a>
+        </div>
       </div>
     </div>
   );
