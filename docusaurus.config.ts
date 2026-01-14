@@ -306,7 +306,6 @@ const config: Config = {
       {
         owner: "owncast",
         repo: "owncast",
-        milestones: [28, 5, 23, 20, 31], // Milestone numbers to fetch
       },
     ],
     [

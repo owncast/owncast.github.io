@@ -7,6 +7,7 @@ export interface IssueData {
   title: string;
   state: 'open' | 'closed';
   url: string;
+  closedAt?: string;
   assignees: {
     login: string;
     avatar_url: string;
@@ -30,10 +31,16 @@ export interface MilestoneData {
   issues?: IssueData[];
 }
 
+export interface PluginData {
+  milestones: Record<number, MilestoneData>;
+  currentMilestoneId: number | null;
+  futureMilestoneIds: number[];
+}
+
 export interface RoadmapProps {
-  /** The milestone number to display as current */
-  currentMilestone: number;
-  /** Optional array of future milestone numbers */
+  /** Optional override for the current milestone (auto-detected if not provided) */
+  currentMilestone?: number;
+  /** Optional override for future milestones (auto-detected if not provided) */
   futureMilestones?: number[];
 }
 
@@ -224,11 +231,11 @@ function FutureMilestone({ milestone }: { milestone: MilestoneData }): JSX.Eleme
   );
 }
 
-export default function Roadmap({ currentMilestone, futureMilestones = [] }: RoadmapProps): JSX.Element {
+export default function Roadmap({ currentMilestone, futureMilestones }: RoadmapProps): JSX.Element {
   // Get milestone data from the plugin
-  const milestonesData = usePluginData('milestones-plugin') as Record<number, MilestoneData>;
+  const pluginData = usePluginData('milestones-plugin') as PluginData;
 
-  if (!milestonesData || Object.keys(milestonesData).length === 0) {
+  if (!pluginData || !pluginData.milestones || Object.keys(pluginData.milestones).length === 0) {
     return (
       <div className={styles.error}>
         <p>No milestone data available. Please check the plugin configuration.</p>
@@ -236,19 +243,34 @@ export default function Roadmap({ currentMilestone, futureMilestones = [] }: Roa
     );
   }
 
-  const currentMilestoneData = milestonesData[currentMilestone];
+  const { milestones, currentMilestoneId, futureMilestoneIds } = pluginData;
 
-  if (!currentMilestoneData) {
+  // Use props if provided, otherwise use auto-detected values
+  const effectiveCurrentMilestone = currentMilestone ?? currentMilestoneId;
+  const effectiveFutureMilestones = futureMilestones ?? futureMilestoneIds;
+
+  if (!effectiveCurrentMilestone) {
     return (
       <div className={styles.error}>
-        <p>Current milestone {currentMilestone} not found.</p>
-        <p>Available milestones: {Object.keys(milestonesData).join(', ')}</p>
+        <p>No current milestone could be determined.</p>
+        <p>Available milestones: {Object.keys(milestones).join(', ')}</p>
       </div>
     );
   }
 
-  const futureMilestonesData = futureMilestones
-    .map(num => milestonesData[num])
+  const currentMilestoneData = milestones[effectiveCurrentMilestone];
+
+  if (!currentMilestoneData) {
+    return (
+      <div className={styles.error}>
+        <p>Current milestone {effectiveCurrentMilestone} not found.</p>
+        <p>Available milestones: {Object.keys(milestones).join(', ')}</p>
+      </div>
+    );
+  }
+
+  const futureMilestonesData = effectiveFutureMilestones
+    .map(num => milestones[num])
     .filter(Boolean);
 
   return (
