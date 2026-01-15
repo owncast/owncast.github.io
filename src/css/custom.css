@@ -239,3 +239,8 @@ html[data-theme='dark'] .docMainWrapper {
   font-weight: bold;
   /* text-transform: uppercase; */
 }
+
+/* Hide the "This page is unlisted" banner on unlisted pages */
+.theme-unlisted-banner {
+  display: none;
+}

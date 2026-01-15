@@ -12,3 +12,9 @@ tags:
   - performance
   - video-quality
 ---
+
+For most people Owncast will be completely usable out of the box without additional configuration. Simply following the [Quickstart](/quickstart) will have you streaming in minutes.
+
+There are, however, handfuls of items you can configure to tweak the content of your page, [the video quality](/docs/video), [server performance](/docs/metrics) and more.
+
+You can also [extend Owncast’s functionality](/docs/api) by building your own bots, overlays, tools and integrations by taking advantage of the third party APIs.

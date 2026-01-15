@@ -140,7 +140,7 @@ const sidebars: SidebarsConfig = {
         "codecs",
         "cdns",
         "backups",
-        "configuration-runtime-flags",
+        "configuration/runtime-flags",
         "scaling",
         "viewers",
         "custom-assets",

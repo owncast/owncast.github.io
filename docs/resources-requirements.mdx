@@ -25,18 +25,14 @@ import ResourcesCalculator from "@site/src/components/ResourcesCalculator";
 
 It is impossible to give a single answer about what the requirements are for you to run Owncast, or what it will cost. It is your server, and it is completely up to you how you choose to configure it, and in what environments you choose to run it. Every environment has different performance, prices and features.
 
-## Resources Calculator
-
-Use this interactive calculator to estimate your bandwidth and CPU requirements based on your specific streaming configuration:
-
-<ResourcesCalculator />
+---
 
 ## Base knowledge
 
 It is very helpful for you to understand the basics included in video streaming.
 
-- CPU: Used to transcode the video to multiple qualities so viewers can watch it on different speed networks.
-- Network bandwidth: Used to distribute the video to your viewers.
+- **CPU**: Used to transcode the video to multiple qualities so viewers can watch it on different speed networks.
+- **Network bandwidth**: Used to distribute the video to your viewers.
 
 ### Viewer count does not impact CPU use
 
@@ -200,6 +196,12 @@ Almost none. Owncast streams in real-time and cleans up video segments as they'r
 Offering only high bitrate video excludes viewers on mobile networks and slower connections. A 5000kbps stream requires a stable 5+ Mbps connection to watch without buffering. Many viewers don't have that, especially on mobile.
 
 **Recommendation**: Always offer at least two quality options. A high quality (4000-6000kbps) for viewers with fast connections, and a low quality (1000-2000kbps) for everyone else. Your viewers will thank you.
+
+## Resources Calculator
+
+Use this interactive calculator to estimate your bandwidth and CPU requirements based on your specific streaming configuration:
+
+<ResourcesCalculator />
 
 ## Learn more
 

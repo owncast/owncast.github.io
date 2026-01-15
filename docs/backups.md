@@ -1,6 +1,6 @@
 ---
 title: Back Up Your Stream Data and Configuration
-description: Owncast makes period backups of your data that can be restored.
+description: Owncast makes periodic backups of your data that can be restored.
 sidebar_position: 1100
 sidebar_label: Backup your stream data and configuration
 ---
@@ -14,4 +14,3 @@ Restoring an Owncast backup file will bring you back to the time the backup was 
 1. Stop Owncast from running.
 1. Run `./owncast --restoreDatabase <backupfile>`
 1. Restart Owncast as you normally would. It will be using the restored data.
-
