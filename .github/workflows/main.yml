@@ -104,25 +104,20 @@ jobs:
       - name: Upload assets
         uses: jakejarvis/s3-sync-action@v0.5.1
         with:
-          args: >
-            --exclude "*.html"
-            --cache-control "public, max-age=31536000, immutable"
+          args: --exclude '*.html' --cache-control 'public,max-age=31536000,immutable' --acl public-read
         env:
-          AWS_S3_BUCKET: ${{ vars.DO_SPACES_BUCKET }}
+          AWS_S3_BUCKET: ${{ secrets.DO_SPACES_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.DO_SPACES_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.DO_SPACES_SECRET }}
-          AWS_REGION: ${{ vars.DO_SPACES_REGION }}
-          AWS_S3_ENDPOINT: https://${{ vars.DO_SPACES_REGION }}.digitaloceanspaces.com
+          AWS_REGION: ${{ secrets.DO_SPACES_REGION }}
+          AWS_S3_ENDPOINT: https://${{ secrets.DO_SPACES_REGION }}.digitaloceanspaces.com
           SOURCE_DIR: build
 
       # Upload HTML (short cache)
       - name: Upload HTML (short cache)
         uses: jakejarvis/s3-sync-action@v0.5.1
         with:
-          args: >
-            --exclude "*"
-            --include "*.html"
-            --cache-control "public, max-age=60"
+          args: --exclude '*' --include '*.html' --cache-control 'public,max-age=60' --acl public-read
         env:
           AWS_S3_BUCKET: ${{ secrets.DO_SPACES_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.DO_SPACES_KEY }}
