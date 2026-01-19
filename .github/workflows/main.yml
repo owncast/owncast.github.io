@@ -58,12 +58,14 @@ jobs:
           mv owncast-install.* ../../static/
 
       - name: Commit changes
-        uses: EndBug/add-and-commit@v5
-        with:
-          author_name: Owncast
-          author_email: owncast@owncast.online
-          message: "Update dynamic content"
-          add: "releases/ static/data/contributors.json static/data/donors.json static/data/contributors-processed.json static/data/donors-processed.json static/owncast-install.*"
+        run: |
+          git config user.name "Owncast"
+          git config user.email "owncast@owncast.online"
+          git fetch origin owncast-docusaurus
+          git reset --soft origin/owncast-docusaurus
+          git add releases/ static/data/contributors.json static/data/donors.json static/data/contributors-processed.json static/data/donors-processed.json static/owncast-install.*
+          git diff --staged --quiet || git commit -m "Update dynamic content"
+          git push origin HEAD:owncast-docusaurus
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
