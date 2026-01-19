@@ -94,7 +94,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ./build --project-name=owncast-preview
+          command: pages deploy ./build --project-name=owncast-docs-dev-testing
 
       # - name: Deploy
       #   uses: peaceiris/actions-gh-pages@v4
