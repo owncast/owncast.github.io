@@ -96,6 +96,52 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy ./build --project-name=owncast-docs-dev-testing
 
+      # Deploy to DigitalOcean Spaces
+
+      # Upload non-HTML assets (long cache)
+      - name: Upload assets
+        uses: jakejarvis/s3-sync-action@v0.5.1
+        with:
+          args: >
+            --exclude "*.html"
+            --cache-control "public, max-age=31536000, immutable"
+        env:
+          AWS_S3_BUCKET: ${{ vars.DO_SPACES_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.DO_SPACES_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DO_SPACES_SECRET }}
+          AWS_REGION: ${{ vars.DO_SPACES_REGION }}
+          AWS_S3_ENDPOINT: https://${{ vars.DO_SPACES_REGION }}.digitaloceanspaces.com
+          SOURCE_DIR: build
+
+      # Upload HTML (short cache)
+      - name: Upload HTML (short cache)
+        uses: jakejarvis/s3-sync-action@v0.5.1
+        with:
+          args: >
+            --exclude "*"
+            --include "*.html"
+            --cache-control "public, max-age=60"
+        env:
+          AWS_S3_BUCKET: ${{ secrets.DO_SPACES_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.DO_SPACES_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DO_SPACES_SECRET }}
+          AWS_REGION: ${{ secrets.DO_SPACES_REGION }}
+          AWS_S3_ENDPOINT: https://${{ secrets.DO_SPACES_REGION }}.digitaloceanspaces.com
+          SOURCE_DIR: build
+
+      # Purge Fastly cache
+      #
+      # Recommended: soft purge so users get instant fresh content when needed,
+      # while allowing Fastly to serve stale during revalidation.
+      - name: Purge Fastly
+        uses: yukukotani/fastly-purge-action@v1
+        with:
+          api-token: ${{ secrets.FASTLY_API_TOKEN }}
+          service-id: ${{ secrets.FASTLY_SERVICE_ID }}
+          target: surrogate-key
+          keys: docs-html,docs-static
+          soft: true
+
       # - name: Deploy
       #   uses: peaceiris/actions-gh-pages@v4
       #   with:
