@@ -34,7 +34,7 @@
     "@lezer/highlight": "^1.2.3",
     "@mdx-js/react": "^3.0.0",
     "@radix-ui/react-avatar": "^1.1.11",
-    "@scalar/docusaurus": "^0.7.20",
+    "@scalar/api-reference-react": "^0.8.27",
     "@uiw/codemirror-themes": "^4.25.4",
     "@uiw/react-codemirror": "^4.25.4",
     "circle-flags": "^2.8.1",
