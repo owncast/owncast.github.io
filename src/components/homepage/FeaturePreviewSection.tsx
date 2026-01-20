@@ -12,10 +12,14 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 function FeatureImage({
   src,
   alt,
+  width,
+  height,
   priority = false,
 }: {
   src: string;
   alt: string;
+  width?: number;
+  height?: number;
   priority?: boolean;
 }) {
   const resolvedSrc = useBaseUrl(src);
@@ -25,6 +29,8 @@ function FeatureImage({
         className="w-full transition-transform duration-300 ease-in-out hover:scale-110"
         src={resolvedSrc}
         alt={alt}
+        width={width}
+        height={height}
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : "auto"}
       />
@@ -39,6 +45,8 @@ interface Feature {
   videoSrc?: string;
   imageSrc?: string;
   imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   priority?: boolean;
 }
 
@@ -55,6 +63,8 @@ function useFeatures(): Feature[] {
         message: "Real-time chat included, no third-party services required.",
       }),
       imageSrc: "/images/screenshots/screenshot-chat.webp",
+      imageWidth: 1418,
+      imageHeight: 1205,
       priority: true,
     },
     {
@@ -69,6 +79,8 @@ function useFeatures(): Feature[] {
           "Stream from your own domain with your own look and feel. Create your own UI, truly owning the experience.",
       }),
       imageSrc: "/images/screenshots/screenshot-customize.webp",
+      imageWidth: 2264,
+      imageHeight: 1882,
     },
     {
       id: "feature-6",
@@ -81,6 +93,8 @@ function useFeatures(): Feature[] {
         message: "Notify followers via various channels when you go live.",
       }),
       imageSrc: "/images/screenshots/screenshot-offline-notify.webp",
+      imageWidth: 1334,
+      imageHeight: 1191,
     },
     {
       id: "feature-7",
@@ -107,6 +121,8 @@ function useFeatures(): Feature[] {
           "Integrates with existing tools, and build your own internal and external utilities on top of the API.",
       }),
       imageSrc: "/images/screenshots/screenshot-expand.webp",
+      imageWidth: 739,
+      imageHeight: 783,
     },
   ];
 }
@@ -132,6 +148,8 @@ function MobileFeatureCard({ feature }: { feature: Feature }) {
         <FeatureImage
           src={feature.imageSrc}
           alt={feature.imageAlt || feature.title}
+          width={feature.imageWidth}
+          height={feature.imageHeight}
           priority={feature.priority}
         />
       ) : null}
@@ -215,6 +233,8 @@ export function FeaturePreviewSection() {
               <FeatureImage
                 src={feature.imageSrc}
                 alt={feature.imageAlt || feature.title}
+                width={feature.imageWidth}
+                height={feature.imageHeight}
                 priority={feature.priority}
               />
             ) : null}
