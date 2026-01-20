@@ -9,7 +9,15 @@ import {
 import { VideoPlayer } from "@/components/shared/VideoPlayer";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
-function FeatureImage({ src, alt }: { src: string; alt: string }) {
+function FeatureImage({
+  src,
+  alt,
+  priority = false,
+}: {
+  src: string;
+  alt: string;
+  priority?: boolean;
+}) {
   const resolvedSrc = useBaseUrl(src);
   return (
     <div className="overflow-visible rounded-md">
@@ -17,6 +25,8 @@ function FeatureImage({ src, alt }: { src: string; alt: string }) {
         className="w-full transition-transform duration-300 ease-in-out hover:scale-110"
         src={resolvedSrc}
         alt={alt}
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
       />
     </div>
   );
@@ -29,6 +39,7 @@ interface Feature {
   videoSrc?: string;
   imageSrc?: string;
   imageAlt?: string;
+  priority?: boolean;
 }
 
 function useFeatures(): Feature[] {
@@ -44,6 +55,7 @@ function useFeatures(): Feature[] {
         message: "Real-time chat included, no third-party services required.",
       }),
       imageSrc: "/images/screenshots/screenshot-chat.webp",
+      priority: true,
     },
     {
       id: "feature-4",
@@ -120,6 +132,7 @@ function MobileFeatureCard({ feature }: { feature: Feature }) {
         <FeatureImage
           src={feature.imageSrc}
           alt={feature.imageAlt || feature.title}
+          priority={feature.priority}
         />
       ) : null}
     </div>
@@ -202,6 +215,7 @@ export function FeaturePreviewSection() {
               <FeatureImage
                 src={feature.imageSrc}
                 alt={feature.imageAlt || feature.title}
+                priority={feature.priority}
               />
             ) : null}
           </LandingProductTourContent>
