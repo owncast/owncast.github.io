@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "@theme/Layout";
+import Head from "@docusaurus/Head";
 import { HeroSection } from "../components/homepage/HeroSection";
 import { FeaturePreviewSection } from "../components/homepage/FeaturePreviewSection";
 import { SoftwareCompatList } from "../components/homepage/SoftwareCompatList";
@@ -20,6 +21,14 @@ import { ArchetypesSection } from "@/components/homepage/Archetypes";
 export default function Home(): React.JSX.Element {
   return (
     <Layout>
+      <Head>
+        <link
+          rel="preload"
+          as="image"
+          href="/images/explainer-video-preview.webp"
+          fetchpriority="high"
+        />
+      </Head>
       <HeroSection />
       <FeaturePreviewSection />
       <SoftwareCompatList />

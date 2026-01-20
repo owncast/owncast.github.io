@@ -19,7 +19,7 @@ export function HeroSection() {
         message:
           "It runs on your server and works with standard streaming protocols. There are no subscriptions, viewer limits, or forced ads. Flexible, customizable, and it's as private or public as you want it to be.",
       })}
-      videoPoster="/images/explainer-video-preview.gif"
+      videoPoster="/images/explainer-video-preview.webp"
       videoSrc="/explainer-video.mp4"
       // autoPlay
       muted={false}
