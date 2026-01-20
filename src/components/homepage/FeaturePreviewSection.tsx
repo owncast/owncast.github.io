@@ -43,7 +43,7 @@ function useFeatures(): Feature[] {
         id: "homepage.featurePreview.chat.description",
         message: "Real-time chat included, no third-party services required.",
       }),
-      imageSrc: "/images/screenshots/screenshot-chat.png",
+      imageSrc: "/images/screenshots/screenshot-chat.webp",
     },
     {
       id: "feature-4",
@@ -56,7 +56,7 @@ function useFeatures(): Feature[] {
         message:
           "Stream from your own domain with your own look and feel. Create your own UI, truly owning the experience.",
       }),
-      imageSrc: "/images/screenshots/screenshot-customize.png",
+      imageSrc: "/images/screenshots/screenshot-customize.webp",
     },
     {
       id: "feature-6",
@@ -68,7 +68,7 @@ function useFeatures(): Feature[] {
         id: "homepage.featurePreview.notifications.description",
         message: "Notify followers via various channels when you go live.",
       }),
-      imageSrc: "/images/screenshots/screenshot-offline-notify.png",
+      imageSrc: "/images/screenshots/screenshot-offline-notify.webp",
     },
     {
       id: "feature-7",
@@ -94,7 +94,7 @@ function useFeatures(): Feature[] {
         message:
           "Integrates with existing tools, and build your own internal and external utilities on top of the API.",
       }),
-      imageSrc: "/images/screenshots/screenshot-expand.png",
+      imageSrc: "/images/screenshots/screenshot-expand.webp",
     },
   ];
 }
