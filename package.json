@@ -5,8 +5,9 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "prebuild": "node scripts/update-api-urls.js && node scripts/generate-contributors.js && node scripts/fetch-releases.js",
+    "prebuild": "node scripts/update-api-urls.js && node scripts/generate-contributors.js && node scripts/download-avatars.js && node scripts/fetch-releases.js",
     "fetch-releases": "node scripts/fetch-releases.js",
+    "download-avatars": "node scripts/download-avatars.js",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -68,6 +69,7 @@
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.561.0",
     "postcss": "^8.5.6",
+    "sharp": "^0.34.5",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^3.4.19",
     "tailwindcss-animate": "^1.0.7",

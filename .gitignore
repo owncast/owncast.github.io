@@ -28,6 +28,7 @@ node_modules
 .contributors-data.json
 .contributors-cache.json
 static/img/contributors/
+static/images/avatars/
 
 # Releases cache - persisted to reduce GitHub API calls during builds
 # .releases-cache.json
