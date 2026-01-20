@@ -24,6 +24,7 @@
     "@codemirror/lang-css": "^6.3.1",
     "@crowdin/cli": "^4.12.0",
     "@docusaurus/core": "3.9.1",
+    "@docusaurus/faster": "^3.9.2",
     "@docusaurus/plugin-client-redirects": "^3.9.1",
     "@docusaurus/plugin-sitemap": "^3.9.1",
     "@docusaurus/preset-classic": "3.9.1",

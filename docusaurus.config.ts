@@ -64,18 +64,6 @@ const config: Config = {
   tagline: "Free and Open Source Livestreaming",
   favicon: "/favicon.png",
 
-  future: {
-    experimental_faster: {
-      swcJsLoader: true,
-      swcJsMinimizer: true,
-      swcHtmlMinimizer: true,
-      lightningCssMinimizer: true,
-      rspackBundler: true,
-      mdxCrossCompilerCache: true,
-      ssgWorkerThreads: true,
-    },
-  },
-
   // Static scripts (loaded outside of webpack/React)
   scripts: [
     {
@@ -97,6 +85,15 @@ const config: Config = {
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    experimental_faster: {
+      swcJsLoader: true,
+      swcJsMinimizer: true,
+      swcHtmlMinimizer: true,
+      lightningCssMinimizer: true,
+      // rspackBundler disabled - causes 404 issues with this project
+      rspackBundler: false,
+      mdxCrossCompilerCache: true,
+    },
   },
 
   // Set the production url of your site here
