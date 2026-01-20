@@ -28,12 +28,6 @@ export default function Home(): React.JSX.Element {
           href="/images/explainer-video-preview.webp"
           fetchpriority="high"
         />
-        <link
-          rel="preload"
-          as="image"
-          href="/images/screenshots/screenshot-chat.webp"
-          fetchpriority="high"
-        />
       </Head>
       <HeroSection />
       <FeaturePreviewSection />

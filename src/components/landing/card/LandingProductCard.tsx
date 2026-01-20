@@ -9,6 +9,11 @@ export interface ProductCardProps {
   descriptionComponent?: React.ReactNode;
   imageSrc?: string;
   imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  imageLoading?: "eager" | "lazy";
+  imageDecoding?: "async" | "auto" | "sync";
+  imageFetchPriority?: "high" | "low" | "auto";
   actionComponent?: React.ReactNode;
   topComponent?: React.ReactNode;
   bottomComponent?: React.ReactNode;
@@ -29,6 +34,11 @@ export function LandingProductCard({
   descriptionComponent,
   imageSrc,
   imageAlt = '',
+  imageWidth,
+  imageHeight,
+  imageLoading,
+  imageDecoding,
+  imageFetchPriority,
   actionComponent,
   topComponent,
   bottomComponent,
@@ -69,6 +79,11 @@ export function LandingProductCard({
           <Image
             src={imageSrc}
             alt={imageAlt || title}
+            width={imageWidth}
+            height={imageHeight}
+            loading={imageLoading}
+            decoding={imageDecoding}
+            fetchPriority={imageFetchPriority}
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
           />
         </div>

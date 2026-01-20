@@ -9,12 +9,14 @@ import tailwindcssTypography from '@tailwindcss/typography';
 const config: Config = {
   darkMode: ['selector', '[data-theme="dark"]'],
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/pages/index.tsx',
+    './src/pages/index.module.css',
+    './src/components/homepage/**/*.{js,ts,jsx,tsx}',
+    './src/components/landing/**/*.{js,ts,jsx,tsx}',
+    './src/components/shared/**/*.{js,ts,jsx,tsx}',
+    './src/components/ui/**/*.{js,ts,jsx,tsx}',
+    './src/components/Contributors.tsx',
+    './src/components/Sponsors.tsx',
   ],
   corePlugins: {
     preflight: false, // Disable Tailwind's reset to avoid conflicts with Docusaurus Infima

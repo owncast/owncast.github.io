@@ -37,6 +37,9 @@ const AppStoreButton: React.FC<AppStoreButtonProps> = ({
           src={useBaseUrl(imageSrc)}
           alt={altText}
           style={{ width, height: "auto" }}
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
         />
       </a>
     </div>

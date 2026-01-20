@@ -51,17 +51,24 @@ export default function Root({ children }) {
   }, []);
 
   useEffect(() => {
-    // Load Plausible analytics script (lightweight ~1KB, non-blocking with defer)
-    const analyticsScript = document.createElement("script");
-    analyticsScript.src = "https://plausible.io/js/script.js";
-    analyticsScript.defer = true;
-    analyticsScript.setAttribute("data-domain", "owncast.online");
-    document.head.appendChild(analyticsScript);
-
-    // Load Kapa.ai widget script after page is idle (589KB bundle)
+    let analyticsScript: HTMLScriptElement | null = null;
     let kapaScript: HTMLScriptElement | null = null;
+    let idleCallbackId: number | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    let hasLoaded = false;
 
-    const loadKapaWidget = () => {
+    const loadThirdPartyScripts = () => {
+      if (hasLoaded) return;
+      hasLoaded = true;
+
+      // Load Plausible analytics script (deferred)
+      analyticsScript = document.createElement("script");
+      analyticsScript.src = "https://plausible.io/js/script.js";
+      analyticsScript.defer = true;
+      analyticsScript.setAttribute("data-domain", "owncast.online");
+      document.head.appendChild(analyticsScript);
+
+      // Load Kapa.ai widget script (large bundle)
       kapaScript = document.createElement("script");
       kapaScript.src = "https://widget.kapa.ai/kapa-widget.bundle.js";
       kapaScript.async = true;
@@ -92,24 +99,45 @@ export default function Root({ children }) {
       kapaScript.setAttribute("data-modal-title-color", "#ffffff");
       kapaScript.setAttribute("data-switch-bg-color", "transparent");
       document.head.appendChild(kapaScript);
+
+      removeInteractionListeners();
     };
 
-    // Defer Kapa widget loading until browser is idle
-    let idleCallbackId: number | undefined;
-    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    const interactionEvents: Array<keyof WindowEventMap> = [
+      "pointerdown",
+      "keydown",
+      "touchstart",
+      "scroll",
+    ];
+
+    const onInteraction = () => loadThirdPartyScripts();
+
+    const addInteractionListeners = () => {
+      interactionEvents.forEach((event) => {
+        window.addEventListener(event, onInteraction, { once: true, passive: true });
+      });
+    };
+
+    const removeInteractionListeners = () => {
+      interactionEvents.forEach((event) => {
+        window.removeEventListener(event, onInteraction);
+      });
+    };
+
+    addInteractionListeners();
 
     if ("requestIdleCallback" in window) {
-      idleCallbackId = window.requestIdleCallback(loadKapaWidget, {
-        timeout: 5000, // Load within 5 seconds max
+      idleCallbackId = window.requestIdleCallback(loadThirdPartyScripts, {
+        timeout: 5000,
       });
     } else {
-      // Fallback for Safari and older browsers
-      timeoutId = setTimeout(loadKapaWidget, 3000);
+      timeoutId = setTimeout(loadThirdPartyScripts, 5000);
     }
 
     return () => {
-      // Cleanup on unmount
-      if (document.head.contains(analyticsScript)) {
+      removeInteractionListeners();
+
+      if (analyticsScript && document.head.contains(analyticsScript)) {
         document.head.removeChild(analyticsScript);
       }
       if (kapaScript && document.head.contains(kapaScript)) {

@@ -5,63 +5,9 @@ import { LandingMarquee } from "@/components/landing/LandingMarquee";
 import { LandingProductCard } from "@/components/landing/card/LandingProductCard";
 import { Badge } from "@/components/shared/ui/badge";
 import { LandingCurvedLinesCtaBg } from "@/components/landing";
-
-interface StoreItem {
-  name: string;
-  image: string;
-  url: string;
-  popular?: boolean;
-}
+import { storeItems } from "@/data/store-items";
 
 export function StoreSection() {
-  const storeItems: StoreItem[] = [
-    {
-      name: "Straight Cut Logo T-Shirt",
-      image:
-        "https://assets.bigcartel.com/product_images/403508901/unisex-garment-dyed-heavyweight-t-shirt-black-front-2-681005d2ce36a.png?auto=format&fit=max&w=400",
-      url: "https://merch.owncast.online/product/straight-cut-logo-t-shirt",
-    },
-    {
-      name: "Enamel Pin",
-      image:
-        "https://assets.bigcartel.com/product_images/404190180/DSC_7693.jpg?auto=format&fit=max&w=400",
-      url: "https://merch.owncast.online/product/enamel-pin",
-      popular: true,
-    },
-    {
-      name: "Embroidered Zip Up Hoodie",
-      image:
-        "https://assets.bigcartel.com/product_images/aecc5c37-1113-4ec5-9e4e-14925ecf0732/unisex-fleece-zip-up-hoodie-black-front-67e0abf29bd04.jpg?auto=format&fit=max&w=400",
-      url: "https://merch.owncast.online/product/owncast-embroidered-logo-zip-up-hoodie",
-      popular: true,
-    },
-    {
-      name: "Logo Mug",
-      image:
-        "https://assets.bigcartel.com/product_images/edacfb28-9d68-477e-bb83-cbe341defdeb/white-ceramic-mug-with-color-inside-black-11-oz-left-67e0ab934e11c.jpg?auto=format&fit=max&w=400",
-      url: "https://merch.owncast.online/product/owncast-logo-mug",
-    },
-    {
-      name: "Assorted Stickers",
-      image:
-        "https://assets.bigcartel.com/product_images/404249784/IMG_3619.jpg?auto=format&fit=max&w=400",
-      url: "https://merch.owncast.online/product/stickers",
-      popular: true,
-    },
-    {
-      name: "Owncat Vibes Mug",
-      image:
-        "https://assets.bigcartel.com/product_images/404249901/DSC_7698-2.jpg?auto=format&fit=max&w=400",
-      url: "https://merch.owncast.online/product/cat-vibes",
-    },
-    {
-      name: "Owncat Pullover Hoodie",
-      image:
-        "https://assets.bigcartel.com/product_images/403509156/unisex-premium-hoodie-black-front-68100771f06be.png?auto=format&fit=max&w=400",
-      url: "https://merch.owncast.online/product/owncat-unisex-hoodie",
-    },
-  ];
-
   return (
     <section className="hidden md:block">
       <LandingPrimaryTextCtaSection
@@ -117,6 +63,12 @@ export function StoreSection() {
               <LandingProductCard
                 title={item.name}
                 imageSrc={item.image}
+                imageAlt={item.name}
+                imageWidth={item.imageWidth}
+                imageHeight={item.imageHeight}
+                imageLoading="lazy"
+                imageDecoding="async"
+                imageFetchPriority="low"
                 className="w-full h-full !flex-col [&>div:first-child]:!h-56 [&>div:first-child]:!flex-none [&>div:last-child]:!flex-none"
               />
             </a>
