@@ -64,6 +64,18 @@ const config: Config = {
   tagline: "Free and Open Source Livestreaming",
   favicon: "/favicon.png",
 
+  future: {
+    experimental_faster: {
+      swcJsLoader: true,
+      swcJsMinimizer: true,
+      swcHtmlMinimizer: true,
+      lightningCssMinimizer: true,
+      rspackBundler: true,
+      mdxCrossCompilerCache: true,
+      ssgWorkerThreads: true,
+    },
+  },
+
   // Static scripts (loaded outside of webpack/React)
   scripts: [
     {
@@ -75,7 +87,7 @@ const config: Config = {
   markdown: {
     // Use 'detect' so .md files use CommonMark (no JSX) and .mdx files use MDX
     // This allows auto-generated release notes from GitHub to work without escaping
-    format: 'detect',
+    format: "detect",
     hooks: {
       onBrokenMarkdownImages: "warn",
     },
