@@ -47,6 +47,9 @@ jobs:
       - name: Process donors
         run: node scripts/process-donors.js
 
+      - name: Download and resize avatars
+        run: node scripts/download-avatars.js
+
       - name: Generate releases pages
         run: node scripts/fetch-releases.js
 
