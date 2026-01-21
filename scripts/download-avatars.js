@@ -68,10 +68,51 @@ async function processAvatar(imageBuffer, outputPath) {
 }
 
 /**
- * Check if an avatar needs to be downloaded (is a GitHub URL)
+ * Check if an avatar is from GitHub
  */
 function isGitHubAvatar(url) {
   return url && url.includes("avatars.githubusercontent.com");
+}
+
+/**
+ * Check if an avatar is from OpenCollective S3
+ */
+function isOpenCollectiveAvatar(url) {
+  return url && url.includes("opencollective-production.s3");
+}
+
+/**
+ * Check if an avatar needs to be downloaded (is an external URL)
+ */
+function isExternalAvatar(url) {
+  return isGitHubAvatar(url) || isOpenCollectiveAvatar(url);
+}
+
+/**
+ * Generate a safe filename from a login/name
+ * Handles spaces, special characters, and unicode
+ */
+function safeFilename(name) {
+  // First try to convert to ASCII-friendly version
+  let safe = name
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "-") // Replace non-alphanumeric with hyphens
+    .replace(/-+/g, "-") // Collapse multiple hyphens
+    .replace(/^-|-$/g, "") // Remove leading/trailing hyphens
+    .substring(0, 50); // Limit length
+
+  // If result is empty (all non-ASCII chars), create hash-based name
+  if (!safe) {
+    // Simple hash from the original name
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = ((hash << 5) - hash) + name.charCodeAt(i);
+      hash = hash & hash; // Convert to 32bit integer
+    }
+    safe = `user-${Math.abs(hash).toString(36)}`;
+  }
+
+  return safe;
 }
 
 /**
@@ -80,16 +121,17 @@ function isGitHubAvatar(url) {
 async function processUserAvatar(user, existingAvatars) {
   const { login, avatar_url } = user;
 
-  // Skip if not a GitHub avatar (already using local SVG)
-  if (!isGitHubAvatar(avatar_url)) {
+  // Skip if not an external avatar (already using local SVG or path)
+  if (!isExternalAvatar(avatar_url)) {
     return user;
   }
 
-  const localPath = `/images/avatars/${login}.webp`;
-  const outputPath = path.join(AVATAR_DIR, `${login}.webp`);
+  const filename = safeFilename(login);
+  const localPath = `/images/avatars/${filename}.webp`;
+  const outputPath = path.join(AVATAR_DIR, `${filename}.webp`);
 
   // Check if avatar already exists
-  if (existingAvatars.has(login)) {
+  if (existingAvatars.has(filename)) {
     return { ...user, avatar_url: localPath };
   }
 
@@ -124,7 +166,7 @@ async function processUsers(users, existingAvatars, label) {
     const result = await processUserAvatar(user, existingAvatars);
     processed.push(result);
 
-    if (!isGitHubAvatar(user.avatar_url)) {
+    if (!isExternalAvatar(user.avatar_url)) {
       skipped++;
     } else if (result.avatar_url !== user.avatar_url) {
       downloaded++;
@@ -219,4 +261,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { processUserAvatar, isGitHubAvatar };
+module.exports = { processUserAvatar, isGitHubAvatar, isOpenCollectiveAvatar, isExternalAvatar, safeFilename };
