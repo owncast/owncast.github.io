@@ -11,7 +11,7 @@
   },
   {
     "login": "Flaki",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/0ae2e4e0-3e92-11e9-9337-47b341a8c2c8.jpg",
+    "avatar_url": "/images/avatars/flaki.webp",
     "html_url": "https://opencollective.com/flaki"
   },
   {
@@ -26,7 +26,7 @@
   },
   {
     "login": "Joel Bradshaw",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/32f90fa0-ef1f-11eb-a967-eb8910455e68.jpg",
+    "avatar_url": "/images/avatars/joel-bradshaw.webp",
     "html_url": "https://opencollective.com/joel-bradshaw"
   },
   {
@@ -41,32 +41,32 @@
   },
   {
     "login": "nebunez",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/8e64a570-3f69-11ed-98ba-cd7679e2f89d.jpg",
+    "avatar_url": "/images/avatars/nebunez.webp",
     "html_url": "https://opencollective.com/nebunez"
   },
   {
     "login": "Paul Lindner",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/2d14fd80-14b1-11ec-9b88-278a4820449a.jpeg",
+    "avatar_url": "/images/avatars/paul-lindner.webp",
     "html_url": "https://opencollective.com/lindner"
   },
   {
     "login": "Teklynk",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/d1bfa5b0-522c-11ed-9ee9-6545f9e06856.jpg",
+    "avatar_url": "/images/avatars/teklynk.webp",
     "html_url": "https://opencollective.com/teklynk"
   },
   {
     "login": "Tom",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/523261ef-fc85-4ddf-811b-ad765b3aba71/Me2024.png",
+    "avatar_url": "/images/avatars/tom.webp",
     "html_url": "https://opencollective.com/tom31"
   },
   {
     "login": "Walter Ebert",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/694d4b30-7ae7-11ec-9772-95e867f474bf.png",
+    "avatar_url": "/images/avatars/walter-ebert.webp",
     "html_url": "https://opencollective.com/walterebert"
   },
   {
     "login": "Ставки на спорт",
-    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/c56d2fe2-f9fb-4d63-947c-77575f4b15c6/stavki.jpg",
+    "avatar_url": "/images/avatars/user-u0x2ac.webp",
     "html_url": "https://opencollective.com/stavki-na-sport-ua"
   }
 ]
