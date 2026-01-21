@@ -302,23 +302,6 @@ const config: Config = {
         repo: "owncast",
       },
     ],
-    // Critical CSS extraction - inlines critical CSS and lazy-loads the rest
-    [
-      require.resolve("./plugins/critical-css"),
-      {
-        // Process important pages for critical CSS extraction
-        processAllPages: false,
-        // Priority pages that are always processed
-        priorityPatterns: [
-          "index.html",
-          "docs/index.html",
-          "quickstart/index.html",
-          "releases/index.html",
-        ],
-        // Limit processing to avoid long build times
-        maxPages: 100,
-      },
-    ],
   ],
 
   themeConfig: {
