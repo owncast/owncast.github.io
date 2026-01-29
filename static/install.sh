@@ -30,7 +30,7 @@ shutdown() {
 	if [ $_success = false ]; then
 		printf "\n\n"
 		printf "${RED}ERROR:${NC} Your Owncast installation did not complete successfully.\n"
-		printf "Please report your issue at https://github.com/owncast/owncast/issues\n\n"
+		printf "Please report your issue at https://github.com/owncast/owncast/issues if there is an unexpected problem.\n\n"
 	fi
 	rm -rf "$INSTALL_TEMP_DIRECTORY"
 }
@@ -68,7 +68,7 @@ spinner() {
 		sleep "${delay}"
 		printf "\b\b\b\b\b\b"
 	done
-	printf "\r"
+	printf "\r\033[K"
 }
 
 # Print an error message and exit the program.
@@ -81,6 +81,30 @@ errorAndExit() {
 requireTool() {
 	if ! command -v "$1" &>/dev/null; then
 		errorAndExit "Could not locate \"$1\", which is required for installation. Please install it on your system."
+	fi
+}
+
+# Check if the current user matches the owner of an existing file or directory
+checkUpgradeUserOwnership() {
+	local path="$1"
+	local description="$2"
+	local current_user
+	local owner
+
+	current_user="$(whoami)"
+
+	# Get file owner (cross-platform: macOS uses -f '%Su', Linux uses -c '%U')
+	if [[ "$(uname -s)" == "Darwin" ]]; then
+		owner="$(stat -f '%Su' "$path")"
+	else
+		owner="$(stat -c '%U' "$path")"
+	fi
+
+	if [[ "$current_user" != "$owner" ]]; then
+		printf "\n"
+		printf "${RED}ERROR:${NC} You are running this upgrade as ${BOLD}${current_user}${NC}, but ${description} is owned by ${BOLD}${owner}${NC}.\n"
+		printf "Upgrades should be run as the same user who originally installed Owncast.\n"
+		exit 1
 	fi
 }
 
@@ -175,12 +199,20 @@ main() {
 
 	# If the install directory exists already then cd into it and upgrade
 	if [[ -d "$OWNCAST_INSTALL_DIRECTORY" && -x "$OWNCAST_INSTALL_DIRECTORY/owncast" ]]; then
+		checkUpgradeUserOwnership "$OWNCAST_INSTALL_DIRECTORY/owncast" "the Owncast executable"
+		if [[ -d "$OWNCAST_INSTALL_DIRECTORY/data" ]]; then
+			checkUpgradeUserOwnership "$OWNCAST_INSTALL_DIRECTORY/data" "the data directory"
+		fi
 		printf "${BLUE}Existing install found${NC} in ${OWNCAST_INSTALL_DIRECTORY}. Will update it to v${OWNCAST_VERSION}. If this is incorrect remove the directory and rerun the installer.\n"
 		cd "$OWNCAST_INSTALL_DIRECTORY"
 		OWNCAST_INSTALL_DIRECTORY="./"
 		backupInstall
 	# If the owncast binary exists then upgrade
 	elif [ -x ./owncast ]; then
+		checkUpgradeUserOwnership "./owncast" "the Owncast executable"
+		if [[ -d "./data" ]]; then
+			checkUpgradeUserOwnership "./data" "the data directory"
+		fi
 		printf "${BLUE}Existing install found${NC} in this directory. Will update it to v${OWNCAST_VERSION}. If this is incorrect remove the directory and rerun the installer.\n"
 		backupInstall
 		OWNCAST_INSTALL_DIRECTORY="./"
@@ -225,7 +257,6 @@ main() {
 
 	_success=true
 
-	printf "\n"
 	printf "${GREEN}Success!${NC} Run owncast by changing to the ${BOLD}owncast${NC} directory and run ${BOLD}./owncast${NC}.\n"
 	printf "The default port is ${BOLD}8080${NC} and the default streaming key and admin password is ${BOLD}abc123${NC}.\n"
 	printf "Visit ${UNDERLINE}https://owncast.online/docs/configuration/${NC} to learn how to configure your new Owncast server."
