@@ -30,19 +30,19 @@ export default function Home(): React.JSX.Element {
         />
       </Head>
       <HeroSection />
+      <FeaturePreviewSection />
       <SoftwareCompatList />
       <FeatureGrid />
-      <FeaturePreviewSection />
 
       <ArchetypesSection />
+      <FAQSection />
 
       {/* <HomePageSpecsSection /> */}
 
       {/* <FeatureComparisonSection /> */}
       <InstallerSection />
-      <ProtocolCompatList />
 
-      <FAQSection />
+      <ProtocolCompatList />
 
       <StoreSection />
       <AppsList />
