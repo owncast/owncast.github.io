@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { translate } from "@docusaurus/Translate";
-import {
-  LandingProductTourSection,
-  LandingProductTourList,
-  LandingProductTourTrigger,
-  LandingProductTourContent,
-} from "@/components/landing/LandingProductTour";
 import { VideoPlayer } from "@/components/shared/VideoPlayer";
 import useBaseUrl from "@docusaurus/useBaseUrl";
+import clsx from "clsx";
 
 function FeatureImage({
   src,
@@ -26,11 +21,14 @@ function FeatureImage({
   return (
     <div className="overflow-visible rounded-md">
       <img
-        className="w-full transition-transform duration-300 ease-in-out hover:scale-110"
+        className="w-full h-auto object-contain transition-transform duration-300 ease-in-out hover:scale-105"
         src={resolvedSrc}
         alt={alt}
         width={width}
         height={height}
+        style={{
+          aspectRatio: width && height ? `${width} / ${height}` : "auto",
+        }}
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : "auto"}
       />
@@ -174,73 +172,166 @@ function MobileFeatureList({ features }: { features: Feature[] }) {
   );
 }
 
-export function FeaturePreviewSection() {
-  const features = useFeatures();
-  const [activeFeature, setActiveFeature] = useState(features[0].id);
+// Desktop: Scroll-reveal alternating sections with growing page
+function DesktopFeatureSectionContent({
+  feature,
+  index,
+  isReversed,
+  isVisible,
+}: {
+  feature: Feature;
+  index: number;
+  isReversed: boolean;
+  isVisible: boolean;
+}) {
+  return (
+    <div
+      className={clsx(
+        "grid grid-cols-2 gap-12 items-center py-4 border-b border-white/10 last:border-b-0",
+        "transition-all duration-700 ease-out",
+        isVisible
+          ? "opacity-100 translate-x-0"
+          : isReversed
+          ? "opacity-0 translate-x-16"
+          : "opacity-0 -translate-x-16"
+      )}
+    >
+      {/* Content side */}
+      <div className={clsx(isReversed ? "order-2" : "order-1")}>
+        <div className="inline-block px-3 py-1 mb-4 rounded-full bg-primary-500/20">
+          <span className="text-xs font-semibold tracking-wider uppercase text-primary-400">
+            Feature {index + 1}
+          </span>
+        </div>
+        <h3 className="text-2xl font-semibold mb-4 leading-tight">
+          {feature.title}
+        </h3>
+        <p className="text-base leading-relaxed text-muted-foreground">
+          {feature.description}
+        </p>
+      </div>
+
+      {/* Media side */}
+      <div
+        className={clsx(
+          "flex",
+          isReversed ? "order-1 justify-start" : "order-2 justify-end"
+        )}
+      >
+        <div className="max-w-md rounded-xl p-2 bg-neutral-500/10 border border-white/10 shadow-2xl">
+          {feature.videoSrc ? (
+            <VideoPlayer
+              className="w-full rounded-lg"
+              src={feature.videoSrc}
+              autoPlay={true}
+              controls={false}
+              loop={true}
+            />
+          ) : feature.imageSrc ? (
+            <FeatureImage
+              src={feature.imageSrc}
+              alt={feature.imageAlt || feature.title}
+              width={feature.imageWidth}
+              height={feature.imageHeight}
+              priority={feature.priority}
+            />
+          ) : null}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Individual feature that manages its own animation state
+function DesktopFeatureSection({
+  feature,
+  index,
+  isReversed,
+  onInView,
+}: {
+  feature: Feature;
+  index: number;
+  isReversed: boolean;
+  onInView?: () => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveFeature((current) => {
-        const currentIndex = features.findIndex((f) => f.id === current);
-        const nextIndex = (currentIndex + 1) % features.length;
-        return features[nextIndex].id;
-      });
-    }, 15000);
+    if (hasAnimated.current) return;
 
-    return () => clearInterval(interval);
-  }, [features]);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          // Small delay so user sees the animation
+          setTimeout(() => {
+            setIsVisible(true);
+            onInView?.();
+          }, 100);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [onInView]);
+
+  return (
+    <div ref={ref}>
+      <DesktopFeatureSectionContent
+        feature={feature}
+        index={index}
+        isReversed={isReversed}
+        isVisible={isVisible}
+      />
+    </div>
+  );
+}
+
+function DesktopFeatureList({ features }: { features: Feature[] }) {
+  const [visibleCount, setVisibleCount] = useState(1);
+
+  const handleFeatureInView = (index: number) => {
+    // When a feature becomes visible, add the next one to the DOM
+    if (index === visibleCount - 1 && visibleCount < features.length) {
+      setVisibleCount((prev) => prev + 1);
+    }
+  };
+
+  const visibleFeatures = features.slice(0, visibleCount);
+
+  return (
+    <section className="hidden lg:block py-12 px-8 max-w-6xl mx-auto">
+      {visibleFeatures.map((feature, index) => (
+        <DesktopFeatureSection
+          key={feature.id}
+          feature={feature}
+          index={index}
+          isReversed={index % 2 === 1}
+          onInView={() => handleFeatureInView(index)}
+        />
+      ))}
+    </section>
+  );
+}
+
+export function FeaturePreviewSection() {
+  const features = useFeatures();
 
   return (
     <>
-      {/* Mobile: Vertical cards stack */}
+      {/* Mobile: Horizontal scroll cards */}
       <MobileFeatureList features={features} />
 
-      {/* Desktop: Interactive tab-based tour */}
-      <LandingProductTourSection
-        className="hidden lg:flex"
-        withBackgroundGlow
-        backgroundGlowVariant="secondary"
-        titleComponent={
-          <h2 className="text-5xl font-semibold leading-tight"></h2>
-        }
-        descriptionComponent={<div className="flex flex-col max-w-xl"></div>}
-        value={activeFeature}
-        onValueChange={setActiveFeature}
-      >
-        <LandingProductTourList>
-          {features.map((feature) => (
-            <LandingProductTourTrigger
-              key={feature.id}
-              value={feature.id}
-              className="my-1 data-[state=active]:bg-primary-500/10"
-            >
-              <p className="text-xl font-bold">{feature.title}</p>
-              <p className="text-base leading-relaxed">{feature.description}</p>
-            </LandingProductTourTrigger>
-          ))}
-        </LandingProductTourList>
-        {features.map((feature) => (
-          <LandingProductTourContent key={feature.id} value={feature.id}>
-            {feature.videoSrc ? (
-              <VideoPlayer
-                className={"w-full max-w-md mx-auto rounded-md"}
-                src={feature.videoSrc}
-                autoPlay={true}
-                controls={false}
-                loop={true}
-              />
-            ) : feature.imageSrc ? (
-              <FeatureImage
-                src={feature.imageSrc}
-                alt={feature.imageAlt || feature.title}
-                width={feature.imageWidth}
-                height={feature.imageHeight}
-                priority={feature.priority}
-              />
-            ) : null}
-          </LandingProductTourContent>
-        ))}
-      </LandingProductTourSection>
+      {/* Desktop: Scroll-reveal alternating sections */}
+      <DesktopFeatureList features={features} />
     </>
   );
 }
