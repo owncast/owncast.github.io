@@ -40,6 +40,11 @@
     "html_url": "https://opencollective.com/guest-07d84ecb"
   },
   {
+    "login": "N-iX Ltd",
+    "avatar_url": "/images/avatars/n-ix-ltd.webp",
+    "html_url": "https://opencollective.com/n-ix-ltd"
+  },
+  {
     "login": "nebunez",
     "avatar_url": "/images/avatars/nebunez.webp",
     "html_url": "https://opencollective.com/nebunez"
@@ -48,6 +53,16 @@
     "login": "Paul Lindner",
     "avatar_url": "/images/avatars/paul-lindner.webp",
     "html_url": "https://opencollective.com/lindner"
+  },
+  {
+    "login": "PurpleJillybeans",
+    "avatar_url": "/images/owncat-head-tuxedo-red.svg",
+    "html_url": "https://opencollective.com/guest-43ade74d"
+  },
+  {
+    "login": "Stripe",
+    "avatar_url": "/images/owncat-head-gray.svg",
+    "html_url": "https://opencollective.com/11004-stripe-50798cdb"
   },
   {
     "login": "Teklynk",

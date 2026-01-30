@@ -55,6 +55,11 @@
     "html_url": "https://opencollective.com/walterebert"
   },
   {
+    "login": "Stripe",
+    "avatar_url": null,
+    "html_url": "https://opencollective.com/11004-stripe-50798cdb"
+  },
+  {
     "login": "Incognito",
     "avatar_url": null,
     "html_url": "https://opencollective.com/user-5bdb86e0"
@@ -78,5 +83,15 @@
     "login": "MATSUDA RYUKI",
     "avatar_url": null,
     "html_url": "https://opencollective.com/guest-07d84ecb"
+  },
+  {
+    "login": "PurpleJillybeans",
+    "avatar_url": null,
+    "html_url": "https://opencollective.com/guest-43ade74d"
+  },
+  {
+    "login": "N-iX Ltd",
+    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/6d43cabd-7f83-4770-8b2e-068e70aded73/N-iX_Logo-RGB_Main%20(2).jpg",
+    "html_url": "https://opencollective.com/n-ix-ltd"
   }
 ]
