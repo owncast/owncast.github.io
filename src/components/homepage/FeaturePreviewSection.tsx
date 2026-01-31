@@ -103,7 +103,7 @@ function useFeatures(): Feature[] {
           "Encourage engagement and reach new viewers across the fediverse. Connect with Mastodon and ActivityPub platforms.",
       }),
       videoSrc: "/images/screenshots/screenshot-fediverse-scroll.mp4",
-      imagePosition: { top: "10%", left: "-10%", width: "120%" },
+      imagePosition: { top: "3%", left: "-5%", width: "110%" },
     },
     {
       id: "feature-10",

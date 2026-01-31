@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fediverse Timeline Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1f1a2e;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+            color: #d9e1e8;
+            overflow: hidden;
+        }
+
+        .timeline-container {
+            width: 400px;
+            height: 750px;
+            margin: 0 auto;
+            background: #282136;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .posts-wrapper {
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .posts-scroll {
+            animation: scrollUp 45s linear infinite;
+        }
+
+        @keyframes scrollUp {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        .post {
+            padding: 14px 16px;
+            border-bottom: 1px solid #3d364d;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .avatar {
+            width: 46px;
+            height: 46px;
+            border-radius: 8px;
+            flex-shrink: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .user-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .display-name {
+            font-weight: 700;
+            font-size: 15px;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .username {
+            font-size: 14px;
+            color: #8b8d94;
+            line-height: 1.3;
+        }
+
+        .post-time {
+            font-size: 14px;
+            color: #8b8d94;
+            flex-shrink: 0;
+        }
+
+        .post-content {
+            font-size: 15px;
+            line-height: 1.45;
+            color: #d9e1e8;
+            margin-bottom: 8px;
+            word-wrap: break-word;
+        }
+
+        .hashtag {
+            color: #8c8dff;
+        }
+
+        .post-link {
+            color: #8c8dff;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        .stream-preview {
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            position: relative;
+            background: #1a1625;
+        }
+
+        .stream-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            color: #8b8d94;
+            padding-right: 20px;
+        }
+
+        .action {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .action svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .action.active-boost { color: #2b90d9; }
+        .action.active-fav { color: #ca8f04; }
+
+        /* Boosted post indicator */
+        .boost-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #8b8d94;
+            font-size: 13px;
+            margin-bottom: 8px;
+            margin-left: 56px;
+        }
+
+        .boost-header svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        /* Fade effects */
+        .posts-wrapper::before,
+        .posts-wrapper::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 50px;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .posts-wrapper::before {
+            top: 0;
+            background: linear-gradient(180deg, #282136 0%, transparent 100%);
+        }
+
+        .posts-wrapper::after {
+            bottom: 0;
+            background: linear-gradient(0deg, #282136 0%, transparent 100%);
+        }
+
+        /* Stream overlay styles */
+        .stream-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .streamer-tag {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0,0,0,0.6);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: white;
+        }
+
+        .streamer-avatar-small {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="timeline-container">
+        <div class="posts-wrapper">
+            <div class="posts-scroll" id="postsScroll">
+                <div class="posts-content" id="postsContent">
+
+                    <!-- Post 1: Gaming stream with "Starting Soon" screen -->
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="avatar" style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);"></div>
+                            <div class="user-info">
+                                <div class="display-name">Neon Arcade Live</div>
+                                <div class="username">@neonarcade@streamhub.space</div>
+                            </div>
+                            <div class="post-time">3h</div>
+                        </div>
+                        <div class="post-content">
+                            Getting ready for tonight's stream! Something special planned 🎮<br><br>
+                            <span class="hashtag">#gaming</span> <span class="hashtag">#streaming</span>
+                        </div>
+                        <a href="#" class="post-link">https://neon.arcade.live</a>
+                        <div class="stream-preview">
+                            <div class="stream-image" style="background: linear-gradient(135deg, #1a365d 0%, #2d1b4e 50%, #1e3a5f 100%);">
+                                <div class="stream-overlay">
+                                    <div style="font-size: 32px; font-weight: 800; color: #a5f3fc; text-shadow: 0 0 20px rgba(165,243,252,0.5);">STREAM</div>
+                                    <div style="font-size: 36px; font-weight: 800; color: #f0abfc; text-shadow: 0 0 20px rgba(240,171,252,0.5);">STARTING</div>
+                                    <div style="font-size: 32px; font-weight: 800; color: #a5f3fc; text-shadow: 0 0 20px rgba(165,243,252,0.5);">SOON</div>
+                                </div>
+                                <div class="streamer-tag">
+                                    <div class="streamer-avatar-small" style="background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);"></div>
+                                    NeonPlayer
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg> 6</div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg></div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
+                        </div>
+                    </div>
+
+                    <!-- Post 2: Talk/discussion stream -->
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="avatar" style="background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);"></div>
+                            <div class="user-info">
+                                <div class="display-name">Open Discourse</div>
+                                <div class="username">@opendiscourse@fediverse.town</div>
+                            </div>
+                            <div class="post-time">4h</div>
+                        </div>
+                        <div class="post-content">
+                            Join us for today's discussion! We're talking about creative hobbies and how they help with work-life balance.<br><br>
+                            <span class="hashtag">#discussion</span> <span class="hashtag">#community</span> <span class="hashtag">#hobbies</span>
+                        </div>
+                        <a href="#" class="post-link">https://open.discourse.chat</a>
+                        <div class="stream-preview">
+                            <div class="stream-image" style="background: linear-gradient(180deg, #1a0a2e 0%, #2d1b4e 50%, #0f0a1a 100%);">
+                                <div style="position: absolute; right: 20px; bottom: 40px; width: 120px; height: 160px; background: linear-gradient(135deg, #ec4899 0%, #f472b6 50%, #fbbf24 100%); border-radius: 8px; opacity: 0.9;"></div>
+                                <div style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #a855f7; font-size: 14px;">
+                                    <div style="margin-bottom: 8px;">💬 Topic: Creative Hobbies</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg> 1</div>
+                            <div class="action active-boost"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg></div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
+                        </div>
+                    </div>
+
+                    <!-- Post 3: DJ/Music stream -->
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="avatar" style="background: linear-gradient(135deg, #f97316 0%, #eab308 100%);"></div>
+                            <div class="user-info">
+                                <div class="display-name">Basement Beats</div>
+                                <div class="username">@basementbeats@soundwave.club</div>
+                            </div>
+                            <div class="post-time">4h</div>
+                        </div>
+                        <div class="post-content">
+                            Friday night vibes incoming! Spinning some deep cuts tonight 🎧<br><br>
+                            <span class="hashtag">#music</span> <span class="hashtag">#dj</span> <span class="hashtag">#electronic</span> <span class="hashtag">#house</span>
+                        </div>
+                        <a href="#" class="post-link">https://basement.beats.fm</a>
+                        <div class="stream-preview">
+                            <div class="stream-image" style="background: linear-gradient(180deg, #0c1445 0%, #1e1b4b 50%, #312e81 100%);">
+                                <div style="position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); display: flex; gap: 4px;">
+                                    <div style="width: 4px; height: 30px; background: #22d3ee; animation: eq1 0.5s ease-in-out infinite alternate;"></div>
+                                    <div style="width: 4px; height: 45px; background: #a855f7; animation: eq2 0.4s ease-in-out infinite alternate;"></div>
+                                    <div style="width: 4px; height: 25px; background: #22d3ee; animation: eq3 0.6s ease-in-out infinite alternate;"></div>
+                                    <div style="width: 4px; height: 55px; background: #a855f7; animation: eq1 0.45s ease-in-out infinite alternate;"></div>
+                                    <div style="width: 4px; height: 35px; background: #22d3ee; animation: eq2 0.55s ease-in-out infinite alternate;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg></div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg></div>
+                            <div class="action active-fav"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> 3</div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
+                        </div>
+                    </div>
+
+                    <!-- Post 4: Art stream boosted -->
+                    <div class="post">
+                        <div class="boost-header">
+                            <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+                            sketchfan42 boosted
+                        </div>
+                        <div class="post-header">
+                            <div class="avatar" style="background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);"></div>
+                            <div class="user-info">
+                                <div class="display-name">Pixel Dreams Studio</div>
+                                <div class="username">@pixeldreams@artcollective.io</div>
+                            </div>
+                            <div class="post-time">5h</div>
+                        </div>
+                        <div class="post-content">
+                            Cozy afternoon drawing session! Working on some character designs today 🎨<br><br>
+                            Come hang out and chat while I sketch!<br><br>
+                            <span class="hashtag">#art</span> <span class="hashtag">#digitalart</span> <span class="hashtag">#illustration</span>
+                        </div>
+                        <a href="#" class="post-link">https://pixel.dreams.art</a>
+                        <div class="stream-preview">
+                            <div class="stream-image" style="background: linear-gradient(135deg, #831843 0%, #701a75 50%, #4a044e 100%);">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px;">🎨</div>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg> 12</div>
+                            <div class="action active-boost"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg> 45</div>
+                            <div class="action active-fav"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> 89</div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
+                        </div>
+                    </div>
+
+                    <!-- Post 5: Retro gaming -->
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="avatar" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%);"></div>
+                            <div class="user-info">
+                                <div class="display-name">Throwback Gaming</div>
+                                <div class="username">@throwbackgames@retro.zone</div>
+                            </div>
+                            <div class="post-time">6h</div>
+                        </div>
+                        <div class="post-content">
+                            Classic console night! Playing through some favorites from the 90s 🕹️<br><br>
+                            <span class="hashtag">#retrogaming</span> <span class="hashtag">#nostalgia</span> <span class="hashtag">#gaming</span>
+                        </div>
+                        <a href="#" class="post-link">https://throwback.gaming.tv</a>
+                        <div class="stream-preview">
+                            <div class="stream-image" style="background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px;">🎮</div>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg> 8</div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg> 23</div>
+                            <div class="action active-fav"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> 67</div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
+                        </div>
+                    </div>
+
+                    <!-- Post 6: Coding stream boosted -->
+                    <div class="post">
+                        <div class="boost-header">
+                            <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+                            opensourcefan boosted
+                        </div>
+                        <div class="post-header">
+                            <div class="avatar" style="background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);"></div>
+                            <div class="user-info">
+                                <div class="display-name">Terminal Sessions</div>
+                                <div class="username">@terminalsessions@devtalk.net</div>
+                            </div>
+                            <div class="post-time">7h</div>
+                        </div>
+                        <div class="post-content">
+                            Building something fun today! Learning a new framework and sharing the journey.<br><br>
+                            <span class="hashtag">#programming</span> <span class="hashtag">#coding</span> <span class="hashtag">#webdev</span>
+                        </div>
+                        <a href="#" class="post-link">https://terminal.sessions.dev</a>
+                        <div class="stream-preview">
+                            <div class="stream-image" style="background: linear-gradient(135deg, #0c4a6e 0%, #075985 50%, #0369a1 100%);">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: monospace; color: #22d3ee; font-size: 14px; text-align: left; background: rgba(0,0,0,0.5); padding: 12px; border-radius: 8px;">
+                                    <div style="color: #a855f7;">fn</div>
+                                    <div>  main() {</div>
+                                    <div style="color: #4ade80;">    // Building...</div>
+                                    <div>  }</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg> 34</div>
+                            <div class="action active-boost"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg> 78</div>
+                            <div class="action active-fav"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> 156</div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
+                        </div>
+                    </div>
+
+                    <!-- Post 7: Music/Jazz -->
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="avatar" style="background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);"></div>
+                            <div class="user-info">
+                                <div class="display-name">Moonlight Sessions</div>
+                                <div class="username">@moonlightsessions@jazzcat.fm</div>
+                            </div>
+                            <div class="post-time">8h</div>
+                        </div>
+                        <div class="post-content">
+                            Late night improv session! Some friends stopped by to jam 🎷<br><br>
+                            <span class="hashtag">#jazz</span> <span class="hashtag">#livemusic</span> <span class="hashtag">#improv</span>
+                        </div>
+                        <a href="#" class="post-link">https://moonlight.sessions.fm</a>
+                        <div class="stream-preview">
+                            <div class="stream-image" style="background: linear-gradient(135deg, #581c87 0%, #6b21a8 50%, #7e22ce 100%);">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px;">🎷</div>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg> 15</div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg> 56</div>
+                            <div class="action active-fav"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> 234</div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
+                        </div>
+                    </div>
+
+                    <!-- Post 8: TTRPG stream -->
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="avatar" style="background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);"></div>
+                            <div class="user-info">
+                                <div class="display-name">Fireside Tales</div>
+                                <div class="username">@firesidetales@tabletop.quest</div>
+                            </div>
+                            <div class="post-time">9h</div>
+                        </div>
+                        <div class="post-content">
+                            Campaign night continues! The party is in deep trouble this week... 🐉<br><br>
+                            <span class="hashtag">#ttrpg</span> <span class="hashtag">#tabletop</span> <span class="hashtag">#roleplaying</span>
+                        </div>
+                        <a href="#" class="post-link">https://fireside.tales.game</a>
+                        <div class="stream-preview">
+                            <div class="stream-image" style="background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 50%, #b91c1c 100%);">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px;">🐉</div>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg> 28</div>
+                            <div class="action active-boost"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg> 67</div>
+                            <div class="action active-fav"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> 178</div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
+                        </div>
+                    </div>
+
+                    <!-- Post 9: Cooking -->
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="avatar" style="background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);"></div>
+                            <div class="user-info">
+                                <div class="display-name">Home Kitchen Live</div>
+                                <div class="username">@homekitchen@foodie.social</div>
+                            </div>
+                            <div class="post-time">10h</div>
+                        </div>
+                        <div class="post-content">
+                            Sunday cooking! Making comfort food from scratch today 🍝<br><br>
+                            <span class="hashtag">#cooking</span> <span class="hashtag">#homemade</span> <span class="hashtag">#foodie</span>
+                        </div>
+                        <a href="#" class="post-link">https://home.kitchen.live</a>
+                        <div class="stream-preview">
+                            <div class="stream-image" style="background: linear-gradient(135deg, #9a3412 0%, #c2410c 50%, #ea580c 100%);">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px;">🍝</div>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg> 19</div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg> 34</div>
+                            <div class="action active-fav"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> 112</div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
+                        </div>
+                    </div>
+
+                    <!-- Post 10: Science/Astronomy -->
+                    <div class="post">
+                        <div class="boost-header">
+                            <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+                            spacefan99 boosted
+                        </div>
+                        <div class="post-header">
+                            <div class="avatar" style="background: linear-gradient(135deg, #0891b2 0%, #22d3ee 100%);"></div>
+                            <div class="user-info">
+                                <div class="display-name">Skyward Tonight</div>
+                                <div class="username">@skywardtonight@stargazer.club</div>
+                            </div>
+                            <div class="post-time">11h</div>
+                        </div>
+                        <div class="post-content">
+                            Perfect night for stargazing! Setting up the telescope for some planetary viewing 🔭<br><br>
+                            <span class="hashtag">#astronomy</span> <span class="hashtag">#stargazing</span> <span class="hashtag">#science</span>
+                        </div>
+                        <a href="#" class="post-link">https://skyward.tonight.live</a>
+                        <div class="stream-preview">
+                            <div class="stream-image" style="background: linear-gradient(180deg, #0f172a 0%, #1e1b4b 50%, #0c0a1d 100%);">
+                                <div style="position: absolute; top: 30%; left: 30%; width: 12px; height: 12px; background: #fef3c7; border-radius: 50%; box-shadow: 0 0 20px #fef3c7;"></div>
+                                <div style="position: absolute; top: 50%; left: 60%; width: 8px; height: 8px; background: #e0f2fe; border-radius: 50%; box-shadow: 0 0 10px #e0f2fe;"></div>
+                                <div style="position: absolute; top: 70%; left: 25%; width: 6px; height: 6px; background: #fce7f3; border-radius: 50%; box-shadow: 0 0 8px #fce7f3;"></div>
+                                <div style="position: absolute; top: 45%; left: 45%; transform: translate(-50%, -50%); font-size: 48px;">🪐</div>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg> 45</div>
+                            <div class="action active-boost"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg> 123</div>
+                            <div class="action active-fav"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> 456</div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></div>
+                            <div class="action"><svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes eq1 {
+            from { height: 20px; }
+            to { height: 45px; }
+        }
+        @keyframes eq2 {
+            from { height: 35px; }
+            to { height: 55px; }
+        }
+        @keyframes eq3 {
+            from { height: 25px; }
+            to { height: 40px; }
+        }
+    </style>
+
+    <script>
+        // Duplicate content for seamless looping
+        document.addEventListener('DOMContentLoaded', function() {
+            const content = document.getElementById('postsContent');
+            const clone = content.cloneNode(true);
+            clone.id = 'postsContentClone';
+            document.getElementById('postsScroll').appendChild(clone);
+        });
+    </script>
+</body>
+</html>

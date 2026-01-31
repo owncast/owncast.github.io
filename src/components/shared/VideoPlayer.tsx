@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { CircleIcon, PlayIcon } from 'lucide-react';
 import clsx from 'clsx';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -17,6 +17,7 @@ export const VideoPlayer = ({
   preload = 'metadata',
   variant = 'primary',
   className,
+  style,
 }: {
   autoPlay?: boolean;
   controls?: boolean;
@@ -30,6 +31,7 @@ export const VideoPlayer = ({
   preload?: 'none' | 'metadata' | 'auto';
   variant?: 'primary' | 'secondary';
   className?: string;
+  style?: React.CSSProperties;
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
@@ -55,10 +57,10 @@ export const VideoPlayer = ({
 
   return (
     <div
-      style={{ maxWidth }}
+      style={{ maxWidth, ...style }}
       className={clsx(className, 'rounded-lg overflow-hidden shadow-md')}
     >
-      <div className="relative bg-white dark:bg-black rounded-md">
+      <div className={clsx("relative rounded-md", !autoPlay && "bg-white dark:bg-black")}>
         {!isPlaying ? (
           <button
             onClick={togglePlay}
@@ -100,7 +102,7 @@ export const VideoPlayer = ({
           controls={autoPlay || isPlaying || controls}
           autoPlay={autoPlay}
           loop={loop}
-          className={className}
+          className="w-full h-auto"
           poster={resolvedPoster}
           muted={muted}
           onClick={togglePlay}
