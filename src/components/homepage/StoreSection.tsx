@@ -46,7 +46,7 @@ export function StoreSection() {
             className="flex-shrink-0 relative"
           >
             {item.popular && (
-              <div className="absolute left-0 top-2 w-full flex items-center justify-center z-20">
+              <div className="absolute left-0 top-6 w-full flex items-center justify-center z-20">
                 <Badge>
                   <Translate id="homepage.store.popularItem">
                     Popular Item
