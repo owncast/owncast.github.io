@@ -50,6 +50,11 @@
     "html_url": "https://opencollective.com/tom31"
   },
   {
+    "login": "Guest",
+    "avatar_url": null,
+    "html_url": "https://opencollective.com/guest-e0844f5f"
+  },
+  {
     "login": "Walter Ebert",
     "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/694d4b30-7ae7-11ec-9772-95e867f474bf.png",
     "html_url": "https://opencollective.com/walterebert"
