@@ -187,7 +187,7 @@ main() {
 
 	# Build ffmpeg download URL
 	FFMPEG_VERSION="8.0"
-	FFMPEG_RELEASE="20260123163721"
+	FFMPEG_RELEASE="20260221183825"
 	FFMPEG_SUFFIX=""
 	[[ "$FFMPEG_OS" == "linux" ]] && FFMPEG_SUFFIX="-static"
 	FFMPEG_DOWNLOAD_URL="https://github.com/owncast/ffmpeg-builds/releases/download/${FFMPEG_RELEASE}/ffmpeg${FFMPEG_VERSION}-${FFMPEG_OS}-${FFMPEG_ARCH}${FFMPEG_SUFFIX}.tar.gz"
