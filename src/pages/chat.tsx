@@ -520,7 +520,7 @@ export default function ChatPage(): JSX.Element {
         style={{
           display: "flex",
           flexDirection: "column",
-          height: "calc(100vh - 60px)",
+          height: "calc(100dvh - var(--ifm-navbar-height))",
           overflow: "hidden",
           minHeight: 0,
         }}
@@ -562,7 +562,9 @@ export default function ChatPage(): JSX.Element {
                 </TabsTrigger>
                 <TabsTrigger value="community" className="gap-1.5">
                   <MessageCircle className="h-4 w-4" />
-                  <Translate id="chat.tab.community">Chat with Us</Translate>
+                  <Translate id="chat.tab.community">
+                    Chat with the Community
+                  </Translate>
                 </TabsTrigger>
               </TabsList>
 

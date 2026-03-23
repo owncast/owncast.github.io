@@ -340,7 +340,7 @@ function AIChatInner({
                           </p>
                           <p
                             style={{
-                              marginBottom: 8,
+                              marginBottom: 0,
                               color: "#9ca8ba",
                               fontSize: "0.8125rem",
                             }}
@@ -387,54 +387,55 @@ function AIChatInner({
                               }
                             </Translate>
                           </p>
-                          <div
-                            style={{
-                              display: "flex",
-                              flexWrap: "wrap",
-                              gap: "14px 8px",
-                              marginTop: 20,
-                            }}
-                          >
-                            {SUGGESTED_QUESTIONS.map((q) => (
-                              <button
-                                key={q}
-                                type="button"
-                                onClick={() => submitQuery(q)}
-                                style={{
-                                  background: "rgba(122, 92, 243, 0.1)",
-                                  border: "1px solid rgba(122, 92, 243, 0.3)",
-                                  borderRadius: 16,
-                                  padding: "6px 14px",
-                                  color: "#7db4f4",
-                                  fontSize: "0.8125rem",
-                                  cursor: "pointer",
-                                  whiteSpace: "nowrap",
-                                  transition:
-                                    "background-color 0.15s, border-color 0.15s",
-                                }}
-                                onMouseOver={(e) => {
-                                  const t = e.currentTarget;
-                                  t.style.backgroundColor =
-                                    "rgba(122, 92, 243, 0.2)";
-                                  t.style.borderColor =
-                                    "rgba(122, 92, 243, 0.5)";
-                                }}
-                                onMouseOut={(e) => {
-                                  const t = e.currentTarget;
-                                  t.style.backgroundColor =
-                                    "rgba(122, 92, 243, 0.1)";
-                                  t.style.borderColor =
-                                    "rgba(122, 92, 243, 0.3)";
-                                }}
-                              >
-                                {q}
-                              </button>
-                            ))}
-                          </div>
                         </Message.CustomContent>
                       </Message>
                     </MessageGroup.Messages>
                   </MessageGroup>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: "14px 8px",
+                      padding: "8px 16px 8px 58px",
+                    }}
+                  >
+                    {SUGGESTED_QUESTIONS.map((q) => (
+                      <button
+                        key={q}
+                        type="button"
+                        onClick={() => submitQuery(q)}
+                        style={{
+                          background: "rgba(122, 92, 243, 0.1)",
+                          border: "1px solid rgba(122, 92, 243, 0.3)",
+                          borderRadius: 16,
+                          padding: "6px 14px",
+                          color: "#7db4f4",
+                          fontSize: "0.8125rem",
+                          cursor: "pointer",
+                          whiteSpace: "nowrap",
+                          transition:
+                            "background-color 0.15s, border-color 0.15s",
+                        }}
+                        onMouseOver={(e) => {
+                          const t = e.currentTarget;
+                          t.style.backgroundColor =
+                            "rgba(122, 92, 243, 0.2)";
+                          t.style.borderColor =
+                            "rgba(122, 92, 243, 0.5)";
+                        }}
+                        onMouseOut={(e) => {
+                          const t = e.currentTarget;
+                          t.style.backgroundColor =
+                            "rgba(122, 92, 243, 0.1)";
+                          t.style.borderColor =
+                            "rgba(122, 92, 243, 0.3)";
+                        }}
+                      >
+                        {q}
+                      </button>
+                    ))}
+                  </div>
                 </>
               )}
 

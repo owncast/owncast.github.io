@@ -689,7 +689,7 @@
     "message": "Instant Help"
   },
   "chat.tab.community": {
-    "message": "Chat with Us"
+    "message": "Chat with the Community"
   },
   "chat.answers.preparing": {
     "message": "Owncat is pretending to type..."
@@ -707,7 +707,7 @@
     "message": "New conversation"
   },
   "chat.answers.welcome": {
-    "message": "Hi, I'm Owncat! You can ask me questions and I'll search the Owncast {docsLink} and other resources to quickly try to find answers for you."
+    "message": "Hi, I'm Owncat, I can search existing Owncast {docsLink} to try to find answers for you. As automated results, these are not replacements for reading the docs yourself or talking to real people, but could be a useful tool."
   },
   "chat.answers.senderName": {
     "message": "Owncat"
@@ -806,7 +806,7 @@
     "message": "If you'd prefer to {chatLink}, you can do that too, though you may have to wait for someone to respond. You're also welcome to file questions on our {issueTracker}."
   },
   "chat.answers.welcomeChatTab": {
-    "message": "Chat with Us"
+    "message": "Chat with the Community"
   },
   "chat.answers.welcomeIssueTracker": {
     "message": "issue tracker"
