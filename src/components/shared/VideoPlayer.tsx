@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { CircleIcon, PlayIcon } from 'lucide-react';
 import clsx from 'clsx';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -34,9 +34,34 @@ export const VideoPlayer = ({
   style?: React.CSSProperties;
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
+  const [isNearViewport, setIsNearViewport] = useState(!autoPlay);
   const resolvedPoster = useBaseUrl(poster);
   const resolvedSrc = useBaseUrl(src);
+
+  // For autoPlay videos, defer loading the src until near viewport
+  useEffect(() => {
+    if (!autoPlay) {
+      setIsNearViewport(true);
+      return;
+    }
+
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsNearViewport(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "400px 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [autoPlay]);
 
   const togglePlay = () => {
     if (!videoRef.current) {
@@ -57,6 +82,7 @@ export const VideoPlayer = ({
 
   return (
     <div
+      ref={containerRef}
       style={{ maxWidth, ...style }}
       className={clsx(className, 'rounded-lg overflow-hidden shadow-md')}
     >
@@ -96,21 +122,21 @@ export const VideoPlayer = ({
 
         <video
           ref={videoRef}
-          src={resolvedSrc}
+          src={isNearViewport ? resolvedSrc : undefined}
           width={width}
           height={height}
           controls={autoPlay || isPlaying || controls}
-          autoPlay={autoPlay}
+          autoPlay={autoPlay && isNearViewport}
           loop={loop}
           className="w-full h-auto"
           poster={resolvedPoster}
           muted={muted}
           onClick={togglePlay}
           playsInline
-          preload={preload}
+          preload={isNearViewport ? preload : 'none'}
         >
           <track kind="captions" />
-          <source src={resolvedSrc} type="video/mp4" />
+          {isNearViewport && <source src={resolvedSrc} type="video/mp4" />}
           Your browser does not support the video tag.
         </video>
       </div>

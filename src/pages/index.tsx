@@ -4,19 +4,38 @@ import Head from "@docusaurus/Head";
 import { HeroSection } from "../components/homepage/HeroSection";
 import { FeaturePreviewSection } from "../components/homepage/FeaturePreviewSection";
 import { SoftwareCompatList } from "../components/homepage/SoftwareCompatList";
-import { FeatureComparisonSection } from "../components/homepage/FeatureComparisonSection";
-import { InstallerSection } from "../components/homepage/InstallerSection";
 import { FeatureGrid } from "../components/homepage/FeatureGrid";
-import { StoreSection } from "../components/homepage/StoreSection";
-import { SponsorsSection } from "../components/homepage/SponsorsSection";
-import { FAQSection } from "../components/homepage/FAQSection";
-import { ProtocolCompatList } from "../components/homepage/ProtocolCompatList";
-import { NewsletterSection } from "../components/homepage/NewsletterSection";
-import Contributors from "@/components/Contributors";
-import Sponsors from "@/components/Sponsors";
-import { HomePageSpecsSection } from "@/components/homepage/HomePageSpecsSection";
-import { AppsList } from "@/components/homepage/AppsList";
+import { LazySection } from "@/components/shared/LazySection";
+
+// Eagerly loaded — these contain text content valuable for SEO/indexing.
 import { ArchetypesSection } from "@/components/homepage/Archetypes";
+import { FAQSection } from "@/components/homepage/FAQSection";
+import { InstallerSection } from "@/components/homepage/InstallerSection";
+import { ProtocolCompatList } from "@/components/homepage/ProtocolCompatList";
+
+// Lazy loaded — image/avatar-heavy sections with minimal indexable text.
+// They load 600px before entering the viewport (no pop-in).
+const AppsList = React.lazy(
+  () =>
+    import("@/components/homepage/AppsList").then((m) => ({
+      default: m.AppsList,
+    }))
+);
+const StoreSection = React.lazy(
+  () =>
+    import("@/components/homepage/StoreSection").then((m) => ({
+      default: m.StoreSection,
+    }))
+);
+const SponsorsSection = React.lazy(
+  () =>
+    import("@/components/homepage/SponsorsSection").then((m) => ({
+      default: m.SponsorsSection,
+    }))
+);
+const Contributors = React.lazy(
+  () => import("@/components/Contributors")
+);
 
 export default function Home(): React.JSX.Element {
   return (
@@ -36,20 +55,13 @@ export default function Home(): React.JSX.Element {
 
       <ArchetypesSection />
       <FAQSection />
-
-      {/* <HomePageSpecsSection /> */}
-
-      {/* <FeatureComparisonSection /> */}
       <InstallerSection />
-
       <ProtocolCompatList />
 
-      <StoreSection />
-      <AppsList />
-      <SponsorsSection />
-      <Contributors />
-      {/* <Sponsors /> */}
-      {/* <NewsletterSection /> */}
+      <LazySection component={StoreSection} minHeight={400} />
+      <LazySection component={AppsList} minHeight={400} />
+      <LazySection component={SponsorsSection} minHeight={200} />
+      <LazySection component={Contributors} minHeight={300} />
     </Layout>
   );
 }

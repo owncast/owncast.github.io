@@ -49,8 +49,17 @@ export const LandingMarquee = ({
     };
 
     updateRepeatCount();
-    window.addEventListener('resize', updateRepeatCount);
-    return () => window.removeEventListener('resize', updateRepeatCount);
+
+    let timeout: ReturnType<typeof setTimeout>;
+    const debouncedUpdate = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(updateRepeatCount, 150);
+    };
+    window.addEventListener('resize', debouncedUpdate);
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener('resize', debouncedUpdate);
+    };
   }, [animationDurationInSeconds]);
 
   return (
