@@ -819,5 +819,8 @@
   },
   "chat.displayName.label": {
     "message": "Display name"
+  },
+  "chat.community.welcome": {
+    "message": "You're now in the Owncast support chat. Say hello!"
   }
 }

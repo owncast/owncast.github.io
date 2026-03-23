@@ -447,6 +447,9 @@ const RoomTabContent = React.forwardRef<HTMLDivElement, RoomTabContentProps>(
               autoScrollToBottom
               autoScrollToBottomOnMount
             >
+              {messages.length === 0 && !isLoadingHistory && (
+                <MessageSeparator content={translate({ id: 'chat.community.welcome', message: "You're now in the Owncast support chat. Say hello!" })} />
+              )}
               {messageElements}
             </CSMessageList>
 
