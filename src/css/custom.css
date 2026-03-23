@@ -218,6 +218,11 @@ html[data-theme='dark'] .docMainWrapper {
   filter: brightness(0) invert(0.9);
 }
 
+/* Hide reCAPTCHA badge (loaded by Kapa SDK). Attribution in chat info dialog. */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
+
 /* Hide Kapa.ai widget on mobile */
 @media (max-width: 768px) {
   #kapa-widget-container {
