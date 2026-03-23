@@ -156,10 +156,10 @@
     "message": "Built-in chat"
   },
   "homepage.featurePreview.chat.description": {
-    "message": "Real-time chat included, no third-party services required."
+    "message": "Real-time chat included, no third-party services required. Moderation tools, custom emotes, and user authentication included."
   },
   "homepage.featurePreview.branding.title": {
-    "message": "Custom branding on your page, served by your domain"
+    "message": "Custom branding, your domain"
   },
   "homepage.featurePreview.branding.description": {
     "message": "Stream from your own domain with your own look and feel. Create your own UI, truly owning the experience."
@@ -168,13 +168,13 @@
     "message": "Notifications"
   },
   "homepage.featurePreview.notifications.description": {
-    "message": "Notify followers via various channels when you go live."
+    "message": "Notify followers via various channels when you go live. Never miss an opportunity to connect with your audience."
   },
   "homepage.featurePreview.fediverse.title": {
     "message": "Fediverse support"
   },
   "homepage.featurePreview.fediverse.description": {
-    "message": "Encourage engagement and reach new viewers across the fediverse."
+    "message": "Encourage engagement and reach new viewers across the fediverse. Connect with Mastodon and ActivityPub platforms."
   },
   "homepage.featurePreview.extensible.title": {
     "message": "Extensible"
@@ -219,7 +219,7 @@
     "message": "Uses open protocols and standards"
   },
   "homepage.protocolCompat.description": {
-    "message": "Choose the tools and services of your choice to work with Owncast."
+    "message": "Choose the tools, services, and software of your choice to work with Owncast."
   },
   "homepage.softwareCompat.title": {
     "message": "Compatible with your favorite broadcasting tools"
@@ -606,5 +606,218 @@
   "theme.tags.tagsPageTitle": {
     "message": "Tags",
     "description": "The title of the tag list page"
+  },
+  "contributors.title": {
+    "message": "Contributors"
+  },
+  "contributors.description": {
+    "message": "Contribute in technical, or non-technical ways."
+  },
+  "contributors.learnHow": {
+    "message": "Learn how to get involved."
+  },
+  "donors.title": {
+    "message": "Donors"
+  },
+  "donors.description": {
+    "message": "Help support the project by making a financial donation at"
+  },
+  "donors.note": {
+    "message": "This list reflects active financial supporters helping fund ongoing development, initiatives and infrastructure."
+  },
+  "docs.welcome.title": {
+    "message": "Welcome to Owncast documentation!"
+  },
+  "docs.welcome.description": {
+    "message": "Owncast is a self-hosted live video and web chat server that allows you to stream your content to your audience without relying on third-party platforms. Whether you're a beginner looking to set up your first stream or an experienced user seeking advanced configuration options, this documentation aims to point you in the right direction."
+  },
+  "chat.error.generic": {
+    "message": "Something went wrong"
+  },
+  "chat.error.retry": {
+    "message": "Try again"
+  },
+  "chat.community.chooseName": {
+    "message": "Choose a name to join the chat"
+  },
+  "chat.community.connecting": {
+    "message": "Connecting to the Owncast support chat..."
+  },
+  "chat.community.description": {
+    "message": "This is a community chat room where you can ask questions and get help from other Owncast users and contributors."
+  },
+  "chat.community.guidelines": {
+    "message": "Please be courteous and respectful of others who may be volunteering their time to help. Before asking, consider checking the {docsLink} and {issuesLink} to see if your question has already been answered."
+  },
+  "chat.community.docsLink": {
+    "message": "documentation"
+  },
+  "chat.community.issuesLink": {
+    "message": "past issues"
+  },
+  "chat.info.title": {
+    "message": "Owncast Community Chat"
+  },
+  "chat.info.subtitle": {
+    "message": "A place to ask questions and get help from the Owncast community."
+  },
+  "chat.info.body": {
+    "message": "This is a community chat room where you can connect with other Owncast users and contributors. Please be courteous and respectful of others who volunteer their time to help."
+  },
+  "chat.info.checkFirst": {
+    "message": "Before asking, consider checking the {docsLink} and {issuesLink} to see if your question has already been answered."
+  },
+  "chat.info.docsLink": {
+    "message": "documentation"
+  },
+  "chat.info.issuesLink": {
+    "message": "past issues"
+  },
+  "chat.info.matrix.title": {
+    "message": "Connect with any Matrix client"
+  },
+  "chat.info.matrix.description": {
+    "message": "This chat is powered by {matrixLink}, an open, decentralized communication protocol. You can join this room using any Matrix client:"
+  },
+  "chat.info.matrix.openElement": {
+    "message": "Open in Element"
+  },
+  "chat.info.matrix.matrixToLink": {
+    "message": "matrix.to link"
+  },
+  "chat.tab.answers": {
+    "message": "Instant Help"
+  },
+  "chat.tab.community": {
+    "message": "Chat with Us"
+  },
+  "chat.answers.preparing": {
+    "message": "Owncat is pretending to type..."
+  },
+  "chat.answers.thinking": {
+    "message": "Owncat is pretending to type..."
+  },
+  "chat.answers.subtitle": {
+    "message": "Answers from the Owncast documentation and past issues"
+  },
+  "chat.answers.stop": {
+    "message": "Stop"
+  },
+  "chat.answers.newConversation": {
+    "message": "New conversation"
+  },
+  "chat.answers.welcome": {
+    "message": "Hi, I'm Owncat! You can ask me questions and I'll search the Owncast {docsLink} and other resources to quickly try to find answers for you."
+  },
+  "chat.answers.senderName": {
+    "message": "Owncat"
+  },
+  "chat.answers.askCommunity": {
+    "message": "Need more help? Ask the community →"
+  },
+  "chat.answers.placeholder": {
+    "message": "Ask anything about Owncast..."
+  },
+  "chat.displayName.errorEmpty": {
+    "message": "Please enter a name"
+  },
+  "chat.displayName.errorTooLong": {
+    "message": "Name is too long"
+  },
+  "chat.displayName.errorFailed": {
+    "message": "Failed to set name. Please try again."
+  },
+  "chat.displayName.titleChange": {
+    "message": "Change your name"
+  },
+  "chat.displayName.titleWelcome": {
+    "message": "Welcome to Owncast support chat"
+  },
+  "chat.displayName.descriptionChange": {
+    "message": "Update the name shown with your messages."
+  },
+  "chat.displayName.descriptionWelcome": {
+    "message": "What should we call you?"
+  },
+  "chat.displayName.placeholder": {
+    "message": "Your display name"
+  },
+  "chat.displayName.cancel": {
+    "message": "Cancel"
+  },
+  "chat.displayName.saving": {
+    "message": "Saving..."
+  },
+  "chat.displayName.update": {
+    "message": "Update"
+  },
+  "chat.displayName.join": {
+    "message": "Join Chat"
+  },
+  "chat.messages.empty": {
+    "message": "No messages yet"
+  },
+  "chat.thread.viewThread": {
+    "message": "View thread"
+  },
+  "chat.input.connecting": {
+    "message": "Connecting..."
+  },
+  "chat.input.placeholder": {
+    "message": "Type a message..."
+  },
+  "chat.thread.by": {
+    "message": "Thread by"
+  },
+  "chat.thread.replySingular": {
+    "message": "reply"
+  },
+  "chat.thread.replyPlural": {
+    "message": "replies"
+  },
+  "chat.thread.replyPlaceholder": {
+    "message": "Reply in thread..."
+  },
+  "directory.editPage": {
+    "message": "Have resources to share? Improve this page by adding them."
+  },
+  "homepage.featurePreview.chat.category": {
+    "message": "Community"
+  },
+  "homepage.featurePreview.branding.category": {
+    "message": "Branding"
+  },
+  "homepage.featurePreview.notifications.category": {
+    "message": "Engagement"
+  },
+  "homepage.featurePreview.fediverse.category": {
+    "message": "Social"
+  },
+  "homepage.featurePreview.extensible.category": {
+    "message": "Developer"
+  },
+  "chat.displayName.skip": {
+    "message": "Skip"
+  },
+  "chat.answers.welcomeDocsLink": {
+    "message": "documentation"
+  },
+  "chat.answers.welcomeAlternatives": {
+    "message": "If you'd prefer to {chatLink}, you can do that too, though you may have to wait for someone to respond. You're also welcome to file questions on our {issueTracker}."
+  },
+  "chat.answers.welcomeChatTab": {
+    "message": "Chat with Us"
+  },
+  "chat.answers.welcomeIssueTracker": {
+    "message": "issue tracker"
+  },
+  "chat.answers.welcomeChatLink": {
+    "message": "chat with real Owncast developers and community members"
+  },
+  "chat.info.buttonLabel": {
+    "message": "About this chat"
+  },
+  "chat.displayName.label": {
+    "message": "Display name"
   }
 }

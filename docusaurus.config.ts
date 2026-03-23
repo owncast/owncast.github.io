@@ -363,10 +363,10 @@ const config: Config = {
           "aria-label": "GitHub repository",
         },
         {
-          href: "https://app.element.io/#/room/#owncast.support:matrix.org",
+          to: "/chat",
           position: "right",
           className: "header-chat-link",
-          "aria-label": "Community chat",
+          "aria-label": "Support chat",
         },
         {
           type: "localeDropdown",

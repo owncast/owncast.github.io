@@ -1,0 +1,249 @@
+/**
+ * Chatscope theme overrides for Owncast (dark mode only).
+ * Uses !important to guarantee overrides regardless of CSS load order.
+ */
+
+/* ---- Layout containers ---- */
+.cs-main-container {
+  background-color: hsl(var(--background)) !important;
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.cs-main-container,
+.cs-chat-container {
+  height: 100% !important;
+}
+
+.cs-main-container > .cs-chat-container {
+  flex: 1 !important;
+  min-height: 0 !important;
+}
+
+.cs-chat-container {
+  background-color: hsl(var(--background)) !important;
+}
+
+.cs-sidebar {
+  background-color: hsl(var(--card)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+/* ---- Header ---- */
+.cs-conversation-header {
+  background-color: hsl(var(--card)) !important;
+  border-bottom-color: hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.cs-conversation-header__content .cs-conversation-header__user-name {
+  color: hsl(var(--foreground)) !important;
+}
+
+.cs-conversation-header__content .cs-conversation-header__info {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* ---- Message list ---- */
+.cs-message-list {
+  background-color: hsl(var(--background)) !important;
+}
+
+/* ---- Message bubbles ---- */
+.cs-message__content {
+  border-radius: 0.5rem !important;
+  font-size: 0.9375rem !important;
+  line-height: 1.375 !important;
+}
+
+.cs-message--incoming .cs-message__content {
+  background-color: hsl(var(--card)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.cs-message--outgoing .cs-message__content {
+  background-color: hsl(var(--accent)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+/* ---- Message header / footer ---- */
+.cs-message__header,
+.cs-message__footer {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.cs-message__sender-name {
+  color: hsl(var(--foreground)) !important;
+  font-weight: 600 !important;
+}
+
+.cs-message__sent-time {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* ---- Message group ---- */
+.cs-message-group__header {
+  color: hsl(var(--muted-foreground)) !important;
+  font-size: 0.75rem !important;
+}
+
+/* ---- Date separator ---- */
+.cs-message-separator {
+  color: hsl(var(--muted-foreground)) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 600 !important;
+}
+
+.cs-message-separator::before,
+.cs-message-separator::after {
+  background-color: hsl(var(--border)) !important;
+}
+
+/* ---- Input ---- */
+.cs-message-input {
+  background-color: hsl(var(--background)) !important;
+  border-top: 1px solid hsl(var(--border)) !important;
+  flex-shrink: 0 !important;
+}
+
+.cs-message-input__content-editor-wrapper {
+  background-color: hsl(var(--card)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 0.5rem !important;
+  width: 100% !important;
+}
+
+.cs-message-input__content-editor-wrapper:focus-within {
+  border-color: hsl(var(--ring)) !important;
+}
+
+.cs-message-input--disabled .cs-message-input__content-editor-wrapper {
+  opacity: 0.5 !important;
+}
+
+.cs-message-input__content-editor-container {
+  background-color: transparent !important;
+  color: hsl(var(--foreground)) !important;
+  font-size: 0.9375rem !important;
+}
+
+.cs-message-input__content-editor {
+  background-color: transparent !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.cs-message-input__content-editor[data-placeholder]::before {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* Send & attachment buttons */
+.cs-button--send {
+  color: hsl(var(--accent-foreground)) !important;
+}
+
+.cs-button--send:hover {
+  color: hsl(var(--foreground)) !important;
+}
+
+.cs-button--attachment {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* ---- Typing indicator ---- */
+.cs-typing-indicator {
+  background-color: hsl(var(--background)) !important;
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.cs-typing-indicator__dot {
+  background-color: hsl(var(--muted-foreground)) !important;
+}
+
+/* ---- Avatars ---- */
+.cs-avatar > .cs-avatar__img {
+  background-color: hsl(var(--card)) !important;
+}
+
+.cs-avatar > .cs-avatar__text {
+  background-color: hsl(var(--accent)) !important;
+  color: hsl(var(--accent-foreground)) !important;
+}
+
+/* ---- Conversation list ---- */
+.cs-conversation-list {
+  background-color: hsl(var(--card)) !important;
+}
+
+.cs-conversation {
+  background-color: transparent !important;
+  border-bottom-color: hsl(var(--border)) !important;
+}
+
+.cs-conversation:hover {
+  background-color: hsl(var(--muted)) !important;
+}
+
+.cs-conversation--active,
+.cs-conversation--active:hover {
+  background-color: hsl(var(--accent)) !important;
+}
+
+.cs-conversation__name {
+  color: hsl(var(--foreground)) !important;
+}
+
+.cs-conversation__info,
+.cs-conversation__info-content {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.cs-conversation__last-activity-time {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* ---- Expansion panel ---- */
+.cs-expansion-panel {
+  border-color: hsl(var(--border)) !important;
+}
+
+.cs-expansion-panel__header {
+  background-color: hsl(var(--card)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.cs-expansion-panel__content {
+  background-color: hsl(var(--background)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+/* ---- Search ---- */
+.cs-search {
+  background-color: hsl(var(--card)) !important;
+  border-bottom-color: hsl(var(--border)) !important;
+}
+
+.cs-search__input {
+  background-color: transparent !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+/* ---- Scrollbar ---- */
+.ps__rail-y {
+  opacity: 0 !important;
+}
+
+.ps__thumb-y {
+  background-color: hsl(var(--muted-foreground)) !important;
+  border-radius: 9999px !important;
+  width: 6px !important;
+}
+
+/* ---- Loader ---- */
+.cs-loader {
+  color: hsl(var(--accent-foreground)) !important;
+}
+
+/* ---- Unread badge ---- */
+.cs-conversation__unread-dot {
+  background-color: hsl(var(--accent-foreground)) !important;
+}

@@ -17,7 +17,7 @@
   },
   "link.item.label.Releases": {
     "message": "Releases",
-    "description": "The label of footer link with label=Releases linking to /blog"
+    "description": "The label of footer link with label=Releases linking to /releases"
   },
   "link.item.label.Roadmap": {
     "message": "Roadmap",
@@ -42,5 +42,25 @@
   "copyright": {
     "message": "Owncast® is a <a href=\"/trademark\">registered trademark</a> of the Owncast Project.",
     "description": "The footer copyright"
+  },
+  "link.title.More": {
+    "message": "More",
+    "description": "The title of the footer links column with title=More in the footer"
+  },
+  "link.item.label.Donate": {
+    "message": "Donate",
+    "description": "The label of footer link with label=Donate linking to https://opencollective.com/owncast/donate"
+  },
+  "link.item.label.Demo Server": {
+    "message": "Demo Server",
+    "description": "The label of footer link with label=Demo Server linking to https://watch.owncast.online"
+  },
+  "link.item.label.Merch store": {
+    "message": "Merch store",
+    "description": "The label of footer link with label=Merch store linking to https://merch.owncast.online"
+  },
+  "link.item.label.Additional Resources": {
+    "message": "Additional Resources",
+    "description": "The label of footer link with label=Additional Resources linking to /resources"
   }
 }

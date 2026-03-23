@@ -18,5 +18,9 @@
   "item.label.Quickstart": {
     "message": "Quickstart",
     "description": "Navbar item with label Quickstart"
+  },
+  "item.label.Releases": {
+    "message": "Releases",
+    "description": "Navbar item with label Releases"
   }
 }

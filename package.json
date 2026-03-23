@@ -22,6 +22,8 @@
     "crowdin:upload-existing": "docusaurus write-translations &&node scripts/crowdin-upload-existing.js"
   },
   "dependencies": {
+    "@chatscope/chat-ui-kit-react": "^2.1.1",
+    "@chatscope/chat-ui-kit-styles": "^1.4.0",
     "@codemirror/lang-css": "^6.3.1",
     "@crowdin/cli": "^4.12.0",
     "@docusaurus/core": "3.9.1",
@@ -43,6 +45,7 @@
     "circle-flags": "^2.8.1",
     "dotenv": "^17.2.3",
     "prism-react-renderer": "^2.3.0",
+    "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0",

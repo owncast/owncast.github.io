@@ -15,6 +15,7 @@ const config: Config = {
     './src/components/landing/**/*.{js,ts,jsx,tsx}',
     './src/components/shared/**/*.{js,ts,jsx,tsx}',
     './src/components/ui/**/*.{js,ts,jsx,tsx}',
+    './src/components/chat/**/*.{js,ts,jsx,tsx}',
     './src/components/Contributors.tsx',
     './src/components/Sponsors.tsx',
   ],
