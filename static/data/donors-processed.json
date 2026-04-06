@@ -5,8 +5,18 @@
     "html_url": "https://opencollective.com/anthony-zone"
   },
   {
-    "login": "emacsen",
+    "login": "Axolito",
+    "avatar_url": "/images/avatars/axolito.webp",
+    "html_url": "https://opencollective.com/axolito"
+  },
+  {
+    "login": "Benoît",
     "avatar_url": "/images/owncat-head-white.svg",
+    "html_url": "https://opencollective.com/benoit6"
+  },
+  {
+    "login": "emacsen",
+    "avatar_url": "/images/owncat-head-black-orange.svg",
     "html_url": "https://opencollective.com/guest-618ea119"
   },
   {
@@ -16,17 +26,17 @@
   },
   {
     "login": "Guest",
-    "avatar_url": "/images/owncat-head-black-orange.svg",
+    "avatar_url": "/images/owncat-head-siamese-teal.svg",
     "html_url": "https://opencollective.com/guest-e0844f5f"
   },
   {
     "login": "Incognito",
-    "avatar_url": "/images/owncat-head-siamese-teal.svg",
+    "avatar_url": "/images/owncat-head-ginger.svg",
     "html_url": "https://opencollective.com/incognito-3b4cd5c7"
   },
   {
     "login": "Incognito",
-    "avatar_url": "/images/owncat-head-ginger.svg",
+    "avatar_url": "/images/owncat-head-cream-coral.svg",
     "html_url": "https://opencollective.com/user-5bdb86e0"
   },
   {
@@ -36,13 +46,8 @@
   },
   {
     "login": "Luka Prinčič",
-    "avatar_url": "/images/owncat-head-cream-coral.svg",
-    "html_url": "https://opencollective.com/luka-princic"
-  },
-  {
-    "login": "MATSUDA RYUKI",
     "avatar_url": "/images/owncat-head-tuxedo-red.svg",
-    "html_url": "https://opencollective.com/guest-07d84ecb"
+    "html_url": "https://opencollective.com/luka-princic"
   },
   {
     "login": "N-iX Ltd",
@@ -68,11 +73,6 @@
     "login": "Stripe",
     "avatar_url": "/images/owncat-head-white-pink.svg",
     "html_url": "https://opencollective.com/11004-stripe-50798cdb"
-  },
-  {
-    "login": "Teklynk",
-    "avatar_url": "/images/avatars/teklynk.webp",
-    "html_url": "https://opencollective.com/teklynk"
   },
   {
     "login": "Tom",
