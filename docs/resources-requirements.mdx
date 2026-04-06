@@ -77,6 +77,10 @@ You decide to offer both a high and low quality option, and you set the high qua
 | 0.0001875 Gigabytes per second (1500kbps) | 7200 seconds | 5       | 6.75 Gigabytes             |
 |                                           |              |         | **Total**: 96.75 Gigabytes |
 
+**What peak network speed does your server need?**
+
+Your server must be able to sustain the combined outbound bitrate to all viewers at the same time. In this scenario: (20 viewers × 5000kbps) + (5 viewers × 1500kbps) = **107.5 Mbps**. Your hosting plan needs to support at least this much outbound throughput.
+
 **How much CPU?**
 
 | Quality  | CPU Usage                                    |
@@ -102,6 +106,10 @@ You've decided you want to use as little CPU on your Owncast server as possible 
 | Bitrate                                  | Duration     | Viewers | Total           |
 | ---------------------------------------- | ------------ | ------- | --------------- |
 | 0.000625 Gigabytes per second (5000kbps) | 7200 seconds | 25      | 112.5 Gigabytes |
+
+**What peak network speed does your server need?**
+
+All 25 viewers are receiving the same 5000kbps stream: 25 × 5000kbps = **125 Mbps** of sustained outbound throughput.
 
 **How much CPU?**
 
@@ -139,6 +147,10 @@ If you have concerns about your hosting plan, bandwidth allocation or viewership
 | 0.0001875 Gigabytes per second (1500kbps) | 7200 seconds | 5       | 6.75 Gigabytes             |
 |                                           |              |         | **Total**: 96.75 Gigabytes |
 
+**What peak network speed does your server need?**
+
+Since viewers are served from S3, your server doesn't send video to viewers at all. It only needs enough outbound bandwidth to upload one copy of each quality stream to S3: 5000kbps + 1500kbps = 6500kbps = **6.5 Mbps**. This stays the same whether you have 0 viewers or 1,000. Your S3 provider handles the viewer-facing throughput, which in this scenario peaks at **107.5 Mbps** — but that's their infrastructure, not yours.
+
 **Result**: You've provided both a high and low quality option for your viewers so those with a slow network have an option, and those with a fast network that might periodically slow down can dip down into the low quality when needed. However, these video qualities are not being served from your Owncast server, but instead an external S3 compatible storage provider. This allows for increasing your viewership and adding additional video qualities without concern of you exhausting your server's bandwidth allocation. You would be able to stream 24/7 without worry using this configuration, however you'd be using the same amount of your server bandwidth if you had zero viewers or 100 viewers. Your CPU usage would be the same as if you were serving the video directly from your server.
 
 ## Quick Reference
@@ -156,6 +168,20 @@ If you have concerns about your hosting plan, bandwidth allocation or viewership
 | 6000kbps | 54 GB      | 135 GB     | 270 GB     |
 
 Offering multiple quality options reduces total bandwidth because viewers on slower connections use the lower bitrate stream. Using [S3-compatible storage](/docs/storage) offloads bandwidth from your server entirely.
+
+### What peak network speed does my server need?
+
+**Formula**: `bitrate in kbps × viewers ÷ 1,000 = Mbps`
+
+**Quick estimates:**
+
+| Bitrate  | 10 viewers | 25 viewers | 50 viewers |
+| -------- | ---------- | ---------- | ---------- |
+| 2000kbps | 20 Mbps    | 50 Mbps    | 100 Mbps   |
+| 4000kbps | 40 Mbps    | 100 Mbps   | 200 Mbps   |
+| 6000kbps | 60 Mbps    | 150 Mbps   | 300 Mbps   |
+
+This is the sustained outbound throughput your server needs during a stream. If you offer multiple quality options, calculate each quality separately and add them together. Most VPS providers offer 1 Gbps ports, which supports roughly 200 viewers at 5000kbps. If your viewers exceed your server's network capacity, they will experience buffering. Using [S3-compatible storage](/docs/storage) eliminates this limit from your server.
 
 ### How much CPU will Owncast use?
 
