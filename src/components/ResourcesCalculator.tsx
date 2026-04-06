@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import Translate, { translate } from '@docusaurus/Translate';
 import styles from './ResourcesCalculator.module.css';
 
 interface QualityOutput {
@@ -9,6 +10,7 @@ interface QualityOutput {
 
 interface CalculationResults {
   bandwidthGB: number;
+  peakNetworkMbps: number;
   cpuCores: string;
   cpuLevel: string;
   viewerExperience: number;
@@ -72,6 +74,26 @@ const ResourcesCalculator: React.FC = () => {
       bandwidthGB = (totalUpload * durationSeconds) / 8000000;
     }
 
+    // Peak outbound network speed (Mbps)
+    // This is the sustained throughput the server needs during a stream
+    let peakNetworkMbps = 0;
+    if (useS3) {
+      // With S3, server only uploads each quality once to S3
+      const totalUploadKbps = qualities.reduce((sum, q) => {
+        const effectiveBitrate = q.isPassthrough ? inputBitrate : q.bitrate;
+        return sum + effectiveBitrate;
+      }, 0);
+      peakNetworkMbps = totalUploadKbps / 1000;
+    } else {
+      // Without S3, server sends video directly to all viewers
+      sortedQualities.forEach((quality, index) => {
+        const distribution = distributions[index] || 0;
+        const viewersForQuality = Math.round(viewers * distribution);
+        const effectiveBitrate = quality.isPassthrough ? inputBitrate : quality.bitrate;
+        peakNetworkMbps += (effectiveBitrate * viewersForQuality) / 1000;
+      });
+    }
+
     // CPU calculation based on documentation
     // Uses scale: Minimal → Light → Moderate → Heavy
     let totalCpu = 0;
@@ -112,13 +134,13 @@ const ResourcesCalculator: React.FC = () => {
     // Determine CPU level label based on total CPU usage
     let cpuLevel: string;
     if (cpuMax <= 0.5) {
-      cpuLevel = 'Minimal';
+      cpuLevel = translate({ id: 'resourcesCalculator.cpu.minimal', message: 'Minimal' });
     } else if (cpuMax <= 1.0) {
-      cpuLevel = 'Light';
+      cpuLevel = translate({ id: 'resourcesCalculator.cpu.light', message: 'Light' });
     } else if (cpuMax <= 2.0) {
-      cpuLevel = 'Moderate';
+      cpuLevel = translate({ id: 'resourcesCalculator.cpu.moderate', message: 'Moderate' });
     } else {
-      cpuLevel = 'Heavy';
+      cpuLevel = translate({ id: 'resourcesCalculator.cpu.heavy', message: 'Heavy' });
     }
 
     // Viewer experience based on available quality options
@@ -158,7 +180,7 @@ const ResourcesCalculator: React.FC = () => {
     if (cpuMax > 4) {
       recommendations.push({
         type: 'warning',
-        message: 'High CPU usage detected. Consider reducing quality variants or lowering frame rates.',
+        message: translate({ id: 'resourcesCalculator.rec.highCpu', message: 'High CPU usage detected. Consider reducing quality variants or lowering frame rates.' }),
       });
     }
 
@@ -168,18 +190,21 @@ const ResourcesCalculator: React.FC = () => {
       let experienceText = '';
 
       if (badExperiencePercent >= 50) {
-        experienceText = 'Many viewers';
+        experienceText = translate({ id: 'resourcesCalculator.rec.manyViewers', message: 'Many viewers' });
       } else if (badExperiencePercent >= 30) {
-        experienceText = 'Some viewers';
+        experienceText = translate({ id: 'resourcesCalculator.rec.someViewers', message: 'Some viewers' });
       } else if (badExperiencePercent >= 15) {
-        experienceText = 'A few viewers';
+        experienceText = translate({ id: 'resourcesCalculator.rec.fewViewers', message: 'A few viewers' });
       } else {
-        experienceText = 'A small number of viewers';
+        experienceText = translate({ id: 'resourcesCalculator.rec.smallNumberViewers', message: 'A small number of viewers' });
       }
 
       recommendations.push({
         type: 'warning',
-        message: `${experienceText} may experience buffering. Add a lower bitrate quality option for mobile and slower network viewers.`,
+        message: translate(
+          { id: 'resourcesCalculator.rec.buffering', message: '{experienceText} may experience buffering. Add a lower bitrate quality option for mobile and slower network viewers.' },
+          { experienceText },
+        ),
       });
     }
 
@@ -187,7 +212,7 @@ const ResourcesCalculator: React.FC = () => {
     if (!useS3 && viewers > 50) {
       recommendations.push({
         type: 'info',
-        message: 'Consider using S3 storage to scale bandwidth with more viewers and reduce server load.',
+        message: translate({ id: 'resourcesCalculator.rec.s3', message: 'Consider using object storage to scale bandwidth with more viewers and reduce server load.' }),
       });
     }
 
@@ -195,7 +220,7 @@ const ResourcesCalculator: React.FC = () => {
     if (!hasLowQuality && maxBitrate > 6000) {
       recommendations.push({
         type: 'danger',
-        message: 'High bitrate without low quality options will exclude viewers on mobile and slower networks. Add a quality variant below 2000 kbps.',
+        message: translate({ id: 'resourcesCalculator.rec.highBitrateNoLow', message: 'High bitrate without low quality options will exclude viewers on mobile and slower networks. Add a quality variant below 2000 kbps.' }),
       });
     }
 
@@ -203,7 +228,7 @@ const ResourcesCalculator: React.FC = () => {
     if (qualities.length === 1 && !qualities[0].isPassthrough && qualities[0].bitrate > 4000) {
       recommendations.push({
         type: 'warning',
-        message: 'Single quality streams above 4000 kbps may cause buffering for viewers on mobile and slower networks. Add lower quality variants.',
+        message: translate({ id: 'resourcesCalculator.rec.singleHighQuality', message: 'Single quality streams above 4000 kbps may cause buffering for viewers on mobile and slower networks. Add lower quality variants.' }),
       });
     }
 
@@ -211,7 +236,7 @@ const ResourcesCalculator: React.FC = () => {
     if (qualities.length === 1 && qualities[0].isPassthrough && viewers > 20) {
       recommendations.push({
         type: 'info',
-        message: 'Passthrough mode saves CPU but may cause buffering for viewers on slower connections.',
+        message: translate({ id: 'resourcesCalculator.rec.passthroughOnly', message: 'Passthrough mode saves CPU but may cause buffering for viewers on slower connections.' }),
       });
     }
 
@@ -220,7 +245,7 @@ const ResourcesCalculator: React.FC = () => {
     if (hasHighFrameRate && cpuMax > 3) {
       recommendations.push({
         type: 'info',
-        message: 'High frame rates (60+ fps) significantly increase CPU usage. Consider lowering for non-gaming content.',
+        message: translate({ id: 'resourcesCalculator.rec.highFrameRate', message: 'High frame rates (60+ fps) significantly increase CPU usage. Consider lowering for non-gaming content.' }),
       });
     }
 
@@ -229,7 +254,7 @@ const ResourcesCalculator: React.FC = () => {
     if (hasVeryHighFrameRate) {
       recommendations.push({
         type: 'warning',
-        message: '90 fps requires substantial CPU resources. Only recommended for high-motion content with powerful hardware.',
+        message: translate({ id: 'resourcesCalculator.rec.veryHighFrameRate', message: '90 fps requires substantial CPU resources. Only recommended for high-motion content with powerful hardware.' }),
       });
     }
 
@@ -238,7 +263,7 @@ const ResourcesCalculator: React.FC = () => {
     if (hasOnlyHighFrameRate && !hasLowQuality && cpuMax > 2) {
       recommendations.push({
         type: 'info',
-        message: 'Consider adding a lower frame rate option (24 or 15 fps) to reduce CPU usage and improve experience for mobile and slower network viewers.',
+        message: translate({ id: 'resourcesCalculator.rec.lowerFrameRate', message: 'Consider adding a lower frame rate option (24 or 15 fps) to reduce CPU usage and improve experience for mobile and slower network viewers.' }),
       });
     }
 
@@ -248,7 +273,7 @@ const ResourcesCalculator: React.FC = () => {
     if (uniqueFrameRates.size === 1 && frameRates[0] >= 48 && qualities.length > 1) {
       recommendations.push({
         type: 'info',
-        message: 'Lower quality variants could use reduced frame rates (24-30 fps) to save CPU while maintaining good experience.',
+        message: translate({ id: 'resourcesCalculator.rec.mixedFrameRates', message: 'Lower quality variants could use reduced frame rates (24-30 fps) to save CPU while maintaining good experience.' }),
       });
     }
 
@@ -257,21 +282,22 @@ const ResourcesCalculator: React.FC = () => {
     const roundedExperience = Math.round(goodExperience);
 
     if (roundedExperience >= 95) {
-      viewerExperienceText = 'Excellent';
+      viewerExperienceText = translate({ id: 'resourcesCalculator.experience.excellent', message: 'Excellent' });
     } else if (roundedExperience >= 85) {
-      viewerExperienceText = 'Very Good';
+      viewerExperienceText = translate({ id: 'resourcesCalculator.experience.veryGood', message: 'Very Good' });
     } else if (roundedExperience >= 70) {
-      viewerExperienceText = 'Good';
+      viewerExperienceText = translate({ id: 'resourcesCalculator.experience.good', message: 'Good' });
     } else if (roundedExperience >= 50) {
-      viewerExperienceText = 'Fair';
+      viewerExperienceText = translate({ id: 'resourcesCalculator.experience.fair', message: 'Fair' });
     } else if (roundedExperience >= 30) {
-      viewerExperienceText = 'Poor';
+      viewerExperienceText = translate({ id: 'resourcesCalculator.experience.poor', message: 'Poor' });
     } else {
-      viewerExperienceText = 'Very Poor';
+      viewerExperienceText = translate({ id: 'resourcesCalculator.experience.veryPoor', message: 'Very Poor' });
     }
 
     return {
       bandwidthGB: Math.round(bandwidthGB * 10) / 10,
+      peakNetworkMbps: Math.round(peakNetworkMbps * 10) / 10,
       cpuCores,
       cpuLevel,
       viewerExperience: roundedExperience,
@@ -300,7 +326,10 @@ const ResourcesCalculator: React.FC = () => {
     <div className={styles.calculator}>
       <div className={styles.controls}>
         <div className={styles.controlGroup}>
-          <label>Input Bitrate: <strong>{inputBitrate}</strong> kbps</label>
+          <label>
+            <Translate id="resourcesCalculator.label.inputBitrate">Input Bitrate:</Translate>{' '}
+            <strong>{inputBitrate}</strong> kbps
+          </label>
           <input
             type="range"
             min="1000"
@@ -312,7 +341,10 @@ const ResourcesCalculator: React.FC = () => {
         </div>
 
         <div className={styles.controlGroup}>
-          <label>Viewers: <strong>{viewers}</strong></label>
+          <label>
+            <Translate id="resourcesCalculator.label.viewers">Viewers:</Translate>{' '}
+            <strong>{viewers}</strong>
+          </label>
           <input
             type="range"
             min="5"
@@ -324,7 +356,10 @@ const ResourcesCalculator: React.FC = () => {
         </div>
 
         <div className={styles.controlGroup}>
-          <label>Duration: <strong>{duration}h</strong></label>
+          <label>
+            <Translate id="resourcesCalculator.label.duration">Duration:</Translate>{' '}
+            <strong>{duration}h</strong>
+          </label>
           <input
             type="range"
             min="0.5"
@@ -342,12 +377,14 @@ const ResourcesCalculator: React.FC = () => {
               checked={useS3}
               onChange={(e) => setUseS3(e.target.checked)}
             />
-            Using S3 Storage
+            <Translate id="resourcesCalculator.label.usingS3">Using Object Storage</Translate>
           </label>
         </div>
 
         <div className={styles.qualitiesDisplay}>
-          <div className={styles.qualitiesLabel}>Output Qualities:</div>
+          <div className={styles.qualitiesLabel}>
+            <Translate id="resourcesCalculator.label.outputQualities">Output Qualities:</Translate>
+          </div>
           <div className={styles.qualityChips}>
             {qualities.map((quality, index) => (
               <div key={index} className={styles.qualityChip}>
@@ -369,23 +406,38 @@ const ResourcesCalculator: React.FC = () => {
       <div className={styles.results}>
         <div className={styles.metricsRow}>
           <div className={styles.metricItem}>
-            <div className={styles.metricLabel}>Bandwidth</div>
+            <div className={styles.metricLabel}>
+              <Translate id="resourcesCalculator.metric.bandwidth">Bandwidth</Translate>
+            </div>
             <div className={styles.metricValue}>{results.bandwidthGB} GB</div>
           </div>
 
           <div className={styles.metricItem}>
-            <div className={styles.metricLabel}>CPU</div>
+            <div className={styles.metricLabel}>
+              <Translate id="resourcesCalculator.metric.peakOutboundSpeed">Peak Outbound Speed</Translate>
+            </div>
+            <div className={styles.metricValue}>{results.peakNetworkMbps} Mbps</div>
+          </div>
+
+          <div className={styles.metricItem}>
+            <div className={styles.metricLabel}>
+              <Translate id="resourcesCalculator.metric.cpu">CPU</Translate>
+            </div>
             <div className={styles.metricValue}>{results.cpuLevel}</div>
           </div>
 
           <div className={styles.metricItem}>
-            <div className={styles.metricLabel}>Experience</div>
+            <div className={styles.metricLabel}>
+              <Translate id="resourcesCalculator.metric.experience">Experience</Translate>
+            </div>
             <div className={styles.metricValue}>{results.viewerExperienceText}</div>
           </div>
         </div>
 
         <div className={styles.recommendationsBox}>
-          <div className={styles.recommendationsTitle}>Recommendations</div>
+          <div className={styles.recommendationsTitle}>
+            <Translate id="resourcesCalculator.recommendations.title">Recommendations</Translate>
+          </div>
           {results.recommendations.length > 0 ? (
             <div className={styles.recommendationsList}>
               {results.recommendations.map((rec, index) => (
@@ -400,7 +452,7 @@ const ResourcesCalculator: React.FC = () => {
           ) : (
             <div className={styles.noRecommendations}>
               <span className={styles.checkmark}>✓</span>
-              No recommendations
+              <Translate id="resourcesCalculator.recommendations.none">No recommendations</Translate>
             </div>
           )}
         </div>
@@ -436,7 +488,7 @@ const QualityEditor: React.FC<QualityEditorProps> = ({ initialQuality, inputBitr
   return (
     <div className={styles.modal} onClick={onCancel}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <h3>Configure Quality Output</h3>
+        <h3><Translate id="resourcesCalculator.editor.title">Configure Quality Output</Translate></h3>
 
         <div className={styles.modalField}>
           <label>
@@ -450,14 +502,17 @@ const QualityEditor: React.FC<QualityEditorProps> = ({ initialQuality, inputBitr
                 }
               }}
             />
-            Video Passthrough
+            <Translate id="resourcesCalculator.editor.passthrough">Video Passthrough</Translate>
           </label>
         </div>
 
         {!isPassthrough && (
           <>
             <div className={styles.modalField}>
-              <label>Output Bitrate: <strong>{bitrate}</strong> kbps</label>
+              <label>
+                <Translate id="resourcesCalculator.editor.outputBitrate">Output Bitrate:</Translate>{' '}
+                <strong>{bitrate}</strong> kbps
+              </label>
               <input
                 type="range"
                 min="500"
@@ -470,7 +525,10 @@ const QualityEditor: React.FC<QualityEditorProps> = ({ initialQuality, inputBitr
             </div>
 
             <div className={styles.modalField}>
-              <label>Frame Rate: <strong>{frameRate}</strong> fps</label>
+              <label>
+                <Translate id="resourcesCalculator.editor.frameRate">Frame Rate:</Translate>{' '}
+                <strong>{frameRate}</strong> fps
+              </label>
               <input
                 type="range"
                 min="0"
@@ -499,9 +557,14 @@ const QualityEditor: React.FC<QualityEditorProps> = ({ initialQuality, inputBitr
 
         {isPassthrough && (
           <div className={styles.modalInfo}>
-            Bitrate will match input: <strong>{inputBitrate} kbps</strong>
+            <Translate
+              id="resourcesCalculator.editor.passthroughInfo"
+              values={{ bitrate: <strong>{inputBitrate} kbps</strong> }}
+            >
+              {'Bitrate will match input: {bitrate}'}
+            </Translate>
             <br />
-            Frame rate will match input stream
+            <Translate id="resourcesCalculator.editor.passthroughFrameRate">Frame rate will match input stream</Translate>
           </div>
         )}
 
@@ -514,10 +577,10 @@ const QualityEditor: React.FC<QualityEditorProps> = ({ initialQuality, inputBitr
             })}
             className={styles.saveBtn}
           >
-            Save
+            <Translate id="resourcesCalculator.editor.save">Save</Translate>
           </button>
           <button onClick={onCancel} className={styles.cancelBtn}>
-            Cancel
+            <Translate id="resourcesCalculator.editor.cancel">Cancel</Translate>
           </button>
         </div>
       </div>

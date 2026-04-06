@@ -100,8 +100,9 @@
 }
 
 .metricsRow {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
   padding: 1rem 0;
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
   flex-shrink: 0;
@@ -122,10 +123,11 @@
 }
 
 .metricValue {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--ifm-color-primary);
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 /* Recommendations Box */
@@ -242,7 +244,7 @@
   }
 
   .metricValue {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 
   .recommendationsBox {
@@ -274,12 +276,12 @@
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  background: var(--ifm-color-primary-lightest);
-  border: 1px solid var(--ifm-color-primary-light);
+  background: var(--ifm-color-emphasis-200);
+  border: 1px solid var(--ifm-color-emphasis-400);
   border-radius: 12px;
   padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
-  color: var(--ifm-color-primary-dark);
+  color: var(--ifm-color-emphasis-900);
 }
 
 .qualityChipText {
@@ -359,10 +361,17 @@
   margin-bottom: 1rem;
 }
 
-.modalField label {
+.modalField {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+.modalField label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
   font-size: 0.875rem;
   color: var(--ifm-color-emphasis-700);
 }
