@@ -69,6 +69,11 @@ export const directoryData: DirectoryCategory[] = [
         description: 'An easy to use bot framework for Owncast.',
         url: 'https://codeberg.org/AnActualEmerald/birchbot'
       },
+       {
+        title: 'Owlbot',
+        description: 'An Owncast chat bot with a modular event-driven architecture.',
+        url: 'https://git.logal.dev/LogalDeveloper/Owlbot/wiki'
+      },
       {
         title: 'Smol Stream Emoji Wall',
         description: 'We made an emoji wall (also known as a "on-screen emotes overlay") which takes the emojis and custom emotes sent in the chat and displays them bubbling up the screen! ',
