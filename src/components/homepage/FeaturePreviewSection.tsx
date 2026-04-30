@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { translate } from "@docusaurus/Translate";
 import { VideoPlayer } from "@/components/shared/VideoPlayer";
+import { FediverseTimelineMockup } from "@/components/homepage/FediverseTimelineMockup";
+import { OwncastChatMockup } from "@/components/homepage/OwncastChatMockup";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import clsx from "clsx";
 
@@ -15,9 +17,11 @@ interface Feature {
   imageWidth?: number;
   imageHeight?: number;
   priority?: boolean;
+  mockup?: "fediverse" | "chat";
   // CSS positioning for cropped screenshot effect
   imagePosition?: {
     top?: string;
+    bottom?: string;
     left?: string;
     right?: string;
     width?: string;
@@ -41,11 +45,8 @@ function useFeatures(): Feature[] {
         message:
           "Real-time chat included, no third-party services required. Moderation tools, custom emotes, and user authentication included.",
       }),
-      imageSrc: "/images/screenshots/screenshot-chat.webp",
-      imageWidth: 1418,
-      imageHeight: 1205,
-      priority: true,
-      imagePosition: { top: "10%", left: "5%", width: "140%" },
+      mockup: "chat",
+      imagePosition: { bottom: "0%", left: "0%", width: "100%" },
     },
     {
       id: "feature-4",
@@ -102,8 +103,8 @@ function useFeatures(): Feature[] {
         message:
           "Encourage engagement and reach new viewers across the fediverse. Connect with Mastodon and ActivityPub platforms.",
       }),
-      videoSrc: "/images/screenshots/screenshot-fediverse-scroll.mp4",
-      imagePosition: { top: "3%", left: "-5%", width: "110%" },
+      mockup: "fediverse",
+      imagePosition: { top: "0%", left: "0%", width: "100%" },
     },
     {
       id: "feature-10",
@@ -144,7 +145,11 @@ function MobileFeatureCard({ feature }: { feature: Feature }) {
           {feature.description}
         </p>
       </div>
-      {feature.videoSrc ? (
+      {feature.mockup === "fediverse" ? (
+        <FediverseTimelineMockup className="w-full max-w-md mx-auto rounded-md" />
+      ) : feature.mockup === "chat" ? (
+        <OwncastChatMockup className="w-full max-w-md mx-auto rounded-md" />
+      ) : feature.videoSrc ? (
         <VideoPlayer
           className="w-full max-w-md mx-auto rounded-md"
           src={feature.videoSrc}
@@ -319,34 +324,58 @@ function FeatureCard({
           isReversed ? "order-1" : "order-2"
         )}
       >
-        {feature.videoSrc ? (
-          <VideoPlayer
-            className="absolute rounded-lg shadow-xl"
-            style={{
-              top: feature.imagePosition?.top || "10%",
-              left: feature.imagePosition?.left,
-              right: feature.imagePosition?.right,
-              width: feature.imagePosition?.width || "140%",
-            }}
-            src={feature.videoSrc}
-            autoPlay={true}
-            controls={false}
-            loop={true}
-          />
-        ) : feature.imageSrc ? (
-          <img
-            className="absolute rounded-lg shadow-xl object-cover"
-            style={{
-              top: feature.imagePosition?.top || "10%",
-              left: feature.imagePosition?.left,
-              right: feature.imagePosition?.right,
-              width: feature.imagePosition?.width || "140%",
-            }}
-            src={resolvedImageSrc}
-            alt={feature.imageAlt || feature.title}
-            loading={feature.priority ? "eager" : "lazy"}
-          />
-        ) : null}
+        {(() => {
+          const pos = feature.imagePosition;
+          const hasVertical = pos?.top !== undefined || pos?.bottom !== undefined;
+          const positionStyle = {
+            top: pos?.top ?? (hasVertical ? undefined : "10%"),
+            bottom: pos?.bottom,
+            left: pos?.left,
+            right: pos?.right,
+            width: pos?.width || "140%",
+          };
+
+          if (feature.mockup === "fediverse") {
+            return (
+              <FediverseTimelineMockup
+                className="absolute rounded-lg shadow-xl"
+                style={positionStyle}
+              />
+            );
+          }
+          if (feature.mockup === "chat") {
+            return (
+              <OwncastChatMockup
+                className="absolute rounded-lg shadow-xl"
+                style={positionStyle}
+              />
+            );
+          }
+          if (feature.videoSrc) {
+            return (
+              <VideoPlayer
+                className="absolute rounded-lg shadow-xl"
+                style={positionStyle}
+                src={feature.videoSrc}
+                autoPlay={true}
+                controls={false}
+                loop={true}
+              />
+            );
+          }
+          if (feature.imageSrc) {
+            return (
+              <img
+                className="absolute rounded-lg shadow-xl object-cover"
+                style={positionStyle}
+                src={resolvedImageSrc}
+                alt={feature.imageAlt || feature.title}
+                loading={feature.priority ? "eager" : "lazy"}
+              />
+            );
+          }
+          return null;
+        })()}
       </div>
           </div>
         </div>

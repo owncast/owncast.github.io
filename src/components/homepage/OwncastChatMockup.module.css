@@ -1,0 +1,226 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #12161d;
+  color: #e2e8f0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  aspect-ratio: 420 / 640;
+}
+
+.messagesWrapper {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.messagesWrapper::before,
+.messagesWrapper::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 40px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.messagesWrapper::before {
+  top: 0;
+  background: linear-gradient(180deg, #12161d 0%, transparent 100%);
+}
+
+.messagesWrapper::after {
+  bottom: 0;
+  background: linear-gradient(0deg, #12161d 0%, transparent 100%);
+}
+
+.messagesScroll {
+  display: flex;
+  flex-direction: column;
+  padding: 0 12px;
+  animation: scrollUp 25s linear infinite;
+  will-change: transform;
+}
+
+.scrollPaused {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .messagesScroll {
+    animation: none;
+  }
+}
+
+/* translateY(-100% / 3) = exactly one MESSAGES set's height when the
+   scroll content contains 3 copies, so the loop wraps to a visually
+   identical frame. */
+@keyframes scrollUp {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% / 3));
+  }
+}
+
+.systemMessage {
+  margin-bottom: 8px;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, #6544e9 0%, #7a5cf3 100%);
+  border-radius: 8px;
+}
+
+.systemText {
+  font-size: 13px;
+  opacity: 0.95;
+}
+
+.userMessage {
+  padding: 8px 0 8px 10px;
+  margin-left: -10px;
+  margin-bottom: 2px;
+  border-left: 2px solid transparent;
+}
+
+.username {
+  margin-bottom: 2px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.colorGreen {
+  color: #42bea6;
+}
+.colorPurple {
+  color: #da9eff;
+}
+.colorBlue {
+  color: #2386e2;
+}
+.colorOrange {
+  color: #ffc655;
+}
+.colorPink {
+  color: #ff6b9d;
+}
+
+.messageText {
+  font-size: 14px;
+  color: #e2e8f0;
+}
+
+.joinMessage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  margin-bottom: 2px;
+  color: #a0aec0;
+  font-size: 13px;
+}
+
+.joinIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.joinName {
+  color: #ff6b9d;
+  font-weight: 500;
+}
+
+.fediverseMessage {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  padding: 10px 12px;
+  background: rgba(195, 218, 254, 0.12);
+  border-radius: 8px;
+}
+
+/* Add breathing room above the fediverse card when it sits after a
+   regular chat message, without introducing a margin-top that would
+   break the seamless scroll loop at the set1→set2 boundary. */
+.userMessage + .fediverseMessage,
+.joinMessage + .fediverseMessage {
+  margin-top: 6px;
+}
+
+.fediverseAvatar {
+  position: relative;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.fediverseAvatarImg {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background: #c4b5a0;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.fediverseBadge {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: #6544e9;
+  border: 2px solid #12161d;
+  border-radius: 50%;
+}
+
+.fediverseBadgeFollow {
+  background: #42bea6;
+}
+
+.fediverseHandle {
+  font-weight: 600;
+  font-size: 13px;
+  color: #e2e8f0;
+}
+
+.fediverseAction {
+  font-size: 13px;
+  color: #a0aec0;
+}
+
+.inputContainer {
+  flex-shrink: 0;
+  padding: 12px;
+  border-top: 1px solid #2d3748;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 14px;
+  background: #2d3748;
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-size: 14px;
+}
+
+.inputPlaceholder {
+  color: #718096;
+}
+
+.inputIcons {
+  display: flex;
+  gap: 8px;
+  color: #718096;
+}
