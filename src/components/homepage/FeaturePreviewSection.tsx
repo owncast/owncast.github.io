@@ -64,9 +64,9 @@ function useFeatures(): Feature[] {
           "Stream from your own domain with your own look and feel. Create your own UI, truly owning the experience.",
       }),
       imageSrc: "/images/screenshots/screenshot-customize.webp",
-      imageWidth: 2264,
-      imageHeight: 1882,
-      imagePosition: { top: "15%", right: "-20%", width: "140%" },
+      imageWidth: 1750,
+      imageHeight: 900,
+      imagePosition: { bottom: "0%", left: "0%", width: "100%" },
     },
     {
       id: "feature-6",
@@ -221,7 +221,7 @@ function FeatureCard({
       {
         threshold: 0.5,
         rootMargin: "0px 0px -50px 0px",
-      }
+      },
     );
 
     if (cardRef.current) {
@@ -265,7 +265,7 @@ function FeatureCard({
             cardStyles[index % cardStyles.length],
             // Rotation
             index % 2 === 0 ? "rotate-[-0.5deg]" : "rotate-[0.5deg]",
-            "hover:rotate-0 hover:translate-y-[-4px]"
+            "hover:rotate-0 hover:translate-y-[-4px]",
           )}
           style={{
             transition: "border-color 0.3s, transform 0.3s",
@@ -275,108 +275,114 @@ function FeatureCard({
           <div
             className="absolute inset-0 rounded-2xl pointer-events-none z-10"
             style={{
-              boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -2px 0 rgba(0, 0, 0, 0.4)",
+              boxShadow:
+                "inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -2px 0 rgba(0, 0, 0, 0.4)",
             }}
           />
           {/* Inner container with overflow hidden to clip content to rounded corners */}
           <div className="grid grid-cols-2 rounded-xl overflow-hidden relative">
-          {/* Fake shadow from card above - gradient at top, rotated to match the card above */}
-          {index > 0 && (
+            {/* Fake shadow from card above - gradient at top, rotated to match the card above */}
+            {index > 0 && (
+              <div
+                className="absolute inset-x-0 -top-2 h-20 pointer-events-none z-30 col-span-2"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.1) 85%, transparent 100%)",
+                  // Rotate opposite to current card (to match card above's rotation)
+                  transform:
+                    (index - 1) % 2 === 0
+                      ? "rotate(-0.5deg)"
+                      : "rotate(0.5deg)",
+                }}
+              />
+            )}
+            {/* Content side */}
             <div
-              className="absolute inset-x-0 -top-2 h-20 pointer-events-none z-30 col-span-2"
-              style={{
-                background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.1) 85%, transparent 100%)",
-                // Rotate opposite to current card (to match card above's rotation)
-                transform: (index - 1) % 2 === 0 ? "rotate(-0.5deg)" : "rotate(0.5deg)",
-              }}
-            />
-          )}
-      {/* Content side */}
-      <div
-        className={clsx(
-          "p-10 flex flex-col justify-center bg-black/20",
-          isReversed ? "order-2" : "order-1"
-        )}
-      >
-        <div className="inline-block px-3.5 py-1.5 mb-4 rounded-full bg-primary-500/25 w-fit">
-          <span className="text-xs font-semibold tracking-wider uppercase text-primary-400">
-            {feature.category}
-          </span>
-        </div>
-        <h3 className="text-2xl font-bold mb-3 leading-tight text-white">
-          {feature.title}
-        </h3>
-        <p className="text-[15px] leading-relaxed text-gray-400 mb-5">
-          {feature.description}
-        </p>
-        <a
-          href="#"
-          className="text-primary-400 text-sm font-semibold inline-flex items-center gap-1.5 hover:text-primary-300 transition-colors"
-        >
-          Learn more →
-        </a>
-      </div>
+              className={clsx(
+                "p-10 flex flex-col justify-center bg-black/20",
+                isReversed ? "order-2" : "order-1",
+              )}
+            >
+              <div className="inline-block px-3.5 py-1.5 mb-4 rounded-full bg-primary-500/25 w-fit">
+                <span className="text-xs font-semibold tracking-wider uppercase text-primary-400">
+                  {feature.category}
+                </span>
+              </div>
+              <h3 className="text-2xl font-bold mb-3 leading-tight text-white">
+                {feature.title}
+              </h3>
+              <p className="text-[15px] leading-relaxed text-gray-400 mb-5">
+                {feature.description}
+              </p>
+              <a
+                href="#"
+                className="text-primary-400 text-sm font-semibold inline-flex items-center gap-1.5 hover:text-primary-300 transition-colors"
+              >
+                Learn more →
+              </a>
+            </div>
 
-      {/* Image side */}
-      <div
-        className={clsx(
-          "relative overflow-hidden min-h-[280px] bg-black/40",
-          isReversed ? "order-1" : "order-2"
-        )}
-      >
-        {(() => {
-          const pos = feature.imagePosition;
-          const hasVertical = pos?.top !== undefined || pos?.bottom !== undefined;
-          const positionStyle = {
-            top: pos?.top ?? (hasVertical ? undefined : "10%"),
-            bottom: pos?.bottom,
-            left: pos?.left,
-            right: pos?.right,
-            width: pos?.width || "140%",
-          };
+            {/* Image side */}
+            <div
+              className={clsx(
+                "relative overflow-hidden min-h-[280px] bg-black/40",
+                isReversed ? "order-1" : "order-2",
+              )}
+            >
+              {(() => {
+                const pos = feature.imagePosition;
+                const hasVertical =
+                  pos?.top !== undefined || pos?.bottom !== undefined;
+                const positionStyle = {
+                  top: pos?.top ?? (hasVertical ? undefined : "10%"),
+                  bottom: pos?.bottom,
+                  left: pos?.left,
+                  right: pos?.right,
+                  width: pos?.width || "140%",
+                };
 
-          if (feature.mockup === "fediverse") {
-            return (
-              <FediverseTimelineMockup
-                className="absolute rounded-lg shadow-xl"
-                style={positionStyle}
-              />
-            );
-          }
-          if (feature.mockup === "chat") {
-            return (
-              <OwncastChatMockup
-                className="absolute rounded-lg shadow-xl"
-                style={positionStyle}
-              />
-            );
-          }
-          if (feature.videoSrc) {
-            return (
-              <VideoPlayer
-                className="absolute rounded-lg shadow-xl"
-                style={positionStyle}
-                src={feature.videoSrc}
-                autoPlay={true}
-                controls={false}
-                loop={true}
-              />
-            );
-          }
-          if (feature.imageSrc) {
-            return (
-              <img
-                className="absolute rounded-lg shadow-xl object-cover"
-                style={positionStyle}
-                src={resolvedImageSrc}
-                alt={feature.imageAlt || feature.title}
-                loading={feature.priority ? "eager" : "lazy"}
-              />
-            );
-          }
-          return null;
-        })()}
-      </div>
+                if (feature.mockup === "fediverse") {
+                  return (
+                    <FediverseTimelineMockup
+                      className="absolute rounded-lg shadow-xl"
+                      style={positionStyle}
+                    />
+                  );
+                }
+                if (feature.mockup === "chat") {
+                  return (
+                    <OwncastChatMockup
+                      className="absolute rounded-lg shadow-xl"
+                      style={positionStyle}
+                    />
+                  );
+                }
+                if (feature.videoSrc) {
+                  return (
+                    <VideoPlayer
+                      className="absolute rounded-lg shadow-xl"
+                      style={positionStyle}
+                      src={feature.videoSrc}
+                      autoPlay={true}
+                      controls={false}
+                      loop={true}
+                    />
+                  );
+                }
+                if (feature.imageSrc) {
+                  return (
+                    <img
+                      className="absolute rounded-lg shadow-xl object-cover"
+                      style={positionStyle}
+                      src={resolvedImageSrc}
+                      alt={feature.imageAlt || feature.title}
+                      loading={feature.priority ? "eager" : "lazy"}
+                    />
+                  );
+                }
+                return null;
+              })()}
+            </div>
           </div>
         </div>
       </div>

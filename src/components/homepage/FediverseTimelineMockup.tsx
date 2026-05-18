@@ -33,6 +33,12 @@ const ICON_MORE = (
   </svg>
 );
 
+const ICON_PLAY = (
+  <svg viewBox="0 0 24 24">
+    <path d="M8 5v14l11-7z" />
+  </svg>
+);
+
 type ActionState = { count?: number; active?: boolean };
 
 // To replace a placeholder with a real image:
@@ -61,130 +67,70 @@ const POSTS: Post[] = [
   {
     id: "neon-arcade",
     avatarGradient: "linear-gradient(135deg, #6366f1 0%, #a855f7 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-neon-arcade-live.webp",
     displayName: "Neon Arcade Live",
     username: "@neonarcade@streamhub.space",
     time: "3h",
     text: "Getting ready for tonight's stream! Something special planned 🎮",
     tags: ["#gaming", "#streaming"],
     link: "https://neon.arcade.live",
-    preview: (
-      <div
-        className={styles.streamImage}
-        style={{
-          background: "linear-gradient(135deg, #1a365d 0%, #2d1b4e 50%, #1e3a5f 100%)",
-        }}
-      >
-        <div className={styles.streamOverlay}>
-          <div className={styles.startingSoonText}>STREAM</div>
-          <div className={styles.startingSoonAccent}>STARTING</div>
-          <div className={styles.startingSoonText}>SOON</div>
-        </div>
-        <div className={styles.streamerTag}>
-          <div
-            className={styles.streamerAvatarSmall}
-            style={{
-              background: "linear-gradient(135deg, #ec4899 0%, #f472b6 100%)",
-            }}
-          />
-          NeonPlayer
-        </div>
-      </div>
-    ),
+    imageSrc: "/images/screenshots/stream-neon-arcade.webp",
     replies: 6,
   },
   {
     id: "open-discourse",
     avatarGradient: "linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-open-discourse.webp",
     displayName: "Open Discourse",
     username: "@opendiscourse@fediverse.town",
     time: "4h",
     text: "Join us for today's discussion! We're talking about creative hobbies and how they help with work-life balance.",
     tags: ["#discussion", "#community", "#hobbies"],
     link: "https://open.discourse.chat",
-    preview: (
-      <div
-        className={styles.streamImage}
-        style={{
-          background: "linear-gradient(180deg, #1a0a2e 0%, #2d1b4e 50%, #0f0a1a 100%)",
-        }}
-      >
-        <div className={styles.discourseSilhouette} />
-        <div className={styles.discourseTopic}>💬 Topic: Creative Hobbies</div>
-      </div>
-    ),
+    imageSrc: "/images/screenshots/stream-open-disclosure.webp",
     replies: 1,
     boosts: { active: true },
   },
   {
     id: "basement-beats",
     avatarGradient: "linear-gradient(135deg, #f97316 0%, #eab308 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-basement-beats.webp",
     displayName: "Basement Beats",
     username: "@basementbeats@soundwave.club",
     time: "4h",
     text: "Friday night vibes incoming! Spinning some deep cuts tonight 🎧",
     tags: ["#music", "#dj", "#electronic", "#house"],
     link: "https://basement.beats.fm",
-    preview: (
-      <div
-        className={styles.streamImage}
-        style={{
-          background: "linear-gradient(180deg, #0c1445 0%, #1e1b4b 50%, #312e81 100%)",
-        }}
-      >
-        <div className={styles.eqRow}>
-          <div className={clsx(styles.eqBar, styles.eqCyan, styles.eqBar1)} />
-          <div className={clsx(styles.eqBar, styles.eqPurple, styles.eqBar2)} />
-          <div className={clsx(styles.eqBar, styles.eqCyan, styles.eqBar3)} />
-          <div className={clsx(styles.eqBar, styles.eqPurple, styles.eqBar4)} />
-          <div className={clsx(styles.eqBar, styles.eqCyan, styles.eqBar5)} />
-        </div>
-      </div>
-    ),
+    imageSrc: "/images/screenshots/stream-basement-beats.webp",
     favorites: { count: 3, active: true },
   },
   {
     id: "pixel-dreams",
     boostedBy: "sketchfan42",
     avatarGradient: "linear-gradient(135deg, #ec4899 0%, #f472b6 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-pixel-dreams-studio.webp",
     displayName: "Pixel Dreams Studio",
     username: "@pixeldreams@artcollective.io",
     time: "5h",
     text: "Cozy afternoon drawing session! Working on some character designs today 🎨\n\nCome hang out and chat while I sketch!",
     tags: ["#art", "#digitalart", "#illustration"],
     link: "https://pixel.dreams.art",
-    preview: (
-      <div
-        className={styles.streamImage}
-        style={{
-          background: "linear-gradient(135deg, #831843 0%, #701a75 50%, #4a044e 100%)",
-        }}
-      >
-        <div className={styles.centerEmoji}>🎨</div>
-      </div>
-    ),
+    imageSrc: "/images/screenshots/stream-live-drawing-illustrating.webp",
     replies: 12,
     boosts: { count: 45, active: true },
     favorites: { count: 89, active: true },
   },
   {
-    id: "throwback-gaming",
+    id: "neon-pixel-arcade",
     avatarGradient: "linear-gradient(135deg, #10b981 0%, #34d399 100%)",
-    displayName: "Throwback Gaming",
-    username: "@throwbackgames@retro.zone",
+    avatarSrc: "/images/screenshots/stream-logo-neon-pixel-arcade.webp",
+    displayName: "Neon Pixel Arcade",
+    username: "@neonpixelarcade@retro.zone",
     time: "6h",
     text: "Classic console night! Playing through some favorites from the 90s 🕹️",
     tags: ["#retrogaming", "#nostalgia", "#gaming"],
-    link: "https://throwback.gaming.tv",
-    preview: (
-      <div
-        className={styles.streamImage}
-        style={{
-          background: "linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%)",
-        }}
-      >
-        <div className={styles.centerEmoji}>🎮</div>
-      </div>
-    ),
+    link: "https://neon.pixelarcade.tv",
+    imageSrc: "/images/screenshots/stream-arcade-8bit-gaming.webp",
     replies: 8,
     boosts: { count: 23 },
     favorites: { count: 67, active: true },
@@ -193,27 +139,14 @@ const POSTS: Post[] = [
     id: "terminal-sessions",
     boostedBy: "opensourcefan",
     avatarGradient: "linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%)",
+    avatarSrc: "/images/screenshots/steram-logo-terminal-sessions.webp",
     displayName: "Terminal Sessions",
     username: "@terminalsessions@devtalk.net",
     time: "7h",
     text: "Building something fun today! Learning a new framework and sharing the journey.",
     tags: ["#programming", "#coding", "#webdev"],
     link: "https://terminal.sessions.dev",
-    preview: (
-      <div
-        className={styles.streamImage}
-        style={{
-          background: "linear-gradient(135deg, #0c4a6e 0%, #075985 50%, #0369a1 100%)",
-        }}
-      >
-        <div className={styles.codeBlock}>
-          <div className={styles.codeKeyword}>fn</div>
-          <div>{"  main() {"}</div>
-          <div className={styles.codeComment}>{"    // Building..."}</div>
-          <div>{"  }"}</div>
-        </div>
-      </div>
-    ),
+    imageSrc: "/images/screenshots/stream-terminal-sessions.webp",
     replies: 34,
     boosts: { count: 78, active: true },
     favorites: { count: 156, active: true },
@@ -221,22 +154,14 @@ const POSTS: Post[] = [
   {
     id: "moonlight-sessions",
     avatarGradient: "linear-gradient(135deg, #7c3aed 0%, #a855f7 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-midnight-sessions.webp",
     displayName: "Moonlight Sessions",
     username: "@moonlightsessions@jazzcat.fm",
     time: "8h",
     text: "Late night improv session! Some friends stopped by to jam 🎷",
     tags: ["#jazz", "#livemusic", "#improv"],
     link: "https://moonlight.sessions.fm",
-    preview: (
-      <div
-        className={styles.streamImage}
-        style={{
-          background: "linear-gradient(135deg, #581c87 0%, #6b21a8 50%, #7e22ce 100%)",
-        }}
-      >
-        <div className={styles.centerEmoji}>🎷</div>
-      </div>
-    ),
+    imageSrc: "/images/screenshots/stream-midnight-sessions.webp",
     replies: 15,
     boosts: { count: 56 },
     favorites: { count: 234, active: true },
@@ -244,22 +169,14 @@ const POSTS: Post[] = [
   {
     id: "fireside-tales",
     avatarGradient: "linear-gradient(135deg, #dc2626 0%, #ef4444 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-fireside-tales.webp",
     displayName: "Fireside Tales",
     username: "@firesidetales@tabletop.quest",
     time: "9h",
     text: "Campaign night continues! The party is in deep trouble this week... 🐉",
     tags: ["#ttrpg", "#tabletop", "#roleplaying"],
     link: "https://fireside.tales.game",
-    preview: (
-      <div
-        className={styles.streamImage}
-        style={{
-          background: "linear-gradient(135deg, #7f1d1d 0%, #991b1b 50%, #b91c1c 100%)",
-        }}
-      >
-        <div className={styles.centerEmoji}>🐉</div>
-      </div>
-    ),
+    imageSrc: "/images/screenshots/stream-dnd-campaign.webp",
     replies: 28,
     boosts: { count: 67, active: true },
     favorites: { count: 178, active: true },
@@ -267,22 +184,14 @@ const POSTS: Post[] = [
   {
     id: "home-kitchen",
     avatarGradient: "linear-gradient(135deg, #ea580c 0%, #f97316 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-home-kitchen-live.webp",
     displayName: "Home Kitchen Live",
     username: "@homekitchen@foodie.social",
     time: "10h",
     text: "Sunday cooking! Making comfort food from scratch today 🍝",
     tags: ["#cooking", "#homemade", "#foodie"],
     link: "https://home.kitchen.live",
-    preview: (
-      <div
-        className={styles.streamImage}
-        style={{
-          background: "linear-gradient(135deg, #9a3412 0%, #c2410c 50%, #ea580c 100%)",
-        }}
-      >
-        <div className={styles.centerEmoji}>🍝</div>
-      </div>
-    ),
+    imageSrc: "/images/screenshots/stream-home-kitchen-live.webp",
     replies: 19,
     boosts: { count: 34 },
     favorites: { count: 112, active: true },
@@ -291,60 +200,14 @@ const POSTS: Post[] = [
     id: "skyward-tonight",
     boostedBy: "spacefan99",
     avatarGradient: "linear-gradient(135deg, #0891b2 0%, #22d3ee 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-skyward-tonight.webp",
     displayName: "Skyward Tonight",
     username: "@skywardtonight@stargazer.club",
     time: "11h",
     text: "Perfect night for stargazing! Setting up the telescope for some planetary viewing 🔭",
     tags: ["#astronomy", "#stargazing", "#science"],
     link: "https://skyward.tonight.live",
-    preview: (
-      <div
-        className={styles.streamImage}
-        style={{
-          background: "linear-gradient(180deg, #0f172a 0%, #1e1b4b 50%, #0c0a1d 100%)",
-        }}
-      >
-        <div
-          className={styles.star}
-          style={{
-            top: "30%",
-            left: "30%",
-            width: 12,
-            height: 12,
-            background: "#fef3c7",
-            boxShadow: "0 0 20px #fef3c7",
-          }}
-        />
-        <div
-          className={styles.star}
-          style={{
-            top: "50%",
-            left: "60%",
-            width: 8,
-            height: 8,
-            background: "#e0f2fe",
-            boxShadow: "0 0 10px #e0f2fe",
-          }}
-        />
-        <div
-          className={styles.star}
-          style={{
-            top: "70%",
-            left: "25%",
-            width: 6,
-            height: 6,
-            background: "#fce7f3",
-            boxShadow: "0 0 8px #fce7f3",
-          }}
-        />
-        <div
-          className={styles.centerEmoji}
-          style={{ top: "45%", left: "45%" }}
-        >
-          🪐
-        </div>
-      </div>
-    ),
+    imageSrc: "/images/screenshots/stream-stargazing-live.webp",
     replies: 45,
     boosts: { count: 123, active: true },
     favorites: { count: 456, active: true },
@@ -413,7 +276,10 @@ function PostCard({ post }: { post: Post }) {
       <span className={styles.postLink}>{post.link}</span>
       <div className={styles.streamPreview}>
         {post.imageSrc ? (
-          <img className={styles.streamImage} src={imageSrc} alt="" />
+          <>
+            <img className={styles.streamImage} src={imageSrc} alt="" />
+            <div className={styles.playButton}>{ICON_PLAY}</div>
+          </>
         ) : (
           post.preview
         )}
