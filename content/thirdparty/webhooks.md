@@ -23,6 +23,7 @@ The following is a list of events you can get notified about.
 | [STREAM_STOPPED](#stream_stopped)       | an incoming RTMP stream disconnects (e.g. OBS stops)                                           |
 | [STREAM_TITLE_UPDATED](#stream_title_updated)       | the title of the stream is updated  |
 | [VISIBILITY-UPDATE](#visibility-update) | a previously sent chat message becomes visible/invisible (set by an Administrator/Moderator)   |
+| [FEDIVERSE_ENGAGEMENT_FOLLOW](#fediverse_engagement_follow) | a Fediverse user follows your server                                             |
 
 
 ### How to accept webhooks
@@ -205,6 +206,26 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 }
 ```
 - `MessageIDs` is a list of IDs of messages that had their visibility changed.
+
+#### FEDIVERSE_ENGAGEMENT_FOLLOW
+
+```json
+{
+    "eventData": {
+        "timestamp": "2026-04-13T19:17:12.528099886Z",
+        "id": "AqilY4hDR",
+        "name": "Test Follower",
+        "username": "testfollower@fake-mastodon.example.com",
+        "image": "https://fake-mastodon.example.com/avatars/testfollower.png"
+    },
+    "type": "FEDIVERSE_ENGAGEMENT_FOLLOW"
+}
+```
+
+- `eventData.id` is an Owncast-generated webhook event ID. It is not the Fediverse actor ID or follow request ID.
+- `eventData.name` is the display name of the follower.
+- `eventData.username` is the full `user@domain` handle.
+- `eventData.image` is the URL to the follower's avatar.
 
 ### clientId vs. user.id
 

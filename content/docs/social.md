@@ -82,6 +82,8 @@ By clicking the _Compose_ button in the admin header you can create a post to se
 
 If somebody **follows** you, **likes** a post you send out, or **shares** any of your posts while a stream is live it will display that these actions took place within the chat feed. This can be disabled under the social settings.
 
+Fediverse follow events are also available to third-party integrations through [webhooks](/thirdparty/webhooks/#fediverse_engagement_follow).
+
 <center>
     <figure>
   <img src="/docs/img/fediverse.svg" width="30%" id="learn-more" />
