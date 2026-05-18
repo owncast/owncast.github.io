@@ -1024,6 +1024,7 @@ th {
 <p>By clicking the <em>Compose</em> button in the admin header you can create a post to send to your followers. This could be used to tell people when you plan on streaming, or to remind people that you&rsquo;re still live.</p>
 <h2 id="engagement">Engagement</h2>
 <p>If somebody <strong>follows</strong> you, <strong>likes</strong> a post you send out, or <strong>shares</strong> any of your posts while a stream is live it will display that these actions took place within the chat feed. This can be disabled under the social settings.</p>
+<p>Fediverse follow events are also available to third-party integrations through <a href="/thirdparty/webhooks/#fediverse_engagement_follow">webhooks</a>.</p>
 <center>
     <figure>
   <img src="/docs/img/fediverse.svg" width="30%" id="learn-more" />
