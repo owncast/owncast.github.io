@@ -193,13 +193,6 @@
 						},
 						"type": "radio",
 						"value": "cloudron"
-					},
-					{
-						"text": {
-							"en": "I own a Qnap NAS"
-						},
-						"type": "radio",
-						"value": "qnap"
 					}
 				],
 				"required": true
