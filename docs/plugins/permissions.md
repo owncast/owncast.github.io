@@ -1,0 +1,216 @@
+---
+title: Permissions
+description: The full permission list, what each one grants, and how Owncast's plugin security model works.
+sidebar_position: 6
+sidebar_label: Permissions
+tags:
+  - plugins
+  - permissions
+  - security
+  - sandbox
+  - trust
+---
+
+Every Owncast plugin runs in a sandbox with no implicit access to anything outside the plugin itself. To do useful work (read chat, post to the fediverse, fetch a URL, write to a key-value store) your plugin asks the host through `owncast.*` methods. Each of those methods is gated by a permission you declare in your manifest.
+
+When an admin installs a plugin, the **Permissions** tab on the plugin's detail page lists exactly what the plugin asked for, in plain language. That's the trust boundary: an admin can install a third-party plugin without auditing every line of code, because the manifest is the upper bound on what the plugin can do.
+
+## How it works
+
+1. You declare permissions in `plugin.manifest.json`:
+
+   ```json
+   { "permissions": ["chat.send", "storage.kv"] }
+   ```
+
+2. The admin reviews them when enabling. Owncast's plugin detail page lists each permission with a human-readable description.
+
+3. The host enforces them at runtime. Calling `owncast.chat.send(...)` without `chat.send` in your manifest throws a clear error before the call reaches Owncast.
+
+4. The host catches drift. Your built plugin declares the permissions it uses at runtime. The host compares that against the manifest and refuses to load the plugin if the runtime asks for more than the manifest grants. You can't sneak in extra access by swapping out the plugin file after the fact.
+
+### Re-approval when permissions expand
+
+If you ship an update that asks for more permissions than the admin previously approved, Owncast auto-disables the plugin and shows a "needs re-approval" badge in the plugin list. The admin reviews the new permissions in the **Permissions** tab and clicks **Approve** to accept the expanded set and re-enable the plugin. Shrinking permissions is silent.
+
+```mermaid
+flowchart TB
+    Update([Admin drops a new .ocpkg]) --> Scan[Owncast scans the manifest]
+    Scan --> Diff{Manifest permissions<br/>vs approved set}
+    Diff -->|same or subset| Load[Load the plugin]
+    Diff -->|new permissions added| Disable[Auto-disable<br/>show 'needs re-approval' badge]
+    Disable --> Review[Admin reviews new permissions<br/>in the Permissions tab]
+    Review --> Click[Admin clicks Approve]
+    Click --> Snapshot[Capture new permission set<br/>as approved baseline]
+    Snapshot --> Load
+```
+
+An installed plugin's effective capabilities never grow without the admin saying yes again.
+
+## Permission reference
+
+### `chat.send`
+
+Grants:
+
+* `owncast.chat.send(text)`: post as the plugin's bot identity
+* `owncast.chat.sendAction(text)`: post a "/me" message
+* `owncast.chat.sendTo(clientId, text)`: private message a connected client
+
+Messages go through Owncast's normal chat pipeline (filters, rate limits, persistence, moderation). Plugins cannot send under arbitrary names or impersonate real users.
+
+### `chat.history`
+
+Grants:
+
+* `owncast.chat.history(limit?)`: read recent chat messages
+* `owncast.chat.clients()`: list connected chat clients
+
+Read-only.
+
+### `chat.moderate`
+
+Grants:
+
+* `owncast.chat.deleteMessage(messageId)`: hide a message from viewers
+* `owncast.chat.kick(clientId)`: disconnect a chat client
+
+### `chat.filter`
+
+Grants the ability to define `filterChatMessage(msg)`: see every chat message before it's broadcast, with the ability to rewrite or drop it.
+
+Filtering happens inline on every chat message, so the admin needs to see this called out explicitly. The host rejects the load if a plugin defines `filterChatMessage` without declaring this permission.
+
+### `users.read`
+
+Grants:
+
+* `owncast.users.list()`: read the chat user list
+* `owncast.users.get(id)`: read a single user record
+
+### `users.moderate`
+
+Grants:
+
+* `owncast.users.setEnabled(id, enabled, reason?)`: enable or disable a user
+* `owncast.users.banIP(ip)`: ban an IP from joining chat
+
+### `storage.kv`
+
+Grants `owncast.kv.get(key)` and `owncast.kv.set(key, value)`: a per-plugin namespaced key/value store. Plugins cannot read each other's keys.
+
+State persists across reloads and host restarts.
+
+### `storage.upload`
+
+Grants `owncast.storage.upload(name, bytes)`: upload a file to Owncast's public file area and get back a URL. Useful for badges, dynamically-generated images, fediverse post attachments.
+
+### `network.fetch`
+
+Grants `owncast.http.fetch(url, opts?)`: synchronous outbound HTTP.
+
+Requires a companion `network.allowedHosts` list in the manifest. The host rejects the load if `network.fetch` is granted without an allowlist. Each call is checked against the allowlist. Hosts that don't match return an error before any bytes leave the server.
+
+```json
+{
+  "permissions": ["network.fetch"],
+  "network": { "allowedHosts": ["api.discord.com", "*.weather.com"] }
+}
+```
+
+The wildcard `"*"` is permitted but must be written explicitly so admins reviewing the manifest see the scope. The admin UI surfaces the full `allowedHosts` list on the **Permissions** tab next to the `network.fetch` row, so a server operator reviewing a plugin sees exactly which hosts it can reach without unpacking the `.ocpkg`.
+
+### `events.emit`
+
+Grants `owncast.events.emit(eventType, payload)`: emit a custom event that other plugins can subscribe to via `on: { ... }`.
+
+Subscribing to events emitted by other plugins does not require a permission.
+
+### `http.serve`
+
+Grants the host's HTTP router permission to send requests at `/plugins/<your-slug>/*` to your plugin. This covers both static files in your `public/` directory and dynamic requests routed to your `onHttpRequest` handler.
+
+Without this permission, the entire `/plugins/<your-slug>/` URL space returns `404`.
+
+### `http.sse`
+
+Grants `owncast.sse.send(channel, event, data)` and exposes a host-owned endpoint at `/plugins/<your-slug>/_sse/<channel>` that browsers connect to with `EventSource`. Independent of `http.serve`. A plugin may push events without serving any other routes.
+
+### `server.read`
+
+Grants the read-only stream and server state APIs:
+
+* `owncast.stream.current()`: live stream state
+* `owncast.stream.broadcaster()`: inbound encode telemetry
+* `owncast.server.info()`: server name, version, summary
+* `owncast.server.socials()`: configured social links
+* `owncast.server.federation()`: fediverse settings
+* `owncast.server.tags()`: configured tags
+
+### `videoconfig.read`
+
+Grants `owncast.videoConfig.read()`: read the output and transcoding configuration (codecs, latency level, stream variants).
+
+### `videoconfig.write`
+
+Grants `owncast.videoConfig.write(partial)`: modify the video output configuration.
+
+High-trust. Changes apply on the next stream start. The host does not restart an active broadcast. Admins should grant sparingly.
+
+### `notifications.send`
+
+Grants the broadcaster-notification APIs:
+
+* `owncast.notifications.discord(text)`: through the streamer's configured Discord webhook
+* `owncast.notifications.browserPush({ title, body, url? })`: to subscribed browsers
+* `owncast.notifications.fediverse({ type, body, image?, link? })`: fediverse-formatted notification
+
+### `fediverse.post`
+
+Grants `owncast.fediverse.post(text)`: make a public post to the fediverse from the Owncast account.
+
+High-trust: posts go out under the streamer's own fediverse handle and can't be silently revoked. Admins should grant sparingly.
+
+### `ui.modify`
+
+Grants the ability to place UI inside Owncast's own chrome:
+
+* Declaring `manifest.actions` (action buttons under the stream).
+* Calling `owncast.actions.add(...)` / `.clear()` at runtime.
+* Declaring `manifest.styles` (CSS inlined into the viewer page).
+* Declaring `manifest.scripts` (JavaScript inlined into the viewer page).
+* Declaring `manifest.extraPageContent` (an HTML block prepended to the viewer's extra-content area).
+* Declaring `manifest.tabs` (additional tabs in the viewer page's tab row).
+
+Without this permission, manifests that declare any of those fields are rejected at load. Each one reaches into the viewer page rather than staying inside the plugin's own URL space, so the admin needs to see the permission to understand the plugin paints into the host UI.
+
+None of the four viewer-injection fields require `http.serve`. The host reads each file from the plugin's `assets/` directory (not from a URL) and inlines the bytes into the existing config / custom-JS responses, so `ui.modify` alone is enough to declare them.
+
+## Summary table
+
+| Permission           | Grants                                                                                                                                            |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chat.send`          | `owncast.chat.send`, `.sendAction`, `.sendTo`                                                                                                     |
+| `chat.history`       | `owncast.chat.history`, `.clients`                                                                                                                |
+| `chat.moderate`      | `owncast.chat.deleteMessage`, `.kick`                                                                                                             |
+| `chat.filter`        | Subscribe to `filterChatMessage` (read, modify, or drop every chat message).                                                                      |
+| `users.read`         | `owncast.users.list`, `.get`                                                                                                                      |
+| `users.moderate`     | `owncast.users.setEnabled`, `.banIP`                                                                                                              |
+| `storage.kv`         | Per-plugin namespaced key/value store                                                                                                             |
+| `storage.upload`     | Upload files to Owncast's public file area                                                                                                        |
+| `network.fetch`      | Outbound HTTP. Also requires `network.allowedHosts`                                                                                               |
+| `events.emit`        | Emit custom events for other plugins                                                                                                              |
+| `http.serve`         | Serve HTTP at `/plugins/<your-slug>/*`                                                                                                            |
+| `http.sse`           | Push realtime events via `owncast.sse.send` and the `/_sse/` endpoint                                                                             |
+| `server.read`        | Read stream state, server config, encode telemetry                                                                                                |
+| `videoconfig.read`   | Read the output/transcoding config                                                                                                                |
+| `videoconfig.write`  | Modify the video output config (applies on the next stream start)                                                                                 |
+| `notifications.send` | Send Discord, browser-push, or fediverse notifications                                                                                            |
+| `fediverse.post`     | Public-post to the fediverse (rate-limited)                                                                                                       |
+| `ui.modify`          | Add action buttons or tabs to Owncast's viewer chrome; inline plugin CSS, JavaScript, or HTML into the viewer page                                |
+
+## Principle of least privilege
+
+Declare only what you actually use. The narrower your manifest, the easier the admin's trust decision. If you find yourself listing every permission, step back and see if your plugin should really be two plugins.
+
+If you stop using a permission during development, drop it from the manifest. Shrinking is silent. There's no friction in removing unused entries.

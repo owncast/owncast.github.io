@@ -46,6 +46,7 @@ const sidebars: SidebarsConfig = {
         "configuration/website",
         "configuration/appearance",
         "configuration/custom-javascript",
+        "configuration/plugins",
         "configuration/notifications",
         "configuration/systemservice",
       ],
@@ -92,11 +93,11 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Embed, integrate & extend with your existing apps",
+      label: "Embed, integrate & extend with custom functionality",
       items: [
         {
           type: "category",
-          label: "APIs",
+          label: "Web APIs",
           items: [
             "api/apis",
             "api/webhooks",
@@ -117,6 +118,22 @@ const sidebars: SidebarsConfig = {
                 },
               ],
             },
+          ],
+        },
+        {
+          type: "category",
+          label: "Build custom plugins",
+          items: [
+            "plugins/index",
+            "plugins/quickstart",
+            "plugins/manifest",
+            "plugins/handlers",
+            "plugins/apis",
+            "plugins/permissions",
+            "plugins/http",
+            "plugins/ui",
+            "plugins/testing",
+            "plugins/packaging",
           ],
         },
         "embed",

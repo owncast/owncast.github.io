@@ -1,0 +1,297 @@
+---
+title: Contributing UI
+description: Add admin pages to the Owncast admin UI and action buttons to the viewer chrome.
+sidebar_position: 8
+sidebar_label: UI
+tags:
+  - plugins
+  - ui
+  - admin
+  - action-buttons
+---
+
+Plugins can add their own UI to Owncast in two places: tabs inside the admin (for streamer-facing settings) and action buttons under the stream (for viewer-facing actions). Both are declared in your manifest and managed by the host; you ship the content, Owncast slots it into the right chrome.
+
+## Admin pages
+
+Plugins can register pages that appear inside the Owncast admin UI under **Plugins**. Declare them in the manifest:
+
+```json
+{
+  "permissions": ["http.serve"],
+  "admin": {
+    "pages": [
+      { "title": "Settings", "path": "/admin", "icon": "gear" }
+    ]
+  }
+}
+```
+
+Each entry has a `title`, a `path` glob, and an optional `icon`:
+
+| Field   | Notes                                                                                                |
+| ------- | ---------------------------------------------------------------------------------------------------- |
+| `title` | The tab label inside the plugin's admin view.                                                        |
+| `path`  | A path glob under `/plugins/<your-slug>/`. Examples: `"/admin"`, `"/admin/*"`, `"/admin/api/*"`.     |
+| `icon`  | Short semantic name. Supported: `gear`, `wrench`, `user`, `lock`, `info`, `apps`, `docs`, `bell`.    |
+
+### How they're rendered
+
+Owncast's admin renders each declared page as a tab inside `/admin/plugins/configure?id=<your-slug>`. The tab body is an `<iframe>` pointed at `/plugins/<your-slug>/<path>`. Each plugin gets a bookmarkable URL and a sidebar entry under **Plugins** in the admin navigation.
+
+The host auto-injects an admin-themed stylesheet into HTML responses on admin paths, so plain `<input>` and `<button>` controls look native to Owncast's admin without you needing to ship CSS. Plugins that prefer their own styling can layer on top.
+
+### Auth gating
+
+Requests to manifest-declared admin paths are auth-gated by the host. Unauthenticated requests get a `401` before your plugin code runs. You don't have to check `req.authenticated` for these paths.
+
+Static files and dynamic endpoints under matched paths are both auth-gated. The same gating applies to your `public/admin/index.html` and to `POST /admin/api/save-settings`.
+
+Use multiple globs when you have both a UI page and a JSON API:
+
+```json
+{
+  "admin": {
+    "pages": [
+      { "title": "Settings", "path": "/admin" },
+      { "title": "Settings", "path": "/admin/api/*" }
+    ]
+  }
+}
+```
+
+Duplicate `title` is fine. Both globs feed one tab.
+
+### Author flow
+
+1. Put admin HTML, CSS, and JS in `public/admin/index.html` (and friends).
+2. Expose admin APIs via `onHttpRequest` at `/admin/api/...` (see [Serving HTTP](/docs/plugins/http)).
+3. Declare the relevant globs in `manifest.admin.pages[].path`.
+4. Visit `/admin/plugins/configure?id=<your-slug>` in the admin UI. Owncast uses your existing admin login to gate the page; no extra prompt.
+
+## Action buttons
+
+Owncast surfaces a row of action buttons in its viewer UI. Clickable entries that either open a URL (in a modal or new tab) or render raw HTML. Plugins can contribute their own.
+
+### Manifest-declared buttons
+
+```json
+{
+  "permissions": ["ui.modify", "http.serve"],
+  "actions": [
+    {
+      "title": "Chat Overlay",
+      "description": "Open the live chat overlay",
+      "url": "/",
+      "icon": "/star.png",
+      "color": "#3b82f6"
+    },
+    {
+      "title": "Issue tracker",
+      "url": "https://github.com/example/my-plugin/issues",
+      "openExternally": true
+    },
+    {
+      "title": "About this stream",
+      "html": "<p>Live every weekday at 8pm UTC.</p>"
+    }
+  ]
+}
+```
+
+While your plugin is enabled, the host merges its action entries into the list Owncast already shows under the stream. When disabled, they disappear.
+
+### Field reference
+
+| Field            | Notes                                                                                          |
+| ---------------- | ---------------------------------------------------------------------------------------------- |
+| `title`          | Required. The button label.                                                                    |
+| `url`            | Either an absolute `https://...` URL or a path. Mutually exclusive with `html`.                |
+| `html`           | Raw HTML rendered in an inline modal. Mutually exclusive with `url`.                           |
+| `icon`           | Optional image URL shown on the button. Same path rules as `url`.                              |
+| `color`          | Optional hex color for the button background.                                                  |
+| `description`    | Optional. Shown in the modal that opens for URL-based actions.                                 |
+| `openExternally` | If `true`, the URL opens in a new tab instead of an inline modal.                              |
+
+### Path rules
+
+Two simple rules cover everything:
+
+* Relative paths auto-prefix to your plugin's namespace. `"/"` becomes `/plugins/my-plugin/`. `"/star.png"` becomes `/plugins/my-plugin/star.png`. This saves you from hard-coding your plugin name. Applies to both `url` and `icon`.
+* Absolute `https://...` URLs pass through unchanged. Use these for external links and CDN-hosted icons.
+
+The host enforces:
+
+* `ui.modify` permission is required. Manifests with `actions` but no `ui.modify` are rejected at load.
+* Exactly one of `url` or `html` per entry.
+* URLs and icons that resolve into your namespace require `http.serve`. You're the one serving them.
+* URLs and icons pointing at another plugin's namespace are rejected. Catches typos and prevents one plugin from advertising another's UI.
+
+### Runtime additions
+
+A plugin can append more action buttons at runtime, without a reload, using `owncast.actions.add(...)`:
+
+```js
+owncast.actions.add({
+  title: "Donate",
+  url: "https://example.com/donate",
+  openExternally: true,
+});
+
+// or pass an array to add several at once
+owncast.actions.add([
+  { title: "Tip", url: "https://example.com/tip", openExternally: true },
+  { title: "Schedule", html: "<p>Weekdays 8pm UTC.</p>" },
+]);
+```
+
+Each runtime entry goes through the same validation as `manifest.actions`. The result is persisted in the plugin's config, so additions survive a reload.
+
+`owncast.actions.clear()` drops every runtime addition. Manifest-declared actions remain.
+
+A common pattern is an admin page that lets the streamer add custom buttons (label + URL) on top of the plugin's defaults. The `action-buttons` example in the SDK ships a working version of this.
+
+## Viewer stylesheets
+
+Plugins can theme the viewer page by bundling CSS files and listing them in `manifest.styles`. Each file's contents are inlined into the same `<style>` block Owncast already uses for the admin's customStyles, so plugins extend the page's CSS without each contribution needing its own `<link>` tag.
+
+```json
+{
+  "permissions": ["ui.modify"],
+  "styles": ["theme.css", "overrides.css"]
+}
+```
+
+Requires `ui.modify` only (the plugin paints inside Owncast's chrome). `http.serve` isn't needed: the host reads each file from your plugin's `assets/` directory and inlines the bytes into `customStyles` on `/api/config`, not at a URL.
+
+### Path rules
+
+* Bare paths like `"theme.css"` auto-prefix to your plugin's namespace.
+* `"/theme.css"` resolves the same way.
+* Fully qualified `/plugins/<your-slug>/...` paths pass through.
+* Paths in another plugin's namespace are rejected.
+* `http://` and `https://` URLs are rejected. Bundle external assets and reference them with `@font-face` or `url(...)` from inside your CSS instead, so an admin reviewing the manifest sees every file that will load.
+* Each entry must end in `.css`.
+
+### How contributions are rendered
+
+The host reads each file at request time and concatenates the bytes in front of an `/* plugin: <your-slug> ... */` comment, so devtools "view source" attributes a rule back to the plugin that shipped it. Disabling the plugin drops its contribution from `customStyles` on the next page load.
+
+The CSS body runs against the live viewer DOM, so your selectors target whatever the page renders. Scoping every rule under a single root id is a defensive habit worth keeping; without it your rules can match elements the host page renders and produce surprising regressions.
+
+### Caveat: relative URLs in CSS
+
+`url(...)` references inside a plugin's CSS resolve against the viewer page, not against the plugin's namespace. If you want to reference a bundled image, use the absolute path `/plugins/<your-slug>/logo.png` instead of `./logo.png`. Same goes for `@font-face` sources. The plugin's static URL space stays served, so direct references work even though no `<link>` points at the file.
+
+## Viewer scripts
+
+Plugins can extend the viewer page's runtime by bundling JavaScript files and listing them in `manifest.scripts`. Each file's contents are appended to the `/customjavascript` response Owncast already serves for the admin's custom JS, so plugins extend the page's behavior without each contribution needing its own `<script>` tag.
+
+```json
+{
+  "permissions": ["ui.modify"],
+  "scripts": ["client.js"]
+}
+```
+
+Same permission and path rules as `styles`, applied to `.js` files (only `ui.modify` is needed; the host reads from `assets/` and inlines into `/customjavascript`). Each contribution is prefixed with a `// plugin: <your-slug> ...` comment.
+
+### Execution context
+
+The viewer page loads `/customjavascript` as a single `<script async>` tag. Every plugin's JS runs in the same global window as the admin's custom JS and the rest of Owncast's chrome. Three implications:
+
+* Top-level `var` and `function` declarations land on `window`. Wrap your script in an IIFE (`(function(){ ... })()`) so private state stays private and you don't collide with the admin's JS or other plugins.
+* An uncaught error inside one plugin's script can prevent the remaining plugins' scripts from running (everything is one concatenated script tag). Defensive try/catch around any branch that might throw is sensible if your plugin is shipping alongside others.
+* Relative `fetch('./data.json')` resolves against the viewer page's URL, not against your plugin. Use absolute paths like `/plugins/<your-slug>/data.json` for files you ship in `public/`.
+
+### When to use it
+
+`scripts` is the right tool for plugins that need to react to viewer-side state, mount their own UI on top of the page, or talk to a backend the plugin runs at `/plugins/<your-slug>/`. For chat-driven bots, message filters, and any logic that should run server-side, the regular plugin handlers are a better fit; they run inside the host sandbox, can speak to Owncast APIs the viewer page can't reach, and don't trust user-controlled DOM.
+
+## Extra page content
+
+Plugins can prepend HTML to the viewer page's extra-content block by bundling a single HTML file and pointing `manifest.extraPageContent` at it.
+
+```json
+{
+  "permissions": ["ui.modify"],
+  "extraPageContent": "content.html"
+}
+```
+
+Requires `ui.modify`. `http.serve` is not required: the HTML is inlined into the `/api/config` response, not served as a URL.
+
+The bytes land at the top of the extra-content block, above any prose the admin has configured. Each contribution is wrapped with an `<!-- plugin: <your-slug> ... -->` comment for attribution. Multiple plugins' contributions stack in the order the host loaded them.
+
+### Path rules
+
+Same as `styles` and `scripts`, applied to a single `.html` entry. One file per plugin; if you want several distinct blocks, link or `<iframe>` them from the one file you ship.
+
+### Markdown vs HTML
+
+The admin's extra page content goes through Owncast's markdown processor before rendering. Plugin HTML does not: the host runs the markdown processor on the admin's content first, then prepends your raw bytes. Tags, attributes, and inline scripts pass through as written.
+
+This means plugin HTML can use any element the viewer page accepts. It also means a malformed tag can break the surrounding chrome, so escape any untrusted strings you embed (user names, fetched text, anything not in your control).
+
+### Pairing with `scripts`
+
+`extraPageContent` shines when paired with `scripts`: ship the markup as HTML where it's reviewable at a glance, and wire interactions from your JavaScript by querying the elements you declared. The host loads the HTML before the script runs, so a script targeting `document.getElementById(...)` on a plugin-contributed element works without timing tricks.
+
+```json
+{
+  "permissions": ["ui.modify", "http.serve"],
+  "extraPageContent": "panel.html",
+  "scripts": ["panel.js"]
+}
+```
+
+A pattern that often reads cleaner than building the same DOM imperatively from a `scripts`-only plugin:
+
+* `panel.html` declares structure, classes, and IDs you can reason about as plain HTML.
+* `panel.css` (declared in `styles`) themes it.
+* `panel.js` attaches event listeners, fetches data, mutates state.
+
+When to reach for HTML-plus-JS instead of pure JavaScript: anything with non-trivial layout, ARIA attributes, or third-party widgets that expect to bootstrap from existing DOM. Pure `scripts` still makes sense for plugins that build their UI only on certain conditions (after a fetch, after a user action) where rendering nothing on initial paint is the right behavior.
+
+### When `extraPageContent` is enough on its own
+
+Standalone, `extraPageContent` is the simplest path for announcement strips, sponsor banners, and any block that doesn't need to react to events: it ships markup directly, doesn't require a script, and survives a JavaScript-disabled viewer.
+
+## Viewer-page tabs
+
+Plugins can add tabs to the viewer page's tab row (next to the built-in **About** and **Followers** tabs) by declaring `manifest.tabs[]` and shipping one HTML file per tab under `assets/`.
+
+```json
+{
+  "permissions": ["ui.modify"],
+  "tabs": [
+    { "title": "Music", "content": "music.html" },
+    { "title": "Schedule", "content": "schedule.html" }
+  ]
+}
+```
+
+Requires `ui.modify`. `http.serve` is not required: each tab's HTML is read from `assets/` and inlined into the tab body. The viewer page renders one tab per entry, with the `title` as the label and the file's contents as the body.
+
+### How tabs are rendered
+
+The host emits a `pluginTabs[]` array on `/api/config`. The viewer page maps each entry to a tab whose body is the inlined HTML (via the same renderer used for `extraPageContent`). Plugin tabs are appended after the built-ins in declaration order; the React key is derived from the plugin's slug so a tab unmounts only when its source plugin is disabled or removed.
+
+### Path rules
+
+Same as `extraPageContent`, applied per entry:
+
+- Bare paths like `"music.html"` auto-prefix to your plugin's namespace.
+- Fully qualified `/plugins/<your-slug>/...` paths pass through.
+- Paths in another plugin's namespace are rejected.
+- `http(s)://` URLs are rejected.
+- Each entry must end in `.html`.
+
+### Tab title
+
+The `title` field shows up verbatim in the tab bar. Keep it short — long titles get truncated by the tab UI. There's no schema constraint on length, but anything past ~16 characters won't fit cleanly on mobile.
+
+### When to use tabs vs `extraPageContent`
+
+- `extraPageContent`: one block of HTML that sits above the tab row. Good for announcement strips, sponsor banners, anything that should always be visible.
+- `tabs`: dedicated panels the viewer clicks into. Good for content that doesn't need to compete with chat for attention — music lists, event schedules, link pages, sponsor sections you want viewers to find but not necessarily see first.
