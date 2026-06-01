@@ -45,7 +45,7 @@ The manifest is what an admin reviews before installing the plugin. The host par
 | `admin`       | object   | no       | Admin pages to add to the Owncast admin UI. See [UI: Admin pages](/docs/plugins/ui#admin-pages).             |
 | `styles`      | string[] | no       | CSS files inlined into the viewer page. See [`styles`](#styles-css-injection).                               |
 | `scripts`     | string[] | no       | JavaScript files inlined into the viewer page. See [`scripts`](#scripts-javascript-injection).               |
-| `extraPageContent` | string | no    | An HTML file prepended to the viewer's extra-content block. See [`extraPageContent`](#extrapagecontent-html-block). |
+| `extraPageContent` | object | no    | An object declaring a slug and an optional HTML file prepended to the viewer's extra-content block. See [`extraPageContent`](#extrapagecontent-html-block). |
 | `tabs`        | object[] | no       | Viewer-page tabs the plugin contributes alongside the built-in tabs. See [`tabs`](#tabs-viewer-page-tabs).         |
 
 ### `name` and `slug`
@@ -251,39 +251,49 @@ Full coverage in [UI: Viewer scripts](/docs/plugins/ui#viewer-scripts).
 
 ## `extraPageContent`: HTML block
 
-One HTML file the plugin contributes to the viewer's extra-content area. The host reads the file's bytes and prepends them to the admin's rendered `extraPageContent` on `/api/config`, so plugin HTML lands above the admin's prose.
+An object that contributes an HTML block to the viewer's extra-content area, prepended above the admin's prose on `/api/config`.
 
 ```json
 {
   "permissions": ["ui.modify"],
-  "extraPageContent": "content.html"
+  "extraPageContent": { "slug": "banner", "content": "content.html" }
 }
 ```
 
-Path rules match `styles` and `scripts`, applied to a single `.html` entry. Requires `ui.modify`; `http.serve` is not required because the HTML is inlined into the config response, not served as a URL. Plugin HTML bypasses the markdown processor so tags and attributes pass through as written. Each contribution is wrapped with an `<!-- plugin: <your-slug> ... -->` comment so a reader can attribute the markup back.
+| Field     | Type   | Notes                                                                                                                                                      |
+| --------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `slug`    | string | Required. Stable identifier passed to `onPageContent` when the host requests rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. |
+| `content` | string | Optional. Relative path to a static HTML file in `assets/`. When present, that file's bytes are inlined directly. When omitted, the host calls `onPageContent` instead. |
+
+**Static** (with `content`): the host reads the file at request time and inlines the bytes. Same path rules as `styles` and `scripts`, applied to a single `.html` entry. Plugin HTML bypasses the markdown processor so tags and attributes pass through as written.
+
+**Dynamic** (without `content`): implement `onPageContent({ slug, user? })` in your plugin to return HTML at request time. Use this when the content should vary per viewer or draw on live data (for example, personalised greetings or current stream stats). `user` is the viewer's chat identity, present when authenticated.
+
+Requires `ui.modify`; `http.serve` is not required because the HTML is inlined into the config response, not served as a URL. Each contribution is wrapped with an `<!-- plugin: <your-slug> ... -->` comment so a reader can attribute the markup back.
 
 Full coverage in [UI: Extra page content](/docs/plugins/ui#extra-page-content).
 
 ## `tabs`: viewer-page tabs
 
-A list of tabs the plugin contributes to the viewer page's tab row (next to the built-in **About** and **Followers** tabs).
+A list of tabs the plugin contributes to the viewer page's tab row (next to the built-in **About** and **Followers** tabs). Each entry requires `title` and `slug`; `content` is optional.
 
 ```json
 {
   "permissions": ["ui.modify"],
   "tabs": [
-    { "title": "Music", "content": "music.html" },
-    { "title": "Schedule", "content": "schedule.html" }
+    { "title": "Music",    "slug": "music",    "content": "music.html" },
+    { "title": "Schedule", "slug": "schedule", "content": "schedule.html" }
   ]
 }
 ```
 
 Each entry has:
 
-| Field     | Notes                                                                                                |
-| --------- | ---------------------------------------------------------------------------------------------------- |
-| `title`   | Required. The label shown on the tab.                                                                |
-| `content` | Required. Relative path to an HTML file under `assets/`. Same path rules as `extraPageContent` (auto-prefix to your namespace, cross-plugin paths and `http(s)://` URLs rejected, must end in `.html`). |
+| Field     | Notes                                                                                                                                                                 |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`   | Required. The label shown on the tab.                                                                                                                                 |
+| `slug`    | Required. Stable identifier passed to `onTabContent` when the host requests rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. Must be unique within the plugin's tabs. |
+| `content` | Optional. Relative path to an HTML file under `assets/`. Same path rules as `extraPageContent` (auto-prefix to your namespace, cross-plugin paths and `http(s)://` URLs rejected, must end in `.html`). When omitted, the host calls `onTabContent` instead. |
 
 Requires `ui.modify`. `http.serve` is not required: each tab's HTML is read from `assets/` and inlined into the `pluginTabs[]` array on `/api/config`. The viewer page maps each entry to a tab whose body renders the HTML directly.
 
@@ -340,9 +350,9 @@ A non-trivial manifest exercising most features:
   },
   "styles": ["sidekick.css"],
   "scripts": ["sidekick.js"],
-  "extraPageContent": "intro.html",
+  "extraPageContent": { "slug": "intro", "content": "intro.html" },
   "tabs": [
-    { "title": "Schedule", "content": "schedule.html" }
+    { "title": "Schedule", "slug": "schedule", "content": "schedule.html" }
   ]
 }
 ```

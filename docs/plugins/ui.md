@@ -214,14 +214,36 @@ The viewer page loads `/customjavascript` as a single `<script async>` tag. Ever
 
 ## Extra page content
 
-Plugins can prepend HTML to the viewer page's extra-content block by bundling a single HTML file and pointing `manifest.extraPageContent` at it.
+Plugins can prepend HTML to the viewer page's extra-content block. Declare `manifest.extraPageContent` as an object with a required `slug` and an optional `content` path:
 
 ```json
 {
   "permissions": ["ui.modify"],
-  "extraPageContent": "content.html"
+  "extraPageContent": { "slug": "banner", "content": "content.html" }
 }
 ```
+
+| Field     | Notes                                                                                                      |
+| --------- | ---------------------------------------------------------------------------------------------------------- |
+| `slug`    | Required. A stable identifier passed to `onPageContent` when the host asks for rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. |
+| `content` | Optional. Relative path to a static HTML file in `assets/`. When present, that file's bytes are inlined directly. When omitted, the host calls your `onPageContent` handler instead. |
+
+### Static vs dynamic
+
+Use `content` when the HTML is the same for every viewer — announcement strips, sponsor banners, blocks of prose. Leave `content` out and implement `onPageContent` when the content should change per viewer or draw on live data:
+
+```js
+module.exports = definePlugin({
+  onPageContent({ slug, user }) {
+    if (slug === "banner") {
+      return `<aside>Welcome, ${user?.displayName ?? "visitor"}!</aside>`;
+    }
+    return "";
+  },
+});
+```
+
+`user` is the viewer's chat identity — present when the viewer is authenticated, undefined for anonymous viewers. See [Handlers: `onPageContent`](/docs/plugins/handlers#onpagecontent-slug-user) for the full payload shape.
 
 Requires `ui.modify`. `http.serve` is not required: the HTML is inlined into the `/api/config` response, not served as a URL.
 
@@ -263,23 +285,50 @@ Standalone, `extraPageContent` is the simplest path for announcement strips, spo
 
 ## Viewer-page tabs
 
-Plugins can add tabs to the viewer page's tab row (next to the built-in **About** and **Followers** tabs) by declaring `manifest.tabs[]` and shipping one HTML file per tab under `assets/`.
+Plugins can add tabs to the viewer page's tab row (next to the built-in **About** and **Followers** tabs) by declaring `manifest.tabs[]`. Each entry requires a `slug` and a `title`; the `content` path is optional.
 
 ```json
 {
   "permissions": ["ui.modify"],
   "tabs": [
-    { "title": "Music", "content": "music.html" },
-    { "title": "Schedule", "content": "schedule.html" }
+    { "title": "Music",       "slug": "music",    "content": "music.html" },
+    { "title": "Stream Info", "slug": "stream-info" }
   ]
 }
 ```
+
+| Field     | Notes                                                                                                                                                                 |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`   | Required. The label shown on the tab.                                                                                                                                 |
+| `slug`    | Required. Stable identifier passed to `onTabContent` when the host requests rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. Must be unique within the plugin's tabs. |
+| `content` | Optional. Relative path to a static HTML file in `assets/`. When present, that file's bytes are inlined directly. When omitted, the host calls `onTabContent` instead. |
 
 Requires `ui.modify`. `http.serve` is not required: each tab's HTML is read from `assets/` and inlined into the tab body. The viewer page renders one tab per entry, with the `title` as the label and the file's contents as the body.
 
 ### How tabs are rendered
 
 The host emits a `pluginTabs[]` array on `/api/config`. The viewer page maps each entry to a tab whose body is the inlined HTML (via the same renderer used for `extraPageContent`). Plugin tabs are appended after the built-ins in declaration order; the React key is derived from the plugin's slug so a tab unmounts only when its source plugin is disabled or removed.
+
+### The `slug` field
+
+`slug` is a stable name you control. It's passed to your `onTabContent` handler as `{ slug }` so a single handler can serve multiple tabs without guessing which one was requested. The slug shows up in host logs and future API calls — pick something that reads clearly, like `"music"` or `"stream-info"`. You can change `title` freely; changing `slug` is a breaking change if any code keys on it.
+
+### Dynamic tab content
+
+When a tab has no `content` file, the host calls your `onTabContent` handler each time a viewer loads that tab. Implement it when content should change per viewer or pull live data:
+
+```js
+module.exports = definePlugin({
+  onTabContent({ slug, user }) {
+    if (slug === "stream-info") {
+      return `<p>Hello ${user?.displayName ?? "visitor"}</p>`;
+    }
+    return "";
+  },
+});
+```
+
+`user` is the viewer's chat identity — present when authenticated, undefined for anonymous viewers. See [Handlers: `onTabContent`](/docs/plugins/handlers#ontabcontent-slug-user) for the full payload shape.
 
 ### Path rules
 

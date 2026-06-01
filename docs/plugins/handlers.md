@@ -266,6 +266,59 @@ Endpoints are public by default. Gate admin features on `req.authenticated`. Man
 
 Requires the `http.serve` permission. Full coverage in [Serving HTTP](/docs/plugins/http).
 
+## Content handlers
+
+These two handlers let a plugin generate tab or extra-page HTML at request time — useful when the content should be personalised per viewer or depend on live stream data. They're the dynamic counterpart to shipping a static HTML file via `manifest.tabs[].content` or `manifest.extraPageContent.content`.
+
+Both handlers receive a `ContentRequest`:
+
+```ts
+interface ContentRequest {
+  slug: string;   // stable identifier declared in the manifest
+  user?: ChatUser; // viewer's chat identity — present when authenticated, undefined for anonymous viewers
+}
+```
+
+Return the full HTML string for the content block. If you don't recognise the slug, return `""`.
+
+### `onTabContent({ slug, user? })`
+
+Called when a tab entry in `manifest.tabs[]` has no static `content` file. The host passes the tab's `slug` so a single handler can serve multiple tabs.
+
+```js
+const { definePlugin } = require("@owncast/plugin-sdk");
+
+module.exports = definePlugin({
+  onTabContent({ slug, user }) {
+    if (slug === "stream-info") {
+      return `<p>Hello ${user?.displayName ?? "visitor"}</p>`;
+    }
+    return "";
+  },
+});
+```
+
+No permission required to subscribe to this handler. Whatever Owncast APIs you call from inside the handler require their usual permissions.
+
+### `onPageContent({ slug, user? })`
+
+Called when `manifest.extraPageContent` has no static `content` file. The host passes the slug from the manifest so the handler knows which content slot is being requested.
+
+```js
+const { definePlugin } = require("@owncast/plugin-sdk");
+
+module.exports = definePlugin({
+  onPageContent({ slug, user }) {
+    if (slug === "banner") {
+      return `<aside>Welcome, ${user?.displayName ?? "visitor"}!</aside>`;
+    }
+    return "";
+  },
+});
+```
+
+No permission required to subscribe. Same API-permission rules as `onTabContent`.
+
 ## Plugin-to-plugin events
 
 Plugins can compose by emitting and subscribing to arbitrary custom events.
@@ -303,6 +356,8 @@ Subscribing requires no permission. To emit custom events, declare `events.emit`
 | `onFediverseReply`         | `FediverseInboundPost`             | none                                   |
 | `filterChatMessage`        | `ChatMessage`                      | `chat.filter`                          |
 | `onHttpRequest`            | `IncomingHttpRequest`              | `http.serve`                           |
+| `onTabContent`             | `ContentRequest`                   | none to subscribe; whatever APIs the handler calls |
+| `onPageContent`            | `ContentRequest`                   | none to subscribe; whatever APIs the handler calls |
 | `on: { ... }`              | (per-event)                        | none to subscribe, `events.emit` to emit |
 
 Subscribing is free. Calling Owncast APIs from inside a handler is what needs permissions. See [Owncast APIs](/docs/plugins/apis) for the catalog of methods and what each one grants.
