@@ -41,6 +41,10 @@ Owncast's admin renders each declared page as a tab inside `/admin/plugins/confi
 
 The host auto-injects an admin-themed stylesheet into HTML responses on admin paths, so plain `<input>` and `<button>` controls look native to Owncast's admin without you needing to ship CSS. Plugins that prefer their own styling can layer on top.
 
+### Sandbox
+
+The page runs in a sandboxed `<iframe>`. Your scripts run, forms submit, and same-origin `fetch` to your own `/plugins/<your-slug>/` endpoints works. Pages may also **open popups**, **trigger file downloads** (e.g. a blob or data-URL `<a download>` you click from script), and use **`confirm()` / `alert()` / `prompt()`** dialogs. The sandbox is the only constraint you'll usually notice; if a browser feature seems silently blocked, the iframe sandbox is the first thing to check.
+
 ### Auth gating
 
 Requests to manifest-declared admin paths are auth-gated by the host. Unauthenticated requests get a `401` before your plugin code runs. You don't have to check `req.authenticated` for these paths.

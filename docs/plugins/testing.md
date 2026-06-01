@@ -144,6 +144,8 @@ The scenario's top-level `expect` checks what happened across the whole run:
 | `kv`                | Partial map of plugin-config state after the scenario                           |
 | `httpRequests`      | Outbound HTTP calls made by your plugin                                         |
 
+`owncast.fs.*` (the `storage.fs` sandbox) has no dedicated assertion — the runtime backs it with a real in-memory sandbox during tests, so test it the way you'd use it: drive your plugin's own endpoints (or handlers) and assert on what they return. For example, `POST` a file through your upload endpoint, then `GET` your list endpoint and assert the response includes it. The [`file-manager`](https://github.com/owncast/plugin-sdk/tree/main/examples/js/file-manager) example does exactly this.
+
 Example exercising several:
 
 ```js

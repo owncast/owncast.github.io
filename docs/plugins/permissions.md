@@ -105,6 +105,12 @@ State persists across reloads and host restarts.
 
 Grants `owncast.storage.upload(name, bytes)`: upload a file to Owncast's public file area and get back a URL. Useful for badges, dynamically-generated images, fediverse post attachments.
 
+### `storage.fs`
+
+Grants `owncast.fs.*`: a private, sandboxed filesystem at `data/plugin-data/<your-slug>/` that your plugin can read, write, list, and delete within. Useful for caches, generated data files, append-style logs, or anything you need to persist as real files rather than key/value strings.
+
+Unlike `storage.upload`, these files stay **server-side** — they're never served over HTTP. Every path is confined to your plugin's own directory: a plugin cannot read another plugin's files or escape its sandbox (`../` and absolute paths are collapsed back inside).
+
 ### `network.fetch`
 
 Grants `owncast.http.fetch(url, opts?)`: synchronous outbound HTTP.
@@ -198,6 +204,7 @@ None of the four viewer-injection fields require `http.serve`. The host reads ea
 | `users.moderate`     | `owncast.users.setEnabled`, `.banIP`                                                                                                              |
 | `storage.kv`         | Per-plugin namespaced key/value store                                                                                                             |
 | `storage.upload`     | Upload files to Owncast's public file area                                                                                                        |
+| `storage.fs`         | Private, sandboxed server-side filesystem at `data/plugin-data/<your-slug>/`                                                                       |
 | `network.fetch`      | Outbound HTTP. Also requires `network.allowedHosts`                                                                                               |
 | `events.emit`        | Emit custom events for other plugins                                                                                                              |
 | `http.serve`         | Serve HTTP at `/plugins/<your-slug>/*`                                                                                                            |
