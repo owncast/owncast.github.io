@@ -49,7 +49,7 @@ interface ChatMessage {
 }
 ```
 
-`user` carries the **full sender identity**, so key per-user state on the stable `user.id` and gate moderator-only behavior on `user.scopes` (e.g. `"MODERATOR"`) rather than matching the display name. To reply privately to the sender, pass the message to [`owncast.chat.replyTo`](./apis#chatreplytomsg-text).
+`user` carries the **full sender identity**, so key per-user state on the stable `user.id` and gate moderator-only behavior on `user.scopes` (e.g. `"MODERATOR"`) rather than matching the display name. To reply privately to the sender, pass the message to [`owncast.chat.replyTo`](./apis#chat-replyto).
 
 `msg.timestamp` is the host's wall-clock time for the message. The sandbox clock works (`Date.now()` is real), but `msg.timestamp` is deterministic and the right choice when comparing elapsed time across events or asserting in tests.
 

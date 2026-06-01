@@ -63,6 +63,18 @@ owncast.chat.sendTo(msg.clientId, "you said: " + msg.body);
 
 Requires `chat.send`.
 
+### `owncast.chat.replyTo(msg, text)` {#chat-replyto}
+
+Whisper a reply back to whoever sent a chat message. Pass the `ChatMessage` from `onChatMessage`/`filterChatMessage` (or a bare `clientId`). Returns `false` if the sender's connection is unknown (no `clientId`), so you can fall back to a public `send`.
+
+```js
+if (!owncast.chat.replyTo(msg, "slow down a moment")) {
+  owncast.chat.send("slow down a moment");
+}
+```
+
+Sugar over `sendTo(msg.clientId, text)`. Requires `chat.send`.
+
 ### `owncast.chat.history(limit?)`
 
 Return the most recent chat messages. `limit` defaults to 50.
@@ -149,11 +161,18 @@ Requires `users.moderate`.
 
 ### `owncast.kv.get(key)` and `owncast.kv.set(key, value)`
 
-Per-plugin key/value store, namespaced by your plugin's `slug`. Values are strings. Encode JSON yourself if you need richer types.
+Per-plugin key/value store, namespaced by your plugin's `slug`. Values are strings.
 
 ```js
 const last = owncast.kv.get("last-seen") || "0";
 owncast.kv.set("last-seen", String(Date.now()));
+```
+
+For richer types, use the JSON helpers instead of calling `JSON.parse`/`stringify` yourself. `getJSON` returns the fallback (default `undefined`) when the key is unset or holds invalid JSON:
+
+```js
+const prefs = owncast.kv.getJSON("prefs", { theme: "dark" });
+owncast.kv.setJSON("prefs", { ...prefs, theme: "light" });
 ```
 
 Plugins cannot read each other's keys.
@@ -170,6 +189,35 @@ const result = owncast.storage.upload("badge.png", bytes);
 ```
 
 Requires `storage.upload`.
+
+### `owncast.fs.*`
+
+A private, sandboxed filesystem at `data/plugin-data/<your-slug>/`. Unlike `owncast.storage.upload`, these files stay server-side — they're never served over HTTP. Paths are relative to your sandbox root; the host confines every path to your own directory (a plugin cannot read another plugin's files, and `../` or absolute paths collapse back inside the sandbox).
+
+```js
+// Write bytes or a string; parent directories are created as needed.
+owncast.fs.write("cache/today.json", JSON.stringify({ count: 3 }));
+
+// Read it back as bytes, or as UTF-8 text.
+const bytes = owncast.fs.read("cache/today.json"); // Uint8Array | null
+const text = owncast.fs.readText("cache/today.json"); // string | null
+
+// Inspect and manage the sandbox.
+owncast.fs.exists("cache/today.json"); // true
+owncast.fs.list("cache"); // ["today.json"]
+owncast.fs.delete("cache/today.json"); // { ok: true }
+```
+
+| Method | Returns |
+| --- | --- |
+| `owncast.fs.read(path)` | `Uint8Array`, or `null` if missing |
+| `owncast.fs.readText(path)` | `string`, or `null` if missing |
+| `owncast.fs.write(path, data)` | `{ ok, error? }` |
+| `owncast.fs.list(dir)` | `string[]` (entry names; missing dir is empty) |
+| `owncast.fs.delete(path)` | `{ ok, error? }` (file or empty directory) |
+| `owncast.fs.exists(path)` | `boolean` |
+
+Requires `storage.fs`.
 
 ## Network
 
@@ -247,6 +295,17 @@ The streamer's configured social links.
 ```js
 const socials = owncast.server.socials();
 // [{ platform: string, url: string, icon: string }, ...]
+```
+
+Requires `server.read`.
+
+### `owncast.server.emotes()`
+
+The server's custom chat emotes — the same set the public `/api/emoji` endpoint serves. Useful for rendering or filtering `:code:` emotes server-side.
+
+```js
+const emotes = owncast.server.emotes();
+// [{ name: ":party:", url: "/img/emoji/party.png" }, ...]
 ```
 
 Requires `server.read`.
@@ -385,7 +444,7 @@ Full coverage in [UI: Action buttons](/docs/plugins/ui#action-buttons).
 Push a Server-Sent-Event to every browser connected to your plugin's `/_sse/<channel>` endpoint.
 
 ```js
-owncast.sse.send("overlay", "chat", { from: msg.user, body: msg.body });
+owncast.sse.send("overlay", "chat", { from: msg.user?.displayName, body: msg.body });
 ```
 
 * `channel`: which stream to push to. Use `""` for the default channel.
@@ -413,6 +472,7 @@ Full coverage in [Serving HTTP: Realtime updates](/docs/plugins/http#realtime-up
 | `owncast.users.setEnabled` / `.banIP`            | `users.moderate`     |
 | `owncast.kv.get` / `.set`                        | `storage.kv`         |
 | `owncast.storage.upload`                         | `storage.upload`     |
+| `owncast.fs.read` / `.readText` / `.write` / `.list` / `.delete` / `.exists` | `storage.fs`         |
 | `owncast.http.fetch`                             | `network.fetch`      |
 | `owncast.events.emit`                            | `events.emit`        |
 | `owncast.stream.current`                         | `server.read`        |

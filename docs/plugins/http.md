@@ -132,7 +132,7 @@ module.exports = definePlugin({
   onChatMessage(msg) {
     // Notify every browser watching the "overlay" stream.
     owncast.sse.send("overlay", "chat", {
-      from: msg.user,
+      from: msg.user?.displayName,
       body: msg.body,
     });
   },
@@ -185,7 +185,7 @@ const { definePlugin, owncast } = require("@owncast/plugin-sdk");
 
 module.exports = definePlugin({
   onChatMessage(msg) {
-    owncast.sse.send("overlay", "chat", { from: msg.user, body: msg.body });
+    owncast.sse.send("overlay", "chat", { from: msg.user?.displayName, body: msg.body });
   },
 });
 ```
