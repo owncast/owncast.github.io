@@ -42,15 +42,20 @@ Fires once per chat message after filters have run and the message is being broa
 ```ts
 interface ChatMessage {
   id: string;
-  user: string; // sender's display name
+  user?: ChatUser; // full sender identity (see ChatUser below); absent if no account
+  clientId?: number; // originating connection; pass to chat.sendTo / replyTo
   body: string;
   timestamp: string; // RFC3339Nano, e.g. "2026-05-28T14:00:00.123456789Z"
 }
 ```
 
-Use `msg.timestamp` (not your language's built-in clock) when you need wall-clock time. The sandbox's clock is frozen at a default value; the host's timestamp on each event is your source of truth.
+`user` carries the **full sender identity**, so key per-user state on the stable `user.id` and gate moderator-only behavior on `user.scopes` (e.g. `"MODERATOR"`) rather than matching the display name. To reply privately to the sender, pass the message to [`owncast.chat.replyTo`](./apis#chatreplytomsg-text).
+
+`msg.timestamp` is the host's wall-clock time for the message. The sandbox clock works (`Date.now()` is real), but `msg.timestamp` is deterministic and the right choice when comparing elapsed time across events or asserting in tests.
 
 No permission required to subscribe.
+
+> **Older hosts** delivered `user` as a plain display-name string. If you support hosts that predate the identity payload, read `typeof msg.user === "string" ? msg.user : msg.user?.displayName`.
 
 ### `onChatUserJoined(user)` and `onChatUserParted(user)`
 
