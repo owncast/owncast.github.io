@@ -3,6 +3,8 @@ title: Serving HTTP
 description: Serve URLs from your plugin, write dynamic handlers, gate admin endpoints, and push realtime events to browsers.
 sidebar_position: 7
 sidebar_label: HTTP
+toc_min_heading_level: 2
+toc_max_heading_level: 3
 tags:
   - plugins
   - http

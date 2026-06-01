@@ -127,6 +127,7 @@ const sidebars: SidebarsConfig = {
             "plugins/index",
             "plugins/quickstart",
             "plugins/manifest",
+            "plugins/chat",
             "plugins/handlers",
             "plugins/apis",
             "plugins/permissions",

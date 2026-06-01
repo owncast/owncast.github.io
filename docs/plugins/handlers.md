@@ -3,6 +3,8 @@ title: Event handlers
 description: Every chat, stream, fediverse, filter, and HTTP handler your plugin can subscribe to, with payload shapes.
 sidebar_position: 4
 sidebar_label: Handlers
+toc_min_heading_level: 2
+toc_max_heading_level: 3
 tags:
   - plugins
   - handlers
@@ -35,6 +37,8 @@ This page is the catalog of every available handler and the shape of the payload
 
 ## Chat events
 
+If you're specifically building a chat-focused plugin, start with [Chat plugins](/docs/plugins/chat). This page remains the complete handler reference across all plugin capabilities.
+
 ### `onChatMessage(msg)`
 
 Fires once per chat message after filters have run and the message is being broadcast to viewers.
@@ -42,11 +46,14 @@ Fires once per chat message after filters have run and the message is being broa
 ```ts
 interface ChatMessage {
   id: string;
-  user: string; // sender's display name
-  body: string;
-  timestamp: string; // RFC3339Nano, e.g. "2026-05-28T14:00:00.123456789Z"
+  user?: ChatUser; // full sender identity; absent for the rare message with no account
+  clientId?: number; // originating connection, used for private replies
+  body: string; // raw text, not HTML-rendered markup
+  timestamp: string; // RFC3339Nano / ISO-8601, e.g. "2026-05-28T14:00:00.123456789Z"
 }
 ```
+
+Use `msg.user.id` for stable per-user state and `msg.user.scopes` for moderator checks. If you need to support older hosts, `msg.user` may still be a plain display-name string there.
 
 Use `msg.timestamp` (not your language's built-in clock) when you need wall-clock time. The sandbox's clock is frozen at a default value; the host's timestamp on each event is your source of truth.
 

@@ -4,6 +4,8 @@ description: Write plugins that run sandboxed inside Owncast to react to chat, p
 slug: /plugins
 sidebar_position: 1
 sidebar_label: Overview
+toc_min_heading_level: 2
+toc_max_heading_level: 3
 tags:
   - plugins
   - extend
@@ -77,6 +79,7 @@ This is why an admin can install a third-party plugin without auditing every lin
 
 * [Quickstart](/docs/plugins/quickstart). Scaffold a new plugin, build it, install it.
 * [Manifest reference](/docs/plugins/manifest). Every field your `plugin.manifest.json` can contain.
+* [Chat plugins](/docs/plugins/chat). Build bots, moderation tools, and chat filters.
 * [Event handlers](/docs/plugins/handlers). Every event your plugin can subscribe to, with payload shapes.
 * [Owncast APIs](/docs/plugins/apis). Every `owncast.*` method, what it does, and the permission it needs.
 * [Permissions](/docs/plugins/permissions). The full list and how the security model works.

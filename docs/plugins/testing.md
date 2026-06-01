@@ -3,6 +3,8 @@ title: Testing plugins
 description: Drive your built plugin through the real Owncast runtime with mocked side effects. Scenario tests, assertions, fixtures, HTTP auth.
 sidebar_position: 9
 sidebar_label: Testing
+toc_min_heading_level: 2
+toc_max_heading_level: 3
 tags:
   - plugins
   - testing
@@ -27,7 +29,12 @@ runScenarios([
     events: [
       {
         event: "chat.message.received",
-        payload: { user: "alice", body: "hi" },
+        payload: {
+          user: { id: "u1", displayName: "alice" },
+          clientId: 1,
+          body: "hi",
+          timestamp: "2026-01-01T00:00:00Z",
+        },
       },
     ],
     expect: {
@@ -64,7 +71,12 @@ Dispatches a notification to the matching `on*` handler.
 ```js
 {
   event: "chat.message.received",
-  payload: { user: "alice", body: "hi" },
+  payload: {
+    user: { id: "u1", displayName: "alice" },
+    clientId: 1,
+    body: "hi",
+    timestamp: "2026-01-01T00:00:00Z",
+  },
 }
 ```
 

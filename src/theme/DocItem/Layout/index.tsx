@@ -22,8 +22,10 @@ function useDocTOC() {
   const { frontMatter, toc } = useDoc();
   const windowSize = useWindowSize();
 
-  const hidden = frontMatter.hide_table_of_contents;
-  const canRender = hidden === false && toc.length > 0;
+  // Docusaurus shows the TOC by default; only an explicit
+  // hide_table_of_contents: true should suppress it.
+  const hidden = frontMatter.hide_table_of_contents === true;
+  const canRender = !hidden && toc.length > 0;
 
   const mobile = canRender ? <DocItemTOCMobile /> : undefined;
 

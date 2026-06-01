@@ -3,6 +3,8 @@ title: Manifest reference
 description: Every field your plugin's manifest can contain, with examples.
 sidebar_position: 3
 sidebar_label: Manifest
+toc_min_heading_level: 2
+toc_max_heading_level: 3
 tags:
   - plugins
   - manifest

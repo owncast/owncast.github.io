@@ -3,6 +3,8 @@ title: Packaging & distribution
 description: Bundle your plugin into a .ocpkg, ship an icon for the admin UI, and install on a server.
 sidebar_position: 10
 sidebar_label: Packaging
+toc_min_heading_level: 2
+toc_max_heading_level: 3
 tags:
   - plugins
   - packaging

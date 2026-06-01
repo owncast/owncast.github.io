@@ -3,6 +3,8 @@ title: Permissions
 description: The full permission list, what each one grants, and how Owncast's plugin security model works.
 sidebar_position: 6
 sidebar_label: Permissions
+toc_min_heading_level: 2
+toc_max_heading_level: 3
 tags:
   - plugins
   - permissions
