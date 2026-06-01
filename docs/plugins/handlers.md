@@ -209,6 +209,34 @@ Lower numbers run earlier. Default `100`. Use this when your plugin's behavior d
 * Filters are time-capped at 50 ms. A slow filter is cancelled and treated as pass.
 * After 5 consecutive failures (errors or timeouts) the plugin is auto-disabled for the rest of the session, with a one-time log line. A successful filter call resets the counter, so transient flakiness doesn't accumulate. Restart the host to re-enable.
 
+### Command routing with `defineCommands`
+
+Rather than hand-rolling prefix parsing, aliases, cooldowns, and moderator gating in `onChatMessage`, build a router with `defineCommands` and feed it your messages:
+
+```js
+const { definePlugin, defineCommands } = require("@owncast/plugin-sdk");
+
+const commands = defineCommands({
+  prefix: "!", // default
+  commands: {
+    uptime: { run: (ctx) => ctx.reply("we've been live a while!") },
+    so: {
+      aliases: ["shoutout"],
+      cooldownMs: 10_000, // per user, clocked off msg.timestamp
+      run: (ctx) => ctx.reply(`go follow ${ctx.args[0] || "someone cool"}`),
+    },
+    clear: {
+      modOnly: true, // requires the sender's scopes to include "MODERATOR"
+      run: (ctx) => ctx.replyPrivately("done"),
+    },
+  },
+});
+
+module.exports = definePlugin({ onChatMessage: commands });
+```
+
+`commands(msg)` returns `true` when the message was a command (even if gated), `false` otherwise — so a filter can drop command messages from chat with `filterChatMessage: (msg) => (commands(msg) ? filter.drop("command") : filter.pass())`. Each `run(ctx)` receives `{ msg, user, command, args, argString, reply, replyPrivately }`; gating uses the sender identity on the message (`user.scopes`, `user.id`), not a display-name guess.
+
 ## HTTP handler
 
 ### `onHttpRequest(req)`

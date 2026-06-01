@@ -38,6 +38,7 @@ The manifest is what an admin reviews before installing the plugin. The host par
 | `version`     | string   | yes      | Your plugin's version. Semver recommended. Must match what `register()` returns at runtime.                  |
 | `description` | string   | no       | One-sentence summary the admin sees in the plugin list and during install.                                   |
 | `permissions` | string[] | no       | List of capabilities your plugin needs. See [Permissions](/docs/plugins/permissions).                        |
+| `config`      | object   | no       | Admin-configurable settings your plugin reads at runtime. See [`config`](#config-admin-configurable-settings). |
 | `bot`         | object   | no       | Chat-bot configuration. See [`bot`](#bot-chat-bot-identity).                                                 |
 | `network`     | object   | no       | Outbound-HTTP allowlist, required when `network.fetch` is granted. See below.                                |
 | `actions`     | object[] | no       | Action buttons to add to the viewer UI. See [UI: Action buttons](/docs/plugins/ui#action-buttons).           |
@@ -78,6 +79,22 @@ Plugins that post to chat (using `owncast.chat.send`) appear under a chat-bot us
 In chat, the bot posts as "Sidekick" instead of "Stream Sidekick". The first time the plugin loads, Owncast provisions a persistent chat user keyed on the plugin's `slug` (so the bot identity survives reinstalls and display-name changes).
 
 `bot.displayName` is only relevant for plugins that have the `chat.send` permission. It's ignored otherwise.
+
+### `config`: admin-configurable settings
+
+Declare simple settings here instead of building your own settings page and key/value plumbing. Each entry has a `type`, a `default`, and a `description`:
+
+```json
+{
+  "config": {
+    "greeting": { "type": "string", "default": "welcome!", "description": "First-join message" },
+    "cooldownMs": { "type": "number", "default": 2000, "description": "Per-user command cooldown" },
+    "modOnly": { "type": "boolean", "default": false, "description": "Restrict to moderators" }
+  }
+}
+```
+
+Read the effective value at runtime with [`owncast.config.get(key)`](/docs/plugins/apis#config), which returns the admin-set value when present and the declared default otherwise, already parsed to its declared type. `config.get` is ambient — no permission required.
 
 ## `permissions`
 

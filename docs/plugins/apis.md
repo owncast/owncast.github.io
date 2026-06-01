@@ -219,6 +219,19 @@ owncast.fs.delete("cache/today.json"); // { ok: true }
 
 Requires `storage.fs`.
 
+## Config
+
+### `owncast.config.get(key, fallback?)`
+
+Read one of your plugin's [manifest-declared `config`](/docs/plugins/manifest#config-admin-configurable-settings) settings. Returns the admin-set value when present, otherwise the declared default, already parsed to its declared type. For an unknown key (or one with no value) it returns `fallback` (default `undefined`).
+
+```js
+const cooldown = owncast.config.get("cooldownMs"); // number, e.g. 2000
+const greeting = owncast.config.get("greeting", "hi"); // 2nd arg is a fallback
+```
+
+Ambient — no permission required. Prefer this over building a bespoke settings page and key/value plumbing for simple knobs.
+
 ## Network
 
 ### `owncast.http.fetch(url, opts?)`
