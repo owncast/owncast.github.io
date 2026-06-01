@@ -27,7 +27,7 @@ runScenarios([
     events: [
       {
         event: "chat.message.received",
-        payload: { user: "alice", body: "hi" },
+        payload: { user: { id: "u-alice", displayName: "alice" }, body: "hi" },
       },
     ],
     expect: {
@@ -64,7 +64,7 @@ Dispatches a notification to the matching `on*` handler.
 ```js
 {
   event: "chat.message.received",
-  payload: { user: "alice", body: "hi" },
+  payload: { user: { id: "u-alice", displayName: "alice" }, body: "hi" },
 }
 ```
 
@@ -77,7 +77,7 @@ Sends a chat message into your `filterChatMessage` and checks the result. The `e
 ```js
 {
   filter: "chat.message.received",
-  payload: { user: "alice", body: "hello damn world" },
+  payload: { user: { id: "u-alice", displayName: "alice" }, body: "hello damn world" },
   expect: { action: "modify", payload: { body: "hello **** world" } },
 }
 ```
@@ -87,7 +87,7 @@ Or to assert a drop:
 ```js
 {
   filter: "chat.message.received",
-  payload: { user: "alice", body: "buy crypto" },
+  payload: { user: { id: "u-alice", displayName: "alice" }, body: "buy crypto" },
   expect: { action: "drop", reason: "spam keyword" },
 }
 ```
@@ -130,7 +130,8 @@ The scenario's top-level `expect` checks what happened across the whole run:
 | `chatSends`         | List of `owncast.chat.send` strings (exact match, in order)                     |
 | `chatActions`       | List of `owncast.chat.sendAction` strings                                       |
 | `chatSystems`       | List of `owncast.chat.system` strings                                           |
-| `chatTo`            | List of `{ clientId, text }` from `owncast.chat.sendTo`                         |
+| `chatTo`            | List of `{ clientId, text }` from `owncast.chat.sendTo` / `replyTo`             |
+| `sseSends`          | Ordered list of `{ channel, event?, data? }` from `owncast.sse.send` (omit `event`/`data` to match only on channel) |
 | `deletedMessages`   | Message IDs hidden via `owncast.chat.deleteMessage`                             |
 | `kickedClients`     | Client IDs disconnected via `owncast.chat.kick`                                 |
 | `discordPosts`      | List of Discord notification strings                                            |
@@ -144,6 +145,8 @@ The scenario's top-level `expect` checks what happened across the whole run:
 | `kv`                | Partial map of plugin-config state after the scenario                           |
 | `httpRequests`      | Outbound HTTP calls made by your plugin                                         |
 
+`chatSends` (and the other chat assertions) capture posts from **any** step — including chat your plugin sends from inside an `onHttpRequest` handler, not just from event handlers.
+
 `owncast.fs.*` (the `storage.fs` sandbox) has no dedicated assertion — the runtime backs it with a real in-memory sandbox during tests, so test it the way you'd use it: drive your plugin's own endpoints (or handlers) and assert on what they return. For example, `POST` a file through your upload endpoint, then `GET` your list endpoint and assert the response includes it. The [`file-manager`](https://github.com/owncast/plugin-sdk/tree/main/examples/js/file-manager) example does exactly this.
 
 Example exercising several:
@@ -152,12 +155,12 @@ Example exercising several:
 {
   name: "bumps the counter and broadcasts an event",
   events: [
-    { event: "chat.message.received", payload: { user: "alice", body: "hi" } },
-    { event: "chat.message.received", payload: { user: "alice", body: "hi again" } },
+    { event: "chat.message.received", payload: { user: { id: "u-alice", displayName: "alice" }, body: "hi" } },
+    { event: "chat.message.received", payload: { user: { id: "u-alice", displayName: "alice" }, body: "hi again" } },
   ],
   expect: {
     chatSends: ["alice: 1 message", "alice: 2 messages"],
-    kv: { "count:alice": "2" },
+    kv: { "count:u-alice": "2" },
     emits: [
       { eventType: "milestone.reached", payload: { user: "alice", count: 2 } },
     ],
@@ -196,7 +199,7 @@ Example:
     {
       event: "chat.message.received",
       payload: {
-        user: "alice",
+        user: { id: "u-alice", displayName: "alice" },
         body: "!uptime",
         timestamp: "2026-05-28T14:01:30Z",
       },
@@ -279,13 +282,31 @@ const usersToTest = ["alice", "bob", "carol"];
 runScenarios(
   usersToTest.map((user) => ({
     name: `echoes for ${user}`,
-    events: [{ event: "chat.message.received", payload: { user, body: "hi" } }],
+    events: [
+      {
+        event: "chat.message.received",
+        payload: { user: { id: `u-${user}`, displayName: user }, body: "hi" },
+      },
+    ],
     expect: { chatSends: [`${user} said: hi`] },
   })),
 );
 ```
 
 JSON is good when your scenarios are static and easy to skim. A script wins as soon as you want shared setup.
+
+## Splitting tests across files
+
+`runScenarios` doesn't exit the process — it records a non-zero exit code on failure and returns a boolean — so you can organize scenarios across several `__tests__/*.test.js` files (by feature or module) and run them all in one process with `runScenarioFiles`:
+
+```js
+// __tests__/index.test.js
+const { runScenarioFiles } = require("@owncast/plugin-sdk/testing");
+
+runScenarioFiles(); // discovers and runs the sibling *.test.js files, aggregating pass/fail
+```
+
+Point your `test` script at that one entry (`node __tests__/index.test.js`) instead of looping over files in a shell.
 
 ## Speed and isolation
 
