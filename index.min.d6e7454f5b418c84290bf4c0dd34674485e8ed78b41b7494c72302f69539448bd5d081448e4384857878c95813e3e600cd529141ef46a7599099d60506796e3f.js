@@ -1832,7 +1832,7 @@ different devices. On this page we&rsquo;ll try to share some.</p>
 <h3 id="appletv">AppleTV</h3>
 <p>Owncasts for tvOS</p>
 <ol>
-<li>Install <a href="https://apps.apple.com/us/app/owncasts/id6451178968?platform=appleTV">Owncasts for tvOS</a> from the tvOS App Store.</li>
+<li>Install <a href="https://apps.apple.com/us/app/owncasts/id6451178968">Owncasts for tvOS</a> from the tvOS App Store.</li>
 <li>Add your own Owncast server in the settings to watch any Owncast-powered live stream.</li>
 </ol>
 <p>VLC for tvOS</p>
@@ -1853,7 +1853,7 @@ different devices. On this page we&rsquo;ll try to share some.</p>
 </ol>
 <p>Owncasts for iOS</p>
 <ol>
-<li>Install <a href="https://apps.apple.com/us/app/owncasts/id6451178968?platform=iphone">Owncasts for iOS</a> from the iPhone App Store.</li>
+<li>Install <a href="https://apps.apple.com/us/app/owncasts/id6451178968">Owncasts for iOS</a> from the iPhone App Store.</li>
 <li>Launch the application and browse the directory or add your own Owncast-powered live stream in the settings.</li>
 <li>Begin playback of the live stream.</li>
 <li>Press the AirPlay button and select your AirPlay compatible device.</li>
@@ -1889,7 +1889,7 @@ Choose an application, and add <code>https://directory.owncast.online/api/iptv</
 <h3 id="appletv-1">AppleTV</h3>
 <p>Owncasts for tvOS</p>
 <ol>
-<li>Install <a href="https://apps.apple.com/us/app/owncasts/id6451178968?platform=iphone">Owncasts for tvOS</a> from the tvOS App Store.</li>
+<li>Install <a href="https://apps.apple.com/us/app/owncasts/id6451178968">Owncasts for tvOS</a> from the tvOS App Store.</li>
 <li>Launch the application and browse the directory.</li>
 <li>Add your own private Owncast server in the settings if it is not listed in the directory.</li>
 </ol>
