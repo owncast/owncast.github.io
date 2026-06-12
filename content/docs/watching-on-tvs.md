@@ -35,7 +35,7 @@ If your application has _IPTV_ or _M3U_ support, you can also browse the directo
 
 Owncasts for tvOS
 
-1. Install [Owncasts for tvOS](https://apps.apple.com/us/app/owncasts/id6451178968?platform=appleTV) from the tvOS App Store.
+1. Install [Owncasts for tvOS](https://apps.apple.com/us/app/owncasts/id6451178968) from the tvOS App Store.
 1. Add your own Owncast server in the settings to watch any Owncast-powered live stream.
 
 VLC for tvOS
@@ -57,7 +57,7 @@ AirPlay
 
 Owncasts for iOS
 
-1. Install [Owncasts for iOS](https://apps.apple.com/us/app/owncasts/id6451178968?platform=iphone) from the iPhone App Store.
+1. Install [Owncasts for iOS](https://apps.apple.com/us/app/owncasts/id6451178968) from the iPhone App Store.
 1. Launch the application and browse the directory or add your own Owncast-powered live stream in the settings.
 1. Begin playback of the live stream.
 1. Press the AirPlay button and select your AirPlay compatible device.
@@ -100,7 +100,7 @@ Choose an application, and add `https://directory.owncast.online/api/iptv` as yo
 
 Owncasts for tvOS
 
-1. Install [Owncasts for tvOS](https://apps.apple.com/us/app/owncasts/id6451178968?platform=iphone) from the tvOS App Store.
+1. Install [Owncasts for tvOS](https://apps.apple.com/us/app/owncasts/id6451178968) from the tvOS App Store.
 1. Launch the application and browse the directory.
 1. Add your own private Owncast server in the settings if it is not listed in the directory.
 
