@@ -289,7 +289,6 @@ function AIChatInner({
 
   return (
     <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-
       <div style={{ flex: 1, minHeight: 0 }}>
         <MainContainer>
           <ChatContainer>
@@ -419,17 +418,13 @@ function AIChatInner({
                         }}
                         onMouseOver={(e) => {
                           const t = e.currentTarget;
-                          t.style.backgroundColor =
-                            "rgba(122, 92, 243, 0.2)";
-                          t.style.borderColor =
-                            "rgba(122, 92, 243, 0.5)";
+                          t.style.backgroundColor = "rgba(122, 92, 243, 0.2)";
+                          t.style.borderColor = "rgba(122, 92, 243, 0.5)";
                         }}
                         onMouseOut={(e) => {
                           const t = e.currentTarget;
-                          t.style.backgroundColor =
-                            "rgba(122, 92, 243, 0.1)";
-                          t.style.borderColor =
-                            "rgba(122, 92, 243, 0.3)";
+                          t.style.backgroundColor = "rgba(122, 92, 243, 0.1)";
+                          t.style.borderColor = "rgba(122, 92, 243, 0.3)";
                         }}
                       >
                         {q}
@@ -559,7 +554,10 @@ interface AIChatTabProps {
 
 export function AIChatTab({ onSuggestCommunity }: AIChatTabProps) {
   return (
-    <KapaProvider integrationId={KAPA_INTEGRATION_ID}>
+    <KapaProvider
+      integrationId={KAPA_INTEGRATION_ID}
+      customizationId="c99663e3-30fd-47d8-9d30-875024da4a2a"
+    >
       <AIChatInner onSuggestCommunity={onSuggestCommunity} />
     </KapaProvider>
   );
