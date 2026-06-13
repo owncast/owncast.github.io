@@ -3,6 +3,8 @@ title: Owncast APIs
 description: Every owncast.* method your plugin can call from inside a handler, what it returns, and what permission it needs.
 sidebar_position: 5
 sidebar_label: APIs
+toc_min_heading_level: 2
+toc_max_heading_level: 3
 tags:
   - plugins
   - apis
@@ -22,6 +24,8 @@ const { owncast } = require("@owncast/plugin-sdk");
 This page is the reference for every method, grouped by capability.
 
 ## Chat
+
+If you're building a chat bot, moderation tool, or message filter, start with [Chat plugins](/docs/plugins/chat). This page remains the full `owncast.*` API reference.
 
 ### `owncast.chat.send(text)`
 

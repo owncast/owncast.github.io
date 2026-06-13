@@ -3,6 +3,8 @@ title: Plugin quickstart
 description: Scaffold a new Owncast plugin, build it, package it, and install it on your server.
 sidebar_position: 2
 sidebar_label: Quickstart
+toc_min_heading_level: 2
+toc_max_heading_level: 3
 tags:
   - plugins
   - quickstart

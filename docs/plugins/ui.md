@@ -3,6 +3,8 @@ title: Contributing UI
 description: Add admin pages to the Owncast admin UI and action buttons to the viewer chrome.
 sidebar_position: 8
 sidebar_label: UI
+toc_min_heading_level: 2
+toc_max_heading_level: 3
 tags:
   - plugins
   - ui

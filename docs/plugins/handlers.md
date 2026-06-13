@@ -3,6 +3,8 @@ title: Event handlers
 description: Every chat, stream, fediverse, filter, and HTTP handler your plugin can subscribe to, with payload shapes.
 sidebar_position: 4
 sidebar_label: Handlers
+toc_min_heading_level: 2
+toc_max_heading_level: 3
 tags:
   - plugins
   - handlers
@@ -35,6 +37,8 @@ This page is the catalog of every available handler and the shape of the payload
 
 ## Chat events
 
+If you're specifically building a chat-focused plugin, start with [Chat plugins](/docs/plugins/chat). This page remains the complete handler reference across all plugin capabilities.
+
 ### `onChatMessage(msg)`
 
 Fires once per chat message after filters have run and the message is being broadcast to viewers.
@@ -42,10 +46,10 @@ Fires once per chat message after filters have run and the message is being broa
 ```ts
 interface ChatMessage {
   id: string;
-  user?: ChatUser; // full sender identity (see ChatUser below); absent if no account
-  clientId?: number; // originating connection; pass to chat.sendTo / replyTo
-  body: string;
-  timestamp: string; // RFC3339Nano, e.g. "2026-05-28T14:00:00.123456789Z"
+  user?: ChatUser; // full sender identity (see ChatUser below); absent for the rare message with no account
+  clientId?: number; // originating connection; pass to chat.sendTo / replyTo for private replies
+  body: string; // raw text, not HTML-rendered markup
+  timestamp: string; // RFC3339Nano / ISO-8601, e.g. "2026-05-28T14:00:00.123456789Z"
 }
 ```
 

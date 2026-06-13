@@ -131,7 +131,13 @@
       "tag_name": "v0.0.1",
       "published_at": "2020-08-08T04:11:57Z",
       "filename": "owncast-0.0.1.md"
+    },
+    "v0.2.5": {
+      "id": 304914509,
+      "tag_name": "v0.2.5",
+      "published_at": "2026-04-11T22:44:17Z",
+      "filename": "owncast-0.2.5.md"
     }
   },
-  "etag": "W/\"eb3d4a15c1e4e0746591e6775def2c040ae0e2c5aa813ba8779b342ad2d24b1f\""
+  "etag": "W/\"ab3a657ad7c377f316adaf94bb00fb75cd327ececedcfca2dfbaab35137d4bb7\""
 }
