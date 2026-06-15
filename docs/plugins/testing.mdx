@@ -1,0 +1,352 @@
+---
+title: Testing plugins
+description: Drive your built plugin through the real Owncast runtime with mocked side effects. Scenario tests, assertions, fixtures, HTTP auth.
+sidebar_position: 9
+sidebar_label: Testing
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - plugins
+  - testing
+  - scenarios
+  - tdd
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Owncast plugins ship with a scenario-based testing framework that drives your built plugin through the real Owncast plugin runtime, with the side effects (chat sends, HTTP fetches, config writes) captured for assertions. A passing test means the same behavior in production.
+
+Scenarios are plain data, so the scenario model on this page is identical whatever language you write in. Test files live under `__tests__/`; how you write and run them differs slightly by SDK.
+
+## Writing and running tests
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript / TypeScript" default>
+
+Write `__tests__/*.test.js` files that call `runScenarios([...])`:
+
+```js
+const { runScenarios } = require("@owncast/plugin-sdk/testing");
+
+runScenarios([
+  {
+    name: "echoes the message",
+    events: [
+      {
+        event: "chat.message.received",
+        payload: { user: { id: "u1", displayName: "alice" }, body: "hi" },
+      },
+    ],
+    expect: { chatSends: ["alice said: hi"] },
+  },
+]);
+```
+
+Run them with `npm test`. Because it's a script, you can build the scenario array with loops, fixtures, and computed payloads. Split scenarios across several `__tests__/*.test.js` files and run them all in one pass with `runScenarioFiles()`. Static `__tests__/*.test.json` files work too.
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+Write `__tests__/*.test.json` files containing an array of scenarios (the format shown throughout this page):
+
+```json
+[
+  {
+    "name": "echoes the message",
+    "events": [
+      {
+        "event": "chat.message.received",
+        "payload": { "user": { "id": "u1", "displayName": "alice" }, "body": "hi" }
+      }
+    ],
+    "expect": { "chatSends": ["alice said: hi"] }
+  }
+]
+```
+
+Run them with `owncast-plugin-py test my-plugin`. Python uses the JSON format — there's no script-based runner.
+
+</TabItem>
+</Tabs>
+
+Running the tests builds your plugin, then runs every scenario file under `__tests__/`. The rest of this page is the scenario reference — the same data model whichever SDK you use.
+
+:::note Wire field names stay camelCase
+A scenario describes **host events**, not your plugin code, so payload fields use the wire names (`displayName`, `clientId`) regardless of the language you wrote the plugin in.
+:::
+
+## Anatomy of a scenario
+
+```json
+{
+  "name": "human-readable description",
+  "given": { },
+  "events": [ ],
+  "expect": { }
+}
+```
+
+* `name`: what the scenario tests. Shown in pass/fail output.
+* `given`: optional. Seed initial state your plugin reads from (chat history, kv values, server info, canned HTTP responses).
+* `events`: the steps to run, in order. Each step is one notification dispatch, filter chain invocation, or HTTP request.
+* `expect`: final-state assertions (after every step runs). What chat messages were posted, what HTTP requests went out, what was written to kv, and so on.
+
+## Step types
+
+### `event`: fire-and-forget notification
+
+Dispatches a notification to the matching event handler.
+
+```json
+{
+  "event": "chat.message.received",
+  "payload": {
+    "user": { "id": "u1", "displayName": "alice" },
+    "clientId": 1,
+    "body": "hi",
+    "timestamp": "2026-01-01T00:00:00Z"
+  }
+}
+```
+
+Common event types: `chat.message.received`, `chat.user.joined`, `stream.started`, `stream.stopped`, `fediverse.follow`, `fediverse.mention`. The full list mirrors the [handlers reference](/docs/plugins/handlers).
+
+### `filter`: chain invocation with inline assertion
+
+Sends a chat message into your chat-message filter and checks the result. The `expect` here is per-step, asserting on the `FilterResult`:
+
+```json
+{
+  "filter": "chat.message.received",
+  "payload": { "user": { "id": "u-alice", "displayName": "alice" }, "body": "hello damn world" },
+  "expect": { "action": "modify", "payload": { "body": "hello **** world" } }
+}
+```
+
+Or to assert a drop:
+
+```json
+{
+  "filter": "chat.message.received",
+  "payload": { "user": { "id": "u-alice", "displayName": "alice" }, "body": "buy crypto" },
+  "expect": { "action": "drop", "reason": "spam keyword" }
+}
+```
+
+`action` is one of `"pass"`, `"modify"`, `"drop"`.
+
+### `http`: send an HTTP request through your plugin
+
+```json
+{
+  "http": {
+    "method": "GET",
+    "path": "/api/status",
+    "expect": { "status": 200, "body": "{\"ok\":true}" }
+  }
+}
+```
+
+Headers and body are optional:
+
+```json
+{
+  "http": {
+    "method": "POST",
+    "path": "/admin/api/save",
+    "headers": { "content-type": "application/json" },
+    "body": "{\"value\":42}",
+    "authenticated": true,
+    "expect": { "status": 200 }
+  }
+}
+```
+
+## Final-state assertions
+
+The scenario's top-level `expect` checks what happened across the whole run:
+
+| Assertion           | What it checks                                                                  |
+| ------------------- | ------------------------------------------------------------------------------- |
+| `chatSends`         | List of `owncast.chat.send` strings (exact match, in order)                     |
+| `chatActions`       | List of `owncast.chat.sendAction` strings                                       |
+| `chatSystems`       | List of `owncast.chat.system` strings                                           |
+| `chatTo`            | List of `{ clientId, text }` from `owncast.chat.sendTo` / `replyTo`             |
+| `sseSends`          | Ordered list of `{ channel, event?, data? }` from `owncast.sse.send` (omit `event`/`data` to match only on channel) |
+| `deletedMessages`   | Message IDs hidden via `owncast.chat.deleteMessage`                             |
+| `kickedClients`     | Client IDs disconnected via `owncast.chat.kick`                                 |
+| `discordPosts`      | List of Discord notification strings                                            |
+| `browserPushes`     | List of `{ title, body, url }` browser-push payloads                            |
+| `fediversePosts`    | List of fediverse posts made via `owncast.fediverse.post`                       |
+| `userModerations`   | List of `{ userId, enabled, reason }` from `owncast.users.setEnabled`           |
+| `bannedIPs`         | List of IPs banned via `owncast.users.banIP`                                    |
+| `uploads`           | List of `{ name, data }` uploads via `owncast.storage.upload`                   |
+| `videoConfigWrites` | List of partial configs applied via `owncast.videoConfig.write()`               |
+| `emits`             | List of `{ eventType, payload }` for `owncast.events.emit` calls                |
+| `kv`                | Partial map of plugin-config state after the scenario                           |
+| `httpRequests`      | Outbound HTTP calls made by your plugin                                         |
+
+`chatSends` (and the other chat assertions) capture posts from **any** step — including chat your plugin sends from inside an HTTP-request handler, not just from event handlers.
+
+`owncast.fs.*` (the `storage.fs` sandbox) has no dedicated assertion — the runtime backs it with a real in-memory sandbox during tests, so test it the way you'd use it: drive your plugin's own endpoints (or handlers) and assert on what they return. For example, `POST` a file through your upload endpoint, then `GET` your list endpoint and assert the response includes it. The [`file-manager`](https://github.com/owncast/plugin-sdk/tree/main/examples) example does exactly this.
+
+Example exercising several:
+
+```json
+{
+  "name": "bumps the counter and broadcasts an event",
+  "events": [
+    { "event": "chat.message.received", "payload": { "user": { "id": "u-alice", "displayName": "alice" }, "body": "hi" } },
+    { "event": "chat.message.received", "payload": { "user": { "id": "u-alice", "displayName": "alice" }, "body": "hi again" } }
+  ],
+  "expect": {
+    "chatSends": ["alice: 1 message", "alice: 2 messages"],
+    "kv": { "count:u-alice": "2" },
+    "emits": [
+      { "eventType": "milestone.reached", "payload": { "user": "alice", "count": 2 } }
+    ]
+  }
+}
+```
+
+## Seeding state with `given`
+
+Each `given.*` field controls what a specific host read returns. Combine these to put your plugin in any state you want.
+
+| Field               | Controls                                                       |
+| ------------------- | -------------------------------------------------------------- |
+| `given.kv`          | Pre-populate your plugin's config (key/value)                  |
+| `given.stream`      | What `owncast.stream.current()` returns                        |
+| `given.broadcaster` | What `owncast.stream.broadcaster()` returns                    |
+| `given.server`      | What `owncast.server.info()` returns                           |
+| `given.socials`     | What `owncast.server.socials()` returns                        |
+| `given.federation`  | What `owncast.server.federation()` returns                     |
+| `given.tags`        | What `owncast.server.tags()` returns                           |
+| `given.videoConfig` | What `owncast.videoConfig.read()` returns                      |
+| `given.chatHistory` | What `owncast.chat.history()` returns                          |
+| `given.chatClients` | What `owncast.chat.clients()` returns                          |
+| `given.users`       | What `owncast.users.list()` / `.get(id)` returns               |
+| `given.httpResponses` | Canned responses for outbound `owncast.http.fetch` calls     |
+
+Example:
+
+```json
+{
+  "name": "answers !uptime when the stream is live",
+  "given": {
+    "stream": { "online": true, "startedAt": "2026-05-28T14:00:00Z", "viewers": 12 }
+  },
+  "events": [
+    {
+      "event": "chat.message.received",
+      "payload": {
+        "user": { "id": "u-alice", "displayName": "alice" },
+        "body": "!uptime",
+        "timestamp": "2026-05-28T14:01:30Z"
+      }
+    }
+  ],
+  "expect": {
+    "chatSends": ["uptime: 90s, 12 viewer(s)"]
+  }
+}
+```
+
+### Canned HTTP responses
+
+For plugins that call `owncast.http.fetch`, `given.httpResponses` is an array of canned responses matched in order:
+
+```json
+{
+  "given": {
+    "httpResponses": [
+      {
+        "match": { "url": "https://api.ipify.org?format=json" },
+        "response": { "status": 200, "body": "{\"ip\":\"203.0.113.42\"}" }
+      }
+    ]
+  }
+}
+```
+
+Each canned response is consumed once. If your plugin makes a call that doesn't match anything, the framework throws so you know to add a case.
+
+## Auth in HTTP scenarios
+
+By default, HTTP steps are treated as unauthenticated. To exercise admin endpoints, set `authenticated: true`:
+
+```json
+{
+  "http": {
+    "method": "GET",
+    "path": "/admin/api/settings",
+    "authenticated": true,
+    "expect": { "status": 200 }
+  }
+}
+```
+
+For chat-user-token endpoints, set `user`:
+
+```json
+{
+  "http": {
+    "method": "GET",
+    "path": "/my-data",
+    "user": { "id": "u1", "displayName": "alice", "scopes": ["MODERATOR"] },
+    "expect": { "status": 200 }
+  }
+}
+```
+
+Without either flag, requests to manifest-declared admin paths return `401` before your plugin code runs. Useful for asserting the auth gate works:
+
+```json
+{
+  "http": {
+    "method": "GET",
+    "path": "/admin/index.html",
+    "expect": { "status": 401 }
+  }
+}
+```
+
+## Speed and isolation
+
+* Each scenario gets a fresh plugin instance and a clean in-memory config. State doesn't leak from one scenario to the next.
+* Tests are fast. A typical test file with rebuild finishes in a few seconds. Run them on every save.
+* No real Owncast required. The runtime is bundled with the SDK, so you don't need a server to test.
+
+## Local dev server
+
+For interactive iteration, run a local dev server that loads your plugin and serves it at `http://localhost:8080/plugins/<your-slug>/` — curl your endpoints, open static pages in a browser, or drive your event and filter handlers.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript / TypeScript" default>
+
+```sh
+npm run serve
+# override the port:
+PORT=8765 npm run serve
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```sh
+owncast-plugin-py serve my-plugin
+# override the port:
+owncast-plugin-py serve my-plugin -p 8765
+```
+
+</TabItem>
+</Tabs>
+
+Beyond static files and your HTTP routes, it exposes dev-only endpoints to drive the handlers a plain HTTP server can't reach. Host reads (server info, video config, and so on) return sample dev data.
+
+- `POST /_dev/chat` with `{"user":"alice","body":"hi"}` — runs your chat-message filter chain, then fires `chat.message.received`. The JSON response shows what your filter did.
+- `GET /_dev/chat` — the chat log so far, including anything your plugin posted.
+- `POST /_dev/event` with `{"type":"stream.started","payload":{}}` — dispatch an arbitrary event to your handlers.
+
+Restart the dev server when you change your code. Use scenario tests for repeatable assertions; the dev server is for interactive iteration. Many authors run both: dev server in one terminal, test watcher in another.

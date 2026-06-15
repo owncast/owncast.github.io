@@ -16,7 +16,7 @@ tags:
 
 Owncast can be extended with **plugins**: small programs that the server loads at runtime to react to chat messages, stream events, fediverse activity, and HTTP requests. They run inside a sandbox, so a plugin can crash without taking the server down, and the host enforces a clear permission model so an admin always knows what a plugin can touch.
 
-The examples in this section use `@owncast/plugin-sdk` from npm. The handlers, APIs, and permissions described here are properties of the host runtime, not of any particular SDK.
+You can write a plugin in **JavaScript/TypeScript** or **Python** — two official SDKs with full feature parity. The handlers, APIs, permissions, and manifest described in this section are properties of the host runtime and apply to both; only the scaffolding, language syntax, and CLI differ. See [Choosing an SDK](/docs/plugins/sdks) to pick one, then its [JavaScript](/docs/plugins/sdks/javascript) or [Python](/docs/plugins/sdks/python) page for the language-specific details.
 
 ## What you can build
 
@@ -37,8 +37,8 @@ A plugin is a single `.ocpkg` file containing your plugin's manifest, the compil
 flowchart LR
     subgraph Dev[Development]
         direction TB
-        Source["src/plugin.js<br/>plugin.manifest.json<br/>public/<br/>assets/"]
-        Build["npm run package"]
+        Source["your plugin source<br/>plugin.manifest.json<br/>public/<br/>assets/"]
+        Build["package with your SDK"]
         Pkg["my-plugin.ocpkg"]
         Source --> Build --> Pkg
     end
@@ -78,6 +78,7 @@ This is why an admin can install a third-party plugin without auditing every lin
 ## Where to go next
 
 * [Quickstart](/docs/plugins/quickstart). Scaffold a new plugin, build it, install it.
+* [Choosing an SDK](/docs/plugins/sdks). JavaScript/TypeScript vs Python, and the language-specific pages for each.
 * [Manifest reference](/docs/plugins/manifest). Every field your `plugin.manifest.json` can contain.
 * [Chat plugins](/docs/plugins/chat). Build bots, moderation tools, and chat filters.
 * [Event handlers](/docs/plugins/handlers). Every event your plugin can subscribe to, with payload shapes.
@@ -90,6 +91,5 @@ This is why an admin can install a third-party plugin without auditing every lin
 
 ## Source
 
-* SDK + examples: [github.com/owncast/plugin-sdk](https://github.com/owncast/plugin-sdk)
-* Example plugins, one per feature: [examples/js/](https://github.com/owncast/plugin-sdk/tree/main/examples/js)
-* Long-form author guide on a single page: [docs/PLUGIN_AUTHOR_GUIDE.md](https://github.com/owncast/plugin-sdk/blob/main/docs/PLUGIN_AUTHOR_GUIDE.md)
+* SDK source: [github.com/owncast/plugin-sdk](https://github.com/owncast/plugin-sdk)
+* Example plugins, one per feature: [JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js) · [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python)

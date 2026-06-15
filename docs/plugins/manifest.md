@@ -16,6 +16,10 @@ Every plugin has a `plugin.manifest.json` file at its root. This is the source o
 
 The manifest is what an admin reviews before installing the plugin. The host parses it at load time and enforces every declaration. Nothing in the compiled plugin can grant a capability the manifest didn't ask for.
 
+:::info Available in every SDK
+The manifest is plain JSON that describes the plugin to the host, independent of the language you wrote the code in. For the language-specific details, see the **[JavaScript / TypeScript](/docs/plugins/sdks/javascript)** or **[Python](/docs/plugins/sdks/python)** SDK reference.
+:::
+
 ## Minimum manifest
 
 ```json
@@ -37,7 +41,7 @@ The manifest is what an admin reviews before installing the plugin. The host par
 | `api`         | string   | yes      | Manifest schema version. Currently `"1"`.                                                                    |
 | `name`        | string   | yes      | Human-readable display name shown in admin lists and registry cards. Example: `"Awesome Echo Bot"`.          |
 | `slug`        | string   | no       | Canonical identifier (URL prefix, config namespace, filename). Auto-derived from `name` if omitted. See below. |
-| `version`     | string   | yes      | Your plugin's version. Semver recommended. Must match what `register()` returns at runtime.                  |
+| `version`     | string   | yes      | Your plugin's version. Semver recommended. Must match what the runtime reports at load time.                 |
 | `description` | string   | no       | One-sentence summary the admin sees in the plugin list and during install.                                   |
 | `permissions` | string[] | no       | List of capabilities your plugin needs. See [Permissions](/docs/plugins/permissions).                        |
 | `config`      | object   | no       | Admin-configurable settings your plugin reads at runtime. See [`config`](#config-admin-configurable-settings). |
@@ -303,13 +307,13 @@ Full coverage in [UI: Viewer-page tabs](/docs/plugins/ui#viewer-page-tabs).
 
 ## Manifest-to-runtime contract
 
-When your plugin loads, the host parses the manifest and calls your `register()` (the SDK generates this for you). It compares the two and rejects the load if they don't agree on:
+When your plugin loads, the host parses the manifest and asks the runtime to register itself. It compares the two and rejects the load if they don't agree on:
 
 * `slug` (the canonical identifier)
 * `version`
 * Any permission the runtime uses that wasn't declared in the manifest
 
-You don't write `register()` yourself: `definePlugin(...)` produces it from the handlers you defined. Knowing this contract exists is useful when debugging. A "permission requested at runtime not declared in manifest" error means you added a handler that needs a permission you forgot to list.
+You don't write the registration yourself: the SDK generates it from the handlers you define (see your [SDK reference](/docs/plugins/sdks) for how handlers are declared in your language). Knowing this contract exists is useful when debugging. A "permission requested at runtime not declared in manifest" error means you added a handler that needs a permission you forgot to list.
 
 ## Complete example
 

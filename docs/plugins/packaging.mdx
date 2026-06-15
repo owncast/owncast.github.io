@@ -13,15 +13,31 @@ tags:
   - icon
 ---
 
-A plugin's distribution format is the `.ocpkg` file: a single bundle containing your `plugin.manifest.json`, the compiled plugin, your `public/` and `assets/` directories, and optionally an icon and an instructions document. That one file is everything a server admin needs to install your plugin.
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+A plugin's distribution format is the `.ocpkg` file: a single bundle containing your `plugin.manifest.json`, your plugin code, your `public/` and `assets/` directories, and optionally an icon and an instructions document. That one file is everything a server admin needs to install your plugin.
 
 ## Building the package
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript / TypeScript" default>
 
 ```sh
 npm run package
 ```
 
-Runs your project's `package` script, which compiles the plugin and bundles `public/` and `assets/` into `<your-slug>.ocpkg` at the project root.
+</TabItem>
+<TabItem value="py" label="Python">
+
+```sh
+owncast-plugin-py package my-plugin
+```
+
+</TabItem>
+</Tabs>
+
+Either way, the build bundles your plugin together with your `public/` and `assets/` directories into a single `<your-slug>.ocpkg` at the project root.
 
 The file is self-contained. Share it however you like:
 
@@ -67,13 +83,13 @@ The file is admin-facing, so write it for the streamer who installed your plugin
 ## What's inside a `.ocpkg`
 
 - Your `plugin.manifest.json`
-- The compiled plugin
+- Your plugin code
 - `icon.png` if you provided one
 - `INSTRUCTIONS.md` if you provided one
 - The contents of your `public/` directory if you have one (web-served at `/plugins/<slug>/`)
 - The contents of your `assets/` directory if you have one (host-read for manifest fields that inline content)
 
-No `node_modules`, no `package.json`, no source files. Those are build inputs, not distribution. The admin who installs your plugin never sees them.
+No build inputs — `node_modules`, `package.json`, `pyproject.toml`, or your `.js`/`.ts`/`.py` source. Those produce the package; they aren't shipped in it. The admin who installs your plugin never sees them.
 
 ## Installing on a server
 
@@ -123,7 +139,7 @@ Before you publish a plugin:
 - `description` is filled in. Admins see it in the plugin list and during install. One sentence covering what the plugin does.
 - `version` reflects what you're shipping. Semver is conventional.
 - The README in your repo explains what it does, what permissions it asks for and why, and what to configure (env vars, admin-page settings, and so on).
-- Tests pass. `npm test` should be green.
+- Tests pass. Your SDK's test command should be green.
 - The icon is included if you have one.
 - An `INSTRUCTIONS.md` ships with anything an admin needs to know after install — setup steps, configuration notes, why each permission is requested. Plugins with non-obvious behavior or required configuration should ship one; trivial plugins (a hello-world chat handler) don't need it.
 
@@ -131,4 +147,4 @@ Before you publish a plugin:
 
 - [Manifest reference](/docs/plugins/manifest) for the full list of manifest fields.
 - [Permissions](/docs/plugins/permissions) for the trust model and the full permission list.
-- [Author guide on GitHub](https://github.com/owncast/plugin-sdk/blob/main/docs/PLUGIN_AUTHOR_GUIDE.md). Long-form, single-page guide that goes deeper than this site does, including the local dev server, tips, and the full set of complete worked recipes.
+- Example plugins: [examples/js](https://github.com/owncast/plugin-sdk/tree/main/examples/js) · [examples/python](https://github.com/owncast/plugin-sdk/tree/main/examples/python).

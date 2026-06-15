@@ -126,6 +126,15 @@ const sidebars: SidebarsConfig = {
           items: [
             "plugins/index",
             "plugins/quickstart",
+            {
+              type: "category",
+              label: "Language SDKs",
+              items: [
+                "plugins/sdks/index",
+                "plugins/sdks/javascript",
+                "plugins/sdks/python",
+              ],
+            },
             "plugins/manifest",
             "plugins/chat",
             "plugins/handlers",

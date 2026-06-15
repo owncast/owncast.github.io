@@ -1,0 +1,152 @@
+---
+title: Python SDK
+description: Author Owncast plugins in Python with owncast-plugin-sdk — install, the @plugin decorators, the owncast-plugin-py CLI, and testing.
+sidebar_position: 3
+sidebar_label: Python
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - plugins
+  - sdk
+  - python
+---
+
+The Python SDK, `owncast-plugin-sdk`, lets you author Owncast plugins in **Python**. You write ordinary Python with decorators; a build step turns it into a single installable plugin that runs sandboxed inside the Owncast server — the same `.ocpkg` format and full feature set as the [JavaScript SDK](/docs/plugins/sdks/javascript), so a Python plugin is a first-class peer of a JS one.
+
+This page covers everything specific to authoring in Python. The event handlers, `owncast.*` APIs, permissions, and manifest are properties of the host runtime and are documented in the language-neutral reference: [Handlers](/docs/plugins/handlers), [APIs](/docs/plugins/apis), [Permissions](/docs/plugins/permissions), and the [Manifest reference](/docs/plugins/manifest).
+
+## How it maps to the reference docs
+
+The shared reference names handlers and APIs in their canonical (camelCase) form. To read it as Python, apply one rule: **everything is `snake_case`.** Quick orientation:
+
+| In the reference | In Python |
+|---|---|
+| Define a handler | a `@plugin.*` decorated function |
+| Handler for an event (e.g. `chat.message.received`) | `@plugin.on_chat_message` |
+| Call a host API (e.g. `owncast.chat.sendAction`) | `owncast.chat.send_action(text)` — snake_case |
+| Payload fields (e.g. `msg.user.displayName`) | `msg.user.display_name`, `msg.client_id`; `msg.raw` for the raw dict |
+| Filter result (`filter.pass()`) | `filter.pass_()` (trailing `_` — `pass` is a keyword); also `filter.modify(...)` / `filter.drop(reason)` |
+| Subscribe to a custom event | `@plugin.on("my.event")` |
+| Build / test your plugin | `owncast-plugin-py package` / `owncast-plugin-py test` |
+
+## Prerequisites
+
+- An Owncast server you can administer, version 0.3.0 or newer.
+- Python 3.9 or newer.
+
+## Install
+
+Install the SDK to get the `owncast-plugin-py` CLI. It downloads and caches the build toolchain on first use, so there's nothing else to install by hand:
+
+```sh
+pip install owncast-plugin-sdk          # or:  uv tool install owncast-plugin-sdk
+```
+
+:::note Not on PyPI yet
+Publishing to PyPI is the last roadmap item. Until then, install from the SDK repo:
+`pip install ./sdks/python` — or run it without installing: `uvx --from ./sdks/python owncast-plugin-py …`
+:::
+
+There's no scaffolder yet (a `create-owncast-plugin`-style generator is on the roadmap). A plugin is just a directory:
+
+```text
+my-plugin/
+├── plugin.manifest.json     name, slug, version, permissions
+├── src/plugin.py            your code
+└── __tests__/*.test.json    optional scenario tests
+```
+
+## Write a plugin
+
+Import `plugin`, `owncast`, and `filter`, and register handlers with decorators. Each decorator subscribes to one event; the SDK derives the manifest's subscription list from which handlers you define.
+
+```python
+from owncast_plugin import plugin, owncast, filter
+
+
+@plugin.on_chat_message
+def greet(msg):
+    name = msg.user.display_name if msg.user else "someone"
+    owncast.chat.send(f"{name} said: {msg.body}")
+
+
+@plugin.filter_chat_message
+def block_spam(msg):
+    return filter.drop("spam") if "spam" in msg.body else filter.pass_()
+```
+
+The module exports three things:
+
+- **`plugin`** — the decorator registry. `@plugin.on_chat_message`, `@plugin.filter_chat_message`, `@plugin.on_stream_started`, `@plugin.on_tick`, `@plugin.on_fediverse_follow`, and the rest mirror the runtime events in the [handlers reference](/docs/plugins/handlers). Two take a key: `@plugin.on("custom.event")` for plugin-emitted events and `@plugin.on_tab_content("slug")` / `@plugin.on_page_content("slug")` for dynamic viewer-page HTML.
+- **`owncast`** — the host API namespace. Method names are **`snake_case`** (`owncast.chat.send_action`, `owncast.kv.get_json`). Each call is gated by the matching permission you declare in your manifest. See the [APIs reference](/docs/plugins/apis).
+- **`filter`** — filter results returned from a `filter_chat_message` handler: `filter.pass_()` (trailing underscore — `pass` is a Python keyword), `filter.modify(...)`, `filter.drop(reason)`.
+
+Payloads are attribute objects with `snake_case` accessors over the wire JSON (`msg.body`, `msg.user.display_name`, `msg.client_id`). Use `msg.raw` for the underlying dict. Host calls that return JSON objects come back as the same attribute objects (`owncast.server.info().name`); lists come back as Python lists.
+
+Two more Python idioms worth knowing, both documented in full (with Python examples) on the subject pages:
+
+- **HTTP routing** — plugins with `http.serve` declare routes with decorators: `@plugin.get/post/put/delete/patch(path)`, `@plugin.route(path, methods=[...])`, `@plugin.on_http_request(path)`, and a bare `@plugin.on_http_request` catch-all. A handler returns a `dict` (`{status, body, headers}`), a `str` (→ 200), or `None` (→ 204). See [Serving HTTP](/docs/plugins/http).
+- **Chat commands** — `plugin.commands({...})` declares a command table (the host's `!help` lists it automatically), with the lower-level `define_commands(...)` router underneath. See [Chat plugins](/docs/plugins/chat).
+
+## The CLI
+
+Installing the SDK gives you `owncast-plugin-py`. It compiles your plugin, fetching and caching the toolchain on first use:
+
+| Command | What it does |
+|---|---|
+| `owncast-plugin-py build my-plugin` | Build `src/plugin.py` (without packaging) |
+| `owncast-plugin-py test my-plugin` | Build, then run the `__tests__/` scenarios |
+| `owncast-plugin-py serve my-plugin` | Local dev server (`-p/--port` to change the port; defaults to 8080) |
+| `owncast-plugin-py package my-plugin` | Build + bundle → `<slug>.ocpkg` — the file you ship |
+
+```sh
+owncast-plugin-py package my-plugin    # produces my-plugin.ocpkg
+owncast-plugin-py test my-plugin
+owncast-plugin-py serve my-plugin      # POST /_dev/chat to drive event handlers
+```
+
+The directory argument defaults to `.`, so you can `cd` into the project and omit it. The `.ocpkg` is the single distribution artifact; see [Packaging & distribution](/docs/plugins/packaging) for what goes inside and how to install it.
+
+## Constraints to know
+
+A few things about how Python plugins are built shape how you write them. You import `owncast_plugin` normally for editor support and unit tests; the build takes care of the rest.
+
+- **Pure-Python only.** Dependencies with C extensions (numpy, pandas, and the like) won't work. Pure-Python packages are fine if you vendor them into your project. For outbound HTTP use `owncast.http.fetch`, not `requests`.
+- **Don't shadow standard-library names at the top level.** A top-level `def json(...)` (or any other stdlib name) in your plugin can break the build. Name helpers like `json_response` instead.
+- **`snake_case` everywhere**, in contrast to the JS SDK's camelCase — `send_action`, `get_json`, `msg.user.display_name`, `filter.pass_()`.
+
+## Testing
+
+Tests are `__tests__/*.test.json` scenario files run with `owncast-plugin-py test`. The format is **identical to the JS SDK's**, so a Python port of a plugin can reuse the JS version's test scenarios verbatim. Each scenario dispatches events / HTTP requests and asserts on observed side effects (`chatSends`, kv writes, HTTP responses, …).
+
+```json
+[
+  {
+    "name": "echoes the message",
+    "events": [
+      {
+        "event": "chat.message.received",
+        "payload": { "user": { "id": "u1", "displayName": "alice" }, "body": "hi" }
+      }
+    ],
+    "expect": { "chatSends": ["alice said: hi"] }
+  }
+]
+```
+
+The full scenario data model (step types, `given` state, `expect` assertions) is on the [Testing](/docs/plugins/testing) page. Note the scenario JSON uses the **wire** field names (camelCase: `displayName`, `clientId`), since it describes host events, not your Python code.
+
+## Status and roadmap
+
+Working today: the runtime, the `owncast-plugin-py` CLI with lazy toolchain download, the full host API, HTTP routing, `.ocpkg` packaging, and a pip/uv-installable package. All of the JS example plugins have Python counterparts under [`examples/python/`](https://github.com/owncast/plugin-sdk/tree/main/examples/python).
+
+Not yet (roadmap): publishing to PyPI, a `create-owncast-plugin`-style scaffolder, and type stubs.
+
+## Where to go next
+
+- [Handlers reference](/docs/plugins/handlers) — every event you can subscribe to (read names as `snake_case`).
+- [APIs reference](/docs/plugins/apis) — every `owncast.*` method and the permission it needs.
+- [Testing](/docs/plugins/testing) — the full scenario data model.
+- [Packaging & distribution](/docs/plugins/packaging) — building the `.ocpkg` and installing it.
+- [Python example plugins](https://github.com/owncast/plugin-sdk/tree/main/examples/python) — one per feature, each a complete starting point you can copy.
+- [SDK source](https://github.com/owncast/plugin-sdk) — the `owncast-plugin-sdk` package and toolchain.

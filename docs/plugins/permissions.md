@@ -17,6 +17,10 @@ Every Owncast plugin runs in a sandbox with no implicit access to anything outsi
 
 When an admin installs a plugin, the **Permissions** tab on the plugin's detail page lists exactly what the plugin asked for, in plain language. That's the trust boundary: an admin can install a third-party plugin without auditing every line of code, because the manifest is the upper bound on what the plugin can do.
 
+:::info Available in every SDK
+The permission identifiers and the trust model below are the same regardless of which SDK you use. `owncast.*` methods are referenced here by their canonical names; for the exact spelling in your language, see the **[JavaScript / TypeScript](/docs/plugins/sdks/javascript)** or **[Python](/docs/plugins/sdks/python)** SDK reference.
+:::
+
 ## How it works
 
 1. You declare permissions in `plugin.manifest.json`:

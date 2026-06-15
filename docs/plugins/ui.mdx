@@ -12,7 +12,12 @@ tags:
   - action-buttons
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Plugins can add their own UI to Owncast in two places: tabs inside the admin (for streamer-facing settings) and action buttons under the stream (for viewer-facing actions). Both are declared in your manifest and managed by the host; you ship the content, Owncast slots it into the right chrome.
+
+Manifest declarations on this page are plain JSON, identical whatever language you write in; dynamic-content handlers and runtime calls are shown for both SDKs. See [JavaScript](/docs/plugins/sdks/javascript) or [Python](/docs/plugins/sdks/python) for install and setup.
 
 ## Admin pages
 
@@ -49,7 +54,7 @@ The page runs in a sandboxed `<iframe>`. Your scripts run, forms submit, and sam
 
 ### Auth gating
 
-Requests to manifest-declared admin paths are auth-gated by the host. Unauthenticated requests get a `401` before your plugin code runs. You don't have to check `req.authenticated` for these paths.
+Requests to manifest-declared admin paths are auth-gated by the host. Unauthenticated requests get a `401` before your plugin code runs. You don't have to check the request's authentication for these paths.
 
 Static files and dynamic endpoints under matched paths are both auth-gated. The same gating applies to your `public/admin/index.html` and to `POST /admin/api/save-settings`.
 
@@ -71,7 +76,7 @@ Duplicate `title` is fine. Both globs feed one tab.
 ### Author flow
 
 1. Put admin HTML, CSS, and JS in `public/admin/index.html` (and friends).
-2. Expose admin APIs via `onHttpRequest` at `/admin/api/...` (see [Serving HTTP](/docs/plugins/http)).
+2. Expose admin APIs via your request handler at `/admin/api/...` (see [Serving HTTP](/docs/plugins/http)).
 3. Declare the relevant globs in `manifest.admin.pages[].path`.
 4. Visit `/admin/plugins/configure?id=<your-slug>` in the admin UI. Owncast uses your existing admin login to gate the page; no extra prompt.
 
@@ -135,25 +140,44 @@ The host enforces:
 
 ### Runtime additions
 
-A plugin can append more action buttons at runtime, without a reload, using `owncast.actions.add(...)`:
+A plugin can append more action buttons at runtime, without a reload, by calling `owncast.actions.add(...)` with a single action or an array of them. Each runtime entry goes through the same validation as `manifest.actions`, and is persisted in the plugin's config, so additions survive a reload. `owncast.actions.clear()` drops every runtime addition; manifest-declared actions remain.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript / TypeScript" default>
 
 ```js
-owncast.actions.add({
-  title: "Donate",
-  url: "https://example.com/donate",
-  openExternally: true,
-});
+const { definePlugin, owncast } = require("@owncast/plugin-sdk");
 
-// or pass an array to add several at once
-owncast.actions.add([
-  { title: "Tip", url: "https://example.com/tip", openExternally: true },
-  { title: "Schedule", html: "<p>Weekdays 8pm UTC.</p>" },
-]);
+module.exports = definePlugin({
+  onStreamStarted() {
+    owncast.actions.add({
+      title: "Donate",
+      url: "https://example.com/donate",
+      openExternally: true,
+    });
+    // or add several at once: owncast.actions.add([ { ... }, { ... } ])
+  },
+});
 ```
 
-Each runtime entry goes through the same validation as `manifest.actions`. The result is persisted in the plugin's config, so additions survive a reload.
+</TabItem>
+<TabItem value="py" label="Python">
 
-`owncast.actions.clear()` drops every runtime addition. Manifest-declared actions remain.
+```python
+from owncast_plugin import plugin, owncast
+
+@plugin.on_stream_started
+def add_button(info):
+    owncast.actions.add({
+        "title": "Donate",
+        "url": "https://example.com/donate",
+        "openExternally": True,
+    })
+    # or add several at once: owncast.actions.add([ { ... }, { ... } ])
+```
+
+</TabItem>
+</Tabs>
 
 A common pattern is an admin page that lets the streamer add custom buttons (label + URL) on top of the plugin's defaults. The `action-buttons` example in the SDK ships a working version of this.
 
@@ -202,6 +226,8 @@ Plugins can extend the viewer page's runtime by bundling JavaScript files and li
 
 Same permission and path rules as `styles`, applied to `.js` files (only `ui.modify` is needed; the host reads from `assets/` and inlines into `/customjavascript`). Each contribution is prefixed with a `// plugin: <your-slug> ...` comment.
 
+These are **viewer-page** scripts that run in the browser — always JavaScript, regardless of which language you wrote the server-side plugin in.
+
 ### Execution context
 
 The viewer page loads `/customjavascript` as a single `<script async>` tag. Every plugin's JS runs in the same global window as the admin's custom JS and the rest of Owncast's chrome. Three implications:
@@ -227,25 +253,43 @@ Plugins can prepend HTML to the viewer page's extra-content block. Declare `mani
 
 | Field     | Notes                                                                                                      |
 | --------- | ---------------------------------------------------------------------------------------------------------- |
-| `slug`    | Required. A stable identifier passed to `onPageContent` when the host asks for rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. |
-| `content` | Optional. Relative path to a static HTML file in `assets/`. When present, that file's bytes are inlined directly. When omitted, the host calls your `onPageContent` handler instead. |
+| `slug`    | Required. A stable identifier passed to the page-content handler when the host asks for rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. |
+| `content` | Optional. Relative path to a static HTML file in `assets/`. When present, that file's bytes are inlined directly. When omitted, the host calls your page-content handler instead. |
 
 ### Static vs dynamic
 
-Use `content` when the HTML is the same for every viewer — announcement strips, sponsor banners, blocks of prose. Leave `content` out and implement `onPageContent` when the content should change per viewer or draw on live data:
+Use `content` when the HTML is the same for every viewer — announcement strips, sponsor banners, blocks of prose. Leave `content` out and implement a **page-content handler** when the content should change per viewer or draw on live data. The host calls the handler with the requested `slug` and the viewer's identity, and your handler returns the HTML string to render:
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript / TypeScript" default>
 
 ```js
 module.exports = definePlugin({
-  onPageContent({ slug, user }) {
-    if (slug === "banner") {
-      return `<aside>Welcome, ${user?.displayName ?? "visitor"}!</aside>`;
-    }
-    return "";
+  onPageContent: {
+    // keyed by the manifest slug; ctx = { slug, user? }
+    banner(ctx) {
+      const who = ctx.user ? `, ${ctx.user.displayName}` : "";
+      return `<div class="banner">Welcome${who}!</div>`;
+    },
   },
 });
 ```
 
-`user` is the viewer's chat identity — present when the viewer is authenticated, undefined for anonymous viewers. See [Handlers: `onPageContent`](/docs/plugins/handlers#onpagecontent-slug-user) for the full payload shape.
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_page_content("banner")
+def banner(ctx):
+    name = ctx.user.display_name if ctx.user else None
+    who = f", {name}" if name else ""
+    return f'<div class="banner">Welcome{who}!</div>'
+```
+
+</TabItem>
+</Tabs>
+
+See [Handlers: page content](/docs/plugins/handlers#onpagecontent-slug-user) for the payload shape. The viewer identity is present when the viewer is authenticated and absent for anonymous viewers.
 
 Requires `ui.modify`. `http.serve` is not required: the HTML is inlined into the `/api/config` response, not served as a URL.
 
@@ -302,8 +346,8 @@ Plugins can add tabs to the viewer page's tab row (next to the built-in **About*
 | Field     | Notes                                                                                                                                                                 |
 | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `title`   | Required. The label shown on the tab.                                                                                                                                 |
-| `slug`    | Required. Stable identifier passed to `onTabContent` when the host requests rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. Must be unique within the plugin's tabs. |
-| `content` | Optional. Relative path to a static HTML file in `assets/`. When present, that file's bytes are inlined directly. When omitted, the host calls `onTabContent` instead. |
+| `slug`    | Required. Stable identifier passed to the tab-content handler when the host requests rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. Must be unique within the plugin's tabs. |
+| `content` | Optional. Relative path to a static HTML file in `assets/`. When present, that file's bytes are inlined directly. When omitted, the host calls the tab-content handler instead. |
 
 Requires `ui.modify`. `http.serve` is not required: each tab's HTML is read from `assets/` and inlined into the tab body. The viewer page renders one tab per entry, with the `title` as the label and the file's contents as the body.
 
@@ -313,24 +357,39 @@ The host emits a `pluginTabs[]` array on `/api/config`. The viewer page maps eac
 
 ### The `slug` field
 
-`slug` is a stable name you control. It's passed to your `onTabContent` handler as `{ slug }` so a single handler can serve multiple tabs without guessing which one was requested. The slug shows up in host logs and future API calls — pick something that reads clearly, like `"music"` or `"stream-info"`. You can change `title` freely; changing `slug` is a breaking change if any code keys on it.
+`slug` is a stable name you control. It's passed to your tab-content handler so a single handler can serve multiple tabs without guessing which one was requested. The slug shows up in host logs and future API calls — pick something that reads clearly, like `"music"` or `"stream-info"`. You can change `title` freely; changing `slug` is a breaking change if any code keys on it.
 
 ### Dynamic tab content
 
-When a tab has no `content` file, the host calls your `onTabContent` handler each time a viewer loads that tab. Implement it when content should change per viewer or pull live data:
+When a tab has no `content` file, the host calls your **tab-content handler** each time a viewer loads that tab. Implement it when content should change per viewer or pull live data. The host calls the handler with the requested `slug` and the viewer's identity, and your handler returns the HTML string for the tab body:
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript / TypeScript" default>
 
 ```js
 module.exports = definePlugin({
-  onTabContent({ slug, user }) {
-    if (slug === "stream-info") {
-      return `<p>Hello ${user?.displayName ?? "visitor"}</p>`;
-    }
-    return "";
+  onTabContent: {
+    // keyed by the manifest slug; ctx = { slug, user? }
+    "stream-info"(ctx) {
+      return "<h2>Stream info</h2><p>Live every weekday at 8pm UTC.</p>";
+    },
   },
 });
 ```
 
-`user` is the viewer's chat identity — present when authenticated, undefined for anonymous viewers. See [Handlers: `onTabContent`](/docs/plugins/handlers#ontabcontent-slug-user) for the full payload shape.
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_tab_content("stream-info")
+def stream_info(ctx):
+    return "<h2>Stream info</h2><p>Live every weekday at 8pm UTC.</p>"
+```
+
+</TabItem>
+</Tabs>
+
+See [Handlers: tab content](/docs/plugins/handlers#ontabcontent-slug-user) for the payload shape. The viewer identity is present when authenticated and absent for anonymous viewers.
 
 ### Path rules
 
