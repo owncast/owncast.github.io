@@ -15,7 +15,6 @@ toc: false
 Alternatively, you can create a `docker-compose.yml` file with the following contents:
 
 ```yaml
-version: "3"
 services:
   owncast:
     image: owncast/owncast:latest
