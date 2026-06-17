@@ -16,7 +16,11 @@ tags:
 
 Owncast can be extended with **plugins**: small programs that the server loads at runtime to react to chat messages, stream events, fediverse activity, and HTTP requests. They run inside a sandbox, so a plugin can crash without taking the server down, and the host enforces a clear permission model so an admin always knows what a plugin can touch.
 
-You can write a plugin in **JavaScript/TypeScript** or **Python** — two official SDKs with full feature parity. The handlers, APIs, permissions, and manifest described in this section are properties of the host runtime and apply to both; only the scaffolding, language syntax, and CLI differ. See [Choosing an SDK](/docs/plugins/sdks) to pick one, then its [JavaScript](/docs/plugins/sdks/javascript) or [Python](/docs/plugins/sdks/python) page for the language-specific details.
+:::info New in Owncast 0.3.0
+Plugins are brand-new functionality, introduced in Owncast 0.3.0, and the API is still evolving. If you hit a bug or have a suggestion, please [open an issue](https://github.com/owncast/plugin-sdk/issues) or [chat live with the community](/chat?tab=community).
+:::
+
+You can write a plugin in **JavaScript** or **Python**. The two SDKs are first-class peers with full feature parity: the handlers, APIs, permissions, and manifest in this section apply to both, and only the scaffolding and language syntax differ.
 
 ## What you can build
 
@@ -28,6 +32,35 @@ You can write a plugin in **JavaScript/TypeScript** or **Python** — two offici
 * Action buttons that appear under your stream, launching widgets, donation pages, or anything else you serve.
 
 Every example plugin in the SDK is a complete starting point you can copy.
+
+## Two SDKs
+
+Both SDKs produce the same `.ocpkg`, run sandboxed in the server, and package to roughly the same size. Pick the language you would rather write.
+
+- **[JavaScript](/docs/plugins/sdks/javascript)** with [`@owncast/plugin-sdk`](https://www.npmjs.com/package/@owncast/plugin-sdk). Scaffold with `npx create-owncast-plugin`, write `definePlugin({ ... })`, build with `npm run package`.
+- **[Python](/docs/plugins/sdks/python)** with `owncast-plugin-sdk`. Scaffold with `owncast-plugin-py new`, write decorated functions, build with `owncast-plugin-py package`.
+
+The same echo bot in each:
+
+```js
+// JavaScript
+const { definePlugin, owncast } = require("@owncast/plugin-sdk");
+
+module.exports = definePlugin({
+  onChatMessage(msg) {
+    owncast.chat.send(`echo: ${msg.body}`);
+  },
+});
+```
+
+```python
+# Python
+from owncast_plugin import plugin, owncast
+
+@plugin.on_chat_message
+def echo(msg):
+    owncast.chat.send(f"echo: {msg.body}")
+```
 
 ## How it fits together
 
@@ -60,7 +93,7 @@ Once enabled, the plugin runs inside the Owncast process. Handlers you defined f
 
 1. Subscribe to events. Chat messages, stream start and stop, fediverse follows, new chat user joins. Define a handler method and the SDK derives the subscription.
 2. Filter chat. See every chat message before it's broadcast, modify it, or drop it.
-3. Call Owncast APIs. `owncast.chat.send(text)`, `owncast.kv.get(key)`, `owncast.http.fetch(url)`, and around twenty more, each gated by a declared permission.
+3. Call Owncast APIs. `owncast.chat.send(text)`, `owncast.kv.get(key)`, `owncast.http.fetch(url)`, and dozens more, most gated by a declared permission.
 4. Serve HTTP. Every plugin can own the URL space at `/plugins/<your-slug>/...` for both static assets and dynamic handlers.
 5. Add UI. Declare admin pages, action buttons, plugin stylesheets, plugin scripts, or an extra-content HTML block in your manifest and Owncast inlines them into its own chrome.
 
@@ -78,16 +111,16 @@ This is why an admin can install a third-party plugin without auditing every lin
 ## Where to go next
 
 * [Quickstart](/docs/plugins/quickstart). Scaffold a new plugin, build it, install it.
-* [Choosing an SDK](/docs/plugins/sdks). JavaScript/TypeScript vs Python, and the language-specific pages for each.
+* [JavaScript](/docs/plugins/sdks/javascript) and [Python](/docs/plugins/sdks/python). The language-specific setup, CLI, and syntax for each SDK.
 * [Manifest reference](/docs/plugins/manifest). Every field your `plugin.manifest.json` can contain.
 * [Chat plugins](/docs/plugins/chat). Build bots, moderation tools, and chat filters.
-* [Event handlers](/docs/plugins/handlers). Every event your plugin can subscribe to, with payload shapes.
+* [Events](/docs/plugins/events). Every event your plugin can subscribe to, with payload shapes.
 * [Owncast APIs](/docs/plugins/apis). Every `owncast.*` method, what it does, and the permission it needs.
 * [Permissions](/docs/plugins/permissions). The full list and how the security model works.
 * [Serving HTTP](/docs/plugins/http). Serve URLs from your plugin and push realtime events to browsers.
 * [Contributing UI](/docs/plugins/ui). Register admin pages and contribute action buttons under the stream.
 * [Testing](/docs/plugins/testing). Scenario tests that drive your plugin through the real runtime.
-* [Packaging & distribution](/docs/plugins/packaging). Bundling the `.ocpkg`, icons, install paths.
+* [Packaging & publishing](/docs/plugins/packaging). Bundle the `.ocpkg`, install it, and list it in the directory.
 
 ## Source
 

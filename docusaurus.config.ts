@@ -22,6 +22,10 @@ const ALL_REDIRECTS = [
   { to: "/docs/getting-started/install/providers/*", from: "/quickstart/*" },
 
   // Regular redirects
+  // Plugin docs restructure: merged/renamed pages.
+  { to: "/docs/plugins/events", from: "/docs/plugins/handlers" },
+  { to: "/docs/plugins/packaging", from: "/docs/plugins/publishing" },
+  { to: "/docs/plugins", from: "/docs/plugins/sdks" },
   { to: "/docs/getting-started/install", from: "/install" },
   { to: "/docs/getting-started/install", from: "/installation" },
   { to: "/docs/getting-started/install", from: "/docs/install" },

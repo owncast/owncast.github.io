@@ -502,6 +502,14 @@ export default function ChatPage(): JSX.Element {
       if (tab === "community" && !communityMounted) {
         setCommunityMounted(true);
       }
+      // Keep the URL shareable so /chat?tab=community deep-links straight here.
+      if (typeof window !== "undefined") {
+        const url =
+          tab === "community"
+            ? `${window.location.pathname}?tab=community`
+            : window.location.pathname;
+        window.history.replaceState(null, "", url);
+      }
     },
     [communityMounted],
   );
@@ -509,6 +517,21 @@ export default function ChatPage(): JSX.Element {
   const switchToCommunity = React.useCallback(() => {
     handleTabChange("community");
   }, [handleTabChange]);
+
+  // Honor a deep link to the community tab: /chat#community or
+  // /chat?tab=community. Runs once on mount (server render always starts on the
+  // AI tab, so this avoids a hydration mismatch).
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    if (
+      window.location.hash === "#community" ||
+      params.get("tab") === "community"
+    ) {
+      handleTabChange("community");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Layout

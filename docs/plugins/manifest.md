@@ -17,7 +17,7 @@ Every plugin has a `plugin.manifest.json` file at its root. This is the source o
 The manifest is what an admin reviews before installing the plugin. The host parses it at load time and enforces every declaration. Nothing in the compiled plugin can grant a capability the manifest didn't ask for.
 
 :::info Available in every SDK
-The manifest is plain JSON that describes the plugin to the host, independent of the language you wrote the code in. For the language-specific details, see the **[JavaScript / TypeScript](/docs/plugins/sdks/javascript)** or **[Python](/docs/plugins/sdks/python)** SDK reference.
+The manifest is plain JSON that describes the plugin to the host, independent of the language you wrote the code in. For the language-specific details, see the **[JavaScript](/docs/plugins/sdks/javascript)** or **[Python](/docs/plugins/sdks/python)** SDK reference.
 :::
 
 ## Minimum manifest
@@ -67,7 +67,7 @@ The manifest is plain JSON that describes the plugin to the host, independent of
 
 Slugs are lowercase letters, digits, and hyphens, starting with a letter, up to 64 characters. The SDK derives one from `name` automatically when `slug` is omitted: spaces and punctuation collapse into single hyphens, letters lowercase. `"Awesome Echo Bot"` becomes `awesome-echo-bot`. Pin `slug` explicitly when the auto-derivation isn't what you want, or when your display name uses characters outside ASCII (`"Café Helper"` would otherwise yield `caf-helper`).
 
-Avoid changing the slug after release: the rename will look like a different plugin to admins, with a fresh config store. Changing `name` (display only) is safe; it doesn't change identity.
+Avoid changing the slug after release: the rename will look like a different plugin to admins, with a fresh config store. Changing `name` (display only) is safe. It doesn't change identity.
 
 ### `bot`: chat-bot identity
 
@@ -100,7 +100,7 @@ Declare simple settings here instead of building your own settings page and key/
 }
 ```
 
-Read the effective value at runtime with [`owncast.config.get(key)`](/docs/plugins/apis#config), which returns the admin-set value when present and the declared default otherwise, already parsed to its declared type. `config.get` is ambient — no permission required.
+Read the effective value at runtime with [`owncast.config.get(key)`](/docs/plugins/apis#config), which returns the admin-set value when present and the declared default otherwise, already parsed to its declared type. `config.get` is ambient: no permission required.
 
 ## `permissions`
 
@@ -251,7 +251,7 @@ A list of JavaScript files the plugin contributes to the viewer page. Each file'
 }
 ```
 
-Path rules and required permissions match `styles`, applied to `.js` files (only `ui.modify` is needed; the host reads from `assets/` and inlines into `/customjavascript`). Wrap your script in an IIFE so top-level declarations don't collide with the admin's JavaScript or other plugins. The host emits a `// plugin: <your-slug> ...` comment in front of each contribution.
+Path rules and required permissions match `styles`, applied to `.js` files (only `ui.modify` is needed, and the host reads from `assets/` and inlines into `/customjavascript`). Wrap your script in an IIFE so top-level declarations don't collide with the admin's JavaScript or other plugins. The host emits a `// plugin: <your-slug> ...` comment in front of each contribution.
 
 Full coverage in [UI: Viewer scripts](/docs/plugins/ui#viewer-scripts).
 
@@ -268,20 +268,20 @@ An object that contributes an HTML block to the viewer's extra-content area, pre
 
 | Field     | Type   | Notes                                                                                                                                                      |
 | --------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `slug`    | string | Required. Stable identifier passed to `onPageContent` when the host requests rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. |
+| `slug`    | string | Required only when `content` is omitted (the host passes it to `onPageContent`). Optional otherwise. Lowercase letters, digits, and hyphens, starting with a letter. |
 | `content` | string | Optional. Relative path to a static HTML file in `assets/`. When present, that file's bytes are inlined directly. When omitted, the host calls `onPageContent` instead. |
 
 **Static** (with `content`): the host reads the file at request time and inlines the bytes. Same path rules as `styles` and `scripts`, applied to a single `.html` entry. Plugin HTML bypasses the markdown processor so tags and attributes pass through as written.
 
 **Dynamic** (without `content`): implement `onPageContent({ slug, user? })` in your plugin to return HTML at request time. Use this when the content should vary per viewer or draw on live data (for example, personalised greetings or current stream stats). `user` is the viewer's chat identity, present when authenticated.
 
-Requires `ui.modify`; `http.serve` is not required because the HTML is inlined into the config response, not served as a URL. Each contribution is wrapped with an `<!-- plugin: <your-slug> ... -->` comment so a reader can attribute the markup back.
+Requires `ui.modify`. `http.serve` is not required because the HTML is inlined into the config response, not served as a URL. Each contribution is wrapped with an `<!-- plugin: <your-slug> ... -->` comment so a reader can attribute the markup back.
 
 Full coverage in [UI: Extra page content](/docs/plugins/ui#extra-page-content).
 
 ## `tabs`: viewer-page tabs
 
-A list of tabs the plugin contributes to the viewer page's tab row (next to the built-in **About** and **Followers** tabs). Each entry requires `title` and `slug`; `content` is optional.
+A list of tabs the plugin contributes to the viewer page's tab row (next to the built-in **About** and **Followers** tabs). Each entry requires `title`. `content` is optional, and `slug` is required only when `content` is omitted (otherwise it's derived from `title`).
 
 ```json
 {
@@ -298,7 +298,7 @@ Each entry has:
 | Field     | Notes                                                                                                                                                                 |
 | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `title`   | Required. The label shown on the tab.                                                                                                                                 |
-| `slug`    | Required. Stable identifier passed to `onTabContent` when the host requests rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. Must be unique within the plugin's tabs. |
+| `slug`    | Required only when `content` is omitted (derived from `title` otherwise). Stable identifier passed to `onTabContent` when the host requests rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. Must be unique within the plugin's tabs. |
 | `content` | Optional. Relative path to an HTML file under `assets/`. Same path rules as `extraPageContent` (auto-prefix to your namespace, cross-plugin paths and `http(s)://` URLs rejected, must end in `.html`). When omitted, the host calls `onTabContent` instead. |
 
 Requires `ui.modify`. `http.serve` is not required: each tab's HTML is read from `assets/` and inlined into the `pluginTabs[]` array on `/api/config`. The viewer page maps each entry to a tab whose body renders the HTML directly.
@@ -313,7 +313,7 @@ When your plugin loads, the host parses the manifest and asks the runtime to reg
 * `version`
 * Any permission the runtime uses that wasn't declared in the manifest
 
-You don't write the registration yourself: the SDK generates it from the handlers you define (see your [SDK reference](/docs/plugins/sdks) for how handlers are declared in your language). Knowing this contract exists is useful when debugging. A "permission requested at runtime not declared in manifest" error means you added a handler that needs a permission you forgot to list.
+You don't write the registration yourself: the SDK generates it from the handlers you define (see your [SDK reference](/docs/plugins) for how handlers are declared in your language). Knowing this contract exists is useful when debugging. A "permission requested at runtime not declared in manifest" error means you added a handler that needs a permission you forgot to list.
 
 ## Complete example
 

@@ -1,8 +1,8 @@
 ---
-title: JavaScript & TypeScript SDK
-description: Author Owncast plugins in JavaScript or TypeScript with @owncast/plugin-sdk — scaffolding, the definePlugin API, the CLI, and the scenario test harness.
+title: JavaScript SDK
+description: "Author Owncast plugins in JavaScript or TypeScript with @owncast/plugin-sdk: scaffolding, the definePlugin API, the CLI, and the scenario test harness."
 sidebar_position: 2
-sidebar_label: JavaScript / TypeScript
+sidebar_label: JavaScript
 toc_min_heading_level: 2
 toc_max_heading_level: 3
 tags:
@@ -13,20 +13,24 @@ tags:
   - nodejs
 ---
 
-The JavaScript SDK, [`@owncast/plugin-sdk`](https://www.npmjs.com/package/@owncast/plugin-sdk), is the most common way to write an Owncast plugin. You write JavaScript or TypeScript, and the toolchain builds it into a single installable plugin that runs sandboxed inside the Owncast server. If you're deciding between this and the Python SDK, see [Choosing an SDK](/docs/plugins/sdks).
+The JavaScript SDK, [`@owncast/plugin-sdk`](https://www.npmjs.com/package/@owncast/plugin-sdk), is the most common way to write an Owncast plugin. You write JavaScript or TypeScript, and the CLI bundles it into a single installable plugin that runs sandboxed inside the Owncast server. If you're deciding between this and the Python SDK, see the [plugins overview](/docs/plugins#two-sdks).
 
-This page covers everything specific to authoring in JavaScript. The event handlers, `owncast.*` APIs, permissions, and manifest are properties of the host runtime and are documented in the language-neutral reference: [Handlers](/docs/plugins/handlers), [APIs](/docs/plugins/apis), [Permissions](/docs/plugins/permissions), and the [Manifest reference](/docs/plugins/manifest).
+:::info New in Owncast 0.3.0
+The plugin SDKs are brand-new in Owncast 0.3.0 and the API is still evolving. If you hit a bug or have a suggestion, please [open an issue](https://github.com/owncast/plugin-sdk/issues) or [chat live with the community](/chat?tab=community).
+:::
+
+This page is the JavaScript-specific layer: scaffolding, `definePlugin`, the CLI, and TypeScript. Handlers, APIs, permissions, and the manifest work the same in both SDKs and have their own reference pages.
 
 ## How it maps to the reference docs
 
-The shared reference names APIs in their canonical form, which is the JavaScript form — so you can read it as-is. Quick orientation:
+The shared reference names APIs in their canonical form, which is the JavaScript form: so you can read it as-is. Quick orientation:
 
 | In the reference | In JavaScript |
 |---|---|
 | Define a handler | a method on `definePlugin({ ... })` |
-| Handler for an event (e.g. `chat.message.received`) | `onChatMessage(msg)` — camelCase, `on` + the event |
-| Call a host API (e.g. `owncast.chat.sendAction`) | identical — `owncast.chat.sendAction(text)` |
-| Payload fields | camelCase — `msg.user.displayName`, `msg.clientId` |
+| Handler for an event (e.g. `chat.message.received`) | `onChatMessage(msg)`: camelCase, `on` + the event |
+| Call a host API (e.g. `owncast.chat.sendAction`) | identical: `owncast.chat.sendAction(text)` |
+| Payload fields | camelCase: `msg.user.displayName`, `msg.clientId` |
 | Filter result | `filter.pass()` / `filter.modify(payload)` / `filter.drop(reason)` |
 | Subscribe to a custom event | `on: { "my.event"(payload) { … } }` |
 | Build / test your plugin | `npm run package` / `npm test` |
@@ -43,7 +47,7 @@ You don't install the SDK by hand. Scaffold a project with `create-owncast-plugi
 ```sh
 npx create-owncast-plugin@latest my-plugin
 cd my-plugin
-npm install     # postinstall fetches the build toolchain
+npm install     # fetches the test and serve helpers
 ```
 
 Pass the slug you want as the argument. The scaffold uses it for the directory name, the output filename, and the URL prefix. Slugs are lowercase letters, digits, and hyphens, starting with a letter.
@@ -64,11 +68,11 @@ my-plugin/
     └── plugin.test.js       a sample scenario test
 ```
 
-`npm install` runs a postinstall step that downloads and caches the build toolchain (including the test/serve runner). That's the only network step; everything after is local.
+`npm install` runs a postinstall step that fetches the prebuilt test and serve host binaries (the scenario runner and the dev server). Building and packaging a plugin need no download. This postinstall is the only network step, and everything after is local.
 
 ## Write a plugin
 
-A plugin is the object you pass to `definePlugin`. Define a method for each event you want to react to — the SDK derives the manifest's subscription list from which methods are present, so there's no separate list to keep in sync.
+A plugin is the object you pass to `definePlugin`. Define a method for each event you want to react to: the SDK derives the manifest's subscription list from which methods are present, so there's no separate list to keep in sync.
 
 ```js
 const { definePlugin, owncast, filter } = require("@owncast/plugin-sdk");
@@ -86,13 +90,13 @@ module.exports = definePlugin({
 
 The package exports three things:
 
-- **`definePlugin(handlers)`** — registers your handlers and returns the plugin object to export.
-- **`owncast`** — the host API namespace (`owncast.chat.send(...)`, `owncast.kv.get(...)`, and the rest). Method names are **camelCase**. Each call is gated by the matching permission you declare in your manifest. See the [APIs reference](/docs/plugins/apis).
-- **`filter`** — the constructor for filter results: `filter.pass()`, `filter.modify(payload)`, `filter.drop(reason)`. Used only from `filterChatMessage`.
+- **`definePlugin(handlers)`**: registers your handlers and returns the plugin object to export.
+- **`owncast`**: the host API namespace (`owncast.chat.send(...)`, `owncast.kv.get(...)`, and the rest). Method names are **camelCase**. Each call is gated by the matching permission you declare in your manifest. See the [APIs reference](/docs/plugins/apis).
+- **`filter`**: the constructor for filter results: `filter.pass()`, `filter.modify(payload)`, `filter.drop(reason)`. Used only from `filterChatMessage`.
 
-Handler names are camelCase and map to the runtime events listed in the [handlers reference](/docs/plugins/handlers): `onChatMessage`, `filterChatMessage`, `onChatUserJoined`, `onStreamStarted`, `onTick`, `onFediverseFollow`, `onHttpRequest`, and so on. Payload fields are camelCase too (`msg.user.displayName`, `msg.clientId`).
+Handler names are camelCase and map to the runtime events listed in the [handlers reference](/docs/plugins/events): `onChatMessage`, `filterChatMessage`, `onChatUserJoined`, `onStreamStarted`, `onTick`, `onFediverseFollow`, `onHttpRequest`, and so on. Payload fields are camelCase too (`msg.user.displayName`, `msg.clientId`).
 
-Beyond top-level methods, two handler groups take a key and are passed as nested objects: `on: { "my.event"(payload) {} }` for custom events and `onTabContent: { slug(ctx) {} }` / `onPageContent` for dynamic viewer pages. And rather than hand-rolling prefix parsing in `onChatMessage`, you can declare a `commands` table that the host's built-in `!help` picks up automatically. Both are shown for JavaScript on the subject pages: [Handlers](/docs/plugins/handlers), [Chat plugins](/docs/plugins/chat), and [UI](/docs/plugins/ui).
+Beyond top-level methods, two handler groups take a key and are passed as nested objects: `on: { "my.event"(payload) {} }` for custom events and `onTabContent: { slug(ctx) {} }` / `onPageContent` for dynamic viewer pages. And rather than hand-rolling prefix parsing in `onChatMessage`, you can declare a `commands` table that the host's built-in `!help` picks up automatically. Both are shown for JavaScript on the subject pages: [Handlers](/docs/plugins/events), [Commands](/docs/plugins/commands), and [UI](/docs/plugins/ui).
 
 ## TypeScript
 
@@ -108,7 +112,7 @@ export default definePlugin({
 });
 ```
 
-The build detects `src/plugin.ts`, `src/plugin.js`, `plugin.ts`, or `plugin.js` in that order. Types are declarations only — there's no separate compile step or `tsconfig` required.
+The build detects `src/plugin.ts`, `src/plugin.js`, `plugin.ts`, or `plugin.js` in that order. Types are declarations only: there's no separate compile step or `tsconfig` required.
 
 ## The CLI
 
@@ -119,7 +123,7 @@ The SDK installs an `owncast-plugin` CLI, exposed through the `package.json` scr
 | `owncast-plugin build` | `npm run build` | Bundles `src/plugin.{js,ts}` into an intermediate build artifact |
 | `owncast-plugin test` | `npm test` | Builds, then runs the `__tests__/` scenarios through the real runtime |
 | `owncast-plugin serve` | `npm run serve` | Local dev server at `http://localhost:8080/plugins/<slug>/` |
-| `owncast-plugin package` | `npm run package` | Builds and bundles everything into `<slug>.ocpkg` — the file you ship |
+| `owncast-plugin package` | `npm run package` | Builds and bundles everything into `<slug>.ocpkg`: the file you ship |
 
 ```sh
 npm run package   # produces my-plugin.ocpkg
@@ -133,18 +137,18 @@ In JavaScript, `npm test` runs `__tests__/*.test.js` files calling `runScenarios
 
 ## What's in the package
 
-- `index.js` — the runtime: `definePlugin`, the `owncast.*` host wrappers, the `filter` constructor, `defineCommands`.
-- `index.d.ts` — TypeScript declarations for every event payload and host API.
-- `testing.js` — the `runScenarios` / `runScenarioFiles` test API.
-- `bin/owncast-plugin` — the CLI (`build`, `test`, `serve`, `package`).
-- `scripts/postinstall.js` — downloads the per-platform host toolchain on install.
+- `index.js`: the runtime: `definePlugin`, the `owncast.*` host wrappers, the `filter` constructor, `defineCommands`.
+- `index.d.ts`: TypeScript declarations for every event payload and host API.
+- `testing.js`: the `runScenarios` / `runScenarioFiles` test API.
+- `bin/owncast-plugin`: the CLI (`build`, `test`, `serve`, `package`).
+- `scripts/postinstall.js`: fetches the prebuilt test and serve host binaries on install, used by `npm test` and `npm run serve`.
 
 ## Where to go next
 
-- [Handlers reference](/docs/plugins/handlers) — every event you can subscribe to and its payload shape.
-- [APIs reference](/docs/plugins/apis) — every `owncast.*` method and the permission it needs.
-- [Testing](/docs/plugins/testing) — the full scenario data model.
-- [Packaging & distribution](/docs/plugins/packaging) — building the `.ocpkg` and installing it.
-- [Example plugins](https://github.com/owncast/plugin-sdk/tree/main/examples/js) — one per feature, each a complete starting point you can copy.
-- [SDK source](https://github.com/owncast/plugin-sdk) — the `@owncast/plugin-sdk` package and toolchain.
+- [Handlers reference](/docs/plugins/events): every event you can subscribe to and its payload shape.
+- [APIs reference](/docs/plugins/apis): every `owncast.*` method and the permission it needs.
+- [Testing](/docs/plugins/testing): the full scenario data model.
+- [Packaging & distribution](/docs/plugins/packaging): building the `.ocpkg` and installing it.
+- [Example plugins](https://github.com/owncast/plugin-sdk/tree/main/examples/js): one per feature, each a complete starting point you can copy.
+- [SDK source](https://github.com/owncast/plugin-sdk): the `@owncast/plugin-sdk` package and toolchain.
 </invoke>

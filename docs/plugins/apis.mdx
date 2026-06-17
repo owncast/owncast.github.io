@@ -18,22 +18,20 @@ tags:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Owncast plugin runtime exposes a single global, `owncast`, with the host functions your plugin can call. Each method requires the matching permission in your manifest. Calling without the permission throws a clear error.
+The Owncast plugin runtime exposes a single global, `owncast`, with the host functions your plugin can call. Most methods require the matching permission in your manifest, and calling without it throws a clear error. A few are **ambient** and need no permission: timers, reading bundled assets, and `owncast.config.get`.
 
-Calls are shown for both SDKs — pick your language with the tabs. See [JavaScript](/docs/plugins/sdks/javascript) or [Python](/docs/plugins/sdks/python) for setup. (JavaScript method names are camelCase; Python uses `snake_case` — `sendAction` is `send_action`, and so on.)
-
-This page is the reference for every method, grouped by capability.
+Calls are shown for both SDKs, pick your language with the tabs. See [JavaScript](/docs/plugins/sdks/javascript) or [Python](/docs/plugins/sdks/python) for setup. (JavaScript method names are camelCase, Python uses `snake_case`, so `sendAction` becomes `send_action`, and so on.)
 
 ## Chat
 
-If you're building a chat bot, moderation tool, or message filter, start with [Chat plugins](/docs/plugins/chat). This page remains the full `owncast.*` API reference.
+Building a chat bot, moderation tool, or filter? Start with [Chat plugins](/docs/plugins/chat).
 
 ### `owncast.chat.send(text)`
 
 Post a chat message. Sent as your plugin's bot identity (display name from `bot.displayName` or `name` in your manifest).
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 owncast.chat.send("hello chat");
@@ -56,7 +54,7 @@ Requires `chat.send`.
 Post an action-style ("/me") message.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 owncast.chat.sendAction("is now live");
@@ -76,7 +74,7 @@ Requires `chat.send`.
 
 ### `owncast.chat.system(body)`
 
-Post a server-announcement message. No bot identity attached; the body renders inline as HTML, so use this for short, server-attributed notices like "the stream is starting in 5 minutes". Treat the body as untrusted-HTML output: don't interpolate user input into it without escaping.
+Post a server-announcement message. No bot identity attached. The body renders inline as HTML, so use this for short, server-attributed notices like "the stream is starting in 5 minutes". Treat the body as untrusted-HTML output: don't interpolate user input into it without escaping.
 
 Requires `chat.send`.
 
@@ -91,7 +89,7 @@ Requires `chat.send`.
 Whisper a reply back to whoever sent a chat message. Pass the chat message from `onChatMessage`/`filterChatMessage` (or a bare client ID). Returns `false` if the sender's connection is unknown (no client ID), so you can fall back to a public `send`. Sugar over `sendTo(clientId, text)`.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 onChatMessage(msg) {
@@ -153,7 +151,7 @@ The bot user is keyed on the plugin's `slug` so the identity survives manifest e
 Read the chat user list or a single user record.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 const users = owncast.users.list();
@@ -178,7 +176,7 @@ Requires `users.read`.
 Enable or disable a chat user.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 owncast.users.setEnabled("u-spammer", false, "spam");
@@ -201,7 +199,7 @@ Requires `users.moderate`.
 Ban an IP from joining chat.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 owncast.users.banIP("203.0.113.42");
@@ -228,7 +226,7 @@ Per-plugin key/value store, namespaced by your plugin's `slug`. Values are strin
 For richer types, use the JSON helpers (`getJSON` / `setJSON`, `get_json` / `set_json` in Python) instead of parsing and serializing yourself. The JSON getter returns the fallback when the key is unset or holds invalid JSON. Plugins cannot read each other's keys.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 owncast.kv.set("count", "1");
@@ -262,7 +260,7 @@ Requires `storage.upload`.
 
 ### `owncast.fs.*`
 
-A private, sandboxed filesystem at `data/plugin-data/<your-slug>/`. Unlike `owncast.storage.upload`, these files stay server-side — they're never served over HTTP. Paths are relative to your sandbox root; the host confines every path to your own directory (a plugin cannot read another plugin's files, and `../` or absolute paths collapse back inside the sandbox). Parent directories are created as needed on write.
+A private, sandboxed filesystem at `data/plugin-data/<your-slug>/`. Unlike `owncast.storage.upload`, these files stay server-side: they're never served over HTTP. Paths are relative to your sandbox root. The host confines every path to your own directory (a plugin cannot read another plugin's files, and `../` or absolute paths collapse back inside the sandbox). Parent directories are created as needed on write.
 
 | Method | Returns |
 | --- | --- |
@@ -276,7 +274,7 @@ A private, sandboxed filesystem at `data/plugin-data/<your-slug>/`. Unlike `ownc
 In Python these are `snake_case` (`fs.read_text`, the rest unchanged).
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 owncast.fs.write("notes/log.txt", "hello");
@@ -303,7 +301,7 @@ Requires `storage.fs`.
 Read one of your plugin's [manifest-declared `config`](/docs/plugins/manifest#config-admin-configurable-settings) settings. Returns the admin-set value when present, otherwise the declared default, already parsed to its declared type. For an unknown key (or one with no value) it returns `fallback`.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 const cooldownMs = owncast.config.get("cooldownMs", 2000);
@@ -319,16 +317,16 @@ cooldown_ms = owncast.config.get("cooldownMs", 2000)
 </TabItem>
 </Tabs>
 
-Ambient — no permission required. Prefer this over building a bespoke settings page and key/value plumbing for simple knobs. (The config key is whatever you named it in the manifest; it isn't translated per language.)
+Ambient: no permission required. Prefer this over building a bespoke settings page and key/value plumbing for simple knobs. (The config key is whatever you named it in the manifest, and it isn't translated per language.)
 
 ## Network
 
 ### `owncast.http.fetch(url, opts?)`
 
-Synchronous outbound HTTP request. `opts` carries `method`, `headers`, and `body`; the result is `{ status, headers, body }`. Only hosts listed in your manifest's `network.allowedHosts` are reachable. Everything else returns an error.
+Synchronous outbound HTTP request. `opts` carries `method`, `headers`, and `body`. The result is `{ status, headers, body }`. Only hosts listed in your manifest's `network.allowedHosts` are reachable. Everything else returns an error.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 const res = owncast.http.fetch("https://api.example.com/status");
@@ -351,7 +349,7 @@ if res.status == 200:
 </TabItem>
 </Tabs>
 
-Requires `network.fetch` and a matching entry in `network.allowedHosts`. Use this for outbound HTTP rather than your language's own HTTP client (in Python, don't use `requests` — it won't compile into a plugin).
+Requires `network.fetch` and a matching entry in `network.allowedHosts`. Use this for outbound HTTP rather than your language's own HTTP client (in Python, don't use `requests`: it won't compile into a plugin).
 
 See [Manifest reference: network](/docs/plugins/manifest#network-outbound-http-allowlist) for allowlist syntax.
 
@@ -359,10 +357,10 @@ See [Manifest reference: network](/docs/plugins/manifest#network-outbound-http-a
 
 ### `owncast.events.emit(eventType, payload)`
 
-Emit a custom event that other plugins can subscribe to. Subscribing plugins receive it through their custom-event handler — see the [handlers reference](/docs/plugins/handlers#custom-events). Namespace your event types with your plugin name to avoid collisions.
+Emit a custom event that other plugins can subscribe to. Subscribing plugins receive it through their custom-event handler: see the [handlers reference](/docs/plugins/events#custom-events). Namespace your event types with your plugin name to avoid collisions.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 owncast.events.emit("my-plugin.thing-happened", { id: 123 });
@@ -399,7 +397,7 @@ Requires `server.read`.
 Static server info: `{ name, version, summary, ... }`.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 const name = owncast.server.info().name;
@@ -425,7 +423,7 @@ Requires `server.read`.
 
 ### `owncast.server.emotes()`
 
-The server's custom chat emotes — the same set the public `/api/emoji` endpoint serves, each `{ name, url }`. Useful for rendering or filtering `:code:` emotes server-side.
+The server's custom chat emotes: the same set the public `/api/emoji` endpoint serves, each `{ name, url }`. Useful for rendering or filtering `:code:` emotes server-side.
 
 Requires `server.read`.
 
@@ -448,7 +446,7 @@ Requires `server.read`.
 Read the output and transcoding configuration: `{ latencyLevel, codec, variants }`.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 const cfg = owncast.videoConfig.read();
@@ -468,10 +466,10 @@ Requires `videoconfig.read`.
 
 ### `owncast.videoConfig.write(partial)`
 
-Update video configuration. Pass a partial object; only the fields you include are changed. Changes apply on the next stream start — the host does not restart an active broadcast.
+Update video configuration. Pass a partial object. Only the fields you include are changed. Changes apply on the next stream start: the host does not restart an active broadcast.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 owncast.videoConfig.write({ latencyLevel: 2 });
@@ -502,7 +500,7 @@ Requires `notifications.send`.
 Push to subscribed browsers.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 owncast.notifications.browserPush({ title: "Live now", body: "Come say hi", url: "/" });
@@ -541,7 +539,7 @@ Requires `fediverse.post`. High-trust: a fediverse post goes out under the strea
 Append one or more action buttons to your plugin's manifest set without a reload. Each button takes the same fields as a `manifest.actions` entry (`title`, plus `url`/`openExternally` or inline `html`). The host validates each entry with the same rules as `manifest.actions` and persists the result so additions survive a reload.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 owncast.actions.add({ title: "Donate", url: "/plugins/my-plugin/donate", openExternally: true });
@@ -578,7 +576,7 @@ Push a Server-Sent-Event to every browser connected to your plugin's `/_sse/<cha
 * `data`: payload. Strings are sent as-is. Anything else is JSON-encoded for you.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 owncast.sse.send("alerts", "donation", { from: "alice", amount: 5 });
@@ -600,22 +598,52 @@ Requires `http.sse`.
 
 Full coverage in [Serving HTTP: Realtime updates](/docs/plugins/http#realtime-updates-server-sent-events).
 
+## Timers
+
+Schedule deferred and repeating work. Timers are **ambient**, no permission required, and are cleared automatically when your plugin is disabled. (Python: `set_timeout`, `set_interval`, `clear`.)
+
+### `owncast.timer.setTimeout(fn, ms)`
+
+Run `fn` once after `ms` milliseconds. Returns an id.
+
+### `owncast.timer.setInterval(fn, ms)`
+
+Run `fn` repeatedly every `ms` milliseconds. Returns an id.
+
+### `owncast.timer.clear(id)`
+
+Cancel a pending timeout or interval by the id either call returned.
+
+## Bundled assets
+
+Read files you shipped in your plugin's `assets/` directory. **Ambient**: no permission required. (Python: `read`, `read_text`.)
+
+### `owncast.assets.read(path)`
+
+Return the bytes of a bundled asset at `path`, relative to `assets/`.
+
+### `owncast.assets.readText(path)`
+
+Same, decoded as UTF-8 text.
+
 ## Complete API reference
 
-Method names below are the JavaScript (camelCase) form; the Python equivalents are `snake_case` (`sendAction` → `send_action`, `banIP` → `ban_ip`, `videoConfig` → `video_config`, and so on).
+Method names below are the JavaScript (camelCase) form. The Python equivalents are `snake_case` (`sendAction` → `send_action`, `banIP` → `ban_ip`, `videoConfig` → `video_config`, and so on).
 
 | API                                              | Permission           |
 | ------------------------------------------------ | -------------------- |
 | `owncast.chat.send`                              | `chat.send`          |
 | `owncast.chat.sendAction`                        | `chat.send`          |
 | `owncast.chat.sendTo`                            | `chat.send`          |
+| `owncast.chat.system`                            | `chat.send`          |
+| `owncast.chat.replyTo`                            | `chat.send`          |
 | `owncast.chat.history`                           | `chat.history`       |
 | `owncast.chat.clients`                           | `chat.history`       |
 | `owncast.chat.deleteMessage`                     | `chat.moderate`      |
 | `owncast.chat.kick`                              | `chat.moderate`      |
 | `owncast.users.list` / `.get`                    | `users.read`         |
 | `owncast.users.setEnabled` / `.banIP`            | `users.moderate`     |
-| `owncast.kv.get` / `.set`                        | `storage.kv`         |
+| `owncast.kv.get` / `.set` / `.getJSON` / `.setJSON` | `storage.kv`         |
 | `owncast.storage.upload`                         | `storage.upload`     |
 | `owncast.fs.read` / `.readText` / `.write` / `.list` / `.delete` / `.exists` | `storage.fs`         |
 | `owncast.http.fetch`                             | `network.fetch`      |
@@ -628,4 +656,7 @@ Method names below are the JavaScript (camelCase) form; the Python equivalents a
 | `owncast.notifications.discord` / `.browserPush` | `notifications.send` |
 | `owncast.fediverse.post`                         | `fediverse.post`     |
 | `owncast.actions.add` / `.clear`                 | `ui.modify`          |
+| `owncast.timer.setTimeout` / `.setInterval` / `.clear` | none (ambient)       |
+| `owncast.assets.read` / `.readText`              | none (ambient)       |
+| `owncast.config.get`              | none (ambient)       |
 | `owncast.sse.send`                               | `http.sse`           |

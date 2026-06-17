@@ -1,8 +1,8 @@
 ---
-title: Event handlers
-description: Every chat, stream, fediverse, filter, and HTTP handler your plugin can subscribe to, with payload shapes.
+title: Events
+description: Every event your plugin can subscribe to (chat, stream, fediverse, filter, HTTP, and more), with its payload shape.
 sidebar_position: 4
-sidebar_label: Handlers
+sidebar_label: Events
 toc_min_heading_level: 2
 toc_max_heading_level: 3
 tags:
@@ -18,12 +18,12 @@ tags:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Plugins react to things happening in Owncast by defining a handler for each event they care about. Only define the handlers you want — a missing handler means no subscription, and the SDK derives the manifest's subscription list from which handlers are present, so there's nothing else to keep in sync.
+Plugins react to things happening in Owncast by defining a handler for each event they care about. Only define the handlers you want: a missing handler means no subscription, and the SDK derives the manifest's subscription list from which handlers are present, so there's nothing else to keep in sync.
 
-Code below is shown for both SDKs — pick your language with the tabs and your choice follows you across the docs. New to this? See the [JavaScript](/docs/plugins/sdks/javascript) or [Python](/docs/plugins/sdks/python) setup pages first.
+Code below is shown for both SDKs. Pick your language with the tabs, and your choice follows you across the docs. New to this? See the [JavaScript](/docs/plugins/sdks/javascript) or [Python](/docs/plugins/sdks/python) setup pages first.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 const { definePlugin, owncast, filter } = require("@owncast/plugin-sdk");
@@ -57,18 +57,18 @@ def handle_live(info):
     ...
 ```
 
-Handlers are decorated functions (`@plugin.on_chat_message`, `@plugin.on_stream_started`, …). Payload fields are snake_case (`msg.user.display_name`, `msg.client_id`); use `msg.raw` for the underlying dict.
+Handlers are decorated functions (`@plugin.on_chat_message`, `@plugin.on_stream_started`, …). Payload fields are snake_case (`msg.user.display_name`, `msg.client_id`). Use `msg.raw` for the underlying dict.
 
 </TabItem>
 </Tabs>
 
-This page is the catalog of every available event, the payload it delivers, and the permission (if any) needed to subscribe. Payloads are shown as their wire shape; each SDK exposes the fields idiomatically (the JavaScript SDK as-is, the Python SDK as snake_case attributes over the same JSON, with the raw dict available too).
+Payloads are shown as their wire shape. Each SDK exposes the fields idiomatically: the JavaScript SDK as-is, the Python SDK as snake_case attributes over the same JSON (with the raw dict available too).
 
 ## Chat events
 
-If you're specifically building a chat-focused plugin, start with [Chat plugins](/docs/plugins/chat). This page remains the complete handler reference across all plugin capabilities.
+Building a chat-focused plugin? [Chat plugins](/docs/plugins/chat) is a friendlier starting point.
 
-### Chat message — `chat.message.received`
+### Chat message: `chat.message.received`
 
 Fires once per chat message after filters have run and the message is being broadcast to viewers.
 
@@ -83,7 +83,7 @@ interface ChatMessage {
 ```
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
@@ -114,9 +114,9 @@ def greet_mods(msg):
 
 No permission required to subscribe.
 
-> **Older hosts** delivered `user` as a plain display-name string rather than the identity object. If you support hosts that predate the identity payload, read it defensively — see your SDK page for the idiom.
+> **Older hosts** delivered `user` as a plain display-name string rather than the identity object. If you support hosts that predate the identity payload, read it defensively. See your SDK page for the idiom.
 
-### Chat user joined / parted — `chat.user.joined`, `chat.user.parted`
+### Chat user joined / parted: `chat.user.joined`, `chat.user.parted`
 
 Fires when a chat user connects or disconnects.
 
@@ -131,7 +131,7 @@ interface ChatUser {
 ```
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
@@ -158,7 +158,7 @@ def farewell(user):
 
 No permission required.
 
-### Chat user renamed — `chat.user.renamed`
+### Chat user renamed: `chat.user.renamed`
 
 Fires when a chat user changes their display name.
 
@@ -168,7 +168,7 @@ interface { user: ChatUser; previousName: string }
 
 No permission required.
 
-### Message moderated — `chat.message.moderated`
+### Message moderated: `chat.message.moderated`
 
 Fires when a moderator hides or unhides a chat message.
 
@@ -180,16 +180,16 @@ No permission required.
 
 ## Stream lifecycle
 
-### Stream started — `stream.started`
+### Stream started: `stream.started`
 
 Fires when a broadcast begins.
 
 ```ts
-interface { startedAt: string; title: string; summary: string }
+interface { startedAt: string; title?: string; summary?: string }
 ```
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
@@ -221,7 +221,7 @@ def retitle(change):
 
 No permission required.
 
-### Stream stopped — `stream.stopped`
+### Stream stopped: `stream.stopped`
 
 Fires when a broadcast ends.
 
@@ -231,7 +231,7 @@ interface { stoppedAt: string }
 
 No permission required.
 
-### Stream title changed — `stream.title.changed`
+### Stream title changed: `stream.title.changed`
 
 Fires when the streamer updates the title mid-stream.
 
@@ -247,7 +247,7 @@ No permission required.
 
 Owncast forwards inbound fediverse activity to plugins. Engagement events (follow, like, repost) carry just the actor. Mentions and replies carry the post content.
 
-### Follow / like / repost — `fediverse.follow`, `fediverse.like`, `fediverse.repost`
+### Follow / like / repost: `fediverse.follow`, `fediverse.like`, `fediverse.repost`
 
 ```ts
 interface {
@@ -257,7 +257,7 @@ interface {
 ```
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
@@ -284,7 +284,7 @@ def note_like(e):
 
 `actor.handle` is the fully-qualified address (for example `@alice@fediverse.example`). No permission required.
 
-### Mention / reply — `fediverse.mention`, `fediverse.reply`
+### Mention / reply: `fediverse.mention`, `fediverse.reply`
 
 Both receive a `FediverseInboundPost`:
 
@@ -307,36 +307,18 @@ No permission required to subscribe.
 
 ## Filter chain
 
-Filters see chat messages before they're broadcast, with the ability to rewrite or drop them. They run sequentially, in priority order, and any one filter can short-circuit the chain.
+Filters see chat messages before they're broadcast, with the ability to rewrite or drop them. They run sequentially in priority order (lowest first), and any one filter can short-circuit the chain: a `drop` ends it, while a `modify` passes the new payload to the next filter.
 
-```mermaid
-flowchart LR
-    Msg([Chat message]) --> F1
-    F1["Filter A<br/>priority 10"] --> D1{result}
-    D1 -->|pass| F2["Filter B<br/>priority 50"]
-    D1 -->|modify| F2
-    D1 -->|drop| Stop1([Dropped])
-    F2 --> D2{result}
-    D2 -->|pass| F3["Filter C<br/>priority 100"]
-    D2 -->|modify| F3
-    D2 -->|drop| Stop2([Dropped])
-    F3 --> D3{result}
-    D3 -->|pass / modify| Broadcast([Broadcast to viewers])
-    D3 -->|drop| Stop3([Dropped])
-```
-
-Filters run lowest-priority first. A `drop` ends the chain. A `modify` passes the new payload to the next filter.
-
-### Chat message filter — `chat.message.received` (filter)
+### Chat message filter: `chat.message.received` (filter)
 
 A filter handler receives the same `ChatMessage` shape as the chat-message event and returns one of three results:
 
-- **pass** — let the message through unchanged.
-- **modify** — replace the message with a new payload, which flows to the next filter.
-- **drop** — block the message with a reason; the chain stops here.
+- **pass**: let the message through unchanged.
+- **modify**: replace the message with a new payload, which flows to the next filter.
+- **drop**: block the message with a reason. The chain stops here.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
@@ -369,7 +351,7 @@ Requires the `chat.filter` permission. Reading or rewriting every chat message i
 
 ### Filter priority (optional)
 
-Each filter can declare a priority; lower numbers run earlier (default `100`). Use this when your plugin's behavior depends on whether other filters have already run (for example, a profanity filter should usually run before a translator). See your SDK page for where to set it.
+Each filter can declare a priority. Lower numbers run earlier (default `100`). Use this when your plugin's behavior depends on whether other filters have already run (for example, a profanity filter should usually run before a translator). See your SDK page for where to set it.
 
 ### Filter safety
 
@@ -382,7 +364,7 @@ Each filter can declare a priority; lower numbers run earlier (default `100`). U
 Rather than hand-rolling prefix parsing, aliases, cooldowns, and moderator gating in your chat handler, declare a **command table**: the SDK wires the chat subscription and prefix parsing for you, and the host's built-in `!help` lists every command. Gating uses the sender identity on the message (`user.scopes`, `user.id`), not a display-name guess.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
@@ -405,7 +387,7 @@ plugin.commands({
 </TabItem>
 </Tabs>
 
-See [Chat plugins](/docs/plugins/chat#commands) for the full command-table reference (aliases, cooldowns, mod-only gating, `!help`).
+See [Chat commands](/docs/plugins/commands) for the full command-table reference (aliases, cooldowns, mod-only gating, `!help`).
 
 ## HTTP handler
 
@@ -433,7 +415,7 @@ interface OutgoingHttpResponse {
 ```
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
@@ -458,25 +440,25 @@ def status(req):
 
 Endpoints are public by default. Gate admin features on `req.authenticated`. Manifest-declared admin paths (`admin.pages[].path`) are auth-gated by the host before your handler runs, so for those routes you don't need to check.
 
-Requires the `http.serve` permission. The JavaScript SDK exposes a single `onHttpRequest` catch-all; the Python SDK adds declarative per-path/per-method routes (`@plugin.get`, `@plugin.route`, …). See [Serving HTTP](/docs/plugins/http) for the full request model.
+Requires the `http.serve` permission. The JavaScript SDK exposes a single `onHttpRequest` catch-all. The Python SDK adds declarative per-path/per-method routes (`@plugin.get`, `@plugin.route`, …). See [Serving HTTP](/docs/plugins/http) for the full request model.
 
 ## Content handlers
 
-These two handlers let a plugin generate tab or extra-page HTML at request time — useful when the content should be personalised per viewer or depend on live stream data. They're the dynamic counterpart to shipping a static HTML file via `manifest.tabs[].content` or `manifest.extraPageContent.content`.
+These two handlers let a plugin generate tab or extra-page HTML at request time: useful when the content should be personalised per viewer or depend on live stream data. They're the dynamic counterpart to shipping a static HTML file via `manifest.tabs[].content` or `manifest.extraPageContent.content`.
 
 Both handlers receive a `ContentRequest`:
 
 ```ts
 interface ContentRequest {
   slug: string;   // stable identifier declared in the manifest
-  user?: ChatUser; // viewer's chat identity — present when authenticated, absent for anonymous viewers
+  user?: ChatUser; // viewer's chat identity: present when authenticated, absent for anonymous viewers
 }
 ```
 
 Return the full HTML string for the content block. If you don't recognise the slug, return an empty string.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
@@ -508,7 +490,7 @@ def banner(ctx):
 
 ### Tab content
 
-Called when a tab entry in `manifest.tabs[]` has no static `content` file. The host passes the tab's `slug` so a single plugin can serve multiple tabs. No permission required to subscribe; whatever Owncast APIs you call from inside the handler require their usual permissions.
+Called when a tab entry in `manifest.tabs[]` has no static `content` file. The host passes the tab's `slug` so a single plugin can serve multiple tabs. No permission required to subscribe. Whatever Owncast APIs you call from inside the handler require their usual permissions.
 
 ### Page content
 
@@ -518,10 +500,10 @@ See [Contributing UI](/docs/plugins/ui) for the manifest side.
 
 ## Plugin-to-plugin events
 
-Plugins can compose by emitting and subscribing to arbitrary custom events. Subscribing to a custom event requires no permission. To emit, declare `events.emit`. Event names are arbitrary strings; namespacing with your plugin name (for example `"my-plugin.thing-happened"`) avoids collisions.
+Plugins can compose by emitting and subscribing to arbitrary custom events. Subscribing to a custom event requires no permission. To emit, declare `events.emit`. Event names are arbitrary strings. Namespacing with your plugin name (for example `"my-plugin.thing-happened"`) avoids collisions.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
@@ -554,7 +536,7 @@ See [Owncast APIs](./apis#plugin-to-plugin-events) for the emit API.
 
 ## Complete handler reference
 
-Each row is a runtime event. The handler name follows your SDK's convention — camelCase methods (`onChatMessage`) in JavaScript, `@plugin.*` decorators (`@plugin.on_chat_message`) in Python.
+Each row is a runtime event. The handler name follows your SDK's convention: camelCase methods (`onChatMessage`) in JavaScript, `@plugin.*` decorators (`@plugin.on_chat_message`) in Python.
 
 | Event                      | Payload                            | Permission to subscribe                |
 | -------------------------- | ---------------------------------- | -------------------------------------- |
@@ -573,8 +555,8 @@ Each row is a runtime event. The handler name follows your SDK's convention — 
 | `fediverse.reply`          | `FediverseInboundPost`             | none                                   |
 | chat message filter        | `ChatMessage`                      | `chat.filter`                          |
 | HTTP request               | `IncomingHttpRequest`              | `http.serve`                           |
-| tab content                | `ContentRequest`                   | none to subscribe; whatever APIs the handler calls |
-| page content               | `ContentRequest`                   | none to subscribe; whatever APIs the handler calls |
+| tab content                | `ContentRequest`                   | none to subscribe. Whatever APIs the handler calls |
+| page content               | `ContentRequest`                   | none to subscribe. Whatever APIs the handler calls |
 | custom events              | (per-event)                        | none to subscribe, `events.emit` to emit |
 
 Subscribing is free. Calling Owncast APIs from inside a handler is what needs permissions. See [Owncast APIs](/docs/plugins/apis) for the catalog of methods and what each one grants.

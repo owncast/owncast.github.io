@@ -16,7 +16,7 @@ tags:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-If you want to build a plugin that talks in chat, reacts to viewers, or moderates messages, this is the page to start with. Code samples are shown in both supported languages — set up your toolchain on the [JavaScript](/docs/plugins/sdks/javascript) or [Python](/docs/plugins/sdks/python) SDK page first.
+If you want to build a plugin that talks in chat, reacts to viewers, or moderates messages, this is the page to start with. Code samples are shown in both supported languages. Set up your toolchain on the [JavaScript](/docs/plugins/sdks/javascript) or [Python](/docs/plugins/sdks/python) SDK page first.
 
 Owncast exposes chat functionality in three layers:
 
@@ -36,7 +36,7 @@ Owncast exposes chat functionality in three layers:
 A reply bot is just one handler:
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 const { definePlugin, owncast } = require("@owncast/plugin-sdk");
@@ -64,56 +64,17 @@ def echo(msg):
 </TabItem>
 </Tabs>
 
-## Event handlers
+## Reacting to chat
 
-Plugins react to chat activity by defining a handler for each event they care about — a method on `definePlugin({ ... })` in JavaScript, or a `@plugin.*` decorated function in Python. Only define the handlers you actually need — a missing handler simply means no subscription to that event.
-
-### `onChatMessage`
-
-Fires once per chat message after filters have run and the message is being broadcast to viewers.
-
-```ts
-interface ChatMessage {
-  id: string;
-  user?: ChatUser; // full sender identity; absent for the rare message with no account
-  clientId?: number; // originating connection, used for whispers/private replies
-  body: string; // raw text, not HTML-rendered markup
-  timestamp: string; // RFC3339Nano / ISO-8601, e.g. "2026-05-28T14:00:00.123456789Z"
-}
-```
-
-The shape above is the wire payload. JavaScript exposes the fields as written (`msg.user.displayName`, `msg.clientId`); Python exposes them as `snake_case` attributes (`msg.user.display_name`, `msg.client_id`), with `msg.raw` for the underlying dict.
-
-Use the stable user id (`user.id`) for per-user state and the sender scopes (`user.scopes`) for moderator checks. Do not key permissions or cooldowns off display names alone.
-
-The sandbox clock works, but `timestamp` is deterministic — prefer it when comparing elapsed time across events or asserting in tests.
-
-No permission required to subscribe.
-
-### User join/part
-
-Fires when a chat user connects or disconnects.
-
-```ts
-interface ChatUser {
-  id: string;
-  displayName: string;
-  isBot?: boolean;
-  isAuthenticated?: boolean;
-  scopes?: string[];
-}
-```
+Define `onChatMessage` (`@plugin.on_chat_message` in Python) to see each message after filters run, just before it broadcasts to viewers:
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
-  onChatUserJoined(user) {
-    owncast.chat.send(`welcome, ${user.displayName}!`);
-  },
-  onChatUserParted(user) {
-    /* ... */
+  onChatMessage(msg) {
+    owncast.chat.send(`echo: ${msg.body}`);
   },
 });
 ```
@@ -122,40 +83,26 @@ module.exports = definePlugin({
 <TabItem value="py" label="Python">
 
 ```python
-@plugin.on_chat_user_joined
-def welcome(user):
-    owncast.chat.send(f"welcome, {user.display_name}!")
-
-@plugin.on_chat_user_parted
-def goodbye(user):
-    ...
+@plugin.on_chat_message
+def echo(msg):
+    owncast.chat.send(f"echo: {msg.body}")
 ```
 
 </TabItem>
 </Tabs>
 
-No permission required.
+The fields you reach for most are `msg.body` (the raw text), `msg.user` (the sender identity, with `user.id` for per-user state and `user.scopes` for moderator checks), and `msg.timestamp` (deterministic, so prefer it over the clock when comparing elapsed time or asserting in tests). Don't key state or permissions off display names.
 
-### Rename
-
-Fires when a chat user changes their display name. Payload: an object with a `user` (`ChatUser`) and a `previousName` string (`previous_name` in Python). The handler is `onChatUserRenamed` / `@plugin.on_chat_user_renamed`.
-
-No permission required.
-
-### Moderation events
-
-Fires when a moderator hides or unhides a chat message. Payload: an object with a `messageId` string, a `visible` boolean, and an optional `moderator` (`ChatUser`). The handler is `onMessageModerated` / `@plugin.on_message_moderated`.
-
-No permission required.
+For the full message payload and every other event a chat plugin can subscribe to (user join and part, rename, moderation, and more), see the [Events reference](/docs/plugins/events).
 
 ## Sending chat messages
 
 ### `owncast.chat.send`
 
-Post a chat message. Sent as your plugin's bot identity. Takes plain text, not markup — the chat UI HTML-escapes it on display, so characters like `<`, `&`, and `"` render as text rather than HTML.
+Post a chat message. Sent as your plugin's bot identity. Takes plain text, not markup: the chat UI HTML-escapes it on display, so characters like `<`, `&`, and `"` render as text rather than HTML.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 owncast.chat.send("hello chat");
@@ -179,13 +126,13 @@ Requires `chat.send`.
 
 ### `owncast.chat.sendAction`
 
-Post an action-style (`/me`) message — `sendAction` in JavaScript, `send_action` in Python. Like `send`, takes plain text and is HTML-escaped by the chat UI on display.
+Post an action-style (`/me`) message: `sendAction` in JavaScript, `send_action` in Python. Like `send`, takes plain text and is HTML-escaped by the chat UI on display.
 
 Requires `chat.send`.
 
 ### `owncast.chat.system`
 
-Post a server-announcement message. No bot identity is attached; the body renders inline as HTML. Use this for short, server-attributed notices like "Stream starting in 5 minutes". Treat the body as untrusted HTML output: don't interpolate viewer-controlled input without escaping it.
+Post a server-announcement message. No bot identity is attached. The body renders inline as HTML. Use this for short, server-attributed notices like "Stream starting in 5 minutes". Treat the body as untrusted HTML output: don't interpolate viewer-controlled input without escaping it.
 
 Requires `chat.send`.
 
@@ -250,12 +197,12 @@ Requires `chat.send`.
 Whisper a reply back to whoever sent a chat message. You can pass either the full message object from the chat-message / filter handler, or a bare client id if that's all you have. It returns a falsy value when the sender connection is no longer known, which gives you a clean fallback to a public message.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
   onChatMessage(msg) {
-    if (!owncast.chat.replyTo(msg, "psst — got your message")) {
+    if (!owncast.chat.replyTo(msg, "psst: got your message")) {
       owncast.chat.send("got your message"); // sender already disconnected
     }
   },
@@ -268,7 +215,7 @@ module.exports = definePlugin({
 ```python
 @plugin.on_chat_message
 def whisper(msg):
-    if not owncast.chat.reply_to(msg, "psst — got your message"):
+    if not owncast.chat.reply_to(msg, "psst: got your message"):
         owncast.chat.send("got your message")  # sender already disconnected
 ```
 
@@ -277,162 +224,38 @@ def whisper(msg):
 
 Requires `chat.send`.
 
-## Command bots
+## Commands
 
-If your plugin responds to chat commands, declare a **command table** instead of hand-rolling prefix parsing, aliases, moderator gates, and cooldown tracking. A command table gives you:
-
-* a configurable command prefix (default `!`);
-* per-command `description`, `usage`, and `aliases`;
-* per-user cooldowns, clocked off `msg.timestamp`;
-* moderator-only gating based on the sender's scopes;
-* an automatic, host-owned `!help`;
-* a fallback for unrecognized commands.
-
-<Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
-
-```js
-const { definePlugin } = require("@owncast/plugin-sdk");
-
-module.exports = definePlugin({
-  commandPrefix: "!", // optional, default "!"
-  commands: {
-    uptime: {
-      description: "How long we've been live",
-      run: (ctx) => ctx.reply("we've been live a while!"),
-    },
-    so: {
-      description: "Shout out a viewer",
-      usage: "!so <name>",
-      aliases: ["shoutout"],
-      cooldownMs: 10_000, // per user, clocked off msg.timestamp
-      run: (ctx) => ctx.reply(`go follow ${ctx.args[0] || "someone cool"}`),
-    },
-    clear: {
-      description: "Clear the chat",
-      modOnly: true, // requires the sender's scopes to include "MODERATOR"
-      run: (ctx) => ctx.replyPrivately("done"),
-      onDenied: (ctx) => ctx.replyPrivately("mods only"),
-    },
-  },
-  onUnknownCommand: (ctx) => ctx.replyPrivately(`unknown command: ${ctx.command}`),
-});
-```
-
-</TabItem>
-<TabItem value="py" label="Python">
-
-```python
-from owncast_plugin import plugin
-
-plugin.commands({
-    "uptime": {
-        "description": "How long we've been live",
-        "run": lambda ctx: ctx.reply("we've been live a while!"),
-    },
-    "so": {
-        "description": "Shout out a viewer",
-        "usage": "!so <name>",
-        "aliases": ["shoutout"],
-        "cooldown_ms": 10_000,  # per user, clocked off msg.timestamp
-        "run": lambda ctx: ctx.reply(f"go follow {ctx.args[0] if ctx.args else 'someone cool'}"),
-    },
-    "clear": {
-        "description": "Clear the chat",
-        "mod_only": True,  # requires the sender's scopes to include "MODERATOR"
-        "run": lambda ctx: ctx.reply_privately("done"),
-        "on_denied": lambda ctx: ctx.reply_privately("mods only"),
-    },
-}, command_prefix="!")  # command_prefix optional, default "!"
-```
-
-</TabItem>
-</Tabs>
-
-Each command handler receives a context with `msg`, `user`, `command`, `args`, `argString`, a public `reply`, and a private `replyPrivately` (whisper) — `args`/`reply` in both, `argString`/`replyPrivately` are `arg_string`/`reply_privately` in Python. Gating uses the stable sender identity (`user.scopes`, `user.id`), so it's reliable rather than a display-name guess. The command table reports a message as recognized even when it was denied by cooldown or moderator gating.
-
-When you want to compose — for example, to drop command invocations from public chat with a filter — use the lower-level router (`defineCommands` in JavaScript, `define_commands` in Python), which returns a callable you feed messages yourself:
-
-<Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
-
-```js
-const { definePlugin, defineCommands, filter } = require("@owncast/plugin-sdk");
-const commands = defineCommands({ commands: { /* same shape as above */ } });
-
-module.exports = definePlugin({
-  filterChatMessage: (msg) => (commands(msg) ? filter.drop("command") : filter.pass()),
-});
-```
-
-</TabItem>
-<TabItem value="py" label="Python">
-
-```python
-from owncast_plugin import plugin, define_commands, filter
-
-commands = define_commands({"commands": { }})  # same shape as above
-
-@plugin.filter_chat_message
-def hide_commands(msg):
-    return filter.drop("command") if commands(msg) else filter.pass_()
-```
-
-</TabItem>
-</Tabs>
-
-### `!help` is automatic
-
-The **host** owns `!help` — type it in chat and the host lists every command's `description` across all enabled plugins, posted as a system message. You don't implement it, and it works even if your plugin holds no `chat.send` permission. Moderator-only commands are hidden from non-moderators. The only thing you do to take part is declare a command table with descriptions.
-
-For a single fixed command you can just check the message body in the chat-message handler — you simply won't show up in `!help` unless you declare a command table.
+If your plugin responds to chat commands, declare a command table rather than parsing the prefix yourself. The host routes commands and answers `!help` automatically, and you can still layer your own chat handlers on top. See [Chat commands](/docs/plugins/commands).
 
 ## Moderating users
 
 ### `owncast.users.setEnabled`
 
-Enable or disable a chat user, by id, with an optional reason — `setEnabled` in JavaScript, `set_enabled` in Python.
+Enable or disable a chat user, by id, with an optional reason: `setEnabled` in JavaScript, `set_enabled` in Python.
 
 Requires `users.moderate`.
 
 ### `owncast.users.banIP`
 
-Ban an IP from joining chat — `banIP` in JavaScript, `ban_ip` in Python.
+Ban an IP from joining chat: `banIP` in JavaScript, `ban_ip` in Python.
 
 Requires `users.moderate`.
 
 ## Chat filters
 
-Filters see chat messages before they're broadcast, with the ability to rewrite or drop them.
-
-```mermaid
-flowchart LR
-    Msg([Chat message]) --> F1
-    F1["Filter A<br/>priority 10"] --> D1{result}
-    D1 -->|pass| F2["Filter B<br/>priority 50"]
-    D1 -->|modify| F2
-    D1 -->|drop| Stop1([Dropped])
-    F2 --> D2{result}
-    D2 -->|pass| F3["Filter C<br/>priority 100"]
-    D2 -->|modify| F3
-    D2 -->|drop| Stop2([Dropped])
-    F3 --> D3{result}
-    D3 -->|pass / modify| Broadcast([Broadcast to viewers])
-    D3 -->|drop| Stop3([Dropped])
-```
-
-Filters run lowest-priority first. A `drop` ends the chain and the message never reaches later filters or notifications. A `modify` passes the new payload to the next filter.
+Filters see chat messages before they're broadcast, with the ability to rewrite or drop them. Filters run lowest-priority first. A `drop` ends the chain and the message never reaches later filters or notifications. A `modify` passes the new payload to the next filter.
 
 ### `filterChatMessage`
 
 Receives the same `ChatMessage` shape as the chat-message handler and returns one of three results, built with the `filter` helper:
 
-* **pass** — let the message through unchanged.
-* **modify** — replace it with a new payload.
-* **drop** — drop it (with a reason); the chain stops here.
+* **pass**: let the message through unchanged.
+* **modify**: replace it with a new payload.
+* **drop**: drop it (with a reason). The chain stops here.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 const { definePlugin, filter } = require("@owncast/plugin-sdk");
@@ -460,7 +283,7 @@ def clean(msg):
         return filter.drop("spam keyword")
     if "damn" in msg.body:
         return filter.modify({**msg.raw, "body": msg.body.replace("damn", "****")})
-    return filter.pass_()  # trailing underscore — pass is a keyword
+    return filter.pass_()  # trailing underscore: pass is a keyword
 ```
 
 </TabItem>
@@ -520,8 +343,9 @@ Browse them at [examples/js](https://github.com/owncast/plugin-sdk/tree/main/exa
 
 ## Where this fits with the other plugin docs
 
-* [Choosing an SDK](/docs/plugins/sdks) and the [JavaScript](/docs/plugins/sdks/javascript) / [Python](/docs/plugins/sdks/python) pages cover the language-specific setup, CLI, and syntax.
-* [Event handlers](/docs/plugins/handlers) is the full handler reference for *all* plugin events.
+* [Choosing an SDK](/docs/plugins) and the [JavaScript](/docs/plugins/sdks/javascript) / [Python](/docs/plugins/sdks/python) pages cover the language-specific setup, CLI, and syntax.
+* [Chat commands](/docs/plugins/commands) covers command tables, the automatic `!help`, and mixing commands with your own chat handlers.
+* [Event handlers](/docs/plugins/events) is the full handler reference for *all* plugin events.
 * [Owncast APIs](/docs/plugins/apis) is the full API reference for *all* `owncast.*` methods.
 * [Manifest reference](/docs/plugins/manifest) covers permissions, bot identity fields, and every manifest property.
 * [Contributing UI](/docs/plugins/ui) covers viewer-side UI, overlays, buttons, scripts, and styles if your chat plugin also ships frontend pieces.

@@ -15,21 +15,21 @@ tags:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This page takes you from nothing to a plugin running on your Owncast server. Plugins can be written in **JavaScript/TypeScript** or **Python** — pick the tab for your language below. If you're not sure which to use, see [Choosing an SDK](/docs/plugins/sdks); the two have full feature parity and differ mainly in plugin size.
+This page takes you from nothing to a plugin running on your Owncast server. Plugins can be written in **JavaScript** or **Python**: pick the tab for your language below. The two have full feature parity. If you're unsure, see [Choosing an SDK](/docs/plugins).
 
 ## Prerequisites
 
 - An Owncast server you can administer, version 0.3.0 or newer.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 - Node.js 18 or newer (`node --version` to check) for the `@owncast/plugin-sdk` toolchain.
 
 </TabItem>
 <TabItem value="py" label="Python">
 
-- Python 3.9 or newer, and `pip` or [`uv`](https://docs.astral.sh/uv/) to install the `owncast-plugin-sdk` toolchain.
+- Python 3.8 or newer, and `pip` or [`uv`](https://docs.astral.sh/uv/) to install the `owncast-plugin-sdk` toolchain.
 
 </TabItem>
 </Tabs>
@@ -39,7 +39,7 @@ This page takes you from nothing to a plugin running on your Owncast server. Plu
 A plugin's identifier is its **slug**: lowercase letters, digits, and hyphens, starting with a letter. It's used as the directory name, the output filename, and the URL prefix.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 Scaffold a project with `create-owncast-plugin`, passing the slug:
 
@@ -68,47 +68,37 @@ my-plugin/
 </TabItem>
 <TabItem value="py" label="Python">
 
-Install the SDK to get the `owncast-plugin-py` CLI (it downloads and caches the build toolchain on first use):
+Install the SDK to get the `owncast-plugin-py` CLI, then scaffold a project with `new`:
 
 ```sh
 pip install owncast-plugin-sdk    # or:  uv tool install owncast-plugin-sdk
+owncast-plugin-py new my-plugin
+cd my-plugin
 ```
 
-There's no scaffolder for Python yet, so create the directory by hand:
+You now have:
 
 ```text
 my-plugin/
 ├── plugin.manifest.json     display name, slug, version, permissions
+├── INSTRUCTIONS.md          optional, rendered as a tab in the admin
 ├── src/
-│   └── plugin.py            your code
+│   └── plugin.py            your code, with a sample handler
 └── __tests__/
-    └── plugin.test.json     optional scenario test
-```
-
-A minimal `plugin.manifest.json`:
-
-```json
-{
-  "api": "1",
-  "name": "My Plugin",
-  "slug": "my-plugin",
-  "version": "0.1.0",
-  "description": "An Owncast plugin",
-  "permissions": ["chat.send"]
-}
+    └── plugin.test.json     a sample scenario test
 ```
 
 </TabItem>
 </Tabs>
 
-The manifest has both a human-readable display name (`"name": "My Plugin"`) and a slug (`"slug": "my-plugin"`). The display name is what admins see in lists; the slug is the canonical identifier. See the [manifest reference](/docs/plugins/manifest#name-and-slug) for the rules.
+The manifest has both a human-readable display name (`"name": "My Plugin"`) and a slug (`"slug": "my-plugin"`). The display name is what admins see in lists. The slug is the canonical identifier. See the [manifest reference](/docs/plugins/manifest#name-and-slug) for the rules.
 
 ## 2. Write some code
 
-A handler reacts to an event; the SDK derives the manifest's subscription list from which handlers you define, so there's nothing else to keep in sync. Here's an echo bot:
+A handler reacts to an event. The SDK derives the manifest's subscription list from which handlers you define, so there's nothing else to keep in sync. Here's an echo bot:
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 Open `src/plugin.js`:
 
@@ -138,14 +128,14 @@ def echo(msg):
 </TabItem>
 </Tabs>
 
-See the [handlers reference](/docs/plugins/handlers) for everything you can hook into, and the [APIs reference](/docs/plugins/apis) for every `owncast.*` method.
+See the [handlers reference](/docs/plugins/events) for everything you can hook into, and the [APIs reference](/docs/plugins/apis) for every `owncast.*` method.
 
 ## 3. Build the plugin
 
-This produces `my-plugin.ocpkg` in your project root: a single file containing your manifest, the compiled plugin, and the contents of `public/` and `assets/`. The `.ocpkg` is the distribution format — that one file is everything an admin needs.
+This produces `my-plugin.ocpkg` in your project root: a single file containing your manifest, the compiled plugin, and the contents of `public/` and `assets/`. The `.ocpkg` is the distribution format: that one file is everything an admin needs.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```sh
 npm run package
@@ -166,7 +156,7 @@ owncast-plugin-py package my-plugin
 Each scenario fires events through the real plugin runtime with mocked side effects, so a passing test means the same behavior in production. See the [testing guide](/docs/plugins/testing) for the full data model.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```sh
 npm test
@@ -187,7 +177,7 @@ owncast-plugin-py test my-plugin
 Serves the plugin at `http://localhost:8080/plugins/my-plugin/` for curling endpoints, opening static pages in a browser, or triggering event handlers through the `/_dev/` helper endpoints (for example `POST /_dev/chat`). Restart the dev server when you change your code.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```sh
 npm run serve
@@ -217,9 +207,9 @@ If the plugin declares permissions, the admin reviews them in the **Permissions*
 
 ## What to read next
 
-- [Choosing an SDK](/docs/plugins/sdks) and its [JavaScript](/docs/plugins/sdks/javascript) / [Python](/docs/plugins/sdks/python) pages for the full language-specific reference.
+- [Choosing an SDK](/docs/plugins) and its [JavaScript](/docs/plugins/sdks/javascript) / [Python](/docs/plugins/sdks/python) pages for the full language-specific reference.
 - [Manifest reference](/docs/plugins/manifest) for the full schema for `plugin.manifest.json`.
-- [Handlers reference](/docs/plugins/handlers) for every event you can subscribe to.
+- [Handlers reference](/docs/plugins/events) for every event you can subscribe to.
 - [Owncast APIs](/docs/plugins/apis) for every method you can call from plugin code.
 
 ## When things go wrong

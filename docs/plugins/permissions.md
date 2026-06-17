@@ -18,7 +18,7 @@ Every Owncast plugin runs in a sandbox with no implicit access to anything outsi
 When an admin installs a plugin, the **Permissions** tab on the plugin's detail page lists exactly what the plugin asked for, in plain language. That's the trust boundary: an admin can install a third-party plugin without auditing every line of code, because the manifest is the upper bound on what the plugin can do.
 
 :::info Available in every SDK
-The permission identifiers and the trust model below are the same regardless of which SDK you use. `owncast.*` methods are referenced here by their canonical names; for the exact spelling in your language, see the **[JavaScript / TypeScript](/docs/plugins/sdks/javascript)** or **[Python](/docs/plugins/sdks/python)** SDK reference.
+The permission identifiers and the trust model below are the same regardless of which SDK you use. `owncast.*` methods are referenced here by their canonical names. For the exact spelling in your language, see the **[JavaScript](/docs/plugins/sdks/javascript)** or **[Python](/docs/plugins/sdks/python)** SDK reference.
 :::
 
 ## How it works
@@ -115,7 +115,7 @@ Grants `owncast.storage.upload(name, bytes)`: upload a file to Owncast's public 
 
 Grants `owncast.fs.*`: a private, sandboxed filesystem at `data/plugin-data/<your-slug>/` that your plugin can read, write, list, and delete within. Useful for caches, generated data files, append-style logs, or anything you need to persist as real files rather than key/value strings.
 
-Unlike `storage.upload`, these files stay **server-side** — they're never served over HTTP. Every path is confined to your plugin's own directory: a plugin cannot read another plugin's files or escape its sandbox (`../` and absolute paths are collapsed back inside).
+Unlike `storage.upload`, these files stay **server-side**: they're never served over HTTP. Every path is confined to your plugin's own directory: a plugin cannot read another plugin's files or escape its sandbox (`../` and absolute paths are collapsed back inside).
 
 ### `network.fetch`
 
@@ -220,7 +220,7 @@ None of the four viewer-injection fields require `http.serve`. The host reads ea
 | `videoconfig.write`  | Modify the video output config (applies on the next stream start)                                                                                 |
 | `notifications.send` | Send Discord, browser-push, or fediverse notifications                                                                                            |
 | `fediverse.post`     | Public-post to the fediverse (rate-limited)                                                                                                       |
-| `ui.modify`          | Add action buttons or tabs to Owncast's viewer chrome; inline plugin CSS, JavaScript, or HTML into the viewer page                                |
+| `ui.modify`          | Add action buttons or tabs to Owncast's viewer chrome. Inline plugin CSS, JavaScript, or HTML into the viewer page                                |
 
 ## Principle of least privilege
 

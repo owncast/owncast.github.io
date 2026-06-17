@@ -17,7 +17,7 @@ import TabItem from '@theme/TabItem';
 
 Plugins can serve their own URLs. Once you declare `http.serve` in your manifest, the URL space at `/plugins/<your-slug>/` is yours: static files from your `public/` directory go out verbatim, and anything else falls through to your request handler.
 
-This page covers serving HTTP, request routing, the request and response limits the host enforces, and how to push realtime events to viewer browsers. Code is shown for both SDKs; see [JavaScript](/docs/plugins/sdks/javascript) or [Python](/docs/plugins/sdks/python) for install and setup.
+Code is shown for both SDKs. See [JavaScript](/docs/plugins/sdks/javascript) or [Python](/docs/plugins/sdks/python) for install and setup.
 
 ## Routing
 
@@ -39,10 +39,10 @@ flowchart LR
 
 A request's path is relative to your plugin's namespace: a request to `/plugins/my-plugin/api/messages` reaches your handler as `/api/messages` (the query string is excluded). The handler reads query parameters and the request body from the request, and returns a response with a status, optional headers, and an optional body.
 
-There are two routing styles. In **JavaScript** you write a single `onHttpRequest(req)` handler and branch on `req.method` / `req.path`. In **Python** you declare per-method routes with decorators; a request whose path matches a route but not its method gets an automatic **405**, and an unmatched path falls through to the bare catch-all, else **404**.
+There are two routing styles. In **JavaScript** you write a single `onHttpRequest(req)` handler and branch on `req.method` / `req.path`. In **Python** you declare per-method routes with decorators. A request whose path matches a route but not its method gets an automatic **405**, and an unmatched path falls through to the bare catch-all, else **404**.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 const { definePlugin } = require("@owncast/plugin-sdk");
@@ -86,16 +86,16 @@ def fallback(req):
     return {"status": 404}
 ```
 
-Routes are exact and plugin-relative; read query params from `req.query`. A handler returns a `dict` (`{status, body, headers}`), a `str` (→ 200), or `None` (→ 204). `@plugin.route(path, methods=[...])` covers multiple methods on one path.
+Routes are exact and plugin-relative. Read query params from `req.query`. A handler returns a `dict` (`{status, body, headers}`), a `str` (→ 200), or `None` (→ 204). `@plugin.route(path, methods=[...])` covers multiple methods on one path.
 
 </TabItem>
 </Tabs>
 
-The `manifest.admin.pages` gate at the top is covered in [UI: Admin pages](/docs/plugins/ui#admin-pages); from the perspective of HTTP serving it's just a 401-before-your-handler-runs filter applied to matching paths.
+The `manifest.admin.pages` gate at the top is covered in [UI: Admin pages](/docs/plugins/ui#admin-pages). From the perspective of HTTP serving it's just a 401-before-your-handler-runs filter applied to matching paths.
 
 ## Static files
 
-The `public/` directory holds files served at `/plugins/<your-slug>/<path>`. A separate `assets/` directory holds files the host reads internally for manifest fields that inline content (`styles`, `scripts`, `extraPageContent`); those are not reachable through the plugin's URL space.
+The `public/` directory holds files served at `/plugins/<your-slug>/<path>`. A separate `assets/` directory holds files the host reads internally for manifest fields that inline content (`styles`, `scripts`, `extraPageContent`). Those are not reachable through the plugin's URL space.
 
 ```text
 my-plugin/
@@ -113,8 +113,8 @@ A request to `/plugins/my-plugin/` (no trailing path) serves `public/index.html`
 * Request bodies are capped at 1 MB.
 * Response bodies are capped at 10 MB.
 * Path traversal (`..`) in URLs is blocked at the host level. You'll never see it in your handler's path.
-* Response headers are filtered through an allowlist. You can set `Content-Type`, `Cache-Control`, `Set-Cookie`, `Location`, `ETag`, `Last-Modified`, `Vary`, `Link`, and CORS (`Access-Control-*`) headers. Owncast-owned headers (`Server`, `Content-Security-Policy`, `Strict-Transport-Security`, `X-Frame-Options`) are blocked.
-* Cookies you set apply to your plugin's URL space by default (`/plugins/<your-slug>/`). If you want a cookie to be sent on requests outside that path, set `Path=...` explicitly; otherwise the browser scopes it to your namespace and won't leak it into other plugins or into Owncast's own paths.
+* Response headers are filtered through an allowlist. You can set `Content-Type`, `Content-Encoding`, `Content-Language`, `Cache-Control`, `Set-Cookie`, `Location`, `ETag`, `Last-Modified`, `Vary`, `Link`, and CORS (`Access-Control-*`) headers. Owncast-owned headers (`Server`, `Content-Security-Policy`, `Strict-Transport-Security`, `X-Frame-Options`) are blocked.
+* Cookies you set apply to your plugin's URL space by default (`/plugins/<your-slug>/`). If you want a cookie to be sent on requests outside that path, set `Path=...` explicitly. Otherwise the browser scopes it to your namespace and won't leak it into other plugins or into Owncast's own paths.
 * Each request is time-capped at 5 seconds before the host returns a `504` and discards your response.
 
 ## Public vs. authenticated
@@ -124,7 +124,7 @@ Endpoints are public by default. To make something admin-only, either check whet
 For requests made by a chat user with a valid user-token, the request carries the user's identity (`id`, display name, and `scopes`). Useful for per-user dashboards or moderator-only tools:
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
@@ -158,7 +158,7 @@ For paths declared in `manifest.admin.pages[]`, the host returns `401` before yo
 
 For pushing live updates to a browser (an overlay that reacts to chat, a dashboard that ticks viewer counts, an alert widget) declare `http.sse` and use `owncast.sse.send`.
 
-You do not open or hold the connection yourself. Your request handler can't stream — each call is a single buffered request/response. The host owns the long-lived connection and exposes a ready-made endpoint at `/plugins/<your-slug>/_sse/<channel>`. Your plugin pushes. The host fans each message out to every connected browser.
+You do not open or hold the connection yourself. Your request handler can't stream: each call is a single buffered request/response. The host owns the long-lived connection and exposes a ready-made endpoint at `/plugins/<your-slug>/_sse/<channel>`. Your plugin pushes. The host fans each message out to every connected browser.
 
 ```mermaid
 sequenceDiagram
@@ -180,10 +180,10 @@ sequenceDiagram
 
 ### Plugin side
 
-Push from any handler — for example, from your chat handler — by calling `owncast.sse.send(channel, event, data)`:
+Push from any handler, for example, from your chat handler, by calling `owncast.sse.send(channel, event, data)`:
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 const { definePlugin, owncast } = require("@owncast/plugin-sdk");
@@ -219,11 +219,11 @@ def push(msg):
 * `event`: the event name the browser listens for (`addEventListener("chat", ...)`). Pass `""` for the browser's default `message` event.
 * `data`: the payload. Strings are sent as-is. Anything else is JSON-encoded for you.
 
-Sends are fire-and-forget. The call returns immediately and never blocks, even if no one is connected or a client is slow. Slow clients drop frames rather than stall your plugin. There are also SSE-connection lifecycle events (a viewer's stream opening and closing) you can subscribe to — see the [handlers reference](/docs/plugins/handlers#sse-events).
+Sends are fire-and-forget. The call returns immediately and never blocks, even if no one is connected or a client is slow. Slow clients drop frames rather than stall your plugin. There are also SSE-connection lifecycle events (a viewer's stream opening and closing) you can subscribe to: see the [handlers reference](/docs/plugins/events#sse-events).
 
 ### Browser side
 
-Standard `EventSource` API on the viewer page. No library — this runs in the browser, so it's always JavaScript whatever language your plugin is written in:
+Standard `EventSource` API on the viewer page. No library. This runs in the browser, so it's always JavaScript whatever language your plugin is written in:
 
 ```html
 <!-- public/index.html, served at /plugins/my-plugin/ -->
@@ -259,7 +259,7 @@ The manifest declares the two permissions the overlay needs:
 The plugin subscribes to chat messages and pushes each one to the `overlay` SSE channel:
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 // src/plugin.js

@@ -1,8 +1,8 @@
 ---
-title: Packaging & distribution
-description: Bundle your plugin into a .ocpkg, ship an icon for the admin UI, and install on a server.
+title: Packaging & publishing
+description: Bundle your plugin into a .ocpkg, install it on a server, and list it in the public plugin directory.
 sidebar_position: 10
-sidebar_label: Packaging
+sidebar_label: Packaging & publishing
 toc_min_heading_level: 2
 toc_max_heading_level: 3
 tags:
@@ -21,7 +21,7 @@ A plugin's distribution format is the `.ocpkg` file: a single bundle containing 
 ## Building the package
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```sh
 npm run package
@@ -76,7 +76,7 @@ my-plugin/
 └── assets/
 ```
 
-Use this for setup steps, configuration notes, what permissions are requested and why, and anything else an admin needs to know after installing. Plugins without one show no Instructions tab. The filename is fixed (`INSTRUCTIONS.md`); no `http.serve` permission required.
+Use this for setup steps, configuration notes, what permissions are requested and why, and anything else an admin needs to know after installing. Plugins without one show no Instructions tab. The filename is fixed (`INSTRUCTIONS.md`). No `http.serve` permission required.
 
 The file is admin-facing, so write it for the streamer who installed your plugin and is opening the admin UI to figure out how to use it. README-style developer-facing notes belong in your repo's README instead.
 
@@ -89,7 +89,7 @@ The file is admin-facing, so write it for the streamer who installed your plugin
 - The contents of your `public/` directory if you have one (web-served at `/plugins/<slug>/`)
 - The contents of your `assets/` directory if you have one (host-read for manifest fields that inline content)
 
-No build inputs — `node_modules`, `package.json`, `pyproject.toml`, or your `.js`/`.ts`/`.py` source. Those produce the package; they aren't shipped in it. The admin who installs your plugin never sees them.
+No build inputs: `node_modules`, `package.json`, `pyproject.toml`, or your `.js`/`.ts`/`.py` source. Those produce the package. They aren't shipped in it. The admin who installs your plugin never sees them.
 
 ## Installing on a server
 
@@ -101,7 +101,7 @@ If the admin UI isn't an option (automation, no browser access, scripted deploys
 scp my-plugin.ocpkg user@your-owncast-server:/path/to/owncast/data/plugins/
 ```
 
-The server scans this directory periodically; the plugin appears in the admin's **Plugins** page within a couple of seconds.
+The server scans this directory periodically. The plugin appears in the admin's **Plugins** page within a couple of seconds.
 
 In either case, finish the install in the admin:
 
@@ -129,7 +129,7 @@ Versioning is for humans. Semver is recommended but not enforced.
 ## Disabling and uninstalling
 
 - Disable keeps the plugin installed but stops loading it. The admin's choice is persisted across restarts. Toggle **Enabled** back on to load it again.
-- Uninstall removes the plugin entirely. From the admin's **Plugins** page click the trash icon on the plugin's row and confirm. (You can also remove the `.ocpkg` from `data/plugins/` directly; the next scan picks up the deletion.)
+- Uninstall removes the plugin entirely. From the admin's **Plugins** page click the trash icon on the plugin's row and confirm. (You can also remove the `.ocpkg` from `data/plugins/` directly, and the next scan picks up the deletion.)
 
 ## Distribution checklist
 
@@ -141,7 +141,31 @@ Before you publish a plugin:
 - The README in your repo explains what it does, what permissions it asks for and why, and what to configure (env vars, admin-page settings, and so on).
 - Tests pass. Your SDK's test command should be green.
 - The icon is included if you have one.
-- An `INSTRUCTIONS.md` ships with anything an admin needs to know after install — setup steps, configuration notes, why each permission is requested. Plugins with non-obvious behavior or required configuration should ship one; trivial plugins (a hello-world chat handler) don't need it.
+- An `INSTRUCTIONS.md` ships with anything an admin needs to know after install: setup steps, configuration notes, why each permission is requested. Plugins with non-obvious behavior or required configuration should ship one. Trivial plugins (a hello-world chat handler) don't need it.
+
+## Publishing to the directory
+
+Listing your plugin in the public directory at [owncast.directory](https://owncast.directory) is optional. A `.ocpkg` is self-contained, so you can always hand it to an admin directly. The directory just makes your plugin discoverable and gives admins one-click install and updates.
+
+A few manifest fields shape your listing, so fill them in first: `name` (the display name), `version` (bump it for every update), `slug` (your permanent identifier, see [Manifest](/docs/plugins/manifest#name-and-slug)), `description` (the one-line summary on your card), `permissions` (keep them minimal, admins review them), and an optional `icon.png`.
+
+### Sign in
+
+The directory uses passwordless, magic-link sign-in. Go to [owncast.directory/plugins/login](https://owncast.directory/plugins/login), enter your email, and click the link in your inbox. Your email is your author identity, tied to the plugins you own. On your account page you can set an optional display name that appears as the author on your listings.
+
+### Submit
+
+Go to [owncast.directory/plugins/submit](https://owncast.directory/plugins/submit) and upload your `.ocpkg`. The directory reads your manifest, validates the package, and publishes the version. Submission is done through the website, with no command-line publish step today. The form also takes a few optional extras: a preview image (a screenshot, PNG or JPEG up to 5 MB), a homepage link, browse tags, and a summary that overrides the manifest description.
+
+### Ownership and updates
+
+- The first submitter owns the slug. When you publish a slug for the first time, it is bound to your account and nobody else can publish under it. A submission for a slug owned by another author is rejected.
+- Each version is published once. To ship an update, bump `version` in your manifest, re-package, and submit again.
+- Manage your plugins at [owncast.directory/plugins/account](https://owncast.directory/plugins/account), where you can see everything you have published and remove a listing.
+
+### What operators see
+
+In the directory's Browse view your plugin shows its name, author, description, icon, latest version, and preview image if you uploaded one. When an admin installs it, Owncast shows the permissions your manifest requests, renders your `INSTRUCTIONS.md`, and lists any chat commands you register. That metadata is what an operator uses to decide whether to trust and enable your plugin, so write it with that reader in mind.
 
 ## Where to go next
 

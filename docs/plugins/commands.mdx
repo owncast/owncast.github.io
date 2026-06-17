@@ -1,0 +1,147 @@
+---
+title: Chat commands
+description: Register a chat command table, get an automatic !help, and compose commands with your own chat handlers and filters.
+sidebar_position: 6
+sidebar_label: Commands
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - plugins
+  - chat
+  - commands
+  - bots
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Plugins that respond to chat commands like `!uptime` or `!so` can declare a command table instead of hand-rolling prefix parsing, aliases, moderator gates, and cooldown tracking. The host routes the commands for you and answers `!help` automatically.
+
+Commands build on the [chat basics](/docs/plugins/chat). That page covers the chat message payload, sending messages, and filters. This page is just the command layer on top.
+
+## Register a command table
+
+A command table gives you:
+
+* a configurable command prefix (default `!`)
+* per-command `description`, `usage`, and `aliases`
+* per-user cooldowns, clocked off `msg.timestamp`
+* moderator-only gating based on the sender's scopes
+* an automatic, host-owned `!help`
+* a fallback for unrecognized commands.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { definePlugin } = require("@owncast/plugin-sdk");
+
+module.exports = definePlugin({
+  commandPrefix: "!", // optional, default "!"
+  commands: {
+    uptime: {
+      description: "How long we've been live",
+      run: (ctx) => ctx.reply("we've been live a while!"),
+    },
+    so: {
+      description: "Shout out a viewer",
+      usage: "!so <name>",
+      aliases: ["shoutout"],
+      cooldownMs: 10_000, // per user, clocked off msg.timestamp
+      run: (ctx) => ctx.reply(`go follow ${ctx.args[0] || "someone cool"}`),
+    },
+    clear: {
+      description: "Clear the chat",
+      modOnly: true, // requires the sender's scopes to include "MODERATOR"
+      run: (ctx) => ctx.replyPrivately("done"),
+      onDenied: (ctx) => ctx.replyPrivately("mods only"),
+    },
+  },
+  onUnknownCommand: (ctx) => ctx.replyPrivately(`unknown command: ${ctx.command}`),
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+from owncast_plugin import plugin
+
+plugin.commands({
+    "uptime": {
+        "description": "How long we've been live",
+        "run": lambda ctx: ctx.reply("we've been live a while!"),
+    },
+    "so": {
+        "description": "Shout out a viewer",
+        "usage": "!so <name>",
+        "aliases": ["shoutout"],
+        "cooldown_ms": 10_000,  # per user, clocked off msg.timestamp
+        "run": lambda ctx: ctx.reply(f"go follow {ctx.args[0] if ctx.args else 'someone cool'}"),
+    },
+    "clear": {
+        "description": "Clear the chat",
+        "mod_only": True,  # requires the sender's scopes to include "MODERATOR"
+        "run": lambda ctx: ctx.reply_privately("done"),
+        "on_denied": lambda ctx: ctx.reply_privately("mods only"),
+    },
+}, prefix="!")  # prefix optional, default "!"
+```
+
+</TabItem>
+</Tabs>
+
+Each command handler receives a context with `msg`, `user`, `command`, `args`, `argString`, a public `reply`, and a private `replyPrivately` (whisper). `args` and `reply` are the same in both SDKs, and `argString`/`replyPrivately` are `arg_string`/`reply_privately` in Python. Gating uses the stable sender identity (`user.scopes`, `user.id`), so it's reliable rather than a display-name guess. The command table reports a message as recognized even when it was denied by cooldown or moderator gating.
+
+## `!help` is automatic
+
+The host owns `!help`. Type it in chat and the host lists every command's `description` across all enabled plugins, posted as a system message. You don't implement it, and it works even if your plugin holds no `chat.send` permission. Moderator-only commands stay hidden from non-moderators. The only thing you do to take part is declare a command table with descriptions.
+
+## Using your own chat handlers instead
+
+A command table is optional. You can always read chat yourself in an `onChatMessage` handler (see [Chat plugins](/docs/plugins/chat)) and act on whatever you want. For a single fixed command that is often enough, though it won't appear in `!help` unless you declare a command table.
+
+You can also combine the two. When you want to compose, for example to drop command invocations from public chat with a filter, use the lower-level router (`defineCommands` in JavaScript, `define_commands` in Python). It returns a callable you feed messages yourself, so you decide what happens around it:
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { definePlugin, defineCommands, filter } = require("@owncast/plugin-sdk");
+const commands = defineCommands({ commands: { /* same shape as above */ } });
+
+module.exports = definePlugin({
+  filterChatMessage: (msg) => (commands(msg) ? filter.drop("command") : filter.pass()),
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+from owncast_plugin import plugin, define_commands, filter
+
+commands = define_commands({"commands": { }})  # same shape as above
+
+@plugin.filter_chat_message
+def hide_commands(msg):
+    return filter.drop("command") if commands(msg) else filter.pass_()
+```
+
+</TabItem>
+</Tabs>
+
+## Example plugins
+
+- **mod-commands** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/mod-commands), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/mod-commands)): a custom `?` prefix and a moderator-only command with on-denied gating.
+- **stream-tracker** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/stream-tracker), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/stream-tracker)): a command table with `!uptime` and `!who`, plus stream and chat-user activity tracking.
+- **stream-ops** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/stream-ops), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/stream-ops)): a command table that reports broadcast and video telemetry.
+- **timer-bot** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/timer-bot), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/timer-bot)): a command table for reminders and countdowns (`!remind`, `!every`, `!countdown`).
+- **ip-bot** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/ip-bot), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/ip-bot)): a single `!ip` command answered with the server's public IP.
+- **relay** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/relay), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/relay)): re-emits `/announce <text>` as a broadcast announcement.
+
+## Where to go next
+
+- [Chat plugins](/docs/plugins/chat) for the chat message payload, sending messages, and filters.
+- [Handlers reference](/docs/plugins/events) for the chat events your plugin can subscribe to.
+- [APIs reference](/docs/plugins/apis) for every `owncast.*` method and the permission it needs.

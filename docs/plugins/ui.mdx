@@ -15,9 +15,9 @@ tags:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Plugins can add their own UI to Owncast in two places: tabs inside the admin (for streamer-facing settings) and action buttons under the stream (for viewer-facing actions). Both are declared in your manifest and managed by the host; you ship the content, Owncast slots it into the right chrome.
+Plugins can add their own UI to Owncast in two places: tabs inside the admin (for streamer-facing settings) and action buttons under the stream (for viewer-facing actions). Both are declared in your manifest and managed by the host. You ship the content, Owncast slots it into the right chrome.
 
-Manifest declarations on this page are plain JSON, identical whatever language you write in; dynamic-content handlers and runtime calls are shown for both SDKs. See [JavaScript](/docs/plugins/sdks/javascript) or [Python](/docs/plugins/sdks/python) for install and setup.
+Manifest declarations on this page are plain JSON, identical whatever language you write in. Dynamic-content handlers and runtime calls are shown for both SDKs. See [JavaScript](/docs/plugins/sdks/javascript) or [Python](/docs/plugins/sdks/python) for install and setup.
 
 ## Admin pages
 
@@ -40,7 +40,7 @@ Each entry has a `title`, a `path` glob, and an optional `icon`:
 | ------- | ---------------------------------------------------------------------------------------------------- |
 | `title` | The tab label inside the plugin's admin view.                                                        |
 | `path`  | A path glob under `/plugins/<your-slug>/`. Examples: `"/admin"`, `"/admin/*"`, `"/admin/api/*"`.     |
-| `icon`  | Short semantic name. Supported: `gear`, `wrench`, `user`, `lock`, `info`, `apps`, `docs`, `bell`.    |
+| `icon`  | Short semantic name. Supported: `gear`, `wrench`, `user`, `users`, `lock`, `info`, `apps`, `docs`, `bell` (aliases like `settings` and `notifications` also work).    |
 
 ### How they're rendered
 
@@ -50,7 +50,7 @@ The host auto-injects an admin-themed stylesheet into HTML responses on admin pa
 
 ### Sandbox
 
-The page runs in a sandboxed `<iframe>`. Your scripts run, forms submit, and same-origin `fetch` to your own `/plugins/<your-slug>/` endpoints works. Pages may also **open popups**, **trigger file downloads** (e.g. a blob or data-URL `<a download>` you click from script), and use **`confirm()` / `alert()` / `prompt()`** dialogs. The sandbox is the only constraint you'll usually notice; if a browser feature seems silently blocked, the iframe sandbox is the first thing to check.
+The page runs in a sandboxed `<iframe>`. Your scripts run, forms submit, and same-origin `fetch` to your own `/plugins/<your-slug>/` endpoints works. Pages may also **open popups**, **trigger file downloads** (e.g. a blob or data-URL `<a download>` you click from script), and use **`confirm()` / `alert()` / `prompt()`** dialogs. The sandbox is the only constraint you'll usually notice. If a browser feature seems silently blocked, the iframe sandbox is the first thing to check.
 
 ### Auth gating
 
@@ -78,7 +78,7 @@ Duplicate `title` is fine. Both globs feed one tab.
 1. Put admin HTML, CSS, and JS in `public/admin/index.html` (and friends).
 2. Expose admin APIs via your request handler at `/admin/api/...` (see [Serving HTTP](/docs/plugins/http)).
 3. Declare the relevant globs in `manifest.admin.pages[].path`.
-4. Visit `/admin/plugins/configure?id=<your-slug>` in the admin UI. Owncast uses your existing admin login to gate the page; no extra prompt.
+4. Visit `/admin/plugins/configure?id=<your-slug>` in the admin UI. Owncast uses your existing admin login to gate the page. No extra prompt.
 
 ## Action buttons
 
@@ -140,10 +140,10 @@ The host enforces:
 
 ### Runtime additions
 
-A plugin can append more action buttons at runtime, without a reload, by calling `owncast.actions.add(...)` with a single action or an array of them. Each runtime entry goes through the same validation as `manifest.actions`, and is persisted in the plugin's config, so additions survive a reload. `owncast.actions.clear()` drops every runtime addition; manifest-declared actions remain.
+A plugin can append more action buttons at runtime, without a reload, by calling `owncast.actions.add(...)` with a single action or an array of them. Each runtime entry goes through the same validation as `manifest.actions`, and is persisted in the plugin's config, so additions survive a reload. `owncast.actions.clear()` drops every runtime addition. Manifest-declared actions remain.
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 const { definePlugin, owncast } = require("@owncast/plugin-sdk");
@@ -207,7 +207,7 @@ Requires `ui.modify` only (the plugin paints inside Owncast's chrome). `http.ser
 
 The host reads each file at request time and concatenates the bytes in front of an `/* plugin: <your-slug> ... */` comment, so devtools "view source" attributes a rule back to the plugin that shipped it. Disabling the plugin drops its contribution from `customStyles` on the next page load.
 
-The CSS body runs against the live viewer DOM, so your selectors target whatever the page renders. Scoping every rule under a single root id is a defensive habit worth keeping; without it your rules can match elements the host page renders and produce surprising regressions.
+The CSS body runs against the live viewer DOM, so your selectors target whatever the page renders. Scoping every rule under a single root id is a defensive habit worth keeping. Without it your rules can match elements the host page renders and produce surprising regressions.
 
 ### Caveat: relative URLs in CSS
 
@@ -224,9 +224,9 @@ Plugins can extend the viewer page's runtime by bundling JavaScript files and li
 }
 ```
 
-Same permission and path rules as `styles`, applied to `.js` files (only `ui.modify` is needed; the host reads from `assets/` and inlines into `/customjavascript`). Each contribution is prefixed with a `// plugin: <your-slug> ...` comment.
+Same permission and path rules as `styles`, applied to `.js` files (only `ui.modify` is needed, and the host reads from `assets/` and inlines into `/customjavascript`). Each contribution is prefixed with a `// plugin: <your-slug> ...` comment.
 
-These are **viewer-page** scripts that run in the browser — always JavaScript, regardless of which language you wrote the server-side plugin in.
+These are **viewer-page** scripts that run in the browser, always JavaScript, regardless of which language you wrote the server-side plugin in.
 
 ### Execution context
 
@@ -238,7 +238,7 @@ The viewer page loads `/customjavascript` as a single `<script async>` tag. Ever
 
 ### When to use it
 
-`scripts` is the right tool for plugins that need to react to viewer-side state, mount their own UI on top of the page, or talk to a backend the plugin runs at `/plugins/<your-slug>/`. For chat-driven bots, message filters, and any logic that should run server-side, the regular plugin handlers are a better fit; they run inside the host sandbox, can speak to Owncast APIs the viewer page can't reach, and don't trust user-controlled DOM.
+`scripts` is the right tool for plugins that need to react to viewer-side state, mount their own UI on top of the page, or talk to a backend the plugin runs at `/plugins/<your-slug>/`. For chat-driven bots, message filters, and any logic that should run server-side, the regular plugin handlers are a better fit. They run inside the host sandbox, can speak to Owncast APIs the viewer page can't reach, and don't trust user-controlled DOM.
 
 ## Extra page content
 
@@ -258,10 +258,10 @@ Plugins can prepend HTML to the viewer page's extra-content block. Declare `mani
 
 ### Static vs dynamic
 
-Use `content` when the HTML is the same for every viewer — announcement strips, sponsor banners, blocks of prose. Leave `content` out and implement a **page-content handler** when the content should change per viewer or draw on live data. The host calls the handler with the requested `slug` and the viewer's identity, and your handler returns the HTML string to render:
+Use `content` when the HTML is the same for every viewer: announcement strips, sponsor banners, blocks of prose. Leave `content` out and implement a **page-content handler** when the content should change per viewer or draw on live data. The host calls the handler with the requested `slug` and the viewer's identity, and your handler returns the HTML string to render:
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
@@ -289,7 +289,7 @@ def banner(ctx):
 </TabItem>
 </Tabs>
 
-See [Handlers: page content](/docs/plugins/handlers#onpagecontent-slug-user) for the payload shape. The viewer identity is present when the viewer is authenticated and absent for anonymous viewers.
+See [Handlers: page content](/docs/plugins/events#onpagecontent-slug-user) for the payload shape. The viewer identity is present when the viewer is authenticated and absent for anonymous viewers.
 
 Requires `ui.modify`. `http.serve` is not required: the HTML is inlined into the `/api/config` response, not served as a URL.
 
@@ -297,7 +297,7 @@ The bytes land at the top of the extra-content block, above any prose the admin 
 
 ### Path rules
 
-Same as `styles` and `scripts`, applied to a single `.html` entry. One file per plugin; if you want several distinct blocks, link or `<iframe>` them from the one file you ship.
+Same as `styles` and `scripts`, applied to a single `.html` entry. One file per plugin. If you want several distinct blocks, link or `<iframe>` them from the one file you ship.
 
 ### Markdown vs HTML
 
@@ -312,7 +312,7 @@ This means plugin HTML can use any element the viewer page accepts. It also mean
 ```json
 {
   "permissions": ["ui.modify", "http.serve"],
-  "extraPageContent": "panel.html",
+  "extraPageContent": { "slug": "panel", "content": "panel.html" },
   "scripts": ["panel.js"]
 }
 ```
@@ -331,7 +331,7 @@ Standalone, `extraPageContent` is the simplest path for announcement strips, spo
 
 ## Viewer-page tabs
 
-Plugins can add tabs to the viewer page's tab row (next to the built-in **About** and **Followers** tabs) by declaring `manifest.tabs[]`. Each entry requires a `slug` and a `title`; the `content` path is optional.
+Plugins can add tabs to the viewer page's tab row (next to the built-in **About** and **Followers** tabs) by declaring `manifest.tabs[]`. Each entry requires a `slug` and a `title`. The `content` path is optional.
 
 ```json
 {
@@ -353,18 +353,18 @@ Requires `ui.modify`. `http.serve` is not required: each tab's HTML is read from
 
 ### How tabs are rendered
 
-The host emits a `pluginTabs[]` array on `/api/config`. The viewer page maps each entry to a tab whose body is the inlined HTML (via the same renderer used for `extraPageContent`). Plugin tabs are appended after the built-ins in declaration order; the React key is derived from the plugin's slug so a tab unmounts only when its source plugin is disabled or removed.
+The host emits a `pluginTabs[]` array on `/api/config`. The viewer page maps each entry to a tab whose body is the inlined HTML (via the same renderer used for `extraPageContent`). Plugin tabs are appended after the built-ins in declaration order. The React key is derived from the plugin's slug so a tab unmounts only when its source plugin is disabled or removed.
 
 ### The `slug` field
 
-`slug` is a stable name you control. It's passed to your tab-content handler so a single handler can serve multiple tabs without guessing which one was requested. The slug shows up in host logs and future API calls — pick something that reads clearly, like `"music"` or `"stream-info"`. You can change `title` freely; changing `slug` is a breaking change if any code keys on it.
+`slug` is a stable name you control. It's passed to your tab-content handler so a single handler can serve multiple tabs without guessing which one was requested. The slug shows up in host logs and future API calls, so pick something that reads clearly, like `"music"` or `"stream-info"`. You can change `title` freely. Changing `slug` is a breaking change if any code keys on it.
 
 ### Dynamic tab content
 
 When a tab has no `content` file, the host calls your **tab-content handler** each time a viewer loads that tab. Implement it when content should change per viewer or pull live data. The host calls the handler with the requested `slug` and the viewer's identity, and your handler returns the HTML string for the tab body:
 
 <Tabs groupId="plugin-lang">
-<TabItem value="js" label="JavaScript / TypeScript" default>
+<TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
@@ -389,7 +389,7 @@ def stream_info(ctx):
 </TabItem>
 </Tabs>
 
-See [Handlers: tab content](/docs/plugins/handlers#ontabcontent-slug-user) for the payload shape. The viewer identity is present when authenticated and absent for anonymous viewers.
+See [Handlers: tab content](/docs/plugins/events#ontabcontent-slug-user) for the payload shape. The viewer identity is present when authenticated and absent for anonymous viewers.
 
 ### Path rules
 
@@ -403,9 +403,9 @@ Same as `extraPageContent`, applied per entry:
 
 ### Tab title
 
-The `title` field shows up verbatim in the tab bar. Keep it short — long titles get truncated by the tab UI. There's no schema constraint on length, but anything past ~16 characters won't fit cleanly on mobile.
+The `title` field shows up verbatim in the tab bar. Keep it short: long titles get truncated by the tab UI. There's no schema constraint on length, but anything past ~16 characters won't fit cleanly on mobile.
 
 ### When to use tabs vs `extraPageContent`
 
 - `extraPageContent`: one block of HTML that sits above the tab row. Good for announcement strips, sponsor banners, anything that should always be visible.
-- `tabs`: dedicated panels the viewer clicks into. Good for content that doesn't need to compete with chat for attention — music lists, event schedules, link pages, sponsor sections you want viewers to find but not necessarily see first.
+- `tabs`: dedicated panels the viewer clicks into. Good for content that doesn't need to compete with chat for attention: music lists, event schedules, link pages, sponsor sections you want viewers to find but not necessarily see first.
