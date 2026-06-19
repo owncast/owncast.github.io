@@ -1,10 +1,35 @@
+const fs = require("fs");
 const { Octokit } = require("@octokit/core");
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
-const links = require("./links.json");
+function loadLinks() {
+  let raw;
+  try {
+    raw = fs.readFileSync("./links.json", "utf8");
+  } catch (error) {
+    console.error("Could not read links.json:", error.message);
+    console.error("Did lychee run successfully? Try running ./run.sh again.");
+    process.exit(1);
+  }
+
+  if (!raw.trim()) {
+    console.error("links.json is empty. lychee produced no output.");
+    console.error("Did lychee run successfully? Try running ./run.sh again.");
+    process.exit(1);
+  }
+
+  try {
+    return JSON.parse(raw);
+  } catch (error) {
+    console.error("links.json is not valid JSON:", error.message);
+    process.exit(1);
+  }
+}
+
+const links = loadLinks();
 const repositoryOwner = "owncast";
 const repositoryName = "owncast";
-const localLinkMessage = `\nHowever, this is a link internal to the site. So make sure you understand how the site is organized using [Hugo](https://gohugo.io/content-management/organization/), our [static site generator](https://jamstack.org/glossary/ssg/).\n`;
+const localLinkMessage = `\nHowever, this is a link internal to the site. So make sure you understand how the site is organized using [Docusaurus](https://docusaurus.io/docs), our [static site generator](https://jamstack.org/glossary/ssg/).\n`;
 
 async function searchForIssue(issueTitle) {
   // console.log("Searching for issue with title:", issueTitle);
@@ -29,9 +54,11 @@ function isInternalLink(link) {
 }
 
 async function run() {
-  for (const key in links.fail_map) {
-    if (links.fail_map.hasOwnProperty(key)) {
-      const failedUrls = links.fail_map[key];
+  // lychee >= 0.15 renamed `fail_map` to `error_map`; support both.
+  const errorMap = links.error_map || links.fail_map || {};
+  for (const key in errorMap) {
+    if (errorMap.hasOwnProperty(key)) {
+      const failedUrls = errorMap[key];
       for (const failedUrl of failedUrls) {
         const link = failedUrl.url;
         const isInternal = isInternalLink(link);

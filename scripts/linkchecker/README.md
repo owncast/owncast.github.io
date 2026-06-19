@@ -4,7 +4,7 @@ Running `run.sh` with a valid GitHub access token will go through our content di
 
 ## Dependencies
 
-- You need [lychee](https://github.com/lycheeverse/lychee) installed before running this script.
+- [lychee](https://github.com/lycheeverse/lychee) is downloaded automatically for your platform by `run.sh` (via `download-lychee.sh`). The binary is gitignored and never committed. Pin a version with the `LYCHEE_VERSION` env var, or delete the local `./lychee` to re-download.
 - Run `npm install` to setup the Javascript dependencies.
 
 ## Usage
