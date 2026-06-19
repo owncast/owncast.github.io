@@ -1348,7 +1348,7 @@ worst of the worst away. Moderation is still the responsibility of each individu
 <p>Note: ffmpeg 5 is not currently supported with VA-API. Please use a version less than 5. Read the <a href="https://github.com/owncast/owncast/issues/2071">issue</a> about this particular issue to learn more.</p>
 <p>Links:</p>
 <ul>
-<li><a href="https://linuxreviews.org/VAAPI">VA-API at Linux Reviews</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Video_Acceleration_API">Video Acceleration API on Wikipedia</a></li>
 <li><a href="https://github.com/intel/media-driver/">Intel Media Driver for VA-API</a></li>
 </ul>
 <h3 id="nvidia-encoder-nvenc">NVIDIA Encoder (nvenc)</h3>
