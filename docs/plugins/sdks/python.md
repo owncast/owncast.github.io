@@ -40,16 +40,18 @@ The shared reference names handlers and APIs in their canonical (camelCase) form
 
 ## Install
 
-Install the SDK to get the `owncast-plugin-py` CLI:
+Clone the SDK repo and install from it to get the `owncast-plugin-py` CLI:
 
 ```sh
-pip install owncast-plugin-sdk          # or:  uv tool install owncast-plugin-sdk
+git clone https://github.com/owncast/plugin-sdk.git
+pip install ./plugin-sdk/sdks/python    # or:  uv tool install ./plugin-sdk/sdks/python
 ```
 
-:::note Not on PyPI yet
-Publishing to PyPI is the last roadmap item. Until then, install from the SDK repo:
-`pip install ./sdks/python`: or run it without installing: `uvx --from ./sdks/python owncast-plugin-py …`
-:::
+Or skip the install and run the CLI straight from the clone:
+
+```sh
+uvx --from ./plugin-sdk/sdks/python owncast-plugin-py new my-plugin
+```
 
 Scaffold a project with `owncast-plugin-py new`, passing the slug:
 
@@ -149,11 +151,9 @@ Tests are `__tests__/*.test.json` scenario files run with `owncast-plugin-py tes
 
 The full scenario data model (step types, `given` state, `expect` assertions) is on the [Testing](/docs/plugins/testing) page. Note the scenario JSON uses the **wire** field names (camelCase: `displayName`, `clientId`), since it describes host events, not your Python code.
 
-## Status and roadmap
+## Status
 
-Working today: the runtime, the `owncast-plugin-py` CLI (scaffold, build, test, serve, package), the full host API, HTTP routing, and `.ocpkg` packaging. All of the JS example plugins have Python counterparts under [`examples/python/`](https://github.com/owncast/plugin-sdk/tree/main/examples/python).
-
-Not yet (roadmap): publishing to PyPI and type stubs.
+The runtime, the `owncast-plugin-py` CLI (scaffold, build, test, serve, package), the full host API, HTTP routing, and `.ocpkg` packaging all work today. All of the JS example plugins have Python counterparts under [`examples/python/`](https://github.com/owncast/plugin-sdk/tree/main/examples/python).
 
 ## Where to go next
 
