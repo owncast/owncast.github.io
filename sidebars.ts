@@ -123,7 +123,7 @@ const sidebars: SidebarsConfig = {
         "api/activitypub",
         {
           type: "category",
-          label: "Build custom plugins",
+          label: "Owncast plugins",
           items: [
             "plugins/index",
             {

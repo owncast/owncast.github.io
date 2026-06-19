@@ -22,6 +22,8 @@ const ALL_REDIRECTS = [
   { to: "/docs/getting-started/install/providers/*", from: "/quickstart/*" },
 
   // Regular redirects
+  // Social docs restructure: enabling page merged into the main social page.
+  { to: "/social#enabling-social-features", from: "/social/enabling" },
   // Plugin docs restructure: merged/renamed pages.
   { to: "/docs/plugins/events", from: "/docs/plugins/handlers" },
   { to: "/docs/plugins/packaging", from: "/docs/plugins/publishing" },

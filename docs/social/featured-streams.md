@@ -19,7 +19,7 @@ Featuring is opt-in on both sides. You choose which servers to feature, and the 
 
 Featured streams runs over the same federation that powers Owncast's [social features](./index.mdx), so:
 
-- [Social features must be enabled](./enabling.mdx) on both your server and the one you want to feature.
+- [Social features must be enabled](./index.mdx#enabling-social-features) on both your server and the one you want to feature.
 - The other server must also be Owncast, on a recent enough version to support featured streams.
 - It must be reachable over HTTPS on the standard port (443). A server published on a non-standard port cannot be featured.
 

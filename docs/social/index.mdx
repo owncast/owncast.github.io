@@ -73,6 +73,32 @@ Each Owncast instance operates as a completely standalone server with a single u
 
 Any user on the Fediverse that is on a compatible server can follow any Owncast server that has this feature enabled.
 
+## Enabling social features
+
+Social features are disabled by default. To enable them on your Owncast server visit the _Configuration -> Social_ page.
+
+### Requirements
+
+You must be hosting your Owncast server behind SSL, with a _https_ URL. Set up a [HTTP Proxy](/docs/sslproxies/nginx) if needed.
+
+### Configuration
+
+Visit the _Configuration -> Social_ page to configure.
+
+1. You can set the username that you're seen as.
+1. You can set the text that is sent out each time you go live.
+1. You can toggle "Private mode".
+
+:::warning
+Once you set your server name and your username that's how people will see you. If you change either of those two settings you'll show up as a different user and your existing followers may no longer be following you. It is not suggested you change these after you set them.
+:::
+
+### Private mode
+
+Enabling _Private Mode_ will require those who wish to follow your server to be approved by you first. Approving followers can be done via the _Followers_ section in the admin.
+
+Private Mode will also make it so any posts you send out are only visible to your followers, not others, as they cannot be shared.
+
 ## Composing messages to your followers
 
 By clicking the _Compose_ button in the admin header you can create a post to send to your followers. This could be used to tell people when you plan on streaming, or to remind people that you're still live.
