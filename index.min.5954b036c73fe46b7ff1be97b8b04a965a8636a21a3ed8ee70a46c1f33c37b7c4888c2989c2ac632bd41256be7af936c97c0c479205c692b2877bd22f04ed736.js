@@ -1037,7 +1037,7 @@ th {
 <p>A decentralized network of different services built on standards is the future of social networking. Learn more about all the different services that make up The Fediverse and see how, much like Owncast can empower you to operate your own live streams, there are other opportunities to leave the centralized corporate social networking services in the past.</p>
 <h3 id="discover-services-and-sites-that-make-up-the-fediverse">Discover services and sites that make up The Fediverse</h3>
 <ul>
-<li><a href="https://joinfediverse.wiki/What_is_the_Fediverse%3F">What is The Fediverse?</a> on Fediverse.wiki.</li>
+<li><a href="https://jointhefediverse.net/?lang=en-us">What is The Fediverse?</a> on Fediverse&rsquo;s website.</li>
 <li><a href="https://en.wikipedia.org/wiki/Fediverse">Fediverse</a> on Wikipedia.</li>
 <li><a href="https://fediverse.party/">Fediverse.party</a></li>
 <li><a href="https://fediverse.observer/">Fediverse.observer</a></li>
