@@ -2,22 +2,23 @@
 title: Build Chat Bots and Overlays Using the Owncast API
 description: Learn about access tokens and APIs
 sidebar_position: 48
-sidebar_label: Build chat bots and overlays using the Owncast API
+sidebar_label: Build your project using the Owncast web APIs
 date: 2020-11-17T19:11:42.000Z
 ---
 
 We currently support the following actions you can make via requests from your code.
 
-| Event                    |                                                                      Endpoint                                                                                |                      Scope |
-| :--------------------    | :----------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------: |
-| System chat message      |               <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1streamtitle/post">/api/integrations/chat/system</a>                          | `CAN_SEND_SYSTEM_MESSAGES` |
-| Standard chat message    |                 <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1send/post">/api/integrations/chat/send</a>                           |        `CAN_SEND_MESSAGES` |
-| Chat action              |                <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1user/post">/api/integrations/chat/action</a>                          | `CAN_SEND_SYSTEM_MESSAGES` |
-| Remove chat message      | <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1updatemessagevisibility/post">/api/integrations/chat/messagevisibility</a>           |         `HAS_ADMIN_ACCESS` |
-| Get chat history         |                       <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat/get">/api/integrations/chat</a>                                 |         `HAS_ADMIN_ACCESS` |
-| Get connected clients    |                    <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1clients/get">/api/integrations/clients</a>                              |         `HAS_ADMIN_ACCESS` |
-| Set stream title         |               <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1streamtitle/post">/api/integrations/streamtitle</a>                          |         `HAS_ADMIN_ACCESS` |
+| Event                    |                                                                            Endpoint                                                                            |                      Scope |
+| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------: |
+| System chat message      |                     <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1streamtitle/post">/api/integrations/chat/system</a>                      | `CAN_SEND_SYSTEM_MESSAGES` |
+| Standard chat message    |                       <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1send/post">/api/integrations/chat/send</a>                       |        `CAN_SEND_MESSAGES` |
+| Chat action              |                      <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1user/post">/api/integrations/chat/action</a>                      | `CAN_SEND_SYSTEM_MESSAGES` |
+| Remove chat message      |       <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1updatemessagevisibility/post">/api/integrations/chat/messagevisibility</a>       |         `HAS_ADMIN_ACCESS` |
+| Get chat history         |                             <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat/get">/api/integrations/chat</a>                             |         `HAS_ADMIN_ACCESS` |
+| Get connected clients    |                          <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1clients/get">/api/integrations/clients</a>                          |         `HAS_ADMIN_ACCESS` |
+| Set stream title         |                     <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1streamtitle/post">/api/integrations/streamtitle</a>                      |         `HAS_ADMIN_ACCESS` |
 | system message to client | <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1system~1client~1{clientId}/post">/api/integrations/chat/system/client/`{clientId}`</a> | `CAN_SEND_SYSTEM_MESSAGES` |
+
 Visit the API documentation for each endpoint to learn more about what values are expected or will be returned.
 
 Your Owncast server will only accept actions from requests with a valid Access Token. Follow the below steps to create an access token.
@@ -51,4 +52,3 @@ Change the following `curl` command to point to your server URL and use your aut
 ```bash
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer YOURAUTHTOKEN" -d '{"body": "I am a system message!"}' http://YOUR.OWNCAST.SERVER/api/integrations/chat/system
 ```
-

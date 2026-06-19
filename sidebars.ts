@@ -44,6 +44,7 @@ const sidebars: SidebarsConfig = {
       items: [
         "configuration/index",
         "configuration/website",
+        "embed",
         "configuration/appearance",
         "configuration/custom-javascript",
         "configuration/plugins",
@@ -93,7 +94,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Embed, integrate & extend with custom functionality",
+      label: "Plugins, APIs, webhooks & your custom functionality",
       items: [
         {
           type: "category",
@@ -159,14 +160,10 @@ const sidebars: SidebarsConfig = {
             {
               type: "category",
               label: "Ship & test",
-              items: [
-                "plugins/packaging",
-                "plugins/testing",
-              ],
+              items: ["plugins/packaging", "plugins/testing"],
             },
           ],
         },
-        "embed",
         "api/actions",
       ],
     },
