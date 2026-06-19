@@ -25,10 +25,6 @@ This page documents the [ActivityPub](https://www.w3.org/TR/activitypub/) implem
 
 If you are an Owncast operator and just want to turn federation on, see [The Fediverse](/social/the-fediverse) and [Enabling social features](/social/enabling) instead. This page assumes familiarity with ActivityPub, ActivityStreams 2.0, JSON-LD, and HTTP Signatures.
 
-:::note
-Owncast builds on the [`go-fed/activity`](https://github.com/go-fed/activity) ActivityStreams vocabulary and [`go-fed/httpsig`](https://github.com/go-fed/httpsig) for HTTP signatures. Its behavior is broadly compatible with Mastodon, Pleroma, Misskey, and other ActivityPub implementations, with a small set of Owncast-specific extensions described below.
-:::
-
 ## Mental model
 
 An Owncast server federates as a **single actor** of type `Service`. There is one account per server (default username `live`), and it represents the stream itself rather than a person. Compared to a general-purpose social server, the model is intentionally narrow:
@@ -54,9 +50,7 @@ The `resource` must be an `acct:` URI whose host matches the server's configured
 ```json
 {
   "subject": "acct:live@owncast.example.com",
-  "aliases": [
-    "https://owncast.example.com/federation/user/live"
-  ],
+  "aliases": ["https://owncast.example.com/federation/user/live"],
   "links": [
     {
       "rel": "self",
@@ -196,12 +190,23 @@ Requesting the actor IRI with an ActivityStreams `Accept` header returns the act
     "mediaType": "image/png",
     "url": "https://owncast.example.com/logo/external?uc=..."
   },
-  "image": { "type": "Image", "url": "https://owncast.example.com/logo/external?uc=..." },
+  "image": {
+    "type": "Image",
+    "url": "https://owncast.example.com/logo/external?uc=..."
+  },
   "tag": [
-    { "type": "Hashtag", "name": "#owncast", "href": "https://owncast.directory/tags/owncast" }
+    {
+      "type": "Hashtag",
+      "name": "#owncast",
+      "href": "https://owncast.directory/tags/owncast"
+    }
   ],
   "attachment": [
-    { "type": "PropertyValue", "name": "Website", "value": "<a href=\"...\">...</a>" }
+    {
+      "type": "PropertyValue",
+      "name": "Website",
+      "value": "<a href=\"...\">...</a>"
+    }
   ],
   "publicKey": {
     "id": "https://owncast.example.com/federation/user/live#main-key",
@@ -215,7 +220,7 @@ Key points for an interoperating implementation:
 
 - **Actor IRI layout** is `{server}/federation/user/{username}`, and the collections hang off it: `{actor}/inbox`, `{actor}/outbox`, `{actor}/followers`.
 - **`following`** is requested at `{actor}/following` but always returns `404` — Owncast never exposes a following list.
-- **`manuallyApprovesFollowers`** reflects whether the server is in *private* federation mode. When `true`, follows are not auto-accepted.
+- **`manuallyApprovesFollowers`** reflects whether the server is in _private_ federation mode. When `true`, follows are not auto-accepted.
 - **`discoverable`** is always `true` (using the `toot:` namespace semantics).
 - The **public key** lives at `{actor}#main-key`, is an RSA-2048 key in PEM (PKIX) form, and is what you use to verify the server's HTTP signatures.
 
@@ -250,13 +255,14 @@ In practice this means: sign `(request-target) host date digest` with an RSA key
 
 All outbound activities originate from the server actor and are delivered to follower inboxes (preferring `sharedInbox` where a follower advertises one). Public activities are addressed to `https://www.w3.org/ns/activitystreams#Public` in `to` with the followers collection in `cc`; in private mode they are addressed only to the followers collection.
 
-| Activity | Object | When | Sent to |
-| --- | --- | --- | --- |
-| `Create` | `Note` | The stream goes live (the "go live" message); other public posts | Followers (+ Public) |
-| `Update` | `Service` | The server profile (name, avatar, summary, etc.) changes | Followers |
-| `Follow` | actor IRI | An operator follows another Owncast server (featured-streams flow) | The target server |
-| `Offer` | server URL | Periodically while live, as a stream "ping" | Followers |
-| `Accept` | inbound `Follow` | In response to a received `Follow` | The follower |
+| Activity | Object           | When                                                               | Sent to              |
+| -------- | ---------------- | ------------------------------------------------------------------ | -------------------- |
+| `Create` | `Note`           | The stream goes live (the "go live" message); other public posts   | Followers (+ Public) |
+| `Update` | `Service`        | The server profile (name, avatar, summary, etc.) changes           | Followers            |
+| `Follow` | actor IRI        | An operator follows another Owncast server (featured-streams flow) | The target server    |
+| `Offer`  | server URL       | Periodically while live, as a stream "ping"                        | Directory followers  |
+| `Accept` | inbound `Follow` | In response to a received `Follow`                                 | The follower         |
+| `Reject` | inbound `Follow` | When the operator removes a directory that was listing this server | That directory       |
 
 ### Create / Note — going live
 
@@ -266,7 +272,7 @@ This is the activity most consumers care about: subscribe by following the actor
 
 ### Offer / stream ping (outbound)
 
-This is an Owncast extension that supports the **featured-streams / mini-directory** feature. While live, the server periodically sends an `Offer` activity whose `object` is the server URL, carrying [Owncast custom metadata](#owncast-custom-namespace) (stream status, title, description, server name, logo, tags). It lets a receiving Owncast server keep a directory of live streams fresh without polling. The matching offline signal is the inbound [`Leave`](#server-to-server-activities) activity.
+This is an Owncast extension that supports the **featured-streams / mini-directory** feature. While live, the server periodically sends an `Offer` activity whose `object` is the server URL, carrying [Owncast custom metadata](#owncast-custom-namespace) (stream status, title, description, server name, logo, tags). It lets a receiving directory keep its list of live streams fresh without polling. The matching offline signal is the inbound [`Leave`](#server-to-server-activities) activity. Owncast sends `Offer` and `Leave` only to followers that identified themselves as a directory (see [the custom namespace](#owncast-custom-namespace)), never to ordinary fan followers.
 
 ### Update, Follow, Accept
 
@@ -278,18 +284,18 @@ This is an Owncast extension that supports the **featured-streams / mini-directo
 
 Deliver these by POSTing a signed activity to the actor's `inbox`. Owncast queues, signature-verifies, and dispatches each one.
 
-| Activity | Handling |
-| --- | --- |
-| `Follow` | Stores the follower; auto-approves and returns `Accept` in public mode (held for approval in private mode). Emits a `FediverseEngagementFollow` event. |
-| `Undo` → `Follow` | Removes the follower. |
-| `Like` | Records an engagement against a local object. Emits `FediverseEngagementLike`. |
-| `Announce` | Boost/repost of a local object. Records an engagement and emits `FediverseEngagementRepost`. |
-| `Accept` → `Follow` | Marks a remote Owncast server we followed as having accepted (featured-streams flow). |
-| `Reject` → `Follow` | Marks our follow of a remote server as rejected. |
-| `Offer` | A stream ping from another Owncast server. If it carries `streamStatus: "live"` Owncast marks that server online in its federated-servers table and stores the streamed metadata. |
-| `Leave` | The offline counterpart to `Offer`: marks the remote Owncast server's stream offline. |
-| `Update` → `Person`/`Service` | Updates stored metadata (display name, inbox, shared inbox, avatar) for an existing follower. |
-| `Create` | **Not accepted.** Owncast intentionally rejects inbound `Create` activities — you cannot post or reply into an Owncast server over ActivityPub. |
+| Activity                      | Handling                                                                                                                                                                                                                                                                                                |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Follow`                      | Stores the follower; auto-approves and returns `Accept` in public mode (held for approval in private mode). A follow carrying the `ns#directory` marker is always held for manual approval regardless of mode, and does not emit the follow event. Otherwise emits a `FediverseEngagementFollow` event. |
+| `Undo` → `Follow`             | Removes the follower.                                                                                                                                                                                                                                                                                   |
+| `Like`                        | Records an engagement against a local object. Emits `FediverseEngagementLike`.                                                                                                                                                                                                                          |
+| `Announce`                    | Boost/repost of a local object. Records an engagement and emits `FediverseEngagementRepost`.                                                                                                                                                                                                            |
+| `Accept` → `Follow`           | Marks a remote Owncast server we followed as having accepted (featured-streams flow).                                                                                                                                                                                                                   |
+| `Reject` → `Follow`           | Marks our follow of a remote server as rejected.                                                                                                                                                                                                                                                        |
+| `Offer`                       | A stream ping from another Owncast server. If it carries `streamStatus: "live"` Owncast marks that server online in its federated-servers table and stores the streamed metadata.                                                                                                                       |
+| `Leave`                       | The offline counterpart to `Offer`: marks the remote Owncast server's stream offline.                                                                                                                                                                                                                   |
+| `Update` → `Person`/`Service` | Updates stored metadata (display name, inbox, shared inbox, avatar) for an existing follower.                                                                                                                                                                                                           |
+| `Create`                      | **Not accepted.** Owncast intentionally rejects inbound `Create` activities — you cannot post or reply into an Owncast server over ActivityPub.                                                                                                                                                         |
 
 Two important guards:
 
@@ -300,7 +306,7 @@ Two important guards:
 
 `Offer`, `Leave`, `Accept`, and `Reject` together form the Owncast-to-Owncast "featured streams" protocol. If you are building a directory or aggregator that wants to participate, the pattern is:
 
-1. Send a `Follow` to the Owncast server's actor; expect an `Accept`.
+1. Send a `Follow` that sets the `ns#directory` marker (see [the custom namespace](#owncast-custom-namespace)) to the Owncast server's actor. The operator approves it by hand, then expect an `Accept`.
 2. Receive periodic `Offer` activities (with Owncast metadata) while the server is live.
 3. Receive a `Leave` when the stream ends.
 
@@ -308,38 +314,64 @@ You can equally consume only the standard `Create`/`Note` go-live posts if you d
 
 ## Owncast custom namespace
 
-Owncast adds a small set of custom JSON-LD properties under the namespace **`https://owncast.online/ns#`**. They appear as extra top-level properties on `Offer` (and related server-to-server) activities and let a receiver populate a directory entry from a single activity. All are optional and safe to ignore if you only care about standard ActivityPub.
+Owncast adds a small set of custom JSON-LD properties under the namespace **`https://owncast.online/ns#`**. The stream-metadata properties appear as extra top-level fields on `Offer` (and related server-to-server) activities and let a receiver populate a directory entry from a single activity. The `ns#directory` marker appears on a `Follow` and identifies the sender as a directory. All are optional and safe to ignore if you only care about standard ActivityPub.
 
-| Property | Type | Meaning |
-| --- | --- | --- |
-| `https://owncast.online/ns#streamStatus` | string | `"live"` or `"offline"`. Always present on server-to-server activities. |
-| `https://owncast.online/ns#streamTitle` | string | Current stream title, when set. |
-| `https://owncast.online/ns#streamDescription` | string | Server summary / description. |
-| `https://owncast.online/ns#serverName` | string | Human-readable server name. |
-| `https://owncast.online/ns#logoUrl` | string | Absolute URL to the server logo. |
-| `https://owncast.online/ns#thumbnailUrl` | string | Absolute URL to the current stream thumbnail. |
-| `https://owncast.online/ns#streamTags` | array of strings | Server metadata tags. |
+| Property                                      | Type             | Meaning                                                                 |
+| --------------------------------------------- | ---------------- | ----------------------------------------------------------------------- |
+| `https://owncast.online/ns#streamStatus`      | string           | `"live"` or `"offline"`. Always present on server-to-server activities. |
+| `https://owncast.online/ns#streamTitle`       | string           | Current stream title, when set.                                         |
+| `https://owncast.online/ns#streamDescription` | string           | Server summary / description.                                           |
+| `https://owncast.online/ns#serverName`        | string           | Human-readable server name.                                             |
+| `https://owncast.online/ns#logoUrl`           | string           | Absolute URL to the server logo.                                        |
+| `https://owncast.online/ns#thumbnailUrl`      | string           | Absolute URL to the current stream thumbnail.                           |
+| `https://owncast.online/ns#streamTags`        | array of strings | Server metadata tags.                                                   |
+| `https://owncast.online/ns#directory`         | boolean          | Set to `true` on a `Follow` to identify the sender as a directory.      |
 
-The presence of any of these properties is how Owncast detects that a peer is itself an Owncast server. If you emit them on your own activities, an Owncast server will treat you as one.
+A directory identifies itself by setting `ns#directory` to `true` on the `Follow` it sends. That marker, and only that marker, makes Owncast treat the follow as a directory listing: it holds the follow for the operator to approve, and once approved, delivers the `Offer` and `Leave` stream pings to that follower. The stream-metadata fields above are descriptive only and do not, on their own, identify a directory.
+
+## Building a directory of Owncast streams
+
+The server-to-server activities that power Owncast's own [featured streams](/docs/social/featured-streams) feature are open for you to consume. If you want to run a directory or aggregator that tracks which Owncast servers are live, you follow each server the way any Fediverse actor would and then react to the liveness signals it sends.
+
+For a complete, runnable example reference, see the [owncast-directory-example](https://github.com/owncast/owncast-directory-example) repository. It is a small Python application that implements everything in this section: a published actor, the `ns#directory` follow, the `Offer`/`Leave`/`Reject` handling, and a web page that lists the live servers. Treat it as a starting point rather than a production service.
+
+You need a published actor and signed requests, the same as any follower (see [HTTP Signatures](#http-signatures)). From there:
+
+1. Send a signed `Follow` that sets `https://owncast.online/ns#directory` to `true` (see [the custom namespace](#owncast-custom-namespace)) to each server's actor. That marker identifies you as a directory, which is what makes the server deliver its stream pings to you, and it makes being listed opt-in: an Owncast server always holds a directory follow for its operator to approve by hand, no matter how the server's federation privacy is configured. You will not receive any status until the operator approves, so expect entries to stay pending until each one opts in. A `Follow` without the marker is treated as an ordinary fan follow: it may be auto-accepted, but it will never receive the `Offer`/`Leave` pings.
+2. While a server is live it posts an `Offer` to your inbox roughly every 5 minutes, carrying the [Owncast custom metadata](#owncast-custom-namespace): stream status, title, description, server name, logo, thumbnail, and tags. Create or refresh that server's directory entry from those fields.
+3. When the stream ends cleanly the server posts a `Leave`. Mark the entry offline.
+4. If the server's operator removes your directory from their side, the server posts a `Reject` of your original `Follow`. Drop the entry: you are no longer authorized to list that server, and it will stop sending you pings.
+
+There is no built-in flow for an Owncast server to request a spot in your directory, so assembling the list is your side's job. A simple way to let operators opt in is to put a submission form on your directory where an operator enters their server URL. You and your directory decide which submissions to list and which to turn away. When you accept one, follow that server the same way as above. The operator approves the follow, which a submitter will be expecting to do, and the follow, accept, and ping flow lists their stream.
+
+Treat the pings as a heartbeat. If a server stops sending `Offer` activities without a `Leave`, because it crashed, lost connectivity, or was firewalled, nothing actively tells you it went down. Expire any entry you have not heard from in a couple of ping intervals. Owncast's own directory marks a peer offline after two missed pings, about 11 minutes, and runs that staleness check once a minute.
+
+A few things worth getting right:
+
+- The metadata fields come from the remote server, so treat them as untrusted input. Clamp lengths and confirm that any URL is `http` or `https` before you render it. The value you can trust is the server URL you chose to follow, not the display name the server sends.
+- The thumbnail and logo URLs are stable, so the browser will cache them. Append a changing cache-busting query when you refresh an entry if you want the preview to stay current.
+- You do not have to use the pings at all. If you only need to know that a server went live, rather than keep a running view of who is live right now, follow the actor and watch for the standard `Create`/`Note` go-live posts like any other Fediverse consumer.
+
+To have your service recognized as a directory, set `https://owncast.online/ns#directory` to `true` on the `Follow` you send. A server that sees it holds the follow for its operator and, once approved, sends you its stream pings.
 
 ## Endpoint reference
 
 All paths are relative to the server's base URL. Every endpoint returns `405` when federation is disabled.
 
-| Path | Method | Purpose |
-| --- | --- | --- |
-| `/.well-known/webfinger` | GET | Resolve `acct:` → actor IRI |
-| `/.well-known/host-meta` | GET | XRD pointer to WebFinger |
-| `/.well-known/nodeinfo` | GET | NodeInfo discovery document |
-| `/nodeinfo/2.0` | GET | NodeInfo 2.0 server metadata |
-| `/.well-known/x-nodeinfo2` | GET | x-nodeinfo2 server metadata |
-| `/api/v1/instance` | GET | Mastodon-compatible instance description |
-| `/federation/user/{username}` | GET | The `Service` actor document |
-| `/federation/user/{username}/inbox` | POST | Deliver activities to the server |
-| `/federation/user/{username}/outbox` | GET | Collection of activities the server has sent |
-| `/federation/user/{username}/followers` | GET | Paginated followers collection |
-| `/federation/user/{username}/following` | GET | Always `404` (no following list) |
-| `/federation/{object-id}` | GET | Fetch a single stored ActivityPub object |
+| Path                                    | Method | Purpose                                      |
+| --------------------------------------- | ------ | -------------------------------------------- |
+| `/.well-known/webfinger`                | GET    | Resolve `acct:` → actor IRI                  |
+| `/.well-known/host-meta`                | GET    | XRD pointer to WebFinger                     |
+| `/.well-known/nodeinfo`                 | GET    | NodeInfo discovery document                  |
+| `/nodeinfo/2.0`                         | GET    | NodeInfo 2.0 server metadata                 |
+| `/.well-known/x-nodeinfo2`              | GET    | x-nodeinfo2 server metadata                  |
+| `/api/v1/instance`                      | GET    | Mastodon-compatible instance description     |
+| `/federation/user/{username}`           | GET    | The `Service` actor document                 |
+| `/federation/user/{username}/inbox`     | POST   | Deliver activities to the server             |
+| `/federation/user/{username}/outbox`    | GET    | Collection of activities the server has sent |
+| `/federation/user/{username}/followers` | GET    | Paginated followers collection               |
+| `/federation/user/{username}/following` | GET    | Always `404` (no following list)             |
+| `/federation/{object-id}`               | GET    | Fetch a single stored ActivityPub object     |
 
 ## Building a compatible application — checklist
 
@@ -350,7 +382,7 @@ To follow and consume an Owncast stream from your own application:
 3. **Send a signed `Follow`** to the actor's inbox. Sign `(request-target) host date digest` with RSA and include a SHA-256 `Digest`.
 4. **Handle the `Accept`** that Owncast posts back to your inbox (public mode) — or wait for manual approval (private mode).
 5. **Listen for go-live posts**: `Create`/`Note` activities arriving in your inbox tell you the stream started; the `alternate`/`application/x-mpegURL` WebFinger link gives you the HLS URL to play.
-6. **Optionally** consume the Owncast-specific `Offer`/`Leave` pings and the `https://owncast.online/ns#*` metadata for real-time liveness and richer directory entries.
+6. **Optionally** act as a directory: set `https://owncast.online/ns#directory` to `true` on your `Follow`, have the operator approve it, then consume the `Offer`/`Leave` pings and the `https://owncast.online/ns#*` metadata for real-time liveness and richer directory entries.
 7. **Verify** the signature on everything Owncast sends you against the actor's `#main-key`.
 
 Remember that Owncast will not accept replies or posts (`Create` is rejected) and exposes no `following` list, so design your integration around following + notifications + likes/boosts rather than two-way conversation.
