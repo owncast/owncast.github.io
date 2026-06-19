@@ -23,7 +23,7 @@ const ALL_REDIRECTS = [
 
   // Regular redirects
   // Social docs restructure: enabling page merged into the main social page.
-  { to: "/social#enabling-social-features", from: "/social/enabling" },
+  { to: "/docs/social#enabling-social-features", from: "/docs/social/enabling" },
   // Plugin docs restructure: merged/renamed pages.
   { to: "/docs/plugins/events", from: "/docs/plugins/handlers" },
   { to: "/docs/plugins/packaging", from: "/docs/plugins/publishing" },
