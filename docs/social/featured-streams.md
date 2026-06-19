@@ -15,10 +15,6 @@ Featured streams let your server show a small directory of other Owncast streams
 
 Featuring is opt-in on both sides. You choose which servers to feature, and the other operator chooses whether to let you feature them. Two servers can feature each other, but each side approves the other independently.
 
-:::info New in Owncast 0.3.0
-Featured streams is a brand-new feature in Owncast 0.3.0. If you hit a bug or have a suggestion, please [open an issue](https://github.com/owncast/owncast/issues) or [chat live with the community](/chat?tab=community).
-:::
-
 ## Before you start
 
 Featured streams runs over the same federation that powers Owncast's [social features](./index.mdx), so:
