@@ -66,7 +66,7 @@ Note: ffmpeg 5 is not currently supported with VA-API. Please use a version less
 
 Links:
 
-- [VA-API at Linux Reviews](https://linuxreviews.org/VAAPI)
+- [Video Acceleration API on Wikipedia](https://en.wikipedia.org/wiki/Video_Acceleration_API)
 - [Intel Media Driver for VA-API](https://github.com/intel/media-driver/)
 
 ### NVIDIA Encoder (nvenc)
