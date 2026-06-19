@@ -63,6 +63,18 @@ const ALL_REDIRECTS = [
   { to: "/docs/chat/moderation", from: "/docs/moderation/" },
   { to: "/docs/chat/chat-authentication", from: "/docs/chat-authentication" },
   { to: "/contribute", from: "/help" },
+  // Configuration docs moved under /docs/configuration/.
+  { to: "/docs/configuration/appearance", from: "/docs/appearance/" },
+  { to: "/docs/configuration/custom-javascript", from: "/docs/custom-javascript/" },
+  { to: "/docs/configuration/notifications", from: "/docs/notifications/" },
+  { to: "/docs/configuration/systemservice", from: "/docs/systemservice/" },
+  { to: "/docs/configuration/website", from: "/docs/website/" },
+  // Third-party section became the API docs. The /thirdparty/* wildcard above
+  // doesn't cover the bare /thirdparty/ index, so map it explicitly.
+  { to: "/docs/api", from: "/thirdparty/" },
+  // Stream-key and "start streaming" content merged into the first-stream guide.
+  { to: "/docs/getting-started/configure-first-stream", from: "/docs/stream-keys/" },
+  { to: "/docs/getting-started/configure-first-stream", from: "/quickstart/startstreaming/" },
 ];
 
 const config: Config = {
