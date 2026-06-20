@@ -135,6 +135,23 @@ The `.ocpkg` is the single distribution artifact: it contains your manifest, the
 
 In JavaScript, `npm test` runs `__tests__/*.test.js` files calling `runScenarios` (build the array with loops, helpers, and fixtures), or static `__tests__/*.test.json` files. The full scenario data model and the local dev server (`npm run serve`) are on the [Testing](/docs/plugins/testing) page.
 
+## Constraints to know
+
+The CLI bundles your code into a single file that runs inside the server's sandbox, not in Node. That sandbox shapes how you write a plugin:
+
+- **Use `owncast.http.fetch` for outbound HTTP**, not the global `fetch`, `axios`, or a package that wraps Node's `http`. Network access goes through the host API and is gated on the `network.fetch` permission. See the [APIs reference](/docs/plugins/apis).
+- **Not every npm package works.** Pure-JavaScript packages bundle in fine. Anything that needs the Node.js runtime does not. See [Third-party libraries](#third-party-libraries).
+
+## Third-party libraries
+
+:::caution Read this before you add a dependency
+npm packages work only if they're **pure JavaScript**. A plugin runs in a sandbox, not Node, so a package that touches `fs`, `net`, `http`/`https`, `path`, `crypto`, `process`, or `child_process` bundles cleanly and then throws when that code runs.
+:::
+
+A package can also hit a Node built-in on a path you never exercise, so test the parts you use. For outbound HTTP, use [`owncast.http.fetch`](/docs/plugins/apis), not an HTTP-client package.
+
+The [`page-content-demo`](https://github.com/owncast/plugin-sdk/tree/main/examples/js/page-content-demo) example uses the `mustache` package this way.
+
 ## What's in the package
 
 - `index.js`: the runtime: `definePlugin`, the `owncast.*` host wrappers, the `filter` constructor, `defineCommands`.

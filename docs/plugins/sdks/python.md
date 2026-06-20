@@ -126,9 +126,26 @@ The directory argument defaults to `.`, so you can `cd` into the project and omi
 
 A few things about how Python plugins are built shape how you write them. You import `owncast_plugin` normally for editor support and unit tests. The build takes care of the rest.
 
-- **Pure-Python only.** Dependencies with C extensions (numpy, pandas, and the like) won't work. Pure-Python packages are fine if you vendor them into your project. For outbound HTTP use `owncast.http.fetch`, not `requests`.
-- **Don't shadow standard-library names at the top level.** A top-level `def json(...)` (or any other stdlib name) in your plugin can break the build. Name helpers like `json_response` instead.
+- **Pure-Python only, and no `pip`.** There is no `pip install` step: you add third-party code by copying its (pure-Python) source into your project. Dependencies with C extensions (numpy, pandas, and the like) won't load. See [Third-party libraries](#third-party-libraries). For outbound HTTP use `owncast.http.fetch`, not `requests`.
+- **Don't shadow standard-library names.** A top-level `def json(...)` (or any other stdlib name) shadows the real module and can break the build, and a module file named after a stdlib module (`src/json.py`) is ignored in favor of the real one. Name them `json_response` and the like.
+- **The entry can't use relative imports.** In `src/plugin.py`, import your own modules absolutely (`from helpers import ...`), not `from . import helpers`. A relative import there fails the build, though relative imports inside a package's own modules are fine.
 - **`snake_case` everywhere**, in contrast to the JS SDK's camelCase: `send_action`, `get_json`, `msg.user.display_name`, `filter.pass_()`.
+
+## Third-party libraries
+
+There is no `pip install` and no `requirements.txt`. A third-party library works only if it is **pure Python and you copy its source into `src/`**, where it becomes one of your own modules.
+
+:::caution `pip install` does nothing
+Installing a package into a virtualenv has no effect on what ships, and `import requests` fails at runtime. To use a library, copy its `.py` source into `src/` (a single module or a package directory) and import it.
+:::
+
+- **C extensions never work.** numpy, pandas, lxml, Pydantic v2, and anything else with compiled code won't load.
+- **You own the whole tree.** If a library you copy in imports other third-party packages, copy those too, or choose a smaller one.
+- **Use `owncast.http.fetch` for outbound HTTP**, not `requests`.
+
+The standard library is available, as long as the module is pure Python (`json`, `re`, `datetime`, `base64`, and the like).
+
+For example, the [`page-content-demo`](https://github.com/owncast/plugin-sdk/tree/main/examples/python/page-content-demo) example needs Mustache templating. Rather than copy in a templating package, it ships a small Mustache-subset renderer of its own.
 
 ## Testing
 
