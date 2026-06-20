@@ -238,6 +238,8 @@ Path rules match action-button URLs:
 
 Requires `ui.modify` only (the plugin paints inside Owncast's chrome). `http.serve` is not needed: each file's bytes are read from `assets/` and inlined into `customStyles` on `/api/config`, not served at a URL. The host emits a `/* plugin: <your-slug> ... */` comment in front of each contribution so a reader can attribute a rule back to whichever plugin shipped it.
 
+For CSS that depends on plugin state, an `onPageStyles` handler returns it at request time, with no manifest field. Its output appends to `customStyles` after these static files.
+
 Full coverage in [UI: Viewer stylesheets](/docs/plugins/ui#viewer-stylesheets).
 
 ## `scripts`: JavaScript injection
@@ -251,7 +253,9 @@ A list of JavaScript files the plugin contributes to the viewer page. Each file'
 }
 ```
 
-Path rules and required permissions match `styles`, applied to `.js` files (only `ui.modify` is needed, and the host reads from `assets/` and inlines into `/customjavascript`). Wrap your script in an IIFE so top-level declarations don't collide with the admin's JavaScript or other plugins. The host emits a `// plugin: <your-slug> ...` comment in front of each contribution.
+Path rules and required permissions match `styles`, applied to `.js` files (only `ui.modify` is needed, and the host reads from `assets/` and inlines into `/customjavascript`). Wrap your script in an IIFE so top-level declarations don't collide with the admin's JavaScript or other plugins. The host emits a `// plugin: <your-slug> ...` comment in front of each contribution and wraps every contribution in a try/catch so one plugin's runtime error can't break the others.
+
+For JavaScript that depends on plugin state, an `onPageScripts` handler returns it at request time, with no manifest field. Its output appends to `/customjavascript` after these static files.
 
 Full coverage in [UI: Viewer scripts](/docs/plugins/ui#viewer-scripts).
 

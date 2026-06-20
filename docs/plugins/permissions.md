@@ -193,10 +193,11 @@ Grants the ability to place UI inside Owncast's own chrome:
 * Declaring `manifest.scripts` (JavaScript inlined into the viewer page).
 * Declaring `manifest.extraPageContent` (an HTML block prepended to the viewer's extra-content area).
 * Declaring `manifest.tabs` (additional tabs in the viewer page's tab row).
+* Implementing an `onPageStyles` or `onPageScripts` handler (CSS or JavaScript returned at request time, with no manifest field).
 
-Without this permission, manifests that declare any of those fields are rejected at load. Each one reaches into the viewer page rather than staying inside the plugin's own URL space, so the admin needs to see the permission to understand the plugin paints into the host UI.
+Without this permission, manifests that declare any of those fields are rejected at load. The `onPageStyles` and `onPageScripts` handlers have no manifest field, so they aren't rejected at load. The host just doesn't call them unless the plugin holds `ui.modify`. Each of these reaches into the viewer page rather than staying inside the plugin's own URL space, so the admin needs to see the permission to understand the plugin paints into the host UI.
 
-None of the four viewer-injection fields require `http.serve`. The host reads each file from the plugin's `assets/` directory (not from a URL) and inlines the bytes into the existing config / custom-JS responses, so `ui.modify` alone is enough to declare them.
+None of the four viewer-injection fields require `http.serve`, and neither do the two handlers. The host reads each file from the plugin's `assets/` directory (not from a URL), or calls the handler, and inlines the result into the existing config / custom-JS responses, so `ui.modify` alone is enough.
 
 ## Summary table
 

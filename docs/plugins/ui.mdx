@@ -260,6 +260,40 @@ The CSS body runs against the live viewer DOM, so your selectors target whatever
 
 `url(...)` references inside a plugin's CSS resolve against the viewer page, not against the plugin's namespace. If you want to reference a bundled image, use the absolute path `/plugins/<your-slug>/logo.png` instead of `./logo.png`. Same goes for `@font-face` sources. The plugin's static URL space stays served, so direct references work even though no `<link>` points at the file.
 
+### Dynamic stylesheets: `onPageStyles`
+
+When the CSS depends on plugin state, a theme the admin picked or a value in the KV store, return it from an `onPageStyles` handler instead of (or alongside) a static file. There is no manifest field for it. The host calls the handler once per `/api/config` for any plugin that holds `ui.modify` and exports it, then appends what it returns to `customStyles` after the static `manifest.styles` files. The later rule wins the cascade, so returning only the active override is enough.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onPageStyles() {
+    const theme = owncast.kv.get("theme");
+    if (!theme) return "";
+    return `:root { --theme-color-action: ${accentFor(theme)}; }`;
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_page_styles
+def page_styles():
+    theme = owncast.kv.get("theme")
+    if not theme:
+        return ""
+    return f":root {{ --theme-color-action: {accent_for(theme)}; }}"
+```
+
+</TabItem>
+</Tabs>
+
+Requires `ui.modify`. Return `""` to contribute nothing on a given request. The call takes no per-viewer argument, so the `/api/config` response stays cacheable. The `theme-hub` example in the SDK uses this to apply an admin-selected theme to the whole viewer UI.
+
 ## Viewer scripts
 
 Plugins can extend the viewer page's runtime by bundling JavaScript files and listing them in `manifest.scripts`. Each file's contents are appended to the `/customjavascript` response Owncast already serves for the admin's custom JS, so plugins extend the page's behavior without each contribution needing its own `<script>` tag.
@@ -280,8 +314,42 @@ These are **viewer-page** scripts that run in the browser, always JavaScript, re
 The viewer page loads `/customjavascript` as a single `<script async>` tag. Every plugin's JS runs in the same global window as the admin's custom JS and the rest of Owncast's chrome. Three implications:
 
 * Top-level `var` and `function` declarations land on `window`. Wrap your script in an IIFE (`(function(){ ... })()`) so private state stays private and you don't collide with the admin's JS or other plugins.
-* An uncaught error inside one plugin's script can prevent the remaining plugins' scripts from running (everything is one concatenated script tag). Defensive try/catch around any branch that might throw is sensible if your plugin is shipping alongside others.
+* The host wraps each plugin's contribution in its own try/catch, so a runtime error throws to the browser console (prefixed `owncast plugin <your-slug> script error:`) without stopping the other plugins' scripts. A syntax error is not isolated: it breaks parsing of the one concatenated script tag before any try/catch runs, so ship valid JavaScript.
 * Relative `fetch('./data.json')` resolves against the viewer page's URL, not against your plugin. Use absolute paths like `/plugins/<your-slug>/data.json` for files you ship in `public/`.
+
+### Dynamic scripts: `onPageScripts`
+
+The script counterpart to `onPageStyles`. Return JavaScript computed at request time from an `onPageScripts` handler, with no manifest field. The host calls it once per `/api/config` for any plugin holding `ui.modify` that exports it, and appends the result to `/customjavascript` after the static `manifest.scripts` files, wrapped in the same per-plugin try/catch.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onPageScripts() {
+    const theme = owncast.kv.get("theme");
+    if (!theme) return "";
+    return `(function () { document.documentElement.dataset.theme = ${JSON.stringify(theme)}; })();`;
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_page_scripts
+def page_scripts():
+    theme = owncast.kv.get("theme")
+    if not theme:
+        return ""
+    return f'(function () {{ document.documentElement.dataset.theme = "{theme}"; }})();'
+```
+
+</TabItem>
+</Tabs>
+
+The output runs in the shared viewer `window`, so the IIFE and absolute-path advice above still applies. Wrap your code in an IIFE and escape any untrusted strings you embed. Return `""` to contribute nothing.
 
 ### When to use it
 

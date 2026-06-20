@@ -91,7 +91,7 @@ def block_spam(msg):
 
 The module exports three things:
 
-- **`plugin`**: the decorator registry. `@plugin.on_chat_message`, `@plugin.filter_chat_message`, `@plugin.on_stream_started`, `@plugin.on_tick`, `@plugin.on_fediverse_follow`, and the rest mirror the runtime events in the [handlers reference](/docs/plugins/events). Two take a key: `@plugin.on("custom.event")` for plugin-emitted events and `@plugin.on_tab_content("slug")` / `@plugin.on_page_content("slug")` for dynamic viewer-page HTML.
+- **`plugin`**: the decorator registry. `@plugin.on_chat_message`, `@plugin.filter_chat_message`, `@plugin.on_stream_started`, `@plugin.on_tick`, `@plugin.on_fediverse_follow`, and the rest mirror the runtime events in the [handlers reference](/docs/plugins/events). Two take a key: `@plugin.on("custom.event")` for plugin-emitted events and `@plugin.on_tab_content("slug")` / `@plugin.on_page_content("slug")` for dynamic viewer-page HTML. Two take no key: `@plugin.on_page_styles` and `@plugin.on_page_scripts` return CSS and JavaScript injected into the viewer page at request time, gated on `ui.modify`.
 - **`owncast`**: the host API namespace. Method names are **`snake_case`** (`owncast.chat.send_action`, `owncast.kv.get_json`). Each call is gated by the matching permission you declare in your manifest. See the [APIs reference](/docs/plugins/apis).
 - **`filter`**, filter results returned from a `filter_chat_message` handler: `filter.pass_()` (trailing underscore, `pass` is a Python keyword), `filter.modify(...)`, `filter.drop(reason)`.
 

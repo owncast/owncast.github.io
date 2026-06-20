@@ -96,7 +96,7 @@ The package exports three things:
 
 Handler names are camelCase and map to the runtime events listed in the [handlers reference](/docs/plugins/events): `onChatMessage`, `filterChatMessage`, `onChatUserJoined`, `onStreamStarted`, `onTick`, `onFediverseFollow`, `onHttpRequest`, and so on. Payload fields are camelCase too (`msg.user.displayName`, `msg.clientId`).
 
-Beyond top-level methods, two handler groups take a key and are passed as nested objects: `on: { "my.event"(payload) {} }` for custom events and `onTabContent: { slug(ctx) {} }` / `onPageContent` for dynamic viewer pages. And rather than hand-rolling prefix parsing in `onChatMessage`, you can declare a `commands` table that the host's built-in `!help` picks up automatically. Both are shown for JavaScript on the subject pages: [Handlers](/docs/plugins/events), [Commands](/docs/plugins/commands), and [UI](/docs/plugins/ui).
+Beyond top-level methods, two handler groups take a key and are passed as nested objects: `on: { "my.event"(payload) {} }` for custom events and `onTabContent: { slug(ctx) {} }` / `onPageContent` for dynamic viewer pages. Two more take no key: `onPageStyles()` and `onPageScripts()` return CSS and JavaScript injected into the viewer page at request time, gated on `ui.modify`. And rather than hand-rolling prefix parsing in `onChatMessage`, you can declare a `commands` table that the host's built-in `!help` picks up automatically. Both are shown for JavaScript on the subject pages: [Handlers](/docs/plugins/events), [Commands](/docs/plugins/commands), and [UI](/docs/plugins/ui).
 
 ## TypeScript
 
