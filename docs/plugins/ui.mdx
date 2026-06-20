@@ -400,7 +400,7 @@ Requires `ui.modify`. `http.serve` is not required: each tab's HTML is read from
 
 ### How tabs are rendered
 
-The host emits a `pluginTabs[]` array on `/api/config`. The viewer page maps each entry to a tab whose body is the inlined HTML (via the same renderer used for `extraPageContent`). Plugin tabs are appended after the built-ins in declaration order. The React key is derived from the plugin's slug so a tab unmounts only when its source plugin is disabled or removed.
+The host emits a `pluginTabs[]` array on `/api/config`. The viewer page maps each entry to a tab whose body is the inlined HTML, rendered in a sandboxed iframe with the baseline stylesheet injected, so plain HTML looks native with no CSS of your own. See [Styling plugin UI](#styling-plugin-ui) for the baseline and the helper classes. Plugin tabs are appended after the built-ins in declaration order. The React key is derived from the plugin's slug so a tab unmounts only when its source plugin is disabled or removed.
 
 ### The `slug` field
 
