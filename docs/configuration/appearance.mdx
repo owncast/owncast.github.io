@@ -57,6 +57,22 @@ For example, if you'd like to make all action items (links, buttons) red, button
 While, using CSS, you can target any element on the page, if there are specific elements you find yourself having difficulty customizing, please open an issue on the <a href="https://github.com/owncast/owncast/issues" target="_blank" rel="noopener noreferrer">Owncast GitHub repository</a> so we can consider adding additional selectors or CSS variables to make customization easier.
 We will also likely add more customization options directly within Owncast's appearance page over time for common use cases. If you find yourself wanting to customize something specific, contributions are welcome!
 
+## Appearance and theme plugins
+
+Plugins can style the viewer page too. A theme plugin is the supported way to install and share a packaged look. Your settings on this page and a plugin's styles combine into the final result.
+
+Your choices win. The colors you pick here and the CSS you write in the editor are applied on top of any plugin's styles, so where both touch the same color, yours takes effect. A theme plugin acts as a baseline: it changes the colors you have not set yourself, and any color you set explicitly overrides it.
+
+When a plugin is styling your page, this page tells you:
+
+- A notice at the top names the plugin or plugins currently applying styles.
+- Each color a plugin also sets is flagged with an `also set by <plugin>` note next to its picker.
+
+Two levers control the outcome:
+
+- To let a theme plugin fully control the look, clear your own colors with **Reset to Defaults**. With nothing set here, the plugin's theme shows through completely.
+- To stop a plugin's styling entirely, disable it on the **Plugins** page in the admin.
+
 ## Owncast CSS helper
 
 To assist in customizing your Owncast colors via CSS variables and customizing specific elements, use the CSS helper below. This is meant to give you a head start in writing your own CSS, not a complete solution.

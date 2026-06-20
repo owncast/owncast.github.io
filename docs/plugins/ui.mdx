@@ -230,7 +230,7 @@ Everything here is opt-in. A tab that ships nothing but semantic HTML already lo
 
 ## Viewer stylesheets
 
-Plugins can theme the viewer page by bundling CSS files and listing them in `manifest.styles`. Each file's contents are inlined into the same `<style>` block Owncast already uses for the admin's customStyles, so plugins extend the page's CSS without each contribution needing its own `<link>` tag.
+Plugins can theme the viewer page by bundling CSS files and listing them in `manifest.styles`. The host inlines each file's contents into a single plugin styles block on the page, so plugins extend the page's CSS without each contribution needing its own `<link>` tag.
 
 ```json
 {
@@ -239,7 +239,7 @@ Plugins can theme the viewer page by bundling CSS files and listing them in `man
 }
 ```
 
-Requires `ui.modify` only (the plugin paints inside Owncast's chrome). `http.serve` isn't needed: the host reads each file from your plugin's `assets/` directory and inlines the bytes into `customStyles` on `/api/config`, not at a URL.
+Requires `ui.modify` only (the plugin paints inside Owncast's chrome). `http.serve` isn't needed: the host reads each file from your plugin's `assets/` directory and inlines the bytes into the page's plugin styles block on `/api/config`, not at a URL.
 
 ### Path rules
 
@@ -252,9 +252,27 @@ Requires `ui.modify` only (the plugin paints inside Owncast's chrome). `http.ser
 
 ### How contributions are rendered
 
-The host reads each file at request time and concatenates the bytes in front of an `/* plugin: <your-slug> ... */` comment, so devtools "view source" attributes a rule back to the plugin that shipped it. Disabling the plugin drops its contribution from `customStyles` on the next page load.
+The host reads each file at request time and concatenates the bytes in front of an `/* plugin: <your-slug> ... */` comment, so devtools "view source" attributes a rule back to the plugin that shipped it. Disabling the plugin drops its contribution on the next page load.
 
 The CSS body runs against the live viewer DOM, so your selectors target whatever the page renders. Scoping every rule under a single root id is a defensive habit worth keeping. Without it your rules can match elements the host page renders and produce surprising regressions.
+
+### Where plugin styles sit in the cascade
+
+The viewer page builds its appearance from four layers, applied in this order. Later layers win.
+
+1. Owncast's built-in defaults.
+2. Plugin styles: your `manifest.styles` files first, then your `onPageStyles` output.
+3. The admin's appearance variables, the colors set with the pickers under **General Settings → Appearance**.
+4. The admin's custom CSS, the editor on that same page.
+
+Your styles are layer 2, so the admin's explicit choices in layers 3 and 4 override yours on any property you both set. Treat a theme as a baseline rather than the final word:
+
+- A token you set that the admin left at its default shows your value.
+- A token you set that the admin also set shows the admin's value.
+
+Both partial and full themes are fine. A plugin that only recolors links leaves every other color untouched. A plugin that sets the whole palette still yields to any individual color the admin picked. The admin stays in control of their own instance, and the Appearance page tells them a plugin is involved: it shows a notice naming your plugin and flags each color you set with an `also set by <plugin>` note. For that flagging to work, declare your colors as `--theme-color-*` custom properties in a `:root { ... }` block, the same form the admin's pickers write.
+
+One escape hatch breaks the ordering: a plugin rule marked `!important` beats the admin's normal declarations regardless of layer. Avoid it in theme CSS if you want the admin to keep the final say over their colors.
 
 ### Caveat: relative URLs in CSS
 
@@ -262,7 +280,7 @@ The CSS body runs against the live viewer DOM, so your selectors target whatever
 
 ### Dynamic stylesheets: `onPageStyles`
 
-When the CSS depends on plugin state, a theme the admin picked or a value in the KV store, return it from an `onPageStyles` handler instead of (or alongside) a static file. There is no manifest field for it. The host calls the handler once per `/api/config` for any plugin that holds `ui.modify` and exports it, then appends what it returns to `customStyles` after the static `manifest.styles` files. The later rule wins the cascade, so returning only the active override is enough.
+When the CSS depends on plugin state, a theme the admin picked or a value in the KV store, return it from an `onPageStyles` handler instead of (or alongside) a static file. There is no manifest field for it. The host calls the handler once per `/api/config` for any plugin that holds `ui.modify` and exports it, then appends what it returns to your plugin styles block after the static `manifest.styles` files. Within your plugin's own styles the later rule wins, so returning only the active override from `onPageStyles` is enough. The whole block still sits below the admin's appearance settings (see [where plugin styles sit in the cascade](#where-plugin-styles-sit-in-the-cascade)).
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
@@ -271,7 +289,7 @@ When the CSS depends on plugin state, a theme the admin picked or a value in the
 module.exports = definePlugin({
   onPageStyles() {
     const theme = owncast.kv.get("theme");
-    if (!theme) return "";
+    if (!theme) return;
     return `:root { --theme-color-action: ${accentFor(theme)}; }`;
   },
 });
@@ -285,14 +303,14 @@ module.exports = definePlugin({
 def page_styles():
     theme = owncast.kv.get("theme")
     if not theme:
-        return ""
+        return
     return f":root {{ --theme-color-action: {accent_for(theme)}; }}"
 ```
 
 </TabItem>
 </Tabs>
 
-Requires `ui.modify`. Return `""` to contribute nothing on a given request. The call takes no per-viewer argument, so the `/api/config` response stays cacheable. The `theme-hub` example in the SDK uses this to apply an admin-selected theme to the whole viewer UI.
+Requires `ui.modify`. Return nothing (a bare `return`, the same as returning `""`) when there is nothing to contribute on a given request. The call takes no per-viewer argument, so the `/api/config` response stays cacheable. The `theme-hub` example in the SDK uses this to apply an admin-selected theme to the whole viewer UI.
 
 ## Viewer scripts
 
@@ -321,15 +339,18 @@ The viewer page loads `/customjavascript` as a single `<script async>` tag. Ever
 
 The script counterpart to `onPageStyles`. Return JavaScript computed at request time from an `onPageScripts` handler, with no manifest field. The host calls it once per `/api/config` for any plugin holding `ui.modify` that exports it, and appends the result to `/customjavascript` after the static `manifest.scripts` files, wrapped in the same per-plugin try/catch.
 
+This is for any request-time JavaScript, not only theming. Use it to run viewer-side code computed per request, for example surfacing a value the admin set in the plugin's KV store. The example below shows that value to viewers:
+
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
+  // Run request-time JavaScript on the viewer page.
   onPageScripts() {
-    const theme = owncast.kv.get("theme");
-    if (!theme) return "";
-    return `(function () { document.documentElement.dataset.theme = ${JSON.stringify(theme)}; })();`;
+    const notice = owncast.kv.get("notice");
+    if (!notice) return;
+    return `alert(${JSON.stringify(notice)});`;
   },
 });
 ```
@@ -340,16 +361,16 @@ module.exports = definePlugin({
 ```python
 @plugin.on_page_scripts
 def page_scripts():
-    theme = owncast.kv.get("theme")
-    if not theme:
-        return ""
-    return f'(function () {{ document.documentElement.dataset.theme = "{theme}"; }})();'
+    notice = owncast.kv.get("notice")
+    if not notice:
+        return
+    return f"alert({json.dumps(notice)});"
 ```
 
 </TabItem>
 </Tabs>
 
-The output runs in the shared viewer `window`, so the IIFE and absolute-path advice above still applies. Wrap your code in an IIFE and escape any untrusted strings you embed. Return `""` to contribute nothing.
+The output runs in the shared viewer `window`, so the IIFE and absolute-path advice above still applies. Escape any untrusted strings you embed: `JSON.stringify` in JavaScript and `json.dumps` in Python both produce a safely-quoted literal, which is why the examples wrap the notice in one before passing it to `alert`. Return nothing (a bare `return`, the same as returning `""`) to contribute nothing.
 
 ### When to use it
 
