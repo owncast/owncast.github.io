@@ -8,4 +8,6 @@ related:
 
 Visit the hardware usage page in the admin to see how your server's resources are performing.
 
+<img src="/docs/img/admin-hardware-info.png" alt="The Hardware Info page in the admin, showing CPU, memory, and disk usage gauges with a usage-over-time chart" width="80%" />
+
 If your CPU is maxed out on your Owncast server viewers will see buffering, as the server can no longer keep up. If this is what you're experiencing the first step is to [resolve excessive hardware utilization](/docs/troubleshoot/hardware-usage).

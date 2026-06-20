@@ -14,6 +14,8 @@ tags:
 
 You can set the admin password and add stream keys in the Server settings.
 
+<img src="/docs/img/admin-stream-keys.png" alt="The Stream Keys tab of the Server settings page, showing the default stream key and a button to add more" width="80%" />
+
 ## Stream keys
 
 ### Command line flag

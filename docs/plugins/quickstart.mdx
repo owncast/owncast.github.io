@@ -197,6 +197,8 @@ owncast-plugin-py serve my-plugin
 
 In the Owncast admin, open **Plugins** in the sidebar and click **Upload plugin**. Pick the `my-plugin.ocpkg` file your build produced. The plugin appears in the list immediately. Toggle **Enabled** to load it.
 
+<img src="/docs/img/plugins-installed-list.png" alt="The Plugins page in the admin, listing installed plugins with their requested permissions, status, an enable toggle, and Upload plugin and Configure buttons" width="80%" />
+
 Alternatively, copy `my-plugin.ocpkg` to your server's `data/plugins/` directory and the next scan tick will pick it up:
 
 ```sh
@@ -204,6 +206,8 @@ scp my-plugin.ocpkg user@your-owncast-server:/path/to/owncast/data/plugins/
 ```
 
 If the plugin declares permissions, the admin reviews them in the **Permissions** tab on the plugin's detail page before enabling. The first enable captures the approved permission set. If you later ship an update that asks for more access, Owncast auto-disables the plugin and prompts the admin to re-approve.
+
+<img src="/docs/img/plugin-permissions-tab.png" alt="The Permissions tab on a plugin's detail page, listing each requested permission with a plain-language description" width="80%" />
 
 ## What to read next
 

@@ -46,6 +46,8 @@ Each entry has a `title`, a `path` glob, and an optional `icon`:
 
 Owncast's admin renders each declared page as a tab inside `/admin/plugins/configure?id=<your-slug>`. The tab body is an `<iframe>` pointed at `/plugins/<your-slug>/<path>`. Each plugin gets a bookmarkable URL and a sidebar entry under **Plugins** in the admin navigation.
 
+<img src="/docs/img/plugin-admin-page.png" alt="A plugin's admin page rendered as a tab inside the admin, alongside its Instructions and Permissions tabs" width="80%" />
+
 The host auto-injects the baseline stylesheet into HTML responses on admin paths, so plain `<input>` and `<button>` controls look native to Owncast's admin without you needing to ship CSS. See [Styling plugin UI](#styling-plugin-ui) for what you get for free and the helper classes available. Plugins that prefer their own styling can layer on top.
 
 ### Sandbox
@@ -83,6 +85,8 @@ Duplicate `title` is fine. Both globs feed one tab.
 ## Action buttons
 
 Owncast surfaces a row of action buttons in its viewer UI. Clickable entries that either open a URL (in a modal or new tab) or render raw HTML. Plugins can contribute their own.
+
+<img src="/docs/img/plugin-action-buttons.png" alt="A row of plugin-contributed action buttons beneath the stream on the viewer page, next to the built-in Follow and Notify buttons" width="85%" />
 
 ### Manifest-declared buttons
 
@@ -489,7 +493,9 @@ Requires `ui.modify`. `http.serve` is not required: each tab's HTML is read from
 
 ### How tabs are rendered
 
-The host emits a `pluginTabs[]` array on `/api/config`. The viewer page maps each entry to a tab whose body is the inlined HTML, rendered in a sandboxed iframe with the baseline stylesheet injected, so plain HTML looks native with no CSS of your own. See [Styling plugin UI](#styling-plugin-ui) for the baseline and the helper classes. Plugin tabs are appended after the built-ins in declaration order. The React key is derived from the plugin's slug so a tab unmounts only when its source plugin is disabled or removed.
+The host emits a `pluginTabs[]` array on `/api/config`. The viewer page maps each entry to a tab whose body is the inlined HTML, rendered in a sandboxed iframe with the baseline stylesheet injected, so plain HTML looks native with no CSS of your own.
+
+<img src="/docs/img/plugin-viewer-tabs.png" alt="Plugin-contributed tabs on the viewer page, shown alongside the built-in About and Followers tabs" width="75%" /> See [Styling plugin UI](#styling-plugin-ui) for the baseline and the helper classes. Plugin tabs are appended after the built-ins in declaration order. The React key is derived from the plugin's slug so a tab unmounts only when its source plugin is disabled or removed.
 
 ### The `slug` field
 

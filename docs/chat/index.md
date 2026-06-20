@@ -22,6 +22,6 @@ Strikethrough: `~~your text~~`
 
 Code blocks: <code>\`your text\`</code>
 
-:::info
-Fill in this page
-:::
+When you send a message, Owncast renders the formatting inline:
+
+<img src="/docs/img/chat-text-formatting.png" alt="Chat messages showing italic, bold, and inline code formatting rendered, along with a clickable link and a custom emoji" width="320" />

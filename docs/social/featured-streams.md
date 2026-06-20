@@ -34,6 +34,8 @@ Featured streams runs over the same federation that powers Owncast's [social fea
 3. Enter the address of the server you want to feature, for example `https://otherserver.example.com`.
 4. Save.
 
+<img src="/docs/img/admin-featured-streams.png" alt="The Featured Streams page in the admin, with a Feature Live Stream button and tabs for the streams you feature and the servers featuring you" width="80%" />
+
 The server appears in your list right away with a **Pending approval** status, and it is not shown to your visitors yet. Featuring a server sends it a request, and that server's operator has to approve it before the entry goes live. This is what stops anyone from listing a server as featured without its consent.
 
 ## Approve a request to feature you

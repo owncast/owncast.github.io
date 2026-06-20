@@ -97,6 +97,8 @@ Each command handler receives a context with `msg`, `user`, `command`, `args`, `
 
 The host owns `!help`. Type it in chat and the host lists every command's `description` across all enabled plugins, posted as a system message. You don't implement it, and it works even if your plugin holds no `chat.send` permission. Moderator-only commands stay hidden from non-moderators. The only thing you do to take part is declare a command table with descriptions.
 
+<img src="/docs/img/plugin-help-command.png" alt="The !help response in chat, listing the commands an enabled plugin provides with their descriptions, grouped by plugin" width="320" />
+
 ## Using your own chat handlers instead
 
 A command table is optional. You can always read chat yourself in an `onChatMessage` handler (see [Chat plugins](/docs/plugins/chat)) and act on whatever you want. For a single fixed command that is often enough, though it won't appear in `!help` unless you declare a command table.

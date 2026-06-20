@@ -6,6 +6,8 @@ sidebar_label: Add custom Javascript
 
 If you have some Javascript you need to run when your Owncast web page loads, you can add it to the Javascript editor under the **General** settings page in the admin.
 
+<img src="/docs/img/admin-custom-javascript.png" alt="The Custom Scripting tab of the General settings page, showing the Javascript editor" width="80%" />
+
 Some examples of reasons you might need this:
 
 - Adding privacy-respecting analytics.

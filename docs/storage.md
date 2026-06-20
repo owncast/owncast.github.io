@@ -13,6 +13,8 @@ If your storage provider is S3 compatible it will likely work with Owncast. Read
 
 ## Configuration
 
+<img src="/docs/img/admin-object-storage.png" alt="The S3 Object Storage tab of the Server settings page, with fields for the endpoint, access key, secret key, bucket, and region" width="75%" />
+
 1. Visit your Owncast server setup page in the admin and view the Object Storage settings.
 1. Enable it.
 1. Visit your storage provider and create a new bucket.

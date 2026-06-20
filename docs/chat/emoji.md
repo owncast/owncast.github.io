@@ -14,6 +14,8 @@ Your stream's chat can be customized with your own custom emoji. You can add as 
 
 By visiting the chat custom emoji page in the admin located at `/admin/chat/emojis` you can add and remove images that are available to chat participants.
 
+<img src="/docs/img/admin-custom-emoji.png" alt="The custom emoji page in the admin, with an Upload new emoji button above a grid of the currently installed emoji" width="60%" />
+
 ## Manual management
 
 You can manage your custom emoji images in the `data/emoji` directory on your filesystem. Here's what you can do:

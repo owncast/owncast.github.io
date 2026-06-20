@@ -18,11 +18,15 @@ tags:
 
 Owncast includes a web interface for your video with built-in chat that is available once you start the server. It shows online/offline states, viewer counts, stream duration, your instance's description, images, links and more. You can just start using it without making any changes, but you'll likely want to update the content displayed on your page by visiting your server admin page.
 
+<img src="/docs/img/owncast-web-interface.png" alt="The Owncast web interface showing the video player, stream title, follow and notify buttons, and live chat" width="80%" />
+
 Additionally, the web interface was specifically built to be customizable by anybody comfortable tweaking colors and styles. No development environment is needed, just open the admin and start tweaking.
 
 If you want to embed Owncast in your existing website, checkout our [documentation on embedding Owncast](/docs/embed/).
 
-Below are some items you'll likely want to customize to update the content that displays on your page.
+Below are some items you'll likely want to customize to update the content that displays on your page. You'll find all of them on the **General** settings page in the admin.
+
+<img src="/docs/img/admin-website-general.png" alt="The General settings page in the admin, with fields for the instance name, description, logo, tags, social links, and custom page content" width="65%" />
 
 ### Name and description
 
