@@ -1,0 +1,17 @@
+<h3 class="force-no-border-top">{{ .CurrentSection.Title }}</h3>
+<ul class="docs-sub-links">
+{{ $currentSection := .CurrentSection }}
+{{ range where .Site.RegularPages.ByWeight "Section" .Section }}
+{{ if in (.Permalink | string) $currentSection.RelPermalink }}
+    <li>
+        <a class="docs-link" href="{{ .Permalink }}">
+        {{ .Params.title | title }}
+        </a>
+    </li>
+{{ end }}
+{{ end }}
+</ul>
+
+<h3 class="force-no-border-top">
+    <a href="/docs/" class="page-links" title="Documentation">&larr; Documentation</a>
+</h3>

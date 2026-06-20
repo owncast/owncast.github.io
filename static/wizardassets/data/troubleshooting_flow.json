@@ -1,0 +1,239 @@
+[
+	{
+		"name": "firstpage",
+		"id": 1,
+		"is_open": true,
+		"children": [
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "streaming",
+				"is_open": false,
+				"id": 2,
+				"children": [
+					{
+						"name": "streaming-page",
+						"id": 3,
+						"is_open": true,
+						"children": [
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "buffering-foreveryone",
+								"is_open": true,
+								"id": 4,
+								"children": [
+									{
+										"name": "https://owncast.online/troubleshoot/buffering/all",
+										"id": 5
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "buffering-forsome",
+								"is_open": true,
+								"id": 6,
+								"children": [
+									{
+										"name": "buffering-for-some-page",
+										"id": 7,
+										"is_open": true,
+										"children": [
+											{
+												"name": "_decision",
+												"test": "string",
+												"if": "buffering-geo",
+												"is_open": true,
+												"id": 8,
+												"children": [
+													{
+														"name": "https://owncast.online/troubleshoot/buffering/geo",
+														"id": 9
+													}
+												]
+											},
+											{
+												"name": "_decision",
+												"test": "string",
+												"if": "buffering-slow-networks",
+												"is_open": true,
+												"id": 10,
+												"children": [
+													{
+														"name": "https://owncast.online/troubleshoot/buffering/slow-networks",
+														"id": 11
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "latency",
+				"is_open": false,
+				"id": 12,
+				"children": [
+					{
+						"name": "https://owncast.online/troubleshoot/latency",
+						"id": 13
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "cpu",
+				"is_open": false,
+				"id": 14,
+				"children": [
+					{
+						"name": "https://owncast.online/troubleshoot/hardware-usage",
+						"id": 15
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "chat-offline",
+				"is_open": true,
+				"id": 16,
+				"children": [
+					{
+						"name": "chat-offline-page",
+						"id": 17,
+						"is_open": true,
+						"children": [
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "chat-offline-while-streaming",
+								"is_open": true,
+								"id": 18,
+								"children": [
+									{
+										"name": "https://owncast.online/troubleshoot/chat/offline-while-streaming",
+										"id": 19
+									}
+								]
+							},
+							{
+								"name": "_decision",
+								"test": "string",
+								"if": "chat-offline-not-streaming",
+								"is_open": true,
+								"id": 20,
+								"children": [
+									{
+										"name": "https://owncast.online/troubleshoot/chat/offline-while-not-streaming",
+										"id": 21
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "immediate-disconnect",
+				"is_open": true,
+				"id": 22,
+				"children": [
+					{
+						"name": "https://owncast.online/troubleshoot/stream-disconnect",
+						"id": 23
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "change-streamkey",
+				"is_open": true,
+				"id": 24,
+				"children": [
+					{
+						"name": "https://owncast.online/troubleshoot/change-streamkey",
+						"id": 25
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "visit-chat",
+				"is_open": true,
+				"id": 35,
+				"children": [
+					{
+						"name": "https://owncast.online/contact",
+						"id": 36
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "dropping-frames",
+				"is_open": true,
+				"id": 26,
+				"children": [
+					{
+						"name": "https://owncast.online/troubleshoot/dropped-frames",
+						"id": 27
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "low-quality",
+				"is_open": true,
+				"id": 28,
+				"children": [
+					{
+						"name": "https://owncast.online/troubleshoot/low-quality-video",
+						"id": 29
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "hardware-usage",
+				"is_open": true,
+				"id": 30,
+				"children": [
+					{
+						"name": "https://owncast.online/troubleshoot/hardware-usage",
+						"id": 31
+					}
+				]
+			},
+			{
+				"name": "_decision",
+				"test": "string",
+				"if": "misc-video-errors",
+				"is_open": true,
+				"id": 30,
+				"children": [
+					{
+						"name": "https://owncast.online/troubleshoot/video-errors",
+						"id": 31
+					}
+				]
+			}
+		]
+	}
+]

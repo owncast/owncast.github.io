@@ -1,0 +1,10 @@
+{
+ "name": "Owncast",
+ "icons": [
+  {
+   "src": "/favicon.ico",
+   "sizes": "any"
+  }
+ ],
+ "display": "fullscreen"
+}

@@ -1,0 +1,286 @@
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #25303b;
+  }
+}
+
+body {
+    font-weight: 400;
+}
+
+section {
+  margin-left: 2vw;
+  margin-right: 2vw;
+}
+
+.introduction {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: 400;
+  width: 90vw;
+}
+
+section#timeline {
+  width: 50%;
+  margin: 20px auto;
+  position: relative;
+}
+
+section#timeline:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin: 0 0 0 -1px;
+  width: 2px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+section#timeline article {
+  width: 100%;
+  margin: 0 0 20px 0;
+  position: relative;
+}
+
+section#timeline article:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+section#timeline article div.inner {
+  width: 45%;
+  float: left;
+  margin: 5px 0 0 0;
+  border-radius: 6px;
+}
+
+section#timeline article div.inner a {
+  color: currentColor;
+  text-decoration-line: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.2);
+  text-decoration-thickness: 0.1rem;
+}
+
+@media (max-width: 800px) {
+  section#timeline article div.inner {
+    width: 80%;
+  }
+}
+
+section#timeline article div.inner span.date span {
+  display: block;
+  text-align: center;
+}
+
+section#timeline article div.inner span.date span.day {
+  font-size: 10px;
+}
+
+section#timeline article div.inner span.date span.month {
+  font-size: 18px;
+}
+
+section#timeline article div.inner span.date span.year {
+  font-size: 10px;
+}
+
+section#timeline article div.inner h2 {
+  padding: 15px;
+  margin: 0;
+  color: #fff;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  border-radius: 6px 6px 0 0;
+  position: relative;
+}
+
+section#timeline article div.inner h2:after {
+  content: "";
+  position: absolute;
+  top: 20px;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+  -webkit-transform: rotate(-45deg);
+}
+
+section#timeline article div.inner p {
+  padding: 15px;
+  margin: 0;
+  font-size: 14px;
+  background: #fff;
+  color: #656565;
+  border-radius: 0 0 6px 6px;
+}
+
+section#timeline article:nth-child(1) div.inner {
+  box-shadow: rgba(0, 0, 0, 0.8) 0px 25px 35px;
+}
+
+section#timeline article:nth-child(2n + 2) div.inner {
+  float: right;
+}
+
+section#timeline article:nth-child(2n + 2) div.inner h2:after {
+  left: -5px;
+}
+
+section#timeline article:nth-child(1) div.inner h2 {
+  background: #2ecc71;
+}
+
+section#timeline article:nth-child(1) div.inner h2:after {
+  background: #2ecc71;
+}
+
+section#timeline article:nth-child(2) div.inner h2 {
+  background: #e74c3c;
+}
+
+section#timeline article:nth-child(2) div.inner h2:after {
+  background: #e74c3c;
+}
+
+section#timeline article:nth-child(3) div.inner h2 {
+  background: #e67e22;
+}
+
+section#timeline article:nth-child(3) div.inner h2:after {
+  background: #e67e22;
+}
+
+section#timeline article:nth-child(4) div.inner h2 {
+  background: #1abc9c;
+}
+
+section#timeline article:nth-child(4) div.inner h2:after {
+  background: #1abc9c;
+}
+
+section#timeline article:nth-child(5) div.inner h2 {
+  background: #9b59b6;
+}
+
+section#timeline article:nth-child(5) div.inner h2:after {
+  background: #9b59b6;
+}
+
+section#timeline article:nth-child(6) div.inner h2 {
+  background: #599ab6;
+}
+
+section#timeline article:nth-child(6) div.inner h2:after {
+  background: #599ab6;
+}
+
+/* Page layout */
+
+.container {
+  max-width: unset;
+  width: 100%;
+}
+
+.justify-content-center {
+  justify-content: unset !important;
+}
+
+.roadmap-page-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  width: 95vw;
+}
+
+@media (max-width: 800px) {
+  .roadmap-page-container {
+    flex-direction: column;
+  }
+}
+
+/* Current milestone on the left */
+
+.current-milestone {
+  width: 40%;
+  min-width: 300px;
+}
+
+.issues-list {
+}
+
+/* List styles */
+.leaderboard {
+  max-width: 490px;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.leaderboard__profiles {
+  border-radius: 0 0 12px 12px;
+  padding: 15px 15px 20px;
+  display: grid;
+  row-gap: 10px;
+}
+
+.leaderboard__profile {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  align-items: center;
+  padding: 3px 5px 5px 5px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 5px 7px -1px rgba(51, 51, 51, 0.23);
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98),
+    box-shadow 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
+  background-color: #fff;
+}
+
+.leaderboard__profile:hover {
+  transform: scale(1.01);
+  box-shadow: 0 9px 47px 11px rgba(51, 51, 51, 0.18);
+}
+
+.leaderboard__picture {
+  max-width: 100%;
+  width: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 10px #ebeef3, 0 0 0 22px #f3f4f6;
+}
+
+.leaderboard__name {
+  color: #979cb0;
+  font-weight: 500;
+  font-size: 17px;
+  letter-spacing: 0.64px;
+  line-height: 1.2;
+  margin-left: 12px;
+}
+
+.leaderboard__profiles a {
+  text-decoration: none !important;
+}
+
+.leaderboard__value {
+  color: #35d8ac;
+  text-shadow: rgba(51, 51, 51, 0.23);
+  font-weight: 500;
+  font-size: 8px;
+  text-align: right;
+}
+
+.leaderboard__value .issue-tag {
+  color: white;
+  padding: 2px 5px;
+  border-radius: 5px;
+  margin: 2px;
+  text-shadow: 1 1 rgba(0, 0, 0, 0.9);
+  text-transform: uppercase;
+}
+
+.leaderboard {
+  box-shadow: 0 0 40px -10px rgba(0, 0, 0, 0.4);
+}
