@@ -46,7 +46,7 @@ Each entry has a `title`, a `path` glob, and an optional `icon`:
 
 Owncast's admin renders each declared page as a tab inside `/admin/plugins/configure?id=<your-slug>`. The tab body is an `<iframe>` pointed at `/plugins/<your-slug>/<path>`. Each plugin gets a bookmarkable URL and a sidebar entry under **Plugins** in the admin navigation.
 
-The host auto-injects an admin-themed stylesheet into HTML responses on admin paths, so plain `<input>` and `<button>` controls look native to Owncast's admin without you needing to ship CSS. Plugins that prefer their own styling can layer on top.
+The host auto-injects the baseline stylesheet into HTML responses on admin paths, so plain `<input>` and `<button>` controls look native to Owncast's admin without you needing to ship CSS. See [Styling plugin UI](#styling-plugin-ui) for what you get for free and the helper classes available. Plugins that prefer their own styling can layer on top.
 
 ### Sandbox
 
@@ -180,6 +180,53 @@ def add_button(info):
 </Tabs>
 
 A common pattern is an admin page that lets the streamer add custom buttons (label + URL) on top of the plugin's defaults. The `action-buttons` example in the SDK ships a working version of this.
+
+## Styling plugin UI
+
+Owncast injects a baseline stylesheet into every plugin surface that renders in an iframe: your **admin pages** and your **viewer-page tabs**. It's built from Owncast's own design tokens, so plain semantic HTML adopts the native look with no CSS of your own.
+
+- Headings, paragraphs, and links pick up the theme fonts and colors.
+- `<input>`, `<textarea>`, `<select>`, and `<button>` render like the native controls. A `<button>` gets the primary style. Add `class="secondary"` for the outline variant.
+- `<table>`, `<fieldset>`, and `<code>` / `<pre>` get sensible native styling.
+
+Your content sits **flush on the page**. The iframe background is transparent so the host's panel shows through, the same way the built-in About and Followers tabs render. You don't get, and shouldn't add, an opaque page background or a wrapping box around everything. That flush rendering is what makes a plugin tab read as part of Owncast rather than an embedded frame.
+
+:::info Where it applies
+The baseline styles the iframe-rendered surfaces: [admin pages](#admin-pages) and [viewer-page tabs](#viewer-page-tabs). Content you inject straight into the viewer page (`extraPageContent`, `scripts`) renders in the real page DOM and inherits Owncast's actual styles instead.
+:::
+
+### Helper classes
+
+For native building blocks beyond plain elements, the baseline ships a few opt-in classes. They reference the same theme tokens as the rest of Owncast, so they restyle automatically when an admin customizes the theme.
+
+| Class              | What it does                                                                                                                                            |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `card`             | A native card surface, the same look as the followers and featured-streams cards. A plain `<section>` / `<article>` stays flush, so opt in with `class="card"` when you want the boxed surface. |
+| `card interactive` | Add `interactive` to a clickable card for the native hover lift.                                                                                        |
+| `card-grid`        | A responsive grid that fills as many ~260px columns as fit and collapses to one column on a narrow frame. Drop `card` children straight in.             |
+| `tag`              | A pill tag or badge, matching the tags on the native stream cards.                                                                                      |
+| `stack`            | A vertical flex column with a consistent gap.                                                                                                           |
+| `row`              | A horizontal flex row that wraps, with a consistent gap.                                                                                                |
+| `muted`            | De-emphasized text, for captions and secondary detail.                                                                                                  |
+
+```html
+<div class="card-grid">
+  <article class="card interactive">
+    <h3>Album A</h3>
+    <p class="muted">Artist A</p>
+    <div class="row">
+      <span class="tag">jazz</span>
+      <span class="tag">2024</span>
+    </div>
+  </article>
+  <article class="card interactive">
+    <h3>Album B</h3>
+    <p class="muted">Artist B</p>
+  </article>
+</div>
+```
+
+Everything here is opt-in. A tab that ships nothing but semantic HTML already looks native. Reach for the helpers when you want cards, grids, or tags without hand-copying Owncast's values, and layer your own CSS on top (see [Viewer stylesheets](#viewer-stylesheets)) whenever you need something the baseline doesn't cover.
 
 ## Viewer stylesheets
 
