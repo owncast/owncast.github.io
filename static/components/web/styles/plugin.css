@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 03 Jun 2026 00:47:31 GMT
+ * This file is generated from the token sources under style-definitions/.
  * 
  * How to edit these values:
  * Edit the corresponding token file under the style-definitions directory
@@ -11,14 +11,14 @@
   --link-color: var(--theme-color-action);
   --link-hover-color: var(--theme-color-action-hover);
   --modal-header-bg: var(--theme-color-components-modal-header-background);
-  --modal-content-bg: var(--theme-color-background-main);
+  --modal-content-bg: var(--theme-color-components-modal-content-background);
   --alert-error-bg-color: var(--theme-color-palette-4);
   --alert-error-border-color: var(--theme-color-palette-error);
   --popover-background: var(--theme-color-components-menu-background);
   --tag-default-color: var(--theme-color-action);
   --border-radius-base: var(--theme-rounded-corners);
   --background-color-light: var(--theme-color-background-main);
-  --modal-close-color: var(--theme-color-background-main);
+  --modal-close-color: var(--theme-color-components-modal-header-text);
   --primary-color: #6544e9; /* Text link/secondary light text */
   --primary-color-hover: #2386e2; /* Fun color 1 */
   --primary-color-active: #7a5cf3; /* Text link hover */
@@ -32,7 +32,7 @@
   --primary-8: #da9eff; /* Fun color 2 */
   --component-background: #e2e8f0; /* Light primary */
   --body-background: #e2e8f0; /* Light primary */
-  --theme-rounded-corners: 5px; /* How much corners are rounded in places in the UI. */
+  --theme-rounded-corners: 9px; /* How much corners are rounded in places in the UI. */
   --theme-unknown-1: green; /* This should never be used and it means something is wrong. */
   --theme-unknown-2: red; /* This should never be used and it means something is wrong. */
   --theme-text-body-font-family: var(
@@ -41,7 +41,14 @@
   --theme-text-display-font-family: var(
     --font-owncast-display
   ); /* The font family used for the display/header text. */
-  --theme-color-users: var(--color-owncast-user-6); /* Colors used to display chat users. */
+  --theme-color-users-0: var(--color-owncast-user-0);
+  --theme-color-users-1: var(--color-owncast-user-1);
+  --theme-color-users-2: var(--color-owncast-user-2);
+  --theme-color-users-3: var(--color-owncast-user-3);
+  --theme-color-users-4: var(--color-owncast-user-4);
+  --theme-color-users-5: var(--color-owncast-user-5);
+  --theme-color-users-6: var(--color-owncast-user-6);
+  --theme-color-users-7: var(--color-owncast-user-7);
   --theme-color-palette-0: var(--color-owncast-palette-0); /* Dark primary */
   --theme-color-palette-1: var(--color-owncast-palette-1); /* Dark secondary */
   --theme-color-palette-2: var(--color-owncast-palette-2); /* Dark alternate */
@@ -106,18 +113,22 @@
     --theme-color-palette-15
   ); /* Lighter background */
   --theme-color-components-modal-header-background: var(
-    --theme-color-palette-1
-  ); /* Dark secondary */
-  --theme-color-components-modal-header-text: var(--theme-color-palette-3); /* Light primary */
-  --theme-color-components-modal-content-background: var(
-    --theme-color-palette-3
+    --theme-color-background-header
+  ); /* Dark primary */
+  --theme-color-components-modal-header-text: var(
+    --theme-color-components-text-on-dark
   ); /* Light primary */
-  --theme-color-components-modal-content-text: var(--theme-color-palette-0); /* Dark primary */
+  --theme-color-components-modal-content-background: var(
+    --theme-color-components-content-background
+  ); /* Lighter background */
+  --theme-color-components-modal-content-text: var(
+    --theme-color-components-text-on-light
+  ); /* Dark primary */
   --theme-color-components-menu-background: var(--theme-color-palette-3); /* Light primary */
   --theme-color-components-menu-item-text: var(--theme-color-palette-0); /* Dark primary */
   --theme-color-components-menu-item-bg: transparent;
-  --theme-color-components-menu-item-hover-bg: rgb(0 0 0 / 5%);
-  --theme-color-components-menu-item-focus-bg: rgb(0 0 0 / 10%);
+  --theme-color-components-menu-item-hover-bg: rgba(0, 0, 0, 0.05);
+  --theme-color-components-menu-item-focus-bg: rgba(0, 0, 0, 0.1);
   --theme-color-components-form-field-background: var(
     --theme-color-palette-4
   ); /* Light secondary */
@@ -148,9 +159,9 @@
   --color-owncast-user-7: #ff53ff;
   --color-owncast-palette-0: #12161d; /* Dark primary */
   --color-owncast-palette-1: #2d3748; /* Dark secondary */
-  --color-owncast-palette-2: #000; /* Dark alternate */
+  --color-owncast-palette-2: #000000; /* Dark alternate */
   --color-owncast-palette-3: #e2e8f0; /* Light primary */
-  --color-owncast-palette-4: #fff; /* Light secondary */
+  --color-owncast-palette-4: #ffffff; /* Light secondary */
   --color-owncast-palette-5: #c3dafe; /* Light alternate */
   --color-owncast-palette-6: #6544e9; /* Text link/secondary light text */
   --color-owncast-palette-7: #7a5cf3; /* Text link hover */
@@ -165,15 +176,14 @@
   --color-owncast-palette-error: #ff4b39; /* Error */
   --color-owncast-palette-warning: #ffc655; /* Warning */
   --font-owncast-body:
-    'Inter', system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, 'Helvetica Neue',
-    arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
     'Noto Color Emoji';
   --font-owncast-display:
-    'Poppins', system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, 'Helvetica Neue',
-    arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
     'Noto Color Emoji';
 }
-
 /*
  * plugin-elements.css — hand-authored element baseline for plugin content.
  *
@@ -195,11 +205,16 @@
  * those stacks — acceptable, and the same as the prior admin stylesheet.
  */
 
+/* Transparent so the host panel/page paints the background and the plugin
+ * content reads as part of the page rather than a boxed-in white pane. The
+ * viewer frame sits on the soft content panel; the admin frame sits on the
+ * admin page background. Keeping this in the stylesheet (rather than only the
+ * viewer's JS) means the admin frame blends in too. */
 html,
 body {
   margin: 0;
   padding: 0;
-  background: var(--theme-color-background-main);
+  background: transparent;
   color: var(--theme-color-components-text-on-light);
   font-family: var(--theme-text-body-font-family);
   font-size: 14px;
@@ -406,11 +421,13 @@ input[type='reset']:hover {
   color: var(--theme-color-components-primary-button-text);
 }
 
-/* Tables — minimal, readable. */
+/* Tables — minimal, readable. Card-toned background (not opaque white) so
+ * tables sit on the panel the way native content does. */
 table {
   border-collapse: collapse;
   width: 100%;
-  background: var(--theme-color-components-form-field-background);
+  background: var(--theme-color-background-main);
+  border: 1px solid rgb(0 0 0 / 12%);
   border-radius: var(--theme-rounded-corners);
   overflow: hidden;
 }
@@ -432,12 +449,21 @@ tr:last-child td {
   border-bottom: none;
 }
 
-/* Cards — semantic <section>/<article>/<fieldset> get a soft container. */
+/* Sectioning content sits flush on the host panel, exactly like native tab
+ * content (the About tab, etc.) does. No card chrome: a plugin that wraps its
+ * markup in a <section>/<article> shouldn't pick up a stray colored box with a
+ * border and a second layer of padding nested inside the panel. Just vertical
+ * rhythm between blocks. */
 section,
-article,
+article {
+  margin: 0 0 16px;
+}
+
+/* <fieldset> is a genuine form-grouping element, so keep it as a light bordered
+ * box — but transparent, so it groups without painting its own panel color. */
 fieldset {
-  background: var(--theme-color-components-form-field-background);
-  border: 1px solid var(--theme-color-palette-14);
+  background: transparent;
+  border: 1px solid rgb(0 0 0 / 12%);
   border-radius: var(--theme-rounded-corners);
   padding: 16px;
   margin: 0 0 16px;
@@ -450,4 +476,74 @@ fieldset legend {
 
 .muted {
   color: var(--theme-color-palette-10);
+}
+
+/* ---------------------------------------------------------------------------
+ * Opt-in helper classes.
+ *
+ * The element baseline above already makes plain semantic HTML look native, so
+ * a plugin needs none of these. They exist for authors who want the native
+ * building blocks — a card surface, a responsive card grid, pill tags, simple
+ * layout — without hand-copying theme values. Everything references theme
+ * tokens, so it re-themes along with the host. Documented at
+ * https://owncast.online/docs/plugins/ui.
+ * ------------------------------------------------------------------------ */
+
+/* Card — the native card surface (the same look as the followers and featured
+ * streams cards). Opt in with class="card"; a plain <section>/<article> stays
+ * flush on the panel by design. */
+.card {
+  background: var(--theme-color-background-main);
+  border: 1px solid rgb(0 0 0 / 12%);
+  border-radius: var(--theme-rounded-corners);
+  padding: 16px;
+}
+
+/* Add "interactive" to a clickable card for the native hover lift. */
+.card.interactive {
+  cursor: pointer;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.card.interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+}
+
+/* Responsive card grid, mirroring the native followers/streams layout: fills
+ * as many ~260px columns as fit and collapses to one column on a narrow
+ * frame. Drop .card children straight in. */
+.card-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+
+/* Pill tag/badge, matching the tags on the native stream cards. */
+.tag {
+  display: inline-block;
+  height: 20px;
+  padding: 0 8px;
+  font-size: 11px;
+  line-height: 20px;
+  color: var(--theme-color-components-text-on-dark);
+  background: var(--theme-color-palette-10);
+  border-radius: 10px;
+}
+
+/* Layout — a vertical stack and a horizontal row, each with a sensible gap.
+ * Compose them for most plugin layouts without writing flexbox by hand. */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
 }
