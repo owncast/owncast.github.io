@@ -1,7 +1,7 @@
 ---
 title: Authentication
 description: Build a plugin that makes viewers sign in (OAuth, a password, anything over HTTP) before they can reach the stream, using the auth.gate capability.
-sidebar_position: 9
+sidebar_position: 3
 sidebar_label: Authentication
 toc_min_heading_level: 2
 toc_max_heading_level: 3
@@ -14,72 +14,73 @@ tags:
   - gate
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-A plugin can be the **authentication gate** for an Owncast site: viewers must sign in through it before they can reach the page, the video, chat, or the API. The plugin supplies the login method — OAuth (GitHub, Discord, Google), a magic link, SAML, or just a shared password — and Owncast enforces the gate. This replaces the high-friction "put a reverse proxy like Vouch in front of Owncast" pattern with a first-class plugin capability.
+A plugin can be the **authentication gate** for an Owncast site: viewers must sign in through it before they can reach the page, the video, chat, or the API. The plugin supplies the login method: OAuth (GitHub, Discord, Google), a magic link, SAML, or just a shared password. Owncast enforces the gate. This replaces the high-friction "put a reverse proxy like Vouch in front of Owncast" pattern with a first-class plugin capability.
 
 The split of responsibility is the whole model:
 
 - **Your plugin is the identity provider.** It renders the login screen, talks to the external provider, and decides who is allowed in.
 - **Owncast core is the gatekeeper and session authority.** It owns the session cookie, enforces the gate on every request, and never lets your plugin near the per-request hot path.
 
-:::info Requires `auth.gate`
+:::info[Requires auth.gate]
 Everything on this page needs the [`auth.gate`](/docs/plugins/permissions#authgate) permission, plus [`users.register`](/docs/plugins/permissions#usersregister) to create the authenticated user and [`http.serve`](/docs/plugins/permissions#httpserve) to render the login flow.
 :::
 
 ## What gets gated
 
-When an `auth.gate` plugin is enabled, the **entire web server is gated** — not just the HTML page. The viewer page (`/`), the video (`/hls/*`), chat (`/ws`), and the API all sit behind the gate.
+When an `auth.gate` plugin is enabled, the **entire web server is gated**, not just the HTML page. The viewer page (`/`), the video (`/hls/*`), chat (`/ws`), and the API all sit behind the gate. Owncast's own admin pages are the exception: they stay behind the admin login rather than the viewer gate, so an admin can always reach the controls.
 
 The accepted consequence: **the stream is only viewable through Owncast's own web UI.** Native players (VLC, QuickTime) can't carry the session cookie, so they can't play a gated stream.
 
-:::warning External storage (S3/CDN) caveat
-With local storage, the gate is airtight: every byte flows through Owncast. With S3/CDN storage, playlists are rewritten to absolute remote URLs and segments are fetched directly from the bucket — the gate never sees those requests. Gating still stops an anonymous visitor from *discovering* the segment list, but a *leaked or shared* segment URL stays fetchable. **Gate + local storage = airtight; gate + S3 = good friction, not airtight.**
+:::warning[Distributing your video with External storage (Object storage/CDN) caveat]
+When distributing your video stream directly from your server, the gate is airtight: every byte flows through Owncast. With Object Storage or CDN, playlists are rewritten to absolute remote URLs and segments are fetched directly from the bucket, so the gate never sees those requests. Gating still stops an anonymous visitor from _discovering_ the segment list, but a _leaked or shared_ segment URL stays fetchable. **Gate + local distribution is airtight. Gate + Object Storage is good friction, not airtight.**
 :::
 
 ## How it works
 
-Once the gate is armed, every request is checked — including each HLS segment, which a live viewer pulls every few seconds. Calling into your plugin's embedded engine on every one of those would melt the server, so the plugin is kept out of the hot path:
+Once the gate is armed, every request is checked, including each HLS segment, which a live viewer pulls every few seconds. Calling into your plugin's embedded engine on every one of those would melt the server, so the plugin is kept out of the hot path:
 
-| When | Cost | What happens |
-| --- | --- | --- |
-| **Every request** (`/hls/*`, images, `/ws`, API) | Pure Go: verify cookie signature + expiry | valid → pass; missing/invalid → redirect to login |
-| **`/` page loads only** | Optional engine call: [`onAuthCheck`](/docs/plugins/events#auth-check) | re-validate against your provider; `ok` / `refresh` / `deny` |
+| When                                             | Cost                                                                   | What happens                                                         |
+| ------------------------------------------------ | ---------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| **Every request** (`/hls/*`, images, `/ws`, API) | Verify cookie signature + expiry                                       | valid → pass, missing/invalid → redirect to login                    |
+| **`/` page loads only**                          | Optional engine call: [`onAuthCheck`](/docs/plugins/events#auth-check) | re-validate against your provider, returns `ok` / `refresh` / `deny` |
 
-Your plugin only runs the **login flow** (infrequent — about once per viewer session) and the optional per-page-load `onAuthCheck`. Core mints and checks a **signed session cookie** so the per-request check is signature-and-expiry only: no database lookup, no plugin call.
+Your plugin only runs the **login flow** (infrequent, about once per viewer session) and the optional per-page-load `onAuthCheck`. Core mints and checks a **signed session cookie** so the per-request check is signature-and-expiry only: no database lookup, no plugin call.
 
-The cookie is a signed envelope carrying the user's existing Owncast access token plus a session expiry. Core owns it end to end — it reserves the cookie name, signs it with a core-held secret, and attaches it to the response. Your plugin never sees or sets the token, so it can't forge or leak one. (This is also how chat picks up the viewer's identity automatically; see [Chat identity](#chat-identity) below.)
+The cookie is a signed envelope carrying the user's existing Owncast access token plus a session expiry. Core owns it end to end: it reserves the cookie name, signs it with a core-held secret, and attaches it to the response. Your plugin never sees or sets the token, so it can't forge or leak one. (This is also how chat picks up the viewer's identity automatically. See [Chat identity](#chat-identity) below.)
 
 ## Building a gate plugin
 
 A gate plugin is an [HTTP-serving plugin](/docs/plugins/http) with a login flow. The control loop, by convention, is rooted at your plugin's own namespace `/plugins/<your-slug>/`:
 
-```
-GET /                      gate: no cookie → redirect to /plugins/<slug>/?return_to=%2F
-GET /plugins/<slug>/       your plugin renders the login screen
-  → (OAuth) redirect to the provider, then back to your callback
-GET /plugins/<slug>/callback
-  your plugin validates the response and resolves the user, then:
-  → owncast.users.register({ authId, displayName })   → { userId }
-  → owncast.auth.grantSession({ userId })             → core attaches the cookie
-  → redirect to return_to
-GET /                      gate: cookie valid → onAuthCheck → render the page
+```mermaid
+flowchart TD
+    Visit([Visitor requests a page]) --> Cookie{"Valid session<br/>cookie?"}
+    Cookie -->|"missing or invalid"| Login["Core redirects to your login screen<br/>/plugins/&lt;slug&gt;/?return_to=…"]
+    Login --> Flow["Your plugin runs the login flow<br/>(a password form, or an OAuth round-trip<br/>to the provider and back to your callback)"]
+    Flow --> Register["owncast.users.register → userId"]
+    Register --> Grant["owncast.auth.grantSession<br/>core mints and attaches the signed cookie"]
+    Grant --> Redirect([Redirect to return_to])
+    Redirect --> Cookie
+    Cookie -->|"valid"| Check["onAuthCheck<br/>(/ page loads only)"]
+    Check --> Render([Render the page])
 ```
 
 Three pieces do the work:
 
-1. **Register the user.** Turn the external identity into a real Owncast user with [`owncast.users.register`](/docs/plugins/apis#users-register). Pass a stable, provider-scoped `authId` (e.g. `"github:583231"`); the host namespaces it by your slug so plugins can't collide or spoof each other.
+1. **Register the user.** Turn the external identity into a real Owncast user with [`owncast.users.register`](/docs/plugins/apis#users-register). Pass a stable, provider-scoped `authId` (e.g. `"github:583231"`). The host namespaces it by your slug so plugins can't collide or spoof each other.
 2. **Grant the session.** Call [`owncast.auth.grantSession`](/docs/plugins/apis#auth-grant-session) with that `userId`. Core mints the signed cookie and attaches it to the in-flight response. This only works inside an `onHttpRequest` handler.
 3. **Redirect home.** Core appends a `return_to` query parameter when it bounces an unauthenticated visitor to your login screen, and **sanitizes it to a same-origin path** (so it can't be turned into an open redirect). Send the viewer there after a successful login.
 
-To sign a viewer out, call [`owncast.auth.endSession()`](/docs/plugins/apis#auth-end-session) and redirect — your plugin still controls where to (it may bounce on to the provider's own logout).
+To sign a viewer out, call [`owncast.auth.endSession()`](/docs/plugins/apis#auth-end-session) and redirect. Your plugin still controls where to (it may bounce on to the provider's own logout).
 
 ### Revocation with `onAuthCheck`
 
-Sessions are stateless, so there's no per-request "is this user still allowed" list — that would put the plugin back on the hot path. Instead, define the optional [`onAuthCheck`](/docs/plugins/events#auth-check) handler. It fires on each `/` page load with the resolved viewer identity, and returns `ok`, `refresh` (re-issue the cookie, optionally with a new TTL — sliding expiry), or `deny` (end the session and bounce to login). A provider-backed plugin re-checks membership here (org still valid? account not deleted?).
+Sessions are stateless, so there's no per-request "is this user still allowed" list. That would put the plugin back on the hot path. Instead, define the optional [`onAuthCheck`](/docs/plugins/events#auth-check) handler. It fires on each `/` page load with the resolved viewer identity, and returns `ok`, `refresh` (re-issue the cookie, optionally with a new TTL for sliding expiry), or `deny` (end the session and bounce to login). A provider-backed plugin re-checks membership here (org still valid? account not deleted?).
 
-Because the check runs only on `/`, a viewer you revoke keeps any open tab working until they reload or the cookie expires. The session **TTL is the hard backstop** for revocation — keep it short if fast revocation matters.
+Because the check runs only on `/`, a viewer you revoke keeps any open tab working until they reload or the cookie expires. The session **TTL is the hard backstop** for revocation, so keep it short if fast revocation matters.
 
 ## Worked example: a shared-password gate
 
@@ -103,7 +104,7 @@ Its manifest declares the permissions and a single config field for the password
 }
 ```
 
-The handler renders a password form at `/`, checks the submitted password against the configured value, and on success registers the shared identity, grants a session, and redirects back. `onAuthCheck` reads an admin-flippable `revoked` flag to kick everyone on their next page load. (The `page()` helper that builds the HTML form is omitted below for brevity — see the example source.)
+The handler renders a password form at `/`, checks the submitted password against the configured value, and on success registers the shared identity, grants a session, and redirects back. `onAuthCheck` reads an admin-flippable `revoked` flag to kick everyone on their next page load. (The `page()` helper that builds the HTML form is omitted below for brevity. See the example source.)
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
@@ -117,16 +118,27 @@ module.exports = definePlugin({
     const returnTo = query.return_to || "/";
 
     if (req.method === "GET" && req.path === "/") {
-      return { status: 200, headers: { "content-type": "text/html" }, body: page(returnTo) };
+      return {
+        status: 200,
+        headers: { "content-type": "text/html" },
+        body: page(returnTo),
+      };
     }
 
     if (req.path === "/login") {
       const expected = owncast.config.get("password", "letmein");
       if ((query.password || "") !== expected) {
-        return { status: 200, headers: { "content-type": "text/html" }, body: page(returnTo, "Incorrect password.") };
+        return {
+          status: 200,
+          headers: { "content-type": "text/html" },
+          body: page(returnTo, "Incorrect password."),
+        };
       }
       // Everyone who knows the password shares one authenticated identity.
-      const { userId } = owncast.users.register({ authId: "shared", displayName: "Guest" });
+      const { userId } = owncast.users.register({
+        authId: "shared",
+        displayName: "Guest",
+      });
       owncast.auth.grantSession({ userId });
       return { status: 302, headers: { Location: returnTo } };
     }
@@ -140,7 +152,10 @@ module.exports = definePlugin({
     if (req.path === "/revoke" || req.path === "/unrevoke") {
       if (!req.authenticated) return { status: 403, body: "admin only" };
       owncast.kv.set("revoked", req.path === "/revoke" ? "1" : "");
-      return { status: 200, body: req.path === "/revoke" ? "revoked" : "unrevoked" };
+      return {
+        status: 200,
+        body: req.path === "/revoke" ? "revoked" : "unrevoked",
+      };
     }
 
     return { status: 404, body: "not found" };
@@ -148,7 +163,8 @@ module.exports = definePlugin({
 
   // Re-validate on each page load. While revoked, end every session.
   onAuthCheck() {
-    if (owncast.kv.get("revoked") === "1") return authCheck.deny("access has been revoked");
+    if (owncast.kv.get("revoked") === "1")
+      return authCheck.deny("access has been revoked");
     return authCheck.ok();
   },
 });
@@ -210,31 +226,31 @@ For a real OAuth flow (CSRF `state` in [`storage.kv`](/docs/plugins/permissions#
 
 ## Enabling the gate
 
-There is **no separate "require viewer auth" toggle** — that would falsely imply built-in Owncast auth. Declaring `auth.gate` does nothing on its own; the gate is armed by **enabling the plugin** through the normal enable/disable lifecycle in the admin. Disable it and the gate drops instantly.
+There is **no separate "require viewer auth" toggle**. That would falsely imply built-in Owncast auth. Declaring `auth.gate` does nothing on its own. The gate is armed by **enabling the plugin** through the normal enable/disable lifecycle in the admin. Disable it and the gate drops instantly.
 
 - **Only one `auth.gate` plugin can be enabled at a time.** Owncast refuses to enable a second one while one is already live ("disable the other first").
 - **Configure before you enable.** A plugin can be installed and configured while disabled, then enabled to go live. Use the auto-generated [config form](/docs/plugins/manifest#config-admin-configurable-settings) for credentials like an OAuth client ID and secret.
 
 ### Fail closed
 
-The gate's posture is decoupled from your plugin's health. If the gate is armed but the plugin is unavailable — crashed, failed to load, errored, or auto-disabled after repeated failures — Owncast **denies all viewer traffic** and serves a static "authentication temporarily unavailable" page. It never falls open. The admin is always reachable (admin routes use Owncast's existing Basic Auth and bypass the gate) so you can fix the config or disable the plugin. Already-valid sessions survive an outage, because checking a cookie needs no plugin call.
+The gate's posture is decoupled from your plugin's health. If the gate is armed but the plugin is unavailable (crashed, failed to load, errored, or auto-disabled after repeated failures), Owncast **denies all viewer traffic** and serves a static "authentication temporarily unavailable" page. It never falls open. The admin is always reachable (admin routes use Owncast's existing Basic Auth and bypass the gate) so you can fix the config or disable the plugin. Already-valid sessions survive an outage, because checking a cookie needs no plugin call.
 
 ### What bypasses the gate
 
-The principle: the gate covers only the otherwise-public surface; any route that already enforces its own credential bypasses it.
+The principle: the gate covers only the otherwise-public surface. Any route that already enforces its own credential bypasses it.
 
 - The gate plugin's own namespace `/plugins/<your-slug>/*` and its static assets (so the login screen is reachable while you're locked out).
-- `/admin/*` and `/api/admin/*` — already behind admin Basic Auth.
-- External-API-token routes — a valid Bearer client carries no cookie; gating would bounce it into a login page.
+- `/admin/*` and `/api/admin/*`, already behind admin Basic Auth.
+- External-API-token routes, where a valid Bearer client carries no cookie and gating would bounce it into a login page.
 - The viewer page's own static assets (the JS/CSS bundle needed to render the login UI).
 
-Everything else is gated, **including `/api/status` and embeds** — leaking live-status or viewer counts to anonymous visitors would undercut the point of gating.
+Everything else is gated, **including `/api/status` and embeds**. Leaking live-status or viewer counts to anonymous visitors would undercut the point of gating.
 
 ## Session details
 
 - **Stateless signed cookie**, `HttpOnly`, `Secure` (on HTTPS requests), `SameSite=Lax`, `Path=/`. Lax rather than Strict because the provider callback is a cross-site top-level redirect.
 - **TTL defaults to 24 hours**, with a sliding refresh available through `onAuthCheck`'s `refresh` verdict. Because the TTL is the revocation backstop, it's a real security knob.
-- **The signing secret is core's responsibility.** It's auto-generated on first use and persisted in config. Rotating it invalidates every session (a panic button). Plugin authors never touch it — and it's separate from any OAuth *client* secret, which is your plugin's config concern.
+- **The signing secret is core's responsibility.** It's auto-generated on first use and persisted in config. Rotating it invalidates every session (a panic button). Plugin authors never touch it, and it's separate from any OAuth _client_ secret, which is your plugin's config concern.
 
 ## Chat identity {#chat-identity}
 
@@ -242,7 +258,7 @@ A gate login produces an authenticated chat identity automatically. Because `use
 
 ## Related
 
-- [Permissions](/docs/plugins/permissions) — `auth.gate`, `users.register`
-- [Owncast APIs](/docs/plugins/apis#authentication) — `users.register`, `auth.grantSession`, `auth.endSession`
-- [Events](/docs/plugins/events#auth-check) — the `onAuthCheck` handler
-- [Serving HTTP](/docs/plugins/http) — the request model the login flow is built on
+- [Permissions](/docs/plugins/permissions): `auth.gate`, `users.register`
+- [Owncast APIs](/docs/plugins/apis#authentication): `users.register`, `auth.grantSession`, `auth.endSession`
+- [Events](/docs/plugins/events#auth-check): the `onAuthCheck` handler
+- [Serving HTTP](/docs/plugins/http): the request model the login flow is built on
