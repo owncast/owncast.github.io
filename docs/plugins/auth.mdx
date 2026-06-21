@@ -226,7 +226,7 @@ For a real OAuth flow (CSRF `state` in [`storage.kv`](/docs/plugins/permissions#
 
 ## Enabling the gate
 
-There is **no separate "require viewer auth" toggle**. That would falsely imply built-in Owncast auth. Declaring `auth.gate` does nothing on its own. The gate is armed by **enabling the plugin** through the normal enable/disable lifecycle in the admin. Disable it and the gate drops instantly.
+Declaring `auth.gate` does nothing on its own. The gate is armed by **enabling the plugin** through the normal enable/disable lifecycle in the admin. Disable it and the gate drops instantly.
 
 - **Only one `auth.gate` plugin can be enabled at a time.** Owncast refuses to enable a second one while one is already live ("disable the other first").
 - **Configure before you enable.** A plugin can be installed and configured while disabled, then enabled to go live. Use the auto-generated [config form](/docs/plugins/manifest#config-admin-configurable-settings) for credentials like an OAuth client ID and secret.
