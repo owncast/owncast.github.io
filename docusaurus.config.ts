@@ -218,6 +218,57 @@ const config: Config = {
             title: "Owncast Plugin Development Documentation",
             description: "Complete reference for Owncast plugin development",
           },
+          {
+            filename: "llms-activitypub.txt",
+            includePatterns: [
+              "docs/api/activitypub.{md,mdx}",
+              "docs/social/**/*.{md,mdx}",
+            ],
+            fullContent: true,
+            title: "Owncast ActivityPub & Fediverse Documentation",
+            description:
+              "Complete reference for Owncast's ActivityPub federation and fediverse integration",
+          },
+          {
+            filename: "llms-configuration.txt",
+            includePatterns: ["docs/configuration/**/*.{md,mdx}"],
+            fullContent: true,
+            title: "Owncast Configuration Documentation",
+            description:
+              "Complete reference for configuring an Owncast server, including appearance, notifications, runtime flags, and the web interface",
+          },
+          {
+            filename: "llms-api.txt",
+            includePatterns: ["docs/api/**/*.{md,mdx}"],
+            fullContent: true,
+            title: "Owncast API & Integrations Documentation",
+            description:
+              "Complete reference for the Owncast web APIs, actions, webhooks, and ActivityPub integration",
+          },
+          {
+            filename: "llms-broadcasting.txt",
+            includePatterns: ["docs/broadcasting/**/*.{md,mdx}"],
+            fullContent: true,
+            title: "Owncast Broadcasting Documentation",
+            description:
+              "Complete reference for broadcasting to Owncast, including OBS, ffmpeg, hardware, and restreaming setup",
+          },
+          {
+            filename: "llms-chat.txt",
+            includePatterns: ["docs/chat/**/*.{md,mdx}"],
+            fullContent: true,
+            title: "Owncast Chat Documentation",
+            description:
+              "Complete reference for Owncast chat, including authentication, moderation, and emoji",
+          },
+          {
+            filename: "llms-getting-started.txt",
+            includePatterns: ["docs/getting-started/**/*.{md,mdx}"],
+            fullContent: true,
+            title: "Owncast Getting Started & Installation Documentation",
+            description:
+              "Complete reference for installing Owncast and configuring your first stream",
+          },
         ],
       },
     ],
