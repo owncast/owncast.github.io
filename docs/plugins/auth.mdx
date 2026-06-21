@@ -1,7 +1,7 @@
 ---
 title: Authentication
 description: Build a plugin that makes viewers sign in (OAuth, a password, anything over HTTP) before they can reach the stream, using the auth.gate capability.
-sidebar_position: 3
+sidebar_position: 1
 sidebar_label: Authentication
 toc_min_heading_level: 2
 toc_max_heading_level: 3
@@ -22,7 +22,7 @@ A plugin can be the **authentication gate** for an Owncast site: viewers must si
 The split of responsibility is the whole model:
 
 - **Your plugin is the identity provider.** It renders the login screen, talks to the external provider, and decides who is allowed in.
-- **Owncast core is the gatekeeper and session authority.** It owns the session cookie, enforces the gate on every request, and never lets your plugin near the per-request hot path.
+- **The Owncast host is the gatekeeper and session authority.** It owns the session cookie, enforces the gate on every request, and never lets your plugin near the per-request hot path.
 
 :::info[Requires auth.gate]
 Everything on this page needs the [`auth.gate`](/docs/plugins/permissions#authgate) permission, plus [`users.register`](/docs/plugins/permissions#usersregister) to create the authenticated user and [`http.serve`](/docs/plugins/permissions#httpserve) to render the login flow.
@@ -47,9 +47,9 @@ Once the gate is armed, every request is checked, including each HLS segment, wh
 | **Every request** (`/hls/*`, images, `/ws`, API) | Verify cookie signature + expiry                                       | valid → pass, missing/invalid → redirect to login                    |
 | **`/` page loads only**                          | Optional engine call: [`onAuthCheck`](/docs/plugins/events#auth-check) | re-validate against your provider, returns `ok` / `refresh` / `deny` |
 
-Your plugin only runs the **login flow** (infrequent, about once per viewer session) and the optional per-page-load `onAuthCheck`. Core mints and checks a **signed session cookie** so the per-request check is signature-and-expiry only: no database lookup, no plugin call.
+Your plugin only runs the **login flow** (infrequent, about once per viewer session) and the optional per-page-load `onAuthCheck`. The Owncast host mints and checks a **signed session cookie** so the per-request check is signature-and-expiry only: no database lookup, no plugin call.
 
-The cookie is a signed envelope carrying the user's existing Owncast access token plus a session expiry. Core owns it end to end: it reserves the cookie name, signs it with a core-held secret, and attaches it to the response. Your plugin never sees or sets the token, so it can't forge or leak one. (This is also how chat picks up the viewer's identity automatically. See [Chat identity](#chat-identity) below.)
+The cookie is a signed envelope carrying the user's existing Owncast access token plus a session expiry. The Owncast host owns it end to end: it reserves the cookie name, signs it with a host-held secret, and attaches it to the response. Your plugin never sees or sets the token, so it can't forge or leak one. (This is also how chat picks up the viewer's identity automatically. See [Chat identity](#chat-identity) below.)
 
 ## Building a gate plugin
 
@@ -58,10 +58,10 @@ A gate plugin is an [HTTP-serving plugin](/docs/plugins/http) with a login flow.
 ```mermaid
 flowchart TD
     Visit([Visitor requests a page]) --> Cookie{"Valid session<br/>cookie?"}
-    Cookie -->|"missing or invalid"| Login["Core redirects to your login screen<br/>/plugins/&lt;slug&gt;/?return_to=…"]
+    Cookie -->|"missing or invalid"| Login["Owncast host redirects to your login screen<br/>/plugins/&lt;slug&gt;/?return_to=…"]
     Login --> Flow["Your plugin runs the login flow<br/>(a password form, or an OAuth round-trip<br/>to the provider and back to your callback)"]
     Flow --> Register["owncast.users.register → userId"]
-    Register --> Grant["owncast.auth.grantSession<br/>core mints and attaches the signed cookie"]
+    Register --> Grant["owncast.auth.grantSession<br/>Owncast host mints and attaches the signed cookie"]
     Grant --> Redirect([Redirect to return_to])
     Redirect --> Cookie
     Cookie -->|"valid"| Check["onAuthCheck<br/>(/ page loads only)"]
@@ -71,8 +71,8 @@ flowchart TD
 Three pieces do the work:
 
 1. **Register the user.** Turn the external identity into a real Owncast user with [`owncast.users.register`](/docs/plugins/apis#users-register). Pass a stable, provider-scoped `authId` (e.g. `"github:583231"`). The host namespaces it by your slug so plugins can't collide or spoof each other.
-2. **Grant the session.** Call [`owncast.auth.grantSession`](/docs/plugins/apis#auth-grant-session) with that `userId`. Core mints the signed cookie and attaches it to the in-flight response. This only works inside an `onHttpRequest` handler.
-3. **Redirect home.** Core appends a `return_to` query parameter when it bounces an unauthenticated visitor to your login screen, and **sanitizes it to a same-origin path** (so it can't be turned into an open redirect). Send the viewer there after a successful login.
+2. **Grant the session.** Call [`owncast.auth.grantSession`](/docs/plugins/apis#auth-grant-session) with that `userId`. The Owncast host mints the signed cookie and attaches it to the in-flight response. This only works inside an `onHttpRequest` handler.
+3. **Redirect home.** The Owncast host appends a `return_to` query parameter when it bounces an unauthenticated visitor to your login screen, and **sanitizes it to a same-origin path** (so it can't be turned into an open redirect). Send the viewer there after a successful login.
 
 To sign a viewer out, call [`owncast.auth.endSession()`](/docs/plugins/apis#auth-end-session) and redirect. Your plugin still controls where to (it may bounce on to the provider's own logout).
 
@@ -250,7 +250,7 @@ Everything else is gated, **including `/api/status` and embeds**. Leaking live-s
 
 - **Stateless signed cookie**, `HttpOnly`, `Secure` (on HTTPS requests), `SameSite=Lax`, `Path=/`. Lax rather than Strict because the provider callback is a cross-site top-level redirect.
 - **TTL defaults to 24 hours**, with a sliding refresh available through `onAuthCheck`'s `refresh` verdict. Because the TTL is the revocation backstop, it's a real security knob.
-- **The signing secret is core's responsibility.** It's auto-generated on first use and persisted in config. Rotating it invalidates every session (a panic button). Plugin authors never touch it, and it's separate from any OAuth _client_ secret, which is your plugin's config concern.
+- **The signing secret is the Owncast host's responsibility.** It's auto-generated on first use and persisted in config. Rotating it invalidates every session (a panic button). Plugin authors never touch it, and it's separate from any OAuth _client_ secret, which is your plugin's config concern.
 
 ## Chat identity {#chat-identity}
 
