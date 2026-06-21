@@ -13,7 +13,7 @@ tags:
 
 The Python SDK, `owncast-plugin-sdk`, lets you author Owncast plugins in **Python**. You write ordinary Python with decorators. A build step turns it into a single installable plugin that runs sandboxed inside the Owncast server: the same `.ocpkg` format and full feature set as the [JavaScript SDK](/docs/plugins/sdks/javascript), so a Python plugin is a first-class peer of a JS one.
 
-:::info New in Owncast 0.3.0
+:::info[New in Owncast 0.3.0]
 The plugin SDKs are brand-new in Owncast 0.3.0 and the API is still evolving. If you hit a bug or have a suggestion, please [open an issue](https://github.com/owncast/plugin-sdk/issues) or [chat live with the community](/chat?tab=community).
 :::
 
@@ -135,7 +135,7 @@ A few things about how Python plugins are built shape how you write them. You im
 
 There is no `pip install` and no `requirements.txt`. A third-party library works only if it is **pure Python and you copy its source into `src/`**, where it becomes one of your own modules.
 
-:::caution `pip install` does nothing
+:::caution[pip install does nothing]
 Installing a package into a virtualenv has no effect on what ships, and `import requests` fails at runtime. To use a library, copy its `.py` source into `src/` (a single module or a package directory) and import it.
 :::
 

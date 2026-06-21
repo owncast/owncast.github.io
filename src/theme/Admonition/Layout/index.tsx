@@ -38,9 +38,17 @@ function AdmonitionContainer({
   );
 }
 
-function AdmonitionHeading({ type }: { type: string }) {
-  // Always use the Owncat-themed title based on type
-  const displayTitle = owncatTitles[type] || "Owncat says";
+function AdmonitionHeading({
+  type,
+  title,
+}: Pick<Props, "type" | "title">) {
+  // Keep the Owncat-themed heading for every callout. When the author gives a
+  // title (`:::warning[My title]`), Docusaurus passes it as a plain string, and
+  // we show it on a second line under the heading. Without one, Docusaurus
+  // passes a <Translate> element for the default type label, which we ignore.
+  const themedTitle = owncatTitles[type] || "Owncat says";
+  const customTitle =
+    typeof title === "string" && title.trim() ? title : null;
 
   return (
     <div className={styles.admonitionHeading}>
@@ -50,7 +58,12 @@ function AdmonitionHeading({ type }: { type: string }) {
         className={styles.owncatIcon}
         aria-hidden="true"
       />
-      <span className={styles.admonitionTitle}>{displayTitle}</span>
+      <span className={styles.admonitionTitles}>
+        <span className={styles.admonitionTitle}>{themedTitle}</span>
+        {customTitle && (
+          <span className={styles.admonitionSubtitle}>{customTitle}</span>
+        )}
+      </span>
     </div>
   );
 }
@@ -62,10 +75,10 @@ function AdmonitionContent({ children }: Pick<Props, "children">) {
 }
 
 export default function AdmonitionLayout(props: Props): ReactNode {
-  const { type, children, className } = props;
+  const { type, title, children, className } = props;
   return (
     <AdmonitionContainer type={type} className={className}>
-      <AdmonitionHeading type={type} />
+      <AdmonitionHeading type={type} title={title} />
       <AdmonitionContent>{children}</AdmonitionContent>
     </AdmonitionContainer>
   );

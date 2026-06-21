@@ -15,7 +15,7 @@ tags:
 
 The JavaScript SDK, [`@owncast/plugin-sdk`](https://www.npmjs.com/package/@owncast/plugin-sdk), is the most common way to write an Owncast plugin. You write JavaScript or TypeScript, and the CLI bundles it into a single installable plugin that runs sandboxed inside the Owncast server. If you're deciding between this and the Python SDK, see the [plugins overview](/docs/plugins#two-sdks).
 
-:::info New in Owncast 0.3.0
+:::info[New in Owncast 0.3.0]
 The plugin SDKs are brand-new in Owncast 0.3.0 and the API is still evolving. If you hit a bug or have a suggestion, please [open an issue](https://github.com/owncast/plugin-sdk/issues) or [chat live with the community](/chat?tab=community).
 :::
 
@@ -144,7 +144,7 @@ The CLI bundles your code into a single file that runs inside the server's sandb
 
 ## Third-party libraries
 
-:::caution Read this before you add a dependency
+:::caution[Read this before you add a dependency]
 npm packages work only if they're **pure JavaScript**. A plugin runs in a sandbox, not Node, so a package that touches `fs`, `net`, `http`/`https`, `path`, `crypto`, `process`, or `child_process` bundles cleanly and then throws when that code runs.
 :::
 

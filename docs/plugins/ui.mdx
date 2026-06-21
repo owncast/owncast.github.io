@@ -195,7 +195,7 @@ Owncast injects a baseline stylesheet into every plugin surface that renders in 
 
 Your content sits **flush on the page**. The iframe background is transparent so the host's panel shows through, the same way the built-in About and Followers tabs render. You don't get, and shouldn't add, an opaque page background or a wrapping box around everything. That flush rendering is what makes a plugin tab read as part of Owncast rather than an embedded frame.
 
-:::info Where it applies
+:::info[Where it applies]
 The baseline styles the iframe-rendered surfaces: [admin pages](#admin-pages) and [viewer-page tabs](#viewer-page-tabs). Content you inject straight into the viewer page (`extraPageContent`, `scripts`) renders in the real page DOM and inherits Owncast's actual styles instead.
 :::
 

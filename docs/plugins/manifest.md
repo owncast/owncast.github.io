@@ -16,7 +16,7 @@ Every plugin has a `plugin.manifest.json` file at its root. This is the source o
 
 The manifest is what an admin reviews before installing the plugin. The host parses it at load time and enforces every declaration. Nothing in the compiled plugin can grant a capability the manifest didn't ask for.
 
-:::info Available in every SDK
+:::info[Available in every SDK]
 The manifest is plain JSON that describes the plugin to the host, independent of the language you wrote the code in. For the language-specific details, see the **[JavaScript](/docs/plugins/sdks/javascript)** or **[Python](/docs/plugins/sdks/python)** SDK reference.
 :::
 
