@@ -23,7 +23,10 @@ const ALL_REDIRECTS = [
 
   // Regular redirects
   // Social docs restructure: enabling page merged into the main social page.
-  { to: "/docs/social#enabling-social-features", from: "/docs/social/enabling" },
+  {
+    to: "/docs/social#enabling-social-features",
+    from: "/docs/social/enabling",
+  },
   // Plugin docs restructure: merged/renamed pages.
   { to: "/docs/plugins/events", from: "/docs/plugins/handlers" },
   { to: "/docs/plugins/packaging", from: "/docs/plugins/publishing" },
@@ -67,7 +70,10 @@ const ALL_REDIRECTS = [
   { to: "/contribute", from: "/help" },
   // Configuration docs moved under /docs/configuration/.
   { to: "/docs/configuration/appearance", from: "/docs/appearance/" },
-  { to: "/docs/configuration/custom-javascript", from: "/docs/custom-javascript/" },
+  {
+    to: "/docs/configuration/custom-javascript",
+    from: "/docs/custom-javascript/",
+  },
   { to: "/docs/configuration/notifications", from: "/docs/notifications/" },
   { to: "/docs/configuration/systemservice", from: "/docs/systemservice/" },
   { to: "/docs/configuration/website", from: "/docs/website/" },
@@ -75,8 +81,14 @@ const ALL_REDIRECTS = [
   // doesn't cover the bare /thirdparty/ index, so map it explicitly.
   { to: "/docs/api", from: "/thirdparty/" },
   // Stream-key and "start streaming" content merged into the first-stream guide.
-  { to: "/docs/getting-started/configure-first-stream", from: "/docs/stream-keys/" },
-  { to: "/docs/getting-started/configure-first-stream", from: "/quickstart/startstreaming/" },
+  {
+    to: "/docs/getting-started/configure-first-stream",
+    from: "/docs/stream-keys/",
+  },
+  {
+    to: "/docs/getting-started/configure-first-stream",
+    from: "/quickstart/startstreaming/",
+  },
 ];
 
 const config: Config = {
@@ -175,6 +187,40 @@ const config: Config = {
   themes: ["@docusaurus/theme-mermaid"],
 
   plugins: [
+    ["plugin-image-zoom", {}],
+    [
+      "docusaurus-plugin-llms",
+      {
+        includeBlog: true,
+        excludeImports: true,
+        removeDuplicateHeadings: true,
+        generateLLMsFullTxt: true,
+        ignoreFiles: ["troubleshoot/*"],
+        customLLMFiles: [
+          {
+            filename: "llms-sdk-javascript.txt",
+            includePatterns: ["docs/plugins/sdks/javascript.{md,mdx}"],
+            fullContent: true,
+            title: "Javascript Plugin SDK Documentation",
+            description: "Complete reference for the Javascript Plugin SDK",
+          },
+          {
+            filename: "llms-sdk-python.txt",
+            includePatterns: ["docs/plugins/sdks/python.{md,mdx}"],
+            fullContent: true,
+            title: "Python Plugin SDK Documentation",
+            description: "Complete reference for the Python Plugin SDK",
+          },
+          {
+            filename: "llms-plugins.txt",
+            includePatterns: ["docs/plugins/**/*.{md,mdx}"],
+            fullContent: true,
+            title: "Owncast Plugin Development Documentation",
+            description: "Complete reference for Owncast plugin development",
+          },
+        ],
+      },
+    ],
     // Releases blog - for version releases
     [
       "@docusaurus/plugin-content-blog",
