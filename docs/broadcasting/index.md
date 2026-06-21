@@ -73,7 +73,7 @@ Owncast will not re-encode audio, so it will go out exactly how it's sent.
 | Quality | Bitrate |
 | ------- | ------- |
 | Low     | 96kbps  |
-| Medium  | 128kpbs |
+| Medium  | 128kbps |
 | High    | 192kbps |
 | Higher  | 256kbps |
 | Highest | 320kbps |
@@ -83,4 +83,6 @@ Owncast will not re-encode audio, so it will go out exactly how it's sent.
 Read more about troubleshooting [Dropped frames](/docs/troubleshoot/dropped-frames) being reported in your broadcasting software.
 
 ## Errors or disconnections
+
+If your broadcasting software keeps disconnecting from Owncast, or your stream drops partway through, read [Your stream keeps disconnecting](/docs/troubleshoot/stream-disconnect). It covers the common causes: an unstable network, a bitrate higher than your upload can sustain, and ffmpeg problems on the server.
 

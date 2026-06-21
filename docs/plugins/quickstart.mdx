@@ -71,7 +71,8 @@ my-plugin/
 Install the SDK to get the `owncast-plugin-py` CLI, then scaffold a project with `new`:
 
 ```sh
-pip install owncast-plugin-sdk    # or:  uv tool install owncast-plugin-sdk
+git clone https://github.com/owncast/plugin-sdk.git
+pip install ./plugin-sdk/sdks/python    # or:  uv tool install ./plugin-sdk/sdks/python
 owncast-plugin-py new my-plugin
 cd my-plugin
 ```

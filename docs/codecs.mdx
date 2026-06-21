@@ -7,7 +7,7 @@ sidebar_position: 400
 sidebar_label: Hardware accelerated encoding & codecs
 ---
 
-# Requirements
+## Requirements
 
 **All four of these things need to be true to support hardware accelerated encoding with Owncast.**
 
@@ -32,11 +32,11 @@ If you have Intel integrated graphics you may be able to use it using [VA-API](#
 
 NVIDIA GPUs ship with an on-chip hardware encoder unit often referred to as NVENC. Separate from the CUDA cores, NVENC run encoding workloads without slowing the execution of graphics or CUDA workloads running at the same time.
 
-As of July 2019 Kepler, Maxwell, Pascal, Volta and Turing generation GPUs support hardware encoding. Visit the [NVIDIA GPU Support Matrix](https://developer.nvidia.com/video-encode-and-decode-gpu-support-matrix-new#Encoder) to verify your GPU is listed in the "encoder" list.
+Most modern NVIDIA GPUs ship with NVENC. Check the [NVIDIA GPU Support Matrix](https://developer.nvidia.com/video-encode-and-decode-gpu-support-matrix-new#Encoder) to confirm your GPU appears in the "encoder" list.
 
 ### AMD GPUs
 
-[VA-API](#va-api) is supported on AMD and ATI GPUs by the [libva-mesa-driver](https://is.gd/ZvSdpo).
+[VA-API](#va-api) is supported on AMD and ATI GPUs by the [libva-mesa-driver](https://wiki.archlinux.org/title/Hardware_video_acceleration).
 
 ## Compatible codecs/libraries
 
@@ -55,7 +55,7 @@ Links:
 
 VA-API (video acceleration API) is a layer to support hardware accelerated encoding on linux. You need the `libva` library installed for it to work. VA-API is not compatible with ARM chipsets.
 
-Note: ffmpeg 5 is not currently supported with VA-API. Please use a version less than 5. Read the [issue](https://github.com/owncast/owncast/issues/2071) about this particular issue to learn more.
+ffmpeg 5 and newer are supported with VA-API.
 
 Links:
 
@@ -81,8 +81,7 @@ Verify you have ffmpeg installed that's at least version 4.1.5.
 
 ```
 $ ffmpeg -version
-ffmpeg version 4.1.6-1~deb10u1+rpt1 Copyright (c) 2000-2020 the FFmpeg developers
-built with gcc 8 (Raspbian 8.3.0-6+rpi1)
+ffmpeg version 6.1.1 Copyright (c) 2000-2024 the FFmpeg developers
 ```
 
 Verify the codec you expect to use is enabled in your version of ffmpeg.

@@ -28,6 +28,8 @@ const ALL_REDIRECTS = [
   { to: "/docs/plugins/events", from: "/docs/plugins/handlers" },
   { to: "/docs/plugins/packaging", from: "/docs/plugins/publishing" },
   { to: "/docs/plugins", from: "/docs/plugins/sdks" },
+  // Removed the API samples page (there were no real web-API examples).
+  { to: "/docs/api", from: "/docs/api/samples" },
   { to: "/docs/getting-started/install", from: "/install" },
   { to: "/docs/getting-started/install", from: "/installation" },
   { to: "/docs/getting-started/install", from: "/docs/install" },

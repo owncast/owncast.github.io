@@ -217,6 +217,89 @@ owncast.users.ban_ip("203.0.113.42")
 
 Requires `users.moderate`.
 
+### `owncast.users.register({ authId, displayName?, scopes? })` {#users-register}
+
+Find-or-create an authenticated Owncast user for an external identity and return `{ userId }`. `authId` is a stable, provider-scoped identifier (e.g. `"github:583231"`, or a fixed string like `"shared"` for a single shared identity); the host namespaces it by your plugin's slug, so plugins can't collide on or spoof each other's users. The resulting user is marked authenticated, with `displayName` seeded from the provider and any `scopes` (e.g. `["MODERATOR"]`) applied. Call it again with the same `authId` to update the existing user rather than create a new one.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { userId } = owncast.users.register({
+  authId: "github:583231",
+  displayName: "octocat",
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+result = owncast.users.register("github:583231", display_name="octocat")
+user_id = result.user_id
+```
+
+</TabItem>
+</Tabs>
+
+Requires `users.register`.
+
+## Authentication
+
+These power a [viewer-authentication gate](/docs/plugins/auth). `grantSession` and `endSession` only work inside an `onHttpRequest` handler, because the host attaches the session cookie to the in-flight HTTP response.
+
+### `owncast.auth.grantSession({ userId, ttl? })` {#auth-grant-session}
+
+Issue a signed session for an already-registered user (the `userId` from `owncast.users.register`). The host mints, signs, and attaches the session cookie to the current response; your plugin never sees the token, so it can't forge or leak it. `ttl` is an optional lifetime in seconds (`0`/omitted uses the host default of 24 hours).
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { userId } = owncast.users.register({ authId: "shared", displayName: "Guest" });
+owncast.auth.grantSession({ userId });
+return { status: 302, headers: { Location: returnTo } };
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+result = owncast.users.register("shared", display_name="Guest")
+owncast.auth.grant_session(result.user_id)
+return {"status": 302, "headers": {"Location": return_to}}
+```
+
+</TabItem>
+</Tabs>
+
+Requires `auth.gate`.
+
+### `owncast.auth.endSession()` {#auth-end-session}
+
+Clear the current viewer's session cookie on this response — a sign-out. Your plugin still controls the redirect (and may bounce on to the provider's own logout).
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.auth.endSession();
+return { status: 302, headers: { Location: "/" } };
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.auth.end_session()
+return {"status": 302, "headers": {"Location": "/"}}
+```
+
+</TabItem>
+</Tabs>
+
+Requires `auth.gate`.
+
 ## Storage
 
 ### `owncast.kv.get(key)` and `owncast.kv.set(key, value)`
@@ -357,7 +440,7 @@ See [Manifest reference: network](/docs/plugins/manifest#network-outbound-http-a
 
 ### `owncast.events.emit(eventType, payload)`
 
-Emit a custom event that other plugins can subscribe to. Subscribing plugins receive it through their custom-event handler: see the [handlers reference](/docs/plugins/events#custom-events). Namespace your event types with your plugin name to avoid collisions.
+Emit a custom event that other plugins can subscribe to. Subscribing plugins receive it through their custom-event handler: see the [handlers reference](/docs/plugins/events#plugin-to-plugin-events). Namespace your event types with your plugin name to avoid collisions.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
@@ -382,7 +465,7 @@ Requires `events.emit`.
 
 ### `owncast.stream.current()`
 
-The current live stream state: `{ online, startedAt?, title?, viewers, ... }`.
+The current live stream state: `{ online, title?, summary?, viewers, startedAt?, latencyLevel? }`.
 
 Requires `server.read`.
 
@@ -394,7 +477,7 @@ Requires `server.read`.
 
 ### `owncast.server.info()`
 
-Static server info: `{ name, version, summary, ... }`.
+Static server info: `{ name?, url?, summary?, welcomeMessage?, version? }`.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
@@ -443,7 +526,7 @@ Requires `server.read`.
 
 ### `owncast.videoConfig.read()`
 
-Read the output and transcoding configuration: `{ latencyLevel, codec, variants }`.
+Read the output and transcoding configuration: `{ latencyLevel, codec, variants }`, where each variant is `{ width, height, framerate, videoBitrate, audioBitrate, isPassthrough }`.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
@@ -643,6 +726,8 @@ Method names below are the JavaScript (camelCase) form. The Python equivalents a
 | `owncast.chat.kick`                              | `chat.moderate`      |
 | `owncast.users.list` / `.get`                    | `users.read`         |
 | `owncast.users.setEnabled` / `.banIP`            | `users.moderate`     |
+| `owncast.users.register`                         | `users.register`     |
+| `owncast.auth.grantSession` / `.endSession`      | `auth.gate`          |
 | `owncast.kv.get` / `.set` / `.getJSON` / `.setJSON` | `storage.kv`         |
 | `owncast.storage.upload`                         | `storage.upload`     |
 | `owncast.fs.read` / `.readText` / `.write` / `.list` / `.delete` / `.exists` | `storage.fs`         |

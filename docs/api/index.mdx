@@ -23,18 +23,20 @@ Owncast has the ability for you to build things on top of it. Here's some exampl
 
 1. In any language, on any kind of web server, create an endpoint that accepts a HTTP `POST` request. This is where Owncast will be sending events.
 1. Each event payload will have a `type` property that states what of the above events are included, and an `eventData` object that includes all the specific properties of this event.
-1. If you need a starting point see our example projects.
 
 ## Functionality
 
 You have the ability to get notified when certain actions take place on your Owncast server via [webhooks](/docs/api/webhooks) and are able to send actions into your server via specific [APIs secured by access tokens](/docs/api/apis).
 
+If you would rather run your code inside Owncast instead of calling it from an external server, [plugins](/docs/plugins) are the other way to extend Owncast. They can do much of what the web APIs and webhooks do, plus add UI and chat commands.
+
 ## Tools
 
-The following are some tools that might make building a bit easier.
+- The browsable API reference: the [released API](/api/release) and the [in-development API](/api/development).
+- A tunneling tool such as [ngrok](https://ngrok.com/) or [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) so your local machine can receive webhooks while you develop.
 
 ## Development environment
 
-You can host your software anywhere and write it in any language.
+You can host your software anywhere and write it in any language. Your code needs to be reachable by your Owncast server to receive webhooks, and able to reach your server to call the APIs.
 
-A quick, easy and free way to get up and running to experiment is by using [Glitch](http://glitch.com). You can create a free account and write a Node.js application that can accept webhooks and send requests to your Owncast server. You can edit code right in the browser and it's immediately available to the world. You can always move your code to another server when you're done if you don't want to keep it on Glitch.
+While developing locally, a tunneling tool like [ngrok](https://ngrok.com/) gives your machine a temporary public URL so Owncast can deliver webhooks to it. When you are ready, move your code to any server or hosting platform you like.

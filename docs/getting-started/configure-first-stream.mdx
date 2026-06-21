@@ -16,22 +16,20 @@ import AdminLogin from "../shared/admin-login.md";
 
 ## Stream Key
 
-To begin streaming you'll first need your stream key and the RTMP URL of your Owncast server. Out of the box your stream key is the same as the admin password: `abc123`. You'll want to change these both as soon as possible.
+To begin streaming you need two things: your Owncast server's RTMP URL (`rtmp://yourserver/live`) and a stream key. The stream key and the admin password both default to `abc123`, but they are separate settings. The stream key lets your broadcasting software publish video. The admin password logs you into the admin dashboard. Change both as soon as you can.
 
-Beginning with Owncast v0.1.0 the admin password and stream keys are managed independently, allowing you to add as many stream keys as you'd like.
+The admin password and stream keys are managed independently, so you can add as many stream keys as you like. Most people only need one, but multiple keys are useful in some setups, such as giving a co-host their own key you can revoke later.
 
-While most people won't require having multiple stream keys, there are some specific scenarios where having this ability may be helpful.
-
-In the admin server setup page you can add and remove these keys.
+You add and remove stream keys on the admin server setup page.
 
 <img src="/docs/img/admin-stream-keys.png" alt="The Stream Keys tab of the Server settings page, showing the default stream key and a button to add more" width="80%" />
 
-## Admin
+## What to configure next
 
-Some common items many people would want to update after installing Owncast are:
+Some common items many people update after installing Owncast are:
 
 - Your site name, logo, description and external links that are displayed on the [web site](/docs/configuration/website).
-- The **stream key** to gain access to broadcasting to your stream and your admin.
+- Your **stream key**, which your broadcasting software uses to publish video, and your **admin password**, which you use to log into the admin dashboard.
 - Enable your stream to show up in the [Owncast Directory](/docs/directory).
 
 Read more about [what you can configure and how](/docs/configuration).

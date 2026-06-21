@@ -11,17 +11,51 @@ related:
   excludeFromAll: true
 ---
 
+import { IncludeMarkdown } from "@site/src/components";
+import HardwareUsage from "../shared/hardware-usage.md";
+import HlsAnalyzer from "../shared/hls-analyzer.md";
+import StreamHealth from "../shared/stream-health.md";
+import BroadcastingSoftware from "../shared/broadcasting-software.md";
+import MatchHighestOutputQuality from "../shared/match-highest-output-quality.md";
+import ReduceVideoQuality from "../shared/reduce-video-quality.md";
+import UseStorage from "../shared/use-storage.md";
+import UseCdn from "../shared/use-cdn.md";
+import RelocatePhysicalServer from "../shared/relocate-physical-server.md";
+import SlowStorageUploads from "../shared/slow-storage-uploads.md";
+
+When every viewer is buffering at once, the problem is almost always on the server or broadcasting side rather than with any individual viewer's connection. Work through the steps below in order.
+
 After reading below you might also find helpful tips browsing the [OBS Troubleshooting Guide](https://github.com/obsproject/obs-studio/wiki/Stream-Buffering-Issues/d65033b24e4a4c81c87323f05a59c12f78de620b), even if you don't use OBS.
 
 ## Check your Owncast server hardware utilization
 
+<IncludeMarkdown>
+  <HardwareUsage />
+</IncludeMarkdown>
+
 ## Get some additional information
+
+<IncludeMarkdown>
+  <StreamHealth />
+</IncludeMarkdown>
+
+<IncludeMarkdown>
+  <HlsAnalyzer />
+</IncludeMarkdown>
 
 ## Start with your broadcasting software
 
 ### Broadcast your stream reliably
 
+<IncludeMarkdown>
+  <BroadcastingSoftware />
+</IncludeMarkdown>
+
 ### Match video quality
+
+<IncludeMarkdown>
+  <MatchHighestOutputQuality />
+</IncludeMarkdown>
 
 ## Increase your latency buffer
 
@@ -33,10 +67,30 @@ You will need to restart a stream after changing this value in the Owncast video
 
 ## Reduce your video quality
 
+<IncludeMarkdown>
+  <ReduceVideoQuality />
+</IncludeMarkdown>
+
 ## Use external storage
+
+<IncludeMarkdown>
+  <UseStorage />
+</IncludeMarkdown>
 
 ## Use a CDN
 
+<IncludeMarkdown>
+  <UseCdn />
+</IncludeMarkdown>
+
 ## Move to a server that is more centrally located or hosted by a faster provider
 
+<IncludeMarkdown>
+  <RelocatePhysicalServer />
+</IncludeMarkdown>
+
 ## If you're experiencing slow uploads to external storage
+
+<IncludeMarkdown>
+  <SlowStorageUploads />
+</IncludeMarkdown>

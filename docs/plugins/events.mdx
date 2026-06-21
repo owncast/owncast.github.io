@@ -442,6 +442,68 @@ Endpoints are public by default. Gate admin features on `req.authenticated`. Man
 
 Requires the `http.serve` permission. The JavaScript SDK exposes a single `onHttpRequest` catch-all. The Python SDK adds declarative per-path/per-method routes (`@plugin.get`, `@plugin.route`, …). See [Serving HTTP](/docs/plugins/http) for the full request model.
 
+## Authentication
+
+### Auth check: `auth.check` {#auth-check}
+
+Only fires for the enabled [`auth.gate`](/docs/plugins/auth) plugin, and only on a viewer's `/` page load — never on the hot path (video segments, the API, chat). It's the **re-validation hook**: the host has already verified the viewer's session cookie and resolved their identity; your handler decides whether that session should continue. Optional — omit it and a valid cookie is enough until it expires.
+
+Return one of three verdicts via the `authCheck` helper:
+
+- **ok** — keep the session as-is.
+- **refresh** — keep it and re-issue the cookie, optionally with a new `ttl` in seconds (sliding expiry).
+- **deny** — end the session and bounce the viewer back to the login screen. This is how you revoke access (a user deleted or banned upstream).
+
+```ts
+interface AuthCheckRequest {
+  user: {
+    id: string;
+    displayName: string;
+    scopes?: string[];
+    isAuthenticated?: boolean;
+  };
+}
+
+type AuthCheckResult =
+  | { action: "ok" }
+  | { action: "refresh"; ttl?: number }
+  | { action: "deny"; reason?: string };
+```
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { definePlugin, owncast, authCheck } = require("@owncast/plugin-sdk");
+
+module.exports = definePlugin({
+  onAuthCheck(req) {
+    if (owncast.kv.get(`banned:${req.user.id}`)) {
+      return authCheck.deny("access revoked");
+    }
+    return authCheck.ok();
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+from owncast_plugin import plugin, owncast, auth_check
+
+@plugin.on_auth_check
+def check(req):
+    if owncast.kv.get(f"banned:{req.user.id}"):
+        return auth_check.deny("access revoked")
+    return auth_check.ok()
+```
+
+</TabItem>
+</Tabs>
+
+Requires `auth.gate`. **Fails closed**: if the handler errors or times out, the host treats that page load as a deny. Because the check runs only on `/`, a viewer whose access you revoke keeps any open tab working until they reload or the cookie expires — the session `ttl` is the hard backstop.
+
 ## Content handlers
 
 These two handlers let a plugin generate tab or extra-page HTML at request time: useful when the content should be personalised per viewer or depend on live stream data. They're the dynamic counterpart to shipping a static HTML file via `manifest.tabs[].content` or `manifest.extraPageContent.content`.
@@ -497,6 +559,83 @@ Called when a tab entry in `manifest.tabs[]` has no static `content` file. The h
 Called when `manifest.extraPageContent` has no static `content` file. The host passes the slug from the manifest so the handler knows which content slot is being requested. Same permission rules as tab content.
 
 See [Contributing UI](/docs/plugins/ui) for the manifest side.
+
+## SSE connection events {#sse-events}
+
+When a browser opens or closes one of your plugin's `/plugins/<name>/_sse/<channel>` streams, Owncast fires `sse.connect` and `sse.disconnect`. Use them to track who is connected, for example to keep a live count for an overlay. See [Realtime updates](/docs/plugins/http#realtime-updates-server-sent-events) for the push side that sends data to those browsers.
+
+### Connect / disconnect: `sse.connect`, `sse.disconnect`
+
+```ts
+interface SSEConnectionEvent {
+  channel: string; // which _sse/<channel> stream the browser opened
+  connectionId: number; // unique per connection for the life of the host process
+  user?: ChatUser; // present only when the connection carried a chat identity
+}
+```
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onSseConnect(e) { /* e.connectionId, e.channel */ },
+  onSseDisconnect(e) { /* same connectionId as the matching connect */ },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_sse_connect
+def joined(e):
+    ...  # e.connection_id, e.channel
+
+@plugin.on_sse_disconnect
+def left(e):
+    ...
+```
+
+</TabItem>
+</Tabs>
+
+`connectionId` is stable for the life of a connection, so you can pair a disconnect with its matching connect and count the same viewer across several tabs. Both handlers require the `http.sse` permission.
+
+## Tick
+
+Owncast dispatches a `tick` event about once a second to any plugin that defines a tick handler. Use it for periodic work such as flushing counters or refreshing cached data. Defining the handler is what opts you in, so plugins that leave it out pay nothing.
+
+### Periodic tick: `tick`
+
+```ts
+interface TickEvent {
+  now: number; // host wall-clock time in unix milliseconds when the tick fired
+}
+```
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onTick(e) { /* e.now */ },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_tick
+def each_second(e):
+    ...  # e.now
+```
+
+</TabItem>
+</Tabs>
+
+For one-off or custom-interval scheduling, use timers (`owncast.timer.setTimeout` and `setInterval`) instead of the tick. No permission required.
 
 ## Plugin-to-plugin events
 
@@ -555,6 +694,10 @@ Each row is a runtime event. The handler name follows your SDK's convention: cam
 | `fediverse.reply`          | `FediverseInboundPost`             | none                                   |
 | chat message filter        | `ChatMessage`                      | `chat.filter`                          |
 | HTTP request               | `IncomingHttpRequest`              | `http.serve`                           |
+| auth check                 | `AuthCheckRequest`                 | `auth.gate`                            |
+| `sse.connect`              | `SSEConnectionEvent`               | `http.sse`                             |
+| `sse.disconnect`           | `SSEConnectionEvent`               | `http.sse`                             |
+| `tick`                     | `{ now }`                          | none                                   |
 | tab content                | `ContentRequest`                   | none to subscribe. Whatever APIs the handler calls |
 | page content               | `ContentRequest`                   | none to subscribe. Whatever APIs the handler calls |
 | custom events              | (per-event)                        | none to subscribe, `events.emit` to emit |

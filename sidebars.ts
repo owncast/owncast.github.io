@@ -102,7 +102,6 @@ const sidebars: SidebarsConfig = {
           items: [
             "api/apis",
             "api/webhooks",
-            "api/samples",
             {
               type: "category",
               label: "API Reference",
@@ -145,6 +144,7 @@ const sidebars: SidebarsConfig = {
                 "plugins/commands",
                 "plugins/http",
                 "plugins/ui",
+                "plugins/auth",
               ],
             },
             {

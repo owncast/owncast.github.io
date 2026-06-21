@@ -22,7 +22,7 @@ Owncast includes a web interface for your video with built-in chat that is avail
 
 Additionally, the web interface was specifically built to be customizable by anybody comfortable tweaking colors and styles. No development environment is needed, just open the admin and start tweaking.
 
-If you want to embed Owncast in your existing website, checkout our [documentation on embedding Owncast](/docs/embed/).
+If you want to embed Owncast in your existing website, check out our [documentation on embedding Owncast](/docs/embed/).
 
 Below are some items you'll likely want to customize to update the content that displays on your page. You'll find all of them on the **General** settings page in the admin.
 

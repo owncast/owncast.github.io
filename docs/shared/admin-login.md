@@ -24,6 +24,6 @@ These are the default credentials for logging into the Owncast admin interface a
 
 1. Point your broadcasting software at your new server using `rtmp://yourserver/live` with your stream key. If your software doesn't have a way to specify a stream key use the url `rtmp://yourserver/live/streamkey` and use your stream key instead.
 1. Access your server in your web browser by visiting `http://yourserver:8080`.
-1. You can visit the Admin dashboard at `http://yourserver:8080/admin` where you can check visitor and server stats, change your stream key, personalize the content displayed on your page, and more. To login, use `admin` and the stream key as the password.
+1. You can visit the Admin dashboard at `http://yourserver:8080/admin` where you can check visitor and server stats, change your stream key, personalize the content displayed on your page, and more. To log in, use the username `admin` and your admin password (`abc123` by default).
 
-**Note:** Your stream key is only used by your streaming software to publish video; it is not your admin password.
+**Note:** Your stream key and admin password both default to `abc123`, but they are separate settings. The stream key is only used by your broadcasting software to publish video. It is not your admin password.

@@ -8,11 +8,13 @@ sidebar_label: Configuration via runtime flags
 
 Configuration is generally done through the Owncast administration site located on your server under `/admin`, however, there are a number of runtime flags you can set when starting Owncast to modify its behavior.
 
+Most admins never need these. Use the admin UI for normal configuration. The flags here are mainly for recovery, such as resetting a lost admin password, or for scripted and automated startups.
+
 You can run Owncast with `--help` to see a full list of available runtime flags.
 
 ## Admin Password
 
-You can reset the admin password on startup via the `--adminpassword` flag. For example:
+You can reset the admin password on startup via the `--adminpassword` flag. This is the usual way to recover access if you have lost your admin password. For example:
 
 ```bash
 owncast --adminpassword mynewpassword
@@ -30,7 +32,7 @@ owncast --streamkey mystreamkey
 
 Per default, Owncast will run a `http` web server on port `8080` and a RTMP server on port `1935`. You can change the ports in the the admin. You must restart Owncast for these changes to take effect.
 
-You can also set the port on the command line via the `--webserverport` and `-rtmpport` flags respectively. For example:
+You can also set the port on the command line via the `--webserverport` and `--rtmpport` flags respectively. For example:
 
 ```bash
 owncast --webserverport 9090 --rtmpport 2945

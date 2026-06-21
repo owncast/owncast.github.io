@@ -429,7 +429,7 @@ def banner(ctx):
 </TabItem>
 </Tabs>
 
-See [Handlers: page content](/docs/plugins/events#onpagecontent-slug-user) for the payload shape. The viewer identity is present when the viewer is authenticated and absent for anonymous viewers.
+See [Handlers: page content](/docs/plugins/events#page-content) for the payload shape. The viewer identity is present when the viewer is authenticated and absent for anonymous viewers.
 
 Requires `ui.modify`. `http.serve` is not required: the HTML is inlined into the `/api/config` response, not served as a URL.
 
@@ -531,7 +531,7 @@ def stream_info(ctx):
 </TabItem>
 </Tabs>
 
-See [Handlers: tab content](/docs/plugins/events#ontabcontent-slug-user) for the payload shape. The viewer identity is present when authenticated and absent for anonymous viewers.
+See [Handlers: tab content](/docs/plugins/events#tab-content) for the payload shape. The viewer identity is present when authenticated and absent for anonymous viewers.
 
 ### Path rules
 

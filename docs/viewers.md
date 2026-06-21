@@ -1,6 +1,6 @@
 ---
 title: Show Where Your Viewers Are From
-description: ''
+description: Display high-level geographic information about where your current viewers are connecting from.
 sidebar_position: 600
 sidebar_label: Show where your viewers are from
 ---

@@ -63,31 +63,19 @@ You can easily customize the styling of the embedded Owncast stream to match you
 3. **Apply Styles:** Customize the styles in your stream-styles.css file according to your preferences. You can target the `<iframe>` element using CSS selectors, as shown in the example below:
 
    ```css
-   /* Customize the embedded stream container */
-   iframe {
-     border: none; /* Remove iframe border */
+   /* Style the embedded stream's iframe box */
+   iframe[title="Owncast"] {
+     border: none; /* Remove the iframe border */
      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow for depth */
      border-radius: 10px; /* Rounded corners for a modern look */
-     overflow: hidden; /* Hide horizontal overflow */
-     background-color: #fff; /* Set background color to white */
+     overflow: hidden;
      margin: 0 auto; /* Center the iframe horizontally */
-   }
-
-   /* Style the iframe title (optional) */
-   iframe[title="Owncast"] {
-     font-size: 18px; /* Adjust the title font size */
-     font-weight: bold; /* Make the title bold */
-     padding: 10px; /* Add some padding around the title */
-   }
-
-   /* Style the iframe content (optional) */
-   iframe[title="Owncast"] body {
-     margin: 0; /* Reset margin inside the iframe */
-     padding: 10px; /* Add padding inside the iframe content */
    }
    ```
 
-4. **Customize to Your Needs:** Feel free to modify the styles provided in the example above to match your website's design and layout.
+4. **Customize to Your Needs:** Adjust the values above to match your website's design and layout.
+
+The embedded stream is a separate page loaded from your Owncast server, so your site's CSS can only style the `<iframe>` box itself, not the content inside it. To change the colors, fonts, and layout inside the player, use the [appearance settings](/docs/configuration/appearance) on your Owncast server instead.
 
 Following these steps, you can seamlessly integrate your Owncast stream into your website while maintaining control over its visual appearance.
 
@@ -98,10 +86,6 @@ The player will automatically find the correct playlist and will start playing.
 This will guarantee forward compatibility if the way how Owncast publishes HLS is ever changed.
 
 However, if you need the HLS feed (i.e. for sharing your stream to a 3rd party player), you can access the HLS feed directly via this URL: `http://your.host/hls/stream.m3u8`.
-
-### Mute by default
-
-If you'd prefer your embedded video to be muted by default, you can add `?initiallyMuted=true` to the end of the `/embed/video` URL.
 
 ## Embedding chat
 

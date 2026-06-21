@@ -168,4 +168,3 @@ The [`page-content-demo`](https://github.com/owncast/plugin-sdk/tree/main/exampl
 - [Packaging & distribution](/docs/plugins/packaging): building the `.ocpkg` and installing it.
 - [Example plugins](https://github.com/owncast/plugin-sdk/tree/main/examples/js): one per feature, each a complete starting point you can copy.
 - [SDK source](https://github.com/owncast/plugin-sdk): the `@owncast/plugin-sdk` package and toolchain.
-</invoke>

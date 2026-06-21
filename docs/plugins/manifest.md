@@ -100,6 +100,8 @@ Declare simple settings here instead of building your own settings page and key/
 }
 ```
 
+Owncast auto-renders an editable form from this schema on a **Settings** tab on your plugin's detail page — you write no admin HTML and no save/load plumbing. The `type` picks the input: `string` renders a text box, `number` a numeric field, `boolean` a switch. The `description` becomes the field label, and the `default` is shown until an admin saves an override. String keys whose name looks like a credential (containing `secret`, `password`, `token`, `apiKey`, or `key`) are rendered as masked password inputs so they aren't shown in plain text. A plugin that declares no `config` simply shows no Settings tab.
+
 Read the effective value at runtime with [`owncast.config.get(key)`](/docs/plugins/apis#config), which returns the admin-set value when present and the declared default otherwise, already parsed to its declared type. `config.get` is ambient: no permission required.
 
 ## `permissions`

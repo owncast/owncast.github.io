@@ -12,7 +12,15 @@ tags:
   - optimization
 ---
 
+import { IncludeMarkdown } from "@site/src/components";
+import ReduceFramerate from "./shared/reduce-framerate.md";
+import MatchHighestOutputQuality from "./shared/match-highest-output-quality.md";
+
 ## Reduce your framerate
+
+<IncludeMarkdown>
+  <ReduceFramerate />
+</IncludeMarkdown>
 
 ## Reduce the amount of hardware (CPU or GPU) allocated in the video settings
 
@@ -28,7 +36,15 @@ Each stream output variant configuration results in more hardware utilization.
 
 ## Match your highest output quality
 
+<IncludeMarkdown>
+  <MatchHighestOutputQuality />
+</IncludeMarkdown>
+
 ## Experiment with Passthrough Mode
+
+Passthrough mode tells Owncast to send your broadcaster's video straight through without re-encoding it. Because the server skips encoding entirely, hardware usage drops to almost nothing. This is the single biggest reduction you can make if your server simply cannot keep up. See [video passthrough](/docs/video/#video-passthrough) for how to enable it.
+
+**Drawback**: With passthrough you can no longer offer multiple quality options, so viewers on slower connections have no lower-quality stream to fall back to. Passthrough can also increase latency, and in some environments it produces video that not all players can handle.
 
 ## If you are running on physical hardware, try hardware acceleration
 

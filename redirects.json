@@ -48,10 +48,6 @@
     "to": "/docs/storage"
   },
   {
-    "from": "/docs/s3/",
-    "to": "/docs/storage"
-  },
-  {
     "from": "/docs/moderation/",
     "to": "/docs/chat/moderation"
   },

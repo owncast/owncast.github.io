@@ -18,7 +18,7 @@ The following is a list of events you can get notified about.
 | Event Type                                    | webhook triggers when ...                                                                    |
 | :-------------------------------------------- | :------------------------------------------------------------------------------------------- |
 | [CHAT](#chat)                                 | user sends a chat message                                                                    |
-| [NAME_CHANGED](#name_changed)                 | user changes their username                                                                  |
+| [NAME_CHANGE](#name_change)                   | user changes their username                                                                  |
 | [USER_JOINED](#user_joined)                   | user joins the chat                                                                          |
 | [STREAM_STARTED](#stream_started)             | an incoming RTMP stream is detected                                                          |
 | [STREAM_STOPPED](#stream_stopped)             | an incoming RTMP stream disconnects (e.g. OBS stops)                                         |
@@ -38,7 +38,12 @@ The following is a list of events you can get notified about.
 
 1. In any language, on any kind of web server, create an endpoint that accepts a HTTP `POST` request. This is where Owncast will be sending events.
 1. Each event payload will have a `type` property that states which event type it is, and an `eventData` object that includes specific properties of that event.
-1. If you need a starting point see our example projects.
+
+### Verifying webhook requests
+
+Owncast does not sign or authenticate webhook requests. There is no shared secret and no signature header, so your endpoint cannot cryptographically confirm that a request came from your Owncast server. Treat the endpoint as something anyone could call, and do not wire it directly to actions you would not want an unauthenticated caller to trigger.
+
+If you want a basic guard, put a hard-to-guess token in the webhook URL you register (for example `https://example.com/owncast-hook/9f3c...`) and reject any request that arrives without it.
 
 ### High level webhooks
 
@@ -89,7 +94,7 @@ Examples of what `eventData` to expect for each event type are below.
 
 Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8` a simple string field with the name `author` was used.
 
-#### NAME_CHANGED
+#### NAME_CHANGE
 
 ```json
 {

@@ -103,6 +103,22 @@ Grants:
 * `owncast.users.setEnabled(id, enabled, reason?)`: enable or disable a user
 * `owncast.users.banIP(ip)`: ban an IP from joining chat
 
+### `users.register`
+
+Grants `owncast.users.register({ authId, displayName?, scopes? })`: find-or-create an authenticated Owncast user for an external identity and return its `userId`. The `authId` is a stable, provider-scoped identifier (e.g. `"github:583231"`); the host namespaces it by your plugin's slug, so two plugins can't collide on or spoof each other's users.
+
+This is how a plugin turns a third-party login (OAuth, Discord, a shared password) into a real Owncast user with an authenticated chat identity. On its own it neither gates the site nor issues a session: pair it with `auth.gate` to build a login gate, or use it alone to mint verified chat identities.
+
+### `auth.gate`
+
+Grants the viewer-authentication gate:
+
+* `owncast.auth.grantSession({ userId, ttl? })`: issue a signed session for an already-registered user (see `users.register`)
+* `owncast.auth.endSession()`: clear the current viewer's session (sign-out)
+* the optional `onAuthCheck` handler: re-validate a viewer's session on each page load
+
+A plugin holding `auth.gate` is an **identity provider**. While it is enabled, every viewer must authenticate through it before they can reach the page, the video, chat, or the API. Only one `auth.gate` plugin can be enabled at a time, and the gate fails closed: if the plugin is unavailable, viewers are kept out rather than let in. See **[Authentication](/docs/plugins/auth)** for the full model.
+
 ### `storage.kv`
 
 Grants `owncast.kv.get(key)` and `owncast.kv.set(key, value)`: a per-plugin namespaced key/value store. Plugins cannot read each other's keys.
@@ -211,6 +227,8 @@ None of the four viewer-injection fields require `http.serve`, and neither do th
 | `chat.filter`        | Subscribe to `filterChatMessage` (read, modify, or drop every chat message).                                                                      |
 | `users.read`         | `owncast.users.list`, `.get`                                                                                                                      |
 | `users.moderate`     | `owncast.users.setEnabled`, `.banIP`                                                                                                              |
+| `users.register`     | `owncast.users.register` — find-or-create an authenticated user for an external identity                                                          |
+| `auth.gate`          | `owncast.auth.grantSession`, `.endSession`, and the `onAuthCheck` handler — be the site's auth gate                                               |
 | `storage.kv`         | Per-plugin namespaced key/value store                                                                                                             |
 | `storage.upload`     | Upload files to Owncast's public file area                                                                                                        |
 | `storage.fs`         | Private, sandboxed server-side filesystem at `data/plugin-data/<your-slug>/`                                                                       |

@@ -53,7 +53,7 @@ Owncast relies on standard, battle-tested tools (like Caddy, Nginx, Traefik) to 
 - ❌ “I enabled HTTPS in Owncast”
 - ❌ “I forwarded port 443 to Owncast”
 - ❌ “I don’t need a reverse proxy”
-- ❌ "I forwarded RTMP port 1943 to the web proxy"
+- ❌ "I forwarded RTMP port 1935 to the web proxy"
 
 These usually cause:
 
@@ -67,7 +67,7 @@ These usually cause:
 ## A correct setup (simplified)
 
 1. DNS points your domain to your server
-2. Reverse proxy listens on ports 80 / 443 (not RTMP 1943)
+2. Reverse proxy listens on ports 80 / 443 (not RTMP 1935)
 3. Reverse proxy gets an SSL certificate
 4. Reverse proxy forwards traffic to Owncast
 5. Owncast runs privately (usually :8080)

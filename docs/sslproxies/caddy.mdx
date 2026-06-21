@@ -38,8 +38,8 @@ sudo apt install caddy
   <TabItem value="manually" label="Download manually">
     1. [Visit the releases page](https://github.com/caddyserver/caddy/releases) and expand the "assets" section.
   1. Find the version for your platform and operating system.
-  1. Unarchive the file: `tar -xvzf caddy_2.3.0_linux_amd64.tar.gz`
-  1. You're likely to want to setup Caddy as a system service to auatomatically start in the background.  [Learn how to do this](https://caddyserver.com/docs/install#linux-service).
+  1. Unarchive the file: `tar -xvzf caddy_<version>_linux_amd64.tar.gz`
+  1. You're likely to want to setup Caddy as a system service to automatically start in the background.  [Learn how to do this](https://caddyserver.com/docs/install#linux-service).
 [Read the Caddy download page for more details.](https://caddyserver.com/docs/install#static-binaries)
   </TabItem>
 </Tabs>
@@ -74,13 +74,11 @@ owncast.example.com {
 }
 ```
 
-Replace `owncast.mydomain.com` with the public hostname of your Owncast server like `watch.owncast.online` for example.
+Replace `owncast.example.com` with the public hostname of your Owncast server like `watch.owncast.online` for example.
 
   </TabItem>
 
 </Tabs>
-
----
 
 If you specify `owncast.example.com` without a protocol or a port, it will attempt to use the default `http` and `https` ports (80 and 443). Since these are [_privileged ports_](https://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html#:~:text=Priviliged%20ports,has%20put%20up%20for%20you.), you will need to run caddy with `sudo` or as `root`.
 
@@ -89,8 +87,6 @@ If you specify `owncast.example.com` without a protocol or a port, it will attem
 Continue to run Owncast on port 8080.
 
 ## 5. Access Owncast through the proxy
-
----
 
 You should now be able to access your Owncast server by visiting https://owncast.example.com instead of http://owncast.example.com:8080.
 
