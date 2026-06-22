@@ -40,7 +40,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Initial configuration of your Owncast server",
+      label: "Configure your Owncast server",
       items: [
         "configuration/index",
         "configuration/website",
