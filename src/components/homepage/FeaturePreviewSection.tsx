@@ -119,7 +119,7 @@ function useFeatures(): Feature[] {
       description: translate({
         id: "homepage.featurePreview.extensible.description",
         message:
-          "Integrates with existing tools, and build your own internal and external utilities on top of the API.",
+          "Integrates with existing tools, and supports your own plugins or use the on top of the web API.",
       }),
       imageSrc: "/images/screenshots/screenshot-expand.webp",
       imageWidth: 739,
