@@ -13,7 +13,7 @@
     "create": "hugo new",
     "prestart": "npm run clean",
     "start": "hugo server --disableFastRender",
-    "prebuild": "npm run clean",
+    "prebuild": "npm run clean && node scripts/news-fallback/index.js",
     "build": "hugo --gc --minify && npm run build:functions",
     "build:functions": "netlify-lambda build assets/lambda",
     "build:preview": "npm run build -D -F",
@@ -37,7 +37,8 @@
     "clipboard": "^2.0",
     "eslint": "^7.18",
     "flexsearch": "^0.6",
-    "hugo-bin": "^0.68.0",
+    "gray-matter": "^4.0.3",
+    "hugo-bin": "0.120.4",
     "instant.page": "^5.1",
     "lazysizes": "^5.3",
     "markdownlint-cli": "^0.26",
@@ -48,6 +49,7 @@
     "rimraf": "^3.0",
     "standard-version": "^9.1",
     "stylelint": "^13.8",
-    "stylelint-config-standard": "^20.0"
+    "stylelint-config-standard": "^20.0",
+    "turndown": "^7.2.4"
   }
 }

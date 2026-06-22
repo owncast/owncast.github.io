@@ -55,6 +55,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Setup nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate fallback news post if there is no published news
+        run: npm install && node scripts/news-fallback/index.js
+
       - name: Build
         run: npm install && hugo --minify
 
