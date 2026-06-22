@@ -252,6 +252,44 @@ html[data-theme='dark'] .docMainWrapper {
   /* text-transform: uppercase; */
 }
 
+/* ---------------------------------------------------------------------------
+   Sidebar scroll affordance
+   The docs sidebar overflows vertically but the scrollbar auto-hides, so it's
+   not obvious there's more below the fold. We fade the top/bottom edges of the
+   scroll area to hint at hidden content: the top fade appears once you've
+   scrolled down, and the bottom fade disappears as you reach the end.
+
+   The band thickness (--sidebar-fade-top / --sidebar-fade-bottom) is updated on
+   scroll by src/clientModules/sidebarScrollFade.ts so this works in every
+   browser. Before that JS runs we default to a bottom-only fade as the hint.
+--------------------------------------------------------------------------- */
+@media (min-width: 997px) {
+  .theme-doc-sidebar-container nav.menu.thin-scrollbar {
+    --sidebar-fade-size: 64px; /* keep in sync with FADE_SIZE in the client module */
+    --sidebar-fade-top: 0px;
+    --sidebar-fade-bottom: var(--sidebar-fade-size);
+    overflow-y: auto;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0,
+      rgba(0, 0, 0, 0.15) calc(var(--sidebar-fade-top) * 0.65),
+      #000 var(--sidebar-fade-top),
+      #000 calc(100% - var(--sidebar-fade-bottom)),
+      rgba(0, 0, 0, 0.15) calc(100% - var(--sidebar-fade-bottom) * 0.35),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0,
+      rgba(0, 0, 0, 0.15) calc(var(--sidebar-fade-top) * 0.65),
+      #000 var(--sidebar-fade-top),
+      #000 calc(100% - var(--sidebar-fade-bottom)),
+      rgba(0, 0, 0, 0.15) calc(100% - var(--sidebar-fade-bottom) * 0.35),
+      transparent 100%
+    );
+  }
+}
+
 /* Hide the "This page is unlisted" banner on unlisted pages */
 .theme-unlisted-banner {
   display: none;

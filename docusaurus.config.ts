@@ -140,6 +140,8 @@ const config: Config = {
 
   onBrokenLinks: "warn",
 
+  clientModules: [require.resolve("./src/clientModules/sidebarScrollFade.ts")],
+
   i18n: {
     defaultLocale: "en",
     locales: ["en", "es", "fr", "de"],
