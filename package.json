@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "prebuild": "node scripts/update-api-urls.js && node scripts/generate-contributors.js && node scripts/download-avatars.js && node scripts/fetch-releases.js",
+    "prebuild": "node scripts/update-api-urls.js && node scripts/generate-contributors.js && node scripts/download-avatars.js && node scripts/fetch-releases.js && node scripts/news-fallback/index.js",
     "fetch-releases": "node scripts/fetch-releases.js",
     "download-avatars": "node scripts/download-avatars.js",
     "build": "docusaurus build",
@@ -80,6 +80,7 @@
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^3.4.19",
     "tailwindcss-animate": "^1.0.7",
+    "turndown": "^7.2.0",
     "typescript": "~5.6.2"
   },
   "browserslist": {
