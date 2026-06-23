@@ -64,6 +64,7 @@ Grants:
 * `owncast.chat.send(text)`: post as the plugin's bot identity
 * `owncast.chat.sendAction(text)`: post a "/me" message
 * `owncast.chat.sendTo(clientId, text)`: private message a connected client
+* `owncast.chat.system(body)`: post a system message with no user identity, rendered as a server announcement (the body is HTML)
 
 Messages go through Owncast's normal chat pipeline (filters, rate limits, persistence, moderation). Plugins cannot send under arbitrary names or impersonate real users.
 
@@ -221,7 +222,7 @@ None of the four viewer-injection fields require `http.serve`, and neither do th
 
 | Permission           | Grants                                                                                                                                            |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `chat.send`          | `owncast.chat.send`, `.sendAction`, `.sendTo`                                                                                                     |
+| `chat.send`          | `owncast.chat.send`, `.sendAction`, `.sendTo`, `.system`                                                                                          |
 | `chat.history`       | `owncast.chat.history`, `.clients`                                                                                                                |
 | `chat.moderate`      | `owncast.chat.deleteMessage`, `.kick`                                                                                                             |
 | `chat.filter`        | Subscribe to `filterChatMessage` (read, modify, or drop every chat message).                                                                      |
