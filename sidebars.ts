@@ -144,6 +144,7 @@ const sidebars: SidebarsConfig = {
               items: [
                 "plugins/chat",
                 "plugins/commands",
+                "plugins/configuration",
                 "plugins/auth",
                 "plugins/http",
                 "plugins/ui",

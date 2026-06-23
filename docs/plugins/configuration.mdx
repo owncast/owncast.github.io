@@ -1,0 +1,89 @@
+---
+title: Configuration
+description: Let admins configure your plugin with typed settings. Owncast renders the form, you read the values at runtime with owncast.config.get.
+sidebar_position: 7
+sidebar_label: Configuration
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - plugins
+  - configuration
+  - admin
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Owncast gives plugins two ways to let an admin change settings. Declare a `config` block in the manifest and Owncast renders a typed form for you, with no admin HTML and no save or load code to write. Or register an `admin` page and serve your own HTML.
+
+Use the manifest `config` block for flat, typed knobs: strings, numbers, and switches. Reach for a [custom admin page](/docs/plugins/ui#admin-pages) only when you need a UI the auto-form can't express, like a grouped layout, a live preview, or an action button that calls your own API. The two can coexist. A plugin can have both the auto-form Settings tab and one or more custom admin pages.
+
+## Declare settings in the manifest
+
+Each entry under `config` has a `type`, a `default`, and a `description`:
+
+```json
+{
+  "config": {
+    "greeting": { "type": "string", "default": "welcome!", "description": "First-join message" },
+    "cooldownMs": { "type": "number", "default": 2000, "description": "Per-user command cooldown" },
+    "modOnly": { "type": "boolean", "default": false, "description": "Restrict to moderators" }
+  }
+}
+```
+
+| Field         | Notes                                                                                                                     |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `type`        | One of `string`, `number`, or `boolean`. Any other value is accepted but gets a plain text input and no type checking on save. |
+| `default`     | The value `config.get` returns until an admin saves an override. Its JSON type should match `type`.                       |
+| `description` | The label shown next to the field in the admin form. Falls back to the key name when empty.                               |
+
+Key names cannot start with `__`. That prefix is reserved for per-instance state the host injects, and a plugin that declares a key like `__internal` fails to load.
+
+## What the admin sees
+
+A plugin that declares a `config` block gets a **Settings** tab on its detail page under Admin → Plugins. Owncast builds the form from the schema:
+
+- `string` renders a text input, `number` a numeric input, and `boolean` a switch.
+- The `description` is the field label.
+- The `default` shows until an admin saves an override.
+- A key whose name looks like a credential renders as a masked password input. The match is case-insensitive and fires when the name contains `secret`, `password`, `token`, `apikey`, or `api_key`, or is the standalone word `key`. So `apiKey`, `clientSecret`, `accessToken`, and `webhook_secret` mask. Names like `accessKey` or `keyValue` do not, because `key` only matches as a whole word. Name a secret field `apiKey`, `api_key`, or anything ending in `Secret` or `Token` if you want it masked.
+
+A plugin with no `config` block shows no Settings tab.
+
+## Read values at runtime
+
+`owncast.config.get(key, fallback?)` returns the admin's override when one is set, otherwise the declared default, already parsed to the declared type.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const cooldownMs = owncast.config.get("cooldownMs", 2000);
+const modOnly = owncast.config.get("modOnly", false);
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+cooldown_ms = owncast.config.get("cooldownMs", 2000)
+mod_only = owncast.config.get("modOnly", False)
+```
+
+</TabItem>
+</Tabs>
+
+`config.get` is ambient, so it needs no permission. A `number` field comes back as a number and a `boolean` as a bool, so you don't parse strings yourself. For an unknown key, or a declared key that has neither a default nor a saved override, it returns `fallback` (`undefined` in JavaScript and `None` in Python when you pass none). Pass a fallback you can run with.
+
+The full signature lives in the [APIs reference](/docs/plugins/apis#config).
+
+## Validation and storage
+
+When an admin saves the form, Owncast checks each value against the schema before storing it:
+
+- A key not declared in the manifest is rejected with `400 unknown config key`.
+- A `string` field must receive a string, a `number` a number, and a `boolean` a bool. A type mismatch is rejected. Any other declared `type` is stored as-is.
+- The request body is capped at 1 MB.
+
+Overrides persist in the plugin's own key/value store under the reserved key `owncast.config`, namespaced by the plugin's `slug`. Other plugins can't read them, and they survive restarts and reinstalls. Changing the `slug` after release starts a fresh store, so saved overrides revert to their defaults, the same rule that applies to the rest of your [KV data](/docs/plugins/apis#storage).

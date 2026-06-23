@@ -44,7 +44,7 @@ The manifest is plain JSON that describes the plugin to the host, independent of
 | `version`     | string   | yes      | Your plugin's version. Semver recommended. Must match what the runtime reports at load time.                 |
 | `description` | string   | no       | One-sentence summary the admin sees in the plugin list and during install.                                   |
 | `permissions` | string[] | no       | List of capabilities your plugin needs. See [Permissions](/docs/plugins/permissions).                        |
-| `config`      | object   | no       | Admin-configurable settings your plugin reads at runtime. See [`config`](#config-admin-configurable-settings). |
+| `config`      | object   | no       | Admin-configurable settings your plugin reads at runtime. See [Configuration](/docs/plugins/configuration). |
 | `bot`         | object   | no       | Chat-bot configuration. See [`bot`](#bot-chat-bot-identity).                                                 |
 | `network`     | object   | no       | Outbound-HTTP allowlist, required when `network.fetch` is granted. See below.                                |
 | `actions`     | object[] | no       | Action buttons to add to the viewer UI. See [UI: Action buttons](/docs/plugins/ui#action-buttons).           |
@@ -88,7 +88,7 @@ In chat, the bot posts as "Sidekick" instead of "Stream Sidekick". The first tim
 
 ### `config`: admin-configurable settings
 
-Declare simple settings here instead of building your own settings page and key/value plumbing. Each entry has a `type`, a `default`, and a `description`:
+Declare typed settings here and Owncast renders an editable form for them in the admin, which your plugin reads at runtime with `owncast.config.get`. Each entry has a `type` (`string`, `number`, or `boolean`), a `default`, and a `description`:
 
 ```json
 {
@@ -100,9 +100,7 @@ Declare simple settings here instead of building your own settings page and key/
 }
 ```
 
-Owncast auto-renders an editable form from this schema on a **Settings** tab on your plugin's detail page — you write no admin HTML and no save/load plumbing. The `type` picks the input: `string` renders a text box, `number` a numeric field, `boolean` a switch. The `description` becomes the field label, and the `default` is shown until an admin saves an override. String keys whose name looks like a credential (containing `secret`, `password`, `token`, `apiKey`, or `key`) are rendered as masked password inputs so they aren't shown in plain text. A plugin that declares no `config` simply shows no Settings tab.
-
-Read the effective value at runtime with [`owncast.config.get(key)`](/docs/plugins/apis#config), which returns the admin-set value when present and the declared default otherwise, already parsed to its declared type. `config.get` is ambient: no permission required.
+Full coverage, including how the form renders, credential masking, validation, and where overrides are stored, in [Configuration](/docs/plugins/configuration).
 
 ## `permissions`
 
