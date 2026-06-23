@@ -1,9 +1,8 @@
 ---
-title: Using Owncast Chat
+title: Chat
 slug: /chat
 description: How to use the Owncast chat features.
 sidebar_position: 1
-sidebar_label: Customize your Owncast site
 tags:
   - chat
   - formatting

@@ -36,3 +36,7 @@ To help people discover streams by people using Owncast we have an optional Ownc
 If your application has what is often called "IPTV" or M3U support, you can browse the directory directly by adding `https://owncast.directory/api/iptv` to the application. Not all apps support this.
 
 Additionally, there are some native applications that allow you to browse the Owncast directory and watch streams directly from within the application. Read more about [watching streams](/docs/watching-streams/).
+
+## Build your own directory
+
+The Owncast directory is not the only one possible. Every Owncast server broadcasts its live status over ActivityPub, so you can run your own directory or aggregator that tracks which servers are streaming. See [building a directory of Owncast streams](/docs/api/activitypub#building-a-directory-of-owncast-streams) for the protocol, and the [owncast-directory-example](https://github.com/owncast/owncast-directory-example) repository for a small runnable reference.

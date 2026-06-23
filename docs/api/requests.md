@@ -1,8 +1,8 @@
 ---
-title: Build Chat Bots and Overlays Using the Owncast API
-description: Learn about access tokens and APIs
+title: Send requests to the Owncast API
+description: Use an access token to send chat messages, set the stream title, and perform other actions over the Owncast API.
 sidebar_position: 48
-sidebar_label: Build your project using the Owncast web APIs
+sidebar_label: Send requests
 ---
 
 We currently support the following actions you can make via requests from your code.
