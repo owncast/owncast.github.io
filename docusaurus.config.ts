@@ -426,6 +426,11 @@ const config: Config = {
   ],
 
   themeConfig: {
+    // Collapse other top-level sections when you open one, so navigating into
+    // one section doesn't leave unrelated sections expanded.
+    docs: {
+      sidebar: { autoCollapseCategories: true },
+    },
     // Replace with your project's social card
     image: "img/owncast-logo-1000x1000.png",
     metadata: [
