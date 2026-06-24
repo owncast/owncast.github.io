@@ -29,6 +29,13 @@
 
     // Fallback: click the category link itself (works when no link prop is set)
     if (categoryLink) {
+      // A link-less category carries an SSR fallback href to its first child
+      // until React hydrates. Clicking before hydration would navigate there
+      // instead of just toggling, so wait until the href becomes a no-op ("#").
+      var fallbackHref = categoryLink.getAttribute("href");
+      if (fallbackHref && fallbackHref !== "#") {
+        return "not-hydrated";
+      }
       categoryLink.click();
       return "expanded-via-link";
     }
@@ -39,7 +46,7 @@
   function tryExpand(attempts) {
     if (attempts <= 0) return;
     var result = expandGetStartedCategory();
-    if (result === "element-not-found" || result === "no-button") {
+    if (result === "element-not-found" || result === "no-button" || result === "not-hydrated") {
       setTimeout(function() { tryExpand(attempts - 1); }, 100);
     }
   }

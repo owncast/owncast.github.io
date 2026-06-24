@@ -21,7 +21,6 @@ const sidebars: SidebarsConfig = {
     {
       type: "category",
       label: "Get started",
-      link: { type: "doc", id: "getting-started/install/index" },
       className: "get-started-category",
       collapsed: true,
       items: [
@@ -29,6 +28,7 @@ const sidebars: SidebarsConfig = {
           type: "category",
           label: "Install Owncast",
           link: { type: "doc", id: "getting-started/install/index" },
+          collapsed: false,
           items: [
             "getting-started/install/installer",
             "getting-started/install/manual",
