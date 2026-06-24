@@ -29,7 +29,7 @@ This page takes you from nothing to a plugin running on your Owncast server. Plu
 </TabItem>
 <TabItem value="py" label="Python">
 
-- Python 3.8 or newer, and `pip` or [`uv`](https://docs.astral.sh/uv/) to install the `owncast-plugin-sdk` toolchain.
+- Python 3.8 or newer, and [`uv`](https://docs.astral.sh/uv/) or `pip` to install the `owncast-plugin-sdk` toolchain.
 
 </TabItem>
 </Tabs>
@@ -68,11 +68,10 @@ my-plugin/
 </TabItem>
 <TabItem value="py" label="Python">
 
-Install the SDK to get the `owncast-plugin-py` CLI, then scaffold a project with `new`:
+Install the SDK from PyPI to get the `owncast-plugin-py` CLI, then scaffold a project with `new`:
 
 ```sh
-git clone https://github.com/owncast/plugin-sdk.git
-pip install ./plugin-sdk/sdks/python    # or:  uv tool install ./plugin-sdk/sdks/python
+uv tool install owncast-plugin-sdk      # or:  pip install owncast-plugin-sdk
 owncast-plugin-py new my-plugin
 cd my-plugin
 ```

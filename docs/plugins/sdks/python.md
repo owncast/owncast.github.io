@@ -40,17 +40,10 @@ The shared reference names handlers and APIs in their canonical (camelCase) form
 
 ## Install
 
-Clone the SDK repo and install from it to get the `owncast-plugin-py` CLI:
+Install the SDK from PyPI to get the `owncast-plugin-py` CLI:
 
 ```sh
-git clone https://github.com/owncast/plugin-sdk.git
-pip install ./plugin-sdk/sdks/python    # or:  uv tool install ./plugin-sdk/sdks/python
-```
-
-Or skip the install and run the CLI straight from the clone:
-
-```sh
-uvx --from ./plugin-sdk/sdks/python owncast-plugin-py new my-plugin
+uv tool install owncast-plugin-sdk      # or:  pip install owncast-plugin-sdk
 ```
 
 Scaffold a project with `owncast-plugin-py new`, passing the slug:
