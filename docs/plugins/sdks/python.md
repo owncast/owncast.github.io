@@ -58,7 +58,10 @@ You get a ready-to-build directory:
 ```text
 my-plugin/
 ├── plugin.manifest.json     name, slug, version, permissions
+├── README.md                how to build, test, package, and install it
 ├── INSTRUCTIONS.md          optional, rendered as a tab in the admin
+├── AGENTS.md                notes for AI coding agents
+├── .agents/                 a bundled skill for AI coding agents
 ├── src/plugin.py            your code, with a sample handler
 └── __tests__/*.test.json    a sample scenario test
 ```

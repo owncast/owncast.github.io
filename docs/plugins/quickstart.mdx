@@ -55,15 +55,17 @@ You now have:
 my-plugin/
 ├── package.json
 ├── plugin.manifest.json     display name, slug, version, permissions
-├── icon.png                 optional, shown in the admin plugin list
+├── README.md                how to build, test, package, and install it
 ├── INSTRUCTIONS.md          optional, rendered as a tab in the admin
+├── AGENTS.md                notes for AI coding agents
+├── .agents/                 a bundled skill for AI coding agents
 ├── src/
 │   └── plugin.js            your code, with a sample handler
-├── public/                  optional files served at /plugins/my-plugin/
-├── assets/                  optional files the host reads for manifest fields that inline content
 └── __tests__/
     └── plugin.test.js       a sample scenario test
 ```
+
+`npm install` also creates `node_modules/`. None of these are created for you, but you can add an `icon.png` (shown in the admin plugin list), a `public/` directory (static files served at `/plugins/my-plugin/`), and an `assets/` directory (files the host inlines for manifest fields).
 
 </TabItem>
 <TabItem value="py" label="Python">
@@ -81,7 +83,10 @@ You now have:
 ```text
 my-plugin/
 ├── plugin.manifest.json     display name, slug, version, permissions
+├── README.md                how to build, test, package, and install it
 ├── INSTRUCTIONS.md          optional, rendered as a tab in the admin
+├── AGENTS.md                notes for AI coding agents
+├── .agents/                 a bundled skill for AI coding agents
 ├── src/
 │   └── plugin.py            your code, with a sample handler
 └── __tests__/
