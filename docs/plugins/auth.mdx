@@ -14,8 +14,8 @@ tags:
   - gate
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 A plugin can be the **authentication gate** for an Owncast site: viewers must sign in through it before they can reach the page, the video, chat, or the API. The plugin supplies the login method: OAuth (GitHub, Discord, Google), a magic link, SAML, or just a shared password. Owncast enforces the gate. This replaces the high-friction "put a reverse proxy like Vouch in front of Owncast" pattern with a first-class plugin capability.
 
@@ -84,7 +84,7 @@ Because the check runs only on `/`, a viewer you revoke keeps any open tab worki
 
 ## Worked example: a shared-password gate
 
-The `basic-auth` example plugin is the simplest possible gate: one shared password, one shared "Guest" identity, no external provider. It ships in both [`examples/js/basic-auth`](https://github.com/owncast/owncast-plugin-sdk/tree/main/examples/js/basic-auth) and [`examples/python/basic-auth`](https://github.com/owncast/owncast-plugin-sdk/tree/main/examples/python/basic-auth).
+The `basic-auth` example plugin is the simplest possible gate: one shared password, one shared "Guest" identity, no external provider. It ships in both [`examples/js/basic-auth`](https://github.com/owncast/plugin-sdk/tree/main/examples/js/basic-auth) and [`examples/python/basic-auth`](https://github.com/owncast/plugin-sdk/tree/main/examples/python/basic-auth).
 
 Its manifest declares the permissions and a single config field for the password:
 
@@ -110,61 +110,60 @@ The handler renders a password form at `/`, checks the submitted password agains
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-const { definePlugin, owncast, authCheck } = require("@owncast/plugin-sdk");
+const { definePlugin, owncast, authCheck } = require('@owncast/plugin-sdk');
 
 module.exports = definePlugin({
   onHttpRequest(req) {
     const query = req.query || {};
-    const returnTo = query.return_to || "/";
+    const returnTo = query.return_to || '/';
 
-    if (req.method === "GET" && req.path === "/") {
+    if (req.method === 'GET' && req.path === '/') {
       return {
         status: 200,
-        headers: { "content-type": "text/html" },
+        headers: { 'content-type': 'text/html' },
         body: page(returnTo),
       };
     }
 
-    if (req.path === "/login") {
-      const expected = owncast.config.get("password", "letmein");
-      if ((query.password || "") !== expected) {
+    if (req.path === '/login') {
+      const expected = owncast.config.get('password', 'letmein');
+      if ((query.password || '') !== expected) {
         return {
           status: 200,
-          headers: { "content-type": "text/html" },
-          body: page(returnTo, "Incorrect password."),
+          headers: { 'content-type': 'text/html' },
+          body: page(returnTo, 'Incorrect password.'),
         };
       }
       // Everyone who knows the password shares one authenticated identity.
       const { userId } = owncast.users.register({
-        authId: "shared",
-        displayName: "Guest",
+        authId: 'shared',
+        displayName: 'Guest',
       });
       owncast.auth.grantSession({ userId });
       return { status: 302, headers: { Location: returnTo } };
     }
 
-    if (req.path === "/logout") {
+    if (req.path === '/logout') {
       owncast.auth.endSession();
-      return { status: 302, headers: { Location: "/" } };
+      return { status: 302, headers: { Location: '/' } };
     }
 
     // Admin-only revocation toggle. req.authenticated is true for admins only.
-    if (req.path === "/revoke" || req.path === "/unrevoke") {
-      if (!req.authenticated) return { status: 403, body: "admin only" };
-      owncast.kv.set("revoked", req.path === "/revoke" ? "1" : "");
+    if (req.path === '/revoke' || req.path === '/unrevoke') {
+      if (!req.authenticated) return { status: 403, body: 'admin only' };
+      owncast.kv.set('revoked', req.path === '/revoke' ? '1' : '');
       return {
         status: 200,
-        body: req.path === "/revoke" ? "revoked" : "unrevoked",
+        body: req.path === '/revoke' ? 'revoked' : 'unrevoked',
       };
     }
 
-    return { status: 404, body: "not found" };
+    return { status: 404, body: 'not found' };
   },
 
   // Re-validate on each page load. While revoked, end every session.
   onAuthCheck() {
-    if (owncast.kv.get("revoked") === "1")
-      return authCheck.deny("access has been revoked");
+    if (owncast.kv.get('revoked') === '1') return authCheck.deny('access has been revoked');
     return authCheck.ok();
   },
 });

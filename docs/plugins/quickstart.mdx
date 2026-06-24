@@ -29,7 +29,7 @@ This page takes you from nothing to a plugin running on your Owncast server. Plu
 </TabItem>
 <TabItem value="py" label="Python">
 
-- Python 3.8 or newer, and [`uv`](https://docs.astral.sh/uv/) or `pip` to install the `owncast-plugin-sdk` toolchain.
+- Python 3.8 or newer, and [`uv`](https://docs.astral.sh/uv/) or `pip` to install the `owncast-plugin-py` toolchain.
 
 </TabItem>
 </Tabs>
@@ -68,12 +68,12 @@ my-plugin/
 </TabItem>
 <TabItem value="py" label="Python">
 
-Install the SDK from PyPI to get the `owncast-plugin-py` CLI, then scaffold a project with `new`:
+Scaffold a project with `new`, passing the slug. `uvx` runs the scaffolder straight from PyPI without installing anything:
 
 ```sh
-uv tool install owncast-plugin-sdk      # or:  pip install owncast-plugin-sdk
-owncast-plugin-py new my-plugin
+uvx owncast-plugin-py new my-plugin
 cd my-plugin
+uv tool install owncast-plugin-py      # or:  pip install owncast-plugin-py — for build/test/serve/package
 ```
 
 You now have:
@@ -103,7 +103,7 @@ A handler reacts to an event. The SDK derives the manifest's subscription list f
 Open `src/plugin.js`:
 
 ```js
-const { definePlugin, owncast } = require("@owncast/plugin-sdk");
+const { definePlugin, owncast } = require('@owncast/plugin-sdk');
 
 module.exports = definePlugin({
   onChatMessage(msg) {
@@ -197,7 +197,11 @@ owncast-plugin-py serve my-plugin
 
 In the Owncast admin, open **Plugins** in the sidebar and click **Upload plugin**. Pick the `my-plugin.ocpkg` file your build produced. The plugin appears in the list immediately. Toggle **Enabled** to load it.
 
-<img src="/docs/img/plugins-installed-list.png" alt="The Plugins page in the admin, listing installed plugins with their requested permissions, status, an enable toggle, and Upload plugin and Configure buttons" width="80%" />
+<img
+  src="/docs/img/plugins-installed-list.png"
+  alt="The Plugins page in the admin, listing installed plugins with their requested permissions, status, an enable toggle, and Upload plugin and Configure buttons"
+  width="80%"
+/>
 
 Alternatively, copy `my-plugin.ocpkg` to your server's `data/plugins/` directory and the next scan tick will pick it up:
 
@@ -207,7 +211,11 @@ scp my-plugin.ocpkg user@your-owncast-server:/path/to/owncast/data/plugins/
 
 If the plugin declares permissions, the admin reviews them in the **Permissions** tab on the plugin's detail page before enabling. The first enable captures the approved permission set. If you later ship an update that asks for more access, Owncast auto-disables the plugin and prompts the admin to re-approve.
 
-<img src="/docs/img/plugin-permissions-tab.png" alt="The Permissions tab on a plugin's detail page, listing each requested permission with a plain-language description" width="80%" />
+<img
+  src="/docs/img/plugin-permissions-tab.png"
+  alt="The Permissions tab on a plugin's detail page, listing each requested permission with a plain-language description"
+  width="80%"
+/>
 
 ## What to read next
 

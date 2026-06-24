@@ -24,12 +24,12 @@ You can write a plugin in **JavaScript** or **Python**. The two SDKs are first-c
 
 ## What you can build
 
-* Chat bots that reply to keywords or commands, post reminders, run polls, or moderate spam.
-* Filters that rewrite or drop chat messages before they reach viewers.
-* Overlays rendered on top of your stream, talking to your plugin's HTTP endpoints.
-* Integrations that bridge Owncast to Discord, the fediverse, browser push, or any HTTPS service.
-* Admin tools that add a tab to the Owncast admin UI for plugin-specific settings.
-* Action buttons that appear under your stream, launching widgets, donation pages, or anything else you serve.
+- Chat bots that reply to keywords or commands, post reminders, run polls, or moderate spam.
+- Filters that rewrite or drop chat messages before they reach viewers.
+- Overlays rendered on top of your stream, talking to your plugin's HTTP endpoints.
+- Integrations that bridge Owncast to Discord, the fediverse, browser push, or any HTTPS service.
+- Admin tools that add a tab to the Owncast admin UI for plugin-specific settings.
+- Action buttons that appear under your stream, launching widgets, donation pages, or anything else you serve.
 
 Every example plugin in the SDK is a complete starting point you can copy.
 
@@ -38,13 +38,13 @@ Every example plugin in the SDK is a complete starting point you can copy.
 Both SDKs produce the same `.ocpkg`, run sandboxed in the server, and package to roughly the same size. Pick the language you would rather write.
 
 - **[JavaScript](/docs/plugins/sdks/javascript)** with [`@owncast/plugin-sdk`](https://www.npmjs.com/package/@owncast/plugin-sdk). Scaffold with `npx create-owncast-plugin`, write `definePlugin({ ... })`, build with `npm run package`.
-- **[Python](/docs/plugins/sdks/python)** with `owncast-plugin-sdk`. Scaffold with `owncast-plugin-py new`, write decorated functions, build with `owncast-plugin-py package`.
+- **[Python](/docs/plugins/sdks/python)** with [`owncast-plugin-py`](https://pypi.org/project/owncast-plugin-py/). Scaffold with `uvx owncast-plugin-py new`, write decorated functions, build with `owncast-plugin-py package`.
 
 The same echo bot in each:
 
 ```js
 // JavaScript
-const { definePlugin, owncast } = require("@owncast/plugin-sdk");
+const { definePlugin, owncast } = require('@owncast/plugin-sdk');
 
 module.exports = definePlugin({
   onChatMessage(msg) {
@@ -102,28 +102,28 @@ Once enabled, the plugin runs inside the Owncast process. Handlers you defined f
 
 By design:
 
-* No direct access to the host filesystem, network, or processes. The sandbox enforces this. Plugins do what the host APIs expose, and only with declared permissions.
-* No identity impersonation. Each plugin gets one chat identity (the bot Owncast provisions on install), and outbound fediverse posts come from the streamer's own account.
-* No cross-plugin reads. Each plugin's key-value store is namespaced.
-* No indefinite chat blocking. Filter calls are time-capped at 50 ms, and a plugin that throws repeatedly is auto-disabled.
+- No direct access to the host filesystem, network, or processes. The sandbox enforces this. Plugins do what the host APIs expose, and only with declared permissions.
+- No identity impersonation. Each plugin gets one chat identity (the bot Owncast provisions on install), and outbound fediverse posts come from the streamer's own account.
+- No cross-plugin reads. Each plugin's key-value store is namespaced.
+- No indefinite chat blocking. Filter calls are time-capped at 50 ms, and a plugin that throws repeatedly is auto-disabled.
 
 This is why an admin can install a third-party plugin without auditing every line of code. The trust boundary is the manifest's permission list.
 
 ## Where to go next
 
-* [Quickstart](/docs/plugins/quickstart). Scaffold a new plugin, build it, install it.
-* [JavaScript](/docs/plugins/sdks/javascript) and [Python](/docs/plugins/sdks/python). The language-specific setup, CLI, and syntax for each SDK.
-* [Manifest reference](/docs/plugins/manifest). Every field your `plugin.manifest.json` can contain.
-* [Chat plugins](/docs/plugins/chat). Build bots, moderation tools, and chat filters.
-* [Events](/docs/plugins/events). Every event your plugin can subscribe to, with payload shapes.
-* [Owncast APIs](/docs/plugins/apis). Every `owncast.*` method, what it does, and the permission it needs.
-* [Permissions](/docs/plugins/permissions). The full list and how the security model works.
-* [Serving HTTP](/docs/plugins/http). Serve URLs from your plugin and push realtime events to browsers.
-* [Contributing UI](/docs/plugins/ui). Register admin pages and contribute action buttons under the stream.
-* [Testing](/docs/plugins/testing). Scenario tests that drive your plugin through the real runtime.
-* [Packaging & publishing](/docs/plugins/packaging). Bundle the `.ocpkg`, install it, and list it in the directory.
+- [Quickstart](/docs/plugins/quickstart). Scaffold a new plugin, build it, install it.
+- [JavaScript](/docs/plugins/sdks/javascript) and [Python](/docs/plugins/sdks/python). The language-specific setup, CLI, and syntax for each SDK.
+- [Manifest reference](/docs/plugins/manifest). Every field your `plugin.manifest.json` can contain.
+- [Chat plugins](/docs/plugins/chat). Build bots, moderation tools, and chat filters.
+- [Events](/docs/plugins/events). Every event your plugin can subscribe to, with payload shapes.
+- [Owncast APIs](/docs/plugins/apis). Every `owncast.*` method, what it does, and the permission it needs.
+- [Permissions](/docs/plugins/permissions). The full list and how the security model works.
+- [Serving HTTP](/docs/plugins/http). Serve URLs from your plugin and push realtime events to browsers.
+- [Contributing UI](/docs/plugins/ui). Register admin pages and contribute action buttons under the stream.
+- [Testing](/docs/plugins/testing). Scenario tests that drive your plugin through the real runtime.
+- [Packaging & publishing](/docs/plugins/packaging). Bundle the `.ocpkg`, install it, and list it in the directory.
 
 ## Source
 
-* SDK source: [github.com/owncast/plugin-sdk](https://github.com/owncast/plugin-sdk)
-* Example plugins, one per feature: [JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js) · [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python)
+- SDK source: [github.com/owncast/plugin-sdk](https://github.com/owncast/plugin-sdk)
+- Example plugins, one per feature: [JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js) · [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python)
