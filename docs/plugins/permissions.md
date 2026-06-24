@@ -228,8 +228,8 @@ None of the four viewer-injection fields require `http.serve`, and neither do th
 | `chat.filter`        | Subscribe to `filterChatMessage` (read, modify, or drop every chat message).                                                                      |
 | `users.read`         | `owncast.users.list`, `.get`                                                                                                                      |
 | `users.moderate`     | `owncast.users.setEnabled`, `.banIP`                                                                                                              |
-| `users.register`     | `owncast.users.register` — find-or-create an authenticated user for an external identity                                                          |
-| `auth.gate`          | `owncast.auth.grantSession`, `.endSession`, and the `onAuthCheck` handler — be the site's auth gate                                               |
+| `users.register`     | `owncast.users.register`: find-or-create an authenticated user for an external identity                                                          |
+| `auth.gate`          | `owncast.auth.grantSession`, `.endSession`, and the `onAuthCheck` handler: be the site's auth gate                                               |
 | `storage.kv`         | Per-plugin namespaced key/value store                                                                                                             |
 | `storage.upload`     | Upload files to Owncast's public file area                                                                                                        |
 | `storage.fs`         | Private, sandboxed server-side filesystem at `data/plugin-data/<your-slug>/`                                                                       |

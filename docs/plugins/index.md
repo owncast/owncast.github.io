@@ -96,7 +96,7 @@ Once enabled, the plugin runs inside the Owncast process. Handlers you defined f
 3. Call Owncast APIs. `owncast.chat.send(text)`, `owncast.kv.get(key)`, `owncast.http.fetch(url)`, and dozens more, most gated by a declared permission.
 4. Serve HTTP. Every plugin can own the URL space at `/plugins/<your-slug>/...` for both static assets and dynamic handlers.
 5. Add UI. Declare admin pages, action buttons, plugin stylesheets, plugin scripts, or an extra-content HTML block in your manifest and Owncast inlines them into its own chrome.
-6. Gate access. A plugin can be the site's authentication provider — make viewers sign in (OAuth, a password, anything over HTTP) before they can reach the page, the video, chat, or the API.
+6. Gate access. A plugin can be the site's authentication provider. Make viewers sign in (OAuth, a password, anything over HTTP) before they can reach the page, the video, chat, or the API.
 
 ## What a plugin can't do
 

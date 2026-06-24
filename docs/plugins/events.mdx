@@ -446,13 +446,13 @@ Requires the `http.serve` permission. The JavaScript SDK exposes a single `onHtt
 
 ### Auth check: `auth.check` {#auth-check}
 
-Only fires for the enabled [`auth.gate`](/docs/plugins/auth) plugin, and only on a viewer's `/` page load — never on the hot path (video segments, the API, chat). It's the **re-validation hook**: the host has already verified the viewer's session cookie and resolved their identity; your handler decides whether that session should continue. Optional — omit it and a valid cookie is enough until it expires.
+Only fires for the enabled [`auth.gate`](/docs/plugins/auth) plugin, and only on a viewer's `/` page load, never on the hot path (video segments, the API, chat). By the time it runs, the host has already verified the viewer's session cookie and resolved their identity. Your handler decides whether that session should continue. It's optional: omit it and a valid cookie is enough until it expires.
 
 Return one of three verdicts via the `authCheck` helper:
 
-- **ok** — keep the session as-is.
-- **refresh** — keep it and re-issue the cookie, optionally with a new `ttl` in seconds (sliding expiry).
-- **deny** — end the session and bounce the viewer back to the login screen. This is how you revoke access (a user deleted or banned upstream).
+- **ok**: keep the session as-is.
+- **refresh**: keep it and re-issue the cookie, optionally with a new `ttl` in seconds (sliding expiry).
+- **deny**: end the session and bounce the viewer back to the login screen. This is how you revoke access (a user deleted or banned upstream).
 
 ```ts
 interface AuthCheckRequest {
@@ -502,7 +502,7 @@ def check(req):
 </TabItem>
 </Tabs>
 
-Requires `auth.gate`. **Fails closed**: if the handler errors or times out, the host treats that page load as a deny. Because the check runs only on `/`, a viewer whose access you revoke keeps any open tab working until they reload or the cookie expires — the session `ttl` is the hard backstop.
+Requires `auth.gate`, and it fails closed: if the handler errors or times out, the host treats that page load as a deny. Because the check runs only on `/`, a viewer whose access you revoke keeps any open tab working until they reload or the cookie expires. The session `ttl` is the hard backstop.
 
 ## Content handlers
 
