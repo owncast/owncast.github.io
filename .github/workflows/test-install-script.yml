@@ -60,8 +60,8 @@ jobs:
       matrix:
         images:
           - docker.io/fedora:latest
-          - registry.access.redhat.com/ubi7
-          - registry.access.redhat.com/ubi8/ubi:8.1
+          - registry.access.redhat.com/ubi8/ubi:latest
+          - registry.access.redhat.com/ubi9/ubi:latest
     runs-on: ubuntu-latest
     container:
       image: ${{matrix.images}}
@@ -69,7 +69,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install needed packages
-        run: yum install -y curl unzip procps-ng
+        run: yum install -y --allowerasing curl unzip procps-ng
 
       - name: Run installation script
         run: static/install.sh
