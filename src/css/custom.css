@@ -290,6 +290,24 @@ html[data-theme='dark'] .docMainWrapper {
   }
 }
 
+/* Brand-colored announcement bar (plugins call-out) */
+.theme-announcement-bar {
+  background: #161a24;
+  color: #cdd3e0;
+  font-weight: 400;
+  border-bottom: 1px solid rgba(101, 68, 233, 0.4);
+}
+
+.theme-announcement-bar a {
+  color: #b6a3f7;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.theme-announcement-bar button {
+  color: #cdd3e0;
+}
+
 /* Hide the "This page is unlisted" banner on unlisted pages */
 .theme-unlisted-banner {
   display: none;

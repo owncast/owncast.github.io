@@ -426,6 +426,12 @@ const config: Config = {
   ],
 
   themeConfig: {
+    announcementBar: {
+      id: "plugins",
+      content:
+        'Owncast now supports custom plugins. <a href="/docs/configuration/plugins">Learn more</a>',
+      isCloseable: true,
+    },
     // Collapse other top-level sections when you open one, so navigating into
     // one section doesn't leave unrelated sections expanded.
     docs: {
