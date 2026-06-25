@@ -1,9 +1,9 @@
 /* Self-hosted Inter font via @fontsource */
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
-@import "@fontsource/inter/700.css";
-@import "@fontsource/inter/800.css";
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/inter/800.css';
 
 @tailwind base;
 @tailwind components;
@@ -18,7 +18,7 @@
 
   /* Brand foreground and background for light mode */
   --theme-color-foreground: var(--color-owncast-palette-0); /* primary text color (dark) */
-  --theme-color-background: var(--color-owncast-palette-14);  /* page background (light) */
+  --theme-color-background: var(--color-owncast-palette-14); /* page background (light) */
 
   /* Spacing and radius tokens (optional) */
   --radius-sm: 6px;
@@ -30,42 +30,42 @@
   --space-4: 16px;
 
   /* Tailwind/shadcn CSS variables for light mode (Owncast theme) */
-  --background: 218 33% 96%;        /* #f0f3f8 - palette-14 light background */
-  --foreground: 218 23% 9%;         /* #12161d - palette-0 dark primary */
-  --card: 0 0% 100%;                /* white */
-  --card-foreground: 218 23% 9%;    /* #12161d */
+  --background: 218 33% 96%; /* #f0f3f8 - palette-14 light background */
+  --foreground: 218 23% 9%; /* #12161d - palette-0 dark primary */
+  --card: 0 0% 100%; /* white */
+  --card-foreground: 218 23% 9%; /* #12161d */
   --popover: 0 0% 100%;
   --popover-foreground: 218 23% 9%;
-  --muted: 214 32% 91%;             /* #e2e8f0 - palette-3 */
-  --muted-foreground: 235 10% 41%;  /* #5d5f72 - palette-10 neutral gray */
-  --accent: 252 79% 95%;            /* Light purple tint */
+  --muted: 214 32% 91%; /* #e2e8f0 - palette-3 */
+  --muted-foreground: 235 10% 41%; /* #5d5f72 - palette-10 neutral gray */
+  --accent: 252 79% 95%; /* Light purple tint */
   --accent-foreground: 252 79% 59%; /* #6544e9 - palette-6 purple */
-  --destructive: 5 100% 61%;        /* #ff4b39 - error */
+  --destructive: 5 100% 61%; /* #ff4b39 - error */
   --destructive-foreground: 0 0% 100%;
-  --border: 214 32% 91%;            /* #e2e8f0 */
+  --border: 214 32% 91%; /* #e2e8f0 */
   --input: 214 32% 91%;
-  --ring: 252 79% 59%;              /* #6544e9 - palette-6 purple */
+  --ring: 252 79% 59%; /* #6544e9 - palette-6 purple */
 
   /* --ifm-menu-link-padding-vertical: 10px; */
 }
 
 /* Dark mode Tailwind/shadcn CSS variables (Owncast theme) */
 [data-theme='dark'] {
-  --background: 218 23% 9%;         /* #12161d - palette-0 dark primary */
-  --foreground: 214 32% 91%;        /* #e2e8f0 - palette-3 light text */
-  --card: 218 23% 23%;              /* #2D3748 - palette-1 dark secondary */
-  --card-foreground: 214 32% 91%;   /* #e2e8f0 */
-  --popover: 218 23% 23%;           /* #2D3748 */
+  --background: 218 23% 9%; /* #12161d - palette-0 dark primary */
+  --foreground: 214 32% 91%; /* #e2e8f0 - palette-3 light text */
+  --card: 218 23% 23%; /* #2D3748 - palette-1 dark secondary */
+  --card-foreground: 214 32% 91%; /* #e2e8f0 */
+  --popover: 218 23% 23%; /* #2D3748 */
   --popover-foreground: 214 32% 91%;
-  --muted: 218 23% 23%;             /* #2D3748 */
-  --muted-foreground: 214 20% 69%;  /* Lighter gray for muted text */
-  --accent: 252 79% 20%;            /* Dark purple tint */
+  --muted: 218 23% 23%; /* #2D3748 */
+  --muted-foreground: 214 20% 69%; /* Lighter gray for muted text */
+  --accent: 252 79% 20%; /* Dark purple tint */
   --accent-foreground: 254 85% 66%; /* #7a5cf3 - palette-7 */
-  --destructive: 5 70% 45%;         /* Darker error for dark mode */
+  --destructive: 5 70% 45%; /* Darker error for dark mode */
   --destructive-foreground: 0 0% 100%;
-  --border: 218 20% 20%;            /* Subtle border */
+  --border: 218 20% 20%; /* Subtle border */
   --input: 218 20% 20%;
-  --ring: 254 85% 66%;              /* #7a5cf3 - palette-7 */
+  --ring: 254 85% 66%; /* #7a5cf3 - palette-7 */
 }
 
 /* Light mode overrides */

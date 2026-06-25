@@ -1,7 +1,7 @@
-import { themes as prismThemes } from "prism-react-renderer";
-import type { Config } from "@docusaurus/types";
-import type * as Preset from "@docusaurus/preset-classic";
-import path from "path";
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
+import type * as Preset from '@docusaurus/preset-classic';
+import path from 'path';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -9,99 +9,99 @@ import path from "path";
 const ALL_REDIRECTS = [
   // Wildcard redirects
   {
-    to: "/docs/troubleshoot/*",
-    from: "/troubleshoot/*",
-    excludePaths: ["/troubleshoot/"],
+    to: '/docs/troubleshoot/*',
+    from: '/troubleshoot/*',
+    excludePaths: ['/troubleshoot/'],
   },
   // {
   //   to: "/docs/troubleshooting/*",
   //   from: "/troubleshoot/*",
   //   excludePaths: ["/troubleshoot/"],
   // },
-  { to: "/docs/api/*", from: "/thirdparty/*" },
-  { to: "/docs/getting-started/install/providers/*", from: "/quickstart/*" },
+  { to: '/docs/api/*', from: '/thirdparty/*' },
+  { to: '/docs/getting-started/install/providers/*', from: '/quickstart/*' },
 
   // Regular redirects
   // Social docs restructure: enabling page merged into the main social page.
   {
-    to: "/docs/social#enabling-social-features",
-    from: "/docs/social/enabling",
+    to: '/docs/social#enabling-social-features',
+    from: '/docs/social/enabling',
   },
   // Plugin docs restructure: merged/renamed pages.
-  { to: "/docs/plugins/events", from: "/docs/plugins/handlers" },
-  { to: "/docs/plugins/packaging", from: "/docs/plugins/publishing" },
-  { to: "/docs/plugins", from: "/docs/plugins/sdks" },
+  { to: '/docs/plugins/events', from: '/docs/plugins/handlers' },
+  { to: '/docs/plugins/packaging', from: '/docs/plugins/publishing' },
+  { to: '/docs/plugins', from: '/docs/plugins/sdks' },
   // Removed the API samples page (there were no real web-API examples).
-  { to: "/docs/api", from: "/docs/api/samples" },
+  { to: '/docs/api', from: '/docs/api/samples' },
   // Renamed the web API how-to from apis to requests.
-  { to: "/docs/api/requests", from: "/docs/api/apis" },
-  { to: "/docs/getting-started/install", from: "/install" },
-  { to: "/docs/getting-started/install", from: "/installation" },
-  { to: "/docs/getting-started/install", from: "/docs/install" },
-  { to: "/docs/getting-started/install", from: "/docs/installation" },
-  { to: "/quickstart", from: "/docs/quickstart" },
-  { to: "/docs/getting-started/install", from: "/quickstart/installation" },
+  { to: '/docs/api/requests', from: '/docs/api/apis' },
+  { to: '/docs/getting-started/install', from: '/install' },
+  { to: '/docs/getting-started/install', from: '/installation' },
+  { to: '/docs/getting-started/install', from: '/docs/install' },
+  { to: '/docs/getting-started/install', from: '/docs/installation' },
+  { to: '/quickstart', from: '/docs/quickstart' },
+  { to: '/docs/getting-started/install', from: '/quickstart/installation' },
   {
-    to: "/docs/getting-started/install/installer",
-    from: "/quickstart/installer",
+    to: '/docs/getting-started/install/installer',
+    from: '/quickstart/installer',
   },
-  { to: "/docs/getting-started/install/manual", from: "/quickstart/manual" },
+  { to: '/docs/getting-started/install/manual', from: '/quickstart/manual' },
   {
-    to: "/docs/getting-started/configure-first-stream",
-    from: "/quickstart/nextsteps",
+    to: '/docs/getting-started/configure-first-stream',
+    from: '/quickstart/nextsteps',
   },
   {
-    to: "/docs/getting-started/install/providers",
-    from: "/quickstart/providers",
+    to: '/docs/getting-started/install/providers',
+    from: '/quickstart/providers',
   },
-  { to: "/docs/watching-streams", from: "/docs/watching-on-tvs" },
+  { to: '/docs/watching-streams', from: '/docs/watching-on-tvs' },
   {
-    to: "/docs/getting-started/install/container",
-    from: "/quickstart/container",
+    to: '/docs/getting-started/install/container',
+    from: '/quickstart/container',
   },
-  { to: "/docs/getting-started/install/container", from: "/quickstart/docker" },
+  { to: '/docs/getting-started/install/container', from: '/quickstart/docker' },
   {
-    to: "/docs/getting-started/configure-first-stream",
-    from: "/quickstart/configure",
+    to: '/docs/getting-started/configure-first-stream',
+    from: '/quickstart/configure',
   },
-  { to: "/docs/storage", from: "/docs/s3/" },
-  { to: "/docs/viewers", from: "/docs/geoip/" },
-  { to: "/docs/video", from: "/docs/encoding/" },
-  { to: "/docs/chat/moderation", from: "/docs/moderation/" },
-  { to: "/docs/chat/chat-authentication", from: "/docs/chat-authentication" },
-  { to: "/contribute", from: "/help" },
+  { to: '/docs/storage', from: '/docs/s3/' },
+  { to: '/docs/viewers', from: '/docs/geoip/' },
+  { to: '/docs/video', from: '/docs/encoding/' },
+  { to: '/docs/chat/moderation', from: '/docs/moderation/' },
+  { to: '/docs/chat/chat-authentication', from: '/docs/chat-authentication' },
+  { to: '/contribute', from: '/help' },
   // Configuration docs moved under /docs/configuration/.
-  { to: "/docs/configuration/appearance", from: "/docs/appearance/" },
+  { to: '/docs/configuration/appearance', from: '/docs/appearance/' },
   {
-    to: "/docs/configuration/custom-javascript",
-    from: "/docs/custom-javascript/",
+    to: '/docs/configuration/custom-javascript',
+    from: '/docs/custom-javascript/',
   },
-  { to: "/docs/configuration/notifications", from: "/docs/notifications/" },
-  { to: "/docs/configuration/systemservice", from: "/docs/systemservice/" },
-  { to: "/docs/configuration/website", from: "/docs/website/" },
+  { to: '/docs/configuration/notifications', from: '/docs/notifications/' },
+  { to: '/docs/configuration/systemservice', from: '/docs/systemservice/' },
+  { to: '/docs/configuration/website', from: '/docs/website/' },
   // Third-party section became the API docs. The /thirdparty/* wildcard above
   // doesn't cover the bare /thirdparty/ index, so map it explicitly.
-  { to: "/docs/api", from: "/thirdparty/" },
+  { to: '/docs/api', from: '/thirdparty/' },
   // Stream-key and "start streaming" content merged into the first-stream guide.
   {
-    to: "/docs/getting-started/configure-first-stream",
-    from: "/docs/stream-keys/",
+    to: '/docs/getting-started/configure-first-stream',
+    from: '/docs/stream-keys/',
   },
   {
-    to: "/docs/getting-started/configure-first-stream",
-    from: "/quickstart/startstreaming/",
+    to: '/docs/getting-started/configure-first-stream',
+    from: '/quickstart/startstreaming/',
   },
 ];
 
 const config: Config = {
-  title: "Owncast - Free and Open Source Livestreaming",
-  tagline: "Free and Open Source Livestreaming",
-  favicon: "/favicon.png",
+  title: 'Owncast - Free and Open Source Livestreaming',
+  tagline: 'Free and Open Source Livestreaming',
+  favicon: '/favicon.png',
 
   // Static scripts (loaded outside of webpack/React)
   scripts: [
     {
-      src: "/js/expand-get-started.js",
+      src: '/js/expand-get-started.js',
       async: true,
     },
   ],
@@ -109,9 +109,9 @@ const config: Config = {
   markdown: {
     // Use 'detect' so .md files use CommonMark (no JSX) and .mdx files use MDX
     // This allows auto-generated release notes from GitHub to work without escaping
-    format: "detect",
+    format: 'detect',
     hooks: {
-      onBrokenMarkdownImages: "warn",
+      onBrokenMarkdownImages: 'warn',
     },
     mermaid: true,
   },
@@ -131,212 +131,206 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: "https://owncast.online",
+  url: 'https://owncast.online',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/",
+  baseUrl: '/',
 
   // GitHub pages deployment config.
-  organizationName: "owncast", // Usually your GitHub org/user name.
-  projectName: "owncast.github.io", // Usually your repo name.
+  organizationName: 'owncast', // Usually your GitHub org/user name.
+  projectName: 'owncast.github.io', // Usually your repo name.
 
-  onBrokenLinks: "warn",
+  onBrokenLinks: 'warn',
 
-  clientModules: [require.resolve("./src/clientModules/sidebarScrollFade.ts")],
+  clientModules: [require.resolve('./src/clientModules/sidebarScrollFade.ts')],
 
   i18n: {
-    defaultLocale: "en",
-    locales: ["en", "es", "fr", "de"],
+    defaultLocale: 'en',
+    locales: ['en', 'es', 'fr', 'de'],
     localeConfigs: {
       en: {
-        label: "English",
-        htmlLang: "en-US",
+        label: 'English',
+        htmlLang: 'en-US',
       },
       es: {
-        label: "Español",
-        htmlLang: "es",
+        label: 'Español',
+        htmlLang: 'es',
       },
       fr: {
-        label: "Français",
-        htmlLang: "fr",
+        label: 'Français',
+        htmlLang: 'fr',
       },
       de: {
-        label: "Deutsch",
-        htmlLang: "de",
+        label: 'Deutsch',
+        htmlLang: 'de',
       },
     },
   },
 
   presets: [
     [
-      "classic",
+      'classic',
       {
         docs: {
-          sidebarPath: "./sidebars.ts",
-          routeBasePath: "docs",
-          path: "docs",
+          sidebarPath: './sidebars.ts',
+          routeBasePath: 'docs',
+          path: 'docs',
           // Enable edit URLs to allow contributors to edit documentation on GitHub
-          editUrl:
-            "https://github.com/owncast/owncast.github.io/edit/owncast-docusaurus/",
+          editUrl: 'https://github.com/owncast/owncast.github.io/edit/owncast-docusaurus/',
           // docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: false, // Disabled - using multi-instance blog plugins instead
         theme: {
-          customCss: "./src/css/custom.css",
+          customCss: './src/css/custom.css',
         },
       } satisfies Preset.Options,
     ],
   ],
 
-  themes: ["@docusaurus/theme-mermaid"],
+  themes: ['@docusaurus/theme-mermaid'],
 
   plugins: [
-    ["plugin-image-zoom", {}],
+    ['plugin-image-zoom', {}],
     [
-      "docusaurus-plugin-llms",
+      'docusaurus-plugin-llms',
       {
         includeBlog: true,
         excludeImports: true,
         removeDuplicateHeadings: true,
         generateLLMsFullTxt: true,
-        ignoreFiles: ["troubleshoot/*"],
+        ignoreFiles: ['troubleshoot/*'],
         customLLMFiles: [
           {
-            filename: "llms-sdk-javascript.txt",
-            includePatterns: ["docs/plugins/sdks/javascript.{md,mdx}"],
+            filename: 'llms-sdk-javascript.txt',
+            includePatterns: ['docs/plugins/sdks/javascript.{md,mdx}'],
             fullContent: true,
-            title: "Javascript Plugin SDK Documentation",
-            description: "Complete reference for the Javascript Plugin SDK",
+            title: 'Javascript Plugin SDK Documentation',
+            description: 'Complete reference for the Javascript Plugin SDK',
           },
           {
-            filename: "llms-sdk-python.txt",
-            includePatterns: ["docs/plugins/sdks/python.{md,mdx}"],
+            filename: 'llms-sdk-python.txt',
+            includePatterns: ['docs/plugins/sdks/python.{md,mdx}'],
             fullContent: true,
-            title: "Python Plugin SDK Documentation",
-            description: "Complete reference for the Python Plugin SDK",
+            title: 'Python Plugin SDK Documentation',
+            description: 'Complete reference for the Python Plugin SDK',
           },
           {
-            filename: "llms-plugins.txt",
-            includePatterns: ["docs/plugins/**/*.{md,mdx}"],
+            filename: 'llms-plugins.txt',
+            includePatterns: ['docs/plugins/**/*.{md,mdx}'],
             fullContent: true,
-            title: "Owncast Plugin Development Documentation",
-            description: "Complete reference for Owncast plugin development",
+            title: 'Owncast Plugin Development Documentation',
+            description: 'Complete reference for Owncast plugin development',
           },
           {
-            filename: "llms-activitypub.txt",
-            includePatterns: [
-              "docs/api/activitypub.{md,mdx}",
-              "docs/social/**/*.{md,mdx}",
-            ],
+            filename: 'llms-activitypub.txt',
+            includePatterns: ['docs/api/activitypub.{md,mdx}', 'docs/social/**/*.{md,mdx}'],
             fullContent: true,
-            title: "Owncast ActivityPub & Fediverse Documentation",
+            title: 'Owncast ActivityPub & Fediverse Documentation',
             description:
               "Complete reference for Owncast's ActivityPub federation and fediverse integration",
           },
           {
-            filename: "llms-configuration.txt",
-            includePatterns: ["docs/configuration/**/*.{md,mdx}"],
+            filename: 'llms-configuration.txt',
+            includePatterns: ['docs/configuration/**/*.{md,mdx}'],
             fullContent: true,
-            title: "Owncast Configuration Documentation",
+            title: 'Owncast Configuration Documentation',
             description:
-              "Complete reference for configuring an Owncast server, including appearance, notifications, runtime flags, and the web interface",
+              'Complete reference for configuring an Owncast server, including appearance, notifications, runtime flags, and the web interface',
           },
           {
-            filename: "llms-api.txt",
-            includePatterns: ["docs/api/**/*.{md,mdx}"],
+            filename: 'llms-api.txt',
+            includePatterns: ['docs/api/**/*.{md,mdx}'],
             fullContent: true,
-            title: "Owncast API & Integrations Documentation",
+            title: 'Owncast API & Integrations Documentation',
             description:
-              "Complete reference for the Owncast web APIs, actions, webhooks, and ActivityPub integration",
+              'Complete reference for the Owncast web APIs, actions, webhooks, and ActivityPub integration',
           },
           {
-            filename: "llms-broadcasting.txt",
-            includePatterns: ["docs/broadcasting/**/*.{md,mdx}"],
+            filename: 'llms-broadcasting.txt',
+            includePatterns: ['docs/broadcasting/**/*.{md,mdx}'],
             fullContent: true,
-            title: "Owncast Broadcasting Documentation",
+            title: 'Owncast Broadcasting Documentation',
             description:
-              "Complete reference for broadcasting to Owncast, including OBS, ffmpeg, hardware, and restreaming setup",
+              'Complete reference for broadcasting to Owncast, including OBS, ffmpeg, hardware, and restreaming setup',
           },
           {
-            filename: "llms-chat.txt",
-            includePatterns: ["docs/chat/**/*.{md,mdx}"],
+            filename: 'llms-chat.txt',
+            includePatterns: ['docs/chat/**/*.{md,mdx}'],
             fullContent: true,
-            title: "Owncast Chat Documentation",
+            title: 'Owncast Chat Documentation',
             description:
-              "Complete reference for Owncast chat, including authentication, moderation, and emoji",
+              'Complete reference for Owncast chat, including authentication, moderation, and emoji',
           },
           {
-            filename: "llms-getting-started.txt",
-            includePatterns: ["docs/getting-started/**/*.{md,mdx}"],
+            filename: 'llms-getting-started.txt',
+            includePatterns: ['docs/getting-started/**/*.{md,mdx}'],
             fullContent: true,
-            title: "Owncast Getting Started & Installation Documentation",
+            title: 'Owncast Getting Started & Installation Documentation',
             description:
-              "Complete reference for installing Owncast and configuring your first stream",
+              'Complete reference for installing Owncast and configuring your first stream',
           },
         ],
       },
     ],
     // Releases blog - for version releases
     [
-      "@docusaurus/plugin-content-blog",
+      '@docusaurus/plugin-content-blog',
       {
-        id: "releases",
-        routeBasePath: "releases",
-        path: "./releases",
-        blogTitle: "Owncast Releases",
-        blogDescription: "Version releases and changelogs for Owncast",
+        id: 'releases',
+        routeBasePath: 'releases',
+        path: './releases',
+        blogTitle: 'Owncast Releases',
+        blogDescription: 'Version releases and changelogs for Owncast',
         showReadingTime: true,
         postsPerPage: 10,
         feedOptions: {
-          type: ["rss", "atom"],
-          title: "Owncast Releases",
-          description: "Version releases and changelogs for Owncast",
+          type: ['rss', 'atom'],
+          title: 'Owncast Releases',
+          description: 'Version releases and changelogs for Owncast',
           copyright: `Copyright © ${new Date().getFullYear()} Owncast`,
-          language: "en-US",
+          language: 'en-US',
           limit: 20,
           xslt: true,
         },
-        onInlineTags: "warn",
-        onInlineAuthors: "warn",
-        onUntruncatedBlogPosts: "ignore",
+        onInlineTags: 'warn',
+        onInlineAuthors: 'warn',
+        onUntruncatedBlogPosts: 'ignore',
       },
     ],
     // News blog - for announcements, updates, and general news
     [
-      "@docusaurus/plugin-content-blog",
+      '@docusaurus/plugin-content-blog',
       {
-        id: "news",
-        routeBasePath: "news",
-        path: "./news",
-        blogTitle: "Owncast News",
-        blogDescription:
-          "Announcements, updates, and news from the Owncast project",
+        id: 'news',
+        routeBasePath: 'news',
+        path: './news',
+        blogTitle: 'Owncast News',
+        blogDescription: 'Announcements, updates, and news from the Owncast project',
         showReadingTime: true,
         postsPerPage: 10,
         feedOptions: {
-          type: ["rss", "atom"],
-          title: "Owncast News",
-          description:
-            "Announcements, updates, and news from the Owncast project",
+          type: ['rss', 'atom'],
+          title: 'Owncast News',
+          description: 'Announcements, updates, and news from the Owncast project',
           copyright: `Copyright © ${new Date().getFullYear()} Owncast`,
-          language: "en-US",
+          language: 'en-US',
           limit: 20,
           xslt: true,
         },
-        onInlineTags: "warn",
-        onInlineAuthors: "warn",
-        onUntruncatedBlogPosts: "ignore",
+        onInlineTags: 'warn',
+        onInlineAuthors: 'warn',
+        onUntruncatedBlogPosts: 'ignore',
       },
     ],
     // Custom plugin to support @/ path alias for imports
     function webpackAliasPlugin() {
       return {
-        name: "webpack-alias-plugin",
+        name: 'webpack-alias-plugin',
         configureWebpack() {
           return {
             resolve: {
               alias: {
-                "@": path.resolve(__dirname, "src"),
+                '@': path.resolve(__dirname, 'src'),
               },
             },
           };
@@ -344,7 +338,7 @@ const config: Config = {
       };
     },
     [
-      "@docusaurus/plugin-client-redirects",
+      '@docusaurus/plugin-client-redirects',
       {
         createRedirects(existingPath: string) {
           const redirects: string[] = [];
@@ -354,9 +348,9 @@ const config: Config = {
             const { to, from, excludePaths = [] } = config;
 
             // Only process entries that have wildcards in both to and from
-            if (to.includes("*") && from.includes("*")) {
-              const toPrefix = to.replace("*", "");
-              const fromPrefix = from.replace("*", "");
+            if (to.includes('*') && from.includes('*')) {
+              const toPrefix = to.replace('*', '');
+              const fromPrefix = from.replace('*', '');
 
               // If existing path matches the "to" pattern, create redirect from "from" pattern
               if (existingPath.startsWith(toPrefix)) {
@@ -369,7 +363,7 @@ const config: Config = {
                 }
 
                 // Skip if the redirect source would be the base path without suffix
-                if (oldPath === fromPrefix.replace("*", "")) {
+                if (oldPath === fromPrefix.replace('*', '')) {
                   continue;
                 }
 
@@ -380,25 +374,25 @@ const config: Config = {
 
           return redirects.length > 0 ? redirects : undefined;
         },
-        redirects: ALL_REDIRECTS.filter((r) => !r.to.includes("*")), // Only non-wildcard redirects
+        redirects: ALL_REDIRECTS.filter(r => !r.to.includes('*')), // Only non-wildcard redirects
       },
     ],
     [
-      "@easyops-cn/docusaurus-search-local",
+      '@easyops-cn/docusaurus-search-local',
       {
         hashed: true,
-        language: ["en"],
+        language: ['en'],
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
-        blogDir: ["releases", "news"],
+        blogDir: ['releases', 'news'],
       },
     ],
     [
-      require.resolve("./plugins/related-docs"),
+      require.resolve('./plugins/related-docs'),
       {
-        pluginId: "related-docs",
-        docsPath: "docs",
-        routeBasePath: "docs",
+        pluginId: 'related-docs',
+        docsPath: 'docs',
+        routeBasePath: 'docs',
         maxRelated: 6,
 
         // Scoring knobs (good defaults below)
@@ -410,24 +404,24 @@ const config: Config = {
       },
     ],
     [
-      require.resolve("./plugins/github-info"),
+      require.resolve('./plugins/github-info'),
       {
-        owner: "owncast",
-        repo: "owncast",
+        owner: 'owncast',
+        repo: 'owncast',
       },
     ],
     [
-      require.resolve("./plugins/milestones-plugin"),
+      require.resolve('./plugins/milestones-plugin'),
       {
-        owner: "owncast",
-        repo: "owncast",
+        owner: 'owncast',
+        repo: 'owncast',
       },
     ],
   ],
 
   themeConfig: {
     announcementBar: {
-      id: "plugins",
+      id: 'plugins',
       content:
         'Owncast now supports custom plugins. <a href="/docs/configuration/plugins">Learn more</a>',
       isCloseable: true,
@@ -438,137 +432,137 @@ const config: Config = {
       sidebar: { autoCollapseCategories: true },
     },
     // Replace with your project's social card
-    image: "img/owncast-logo-1000x1000.png",
+    image: 'img/owncast-logo-1000x1000.png',
     metadata: [
       {
-        name: "description",
+        name: 'description',
         content:
-          "Owncast is a free and open source live video and web chat server for use with existing broadcasting software. Point your live stream at a Owncast server you personally control and regain ownership over your content.",
+          'Owncast is a free and open source live video and web chat server for use with existing broadcasting software. Point your live stream at a Owncast server you personally control and regain ownership over your content.',
       },
       {
-        name: "keywords",
+        name: 'keywords',
         content:
-          "live streaming, live video, open source, self-hosted, streaming server, rtmp, hls, chat",
+          'live streaming, live video, open source, self-hosted, streaming server, rtmp, hls, chat',
       },
-      { name: "twitter:site", content: "@owncastlive" },
-      { name: "twitter:creator", content: "@owncastlive" },
-      { property: "og:locale", content: "en_US" },
-      { property: "og:type", content: "website" },
+      { name: 'twitter:site', content: '@owncastlive' },
+      { name: 'twitter:creator', content: '@owncastlive' },
+      { property: 'og:locale', content: 'en_US' },
+      { property: 'og:type', content: 'website' },
     ],
     colorMode: {
-      defaultMode: "dark",
+      defaultMode: 'dark',
       disableSwitch: true, // removes the light/dark toggle
       respectPrefersColorScheme: false,
     },
     navbar: {
-      title: "Owncast",
+      title: 'Owncast',
       logo: {
-        alt: "Owncast Logo",
-        src: "images/logo-white.svg",
+        alt: 'Owncast Logo',
+        src: 'images/logo-white.svg',
         // srcDark: "images/logo-white.svg",
       },
       items: [
         {
-          to: "/docs/",
-          position: "left",
-          label: "Documentation",
+          to: '/docs/',
+          position: 'left',
+          label: 'Documentation',
         },
         {
-          to: "/releases",
-          label: "Releases",
-          position: "left",
+          to: '/releases',
+          label: 'Releases',
+          position: 'left',
         },
         {
-          to: "/troubleshoot",
-          label: "Troubleshooting",
-          position: "left",
+          to: '/troubleshoot',
+          label: 'Troubleshooting',
+          position: 'left',
         },
         {
-          to: "/quickstart",
-          label: "Quickstart",
-          position: "left",
+          to: '/quickstart',
+          label: 'Quickstart',
+          position: 'left',
         },
         {
-          href: "https://github.com/owncast",
-          position: "right",
-          className: "header-github-link",
-          "aria-label": "GitHub repository",
+          href: 'https://github.com/owncast',
+          position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
         },
         {
-          to: "/chat",
-          position: "right",
-          className: "header-chat-link",
-          "aria-label": "Support chat",
+          to: '/chat',
+          position: 'right',
+          className: 'header-chat-link',
+          'aria-label': 'Support chat',
         },
         {
-          type: "localeDropdown",
-          position: "right",
+          type: 'localeDropdown',
+          position: 'right',
         },
       ],
     },
     footer: {
-      style: "dark",
+      style: 'dark',
       links: [
         {
-          title: "Getting Started",
+          title: 'Getting Started',
           items: [
             {
-              label: "Documentation",
-              to: "/docs/",
+              label: 'Documentation',
+              to: '/docs/',
             },
             {
-              label: "Quick Start",
-              to: "/quickstart",
+              label: 'Quick Start',
+              to: '/quickstart',
             },
             {
-              to: "/releases",
-              label: "Releases",
+              to: '/releases',
+              label: 'Releases',
             },
           ],
         },
         {
-          title: "Community",
+          title: 'Community',
           items: [
             {
-              label: "GitHub",
-              href: "https://github.com/owncast",
+              label: 'GitHub',
+              href: 'https://github.com/owncast',
             },
             {
-              label: "Community Chat",
-              href: "https://app.element.io/#/room/#owncast.support:matrix.org",
+              label: 'Community Chat',
+              href: 'https://app.element.io/#/room/#owncast.support:matrix.org',
             },
             {
-              label: "Contribute",
-              href: "/contribute",
+              label: 'Contribute',
+              href: '/contribute',
             },
             {
-              label: "Donate",
-              href: "https://opencollective.com/owncast/donate",
+              label: 'Donate',
+              href: 'https://opencollective.com/owncast/donate',
             },
             {
-              label: "Contact",
-              href: "/contact",
+              label: 'Contact',
+              href: '/contact',
             },
           ],
         },
         {
-          title: "More",
+          title: 'More',
           items: [
             {
-              label: "Demo Server",
-              href: "https://watch.owncast.online",
+              label: 'Demo Server',
+              href: 'https://watch.owncast.online',
             },
             {
-              label: "Merch store",
-              href: "https://merch.owncast.online",
+              label: 'Merch store',
+              href: 'https://merch.owncast.online',
             },
             {
-              label: "Roadmap",
-              to: "/roadmap",
+              label: 'Roadmap',
+              to: '/roadmap',
             },
             {
-              label: "Additional Resources",
-              to: "/resources",
+              label: 'Additional Resources',
+              to: '/resources',
             },
           ],
         },
@@ -580,14 +574,14 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
       additionalLanguages: [
-        "bash",
-        "diff",
-        "json",
-        "yaml",
-        "toml",
-        "javascript",
-        "nginx",
-        "apacheconf",
+        'bash',
+        'diff',
+        'json',
+        'yaml',
+        'toml',
+        'javascript',
+        'nginx',
+        'apacheconf',
       ],
     },
   } satisfies Preset.ThemeConfig,
