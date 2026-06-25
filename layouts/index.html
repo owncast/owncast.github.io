@@ -1,18 +1,43 @@
 {{ define "main" }}
-<section class="section hero-container">
-  <div class="container row justify-content-center align-items-center">
-    <figure class="hero-image-container col-lg-9 col-md-16">
-      <img src="/images/owncast-splash-loading.png" alt="" class="splash-image splash-image-loader" id="splash-image-loader" />
-      <img src="/images/owncast-splash.png" alt="Owncast on desktop and mobile" class="splash-image" loading="lazy" onLoad="handleHeroImageLoad()" id="splash-image-main" />
-    </figure>
+<section class="section hero-container pb-0">
+  <div class="container">
+    <!-- Badge -->
+    <div class="text-center mb-4">
+      <span class="modern-badge">Start your own live streaming server</span>
+    </div>
+    
+    <!-- Main headline -->
+    <div class="text-center mb-5">
+      <h1 class="hero-title display-3 font-weight-bold mb-4">
+        Take control of your<br>
+        <span class="text-primary">live streaming</span> with Owncast
+      </h1>
+      <p class="hero-subtitle text-muted mb-4">
+        A free and open source live video and web chat server for use with<br>
+        existing popular broadcasting software. Self-hosted and independent.
+      </p>
+      
+      <!-- CTA Buttons -->
+      <div class="hero-actions">
+        <a class="btn btn-primary px-4 py-2 mr-3" href="{{ "quickstart/" | absURL }}" role="button">
+          Get Started →
+        </a>
+        <a class="btn btn-outline-light px-4 py-2" href="{{ "docs/" | absURL }}" role="button">
+          Learn More →
+        </a>
+      </div>
+    </div>
 
-    <div class="intro col-lg-7 col-md-16">
-      <p class="lead">Owncast is a free and open source live video and web chat server for use with existing popular broadcasting software.</p>
-      <a class="btn btn-primary btn-lg px-4 mb-2" href="{{ "quickstart/" | absURL }}" role="button">Get started</a>
+    <!-- Hero Image -->
+    <div class="text-center hero-image-section">
+      <figure class="hero-image-container">
+        <img src="/images/owncast-splash-loading.png" alt="" class="splash-image splash-image-loader" id="splash-image-loader" />
+        <img src="/images/owncast-splash.png" alt="Owncast streaming dashboard" class="splash-image hero-main-image shadow-lg rounded" loading="lazy" onLoad="handleHeroImageLoad()" id="splash-image-main" />
+      </figure>
     </div>
   </div>
   <script>
-    //
+    // Modern image loading with better UX
     const timeout = setTimeout(function() {
       handleHeroImageLoad();
     }, 2000);
@@ -22,13 +47,31 @@
 
       const loader = document.getElementById('splash-image-loader');
       const main = document.getElementById('splash-image-main');
-      if (loader) {
-        loader.style.opacity = 0;
-      }
+      
       if (main) {
+        main.classList.add('loaded');
         main.style.opacity = 1;
       }
+      
+      if (loader) {
+        setTimeout(() => {
+          loader.style.opacity = 0;
+          setTimeout(() => {
+            if (loader.parentNode) {
+              loader.style.display = 'none';
+            }
+          }, 300);
+        }, 200);
+      }
     }
+
+    // Also trigger on image load
+    document.addEventListener('DOMContentLoaded', function() {
+      const mainImage = document.getElementById('splash-image-main');
+      if (mainImage && mainImage.complete) {
+        handleHeroImageLoad();
+      }
+    });
   </script>
 </section>
 
