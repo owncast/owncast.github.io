@@ -822,5 +822,142 @@
   },
   "chat.community.welcome": {
     "message": "You're now in the Owncast support chat. Say hello!"
+  },
+  "resourcesCalculator.cpu.minimal": {
+    "message": "Minimal"
+  },
+  "resourcesCalculator.cpu.light": {
+    "message": "Light"
+  },
+  "resourcesCalculator.cpu.moderate": {
+    "message": "Moderate"
+  },
+  "resourcesCalculator.cpu.heavy": {
+    "message": "Heavy"
+  },
+  "resourcesCalculator.rec.highCpu": {
+    "message": "High CPU usage detected. Consider reducing quality variants or lowering frame rates."
+  },
+  "resourcesCalculator.rec.manyViewers": {
+    "message": "Many viewers"
+  },
+  "resourcesCalculator.rec.someViewers": {
+    "message": "Some viewers"
+  },
+  "resourcesCalculator.rec.fewViewers": {
+    "message": "A few viewers"
+  },
+  "resourcesCalculator.rec.smallNumberViewers": {
+    "message": "A small number of viewers"
+  },
+  "resourcesCalculator.rec.buffering": {
+    "message": "{experienceText} may experience buffering. Add a lower bitrate quality option for mobile and slower network viewers."
+  },
+  "resourcesCalculator.rec.s3": {
+    "message": "Consider using object storage to scale bandwidth with more viewers and reduce server load."
+  },
+  "resourcesCalculator.rec.highBitrateNoLow": {
+    "message": "High bitrate without low quality options will exclude viewers on mobile and slower networks. Add a quality variant below 2000 kbps."
+  },
+  "resourcesCalculator.rec.singleHighQuality": {
+    "message": "Single quality streams above 4000 kbps may cause buffering for viewers on mobile and slower networks. Add lower quality variants."
+  },
+  "resourcesCalculator.rec.passthroughOnly": {
+    "message": "Passthrough mode saves CPU but may cause buffering for viewers on slower connections."
+  },
+  "resourcesCalculator.rec.highFrameRate": {
+    "message": "High frame rates (60+ fps) significantly increase CPU usage. Consider lowering for non-gaming content."
+  },
+  "resourcesCalculator.rec.veryHighFrameRate": {
+    "message": "90 fps requires substantial CPU resources. Only recommended for high-motion content with powerful hardware."
+  },
+  "resourcesCalculator.rec.lowerFrameRate": {
+    "message": "Consider adding a lower frame rate option (24 or 15 fps) to reduce CPU usage and improve experience for mobile and slower network viewers."
+  },
+  "resourcesCalculator.rec.mixedFrameRates": {
+    "message": "Lower quality variants could use reduced frame rates (24-30 fps) to save CPU while maintaining good experience."
+  },
+  "resourcesCalculator.experience.excellent": {
+    "message": "Excellent"
+  },
+  "resourcesCalculator.experience.veryGood": {
+    "message": "Very Good"
+  },
+  "resourcesCalculator.experience.good": {
+    "message": "Good"
+  },
+  "resourcesCalculator.experience.fair": {
+    "message": "Fair"
+  },
+  "resourcesCalculator.experience.poor": {
+    "message": "Poor"
+  },
+  "resourcesCalculator.experience.veryPoor": {
+    "message": "Very Poor"
+  },
+  "resourcesCalculator.label.inputBitrate": {
+    "message": "Input Bitrate:"
+  },
+  "resourcesCalculator.label.viewers": {
+    "message": "Viewers:"
+  },
+  "resourcesCalculator.label.duration": {
+    "message": "Duration:"
+  },
+  "resourcesCalculator.label.usingS3": {
+    "message": "Using Object Storage"
+  },
+  "resourcesCalculator.label.outputQualities": {
+    "message": "Output Qualities:"
+  },
+  "resourcesCalculator.metric.bandwidth": {
+    "message": "Bandwidth"
+  },
+  "resourcesCalculator.metric.peakOutboundSpeed": {
+    "message": "Peak Outbound Speed"
+  },
+  "resourcesCalculator.metric.cpu": {
+    "message": "CPU"
+  },
+  "resourcesCalculator.metric.experience": {
+    "message": "Experience"
+  },
+  "resourcesCalculator.recommendations.title": {
+    "message": "Recommendations"
+  },
+  "resourcesCalculator.recommendations.none": {
+    "message": "No recommendations"
+  },
+  "resourcesCalculator.editor.title": {
+    "message": "Configure Quality Output"
+  },
+  "resourcesCalculator.editor.passthrough": {
+    "message": "Video Passthrough"
+  },
+  "resourcesCalculator.editor.outputBitrate": {
+    "message": "Output Bitrate:"
+  },
+  "resourcesCalculator.editor.frameRate": {
+    "message": "Frame Rate:"
+  },
+  "resourcesCalculator.editor.passthroughInfo": {
+    "message": "Bitrate will match input: {bitrate}"
+  },
+  "resourcesCalculator.editor.passthroughFrameRate": {
+    "message": "Frame rate will match input stream"
+  },
+  "resourcesCalculator.editor.save": {
+    "message": "Save"
+  },
+  "resourcesCalculator.editor.cancel": {
+    "message": "Cancel"
+  },
+  "homepage.announcementBar.plugins": {
+    "message": "Owncast now supports custom plugins. {link}",
+    "description": "Announcement bar message linking to the plugins docs"
+  },
+  "homepage.announcementBar.plugins.link": {
+    "message": "Learn more",
+    "description": "Link text in the plugins announcement bar"
   }
 }
