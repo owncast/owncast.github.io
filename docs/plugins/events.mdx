@@ -75,7 +75,7 @@ Fires once per chat message after filters have run and the message is being broa
 ```ts
 interface ChatMessage {
   id: string;
-  user?: ChatUser; // full sender identity (see ChatUser below); absent for the rare message with no account
+  user?: User; // full sender identity (see User below); absent for the rare message with no account
   clientId?: number; // originating connection; pass to the chat send-to / reply-to APIs for private replies
   body: string; // raw text, not HTML-rendered markup
   timestamp: string; // RFC3339Nano / ISO-8601, e.g. "2026-05-28T14:00:00.123456789Z"
@@ -121,9 +121,13 @@ No permission required to subscribe.
 Fires when a chat user connects or disconnects.
 
 ```ts
-interface ChatUser {
+interface User {
   id: string;
   displayName: string;
+  displayColor: number; // index into the instance's user-color palette, not a literal color
+  previousNames?: string[];
+  createdAt?: string; // ISO-8601
+  disabledAt?: string; // ISO-8601 if banned, omitted otherwise
   isBot?: boolean;
   isAuthenticated?: boolean;
   scopes?: string[];
@@ -163,7 +167,7 @@ No permission required.
 Fires when a chat user changes their display name.
 
 ```ts
-interface { user: ChatUser; previousName: string }
+interface { user: User; previousName: string }
 ```
 
 No permission required.
@@ -173,7 +177,7 @@ No permission required.
 Fires when a moderator hides or unhides a chat message.
 
 ```ts
-interface { messageId: string; visible: boolean; moderator?: ChatUser }
+interface { messageId: string; visible: boolean; moderator?: User }
 ```
 
 No permission required.
@@ -513,7 +517,7 @@ Both handlers receive a `ContentRequest`:
 ```ts
 interface ContentRequest {
   slug: string;   // stable identifier declared in the manifest
-  user?: ChatUser; // viewer's chat identity: present when authenticated, absent for anonymous viewers
+  user?: User; // viewer's chat identity: present when authenticated, absent for anonymous viewers
 }
 ```
 
@@ -570,7 +574,7 @@ When a browser opens or closes one of your plugin's `/plugins/<name>/_sse/<chann
 interface SSEConnectionEvent {
   channel: string; // which _sse/<channel> stream the browser opened
   connectionId: number; // unique per connection for the life of the host process
-  user?: ChatUser; // present only when the connection carried a chat identity
+  user?: User; // present only when the connection carried a chat identity
 }
 ```
 
@@ -680,8 +684,8 @@ Each row is a runtime event. The handler name follows your SDK's convention: cam
 | Event                      | Payload                            | Permission to subscribe                |
 | -------------------------- | ---------------------------------- | -------------------------------------- |
 | `chat.message.received`    | `ChatMessage`                      | none                                   |
-| `chat.user.joined`         | `ChatUser`                         | none                                   |
-| `chat.user.parted`         | `ChatUser`                         | none                                   |
+| `chat.user.joined`         | `User`                             | none                                   |
+| `chat.user.parted`         | `User`                             | none                                   |
 | `chat.user.renamed`        | `{ user, previousName }`           | none                                   |
 | `chat.message.moderated`   | `{ messageId, visible, moderator}` | none                                   |
 | `stream.started`           | `{ startedAt, title, summary }`    | none                                   |
