@@ -312,3 +312,17 @@ html[data-theme='dark'] .docMainWrapper {
 .theme-unlisted-banner {
   display: none;
 }
+
+/* With the menu sidebar gone, cap and center the dev doc content+TOC block so
+   it isn't flush-left across the full viewport width. */
+@media (min-width: 997px) {
+  html.plugin-id-dev main .container {
+    max-width: 1140px;
+    margin-inline: auto;
+  }
+}
+
+/* Dev docs don't use prev/next pagination. */
+html.plugin-id-dev .pagination-nav {
+  display: none;
+}

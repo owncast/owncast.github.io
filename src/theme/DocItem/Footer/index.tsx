@@ -24,14 +24,22 @@ export default function FooterWrapper(
     filePath.includes(`/i18n/${currentLocale}/`);
   const locale = isTranslatedDoc ? currentLocale : undefined;
 
+  // Dev docs come from Docmost, not GitHub, so the GitHub contributors list and
+  // the related-docs (configured for the main docs) don't apply to them.
+  const isDevDoc = filePath.includes("/dev-docs/");
+
   return (
     <>
-      <ContributorsList
-        filePath={filePath}
-        editUrl={metadata.editUrl}
-        locale={locale}
-      />
-      <RelatedDocs title="Related Documents" showScores={false} />
+      {!isDevDoc && (
+        <>
+          <ContributorsList
+            filePath={filePath}
+            editUrl={metadata.editUrl}
+            locale={locale}
+          />
+          <RelatedDocs title="Related Documents" showScores={false} />
+        </>
+      )}
       <OriginalFooter {...props} />
     </>
   );

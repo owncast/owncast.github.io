@@ -181,6 +181,11 @@ const config: Config = {
           // docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: false, // Disabled - using multi-instance blog plugins instead
+        sitemap: {
+          // Keep internal /dev (Docmost) docs out of the public sitemap so
+          // search engines don't route end users to development documentation.
+          ignorePatterns: ["/dev/**"],
+        },
         theme: {
           customCss: "./src/css/custom.css",
         },
@@ -391,6 +396,20 @@ const config: Config = {
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
         blogDir: ["releases", "news"],
+        // /dev (Docmost) docs are internal dev docs, not for end users. They're
+        // already excluded by routeBasePath, but pin it so a future indexPages
+        // or docsRouteBasePath change can never leak them into search.
+        ignoreFiles: [/^dev\//],
+      },
+    ],
+    // Dev docs - sourced from Docmost via scripts/fetch-docmost.js (prototype)
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "dev",
+        routeBasePath: "dev",
+        path: "dev-docs",
+        sidebarPath: "./sidebarsDev.ts",
       },
     ],
     [

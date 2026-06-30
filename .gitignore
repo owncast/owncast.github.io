@@ -39,3 +39,13 @@ api-config.json
 # Environment variables
 .env
 i18n/
+
+# Local Docmost export prototype (scripts/fetch-docmost.js)
+.docmost-preview/
+
+# Generated dev docs synced from Docmost (scripts/fetch-docmost.js).
+# index.mdx is the hand-edited landing and IS tracked; everything else here is
+# generated and ignored.
+dev-docs/*
+!dev-docs/index.mdx
+src/data/dev-manifest.json
