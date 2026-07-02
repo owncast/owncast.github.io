@@ -68,6 +68,20 @@ The more CPU you use the better the output image will be, or the smaller of a fi
 
 You have some control over the live latency between the broadcaster and the viewer. While it's completely understandable to want to have as little latency as possible you may need to increase the latency buffer if you're experiencing issues. In general the lower the latency the less buffer is available for any possible slow transfers, network blips or errors.
 
+### Autoplay
+
+By default viewers press play to start watching. If you would rather the stream start on its own when someone opens your page, change the **Autoplay** setting on the same Video configuration page. It has no performance impact, and it applies to your Owncast page and to [embedded players](/docs/embed#autoplay).
+
+<img src="/docs/img/admin-autoplay.png" alt="The Autoplay setting on the Video configuration page in the admin, showing the behavior dropdown" width="65%" />
+
+- **Never**: the player waits for the viewer to press play. This is the default.
+- **Always**: the stream starts the moment the page opens. It plays with sound where the browser allows it and starts muted everywhere else. While the stream plays muted, the player shows a large unmute button over the video so turning on sound is one click.
+- **Only if sound is available**: the stream starts on its own only when the viewer's browser allows sound to play too. It never starts silently. If the browser blocks sound, the viewer presses play as usual.
+
+Every major browser restricts autoplay with sound, based on its own rules, its settings, and often the viewer's history with your site. In practice **Always** usually starts muted for first-time visitors, and **Only if sound is available** usually does not autoplay for them at all.
+
+The player also never autoplays, regardless of this setting, for viewers who have data saver enabled or whose system asks for reduced motion (the `prefers-reduced-motion` accessibility preference).
+
 
 ### Video Passthrough
 
