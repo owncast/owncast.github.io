@@ -15,6 +15,7 @@ tags:
   - follow
   - like
   - share
+  - quote
   - followers
   - fediauth
   - authentication
@@ -100,6 +101,12 @@ Once you set your server name and your username that's how people will see you. 
 Enabling _Private Mode_ will require those who wish to follow your server to be approved by you first. Approving followers can be done via the _Followers_ section in the admin.
 
 Private Mode will also make it so any posts you send out are only visible to your followers, not others, as they cannot be shared.
+
+### Quote posts
+
+People on Mastodon, GoToSocial and other platforms that support quote posts can quote your posts in their own, adding their commentary while showing your original post to their followers. Owncast approves these quotes automatically using the consent flow the Fediverse uses, so quotes of your posts show up correctly everywhere.
+
+If you would rather not allow this, turn off _Allow quotes_ on the _Configuration -> Social_ page. New posts will no longer offer quoting and any quote requests will be declined. Posts are also not quotable while _Private Mode_ is enabled, since they are only visible to your followers.
 
 ## Composing messages to your followers
 
