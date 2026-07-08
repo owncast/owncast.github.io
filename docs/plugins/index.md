@@ -89,6 +89,8 @@ flowchart LR
 
 Once enabled, the plugin runs inside the Owncast process. Handlers you defined fire when matching events happen. APIs you call (sending chat, reading config, fetching URLs) go through the host, which checks the permissions you declared in your manifest.
 
+Each enabled plugin uses a little more of the server's memory. The first plugin of a language also loads that language's shared runtime, a one-time cost that is larger for Python than for JavaScript. Every plugin after that adds only a small amount on top.
+
 ## What a plugin can do
 
 1. Subscribe to events. Chat messages, stream start and stop, fediverse follows, new chat user joins. Define a handler method and the SDK derives the subscription.
