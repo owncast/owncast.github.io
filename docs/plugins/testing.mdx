@@ -163,6 +163,31 @@ Headers and body are optional:
 }
 ```
 
+### `authCheck`: re-validate a gate session
+
+For [`auth.gate`](/docs/plugins/auth) plugins, drives the [`onAuthCheck`](/docs/plugins/events#auth-check) handler directly with a resolved viewer identity and asserts the verdict:
+
+```json
+{
+  "authCheck": {
+    "user": { "id": "u1", "displayName": "Alice" },
+    "expect": { "action": "deny", "reason": "access revoked" }
+  }
+}
+```
+
+`action` is `"ok"`, `"refresh"`, or `"deny"`; `reason` is optional and matched exactly when set.
+
+### Content steps
+
+`tabContent`, `pageContent`, `pageStyles`, and `pageScripts` call the matching content handler directly and assert on the returned markup, CSS, or JavaScript:
+
+```json
+{ "tabContent": { "slug": "schedule", "expect": { "bodyContains": "Friday" } } }
+```
+
+`tabContent` and `pageContent` take a `slug` and an optional `user`; all four accept `expect.body` (exact) or `expect.bodyContains`.
+
 ## Final-state assertions
 
 The scenario's top-level `expect` checks what happened across the whole run:
@@ -216,7 +241,8 @@ Each `given.*` field controls what a specific host read returns. Combine these t
 
 | Field               | Controls                                                       |
 | ------------------- | -------------------------------------------------------------- |
-| `given.kv`          | Pre-populate your plugin's config (key/value)                  |
+| `given.kv`          | Pre-populate your plugin's key/value store (`owncast.kv`)      |
+| `given.config`      | Admin-set overrides for manifest-declared config keys (`owncast.config.get`); unseeded keys return the manifest defaults |
 | `given.stream`      | What `owncast.stream.current()` returns                        |
 | `given.broadcaster` | What `owncast.stream.broadcaster()` returns                    |
 | `given.server`      | What `owncast.server.info()` returns                           |
@@ -271,7 +297,7 @@ For plugins that call `owncast.http.fetch`, `given.httpResponses` is an array of
 }
 ```
 
-A fixture matches by `url` glob (and `method`, if set) and is consumed once. If your plugin makes a call that doesn't match anything, the framework throws so you know to add a case.
+A fixture matches by `url` glob (and `method`, if set). The first matching fixture wins and serves any number of calls — fixtures aren't consumed, so a sequence where the same URL must answer differently across calls (a 401 followed by a 200 after a token refresh, say) can't be modeled; unit-test that branch outside the runner. If your plugin makes a call that no fixture matches, the framework fails the scenario so you know to add a case.
 
 ## Auth in HTTP scenarios
 
