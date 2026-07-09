@@ -19,6 +19,7 @@ The following is a list of events you can get notified about.
 | [CHAT](#chat)                           | user sends a chat message                                                                      |
 | [NAME_CHANGED](#name_changed)           | user changes their username                                                                    |
 | [USER_JOINED](#user_joined)             | user joins the chat                                                                            |
+| [USER_PARTED](#user_parted)             | a user's last active chat connection disconnects                                              |
 | [STREAM_STARTED](#stream_started)       | an incoming RTMP stream is detected                                                            |
 | [STREAM_STOPPED](#stream_stopped)       | an incoming RTMP stream disconnects (e.g. OBS stops)                                           |
 | [STREAM_TITLE_UPDATED](#stream_title_updated)       | the title of the stream is updated  |
@@ -131,6 +132,30 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
             "authenticated": false
         },
         "clientId": 2
+    }
+}
+```
+
+#### USER_PARTED
+
+`USER_PARTED` is sent 10 seconds after a user's last active chat connection disconnects. If the user reconnects during that time, the event is canceled. Disabling visible join and part messages only hides the message in chat; the webhook is still sent.
+
+```json
+{
+    "type": "USER_PARTED",
+    "eventData": {
+        "id": "Ws4gTeM7R",
+        "timestamp": "2021-08-12T08:20:01.061982913Z",
+        "user": {
+            "id": "yFgco6M7R",
+            "displayName": "laughing-cray",
+            "displayColor": 257,
+            "createdAt": "2021-08-12T08:19:28.759651178Z",
+            "previousNames": ["laughing-cray"],
+            "nameChangedAt": "0001-01-01T00:00:00Z",
+            "isBot": false,
+            "authenticated": false
+        }
     }
 }
 ```
