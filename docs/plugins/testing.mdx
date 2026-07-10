@@ -110,7 +110,7 @@ Dispatches a notification to the matching event handler.
 }
 ```
 
-Common event types: `chat.message.received`, `chat.user.joined`, `stream.started`, `stream.stopped`, `fediverse.follow`, `fediverse.mention`. The full list mirrors the [handlers reference](/docs/plugins/events).
+Common event types include `chat.message.received`, `chat.user.joined`, `stream.started`, and `stream.stopped`. Fediverse scenarios can dispatch `fediverse.follow`, `fediverse.like`, `fediverse.repost`, `fediverse.quote`, `fediverse.mention`, `fediverse.reply`, or the raw `fediverse.activity` catch-all. The full list mirrors the [handlers reference](/docs/plugins/events).
 
 ### `filter`: chain invocation with inline assertion
 

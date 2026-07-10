@@ -196,6 +196,20 @@ Grants the broadcaster-notification APIs:
 * `owncast.notifications.browserPush({ title, body, url? })`: to subscribed browsers
 * `owncast.notifications.fediverse({ type, body, image?, link? })`: fediverse-formatted notification
 
+### `fediverse.inbound`
+
+Grants subscription to all seven inbound Fediverse plugin events:
+
+* `fediverse.follow`
+* `fediverse.like`
+* `fediverse.repost`
+* `fediverse.quote`
+* `fediverse.mention`
+* `fediverse.reply`
+* `fediverse.activity`
+
+The `fediverse.activity` catch-all receives the verified activity's raw JSON object. It runs in addition to any matching specialized event. This permission only covers receiving activity. Posting from the Owncast account requires the separate `fediverse.post` permission.
+
 ### `fediverse.post`
 
 Grants `owncast.fediverse.post(text)`: make a public post to the fediverse from the Owncast account.
@@ -241,6 +255,7 @@ None of the four viewer-injection fields require `http.serve`, and neither do th
 | `videoconfig.read`   | Read the output/transcoding config                                                                                                                |
 | `videoconfig.write`  | Modify the video output config (applies on the next stream start)                                                                                 |
 | `notifications.send` | Send Discord, browser-push, or fediverse notifications                                                                                            |
+| `fediverse.inbound`  | Subscribe to all seven inbound events: `fediverse.follow`, `.like`, `.repost`, `.quote`, `.mention`, `.reply`, and `.activity`                                 |
 | `fediverse.post`     | Public-post to the fediverse (rate-limited)                                                                                                       |
 | `ui.modify`          | Add action buttons or tabs to Owncast's viewer chrome. Inline plugin CSS, JavaScript, or HTML into the viewer page                                |
 

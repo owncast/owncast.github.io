@@ -249,24 +249,47 @@ No permission required.
 
 ## Fediverse events
 
-Owncast forwards inbound fediverse activity to plugins. Engagement events (follow, like, repost) carry just the actor. Mentions and replies carry the post content.
+Owncast exposes seven internal plugin event subscriptions for inbound Fediverse activity. These are plugin events, not external HTTP webhooks. Every subscription in this section requires the `fediverse.inbound` permission.
 
-### Follow / like / repost: `fediverse.follow`, `fediverse.like`, `fediverse.repost`
+| Event | JavaScript handler | Python handler | Payload |
+| --- | --- | --- | --- |
+| `fediverse.follow` | `onFediverseFollow` | `@plugin.on_fediverse_follow` | `{ actor }` |
+| `fediverse.like` | `onFediverseLike` | `@plugin.on_fediverse_like` | `{ actor, target }` |
+| `fediverse.repost` | `onFediverseRepost` | `@plugin.on_fediverse_repost` | `{ actor, target }` |
+| `fediverse.quote` | `onFediverseQuote` | `@plugin.on_fediverse_quote` | `{ actor, target }` |
+| `fediverse.mention` | `onFediverseMention` | `@plugin.on_fediverse_mention` | `FediverseInboundPost` |
+| `fediverse.reply` | `onFediverseReply` | `@plugin.on_fediverse_reply` | `FediverseInboundPost` |
+| `fediverse.activity` | `onFediverse` | `@plugin.on_fediverse` | Raw ActivityPub JSON object |
+
+### Follow, like, repost, and quote
 
 ```ts
-interface {
-  actor: { name: string; handle: string; url?: string; image?: string };
-  target?: { url: string }; // set for likes and reposts
+interface FediverseActor {
+  name: string;
+  handle: string;
+  url?: string;
+  image?: string;
+}
+
+interface FediverseEngagement {
+  actor: FediverseActor;
+  target?: { url: string };
 }
 ```
+
+A follow contains only `actor`. Likes, reposts, and quotes also contain `target`. For a quote, `target` is the locally authored post that the remote actor quoted.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
-  onFediverseFollow(e) { owncast.chat.send(`new follower: ${e.actor.handle}`); },
-  onFediverseLike(e) { /* e.target.url */ },
+  onFediverseFollow(event) {
+    owncast.chat.send(`new follower: ${event.actor.handle}`);
+  },
+  onFediverseQuote(event) {
+    owncast.log.info(`quoted post: ${event.target.url}`);
+  },
 });
 ```
 
@@ -275,26 +298,30 @@ module.exports = definePlugin({
 
 ```python
 @plugin.on_fediverse_follow
-def thank(e):
-    owncast.chat.send(f"new follower: {e.actor.handle}")
+def thank(event):
+    owncast.chat.send(f"new follower: {event.actor.handle}")
 
-@plugin.on_fediverse_like
-def note_like(e):
-    ...  # e.target.url
+@plugin.on_fediverse_quote
+def record_quote(event):
+    owncast.log.info(f"quoted post: {event.target.url}")
 ```
 
 </TabItem>
 </Tabs>
 
-`actor.handle` is the fully-qualified address (for example `@alice@fediverse.example`). No permission required.
+`actor.handle` is the fully qualified address, such as `@alice@fediverse.example`. The follow examples also call `owncast.chat.send`, which separately requires `chat.send`:
 
-### Mention / reply: `fediverse.mention`, `fediverse.reply`
+```json
+{ "permissions": ["fediverse.inbound", "chat.send"] }
+```
+
+### Mention and reply
 
 Both receive a `FediverseInboundPost`:
 
 ```ts
 interface FediverseInboundPost {
-  actor: { name: string; handle: string; url?: string; image?: string };
+  actor: FediverseActor;
   content: string; // rendered HTML from the source instance
   contentText: string; // plain-text version, usually what you want
   url: string; // permalink on the source instance
@@ -305,9 +332,43 @@ interface FediverseInboundPost {
 }
 ```
 
-Use `contentText` for analysis or to echo into chat. Use `content` if you need to preserve the original formatting.
+These specialized hooks accept a verified `Create` activity containing exactly one `Note`. The note must be attributed to the activity actor. A mention must address the local Owncast actor. A reply must reference a post stored by the local Owncast instance.
 
-No permission required to subscribe.
+Use `contentText` for analysis or to echo into chat. Use `content` only when you need the original formatting, and sanitize it before rendering.
+
+### Raw inbound activity
+
+`fediverse.activity` receives the verified inbound ActivityPub activity as its raw JSON object. Owncast sends it after the HTTP signature passes verification and the activity actor's origin matches the signing key owner's origin.
+
+The catch-all runs in addition to a specialized handler. For example, an accepted quote can invoke both `onFediverseQuote` and `onFediverse`.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onFediverse(activity) {
+    if (typeof activity.type === "string") {
+      owncast.log.info(`inbound activity: ${activity.type}`);
+    }
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_fediverse
+def record_activity(activity):
+    if isinstance(activity.type, str):
+        owncast.log.info(f"inbound activity: {activity.type}")
+```
+
+</TabItem>
+</Tabs>
+
+Signature and actor-origin verification establish where the activity came from. They do not make its fields safe. Treat the raw object as untrusted plugin input. Check field types and required values, sanitize content before rendering it, and validate URLs before fetching them.
 
 ## Filter chain
 
@@ -691,11 +752,13 @@ Each row is a runtime event. The handler name follows your SDK's convention: cam
 | `stream.started`           | `{ startedAt, title, summary }`    | none                                   |
 | `stream.stopped`           | `{ stoppedAt }`                    | none                                   |
 | `stream.title.changed`     | `{ from, to }`                     | none                                   |
-| `fediverse.follow`         | `{ actor }`                        | none                                   |
-| `fediverse.like`           | `{ actor, target }`                | none                                   |
-| `fediverse.repost`         | `{ actor, target }`                | none                                   |
-| `fediverse.mention`        | `FediverseInboundPost`             | none                                   |
-| `fediverse.reply`          | `FediverseInboundPost`             | none                                   |
+| `fediverse.follow`         | `{ actor }`                        | `fediverse.inbound`                   |
+| `fediverse.like`           | `{ actor, target }`                | `fediverse.inbound`                   |
+| `fediverse.repost`         | `{ actor, target }`                | `fediverse.inbound`                   |
+| `fediverse.quote`          | `{ actor, target }`                | `fediverse.inbound`                   |
+| `fediverse.mention`        | `FediverseInboundPost`             | `fediverse.inbound`                   |
+| `fediverse.reply`          | `FediverseInboundPost`             | `fediverse.inbound`                   |
+| `fediverse.activity`       | Raw ActivityPub JSON object        | `fediverse.inbound`                   |
 | chat message filter        | `ChatMessage`                      | `chat.filter`                          |
 | HTTP request               | `IncomingHttpRequest`              | `http.serve`                           |
 | auth check                 | `AuthCheckRequest`                 | `auth.gate`                            |
@@ -706,4 +769,4 @@ Each row is a runtime event. The handler name follows your SDK's convention: cam
 | page content               | `ContentRequest`                   | none to subscribe. Whatever APIs the handler calls |
 | custom events              | (per-event)                        | none to subscribe, `events.emit` to emit |
 
-Subscribing is free. Calling Owncast APIs from inside a handler is what needs permissions. See [Owncast APIs](/docs/plugins/apis) for the catalog of methods and what each one grants.
+Subscribing to ungated hooks and custom events requires no permission. Gated hooks require the permission listed in the table. Calling Owncast APIs from inside a handler requires the API's permission too. See [Owncast APIs](/docs/plugins/apis) for the catalog of methods and what each one grants.
