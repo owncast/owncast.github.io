@@ -156,7 +156,7 @@ The [`page-content-demo`](https://github.com/owncast/plugin-sdk/tree/main/exampl
 
 ## What's in the package
 
-- `index.js`: the runtime: `definePlugin`, the `owncast.*` host wrappers, the `filter` constructor, `defineCommands`.
+- `index.js`: the runtime with `definePlugin`, command handlers, the `owncast.*` host wrappers, and filter helpers.
 - `index.d.ts`: TypeScript declarations for every event payload and host API.
 - `testing.js`: the `runScenarios` / `runScenarioFiles` test API.
 - `bin/owncast-plugin`: the CLI (`build`, `test`, `serve`, `package`).
