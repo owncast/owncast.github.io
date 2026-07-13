@@ -38,7 +38,7 @@ The following is a list of events you can get notified about.
 
 1. In any language, on any kind of web server, create an endpoint that accepts a HTTP `POST` request.  This is where Owncast will be sending events.
 1. Each event payload will have a `type` property that states which event type it is, and an `eventData` object that includes specific properties of that event.
-1. Webhook requests also contain an `owncast-signature` header, which can be used to authenticate the request. More details regarding webhook authentication can be found [here](#webhook-authentication).
+1. Webhook requests also contain an `owncast-signature` header, which can be used to authenticate the request. More details regarding webhook authentication can be found [here](#webhook-authentication-optional).
 1. If you need a starting point see our example projects.
 
 ### High level webhooks
@@ -59,7 +59,7 @@ where
 
 Examples of what `eventData` to expect for each event type are below.
 
-## Webhook Authentication
+## Webhook Authentication (optional)
 
 To confirm the authenticity of each webhook request, every request contains a header named `owncast-signature`. The `owncast-signature` format is `t=time-epoch.s=some-signature`, with the timestamp and signature separated by a period (`.`).
 
@@ -74,7 +74,9 @@ Steps to verify a signature:
 1. Compare the signature extracted from the header and the signature created in step 3 with constant-time compare.
 1. Prevent replay attacks by comparing the timestamp in the header to the current server timestamp.
 
-Complete code examples featuring Go, PHP, Python, and Node.js are available [here](https://gist.github.com/AnonymousXC/f3b7e5f9744d0a612687e22673903108) to help implement this verification.
+Complete code examples featuring Go, PHP, Python, and Node.js are available [here](https://gist.github.com/AnonymousXC/f3b7e5f9744d0a612687e22673903108) to help implement this verification. 
+
+Note: While validating the signature header is optional, it is highly recommended to authenticate incoming requests and ensure they genuinely originated from your Owncast instance.
 
 ## Webhook Examples
 #### CHAT
