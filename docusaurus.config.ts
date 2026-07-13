@@ -565,6 +565,10 @@ const config: Config = {
               href: "https://opencollective.com/owncast/donate",
             },
             {
+              label: "Security",
+              href: "/security",
+            },
+            {
               label: "Contact",
               href: "/contact",
             },

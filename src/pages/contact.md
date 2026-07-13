@@ -27,7 +27,7 @@ If you have any general usage or support questions, you'll find responses in our
 
 The project is always looking for people to help build, support and keep Owncast alive.
 
-### For security incidents, please send an email to Gabe.
+### [Report a security issue](/security)
 
 :::note
 We are not responsible for the content that people stream using Owncast nor do we have insight into how people may use this software. For specific concerns contact the owners of the servers in question.
