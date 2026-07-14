@@ -97,13 +97,31 @@ b {
 
 .hero-container {
   background-color: #121421;
-  background-image: url(/images/hero-bgdecor.svg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 -8em;
+  position: relative;
+  
+  // Add blur effect to background
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(/images/hero-bgdecor.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 -8em;
+    filter: blur(2px);
+    z-index: 0;
+  }
 
   > .container {
-    margin: auto;
+   margin: auto;
+    position: relative;
+    z-index: 1;
   }
   .lead {
     font-size: 1.8em;
@@ -514,6 +532,79 @@ b {
           filter: drop-shadow(0.2rem 0.2rem 0.4rem #ffffff7d);
         }
       }
+    }
+  }
+}
+
+
+// Style the suggestions dropdown
+#suggestions.shadow.bg-white.rounded {
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  
+  // Custom scrollbar styling
+  scrollbar-width: thin;
+  scrollbar-color: rgba(111, 66, 193, 0.4) transparent;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(111, 66, 193, 0.4);
+    border-radius: 3px;
+    
+    &:hover {
+      background: rgba(111, 66, 193, 0.6);
+    }
+  }
+}
+
+// Modern Recording Badge
+.modern-badge {
+  background: transparent;
+  color: #64748b;
+  padding: 0.625rem 1.25rem;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1.5px solid #e2e8f0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  
+  // Add recording dot before text
+  &::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #ef4444;
+    border-radius: 50%;
+    display: inline-block;
+    animation: blink 1.5s infinite;
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  
+  // Blinking animation for the red dot
+  @keyframes blink {
+    0% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+    }
+    50% {
+      opacity: 0.3;
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+    }
+    100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
     }
   }
 }
