@@ -3,4 +3,4 @@ Expires: 2027-07-01T00:00:00.000Z
 Preferred-Languages: en
 Canonical: https://owncast.online/.well-known/security.txt
 Policy: https://owncast.online/security
-Acknowledgments: https://owncast.online/security#acknowledgments
+Acknowledgments: https://owncast.online/security?tab=credits
