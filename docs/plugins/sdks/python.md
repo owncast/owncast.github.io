@@ -96,7 +96,7 @@ Payloads are attribute objects with `snake_case` accessors over the wire JSON (`
 Two more Python idioms worth knowing, both documented in full (with Python examples) on the subject pages:
 
 - **HTTP routing**: plugins with `http.serve` declare routes with decorators: `@plugin.get/post/put/delete/patch(path)`, `@plugin.route(path, methods=[...])`, `@plugin.on_http_request(path)`, and a bare `@plugin.on_http_request` catch-all. A handler returns a `dict` (`{status, body, headers}`), a `str` (→ 200), or `None` (→ 204). See [Serving HTTP](/docs/plugins/http).
-- **Chat commands**: `plugin.commands({...})` declares a command table (the host's `!help` lists it automatically), with the lower-level `define_commands(...)` router underneath. See [Chat commands](/docs/plugins/commands).
+- **Chat commands**: `plugin.commands({...})` declares commands with aliases, moderator gating, and per-user cooldowns. The built-in `!help` lists them automatically. See [Chat commands](/docs/plugins/commands).
 
 ## The CLI
 

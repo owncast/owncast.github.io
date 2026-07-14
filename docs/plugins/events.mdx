@@ -424,9 +424,9 @@ Each filter can declare a priority. Lower numbers run earlier (default `100`). U
 * Filters are time-capped at 50 ms. A slow filter is cancelled and treated as pass.
 * After 5 consecutive failures (errors or timeouts) the plugin is auto-disabled for the rest of the session, with a one-time log line. A successful filter call resets the counter, so transient flakiness doesn't accumulate. Restart the host to re-enable.
 
-### Command routing
+### Command tables
 
-Rather than hand-rolling prefix parsing, aliases, cooldowns, and moderator gating in your chat handler, declare a **command table**: the SDK wires the chat subscription and prefix parsing for you, and the host's built-in `!help` lists every command. Gating uses the sender identity on the message (`user.scopes`, `user.id`), not a display-name guess.
+Declare a **command table** for aliases, cooldowns, moderator gating, parsed arguments, and automatic `!help` listings. Gating uses the sender identity (`user.scopes`, `user.id`), not a display-name guess.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
