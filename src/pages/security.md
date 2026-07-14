@@ -9,7 +9,7 @@ Report suspected security issues privately to [security@owncast.online](mailto:s
 
 Include the affected Owncast version, steps to reproduce the issue, its potential impact, and any proof of concept that helps explain the report. Test only systems you own or have permission to test. Do not access other people's data or disrupt a service.
 
-Please allow time for the issue to be investigated and fixed before sharing it publicly. Good-faith security research that follows these guidelines will not result in legal action from the Owncast project.
+Please allow time for the issue to be investigated and fixed before sharing it publicly. Reports made in good faith and within this scope are welcome.
 
 ## In scope
 
