@@ -20,6 +20,9 @@ const ALL_REDIRECTS = [
   // },
   { to: "/docs/api/*", from: "/thirdparty/*" },
   { to: "/docs/getting-started/install/providers/*", from: "/quickstart/*" },
+  // Internal dev docs moved from /dev to /devdocs.
+  { to: "/devdocs/*", from: "/dev/*" },
+  { to: "/devdocs/", from: "/dev/" },
 
   // Regular redirects
   // Social docs restructure: enabling page merged into the main social page.
@@ -182,9 +185,9 @@ const config: Config = {
         },
         blog: false, // Disabled - using multi-instance blog plugins instead
         sitemap: {
-          // Keep internal /dev (Docmost) docs out of the public sitemap so
+          // Keep internal /devdocs (Docmost) docs out of the public sitemap so
           // search engines don't route end users to development documentation.
-          ignorePatterns: ["/dev/**"],
+          ignorePatterns: ["/devdocs/**"],
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -396,10 +399,10 @@ const config: Config = {
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
         blogDir: ["releases", "news"],
-        // /dev (Docmost) docs are internal dev docs, not for end users. They're
+        // /devdocs (Docmost) docs are internal dev docs, not for end users. They're
         // already excluded by routeBasePath, but pin it so a future indexPages
         // or docsRouteBasePath change can never leak them into search.
-        ignoreFiles: [/^dev\//],
+        ignoreFiles: [/^devdocs\//],
       },
     ],
     // Dev docs - sourced from Docmost via scripts/fetch-docmost.js (prototype)
@@ -407,7 +410,7 @@ const config: Config = {
       "@docusaurus/plugin-content-docs",
       {
         id: "dev",
-        routeBasePath: "dev",
+        routeBasePath: "devdocs",
         path: "dev-docs",
         sidebarPath: "./sidebarsDev.ts",
       },

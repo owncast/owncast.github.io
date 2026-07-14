@@ -4,9 +4,9 @@ description: The technical details for those wishing to take part in Owncast dev
 ---
 
 <head>
-  <meta httpEquiv="refresh" content="0; url=https://docs.owncast.dev/development" />
+  <meta httpEquiv="refresh" content="0; url=/devdocs/development" />
 </head>
 
 # How to work on Owncast
 
-Click [here](https://docs.owncast.dev/development) if you are not redirected.
+Click [here](/devdocs/development) if you are not redirected.

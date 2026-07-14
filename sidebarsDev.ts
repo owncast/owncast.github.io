@@ -1,6 +1,6 @@
 import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 
-// The /dev section uses its landing page (the document table) as the primary
+// The /devdocs section uses its landing page (the document table) as the primary
 // navigation, so the sidebar isn't a generated doc tree. Instead it carries the
 // project's community and resource links, always one click away.
 const sidebars: SidebarsConfig = {

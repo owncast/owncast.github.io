@@ -2,7 +2,7 @@
 
 // Prototype: pull a Docmost space out as Markdown plus a metadata manifest
 // (labels, dates, authors, icons, verification) for rendering in a custom
-// Docusaurus "/dev" frontend.
+// Docusaurus "/devdocs" frontend.
 //
 // This is NOT wired into prebuild yet. Run it by hand against a local Docmost
 // to see what the export and metadata actually look like before we build on it.
@@ -229,7 +229,7 @@ function slugify(s) {
   );
 }
 
-// Turn the exported Markdown + manifest into a Docusaurus "/dev" docs instance:
+// Turn the exported Markdown + manifest into a Docusaurus "/devdocs" docs instance:
 // one frontmatter'd .md per page, an index.mdx that renders the landing
 // component, and the manifest the component reads. Output is regenerated each
 // run, so treat dev-docs/ and src/data/dev-manifest.json as build artifacts.
@@ -258,6 +258,9 @@ function emitDocusaurus(manifest, spaceSlug) {
       continue;
     }
     body = body.replace(/^#\s+.*\r?\n+/, ""); // drop leading H1; title comes from frontmatter
+    // Docmost content still cross-links pages as /dev/...; the site route is
+    // /devdocs, so rewrite those links on emit.
+    body = body.replace(/\]\(\/dev\//g, "](/devdocs/");
 
     // Links the doc's "Edit" action back to the page in Docmost. Docmost
     // resolves the page by the trailing slugId, so the title part is cosmetic.
@@ -266,7 +269,7 @@ function emitDocusaurus(manifest, spaceSlug) {
     const fm = [
       "---",
       `title: ${JSON.stringify(p.title)}`,
-      `slug: /${slug}`, // relative to the dev docs routeBasePath (/dev)
+      `slug: /${slug}`, // relative to the dev docs routeBasePath (/devdocs)
       p.labels.length ? `tags: [${p.labels.map((l) => JSON.stringify(l)).join(", ")}]` : null,
       `custom_edit_url: ${JSON.stringify(docmostUrl)}`,
       "---",
@@ -276,7 +279,7 @@ function emitDocusaurus(manifest, spaceSlug) {
       .join("\n");
 
     fs.writeFileSync(path.join(DEV_DOCS, `${slug}.md`), fm + body);
-    withSlug.push({ ...p, slug: `/dev/${slug}` });
+    withSlug.push({ ...p, slug: `/devdocs/${slug}` });
   }
 
   const dataDir = path.join(REPO, "src", "data");

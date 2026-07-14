@@ -138,7 +138,7 @@ export const directoryData: DirectoryCategory[] = [
       { 
         title: "Internal Owncast Project Documentation",
         description: 'Includes the documentation for operating the Owncast project. Such as contributing, building the project, technical specifics, and future plans.',
-        url: 'https://docs.owncast.dev',
+        url: 'https://owncast.online/devdocs/',
       },
       {
         title: 'Owncast UI Components, Assets, and Styles',

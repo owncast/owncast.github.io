@@ -9,7 +9,7 @@ Owncast is a growing open source project that is giving freedom, flexibility and
 
 Unfortunately the project is lacking in contributors and there's gaps in skillsets that we'd love to fill so we can get even better at building tools that make a difference for people.
 
-Visit our detailed [contribution guide](https://docs.owncast.dev/owncast/Contributor-Guide-12eed550d9b347829323496e3bf12ca3) to learn about how to get started in taking part in the project.
+Visit our detailed [contribution guide](/devdocs/contributor-guide) to learn about how to get started in taking part in the project.
 
 ## Current needs
 
@@ -26,7 +26,7 @@ As you continue to read, and you find the project interesting, I urge you to do 
 
 - [Join our chat](https://owncast.rocket.chat) where you can say hello and introduce yourself.
 - [Feel free to email Gabe directly](mailto:gabek@real-ity.com) if you'd like to talk one-on-one.
-- [Learn about how to get a development environment running](/development) if you'd like to write code.
+- [Learn about how to get a development environment running](/devdocs/development) if you'd like to write code.
 - [Visit our GitHub issues](https://github.com/owncast/owncast/issues) and take a look to see if there's anything you'd like to work on. If not, feel free to file a new issue with ideas you might have. Our [Good First Issues](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22good+first+issue%22) list might be a good place to start.
 
 ## What do current users think of Owncast?
@@ -66,7 +66,7 @@ Some of our frontend stack:
 - Next.js
 - [Storybook](https://owncast.online/components)
 
-Take a look at our current list of [web frontend](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3A%22Web+frontend%22) and [web admin](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3Aadmin) items currently filed to get a taste of what's currently going on and [learn about how to get a development environment running](/development)
+Take a look at our current list of [web frontend](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3A%22Web+frontend%22) and [web admin](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3Aadmin) items currently filed to get a taste of what's currently going on and [learn about how to get a development environment running](/devdocs/development)
 
 ### Backend and APIs
 
@@ -85,7 +85,7 @@ Here's our backend stack and protocols:
 - HLS video
 - ffmpeg
 
-[Learn about how to get a development environment running](/development) if you'd like to help work on this exciting piece of server software!
+[Learn about how to get a development environment running](/devdocs/development) if you'd like to help work on this exciting piece of server software!
 
 ## Do you want to help in a way that's not writing code?
 
