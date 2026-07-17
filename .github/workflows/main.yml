@@ -7,6 +7,8 @@ on:
   schedule:
     # Every six hours update the web site
     - cron: "0 */6 * * *"
+    # Daily rebuild at 3am UTC
+    - cron: "0 3 * * *"
   workflow_dispatch:
 
 jobs:

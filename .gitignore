@@ -49,3 +49,6 @@ i18n/
 dev-docs/*
 !dev-docs/index.mdx
 src/data/dev-manifest.json
+
+# Nightly builds page (generated at build time by scripts/fetch-nightly-builds.js)
+src/pages/nightly-builds.md

@@ -27,7 +27,7 @@ const sidebars: SidebarsConfig = {
           label: "🗣️ Discussion Forum",
           href: "https://github.com/owncast/owncast/discussions",
         },
-        { type: "link", label: "📕 Web Storybook", href: "https://owncast.online/components" },
+        { type: "link", label: "📕 Web Storybook", href: "https://ui.owncast.online" },
         { type: "link", label: "🎨 Penpot Design", href: "https://design.penpot.app" },
         { type: "link", label: "🛍️ Merch Store", href: "https://merch.owncast.online" },
       ],

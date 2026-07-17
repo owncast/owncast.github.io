@@ -64,7 +64,7 @@ Some of our frontend stack:
 - Ant Design components
 - VideoJS
 - Next.js
-- [Storybook](https://owncast.online/components)
+- [Storybook](https://ui.owncast.online)
 
 Take a look at our current list of [web frontend](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3A%22Web+frontend%22) and [web admin](https://github.com/owncast/owncast/issues?q=is%3Aissue+is%3Aopen+label%3Aadmin) items currently filed to get a taste of what's currently going on and [learn about how to get a development environment running](/devdocs/development)
 
