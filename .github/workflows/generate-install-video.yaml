@@ -1,0 +1,25 @@
+name: Generate install preview video
+on:
+  push:
+    paths:
+      - "static/install.sh"
+  workflow_dispatch:
+
+jobs:
+  generate-install-video:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Generate
+        run: scripts/install-video-generator/generate-quickstart.sh
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v5
+        with:
+          author_name: Owncast
+          author_email: owncast@owncast.online
+          message: "Update install preview video"
+          add: "static/install-preview.*"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
