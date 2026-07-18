@@ -131,7 +131,7 @@ ffmpeg -y -i ginger-quickstart.mp4 -i owncast-install.mp4 -i obs-tutorial.mp4 -i
     [ground]split[gv][gs];\
     [gv]pad=${GINGER_UNIT_W}:${GINGER_UNIT_H}:0:0:color=black@0.0[gvid];\
     [gs]pad=${GINGER_UNIT_W}:${GINGER_UNIT_H}:${GINGER_SHADOW_OFFSET}:${GINGER_SHADOW_OFFSET}:color=black@0.0,lutrgb=r=0:g=0:b=0,colorchannelmixer=aa=${GINGER_SHADOW_OPACITY},gblur=sigma=${GINGER_SHADOW_BLUR}[gshadow];\
-    [gshadow][gvid]overlay=0:0[vid];\
+    [gshadow][gvid]overlay=0:0,fade=t=in:st=0:d=1.5:alpha=1[vid];\
     [bg][vid]overlay=${GINGER_X}:${GINGER_Y},fade=t=out:st=${FADE_START}:d=${FADE_DURATION}[out]" \
   -map "[out]" -map 0:a? \
   -t ${OUTPUT_DURATION} \
