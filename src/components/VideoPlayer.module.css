@@ -1,0 +1,42 @@
+.player {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  line-height: 0;
+  box-shadow: 0 10px 30px rgba(18, 22, 29, 0.35);
+}
+
+.video {
+  width: 100%;
+}
+
+.playButton {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 88px;
+  height: 88px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  background: var(--theme-color-action);
+  box-shadow: 0 6px 24px rgba(122, 92, 243, 0.55);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.playButton:hover,
+.playButton:focus-visible {
+  transform: scale(1.08);
+  filter: brightness(1.12);
+}
+
+.playButton svg {
+  width: 40px;
+  height: 40px;
+  margin-left: 4px; /* optically center the triangle */
+  fill: currentColor;
+}

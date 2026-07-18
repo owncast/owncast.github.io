@@ -24,17 +24,20 @@ curl -s https://owncast.online/install.sh | bash
 
 ### See an example of getting running in under a minute.
 
-<video controls width="90%" poster="/install-preview.jpg">
-  <source src="/install-preview.webm" type="video/webm" />
-  <source src="/install-preview.mp4" type="video/mp4" />
-</video>
+<VideoPlayer
+  mp4="/install-preview.mp4"
+  webm="/install-preview.webm"
+  poster="/install-preview.jpg"
+  title="Getting Owncast running in under a minute"
+/>
+
 ### That's it!
 
 While the above installer will be enough for most people to get up and running quickly, you may want to learn about server configuration, broadcasting, and optional next steps such as [SSL proxies](/docs/sslproxies/nginx) and running Owncast as a [system service](/docs/configuration/systemservice).
 
 ## Login to the admin and set up your stream
 
-import { IncludeMarkdown } from '@site/src/components';
+import { IncludeMarkdown, VideoPlayer } from '@site/src/components';
 import AdminLogin from '../../shared/admin-login.md';
 
 <IncludeMarkdown>
