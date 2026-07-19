@@ -4,10 +4,6 @@ description: Find solutions to common issues.
 ---
 
 import Wizard from '../components/Wizard'
-import { Model } from 'survey-core'
 import tree from '../data/troubleshooting_tree.json'
 
-export const treeModel = new Model(tree);
-
-<Wizard model={treeModel}/>
-
+<Wizard tree={tree} name="troubleshooting"/>

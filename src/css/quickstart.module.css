@@ -2,7 +2,7 @@
 .quickstartHeader {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 1rem;
   margin-bottom: 1.5rem;
   padding: 1rem;

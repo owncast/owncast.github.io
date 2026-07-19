@@ -1,35 +1,115 @@
-/* Wizard.module.css */
+/* Wizard.module.css
+   Maps SurveyJS theme variables onto the site's design tokens so the wizard
+   inherits site typography, colors, and light/dark mode. */
 .wizard {
-  padding: 1rem;
+  --sjs-font-family: var(--ifm-font-family-base);
+  --sjs-corner-radius: 8px;
+
+  /* No panel chrome: let the page background flow through */
+  --sjs-general-backcolor: transparent;
+  --sjs-general-backcolor-dim: transparent;
+  --sjs-general-backcolor-dim-light: transparent;
+  --sjs-questionpanel-backcolor: transparent;
+  --sjs-question-background: transparent;
+  --sjs-shadow-small: none;
+  --sjs-shadow-medium: none;
+  --sjs-shadow-large: none;
+  --sjs-shadow-inner: none;
+
+  /* Text */
+  --sjs-general-forecolor: var(--ifm-font-color-base);
+  --sjs-general-forecolor-light: var(--ifm-color-emphasis-600);
+  --sjs-general-dim-forecolor: var(--ifm-font-color-base);
+  --sjs-general-dim-forecolor-light: var(--ifm-color-emphasis-600);
+
+  /* Brand accent */
+  --sjs-primary-backcolor: var(--theme-color-action);
+  --sjs-primary-backcolor-light: rgba(122, 92, 243, 0.12);
+  --sjs-primary-backcolor-dark: #6847e8;
+  --sjs-primary-forecolor: #ffffff;
+
+  --sjs-border-default: var(--ifm-color-emphasis-300);
+  --sjs-border-light: var(--ifm-color-emphasis-200);
+}
+
+/* Survey title: style like a site page heading instead of a panel header */
+.wizard :global(.sd-title.sd-container-modern__title) {
+  background: transparent;
+  box-shadow: none;
+  padding: 0 0 0.5rem 0;
+}
+
+.wizard :global(.sd-header__text .sd-title) {
+  color: var(--ifm-heading-color);
+  font-family: var(--ifm-heading-font-family);
+  font-weight: var(--ifm-heading-font-weight);
+}
+
+.wizard :global(.sd-body.sd-body--static),
+.wizard :global(.sd-body.sd-body--responsive) {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  max-width: none;
+}
+
+/* Flatten SurveyJS panel padding so content shares the page's left edge */
+.wizard :global(.sd-page.sd-body__page) {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.wizard :global(.sd-element--with-frame) {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+}
+
+/* Tighten the gap between the question text and the first answer */
+.wizard :global(.sd-row.sd-page__row) {
+  margin-top: 8px;
+}
+
+.wizard :global(.sd-item.sd-selectbase__item) {
+  padding-top: 0;
+}
+
+/* Question title + description follow site typography */
+.wizard :global(.sd-question__title) {
+  color: var(--ifm-heading-color);
+}
+
+.wizard :global(.sd-description) {
+  color: var(--ifm-color-emphasis-600);
 }
 
 /* Put the group into flexbox so items wrap and stay uniform */
 .wizard :global(.sd-radiogroup) {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: flex-start; /* buttons just flow, not full row fill */
+  gap: 0.75rem;
+  justify-content: flex-start;
 }
 
-/* Each choice styled like a button */
+/* Each choice styled like a site button */
 .wizard :global(label.sd-selectbase__label) {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 120px;             /* all buttons at least this wide */
-  padding: 0.75rem 1rem;
-  border: 1px solid #0ea5e9;
+  min-width: 120px;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--theme-color-action);
   border-radius: 8px;
-  background: #f8f9fa;
-  color: #0ea5e9;
+  background: transparent;
+  color: var(--ifm-font-color-base);
   font-weight: 600;
   cursor: pointer;
   user-select: none;
   text-align: center;
-  transition: background .2s, color .2s, border-color .2s, box-shadow .2s;
-  min-height: 44px;             /* consistent height */
-  flex: 0 0 auto;               /* don’t stretch, stay auto-sized */
+  transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  min-height: 44px;
+  flex: 0 0 auto;
 }
 
 /* Hide the default circle */
@@ -58,32 +138,31 @@
 .wizard :global(.sd-item__control-label .sv-string-viewer) {
   flex: 1;
   text-align: center;
-  pointer-events: none; /* so clicks go to the input */
+  pointer-events: none;
 }
 
 /* Hover state */
 .wizard :global(label.sd-selectbase__label:hover) {
-  background: #e6f6fb;
-  color: #0c4a6e;
+  background: rgba(122, 92, 243, 0.12);
 }
 
 /* Focus state */
 .wizard :global(label.sd-selectbase__label:focus-within) {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.4);
+  box-shadow: 0 0 0 3px rgba(122, 92, 243, 0.4);
 }
 
 /* Checked state */
 .wizard :global(label.sd-selectbase__label:has(input:checked)) {
-  background: #0ea5e9;
+  background: var(--theme-color-action);
   color: #ffffff;
-  border-color: #0ea5e9;
+  border-color: var(--theme-color-action);
 }
 
 /* Checked + hover */
 .wizard :global(label.sd-selectbase__label:has(input:checked):hover) {
-  background: #0284c7;
-  border-color: #0284c7;
+  background: #6847e8;
+  border-color: #6847e8;
 }
 
 /* Disabled */
