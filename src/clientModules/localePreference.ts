@@ -161,13 +161,7 @@ if (ExecutionEnvironment.canUseDOM) {
   }
   const preferred =
     (stored && locales.includes(stored) ? stored : null) ?? devicePreference();
-  if (
-    preferred &&
-    preferred !== currentLocale &&
-    // Never redirect to the path we're already on (e.g. the dev server serves
-    // the default-locale bundle at /fr/, where currentLocale is still "en").
-    localeOf(window.location.pathname) !== preferred
-  ) {
+  if (preferred && preferred !== currentLocale) {
     window.location.replace(
       pathIn(window.location.pathname, preferred) +
         window.location.search +
