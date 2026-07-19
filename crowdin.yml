@@ -5,12 +5,23 @@ files:
   # JSON translation files
   - source: /i18n/en/**/*
     translation: /i18n/%two_letters_code%/**/%original_file_name%
+    languages_mapping: &locale_mapping
+      two_letters_code:
+        # zh-CN and zh-TW share the two-letter code "zh"; keep them apart
+        zh-CN: zh-CN
+        zh-TW: zh-TW
+        # novelty/duplicate languages: keep en-PT (Pirate) and the "en" target
+        # language from clobbering the i18n/en source dir
+        en-PT: en-PT
+        en: en-US
+        lol: lol
   # Docs Markdown files
   - source: /docs/**/*
     ignore:
       - /docs/**/*.svg
       - /docs/images/**
     translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%
+    languages_mapping: *locale_mapping
     # NOTE: machine-readable front matter (id, slug, deviceType, ...) gets
     # mangled by machine translation; scripts/fix-translated-frontmatter.js
     # restores it from the English source after every crowdin download.

@@ -164,23 +164,139 @@ const config: Config = {
 
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'es', 'fr', 'de'],
+    locales: [
+      'en',
+      'ar',
+      'bn',
+      'de',
+      'el',
+      'es',
+      'eu',
+      'fr',
+      'ga',
+      'hi',
+      'hr',
+      'it',
+      'ja',
+      'ko',
+      'ms',
+      'nl',
+      'no',
+      'pa',
+      'pl',
+      'pt',
+      'ru',
+      'sv',
+      'th',
+      'vi',
+      'zh-CN',
+      'zh-TW',
+    ],
     localeConfigs: {
       en: {
         label: 'English',
         htmlLang: 'en-US',
       },
+      ar: {
+        label: 'العربية',
+        htmlLang: 'ar',
+        direction: 'rtl',
+      },
+      bn: {
+        label: 'বাংলা',
+        htmlLang: 'bn',
+      },
+      de: {
+        label: 'Deutsch',
+        htmlLang: 'de',
+      },
+      el: {
+        label: 'Ελληνικά',
+        htmlLang: 'el',
+      },
       es: {
         label: 'Español',
         htmlLang: 'es',
+      },
+      eu: {
+        label: 'Euskara',
+        htmlLang: 'eu',
       },
       fr: {
         label: 'Français',
         htmlLang: 'fr',
       },
-      de: {
-        label: 'Deutsch',
-        htmlLang: 'de',
+      ga: {
+        label: 'Gaeilge',
+        htmlLang: 'ga',
+      },
+      hi: {
+        label: 'हिन्दी',
+        htmlLang: 'hi',
+      },
+      hr: {
+        label: 'Hrvatski',
+        htmlLang: 'hr',
+      },
+      it: {
+        label: 'Italiano',
+        htmlLang: 'it',
+      },
+      ja: {
+        label: '日本語',
+        htmlLang: 'ja',
+      },
+      ko: {
+        label: '한국어',
+        htmlLang: 'ko',
+      },
+      ms: {
+        label: 'Bahasa Melayu',
+        htmlLang: 'ms',
+      },
+      nl: {
+        label: 'Nederlands',
+        htmlLang: 'nl',
+      },
+      no: {
+        label: 'Norsk',
+        htmlLang: 'no',
+      },
+      pa: {
+        label: 'ਪੰਜਾਬੀ',
+        htmlLang: 'pa',
+      },
+      pl: {
+        label: 'Polski',
+        htmlLang: 'pl',
+      },
+      pt: {
+        label: 'Português (Brasil)',
+        htmlLang: 'pt-BR',
+      },
+      ru: {
+        label: 'Русский',
+        htmlLang: 'ru',
+      },
+      sv: {
+        label: 'Svenska',
+        htmlLang: 'sv',
+      },
+      th: {
+        label: 'ไทย',
+        htmlLang: 'th',
+      },
+      vi: {
+        label: 'Tiếng Việt',
+        htmlLang: 'vi',
+      },
+      'zh-CN': {
+        label: '简体中文',
+        htmlLang: 'zh-CN',
+      },
+      'zh-TW': {
+        label: '繁體中文',
+        htmlLang: 'zh-TW',
       },
     },
   },

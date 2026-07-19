@@ -21,13 +21,26 @@ function isBrowserLanguageEnglish(): boolean {
   return browserLang.toLowerCase().startsWith("en");
 }
 
-// Map locale codes to country codes for circle-flags
-// Add new languages here as needed
+// Map locale codes to country codes for circle-flags.
+// Locales matching their flag's country code (fr, de, it, ...) fall through
+// in getCountryCode and don't need an entry here.
 const localeToCountry: Record<string, string> = {
   en: "us",
-  es: "es",
-  fr: "fr",
-  de: "de",
+  ar: "sa",
+  bn: "bd",
+  el: "gr",
+  eu: "es-pv",
+  ga: "ie",
+  hi: "in",
+  ja: "jp",
+  ko: "kr",
+  ms: "my",
+  pa: "in",
+  pt: "br",
+  sv: "se",
+  vi: "vn",
+  "zh-CN": "cn",
+  "zh-TW": "tw",
 };
 
 function getCountryCode(locale: string): string {

@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 
-// Supported locales (excluding default 'en')
-const SUPPORTED_LOCALES = ["es", "fr", "de"];
+// Supported locales (excluding default 'en'); keep in sync with docusaurus.config.ts
+const SUPPORTED_LOCALES = [
+  "ar", "bn", "de", "el", "es", "eu", "fr", "ga", "hi", "hr", "it", "ja",
+  "ko", "ms", "nl", "no", "pa", "pl", "pt", "ru", "sv", "th", "vi",
+  "zh-CN", "zh-TW",
+];
 const LOCALE_REDIRECT_KEY = "owncast_locale_redirected";
 
 // Get the user's preferred locale from browser settings
@@ -11,10 +15,15 @@ function getPreferredLocale(): string | null {
   const languages = navigator.languages || [navigator.language];
 
   for (const lang of languages) {
-    const langCode = lang.toLowerCase().split("-")[0];
-    if (SUPPORTED_LOCALES.includes(langCode)) {
-      return langCode;
-    }
+    const lower = lang.toLowerCase();
+    // Exact match first (zh-cn -> zh-CN), then base language (zh -> zh-CN)
+    const exact = SUPPORTED_LOCALES.find((l) => l.toLowerCase() === lower);
+    if (exact) return exact;
+    const base = lower.split("-")[0];
+    const baseMatch = SUPPORTED_LOCALES.find(
+      (l) => l.toLowerCase().split("-")[0] === base
+    );
+    if (baseMatch) return baseMatch;
   }
 
   return null;

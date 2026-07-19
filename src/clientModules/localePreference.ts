@@ -48,8 +48,16 @@ function devicePreference(): string | null {
     ? navigator.languages
     : [navigator.language];
   for (const lang of languages) {
-    const short = lang?.toLowerCase().split("-")[0];
-    if (short && locales.includes(short)) return short;
+    const lower = lang?.toLowerCase();
+    if (!lower) continue;
+    // Exact match first (zh-cn -> zh-CN), then base language (zh -> zh-CN)
+    const exact = locales.find((l) => l.toLowerCase() === lower);
+    if (exact) return exact;
+    const base = lower.split("-")[0];
+    const baseMatch = locales.find(
+      (l) => l !== defaultLocale && l.toLowerCase().split("-")[0] === base
+    );
+    if (baseMatch) return baseMatch;
   }
   return null;
 }
