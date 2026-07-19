@@ -1,0 +1,54 @@
+{
+  "version.label": {
+    "message": "Siguiente",
+    "description": "The label for version current"
+  },
+  "sidebar.devSidebar.category.Community & resources": {
+    "message": "Comunidad y recursos",
+    "description": "The label for category Community & resources in sidebar devSidebar"
+  },
+  "sidebar.devSidebar.category.Servers": {
+    "message": "Servidores",
+    "description": "The label for category Servers in sidebar devSidebar"
+  },
+  "sidebar.devSidebar.link.💬 Community Chat": {
+    "message": "💬 Chat de la comunidad",
+    "description": "The label for link 💬 Community Chat in sidebar devSidebar, linking to https://app.element.io/#/room/#owncast.support:matrix.org"
+  },
+  "sidebar.devSidebar.link.📓 GitHub Repository": {
+    "message": "📓 Repositorio de GitHub",
+    "description": "The label for link 📓 GitHub Repository in sidebar devSidebar, linking to https://github.com/owncast/owncast"
+  },
+  "sidebar.devSidebar.link.📝 Issue Tracker": {
+    "message": "📝 Seguimiento de problemas",
+    "description": "The label for link 📝 Issue Tracker in sidebar devSidebar, linking to https://github.com/owncast/owncast/issues"
+  },
+  "sidebar.devSidebar.link.🗣️ Discussion Forum": {
+    "message": "🗣️ Foro de discusión",
+    "description": "The label for link 🗣️ Discussion Forum in sidebar devSidebar, linking to https://github.com/owncast/owncast/discussions"
+  },
+  "sidebar.devSidebar.link.📕 Web Storybook": {
+    "message": "📕 Web Storybook",
+    "description": "The label for link 📕 Web Storybook in sidebar devSidebar, linking to https://ui.owncast.online"
+  },
+  "sidebar.devSidebar.link.🎨 Penpot Design": {
+    "message": "🎨 Diseño de Penpot",
+    "description": "The label for link 🎨 Penpot Design in sidebar devSidebar, linking to https://design.penpot.app"
+  },
+  "sidebar.devSidebar.link.🛍️ Merch Store": {
+    "message": "🛍️ Tienda de merch",
+    "description": "The label for link 🛍️ Merch Store in sidebar devSidebar, linking to https://merch.owncast.online"
+  },
+  "sidebar.devSidebar.link.📺 Demo Server": {
+    "message": "📺 Servidor de demostración",
+    "description": "The label for link 📺 Demo Server in sidebar devSidebar, linking to https://watch.owncast.online"
+  },
+  "sidebar.devSidebar.link.🌙 Nightly": {
+    "message": "🌙 Nocturno",
+    "description": "The label for link 🌙 Nightly in sidebar devSidebar, linking to https://nightly.owncast.tv"
+  },
+  "sidebar.devSidebar.doc.Documents": {
+    "message": "Documentos",
+    "description": "The label for the doc item Documents in sidebar devSidebar, linking to the doc index"
+  }
+}

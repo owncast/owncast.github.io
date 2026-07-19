@@ -1,0 +1,232 @@
+---
+title: Was Sie benötigen, um Owncast auszuführen
+description: Es gibt keine strikten Regeln dafür, wie viele Ressourcen Owncast benötigt, da es von Ihrer Konfiguration und Ihren Anforderungen abhängt, aber hier sind einige Beispiele.
+sidebar_position: 200
+sidebar_label: Was Sie benötigen, um Owncast auszuführen
+hide_table_of_contents: false
+tags:
+  - Ressourcen
+  - Anforderungen
+  - Bandbreite
+  - CPU
+  - Hosting
+  - Festplatte
+  - Bitrate
+  - Bildrate
+  - Durchschleifen
+  - Skalierung
+  - Objektspeicher
+  - CDN
+---
+
+import ResourcesCalculator from "@site/src/components/ResourcesCalculator";
+
+Es ist unmöglich, eine pauschale Antwort darauf zu geben, welche Anforderungen Sie benötigen, um Owncast auszuführen, oder was es kosten wird. Es ist Ihr Server, und es liegt ganz bei Ihnen, wie Sie ihn konfigurieren und in welchem Umfeld Sie ihn betreiben möchten. Jede Umgebung hat unterschiedliche Leistungen, Preise und Funktionen.
+
+---
+
+## Grundkenntnisse
+
+Es ist sehr hilfreich für Sie, die Grundlagen des Video-Streamings zu verstehen.
+
+* **CPU**: Wird verwendet, um das Video in mehrere Qualitäten zu transcoden, damit die Zuschauer es in unterschiedlichen Netzwerken mit verschiedenen Geschwindigkeiten ansehen können.
+* **Netzwerkbandbreite**: Wird verwendet, um das Video an Ihre Zuschauer zu verteilen.
+
+### Die Anzahl der Zuschauer hat keinen Einfluss auf die CPU-Nutzung
+
+Wenn Sie das wissen, sehen Sie, dass **der CPU-Verbrauch unabhängig von der Anzahl der Zuschauer gleich bleibt**. 0 oder 100, die CPU führt weiterhin die Arbeit aus. Denken Sie daran, wie beim Erstellen einer ZIP-Datei. Wenn Sie eine 100MB große Datei haben und Sie sie zippen, sodass sie 70MB groß wird, können Sie diese 70MB-Datei an so viele Personen senden, wie Sie möchten, ohne die Datei für jede Person erneut zu zippen. Aber Sie müssen die Datei dennoch für jede Person separat senden, was für jede Übertragung Netzwerkbandbreite erfordert. Wenn Sie jedoch einigen Personen eine 70MB-Version und anderen eine 50MB-Version senden möchten, müssen Sie zwei separate Dateien erstellen. Diese 50MB-Version wird länger dauern und mehr CPU benötigen, um sie zu erstellen, aufgrund der zusätzlichen Arbeit, die erforderlich ist, um die Datei weiter zu komprimieren. Das ist dasselbe bei Videos. Je mehr Arbeit erforderlich ist, um Ihr Video zu kodieren, desto mehr CPU wird benötigt. Im Allgemeinen gilt: Je mehr Sie die Größe und Bitrate Ihres Videos reduzieren müssen, desto mehr CPU wird verbraucht. Aber niedrigere Bitrate/Qualitätsversionen Ihres Streams anzubieten, ist wichtig, um mehr Zuschauern auf der ganzen Welt zu ermöglichen, ihn über jedes Netzwerk zu sehen.
+
+### Ihre Upload-Bandbreite als Streamer
+
+Bevor Ihr Server das Video an die Zuschauer verteilen kann, müssen Sie Ihren Stream an den Server senden. Das erfordert **Upload-Bandbreite** von dort, wo Sie streamen. Wenn Sie mit 5000kbps streamen, benötigen Sie eine Upload-Geschwindigkeit, die diese Rate zuverlässig aufrechterhält.
+
+**Faustregel**: Ihre Upload-Geschwindigkeit sollte mindestens **1,5x Ihrer Stream-Bitrate** betragen, um Schwankungen und Overhead Rechnung zu tragen. Bei einem 5000kbps Stream sollten Sie mindestens 7,5 Mbps Upload anstreben.
+
+| Streaming-Bitrate | Minimale Upload-Geschwindigkeit |
+| ----------------- | ------------------------------- |
+| 2500 kbps         | 4 Mbps                          |
+| 4000 kbps         | 6 Mbps                          |
+| 5000 kbps         | 7,5 Mbps                        |
+| 6000 kbps         | 9 Mbps                          |
+| 8000 kbps         | 12 Mbps                         |
+
+**Wichtige Überlegungen:**
+
+* **Heim-Internet ist oft asymmetrisch**: Die meisten Wohnanschlüsse haben viel schnellere Download- als Upload-Geschwindigkeiten. Ein "100 Mbps"-Plan hat möglicherweise nur 10-20 Mbps Upload. Überprüfen Sie Ihre tatsächliche Upload-Geschwindigkeit bei [speedtest.net](https://www.speedtest.net/) oder ähnlich.
+* **Geteilte Verbindungen**: Wenn andere in Ihrem Netzwerk Bandbreite verwenden, während Sie streamen, verringert sich Ihre verfügbare Upload-Bandbreite.
+* **Verwenden Sie eine kabelgebundene Verbindung**: WLAN erhöht die Latenz und Instabilität. Eine kabelgebundene Ethernet-Verbindung zu Ihrem Router wird dringend für das Streaming empfohlen.
+* **Dies ist getrennt von der Server-Bandbreite**: Ihr Upload überträgt den Stream an den Server. Der Server benötigt dann seine eigene Bandbreite, um an die Zuschauer zu verteilen.
+
+## Beispiel-Szenario
+
+Jetzt, da Sie die Grundlagen verstanden haben, lassen Sie uns ein Beispiel verwenden, um zu veranschaulichen, wie Ihre Konfiguration die Ressourcen Ihres Servers und vor allem das Erlebnis Ihrer Zuschauer beeinflussen kann. Es ist ein wenig vereinfacht und die tatsächlichen Zahlen können in der Realität variieren, aber es könnte helfen, die Frage zu beantworten: "Ungefähr wie viel Bandbreite und CPU wird Owncast verwenden?"
+
+Sie haben Ihre Broadcasting-Quelle (wie OBS) so konfiguriert, dass sie an Ihre Owncast-Instanz mit **5000kbps** streamt. Sie haben **25 Zuschauer**. **5** von ihnen sind in langsamen oder mobilen Netzwerken, **17** von ihnen haben schnelles, stabiles Internet, und **3** von ihnen haben meistens schnelles Internet, dessen Geschwindigkeit schwankt. Alle 25 Zuschauer haben einen gesamten Stream gesehen, der zwei Stunden dauert. Sie haben einen Hosting-Anbieter, der Ihnen 4 TB Bandbreite pro Monat bietet.
+
+### Bieten Sie eine hoch- und niedrigqualitative Option an
+
+Sie entscheiden sich, sowohl eine hochwertige als auch eine niedrigere Qualitätsoption anzubieten, und Sie setzen die hohe Qualität auf 5000kbps und die niedrige Qualität auf 1500kbps.
+
+**Wie viel Bandbreite wird auf Ihrem Server für diesen Stream verwendet?**
+
+| Bitrate                                   | Dauer         | Zuschauer | Gesamt                     |
+| ----------------------------------------- | ------------- | --------- | -------------------------- |
+| 0,000625 Gigabyte pro Sekunde (5000kbps)  | 7200 Sekunden | 20        | 90 Gigabyte                |
+| 0,0001875 Gigabyte pro Sekunde (1500kbps) | 7200 Sekunden | 5         | 6,75 Gigabyte              |
+|                                           |               |           | **Gesamt**: 96,75 Gigabyte |
+
+**Welche Spitzen-Netzwerkgeschwindigkeit benötigt Ihr Server?**
+
+Ihr Server muss in der Lage sein, die kombinierte ausgehende Bitrate an alle Zuschauer gleichzeitig aufrechtzuerhalten. In diesem Szenario: (20 Zuschauer × 5000kbps) + (5 Zuschauer × 1500kbps) = **107,5 Mbps**. Ihr Hosting-Plan muss zumindest so viel ausgehende Durchsatzkapazität unterstützen.
+
+**Wie viel CPU?**
+
+| Qualität | CPU-Nutzung                                              |
+| -------- | -------------------------------------------------------- |
+| 5000kbps | Leicht (minimales Transcoding, entspricht dem Eingang)   |
+| 1500kbps | Moderat (aktives Encodieren zur Reduzierung der Bitrate) |
+
+**Wie ist das Zuschauererlebnis?**
+
+| Qualität | Zuschauer | Erfahrung |
+| -------- | --------- | --------- |
+| 5000kbps | 20        | Gut       |
+| 1500kbps | 5         | Gut       |
+
+**Ergebnis**: Sie haben sowohl eine hoch- als auch eine niedrigqualitative Option für Ihre Zuschauer angeboten, sodass diejenigen mit einem langsamen Netzwerk eine Option haben und diejenigen mit einem schnellen Netzwerk, das gelegentlich langsamer wird, bei Bedarf auf die niedrigere Qualität zurückgreifen können. Darüber hinaus haben Sie in diesem Fall fast 16 GB an Bandbreite durch das Angebot einer niedrigen Qualität eingespart. Sie verwenden mehr CPU für ein viel besseres Erlebnis. Sie könnten 42 Mal in einem Monat streamen, bevor Sie Ihr Bandbreitenlimit erreichen.
+
+### Bieten Sie eine einzelne hochqualitative Option an, die die wenigste CPU nutzt
+
+Sie haben entschieden, dass Sie so wenig CPU wie möglich auf Ihrem Owncast-Server verwenden möchten, sodass Sie den Modus "Video Durchschleifen" als einzigen verfügbaren Ausgang aktivieren. Das bedeutet, dass das genaue Video, das Sie von Ihrer lokalen Broadcasting-Software senden, an Ihre Zuschauer gesendet wird.
+
+**Wie viel Bandbreite wird auf Ihrem Server für diesen Stream verwendet?**
+
+| Bitrate                                  | Dauer         | Zuschauer | Gesamt         |
+| ---------------------------------------- | ------------- | --------- | -------------- |
+| 0,000625 Gigabyte pro Sekunde (5000kbps) | 7200 Sekunden | 25        | 112,5 Gigabyte |
+
+**Welche Spitzen-Netzwerkgeschwindigkeit benötigt Ihr Server?**
+
+Alle 25 Zuschauer erhalten denselben 5000kbps Stream: 25 × 5000kbps = **125 Mbps** an sustainierter ausgehender Bandbreite.
+
+**Wie viel CPU?**
+
+| Qualität | CPU-Nutzung                |
+| -------- | -------------------------- |
+| 5000kbps | Minimal (kein Transcoding) |
+
+**Wie ist das Zuschauererlebnis?**
+
+| Qualität | Zuschauer | Erfahrung     |
+| -------- | --------- | ------------- |
+| 5000kbps | 17        | Gut           |
+| 5000kbps | 3         | Schlecht      |
+| 5000kbps | 5         | Unbeobachtbar |
+
+**Ergebnis**: Sie verwenden nicht viel CPU, aber nur **68%** Ihrer Zuschauer haben ein gutes Erlebnis. Die anderen **32%** haben ein schlechtes Erlebnis mit häufigem Puffern, und **20%** von ihnen können Ihren Stream überhaupt nicht ansehen. Sie könnten 36 Mal in einem Monat streamen, bevor Sie Ihr Bandbreitenlimit erreichen.
+
+### Verwenden Sie einen S3-kompatiblen Speicheranbieter für Bandbreite
+
+Wenn Sie Bedenken bezüglich Ihres Hosting-Plans, der Bandbreitenzuweisung oder des Zuschauerwachstums haben, können Sie stattdessen einen S3-Speicheranbieter für die Bandbreitenverantwortung verwenden. In diesem Beispiel entscheiden Sie sich erneut, sowohl eine hoch- als auch eine niedrigqualitative Option anzubieten, und setzen die hohe Qualität auf 5000kbps und die niedrige Qualität auf 1500kbps. Die CPU-Nutzung ist die gleiche wie im obigen Beispiel für die hoch- und niedrigqualitative Option. Erfahren Sie mehr über [S3-kompatiblen Speicher](/docs/storage).
+
+**Wie viel Bandbreite wird auf Ihrem Server für diesen Stream verwendet?**
+
+| Bitrate                                   | Dauer         | Gesamt                    |
+| ----------------------------------------- | ------------- | ------------------------- |
+| 0,000625 Gigabyte pro Sekunde (5000kbps)  | 7200 Sekunden | 4,5 Gigabyte              |
+| 0,0001875 Gigabyte pro Sekunde (1500kbps) | 7200 Sekunden | 1,35 Gigabyte             |
+|                                           |               | **Gesamt**: 5,85 Gigabyte |
+
+**Wie viel ausgehende Bandbreite wird von Ihrem S3-Anbieter für diesen Stream genutzt?**
+
+| Bitrate                                   | Dauer         | Zuschauer | Gesamt                     |
+| ----------------------------------------- | ------------- | --------- | -------------------------- |
+| 0,000625 Gigabyte pro Sekunde (5000kbps)  | 7200 Sekunden | 20        | 90 Gigabyte                |
+| 0,0001875 Gigabyte pro Sekunde (1500kbps) | 7200 Sekunden | 5         | 6,75 Gigabyte              |
+|                                           |               |           | **Gesamt**: 96,75 Gigabyte |
+
+**Welche Spitzen-Netzwerkgeschwindigkeit benötigt Ihr Server?**
+
+Da die Zuschauer von S3 bedient werden, sendet Ihr Server überhaupt kein Video an die Zuschauer. Es benötigt nur genug ausgehende Bandbreite, um jede Qualitätsstream-Variante nach S3 hochzuladen: 5000kbps + 1500kbps = 6500kbps = **6,5 Mbps**. Dies bleibt gleich, egal ob Sie 0 oder 1000 Zuschauer haben. Ihr S3-Anbieter verwaltet den durch den Betrachter sichtbaren Durchsatz, der in diesem Szenario einen Höchstwert von **107,5 Mbps** erreicht - aber das ist deren Infrastruktur, nicht Ihre.
+
+**Ergebnis**: Sie haben sowohl eine hohe als auch eine niedrige Qualitätsoption für Ihre Zuschauer bereitgestellt, sodass diejenigen mit einem langsamen Netzwerk eine Option haben und diejenigen mit einem schnellen Netzwerk, das gelegentlich langsamer werden könnte, bei Bedarf auf die niedrige Qualität zurückgreifen können. Diese Videoqualitäten werden jedoch nicht von Ihrem Owncast-Server bereitgestellt, sondern von einem externen S3-kompatiblen Speicheranbieter. Dies ermöglicht es, Ihre Zuschauerzahl zu erhöhen und zusätzliche Videoqualitäten hinzuzufügen, ohne sich um die Erschöpfung der Bandbreitenzuweisung Ihres Servers sorgen zu müssen. Sie könnten rund um die Uhr ohne Sorgen mit dieser Konfiguration streamen, allerdings würden Sie die gleiche Menge an Serverbandbreite verwenden, ob Sie null Zuschauer oder 100 Zuschauer haben. Ihre CPU-Auslastung wäre die gleiche, als ob Sie das Video direkt von Ihrem Server bereitstellen würden.
+
+## Schnelle Referenz
+
+### Wie viel Bandbreite wird Owncast nutzen?
+
+**Formel**: `(Bitrate in kbps × Dauer in Sekunden × Zuschauer) ÷ 8.000.000 = GB`
+
+**Schnelle Schätzungen für einen 2-stündigen Stream:**
+
+| Bitrate  | 10 Zuschauer | 25 Zuschauer | 50 Zuschauer |
+| -------- | ------------ | ------------ | ------------ |
+| 2000kbps | 18 GB        | 45 GB        | 90 GB        |
+| 4000kbps | 36 GB        | 90 GB        | 180 GB       |
+| 6000kbps | 54 GB        | 135 GB       | 270 GB       |
+
+Das Angebot mehrerer Qualitätsoptionen reduziert die Gesamtbandbreite, da Zuschauer mit langsameren Verbindungen den niedrigeren Bitratestrang nutzen. Die Verwendung von [S3-kompatiblem Speicher](/docs/storage) entlastet die Bandbreite Ihres Servers vollständig.
+
+### Welche maximale Netzwerkgeschwindigkeit benötigt mein Server?
+
+**Formel**: `Bitrate in kbps × Zuschauer ÷ 1.000 = Mbps`
+
+**Schnelle Schätzungen:**
+
+| Bitrate  | 10 Zuschauer | 25 Zuschauer | 50 Zuschauer |
+| -------- | ------------ | ------------ | ------------ |
+| 2000kbps | 20 Mbps      | 50 Mbps      | 100 Mbps     |
+| 4000kbps | 40 Mbps      | 100 Mbps     | 200 Mbps     |
+| 6000kbps | 60 Mbps      | 150 Mbps     | 300 Mbps     |
+
+Dies ist der nachhaltige Ausgangsdurchsatz, den Ihr Server während eines Streams benötigt. Wenn Sie mehrere Qualitätsoptionen anbieten, berechnen Sie jede Qualität separat und addieren Sie sie zusammen. Die meisten VPS-Anbieter bieten 1-Gbps-Ports, die ungefähr 200 Zuschauer bei 5000kbps unterstützen. Wenn Ihre Zuschauer die Netzwerkkapazität Ihres Servers überschreiten, werden sie Pufferung erfahren. Die Verwendung von [S3-kompatiblem Speicher](/docs/storage) beseitigt diese Grenze für Ihren Server.
+
+### Wie viel CPU wird Owncast nutzen?
+
+**Schneller Leitfaden:**
+
+| Konfiguration                           | CPU-Nutzung |
+| --------------------------------------- | ----------- |
+| Einzelner Durchleitungsqualität         | Minimal     |
+| Einzelne transkodierte Qualität         | Leicht      |
+| Zwei Qualitäten (hoch + niedrig)        | Moderat     |
+| Drei Qualitäten oder starke Kompression | Schwer      |
+
+Ein einzelner CPU-Kern kann typischerweise eine transkodierte Ausgabequalität bei 30fps verarbeiten. Durchleitungsmodus (keine Transkodierung) benötigt unabhängig von der Bitrate sehr wenig CPU. Natürlich sind alle CPUs hinsichtlich der Leistung über Hardware und Hosting-Anbieter unterschiedlich, sodass dies stark variiert und keine Garantie gegeben werden kann. Sie müssen experimentieren, um herauszufinden, was am besten für Ihre Bedürfnisse funktioniert.
+
+### Erhöht sich die CPU-Nutzung mit mehr Zuschauern?
+
+Nein. Für die Video-Encoding bleibt die CPU-Nutzung konstant, egal ob Sie 1 Zuschauer oder 1.000 haben. Das Video wird einmal kodiert und an alle Zuschauer verteilt. Nur die Serverbandbreite erhöht sich mit der Zuschauerzahl. Die CPU-Nutzung kann mit mehr Zuschauern leicht steigen, aufgrund von Chataktivitäten und anderem Overhead, aber das ist im Vergleich zur Video-Encoding minimal.
+
+### Wie beeinflusst die Bildrate die CPU-Nutzung?
+
+Höhere Bildraten erfordern mehr CPU. Die Reduzierung der Bildrate ist ein effektiver Weg, um die CPU-Nutzung zu senken:
+
+| Bildfrequenz | Relative CPU |
+| ------------ | ------------ |
+| 60 fps       | 2x Baseline  |
+| 30 fps       | 1x Baseline  |
+| 24 fps       | 0.8x         |
+| 15 fps       | 0.5x         |
+
+Erwägen Sie, niedrigere Bildraten (24fps) für niedrigere Qualitätsausgaben zu verwenden, um CPU zu sparen und gleichzeitig eine reibungslose Wiedergabe für Zuschauer mit langsamen Verbindungen zu gewährleisten.
+
+### Wie viel Speicherplatz wird Owncast nutzen?
+
+Fast gar keinen. Owncast streamt in Echtzeit und bereinigt Videosegmente, während sie bereitgestellt werden. Sie müssen nicht für den Videospeicher planen.
+
+### Sollte ich nur die höchste Qualität anbieten, um es einfach zu halten?
+
+Die ausschließliche Bereitstellung von Videoinhalten mit hoher Bitrate schließt Zuschauer in Mobilnetzen und mit langsameren Verbindungen aus. Ein 5000kbps Stream benötigt eine stabile Verbindung von 5+ Mbps, um ohne Pufferung ansehen zu können. Viele Zuschauer haben das nicht, insbesondere mobil.
+
+**Empfehlung**: Bieten Sie immer mindestens zwei Qualitätsoptionen an. Eine hohe Qualität (4000-6000kbps) für Zuschauer mit schnellen Verbindungen und eine niedrige Qualität (1000-2000kbps) für alle anderen. Ihre Zuschauer werden es Ihnen danken.
+
+## Ressourcenrechner
+
+Verwenden Sie diesen interaktiven Rechner, um Ihre Bandbreiten- und CPU-Anforderungen basierend auf Ihrer spezifischen Streaming-Konfiguration zu schätzen:
+
+<ResourcesCalculator />
+
+## Mehr erfahren
+
+Besuchen Sie die detaillierte [Videodokumentation](/docs/video) um mehr darüber zu erfahren, wie Owncast Video verwaltet.

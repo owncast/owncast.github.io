@@ -1,0 +1,117 @@
+---
+title: Fonctionnalités sociales d'Owncast
+slug: /social
+description: Permettre aux gens de suivre votre serveur, de savoir quand vous êtes en direct, de partager et d'interagir avec votre flux.
+sidebar_position: 1
+sidebar_label: Fonctionnalités sociales
+hide_table_of_contents: false
+tags:
+  - social
+  - fediverse
+  - mastodon
+  - pleroma
+  - suivre
+  - aimer
+  - partager
+  - citer
+  - suiveurs
+  - fediauth
+  - authentification
+  - engagement
+  - pixelfed
+---
+
+Owncast permet aux gens de suivre, d'interagir avec et de partager votre flux avec d'autres sur ce qui est connu sous le nom de [**Le Fediverse**](the-fediverse.mdx), un réseau décentralisé de services.
+
+## Ce qu'il prend en charge
+
+1. Les gens peuvent suivre votre serveur.
+2. Vos suiveurs apparaissent dans l'onglet "Suiveurs" sur la page de votre flux.
+3. Vous pouvez envoyer des messages à vos suiveurs via l'administration.
+4. Vos suiveurs recevront automatiquement une notification lorsque vous serez en direct.
+5. Vos suiveurs peuvent partager que vous êtes en direct avec leur cercle de suiveurs.
+6. Des actions telles que suivre, aimer ou partager sont exposées dans le chat de votre flux.
+
+## Pourquoi utiliser les fonctionnalités sociales d'Owncast ?
+
+### Posséder votre audience
+
+Contrairement aux plateformes de streaming traditionnelles, il n'y a aucun risque que des changements d'algorithme cachent votre contenu, des changements soudains de politiques de plateforme, ou de perdre l'accès à votre communauté. Vos suiveurs vous appartiennent.
+
+### Atteindre au-delà de votre site
+
+Votre flux devient découvrable à travers l'ensemble du réseau Fediverse. Des millions d'utilisateurs sur Mastodon, Pixelfed et d'autres plateformes fédérées. Lorsque vos suiveurs partagent que vous êtes en direct, cela se propage organiquement à travers leurs réseaux sans que des algorithmes ne limitent votre portée.
+
+### Aucun compte supplémentaire nécessaire
+
+Votre audience n'a pas besoin de créer un compte supplémentaire sur une autre plateforme. S'ils utilisent déjà un service Fediverse comme Mastodon ou Pleroma, ils peuvent suivre votre serveur Owncast avec leur compte existant.
+
+### Communication directe
+
+Envoyez des mises à jour directement à vos suiveurs concernant les flux à venir, les événements spéciaux ou les annonces importantes. Pas de concurrence avec des millions d'autres créateurs dans un flux algorithmique, vos suiveurs voient vos messages dans l'ordre chronologique là où ils se trouvent déjà.
+
+### Construction de communauté
+
+L'engagement provenant du Fediverse (suivis, likes, partages) apparaît directement dans le chat de votre flux, créant de l'excitation et une preuve sociale. Vos suiveurs et partages sont en avant-plan, les faisant se sentir valorisés en tant que membres de votre communauté et encourageant les autres à partager et à suivre également.
+
+### FediAuth
+
+Activer FediAuth permet à vos spectateurs de s'authentifier en utilisant leurs comptes Fediverse lorsqu'ils participent au chat. Cela aide à maintenir une présence de chat cohérente à travers les sessions, les navigateurs et les appareils. C'est particulièrement utile pour les modérateurs.
+
+## Comment les gens suivent votre serveur Owncast ?
+
+Toute personne sur le Fediverse utilisant un service compatible avec le suivi d'Owncast, comme [Pleroma](https://pleroma.social/) ou [Mastodon](https://joinmastodon.org/) peut suivre votre serveur.
+
+[En savoir plus sur le Fediverse](./the-fediverse.mdx).
+
+## Comment cela fonctionne
+
+Le Fediverse est un ensemble de serveurs décentralisés et interconnectés utilisés pour le réseautage social, le microblogging et plus encore. Chaque serveur est hébergé indépendamment, mais ils communiquent entre eux.
+
+Chaque instance d'Owncast fonctionne comme un serveur totalement autonome avec un seul utilisateur pouvant participer au Fediverse, échangeant des publications et des notifications avec tout utilisateur participant intéressé par celles-ci.
+
+Tout utilisateur sur le Fediverse qui se trouve sur un serveur compatible peut suivre n'importe quel serveur Owncast qui a cette fonctionnalité activée.
+
+## Activation des fonctionnalités sociales
+
+Les fonctionnalités sociales sont désactivées par défaut. Pour les activer sur votre serveur Owncast, visitez la page *Configuration -> Social* .
+
+### Exigences
+
+Vous devez héberger votre serveur Owncast derrière SSL, avec une URL *https*. Configurez un [proxy HTTP](/docs/sslproxies/nginx) si nécessaire.
+
+### Configuration
+
+Visitez la page *Configuration -> Social* pour configurer.
+
+1. Vous pouvez définir le nom d'utilisateur sous lequel vous serez vu.
+2. Vous pouvez définir le texte qui est envoyé chaque fois que vous êtes en direct.
+3. Vous pouvez activer ou désactiver le "Mode privé".
+
+<img src="/docs/img/admin-social-features.png" alt="La page de configuration des fonctionnalités sociales dans l'admin, avec l'URL du serveur, le basculement d'activation des fonctionnalités sociales, le basculement du mode privé, le nom d'utilisateur et les champs du message de démarrage." width="75%" />
+
+:::warning
+Une fois que vous définissez le nom de votre serveur et votre nom d'utilisateur, c'est ainsi que les gens vous verront. Si vous changez l'un de ces deux paramètres, vous apparaîtrez comme un utilisateur différent et vos suiveurs existants peuvent ne plus vous suivre. Il n'est pas recommandé de changer cela après les avoir configurés.
+:::
+
+### Mode privé
+
+Activer le *Mode Privé* exigera que ceux qui souhaitent suivre votre serveur soient approuvés par vous au préalable. L'approbation des suiveurs peut se faire via la section *Suiveurs* dans l'admin.
+
+Le Mode Privé rend également tous les messages que vous envoyez uniquement visibles à vos suiveurs, pas aux autres, car ils ne peuvent pas être partagés.
+
+### Citer des publications
+
+Les personnes sur Mastodon, GoToSocial et d'autres plateformes qui supportent les citations de publications peuvent citer vos publications dans les leurs, ajoutant leurs commentaires tout en montrant votre publication originale à leurs suiveurs. Owncast approuve automatiquement ces citations en utilisant le flux de consentement que le Fediverse utilise, donc les citations de vos publications s'affichent correctement partout.
+
+Si vous ne souhaitez pas permettre cela, désactivez *Autoriser les citations* sur la page *Configuration -> Social* . Les nouvelles publications ne proposeront plus de citation et toutes les demandes de citation seront refusées. Les publications ne sont également pas citables tant que le *Mode Privé* est activé, car elles ne sont visibles que par vos suiveurs.
+
+## Composer des messages à vos suiveurs
+
+En cliquant sur le bouton *Composer* dans l'en-tête de l'admin, vous pouvez créer un message à envoyer à vos suiveurs. Cela pourrait être utilisé pour informer les gens lorsque vous prévoyez de streamer, ou pour rappeler aux gens que vous êtes toujours en direct.
+
+## Engagement
+
+Si quelqu'un **vous suit**, **aime** une publication que vous envoyez, ou **partage** l'une de vos publications pendant qu'un flux est en direct, cela affichera que ces actions ont eu lieu dans le flux de chat. Cela peut être désactivé dans les paramètres sociaux.
+
+Les événements de suivi du Fediverse sont également disponibles pour les intégrations tierces via [webhooks](/docs/api/webhooks#fediverse_engagement_follow).

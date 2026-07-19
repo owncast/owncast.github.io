@@ -1,0 +1,29 @@
+---
+title: Owncast Web-APIs
+description: Integrieren Sie externen Code mit Owncast über HTTP, um Webhooks zu verwenden, um Ereignisse zu empfangen und über Token-APIs Aktionen zu senden.
+sidebar_position: 200
+slug: /api/
+---
+
+Die Web-APIs sind die Möglichkeit, wie Code, der außerhalb von Owncast läuft, über HTTP mit Ihrem Server kommuniziert. Sie kommen in zwei Hälften:
+
+* [**Webhooks**](/docs/api/webhooks) benachrichtigen Ihre Anwendung, wenn etwas im Stream passiert, wie z. B. die Ankunft einer Chatnachricht oder der Stream live geht. Owncast sendet einen HTTP `POST` an einen Endpunkt, den Sie hosten.
+* [**APIs**](/docs/api/requests) ermöglichen Ihrer Anwendung, Aktionen zurück in Owncast zu senden, wie z. B. das Posten einer Chatnachricht oder das Aktualisieren des Streamtitels. Anfragen werden mit einem Zugriffstoken authentifiziert.
+
+Um Webhooks zu empfangen, erstellen Sie einen Endpunkt auf einem beliebigen Webserver, in beliebiger Sprache, der einen HTTP `POST` akzeptiert. Jedes Ereignis-Payload trägt ein `type`-Feld, das das Ereignis benennt, und ein `eventData`-Objekt mit seinen Details.
+
+## Beispiel
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eWE7HGJQI_4?start=547" title="YouTube-Video-Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+
+## API-Referenz
+
+Durchsuchen Sie jeden Endpunkt in der [veröffentlichten API](/api/release) oder der [in Entwicklung befindlichen API](/api/development).
+
+## Entwicklungsumgebung
+
+Hosten Sie Ihren Code überall und schreiben Sie ihn in jeder Sprache. Es muss von Ihrem Owncast-Server erreichbar sein, um Webhooks zu empfangen, und in der Lage sein, Ihren Server zu erreichen, um die APIs aufzurufen. Beim lokalen Entwickeln bietet ein tunneling Tool wie [ngrok](https://ngrok.com/) oder [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) Ihrer Maschine eine temporäre öffentliche URL, sodass Owncast Webhooks dazu liefern kann. Wenn Sie bereit sind, verschieben Sie den Code zu einem beliebigen Server oder Hosting-Anbieter, den Sie möchten.
+
+## Führen Sie Ihren Code stattdessen innerhalb von Owncast aus
+
+Wenn Sie möchten, dass Ihr Code innerhalb des Servers läuft, anstatt ihn über HTTP aufzurufen, sind [Plugins](/docs/plugins) die andere Möglichkeit, dies zu tun. Siehe [Möglichkeiten zur Erweiterung von Owncast](/docs/extend) für einen Vergleich der beiden Ansätze.

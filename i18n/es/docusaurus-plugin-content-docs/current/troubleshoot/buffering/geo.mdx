@@ -1,0 +1,47 @@
+---
+title: Los espectadores más alejados están experimentando almacenamiento en búfer
+description: ""
+tags:
+  - almacenamiento en búfer
+  - geo
+  - visualización
+---
+
+import RelocatePhysicalServer from "../../troubleshoot/shared/relocate-physical-server.md";
+import AddLowerQualityOutputs from "../../troubleshoot/shared/add-lower-quality-outputs.md";
+import UseCDN from "../../troubleshoot/shared/use-cdn.md";
+import UseStorage from "../../troubleshoot/shared/use-storage.md";
+
+import { IncludeMarkdown } from "@site/src/components";
+
+Debido a que el video en vivo puede tener tolerancias muy estrechas, es posible que la ubicación física de los espectadores en comparación con la ubicación de su servidor pueda causar suficientes retrasos para que el espectador experimente almacenamiento en búfer.
+
+## Reubique su servidor
+
+<IncludeMarkdown>
+  <RelocatePhysicalServer />
+</IncludeMarkdown>
+
+## Agregue calidades de salida adicionales más bajas
+
+<IncludeMarkdown>
+  <AddLowerQualityOutputs />
+</IncludeMarkdown>
+
+Después de leer lo siguiente, también puede encontrar útiles consejos navegando por la [Guía de Solución de Problemas de OBS](https://github.com/obsproject/obs-studio/wiki/Stream-Buffering-Issues/d65033b24e4a4c81c87323f05a59c12f78de620b), incluso si no usa OBS.
+
+## El espectador cambiará entre calidades según sea necesario
+
+Utilizando una tecnología llamada Streaming de Tasa de Bits Adaptativa, el espectador cambiará de forma transparente entre diferentes calidades de video según sea necesario. Lea más sobre cómo esto, y otras partes del video, funcionan leyendo nuestro [Documento de Video](/docs/video).
+
+## Use almacenamiento externo
+
+<IncludeMarkdown>
+  <UseStorage />
+</IncludeMarkdown>
+
+## Use un CDN
+
+<IncludeMarkdown>
+  <UseCDN />
+</IncludeMarkdown>

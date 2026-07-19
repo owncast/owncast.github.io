@@ -1,0 +1,35 @@
+---
+title: Configura tu clave de transmisión y tu primera transmisión
+description: Aprende a iniciar sesión, cambiar tu clave de transmisión y comenzar tu primera transmisión con Owncast.
+sidebar_position: 200
+sidebar_label: Configura tu clave de transmisión y tu primera transmisión
+---
+
+Cualquier software que ya estés utilizando para la transmisión en vivo es probable que sea compatible con Owncast. Visita nuestra página de [software de transmisión](/docs/broadcasting) para ver algunos programas específicos y cómo se configuran.
+
+import { IncludeMarkdown } from "@site/src/components";
+import AdminLogin from "../shared/admin-login.md";
+
+<IncludeMarkdown>
+  <AdminLogin />
+</IncludeMarkdown>
+
+## Clave de transmisión
+
+Para comenzar a transmitir necesitas dos cosas: la URL RTMP de tu servidor Owncast (`rtmp://tu_servidor/live`) y una clave de transmisión. La clave de transmisión y la contraseña de administrador tienen como valor predeterminado `abc123`, pero son configuraciones separadas. La clave de transmisión permite a tu software de transmisión publicar video. La contraseña de administrador te permite ingresar al panel de administración. Cambia ambos tan pronto como puedas.
+
+La contraseña de administrador y las claves de transmisión se gestionan de forma independiente, así que puedes agregar tantas claves de transmisión como desees. La mayoría de las personas solo necesitan una, pero múltiples claves son útiles en algunas configuraciones, como dar a un co-anfitrión su propia clave que puedes revocar más tarde.
+
+Agregas y eliminas claves de transmisión en la página de configuración del servidor de administración.
+
+<img src="/docs/img/admin-stream-keys.png" alt="La pestaña de claves de transmisión de la página de configuración del servidor, que muestra la clave de transmisión predeterminada y un botón para agregar más" width="80%" />
+
+## Qué configurar a continuación
+
+Algunos elementos comunes que muchas personas actualizan después de instalar Owncast son:
+
+* El nombre de tu sitio, logotipo, descripción y enlaces externos que se muestran en el [sitio web](/docs/configuration/website).
+* Tu **clave de transmisión**, que tu software de transmisión utiliza para publicar video, y tu **contraseña de administrador**, que usas para iniciar sesión en el panel de administración.
+* Habilita tu transmisión para que aparezca en el [Directorio de Owncast](/docs/directory).
+
+Lee más sobre [lo que puedes configurar y cómo](/docs/configuration).

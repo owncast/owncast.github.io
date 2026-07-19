@@ -1,0 +1,96 @@
+---
+title: Tous les visionneurs rencontrent des mises en mémoire tampon
+description: Étapes pour le dépannage si tous les visionneurs rencontrent des problèmes de mise en mémoire tampon.
+tags:
+  - tampon
+  - mise en mémoire tampon
+  - roulette de chargement
+  - chargement
+unlisted: true
+related:
+  excludeFromAll: true
+---
+
+import { IncludeMarkdown } from "@site/src/components";
+import HardwareUsage from "../shared/hardware-usage.md";
+import HlsAnalyzer from "../shared/hls-analyzer.md";
+import StreamHealth from "../shared/stream-health.md";
+import BroadcastingSoftware from "../shared/broadcasting-software.md";
+import MatchHighestOutputQuality from "../shared/match-highest-output-quality.md";
+import ReduceVideoQuality from "../shared/reduce-video-quality.md";
+import UseStorage from "../shared/use-storage.md";
+import UseCdn from "../shared/use-cdn.md";
+import RelocatePhysicalServer from "../shared/relocate-physical-server.md";
+import SlowStorageUploads from "../shared/slow-storage-uploads.md";
+
+Lorsque chaque visionneur est en train de mettre en mémoire tampon, le problème est presque toujours du côté du serveur ou de la diffusion plutôt qu'avec la connexion de chaque visionneur. Suivez les étapes ci-dessous dans l'ordre.
+
+Après avoir lu ci-dessous, vous pourriez également trouver des conseils utiles en consultant le [Guide de dépannage OBS](https://github.com/obsproject/obs-studio/wiki/Stream-Buffering-Issues/d65033b24e4a4c81c87323f05a59c12f78de620b), même si vous n'utilisez pas OBS.
+
+## Vérifiez l'utilisation du matériel de votre serveur Owncast
+
+<IncludeMarkdown>
+  <HardwareUsage />
+</IncludeMarkdown>
+
+## Obtenez des informations supplémentaires
+
+<IncludeMarkdown>
+  <StreamHealth />
+</IncludeMarkdown>
+
+<IncludeMarkdown>
+  <HlsAnalyzer />
+</IncludeMarkdown>
+
+## Commencez par votre logiciel de diffusion
+
+### Diffusez votre stream de manière fiable
+
+<IncludeMarkdown>
+  <BroadcastingSoftware />
+</IncludeMarkdown>
+
+### Correspondance de la qualité vidéo
+
+<IncludeMarkdown>
+  <MatchHighestOutputQuality />
+</IncludeMarkdown>
+
+## Augmentez votre tampon de latence
+
+Augmenter les paramètres de votre tampon de latence commencera l'utilisateur plus loin derrière le direct, mais donnera au client plus de vidéos lisibles avant qu'il ne soit bloqué en attendant le direct. Moins de latence est moins efficace et est plus susceptible de créer des mises en mémoire tampon. Vous devrez vérifier à l'aide de [HLS Analyzer](https://hlsanalyzer.com) après avoir augmenté la valeur de votre tampon de latence pour voir si cela a réduit certains avertissements.
+
+Vous devez redémarrer un stream après avoir modifié cette valeur dans les paramètres vidéo d'Owncast.
+
+**Inconvénient**: Augmenter votre latence rend plus difficile l'interaction en direct avec les visionneurs car le délai entre le moment où vous effectuez une action et le moment où ils la voient augmente.
+
+## Réduisez la qualité de votre vidéo
+
+<IncludeMarkdown>
+  <ReduceVideoQuality />
+</IncludeMarkdown>
+
+## Utilisez un stockage externe
+
+<IncludeMarkdown>
+  <UseStorage />
+</IncludeMarkdown>
+
+## Utilisez un CDN
+
+<IncludeMarkdown>
+  <UseCdn />
+</IncludeMarkdown>
+
+## Passez à un serveur plus centralement situé ou hébergé par un fournisseur plus rapide
+
+<IncludeMarkdown>
+  <RelocatePhysicalServer />
+</IncludeMarkdown>
+
+## Si vous rencontrez des téléchargements lents vers un stockage externe
+
+<IncludeMarkdown>
+  <SlowStorageUploads />
+</IncludeMarkdown>

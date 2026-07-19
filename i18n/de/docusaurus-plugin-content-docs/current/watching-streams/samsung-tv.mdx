@@ -1,0 +1,116 @@
+---
+id: geräte-samsung-tv
+title: Samsung Smart-TVs
+slug: /watching-streams/samsung-tv
+sidebar_label: Samsung-TVs
+deviceId: samsung-tv
+deviceType: smart-tv
+reliability: niedrig
+hide_title: true
+tags:
+  - samsung
+  - smart-tv
+  - tizen
+  - fernseher
+  - sehen
+description: |
+  Eingeschränkte Optionen zur Nutzung von Owncast-Streams auf Samsung Smart-TVs aufgrund von Plattformbeschränkungen.
+icon: /images/devices/samsung-tv.svg
+---
+
+import DeviceLayout from "@site/src/components/tv/DeviceLayout";
+import { DeviceOptionsGrid } from "@site/src/components/tv/DeviceOptionsGrid";
+import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard id="browser-samsung" title="Integrierter Browser" difficulty="schwierig" reliability="niedrig" screenshot="/images/devices/samsung-tv/browser-interface.png" screenshotAlt="Benutzeroberfläche des integrierten Browsers von Samsung TV" summary="Versuchen Sie, den integrierten Browser von Samsung TV zu verwenden, um direkt auf Owncast-Streams zuzugreifen.">
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Funktioniert möglicherweise auf neueren Samsung TV-Modellen.</li>
+      <li>Eingeschränkte Browserfähigkeiten auf den meisten Samsung-TVs.</li>
+      <li>Keine Garantie für die Kompatibilität.</li>
+    </ul>
+
+    <details>
+      <summary>Schritt-für-Schritt-Anleitungen anzeigen</summary>
+
+      1. Öffnen Sie die **Webbrowser**-App auf Ihrem Samsung TV (falls verfügbar).
+      2. Navigieren Sie zu Ihrer Owncast-Server-URL.
+      3. Versuchen Sie, den Stream direkt im Browser abzuspielen.
+
+      **Hinweis:** Samsung-TVs haben eingeschränkte Unterstützung für webbasierte Video-Streaming und diese Methode funktioniert möglicherweise nicht zuverlässig.
+
+    </details>
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard id="casting-samsung" title="Screen Mirroring/Casting" difficulty="mittel" reliability="mittel" screenshot="/images/devices/samsung-tv/screen-mirroring.png" screenshotAlt="Samsung TV Screen Mirroring Einrichtung" summary="Verwenden Sie Screen Mirroring von Ihrem Telefon oder Computer, um Owncast-Streams anzuzeigen.">
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Funktioniert mit der Smart View-App von Samsung oder integriertem Screen Mirroring.</li>
+      <li>Benötigt ein kompatibles Smartphone oder einen Computer.</li>
+      <li>Kann eine gewisse Latenz einführen.</li>
+    </ul>
+
+    <details>
+      <summary>Schritt-für-Schritt-Anleitungen anzeigen</summary>
+
+      1. Stellen Sie sicher, dass Ihr Samsung TV und Gerät im selben WLAN sind.
+      2. Öffnen Sie den Owncast-Stream auf Ihrem Telefon oder Computer.
+      3. Verwenden Sie die Screen Mirroring-Funktionen:
+         * **Android**: Verwenden Sie Smart View oder Screen Mirroring
+         * **iOS**: Verwenden Sie AirPlay (wenn vom TV unterstützt)
+         * **Windows**: Verwenden Sie Projektieren/Casten auf Gerät
+      4. Wählen Sie Ihren Samsung TV aus der Liste der verfügbaren Geräte aus.
+
+    </details>
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard id="external-device-samsung" title="Externes Streaming-Gerät" badge="Empfohlen" difficulty="einfach" reliability="hoch" screenshot="/images/devices/samsung-tv/external-devices.png" screenshotAlt="Externe Streaming-Geräte, die mit Samsung TV verbunden sind" summary="Verbinden Sie ein dediziertes Streaming-Gerät mit Ihrem Samsung TV, um eine bessere Owncast-Kompatibilität zu erhalten.">
+
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Viel zuverlässiger als die integrierten Samsung TV-Apps.</li>
+      <li>Breite Auswahl an kompatiblen Apps und Optionen.</li>
+      <li>Bessere langfristige Unterstützung und Updates.</li>
+    </ul>
+
+    Erwägen Sie, eines dieser Geräte mit Ihrem Samsung TV zu verbinden:
+    * Apple TV
+    * Roku
+    * Amazon Fire TV Stick
+    * Google Chromecast
+    * NVIDIA Shield TV
+
+    Befolgen Sie dann die Anweisungen für Ihr ausgewähltes Streaming-Gerät.
+
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

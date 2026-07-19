@@ -1,0 +1,42 @@
+---
+title: Listez votre stream dans l'annuaire Owncast
+description: L'annuaire Owncast est une liste centralisée de streams pour que les gens puissent découvrir.
+sidebar_position: 600
+sidebar_label: Listez votre stream dans l'annuaire Owncast
+tags:
+  - annuaire
+  - viewers
+  - découvrir
+  - découverte
+  - découvrabilité
+  - en direct
+  - iptv
+  - m3u8
+---
+
+Pour aider les gens à découvrir des streams des utilisateurs d'Owncast, nous avons un annuaire Owncast optionnel situé à https://owncast.directory où vous pouvez vous ajouter.
+
+1. Visitez les paramètres **"Général"** dans l'administration.
+2. Définissez l'URL publique de votre instance Owncast à laquelle vous souhaitez que les gens soient liés.
+3. Définissez le **"À propos"** avec une brève description de votre stream.
+4. Définissez les **tags** associés au contenu que vous diffusez.
+5. Marquez si votre contenu est *Non Sécure pour le Travail* (nsfw).
+
+## Si votre serveur n'apparaît pas dans l'annuaire
+
+1. C'est sur option, donc assurez-vous de suivre les [instructions de configuration](/docs/directory) pour activer l'annuaire pour votre serveur.
+2. Il faudra environ 5 minutes pour que votre serveur apparaisse la première fois que vous diffusez après avoir activé cette fonctionnalité.
+3. Vous pouvez vouloir exécuter votre serveur avec `owncast --enableVerboseLogging` pour voir quels erreurs apparaissent.
+4. Si vous étiez inscrit, mais ne figurez plus, vous devrez peut-être réinitialiser votre inscription au serveur dans les paramètres du serveur de l'administration.
+5. Si vous avez récemment changé l'URL de votre serveur, réinitialisez votre inscription dans vos paramètres de serveur.
+6. S'il y a un problème qui vous empêche d'être listé [veuillez déposer un problème sur GitHub](https://github.com/owncast/owncast/issues) afin que nous puissions aider à résoudre ou réinitialiser votre inscription à l'annuaire.
+
+## Parcourez l'annuaire Owncast
+
+Si votre application a ce qu'on appelle souvent le support "IPTV" ou M3U, vous pouvez parcourir directement l'annuaire en ajoutant `https://owncast.directory/api/iptv` à l'application. Toutes les applications ne supportent pas cela.
+
+De plus, il existe certaines applications natives qui vous permettent de parcourir l'annuaire Owncast et de regarder des streams directement à partir de l'application. Lisez-en plus sur [regarder des streams](/docs/watching-streams/).
+
+## Construisez votre propre annuaire
+
+L'annuaire Owncast n'est pas le seul possible. Chaque serveur Owncast diffuse son statut en direct via ActivityPub, donc vous pouvez faire fonctionner votre propre annuaire ou agrégateur qui suit quels serveurs diffusent. Voir [comment construire un annuaire des streams Owncast](/docs/api/activitypub#building-a-directory-of-owncast-streams) pour le protocole, et le dépôt [owncast-directory-example](https://github.com/owncast/owncast-directory-example) pour une petite référence exécutable.

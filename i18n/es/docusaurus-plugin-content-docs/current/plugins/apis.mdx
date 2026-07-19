@@ -1,0 +1,747 @@
+---
+title: APIs de Owncast
+description: Cada método de owncast.* que tu complemento puede llamar desde dentro de un controlador, lo que devuelve y qué permiso necesita.
+sidebar_position: 5
+sidebar_label: APIs
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - complementos
+  - apis
+  - referencia
+  - chat
+  - almacenamiento
+  - obtener
+  - notificaciones
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+El tiempo de ejecución del complemento de Owncast expone un único global, `owncast`, con las funciones anfitrionas que tu complemento puede llamar. La mayoría de los métodos requieren el permiso correspondiente en tu manifiesto, y llamarlo sin él genera un error claro. Algunos son **ambientales** y no necesitan permiso: temporizadores, lectura de activos empaquetados y `owncast.config.get`.
+
+Las llamadas se muestran para ambos SDK, elige tu lenguaje con las pestañas. Consulta [JavaScript](/docs/plugins/sdks/javascript) o [Python](/docs/plugins/sdks/python) para la configuración. (Los nombres de métodos de JavaScript son camelCase, Python usa `snake_case`, así que `sendAction` se convierte en `send_action`, y así sucesivamente).
+
+## Chat
+
+¿Construyendo un bot de chat, herramienta de moderación o filtro? Comienza con [Complementos de Chat](/docs/plugins/chat).
+
+### `owncast.chat.send(text)`
+
+Publica un mensaje de chat. Enviado como la identidad de bot de tu complemento (nombre para mostrar de `bot.displayName` o `name` en tu manifiesto).
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.chat.send("hola chat");
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.chat.send("hola chat")
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `chat.send`.
+
+### `owncast.chat.sendAction(text)`
+
+Publica un mensaje de tipo acción ("/me").
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.chat.sendAction("está ahora en vivo");
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.chat.send_action("está ahora en vivo")
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `chat.send`.
+
+### `owncast.chat.system(body)`
+
+Publica un mensaje de anuncio del servidor. Sin identidad de bot adjunta. El cuerpo se renderiza en línea como HTML, así que usa esto para avisos cortos atribuidos al servidor como "la transmisión comenzará en 5 minutos". Trata el cuerpo como salida HTML no confiable: no interpoles la entrada del usuario en él sin escapar.
+
+Requiere `chat.send`.
+
+### `owncast.chat.sendTo(clientId, text)`
+
+Envía un mensaje privado a un solo cliente conectado.
+
+Requiere `chat.send`.
+
+### `owncast.chat.replyTo(msg, text)` {#chat-replyto}
+
+Susurra una respuesta a quien envió un mensaje de chat. Pasa el mensaje de chat de `onChatMessage`/`filterChatMessage` (o un ID de cliente simple). Devuelve `false` si la conexión del remitente es desconocida (sin ID de cliente), por lo que puedes volver a un `send` público. Azúcar sobre `sendTo(clientId, text)`.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+onChatMessage(msg) {
+  if (!owncast.chat.replyTo(msg, "recibido")) {
+    owncast.chat.send("recibido");
+  }
+}
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_chat_message
+def handle(msg):
+    if not owncast.chat.reply_to(msg, "recibido"):
+        owncast.chat.send("recibido")
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `chat.send`.
+
+### `owncast.chat.history(limit?)`
+
+Devuelve los mensajes de chat más recientes, cada uno con `id`, `user`, `body` y `timestamp`. `limit` tiene un valor predeterminado de 50.
+
+Requiere `chat.history`.
+
+### `owncast.chat.clients()`
+
+Devuelve la lista de clientes de chat actualmente conectados, cada uno con `id`, `userId?`, `displayName?`, `connectedAt?`, `userAgent?`, `ipAddress?` y `messageCount?`. `id` es el ID de cliente por conexión utilizado por `chat.kick`.
+
+Requiere `chat.history`.
+
+### `owncast.chat.deleteMessage(messageId)`
+
+Oculta un mensaje de chat de los espectadores.
+
+Requiere `chat.moderate`.
+
+### `owncast.chat.kick(clientId)`
+
+Desconecta a un cliente de chat.
+
+Requiere `chat.moderate`.
+
+### Identidad de chat
+
+Cada complemento tiene exactamente una identidad de chat, el bot que Owncast proporciona cuando tu complemento está instalado. El nombre para mostrar es el `bot.displayName` de tu manifiesto si está configurado, de lo contrario, es su `name`, con `IsBot: true`. Tanto `send` como `sendAction` publican como esta identidad, a través del canal de chat normal de Owncast (filtros, límites de tasa, moderación). Los complementos no pueden publicar bajo nombres arbitrarios ni suplantar a usuarios reales.
+
+El usuario bot se basa en el `slug` del complemento, por lo que la identidad sobrevive a las ediciones del manifiesto de `name` o `bot.displayName`. Si necesitas múltiples personas de chat, envía múltiples complementos.
+
+## Usuarios
+
+### `owncast.users.list()` y `owncast.users.get(id)`
+
+Lee la lista de usuarios de chat o el registro de un solo usuario.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const users = owncast.users.list();
+const alice = owncast.users.get("u-alice");
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+users = owncast.users.list()
+alice = owncast.users.get("u-alice")
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `users.read`.
+
+### `owncast.users.setEnabled(id, enabled, reason?)`
+
+Habilita o deshabilita un usuario de chat.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.users.setEnabled("u-spammer", false, "spam");
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.users.set_enabled("u-spammer", False, "spam")
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `users.moderate`.
+
+### `owncast.users.banIP(ip)`
+
+Prohíbe una IP de unirse al chat.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.users.banIP("203.0.113.42");
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.users.ban_ip("203.0.113.42")
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `users.moderate`.
+
+### `owncast.users.register({ authId, displayName?, scopes? })` {#users-register}
+
+Encuentra o crea un usuario de Owncast autenticado para una identidad externa y devuelve `{ userId }`. `authId` es un identificador estable, con alcance de proveedor (por ejemplo, `"github:583231"`, o una cadena fija como `"shared"` para una única identidad compartida); el anfitrión lo nombra por el `slug` de tu complemento, por lo que los complementos no pueden colisionar ni suplantar los usuarios entre sí. El usuario resultante está marcado como autenticado, con `displayName` proporcionado por el proveedor y cualquier `scopes` (por ejemplo, `["MODERATOR"]`) aplicado. Llámalo nuevamente con el mismo `authId` para actualizar el usuario existente en lugar de crear uno nuevo.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { userId } = owncast.users.register({
+  authId: "github:583231",
+  displayName: "octocat",
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+result = owncast.users.register("github:583231", display_name="octocat")
+user_id = result.user_id
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `users.register`.
+
+## Autenticación
+
+Estos impulsan un [puerta de autenticación de espectadores](/docs/plugins/auth). `grantSession` y `endSession` solo funcionan dentro de un controlador `onHttpRequest`, porque el anfitrión adjunta la cookie de sesión a la respuesta HTTP en vuelo.
+
+### `owncast.auth.grantSession({ userId, ttl? })` {#auth-grant-session}
+
+Emite una sesión firmada para un usuario ya registrado (el `userId` de `owncast.users.register`). El anfitrión emite, firma y adjunta la cookie de sesión a la respuesta actual; tu complemento nunca ve el token, por lo que no puede falsificarlo o filtrarlo. `ttl` es una duración opcional en segundos (`0`/omitido usa el valor predeterminado del anfitrión de 24 horas).
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { userId } = owncast.users.register({ authId: "shared", displayName: "Guest" });
+owncast.auth.grantSession({ userId });
+return { status: 302, headers: { Location: returnTo } };
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+result = owncast.users.register("shared", display_name="Guest")
+owncast.auth.grant_session(result.user_id)
+return {"status": 302, "headers": {"Location": "/"}}
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `auth.gate`.
+
+### `owncast.auth.endSession()` {#auth-end-session}
+
+Limpia la cookie de sesión del visualizador actual en esta respuesta para cerrar sesión. Tu complemento aún controla la redirección (y puede redirigir al propio cierre de sesión del proveedor).
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.auth.endSession();
+return { status: 302, headers: { Location: "/" } };
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.auth.end_session()
+return {"status": 302, "headers": {"Location": "/"}}
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `auth.gate`.
+
+## Almacenamiento
+
+### `owncast.kv.get(key)` y `owncast.kv.set(key, value)`
+
+Almacenamiento clave/valor por complemento, nombrado por el `slug` de tu complemento. Los valores son cadenas.
+
+Para tipos más ricos, usa los ayudantes de JSON (`getJSON` / `setJSON`, `get_json` / `set_json` en Python) en lugar de analizar y serializar tú mismo. El getter JSON devuelve el valor de respaldo cuando la clave no está configurada o contiene JSON inválido. Los complementos no pueden leer las claves de otros complementos.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.kv.set("count", "1");
+const n = Number(owncast.kv.get("count") ?? "0");
+
+owncast.kv.setJSON("prefs", { theme: "dark" });
+const prefs = owncast.kv.getJSON("prefs", {});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.kv.set("count", "1")
+n = int(owncast.kv.get("count") or "0")
+
+owncast.kv.set_json("prefs", {"theme": "dark"})
+prefs = owncast.kv.get_json("prefs", {})
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `storage.kv`.
+
+### `owncast.storage.upload(name, bytes)`
+
+Sube un archivo al área de archivos pública de Owncast. Devuelve `{ url }` (por ejemplo, `https://your-server.example/public/plugins/my-plugin/badge.png`), utilizable en etiquetas de imagen, botones de acción, publicaciones de fediverse, etc.
+
+Requiere `storage.upload`.
+
+### `owncast.fs.*`
+
+Un sistema de archivos privado y aislado en `data/plugin-data/\<your-slug>/`. A diferencia de `owncast.storage.upload`, estos archivos permanecen en el servidor: nunca se sirven a través de HTTP. Las rutas son relativas a la raíz de tu espacio aislado. El anfitrión restringe cada ruta a tu propio directorio (un complemento no puede leer los archivos de otro complemento, y `../` o rutas absolutas vuelven a colapsar dentro del espacio aislado). Los directorios principales se crean según sea necesario al escribir.
+
+| Método                 | Devuelve                                               |
+| ---------------------- | ------------------------------------------------------ |
+| `fs.read(path)`        | los bytes del archivo, o `null` si falta               |
+| `fs.readText(path)`    | el archivo como texto UTF-8, o `null` si falta         |
+| `fs.write(path, data)` | `{ ok, error? }`                                       |
+| `fs.list(dir)`         | nombres de entrada (un directorio faltante está vacío) |
+| `fs.delete(path)`      | `{ ok, error? }` (archivo o directorio vacío)          |
+| `fs.exists(path)`      | booleano                                               |
+
+En Python estos son `snake_case` (`fs.read_text`, el resto sin cambios).
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.fs.write("notes/log.txt", "hello");
+const text = owncast.fs.readText("notes/log.txt");
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.fs.write("notes/log.txt", "hello")
+text = owncast.fs.read_text("notes/log.txt")
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `storage.fs`.
+
+## Configuración
+
+### `owncast.config.get(key, fallback?)`
+
+Lee uno de los [manifiestos declarados `config`](/docs/plugins/configuration) de tu plugin. Devuelve el valor establecido por el administrador cuando está presente, de lo contrario el valor predeterminado declarado, ya analizado a su tipo declarado. Para una clave desconocida (o una sin valor) devuelve `fallback`.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const cooldownMs = owncast.config.get("cooldownMs", 2000);
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+cooldown_ms = owncast.config.get("cooldownMs", 2000)
+```
+
+</TabItem>
+</Tabs>
+
+Ambient: no se requiere permiso. Prefiere esto sobre construir una página de configuración personalizada y tuberías de clave/valor para ajustes simples. (La clave de configuración es lo que tú llamaste en el manifiesto, y no se traduce por idioma.)
+
+## Red
+
+### `owncast.http.fetch(url, opts?)`
+
+Solicitud HTTP saliente sincrónica. `opts` lleva `method`, `headers` y `body`. El resultado es `{ status, headers, body }`. Solo se pueden alcanzar los hosts enumerados en `network.allowedHosts` de tu manifiesto. Todo lo demás devuelve un error.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const res = owncast.http.fetch("https://api.example.com/status");
+if (res.status === 200) {
+  const data = JSON.parse(res.body);
+}
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+import json
+
+res = owncast.http.fetch("https://api.example.com/status")
+if res.status == 200:
+    data = json.loads(res.body)
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `network.fetch` y una entrada coincidente en `network.allowedHosts`. Usa esto para HTTP saliente en lugar del cliente HTTP propio de tu lenguaje (en Python, no uses `requests`: no se compilará dentro de un plugin).
+
+Consulta la [referencia del manifiesto: red](/docs/plugins/manifest#network-outbound-http-allowlist) para la sintaxis de la lista de permitidos.
+
+## Eventos entre plugins
+
+### `owncast.events.emit(eventType, payload)`
+
+Emite un evento personalizado al que otros plugins pueden suscribirse. Los plugins suscriptores lo reciben a través de su manejador de eventos personalizados: consulta la [referencia de manejadores](/docs/plugins/events#plugin-to-plugin-events). Namespaces tu tipo de evento con el nombre de tu plugin para evitar colisiones.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.events.emit("my-plugin.thing-happened", { id: 123 });
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.events.emit("my-plugin.thing-happened", {"id": 123})
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `events.emit`.
+
+## Estado del flujo y del servidor
+
+### `owncast.stream.current()`
+
+El estado actual de la transmisión en vivo: `{ online, title?, summary?, viewers, startedAt?, latencyLevel?` }\`.
+
+Requiere `server.read`.
+
+### `owncast.stream.broadcaster()`
+
+Telemetría de codificación de entrada para la conexión actual: `{ remoteAddr?, codecs?, resolution?, framerate?, bitrates?` }\`. Solo lectura, y con valor cero cuando no hay transmisión conectada. Para cambiar la salida de video, consulta el grupo de [configuración de video](#video-and-transcoding-configuration) abajo.
+
+Requiere `server.read`.
+
+### `owncast.server.info()`
+
+Información estática del servidor: `{ name?, url?, summary?, welcomeMessage?, version?` }\`.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const name = owncast.server.info().name;
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+name = owncast.server.info().name
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `server.read`.
+
+### `owncast.server.socials()`
+
+Los enlaces sociales configurados del transmisor, cada uno `{ platform, url, icon }`.
+
+Requiere `server.read`.
+
+### `owncast.server.emotes()`
+
+Los emoticonos personalizados del servidor: el mismo conjunto que ofrece el punto final público `/api/emoji`, cada uno `{ name, url }`. Útil para renderizar o filtrar emoticonos `:code:` del lado del servidor.
+
+Requiere `server.read`.
+
+### `owncast.server.federation()`
+
+Si la federación del fediverso está habilitada y bajo qué handle: `{ enabled, username, isPrivate }`.
+
+Requiere `server.read`.
+
+### `owncast.server.tags()`
+
+Las etiquetas configuradas del transmisor, como una lista de cadenas.
+
+Requiere `server.read`.
+
+## Configuración de video y transcoding
+
+### `owncast.videoConfig.read()`
+
+Lee la configuración de salida y transcoding: `{ latencyLevel, codec, variants }`, donde cada variante es `{ width, height, framerate, videoBitrate, audioBitrate, isPassthrough }`.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const cfg = owncast.videoConfig.read();
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+cfg = owncast.video_config.read()
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `videoconfig.read`.
+
+### `owncast.videoConfig.write(partial)`
+
+Actualiza la configuración de video. Pasa un objeto parcial. Solo los campos que incluyas se modifican. Los cambios se aplican en el próximo inicio de transmisión: el anfitrión no reinicia una transmisión activa.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.videoConfig.write({ latencyLevel: 2 });
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.video_config.write({"latencyLevel": 2})
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `videoconfig.write`. Esto es de alta confianza. Los administradores deben concederlo con parquedad.
+
+## Notificaciones
+
+### `owncast.notifications.discord(text)`
+
+Envía una notificación de Discord a través del webhook configurado del transmisor.
+
+Requiere `notifications.send`.
+
+### `owncast.notifications.browserPush({ title, body, url? })`
+
+Push a navegadores suscritos.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.notifications.browserPush({ title: "En vivo ahora", body: "Ven a saludar", url: "/" });
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.notifications.browser_push({"title": "En vivo ahora", "body": "Ven a saludar", "url": "/"})
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `notifications.send`.
+
+### `owncast.notifications.fediverse({ type, body, image?, link? })`
+
+Envía una notificación formateada para fediverso (renderizada como una publicación para seguidores).
+
+Requiere `notifications.send`.
+
+## Fediverse
+
+### `owncast.fediverse.post(text)`
+
+Haz una publicación pública en el fediverso desde la cuenta de Owncast.
+
+Requiere `fediverse.post`. Alta confianza: una publicación en el fediverso se envía bajo el nombre del transmisor y no se puede revocar en silencio. Los administradores deben concederlo con parquedad.
+
+## Botones de acción (tiempo de ejecución)
+
+### `owncast.actions.add(button | buttons[])`
+
+Agrega uno o más botones de acción al conjunto de manifiestos de tu plugin sin recarga. Cada botón toma los mismos campos que una entrada `manifest.actions` (`title`, más `url`/`openExternally` o `html` en línea). El anfitrión valida cada entrada con las mismas reglas que `manifest.actions` y persiste el resultado para que las adiciones sobrevivan a una recarga.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.actions.add({ title: "Donar", url: "/plugins/my-plugin/donate", openExternally: true });
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.actions.add({"title": "Donar", "url": "/plugins/my-plugin/donate", "openExternally": True})
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `ui.modify`.
+
+### `owncast.actions.clear()`
+
+Elimina todos los botones de acción añadidos en tiempo de ejecución. Las acciones declaradas en el manifiesto permanecen.
+
+Requiere `ui.modify`.
+
+Cobertura completa en [UI: Botones de acción](/docs/plugins/ui#action-buttons).
+
+## Push en tiempo real (Eventos enviados por el servidor)
+
+### `owncast.sse.send(channel, event, data)`
+
+Envía un Evento enviado por el servidor a cada navegador conectado al punto final de tu plugin `/_sse/\<channel>`.
+
+* `channel`: qué flujo empujar. Usa `""` para el canal por defecto.
+* `event`: el nombre del evento en el que el navegador escucha. Usa `""` para el evento `message` por defecto.
+* `data`: carga útil. Las cadenas se envían tal cual. Todo lo demás es codificado en JSON para ti.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.sse.send("alerts", "donation", { from: "alice", amount: 5 });
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.sse.send("alerts", "donation", {"from": "alice", "amount": 5})
+```
+
+</TabItem>
+</Tabs>
+
+Fire-and-forget. La llamada regresa inmediatamente y nunca bloquea. Los clientes lentos pierden fotogramas en lugar de detener tu complemento.
+
+Requiere `http.sse`.
+
+Cobertura completa en [Servir HTTP: Actualizaciones en tiempo real](/docs/plugins/http#realtime-updates-server-sent-events).
+
+## Temporizadores
+
+Programa trabajos diferidos y repetidos. Los temporizadores son **ambientales**, no se requiere permiso y se borran automáticamente cuando tu complemento está deshabilitado. (Python: `set_timeout`, `set_interval`, `clear`.)
+
+### `owncast.timer.setTimeout(fn, ms)`
+
+Ejecuta `fn` una vez después de `ms` milisegundos. Devuelve un id.
+
+### `owncast.timer.setInterval(fn, ms)`
+
+Ejecuta `fn` repetidamente cada `ms` milisegundos. Devuelve un id.
+
+### `owncast.timer.clear(id)`
+
+Cancela un timeout o intervalo pendiente por el id que la llamada devolvió.
+
+## Activos agrupados
+
+Lee archivos que enviaste en el directorio `assets/` de tu complemento. **Ambiental**: no se requiere permiso. (Python: `read`, `read_text`.)
+
+### `owncast.assets.read(path)`
+
+Devuelve los bytes de un activo agrupado en `path`, relativo a `assets/`.
+
+### `owncast.assets.readText(path)`
+
+Igual, decodificado como texto UTF-8.
+
+## Referencia completa de la API
+
+Los nombres de los métodos a continuación son la forma en JavaScript (camelCase). Los equivalentes en Python son `snake_case` (`sendAction` → `send_action`, `banIP` → `ban_ip`, `videoConfig` → `video_config`, y así sucesivamente).
+
+| API                                                                          | Permiso              |
+| ---------------------------------------------------------------------------- | -------------------- |
+| `owncast.chat.send`                                                          | `chat.send`          |
+| `owncast.chat.sendAction`                                                    | `chat.send`          |
+| `owncast.chat.sendTo`                                                        | `chat.send`          |
+| `owncast.chat.system`                                                        | `chat.send`          |
+| `owncast.chat.replyTo`                                                       | `chat.send`          |
+| `owncast.chat.history`                                                       | `chat.history`       |
+| `owncast.chat.clients`                                                       | `chat.history`       |
+| `owncast.chat.deleteMessage`                                                 | `chat.moderate`      |
+| `owncast.chat.kick`                                                          | `chat.moderate`      |
+| `owncast.users.list` / `.get`                                                | `users.read`         |
+| `owncast.users.setEnabled` / `.banIP`                                        | `users.moderate`     |
+| `owncast.users.register`                                                     | `users.register`     |
+| `owncast.auth.grantSession` / `.endSession`                                  | `auth.gate`          |
+| `owncast.kv.get` / `.set` / `.getJSON` / `.setJSON`                          | `storage.kv`         |
+| `owncast.storage.upload`                                                     | `storage.upload`     |
+| `owncast.fs.read` / `.readText` / `.write` / `.list` / `.delete` / `.exists` | `storage.fs`         |
+| `owncast.http.fetch`                                                         | `network.fetch`      |
+| `owncast.events.emit`                                                        | `events.emit`        |
+| `owncast.stream.current`                                                     | `server.read`        |
+| `owncast.stream.broadcaster`                                                 | `server.read`        |
+| `owncast.server.info` / `.socials` / etc.                                    | `server.read`        |
+| `owncast.videoConfig.read`                                                   | `videoconfig.read`   |
+| `owncast.videoConfig.write`                                                  | `videoconfig.write`  |
+| `owncast.notifications.discord` / `.browserPush`                             | `notifications.send` |
+| `owncast.fediverse.post`                                                     | `fediverse.post`     |
+| `owncast.actions.add` / `.clear`                                             | `ui.modify`          |
+| `owncast.timer.setTimeout` / `.setInterval` / `.clear`                       | ninguno (ambiental)  |
+| `owncast.assets.read` / `.readText`                                          | ninguno (ambiental)  |
+| `owncast.config.get`                                                         | ninguno (ambiental)  |
+| `owncast.sse.send`                                                           | `http.sse`           |

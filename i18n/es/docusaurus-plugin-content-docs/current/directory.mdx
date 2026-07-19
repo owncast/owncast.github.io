@@ -1,0 +1,42 @@
+---
+title: Enumera tu transmisión en el directorio de Owncast
+description: El directorio de Owncast es una lista centralizada de transmisiones para que la gente descubra.
+sidebar_position: 600
+sidebar_label: Enumera tu transmisión en el directorio de Owncast
+tags:
+  - directorio
+  - espectadores
+  - descubrir
+  - descubrimiento
+  - descubribilidad
+  - en vivo
+  - iptv
+  - m3u8
+---
+
+Para ayudar a las personas a descubrir transmisiones de personas que usan Owncast, tenemos un directorio opcional de Owncast ubicado en https://owncast.directory al que puedes añadirte.
+
+1. Visita la configuración **"General"** en el administrador.
+2. Establece la URL pública de tu instancia de Owncast a la que quieres que la gente esté vinculada.
+3. Establece el **"Acerca de"** con una breve descripción de tu transmisión.
+4. Establece las **etiquetas** asociadas con el contenido que transmites.
+5. Marca si tu contenido no es apto para el trabajo (*Not Safe For Work*) (nsfw).
+
+## Si tu servidor no aparece en el directorio
+
+1. Es optativo, así que asegúrate de seguir las [instrucciones de configuración](/docs/directory) para habilitar el directorio para tu servidor.
+2. Tomará aproximadamente 5 minutos para que tu servidor aparezca la primera vez que transmitas después de habilitar esta función.
+3. Puedes querer ejecutar tu servidor con `owncast --enableVerboseLogging` para ver qué errores aparecen.
+4. Si antes estabas listado, pero ya no apareces, puede que necesites restablecer tu registro en la configuración del servidor del administrador.
+5. Si recientemente cambiaste la URL de tu servidor, restablece tu registro en la configuración de tu servidor.
+6. Si hay algún problema que impide que aparezcas, [por favor reporta un problema en GitHub](https://github.com/owncast/owncast/issues) para que podamos ayudar a solucionar o restablecer tu registro con el directorio.
+
+## Navega por el Directorio de Owncast
+
+Si tu aplicación tiene lo que a menudo se llama "IPTV" u soporte M3U, puedes navegar por el directorio directamente añadiendo `https://owncast.directory/api/iptv` a la aplicación. No todas las aplicaciones soportan esto.
+
+Además, hay algunas aplicaciones nativas que te permiten navegar por el directorio de Owncast y ver transmisiones directamente desde la aplicación. Lee más sobre [ver transmisiones](/docs/watching-streams/).
+
+## Crea tu propio directorio
+
+El directorio de Owncast no es el único posible. Cada servidor de Owncast transmite su estado en vivo a través de ActivityPub, por lo que puedes ejecutar tu propio directorio o agregador que rastree qué servidores están transmitiendo. Consulta [construir un directorio de transmisiones de Owncast](/docs/api/activitypub#building-a-directory-of-owncast-streams) para el protocolo, y el repositorio [owncast-directory-example](https://github.com/owncast/owncast-directory-example) para una pequeña referencia ejecutable.

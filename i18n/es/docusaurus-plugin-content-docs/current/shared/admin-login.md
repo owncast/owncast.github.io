@@ -1,29 +1,29 @@
 ---
-title: Default Login Information
-description: Instructions for logging into the Owncast admin interface and default credentials.
+title: Información de inicio de sesión predeterminada
+description: Instrucciones para iniciar sesión en la interfaz de administración de Owncast y credenciales predeterminadas.
 unlisted: true
 related:
   excludeFromAll: true
 ---
 
-The admin interface can be found by navigating to `/admin` on your Owncast server (e.g., `https://owncast.example.com/admin`).
+La interfaz de administración se puede encontrar navegando a `/admin` en su servidor Owncast (por ejemplo, `https://owncast.example.com/admin`).
 
-[Configuring your broadcasting software](/docs/broadcasting) to stream to your Owncast server requires you to use the `/live` endpoint along with providing the stream key. (e.g., `rtmp://owncast.example.com/live` with stream key `abc123`). If your software does not allow specifying the stream key separately, you may need to append it to the URL as `rtmp://owncast.example.com/live/abc123`.
+[Configurar su software de transmisión](/docs/broadcasting) para transmitir a su servidor Owncast requiere que utilice el punto final `/live` junto con proporcionar la clave de transmisión. (por ejemplo, `rtmp://owncast.example.com/live` con la clave de transmisión `abc123`). Si su software no permite especificar la clave de transmisión por separado, es posible que deba agregarla a la URL como `rtmp://owncast.example.com/live/abc123`.
 
-## Default credentials
+## Credenciales predeterminadas
 
-| Default        | Value  |
-| -------------- | ------ |
-| Admin username | admin  |
-| Admin password | abc123 |
-| Stream key     | abc123 |
+| Predeterminado                     | Valor  |
+| ---------------------------------- | ------ |
+| Nombre de usuario de administrador | admin  |
+| Contraseña de administrador        | abc123 |
+| Clave de transmisión               | abc123 |
 
-These are the default credentials for logging into the Owncast admin interface and streaming to your Owncast server. It is highly recommended that you change these values immediately after your first login to ensure the security of your server.
+Estas son las credenciales predeterminadas para iniciar sesión en la interfaz de administración de Owncast y transmitir a su servidor Owncast. Se recomienda encarecidamente que cambie estos valores inmediatamente después de su primer inicio de sesión para garantizar la seguridad de su servidor.
 
-## Next steps
+## Próximos pasos
 
-1. Point your broadcasting software at your new server using `rtmp://yourserver/live` with your stream key. If your software doesn't have a way to specify a stream key use the url `rtmp://yourserver/live/streamkey` and use your stream key instead.
-1. Access your server in your web browser by visiting `http://yourserver:8080`.
-1. You can visit the Admin dashboard at `http://yourserver:8080/admin` where you can check visitor and server stats, change your stream key, personalize the content displayed on your page, and more. To login, use `admin` and the stream key as the password.
+1. Dirija su software de transmisión a su nuevo servidor usando `rtmp://yourserver/live` con su clave de transmisión. Si su software no tiene una forma de especificar una clave de transmisión, use la URL `rtmp://yourserver/live/streamkey` y use su clave de transmisión en su lugar.
+2. Acceda a su servidor en su navegador web visitando `http://yourserver:8080`.
+3. Puede visitar el panel de administración en `http://yourserver:8080/admin`, donde puede verificar estadísticas de visitantes y del servidor, cambiar su clave de transmisión, personalizar el contenido mostrado en su página, y más. Para iniciar sesión, use el nombre de usuario `admin` y su contraseña de administrador (`abc123` por defecto).
 
-**Note:** Your stream key is only used by your streaming software to publish video; it is not your admin password.
+**Nota:** Su clave de transmisión y su contraseña de administrador ambos son `abc123` por defecto, pero son configuraciones separadas. La clave de transmisión se utiliza solo por su software de transmisión para publicar video. No es su contraseña de administrador.

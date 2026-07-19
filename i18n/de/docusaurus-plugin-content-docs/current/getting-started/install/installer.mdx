@@ -1,0 +1,44 @@
+---
+title: Owncast Quick Installer
+tags:
+  - Installation
+  - automatisiert
+  - Demo
+  - Beispiel
+description: Beginnen Sie in wenigen Sekunden mit dem Streamen auf Ihrem eigenen Server.
+sidebar_label: Owncast Schnell-Installer
+---
+
+Durch die Verwendung des Installers können Sie in etwa einer Minute startklar sein. Wenn Sie jedoch lieber [ein Release manuell herunterlädt](/docs/getting-started/install/manual), verwenden Sie eine [Ein-Klick-Installation](/docs/getting-started/install/providers) bei einem unterstützten Hosting-Anbieter oder andere Methoden, besuchen Sie die [Installationsseite](/docs/getting-started/install/), um die Installationsmethode zu finden, die am besten zu Ihren Bedürfnissen passt.
+
+### Installer
+
+Fügen Sie das Folgende in Ihr Terminal ein, und der Installer lädt die aktuellste Version von Owncast für Ihre Plattform herunter.
+Es wird auch eine Kopie von ffmpeg heruntergeladen, falls Sie derzeit keine installiert haben.
+
+```bash
+curl -s https://owncast.online/install.sh | bash
+```
+
+**Hinweis**: Es wird nicht empfohlen, dies als root auszuführen, da Sie ein Skript aus dem Internet herunterladen und ausführen. Es wird auch empfohlen, den Inhalt jedes Remote-Skripts vor der Ausführung zu überprüfen.
+
+<img src="/owncast-install.gif" width="90%" />
+
+---
+
+### Sehen Sie sich ein Beispiel an, um in weniger als einer Minute zu starten.
+
+<VideoPlayer mp4="/install-preview.mp4" webm="/install-preview.webm" poster="/install-preview.jpg" title="Owncast in weniger als einer Minute zum Laufen bringen" />
+
+### Das wars!
+
+Während der obige Installer für die meisten Menschen ausreicht, um schnell loszulegen, möchten Sie möglicherweise mehr über die Serverkonfiguration, das Broadcasting und optionale nächste Schritte wie [SSL-Proxy](/docs/sslproxies/nginx) und das Ausführen von Owncast als [Systemdienst](/docs/configuration/systemservice) erfahren.
+
+## Melden Sie sich im Admin-Bereich an und richten Sie Ihren Stream ein
+
+import { IncludeMarkdown, VideoPlayer } from '@site/src/components';
+import AdminLogin from '../../shared/admin-login.md';
+
+<IncludeMarkdown>
+  <AdminLogin />
+</IncludeMarkdown>

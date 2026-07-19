@@ -5,38 +5,38 @@ related:
 ---
 
 ```mermaid
-flowchart LR
-    subgraph Broadcasting
-        OBS[OBS / Broadcasting Software]
-    end
+graph LR
+    sous-graphe Diffusion
+        OBS[OBS / Logiciel de diffusion]
+    fin
 
-    subgraph Owncast[Owncast Server]
+    sous-graphe Owncast[Serveur Owncast]
         direction TB
         RTMP[RTMP Ingest]
-        Encoder[Video Encoder]
-        WebServer[Web Server]
-        RTMP --> Encoder --> WebServer
-    end
+        Encodeur[Encodeur vidéo]
+        ServeurWeb[Serveur Web]
+        RTMP --> Encodeur --> ServeurWeb
+    fin
 
-    subgraph CDN[CDN Network]
+    sous-graphe CDN[Réseau CDN]
         direction TB
-        Edge1[Edge Node<br/>North America]
-        Edge2[Edge Node<br/>Europe]
-        Edge3[Edge Node<br/>Asia]
-    end
+        Edge1[Nœud de bord<br/>Amérique du Nord]
+        Edge2[Nœud de bord<br/>Europe]
+        Edge3[Nœud de bord<br/>Asie]
+    fin
 
-    subgraph Viewers[Video Clients]
+    sous-graphe Spectateurs[Clients vidéo]
         direction TB
-        US[US Viewer]
-        EU[EU Viewer]
-        AS[Asia Viewer]
-    end
+        US[Spectateur US]
+        UE[Spectateur UE]
+        AS[Spectateur Asie]
+    fin
 
-    OBS -->|RTMP Stream| RTMP
-    WebServer -->|Origin| Edge1
-    WebServer -->|Origin| Edge2
-    WebServer -->|Origin| Edge3
-    Edge1 -->|HLS Video| US
-    Edge2 -->|HLS Video| EU
-    Edge3 -->|HLS Video| AS
+    OBS -->|Flux RTMP| RTMP
+    ServeurWeb -->|Origine| Edge1
+    ServeurWeb -->|Origine| Edge2
+    ServeurWeb -->|Origine| Edge3
+    Edge1 -->|Vidéo HLS| US
+    Edge2 -->|Vidéo HLS| UE
+    Edge3 -->|Vidéo HLS| AS
 ```

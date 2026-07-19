@@ -1,0 +1,557 @@
+---
+title: Contribuyendo UI
+description: Agrega páginas de administración a la interfaz de usuario de administración de Owncast y botones de acción en la barra de visualización.
+sidebar_position: 8
+sidebar_label: UI
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - complementos
+  - ui
+  - administrador
+  - botones-de-acción
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Los complementos pueden agregar su propia interfaz de usuario a Owncast en dos lugares: pestañas dentro de la administración (para configuraciones orientadas al streamer) y botones de acción debajo de la transmisión (para acciones orientadas al espectador). Ambos están declarados en tu manifiesto y gestionados por el anfitrión. Tú envías el contenido, Owncast lo coloca en el chrome correcto.
+
+Las declaraciones de manifiesto en esta página son JSON plano, idénticas sin importar el idioma en el que escribas. Los manejadores de contenido dinámico y las llamadas en tiempo de ejecución se muestran para ambos SDK. Consulta [JavaScript](/docs/plugins/sdks/javascript) o [Python](/docs/plugins/sdks/python) para la instalación y configuración.
+
+## Páginas de administración
+
+:::tip[¿Solo necesitas un formulario de configuración?]
+Para configuraciones planas y tipificadas (cadenas, números, interruptores), declara un bloque de `config` en el manifiesto y deja que Owncast renderice el formulario por ti. Consulta [Configuración](/docs/plugins/configuration). Crea una página de administración personalizada cuando necesites una interfaz de usuario que el formulario automático no pueda expresar.
+:::
+
+Los complementos pueden registrar páginas que aparecen dentro de la interfaz de usuario de administración de Owncast bajo **Complementos**. Decláralas en el manifiesto:
+
+```json
+{
+  "permissions": ["http.serve"],
+  "admin": {
+    "pages": [
+      { "title": "Configuración", "path": "/admin", "icon": "gear" }
+    ]
+  }
+}
+```
+
+Cada entrada tiene un `title`, un glob de `path` y un `icon` opcional:
+
+| Campo   | Notas                                                                                                                                                                          |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `title` | La etiqueta de pestaña dentro de la vista de administración del complemento.                                                                                                   |
+| `path`  | Un glob de ruta bajo `/plugins/\<your-slug>/`. Ejemplos: `"/admin"`, `"/admin/*"`, `"/admin/api/*"`.                                                          |
+| `icon`  | Nombre semántico corto. Soportados: `gear`, `wrench`, `user`, `users`, `lock`, `info`, `apps`, `docs`, `bell` (los alias como `settings` y `notifications` también funcionan). |
+
+### Cómo se renderizan
+
+El administrador de Owncast renderiza cada página declarada como una pestaña dentro de `/admin/plugins/configure?id=\<your-slug>`. El cuerpo de la pestaña es un `\<iframe>` apuntado a `/plugins/\<your-slug>/\<path>`. Cada complemento recibe una URL marcable y una entrada en la barra lateral bajo **Complementos** en la navegación de administración.
+
+<img src="/docs/img/plugin-admin-page.png" alt="La página de administración de un complemento renderizada como una pestaña dentro de la administración, junto a sus pestañas de Instrucciones y Permisos" width="80%" />
+
+El anfitrión inyecta automáticamente la hoja de estilos base en las respuestas HTML en las rutas de administración, por lo que los controles `<input>` y `\<button>` se ven nativos para la administración de Owncast sin que necesites enviar CSS. Consulta [Estilizando la interfaz de usuario del complemento](#styling-plugin-ui) para ver qué obtienes de forma gratuita y las clases de ayuda disponibles. Los complementos que prefieren su propio estilo pueden superponer.
+
+### Sandbox
+
+La página se ejecuta en un `\<iframe>` en sandbox. Tus scripts se ejecutan, los formularios se envían, y el `fetch` de mismo origen a tus propios puntos finales `/plugins/\<your-slug>/` funciona. Las páginas también pueden **abrir popups**, **activar descargas de archivos** (por ejemplo, un blob o URL de datos `\<a download>` que haces clic desde el script), y usar diálogos **`confirm()` / `alert()` / `prompt()`**. El sandbox es la única restricción que normalmente notarás. Si una función del navegador parece estar bloqueada en silencio, el sandbox del iframe es lo primero que debes comprobar.
+
+### Gating de autenticación
+
+Las solicitudes a rutas de administración declaradas en el manifiesto están bloqueadas por autenticación por el anfitrión. Las solicitudes no autenticadas reciben un `401` antes de que se ejecute el código de tu complemento. No necesitas verificar la autenticación de la solicitud para estas rutas.
+
+Los archivos estáticos y los puntos finales dinámicos bajo rutas coincididas están ambos bloqueados por autenticación. La misma restricción se aplica a tu `public/admin/index.html` y a `POST /admin/api/save-settings`.
+
+Utiliza múltiples globs cuando tengas tanto una página de interfaz de usuario como una API JSON:
+
+```json
+{
+  "admin": {
+    "pages": [
+      { "title": "Configuración", "path": "/admin" },
+      { "title": "Configuración", "path": "/admin/api/*" }
+    ]
+  }
+}
+```
+
+Un `title` duplicado está bien. Ambos globs alimentan una pestaña.
+
+### Flujo del autor
+
+1. Pon HTML, CSS y JS de administración en `public/admin/index.html` (y amigos).
+2. Expón APIs de administración a través de tu manejador de solicitudes en `/admin/api/...` (consulta [Sirviendo HTTP](/docs/plugins/http)).
+3. Declara los globs relevantes en `manifest.admin.pages[].path`.
+4. Visita `/admin/plugins/configure?id=\<your-slug>` en la interfaz de usuario de administración. Owncast utiliza tu inicio de sesión de administración existente para bloquear la página. Sin prompt extra.
+
+## Botones de acción
+
+Owncast muestra una fila de botones de acción en su interfaz de usuario de espectador. Entradas clicables que abren una URL (en un modal o nueva pestaña) o renderizan HTML sin procesar. Los complementos pueden contribuir con los suyos.
+
+<img src="/docs/img/plugin-action-buttons.png" alt="Una fila de botones de acción contribuidos por complementos debajo de la transmisión en la página del espectador, junto a los botones de Seguir y Notificar incorporados" width="85%" />
+
+### Botones declarados en el manifiesto
+
+```json
+{
+  "permissions": ["ui.modify", "http.serve"],
+  "actions": [
+    {
+      "title": "Superposición de chat",
+      "description": "Abrir la superposición de chat en vivo",
+      "url": "/",
+      "icon": "/star.png",
+      "color": "#3b82f6"
+    },
+    {
+      "title": "Seguimiento de problemas",
+      "url": "https://github.com/example/my-plugin/issues",
+      "openExternally": true
+    },
+    {
+      "title": "Acerca de esta transmisión",
+      "html": "<p>En vivo todos los días hábiles a las 8pm UTC.</p>"
+    }
+  ]
+}
+```
+
+Mientras tu complemento esté habilitado, el anfitrión fusiona sus entradas de acción en la lista que Owncast ya muestra bajo la transmisión. Cuando se deshabilitan, desaparecen.
+
+### Referencia de campo
+
+| Campo            | Notas                                                                                |
+| ---------------- | ------------------------------------------------------------------------------------ |
+| `title`          | Requerido. La etiqueta del botón.                                                    |
+| `url`            | Ya sea una URL absoluta `https://...` o una ruta. Mutuamente excluyente con `html`.  |
+| `html`           | HTML sin procesar renderizado en un modal en línea. Mutuamente excluyente con `url`. |
+| `icon`           | URL de imagen opcional mostrada en el botón. Las mismas reglas de ruta que `url`.    |
+| `color`          | Color hexadecimal opcional para el fondo del botón.                                  |
+| `description`    | Opcional. Se muestra en el modal que se abre para acciones basadas en URL.           |
+| `openExternally` | Si `true`, la URL se abre en una nueva pestaña en lugar de en un modal en línea.     |
+
+### Reglas de ruta
+
+Dos reglas simples cubren todo:
+
+* Las rutas relativas se prefijan automáticamente al espacio de nombres de tu complemento. `"/"` se convierte en `/plugins/my-plugin/`. `"/star.png"` se convierte en `/plugins/my-plugin/star.png`. Esto te ahorra de codificar tu nombre de complemento. Se aplica tanto a `url` como a `icon`.
+* Las URL absolutas `https://...` pasan sin cambios. Usa estas para enlaces externos y iconos alojados en CDN.
+
+El anfitrión hace cumplir:
+
+* Se requiere permiso `ui.modify`. Los manifiestos con `actions` pero sin `ui.modify` son rechazados en la carga.
+* Exactamente uno de `url` o `html` por entrada.
+* URLs e iconos que se resuelven en tu espacio de nombres requieren `http.serve`. Tú eres quien los sirve.
+* URLs e iconos que señalan al espacio de nombres de otro complemento son rechazados. Atrapa errores tipográficos y evita que un complemento anuncie la interfaz de usuario de otro.
+
+### Adiciones en tiempo de ejecución
+
+Un complemento puede agregar más botones de acción en tiempo de ejecución, sin recargar, llamando a `owncast.actions.add(...)` con una sola acción o un array de ellas. Cada entrada de tiempo de ejecución pasa por la misma validación que `manifest.actions`, y se persiste en la configuración del complemento, así que las adiciones sobreviven a una recarga. `owncast.actions.clear()` elimina cada adición de tiempo de ejecución. Las acciones declaradas en el manifiesto permanecen.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { definePlugin, owncast } = require("@owncast/plugin-sdk");
+
+module.exports = definePlugin({
+  onStreamStarted() {
+    owncast.actions.add({
+      title: "Donar",
+      url: "https://example.com/donate",
+      openExternally: true,
+    });
+    // o agregar varios a la vez: owncast.actions.add([ { ... }, { ... } ])
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+from owncast_plugin import plugin, owncast
+
+@plugin.on_stream_started
+def add_button(info):
+    owncast.actions.add({
+        "title": "Donar",
+        "url": "https://example.com/donate",
+        "openExternally": True,
+    })
+    # o agregar varios a la vez: owncast.actions.add([ { ... }, { ... } ])
+```
+
+</TabItem>
+</Tabs>
+
+Un patrón común es una página de administración que permite al streamer agregar botones personalizados (etiqueta + URL) sobre los valores predeterminados del complemento. El ejemplo de `action-buttons` en el SDK envía una versión funcional de esto.
+
+## Estilizando la interfaz de usuario del complemento
+
+Owncast inyecta una hoja de estilos base en cada superficie de complemento que se renderiza en un iframe: tus **páginas de administración** y tus **pestañas de página de espectador**. Está construida a partir de los propios tokens de diseño de Owncast, así que HTML semántico simple adopta el aspecto nativo sin CSS propio.
+
+* Los encabezados, párrafos y enlaces recogen las fuentes y colores del tema.
+* `<input>`, `\<textarea>`, `\<select>`, y `\<button>` se renderizan como los controles nativos. Un `\<button>` obtiene el estilo primario. Agrega `class="secondary"` para la variante de contorno.
+* `\<table>`, `\<fieldset>`, y `\<code>` / `\<pre>` obtienen un estilo nativo sensato.
+
+Tu contenido se sienta **pegado a la página**. El fondo del iframe es transparente, por lo que el panel del anfitrión se muestra, del mismo modo que las pestañas incorporadas Acerca de y Seguidores se renderizan. No obtienes, y no deberías agregar, un fondo de página opaco o una caja envolvente alrededor de todo. Esa renderización a ras es lo que hace que una pestaña de complemento se lea como parte de Owncast en lugar de un marco integrado.
+
+:::info[Dónde se aplica]
+Los estilos base las superficies renderizadas en iframe: [páginas de administración](#admin-pages) y [pestañas de página de espectador](#viewer-page-tabs). El contenido que inyectes directamente en la página del espectador (`extraPageContent`, `scripts`) se renderiza en el DOM real de la página y hereda los estilos reales de Owncast en su lugar.
+:::
+
+### Clases de asistencia
+
+Para bloques de construcción nativos más allá de los elementos simples, los estilos base envían algunas clases optativas. Referencian los mismos tokens de tema que el resto de Owncast, por lo que se reestilizan automáticamente cuando un administrador personaliza el tema.
+
+| Clase              | Lo que hace                                                                                                                                                                                                                                                                    |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `card`             | Una superficie de tarjeta nativa, el mismo aspecto que las tarjetas de seguidores y transmisiones destacadas. Una `\<section>` / `\<article>` plana se mantiene pegada, así que opta por `class="card"` cuando desees la superficie en caja. |
+| `card interactive` | Agrega `interactive` a una tarjeta clicable para el levantamiento nativo al pasar el mouse.                                                                                                                                                                                    |
+| `card-grid`        | Una cuadrícula receptiva que llena tantas columnas de ~260px como quepan y se colapsa en una columna en un marco estrecho. Deja caer los hijos `card` directamente.                                                                                                            |
+| `tag`              | Una etiqueta o insignia tipo píldora, que coincide con las etiquetas en las tarjetas de transmisión nativas.                                                                                                                                                                   |
+| `stack`            | Una columna flexible vertical con un espacio constante.                                                                                                                                                                                                                        |
+| `row`              | Una fila flexible horizontal que envuelve, con un espacio constante.                                                                                                                                                                                                           |
+| `muted`            | Texto deslucido, para subtítulos y detalles secundarios.                                                                                                                                                                                                                       |
+
+```html
+<div class="card-grid">
+  <article class="card interactive">
+    <h3>Álbum A</h3>
+    <p class="muted">Artista A</p>
+    <div class="row">
+      <span class="tag">jazz</span>
+      <span class="tag">2024</span>
+    </div>
+  </article>
+  <article class="card interactive">
+    <h3>Álbum B</h3>
+    <p class="muted">Artista B</p>
+  </article>
+</div>
+```
+
+Todo aquí es opcional. Una pestaña que envía solo HTML semántico ya se ve nativa. Recurrir a los ayudantes cuando quieras tarjetas, cuadrículas o etiquetas sin copiar manualmente los valores de Owncast, y agregar tu propio CSS encima (ver [Hojas de estilo del visor](#viewer-stylesheets)) siempre que necesites algo que la base no cubre.
+
+## Hojas de estilo del visor
+
+Los complementos pueden tematizar la página del visor agrupando archivos CSS y listándolos en `manifest.styles`. El host inserta el contenido de cada archivo en un solo bloque de estilos de complemento en la página, por lo que los complementos extienden el CSS de la página sin que cada contribución necesite su propia etiqueta `<link>`.
+
+```json
+{
+  "permissions": ["ui.modify"],
+  "styles": ["theme.css", "overrides.css"]
+}
+```
+
+Requiere `ui.modify` únicamente (el complemento se pinta dentro del chrome de Owncast). `http.serve` no es necesario: el host lee cada archivo del directorio `assets/` de tu complemento y lo inserta en el bloque de estilos del complemento en `/api/config`, no en una URL.
+
+### Reglas de ruta
+
+* Las rutas simples como `"theme.css"` se prefijan automáticamente al espacio de nombres de tu complemento.
+* `"/theme.css"` se resuelve de la misma manera.
+* Las rutas completamente calificadas `/plugins/\<your-slug>/...` pasan.
+* Las rutas en el espacio de nombres de otro complemento son rechazadas.
+* Las URLs `http://` y `https://` son rechazadas. Agrupa activos externos y refiérete a ellos con `@font-face` o `url(...)` desde dentro de tu CSS, de modo que un administrador que revise el manifiesto vea cada archivo que se cargará.
+* Cada entrada debe terminar en `.css`.
+
+### Cómo se renderizan las contribuciones
+
+El host lee cada archivo en tiempo de solicitud y concatena los bytes antes de un comentario `/* plugin: \<your-slug> ...` \*/\` comentado, así que devtools "ver fuente" atribuye una regla de regreso al complemento que la envió. Desactivar el complemento elimina su contribución en la siguiente carga de página.
+
+El cuerpo CSS se ejecuta contra el DOM del visor activo, por lo que tus selectores apuntan a lo que la página renderiza. Limitar cada regla bajo un único id raíz es un hábito defensivo que vale la pena mantener. Sin ello, tus reglas pueden coincidir con los elementos que la página del host renderiza y producir regresiones sorprendentes.
+
+### Dónde se encuentran los estilos de complemento en la cascada
+
+La página del visor construye su apariencia a partir de cuatro capas, aplicadas en este orden. Las capas posteriores ganan.
+
+1. Los valores predeterminados integrados de Owncast.
+2. Estilos de complemento: tus archivos `manifest.styles` primero, luego tu salida de `onPageStyles`.
+3. Las variables de apariencia del administrador, los colores establecidos con los selectores en **Configuración General → Apariencia**.
+4. El CSS personalizado del administrador, el editor en esa misma página.
+
+Tus estilos son la capa 2, por lo que las elecciones explícitas del administrador en las capas 3 y 4 anulan los tuyos en cualquier propiedad que ambos establezcan. Considera un tema como una base en lugar de la palabra final:
+
+* Un token que estableciste que el administrador dejó en su valor predeterminado muestra tu valor.
+* Un token que estableciste que el administrador también estableció muestra el valor del administrador.
+
+Tanto los temas parciales como los completos están bien. Un complemento que solo recolorea enlaces deja todos los demás colores intactos. Un complemento que establece toda la paleta aún cede a cualquier color individual que el administrador eligió. El administrador se mantiene en control de su propia instancia, y la página de Apariencia les informa que un complemento está involucrado: muestra un aviso nombrando tu complemento y marca cada color que establezcas con una nota `también establecido por \<plugin>`. Para que esa marcación funcione, declara tus colores como propiedades personalizadas `--theme-color-*` en un bloque `:root { ... }` , la misma forma en que escriben los selectores del administrador.
+
+Un escape rompe el orden: una regla de complemento marcada como `!important` supera las declaraciones normales del administrador independientemente de la capa. Evítalo en CSS de tema si quieres que el administrador mantenga la última palabra sobre sus colores.
+
+### Advertencia: URLs relativas en CSS
+
+Las referencias `url(...)` dentro del CSS de un complemento se resuelven contra la página del visor, no contra el espacio de nombres del complemento. Si deseas hacer referencia a una imagen agrupada, utiliza la ruta absoluta `/plugins/\<your-slug>/logo.png` en lugar de `./logo.png`. Lo mismo ocurre con las fuentes `@font-face`. El espacio de URL estático del complemento se mantiene servido, por lo que las referencias directas funcionan aunque no haya ningún `<link>` que apunte al archivo.
+
+### Hojas de estilo dinámicas: `onPageStyles`
+
+Cuando el CSS depende del estado del complemento, un tema seleccionado por el administrador o un valor en el almacenamiento KV, devuélvelo desde un controlador `onPageStyles` en lugar de (o junto con) un archivo estático. No hay ningún campo de manifiesto para ello. El host llama al controlador una vez por `/api/config` para cualquier complemento que tenga `ui.modify` y lo exporte, luego agrega lo que devuelve a tu bloque de estilos de complemento después de los archivos estáticos `manifest.styles`. Dentro de los propios estilos de tu complemento, la regla posterior gana, por lo que devolver solo la anulación activa de `onPageStyles` es suficiente. El bloque completo aún se sienta debajo de la configuración de apariencia del administrador (ver [dónde se encuentran los estilos de complemento en la cascada](#where-plugin-styles-sit-in-the-cascade)).
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onPageStyles() {
+    const theme = owncast.kv.get("theme");
+    if (!theme) return;
+    return `:root { --theme-color-action: ${accentFor(theme)}; }`;
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_page_styles
+def page_styles():
+    theme = owncast.kv.get("theme")
+    if not theme:
+        return
+    return f":root {{ --theme-color-action: {accent_for(theme)}; }}"
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `ui.modify`. Devuelve nada (un `return` vacío, lo mismo que devolver `""`) cuando no hay nada que contribuir en una solicitud dada. La llamada no toma argumento por espectador, por lo que la respuesta de `/api/config` sigue siendo cacheable. El ejemplo `theme-hub` en el SDK utiliza esto para aplicar un tema seleccionado por el administrador a toda la UI del visor.
+
+## Scripts del visor
+
+Los complementos pueden extender el tiempo de ejecución de la página del visor agrupando archivos JavaScript y listándolos en `manifest.scripts`. El contenido de cada archivo se agrega a la respuesta `/customjavascript` que Owncast ya sirve para el JS personalizado del administrador, por lo que los complementos extienden el comportamiento de la página sin que cada contribución necesite su propia etiqueta `\<script>`.
+
+```json
+{
+  "permissions": ["ui.modify"],
+  "scripts": ["client.js"]
+}
+```
+
+Las mismas reglas de permiso y ruta que `styles`, aplicadas a archivos `.js` (solo se necesita `ui.modify`, y el host lee de `assets/` y lo inserta en `/customjavascript`). Cada contribución se prefija con un comentario `// plugin: \<your-slug> ...` .
+
+Estos son scripts de **página del visor** que se ejecutan en el navegador, siempre en JavaScript, independientemente de en qué idioma escribiste el complemento del lado del servidor.
+
+### Contexto de ejecución
+
+La página del visor carga `/customjavascript` como una sola etiqueta `\<script async>` . El JS de cada complemento se ejecuta en la misma ventana global que el JS personalizado del administrador y el resto del chrome de Owncast. Tres implicaciones:
+
+* Las declaraciones `var` y `function` de nivel superior aterrizan en `window`. Envuelve tu script en un IIFE (`(function(){ ... })()`) para que el estado privado se mantenga privado y no colisiones con el JS del administrador u otros complementos.
+* El host envuelve la contribución de cada complemento en su propio try/catch, por lo que un error en tiempo de ejecución se lanza a la consola del navegador (precedido de `owncast plugin \<your-slug> script error:`) sin detener los scripts de otros complementos. Un error de sintaxis no está aislado: rompe el análisis de la etiqueta de script concatenada antes de que se ejecute cualquier try/catch, así que envía JavaScript válido.
+* URLs relativas `fetch('./data.json')` se resuelven contra la URL de la página del visor, no contra tu complemento. Usa rutas absolutas como `/plugins/\<your-slug>/data.json` para archivos que envíes en `public/`.
+
+### Scripts dinámicos: `onPageScripts`
+
+El contraparte del script a `onPageStyles`. Devuelve JavaScript calculado en el tiempo de solicitud desde un controlador `onPageScripts`, sin campo de manifiesto. El host lo llama una vez por `/api/config` para cualquier complemento que tenga `ui.modify` que lo exporte, y agrega el resultado a `/customjavascript` después de los archivos estáticos `manifest.scripts`, envuelto en el mismo try/catch por complemento.
+
+Esto es para cualquier JavaScript en tiempo de solicitud, no solo temático. Úsalo para ejecutar código del lado del visor calculado por solicitud, por ejemplo, mostrando un valor que el administrador estableció en el almacenamiento KV del complemento. El ejemplo de abajo muestra ese valor a los espectadores:
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  // Ejecuta JavaScript en tiempo de solicitud en la página del visor.
+  onPageScripts() {
+    const notice = owncast.kv.get("notice");
+    if (!notice) return;
+    return `alert(${JSON.stringify(notice)});`;
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_page_scripts
+def page_scripts():
+    notice = owncast.kv.get("notice")
+    if not notice:
+        return
+    return f"alert({json.dumps(notice)});"
+```
+
+</TabItem>
+</Tabs>
+
+La salida se ejecuta en el `window` compartido del visor, por lo que el IIFE y el consejo de ruta absoluta anterior aún se aplican. Escapa cualquier cadena no confiable que insertes: `JSON.stringify` en JavaScript y `json.dumps` en Python producen literal bien citado de forma segura, que es por eso que los ejemplos envuelven el aviso en uno antes de pasarlo a `alert`. Devuelve nada (un `return` vacío, lo mismo que devolver `""`) para no contribuir nada.
+
+### Cuándo usarlo
+
+`scripts` es la herramienta adecuada para complementos que necesitan reaccionar al estado del lado del visor, montar su propia UI sobre la página, o hablar con un backend que el complemento se ejecuta en `/plugins/\<your-slug>/`. Para bots impulsados por chat, filtros de mensajes y cualquier lógica que deba ejecutarse del lado del servidor, los controladores regulares de complemento encajan mejor. Se ejecutan dentro del sandbox del host, pueden hablar a las APIs de Owncast que la página del visor no puede alcanzar, y no confían en el DOM controlado por el usuario.
+
+## Contenido adicional de la página
+
+Los complementos pueden anteponer HTML al bloque de contenido adicional de la página del visor. Declara `manifest.extraPageContent` como un objeto con un `slug` requerido y una ruta de `content` opcional:
+
+```json
+{
+  "permissions": ["ui.modify"],
+  "extraPageContent": { "slug": "banner", "content": "content.html" }
+}
+```
+
+| Campo     | Notas                                                                                                                                                                                                                         |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `slug`    | Requerido. Un identificador estable pasado al controlador de contenido de la página cuando el host solicita HTML renderizado. Letras minúsculas, dígitos y guiones, comenzando con una letra.                                 |
+| `content` | Opcional. Ruta relativa a un archivo HTML estático en `assets/`. Cuando está presente, los bytes de ese archivo se insertan directamente. Cuando se omite, el host llama a tu controlador de contenido de página en su lugar. |
+
+### Estático vs dinámico
+
+Usa `content` cuando el HTML es el mismo para cada espectador: tiras de anuncios, banners de patrocinadores, bloques de prosa. Deja fuera `content` e implementa un **controlador de contenido de página** cuando el contenido deba cambiar por espectador o depender de datos en vivo. El host llama al controlador con el `slug` solicitado y la identidad del espectador, y tu controlador devuelve la cadena HTML para renderizar:
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onPageContent: {
+    // agrupado por el slug del manifiesto; ctx = { slug, user? }
+    banner(ctx) {
+      const who = ctx.user ? `, ${ctx.user.displayName}` : "";
+      return `<div class="banner">¡Bienvenido${who}!</div>`;
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_page_content("banner")
+def banner(ctx):
+    name = ctx.user.display_name if ctx.user else None
+    who = f", {name}" if name else ""
+    return f'<div class="banner">¡Bienvenido{who}!</div>'
+```
+
+</TabItem>
+</Tabs>
+
+Consulta [Controladores: contenido de página](/docs/plugins/events#page-content) para la forma del payload. La identidad del espectador está presente cuando el espectador está autenticado y ausente para espectadores anónimos.
+
+Requiere `ui.modify`. `http.serve` no es necesario: el HTML se inserta en la respuesta de `/api/config`, no se sirve como una URL.
+
+Los bytes se colocan en la parte superior del bloque de contenido adicional, por encima de cualquier prosa que el administrador haya configurado. Cada contribución está envuelta con un comentario `<!-- plugin: <your-slug> ...` -->\` para la atribución. Las contribuciones de múltiples complementos se apilan en el orden en que el host las cargó.
+
+### Reglas de ruta
+
+Lo mismo que `styles` y `scripts`, aplicadas a una única entrada `.html`. Un archivo por complemento. Si deseas varios bloques distintos, enlázalos o `\<iframe>` desde el único archivo que envíes.
+
+### Markdown vs HTML
+
+El contenido adicional de la página del administrador pasa por el procesador de markdown de Owncast antes de renderizar. El HTML del complemento no: el host ejecuta el procesador de markdown primero en el contenido del administrador, luego antepone tus bytes crudos. Las etiquetas, atributos y scripts en línea pasan tal como están escritos.
+
+Esto significa que el HTML de complemento puede usar cualquier elemento que acepte la página del visor. También significa que una etiqueta mal formada puede romper el chrome circundante, así que escapa cualquier cadena no confiable que insertes (nombres de usuario, texto recuperado, cualquier cosa que no esté bajo tu control).
+
+### Emparejando con `scripts`
+
+`extraPageContent` brilla cuando se empareja con `scripts`: envía el marcado como HTML donde se puede revisar de un vistazo y conecta interacciones desde tu JavaScript consultando los elementos que declaraste. El anfitrión carga el HTML antes de que el script se ejecute, por lo que un script que apunta a `document.getElementById(...)` en un elemento contribuido por un plugin funciona sin trucos de sincronización.
+
+```json
+{
+  "permissions": ["ui.modify", "http.serve"],
+  "extraPageContent": { "slug": "panel", "content": "panel.html" },
+  "scripts": ["panel.js"]
+}
+```
+
+Un patrón que a menudo se ve más limpio que construir el mismo DOM imperativamente desde un plugin solo de `scripts`:
+
+* `panel.html` declara estructura, clases e IDs sobre los que puedes razonar como HTML plano.
+* `panel.css` (declarado en `styles`) le da tema.
+* `panel.js` adjunta oyentes de eventos, obtiene datos, muta el estado.
+
+Cuándo optar por HTML-plus-JS en lugar de JavaScript puro: cualquier cosa con un diseño no trivial, atributos ARIA o widgets de terceros que esperan iniciarse desde el DOM existente. Los `scripts` puros siguen teniendo sentido para los complementos que construyen su UI solo bajo ciertas condiciones (después de una obtención, después de una acción del usuario) donde no renderizar nada en la pintura inicial es el comportamiento correcto.
+
+### Cuando `extraPageContent` es suficiente por sí solo
+
+De forma independiente, `extraPageContent` es el camino más sencillo para las cintas de anuncio, banners de patrocinadores y cualquier bloque que no necesite reaccionar a eventos: envía marcado directamente, no requiere un script y sobrevive a un espectador que tiene JavaScript deshabilitado.
+
+## Pestañas de la página del espectador
+
+Los complementos pueden agregar pestañas a la fila de pestañas de la página del espectador (junto a las pestañas **Acerca de** y **Seguidores** incorporadas) declarando `manifest.tabs[]`. Cada entrada requiere un `slug` y un `title`. La ruta `content` es opcional.
+
+```json
+{
+  "permissions": ["ui.modify"],
+  "tabs": [
+    { "title": "Música",       "slug": "music",    "content": "music.html" },
+    { "title": "Información de Stream", "slug": "stream-info" }
+  ]
+}
+```
+
+| Campo     | Notas                                                                                                                                                                                                                                                   |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`   | Requerido. La etiqueta que se muestra en la pestaña.                                                                                                                                                                                                    |
+| `slug`    | Requerido. Identificador estable que se pasa al controlador de contenido de la pestaña cuando el host solicita HTML renderizado. Letras minúsculas, dígitos y guiones, comenzando con una letra. Debe ser único dentro de las pestañas del complemento. |
+| `content` | Opcional. Ruta relativa a un archivo HTML estático en `assets/`. Cuando está presente, los bytes de ese archivo se integran directamente. Cuando se omite, el host llama al controlador de contenido de la pestaña en su lugar.                         |
+
+Requiere `ui.modify`. `http.serve` no es necesario: el HTML de cada pestaña se lee desde `assets/` y se integra en el cuerpo de la pestaña. La página del espectador renderiza una pestaña por entrada, con el `title` como la etiqueta y el contenido del archivo como el cuerpo.
+
+### Cómo se renderizan las pestañas
+
+El host emite un arreglo `pluginTabs[]` en `/api/config`. La página del espectador asigna cada entrada a una pestaña cuyo cuerpo es el HTML integrado, renderizado en un iframe aislado con la hoja de estilo base inyectada, por lo que el HTML simple se ve nativo sin CSS propio.
+
+<img src="/docs/img/plugin-viewer-tabs.png" alt="Pestañas contribuidas por el complemento en la página del espectador, mostradas junto a las pestañas Acerca de y Seguidores incorporadas" width="75%" /> Consulta [Estilizando la UI del complemento](#styling-plugin-ui) para la base y las clases auxiliares. Las pestañas del complemento se agregan después de las integradas en el orden de declaración. La clave de React se deriva del slug del complemento, por lo que una pestaña se desmonta solo cuando su complemento fuente está deshabilitado o eliminado.
+
+### El campo `slug`
+
+`slug` es un nombre estable que controlas. Se pasa a tu controlador de contenido de la pestaña para que un solo controlador pueda servir varias pestañas sin adivinar cuál fue solicitada. El slug aparece en los registros del host y las futuras llamadas a la API, así que elige algo que se lea claramente, como `"music"` o `"stream-info"`. Puedes cambiar `title` libremente. Cambiar `slug` es un cambio disruptivo si algún código se basa en él.
+
+### Contenido dinámico de la pestaña
+
+Cuando una pestaña no tiene un archivo `content`, el host llama a tu **controlador de contenido de la pestaña** cada vez que un espectador carga esa pestaña. Implémentalo cuando el contenido deba cambiar por espectador o si debe obtener datos en vivo. El host llama al controlador con el `slug` solicitado y la identidad del espectador, y tu controlador devuelve la cadena HTML para el cuerpo de la pestaña:
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onTabContent: {
+    // indexado por el slug del manifiesto; ctx = { slug, user? }
+    "stream-info"(ctx) {
+      return "<h2>Información del stream</h2><p>En vivo todos los días de lunes a viernes a las 8pm UTC.</p>";
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_tab_content("stream-info")
+def stream_info(ctx):
+    return "<h2>Información del stream</h2><p>En vivo todos los días de lunes a viernes a las 8pm UTC.</p>"
+```
+
+</TabItem>
+</Tabs>
+
+Consulta [Controladores: contenido de la pestaña](/docs/plugins/events#tab-content) para la forma de carga útil. La identidad del espectador está presente cuando está autenticado y ausente para los espectadores anónimos.
+
+### Reglas de ruta
+
+Igual que `extraPageContent`, aplicado por entrada:
+
+* Las rutas simples como `"music.html"` se auto-prefijan al espacio de nombres de tu complemento.
+* Las rutas totalmente calificadas `/plugins/\<your-slug>/...` pasan directamente.
+* Las rutas en el espacio de nombres de otro complemento son rechazadas.
+* Las URL de `http(s)://` son rechazadas.
+* Cada entrada debe terminar en `.html`.
+
+### Título de la pestaña
+
+El campo `title` aparece tal cual en la barra de pestañas. Mantenlo corto: los títulos largos son truncados por la UI de pestañas. No hay una restricción de esquema sobre la longitud, pero cualquier cosa más allá de aproximadamente 16 caracteres no se ajustará bien en móvil.
+
+### Cuándo usar pestañas vs `extraPageContent`
+
+* `extraPageContent`: un bloque de HTML que se coloca encima de la fila de pestañas. Bueno para cintas de anuncio, banners de patrocinadores, cualquier cosa que deba estar siempre visible.
+* `tabs`: paneles dedicados en los que el espectador hace clic. Bueno para contenido que no necesita competir con el chat por atención: listas de música, horarios de eventos, páginas de enlaces, secciones de patrocinadores que deseas que los espectadores encuentren, pero no necesariamente vean primero.

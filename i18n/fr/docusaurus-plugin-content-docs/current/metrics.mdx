@@ -1,0 +1,50 @@
+---
+title: Performance du flux
+description: Il est important de savoir si votre flux Owncast fonctionne bien. Il existe quelques outils dans l'administration pour vous aider avec cela.
+sidebar_position: 200
+sidebar_label: Performance du flux
+tags:
+  - métriques
+  - prometheus
+  - performance
+  - lecture
+  - matériel
+  - cpu
+---
+
+import StreamHealth from "./troubleshoot/shared/stream-health.md";
+import { IncludeMarkdown } from "@site/src/components";
+
+## État général du flux
+
+<IncludeMarkdown>
+  <StreamHealth />
+</IncludeMarkdown>
+
+## Matériel
+
+Il est important de savoir comment votre CPU, en particulier, gère les tâches de traitement vidéo lors du dépannage. Owncast vous donne un aperçu général des métriques matérielles clés pour vous aider avec cela.
+
+<img src="/docs/img/admin-hardware-info.png" alt="La page Infos Matériel dans l'administration, montrant les jauges d'utilisation du CPU, de la mémoire et du disque avec un graphique d'utilisation dans le temps" width="80%" />
+
+Si vous constatez que votre matériel est sur-utilisé, vous souhaiterez peut-être [déboguer](/troubleshoot).
+
+## Prometheus
+
+Pour les personnes qui préfèrent utiliser des solutions de surveillance externes, Owncast prend en charge l'utilisation de [Prometheus](https://prometheus.io/) pour collecter un ensemble de métriques.
+
+Vous pouvez diriger la configuration de Prometheus vers votre instance Owncast avec le point de terminaison de `/api/admin/prometheus`, en utilisant l'authentification de base et les données de connexion administratives.
+
+Par exemple :
+
+```yaml
+- job_name: owncast
+  scrape_interval: 1m
+  metrics_path: /api/admin/prometheus
+  scheme: https
+  basic_auth:
+    username: admin
+    password: my_admin_password
+  static_configs:
+    - targets: ["my.owncast.server"]
+```

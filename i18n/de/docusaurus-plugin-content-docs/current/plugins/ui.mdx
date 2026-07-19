@@ -1,0 +1,557 @@
+---
+title: Beitragende UI
+description: Fügen Sie Admin-Seiten zur Owncast-Admin-UI und Aktionsschaltflächen zum Viewer-Chrome hinzu.
+sidebar_position: 8
+sidebar_label: UI
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - Plugins
+  - ui
+  - admin
+  - aktions-schaltflächen
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Plugins können ihre eigene UI an zwei Stellen zu Owncast hinzufügen: Registerkarten im Admin-Bereich (für streamerseitige Einstellungen) und Aktionsschaltflächen unter dem Stream (für zuschauerseitige Aktionen). Beide werden in Ihrem Manifest deklariert und vom Host verwaltet. Sie liefern den Inhalt, Owncast fügt ihn in das richtige Chrome ein.
+
+Manifest-Deklarationen auf dieser Seite sind reines JSON, identisch, egal in welcher Sprache Sie schreiben. Dynamische Inhalts-Handler und Laufzeitanrufe werden für beide SDKs angezeigt. Siehe [JavaScript](/docs/plugins/sdks/javascript) oder [Python](/docs/plugins/sdks/python) für Installation und Einrichtung.
+
+## Admin-Seiten
+
+:::tip[Brauchen Sie nur ein Einstellungsformular?]
+Für flache, typisierte Einstellungen (Strings, Zahlen, Schalter), deklarieren Sie einen Manifestblock `config` und lassen Sie Owncast das Formular für Sie rendern. Siehe [Konfiguration](/docs/plugins/configuration). Erstellen Sie eine benutzerdefinierte Admin-Seite, wenn Sie eine UI benötigen, die das Auto-Formular nicht darstellen kann.
+:::
+
+Plugins können Seiten registrieren, die in der Owncast-Admin-UI unter **Plugins** erscheinen. Deklarieren Sie sie im Manifest:
+
+```json
+{
+  "permissions": ["http.serve"],
+  "admin": {
+    "pages": [
+      { "title": "Einstellungen", "path": "/admin", "icon": "gear" }
+    ]
+  }
+}
+```
+
+Jeder Eintrag hat einen `title`, ein `path`-Glob und ein optionales `icon`:
+
+| Feld    | Notizen                                                                                                                                                                          |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title` | Das Tab-Label in der Admin-Ansicht des Plugins.                                                                                                                                  |
+| `path`  | Ein Path-Glob unter `/plugins/\<your-slug>/`. Beispiele: `"/admin"`, `"/admin/*"`, `"/admin/api/*"`.                                                            |
+| `icon`  | Kurzer semantischer Name. Unterstützt: `gear`, `wrench`, `user`, `users`, `lock`, `info`, `apps`, `docs`, `bell` (auch Aliase wie `settings` und `notifications` funktionieren). |
+
+### Wie sie gerendert werden
+
+Owncasts Admin rendert jede deklarierte Seite als Tab innerhalb von `/admin/plugins/configure?id=\<your-slug>`. Der Tab-Inhalt ist ein `\<iframe>`, der auf `/plugins/\<your-slug>/\<path>` zeigt. Jedes Plugin erhält eine bookmarkbare URL und einen Sidebar-Eintrag unter **Plugins** in der Admin-Navigation.
+
+<img src="/docs/img/plugin-admin-page.png" alt="Die Admin-Seite eines Plugins wird als Tab in der Admin-Leiste gerendert, neben den Registerkarten Anweisungen und Berechtigungen." width="80%" />
+
+Der Host injiziert automatisch das Baseline-Stylesheet in HTML-Antworten auf Admin-Pfaden, sodass einfache `<input>`- und `\<button>`-Steuerelemente auf die eigene Art in der Owncast-Admin-Ansicht aussehen, ohne dass Sie CSS liefern müssen. Siehe [Styling plugin UI](#styling-plugin-ui) für alles, was Sie kostenlos erhalten und die verfügbaren Hilfsklassen. Plugins, die ihr eigenes Styling bevorzugen, können zusätzlich Schichten darauf legen.
+
+### Sandbox
+
+Die Seite läuft in einem sandboxed `\<iframe>`. Ihre Skripte laufen, Formulare werden übermittelt, und gleichnamiges `fetch` an Ihren eigenen `/plugins/\<your-slug>/`-Endpunkten funktioniert. Seiten können auch **Popups öffnen**, **Dateidownloads auslösen** (z.B. ein Blob oder eine Daten-URL `\<a download>`, die Sie aus dem Skript anklicken), und **`confirm()` / `alert()` / `prompt()`**-Dialoge verwenden. Die Sandbox ist die einzige Einschränkung, die Ihnen auffallen wird. Wenn eine Browserfunktion anscheinend stillschweigend blockiert wird, ist das iframe-Sandbox das Erste, was Sie überprüfen sollten.
+
+### Auth-Gating
+
+Anfragen an manifest-deklarierte Admin-Pfade werden vom Host auth-gated. Nicht authentifizierte Anfragen erhalten einen `401`, bevor Ihr Plugin-Code ausgeführt wird. Sie müssen die Authentifizierung der Anfrage für diese Pfade nicht überprüfen.
+
+Statische Dateien und dynamische Endpunkte unter übereinstimmenden Pfaden sind beide auth-gated. Die gleiche Gating-Regel gilt für Ihre `public/admin/index.html` und für `POST /admin/api/save-settings`.
+
+Verwenden Sie mehrere Globs, wenn Sie sowohl eine UI-Seite als auch eine JSON-API haben:
+
+```json
+{
+  "admin": {
+    "pages": [
+      { "title": "Einstellungen", "path": "/admin" },
+      { "title": "Einstellungen", "path": "/admin/api/*" }
+    ]
+  }
+}
+```
+
+Doppelte `title` sind in Ordnung. Beide Globs bedienen ein Tab.
+
+### Autorenfluss
+
+1. Legen Sie HTML, CSS und JS für Admin in `public/admin/index.html` (und Freunde).
+2. Machen Sie Admin-APIs über Ihren Request-Handler unter `/admin/api/...` verfügbar (siehe [HTTP bereitstellen](/docs/plugins/http)).
+3. Deklarieren Sie die relevanten Globs in `manifest.admin.pages[].path`.
+4. Besuchen Sie `/admin/plugins/configure?id=\<your-slug>` in der Admin-UI. Owncast verwendet Ihr bestehendes Admin-Login, um die Seite zu sichern. Keine zusätzlichen Aufforderungen.
+
+## Aktionsschaltflächen
+
+Owncast zeigt eine Reihe von Aktionsschaltflächen in seiner Viewer-UI an. Klickbare Einträge, die entweder eine URL (in einem Modal oder einem neuen Tab) öffnen oder rohes HTML rendern. Plugins können ihre eigenen beisteuern.
+
+<img src="/docs/img/plugin-action-buttons.png" alt="Eine Reihe von Aktionsschaltflächen, die von Plugins unter dem Stream auf der Zuschauerseite beigetragen werden, neben den integrierten Folge- und Benachrichtigen-Schaltflächen." width="85%" />
+
+### Manifest-deklarierte Schaltflächen
+
+```json
+{
+  "permissions": ["ui.modify", "http.serve"],
+  "actions": [
+    {
+      "title": "Chat Overlay",
+      "description": "Öffne das Live-Chat-Overlay",
+      "url": "/",
+      "icon": "/star.png",
+      "color": "#3b82f6"
+    },
+    {
+      "title": "Issue-Tracker",
+      "url": "https://github.com/example/my-plugin/issues",
+      "openExternally": true
+    },
+    {
+      "title": "Über diesen Stream",
+      "html": "<p>Live jeden Wochentag um 20 Uhr UTC.</p>"
+    }
+  ]
+}
+```
+
+Solange Ihr Plugin aktiviert ist, fügt der Host seine Aktions-Einträge in die bereits unter dem Stream angezeigte Liste von Owncast ein. Wenn es deaktiviert ist, verschwinden sie.
+
+### Feldreferenz
+
+| Feld             | Notizen                                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------------------ |
+| `title`          | Erforderlich. Das Label der Schaltfläche.                                                        |
+| `url`            | Entweder eine absolute `https://...` URL oder ein Pfad. Wechselseitig ausschließend mit `html`.  |
+| `html`           | Rohes HTML, das in einem Inline-Modal gerendert wird. Wechselseitig ausschließend mit `url`.     |
+| `icon`           | Optionaler Bild-URL, der auf der Schaltfläche angezeigt wird. Die gleichen Pfadrechte wie `url`. |
+| `color`          | Optionaler Hexadezimalfarbcode für den Hintergrund der Schaltfläche.                             |
+| `description`    | Optional. In dem Modal angezeigt, das für URL-basierte Aktionen geöffnet wird.                   |
+| `openExternally` | Wenn `true`, öffnet sich die URL in einem neuen Tab anstelle eines Inline-Modals.                |
+
+### Pfadregeln
+
+Zwei einfache Regeln decken alles ab:
+
+* Relative Pfade werden automatisch mit dem Namespace Ihres Plugins vorangestellt. `"/"` wird zu `/plugins/my-plugin/`. `"/star.png"` wird zu `/plugins/my-plugin/star.png`. Das erspart Ihnen das Hard-Coding Ihres Plugin-Namens. Gilt sowohl für `url` als auch für `icon`.
+* Absolute `https://...` URLs werden unverändert durchgereicht. Verwenden Sie diese für externe Links und CDN-gehostete Icons.
+
+Der Host setzt durch:
+
+* Die Berechtigung `ui.modify` ist erforderlich. Manifeste mit `actions`, aber ohne `ui.modify`, werden beim Laden abgelehnt.
+* Genau eines von `url` oder `html` pro Eintrag.
+* URLs und Icons, die in Ihren Namespace aufgelöst werden, erfordern `http.serve`. Sie sind es, die sie bereitstellen.
+* URLs und Icons, die auf den Namespace eines anderen Plugins zeigen, werden abgelehnt. Fängt Tippfehler ab und verhindert, dass ein Plugin die UI eines anderen bewirbt.
+
+### Laufzeit-Erweiterungen
+
+Ein Plugin kann beim Laufzeitablauf weitere Aktionsschaltflächen hinzufügen, ohne neu zu laden, indem `owncast.actions.add(...)` mit einer einzelnen Aktion oder einem Array davon aufgerufen wird. Jeder Laufeintrag durchläuft die gleiche Validierung wie `manifest.actions` und wird im Plugin-Konfiguration gespeichert, sodass die Erweiterungen über einen Reload hinaus bestehen bleiben. `owncast.actions.clear()` entfernt jede Laufzeiterweiterung. Manifest-deklarierte Aktionen bleiben.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { definePlugin, owncast } = require("@owncast/plugin-sdk");
+
+module.exports = definePlugin({
+  onStreamStarted() {
+    owncast.actions.add({
+      title: "Spenden",
+      url: "https://example.com/donate",
+      openExternally: true,
+    });
+    // oder fügen Sie mehrere auf einmal hinzu: owncast.actions.add([ { ... }, { ... } ])
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+from owncast_plugin import plugin, owncast
+
+@plugin.on_stream_started
+def add_button(info):
+    owncast.actions.add({
+        "title": "Spenden",
+        "url": "https://example.com/donate",
+        "openExternally": True,
+    })
+    # oder fügen Sie mehrere auf einmal hinzu: owncast.actions.add([ { ... }, { ... } ])
+```
+
+</TabItem>
+</Tabs>
+
+Ein gängiges Muster ist eine Admin-Seite, die dem Streamer erlaubt, benutzerdefinierte Schaltflächen (Label + URL) über die Standardoptionen des Plugins hinzuzufügen. Das Beispiel `action-buttons` im SDK liefert eine funktionierende Version davon.
+
+## Styling plugin UI
+
+Owncast injiziert ein Baseline-Stylesheet in jede Plugin-Oberfläche, die in einem iframe gerendert wird: Ihre **Admin-Seiten** und Ihre **Viewer-Seiten-Tabs**. Es wird aus Owncasts eigenen Design-Token erstellt, sodass einfache semantische HTML die native Erscheinung ohne eigenes CSS übernimmt.
+
+* Überschriften, Absätze und Links übernehmen die Theme-Schriftarten und -Farben.
+* `<input>`, `\<textarea>`, `\<select>` und `\<button>` rendern wie die nativen Steuerelemente. Eine `\<button>` erhält den primären Stil. Fügen Sie `class="secondary"` für die Umriss-Variante hinzu.
+* `\<table>`, `\<fieldset>` und `\<code>` / `\<pre>` erhalten eine sinnvolle native Formatierung.
+
+Ihr Inhalt wird **flush auf der Seite** angezeigt. Der Hintergrund des iframes ist transparent, sodass das Panel des Hosts durchscheint, genau wie die integrierten Über Tabs und Follower gerendert werden. Sie müssen keinen und sollten keinen undurchsichtigen Seitenhintergrund oder eine umschließende Box um alles herum hinzufügen. Diese flush-Formatierung macht einen Plugin-Tab zu einem Teil von Owncast anstelle eines eingebetteten Rahmens.
+
+:::info[Wo es gilt]
+Die Baseline stylt die vom iframe gerenderten Oberflächen: [Admin-Seiten](#admin-pages) und [Viewer-Seiten-Tabs](#viewer-page-tabs). Inhalte, die Sie direkt in die Viewer-Seite injizieren (`extraPageContent`, `scripts`), werden im echten Seiten-DOM gerendert und erben stattdessen die tatsächlichen Styles von Owncast.
+:::
+
+### Hilfsklassen
+
+Für native Bausteine über einfache Elemente stellt die Baseline einige optionale Klassen zur Verfügung. Sie referenzieren die gleichen Theme-Token wie der Rest von Owncast, sodass sie automatisch neu gestaltet werden, wenn ein Admin das Thema anpasst.
+
+| Klasse             | Was es tut                                                                                                                                                                                                                                                              |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `card`             | Eine native Kartenoberfläche, dieselbe Optik wie die Follower- und Featured-Streams-Karten. Ein einfaches `\<section>` / `\<article>` bleibt flush, also treten Sie mit `class="card"` opt-in, wenn Sie die boxed Oberfläche möchten. |
+| `card interactive` | Fügen Sie `interactive` zu einer klickbaren Karte für den nativen Hover Lift hinzu.                                                                                                                                                                                     |
+| `card-grid`        | Ein responsives Raster, das so viele ~260px-Spalten wie möglich ausfüllt und bei schmalen Rahmen auf eine Spalte zusammenbricht. Lassen Sie `card`-Kinder einfach hinein.                                                                                               |
+| `tag`              | Ein Plakat-Tag oder Badge, das den Tags auf den nativen Stream-Karten entspricht.                                                                                                                                                                                       |
+| `stack`            | Eine vertikale Flex-Spalte mit einem konsistenten Abstand.                                                                                                                                                                                                              |
+| `row`              | Eine horizontale Flexreihe, die umschließt, mit einem konsistenten Abstand.                                                                                                                                                                                             |
+| `muted`            | Weniger betonte Texte, für Beschriftungen und sekundäre Details.                                                                                                                                                                                                        |
+
+```html
+<div class="card-grid">
+  <article class="card interactive">
+    <h3>Album A</h3>
+    <p class="muted">Künstler A</p>
+    <div class="row">
+      <span class="tag">Jazz</span>
+      <span class="tag">2024</span>
+    </div>
+  </article>
+  <article class="card interactive">
+    <h3>Album B</h3>
+    <p class="muted">Künstler B</p>
+  </article>
+</div>
+```
+
+Alles hier ist freiwillig. Ein Tab, der nichts als semantisches HTML liefert, sieht bereits nativ aus. Greifen Sie auf die Helfer zurück, wenn Sie Karten, Raster oder Tags wünschen, ohne die Werte von Owncast manuell zu kopieren, und legen Sie Ihr eigenes CSS darüber (siehe [Viewer-Stylesheets](#viewer-stylesheets)), wann immer Sie etwas benötigen, das die Basis nicht abdeckt.
+
+## Viewer-Stylesheets
+
+Plugins können die Benutzeroberfläche des Betrachters gestalten, indem sie CSS-Dateien bündeln und in `manifest.styles` auflisten. Der Host bettet den Inhalt jeder Datei in einen einzigen Plugin-Stilblock auf der Seite ein, sodass Plugins das CSS der Seite erweitern, ohne dass jeder Beitrag sein eigenes `<link>`-Tag benötigt.
+
+```json
+{
+  "permissions": ["ui.modify"],
+  "styles": ["theme.css", "overrides.css"]
+}
+```
+
+Benötigt nur `ui.modify` (das Plugin wird innerhalb von Owncasts Chrome gerendert). `http.serve` ist nicht erforderlich: Der Host liest jede Datei aus dem Verzeichnis `assets/` Ihres Plugins und bettet die Bytes in den Plugin-Stilblock auf /api/config ein, nicht an einer URL.
+
+### Pfadregeln
+
+* Nackte Pfade wie `"theme.css"` werden automatisch mit dem Namensraum Ihres Plugins versehen.
+* `"/theme.css"` wird auf dieselbe Weise aufgelöst.
+* Vollqualifizierte `/plugins/\<your-slug>/...`-Pfade werden durchgereicht.
+* Pfade im Namensraum eines anderen Plugins werden abgelehnt.
+* `http://` und `https://` URLs werden abgelehnt. Bündeln Sie externe Assets und referenzieren Sie sie stattdessen mit `@font-face` oder `url(...)` aus Ihrem CSS, damit ein Administrator, der das Manifest überprüft, jede Datei sieht, die geladen wird.
+* Jeder Eintrag muss mit `.css` enden.
+
+### Wie Beiträge gerendert werden
+
+Der Host liest jede Datei zum Zeitpunkt der Anfrage und fügt die Bytes vor einem `/* plugin: \<your-slug> ...` Kommentar zusammen, sodass die Entwicklerwerkzeuge die Attribute des Quellcodes einer Regel dem Plugin zuordnen, das es geliefert hat. \*/\` Kommentar, sodass die Entwicklerwerkzeuge die Regel dem Plugin zuordnen, das sie geliefert hat. Das Deaktivieren des Plugins entfernt seinen Beitrag beim nächsten Laden der Seite.
+
+Der CSS-Body wird gegen den Live-Viewer-DOM ausgeführt, sodass Ihre Selektoren alles anvisieren, was die Seite rendert. Es ist eine defensive Gewohnheit, alle Regeln unter einer einzigen Root-ID zu scopen. Ohne dies können Ihre Regeln Elemente, die die Hostseite rendert, übereinstimmen und überraschende Regressionen hervorrufen.
+
+### Wo Plugin-Stile in der Kaskade sitzen
+
+Die Seite des Viewers erstellt ihr Aussehen aus vier Schichten, die in dieser Reihenfolge angewendet werden. Spätere Schichten gewinnen.
+
+1. Owncasts integrierte Standardwerte.
+2. Plugin-Stile: Ihre `manifest.styles`-Dateien zuerst, dann Ihre `onPageStyles`-Ausgaben.
+3. Die Erscheinungsvariablen des Administrators, die Farben, die mit den zwei Pickern unter **Allgemeine Einstellungen → Erscheinungsbild** festgelegt wurden.
+4. Die benutzerdefinierten CSS des Administrators, der Editor auf derselben Seite.
+
+Ihre Stile sind die Schicht 2, sodass die expliziten Auswahlmöglichkeiten des Administrators in den Schichten 3 und 4 Ihre auf beliebigen Eigenschaften, die Sie beide festgelegt haben, überschreiben. Betrachten Sie ein Thema als Ausgangspunkt und nicht als endgültiges Wort:
+
+* Ein Token, das Sie gesetzt haben, dessen Standardwert der Administrator belassen hat, zeigt Ihren Wert an.
+* Ein Token, das Sie gesetzt haben, das der Administrator ebenfalls gesetzt hat, zeigt den Wert des Administrators an.
+
+Sowohl partielle als auch vollständige Themen sind in Ordnung. Ein Plugin, das nur Links neu färbt, lässt jede andere Farbe unberührt. Ein Plugin, das die gesamte Palette festlegt, unterliegt dennoch jeder individuellen Farbe, die der Administrator gewählt hat. Der Administrator bleibt in der Kontrolle seiner Instanz, und die Seite Erscheinungsbild sagt ihm, dass ein Plugin beteiligt ist: Sie zeigt eine Benachrichtigung mit dem Namen Ihres Plugins an und kennzeichnet jede Farbe, die Sie festgelegt haben, mit einer `also set by \<plugin>`-Notiz. Damit diese Kennzeichnung funktioniert, müssen Sie Ihre Farben als `--theme-color-*` benutzerdefinierte Eigenschaften in einem `:root { ...`-Block deklarieren, dem gleichen Format, das die Picker des Administrators verwenden. }\`-Block, dem gleichen Format, das die Message Pickers schreiben.
+
+Eine Ausstiegsschleuse bricht die Reihenfolge auf: Eine Plugin-Regel, die mit `!important` markiert ist, überholt die gewöhnlichen Erklärungen des Administrators unabhängig von der Schicht. Vermeiden Sie dies in Theme-CSS, wenn Sie möchten, dass der Administrator das letzte Wort über seine Farben hat.
+
+### Vorsicht: relative URLs in CSS
+
+`url(...)`-Referenzen innerhalb CSS eines Plugins lösen sich gegen die Seite des Betrachters auf, nicht gegen den Namensraum des Plugins. Wenn Sie ein gebündeltes Bild referenzieren möchten, verwenden Sie stattdessen den absoluten Pfad `/plugins/\<your-slug>/logo.png` anstelle von `./logo.png`. Gilt auch für `@font-face`-Quellen. Der statische URL-Bereich des Plugins bleibt verfügbar, sodass direkte Referenzen auch funktionieren, wenn kein `<link>` auf die Datei verweist.
+
+### Dynamische Stylesheets: `onPageStyles`
+
+Wenn das CSS von einem Plugin-Zustand abhängt, einem vom Administrator ausgewählten Thema oder einem Wert im KV-Speicher, geben Sie es stattdessen von einem `onPageStyles`-Handler zurück (oder neben einem statischen Datei). Es gibt kein Manifestfeld dafür. Der Host ruft den Handler einmal pro `/api/config` für jedes Plugin auf, das `ui.modify` hat und es exportiert, dann wird das, was es zurückgibt, zu Ihrem Plugin-Stilblock nach den statischen `manifest.styles`-Dateien hinzugefügt. Innerhalb Ihrer eigenen Stile des Plugins gewinnt die spätere Regel, sodass es ausreicht, nur die aktive Überschreibung von `onPageStyles` zurückzugeben. Der gesamte Block sitzt immer noch unter den Erscheinungseinstellungen des Administrators (siehe [wo die Plugin-Stile in der Kaskade sitzen](#wo-plugin-stile-in-der-kaskade-sitzen)).
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onPageStyles() {
+    const theme = owncast.kv.get("theme");
+    if (!theme) return;
+    return `:root { --theme-color-action: ${accentFor(theme)}; }`;
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_page_styles
+def page_styles():
+    theme = owncast.kv.get("theme")
+    if not theme:
+        return
+    return f":root {{ --theme-color-action: {accent_for(theme)}; }}"
+```
+
+</TabItem>
+</Tabs>
+
+Benötigt `ui.modify`. Geben Sie nichts zurück (ein nackter `return`, das gleiche wie das Zurückgeben von `""`), wenn es nichts zu beitragen gibt bei einer gegebenen Anfrage. Der Aufruf benötigt kein pro-Viewer-Argument, sodass die Antwort `/api/config` zwischenspeicherbar bleibt. Das `theme-hub` Beispiel im SDK verwendet dies, um ein vom Administrator gewähltes Thema auf die gesamte Ansicht Benutzeroberfläche anzuwenden.
+
+## Viewer-Skripte
+
+Plugins können die Laufzeit der Seite des Betrachters erweitern, indem sie JavaScript-Dateien bündeln und in `manifest.scripts` auflisten. Der Inhalt jeder Datei wird zur Antwort `/customjavascript` aufgenommen, die Owncast bereits für den benutzerdefinierten JS des Administrators bereitstellt, sodass Plugins das Verhalten der Seite erweitern, ohne dass jeder Beitrag sein eigenes `\<script>`-Tag benötigt.
+
+```json
+{
+  "permissions": ["ui.modify"],
+  "scripts": ["client.js"]
+}
+```
+
+Die gleichen Berechtigungs- und Pfadregeln wie `styles`, angewandt auf `.js`-Dateien (nur `ui.modify` ist erforderlich, und der Host liest aus `assets/` und bettet in `/customjavascript` ein). Jeder Beitrag wird mit einem `// plugin: \<your-slug> ...` Kommentar vorangestellt.
+
+Dies sind **Viewer-Seiten**-Skripte, die im Browser ausgeführt werden, stets JavaScript, unabhängig davon, in welcher Sprache Sie das serverseitige Plugin geschreiben haben.
+
+### Ausführungskontext
+
+Die Viewer-Seite lädt `/customjavascript` als ein einzelnes `\<script async>`-Tag. Jedes JavaScript des Plugins wird im gleichen globalen Fenster wie der benutzerdefinierte JS des Administrators und der Rest von Owncasts Chrome ausgeführt. Drei Implikationen:
+
+* Top-Level `var`- und `function`-Deklarationen liegen auf `window`. Umhüllen Sie Ihr Skript in einer IIFE (`(function(){ ... })()`) damit der private Zustand privat bleibt und Sie nicht mit dem JS des Administrators oder anderen Plugins zusammenstoßen.
+* Der Host umschließt jede Beitrag des Plugins in sein eigenes try/catch, sodass ein Laufzeitfehler in die Browser-Konsole geworfen wird (vorgeanmerkt `owncast plugin \<your-slug> script error:`), ohne die Skripte der anderen Plugins anzuhalten. Ein Syntaxfehler ist nicht isoliert: er bricht das Parsen des einen zusammengefassten Skript-Tags ab, bevor irgendein try/catch ausgeführt wird, also liefern Sie valides JavaScript aus.
+* Relative `fetch('./data.json')` löst sich auf die URL der Viewer-Seite auf, nicht gegen Ihr Plugin. Verwenden Sie absolute Pfade wie `/plugins/\<your-slug>/data.json` für Dateien, die Sie in `public/` bereistellen.
+
+### Dynamische Skripte: `onPageScripts`
+
+Das Skript-Gegenstück zu `onPageStyles`. Geben Sie JavaScript zurück, das zur Anfragezeit aus einem `onPageScripts`-Handler berechnet wurde, ohne Manifestfeld. Der Host ruft es einmal pro `/api/config` für jedes Plugin auf, das `ui.modify` hat und es exportiert, und fügt das Ergebnis zu `/customjavascript` nach den statischen `manifest.scripts`-Dateien hinzu, verpackt in den gleichen per-Plugin try/catch.
+
+Dies ist für jedes JavaScript zur Anfragezeit, nicht nur für das Thema. Verwenden Sie es, um code, der seitenseitig zur Anfrageberechnung, zum Beispiel um einen Wert, den der Administrator im KV-Speicher des Plugins festgelegt hat, abzurufen. Das folgende Beispiel zeigt diesen Wert den Zuschauern:
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  // Führen Sie JavaScript zur Anfragezeit auf der Viewer-Seite aus.
+  onPageScripts() {
+    const notice = owncast.kv.get("notice");
+    if (!notice) return;
+    return `alert(${JSON.stringify(notice)});`;
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_page_scripts
+def page_scripts():
+    notice = owncast.kv.get("notice")
+    if not notice:
+        return
+    return f"alert({json.dumps(notice)});"
+```
+
+</TabItem>
+</Tabs>
+
+Die Ausgabe wird im gemeinsamen Viewer `window` ausgeführt, sodass die IIFE- und absolute Pfad-Praxis oben immer noch gelten. Escapen Sie alle untrusted Strings, die Sie einbetten: `JSON.stringify` in JavaScript und `json.dumps` in Python produzieren beide einen sicher zitierten Literal, weshalb die Beispiele die Benachrichtigung in einem einwickeln, bevor sie sie an `alert` übergeben. Geben Sie nichts zurück (ein nackter `return`, das gleiche wie das Zurückgeben von `""`), um nichts beizutragen.
+
+### Wann man es verwenden sollte
+
+`scripts` ist das richtige Werkzeug für Plugins, die auf den Zustand des Viewers reagieren müssen, ihre eigene UI über der Seite einfügen oder mit einem Backend kommunizieren, das das Plugin unter `/plugins/\<your-slug>/` läuft. Für chatgesteuerte Bots, Nachrichtenfilter und jede Logik, die serverseitig ausgeführt werden soll, sind die regulären Plugin-Handler besser geeignet. Sie laufen innerhalb der Sandbox des Hosts, können mit den Owncast-APIs sprechen, auf die die Viewer-Seite nicht zugreifen kann, und trauen sich nicht auf benutzerkontrollierten DOM.
+
+## Zusätzlicher Seiteninhalt
+
+Plugins können HTML an den extra Inhaltsblock der Seite des Zuschauers voranstellen. Deklarieren Sie `manifest.extraPageContent` als ein Objekt mit einem erforderlichen `slug` und einem optionalen `content`-Pfad:
+
+```json
+{
+  "permissions": ["ui.modify"],
+  "extraPageContent": { "slug": "banner", "content": "content.html" }
+}
+```
+
+| Feld      | Notizen                                                                                                                                                                                                                         |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `slug`    | Erforderlich. Ein stabiler Identifikator, der an den Handler für den Seiteninhalt übergeben wird, wenn der Host nach gerendertem HTML fragt. Kleinbuchstaben, Ziffern und Bindestriche, beginnend mit einem Buchstaben.         |
+| `content` | Optional. Relativer Pfad zu einer statischen HTML-Datei in `assets/`. Wenn vorhanden, werden die Bytes dieser Datei direkt eingebettet. Wenn nicht vorhanden, ruft der Host stattdessen Ihren Handler für den Seiteninhalt auf. |
+
+### Statisch vs dynamisch
+
+Verwenden Sie `content`, wenn das HTML für jeden Zuschauer gleich ist: Ankündigungsstreifen, Sponsorbanner, Blöcke von Prosa. Lassen Sie `content` weg und implementieren Sie einen **Seiteninhalt-Handler**, wenn der Inhalt sich von Zuschauer zu Zuschauer ändern oder auf Live-Daten zugreifen soll. Der Host ruft den Handler mit dem angeforderten `slug` und der Identität des Zuschauers auf, und Ihr Handler gibt die HTML-Zeichenfolge zurück, die gerendert werden soll:
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onPageContent: {
+    // nach dem Manifest slug; ctx = { slug, user? }
+    banner(ctx) {
+      const who = ctx.user ? `, ${ctx.user.displayName}` : "";
+      return `<div class="banner">Willkommen${who}!</div>`;
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_page_content("banner")
+def banner(ctx):
+    name = ctx.user.display_name if ctx.user else None
+    who = f", {name}" if name else ""
+    return f'<div class="banner">Willkommen{who}!</div>'
+```
+
+</TabItem>
+</Tabs>
+
+Siehe [Handler: Seiteninhalt](/docs/plugins/events#page-content) für die Form des Payloads. Die Identität des Zuschauers ist vorhanden, wenn der Zuschauer authentifiziert ist, und abwesend für anonyme Zuschauer.
+
+Benötigt `ui.modify`. `http.serve` ist nicht erforderlich: das HTML wird in die Antwort `/api/config` eingebettet, nicht als URL bereitgestellt.
+
+Die Bytes landen oben im extras-content Block, über jedem Text, den der Administrator konfiguriert hat. Jeder Beitrag wird mit einem `<!-- plugin: <your-slug> ...`-Kommentar umschlossen, um die Zuschreibung zu gewährleisten. -->\` Kommentar zur Attribution. Die Beiträge mehrerer Plugins stapeln sich in der Reihenfolge, in der der Host sie geladen hat.
+
+### Pfadregeln
+
+Gleich wie `styles` und `scripts`, angewandt auf einen einzelnen `.html`-Eintrag. Eine Datei pro Plugin. Wenn Sie mehrere unterschiedliche Blöcke benötigen, verlinken oder `\<iframe>` sie von der einen Datei, die Sie ausliefern.
+
+### Markdown vs HTML
+
+Der zusätzliche Seiteninhalt des Admins durchläuft Owncasts Markdown-Processor, bevor er gerendert wird. Plugin-HTML nicht: Der Host führt zuerst den Markdown-Processor auf den Inhalt des Administrators aus und fügt dann Ihre Rohbytes hinzu. Tags, Attribute und Inline-Skripte bleiben in der geschriebenen Form bestehen.
+
+Das bedeutet, dass Plugin-HTML jedes Element verwenden kann, das die Viewer-Seite akzeptiert. Es bedeutet auch, dass ein fehlerhaftes Tag das umliegende Chrome brechen kann, also escapen Sie alle untrusted Strings, die Sie einbetten (Benutzernamen, abgerufener Text, alles was nicht unter Ihrer Kontrolle steht).
+
+### Kombination mit `scripts`
+
+`extraPageContent` glänzt in Kombination mit `scripts`: Versenden Sie das Markup als HTML, wo es auf einen Blick überprüfbar ist, und verkabeln Sie Interaktionen von Ihrem JavaScript, indem Sie die Elemente abfragen, die Sie deklariert haben. Der Host lädt das HTML, bevor das Skript ausgeführt wird, sodass ein Skript, das `document.getElementById(...)` auf ein von Plugin hinzugefügtes Element abzielt, ohne zeitliche Tricks funktioniert.
+
+```json
+{
+  "permissions": ["ui.modify", "http.serve"],
+  "extraPageContent": { "slug": "panel", "content": "panel.html" },
+  "scripts": ["panel.js"]
+}
+```
+
+Ein Muster, das oft klarer aussieht als den gleichen DOM imperativ aus einem nur `scripts`-Plugin aufzubauen:
+
+* `panel.html` erklärt Struktur, Klassen und IDs, über die Sie als reines HTML nachdenken können.
+* `panel.css` (deklariert in `styles`) gestaltet es.
+* `panel.js` attach event listeners, ruft Daten ab, ändert den Zustand.
+
+Wann man auf HTML-plus-JS anstelle von reinem JavaScript zurückgreifen sollte: alles, was ein nicht triviales Layout, ARIA-Attribute oder Drittanbieter-Widgets enthält, die erwarten, von einem vorhandenen DOM zu bootstrappen. Reine `scripts` sind nach wie vor sinnvoll für Plugins, die ihre Benutzeroberfläche nur unter bestimmten Bedingungen aufbauen (nach einem Fetch, nach einer Benutzeraktion), bei denen es das richtige Verhalten ist, beim ersten Rendern nichts anzuzeigen.
+
+### Wenn `extraPageContent` allein ausreichend ist
+
+Standalone ist `extraPageContent` der einfachste Weg für Ankündigungsleisten, Sponsorbanner und jeden Block, der nicht auf Ereignisse reagieren muss: es verschickt Markup direkt, benötigt kein Skript und funktioniert auch bei einem JavaScript-deaktivierten Viewer.
+
+## Viewer-Seiten-Tabs
+
+Plugins können Tabs zur Tab-Leiste der Viewer-Seite (neben den integrierten **Über**- und **Follower**-Tabs) hinzufügen, indem sie `manifest.tabs[]` deklarieren. Jeder Eintrag benötigt einen `slug` und einen `title`. Der `content`-Pfad ist optional.
+
+```json
+{
+  "permissions": ["ui.modify"],
+  "tabs": [
+    { "title": "Musik",       "slug": "musik",    "content": "music.html" },
+    { "title": "Stream-Info", "slug": "stream-info" }
+  ]
+}
+```
+
+| Feld      | Notizen                                                                                                                                                                                                                                                              |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`   | Erforderlich. Das auf dem Tab angezeigte Label.                                                                                                                                                                                                                      |
+| `slug`    | Erforderlich. Stabiler Identifier, der an die Tab-Inhaltsbehandlungsroutine übergeben wird, wenn der Host gerendertes HTML anfordert. Kleinbuchstaben, Ziffern und Bindestriche, beginnend mit einem Buchstaben. Muss innerhalb der Tabs des Plugins eindeutig sein. |
+| `content` | Optional. Relativer Pfad zu einer statischen HTML-Datei in `assets/`. Wenn vorhanden, werden die Bytes dieser Datei direkt inline eingebettet. Wenn weggelassen, ruft der Host stattdessen die Tab-Inhaltsbehandlungsroutine auf.                                    |
+
+Erfordert `ui.modify`. `http.serve` ist nicht erforderlich: das HTML jedes Tabs wird aus `assets/` gelesen und in den Tab-Inhalt inline eingefügt. Die Viewer-Seite rendert einen Tab pro Eintrag, mit dem `title` als Label und dem Inhalt der Datei als Körper.
+
+### Wie Tabs gerendert werden
+
+Der Host gibt ein `pluginTabs[]` Array auf `/api/config` aus. Die Viewer-Seite mappt jeden Eintrag zu einem Tab, dessen Inhalt das inline eingebettete HTML ist, das in einem sandboxed iframe mit dem eingebetteten Basistylesheet gerendert wird, sodass einfaches HTML ohne eigenes CSS nativ aussieht.
+
+<img src="/docs/img/plugin-viewer-tabs.png" alt="Von Plugins beigetragene Tabs auf der Viewer-Seite, die neben den integrierten Über- und Follower-Tabs angezeigt werden" width="75%" /> Siehe [Styling plugin UI](#styling-plugin-ui) für die Basis- und Hilfsklassen. Plugin-Tabs werden nach den integrierten Tabs in der Deklarationsreihenfolge hinzugefügt. Der React-Schlüssel wird aus dem `slug` des Plugins abgeleitet, sodass ein Tab nur dann unmontiert wird, wenn das Quell-Plugin deaktiviert oder entfernt wird.
+
+### Das `slug`-Feld
+
+`slug` ist ein stabiler Name, den Sie steuern. Es wird an die Tab-Inhaltsbehandlungsroutine übergeben, sodass eine einzige Routine mehrere Tabs bedienen kann, ohne zu raten, welcher angefordert wurde. Der Slug erscheint in den Host-Protokollen und zukünftigen API-Aufrufen, wählen Sie also etwas, das klar lesbar ist, wie `"musik"` oder `"stream-info"`. Sie können den `title` frei ändern. Die Änderung von `slug` ist eine breaking change, wenn zu irgendeinem Zeitpunkt Code darauf verweist.
+
+### Dynamischer Tab-Inhalt
+
+Wenn ein Tab keine `content`-Datei hat, ruft der Host Ihre **Tab-Inhaltsbehandlungsroutine** jedes Mal auf, wenn ein Viewer diesen Tab lädt. Implementieren Sie dies, wenn der Inhalt sich pro Viewer ändern oder Live-Daten abgefragt werden sollen. Der Host ruft die Routine mit dem angeforderten `slug` und der Identität des Viewers auf, und Ihre Routine gibt den HTML-String für den Tab-Inhalt zurück:
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onTabContent: {
+    // keyed by the manifest slug; ctx = { slug, user? }
+    "stream-info"(ctx) {
+      return "<h2>Stream-Info</h2><p>Live jeden Wochentag um 20 Uhr UTC.</p>";
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_tab_content("stream-info")
+def stream_info(ctx):
+    return "<h2>Stream-Info</h2><p>Live jeden Wochentag um 20 Uhr UTC.</p>"
+```
+
+</TabItem>
+</Tabs>
+
+Siehe [Handlers: tab content](/docs/plugins/events#tab-content) für die Struktur des Payloads. Die Viewer-Identität ist vorhanden, wenn authentifiziert, und abwesend für anonyme Viewer.
+
+### Pfadregeln
+
+Gleich wie `extraPageContent`, auf jeden Eintrag angewendet:
+
+* Einfache Pfade wie `"music.html"` erhalten automatisch das Präfix Ihres Plugins.
+* Vollständig qualifizierte `/plugins/\<your-slug>/...`-Pfade werden durchgelassen.
+* Pfade im Namensraum eines anderen Plugins werden abgelehnt.
+* `http(s)://` URLs werden abgelehnt.
+* Jeder Eintrag muss mit `.html` enden.
+
+### Tab-Titel
+
+Das `title`-Feld wird wörtlich in der Tab-Leiste angezeigt. Halten Sie es kurz: lange Titel werden von der Tab-Oberfläche abgeschnitten. Es gibt keine Schemaeinschränkung für die Länge, aber alles, was länger als ~16 Zeichen ist, passt nicht sauber auf mobile Geräte.
+
+### Wann man Tabs gegenüber `extraPageContent` verwenden sollte
+
+* `extraPageContent`: ein Block von HTML, der über der Tab-Leiste sitzt. Gut für Ankündigungsleisten, Sponsorbanner, alles, was immer sichtbar sein sollte.
+* `tabs`: spezielle Panels, in die der Viewer klickt. Gut für Inhalte, die nicht mit dem Chat um Aufmerksamkeit konkurrieren müssen: Musiklisten, Veranstaltungspläne, Linkseiten, Sponsorabschnitte, die Sie den Viewern zeigen möchten, die sie aber nicht unbedingt zuerst sehen sollen.

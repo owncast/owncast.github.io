@@ -1,0 +1,42 @@
+---
+title: Afficher les boutons d'action personnalisés sur votre page
+description: Vous pouvez afficher des interfaces utilisateur externes dans Owncast en enregistrant des actions externes.
+sidebar_label: Afficher les boutons d'action personnalisés sur votre page
+sidebar_position: 48
+---
+
+Vous pouvez créer des interfaces supplémentaires qui sont hébergées avec des modules complémentaires, des extensions ou des sites tiers. Chaque action est une URL unique ou un HTML personnalisé qui sera chargé et affiché lorsqu'un utilisateur appuie sur un bouton sur la page Owncast.
+
+## Exemples
+
+Quelques exemples de cette fonctionnalité pourraient être des choses comme :
+
+1. Un classement pour un jeu basé sur le chat que vous avez créé ou un jeu externe auquel vous jouez en stream.
+2. Des listes d'actions qui effectuent des animations amusantes sur vos superpositions de stream lorsqu'elles sont sélectionnées.
+3. Des intégrations avec votre bot de chat pour sondages qui montrent les sondages récents et les résultats.
+4. Pourboire pour accepter les dons.
+5. Un emploi du temps qui est plus élégant ou plus interactif que ce que vous pouvez représenter en Markdown.
+
+## Limitations
+
+1. Les URLs intégrées via des actions externes doivent être hébergées sur un serveur qui prend en charge SSL et possède un protocole `https`. Les URLs non sécurisées ne sont pas prises en charge.
+2. Ces URLs doivent être capables de s'exécuter dans un iframe. Cela signifie que [X-FRAME-OPTIONS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) et la [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) ne peuvent pas bloquer. Si vous êtes bloqué, vous serez limité à charger cette URL dans un nouvel onglet et ce n'est pas une bonne expérience.
+3. Bien que vous puissiez expérimenter avec des URLs que vous ne contrôlez pas personnellement, il est souvent probable que beaucoup d'entre elles ne fonctionneront pas en raison des limitations imposées par le serveur distant. Un exemple de cela est juste de jeter un URL PayPal ou Google.
+
+## Comment enregistrer des actions
+
+1. Visitez l'admin, et sous "Intégrations", allez à la page "Actions externes".
+2. Ajouter une action.
+3. Définissez l'URL ou le HTML personnalisé de cette action. Les URLs doivent être une destination HTTPS et respecter les meilleures pratiques énoncées.
+4. Donnez-lui un nom qui sera affiché sur le bouton qui lance cette action, une description facultative qui s'affichera dans la modal qui présente l'action, une URL pour une icône facultative pour le bouton, et éventuellement une couleur qui sera utilisée pour le bouton.
+5. Si vous voulez vraiment enregistrer une URL que vous ne contrôlez pas, mais qu'elle ne fonctionne pas avec la fonctionnalité par défaut, vous pouvez lui dire "Ouvrir à l'extérieur" et cela ouvrira un nouvel onglet dans votre navigateur. Ce n'est pas optimal, mais c'est une option.
+
+## Meilleures pratiques
+
+1. L'interface utilisateur de cette action devrait effectuer peu ou pas de navigation. Elle ne devrait pas être considérée comme un moyen de montrer n'importe quelle page.
+2. Concevez votre interface utilisateur pour vivre dans une petite fenêtre qui ne nécessite pas beaucoup, voire pas du tout, de défilement, et qui est réactive aux appareils mobiles et petits affichages.
+3. Assurez-vous que le serveur de votre URL permet de charger votre contenu depuis votre serveur Owncast via [X-FRAME-OPTIONS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) et la [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy).
+4. Le nom d'utilisateur du chat de la personne qui a déclenché cette action est transmis en tant que paramètre d'URL afin que vous puissiez pré-remplir des formulaires pour plus de commodité. Vous devriez utiliser cela.
+5. L'URL de l'instance du serveur Owncast qui affiche cette interface d'action est transmise en tant que paramètre d'URL afin que si vous hébergez des actions pour plusieurs serveurs, vous puissiez savoir d'où cela vient. **Remarque :** Vous ne devriez pas effectuer de requêtes API arbitraires juste parce que ce paramètre existe, car n'importe qui peut facilement le falsifier.
+6. Pour les actions HTML qui incluent un style personnalisé via des balises `\<style>`, vous devez vous assurer d'avoir des sélecteurs aussi spécifiques que possible, sans entrer en collision avec d'autres éléments de la page.
+7. Pour les actions HTML qui intègrent directement un élément `\<form>`, il est logique de définir `target="_blank"` pour ouvrir la page de soumission dans un nouvel onglet. De cette façon, vos spectateurs n'auront pas à arrêter le stream lors de la soumission du formulaire.

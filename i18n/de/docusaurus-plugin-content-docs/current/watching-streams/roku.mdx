@@ -1,0 +1,92 @@
+---
+id: geräte-roku
+title: Roku
+slug: /watching-streams/roku
+sidebar_label: Roku
+deviceId: roku
+deviceType: streaming-box
+reliability: mittel
+hide_title: true
+tags:
+  - roku
+  - airplay
+  - offizielle-app
+  - streaming-box
+  - fernseher
+  - schauen
+description: |
+  Schauen Sie Owncast-Streams auf Roku mit AirPlay oder der offiziellen Owncasts-App an.
+icon: /images/devices/roku.svg
+---
+
+import DeviceLayout from "@site/src/components/tv/DeviceLayout";
+import { DeviceOptionsGrid } from "@site/src/components/tv/DeviceOptionsGrid";
+import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
+import StoreButton from "@site/src/components/StoreButton";
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard id="owncasts-roku" title="Owncasts für Roku" badge="Empfohlen" difficulty="einfach" reliability="mittel" screenshot="/images/devices/roku/owncasts-roku-home.jpg" screenshotAlt="Startbildschirm von Owncasts für Roku" summary="Verwenden Sie die offizielle Owncasts-App, um das Owncast-Verzeichnis direkt auf Ihrem Roku zu durchsuchen.">
+
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Durchsuchen Sie das Owncast-Verzeichnis direkt auf Ihrem Roku.</li>
+      <li>Offizielle App, die für die Roku-Plattform entwickelt wurde.</li>
+      <li>Einfaches Interface, das für TV-Fernbedienungen konzipiert ist.</li>
+    </ul>
+
+    <details>
+      <summary>Schritt-für-Schritt-Anleitungen anzeigen</summary>
+
+      1. Installieren Sie die Owncasts für Roku aus dem Roku Channel Store.
+      2. Starten Sie die Anwendung.
+      3. Durchsuchen Sie nach dem Stream, den Sie ansehen möchten.
+      4. Wählen Sie einen Stream aus, um ihn anzusehen.
+
+    </details>
+
+    <StoreButton url="https://channelstore.roku.com/details/2179326b6b85869a1a3a18d48ca76de6/owncasts" type="roku" />
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard id="roku-airplay" title="AirPlay zu Roku" difficulty="mittel" reliability="hoch" screenshot="/images/devices/roku/airplay-setup.jpg" screenshotAlt="AirPlay-Setup-Bildschirm auf Roku" summary="Streamen Sie von Ihrem iPhone oder Mac auf Ihr AirPlay-kompatibles Roku-Gerät.">
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Funktioniert mit neueren Roku-Geräten, die AirPlay unterstützen.</li>
+      <li>Streamen Sie von iPhone, iPad oder Mac.</li>
+      <li>Keine zusätzlichen Roku-Apps erforderlich.</li>
+    </ul>
+
+    <details>
+      <summary>Schritt-für-Schritt-Anleitungen anzeigen</summary>
+
+      1. Öffnen Sie den Owncast-Stream, den Sie auf Ihrem iPhone oder Mac-Computer ansehen möchten.
+      2. Spielen Sie den Owncast-Stream ab.
+      3. Drücken Sie die **AirPlay**-Taste.
+      4. Wählen Sie Ihr Roku-Gerät aus.
+
+    </details>
+
+    Für weitere Details besuchen Sie die [Apple AirPlay-Dokumentation](https://support.apple.com/en-us/HT204289).
+
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

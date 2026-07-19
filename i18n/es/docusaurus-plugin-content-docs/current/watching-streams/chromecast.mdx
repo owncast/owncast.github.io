@@ -1,0 +1,63 @@
+---
+id: dispositivos-chromecast
+title: Chromecast
+slug: /observando-flujos/chromecast
+sidebar_label: Chromecast
+deviceId: chromecast
+deviceType: casting
+reliability: alto
+hide_title: true
+tags:
+  - chromecast
+  - casting
+  - google
+  - chrome
+  - televisión
+  - observando
+description: |
+  Transmite flujos de Owncast a tu dispositivo Chromecast directamente desde el navegador Chrome.
+icon: /images/devices/chromecast.svg
+---
+
+import DeviceLayout from "@site/src/components/tv/DeviceLayout";
+import { DeviceOptionsGrid } from "@site/src/components/tv/DeviceOptionsGrid";
+import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard id="chrome-cast" title="Casting en el navegador Chrome" badge="Recomendado" difficulty="fácil" reliability="alto" screenshot="/images/devices/chromecast/chrome-cast.png" screenshotAlt="Interfaz de emisión del navegador Chrome" summary="Transmite tu flujo de Owncast directamente desde el navegador Chrome a tu dispositivo Chromecast.">
+
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Funciona con cualquier flujo de Owncast en el navegador Chrome.</li>
+      <li>Proceso de casting simple con solo unos pocos clics.</li>
+      <li>No se requieren aplicaciones adicionales en el Chromecast.</li>
+    </ul>
+
+    <details>
+      <summary>Muestra instrucciones paso a paso</summary>
+
+      1. En tu computadora, abre **Chrome**.
+      2. Visita el servidor de Owncast que deseas ver.
+      3. En la parte superior derecha, haz clic en el botón **Más** y luego en **Enviar**.
+      4. Elige el dispositivo Chromecast donde deseas ver el contenido.
+      5. Si ya estás usando el Chromecast, tu contenido reemplazará lo que hay en tu televisor.
+
+    </details>
+
+    Para más detalles, visita la [documentación oficial de Chromecast](https://support.google.com/chromecast/answer/3228332).
+
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

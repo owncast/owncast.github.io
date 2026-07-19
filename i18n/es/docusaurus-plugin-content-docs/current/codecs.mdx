@@ -1,0 +1,92 @@
+---
+title: Codificación y códecs acelerados por hardware
+description: Si tienes acceso directo a hardware específico, puedes aumentar el rendimiento de tu servidor usando un códec compatible.
+sidebar_position: 400
+sidebar_label: Codificación y códecs acelerados por hardware
+---
+
+## Requisitos
+
+**Las cuatro cosas deben ser verdaderas para soportar la codificación acelerada por hardware con Owncast.**
+
+1. No estás **ejecutando** en un VPS proporcionado por un proveedor de hosting, ya que los servidores virtuales compartidos no permiten el acceso directo al hardware.
+2. Tienes hardware compatible y acceso directo a él.
+3. Has instalado y configurado los controladores y bibliotecas necesarios para aprovechar tu hardware.
+4. Tienes una copia de `ffmpeg` que es la versión 4.1.5 o superior, que está específicamente construida para utilizar esos controladores y bibliotecas.
+
+## Cosas a tener en cuenta
+
+1. La mayoría de las personas no podrán aprovechar esto a menos que estén utilizando su propio hardware.
+2. Solo porque un códec específico acelerado por hardware aparezca en el admin de Owncast **no significa que tu máquina esté configurada para soportarlo**. Simplemente significa que Owncast cree que ese códec está disponible.
+3. Muy poco de lo que se requiere para hacer que tu hardware funcione tiene que ver con Owncast. Cualquier pregunta que tengas sobre tu hardware particular debe ser dirigida a tu fabricante de hardware o a quien proporcione los controladores y bibliotecas para utilizarlo. Probablemente haya mucha información ya disponible en línea, así que por favor haz tu investigación.
+
+## Hardware compatible
+
+### Gráficos Intel
+
+Si tienes gráficos integrados Intel, puede que puedas usarlos usando [VA-API](#va-api) o [Quicksync](#intel-quicksync).
+
+### GPUs NVIDIA
+
+Las GPUs NVIDIA se envían con una unidad de codificación de hardware integrada a menudo denominada NVENC. Separado de los núcleos CUDA, NVENC ejecuta cargas de trabajo de codificación sin ralentizar la ejecución de cargas de trabajo gráficas o CUDA que se ejecutan al mismo tiempo.
+
+La mayoría de las GPU NVIDIA modernas se envían con NVENC. Consulta la [Matriz de Soporte de GPUs NVIDIA](https://developer.nvidia.com/video-encode-and-decode-gpu-support-matrix-new#Encoder) para confirmar que tu GPU aparece en la lista de "codificadores".
+
+### GPUs AMD
+
+[VA-API](#va-api) es compatible con las GPUs AMD y ATI a través del [libva-mesa-driver](https://wiki.archlinux.org/title/Hardware_video_acceleration).
+
+## Códecs/bibliotecas compatibles
+
+### Intel QuickSync
+
+"Intel Quick Sync Video" es el nombre comercial de las características de codificación y decodificación de video por hardware en los procesadores Intel con gráficos integrados. Los procesadores con un iGPU de Intel pueden usarse para realizar codificación de video por hardware siempre que tengas `libva` instalado y el iGPU del procesador soporte el códec de video y la resolución que deseas utilizar.
+
+Sigue las instrucciones en el sitio de Intel sobre [cómo configurar QuickSync en Linux](https://www.intel.com/content/www/us/en/architecture-and-technology/quick-sync-video/quick-sync-video-installation.html).
+
+Enlaces:
+
+* [Configurando QuickSync en Ubuntu](https://wiki.ubuntu.com/IntelQuickSyncVideo)
+* [Gráficos Intel en Reseñas de Linux](https://linuxreviews.org/Intel_graphics)
+
+### VA-API
+
+VA-API (API de aceleración de video) es una capa para soportar la codificación acelerada por hardware en Linux. Necesitas tener instalada la biblioteca `libva` para que funcione. VA-API no es compatible con chipset ARM.
+
+ffmpeg 5 y versiones más recientes son compatibles con VA-API.
+
+Enlaces:
+
+* [VA-API en Reseñas de Linux](https://linuxreviews.org/VAAPI)
+* [Controlador de Medios de Intel para VA-API](https://github.com/intel/media-driver/)
+
+### Codificador NVIDIA (nvenc)
+
+Sigue las instrucciones en la [guía de transcodificación de NVIDIA ffmpeg](https://developer.nvidia.com/blog/nvidia-ffmpeg-transcoding-guide/) para instalar todos los controladores y bibliotecas requeridos. Esto requiere instalar un controlador desde el [sitio web de NVIDIA](https://www.nvidia.com/en-us/drivers/), descargar e instalar el [CUDA toolkit](https://developer.nvidia.com/cuda-toolkit), [descargar encabezados de nv-codec](https://github.com/FFmpeg/nv-codec-headers) y construir ffmpeg. Desplázate a la sección titulada *Codificación acelerada por hardware con FFmpeg* en la [guía de transcodificación de NVIDIA](https://developer.nvidia.com/blog/nvidia-ffmpeg-transcoding-guide/) para más información.
+
+Puede que puedas encontrar una versión preconstruida de ffmpeg que tenga soporte para `nvenc`, sin embargo eso está fuera del alcance de este documento. Aún necesitas drivers de NVIDIA de todos modos.
+
+Enlaces:
+
+* [Instrucciones de Tal.org sobre cómo construir ffmpeg con nvenc](https://www.tal.org/tutorials/ffmpeg_nvidia_encode)
+* [Script de shell que dice automatizar el proceso en Ubuntu](https://gist.github.com/ransagy/3f6f1a9e5ede6212425f3b36b136216e)
+
+## ffmpeg
+
+Una vez que tu sistema esté configurado para usar los controladores y bibliotecas correctos requeridos, necesitarás asegurarte de que tu copia de `ffmpeg` lo soporte.
+
+Verifica que tienes ffmpeg instalado que tenga al menos la versión 4.1.5.
+
+```
+$ ffmpeg -version
+ffmpeg version 6.1.1 Copyright (c) 2000-2024 los desarrolladores de FFmpeg
+```
+
+Verifica que el códec que esperas usar esté habilitado en tu versión de ffmpeg.
+
+```
+$ ffmpeg -hide_banner -codecs | grep 264
+ DEV.LS h264                 H.264 / AVC / MPEG-4 AVC / MPEG-4 parte 10 (decodificadores: h264 h264_v4l2m2m h264_mmal ) (codificadores: libx264 libx264rgb h264_omx h264_v4l2m2m h264_vaapi )
+```
+
+Si el códec que esperas usar no está en esta lista, es posible que debas construir tu propia copia de ffmpeg que lo soporte.

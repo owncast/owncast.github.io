@@ -1,0 +1,137 @@
+---
+title: Comandos de chat
+description: Declara comandos de chat con alias, enfriamientos, control de moderadores y listados automáticos de !help.
+sidebar_position: 6
+sidebar_label: Comandos
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - complementos
+  - chat
+  - comandos
+  - bots
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Declara una tabla de comandos para comandos como `!uptime` o `!so`. Las tablas de comandos
+soportan alias, puertas de moderador, enfriamientos por usuario, argumentos analizados y
+listados automáticos de `!help`. Consulta [fundamentos del chat](/docs/plugins/chat) para el
+data del mensaje de chat, envío de mensajes y filtros.
+
+## Registrar una tabla de comandos
+
+Una tabla de comandos proporciona:
+
+* un prefijo de comando configurable, con `!` como predeterminado
+* `descripción`, `uso` y `alias` por comando
+* enfriamientos por usuario
+* control de moderador solo basado en los alcances del remitente
+* análisis de argumentos
+* una lista automática de `!help`
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { definePlugin } = require("@owncast/plugin-sdk");
+
+module.exports = definePlugin({
+  commandPrefix: "!", // opcional
+  commands: {
+    uptime: {
+      description: "Cuánto tiempo hemos estado en vivo",
+      run: (ctx) => ctx.reply("¡hemos estado en vivo un rato!");
+    },
+    so: {
+      description: "Saluda a un espectador",
+      usage: "!so <nombre>",
+      aliases: ["shoutout"],
+      cooldownMs: 10_000,
+      run: (ctx) => ctx.reply(`ve a seguir a ${ctx.args[0] || "alguien genial"}`);
+    },
+    clear: {
+      description: "Limpiar el chat",
+      modOnly: true,
+      run: (ctx) => ctx.replyPrivately("listo"),
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+from owncast_plugin import plugin
+
+plugin.commands({
+    "uptime": {
+        "description": "Cuánto tiempo hemos estado en vivo",
+        "run": lambda ctx: ctx.reply("¡hemos estado en vivo un rato!"),
+    },
+    "so": {
+        "description": "Saludo a un espectador",
+        "usage": "!so <nombre>",
+        "aliases": ["shoutout"],
+        "cooldown_ms": 10_000,
+        "run": lambda ctx: ctx.reply(
+            f"ve a seguir a {ctx.args[0] if ctx.args else 'alguien genial'}"
+        ),
+    },
+    "clear": {
+        "description": "Limpiar el chat",
+        "mod_only": True,
+        "run": lambda ctx: ctx.reply_privately("listo"),
+    },
+}, prefix="!")
+```
+
+</TabItem>
+</Tabs>
+
+Los controladores de JavaScript reciben `msg`, `user`, `command`, `invokedAs`, `args`,
+`argString`, `reply`, y `replyPrivately`. Python usa `invoked_as`,
+`arg_string`, y `reply_privately`.
+
+Se permiten nombres de comandos duplicados, por lo que cada complemento coincidente se ejecuta.
+Los comandos desconocidos, las invocaciones restringidas por moderador y las invocaciones limitadas por enfriamiento
+son silenciosas. Declarar o recibir un comando no requiere permisión. Las acciones
+dentro del controlador aún requieren sus permisos habituales, como `chat.send`.
+
+## `!help` es automático pero no está reservado
+
+Owncast publica un mensaje del sistema que enumera las descripciones de los comandos de cada complemento habilitado. Los comandos solo para moderadores permanecen ocultos para los no moderadores. Esta respuesta incorporada
+o necesita permisos de complemento.
+
+`!help` y su alias `!commands` permanecen como mensajes de chat ordinarios. Los complementos también pueden
+declarar o responder a ellos. La respuesta incorporada no bloquea respuestas adicionales
+de complementos.
+
+<img src="/docs/img/plugin-help-command.png" alt="La respuesta !help en el chat, enumerando los comandos que un complemento habilitado proporciona con sus descripciones, agrupados por complemento" width="320" />
+
+## Usando controladores y filtros de chat ordinarios
+
+Una tabla de comandos es opcional. Un complemento puede inspeccionar `msg.body` en un
+controlador `onChatMessage` para un solo comando fijo. Los comandos hechos a mano no
+aparecen en la lista de ayuda incorporada.
+
+Los mensajes de comandos siguen siendo mensajes de chat ordinarios, por lo que un complemento puede usar tanto una
+tabla de comandos como un controlador de chat ordinario. Los filtros de chat se ejecutan antes de la
+coincidencia de comandos. Un mensaje desechado por un filtro no ejecuta ningún comando declarado.
+
+## Ejemplos de complementos
+
+* **mod-commands** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/mod-commands), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/mod-commands)): un prefijo `?` personalizado con alias, enfriamientos y control de moderadores.
+* **stream-tracker** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/stream-tracker), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/stream-tracker)): una tabla de comandos con `!uptime` y `!who`, además de seguimiento de actividad de transmisión y de usuario de chat.
+* **stream-ops** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/stream-ops), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/stream-ops)): una tabla de comandos que informa sobre la telemetría de transmisión y video.
+* **timer-bot** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/timer-bot), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/timer-bot)): una tabla de comandos para recordatorios y cuentas regresivas (`!remind`, `!every`, `!countdown`).
+* **ip-bot** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/ip-bot), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/ip-bot)): un único comando `!ip` respondido con la IP pública del servidor.
+* **relay** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/relay), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/relay)): vuelve a emitir `/announce \<text>` como un anuncio de transmisión.
+
+## A dónde ir después
+
+* [Complementos de chat](/docs/plugins/chat) para el data del mensaje de chat, envío de mensajes y filtros.
+* [Referencia de controladores](/docs/plugins/events) para los eventos de chat a los que tu complemento puede suscribirse.
+* [Referencia de APIs](/docs/plugins/apis) para cada método `owncast.*` y el permiso que necesita.

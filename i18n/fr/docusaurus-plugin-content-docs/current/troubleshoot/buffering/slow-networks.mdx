@@ -1,0 +1,27 @@
+---
+title: Le flux est en cours de mise en mémoire tampon pour ceux utilisant des réseaux mobiles ou lents
+description: ""
+tags:
+  - mise en mémoire tampon
+  - lent
+  - mobile
+---
+
+import { IncludeMarkdown } from "@site/src/components";
+import AddLowerQualityOutputs from "../shared/add-lower-quality-outputs.md";
+import ReduceVideoQuality from "../shared/reduce-video-quality.md";
+
+Si certaines personnes regardent votre flux sans problème, mais que d'autres ne peuvent pas profiter de votre flux à la qualité que vous avez configurée en raison de leur propre connexion Internet ou de leurs circonstances mobiles, leur réseau ou [emplacement](/docs/troubleshoot/buffering/geo) pourrait en être la cause. Au lieu d'essayer d'accélérer quoi que ce soit de votre côté, vous devez offrir des options supplémentaires qu'ils peuvent télécharger plus rapidement.
+
+Après avoir lu ce qui suit, vous pourriez également trouver des conseils utiles en consultant le [Guide de dépannage OBS](https://github.com/obsproject/obs-studio/wiki/Stream-Buffering-Issues), même si vous n'utilisez pas OBS.
+
+## Ajoutez des qualités de sortie supplémentaires de plus basse résolution
+
+<IncludeMarkdown>
+  <AddLowerQualityOutputs />
+  <ReduceVideoQuality />
+</IncludeMarkdown>
+
+## Le spectateur changera de qualité au besoin
+
+En utilisant une technologie appelée Streaming Adaptatif par Débit, le spectateur changera de manière transparente entre différentes qualités vidéo au besoin. En savoir plus sur le fonctionnement de ceci et d'autres éléments de vidéo en lisant notre [Document Vidéo](/docs/video) plus détaillé.

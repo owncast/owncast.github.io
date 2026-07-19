@@ -1,0 +1,93 @@
+---
+title: SSL & HTTP-Proxys
+slug: /sslproxies
+description: Hinterlegen Sie Ihren Owncast-Server hinter einem Proxy, um SSL zu aktivieren.
+sidebar_position: 1
+sidebar_label: SSL & HTTP-Proxys
+hide_table_of_contents: false
+tags:
+  - ssl
+  - https
+  - Reverse-Proxy
+  - einbetten
+  - Proxy
+  - Sicherheit
+  - Browser
+---
+
+Wenn Sie Owncast einrichten und von Begriffen wie Reverse-Proxy, SSL oder HTTPS verwirrt sind, kann dies hilfreich sein. Diese Seite erklärt, was sie sind, warum Owncast sie benötigen kann und wie alles zusammenpasst.
+
+## Was ein Reverse-Proxy ist
+
+Ein Reverse-Proxy ist ein kleiner Server, der vor Owncast steht. Es:
+
+* Hört im öffentlichen Internet (Ports 80 und 443) zu
+* Verarbeitet HTTPS / SSL
+* Leitet den Verkehr zu Owncast, das privat läuft (normalerweise auf Port 8080)
+* Besitzt das Zertifikat
+* Verschlüsselt den Verkehr
+* Entschlüsselt es, bevor es an Owncast gesendet wird
+  Owncast sieht nie HTTPS – es sieht normalen internen Verkehr.
+
+Denken Sie daran, dass es wie eine **Rezeption** ist:
+
+* Die Öffentlichkeit spricht mit der Rezeption.
+* Die Rezeption übergibt Dinge an Owncast.
+
+Owncast verlässt sich auf Standard-Tools, die sich bewährt haben (wie Caddy, Nginx, Traefik), um es richtig zu machen. Viele, die bereits selbst hosten oder ihre eigene Infrastruktur besitzen, werden bereits ein Reverse-Proxy-Setup haben, zu dem sie Owncast hinzufügen können.
+
+## Warum Sie SSL unterstützen möchten
+
+1. Wenn Sie Ihr Owncast-Video oder Ihren Chat in eine Seite einbetten möchten, die SSL verwendet, muss auch Ihr Owncast-Server gesichert sein.
+2. Browser werden Ihre Seite ohne Verwendung von SSL als [„Nicht sicher“](https://support.apple.com/en-us/HT208672) kennzeichnen.
+3. Es sieht professioneller aus und Ihre Seite wirkt vertrauenswürdiger.
+4. Die Sicherung des Webverkehrs im öffentlichen Internet ist das Richtige zu tun.
+
+### Wann Sie es möglicherweise nicht benötigen
+
+1. Wenn Sie nur mit Owncast testen und experimentieren.
+2. Sie betreiben den Dienst intern und haben keine Pläne für ein öffentliches Publikum.
+
+## Häufiges Missverständnis (und weshalb es Probleme verursacht)
+
+* ❌ „Ich habe HTTPS in Owncast aktiviert“
+* ❌ „Ich habe Port 443 an Owncast weitergeleitet“
+* ❌ „Ich brauche keinen Reverse-Proxy“
+* ❌ "Ich habe RTMP-Port 1935 an den Webproxy weitergeleitet"
+
+Diese verursachen normalerweise:
+
+* OBS-Verbindungsfehler
+* Admin-UI funktioniert, aber Video nicht
+* Einbettungen funktionieren nicht
+* Mixed Content-Warnungen in Browsern
+* Sie können Owncast weiterhin auf Port 8080 laden, jedoch nicht über HTTPS, Port 443
+* Ihr Stream ist in mobilen Apps nicht verfügbar
+
+## Eine korrekte Einrichtung (vereinfachte)
+
+1. DNS weist Ihre Domain auf Ihren Server
+2. Reverse-Proxy hört auf Ports 80 / 443 (nicht RTMP 1935)
+3. Reverse-Proxy erhält ein SSL-Zertifikat
+4. Reverse-Proxy leitet den Verkehr an Owncast weiter
+5. Owncast läuft privat (normalerweise :8080)
+6. OBS sendet RTMP an Owncast
+
+## Wenn etwas nicht funktioniert, sind die hilfreichsten Fragen, die zu stellen sind:
+
+* „Wo endet HTTPS?“
+* „Welcher Dienst hört auf Port 443?“
+* „Spricht OBS mit Owncast oder dem Proxy?“
+  Diese Fragen aufzudecken, bringt fast immer das Problem ans Licht.
+
+## Beliebte Optionen
+
+Sie können jede Methode verwenden, die Sie mögen, um SSL-Unterstützung hinzuzufügen, aber es gibt einige beliebte Optionen, die wir gesehen haben, die gut funktionieren. Wenn Sie spezifische Fragen haben oder Vorschläge zu Konfigurationen oder anderen Setups machen möchten [lassen Sie es uns wissen](/contact).
+
+## Anzeige Namen vom Reverse-Proxy erben
+
+Owncast weist normalerweise einen zufälligen Anzeigenamen zu, wenn neue Benutzer dem Chat beitreten. Upstream-Reverse-Proxys können dieses Verhalten beeinflussen, indem sie einen `X-Forwarded-User` HTTP-Header setzen, um den Webverkehr weiterzuleiten. Dieser Header wird anstelle eines zufälligen Namens verwendet, um den Anzeigenamen eines Benutzers abzuleiten. Ein Benutzer kann seinen eigenen Anzeigenamen noch auf jeden gewünschten Wert ändern.
+
+## Vorgeschlagen
+
+Wenn Sie keine Anforderungen zur Verwendung anderer Optionen haben, wird empfohlen, [Caddy](/docs/sslproxies/caddy) zu installieren, da dies schnell und einfach installiert werden kann.

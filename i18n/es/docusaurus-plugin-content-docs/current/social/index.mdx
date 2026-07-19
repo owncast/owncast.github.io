@@ -1,0 +1,117 @@
+---
+title: Características sociales de Owncast
+slug: /social
+description: Permite que las personas sigan tu servidor, sepan cuándo estás en vivo, compartan e interactúen con tu transmisión.
+sidebar_position: 1
+sidebar_label: Características sociales
+hide_table_of_contents: false
+tags:
+  - social
+  - fediverso
+  - mastodon
+  - pleroma
+  - seguir
+  - gustar
+  - compartir
+  - citar
+  - seguidores
+  - fediauth
+  - autenticación
+  - compromiso
+  - pixelfed
+---
+
+Owncast permite que las personas sigan, interactúen y compartan tu transmisión con otros en lo que se conoce como [**El Fediverso**](the-fediverse.mdx), una red descentralizada de servicios.
+
+## Lo que soporta
+
+1. Las personas pueden seguir tu servidor.
+2. Tus seguidores aparecen en la pestaña "Seguidores" en la página de tu transmisión.
+3. Puedes enviar publicaciones a tus seguidores a través del administrador.
+4. Tus seguidores recibirán automáticamente notificaciones cuando estés en vivo.
+5. Tus seguidores pueden compartir que estás en vivo con su círculo de seguidores.
+6. Acciones como seguir, gustar o compartir se exponen dentro del chat de tu transmisión.
+
+## ¿Por qué usar las características sociales de Owncast?
+
+### Posee tu audiencia
+
+A diferencia de las plataformas de streaming tradicionales, no hay riesgo de que cambios en el algoritmo oculten tu contenido, cambios repentinos en políticas de la plataforma, o perder acceso a tu comunidad. Tus seguidores son tuyos.
+
+### Alcanza más allá de tu sitio
+
+Tu transmisión se vuelve descubrible en toda la red del Fediverso. Millones de usuarios en Mastodon, Pixelfed y otras plataformas federadas. Cuando tus seguidores comparten que estás en vivo, se difunde orgánicamente en sus redes sin que algoritmos controlen tu alcance.
+
+### No se necesitan cuentas adicionales
+
+Tu audiencia no necesita crear otra cuenta en otra plataforma más. Si ya están usando algún servicio del Fediverso como Mastodon o Pleroma, pueden seguir tu servidor Owncast con su cuenta existente.
+
+### Comunicación directa
+
+Envía actualizaciones directamente a tus seguidores sobre transmisiones próximas, eventos especiales o anuncios importantes. Sin competir con millones de otros creadores en un feed algorítmico, tus seguidores ven tus publicaciones cronológicamente donde ya están.
+
+### Construcción de comunidad
+
+El compromiso del Fediverso (seguimientos, gustos, compartidos) aparece directamente en el chat de tu transmisión, creando emoción y prueba social. Tus seguidores y compartidos son presentados ante todos, haciéndolos sentir valorados como parte de tu comunidad y alentando a otros a compartir y seguir también.
+
+### FediAuth
+
+Habilitar FediAuth permite que tus espectadores se autentiquen usando sus cuentas del Fediverso al participar en el chat. Esto ayuda a mantener una presencia constante en el chat a través de sesiones, navegadores y dispositivos. Esto es especialmente útil para moderadores.
+
+## ¿Cómo sigue la gente tu servidor Owncast?
+
+Cualquier persona en el Fediverso que use un servicio que sea compatible con seguir a Owncast, como [Pleroma](https://pleroma.social/) o [Mastodon](https://joinmastodon.org/) puede seguir tu servidor.
+
+[Aprender más sobre el Fediverso](./the-fediverse.mdx).
+
+## Cómo funciona
+
+El Fediverso es un conjunto de servidores descentralizados e interconectados que se utilizan para redes sociales, microblogging y más. Mientras que cada servidor está alojado de forma independiente, se comunican entre sí.
+
+Cada instancia de Owncast opera como un servidor completamente independiente con un solo usuario que puede participar en el Fediverso, intercambiando publicaciones y notificaciones con cualquier usuario participante que esté interesado.
+
+Cualquier usuario en el Fediverso que esté en un servidor compatible puede seguir cualquier servidor Owncast que tenga esta función habilitada.
+
+## Habilitando características sociales
+
+Las características sociales están desactivadas por defecto. Para habilitarlas en tu servidor Owncast visita la página *Configuración -> Social*.
+
+### Requisitos
+
+Debes estar alojando tu servidor Owncast detrás de SSL, con una URL *https*. Configura un [Proxy HTTP](/docs/sslproxies/nginx) si es necesario.
+
+### Configuración
+
+Visita la página *Configuración -> Social* para configurarlo.
+
+1. Puedes establecer el nombre de usuario con el que te vean.
+2. Puedes establecer el texto que se envía cada vez que estás en vivo.
+3. Puedes activar el "Modo privado".
+
+<img src="/docs/img/admin-social-features.png" alt="La página de configuración de características sociales en el administrador, con la URL del servidor, alternancia para habilitar características sociales, alternancia del modo privado, nombre de usuario y campos de mensaje de inicio de transmisión" width="75%" />
+
+:::warning
+Una vez que establezcas tu nombre de servidor y tu nombre de usuario, así es como te verán las personas. Si cambias cualquiera de esos dos ajustes, aparecerás como un usuario diferente y es posible que tus seguidores existentes ya no te sigan. No se sugiere que cambies esto después de configurarlo.
+:::
+
+### Modo privado
+
+Habilitar *Modo privado* requerirá que aquellos que deseen seguir tu servidor sean aprobados por ti primero. Aprobar seguidores se puede hacer a través de la sección *Seguidores* en el administrador.
+
+El Modo Privado también hará que cualquier publicación que envíes sea visible solo para tus seguidores, no para otros, ya que no se pueden compartir.
+
+### Publicaciones de cita
+
+Las personas en Mastodon, GoToSocial y otras plataformas que soportan publicaciones de cita pueden citar tus publicaciones en las suyas, añadiendo sus comentarios mientras muestran tu publicación original a sus seguidores. Owncast aprueba estas citas automáticamente utilizando el flujo de consentimiento que utiliza el Fediverso, por lo que las citas de tus publicaciones aparecen correctamente en todas partes.
+
+Si prefieres no permitir esto, desactiva *Permitir citas* en la página *Configuración -> Social*. Nuevas publicaciones ya no ofrecerán citas y cualquier solicitud de cita será rechazada. Las publicaciones tampoco son citables mientras el *Modo Privado* esté habilitado, ya que solo son visibles para tus seguidores.
+
+## Componiendo mensajes a tus seguidores
+
+Al hacer clic en el botón *Componer* en el encabezado del administrador puedes crear una publicación para enviar a tus seguidores. Esto podría usarse para decirles a las personas cuándo planeas transmitir, o para recordarles que aún estás en vivo.
+
+## Compromiso
+
+Si alguien **te sigue**, **le gusta** una publicación que envías, o **compartes** alguna de tus publicaciones mientras una transmisión está en vivo, mostrará que estas acciones ocurrieron dentro del chat. Esto se puede desactivar en la configuración social.
+
+Los eventos de seguimiento del Fediverso también están disponibles para integraciones de terceros a través de [webhooks](/docs/api/webhooks#fediverse_engagement_follow).

@@ -1,0 +1,63 @@
+---
+title: Utilisation du matériel
+description: Plus il y a de travail d'encodage vidéo requis, plus l'utilisation du matériel aura lieu. Mais il y a certaines choses que vous pouvez faire.
+unlisted: true
+related:
+  excludeFromAll: true
+tags:
+  - cpu
+  - matériel
+  - optimisation
+---
+
+import { IncludeMarkdown } from "@site/src/components";
+import ReduceFramerate from "./shared/reduce-framerate.md";
+import MatchHighestOutputQuality from "./shared/match-highest-output-quality.md";
+
+## Réduisez votre fréquence d'images
+
+<IncludeMarkdown>
+  <ReduceFramerate />
+</IncludeMarkdown>
+
+## Réduisez la quantité de matériel (CPU ou GPU) allouée dans les paramètres vidéo
+
+Chaque variante de sortie vidéo a une certaine quantité de matériel alloué en fonction de la configuration vidéo. Réduire cette valeur peut grandement libérer des ressources serveur utilisées.
+
+**Inconvénient** : Moins vous allouez de temps matériel à l'encodage vidéo, moins la qualité de sortie sera bonne. Des réglages inférieurs sont également moins efficaces en ce qui concerne la taille des fichiers, ce qui peut entraîner des tailles de vidéo plus grandes que vos spectateurs doivent télécharger, entraînant un buffering pour certains.
+
+## Réduisez le nombre de variantes de sortie de flux que vous proposez
+
+Chaque configuration de variante de sortie de flux entraîne une plus grande utilisation du matériel.
+
+**Inconvénient** : En tant que streamer, vous voudrez offrir autant de qualités de flux différentes que possible afin que les personnes dans tous les endroits et conditions réseau puissent profiter de votre contenu. Supprimer des options de flux peut diminuer la disponibilité de votre flux pour certains avec des réseaux plus lents, entraînant un buffering.
+
+## Ajustez votre qualité de sortie la plus élevée
+
+<IncludeMarkdown>
+  <MatchHighestOutputQuality />
+</IncludeMarkdown>
+
+## Expérimentez avec le mode Passthrough
+
+Le mode Passthrough indique à Owncast d'envoyer la vidéo de votre diffuseur directement sans la réencoder. Comme le serveur saute totalement l'encodage, l'utilisation du matériel tombe à presque rien. C'est la plus grande réduction que vous puissiez faire si votre serveur ne peut tout simplement pas suivre. Voir [vidéo passthrough](/docs/video/#video-passthrough) pour savoir comment l'activer.
+
+**Inconvénient** : Avec passthrough, vous ne pouvez plus offrir plusieurs options de qualité, donc les spectateurs sur des connexions plus lentes n'ont pas de flux de qualité inférieure sur lequel se rabattre. Le passthrough peut également augmenter la latence, et dans certains environnements, il produit des vidéos que tous les lecteurs ne peuvent pas lire.
+
+## Si vous utilisez un matériel physique, essayez l'accélération matérielle
+
+**Remarque : La plupart des gens ne pourront pas en tirer parti.**
+
+Si vous avez accès à un CPU physique qui supporte l'encodage vidéo, ou à un GPU avec un chipset d'encodage dédié, vous pouvez grandement améliorer vos performances. [En savoir plus sur le matériel pris en charge](/docs/codecs/).
+
+**Inconvénient** : Cela ne sera pas disponible pour la plupart des gens, à moins que vous n'ayez accès à du matériel physique qui prend en charge l'encodage vidéo accéléré.
+
+## Passez à un serveur plus puissant
+
+Si vous constatez que vous ne pouvez pas configurer votre instance Owncast pour prendre en charge le nombre de variantes de sortie et la fréquence d'images et la qualité que vous désirez, vous devrez peut-être simplement passer à un serveur capable de gérer la charge avec plus de ressources CPU.
+
+Si vous êtes sur un VPS hébergé, vous pourrez peut-être changer votre serveur pour un qui dispose de plus de ressources CPU disponibles.
+
+## En savoir plus
+
+Vous ne pouvez pas exactement savoir combien de CPU vous avez besoin, ou quel serveur ou environnement vous servira le mieux. Mais lisez le document [Ressources et exigences](/docs/resources-requirements/) pour en savoir plus.

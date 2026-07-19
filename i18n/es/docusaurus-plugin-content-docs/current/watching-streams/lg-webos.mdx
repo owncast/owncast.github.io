@@ -1,0 +1,92 @@
+---
+id: dispositivos-lg-webos
+title: LG Smart TVs (WebOS)
+slug: /mirando-flujos/lg-webos
+sidebar_label: LG TVs (WebOS)
+deviceId: lg-webos
+deviceType: smart-tv
+reliability: medio
+hide_title: true
+tags:
+  - lg
+  - webos
+  - smart-tv
+  - satv
+  - iptv
+  - televisión
+  - viendo
+description: |
+  Mira los flujos de Owncast en los televisores LG WebOS utilizando SATV u otras aplicaciones compatibles con IPTV.
+icon: /imágenes/dispositivos/lg-tv.svg
+---
+
+import DeviceLayout from "@site/src/components/tv/DeviceLayout";
+import { DeviceOptionsGrid } from "@site/src/components/tv/DeviceOptionsGrid";
+import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard id="satv-webos" title="Aplicación SATV" badge="Recomendado" difficulty="medio" reliability="medio" screenshot="/imágenes/dispositivos/lg-webos/satv-app.png" screenshotAlt="Interfaz de lista de reproducción de la aplicación SATV IPTV" summary="Utiliza la aplicación SATV para navegar por el directorio de Owncast a través de la lista de reproducción de IPTV en tu televisor LG WebOS.">
+
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Navega directamente por todo el directorio de Owncast en tu televisor.</li>
+      <li>Aplicación gratuita disponible en LG Content Store.</li>
+      <li>Actualización automática de flujos en vivo.</li>
+    </ul>
+
+    <details>
+      <summary>Muestra las instrucciones paso a paso</summary>
+
+      1. Instala **SATV** (gratis) desde la tienda de aplicaciones de tu televisor LG.
+      2. Ejecuta la aplicación y pulsa el botón para **"Agregar lista de reproducción"**.
+      3. Escribe: `https://owncast.directory/api/iptv`. Asegúrate de que sea https.
+      4. Verifica que lo hayas escrito correctamente.
+      5. Guarda esta lista de reproducción.
+      6. Actualizará los flujos en vivo actuales cada vez que inicies la aplicación SATV.
+      7. Elige el flujo en vivo que deseas ver.
+
+    </details>
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard id="direct-url-webos" title="Entrada de URL directa" difficulty="difícil" reliability="bajo" screenshot="/imágenes/dispositivos/lg-webos/direct-url.png" screenshotAlt="Entrada de URL directa del navegador WebOS" summary="Algunos navegadores de WebOS pueden soportar la reproducción directa de flujos de Owncast.">
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Puede funcionar con el navegador integrado en los modelos más recientes de televisores LG.</li>
+      <li>Requiere ingreso manual de URL.</li>
+      <li>Compatibilidad y confiabilidad limitadas.</li>
+    </ul>
+
+    <details>
+      <summary>Muestra las instrucciones paso a paso</summary>
+
+      1. Abre el navegador web en tu televisor LG WebOS (si está disponible).
+      2. Navega a la URL de tu servidor Owncast.
+      3. Intenta reproducir el flujo directamente en el navegador.
+
+      **Nota:** Este método tiene un éxito limitado y puede no funcionar en todos los modelos de televisores LG.
+
+    </details>
+
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

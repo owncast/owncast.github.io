@@ -1,0 +1,48 @@
+---
+title: Chat-Authentifizierung aktivieren
+description: Überprüfen Sie Ihre Chat-Identität und behalten Sie sie bei.
+sidebar_position: 200
+sidebar_label: Chat-Authentifizierung aktivieren
+tags:
+  - chat
+  - fediverse
+  - indieauth
+  - Authentifizierung
+  - Anmeldung
+  - Konten
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Es ist nicht erforderlich, sich zu authentifizieren, wenn Sie den Owncast-Chat verwenden. Einige ziehen es jedoch vor,
+sich zu authentifizieren, um ihre Identität gegenüber anderen zu verifizieren und die gleiche Chat-Identität auf mehreren Geräten und Browsern zu verwenden. Dies ist besonders hilfreich für diejenigen mit [Moderator](/docs/chat/)
+Befugnissen.
+
+Sie können auf die Authentifizierungsoptionen über das Dropdown-Menü im oberen rechten Bereich der Seite zugreifen.
+
+<img src="/docs/img/chat-authentication-menu.png" alt="Das Dropdown-Menü im oberen rechten Bereich der Seite, das die Option Authentifizieren zusammen mit Name ändern, Chat ausblenden und Chat ausblenden anzeigt." width="320" />
+
+<Tabs queryString="authentifizierungsmethode" defaultValue="FediAuth">
+  <TabItem value="FediAuth" label="FediAuth" default>
+## Fediverse-Authentifizierung (FediAuth)
+
+Mit Ihrem Fediverse-Konto können Sie einen einmalig verwendbaren Code erhalten, um Ihre Identität zu verifizieren und sich mit dem Owncast-Chat zu authentifizieren. Die Unterstützung des Fediverse muss auf dem Owncast-Server aktiviert sein, damit dieses Feature verfügbar ist.
+
+Dies erfolgt durch das Senden einer Direktnachricht an Ihr Konto. Wenn Sie diese Nachricht nicht erhalten, stellen Sie sicher, dass Sie Direktnachrichten empfangen können.
+
+Diese Codes laufen ab, sodass Sie bei Bedarf einen neuen anfordern müssen.
+  </TabItem>
+
+  <TabItem value="IndieAuth" label="IndieAuth">
+    ## IndieAuth
+
+IndieAuth ist ein offenes, dezentrales Authentifizierungsprotokoll, das es Diensten ermöglicht, die Identität eines durch eine URL vertretenen Benutzers zu verifizieren. Das bedeutet, dass jeder, der eine bestehende URL hat, die IndieAuth unterstützt, diese nutzen kann, um sich im Owncast-Chat zu authentifizieren.
+
+Besuchen Sie [IndieAuth.net](https://indieauth.net/), um mehr zu erfahren.
+
+### Owncast ist ein IndieAuth-Server
+
+Wenn Sie einen Owncast-Server betreiben, können Sie ihn verwenden, um sich auf anderen Owncast-Instanzen authentifizieren zu lassen, indem Sie die URL Ihres Servers verwenden.
+  </TabItem>
+</Tabs>

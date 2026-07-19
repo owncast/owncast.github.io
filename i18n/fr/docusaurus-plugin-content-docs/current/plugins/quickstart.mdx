@@ -1,0 +1,229 @@
+---
+title: Plugin de démarrage rapide
+description: Créez un nouveau plugin Owncast en JavaScript ou Python, construisez-le, emballez-le et installez-le sur votre serveur.
+sidebar_position: 2
+sidebar_label: Démarrage rapide
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - plugins
+  - démarrage rapide
+  - échafaudage
+  - démarrer
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Cette page vous conduit de rien à un plugin fonctionnant sur votre serveur Owncast. Les deux ont une parité de fonctionnalités complète. Si vous n'êtes pas sûr, consultez [Choisir un SDK](/docs/plugins). Prérequis
+
+## Prérequis
+
+* Un serveur Owncast que vous pouvez administrer, version 0.3.0 ou plus récent.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+- Node.js 18 ou plus récent (`node --version` pour vérifier) pour l'outil `@owncast/plugin-sdk`.
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+* Python 3.8 ou plus récent, et [`uv`](https://docs.astral.sh/uv/) ou `pip` pour installer l'outil `owncast-plugin-py`.
+
+</TabItem>
+</Tabs>
+
+## 1. Créer un nouveau plugin
+
+L'identifiant d'un plugin est son **slug** : lettres minuscules, chiffres et tirets, commençant par une lettre. Il est utilisé comme nom de répertoire, nom de fichier de sortie, et préfixe d'URL.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+Échafaudez un projet avec `create-owncast-plugin`, en passant le slug :
+
+```sh
+npx create-owncast-plugin@latest my-plugin
+cd my-plugin
+npm install
+```
+
+Vous avez maintenant :
+
+```text
+my-plugin/
+├── package.json
+├── plugin.manifest.json     nom affiché, slug, version, permissions
+├── README.md                comment construire, tester, emballer et l'installer
+├── INSTRUCTIONS.md          optionnel, rendu comme un onglet dans l'admin
+├── AGENTS.md                notes pour les agents de codage AI
+├── .agents/                 une compétence regroupée pour les agents de codage AI
+├── src/
+│   └── plugin.js            votre code, avec un gestionnaire d'exemple
+└── __tests__/
+    └── plugin.test.js       un test de scénario d'exemple
+```
+
+`npm install` crée également `node_modules/`. Aucun de ces éléments n'est créé pour vous, mais vous pouvez ajouter un `icon.png` (affiché dans la liste des plugins de l'admin), un répertoire `public/` (fichiers statiques servis à `/plugins/my-plugin/`), et un répertoire `assets/` (fichiers que l'hôte intègre pour les champs de manifeste).
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+Échafaudez un projet avec `new`, en passant le slug. `uvx` exécute le générateur directement depuis PyPI sans installer quoi que ce soit :
+
+```sh
+uvx owncast-plugin-py new my-plugin
+cd my-plugin
+uv tool install owncast-plugin-py      # ou :  pip install owncast-plugin-py — pour build/test/serve/package
+```
+
+Vous avez maintenant :
+
+```text
+my-plugin/
+├── plugin.manifest.json     nom affiché, slug, version, permissions
+├── README.md                comment construire, tester, emballer et l'installer
+├── INSTRUCTIONS.md          optionnel, rendu comme un onglet dans l'admin
+├── AGENTS.md                notes pour les agents de codage AI
+├── .agents/                 une compétence regroupée pour les agents de codage AI
+├── src/
+│   └── plugin.py            votre code, avec un gestionnaire d'exemple
+└── __tests__/
+    └── plugin.test.json     un test de scénario d'exemple
+```
+
+</TabItem>
+</Tabs>
+
+Le manifeste a à la fois un nom affiché lisible par l'humain (`"name": "My Plugin"`) et un slug (`"slug": "my-plugin"`). Le nom affiché est ce que voient les administrateurs dans les listes. Le slug est l'identifiant canonique. Consultez la [référence du manifeste](/docs/plugins/manifest#name-and-slug) pour les règles.
+
+## 2. Écrivez du code
+
+Un gestionnaire réagit à un événement. Le SDK dérive la liste d'abonnement du manifeste des gestionnaires que vous définissez, donc il n'y a rien d'autre à garder synchronisé. Voici un bot écho :
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+Ouvrez `src/plugin.js` :
+
+```js
+const { definePlugin, owncast } = require('@owncast/plugin-sdk');
+
+module.exports = definePlugin({
+  onChatMessage(msg) {
+    owncast.chat.send(`echo: ${msg.body}`);
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+Créez `src/plugin.py` :
+
+```python
+from owncast_plugin import plugin, owncast
+
+@plugin.on_chat_message
+def echo(msg):
+    owncast.chat.send(f"echo: {msg.body}")
+```
+
+</TabItem>
+</Tabs>
+
+Consultez la [référence des gestionnaires](/docs/plugins/events) pour tout ce que vous pouvez raccorder, et la [référence des API](/docs/plugins/apis) pour chaque méthode `owncast.*`.
+
+## 3. Construisez le plugin
+
+Cela produit `my-plugin.ocpkg` à la racine de votre projet : un seul fichier contenant votre manifeste, le plugin compilé, et le contenu de `public/` et `assets/`. Le `.ocpkg` est le format de distribution : ce fichier unique est tout ce dont un administrateur a besoin.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```sh
+npm run package
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```sh
+owncast-plugin-py package my-plugin
+```
+
+</TabItem>
+</Tabs>
+
+## 4. Exécutez les tests
+
+Chaque scénario déclenche des événements à travers l'exécution réelle du plugin avec des effets secondaires simulés, donc un test réussi signifie le même comportement en production. Consultez le [guide de test](/docs/plugins/testing) pour le modèle de données complet.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```sh
+npm test
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```sh
+owncast-plugin-py test my-plugin
+```
+
+</TabItem>
+</Tabs>
+
+## 5. (Optionnel) itérez contre un serveur de développement local
+
+Serve le plugin à `http://localhost:8080/plugins/my-plugin/` pour interroger les points de terminaison, ouvrir des pages statiques dans un navigateur, ou déclencher des gestionnaires d'événements via les points de terminaison d'aide `/_dev/` (par exemple `POST /_dev/chat`). Redémarrez le serveur de développement lorsque vous modifiez votre code.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```sh
+npm run serve
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```sh
+owncast-plugin-py serve my-plugin
+```
+
+</TabItem>
+</Tabs>
+
+## 6. Installez sur votre serveur
+
+Dans l'administration Owncast, ouvrez **Plugins** dans la barre latérale et cliquez sur **Télécharger le plugin**. Choisissez le fichier `my-plugin.ocpkg` que votre compilation a produit. Le plugin apparaît immédiatement dans la liste. Activez **Activé** pour le charger.
+
+<img src="/docs/img/plugins-installed-list.png" alt="La page des Plugins dans l'administration, répertoriant les plugins installés avec leurs permissions demandées, leur statut, un bascule d'activation et des boutons Télécharger le plugin et Configurer" width="80%" />
+
+Sinon, copiez `my-plugin.ocpkg` dans le répertoire `data/plugins/` de votre serveur et le prochain scan le prendra :
+
+```sh
+scp my-plugin.ocpkg user@your-owncast-server:/path/to/owncast/data/plugins/
+```
+
+Si le plugin déclare des permissions, l'administrateur les examine dans l'onglet **Permissions** sur la page de détail du plugin avant de l'activer. Le premier activation capture l'ensemble de permissions approuvé. Si vous déployez plus tard une mise à jour qui demande plus d'accès, Owncast désactive automatiquement le plugin et invite l'administrateur à le réapprouver.
+
+<img src="/docs/img/plugin-permissions-tab.png" alt="L'onglet Permissions sur la page de détail d'un plugin, listant chaque permission demandée avec une description en langage clair" width="80%" />
+
+## Que lire ensuite
+
+* [Choisir un SDK](/docs/plugins) et ses pages [JavaScript](/docs/plugins/sdks/javascript) / [Python](/docs/plugins/sdks/python) pour la référence complète spécifique à la langue.
+* [Référence du manifeste](/docs/plugins/manifest) pour le schéma complet pour `plugin.manifest.json`.
+* [Référence des gestionnaires](/docs/plugins/events) pour chaque événement auquel vous pouvez vous abonner.
+* [APIs Owncast](/docs/plugins/apis) pour chaque méthode que vous pouvez appeler à partir du code du plugin.
+
+## Quand les choses vont mal
+
+* Le plugin n'apparaît pas dans la liste de l'administration. Assurez-vous que le `.ocpkg` est dans `data/plugins/`, pas seulement `plugins/`, et que le nom de fichier se termine par `.ocpkg`. La page **Plugins** de l'administrateur a un bouton Rafraîchir si vous ne voulez pas attendre le prochain scan.
+* Le plugin apparaît mais ne s'active pas. Vérifiez la vue de détail du plugin de l'administrateur. La colonne **Statut** affiche `erreur` si le manifeste est invalide ou si le plugin a échoué à s'instancier. Survolez pour le message, ou exécutez vos tests localement pour capturer le même problème avant de déployer.
+* Le plugin s'active mais ne fait rien. Assurez-vous d'utiliser le bon nom de gestionnaire (`onChatMessage` / `on_chat_message`, pas `onMessage`) et que la permission correspondante figure dans votre manifeste. Appeler une API sans sa permission génère une erreur claire.
+* Le plugin est désactivé automatiquement. Un filtre qui génère une erreur ou reste bloqué cinq fois de suite est désactivé pour le reste de la session. Corrigez le bug, reconstruisez, déployez à nouveau et réactivez.

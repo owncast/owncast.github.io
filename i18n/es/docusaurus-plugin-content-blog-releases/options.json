@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "Publicaciones de Owncast",
+    "description": "The title for the blog used in SEO"
+  },
+  "description": {
+    "message": "Versiones y registros de cambios de Owncast",
+    "description": "The description for the blog used in SEO"
+  },
+  "sidebar.title": {
+    "message": "Publicaciones recientes",
+    "description": "The label for the left sidebar"
+  }
+}

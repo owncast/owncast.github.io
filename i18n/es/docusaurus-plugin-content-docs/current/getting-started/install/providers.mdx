@@ -1,0 +1,45 @@
+---
+title: Owncast preinstalado con proveedores de alojamiento
+sidebar_label: Instalado por proveedores de alojamiento
+description: Tenga automáticamente un servidor con Owncast preinstalado utilizando proveedores de alojamiento compatibles.
+tags:
+  - instalación
+  - alojamiento
+  - proveedores
+  - automatizado
+---
+
+Algunos proveedores de servicios ofrecen opciones de instalación con un clic para Owncast donde puede comenzar a funcionar sin instalar el software manualmente.
+
+## Siga las instrucciones de su proveedor de alojamiento
+
+Siga las instrucciones de su proveedor de alojamiento elegido para comenzar, ya que cada uno tendrá su propio proceso específico. El proyecto Owncast generalmente no podrá apoyar problemas específicos de su proveedor de alojamiento, así que comuníquese con su soporte si tiene algún problema.
+
+## Lo que necesita
+
+1. Un nombre de dominio y acceso a la configuración de su DNS. Esto es necesario para soportar [SSL](/docs/sslproxies).
+2. Una cuenta con un proveedor de alojamiento que soporte instalaciones automáticas de Owncast.
+
+### Algunos proveedores conocidos
+
+* [DigitalOcean](https://marketplace.digitalocean.com/apps/owncast?refcode=492f098407b2)
+* [Elestio](https://elest.io/open-source/owncast). Son totalmente gestionados, lo que significa que manejan actualizaciones, copias de seguridad, etc.
+* [Hetzner](https://docs.hetzner.com/cloud/apps/list/owncast/)
+* [Linode/Akamai](https://www.linode.com/marketplace/apps/owncast/owncast/?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d)
+
+Algunos de estos proveedores pueden ofrecer créditos gratuitos para nuevas cuentas, o dar crédito a Owncast por referidos.
+
+## Configurando DNS
+
+1. Inicie sesión en su proveedor de DNS.
+2. Agregue un **"Registro A"** apuntando al nuevo servidor que creó su proveedor de alojamiento, y el nombre de host que desea usar para Owncast.
+3. Espere aproximadamente 5 minutos, pero puede tardar más según su proveedor de DNS.
+4. Cuando `http://your_new_server:8080` se cargue en su navegador, su instalación estará completa.
+5. Es posible que necesite reiniciar su nuevo servidor para que se inicie el proxy SSL, dependiendo de su proveedor de alojamiento.
+
+import { IncludeMarkdown } from "@site/src/components";
+import AdminLogin from "../../shared/admin-login.md";
+
+<IncludeMarkdown>
+  <AdminLogin />
+</IncludeMarkdown>

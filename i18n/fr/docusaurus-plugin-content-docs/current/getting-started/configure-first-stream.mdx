@@ -1,0 +1,35 @@
+---
+title: Configurer votre clé de flux et votre premier flux
+description: Apprenez à vous connecter, à changer votre clé de flux et à commencer votre premier flux avec Owncast.
+sidebar_position: 200
+sidebar_label: Configurer votre clé de flux et votre premier flux
+---
+
+Tout logiciel que vous utilisez déjà pour la diffusion en direct est probablement compatible avec Owncast. Visitez notre page [logiciel de diffusion](/docs/broadcasting) pour voir certains logiciels spécifiques et comment ils sont configurés.
+
+import { IncludeMarkdown } from "@site/src/components";
+import AdminLogin from "../shared/admin-login.md";
+
+<IncludeMarkdown>
+  <AdminLogin />
+</IncludeMarkdown>
+
+## Clé de flux
+
+Pour commencer la diffusion, vous avez besoin de deux choses : l'URL RTMP de votre serveur Owncast (`rtmp://yourserver/live`) et une clé de flux. La clé de flux et le mot de passe administrateur par défaut sont tous deux `abc123`, mais ce sont des paramètres séparés. La clé de flux permet à votre logiciel de diffusion de publier des vidéos. Le mot de passe administrateur vous connecte au tableau de bord administrateur. Changez-les tous les deux dès que possible.
+
+Le mot de passe administrateur et les clés de flux sont gérés indépendamment, vous pouvez donc ajouter autant de clés de flux que vous le souhaitez. La plupart des gens n'ont besoin que d'une seule clé, mais plusieurs clés peuvent être utiles dans certaines configurations, comme donner à un co-présentateur sa propre clé que vous pouvez révoquer plus tard.
+
+Vous ajoutez et supprimez les clés de flux sur la page de configuration du serveur administrateur.
+
+<img src="/docs/img/admin-stream-keys.png" alt="L'onglet Clés de flux de la page des paramètres du serveur, montrant la clé de flux par défaut et un bouton pour en ajouter d'autres" width="80%" />
+
+## Ce qu'il faut configurer ensuite
+
+Certaines éléments courants que beaucoup de gens mettent à jour après avoir installé Owncast sont :
+
+* Le nom de votre site, logo, description et liens externes affichés sur le [site web](/docs/configuration/website).
+* Votre **clé de flux**, que votre logiciel de diffusion utilise pour publier des vidéos, et votre **mot de passe administrateur**, que vous utilisez pour vous connecter au tableau de bord administrateur.
+* Activez votre flux pour qu'il apparaisse dans le [répertoire Owncast](/docs/directory).
+
+En savoir plus sur [ce que vous pouvez configurer et comment](/docs/configuration).

@@ -1,0 +1,55 @@
+---
+title: Cadres perdus
+description: ""
+unlisted: true
+related:
+  excludeFromAll: true
+tags:
+  - obs
+  - perdus
+  - cadres
+---
+
+import HardwareUsage from "./shared/hardware-usage.md";
+import BroadcastingSoftware from "./shared/broadcasting-software.md";
+import ReduceFramerate from "./shared/reduce-framerate.md";
+
+import { IncludeMarkdown } from "@site/src/components";
+
+Si votre logiciel de diffusion vous indique que vous perdez des cadres, c'est soit à cause de votre matériel et logiciel de diffusion qui ne parviennent pas à rendre les cadres assez rapidement, soit à cause de votre connexion réseau qui ne prend pas en charge le streaming à votre débit binaire choisi, ou soit parce que votre serveur Owncast n'est pas capable d'ingérer les cadres assez rapidement.
+
+En général, quelques cadres perdus sont parfaitement acceptables et attendus. Cependant, une perte continue de cadres pendant que vous diffusez signifie que quelque chose doit être optimisé soit sur le matériel ou le logiciel de votre ordinateur de diffusion local, soit sur le réseau, ou du côté d'Owncast.
+
+Certaines de ces informations sont adaptées du [Guide des Cadres Perdus d'OBS](https://github.com/obsproject/obs-studio/wiki/Dropped-Frames-and-General-Connection-Issues), donc vous constaterez probablement que ce document complet est également utile.
+
+## Vérifiez l'utilisation du matériel de votre serveur Owncast
+
+<IncludeMarkdown>
+  <HardwareUsage />
+</IncludeMarkdown>
+
+## Vérifiez votre logiciel de diffusion
+
+<IncludeMarkdown>
+  <BroadcastingSoftware />
+</IncludeMarkdown>
+
+## Essayez de réduire votre débit binaire et/ou votre fréquence d'images
+
+La prochaine chose à faire est de réduire le débit binaire et/ou la fréquence d'images de votre logiciel de diffusion jusqu'à ce que les cadres perdus s'arrêtent. Les conditions réseau ne sont pas toujours les mêmes d'un jour à l'autre, et ce qui a fonctionné hier n'est pas garanti de fonctionner aujourd'hui. Parfois, il n'y a tout simplement pas grand-chose d'autre à faire que de réduire le débit binaire pour compenser la mauvaise connexion à ce moment donné.
+
+<IncludeMarkdown>
+  <ReduceFramerate />
+</IncludeMarkdown>
+
+En savoir plus sur [l'encodage vidéo et la qualité](/docs/video).
+
+**Inconvénient** : Réduire la qualité de votre vidéo peut visiblement diminuer la qualité de votre diffusion pour certains contenus.
+
+## Ne diffusez pas sur une connexion sans fil
+
+Dans de nombreux cas, les connexions sans fil peuvent causer des problèmes en raison de leur nature instable. La diffusion nécessite vraiment une connexion stable. Souvent, les connexions sans fil fonctionnent bien, mais si vous avez des problèmes, c'est un très bon changement à faire.
+
+## Test de Vitesse
+
+Les tests de vitesse ne sont qu'une estimation très grossière - ils signifient très peu en ce qui concerne le streaming. Juste parce qu'un test de vitesse dit que vous avez un téléchargement de 5Mb/s ne signifie pas que vous pouvez télécharger à quoi que ce soit de manière stable à 5Mb/s. Ce n'est tout simplement pas comme ça que fonctionne internet, malheureusement. Vous n'êtes jamais garanti de pouvoir maintenir une connexion stable à un serveur si le serveur ou les points de routage vers le serveur sont instables. Votre débit binaire "stable" est probablement d'environ 70-75% de votre test de vitesse de téléchargement "estimé" (et cela, c'est seulement si vous n'êtes pas limité). Si quelque chose, un test de vitesse vous dira la vitesse théorique maximale à laquelle vous pourriez diffuser dans des conditions idéalement parfaites, mais les conditions ne sont jamais parfaites.

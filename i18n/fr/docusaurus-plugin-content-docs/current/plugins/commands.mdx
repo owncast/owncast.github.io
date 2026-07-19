@@ -1,0 +1,132 @@
+---
+title: Commandes de chat
+description: Déclarez des commandes de chat avec des alias, des temps de recharge, des restrictions modérateurs et des listes automatiques `!help`.
+sidebar_position: 6
+sidebar_label: Commandes
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - plugins
+  - chat
+  - commandes
+  - bots
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Déclarez une table de commandes pour des commandes telles que `!uptime` ou `!so`. Les tables de commandes supportent les alias, les restrictions des modérateurs, les temps de recharge par utilisateur, les arguments analysés, et les listes automatiques `!help`. Voir [les bases du chat](/docs/plugins/chat) pour le payload de message de chat, l'envoi de messages et les filtres.
+
+## Enregistrez une table de commandes
+
+Une table de commandes fournit :
+
+* un préfixe de commande configurable, avec `!` comme valeur par défaut
+* `description`, `usage` et `alias` par commande
+* temps de recharge par utilisateur
+* restriction réservée aux modérateurs basée sur les portées de l'expéditeur
+* analyse des arguments
+* une liste automatique `!help`
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { definePlugin } = require("@owncast/plugin-sdk");
+
+module.exports = definePlugin({
+  commandPrefix: "!", // optionnel
+  commands: {
+    uptime: {
+      description: "Depuis combien de temps nous sommes en direct",
+      run: (ctx) => ctx.reply("nous avons été en direct un certain temps !"),
+    },
+    so: {
+      description: "Faites un clin d'œil à un spectateur",
+      usage: "!so <nom>",
+      aliases: ["shoutout"],
+      cooldownMs: 10_000,
+      run: (ctx) => ctx.reply(`allez suivre ${ctx.args[0] || "quelqu'un de cool"}`),
+    },
+    clear: {
+      description: "Effacer le chat",
+      modOnly: true,
+      run: (ctx) => ctx.replyPrivately("fait"),
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+from owncast_plugin import plugin
+
+plugin.commands({
+    "uptime": {
+        "description": "Depuis combien de temps nous sommes en direct",
+        "run": lambda ctx: ctx.reply("nous avons été en direct un certain temps !"),
+    },
+    "so": {
+        "description": "Faites un clin d'œil à un spectateur",
+        "usage": "!so <nom>",
+        "aliases": ["shoutout"],
+        "cooldown_ms": 10_000,
+        "run": lambda ctx: ctx.reply(
+            f"allez suivre {ctx.args[0] if ctx.args else 'quelqu'un de cool'}"
+        ),
+    },
+    "clear": {
+        "description": "Effacer le chat",
+        "mod_only": True,
+        "run": lambda ctx: ctx.reply_privately("fait"),
+    },
+}, prefix="!")
+```
+
+</TabItem>
+</Tabs>
+
+Les gestionnaires JavaScript reçoivent `msg`, `user`, `command`, `invokedAs`, `args`,
+`argString`, `reply`, et `replyPrivately`. Python utilise `invoked_as`,
+`arg_string`, et `reply_privately`.
+
+Des noms de commandes en double sont autorisés, donc chaque plugin correspondant s'exécute.
+Les commandes inconnues, les invocations réservées aux modérateurs et les invocations limitées par temps de recharge sont silencieuses. Déclarer ou recevoir une commande ne nécessite aucune permission. Les actions
+à l'intérieur du gestionnaire nécessitent toujours leurs permissions habituelles, telles que `chat.send`.
+
+## `!help` est automatique mais pas réservé
+
+Owncast publie un message système répertoriant les descriptions des commandes de chaque plugin activé. Les commandes réservées aux modérateurs restent cachées des non-moderateurs. Cette réponse intégrée
+ne nécessite aucune permission de plugin.
+
+`!help` et son alias `!commands` restent des messages de chat ordinaires. Les plugins peuvent
+également les déclarer ou y répondre. La réponse intégrée n'empêche pas d'autres
+réponses de plugins supplémentaires.
+
+<img src="/docs/img/plugin-help-command.png" alt="La réponse !help dans le chat, listant les commandes d'un plugin activé avec leurs descriptions, regroupées par plugin" width="320" />
+
+## Utilisation de gestionnaires et de filtres de chat ordinaires
+
+Une table de commandes est optionnelle. Un plugin peut inspecter `msg.body` dans un
+gestionnaire `onChatMessage` pour une seule commande fixe. Les commandes faites à la main n'apparaissent pas dans la liste d'aide intégrée.
+
+Les messages de commande restent des messages de chat ordinaires, donc un plugin peut utiliser à la fois une
+table de commandes et un gestionnaire de chat ordinaire. Les filtres de chat s'exécutent avant la
+correspondance des commandes. Un message supprimé par un filtre n'exécute aucune commande déclarée.
+
+## Exemples de plugins
+
+* **mod-commands** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/mod-commands), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/mod-commands)): un préfixe `?` personnalisé avec alias, temps de recharge et restrictions de modérateur.
+* **stream-tracker** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/stream-tracker), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/stream-tracker)): une table de commandes avec `!uptime` et `!who`, plus le suivi de l'activité de streaming et d'utilisateur de chat.
+* **stream-ops** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/stream-ops), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/stream-ops)): une table de commandes qui rapporte la télémétrie de diffusion et vidéo.
+* **timer-bot** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/timer-bot), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/timer-bot)): une table de commandes pour des rappels et des comptes à rebours (`!remind`, `!every`, `!countdown`).
+* **ip-bot** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/ip-bot), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/ip-bot)): une seule commande `!ip` répondue avec l'IP publique du serveur.
+* **relay** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/relay), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/relay)): réémet `/announce \<text>` en tant qu'annonce de diffusion.
+
+## Où aller ensuite
+
+* [Plugins de chat](/docs/plugins/chat) pour le payload de message de chat, l'envoi de messages et les filtres.
+* [Référence des gestionnaires](/docs/plugins/events) pour les événements de chat auxquels votre plugin peut s'inscrire.
+* [Référence des API](/docs/plugins/apis) pour chaque méthode `owncast.*` et la permission dont elle a besoin.

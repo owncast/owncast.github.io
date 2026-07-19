@@ -1,0 +1,63 @@
+---
+id: appareils-google-tv
+title: Google TV
+slug: /regarder-des-flux/google-tv
+sidebar_label: Google TV
+deviceId: google-tv
+deviceType: smart-tv
+reliability: élevé
+hide_title: true
+tags:
+  - google-tv
+  - android-tv
+  - vlc
+  - smart-tv
+  - télévision
+  - regarder
+description: |
+  Regardez les flux Owncast sur Google TV en utilisant VLC ou d'autres applications Android TV compatibles.
+icon: /images/appareils/google-tv.svg
+---
+
+import DeviceLayout from "@site/src/components/tv/DeviceLayout";
+import { DeviceOptionsGrid } from "@site/src/components/tv/DeviceOptionsGrid";
+import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
+import StoreButton from "@site/src/components/StoreButton";
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard id="vlc-google-tv" title="VLC pour Android TV" badge="Recommandé" difficulty="facile" reliability="élevé" screenshot="/images/appareils/google-tv/vlc-flux.png" screenshotAlt="Interface de flux VLC pour Android TV" summary="Utilisez VLC depuis le Google Play Store pour lire les flux Owncast sur votre Google TV.">
+
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Lecteur multimédia complet optimisé pour l'interface TV.</li>
+      <li>Entrée d'URL de flux facile.</li>
+      <li>Gratuit et régulièrement mis à jour.</li>
+    </ul>
+
+    <details>
+      <summary>Afficher les instructions étape par étape</summary>
+
+      1. Installez VLC depuis le Google Play Store.
+      2. Sélectionnez **"Flux"** dans la section **"Navigation"**.
+      3. Tapez le nom du flux que vous souhaitez regarder. Par exemple : `https://watch.owncast.online`.
+      4. Sélectionnez **"Suivant"**.
+
+    </details>
+
+    <StoreButton url="https://play.google.com/store/apps/details?id=org.videolan.vlc" type="android" />
+
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

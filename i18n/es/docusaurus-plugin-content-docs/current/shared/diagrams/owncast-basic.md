@@ -5,30 +5,30 @@ related:
 ---
 
 ```mermaid
-flowchart LR
-    subgraph Broadcasting
-        OBS[OBS / Broadcasting Software]
-    end
+diagrama de flujo LR
+    subgrafo Difusión
+        OBS[OBS / Software de Difusión]
+    fin
 
-    subgraph Owncast[Owncast Server]
-        direction TB
-        RTMP[RTMP Ingest]
-        Encoder[Video Encoder]
-        WebServer[Web Server]
-        RTMP --> Encoder --> WebServer
-    end
+    subgrafo Owncast[Servidor Owncast]
+        dirección TB
+        RTMP[Ingesta RTMP]
+        Codificador[Codificador de Video]
+        ServidorWeb[Servidor Web]
+        RTMP --> Codificador --> ServidorWeb
+    fin
 
-    subgraph Viewers[Video Clients]
-        direction TB
-        Browser[Web Browsers]
-        Phone[Mobile Phones]
+    subgrafo Espectadores[Clientes de Video]
+        dirección TB
+        Navegador[Navegadores Web]
+        Teléfono[Teléfonos Móviles]
         TV[Smart TVs]
-        VLC[VLC / Media Players]
-    end
+        VLC[VLC / Reproductores de Medios]
+    fin
 
-    OBS -->|RTMP Stream| RTMP
-    WebServer -->|HLS Video| Browser
-    WebServer -->|HLS Video| Phone
-    WebServer -->|HLS Video| TV
-    WebServer -->|HLS Video| VLC
+    OBS -->|Flujo RTMP| RTMP
+    ServidorWeb -->|Video HLS| Navegador
+    ServidorWeb -->|Video HLS| Teléfono
+    ServidorWeb -->|Video HLS| TV
+    ServidorWeb -->|Video HLS| VLC
 ```

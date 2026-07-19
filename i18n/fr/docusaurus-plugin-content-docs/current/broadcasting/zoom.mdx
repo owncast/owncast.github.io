@@ -1,0 +1,18 @@
+---
+title: Zoom
+description: Zoom est un fournisseur de conférences vidéo.
+sidebar_position: 24
+---
+
+[Zoom](https://zoom.us/) vous propose de diffuser votre réunion vers un service de diffusion en direct tel qu'Owncast. Veuillez noter que certaines modifications pourraient devoir être effectuées par votre administrateur Zoom.
+
+1. Configurez Owncast et personnalisez-le selon vos choix. Puisque le flux RTMP provient directement des serveurs de Zoom, au moins le port RTMP devrait être accessible depuis Internet.
+2. Autorisez la diffusion en direct pour le compte utilisateur. Dans [zoom.us/profile/setting](https://zoom.us/profile/setting), faites défiler vers le bas jusqu'à "Autoriser les réunions à diffuser en direct" et activez le *Service de diffusion en direct personnalisé* :
+   ![Image](/docs/img/zoom-activate-for-account.png)
+3. Planifiez une réunion en utilisant le site Web et enregistrez-la. Zoom vous redirigera vers une page "Gérer la réunion" qui a une section de diffusion en direct en bas de page. Cliquez sur le lien "configurer les paramètres de diffusion en direct" :
+   ![Image](/docs/img/zoom-manage-meeting.png)
+4. Remplissez les informations de votre serveur Owncast. L'"URL de la page de diffusion en direct" devrait être le frontend d'Owncast, puisque Zoom y fera référence depuis la réunion.
+   ![Image](/docs/img/zoom-server-settings.png)
+5. Une fois la réunion commencée, cliquez sur "Plus" dans la barre de menu, puis sur "Diffuser en direct vers le service personnalisé". Zoom ouvrira une fenêtre de navigateur et vous redirigera ensuite vers le frontend d'Owncast (ou l'URL que vous avez spécifiée).
+
+Les instructions pour les webinaires et les salles de réunion personnelles sont similaires, [voir la page d'assistance de Zoom](https://support.zoom.us/hc/en-us/articles/115001777826-Live-Streaming-Meetings-or-Webinars-Using-a-Custom-Service) pour plus d'informations.

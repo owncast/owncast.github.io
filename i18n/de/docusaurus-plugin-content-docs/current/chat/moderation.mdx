@@ -1,0 +1,82 @@
+---
+title: Chatmoderation
+description: Moderatoren hinzufügen, Nachrichten und Benutzer aus deinem Chat entfernen.
+sidebar_position: 300
+sidebar_label: Chatmoderation
+tags:
+  - Moderation
+  - Chat
+  - Sperren
+  - Blockieren
+  - IP-Adresse
+---
+
+Mit dem Owncast-Admin oder den Inline-Moderationskontrollen in deinem Chat kannst du einzelne Nachrichten oder ganze Benutzer entfernen.
+
+## Chatmoderatoren
+
+Moderatoren haben keinen Zugriff auf die Admin-Oberfläche und helfen dir, deinen Chat in Ordnung zu halten.
+
+Gehe in deinem Admin zu `Chat & Benutzer` > `Benutzer`, um den Benutzer zu finden, dem du Moderatorenrechte gewähren möchtest.
+Rufe deren Details auf und du kannst sie als Moderator hinzufügen.
+
+Standardmäßig gibt es keine Moderatoren, daher möchtest du dich mindestens selbst zu einem machen.
+
+Moderatoren werden benachrichtigt, wenn sie einer werden, und haben ein Moderatoren-Symbol neben ihrem Namen im Chat, das jeder sehen kann.
+
+## Wie moderiert man
+
+Sobald du Moderator geworden bist, kannst du über eine Chat-Nachricht fahren und ein Menü öffnen, in dem du eine einzelne Nachricht entfernen oder den Benutzer vollständig aus dem Chat bannen kannst.
+
+Mit der Aktion „Weitere Informationen“ kannst du einen kurzen Überblick über den Benutzer erhalten, z. B. wann er sich das erste Mal angemeldet hat. Diese Informationen sind nützlich, wenn Trolle versuchen, jemand anderen zu imitieren.
+
+<img src="/images/moderator-menu.png" alt="Das Moderator-Menü, das erscheint, wenn du über eine Chat-Nachricht fährst, mit Optionen zum Entfernen der Nachricht, zum Sperren des Benutzers und zum Anzeigen weiterer Informationen über ihn." width="50%" />
+
+## Chatnachrichten mit dem Admin entfernen
+
+Gehe in deinem Admin zu `Chat & Benutzer` > `Nachrichten`, um Aufgaben zur Moderation von Chatnachrichten durchzuführen.
+
+### Einzelne Nachricht
+
+Du kannst die Sichtbarkeit einer einzelnen Nachricht in deinem Chat umschalten, indem du auf die Sichtbarkeitsschaltfläche (die wie ein Auge aussieht) ganz rechts neben jeder Nachricht klickst.
+
+![Die Nachrichten-Registerkarte des Admins, mit der Sichtbarkeitsschaltfläche, die rechts neben einer Chatnachricht erscheint](/docs/img/chat-moderation-hide-message.png)
+
+### Massenänderung der Sichtbarkeit
+
+![Die Nachrichten-Registerkarte mit mehreren Nachrichten, die per Kontrollkästchen ausgewählt sind, und den Schaltflächen „zeigen“ und „verstecken“ über der Liste](/docs/img/chat-moderation-bulk-hide-messages.png)
+
+Alternativ kannst du die Nachrichten, die du auf einmal ändern möchtest, per Kontrollkästchen auswählen und dann auf die Schaltflächen *„zeigen“* oder *„verstecken“* klicken.
+
+## Benutzer aus deinem Chat mit dem Admin bannen
+
+Gehe in deinem Admin zu `Chat & Benutzer` > `Benutzer`, um Benutzermoderationsaufgaben durchzuführen.
+
+Das Sperren eines Benutzers trennt ihn sofort vom Chat und blendet die Chat-Oberfläche in seinem Browser aus. Alle vorherigen Nachrichten, die von diesem Benutzer gesendet wurden, werden ebenfalls aus dem Chat-Feed entfernt.
+
+Du kannst einen zuvor gesperrten Benutzer wieder freigeben, aber beachte, dass dies die entfernten Nachrichten nicht wiederherstellt. Falls nötig, kannst du sie manuell wiederherstellen.
+
+![Die Benutzer-Registerkarte des Admins, die eine Benutzerzeile mit der Option zeigt, den Benutzer zu sperren](/docs/img/user-moderation-ban-user.png)
+
+Alternativ kannst du auf den angezeigten Benutzernamen klicken und das Benutzerinformationsfenster aufrufen und sie von dort aus sperren.
+
+![Das Benutzerinformationsfenster, das aus einem angezeigten Namen geöffnet wurde, mit einer Schaltfläche, um den Benutzer zu sperren](/docs/img/user-moderation-ban-user-modal.png)
+
+## IP-Adresssperrung
+
+Beim Sperren eines Benutzers wird die bekannte IP-Adresse automatisch blockiert. Während dies die meisten Trolle abschrecken kann, ist es wie alles andere auch möglich, es zu umgehen.
+
+* Owncast verwendet die IP-Adresse, die im Header `x-forwarded-for` angegeben ist, wenn sie bereitgestellt wird, was bedeutet, dass es möglicherweise möglich ist, dieses Wert mit einer gefälschten Adresse zu überschreiben. Wenn du dir darüber Sorgen machst, stelle sicher, dass dein Reverse-Proxy konfiguriert ist, um den korrekten Headerwert explizit festzulegen.
+* VPNs sind ein Thema. Mit einem VPN ist es trivial, die IP-Adresssperre zu umgehen.
+
+Das alles soll sagen: Dieses Feature wird helfen, Missbrauch zu reduzieren, aber es garantiert in keiner Weise, dass es die schlimmsten der schlimmsten fernhält. Die Moderation bleibt weiterhin die Verantwortung jedes einzelnen Streams.
+
+Eine Liste der gesperrten IPs kann in der Admin-Chat-Benutzeroberfläche angezeigt und über dieselbe Oberfläche wieder freigegeben werden.
+
+## Beleidigungen / Schimpfwörter-Filter
+
+Ein einfacher Schimpfwörterfilter kann in den Chat-Einstellungen aktiviert werden. Dies wird Nachrichten ablehnen, die einer internen Liste entsprechen.
+
+## Rate-Limiter
+
+Standardmäßig gibt es einen integrierten Rate-Limiter, der versucht, zu verhindern, dass Benutzer in kurzer Zeit zu viele Nachrichten senden. Dies soll helfen, Spam und Missbrauch zu verhindern. Der Rate-Limiter kann in den Chat-Einstellungen deaktiviert werden.

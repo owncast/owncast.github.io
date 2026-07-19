@@ -1,0 +1,47 @@
+---
+title: Zuschauer, die weiter entfernt sind, erleben Pufferung
+description: ""
+tags:
+  - Pufferung
+  - geo
+  - Betrachten
+---
+
+import RelocatePhysicalServer from "../../troubleshoot/shared/relocate-physical-server.md";
+import AddLowerQualityOutputs from "../../troubleshoot/shared/add-lower-quality-outputs.md";
+import UseCDN from "../../troubleshoot/shared/use-cdn.md";
+import UseStorage from "../../troubleshoot/shared/use-storage.md";
+
+import { IncludeMarkdown } from "@site/src/components";
+
+Da Live-Video sehr enge Toleranzen haben kann, ist es möglich, dass der physische Standort der Zuschauer im Vergleich zum Standort Ihres Servers genug Verzögerungen verursacht, sodass der Zuschauer Pufferung erlebt.
+
+## Verschieben Sie Ihren Server
+
+<IncludeMarkdown>
+  <RelocatePhysicalServer />
+</IncludeMarkdown>
+
+## Fügen Sie zusätzliche niedrigere Ausgabequalitäten hinzu
+
+<IncludeMarkdown>
+  <AddLowerQualityOutputs />
+</IncludeMarkdown>
+
+Nachdem Sie die folgenden Informationen gelesen haben, finden Sie möglicherweise hilfreiche Tipps in dem [OBS-Fehlerbehebungsleitfaden](https://github.com/obsproject/obs-studio/wiki/Stream-Buffering-Issues/d65033b24e4a4c81c87323f05a59c12f78de620b), auch wenn Sie OBS nicht verwenden.
+
+## Der Zuschauer wechselt nach Bedarf zwischen den Qualitäten
+
+Durch die Verwendung einer Technologie namens Adaptive Bitrate Streaming wechselt der Zuschauer transparent zwischen verschiedenen Videoqualitäten, wenn dies erforderlich ist. Erfahren Sie mehr darüber, wie dies und andere Videoaspekte funktionieren, indem Sie unser detaillierteres [Videodokument](/docs/video) lesen.
+
+## Verwenden Sie externen Speicher
+
+<IncludeMarkdown>
+  <UseStorage />
+</IncludeMarkdown>
+
+## Verwenden Sie ein CDN
+
+<IncludeMarkdown>
+  <UseCDN />
+</IncludeMarkdown>

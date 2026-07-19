@@ -1,0 +1,63 @@
+---
+title: Hardwareauslastung
+description: Je mehr Video-Encoding-Arbeit erforderlich ist, desto mehr Hardwareauslastung findet statt. Aber es gibt einige Dinge, die du tun kannst.
+unlisted: true
+related:
+  excludeFromAll: true
+tags:
+  - CPU
+  - Hardware
+  - Optimierung
+---
+
+import { IncludeMarkdown } from "@site/src/components";
+import ReduceFramerate from "./shared/reduce-framerate.md";
+import MatchHighestOutputQuality from "./shared/match-highest-output-quality.md";
+
+## Reduziere deine Bildrate
+
+<IncludeMarkdown>
+  <ReduceFramerate />
+</IncludeMarkdown>
+
+## Reduziere die Menge an Hardware (CPU oder GPU), die in den Videoeinstellungen zugewiesen ist.
+
+Jede Videoausgabevariante hat basierend auf der Video-Konfiguration eine bestimmte Menge an zugewiesener Hardware. Eine Reduzierung dieses Wertes kann die Menge an Serverressourcen, die genutzt werden, erheblich freisetzen.
+
+**Nachteil**: Je weniger Hardwarezeit du dem Video-Encoding zuweist, desto schlechter wird die Qualität des Outputs sein. Niedrigere Einstellungen sind auch weniger effizient, wenn es um die Dateigröße geht, was möglicherweise zu größeren Video-Dateien führt, die deine Zuschauer herunterladen müssen, was bei einigen zu Puffern führen kann.
+
+## Reduziere die Anzahl der Streamausgabevarianten, die du anbietest
+
+Jede Streamausgabevariantenkonfiguration führt zu einer höheren Hardwareauslastung.
+
+**Nachteil**: Als Streamer möchtest du so viele verschiedene Stream-Qualitäten wie möglich anbieten, damit Menschen an allen Standorten und bei allen Netzwerkbedingungen dein Content genießen können. Das Entfernen von Stream-Optionen kann die Verfügbarkeit deines Streams für einige mit langsameren Netzwerken verringern, was zu Puffern führt.
+
+## Passe deine höchste Ausgabequalität an
+
+<IncludeMarkdown>
+  <MatchHighestOutputQuality />
+</IncludeMarkdown>
+
+## Experimentiere mit dem Passthrough-Modus
+
+Der Passthrough-Modus weist Owncast an, das Video deines Senders direkt ohne erneutes Codieren durchzuleiten. Da der Server das Encoding vollständig überspringt, sinkt die Hardwareauslastung auf fast null. Dies ist die größte Reduzierung, die du vornehmen kannst, wenn dein Server einfach nicht mithalten kann. Siehe [Video Passthrough](/docs/video/#video-passthrough), um zu erfahren, wie du es aktivierst.
+
+**Nachteil**: Mit Passthrough kannst du keine mehreren Qualitätsoptionen mehr anbieten, sodass Zuschauer mit langsameren Verbindungen keinen Stream mit niedrigerer Qualität haben, auf den sie zurückgreifen können. Der Passthrough kann auch die Latenz erhöhen, und in einigen Umgebungen erzeugt er Videos, die nicht alle Player verarbeiten können.
+
+## Wenn du auf physischer Hardware arbeitest, versuche die Hardwarebeschleunigung
+
+**Hinweis: Die meisten Menschen werden davon keinen Gebrauch machen können.**
+
+Wenn du Zugriff auf eine physische CPU hast, die Video-Encoding unterstützt, oder eine GPU mit einem speziellen Encoding-Chipsatz, kannst du deine Leistung erheblich verbessern. [Lies mehr darüber, welche Hardware unterstützt wird](/docs/codecs/).
+
+**Nachteil**: Dies wird den meisten Menschen nicht zur Verfügung stehen, es sei denn, du hast Zugriff auf physische Hardware, die beschleunigtes Video-Encoding unterstützt.
+
+## Wechsle zu einem leistungsstärkeren Server
+
+Wenn du feststellst, dass du deine Owncast-Instanz nicht so konfigurieren kannst, dass sie die Anzahl der Ausgabevarianten sowie die Bildrate und Qualität unterstützt, musst du möglicherweise einfach zu einem Server wechseln, der die Last mit mehr CPU-Ressourcen bewältigen kann.
+
+Wenn du auf einem gehosteten VPS bist, könntest du in der Lage sein, deinen Server gegen einen zu tauschen, der mehr CPU-Ressourcen zur Verfügung hat.
+
+## Mehr erfahren
+
+Dir kann nicht genau gesagt werden, wie viel CPU du benötigst oder welcher Server oder welche Umgebung dir am besten dienen wird. Aber lies das Dokument über die [Ressourcen und Anforderungen](/docs/resources-requirements/), um mehr zu erfahren.

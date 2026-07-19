@@ -1,0 +1,232 @@
+---
+title: Ce dont vous avez besoin pour exécuter Owncast
+description: Il n'y a pas de règle fixe concernant la quantité de ressources qu'Owncast utilisera, car cela dépend de votre configuration et de vos exigences, mais voici quelques exemples.
+sidebar_position: 200
+sidebar_label: Ce dont vous avez besoin pour exécuter Owncast
+hide_table_of_contents: false
+tags:
+  - ressources
+  - exigences
+  - bande passante
+  - processeur
+  - hébergement
+  - stockage
+  - taux de bits
+  - taux de rafraîchissement
+  - pass-through
+  - mise à l'échelle
+  - stockage d'objets
+  - cdn
+---
+
+import ResourcesCalculator from "@site/src/components/ResourcesCalculator";
+
+Il est impossible de donner une réponse unique concernant les exigences pour exécuter Owncast ou le coût. C'est votre serveur, et il vous revient entièrement de choisir comment vous souhaitez le configurer et dans quels environnements vous décidez de l'exécuter. Chaque environnement a des performances, des prix et des caractéristiques différents.
+
+---
+
+## Connaissances de base
+
+Il est très utile de comprendre les éléments de base inclus dans le streaming vidéo.
+
+* **PROCESSEUR** : Utilisé pour transcoder la vidéo en plusieurs qualités afin que les spectateurs puissent la regarder sur différents réseaux à vitesse variable.
+* **Bande passante réseau** : Utilisée pour distribuer la vidéo à vos spectateurs.
+
+### Le nombre de spectateurs n'impacte pas l'utilisation du processeur
+
+Sachant cela, vous voyez que **l'utilisation du processeur est la même, peu importe le nombre de spectateurs que vous avez**. 0 ou 100, le processeur effectue toujours le travail. Pensez-y comme à la création d'un fichier zip. Si vous avez un fichier de 100 Mo, et que vous le zippez, et qu'il devient 70 Mo, vous pouvez envoyer ce fichier de 70 Mo à autant de personnes que vous le souhaitez sans rezipper ce fichier à chaque fois pour chaque personne. Mais vous devez tout de même envoyer le fichier à chaque personne séparément, nécessitant de la bande passante réseau chaque fois que vous l'envoyez. Cependant, si vous souhaitez envoyer à certaines personnes une version de 70 Mo et à d'autres une version de 50 Mo, vous devrez créer deux fichiers distincts. Cette version de 50 Mo prendra plus de temps et utilisera plus de processeur pour être créée, en raison du travail supplémentaire qu'il faut pour compresser le fichier davantage. C'est la même chose avec la vidéo. Plus le travail requis pour encoder votre vidéo est important, plus le processeur sera requis. En général, plus vous devez réduire la taille et le taux de bits de votre vidéo, plus le processeur sera utilisé. Mais proposer des versions à faible débit et de qualité inférieure de votre flux est important pour permettre à plus de spectateurs de le regarder depuis le monde entier, sur n'importe quel type de réseau.
+
+### Votre bande passante de téléchargement en tant que streamer
+
+Avant que votre serveur ne puisse distribuer de la vidéo aux spectateurs, vous devez envoyer votre flux au serveur. Cela nécessite **une bande passante de téléchargement** depuis où que vous diffusiez. Si vous streamez à 5000kbps, vous avez besoin d'une vitesse de téléchargement qui peut soutenir ce taux de manière fiable.
+
+**Règle de base** : Votre vitesse de téléchargement doit être d'au moins **1,5 fois votre bitrate de streaming** pour tenir compte des fluctuations et des frais supplémentaires. Pour un stream de 5000kbps, visez au moins 7,5 Mbps de téléchargement.
+
+| Taux de streaming | Vitesse de téléchargement minimale |
+| ----------------- | ---------------------------------- |
+| 2500 kbps         | 4 Mbps                             |
+| 4000 kbps         | 6 Mbps                             |
+| 5000 kbps         | 7,5 Mbps                           |
+| 6000 kbps         | 9 Mbps                             |
+| 8000 kbps         | 12 Mbps                            |
+
+**Considérations importantes :**
+
+* **Internet domestique souvent asymétrique** : La plupart des connexions résidentielles ont des vitesses de téléchargement beaucoup plus rapides que celles de téléversement. Un plan de « 100 Mbps » pourrait n'avoir que 10-20 Mbps de téléchargement. Vérifiez votre vitesse de téléchargement réelle sur [speedtest.net](https://www.speedtest.net/) ou similaire.
+* **Connexions partagées** : Si d'autres personnes sur votre réseau utilisent de la bande passante pendant que vous streamez, votre bande passante disponible diminue.
+* **Utilisez une connexion filaire** : Le WiFi ajoute de la latence et de l'instabilité. Une connexion Ethernet câblée à votre routeur est fortement recommandée pour le streaming.
+* **Ceci est distinct de la bande passante du serveur** : Votre téléchargement permet d'envoyer le flux au serveur. Le serveur a ensuite besoin de sa propre bande passante pour le distribuer aux spectateurs.
+
+## Scénario d'exemple
+
+Maintenant que vous comprenez les bases, utilisons un exemple pour illustrer comment votre configuration peut impacter les ressources de votre serveur et, surtout, l'expérience de vos spectateurs. C'est un peu simpliste et les chiffres réels peuvent varier dans la vie réelle, mais cela pourrait aider à répondre à la question de "combien de bande passante et de processeur Owncast utilisera-t-il approximativement ?"
+
+Vous avez configuré votre source de diffusion (comme OBS) pour streamer vers votre instance Owncast à **5000kbps**. Vous avez **25 spectateurs**. **5** d'entre eux sont sur des réseaux lents ou mobiles, **17** d'entre eux ont une connexion Internet rapide et stable, et **3** d'entre eux ont généralement une connexion Internet rapide mais la vitesse fluctue. Tous les 25 spectateurs ont regardé un flux entier de deux heures. Vous avez un fournisseur d'hébergement qui vous donne 4 To de bande passante par mois.
+
+### Offrez une option de haute et basse qualité
+
+Vous décidez d'offrir à la fois une option de haute et de basse qualité, et vous définissez l'option de haute qualité à 5000kbps et l'option de basse qualité à 1500kbps.
+
+**Combien de bande passante est utilisée sur votre serveur pour ce flux ?**
+
+| Taux de bits                                | Durée         | Spectateurs | Total                        |
+| ------------------------------------------- | ------------- | ----------- | ---------------------------- |
+| 0.000625 Gigaoctets par seconde (5000kbps)  | 7200 secondes | 20          | 90 Gigaoctets                |
+| 0.0001875 Gigaoctets par seconde (1500kbps) | 7200 secondes | 5           | 6,75 Gigaoctets              |
+|                                             |               |             | **Total** : 96,75 Gigaoctets |
+
+**Quelle est la vitesse de réseau maximale dont votre serveur a besoin ?**
+
+Votre serveur doit être capable de soutenir le bitrate sortant combiné pour tous les spectateurs en même temps. Dans ce scénario : (20 spectateurs × 5000kbps) + (5 spectateurs × 1500kbps) = **107,5 Mbps**. Votre plan d'hébergement doit supporter au moins cette quantité de débit sortant.
+
+**Combien de processeur ?**
+
+| Qualité  | Utilisation du processeur                            |
+| -------- | ---------------------------------------------------- |
+| 5000kbps | Léger (transcodage minimal, correspond à l'entrée)   |
+| 1500kbps | Modéré (encodage actif pour réduire le taux de bits) |
+
+**Comment est l'expérience du spectateur ?**
+
+| Qualité  | Spectateurs | Expérience |
+| -------- | ----------- | ---------- |
+| 5000kbps | 20          | Bonne      |
+| 1500kbps | 5           | Bonne      |
+
+**Résultat** : Vous avez offert à la fois une option de haute et de basse qualité pour vos spectateurs, afin que ceux avec un réseau lent aient une option, et ceux avec un réseau rapide qui pourrait ralentir régulièrement puissent passer temporairement à la basse qualité si nécessaire. De plus, dans ce cas, vous avez économisé près de 16 Go de bande passante en raison de l'offre d'une qualité inférieure. Vous utilisez plus de processeur pour une expérience beaucoup meilleure. Vous pourriez diffuser 42 fois en un mois avant d'atteindre votre limite de bande passante.
+
+### Offrez une seule option de haute qualité en utilisant le moins de processeur possible
+
+Vous avez décidé que vous souhaitez utiliser le moins de processeur possible sur votre serveur Owncast, donc vous activez le mode "Vidéo pass-through" comme seule sortie disponible. Cela signifie que la vidéo exacte que vous envoyez depuis votre logiciel de diffusion local est ce qui est envoyé à vos spectateurs.
+
+**Combien de bande passante est utilisée sur votre serveur pour ce flux ?**
+
+| Taux de bits                               | Durée         | Spectateurs | Total            |
+| ------------------------------------------ | ------------- | ----------- | ---------------- |
+| 0.000625 Gigaoctets par seconde (5000kbps) | 7200 secondes | 25          | 112,5 Gigaoctets |
+
+**Quelle est la vitesse de réseau maximale dont votre serveur a besoin ?**
+
+Tous les 25 spectateurs reçoivent le même flux de 5000kbps : 25 × 5000kbps = **125 Mbps** de débit sortant soutenu.
+
+**Combien de processeur ?**
+
+| Qualité  | Utilisation du processeur  |
+| -------- | -------------------------- |
+| 5000kbps | Minimal (sans transcodage) |
+
+**Comment est l'expérience du spectateur ?**
+
+| Qualité  | Spectateurs | Expérience   |
+| -------- | ----------- | ------------ |
+| 5000kbps | 17          | Bonne        |
+| 5000kbps | 3           | Mauvaise     |
+| 5000kbps | 5           | Inregardable |
+
+**Résultat** : Vous n'utilisez pas beaucoup de processeur, mais seulement **68%** de vos spectateurs passent un bon moment. Les autres **32%** ont une mauvaise expérience avec de fréquentes mises en mémoire tampon, et **20%** d'entre eux ne peuvent pas regarder votre flux du tout. Vous pourriez diffuser 36 fois en un mois avant d'atteindre votre limite de bande passante.
+
+### Utilisez un fournisseur de stockage compatible S3 pour la bande passante
+
+Si vous avez des préoccupations concernant votre plan d'hébergement, l'allocation de bande passante ou la croissance du public, vous pouvez utiliser un fournisseur de stockage S3 plutôt que votre serveur pour les responsabilités de bande passante. Dans cet exemple, vous décidez à nouveau d'offrir à la fois une option de haute et de basse qualité, et vous définissez l'option de haute qualité à 5000kbps et l'option de basse qualité à 1500kbps. Le processeur utilisé est le même que dans l'exemple ci-dessus pour l'option haute + basse qualité. En savoir plus sur [le stockage compatible S3](/docs/storage).
+
+**Combien de bande passante est utilisée sur votre serveur pour ce flux ?**
+
+| Taux de bits                                | Durée         | Total                       |
+| ------------------------------------------- | ------------- | --------------------------- |
+| 0.000625 Gigaoctets par seconde (5000kbps)  | 7200 secondes | 4,5 Gigaoctets              |
+| 0.0001875 Gigaoctets par seconde (1500kbps) | 7200 secondes | 1,35 Gigaoctets             |
+|                                             |               | **Total** : 5,85 Gigaoctets |
+
+**Quelle quantité de bande passante sortante est utilisée auprès de votre fournisseur S3 pour ce flux ?**
+
+| Taux de bits                                | Durée         | Spectateurs | Total                        |
+| ------------------------------------------- | ------------- | ----------- | ---------------------------- |
+| 0.000625 Gigaoctets par seconde (5000kbps)  | 7200 secondes | 20          | 90 Gigaoctets                |
+| 0.0001875 Gigaoctets par seconde (1500kbps) | 7200 secondes | 5           | 6,75 Gigaoctets              |
+|                                             |               |             | **Total** : 96,75 Gigaoctets |
+
+**Quelle est la vitesse de réseau maximale dont votre serveur a besoin ?**
+
+Comme les spectateurs sont servis depuis S3, votre serveur n'envoie pas de vidéo aux spectateurs du tout. Il a seulement besoin d'une bande passante sortante suffisante pour télécharger une copie de chaque qualité de flux vers S3 : 5000kbps + 1500kbps = 6500kbps = **6,5 Mbps**. Cela reste le même que vous ayez 0 spectateurs ou 1000. Votre fournisseur S3 gère le débit en direction des spectateurs, qui dans ce scénario atteint un pic de **107,5 Mbps** — mais c'est leur infrastructure, pas la vôtre.
+
+**Résultat** : Vous avez proposé à la fois une option de haute qualité et une option de basse qualité pour vos spectateurs, afin que ceux ayant un réseau lent aient une option, et ceux ayant un réseau rapide qui pourrait ralentir périodiquement puissent redescendre en basse qualité si nécessaire. Cependant, ces qualités vidéo ne sont pas fournies par votre serveur Owncast, mais plutôt par un fournisseur de stockage compatible S3 externe. Cela permet d'augmenter votre audience et d'ajouter des qualités vidéo supplémentaires sans vous soucier d'épuiser l'allocation de bande passante de votre serveur. Vous pourriez diffuser 24/7 sans soucis avec cette configuration, toutefois vous utiliseriez la même quantité de bande passante de votre serveur que vous ayez zéro spectateur ou 100 spectateurs. Votre utilisation du processeur serait la même que si vous diffusiez la vidéo directement depuis votre serveur.
+
+## Référence rapide
+
+### Combien de bande passante Owncast utilisera-t-il ?
+
+**Formule** : `(débit en kbps × durée en secondes × spectateurs) ÷ 8 000 000 = Go`
+
+**Estimations rapides pour un streaming de 2 heures :**
+
+| Débit    | 10 spectateurs | 25 spectateurs | 50 spectateurs |
+| -------- | -------------- | -------------- | -------------- |
+| 2000kbps | 18 Go          | 45 Go          | 90 Go          |
+| 4000kbps | 36 Go          | 90 Go          | 180 Go         |
+| 6000kbps | 54 Go          | 135 Go         | 270 Go         |
+
+Proposer plusieurs options de qualité réduit le total de la bande passante car les spectateurs sur des connexions plus lentes utilisent le flux à faible débit. Utiliser un [stockage compatible S3](/docs/storage) décharge complètement la bande passante de votre serveur.
+
+### Quelle vitesse réseau maximale mon serveur doit-il avoir ?
+
+**Formule** : `débit en kbps × spectateurs ÷ 1 000 = Mbps`
+
+**Estimations rapides :**
+
+| Débit    | 10 spectateurs | 25 spectateurs | 50 spectateurs |
+| -------- | -------------- | -------------- | -------------- |
+| 2000kbps | 20 Mbps        | 50 Mbps        | 100 Mbps       |
+| 4000kbps | 40 Mbps        | 100 Mbps       | 200 Mbps       |
+| 6000kbps | 60 Mbps        | 150 Mbps       | 300 Mbps       |
+
+C'est le débit sortant soutenu dont votre serveur a besoin pendant une diffusion. Si vous offrez plusieurs options de qualité, calculez chaque qualité séparément et additionnez-les. La plupart des fournisseurs de VPS offrent des ports de 1 Gbps, ce qui prend en charge environ 200 spectateurs à 5000kbps. Si vos spectateurs dépassent la capacité réseau de votre serveur, ils éprouveront des interruptions. Utiliser un [stockage compatible S3](/docs/storage) élimine cette limite de votre serveur.
+
+### Combien de CPU Owncast utilisera-t-il ?
+
+**Guide rapide :**
+
+| Configuration                        | Utilisation CPU |
+| ------------------------------------ | --------------- |
+| Qualité de passage unique            | Minimale        |
+| Qualité transcodée unique            | Légère          |
+| Deux qualités (haute + basse)        | Modérée         |
+| Trois qualités ou compression lourde | Lourde          |
+
+Un seul cœur de CPU peut généralement gérer une qualité de sortie transcodée à 30fps. Le mode de passage (sans transcodage) utilise très peu de CPU, quel que soit le débit. Bien sûr, tous les CPU sont différents en performance selon le matériel et les fournisseurs d'hébergement, donc cela varie énormément et aucune garantie ne peut jamais être donnée. Vous devrez expérimenter pour trouver ce qui fonctionne le mieux pour vos besoins.
+
+### L'utilisation du CPU augmente-t-elle avec plus de spectateurs ?
+
+Non. Pour l'encodage vidéo, l'utilisation du CPU reste constante que vous ayez 1 spectateur ou 1 000. La vidéo est encodée une fois et distribuée à tous les spectateurs. Seule la bande passante du serveur augmente avec le nombre de spectateurs. L'utilisation du CPU peut légèrement augmenter avec plus de spectateurs en raison de l'activité de chat et d'autres frais généraux, mais cela reste minime par rapport à l'encodage vidéo.
+
+### Comment le taux de trame affecte-t-il l'utilisation du CPU ?
+
+Des taux de trame plus élevés nécessitent plus de CPU. Réduire le taux de trame est un moyen efficace de diminuer l'utilisation du CPU :
+
+| Taux de trame | CPU relatif |
+| ------------- | ----------- |
+| 60 ips        | 2x de base  |
+| 30 ips        | 1x de base  |
+| 24 ips        | 0.8x        |
+| 15 ips        | 0.5x        |
+
+Envisagez d'utiliser des taux de trame plus bas (24 ips) pour des sorties de qualité inférieure afin d'économiser du CPU tout en maintenant une lecture fluide pour les spectateurs sur des connexions lentes.
+
+### Combien d'espace disque Owncast utilisera-t-il ?
+
+Presque aucun. Owncast diffuse en temps réel et nettoie les segments vidéo au fur et à mesure de leur diffusion. Vous n'avez pas besoin de planifier le stockage vidéo.
+
+### Devrais-je simplement proposer la qualité la plus élevée pour que les choses soient simples ?
+
+Proposer uniquement des vidéos à haut débit exclut les spectateurs sur les réseaux mobiles et les connexions plus lentes. Un flux à 5000kbps nécessite une connexion stable de 5+ Mbps pour regarder sans mise en mémoire tampon. Beaucoup de spectateurs ne l'ont pas, surtout sur mobile.
+
+**Recommandation** : Proposez toujours au moins deux options de qualité. Une qualité élevée (4000-6000kbps) pour les spectateurs avec des connexions rapides, et une qualité basse (1000-2000kbps) pour les autres. Vos spectateurs vous remercieront.
+
+## Calculateur de ressources
+
+Utilisez ce calculateur interactif pour estimer vos besoins en bande passante et en CPU en fonction de votre configuration de streaming spécifique :
+
+<ResourcesCalculator />
+
+## En savoir plus
+
+Visitez la [documentation vidéo détaillée](/docs/video) pour en savoir plus sur la façon dont Owncast gère la vidéo.

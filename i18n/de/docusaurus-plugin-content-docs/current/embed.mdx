@@ -1,0 +1,154 @@
+---
+title: Binde Owncast in deine Website ein
+description: Du kannst einfach deinen Chat oder dein Video in eine andere Seite einfügen.
+sidebar_position: 200
+sidebar_label: Binde Owncast in deine Website ein
+hide_table_of_contents: false
+tags:
+  - einfügen
+  - Website
+  - iframe
+  - Chat
+  - Video
+  - autoplay
+  - css
+---
+
+## Video einbinden
+
+Owncast unterstützt das Einfügen deines Video-Streams direkt in jede andere Webseite oder Quelle, ohne dass ein Player eingerichtet werden muss.
+
+Die Video-URL zu deinem Stream-Inhalt lautet: `http://owncast.example.com/embed/video`.
+
+Hier ist ein Beispiel-HTML, das du verwenden kannst.
+
+```html
+<iframe
+  src="https://owncast.example.com/embed/video"
+  title="Owncast"
+  height="350px"
+  width="550px"
+  referrerpolicy="origin"
+  allowfullscreen
+>
+</iframe>
+```
+
+Es wird ungefähr so aussehen:
+
+<iframe src="https://watch.owncast.online/embed/video" title="Owncast" height="350px" width="550px" referrerpolicy="ursprünglich" allowfullscreen />
+
+### Autoplay
+
+Ob ein eingebettetes Video automatisch abgespielt wird, hängt von den [Autoplay-Einstellungen](/docs/video/#autoplay) deines Servers ab. Du kannst es für ein einzelnes Embed überschreiben, indem du `?autoplay=` an die URL anhängst, mit einem der Werte `off`, `always` oder `sound-only`. Ein nicht erkennbarer Wert fällt auf die Servereinstellung zurück.
+
+Die meisten Browser blockieren Autoplay innerhalb eines iFrames auf einer anderen Seite, es sei denn, die einbettende Seite gewährt die Erlaubnis mit dem `allow`-Attribut:
+
+```html
+<iframe
+  src="https://owncast.example.com/embed/video?autoplay=always"
+  title="Owncast"
+  height="350px"
+  width="550px"
+  referrerpolicy="origin"
+  allow="autoplay"
+  allowfullscreen
+>
+</iframe>
+```
+
+### Stummschaltung
+
+Wenn du möchtest, dass der Player stummgeschaltet ist, sobald er zu spielen beginnt, hänge `?initiallyMuted=true` an die URL an. Zuschauer können ihn weiterhin manuell einschalten. Kombiniere Parameter mit `&`, zum Beispiel `?autoplay=always&initiallyMuted=true`.
+
+Eine Interaktion, die man wissen sollte: `sound-only` wird nie lautlos gestartet, daher bedeutet die Kombination mit `initiallyMuted=true`, dass der Player überhaupt nicht automatisch abgespielt wird.
+
+## Die eingebettete Stream-Stilgestaltung anpassen
+
+Du kannst die Stile des eingebetteten Owncast-Streams einfach an das Design deiner Website anpassen, indem du CSS-Stile anwendest. So kannst du es tun:
+
+1. **Erstelle eine CSS-Datei:** Erstelle zuerst eine CSS-Datei (z. B. `stream-styles.css`), in der du deine benutzerdefinierten Stile definierst.
+
+2. **Verlinke die CSS-Datei:** Füge im `<head>`-Bereich deines HTML-Dokuments, wo du den Owncast-Stream einfügst, ein `<link>`-Tag hinzu, um deine CSS-Datei einzufügen. Stelle sicher, dass du diese Zeile vor dem schließenden `</head>`-Tag hinzufügst:
+
+   ```html
+   <link rel="stylesheet" href="path/to/stream-styles.css" />
+   ```
+
+   Ersetze "path/to/stream-styles.css" durch den tatsächlichen Pfad zu deiner CSS-Datei.
+
+3. **Stile anwenden:** Passe die Stile in deiner stream-styles.css-Datei gemäß deinen Vorlieben an. Du kannst das `\<iframe>`-Element mit CSS-Selektoren ansprechen, wie im folgenden Beispiel gezeigt:
+
+   ```css
+   /* Stile den iFrame-Container des eingebetteten Streams */
+   iframe[title="Owncast"] {
+     border: none; /* Entferne die iFrame-Grenze */
+     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Füge einen sanften Schatten für Tiefe hinzu */
+     border-radius: 10px; /* Abgerundete Ecken für ein modernes Aussehen */
+     overflow: hidden;
+     margin: 0 auto; /* Zentriere den iFrame horizontal */
+   }
+   ```
+
+4. **Anpassen an deine Bedürfnisse:** Passe die obigen Werte an das Design und Layout deiner Website an.
+
+Der eingebettete Stream ist eine separate Seite, die von deinem Owncast-Server geladen wird, sodass das CSS deiner Seite nur den `\<iframe>`-Container selbst stilisieren kann, nicht den Inhalt darin. Um die Farben, Schriftarten und das Layout innerhalb des Players zu ändern, verwende stattdessen die [Einstellungen zur Anzeige](/docs/configuration/appearance) auf deinem Owncast-Server.
+
+Wenn du diese Schritte befolgst, kannst du deinen Owncast-Stream nahtlos in deine Website integrieren und dabei die Kontrolle über das visuelle Erscheinungsbild behalten.
+
+### Verwendung des HLS-Feeds
+
+Solange der Player es unterstützt, wird empfohlen, die Homepage deiner Owncast-Instanz direkt zu öffnen.
+Der Player findet automatisch die richtige Wiedergabeliste und beginnt mit dem Abspielen.
+Dies gewährleistet die zukünftige Kompatibilität, falls sich die Art, wie Owncast HLS veröffentlicht, jemals ändern sollte.
+
+Wenn du jedoch den HLS-Feed benötigst (d. h. um deinen Stream an einen Drittanbieter-Player weiterzugeben), kannst du direkt auf den HLS-Feed über diese URL zugreifen: `http://your.host/hls/stream.m3u8`.
+
+## Chat einbetten
+
+Owncast unterstützt das direkte Einfügen deines Chats in jede andere Website oder Quelle.
+
+Es gibt zwei Arten von eingebetteten Chats: einen schreibgeschützten Chat, der nur die Nachrichten anzeigt, und einen eigenständigen Chat, der dieselbe Funktionalität wie der im Haupt-Webinterface von Owncast hat.
+
+### Eigenständigen Chat einbetten
+
+Die URL des eigenständigen Chats lautet: `http://owncast.example.com/embed/chat/readwrite`.
+
+Es wird ungefähr so aussehen:
+
+[Owncast Einbetten](https://watch.owncast.online/embed/chat/readwrite)
+
+### Embedded read-only chat
+
+Die URL des schreibgeschützten Chats lautet: `http://owncast.example.com/embed/chat/readonly`.
+
+Eine gängige Verwendung des schreibgeschützten Chats besteht darin, die Chatnachrichten in deine Broadcast-Software hinzuzufügen, z. B. in eine Webschicht in OBS.
+
+#### Verwendung von OBS
+
+1. Klicke auf `+` oder mit der rechten Maustaste, um eine neue Quelle hinzuzufügen. Wähle `Browser` aus der Liste.
+
+2. Für eine neue Quelle musst du den Namen hinzufügen. Gib "*Chat*" ein.
+
+3. In den Einstellungen der Browserquelle musst du die URL auf die `/embed/chat/readonly`-URL deiner Owncast-Instanz ändern.
+
+4. Du kannst das *Custom CSS* verwenden, um zu ändern, wie der Browser dein Video anzeigt. Das folgende Beispiel fügt rund um die Box etwas Platz hinzu, gibt ihr einen halbtransparenten dunklen Hintergrund und erhöht die Gesamt-Schriftgröße auf eine Basisgröße von 24px. Du kannst beliebige dieser Einstellungen ändern, um sie an dein Präsentationslayout anzupassen. Beachte, dass die Gesamtfarbe des Nachrichtentextes weiß ist.
+
+   ```css
+   html {
+     margin: 0px;
+     padding: 20px;
+     background-color: rgba(0, 0, 0, 0);
+     font-size: 24px;
+   }
+
+   #chat-container {
+     background-color: rgba(0, 0, 0, 0.5);
+   }
+   ```
+
+5. Klicke auf 'OK', um deine Chat-Einstellungen zu speichern, und positioniere die neue Chat-Quelle in deiner Szene neu.
+
+## SSL-Anforderungen
+
+Eingebettete Owncast-Inhalte, die nicht über HTTPS innerhalb einer Seite bereitgestellt werden, die SSL/TLS verwendet, werden [von Browsern blockiert](https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content/How_to_fix_website_with_mixed_content). [Erfahre, wie du einen SSL-Proxy verwenden kannst](/docs/sslproxies/nginx), um diese Browseranforderung zu erfüllen und deine Owncast-Website zu sichern.

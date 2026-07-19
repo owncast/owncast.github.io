@@ -1,0 +1,93 @@
+---
+title: Proxies SSL et HTTP
+slug: /sslproxies
+description: Placez votre serveur Owncast derrière un proxy pour activer le SSL.
+sidebar_position: 1
+sidebar_label: Proxies SSL et HTTP
+hide_table_of_contents: false
+tags:
+  - ssl
+  - https
+  - proxy inverse
+  - intégrer
+  - proxy
+  - sécurité
+  - navigateur
+---
+
+Si vous configurez Owncast et que des termes comme proxy inverse, SSL ou HTTPS vous semblent confus, cela peut vous aider. Cette page explique ce que sont ces éléments, pourquoi Owncast peut en avoir besoin et comment tout cela s'assemble.
+
+## Ce qu'est un proxy inverse
+
+Un proxy inverse est un petit serveur qui se trouve devant Owncast. Il :
+
+* Écoute sur Internet public (ports 80 et 443)
+* Gère HTTPS / SSL
+* Transmet le trafic à Owncast fonctionnant en privé (généralement sur le port 8080)
+* Possède le certificat
+* Chiffre le trafic
+* Déchiffre avant de l'envoyer à Owncast
+  Owncast ne voit jamais HTTPS - il voit un trafic interne simple.
+
+Pensez-y comme à un **réceptionniste** :
+
+* Le public parle au réceptionniste.
+* Le réceptionniste remet les choses à Owncast.
+
+Owncast s'appuie sur des outils standards et éprouvés (comme Caddy, Nginx, Traefik) pour bien le faire. Beaucoup de ceux qui s'auto-hébergent ou qui possèdent leur propre infrastructure disposeront déjà d'un proxy inverse configuré qu'ils peuvent ajouter à Owncast.
+
+## Pourquoi vous voulez prendre en charge le SSL
+
+1. Si vous souhaitez intégrer votre vidéo ou votre chat Owncast dans une page utilisant SSL, votre serveur Owncast devra également être sécurisé.
+2. Les navigateurs étiqueteront votre site comme ["Non sécurisé"](https://support.apple.com/en-us/HT208672) sans SSL.
+3. Cela semble plus professionnel et votre site sera perçu comme plus fiable.
+4. Sécuriser le trafic web sur Internet public est la bonne chose à faire.
+
+### Quand vous pourriez ne pas en avoir besoin
+
+1. Si vous ne faites que tester et expérimenter avec Owncast.
+2. Vous exécutez le service en interne et vous n'avez pas de plans pour un public public.
+
+## Compréhension erronée commune (et pourquoi cela casse des choses)
+
+* ❌ "J'ai activé HTTPS dans Owncast"
+* ❌ "J'ai redirigé le port 443 vers Owncast"
+* ❌ "Je n'ai pas besoin d'un proxy inverse"
+* ❌ "J'ai redirigé le port RTMP 1935 vers le proxy web"
+
+Cela cause généralement :
+
+* Échecs de connexion OBS
+* L'interface d'administration fonctionne mais la vidéo ne fonctionne pas
+* Les intégrations ne fonctionnent pas
+* Avertissements de contenu mixte dans les navigateurs
+* Vous pouvez toujours charger Owncast sur le port 8080 mais pas sur le port https 443.
+* Votre flux n'est pas disponible dans les applications mobiles
+
+## Une configuration correcte (simplifiée)
+
+1. DNS pointe votre domaine vers votre serveur
+2. Le proxy inverse écoute sur les ports 80 / 443 (pas RTMP 1935)
+3. Le proxy inverse obtient un certificat SSL
+4. Le proxy inverse transmet le trafic à Owncast
+5. Owncast fonctionne en privé (généralement :8080)
+6. OBS envoie RTMP vers Owncast
+
+## Si quelque chose ne fonctionne pas, les questions les plus utiles à poser sont :
+
+* "Où se termine HTTPS ?"
+* "Quel service écoute sur le port 443 ?"
+* "Est-ce que OBS parle à Owncast ou au proxy ?"
+  Répondre à cela révèle presque toujours le problème.
+
+## Options populaires
+
+Vous pouvez utiliser n'importe quelle méthode que vous aimez pour ajouter un support SSL mais il existe certaines options populaires que nous avons vues fonctionner efficacement. Si vous avez des questions spécifiques ou souhaitez faire des suggestions sur des configurations ou d'autres installations, [faites-le nous savoir](/contact).
+
+## Hériter du nom d'affichage du proxy inverse
+
+Owncast assigne généralement un nom d'affichage aléatoire lorsque de nouveaux utilisateurs rejoignent le chat. Les proxys inverses en amont peuvent influencer ce comportement en définissant un en-tête HTTP `X-Forwarded-User` lors du passage du trafic web. Cet en-tête sera utilisé au lieu d'un nom aléatoire pour dériver le nom d'affichage d'un utilisateur. Un utilisateur pourra toujours changer son propre nom d'affichage à n'importe quelle valeur souhaitée.
+
+## Suggéré
+
+Si vous n'avez aucune obligation d'utiliser d'autres options, il est suggéré d'installer [Caddy](/docs/sslproxies/caddy) car il peut être installé rapidement et facilement.

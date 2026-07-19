@@ -1,0 +1,67 @@
+---
+title: Benachrichtigungen für Live-Streams
+description: Benachrichtigungen senden, wenn Ihr Stream live geht.
+sidebar_position: 200
+sidebar_label: Benachrichtigungen für Live-Streams
+tags:
+  - Benachrichtigungen
+  - discord
+  - fediverse
+  - live
+  - Zuschauer
+  - Webhooks
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+Einige Streams profitieren davon, ihr Publikum zu benachrichtigen, wenn sie live gehen.
+
+Dies stellt keine Befürwortung eines bestimmten Dienstes dar, könnte jedoch einigen Streamern helfen, sich in ihre bestehenden Gemeinschaften zu integrieren.
+
+Wenn Sie dies erweitern und automatisierte Benachrichtigungen an andere Ziele senden möchten, erstellen Sie einen benutzerdefinierten [Webhook](/docs/api/webhooks).
+
+Diese Kanäle finden Sie unter **Konfiguration → Benachrichtigungen** im Adminbereich.
+
+<img src="/docs/img/admin-notifications.png" alt="Die Seite für die Benachrichtigungseinstellungen im Adminbereich, mit Abschnitten für Browserwarnungen, Discord, Fediverse-Soziale und benutzerdefinierte Webhooks." width="75%" />
+
+<Tabs>
+  <TabItem value="browser-push-notifications" label="Browserbenachrichtigungen" default>
+
+        Mit Browser-Push-Benachrichtigungen können Ihre Zuschauer wählen, ob sie bei jedem Live-Stream benachrichtigt werden möchten.
+
+        Nicht alle Browser unterstützen diese Funktion, und Browser, die dies tun, können damit unterschiedlich umgehen. Brave erfordert beispielsweise, dass Sie die Dauer auswählen, wie lange die Benachrichtigungen gültig sind. Sie möchten wahrscheinlich „Immer“ auswählen, um die Benachrichtigung aktiv zu halten.
+
+        ### Aktivieren von Browserbenachrichtigungen auf iOS
+
+        Sie können anfordern, benachrichtigt zu werden, wenn ein Stream auf iOS live geht, indem Sie diese Schritte befolgen:
+
+        1. Öffnen Sie Safari und navigieren Sie zu Ihrer Owncast-Instanz.
+        2. Tippen Sie auf das Freigabesymbol am unteren Rand Ihres Browsers.
+        3. Tippen Sie auf „Zum Home-Bildschirm hinzufügen“.
+        4. Tippen Sie auf das neue Owncast-Symbol auf Ihrem Home-Bildschirm.
+        5. Drücken Sie die Schaltfläche „Benachrichtigen“.
+        6. Tippen Sie auf „Zulassen“, wenn Sie dazu aufgefordert werden.
+
+  </TabItem>
+  <TabItem value="browser-extension" label="Browsererweiterung">
+    Eine weitere empfohlene Möglichkeit, Benachrichtigungen von beliebig vielen Streams zu erhalten, besteht darin, die [Owncast-Browsererweiterung von craftamap](https://github.com/craftamap/owncast-browser-extension) zu verwenden. Sie ist verfügbar für [Chrome](https://chrome.google.com/webstore/detail/owncast-extension/djgneammmklaajinkihpibdpaflehgio) und [Firefox](https://addons.mozilla.org/en-US/firefox/addon/owncast-extension/).
+  </TabItem>
+
+<TabItem value="fediverse" label="Fediverse">
+  Die sozialen Funktionen des Fediverse bieten eine integrierte Unterstützung, um Ihre Follower zu benachrichtigen, wenn Sie live gehen. [Besuchen Sie die Dokumentation](/docs/social/) für weitere Informationen.
+</TabItem>
+
+  <TabItem value="discord" label="Discord">
+        Sie können einen Discord-Kanal benachrichtigen, wenn Ihr Stream live geht. Besuchen Sie die [Discord-Dokumentation](https://support.discord.com/hc/en-us/articles/228383668) für vollständige Anweisungen.
+
+    * Besuchen Sie Bearbeiten Kanal / Integrationen auf Ihrem Discord-Kanal.
+    * Erstellen Sie einen Webhook.
+    * Geben Sie die URL in der Owncast-Konfiguration an.
+  </TabItem>
+
+<TabItem value="benutzerdefiniert" label="Benutzerdefiniert">
+  Sie können Ihre eigenen benutzerdefinierten Benachrichtigungen mithilfe von [Webhooks](/docs/api/webhooks) erstellen. Damit können Sie Benachrichtigungen an jeden Dienst senden, indem Sie Ihre eigene Integration schreiben.
+</TabItem>
+
+</Tabs>

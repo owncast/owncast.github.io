@@ -1,0 +1,176 @@
+---
+title: Empaquetado y publicación
+description: Agrupa tu plugin en un .ocpkg, instálalo en un servidor y anúncialo en el directorio público de plugins.
+sidebar_position: 10
+sidebar_label: Empaquetado y publicación
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - plugins
+  - empaquetado
+  - distribución
+  - instalar
+  - icono
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+El formato de distribución de un plugin es el archivo `.ocpkg`: un solo paquete que contiene tu `plugin.manifest.json`, tu código de plugin, tus directorios `public/` y `assets/`, y opcionalmente un icono y un documento de instrucciones. Ese único archivo es todo lo que un administrador de servidor necesita para instalar tu plugin.
+
+## Construyendo el paquete
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```sh
+npm run package
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```sh
+owncast-plugin-py package my-plugin
+```
+
+</TabItem>
+</Tabs>
+
+De cualquier forma, la construcción agrupa tu plugin junto con tus directorios `public/` y `assets/` en un solo `\<your-slug>.ocpkg` en el directorio raíz del proyecto.
+
+El archivo es autónomo. Compártelo como quieras:
+
+* Adjúntalo a un lanzamiento de GitHub
+* Aloja en tu propio servidor
+* Entregalo a un administrador por chat o email
+
+## Icono del plugin
+
+Coloca un `icon.png` en la raíz de tu proyecto (junto a `plugin.manifest.json`) y el empaquetador lo agrupa automáticamente en el `.ocpkg`. La UI del administrador lo obtiene de `/api/plugins/\<your-slug>/icon` y lo muestra en la lista de plugins y en la entrada de la barra lateral para cualquier plugin que incluya una página de administración.
+
+```text
+my-plugin/
+├── plugin.manifest.json
+├── icon.png              empaquetado automáticamente
+├── src/
+├── public/
+└── assets/
+```
+
+Notas:
+
+* No se requieren permisos. El host sirve el icono directamente. No necesitas `http.serve`.
+* El icono es distinto de los iconos de los botones de acción, que se encuentran en `public/` (servidos por web) y son referenciados por el campo `icon` de una entrada `actions[]`. Consulta [UI: Botones de acción](/docs/plugins/ui#action-buttons).
+
+## Instrucciones
+
+Coloca un `INSTRUCTIONS.md` en la raíz de tu proyecto (junto a `plugin.manifest.json`) y el empaquetador lo agrupa automáticamente en el `.ocpkg`. La UI del administrador lo obtiene de `/api/admin/plugins/\<your-slug>/instructions` y lo presenta como markdown en una pestaña **Instrucciones** en la página de detalles del plugin.
+
+```text
+my-plugin/
+├── plugin.manifest.json
+├── INSTRUCTIONS.md          empaquetado automáticamente
+├── src/
+├── public/
+└── assets/
+```
+
+Utiliza esto para pasos de configuración, notas de configuración, qué permisos se solicitan y por qué, y cualquier otra cosa que un administrador necesita saber después de instalar. Los plugins sin uno no muestran pestaña de Instrucciones. El nombre del archivo es fijo (`INSTRUCTIONS.md`). No se requiere permiso de `http.serve`.
+
+El archivo es para administradores, así que escríbelo para el streamer que instaló tu plugin y está abriendo la UI de administración para averiguar cómo usarlo. Notas para desarrolladores en estilo README pertenecen en el README de tu repositorio.
+
+## Qué hay dentro de un `.ocpkg`
+
+* Tu `plugin.manifest.json`
+* Tu código de plugin
+* `icon.png` si proporcionaste uno
+* `INSTRUCTIONS.md` si proporcionaste uno
+* El contenido de tu directorio `public/` si tienes uno (servido por web en `/plugins/\<slug>/`)
+* El contenido de tu directorio `assets/` si tienes uno (acceso del host para campos de manifiesto que integran contenido)
+
+Sin entradas de construcción: `node_modules`, `package.json`, `pyproject.toml`, o tu código fuente `.js`/`.ts`/`.py`. Esos producen el paquete. No se envían en él. El administrador que instala tu plugin nunca los ve.
+
+## Instalando en un servidor
+
+En el administrador de Owncast, abre **Plugins** en la barra lateral y haz clic en **Subir plugin**. Selecciona tu `.ocpkg` y el servidor lo instala en su lugar. El nuevo plugin aparece en la lista de inmediato.
+
+<img src="/docs/img/plugins-installed-list.png" alt="La página de Plugins en el administrador, que lista los plugins instalados con sus permisos solicitados, estado, un interruptor de habilitación, y botones de Subir plugin y Configurar" width="80%" />
+
+Si la UI del administrador no es una opción (automatización, sin acceso al navegador, despliegues por script) también puedes colocar el `.ocpkg` directamente en el directorio `data/plugins/` del servidor:
+
+```sh
+scp my-plugin.ocpkg user@your-owncast-server:/path/to/owncast/data/plugins/
+```
+
+El servidor escanea este directorio periódicamente. El plugin aparece en la página de **Plugins** del administrador en un par de segundos.
+
+En ambos casos, termina la instalación en el administrador:
+
+1. Haz clic en tu plugin en la lista para abrir su vista de detalle.
+2. Revisa la pestaña **Permisos**. Estos son exactamente los que tu manifiesto declaró.
+3. Activa **Habilitado** para cargar el plugin. La primera habilitación también captura el conjunto de permisos aprobados.
+
+## Actualizando un plugin instalado
+
+Para enviar una actualización, sube el nuevo `.ocpkg` desde la página de **Plugins** del administrador (o sobrescribe el archivo en `data/plugins/` directamente). El nuevo contenido reemplaza la entrada existente bajo el mismo nombre de plugin. Para forzar una recarga inmediata de un plugin habilitado, haz clic en **Recargar** en su fila.
+
+### Qué sucede cuando cambian los permisos
+
+* Has eliminado permisos. Silencioso. El plugin se recarga con el conjunto más pequeño.
+* Has añadido permisos. Owncast desactiva automáticamente el plugin y muestra una etiqueta "necesita reaprobación" en la lista de plugins. El administrador revisa los nuevos permisos en la pestaña **Permisos** (nuevas entradas están etiquetadas) y hace clic en **Aprobar** para aceptar el conjunto ampliado y reactivar el plugin.
+
+Las capacidades efectivas de un plugin nunca crecen sin el consentimiento explícito del administrador, incluso a través de actualizaciones.
+
+### Aumentando la versión
+
+Aumenta `version` en `plugin.manifest.json` cada vez que realices un lanzamiento. El host aplica una coincidencia de versión del manifiesto en tiempo de carga. Si cambias la versión en el manifiesto sin reconstruir (así que la versión reportada del tiempo de ejecución aún tiene el antiguo número), la carga falla con un error claro.
+
+La versionización es para humanos. Se recomienda Semver pero no se aplica obligatoriamente.
+
+## Desactivando y desinstalando
+
+* Desactivar mantiene el plugin instalado pero detiene su carga. La elección del administrador se persiste a través de reinicios. Activa **Habilitado** nuevamente para cargarlo de nuevo.
+* Desinstalar elimina el plugin por completo. Desde la página de **Plugins** del administrador haz clic en el icono de papelera en la fila del plugin y confirma. (También puedes eliminar el `.ocpkg` de `data/plugins/` directamente, y el próximo escaneo recoge la eliminación.)
+
+## Lista de verificación de distribución
+
+Antes de publicar un plugin:
+
+* El manifiesto declara solo lo que usas. Elimina permisos no usados. Cuanto más estrecho sea tu pedido, más fácil será la decisión de confianza del administrador.
+* `description` está completado. Los administradores lo ven en la lista de plugins y durante la instalación. Una oración que cubre lo que hace el plugin.
+* `version` refleja lo que estás enviando. Se acepta semver como convencional.
+* El README en tu repositorio explica lo que hace, qué permisos solicita y por qué, y qué configurar (variables de entorno, configuración de página de administración, etc.).
+* Las pruebas pasan. El comando de prueba de tu SDK debería estar en verde.
+* El icono está incluido si tienes uno.
+* Un `INSTRUCTIONS.md` se envía con cualquier cosa que el administrador necesita saber después de la instalación: pasos de configuración, notas de configuración, por qué se solicita cada permiso. Los plugins con comportamiento no obvio o configuración requerida deberían incluir uno. Plugins triviales (un manejador de chat hello-world) no lo necesitan.
+
+## Publicando en el directorio
+
+Listar tu plugin en el directorio público en [owncast.directory](https://owncast.directory) es opcional. Un `.ocpkg` es autónomo, así que siempre puedes entregárselo directamente a un administrador. El directorio solo hace que tu plugin sea descubrible y le da a los administradores instalación y actualizaciones con un solo clic.
+
+Algunos campos del manifiesto dan forma a tu listado, así que complétalos primero: `name` (el nombre para mostrar), `version` (aumenta por cada actualización), `slug` (tu identificador permanente, consulta [Manifest](/docs/plugins/manifest#name-and-slug)), `description` (el resumen en una línea en tu tarjeta), `permissions` (mantenlos mínimos, los administradores los revisan), y un opcional `icon.png`.
+
+### Iniciar sesión
+
+El directorio utiliza inicio de sesión sin contraseña, con enlace mágico. Ve a [owncast.directory/plugins/login](https://owncast.directory/plugins/login), ingresa tu email y haz clic en el enlace en tu bandeja de entrada. Tu email es tu identidad de autor, vinculada a los plugins que posees. En tu página de cuenta puedes establecer un nombre para mostrar opcional que aparecerá como autor en tus listados.
+
+### Enviar
+
+Ve a [owncast.directory/plugins/submit](https://owncast.directory/plugins/submit) y sube tu `.ocpkg`. El directorio lee tu manifiesto, valida el paquete y publica la versión. La presentación se realiza a través del sitio web, sin un paso de publicación por línea de comandos hoy en día. El formulario también acepta algunos extras opcionales: una imagen de vista previa (una captura de pantalla, PNG o JPEG de hasta 5 MB), un enlace a la página principal, etiquetas de navegación y un resumen que reemplaza la descripción del manifiesto.
+
+### Propiedad y actualizaciones
+
+* El primer presentador es el propietario del slug. Cuando publicas un slug por primera vez, está vinculado a tu cuenta y nadie más puede publicarlo. Una presentación para un slug de otro autor es rechazada.
+* Cada versión se publica una vez. Para enviar una actualización, aumenta `version` en tu manifiesto, vuelve a empaquetar y presenta nuevamente.
+* Gestiona tus plugins en [owncast.directory/plugins/account](https://owncast.directory/plugins/account), donde puedes ver todo lo que has publicado y eliminar un listado.
+
+### Qué ven los operadores
+
+En la vista de Navegar del directorio, tu plugin muestra su nombre, autor, descripción, icono, última versión e imagen de vista previa si has subido una. Cuando un administrador lo instala, Owncast muestra los permisos que tu manifiesto solicita, presenta tu `INSTRUCTIONS.md` y lista cualquier comando de chat que registres. Esa metadata es lo que un operador utiliza para decidir si confiar y habilitar tu plugin, así que escríbelo teniendo en cuenta a ese lector.
+
+## Dónde ir a continuación
+
+* [Referencia del manifiesto](/docs/plugins/manifest) para la lista completa de campos del manifiesto.
+* [Permisos](/docs/plugins/permissions) para el modelo de confianza y la lista completa de permisos.
+* Plugins de ejemplo: [examples/js](https://github.com/owncast/plugin-sdk/tree/main/examples/js) · [examples/python](https://github.com/owncast/plugin-sdk/tree/main/examples/python).

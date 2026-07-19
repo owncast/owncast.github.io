@@ -1,0 +1,27 @@
+---
+title: La transmisión se está buffering para aquellos con conexiones móviles o redes lentas
+description: ""
+tags:
+  - buffering
+  - lento
+  - móvil
+---
+
+import { IncludeMarkdown } from "@site/src/components";
+import AddLowerQualityOutputs from "../shared/add-lower-quality-outputs.md";
+import ReduceVideoQuality from "../shared/reduce-video-quality.md";
+
+Si algunas personas están experimentando tu transmisión sin problemas, pero otras no pueden disfrutar de tu transmisión en la calidad o calidades que has configurado debido a su propia conexión a internet o circunstancias móviles, su red o [ubicación](/docs/troubleshoot/buffering/geo) pueden ser los culpables. En lugar de intentar acelerar algo de tu lado, necesitas ofrecer opciones adicionales que puedan descargar más rápido.
+
+Después de leer a continuación, también puedes encontrar consejos útiles al navegar por la [Guía de Solución de Problemas de OBS](https://github.com/obsproject/obs-studio/wiki/Stream-Buffering-Issues), incluso si no utilizas OBS.
+
+## Agrega calidades de salida adicionales más bajas
+
+<IncludeMarkdown>
+  <AddLowerQualityOutputs />
+  <ReduceVideoQuality />
+</IncludeMarkdown>
+
+## El espectador cambiará entre calidades según sea necesario
+
+Usando una tecnología llamada Transmisión de Bitrate Adaptativa, el espectador cambiará transparentemente entre diferentes calidades de video según sea necesario. Lee más sobre cómo esto y otras piezas de video funcionan leyendo nuestro más detallado [Documento de Video](/docs/video).

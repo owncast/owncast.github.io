@@ -1,0 +1,35 @@
+---
+title: Konfigurieren Sie Ihren Stream-Schlüssel und den ersten Stream
+description: Erfahren Sie, wie Sie sich anmelden, Ihren Stream-Schlüssel ändern und Ihren ersten Stream mit Owncast starten.
+sidebar_position: 200
+sidebar_label: Konfigurieren Sie Ihren Stream-Schlüssel und den ersten Stream
+---
+
+Jede Software, die Sie bereits für das Live-Streaming verwenden, ist wahrscheinlich mit Owncast kompatibel. Besuchen Sie unsere [Broadcasting-Software](/docs/broadcasting)-Seite, um einige spezifische Softwareteile und deren Konfiguration zu sehen.
+
+import { IncludeMarkdown } from "@site/src/components";
+import AdminLogin from "../shared/admin-login.md";
+
+<IncludeMarkdown>
+  <AdminLogin />
+</IncludeMarkdown>
+
+## Stream-Schlüssel
+
+Um mit dem Streaming zu beginnen, benötigen Sie zwei Dinge: die RTMP-URL Ihres Owncast-Servers (`rtmp://yourserver/live`) und einen Stream-Schlüssel. Der Stream-Schlüssel und das Admin-Passwort stehen standardmäßig auf `abc123`, sind jedoch separate Einstellungen. Der Stream-Schlüssel ermöglicht es Ihrer Broadcasting-Software, Video zu veröffentlichen. Das Admin-Passwort ermöglicht den Zugriff auf das Admin-Dashboard. Ändern Sie beide so schnell wie möglich.
+
+Das Admin-Passwort und die Stream-Schlüssel werden unabhängig verwaltet, sodass Sie so viele Stream-Schlüssel hinzufügen können, wie Sie möchten. Die meisten Menschen benötigen nur einen, aber mehrere Schlüssel sind in einigen Setups nützlich, zum Beispiel um einem Co-Host seinen eigenen Schlüssel zu geben, den Sie später widerrufen können.
+
+Sie fügen Stream-Schlüssel auf der Admin-Server-Einstellungsseite hinzu und entfernen sie.
+
+<img src="/docs/img/admin-stream-keys.png" alt="Die Registerkarte für die Stream-Schlüssel auf der Seite der Servereinstellungen, die den Standard-Stream-Schlüssel und einen Button zeigt, um weitere hinzuzufügen" width="80%" />
+
+## Was als Nächstes konfiguriert werden soll
+
+Einige häufige Elemente, die viele Leute nach der Installation von Owncast aktualisieren, sind:
+
+* Ihr Webseitenname, Logo, Beschreibung und externe Links, die auf der [Webseite](/docs/configuration/website) angezeigt werden.
+* Ihr **Stream-Schlüssel**, den Ihre Broadcasting-Software zur Veröffentlichung von Videos verwendet, und Ihr **Admin-Passwort**, mit dem Sie sich im Admin-Dashboard anmelden.
+* Aktivieren Sie Ihren Stream, damit er im [Owncast-Verzeichnis](/docs/directory) angezeigt wird.
+
+Erfahren Sie mehr darüber, [was Sie konfigurieren können und wie](/docs/configuration).

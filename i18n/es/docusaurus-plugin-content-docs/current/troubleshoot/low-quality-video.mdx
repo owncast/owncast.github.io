@@ -1,0 +1,33 @@
+---
+title: Video de baja calidad
+description: Ajusta la configuración tanto en tu software de transmisión como en tu servidor para ajustar la calidad del video de tu transmisión.
+tags:
+  - video
+  - calidad
+unlisted: true
+related:
+  excludeFromAll: true
+---
+
+import { IncludeMarkdown } from "@site/src/components";
+import LowQualityVideo from "./shared/low-quality-video.md";
+
+## Asegúrate de que estás transmitiendo lo que esperas
+
+<IncludeMarkdown>
+  <LowQualityVideo />
+</IncludeMarkdown>
+
+## Aumenta la tasa de bits configurada en tu servidor
+
+La tasa de bits de transmisión de Owncast es la cantidad de datos que tu servidor Owncast envía a los espectadores cuando transmites. Aumentar tu tasa de bits puede mejorar la calidad de tu video, pero solo hasta cierto punto. Cuanto más movimiento y mayor velocidad de fotogramas ofrezcas, mayor será la tasa de bits que probablemente necesitarás ofrecer para no ver "artefactos" visibles y bloqueos en tu video. Las transmisiones con menos movimiento, resoluciones más bajas o una velocidad de fotogramas más baja pueden funcionar con una tasa de bits más baja, lo que facilita tu transmisión y la hace más fácil de consumir para tus espectadores.
+
+Si estás aumentando la tasa de bits dentro de Owncast, asegúrate de que estás transmitiendo al menos esa tasa de bits desde tu software de transmisión también. Nunca hay una razón para ofrecer una configuración de tasa de bits en tu servidor Owncast que sea más alta que la que estás transmitiendo desde tu software de transmisión.
+
+**Desventaja**: Una tasa de bits más alta consume más ancho de banda de internet disponible y crea segmentos de video más grandes, lo que hace que tarde más en descargarse para los espectadores, lo que podría llevar a buffering si no pueden descargar el video a tiempo. Piensa en ofrecer opciones de menor calidad para los espectadores también. Aumentar tu tasa de bits también aumenta la demanda sobre la conexión a internet de tu servidor Owncast, así que asegúrate de que esto no sea un cuello de botella. Habla con tus espectadores y prueba con [HLS Analyzer](https://hlsanalyzer.com) al hacer cambios.
+
+## Dedica más recursos en tu servidor para aumentar la calidad visual
+
+También puede que quieras aumentar la cantidad de CPU (o GPU si estás usando una configuración acelerada por hardware) que se está utilizando para procesar el video en tu servidor Owncast. A medida que bajes, verás visiblemente cómo la calidad se degrada.
+
+**Desventaja**: Ten en cuenta que al aumentar la cantidad de recursos de hardware dedicados al procesamiento de tu video, este, como era de esperar, aumentará el hardware utilizado. Deberías estar atento a la utilización para asegurarte de que tu servidor pueda manejar la configuración actualizada.

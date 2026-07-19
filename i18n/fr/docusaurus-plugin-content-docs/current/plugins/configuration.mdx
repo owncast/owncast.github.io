@@ -1,0 +1,89 @@
+---
+title: Configuration
+description: Laissez les administrateurs configurer votre plugin avec des paramètres typés. Owncast rend le formulaire, vous lisez les valeurs à l'exécution avec owncast.config.get.
+sidebar_position: 7
+sidebar_label: Configuration
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - plugins
+  - configuration
+  - administrateur
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Owncast donne aux plugins deux façons de permettre à un administrateur de changer les paramètres. Déclarez un bloc `config` dans le manifeste et Owncast crée un formulaire typé pour vous, sans HTML d'administrateur et sans code à écrire pour enregistrer ou charger. Ou enregistrez une page `admin` et servez votre propre HTML.
+
+Utilisez le bloc `config` du manifeste pour des commandes plates et typées : chaînes, nombres et interrupteurs. Ne cherchez une [page d'administration personnalisée](/docs/plugins/ui#admin-pages) que lorsque vous avez besoin d'une interface utilisateur que le formulaire automatique ne peut pas exprimer, comme une mise en page groupée, un aperçu en direct ou un bouton d'action qui appelle votre propre API. Les deux peuvent coexister. Un plugin peut avoir à la fois l'onglet Paramètres du formulaire automatique et une ou plusieurs pages d'administration personnalisées.
+
+## Déclarez les paramètres dans le manifeste
+
+Chaque entrée sous `config` a un `type`, un `default`, et une `description` :
+
+```json
+{
+  "config": {
+    "greeting": { "type": "string", "default": "welcome!", "description": "Message de première connexion" },
+    "cooldownMs": { "type": "number", "default": 2000, "description": "Délai de commande par utilisateur" },
+    "modOnly": { "type": "boolean", "default": false, "description": "Restreindre aux modérateurs" }
+  }
+}
+```
+
+| Champs        | Notes                                                                                                                                                                 |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`        | Un des `string`, `number`, ou `boolean`. Toute autre valeur est acceptée mais renvoie un champ de texte brut et aucune vérification de type lors de l'enregistrement. |
+| `default`     | La valeur que `config.get` renvoie jusqu'à ce qu'un administrateur enregistre un remplacement. Son type JSON doit correspondre au `type`.                             |
+| `description` | L'étiquette affichée à côté du champ dans le formulaire administrateur. Revertit au nom de la clé lorsqu'il est vide.                                                 |
+
+Les noms de clés ne peuvent pas commencer par `__`. Ce préfixe est réservé pour l'état par instance injecté par l'hôte, et un plugin qui déclare une clé comme `__internal` échoue à se charger.
+
+## Ce que l'administrateur voit
+
+Un plugin qui déclare un bloc `config` obtient un onglet **Paramètres** sur sa page de détail sous Admin → Plugins. Owncast construit le formulaire à partir du schéma :
+
+* `string` rend un champ de texte, `number` un champ numérique, et `boolean` un commutateur.
+* La `description` est l'étiquette du champ.
+* Le `default` est affiché jusqu'à ce qu'un administrateur enregistre un remplacement.
+* Une clé dont le nom ressemble à un identifiant rend un champ de mot de passe masqué. Le match est insensible à la casse et se déclenche lorsque le nom contient `secret`, `password`, `token`, `apikey`, ou `api_key`, ou est le mot isolé `key`. Ainsi, `apiKey`, `clientSecret`, `accessToken`, et `webhook_secret` sont masqués. Des noms comme `accessKey` ou `keyValue` ne le sont pas, car `key` ne correspond qu'en tant que mot entier. Nommez un champ secret `apiKey`, `api_key`, ou tout ce qui se termine en `Secret` ou `Token` si vous souhaitez qu'il soit masqué.
+
+Un plugin sans bloc `config` n'affiche aucun onglet Paramètres.
+
+## Lire les valeurs à l'exécution
+
+`owncast.config.get(key, fallback?)` renvoie le remplacement de l'administrateur lorsqu'il est défini, sinon la valeur par défaut déclarée, déjà analysée au type déclaré.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const cooldownMs = owncast.config.get("cooldownMs", 2000);
+const modOnly = owncast.config.get("modOnly", false);
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+cooldown_ms = owncast.config.get("cooldownMs", 2000)
+mod_only = owncast.config.get("modOnly", False)
+```
+
+</TabItem>
+</Tabs>
+
+Le `config.get` est ambiant, donc il n'a pas besoin de permission. Un champ `number` revient comme un nombre et un `boolean` comme un booléen, vous n'analysez donc pas vous-même les chaînes. Pour une clé inconnue, ou une clé déclarée qui n'a ni défaut ni remplacement enregistré, elle renvoie `fallback` (`undefined` en JavaScript et `None` en Python lorsque vous ne passez rien). Passez un fallback que vous pouvez utiliser.
+
+La signature complète se trouve dans la [référence des APIs](/docs/plugins/apis#config).
+
+## Validation et stockage
+
+Lorsque l'administrateur enregistre le formulaire, Owncast vérifie chaque valeur par rapport au schéma avant de l'enregistrer :
+
+* Une clé non déclarée dans le manifeste est rejetée avec `400 clé de configuration inconnue`.
+* Un champ `string` doit recevoir une chaîne, un `number` un nombre, et un `boolean` un booléen. Un désaccord de type est rejeté. Tout autre `type` déclaré est stocké tel quel.
+* Le corps de la requête est limité à 1 Mo.
+
+Les remplacements persistent dans le propre magasin clé/valeur du plugin sous la clé réservée `owncast.config`, namespace par le `slug` du plugin. D'autres plugins ne peuvent pas les lire, et ils survivent aux redémarrages et réinstallations. Changer le `slug` après publication commence un nouveau magasin, donc les remplacements enregistrés reviennent à leurs valeurs par défaut, la même règle s'appliquant au reste de vos [données KV](/docs/plugins/apis#storage).

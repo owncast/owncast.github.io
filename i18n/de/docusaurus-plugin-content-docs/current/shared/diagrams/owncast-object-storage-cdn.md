@@ -5,43 +5,43 @@ related:
 ---
 
 ```mermaid
-flowchart LR
-    subgraph Broadcasting
-        OBS[OBS / Broadcasting Software]
-    end
+flussdiagramm LR
+    Untergraph Broadcasting
+        OBS[OBS / Broadcast-Software]
+    Ende
 
-    subgraph Owncast[Owncast Server]
-        direction TB
-        RTMP[RTMP Ingest]
-        Encoder[Video Encoder]
-        WebServer[Web Server]
+    Untergraph Owncast[Owncast-Server]
+        Richtung TB
+        RTMP[RTMP-Zugriff]
+        Encoder[Video-Encoder]
+        WebServer[Webserver]
         RTMP --> Encoder
-    end
+    Ende
 
-    subgraph Storage[Object Storage]
-        S3[Storage Provider]
-    end
+    Untergraph Storage[Objekt-Speicher]
+        S3[Speicheranbieter]
+    Ende
 
-    subgraph CDN[CDN Network]
-        direction TB
-        Edge1[Edge Node<br/>North America]
-        Edge2[Edge Node<br/>Europe]
-        Edge3[Edge Node<br/>Asia]
-    end
+    Untergraph CDN[CDN-Netzwerk]
+        Richtung TB
+        Edge1[Edge-Knoten<br/>Nordamerika]
+        Edge2[Edge-Knoten<br/>Europa]
+        Edge3[Edge-Knoten<br/>Asien]
+    Ende
 
-    subgraph Viewers[Video Clients]
-        direction TB
-        US[US Viewer]
-        EU[EU Viewer]
-        AS[Asia Viewer]
-    end
+    Untergraph Viewers[Video-Clients]
+        Richtung TB
+        US[US-Zuschauer]
+        EU[EU-Zuschauer]
+        AS[Asien-Zuschauer]
+    Ende
 
-    OBS -->|RTMP Stream| RTMP
-    Encoder -->|Upload HLS Segments| S3
-    S3 -->|Origin| Edge1
-    S3 -->|Origin| Edge2
-    S3 -->|Origin| Edge3
-    Edge1 -->|HLS Video| US
-    Edge2 -->|HLS Video| EU
-    Edge3 -->|HLS Video| AS
+    OBS -->|RTMP-Stream| RTMP
+    Encoder -->|Upload HLS-Segmente| S3
+    S3 -->|Ursprung| Edge1
+    S3 -->|Ursprung| Edge2
+    S3 -->|Ursprung| Edge3
+    Edge1 -->|HLS-Video| US
+    Edge2 -->|HLS-Video| EU
+    Edge3 -->|HLS-Video| AS
 ```

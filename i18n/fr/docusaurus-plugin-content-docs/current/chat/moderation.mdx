@@ -1,0 +1,82 @@
+---
+title: Modération de chat
+description: Ajoutez des modérateurs, supprimez des messages et des utilisateurs de votre chat.
+sidebar_position: 300
+sidebar_label: Modération de chat
+tags:
+  - modération
+  - chat
+  - bannissements
+  - bloquer
+  - adresse IP
+---
+
+En utilisant soit l'administration Owncast, soit les contrôles de modération en ligne dans votre chat, vous pouvez supprimer des messages individuels ou des utilisateurs entiers.
+
+## Modérateurs de chat
+
+Les modérateurs n'ont pas accès à l'administration et existent pour vous aider à garder votre chat en ordre.
+
+Dans votre administration, visitez `Chat & Utilisateurs` > `Utilisateurs` pour trouver l'utilisateur auquel vous souhaitez accorder des privilèges de modérateur.
+Affichez leurs détails et vous pouvez les ajouter en tant que modérateur.
+
+Par défaut, il n'y a pas de modérateurs, donc au minimum, vous voudrez peut-être faire de vous-même un modérateur.
+
+Les modérateurs seront informés lorsqu'ils deviendront un modérateur et auront une icône de modérateur à côté de leur nom dans le chat que tout le monde peut voir.
+
+## Comment modérer
+
+Une fois que vous devenez modérateur, vous pouvez survoler un message de chat et ouvrir un menu où vous pouvez supprimer un message unique ou interdire complètement l'utilisateur du chat.
+
+En utilisant l'action "Plus d'infos", vous pouvez obtenir un aperçu rapide de l'utilisateur, comme la date à laquelle il a rejoint pour la première fois. Cette information est utile lorsque des trolls essaient d'imiter quelqu'un.
+
+<img src="/images/moderator-menu.png" alt="Le menu du modérateur qui apparaît lorsque vous survolez un message de chat, avec des options pour supprimer le message, interdire l'utilisateur et voir plus d'infos à leur sujet" width="50%" />
+
+## Suppression des messages de chat en utilisant l'administration
+
+Visitez `Chat & Utilisateurs` > `Messages` dans votre administration pour effectuer des tâches de modération des messages de chat.
+
+### Message unique
+
+Vous pouvez basculer la visibilité d'un message unique dans votre chat en cliquant sur le bouton de basculement de visibilité (qui ressemble à un œil) à l'extrémité droite de chaque message.
+
+![L'onglet Messages de l'administration, avec le bouton de visibilité œil à droite d'un message de chat](/docs/img/chat-moderation-hide-message.png)
+
+### Changement de visibilité en masse
+
+![L'onglet Messages avec plusieurs messages sélectionnés par case à cocher et les boutons montrer et cacher au-dessus de la liste](/docs/img/chat-moderation-bulk-hide-messages.png)
+
+Alternativement, vous pouvez sélectionner, via des cases à cocher, les messages que vous souhaitez modifier tous en même temps, puis appuyer sur les boutons *"montrer"* ou *"cacher"*.
+
+## Interdiction des utilisateurs de votre chat en utilisant l'administration
+
+Visitez `Chat & Utilisateurs` > `Utilisateurs` dans votre administration pour effectuer des tâches de modération des utilisateurs.
+
+Interdire un utilisateur le déconnectera immédiatement du chat et cachera l'interface de chat de son navigateur. Cela supprimera également tous les messages précédents envoyés par cet utilisateur du fil de chat.
+
+Vous pouvez débanir un utilisateur précédemment interdit, mais notez que cela ne restaurera pas ces messages supprimés. Vous pouvez les restaurer manuellement si nécessaire.
+
+![L'onglet Utilisateurs de l'administration, montrant une ligne d'utilisateur avec l'option d'interdire l'utilisateur](/docs/img/user-moderation-ban-user.png)
+
+Alternativement, vous pouvez cliquer sur le nom d'affichage de l'utilisateur et ouvrir le modal d'informations utilisateur et les interdire à partir de là.
+
+![Le modal d'informations utilisateur ouvert à partir d'un nom d'affichage, avec un bouton pour interdire l'utilisateur](/docs/img/user-moderation-ban-user-modal.png)
+
+## Blocage d'adresse IP
+
+Lors de l'interdiction d'un utilisateur, Owncast bloquera automatiquement son adresse IP connue. Bien que cela puisse dissuader la plupart des trolls, comme pour toute autre chose, il est possible d'y échapper.
+
+* Owncast utilise l'adresse IP telle que fournie dans l'en-tête `x-forwarded-for` si elle est fournie, ce qui signifie qu'il peut être possible pour quelqu'un d'écraser cette valeur avec une fausse adresse. Si cela vous préoccupe, assurez-vous que votre proxy inverse est configuré pour définir explicitement la valeur correcte de l'en-tête.
+* Les VPN sont une réalité. En utilisant un VPN, il est trivial d'échapper à l'interdiction par adresse IP.
+
+Tout cela pour dire : Cette fonctionnalité aidera à réduire les abus, mais ne garantit en aucun cas qu'elle éloignera les pires des pires. La modération est toujours la responsabilité de chaque flux individuel.
+
+Une liste des adresses IP bloquées peut être consultée dans l'interface Admin Chat Utilisateurs et peut être débanie via la même interface.
+
+## Filtre à gros mots / insultes
+
+Un filtre à gros mots de base peut être activé dans les paramètres de chat. Cela rejettera les messages qui correspondent à une liste interne.
+
+## Limiteur de taux
+
+Par défaut, il y a un limiteur de taux intégré qui tentera d'empêcher les utilisateurs d'envoyer trop de messages dans un court laps de temps. C'est pour aider à prévenir le spam et les abus. Le limiteur de taux peut être désactivé dans les paramètres de chat.

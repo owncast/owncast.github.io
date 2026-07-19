@@ -1,0 +1,92 @@
+---
+title: Encodage et codecs accélérés par le matériel
+description: Si vous avez un accès direct à un matériel spécifique, vous pourrez peut-être augmenter les performances de votre serveur en utilisant un codec compatible.
+sidebar_position: 400
+sidebar_label: Encodage et codecs accélérés par le matériel
+---
+
+## Exigences
+
+**Les quatre conditions suivantes doivent être vraies pour prendre en charge l'encodage accéléré par le matériel avec Owncast.**
+
+1. Vous **ne** fonctionnez pas sur un VPS fourni par un fournisseur d'hébergement, car les serveurs virtuels partagés ne permettent pas d'accès direct au matériel.
+2. Vous disposez d'un matériel compatible et y avez accès directement.
+3. Vous avez installé et configuré tous les pilotes et bibliothèques nécessaires pour tirer parti de votre matériel.
+4. Vous avez une copie de `ffmpeg` de version 4.1.5 ou supérieure spécifiquement construite pour utiliser ces pilotes et bibliothèques.
+
+## Choses à garder à l'esprit
+
+1. La plupart des gens ne pourront pas en profiter à moins que vous n'exécutiez votre propre matériel.
+2. Ce n'est pas parce qu'un codec accéléré par le matériel spécifique s'affiche dans l'administration d'Owncast **que cela signifie que votre machine est configurée pour le prendre en charge**. Cela signifie simplement qu'Owncast pense que ce codec est disponible.
+3. Très peu de ce qui est requis pour faire fonctionner votre matériel a quelque chose à voir avec Owncast. Toutes questions que vous avez au sujet de votre matériel particulier doivent être adressées à votre fabricant de matériel ou à celui qui fournit les pilotes et bibliothèques pour l'utiliser. Il y a probablement déjà beaucoup d'informations en ligne, alors veuillez faire vos recherches.
+
+## Matériel compatible
+
+### Graphiques Intel
+
+Si vous avez des graphiques intégrés Intel, vous pouvez peut-être les utiliser via [VA-API](#va-api) ou [Quicksync](#intel-quicksync).
+
+### GPU NVIDIA
+
+Les GPU NVIDIA sont équipés d'une unité d'encodage matériel intégrée souvent appelée NVENC. Séparément des cœurs CUDA, NVENC exécute des charges d'encodage sans ralentir l'exécution des graphismes ou des charges CUDA fonctionnant en même temps.
+
+La plupart des GPU NVIDIA modernes sont livrés avec NVENC. Consultez le [NVIDIA GPU Support Matrix](https://developer.nvidia.com/video-encode-and-decode-gpu-support-matrix-new#Encoder) pour confirmer que votre GPU apparaît dans la liste "encodeur".
+
+### GPU AMD
+
+[VA-API](#va-api) est pris en charge sur les GPU AMD et ATI par le [libva-mesa-driver](https://wiki.archlinux.org/title/Hardware_video_acceleration).
+
+## Codecs/bibliothèques compatibles
+
+### Intel QuickSync
+
+"Intel Quick Sync Video" est le nom marketing des fonctionnalités de décodage et d'encodage vidéo matériel sur les processeurs Intel avec graphiques intégrés. Les processeurs avec un iGPU Intel peuvent être utilisés pour faire de l'encodage vidéo matériel tant que vous avez `libva` installé et que l'iGPU des processeurs prend en charge le codec vidéo et la résolution que vous souhaitez utiliser.
+
+Suivez les instructions sur le site d'Intel concernant [comment configurer QuickSync sur Linux](https://www.intel.com/content/www/us/en/architecture-and-technology/quick-sync-video/quick-sync-video-installation.html).
+
+Liens :
+
+* [Configurer QuickSync sur Ubuntu](https://wiki.ubuntu.com/IntelQuickSyncVideo)
+* [Graphiques Intel chez Linux Reviews](https://linuxreviews.org/Intel_graphics)
+
+### VA-API
+
+VA-API (API d'accélération vidéo) est une couche pour prendre en charge l'encodage accéléré par le matériel sur Linux. Vous devez avoir la bibliothèque `libva` installée pour que cela fonctionne. VA-API n'est pas compatible avec les chipsets ARM.
+
+ffmpeg 5 et versions ultérieures sont pris en charge avec VA-API.
+
+Liens :
+
+* [VA-API chez Linux Reviews](https://linuxreviews.org/VAAPI)
+* [Pilote multimédia Intel pour VA-API](https://github.com/intel/media-driver/)
+
+### Encodeur NVIDIA (nvenc)
+
+Suivez les instructions sur le [guide de transcodage ffmpeg de NVIDIA](https://developer.nvidia.com/blog/nvidia-ffmpeg-transcoding-guide/) pour installer tous les pilotes et bibliothèques nécessaires. Cela nécessite d'installer un pilote à partir du [site de NVIDIA](https://www.nvidia.com/en-us/drivers/), de télécharger et d'installer le [kit d'outils CUDA](https://developer.nvidia.com/cuda-toolkit), de [télécharger nv-codec-headers](https://github.com/FFmpeg/nv-codec-headers), et de construire ffmpeg. Faites défiler jusqu'à la section intitulée *Transcodage accéléré par le matériel avec FFmpeg* dans le [guide de transcodage NVIDIA](https://developer.nvidia.com/blog/nvidia-ffmpeg-transcoding-guide/) pour plus d'informations.
+
+Vous pourrez peut-être trouver une version préconstruite de ffmpeg qui a le support `nvenc`, cependant cela dépasse le cadre de ce document. Vous avez toujours besoin des pilotes NVIDIA de toute façon.
+
+Liens :
+
+* [Instructions de Tal.org sur la construction de ffmpeg avec nvenc](https://www.tal.org/tutorials/ffmpeg_nvidia_encode)
+* [Script shell qui prétend automatiser le processus sur Ubuntu](https://gist.github.com/ransagy/3f6f1a9e5ede6212425f3b36b136216e)
+
+## ffmpeg
+
+Une fois que votre système est configuré pour utiliser les bons pilotes et bibliothèques requis, vous devez vous assurer que votre copie de `ffmpeg` les prend en charge.
+
+Vérifiez que vous avez ffmpeg installé d'au moins version 4.1.5.
+
+```
+$ ffmpeg -version
+ffmpeg version 6.1.1 Copyright (c) 2000-2024 les développeurs de FFmpeg
+```
+
+Vérifiez que le codec que vous espérez utiliser est activé dans votre version de ffmpeg.
+
+```
+$ ffmpeg -hide_banner -codecs | grep 264
+ DEV.LS h264                 H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10 (décoders : h264 h264_v4l2m2m h264_mmal ) (encodeurs : libx264 libx264rgb h264_omx h264_v4l2m2m h264_vaapi )
+```
+
+Si le codec que vous espérez utiliser n'est pas dans cette liste, vous devrez peut-être construire votre propre copie de ffmpeg qui le prend en charge.

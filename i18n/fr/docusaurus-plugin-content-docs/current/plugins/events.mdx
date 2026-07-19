@@ -1,0 +1,772 @@
+---
+title: Événements
+description: Chaque événement auquel votre plugin peut s'abonner (chat, flux, fediverse, filtre, HTTP, et plus), avec sa forme de charge utile.
+sidebar_position: 4
+sidebar_label: Événements
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - plugins
+  - gestionnaires
+  - événements
+  - chat
+  - fediverse
+  - filtre
+  - http
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Les plugins réagissent aux événements se produisant dans Owncast en définissant un gestionnaire pour chaque événement qui les concerne. Ne définissez que les gestionnaires que vous souhaitez : un gestionnaire manquant signifie aucune abonnement, et le SDK dérive la liste d'abonnement du manifeste en fonction des gestionnaires présents, donc il n'y a rien d'autre à synchroniser.
+
+Le code ci-dessous est présenté pour les deux SDK. Choisissez votre langue avec les onglets, et votre choix vous suit à travers la documentation. Nouvelle ici ? Voir d'abord les pages de configuration [JavaScript](/docs/plugins/sdks/javascript) ou [Python](/docs/plugins/sdks/python).
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { definePlugin, owncast, filter } = require("@owncast/plugin-sdk");
+
+module.exports = definePlugin({
+  onChatMessage(msg) {
+    /* réagir à un message de chat */
+  },
+  onStreamStarted(info) {
+    /* réagir au démarrage du flux */
+  },
+});
+```
+
+Les gestionnaires sont des méthodes sur l'objet que vous passez à `definePlugin`, nommées en camelCase (`onChatMessage`, `onStreamStarted`, …). Les champs de charge utile sont également en camelCase (`msg.user.displayName`, `msg.clientId`).
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+from owncast_plugin import plugin, owncast, filter
+
+@plugin.on_chat_message
+def handle_chat(msg):
+    # réagir à un message de chat
+    ...
+
+@plugin.on_stream_started
+def handle_live(info):
+    # réagir au démarrage du flux
+    ...
+```
+
+Les gestionnaires sont des fonctions décorées (`@plugin.on_chat_message`, `@plugin.on_stream_started`, …). Les champs de charge utile sont en snake_case (`msg.user.display_name`, `msg.client_id`). Utilisez `msg.raw` pour le dictionnaire sous-jacent.
+
+</TabItem>
+</Tabs>
+
+Les charges utiles sont montrées sous leur forme brute. Chaque SDK expose les champs de manière idiomatique : le SDK JavaScript tel quel, le SDK Python en tant qu'attributs snake_case sur le même JSON (avec le dictionnaire brut également disponible).
+
+## Événements de chat
+
+Construire un plugin axé sur le chat ? [Les plugins de chat](/docs/plugins/chat) constituent un point de départ plus convivial.
+
+### Message de chat : `chat.message.received`
+
+Se déclenche une fois par message de chat après le passage des filtres et le message étant diffusé aux spectateurs.
+
+```ts
+interface ChatMessage {
+  id: string;
+  user?: User; // identité complète de l'expéditeur (voir User ci-dessous); absente pour le rare message sans compte
+  clientId?: number; // connexion d'origine; passer aux API de réponse à des chats pour des réponses privées
+  body: string; // texte brut, non rendu en HTML
+  timestamp: string; // RFC3339Nano / ISO-8601, e.g. "2026-05-28T14:00:00.123456789Z"
+}
+```
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onChatMessage(msg) {
+    if (msg.user?.scopes?.includes("MODERATOR")) {
+      owncast.chat.send(`salut mod ${msg.user.displayName}`);
+    }
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_chat_message
+def greet_mods(msg):
+    if msg.user and "MODERATOR" in (msg.user.scopes or []):
+        owncast.chat.send(f"salut mod {msg.user.display_name}")
+```
+
+</TabItem>
+</Tabs>
+
+`user` représente l'**identité complète de l'expéditeur**, donc la clé pour chaque état utilisateur sur le stable `user.id` et la porte vers un comportement réservé aux modérateurs sur `user.scopes` (par exemple `"MODERATOR"`) plutôt que de faire correspondre le nom affiché. Pour répondre en privé à l'expéditeur, utilisez l'API de réponse au chat (voir [Owncast APIs](./apis#chat-replyto)).
+
+`timestamp` est l'heure du serveur pour le message. L'horloge du bac à sable fonctionne, mais `timestamp` est déterministe et le bon choix lors de la comparaison du temps écoulé entre les événements ou lors d'assertions dans les tests.
+
+Aucune permission requise pour s'abonner.
+
+> **Les anciens hôtes** ont délivré `user` en tant que chaîne de nom d'affichage simple plutôt qu'en tant qu'objet d'identité. Si vous supportez des hôtes qui datent de l'envoi de la charge d'identité, lisez cela de manière défensive. Consultez votre page SDK pour l'idiome.
+
+### Utilisateur de chat rejoint / parti : `chat.user.joined`, `chat.user.parted`
+
+Se déclenche lorsqu'un utilisateur de chat se connecte ou se déconnecte.
+
+```ts
+interface User {
+  id: string;
+  displayName: string;
+  displayColor: number; // index dans la palette de couleurs de l'utilisateur de l'instance, pas une couleur littérale
+  previousNames?: string[];
+  createdAt?: string; // ISO-8601
+  disabledAt?: string; // ISO-8601 si banni, omis sinon
+  isBot?: boolean;
+  isAuthenticated?: boolean;
+  scopes?: string[];
+}
+```
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onChatUserJoined(user) { owncast.chat.send(`bienvenue ${user.displayName}`); },
+  onChatUserParted(user) { /* … */ },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_chat_user_joined
+def welcome(user):
+    owncast.chat.send(f"bienvenue {user.display_name}")
+
+@plugin.on_chat_user_parted
+def farewell(user):
+    ...
+```
+
+</TabItem>
+</Tabs>
+
+Aucune permission requise.
+
+### Utilisateur de chat renommé : `chat.user.renamed`
+
+Se déclenche lorsqu'un utilisateur de chat change son nom d'affichage.
+
+```ts
+interface { user: User; previousName: string }
+```
+
+Aucune permission requise.
+
+### Message modéré : `chat.message.moderated`
+
+Se déclenche lorsqu'un modérateur cache ou affiche un message de chat.
+
+```ts
+interface { messageId: string; visible: boolean; moderator?: User }
+```
+
+Aucune permission requise.
+
+## Cycle de vie du flux
+
+### Flux démarré : `stream.started`
+
+Se déclenche lorsqu'une diffusion commence.
+
+```ts
+interface { startedAt: string; title?: string; summary?: string }
+```
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onStreamStarted(info) { owncast.chat.send(`en direct maintenant : ${info.title}`); },
+  onStreamStopped(info) { /* … */ },
+  onStreamTitleChanged(change) { /* change.to */ },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_stream_started
+def announce(info):
+    owncast.chat.send(f"en direct maintenant : {info.title}")
+
+@plugin.on_stream_stopped
+def wrap_up(info):
+    ...
+
+@plugin.on_stream_title_changed
+def retitle(change):
+    ...  # change.to
+```
+
+</TabItem>
+</Tabs>
+
+Aucune permission requise.
+
+### Flux arrêté : `stream.stopped`
+
+Se déclenche lorsqu'une diffusion prend fin.
+
+```ts
+interface { stoppedAt: string }
+```
+
+Aucune permission requise.
+
+### Titre du flux changé : `stream.title.changed`
+
+Se déclenche lorsque le streamer met à jour le titre en cours de diffusion.
+
+```ts
+interface { from?: string; to: string }
+```
+
+`from` est actuellement toujours vide : l'événement de titre changé d'Owncast ne porte que le nouveau titre.
+
+Aucune permission requise.
+
+## Événements fediverse
+
+Owncast expose sept abonnements d'événements internes de plugin pour l'activité entrante fediverse. Ce sont des événements de plugin, pas des webhooks HTTP externes. Chaque abonnement dans cette section nécessite la permission `fediverse.inbound`.
+
+| Événement            | Gestionnaire JavaScript | Gestionnaire Python            | Charge utile                |
+| -------------------- | ----------------------- | ------------------------------ | --------------------------- |
+| `fediverse.follow`   | `onFediverseFollow`     | `@plugin.on_fediverse_follow`  | `{ actor }`                 |
+| `fediverse.like`     | `onFediverseLike`       | `@plugin.on_fediverse_like`    | `{ actor, target }`         |
+| `fediverse.repost`   | `onFediverseRepost`     | `@plugin.on_fediverse_repost`  | `{ actor, target }`         |
+| `fediverse.quote`    | `onFediverseQuote`      | `@plugin.on_fediverse_quote`   | `{ actor, target }`         |
+| `fediverse.mention`  | `onFediverseMention`    | `@plugin.on_fediverse_mention` | `FediverseInboundPost`      |
+| `fediverse.reply`    | `onFediverseReply`      | `@plugin.on_fediverse_reply`   | `FediverseInboundPost`      |
+| `fediverse.activity` | `onFediverse`           | `@plugin.on_fediverse`         | Objet JSON brut ActivityPub |
+
+### Suivre, aimer, republier et citer
+
+```ts
+interface FediverseActor {
+  name: string;
+  handle: string;
+  url?: string;
+  image?: string;
+}
+
+interface FediverseEngagement {
+  actor: FediverseActor;
+  target?: { url: string };
+}
+```
+
+Un suivi ne contient que `actor`. Les likes, republier et citer contiennent également `target`. Pour une citation, `target` est le post écrit localement que l'acteur distant a cité.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onFediverseFollow(event) {
+    owncast.chat.send(`nouveau suiveur : ${event.actor.handle}`);
+  },
+  onFediverseQuote(event) {
+    owncast.log.info(`post cité : ${event.target.url}`);
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_fediverse_follow
+def thank(event):
+    owncast.chat.send(f"nouveau suiveur : {event.actor.handle}")
+
+@plugin.on_fediverse_quote
+def record_quote(event):
+    owncast.log.info(f"post cité : {event.target.url}")
+```
+
+</TabItem>
+</Tabs>
+
+`actor.handle` est l'adresse entièrement qualifiée, telle que `@alice@fediverse.example`. Les exemples de suivi appellent également `owncast.chat.send`, ce qui nécessite séparément `chat.send` :
+
+```json
+{ "permissions": ["fediverse.inbound", "chat.send"] }
+```
+
+### Mention et réponse
+
+Tous deux reçoivent un `FediverseInboundPost` :
+
+```ts
+interface FediverseInboundPost {
+  actor: FediverseActor;
+  content: string; // HTML rendu depuis l'instance source
+  contentText: string; // version en texte brut, généralement ce que vous souhaitez
+  url: string; // lien permanent sur l'instance source
+  postedAt: string; // ISO-8601
+  inReplyTo?: string; // url du post parent, défini lorsque ceci est une réponse
+  attachments?: { url: string; mediaType: string; alt?: string }[];
+  language?: string;
+}
+```
+
+Ces hooks spécialisés acceptent une activité `Create` vérifiée contenant exactement un `Note`. La note doit être attribuée à l'acteur de l'activité. Une mention doit s'adresser à l'acteur local d'Owncast. Une réponse doit faire référence à un post stocké par l'instance locale d'Owncast.
+
+Utilisez `contentText` pour l'analyse ou pour l'écho dans le chat. Utilisez `content` seulement lorsque vous avez besoin du formatage original, et nettoyez-le avant de le rendre.
+
+### Activité d'entrée brute
+
+`fediverse.activity` reçoit l'activité ActivityPub entrée vérifiée sous forme d'objet JSON brut. Owncast l'envoie après que la signature HTTP ait passé la vérification et que l'origine de l'acteur de l'activité corresponde à l'origine du propriétaire de la clé de signature.
+
+Le catch-all s'exécute en plus d'un gestionnaire spécialisé. Par exemple, une citation acceptée peut invoquer à la fois `onFediverseQuote` et `onFediverse`.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onFediverse(activity) {
+    if (typeof activity.type === "string") {
+      owncast.log.info(`activité entrante : ${activity.type}`);
+    }
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_fediverse
+def record_activity(activity):
+    if isinstance(activity.type, str):
+        owncast.log.info(f"activité entrante : {activity.type}")
+```
+
+</TabItem>
+</Tabs>
+
+La vérification de la signature et de l'origine de l'acteur établit d'où provient l'activité. Elles ne rendent pas ses champs sûrs. Traitez l'objet brut comme une entrée de plugin non fiable. Vérifiez les types de champs et les valeurs requises, assainissez le contenu avant de l'afficher et validez les URLs avant de les récupérer.
+
+## Chaîne de filtres
+
+Les filtres examinent les messages de chat avant qu'ils ne soient diffusés, avec la possibilité de les réécrire ou de les ignorer. Ils s'exécutent de manière séquentielle selon l'ordre de priorité (le plus bas en premier), et un seul filtre peut arrêter la chaîne : un `drop` la termine, tandis qu'un `modify` transmet la nouvelle charge utile au filtre suivant.
+
+### Filtre de message de chat : `chat.message.received` (filtre)
+
+Un gestionnaire de filtre reçoit la même structure `ChatMessage` que l'événement de message de chat et retourne l'un des trois résultats :
+
+* **passer** : laisser le message inchangé.
+* **modifier** : remplacer le message par une nouvelle charge utile, qui passe au filtre suivant.
+* **ignorer** : bloquer le message avec un motif. La chaîne s'arrête ici.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  filterChatMessage(msg) {
+    if (msg.body.includes("spam")) return filter.drop("spam");
+    if (msg.body.includes("damn"))
+      return filter.modify({ ...msg, body: msg.body.replace("damn", "****") });
+    return filter.pass();
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.filter_chat_message
+def clean(msg):
+    if "spam" in msg.body:
+        return filter.drop("spam")
+    if "damn" in msg.body:
+        return filter.modify({**msg.raw, "body": msg.body.replace("damn", "****")})
+    return filter.pass_()
+```
+
+</TabItem>
+</Tabs>
+
+Nécessite la permission `chat.filter`. Lire ou réécrire chaque message de chat a un effet secondaire significatif, donc l'administrateur doit voir la permission pour l'accorder. L'hôte rejette la charge si un plugin définit le gestionnaire de filtre sans déclarer la permission.
+
+### Priorité des filtres (optionnelle)
+
+Chaque filtre peut déclarer une priorité. Les chiffres les plus bas s'exécutent plus tôt (valeur par défaut `100`). Utilisez cela lorsque le comportement de votre plugin dépend de l'exécution préalable d'autres filtres (par exemple, un filtre de grossièretés devrait généralement s'exécuter avant un traducteur). Voir votre page SDK pour savoir où le définir.
+
+### Sécurité des filtres
+
+* Les erreurs sont traitées comme un passage. Un filtre qui lance une exception ne bloque jamais le chat. La chaîne continue avec le message original.
+* Les filtres ont une limite de temps de 50 ms. Un filtre lent est annulé et traité comme un passage.
+* Après 5 échecs consécutifs (erreurs ou délais d'attente), le plugin est automatiquement désactivé pour le reste de la session, avec une ligne de journal unique. Un appel de filtre réussi réinitialise le compteur, donc une instabilité transitoire ne s'accumule pas. Redémarrez l'hôte pour réactiver.
+
+### Tables de commandes
+
+Déclarez une **table de commandes** pour les alias, les temps de recharge, le contrôle par modérateur, les arguments analysés et les listes automatiques `!help`. Le contrôle utilise l'identité de l'expéditeur (`user.scopes`, `user.id`), pas une supposition de nom d'affichage.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  commands: {
+    uptime: { description: "Depuis combien de temps nous sommes en direct", run: (ctx) => ctx.reply("depuis un moment !") },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+plugin.commands({
+    "uptime": {"description": "Depuis combien de temps nous sommes en direct",
+               "run": lambda ctx: ctx.reply("depuis un moment !")},
+})
+```
+
+</TabItem>
+</Tabs>
+
+Voir [Commandes de chat](/docs/plugins/commands) pour la référence complète de la table de commandes (alias, temps de recharge, contrôle par modérateur, `!help`).
+
+## Gestionnaire HTTP
+
+### Requête HTTP
+
+Se déclenche pour chaque requête à `/plugins/\<your-slug>/*` qui ne correspond pas à un fichier statique dans `public/`. Retourne un objet de réponse.
+
+```ts
+interface IncomingHttpRequest {
+  method: string;
+  path: string; // relatif à /plugins/<your-slug>/
+  query: Record<string, string>;
+  headers: Record<string, string>;
+  body: string;
+  remoteAddr: string;
+  authenticated: boolean; // provenant d'un administrateur Owncast authentifié
+  user?: { id: string; displayName: string; scopes: string[] }; // uniquement pour les requêtes de jetons utilisateur
+}
+
+interface OutgoingHttpResponse {
+  status?: number; // par défaut 200
+  headers?: Record<string, string>;
+  body?: string;
+}
+```
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onHttpRequest(req) {
+    if (req.path === "/status") return { status: 200, body: '{"ok":true}' };
+    return { status: 404 };
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.get("/status")
+def status(req):
+    return {"status": 200, "body": '{"ok":true}'}
+```
+
+</TabItem>
+</Tabs>
+
+Les points de terminaison sont publics par défaut. Contrôlez les fonctionnalités administratives sur `req.authenticated`. Les chemins administratifs déclarés dans le manifeste (`admin.pages[].path`) sont sécurisés par l'hôte avant que votre gestionnaire s'exécute, donc pour ces routes, vous n'avez pas besoin de vérifier.
+
+Nécessite la permission `http.serve`. Le SDK JavaScript expose un unique gestionnaire `onHttpRequest` global. Le SDK Python ajoute des routes déclaratives par chemin/méthode (`@plugin.get`, `@plugin.route`, …). Voir [Serveur HTTP](/docs/plugins/http) pour le modèle de requête complet.
+
+## Authentification
+
+### Vérification d'authentification : `auth.check` {#auth-check}
+
+Se déclenche uniquement pour le plugin [`auth.gate`](/docs/plugins/auth) activé, et uniquement lors du chargement de la page `/` d'un visualiseur, jamais dans le chemin critique (segments vidéo, API, chat). Au moment où il s'exécute, l'hôte a déjà vérifié le cookie de session du visualiseur et résolu leur identité. Votre gestionnaire décide si cette session doit continuer. C'est optionnel : omettez-le et un cookie valide suffit jusqu'à ce qu'il expire.
+
+Retournez l'un des trois verdicts via l'assistant `authCheck` :
+
+* **ok** : garder la session telle quelle.
+* **rafraîchir** : la garder et réémettre le cookie, éventuellement avec un nouveau `ttl` en secondes (expiration glissante).
+* **refuser** : mettre fin à la session et renvoyer le visualiseur à l'écran de connexion. C'est ainsi que vous révoquez l'accès (un utilisateur supprimé ou banni en amont).
+
+```ts
+interface AuthCheckRequest {
+  user: {
+    id: string;
+    displayName: string;
+    scopes?: string[];
+    isAuthenticated?: boolean;
+  };
+}
+
+type AuthCheckResult =
+  | { action: "ok" }
+  | { action: "refresh"; ttl?: number }
+  | { action: "deny"; reason?: string };
+```
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { definePlugin, owncast, authCheck } = require("@owncast/plugin-sdk");
+
+module.exports = definePlugin({
+  onAuthCheck(req) {
+    if (owncast.kv.get(`banned:${req.user.id}`)) {
+      return authCheck.deny("accès révoqué");
+    }
+    return authCheck.ok();
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+from owncast_plugin import plugin, owncast, auth_check
+
+@plugin.on_auth_check
+def check(req):
+    if owncast.kv.get(f"banned:{req.user.id}"):
+        return auth_check.deny("accès révoqué")
+    return auth_check.ok()
+```
+
+</TabItem>
+</Tabs>
+
+Nécessite `auth.gate`, et cela échoue en fermeture : si le gestionnaire génère une erreur ou expire, l'hôte traite ce chargement de page comme un refus. Parce que la vérification ne s'exécute qu'à `/`, un visualiseur dont vous révoquez l'accès conserve tous les onglets ouverts fonctionnels jusqu'à ce qu'il les recharge ou que le cookie expire. Le `ttl` de session est la véritable limite.
+
+## Gestionnaires de contenu
+
+Ces deux gestionnaires permettent à un plugin de générer du HTML pour des onglets ou des pages supplémentaires au moment de la requête : utile lorsque le contenu doit être personnalisé par visualiseur ou dépendre des données du flux en direct. Ils sont le pendant dynamique à l'envoi d'un fichier HTML statique via `manifest.tabs[].content` ou `manifest.extraPageContent.content`.
+
+Les deux gestionnaires reçoivent une `ContentRequest` :
+
+```ts
+interface ContentRequest {
+  slug: string;   // identifiant stable déclaré dans le manifeste
+  user?: User; // identité de chat du visualiseur : présente lorsque authentifié, absente pour les visualiseurs anonymes
+}
+```
+
+Retournez la chaîne HTML complète pour le bloc de contenu. Si vous ne reconnaissez pas le slug, retournez une chaîne vide.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onTabContent: {
+    stats(ctx) { return `<h1>Statistiques en direct pour ${ctx.user?.displayName ?? "visualiseur"}</h1>`; },
+  },
+  onPageContent: {
+    banner(ctx) { return "<p>Bienvenue!</p>"; },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_tab_content("stats")
+def stats(ctx):
+    name = ctx.user.display_name if ctx.user else "visualiseur"
+    return f"<h1>Statistiques en direct pour {name}</h1>"
+
+@plugin.on_page_content("banner")
+def banner(ctx):
+    return "<p>Bienvenue!</p>"
+```
+
+</TabItem>
+</Tabs>
+
+### Contenu de l'onglet
+
+Appelé lorsqu'une entrée d'onglet dans `manifest.tabs[]` n'a pas de fichier `content` statique. L'hôte passe le `slug` de l'onglet afin qu'un seul plugin puisse servir plusieurs onglets. Aucune permission nécessaire pour s'abonner. Quelles que soient les API d'Owncast que vous appelez à l'intérieur du gestionnaire, elles nécessitent leurs permissions habituelles.
+
+### Contenu de la page
+
+Appelé lorsque `manifest.extraPageContent` n'a pas de fichier `content` statique. L'hôte passe le slug depuis le manifeste afin que le gestionnaire sache quel créneau de contenu est demandé. Les mêmes règles de permission que pour le contenu d'onglet.
+
+Voir [Contribuer à l'UI](/docs/plugins/ui) pour le côté manifeste.
+
+## Événements de connexion SSE {#sse-events}
+
+Lorsqu'un navigateur ouvre ou ferme l'un des flux de votre plugin `/plugins/\<name>/_sse/\<channel>`, Owncast déclenche `sse.connect` et `sse.disconnect`. Utilisez-les pour suivre qui est connecté, par exemple pour maintenir un compte en direct pour une superposition. Voir [Mises à jour en temps réel](/docs/plugins/http#realtime-updates-server-sent-events) pour le côté push qui envoie des données à ces navigateurs.
+
+### Connecter / déconnecter : `sse.connect`, `sse.disconnect`
+
+```ts
+interface SSEConnectionEvent {
+  channel: string; // quel flux _sse/<channel> le navigateur a ouvert
+  connectionId: number; // unique par connexion pour la durée du processus hôte
+  user?: User; // présent uniquement lorsque la connexion a transporté une identité de chat
+}
+```
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onSseConnect(e) { /* e.connectionId, e.channel */ },
+  onSseDisconnect(e) { /* même connectionId que le connect correspondant */ },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_sse_connect
+def joined(e):
+    ...  # e.connection_id, e.channel
+
+@plugin.on_sse_disconnect
+def left(e):
+    ...
+```
+
+</TabItem>
+</Tabs>
+
+`connectionId` est stable pour la durée d'une connexion, vous pouvez donc associer un déconnexion à son connect correspondant et compter le même visualiseur sur plusieurs onglets. Les deux gestionnaires nécessitent la permission `http.sse`.
+
+## Tick
+
+Owncast déclenche un événement `tick` environ une fois par seconde pour tout plugin qui définit un gestionnaire de tick. Utilisez-le pour des travaux périodiques comme vider des compteurs ou rafraîchir des données mises en cache. Définir le gestionnaire est ce qui vous engage, donc les plugins qui l'omettent ne paient rien.
+
+### Tick périodique : `tick`
+
+```ts
+interface TickEvent {
+  now: number; // heure d'horloge hôte en millisecondes unix lorsque le tick s'est déclenché
+}
+```
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onTick(e) { /* e.now */ },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_tick
+def each_second(e):
+    ...  # e.now
+```
+
+</TabItem>
+</Tabs>
+
+Pour une planification unique ou à intervalle personnalisé, utilisez des minuteurs (`owncast.timer.setTimeout` et `setInterval`) plutôt que le tick. Aucune permission requise.
+
+## Événements entre plugins
+
+Les plugins peuvent se composer en émettant et en s'abonnant à des événements personnalisés arbitraires. S'abonner à un événement personnalisé ne nécessite pas de permission. Pour émettre, déclarez `events.emit`. Les noms d'événements sont des chaînes arbitraires. Le nommage avec le nom de votre plugin (par exemple `"my-plugin.thing-happened"`) évite les collisions.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  on: {
+    "other-plugin.milestone"(payload) { /* réagir */ },
+  },
+  onStreamStarted() {
+    owncast.events.emit("my-plugin.went-live", { at: Date.now() });
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on("other-plugin.milestone")
+def react(payload):
+    ...
+
+@plugin.on_stream_started
+def went_live(info):
+    owncast.events.emit("my-plugin.went-live", {"at": info.started_at})
+```
+
+</TabItem>
+</Tabs>
+
+Voir [APIs d'Owncast](./apis#plugin-to-plugin-events) pour l'API d'émission.
+
+## Référence complète des gestionnaires
+
+Chaque ligne est un événement d'exécution. Le nom du gestionnaire suit la convention de votre SDK : méthodes camelCase (`onChatMessage`) en JavaScript, décorateurs `@plugin.*` (`@plugin.on_chat_message`) en Python.
+
+| Événement                       | Charge utile                       | Permission pour s'abonner                                                  |
+| ------------------------------- | ---------------------------------- | -------------------------------------------------------------------------- |
+| `chat.message.received`         | `ChatMessage`                      | aucun(e)                                                                   |
+| `chat.user.joined`              | `Utilisateur`                      | aucun(e)                                                                   |
+| `chat.user.parted`              | `Utilisateur`                      | aucun(e)                                                                   |
+| `chat.user.renamed`             | `{ user, previousName }`           | aucun(e)                                                                   |
+| `chat.message.moderated`        | `{ messageId, visible, moderator}` | aucun(e)                                                                   |
+| `stream.started`                | `{ startedAt, title, summary }`    | aucun(e)                                                                   |
+| `stream.stopped`                | `{ stoppedAt }`                    | aucun(e)                                                                   |
+| `stream.title.changed`          | `{ from, to }`                     | aucun(e)                                                                   |
+| `fediverse.follow`              | `{ actor }`                        | `fediverse.inbound`                                                        |
+| `fediverse.like`                | `{ actor, target }`                | `fediverse.inbound`                                                        |
+| `fediverse.repost`              | `{ actor, target }`                | `fediverse.inbound`                                                        |
+| `fediverse.quote`               | `{ actor, target }`                | `fediverse.inbound`                                                        |
+| `fediverse.mention`             | `FediverseInboundPost`             | `fediverse.inbound`                                                        |
+| `fediverse.reply`               | `FediverseInboundPost`             | `fediverse.inbound`                                                        |
+| `fediverse.activity`            | Objet JSON Raw ActivityPub         | `fediverse.inbound`                                                        |
+| filtre de message chat          | `ChatMessage`                      | `chat.filter`                                                              |
+| requête HTTP                    | `IncomingHttpRequest`              | `http.serve`                                                               |
+| vérification d'authentification | `AuthCheckRequest`                 | `auth.gate`                                                                |
+| `sse.connect`                   | `SSEConnectionEvent`               | `http.sse`                                                                 |
+| `sse.disconnect`                | `SSEConnectionEvent`               | `http.sse`                                                                 |
+| `tick`                          | `{ now }`                          | aucun(e)                                                                   |
+| contenu de l'onglet             | `ContentRequest`                   | aucun à s'abonner. Quelles que soient les API appelées par le gestionnaire |
+| contenu de la page              | `ContentRequest`                   | aucun à s'abonner. Quelles que soient les API appelées par le gestionnaire |
+| événements personnalisés        | (par événement)                    | aucun à s'abonner, `events.emit` pour émettre                              |
+
+S'abonner à des hooks non restreints et à des événements personnalisés ne nécessite pas de permission. Les hooks restreints nécessitent la permission indiquée dans le tableau. Appeler les APIs Owncast depuis l'intérieur d'un gestionnaire nécessite également la permission de l'API. Voir [les APIs Owncast](/docs/plugins/apis) pour le catalogue des méthodes et ce que chacune accorde.

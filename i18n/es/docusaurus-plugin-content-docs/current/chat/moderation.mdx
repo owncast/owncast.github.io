@@ -1,0 +1,82 @@
+---
+title: Moderación de chat
+description: Agrega moderadores, elimina mensajes y usuarios de tu chat.
+sidebar_position: 300
+sidebar_label: Moderación de chat
+tags:
+  - moderación
+  - chat
+  - prohibiciones
+  - bloquear
+  - dirección IP
+---
+
+Usando ya sea el administrador de Owncast, o los controles de moderación en línea dentro de tu chat, puedes eliminar mensajes individuales o usuarios enteros.
+
+## Moderadores del chat
+
+Los moderadores no tienen acceso al administrador, y existen para ayudarte a mantener tu chat en orden.
+
+En tu administrador, visita `Chat y Usuarios` > `Usuarios` para encontrar el usuario al que deseas otorgar privilegios de Moderador.
+Muestra sus detalles y puedes agregarlo como moderador.
+
+Por defecto no hay moderadores, por lo que al menos querrás hacerte uno.
+
+Los moderadores serán notificados cuando se conviertan en uno, y tendrán un ícono de moderador al lado de su nombre en el chat que todos pueden ver.
+
+## Cómo moderar
+
+Una vez que te conviertas en moderador, puedes pasar el cursor sobre un mensaje del chat y abrir un menú donde puedes eliminar un solo mensaje, o prohibir al usuario del chat completamente.
+
+Usando la acción "Más información" puedes obtener una breve visión general del usuario como cuándo se unió por primera vez. Esta información es útil cuando los trolls intentan hacerse pasar por alguien.
+
+<img src="/images/moderator-menu.png" alt="El menú del moderador que aparece al pasar el ratón sobre un mensaje de chat, con opciones para eliminar el mensaje, prohibir al usuario y ver más información sobre él" width="50%" />
+
+## Eliminación de mensajes de chat usando el Administrador
+
+Visita `Chat y Usuarios` > `Mensajes` en tu administrador para realizar tareas de moderación de mensajes de chat.
+
+### Mensaje individual
+
+Puedes alternar la visibilidad de un solo mensaje en tu chat haciendo clic en el botón de alternancia de visibilidad (que se parece a un ojo) en el extremo derecho de cada mensaje.
+
+![La pestaña de Mensajes del administrador, con el botón de alternancia de visibilidad de ojo a la derecha de un mensaje de chat](/docs/img/chat-moderation-hide-message.png)
+
+### Cambio masivo de visibilidad
+
+![La pestaña de Mensajes con varios mensajes seleccionados por casilla de verificación y los botones de mostrar y ocultar sobre la lista](/docs/img/chat-moderation-bulk-hide-messages.png)
+
+Alternativamente, puedes seleccionar, a través de casillas de verificación, los mensajes que deseas cambiar todos a la vez, y luego presionar los botones *"mostrar"* o *"ocultar"*.
+
+## Prohibiendo usuarios de tu chat usando el Administrador
+
+Visita `Chat y Usuarios` > `Usuarios` en tu administrador para realizar tareas de moderación de usuarios.
+
+Prohibir a un usuario lo desconectará inmediatamente del chat y ocultará la interfaz de chat de su navegador. También eliminará todos los mensajes anteriores enviados por este usuario del feed de chat.
+
+Puedes desbanear a un usuario que fue prohibido anteriormente, pero ten en cuenta que no restaurará estos mensajes eliminados. Puedes restaurarlos manualmente si es necesario.
+
+![La pestaña de Usuarios del administrador, mostrando una fila de usuario con la opción de prohibir al usuario](/docs/img/user-moderation-ban-user.png)
+
+Alternativamente, puedes hacer clic en el nombre de visualización del usuario y mostrar el modal de información del usuario y prohibirlo desde allí.
+
+![El modal de información del usuario abierto desde un nombre de visualización, con un botón para prohibir al usuario](/docs/img/user-moderation-ban-user-modal.png)
+
+## Bloqueo de dirección IP
+
+Al prohibir a un usuario, Owncast bloqueará automáticamente su dirección IP conocida. Si bien esto puede disuadir a la mayoría de los trolls, como cualquier otra cosa, es posible evadirlo.
+
+* Owncast utiliza la dirección IP según lo proporcionado en el encabezado `x-forwarded-for` si se proporciona, lo que significa que puede ser posible que alguien sobreescriba este valor con una dirección falsa. Si estás preocupado por esto, asegúrate de que tu proxy inverso esté configurado para establecer explícitamente el valor correcto del encabezado.
+* Las VPN son una cosa. Usando una VPN es trivial evadir la prohibición de dirección IP.
+
+Todo esto quiere decir: Esta función ayudará a mantener el abuso bajo control, pero de ninguna manera garantiza que mantendrá a los peores de los peores alejados. La moderación sigue siendo responsabilidad de cada transmisión individual.
+
+Una lista de IP bloqueadas se puede ver en la interfaz de Chat de Usuarios del Administrador y se puede desbanear a través de la misma interfaz.
+
+## Filtro de palabras groseras / insultos
+
+Se puede habilitar un filtro básico de groserías en la configuración del chat. Esto rechazará mensajes que coincidan con una lista interna.
+
+## Limitador de velocidad
+
+Por defecto, hay un limitador de velocidad incorporado que intentará evitar que los usuarios envíen demasiados mensajes en un corto período de tiempo. Esto es para ayudar a prevenir spam y abuso. El limitador de velocidad se puede desactivar en la configuración del chat.

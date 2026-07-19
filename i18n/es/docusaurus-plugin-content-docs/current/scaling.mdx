@@ -1,0 +1,54 @@
+---
+title: Soporte para aumentar la capacidad de espectadores
+description: Un lugar para comenzar cuando necesite aumentar la capacidad de su servidor.
+sidebar_position: 1000
+sidebar_label: Soporte para aumentar la capacidad de espectadores
+tags:
+  - almacenamiento de objetos
+  - cdn
+  - espectadores
+  - s3
+  - escalado
+  - optimización
+  - avanzado
+  - redes
+---
+
+import UseStorage from "./troubleshoot/shared/use-storage.md";
+import UseCDN from "./troubleshoot/shared/use-cdn.md";
+import OwncastWithCDN from "./shared/diagrams/owncast-cdn.md";
+import OwncastObjectStorage from "./shared/diagrams/owncast-object-storage.md";
+import OwncastObjectStorageCDN from "./shared/diagrams/owncast-object-storage-cdn.md";
+
+import { IncludeMarkdown } from "@site/src/components";
+
+## Descargo de responsabilidad
+
+Owncast funciona muy bien desde el principio como un servicio de transmisión personal. La facilidad de instalación y la arquitectura todo en uno permite a las personas empezar a trabajar rápidamente. El inconveniente de esto es que requiere un poco más de reflexión en torno a implementaciones grandes, ya que no se puede simplemente ejecutar más copias de Owncast para escalar.
+
+Si no está familiarizado con los temas a continuación, o si no se siente cómodo con los pasos siguientes es poco probable que deba asumir la responsabilidad adicional de una implementación más grande de cualquier servicio. **La experiencia básica en administración de sistemas y comprensión de la arquitectura generalmente se espera al intentar obtener un rendimiento adicional de cualquier cosa**, y esto puede que no sea para usted. No se sienta mal. **Owncast seguirá funcionando muy bien para usted desde el principio**, pero es posible que desee adquirir ayuda profesional si necesita algo más que eso.
+
+## Video
+
+### Almacenamiento de Objetos
+
+<IncludeMarkdown>
+  <OwncastObjectStorage />
+  <UseStorage />
+</IncludeMarkdown>
+
+### Redes de Distribución de Contenidos (CDNs)
+
+<IncludeMarkdown>
+  <OwncastWithCDN />
+  <UseCDN />
+  <OwncastObjectStorageCDN />
+</IncludeMarkdown>
+
+## Chat
+
+Al escalar el chat, está limitado por lo que su único servidor podrá manejar en cuanto a conexiones abiertas. Para la mayoría de las personas, la configuración estándar probablemente será suficiente, ya que se ha probado con miles de clientes concurrentes.
+
+Owncast aumentará automáticamente la cantidad de sockets concurrentes que su sistema operativo permitirá. Sin embargo, si aún recibe el error `demasiados archivos abiertos`, es porque su valor `ulimit` es inferior al número de recursos abiertos que Owncast está intentando usar. Desea tener un servidor más potente (cpu, ram) al aumentar el límite máximo y manejar más conexiones de chat.
+
+Puede aumentar las conexiones concurrentes utilizando el comando `ulimit` o editando sus archivos de sistema. [Aquí hay un resumen de los diferentes límites y cómo cambiarlos](https://www.learnitguide.net/2015/07/how-to-increase-ulimit-values-in-linux.html). Está más allá del alcance de esta documentación profundizar en los números que debería usar y dónde ponerlos.

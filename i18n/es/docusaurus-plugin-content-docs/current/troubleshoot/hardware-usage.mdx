@@ -1,0 +1,63 @@
+---
+title: Utilización de Hardware
+description: Cuanto más trabajo de codificación de video se requiere, más utilización de hardware tendrá lugar. Pero hay algunas cosas que puedes hacer.
+unlisted: true
+related:
+  excludeFromAll: true
+tags:
+  - cpu
+  - hardware
+  - optimización
+---
+
+import { IncludeMarkdown } from "@site/src/components";
+import ReduceFramerate from "./shared/reduce-framerate.md";
+import MatchHighestOutputQuality from "./shared/match-highest-output-quality.md";
+
+## Reduce tu velocidad de fotogramas
+
+<IncludeMarkdown>
+  <ReduceFramerate />
+</IncludeMarkdown>
+
+## Reduce la cantidad de hardware (CPU o GPU) asignado en la configuración de video
+
+Cada variante de salida de video tiene una cierta cantidad de hardware asignado basado en la configuración de video. Reducir este valor puede liberar considerablemente la cantidad de recursos del servidor que se están utilizando.
+
+**Desventaja**: Cuanto menos tiempo de hardware asignes a la codificación de video, peor será la calidad de la salida. Los ajustes más bajos también son menos eficientes en cuanto al tamaño del archivo, lo que podría llevar a tamaños de video más grandes que tus espectadores tienen que descargar, resultando en buffering para algunos.
+
+## Reduce el número de variantes de salida de stream que ofreces
+
+Cada configuración de variante de salida de stream resulta en más utilización de hardware.
+
+**Desventaja**: Como streamer, querrás ofrecer tantas calidades de stream diferentes como puedas para que personas en todas las ubicaciones y condiciones de red puedan disfrutar de tu contenido. Eliminar opciones de stream puede disminuir la disponibilidad de tu stream para algunos con redes más lentas, lo que lleva a buffering.
+
+## Ajusta tu calidad de salida más alta
+
+<IncludeMarkdown>
+  <MatchHighestOutputQuality />
+</IncludeMarkdown>
+
+## Experimenta con el Modo Passthrough
+
+El modo passthrough le indica a Owncast que envíe el video de tu transmisor directamente sin recodificarlo. Debido a que el servidor omite la codificación por completo, el uso de hardware cae a casi nada. Esta es la mayor reducción que puedes hacer si tu servidor simplemente no puede seguir el ritmo. Consulta [video passthrough](/docs/video/#video-passthrough) para saber cómo activarlo.
+
+**Desventaja**: Con passthrough, ya no puedes ofrecer múltiples opciones de calidad, así que los espectadores en conexiones más lentas no tienen un stream de menor calidad al que recurrir. El passthrough también puede aumentar la latencia y en algunos entornos produce video que no todos los reproductores pueden manejar.
+
+## Si estás ejecutando en hardware físico, prueba la aceleración de hardware
+
+**Nota: La mayoría de las personas no podrán aprovechar esto.**
+
+Si tienes acceso a una CPU física que soporta la codificación de video, o a una GPU con un chipset de codificación dedicado, puedes mejorar considerablemente tu rendimiento. [Lee más sobre qué hardware es compatible](/docs/codecs/).
+
+**Desventaja**: Esto no estará disponible para la mayoría de las personas a menos que tengas acceso a hardware físico que soporte la codificación de video acelerada.
+
+## Cambia a un servidor más poderoso
+
+Si te das cuenta de que no puedes configurar tu instancia de Owncast para soportar el número de variantes de salida y la velocidad de fotogramas y calidad que deseas, simplemente puede que tengas que mudarte a un servidor que pueda manejar la carga con más recursos de CPU.
+
+Si estás en un VPS alojado, puede que puedas cambiar tu servidor por uno que tenga más recursos de CPU disponibles.
+
+## Lee más
+
+No se te puede decir exactamente cuánta CPU necesitas, ni qué servidor o entorno te servirá mejor. Pero lee el documento de [Recursos y Requisitos](/docs/resources-requirements/) para entender más.

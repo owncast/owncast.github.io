@@ -1,0 +1,55 @@
+---
+title: Cuadros caídos
+description: ""
+unlisted: true
+related:
+  excludeFromAll: true
+tags:
+  - obs
+  - caídos
+  - cuadros
+---
+
+import HardwareUsage from "./shared/hardware-usage.md";
+import BroadcastingSoftware from "./shared/broadcasting-software.md";
+import ReduceFramerate from "./shared/reduce-framerate.md";
+
+import { IncludeMarkdown } from "@site/src/components";
+
+Si tu software de transmisión te dice que estás perdiendo cuadros, puede ser debido a que tu hardware y software de transmisión no pueden renderizar cuadros lo suficientemente rápido, tu conexión de red no soporta la transmisión a tu tasa de bits elegida, o tu servidor de Owncast no puede ingerir los cuadros lo suficientemente rápido.
+
+En general, algunos cuadros caídos son perfectamente aceptables y esperados. Sin embargo, una caída continua de cuadros consistentemente mientras transmites significa que algo necesita ser optimizado, ya sea en el hardware, software o red de tu computadora de transmisión local, o en el lado de Owncast.
+
+Parte de esta información está adaptada de la [Guía de Cuadros Caídos de OBS](https://github.com/obsproject/obs-studio/wiki/Dropped-Frames-and-General-Connection-Issues), así que probablemente encuentres útil ese documento completo también.
+
+## Verifica la utilización del hardware de tu servidor de Owncast
+
+<IncludeMarkdown>
+  <HardwareUsage />
+</IncludeMarkdown>
+
+## Verifica tu software de transmisión
+
+<IncludeMarkdown>
+  <BroadcastingSoftware />
+</IncludeMarkdown>
+
+## Intenta reducir tu tasa de bits y/o la tasa de cuadros
+
+Lo siguiente que debes hacer es reducir la tasa de bits y/o la tasa de cuadros en tu software de transmisión hasta que dejes de perder cuadros. Las condiciones de la red no siempre son las mismas de un día para otro, y lo que funcionó ayer no garantiza que funcione hoy. A veces, simplemente no hay mucho más que puedes hacer, excepto reducir la tasa de bits para compensar por la mala conexión en ese momento.
+
+<IncludeMarkdown>
+  <ReduceFramerate />
+</IncludeMarkdown>
+
+Lee más sobre [codificación de video y calidad](/docs/video).
+
+**Desventaja**: Reducir la calidad de tu video puede disminuir visiblemente la calidad de tu transmisión para algún contenido.
+
+## No transmitas a través de una conexión inalámbrica
+
+En muchos casos, las conexiones inalámbricas pueden causar problemas debido a su naturaleza inestable. La transmisión realmente requiere una conexión estable. A menudo, las conexiones inalámbricas están bien, pero si tienes problemas, es un cambio muy bueno a hacer.
+
+## Prueba de velocidad
+
+Las pruebas de velocidad son una estimación muy imprecisa - significan muy poco con respecto a la transmisión. Solo porque una prueba de velocidad diga que tienes 5Mb/s de subida, no significa que puedas subir a nada de manera estable a 5Mb/s. Así no es como funciona internet, desafortunadamente. Nunca se garantiza que puedas mantener una conexión estable a un servidor si el servidor o los puntos de enrutamiento al servidor son inestables. Tu tasa de bits "estable" es más probablemente alrededor del 70-75% de tu velocidad de subida "estimada" de la prueba de velocidad (y eso es solo si no estás siendo regulado). Si acaso, una prueba de velocidad te dirá la velocidad máxima teórica a la que podrías transmitir bajo condiciones perfectamente ideales, pero las condiciones nunca son perfectas.

@@ -1,0 +1,154 @@
+---
+title: Intégrez Owncast dans votre site Web
+description: Vous pouvez facilement intégrer votre chat ou vidéo dans un autre site.
+sidebar_position: 200
+sidebar_label: Intégrez Owncast dans votre site Web
+hide_table_of_contents: false
+tags:
+  - intégrer
+  - site web
+  - iframe
+  - chat
+  - vidéo
+  - lecture automatique
+  - css
+---
+
+## Intégration de la vidéo
+
+Owncast prend en charge l'intégration de votre flux vidéo directement dans n'importe quel autre site Web ou source sans avoir à configurer un lecteur.
+
+L'URL uniquement vidéo de votre contenu de flux se trouve à : `http://owncast.example.com/embed/video`.
+
+Voici un exemple de HTML que vous pouvez utiliser.
+
+```html
+<iframe
+  src="https://owncast.example.com/embed/video"
+  title="Owncast"
+  height="350px"
+  width="550px"
+  referrerpolicy="origin"
+  allowfullscreen
+>
+</iframe>
+```
+
+Cela ressemblera à :
+
+<iframe src="https://watch.owncast.online/embed/video" title="Owncast" height="350px" width="550px" referrerpolicy="origin" allowfullscreen />
+
+### Lecture automatique
+
+Que la vidéo intégrée commence à jouer d'elle-même dépend des [paramètres de lecture automatique](/docs/video/#autoplay) de votre serveur. Vous pouvez le remplacer pour une seule intégration en ajoutant `?autoplay=` à l'URL avec l'une des valeurs `off`, `always`, ou `sound-only`. Une valeur non reconnue revient au paramètre du serveur.
+
+La plupart des navigateurs bloquent la lecture automatique à l'intérieur d'un iframe sur un autre site, à moins que la page intégrante accorde la permission avec l'attribut `allow` :
+
+```html
+<iframe
+  src="https://owncast.example.com/embed/video?autoplay=always"
+  title="Owncast"
+  height="350px"
+  width="550px"
+  referrerpolicy="origin"
+  allow="autoplay"
+  allowfullscreen
+>
+</iframe>
+```
+
+### Muet
+
+Si vous souhaitez que le lecteur soit muet dès le début, ajoutez `?initiallyMuted=true` à l'URL. Les spectateurs peuvent toujours désactiver le son manuellement. Combinez les paramètres avec `&`, par exemple `?autoplay=always&initiallyMuted=true`.
+
+Une interaction à connaître : `sound-only` ne commence jamais silencieusement, donc le combiner avec `initiallyMuted=true` signifie que le lecteur ne se lancera pas automatiquement.
+
+## Personnalisation du style du flux intégré
+
+Vous pouvez facilement personnaliser le style du flux intégré d'Owncast pour l'adapter au design de votre site Web en appliquant des styles CSS. Voici comment vous pouvez le faire :
+
+1. **Créez un fichier CSS :** Tout d'abord, créez un fichier CSS (par exemple, `stream-styles.css`) où vous définirez vos styles personnalisés.
+
+2. **Liez le fichier CSS :** Dans la section `<head>` de votre document HTML où vous intégrez le flux Owncast, ajoutez une balise `<link>` pour inclure votre fichier CSS. Assurez-vous d'ajouter cette ligne avant la balise de fermeture `</head>` :
+
+   ```html
+   <link rel="stylesheet" href="path/to/stream-styles.css" />
+   ```
+
+   Remplacez "path/to/stream-styles.css" par le chemin réel de votre fichier CSS.
+
+3. **Appliquez des styles :** Personnalisez les styles dans votre fichier stream-styles.css selon vos préférences. Vous pouvez cibler l'élément `\<iframe>` en utilisant des sélecteurs CSS, comme montré dans l'exemple ci-dessous :
+
+   ```css
+   /* Stylez la boîte iframe du flux intégré */
+   iframe[title="Owncast"] {
+     border: none; /* Supprimez la bordure de l'iframe */
+     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Ajoutez une ombre subtile pour la profondeur */
+     border-radius: 10px; /* Coins arrondis pour un look moderne */
+     overflow: hidden;
+     margin: 0 auto; /* Centre l'iframe horizontalement */
+   }
+   ```
+
+4. **Personnalisez selon vos besoins :** Ajustez les valeurs ci-dessus pour correspondre au design et à la mise en page de votre site Web.
+
+Le flux intégré est une page distincte chargée depuis votre serveur Owncast, donc le CSS de votre site ne peut styliser que la boîte `\<iframe>` elle-même, pas le contenu à l'intérieur. Pour changer les couleurs, les polices et la mise en page à l'intérieur du lecteur, utilisez les [paramètres d'apparence](/docs/configuration/appearance) sur votre serveur Owncast à la place.
+
+En suivant ces étapes, vous pouvez intégrer sans couture votre flux Owncast dans votre site Web tout en gardant le contrôle sur son apparence visuelle.
+
+### Utiliser le flux HLS
+
+Tant que le lecteur le prend en charge, il est recommandé d'ouvrir la page d'accueil de votre instance Owncast directement.
+Le lecteur trouvera automatiquement la bonne liste de lecture et commencera à jouer.
+Cela garantira la compatibilité future si la façon dont Owncast publie HLS est jamais changée.
+
+Cependant, si vous avez besoin du flux HLS (c'est-à-dire pour partager votre flux avec un lecteur tiers), vous pouvez accéder directement au flux HLS via cette URL : `http://your.host/hls/stream.m3u8`.
+
+## Intégration du chat
+
+Owncast prend en charge l'intégration de votre chat directement dans n'importe quel autre site Web ou source.
+
+Il existe deux types de chats intégrés : un chat en lecture seule qui affiche uniquement les messages et un chat autonome qui a la même fonctionnalité que celui de l'interface Web principale d'Owncast.
+
+### Intégration du chat autonome
+
+L'URL du chat autonome se trouve à : `http://owncast.example.com/embed/chat/readwrite`.
+
+Cela ressemblera à :
+
+[Intégration Owncast](https://watch.owncast.online/embed/chat/readwrite)
+
+### Intégration du chat en lecture seule
+
+L'URL du chat en lecture seule se trouve à : `http://owncast.example.com/embed/chat/readonly`.
+
+Une utilisation courante du chat en lecture seule consiste à ajouter les messages du chat à votre logiciel de diffusion, comme une couche Web dans OBS.
+
+#### Utiliser OBS
+
+1. Cliquez sur `+` ou faites un clic droit pour ajouter une nouvelle source. Choisissez `Navigateur` dans la liste.
+
+2. Pour une nouvelle source, vous devrez ajouter le nom. Tapez "*Chat*".
+
+3. Dans les paramètres de la source du navigateur, vous devrez changer l'URL vers l'URL `/embed/chat/readonly` de votre instance Owncast.
+
+4. Vous pouvez utiliser le *CSS personnalisé* pour ajuster comment le navigateur affiche votre vidéo. L'exemple suivant ajoutera de l'espace autour de la boîte, lui donnera un arrière-plan sombre semi-transparent et augmentera la taille de la police globale à une unité de base de 24px. Vous pouvez changer l'un de ces paramètres pour adapter votre présentation. Notez que la couleur du texte global des messages est blanche.
+
+   ```css
+   html {
+     margin: 0px;
+     padding: 20px;
+     background-color: rgba(0, 0, 0, 0);
+     font-size: 24px;
+   }
+
+   #chat-container {
+     background-color: rgba(0, 0, 0, 0.5);
+   }
+   ```
+
+5. Cliquez sur ‘OK’ pour enregistrer vos paramètres de chat et repositionner la nouvelle source de chat dans votre scène.
+
+## Exigences SSL
+
+Le contenu Owncast intégré qui n'est pas servi via HTTPS dans une page utilisant SSL/TLS est [bloqué par les navigateurs](https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content/How_to_fix_website_with_mixed_content). [Découvrez comment vous pouvez utiliser un proxy SSL](/docs/sslproxies/nginx) pour remplir cette exigence du navigateur et sécuriser votre site Owncast.

@@ -1,0 +1,109 @@
+---
+id: dispositivos-kodi
+title: Kodi
+slug: /viendo-transmisiones/kodi
+sidebar_label: Kodi
+deviceId: kodi
+deviceType: otros
+reliability: alto
+hide_title: true
+tags:
+  - kodi
+  - plugin
+  - centro-de-medios
+  - raspberry-pi
+  - htpc
+  - televisión
+  - viendo
+description: |
+  Mira flujos de Owncast en Kodi utilizando el plugin oficial de Owncast para explorar el directorio.
+icon: /images/devices/kodi.svg
+---
+
+import DeviceLayout from "@site/src/components/tv/DeviceLayout";
+import { DeviceOptionsGrid } from "@site/src/components/tv/DeviceOptionsGrid";
+import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard id="plugin-owncast" title="Plugin de Owncast Kodi" badge="Recomendado" difficulty="medio" reliability="alto" screenshot="/images/devices/kodi/plugin-interface.png" screenshotAlt="Interfaz del directorio del plugin de Owncast Kodi" summary="Instala el plugin oficial de Owncast para explorar el directorio directamente dentro de Kodi.">
+
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Explora todo el directorio de Owncast desde dentro de Kodi.</li>
+      <li>Plugin dedicado construido específicamente para Owncast.</li>
+      <li>Se integra sin problemas con la interfaz de Kodi.</li>
+    </ul>
+
+    <details>
+      <summary>Mostrar instrucciones paso a paso</summary>
+
+      1. Visita el [Plugin de Owncast Kodi](https://github.com/rAcHekLoS/plugin.video.owncast) en el repositorio de GitHub de rAcHekLoS.
+      2. Sigue las instrucciones de instalación del plugin en GitHub.
+      3. Inicia el plugin desde la sección de complementos de Kodi.
+      4. Explora los flujos disponibles de Owncast en el directorio.
+      5. Selecciona un flujo para comenzar a ver.
+
+    </details>
+
+    <div style={{textAlign: 'center'}}>
+      <a
+href="https://github.com/rAcHekLoS/plugin.video.owncast"
+target="_blank"
+rel="noopener noreferrer"
+style={{
+        display: 'inline-block',
+        padding: '10px 20px',
+        backgroundColor: '#6c757d',
+        color: 'white',
+        textDecoration: 'none',
+        borderRadius: '5px',
+        fontSize: '14px'
+      }}
+>
+Ver en GitHub
+      </a>
+    </div>
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard id="url-directa-kodi" title="Reproducción de URL directa" difficulty="fácil" reliability="alto" screenshot="/images/devices/kodi/direct-url.png" screenshotAlt="Interfaz de añadir ubicación de red de Kodi" summary="Reproduce flujos de Owncast directamente introduciendo la URL del flujo en Kodi.">
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Funciona con cualquier instalación de Kodi.</li>
+      <li>Acceso directo a servidores específicos de Owncast.</li>
+      <li>No se requieren plugins adicionales.</li>
+    </ul>
+
+    <details>
+      <summary>Mostrar instrucciones paso a paso</summary>
+
+      1. En Kodi, ve a **Videos** > **Archivos**.
+      2. Selecciona **Añadir Videos**.
+      3. Elige **Navegar** y luego **Añadir Ubicación de Red**.
+      4. Ingresa la URL de tu servidor Owncast (por ejemplo, `https://watch.owncast.online`).
+      5. Guarda la ubicación y accede a ella para reproducir el flujo.
+
+    </details>
+
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

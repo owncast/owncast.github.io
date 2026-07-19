@@ -1,0 +1,76 @@
+---
+title: Notifications de diffusion en direct
+description: Envoyez des notifications lorsque votre diffusion commence.
+sidebar_position: 200
+sidebar_label: Notifications de diffusion en direct
+tags:
+  - notifications
+  - discord
+  - fediverse
+  - en direct
+  - spectateurs
+  - webhooks
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+Certaines diffusions bénéficient de l'annonce à leur public lorsqu'elles sont en direct.
+
+Cela ne constitue pas une approbation d'un service particulier, mais cela peut aider certains streamers à s'intégrer dans leurs communautés existantes.
+
+Si vous souhaitez développer cela et envoyer des notifications automatisées à d'autres destinations, créez un [webhook](/docs/api/webhooks).
+
+Vous trouverez ces canaux sous **Configuration → Notifications** dans l'administration.
+
+<img src="/docs/img/admin-notifications.png" alt="La page des paramètres de notifications dans l'administration, avec des sections pour les alertes de navigateur, Discord, Fediverse social et les webhooks personnalisés" width="75%" />
+
+<Tabs>
+  <TabItem value="notifications-push-de-navigateur" label="Notifications de navigateur" default>
+
+        Grâce aux notifications push de navigateur, vos spectateurs peuvent choisir d'être notifiés chaque fois que vous êtes en direct.
+
+        Tous les navigateurs ne prennent pas en charge cette fonctionnalité, et les navigateurs qui le font peuvent le gérer différemment. Brave, par exemple, exige que vous choisissiez la durée de validité des notifications. Ils voudront probablement sélectionner "Pour toujours" pour garder la notification active.
+
+        ### Activation des notifications de navigateur sur iOS
+
+        Vous pouvez demander à être notifié lorsqu'une diffusion commence sur iOS en suivant ces étapes :
+
+        1. Ouvrez Safari et accédez à votre instance Owncast.
+        2. Appuyez sur l'icône de partage en bas de votre navigateur.
+        3. Appuyez sur "Ajouter à l'écran d'accueil".
+        4. Appuyez sur la nouvelle icône Owncast sur votre écran d'accueil.
+        5. Appuyez sur le bouton "Notifier".
+        6. Appuyez sur "Autoriser" lorsqu'on vous le demande.
+
+  </TabItem>
+  <TabItem value="extension-de-navigateur" label="Extension de navigateur">
+    Une autre façon suggérée de recevoir des notifications de navigateur d'un nombre quelconque de
+    diffusions est d'utiliser l'Extension de navigateur Owncast par
+    craftamap. Elle est disponible pour
+    [Chrome](https://chrome.google.com/webstore/detail/owncast-extension/djgneammmklaajinkihpibdpaflehgio)
+    et
+    [Firefox](https://addons.mozilla.org/en-US/firefox/addon/owncast-extension/).
+  </TabItem>
+
+<TabItem value="fediverse" label="Fediverse">
+  Les fonctionnalités sociales du Fediverse ont un support intégré pour notifier vos abonnés
+  lorsque vous êtes en direct. [Visitez la documentation](/docs/social/) pour plus
+  d'informations.
+</TabItem>
+
+  <TabItem value="discord" label="Discord">
+        Vous pouvez notifier un canal Discord lorsque votre diffusion démarre. Visitez la [documentation Discord](https://support.discord.com/hc/en-us/articles/228383668) pour des instructions complètes.
+
+    * Visitez Éditez le canal / Intégrations sur votre canal Discord.
+    * Créez un webhook.
+    * Fournissez l'URL dans la configuration d'Owncast.
+  </TabItem>
+
+<TabItem value="personnel" label="Personnalisé">
+  Vous pouvez créer vos propres notifications personnalisées en utilisant
+  [webhooks](/docs/api/webhooks). Cela vous permet d'envoyer des notifications à tout
+  service en écrivant votre propre intégration.
+</TabItem>
+
+</Tabs>

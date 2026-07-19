@@ -1,0 +1,44 @@
+---
+title: Verwenden Sie ein Container-Image
+description: Images zum Ausführen von Owncast in einer containerisierten Umgebung sind für Veröffentlichungen verfügbar.
+tags:
+  - docker
+  - container
+  - portainer
+  - installation
+  - compose
+---
+
+1. Laden Sie die `neueste` Version [von Dockerhub](https://hub.docker.com/r/owncast/owncast/tags) herunter: `docker pull owncast/owncast:latest`.
+2. Führen Sie Folgendes aus, um den Dienst zu starten. Die Bindung des `data`-Verzeichnisses hält Ihre Datenbank und Backups auf dem Host, sodass Sie sie später auf einen anderen Server verschieben können.
+
+```bash
+docker run --restart unless-stopped -v "$(pwd)/data:/app/data" -p 8080:8080 -p 1935:1935 owncast/owncast:latest
+```
+
+Alternativ können Sie eine `docker-compose.yml`-Datei mit folgenden Inhalten erstellen:
+
+```yaml
+services:
+  owncast:
+    image: owncast/owncast:latest
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+      - "1935:1935"
+    volumes:
+      - ./data:/app/data
+```
+
+und führen Sie `docker compose up -d` aus, um den Dienst zu starten.
+
+Um später auf eine neuere Version zu upgraden, ziehen Sie das neueste Image und erstellen Sie den Container neu: Führen Sie `docker pull owncast/owncast:latest` aus, und dann `docker compose up -d` (oder stoppen Sie den Container und führen Sie erneut Ihren `docker run`-Befehl aus).
+
+## Melden Sie sich als Administrator an und richten Sie Ihren Stream ein
+
+import { IncludeMarkdown } from "@site/src/components";
+import AdminLogin from "../../shared/admin-login.md";
+
+<IncludeMarkdown>
+  <AdminLogin />
+</IncludeMarkdown>

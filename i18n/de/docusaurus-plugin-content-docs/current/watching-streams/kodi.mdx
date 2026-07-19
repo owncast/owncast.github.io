@@ -1,0 +1,109 @@
+---
+id: geräte-kodi
+title: Kodi
+slug: /watching-streams/kodi
+sidebar_label: Kodi
+deviceId: kodi
+deviceType: sonstiges
+reliability: hoch
+hide_title: true
+tags:
+  - kodi
+  - plugin
+  - medienzentrum
+  - raspberry-pi
+  - htpc
+  - fernseher
+  - schauen
+description: |
+  Sehen Sie eigene Owncast-Streams auf Kodi mit dem offiziellen Owncast-Plugin für die Verzeichnisdurchsuchung an.
+icon: /images/devices/kodi.svg
+---
+
+import DeviceLayout from "@site/src/components/tv/DeviceLayout";
+import { DeviceOptionsGrid } from "@site/src/components/tv/DeviceOptionsGrid";
+import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard id="owncast-plugin" title="Owncast Kodi Plugin" badge="Empfohlen" difficulty="mittel" reliability="hoch" screenshot="/images/devices/kodi/plugin-interface.png" screenshotAlt="Owncast Kodi Plugin Verzeichnis Schnittstelle" summary="Installieren Sie das offizielle Owncast-Plugin, um das Verzeichnis direkt innerhalb von Kodi zu durchsuchen.">
+
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Durchsuchen Sie das gesamte Owncast-Verzeichnis von Kodi aus.</li>
+      <li>Dediziertes Plugin, das speziell für Owncast entwickelt wurde.</li>
+      <li>Integriert sich nahtlos in die Benutzeroberfläche von Kodi.</li>
+    </ul>
+
+    <details>
+      <summary>Schritte zur Anleitung anzeigen</summary>
+
+      1. Besuchen Sie das [Owncast Kodi Plugin](https://github.com/rAcHekLoS/plugin.video.owncast) GitHub-Repository von rAcHekLoS.
+      2. Befolgen Sie die Installationsanweisungen des Plugins auf GitHub.
+      3. Starten Sie das Plugin aus dem Add-ons-Bereich von Kodi.
+      4. Durchsuchen Sie verfügbare Owncast-Streams aus dem Verzeichnis.
+      5. Wählen Sie einen Stream aus, um anzusehen.
+
+    </details>
+
+    <div style={{textAlign: 'center'}}>
+      <a
+href="https://github.com/rAcHekLoS/plugin.video.owncast"
+target="_blank"
+rel="noopener noreferrer"
+style={{
+        display: 'inline-block',
+        padding: '10px 20px',
+        backgroundColor: '#6c757d',
+        color: 'white',
+        textDecoration: 'none',
+        borderRadius: '5px',
+        fontSize: '14px'
+      }}
+>
+Auf GitHub anzeigen
+      </a>
+    </div>
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard id="direct-url-kodi" title="Direkte URL-Wiedergabe" difficulty="einfach" reliability="hoch" screenshot="/images/devices/kodi/direct-url.png" screenshotAlt="Kodi Netzwerkstandort hinzufügen Schnittstelle" summary="Spielen Sie Owncast-Streams direkt, indem Sie die Stream-URL in Kodi eingeben.">
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Funktioniert mit jeder Kodi-Installation.</li>
+      <li>Direkter Zugang zu bestimmten Owncast-Servern.</li>
+      <li>Keine zusätzlichen Plugins erforderlich.</li>
+    </ul>
+
+    <details>
+      <summary>Schritte zur Anleitung anzeigen</summary>
+
+      1. Gehen Sie in Kodi zu **Videos** > **Dateien**.
+      2. Wählen Sie **Videos hinzufügen**.
+      3. Wählen Sie **Durchsuchen** und dann **Netzwerkstandort hinzufügen**.
+      4. Geben Sie die URL Ihres Owncast-Servers ein (z.B. `https://watch.owncast.online`).
+      5. Speichern Sie den Standort und greifen Sie darauf zu, um den Stream abzuspielen.
+
+    </details>
+
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

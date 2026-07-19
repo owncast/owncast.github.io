@@ -1,0 +1,42 @@
+---
+title: Mostrar botones de acción personalizados en su página
+description: Puede mostrar interfaces de usuario externas en Owncast registrando acciones externas.
+sidebar_label: Mostrar botones de acción personalizados en su página
+sidebar_position: 48
+---
+
+Puede crear interfaces adicionales que se alojan con complementos, extensiones o sitios de terceros. Cada acción es una única URL o HTML personalizado que se cargará y mostrará cuando un usuario presione un botón en la página de Owncast.
+
+## Ejemplos
+
+Algunos ejemplos de esta funcionalidad podrían ser cosas como:
+
+1. Una tabla de líderes para algún juego basado en chat que construiste o un juego externo que estás jugando en la transmisión.
+2. Listas de acciones que realizan divertidas animaciones en las superposiciones de su transmisión al ser seleccionadas.
+3. Integraciones con su bot de encuestas que muestra encuestas recientes y los resultados.
+4. Tarro de propinas para aceptar donaciones.
+5. Un horario que es más elegante o interactivo de lo que puedes representar en Markdown.
+
+## Limitaciones
+
+1. Las URL incrustadas a través de acciones externas deben estar alojadas en un servidor que soporte SSL y tenga un protocolo `https`. Las URL no seguras no son soportadas.
+2. Estas URL deben ser compatibles con el uso dentro de un iframe. Esto significa que [X-FRAME-OPTIONS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) y el [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) no pueden estar bloqueando. Si eres bloqueado, entonces estás limitado a cargar esta URL en una nueva pestaña y esa no es una buena experiencia.
+3. Si bien puedes experimentar con el uso de URL que no controlas personalmente, es probable que muchas de ellas no funcionen debido a limitaciones impuestas en el servidor remoto. Un ejemplo de esto es simplemente lanzar en una URL de PayPal o Google.
+
+## Cómo registrar acciones
+
+1. Visita el administrador y, bajo "Integraciones", ve a la página de "Acciones Externas".
+2. Agregar una acción.
+3. Establecer la URL o HTML personalizado de esta acción. Las URL deben ser un destino HTTPS y seguir las mejores prácticas enumeradas.
+4. Dale un nombre que se mostrará en el botón que inicia esta acción, una descripción opcional que se mostrará en el modal que presenta la acción, una URL para un ícono opcional para el botón y, opcionalmente, un color que se utilizará para el botón.
+5. Si realmente quieres registrar una URL que no controlas, pero no funciona con la funcionalidad predeterminada, puedes indicarlo "Abrir Externamente" y se abrirá una nueva pestaña en tu navegador. Esto no es óptimo, pero es una opción.
+
+## Mejores prácticas
+
+1. La interfaz de usuario de esta acción debería realizar poca o ninguna navegación. No debería ser tratada como una forma de mostrar cualquier página.
+2. Diseña tu interfaz de usuario para que viva en una ventana pequeña que no requiera mucho, si es que requiere desplazamiento, y que sea responsiva a móviles y pantallas pequeñas.
+3. Asegúrate de que el servidor de tu URL permita cargar tu contenido desde tu servidor Owncast a través de [X-FRAME-OPTIONS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) y el [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy).
+4. El nombre de usuario de chat de la persona que activó esta acción se pasa como un parámetro de URL, por lo que puedes completar automáticamente cualquier formulario para mayor comodidad. Deberías utilizar esto.
+5. La URL de instancia del servidor Owncast que está mostrando esta UI de acción se pasa como un parámetro de URL, por lo que si estás alojando acciones para múltiples servidores, puedes saber de dónde proviene. **Nota:** No deberías realizar solicitudes API arbitrarias solo porque este parámetro existe, ya que cualquiera puede falsificarlo fácilmente.
+6. Para acciones HTML que incluyen estilos personalizados a través de etiquetas `\<style>`, debes asegurarte de tener selectores que sean lo más específicos posible, sin colidir con ningún otro elemento de la página.
+7. Para acciones HTML que incrustan directamente un elemento `\<form>`, tiene sentido establecer `target="_blank"` para abrir la página de envío en una nueva pestaña. De esa manera tus espectadores no tendrán que detener la transmisión al enviar el formulario.

@@ -1,0 +1,63 @@
+---
+id: geräte-chromecast
+title: Chromecast
+slug: /streams-anschauen/chromecast
+sidebar_label: Chromecast
+deviceId: chromecast
+deviceType: casting
+reliability: hoch
+hide_title: true
+tags:
+  - chromecast
+  - casting
+  - google
+  - chrome
+  - fernseher
+  - anschauen
+description: |
+  Streamen Sie eigene Owncast-Streams direkt vom Chrome-Browser auf Ihr Chromecast-Gerät.
+icon: /images/devices/chromecast.svg
+---
+
+import DeviceLayout from "@site/src/components/tv/DeviceLayout";
+import { DeviceOptionsGrid } from "@site/src/components/tv/DeviceOptionsGrid";
+import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard id="chrome-cast" title="Chrome-Browser Casting" badge="Empfohlen" difficulty="einfach" reliability="hoch" screenshot="/images/devices/chromecast/chrome-cast.png" screenshotAlt="Chrome-Browser-Casting-Schnittstelle" summary="Streamen Sie Ihren Owncast-Stream direkt vom Chrome-Browser auf Ihr Chromecast-Gerät.">
+
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Funktioniert mit jedem Owncast-Stream im Chrome-Browser.</li>
+      <li>Einfacher Casting-Prozess mit nur wenigen Klicks.</li>
+      <li>Keine zusätzlichen Apps auf dem Chromecast erforderlich.</li>
+    </ul>
+
+    <details>
+      <summary>Schritt-für-Schritt-Anleitungen anzeigen</summary>
+
+      1. Öffnen Sie **Chrome** auf Ihrem Computer.
+      2. Besuchen Sie den Owncast-Server, den Sie ansehen möchten.
+      3. Klicken Sie oben rechts auf die Schaltfläche **Mehr** und dann auf **Cast**.
+      4. Wählen Sie das Chromecast-Gerät aus, auf dem Sie den Inhalt ansehen möchten.
+      5. Wenn Sie das Chromecast bereits verwenden, wird Ihr Inhalt das, was auf Ihrem Fernseher ist, ersetzen.
+
+    </details>
+
+    Für weitere Informationen besuchen Sie die [offizielle Chromecast-Dokumentation](https://support.google.com/chromecast/answer/3228332).
+
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

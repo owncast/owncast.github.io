@@ -1,0 +1,47 @@
+---
+title: Les téléspectateurs plus éloignés rencontrent des problèmes de buffering
+description: ""
+tags:
+  - buffering
+  - géolocalisation
+  - visualisation
+---
+
+import RelocatePhysicalServer from "../../troubleshoot/shared/relocate-physical-server.md";
+import AddLowerQualityOutputs from "../../troubleshoot/shared/add-lower-quality-outputs.md";
+import UseCDN from "../../troubleshoot/shared/use-cdn.md";
+import UseStorage from "../../troubleshoot/shared/use-storage.md";
+
+import { IncludeMarkdown } from "@site/src/components";
+
+Parce que la vidéo en direct peut avoir des tolérances très étroites, il est possible que l'emplacement physique des téléspectateurs par rapport à l'emplacement de votre serveur puisse provoquer des délais suffisants pour que le téléspectateur rencontre des problèmes de buffering.
+
+## Déplacez votre serveur
+
+<IncludeMarkdown>
+  <RelocatePhysicalServer />
+</IncludeMarkdown>
+
+## Ajoutez des qualités de sortie supplémentaires inférieures
+
+<IncludeMarkdown>
+  <AddLowerQualityOutputs />
+</IncludeMarkdown>
+
+Après avoir lu ce qui suit, vous pourriez également trouver des conseils utiles en consultant le [Guide de dépannage OBS](https://github.com/obsproject/obs-studio/wiki/Stream-Buffering-Issues/d65033b24e4a4c81c87323f05a59c12f78de620b), même si vous n'utilisez pas OBS.
+
+## Le téléspectateur changera de qualité au besoin
+
+En utilisant une technologie appelée Streaming Adaptatif, le téléspectateur changera de manière transparente entre différentes qualités vidéo selon les besoins. Lisez plus sur le fonctionnement de ceci et d'autres aspects de la vidéo en consultant notre [Document Vidéo](/docs/video).
+
+## Utilisez un stockage externe
+
+<IncludeMarkdown>
+  <UseStorage />
+</IncludeMarkdown>
+
+## Utilisez un CDN
+
+<IncludeMarkdown>
+  <UseCDN />
+</IncludeMarkdown>

@@ -1,0 +1,33 @@
+---
+title: Vidéo de basse qualité
+description: Ajustez les paramètres à la fois sur votre logiciel de diffusion et sur votre serveur pour ajuster la qualité vidéo de votre flux.
+tags:
+  - vidéo
+  - qualité
+unlisted: true
+related:
+  excludeFromAll: true
+---
+
+import { IncludeMarkdown } from "@site/src/components";
+import LowQualityVideo from "./shared/low-quality-video.md";
+
+## Assurez-vous que vous diffusez ce que vous attendez
+
+<IncludeMarkdown>
+  <LowQualityVideo />
+</IncludeMarkdown>
+
+## Augmentez le débit binaire configuré sur votre serveur
+
+Le débit binaire de flux Owncast est la quantité de données que votre serveur Owncast envoie aux spectateurs lorsque vous diffusez. Augmenter votre débit binaire peut améliorer la qualité de votre vidéo, mais seulement jusqu'à un certain point. Plus il y a de mouvement et de fréquence d'images élevée que vous offrez, plus le débit binaire que vous devrez fournir sera élevé pour ne pas voir d'"artéfacts" visibles et de pixelisation dans votre vidéo. Les flux avec moins de mouvement, des résolutions plus faibles ou une fréquence d'images plus basse peuvent se contenter d'un débit binaire plus faible, ce qui rend plus facile pour vous de diffuser et pour vos spectateurs de consommer.
+
+Si vous augmentez le débit binaire dans Owncast, assurez-vous que vous diffusez au moins ce débit binaire depuis votre logiciel de diffusion également. Il n'y a toujours aucune raison d'offrir une configuration de débit binaire sur votre serveur Owncast qui soit supérieure à ce que vous diffusez depuis votre logiciel de diffusion.
+
+**Inconvénient** : Un débit binaire plus élevé utilise plus de bande passante internet disponible et crée des segments vidéo de plus grande taille, ce qui prend plus de temps pour les spectateurs à télécharger, entraînant la possibilité que des gens rencontrent des mises en mémoire tampon s'ils ne peuvent pas télécharger la vidéo à temps. Pensez à offrir des options de qualité inférieure pour les spectateurs également. Augmenter votre débit binaire augmente également la demande sur la connexion Internet de votre serveur Owncast, donc assurez-vous que cela ne soit pas un goulot d'étranglement. Parlez à vos spectateurs et testez avec [HLS Analyzer](https://hlsanalyzer.com) lors des changements.
+
+## Consacrez plus de ressources sur votre serveur pour augmenter la qualité visuelle
+
+Vous voudrez peut-être également augmenter la quantité de CPU (ou GPU si vous utilisez un paramètre d'accélération matérielle) utilisée pour traiter la vidéo sur votre serveur Owncast. À mesure que vous baissez, vous verrez visiblement la qualité se dégrader.
+
+**Inconvénient** : Gardez à l'esprit que lorsque vous augmentez la quantité de ressources matérielles consacrées au traitement de votre vidéo, cela augmentera, comme prévu, le matériel utilisé. Vous devriez surveiller l'utilisation pour vous assurer que votre serveur peut gérer les paramètres mis à jour.

@@ -1,0 +1,154 @@
+---
+title: Incrustar Owncast en tu sitio web
+description: Puedes incrustar fácilmente tu chat o video en otro sitio.
+sidebar_position: 200
+sidebar_label: Incrustar Owncast en tu sitio web
+hide_table_of_contents: false
+tags:
+  - incrustar
+  - sitio web
+  - iframe
+  - chat
+  - video
+  - autoplay
+  - css
+---
+
+## Incrustando video
+
+Owncast admite incrustar tu transmisión de video directamente en cualquier otro sitio web o fuente sin necesidad de configurar un reproductor.
+
+La URL solo de video para tu contenido de transmisión está en: `http://owncast.example.com/embed/video`.
+
+Aquí hay un ejemplo de HTML que puedes usar.
+
+```html
+<iframe
+  src="https://owncast.example.com/embed/video"
+  title="Owncast"
+  height="350px"
+  width="550px"
+  referrerpolicy="origin"
+  allowfullscreen
+>
+</iframe>
+```
+
+Se verá algo así:
+
+<iframe src="https://watch.owncast.online/embed/video" title="Owncast" height="350px" width="550px" referrerpolicy="origen" allowfullscreen />
+
+### Autoplay
+
+Si deseas que un video incrustado comience a reproducirse por sí solo, sigue la [configuración de autoplay](/docs/video/#autoplay) de tu servidor. Puedes anular esto para una única incrustación agregando `?autoplay=` a la URL con uno de `off`, `always`, o `sound-only`. Un valor no reconocido se retrocede a la configuración del servidor.
+
+La mayoría de los navegadores bloquean el autoplay dentro de un iframe en otro sitio a menos que la página de incrustación otorgue permiso con el atributo `allow`:
+
+```html
+<iframe
+  src="https://owncast.example.com/embed/video?autoplay=always"
+  title="Owncast"
+  height="350px"
+  width="550px"
+  referrerpolicy="origin"
+  allow="autoplay"
+  allowfullscreen
+>
+</iframe>
+```
+
+### Silenciar
+
+Si deseas que el reproductor esté en silencio una vez que comience a reproducirse, agrega `?initiallyMuted=true` a la URL. Los espectadores aún pueden desactivar el silencio manualmente. Combina parámetros con `&`, por ejemplo `?autoplay=always&initiallyMuted=true`.
+
+Una interacción que debes conocer: `sound-only` nunca comienza en silencio, así que combinarlo con `initiallyMuted=true` significa que el reproductor no se reproducirá automáticamente en absoluto.
+
+## Personalizando el estilo del flujo integrado
+
+Puedes personalizar fácilmente el estilo del flujo de Owncast incrustado para que coincida con el diseño de tu sitio web aplicando estilos CSS. Así es como puedes hacerlo:
+
+1. **Crea un archivo CSS:** Primero, crea un archivo CSS (por ejemplo, `stream-styles.css`) donde definirás tus estilos personalizados.
+
+2. **Vincula el archivo CSS:** En la sección `<head>` de tu documento HTML donde incrustas el flujo de Owncast, añade una etiqueta `<link>` para incluir tu archivo CSS. Asegúrate de agregar esta línea antes de la etiqueta de cierre `</head>`:
+
+   ```html
+   <link rel="stylesheet" href="path/to/stream-styles.css" />
+   ```
+
+   Reemplaza "path/to/stream-styles.css" con la ruta real a tu archivo CSS.
+
+3. **Aplica estilos:** Personaliza los estilos en tu archivo stream-styles.css de acuerdo a tus preferencias. Puedes apuntar al elemento `\<iframe>` usando selectores CSS, como se muestra en el siguiente ejemplo:
+
+   ```css
+   /* Diseña la caja del iframe del flujo incrustado */
+   iframe[title="Owncast"] {
+     border: none; /* Eliminar el borde del iframe */
+     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Añadir una sombra sutil para profundidad */
+     border-radius: 10px; /* Esquinas redondeadas para un aspecto moderno */
+     overflow: hidden;
+     margin: 0 auto; /* Centrar el iframe horizontalmente */
+   }
+   ```
+
+4. **Personaliza a tus necesidades:** Ajusta los valores anteriores para que coincidan con el diseño y la disposición de tu sitio web.
+
+El flujo incrustado es una página separada cargada desde tu servidor Owncast, por lo que el CSS de tu sitio solo puede estilizar la caja `\<iframe>` en sí, no el contenido dentro de ella. Para cambiar los colores, fuentes y diseño dentro del reproductor, usa los [ajustes de apariencia](/docs/configuration/appearance) en tu servidor Owncast en su lugar.
+
+Siguiendo estos pasos, puedes integrar sin problemas tu flujo de Owncast en tu sitio web mientras mantienes control sobre su apariencia visual.
+
+### Usando el feed HLS
+
+Mientras el reproductor lo admita, se recomienda abrir la página de inicio de tu instancia de Owncast directamente.
+El reproductor encontrará automáticamente la lista de reproducción correcta y comenzará a reproducir.
+Esto garantizará la compatibilidad futura si la forma en que Owncast publica HLS cambia alguna vez.
+
+Sin embargo, si necesitas el feed HLS (es decir, para compartir tu transmisión a un reproductor de terceros), puedes acceder al feed HLS directamente a través de esta URL: `http://your.host/hls/stream.m3u8`.
+
+## Incorporando chat
+
+Owncast admite incrustar tu chat directamente en cualquier otro sitio web o fuente.
+
+Hay dos tipos de chats incrustados: un chat de solo lectura que solo muestra los mensajes y un chat independiente que tiene la misma funcionalidad que el que hay en la interfaz web principal de Owncast.
+
+### Incorporando chat independiente
+
+La URL del chat independiente está en: `http://owncast.example.com/embed/chat/readwrite`.
+
+Se verá algo así:
+
+[Incrustar Owncast](https://watch.owncast.online/embed/chat/readwrite)
+
+### Incorporando chat de solo lectura
+
+La URL del chat de solo lectura está en: `http://owncast.example.com/embed/chat/readonly`.
+
+Un uso común del chat de solo lectura es agregar los mensajes de chat a tu software de transmisión, como una capa web en OBS.
+
+#### Usando OBS
+
+1. Haz clic en `+` o haz clic con el botón derecho para agregar una nueva fuente. Elige `Navegador` de la lista.
+
+2. Para una nueva fuente, deberás agregar el nombre. Escribe "*Chat*".
+
+3. En la configuración de la fuente del navegador, deberás cambiar la URL a la URL `/embed/chat/readonly` de tu instancia de Owncast.
+
+4. Puedes usar el *CSS personalizado* para ajustar cómo el navegador muestra tu video. El siguiente ejemplo añadirá un espacio alrededor de la caja, le dará un fondo oscuro semi-transparente y aumentará el tamaño de fuente general a una unidad base de 24px. Puedes cambiar cualquiera de estos ajustes para adaptarlos a la disposición de tu presentación. Ten en cuenta que el color del texto del mensaje en general es blanco.
+
+   ```css
+   html {
+     margin: 0px;
+     padding: 20px;
+     background-color: rgba(0, 0, 0, 0);
+     font-size: 24px;
+   }
+
+   #chat-container {
+     background-color: rgba(0, 0, 0, 0.5);
+   }
+   ```
+
+5. Haz clic en 'OK' para guardar tu configuración de chat y reposicionar la nueva fuente de chat en tu escena.
+
+## Requisitos SSL
+
+El contenido de Owncast incrustado que no se sirve a través de HTTPS dentro de una página que usa SSL/TLS se [bloquea por los navegadores](https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content/How_to_fix_website_with_mixed_content). [Aprende cómo puedes usar un proxy SSL](/docs/sslproxies/nginx) para cumplir con este requisito del navegador y asegurar tu sitio de Owncast.

@@ -1,0 +1,30 @@
+---
+title: Erreurs liées à la vidéo
+description: Dépanner les erreurs liées à la vidéo dans les journaux d'Owncast
+unlisted: true
+related:
+  excludeFromAll: true
+tags:
+  - vidéo
+  - erreurs
+  - miniature
+---
+
+import { IncludeMarkdown } from "@site/src/components";
+import MiscVideoIssues from "./shared/misc-video-issues.md";
+
+## Premiers pas
+
+<IncludeMarkdown>
+  <MiscVideoIssues />
+</IncludeMarkdown>
+
+## Erreur de génération de miniature impossible
+
+Si vous voyez une erreur dans vos journaux Owncast indiquant qu'il était impossible de générer une miniature pour votre flux, c'est probablement parce que vous avez activé le passthrough vidéo, et la vidéo que vous envoyez à Owncast n'est pas dans un format lisible.
+
+Si vous voyez cette erreur, il est également probable que vos spectateurs rencontrent des problèmes pour lire votre flux.
+
+### Solution
+
+Désactivez le passthrough vidéo dans les paramètres vidéo de votre serveur Owncast.

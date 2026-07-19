@@ -1,0 +1,63 @@
+---
+id: appareils-chromecast
+title: Chromecast
+slug: /streaming-en-cours/chromecast
+sidebar_label: Chromecast
+deviceId: chromecast
+deviceType: diffusion
+reliability: élevé
+hide_title: true
+tags:
+  - chromecast
+  - diffusion
+  - google
+  - chrome
+  - télévision
+  - regarder
+description: |
+  Diffusez vos flux Owncast directement depuis le navigateur Chrome vers votre appareil Chromecast.
+icon: /images/appareils/chromecast.svg
+---
+
+import DeviceLayout from "@site/src/components/tv/DeviceLayout";
+import { DeviceOptionsGrid } from "@site/src/components/tv/DeviceOptionsGrid";
+import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard id="chrome-cast" title="Diffusion de Chrome Browser" badge="Recommandé" difficulty="facile" reliability="élevé" screenshot="/images/appareils/chromecast/chrome-cast.png" screenshotAlt="Interface de diffusion de Chrome" summary="Diffusez votre flux Owncast directement depuis le navigateur Chrome vers votre appareil Chromecast.">
+
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Compatible avec tout flux Owncast dans le navigateur Chrome.</li>
+      <li>Processus de diffusion simple en quelques clics.</li>
+      <li>Aucune application supplémentaire requise sur le Chromecast.</li>
+    </ul>
+
+    <details>
+      <summary>Afficher les instructions étape par étape</summary>
+
+      1. Sur votre ordinateur, ouvrez **Chrome**.
+      2. Visitez le serveur Owncast que vous souhaitez regarder.
+      3. En haut à droite, cliquez sur le bouton **Plus** puis sur **Diffuser**.
+      4. Choisissez le dispositif Chromecast sur lequel vous souhaitez regarder le contenu.
+      5. Si vous utilisez déjà le Chromecast, votre contenu remplacera ce qui est affiché sur votre télévision.
+
+    </details>
+
+    Pour plus de détails, visitez la [documentation officielle de Chromecast](https://support.google.com/chromecast/answer/3228332).
+
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

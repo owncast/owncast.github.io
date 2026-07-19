@@ -1,0 +1,42 @@
+---
+title: Benutzerdefinierte Aktionsschaltflächen auf Ihrer Seite anzeigen
+description: Sie können externe Benutzeroberflächen in Owncast anzeigen, indem Sie externe Aktionen registrieren.
+sidebar_label: Benutzerdefinierte Aktionsschaltflächen auf Ihrer Seite anzeigen
+sidebar_position: 48
+---
+
+Sie können zusätzliche Schnittstellen erstellen, die mit Add-ons, Erweiterungen oder Websites von Drittanbietern gehostet werden. Jede Aktion ist eine einzelne URL oder benutzerdefiniertes HTML, das geladen und angezeigt wird, wenn ein Benutzer einen Knopf auf der Owncast-Seite drückt.
+
+## Beispiele
+
+Einige Beispiele für diese Funktionalität könnten Dinge sein, wie:
+
+1. Ein Leaderboard für ein Chat-basiertes Spiel, das du gebaut hast, oder ein externes Spiel, das du im Stream spielst.
+2. Listen von Aktionen, die lustige Animationen über Ihrem Stream-Overlay abspielen, wenn sie ausgewählt werden.
+3. Integrationen mit Ihrem Abstimmungs-Chatbot, der aktuelle Umfragen und die Ergebnisse anzeigt.
+4. Tipp-Glas zur Annahme von Spenden.
+5. Ein Zeitplan, der schicker oder interaktiver ist, als das, was Sie in Markdown darstellen können.
+
+## Einschränkungen
+
+1. URLs, die über externe Aktionen eingebettet sind, müssen auf einem Server gehostet werden, der SSL unterstützt und ein `https`-Protokoll hat. Unsichere URLs werden nicht unterstützt.
+2. Diese URLs müssen innerhalb eines iFrames funktionieren. Das bedeutet, dass [X-FRAME-OPTIONS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) und die [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) nicht blockierend sein dürfen. Wenn Sie blockiert sind, sind Sie darauf beschränkt, diese URL in einem neuen Tab zu laden, und das ist kein tolles Erlebnis.
+3. Während Sie experimentieren können, indem Sie URLs verwenden, die Sie nicht persönlich kontrollieren, ist es oft wahrscheinlich, dass viele von ihnen aufgrund von Einschränkungen des Remote-Servers nicht funktionieren. Ein Beispiel dafür ist einfach, eine PayPal- oder Google-URL einzufügen.
+
+## So registrieren Sie Aktionen
+
+1. Besuchen Sie die Admin-Oberfläche und gehen Sie unter "Integrationen" zur Seite "Externe Aktionen".
+2. Fügen Sie eine Aktion hinzu.
+3. Legen Sie die URL oder den benutzerdefinierten HTML-Code dieser Aktion fest. URLs sollten ein HTTPS-Ziel sein und den aufgeführten Best Practices folgen.
+4. Geben Sie ihr einen Namen, der auf der Schaltfläche angezeigt wird, die diese Aktion startet, eine optionale Beschreibung, die im Modal angezeigt wird, das die Aktion präsentiert, eine URL zu einem optionalen Symbol für die Schaltfläche und optional eine Farbe, die für die Schaltfläche verwendet wird.
+5. Wenn Sie wirklich eine URL registrieren möchten, die Sie nicht kontrollieren, und sie nicht mit der Standardfunktionalität funktioniert, können Sie sagen, dass sie "Extern Öffnen" soll, und sie wird einen neuen Tab in Ihrem Browser öffnen. Das ist nicht optimal, aber es ist eine Option.
+
+## Best Practices
+
+1. Die Benutzeroberfläche dieser Aktion sollte wenig bis gar keine Navigation durchführen. Sie sollte nicht als Möglichkeit betrachtet werden, einfach beliebige Seiten anzuzeigen.
+2. Gestalten Sie Ihre Benutzeroberfläche so, dass sie in einem kleinen Fenster lebt, das nicht viel Scrollen erfordert und auf mobilen und kleinen Displays responsiv ist.
+3. Stellen Sie sicher, dass der Server Ihrer URL das Laden Ihres Inhalts von Ihrem Owncast-Server über [X-FRAME-OPTIONS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) und die [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) erlaubt.
+4. Der Chat-Benutzername der Person, die diese Aktion ausgelöst hat, wird als URL-Parameter übergeben, sodass Sie alle Formulare zur Vereinfachung vorab ausfüllen können. Sie sollten dies nutzen.
+5. Die Instanz-URL des Owncast-Servers, der diese Aktionsbenutzeroberfläche anzeigt, wird als URL-Parameter übergeben, sodass Sie, wenn Sie Aktionen für mehrere Server hosten, wissen können, woher sie kommt. **Hinweis:** Sie sollten keine beliebigen API-Anfragen durchführen, nur weil dieser Parameter existiert, da jeder ihn leicht fälschen kann.
+6. Für HTML-Aktionen, die benutzerdefiniertes Styling über `\<style>`-Tags enthalten, sollten Sie sicherstellen, dass Sie Selektoren haben, die so spezifisch wie möglich sind und nicht mit anderen Elementen auf der Seite kollidieren.
+7. Für HTML-Aktionen, die ein `\<form>`-Element direkt einbetten, macht es Sinn, `target="_blank"` einzustellen, um die Einreichseite in einem neuen Tab zu öffnen. Auf diese Weise müssen Ihre Zuschauer den Stream nicht stoppen, wenn sie das Formular einreichen.

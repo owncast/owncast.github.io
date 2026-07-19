@@ -1,0 +1,96 @@
+---
+title: Alle Zuschauer haben Pufferprobleme
+description: Schritte zur Fehlersuche, wenn alle Zuschauer Pufferprobleme haben.
+tags:
+  - Puffer
+  - Puffern
+  - Ladezeichen
+  - Wird geladen
+unlisted: true
+related:
+  excludeFromAll: true
+---
+
+import { IncludeMarkdown } from "@site/src/components";
+import HardwareUsage from "../shared/hardware-usage.md";
+import HlsAnalyzer from "../shared/hls-analyzer.md";
+import StreamHealth from "../shared/stream-health.md";
+import BroadcastingSoftware from "../shared/broadcasting-software.md";
+import MatchHighestOutputQuality from "../shared/match-highest-output-quality.md";
+import ReduceVideoQuality from "../shared/reduce-video-quality.md";
+import UseStorage from "../shared/use-storage.md";
+import UseCdn from "../shared/use-cdn.md";
+import RelocatePhysicalServer from "../shared/relocate-physical-server.md";
+import SlowStorageUploads from "../shared/slow-storage-uploads.md";
+
+Wenn jeder Zuschauer gleichzeitig puffert, liegt das Problem meist auf der Server- oder Übertragungsseite und nicht bei der Verbindung eines einzelnen Zuschauers. Arbeiten Sie die folgenden Schritte in der angegebenen Reihenfolge durch.
+
+Nachdem Sie die folgenden Informationen gelesen haben, können Ihnen auch hilfreiche Tipps aus dem [OBS-Beseitigungshandbuch](https://github.com/obsproject/obs-studio/wiki/Stream-Buffering-Issues/d65033b24e4a4c81c87323f05a59c12f78de620b) hilfreich sein, auch wenn Sie OBS nicht verwenden.
+
+## Überprüfen Sie die Hardwareauslastung Ihres Owncast-Servers
+
+<IncludeMarkdown>
+  <HardwareUsage />
+</IncludeMarkdown>
+
+## Holen Sie sich einige zusätzliche Informationen
+
+<IncludeMarkdown>
+  <StreamHealth />
+</IncludeMarkdown>
+
+<IncludeMarkdown>
+  <HlsAnalyzer />
+</IncludeMarkdown>
+
+## Beginnen Sie mit Ihrer Broadcast-Software
+
+### Übertragen Sie Ihren Stream zuverlässig
+
+<IncludeMarkdown>
+  <BroadcastingSoftware />
+</IncludeMarkdown>
+
+### Videoqualität anpassen
+
+<IncludeMarkdown>
+  <MatchHighestOutputQuality />
+</IncludeMarkdown>
+
+## Erhöhen Sie Ihren Puffer für die Latenz
+
+Die Erhöhung der Einstellung des Latenzpuffers startet den Benutzer zwar weiter hinter dem Live-Bild, gibt dem Client jedoch mehr abspielbares Video, bevor er auf das Live-Bild warten muss. Weniger Latenz ist weniger effizient und führt eher zu Pufferproblemen. Überprüfen Sie mithilfe des [HLS-Analyzers](https://hlsanalyzer.com), ob nach Erhöhung des Wertes für den Latenzpuffer Warnmeldungen reduziert werden konnten.
+
+Sie müssen einen Stream neu starten, nachdem Sie diesen Wert in den Videoeinstellungen von Owncast geändert haben.
+
+**Nachteil**: Eine Erhöhung Ihrer Latenz erschwert die Interaktion mit Zuschauern in Live-Übertragungen, da die Verzögerung zwischen Ihrer Aktion und dem, was sie sehen, größer wird.
+
+## Reduzieren Sie Ihre Videoqualität
+
+<IncludeMarkdown>
+  <ReduceVideoQuality />
+</IncludeMarkdown>
+
+## Verwenden Sie externen Speicher
+
+<IncludeMarkdown>
+  <UseStorage />
+</IncludeMarkdown>
+
+## Verwenden Sie ein CDN
+
+<IncludeMarkdown>
+  <UseCdn />
+</IncludeMarkdown>
+
+## Wechseln Sie zu einem Server, der zentraler gelegen ist oder von einem schnelleren Anbieter gehostet wird
+
+<IncludeMarkdown>
+  <RelocatePhysicalServer />
+</IncludeMarkdown>
+
+## Wenn Sie langsame Uploads zu externem Speicher erleben
+
+<IncludeMarkdown>
+  <SlowStorageUploads />
+</IncludeMarkdown>

@@ -5,36 +5,36 @@ related:
 ---
 
 ```mermaid
-flowchart LR
-    subgraph Broadcasting
-        OBS[OBS / Broadcasting Software]
-    end
+flussdiagramm LR
+    unterdiagramm Streaming
+        OBS[OBS / Streaming-Software]
+    ende
 
-    subgraph Owncast[Owncast Server]
-        direction TB
-        RTMP[RTMP Ingest]
-        Encoder[Video Encoder]
-        High[High Quality<br/>1080p @ 5000kbps]
-        Medium[Medium Quality<br/>720p @ 2500kbps]
-        Low[Low Quality<br/>480p @ 1000kbps]
-        WebServer[Web Server]
+    unterdiagramm Owncast[Owncast-Server]
+        richtung TB
+        RTMP[RTMP-Eingang]
+        Encoder[Video-Encoder]
+        Hoch[Hohe Qualität<br/>1080p @ 5000kbps]
+        Mittel[Mittlere Qualität<br/>720p @ 2500kbps]
+        Niedrig[Niedrige Qualität<br/>480p @ 1000kbps]
+        WebServer[Webserver]
         RTMP --> Encoder
-        Encoder --> High
-        Encoder --> Medium
-        Encoder --> Low
-        High --> WebServer
-        Medium --> WebServer
-        Low --> WebServer
-    end
+        Encoder --> Hoch
+        Encoder --> Mittel
+        Encoder --> Niedrig
+        Hoch --> WebServer
+        Mittel --> WebServer
+        Niedrig --> WebServer
+    ende
 
-    subgraph Viewers
-        Desktop[Desktop<br/>Fast Connection]
+    unterdiagramm Zuschauer
+        Desktop[Desktop<br/>Schnelle Verbindung]
         Tablet[Tablet<br/>WiFi]
-        Mobile[Mobile<br/>Cellular]
-    end
+        Mobil[Mobil<br/>Mobilfunk]
+    ende
 
-    OBS -->|RTMP Stream| RTMP
+    OBS -->|RTMP-Stream| RTMP
     WebServer -->|HLS| Desktop
     WebServer -->|HLS| Tablet
-    WebServer -->|HLS| Mobile
+    WebServer -->|HLS| Mobil
 ```

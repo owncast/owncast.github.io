@@ -1,0 +1,45 @@
+---
+title: Vorinstalliertes Owncast mit Hosting-Anbietern
+sidebar_label: Von Hosting-Anbietern installiert
+description: Haben Sie automatisch einen Server mit vorinstalliertem Owncast, indem Sie unterstützte Hosting-Anbieter verwenden.
+tags:
+  - Installation
+  - Hosting
+  - Anbieter
+  - Automatisiert
+---
+
+Einige Dienstanbieter bieten 1-Klick-Installationsoptionen für Owncast an, mit denen Sie ohne manuelle Installation der Software schnell loslegen können.
+
+## Folgen Sie den Anweisungen Ihres Hosting-Anbieters
+
+Befolgen Sie die Anweisungen Ihres gewählten Hosting-Anbieters, um loszulegen, da jeder Anbieter einen eigenen spezifischen Prozess hat. Das Owncast-Projekt kann im Allgemeinen keine spezifischen Probleme Ihres Hosting-Anbieters unterstützen, wenden Sie sich daher bitte an deren Support, wenn Sie Probleme haben.
+
+## Was Sie benötigen
+
+1. Einen Domainnamen und Zugriff auf Ihre DNS-Einstellungen. Dies ist erforderlich, um [SSL](/docs/sslproxies) zu unterstützen.
+2. Ein Konto bei einem Hosting-Anbieter, der automatische Owncast-Installationen unterstützt.
+
+### Einige bekannte Anbieter
+
+* [DigitalOcean](https://marketplace.digitalocean.com/apps/owncast?refcode=492f098407b2)
+* [Elestio](https://elest.io/open-source/owncast). Sie sind vollständig verwaltet, was bedeutet, dass sie Updates, Backups usw. übernehmen.
+* [Hetzner](https://docs.hetzner.com/cloud/apps/list/owncast/)
+* [Linode/Akamai](https://www.linode.com/marketplace/apps/owncast/owncast/?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d)
+
+Einige dieser Anbieter bieten möglicherweise kostenlose Guthaben für neue Konten an oder geben Owncast für Empfehlungen Kredit.
+
+## DNS einrichten
+
+1. Melden Sie sich bei Ihrem DNS-Anbieter an.
+2. Fügen Sie einen **"A Record"** hinzu, der auf den neuen Server zeigt, den Ihr Hosting-Anbieter erstellt hat, und den Hostnamen, den Sie für Owncast verwenden möchten.
+3. Warten Sie etwa 5 Minuten, es kann jedoch länger dauern, je nach Ihrem DNS-Anbieter.
+4. Wenn `http://your_new_server:8080` in Ihrem Browser geladen wird, ist Ihre Installation abgeschlossen.
+5. Es kann erforderlich sein, Ihren neuen Server neu zu starten, damit der SSL-Proxy startet, abhängig von Ihrem Hosting-Anbieter.
+
+import { IncludeMarkdown } from "@site/src/components";
+import AdminLogin from "../../shared/admin-login.md";
+
+<IncludeMarkdown>
+  <AdminLogin />
+</IncludeMarkdown>

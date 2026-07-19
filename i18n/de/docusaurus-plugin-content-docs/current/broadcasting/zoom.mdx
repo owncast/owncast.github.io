@@ -1,0 +1,18 @@
+---
+title: Zoom
+description: Zoom ist ein Anbieter von Video-Conferencing.
+sidebar_position: 24
+---
+
+[Zoom](https://zoom.us/) bietet an, Ihr Meeting an einen Livestream-Dienst wie Owncast zu übertragen. Bitte beachten Sie, dass möglicherweise einige Änderungen von Ihrem Zoom-Administrator vorgenommen werden müssen.
+
+1. Richten Sie Owncast ein und konfigurieren Sie es nach Ihren Wünschen. Da der RTMP-Stream direkt von den Zoom-Servern kommt, sollte mindestens der RTMP-Port aus dem Internet erreichbar sein.
+2. Erlauben Sie das Livestreaming für das Benutzerkonto. Gehen Sie zu [zoom.us/profile/setting](https://zoom.us/profile/setting), scrollen Sie zu "Livestream-Meetings erlauben" und aktivieren Sie den *benutzerdefinierten Livestream-Dienst*:
+   ![Image](/docs/img/zoom-activate-for-account.png)
+3. Planen Sie ein Meeting über die Webseite und speichern Sie es. Zoom wird Sie auf eine Seite "Meeting verwalten" weiterleiten, die ganz unten einen Abschnitt für Livestreaming hat. Klicken Sie auf den Link "Livestream-Einstellungen konfigurieren":
+   ![Image](/docs/img/zoom-manage-meeting.png)
+4. Füllen Sie Ihre Owncast-Serverinformationen aus. Die "URL der Livestream-Seite" sollte das Owncast-Frontend sein, da Zoom von dem Meeting darauf verlinkt.
+   ![Image](/docs/img/zoom-server-settings.png)
+5. Sobald das Meeting gestartet ist, klicken Sie auf "Mehr" in der Menüleiste und dann auf "Livestream zu benutzerdefinierter Dienst". Zoom öffnet ein Browserfenster und leitet Sie dann zum Owncast-Frontend (oder zur von Ihnen angegebenen URL) weiter.
+
+Die Anweisungen für Webinare und persönliche Meetingräume sind ähnlich, [siehe die Support-Seite von Zoom](https://support.zoom.us/hc/en-us/articles/115001777826-Live-Streaming-Meetings-or-Webinars-Using-a-Custom-Service) für weitere Informationen.

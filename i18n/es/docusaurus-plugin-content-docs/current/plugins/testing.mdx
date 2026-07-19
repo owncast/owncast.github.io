@@ -1,0 +1,380 @@
+---
+title: Pruebas de plugins
+description: Ejecuta tu plugin construido a través del runtime real de Owncast con efectos secundarios simulados. Pruebas de escenarios, afirmaciones, fixtures, autenticación HTTP.
+sidebar_position: 9
+sidebar_label: Pruebas
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - plugins
+  - pruebas
+  - escenarios
+  - tdd
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Los plugins de Owncast vienen con un marco de pruebas basado en escenarios que ejecuta tu plugin construido a través del runtime real de Owncast, con los efectos secundarios (envíos de chat, peticiones HTTP, escrituras de configuración) capturados para afirmaciones. Una prueba que pasa significa el mismo comportamiento en producción.
+
+Los escenarios son datos simples, así que el modelo de escenario en esta página es idéntico sin importar el idioma en el que escribas. Los archivos de prueba se encuentran bajo `__tests__/`. Cómo los escribes y los ejecutas varía ligeramente según el SDK.
+
+## Escribir y ejecutar pruebas
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+Escribe archivos `__tests__/*.test.js` que llamen a `runScenarios([...])`:
+
+```js
+const { runScenarios } = require("@owncast/plugin-sdk/testing");
+
+runScenarios([
+  {
+    name: "ecchos el mensaje",
+    events: [
+      {
+        event: "chat.message.received",
+        payload: { user: { id: "u1", displayName: "alice" }, body: "hola" },
+      },
+    ],
+    expect: { chatSends: ["alice dijo: hola"] },
+  },
+]);
+```
+
+Ejecuta con `npm test`. Porque es un script, puedes construir el arreglo de escenarios con bucles, fixtures y cargas útiles calculadas. Divide los escenarios entre varios archivos `__tests__/*.test.js` y ejecútalos todos en una sola pasada con `runScenarioFiles()`. Los archivos estáticos `__tests__/*.test.json` también funcionan.
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+Escribe archivos `__tests__/*.test.json` que contengan un arreglo de escenarios (el formato mostrado a lo largo de esta página):
+
+```json
+[
+  {
+    "name": "ecchos el mensaje",
+    "events": [
+      {
+        "event": "chat.message.received",
+        "payload": { "user": { "id": "u1", "displayName": "alice" }, "body": "hola" }
+      }
+    ],
+    "expect": { "chatSends": ["alice dijo: hola"] }
+  }
+]
+```
+
+Ejecuta con `owncast-plugin-py test` (el argumento del directorio de forma predeterminada se establece en el actual). Python utiliza el formato JSON: no hay un ejecutor basado en script.
+
+</TabItem>
+</Tabs>
+
+Ejecutar las pruebas construye tu plugin, luego ejecuta cada archivo de escenario bajo `__tests__/`. El modelo de datos de escenario es el mismo sin importar qué SDK utilices.
+
+:::note[Los nombres de los campos se mantienen en camelCase]
+Un escenario describe **eventos del host**, no tu código de plugin, así que los campos de carga útil utilizan los nombres de los cables (`displayName`, `clientId`) sin importar el idioma en el que escribiste el plugin.
+:::
+
+## Anatomía de un escenario
+
+```json
+{
+  "name": "descripción legible por humanos",
+  "given": { },
+  "events": [ ],
+  "expect": { }
+}
+```
+
+* `name`: qué prueba el escenario. Se muestra en la salida de paso/fallo.
+* `given`: opcional. Establece el estado inicial que tu plugin lee (historial de chat, valores de kv, información del servidor, respuestas HTTP enlatadas).
+* `events`: los pasos a seguir, en orden. Cada paso es una notificación despachada, invocación de cadena de filtros o petición HTTP.
+* `expect`: afirmaciones de estado final (después de que se ejecutan todos los pasos). Qué mensajes de chat se publicaron, qué peticiones HTTP se realizaron, qué se escribió en kv, etc.
+
+## Tipos de paso
+
+### `event`: notificación de fuego-y-olvidar
+
+Despacha una notificación al controlador de eventos correspondiente.
+
+```json
+{
+  "event": "chat.message.received",
+  "payload": {
+    "user": { "id": "u1", "displayName": "alice" },
+    "clientId": 1,
+    "body": "hola",
+    "timestamp": "2026-01-01T00:00:00Z"
+  }
+}
+```
+
+Los tipos de eventos comunes incluyen `chat.message.received`, `chat.user.joined`, `stream.started`, y `stream.stopped`. Los escenarios de Fediverse pueden despachar `fediverse.follow`, `fediverse.like`, `fediverse.repost`, `fediverse.quote`, `fediverse.mention`, `fediverse.reply`, o el `fediverse.activity` que captura todo. La lista completa refleja la [referencia de controladores](/docs/plugins/events).
+
+### `filter`: invocación de cadena con afirmación en línea
+
+Envía un mensaje de chat a tu filtro de mensajes y verifica el resultado. El `expect` aquí es por paso, afirmando en el `FilterResult`:
+
+```json
+{
+  "filter": "chat.message.received",
+  "payload": { "user": { "id": "u-alice", "displayName": "alice" }, "body": "hola maldito mundo" },
+  "expect": { "action": "modify", "payload": { "body": "hola **** mundo" } }
+}
+```
+
+O para afirmar una eliminación:
+
+```json
+{
+  "filter": "chat.message.received",
+  "payload": { "user": { "id": "u-alice", "displayName": "alice" },
+  "body": "comprar cripto" },
+  "expect": { "action": "drop", "reason": "palabra clave de spam" }
+}
+```
+
+`action` es uno de `"pass"`, `"modify"`, `"drop"`.
+
+### `http`: enviar una petición HTTP a través de tu plugin
+
+```json
+{
+  "http": {
+    "method": "GET",
+    "path": "/api/status",
+    "expect": { "status": 200, "body": "{\"ok\":true}" }
+  }
+}
+```
+
+Los encabezados y el cuerpo son opcionales:
+
+```json
+{
+  "http": {
+    "method": "POST",
+    "path": "/admin/api/save",
+    "headers": { "content-type": "application/json" },
+    "body": "{\"value\":42}",
+    "authenticated": true,
+    "expect": { "status": 200 }
+  }
+}
+```
+
+### `authCheck`: re-validar una sesión de gate
+
+Para plugins de [`auth.gate`](/docs/plugins/auth), impulsa el controlador de [`onAuthCheck`](/docs/plugins/events#auth-check) directamente con una identidad de espectador resuelta y afirma el veredicto:
+
+```json
+{
+  "authCheck": {
+    "user": { "id": "u1", "displayName": "Alice" },
+    "expect": { "action": "deny", "reason": "acceso revocado" }
+  }
+}
+```
+
+`action` es `"ok"`, `"refresh"`, o `"deny"`; `reason` es opcional y coincida exactamente cuando está establecido.
+
+### Pasos de contenido
+
+`tabContent`, `pageContent`, `pageStyles`, y `pageScripts` llaman al controlador de contenido correspondiente directamente y afirman sobre el marcado, CSS o JavaScript devueltos:
+
+```json
+{ "tabContent": { "slug": "schedule", "expect": { "bodyContains": "Viernes" } } }
+```
+
+`tabContent` y `pageContent` toman un `slug` y un `usuario` opcionales; los cuatro aceptan `expect.body` (exacto) o `expect.bodyContains`.
+
+## Afirmaciones de estado final
+
+El `expect` de nivel superior del escenario verifica qué ocurrió durante toda la ejecución:
+
+| Afirmación          | Qué verifica                                                                                                            |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `chatSends`         | Lista de cadenas de `owncast.chat.send` (coincidencia exacta, en orden)                                                 |
+| `chatActions`       | Lista de cadenas de `owncast.chat.sendAction`                                                                           |
+| `chatSystems`       | Lista de cadenas de `owncast.chat.system`                                                                               |
+| `chatTo`            | Lista de `{ clientId, text }` de `owncast.chat.sendTo` / `replyTo`                                                      |
+| `sseSends`          | Lista ordenada de `{ channel, event?, data?` }`de`owncast.sse.send`(omite`event`/`data\` para coincidir solo por canal) |
+| `deletedMessages`   | IDs de mensajes ocultos a través de `owncast.chat.deleteMessage`                                                        |
+| `kickedClients`     | IDs de clientes desconectados a través de `owncast.chat.kick`                                                           |
+| `discordPosts`      | Lista de cadenas de notificación de Discord                                                                             |
+| `browserPushes`     | Lista de cargas útiles de notificaciones del navegador `{ title, body, url }`                                           |
+| `fediversePosts`    | Lista de publicaciones de fediverse realizadas a través de `owncast.fediverse.post`                                     |
+| `userModerations`   | Lista de `{ userId, enabled, reason }` de `owncast.users.setEnabled`                                                    |
+| `bannedIPs`         | Lista de IPs prohibidas a través de `owncast.users.banIP`                                                               |
+| `uploads`           | Lista de `{ name, data }` subidas a través de `owncast.storage.upload`                                                  |
+| `videoConfigWrites` | Lista de configuraciones parciales aplicadas a través de `owncast.videoConfig.write()`                                  |
+| `emits`             | Lista de `{ eventType, payload }` para llamadas `owncast.events.emit`                                                   |
+| `kv`                | Mapa parcial del estado de configuración del plugin después del escenario                                               |
+| `httpRequests`      | Llamadas HTTP salientes realizadas por tu plugin                                                                        |
+
+`chatSends` (y las otras afirmaciones de chat) capturan publicaciones de **cualquier** paso: incluyendo chat que tu plugin envía desde dentro de un controlador de solicitud HTTP, no solo desde controladores de eventos.
+
+`owncast.fs.*` (el sandbox de `storage.fs`) no tiene una afirmación dedicada: el runtime lo respalda con un sandbox real en memoria durante las pruebas, así que pruébalo como lo usarías: impulsa los propios endpoints (o controladores) de tu plugin y afirma sobre lo que devuelven. Por ejemplo, `POST` un archivo a través de tu endpoint de carga, luego `GET` tu endpoint de lista y afirma que la respuesta lo incluye. El ejemplo del [`file-manager`](https://github.com/owncast/plugin-sdk/tree/main/examples) hace exactamente esto.
+
+Ejemplo que ejercita varios:
+
+```json
+{
+  "name": "incrementa el contador y emite un evento",
+  "events": [
+    { "event": "chat.message.received", "payload": { "user": { "id": "u-alice", "displayName": "alice" }, "body": "hola" } },
+    { "event": "chat.message.received", "payload": { "user": { "id": "u-alice", "displayName": "alice" }, "body": "hola otra vez" } }
+  ],
+  "expect": {
+    "chatSends": ["alice: 1 mensaje", "alice: 2 mensajes"],
+    "kv": { "count:u-alice": "2" },
+    "emits": [
+      { "eventType": "milestone.reached", "payload": { "user": "alice", "count": 2 } }
+    ]
+  }
+}
+```
+
+## Sembrando estado con `given`
+
+Cada campo `given.*` controla lo que devuelve una lectura específica del host. Combina estos para poner tu plugin en cualquier estado que desees.
+
+| Campo                 | Controles                                                                                                                                                                                                    |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `given.kv`            | Pre-pobla la tienda de clave/valor de tu plugin (`owncast.kv`)                                                                                                                                               |
+| `given.config`        | Anulación establecida por el administrador para las claves de configuración declaradas en el manifiesto (`owncast.config.get`); las claves no sembradas devuelven los valores predeterminados del manifiesto |
+| `given.stream`        | Lo que devuelve `owncast.stream.current()`                                                                                                                                                                   |
+| `given.broadcaster`   | Lo que devuelve `owncast.stream.broadcaster()`                                                                                                                                                               |
+| `given.server`        | Lo que devuelve `owncast.server.info()`                                                                                                                                                                      |
+| `given.socials`       | Lo que devuelve `owncast.server.socials()`                                                                                                                                                                   |
+| `given.federation`    | Lo que devuelve `owncast.server.federation()`                                                                                                                                                                |
+| `given.tags`          | Lo que devuelve `owncast.server.tags()`                                                                                                                                                                      |
+| `given.videoConfig`   | Lo que devuelve `owncast.videoConfig.read()`                                                                                                                                                                 |
+| `given.chatHistory`   | Lo que devuelve `owncast.chat.history()`                                                                                                                                                                     |
+| `given.chatClients`   | Lo que devuelve `owncast.chat.clients()`                                                                                                                                                                     |
+| `given.users`         | Lo que devuelve `owncast.users.list()` / `.get(id)`                                                                                                                                                          |
+| `given.httpResponses` | Respuestas enlatadas para llamadas salientes de `owncast.http.fetch`                                                                                                                                         |
+
+Ejemplo:
+
+```json
+{
+  "name": "responde !uptime cuando la transmisión está en vivo",
+  "given": {
+    "stream": { "online": true, "startedAt": "2026-05-28T14:00:00Z", "viewers": 12 }
+  },
+  "events": [
+    {
+      "event": "chat.message.received",
+      "payload": {
+        "user": { "id": "u-alice", "displayName": "alice" },
+        "body": "!uptime",
+        "timestamp": "2026-05-28T14:01:30Z"
+      }
+    }
+  ],
+  "expect": {
+    "chatSends": ["uptime: 90s, 12 espectador(es)"]
+  }
+}
+```
+
+### Respuestas HTTP enlatadas
+
+Para plugins que llaman a `owncast.http.fetch`, `given.httpResponses` es un arreglo de respuestas enlatadas. Cada fixture es un objeto plano: `url` (un glob, por ejemplo, `https://api.foo.com/*`), `method` opcional, `status`, `headers` opcionales, y `body`.
+
+```json
+{
+  "given": {
+    "httpResponses": [
+      {
+        "url": "https://api.ipify.org?format=json",
+        "status": 200,
+        "body": "{\"ip\":\"203.0.113.42\"}"
+      }
+    ]
+  }
+}
+```
+
+Una fixture coincide por `url` glob (y `method`, si se establece). La primera fixture que coincida gana y sirve cualquier número de llamadas; las fixtures no se consumen, por lo que no se puede modelar una secuencia donde la misma URL deba responder de manera diferente entre llamadas (un 401 seguido de un 200 después de una actualización de token, por ejemplo); prueba unitaria esa rama fuera del runner. Si tu plugin realiza una llamada que ninguna fixture coincide, el marco falla el escenario para que sepas que debes añadir un caso.
+
+## Autenticación en escenarios HTTP
+
+Por defecto, los pasos HTTP se tratan como no autenticados. Para ejercer puntos finales de administración, establece `authenticated: true`:
+
+```json
+{
+  "http": {
+    "method": "GET",
+    "path": "/admin/api/settings",
+    "authenticated": true,
+    "expect": { "status": 200 }
+  }
+}
+```
+
+Para puntos finales de token de usuario de chat, establece `user`:
+
+```json
+{
+  "http": {
+    "method": "GET",
+    "path": "/my-data",
+    "user": { "id": "u1", "displayName": "alice", "scopes": ["MODERATOR"] },
+    "expect": { "status": 200 }
+  }
+}
+```
+
+Sin ninguna de las dos banderas, las solicitudes a rutas de administración declaradas en el manifiesto devuelven `401` antes de que se ejecute tu código de plugin. Útil para afirmar que el control de autenticación funciona:
+
+```json
+{
+  "http": {
+    "method": "GET",
+    "path": "/admin/index.html",
+    "expect": { "status": 401 }
+  }
+}
+```
+
+## Velocidad e aislamiento
+
+* Cada escenario obtiene una nueva instancia de plugin y una configuración limpia en memoria. El estado no se filtra de un escenario al siguiente.
+* Las pruebas son rápidas. Un archivo de prueba típico con reconstrucción termina en unos pocos segundos. Ejecuta las pruebas en cada guardado.
+* No se requiere Owncast real. El runtime está empaquetado con el SDK, por lo que no necesitas un servidor para probar.
+
+## Servidor de desarrollo local
+
+Para iteraciones interactivas, ejecuta un servidor de desarrollo local que carga tu plugin y lo sirve en `http://localhost:8080/plugins/\<your-slug>/`: curl tus puntos finales, abre páginas estáticas en un navegador, o controla tus manejadores de eventos y de filtro.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```sh
+npm run serve
+# sobrescribir el puerto:
+PORT=8765 npm run serve
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```sh
+owncast-plugin-py serve my-plugin
+# sobrescribir el puerto:
+owncast-plugin-py serve my-plugin -p 8765
+```
+
+</TabItem>
+</Tabs>
+
+Más allá de los archivos estáticos y tus rutas HTTP, expone puntos finales solo para desarrolladores para controlar los manejadores que un servidor HTTP normal no puede alcanzar. Las lecturas de host (información del servidor, configuración de video, etc.) devuelven datos de desarrollo de ejemplo.
+
+* `POST /_dev/chat` con `{"user":"alice","body":"hi"}`: ejecuta tu cadena de filtros de mensajes de chat, luego activa `chat.message.received`. La respuesta JSON muestra lo que hizo tu filtro.
+* `GET /_dev/chat`: el registro de chat hasta ahora, incluyendo cualquier cosa que tu plugin haya publicado.
+* `POST /_dev/event` con `{"type":"stream.started","payload":{}}`: despacha un evento arbitrario a tus manejadores.
+
+Reinicia el servidor de desarrollo cuando cambies tu código. Usa pruebas de escenario para afirmaciones repetibles. El servidor de desarrollo es para iteración interactiva. Muchos autores ejecutan ambos: el servidor de desarrollo en una terminal, el observador de pruebas en otra.

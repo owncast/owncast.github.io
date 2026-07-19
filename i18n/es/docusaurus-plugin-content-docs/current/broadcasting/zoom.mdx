@@ -1,0 +1,18 @@
+---
+title: Zoom
+description: Zoom es un proveedor de videoconferencias.
+sidebar_position: 24
+---
+
+[Zoom](https://zoom.us/) ofrece transmitir tu reunión a un servicio de transmisión en vivo como Owncast. Ten en cuenta que algunos cambios pueden necesitar ser realizados por tu administrador de Zoom.
+
+1. Configura Owncast y configúralo según tu preferencia. Dado que la transmisión RTMP proviene directamente de los servidores de Zoom, al menos el puerto RTMP debería estar disponible desde internet.
+2. Permitir transmisión en vivo para la cuenta de usuario. En [zoom.us/profile/setting](https://zoom.us/profile/setting), desplázate hacia abajo hasta "Permitir reuniones de transmisión en vivo" y activa el *Servicio de transmisión en vivo personalizado*:
+   ![Image](/docs/img/zoom-activate-for-account.png)
+3. Programa una reunión usando el sitio web y guárdala. Zoom te redirigirá a una página de "Administrar reunión" que tiene una sección de transmisión en vivo en la parte inferior. Haz clic en el enlace "configurar ajustes de transmisión en vivo":
+   ![Image](/docs/img/zoom-manage-meeting.png)
+4. Completa la información de tu servidor Owncast. La "URL de la página de transmisión en vivo" debería ser el Frontend de Owncast, ya que Zoom se vinculará a él desde la reunión.
+   ![Image](/docs/img/zoom-server-settings.png)
+5. Una vez que se inicie la reunión, haz clic en "Más" en la barra de menú y luego en "Transmitir a un servicio personalizado". Zoom abrirá una ventana del navegador y luego te redirigirá al frontend de Owncast (o a la URL que especificaste).
+
+Las instrucciones para Webinars y Salas de Reunión Personal son similares, [consulta la página de soporte de Zoom](https://support.zoom.us/hc/en-us/articles/115001777826-Live-Streaming-Meetings-or-Webinars-Using-a-Custom-Service) para más información.

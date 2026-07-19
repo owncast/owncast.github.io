@@ -1,0 +1,96 @@
+---
+title: Todos los espectadores están experimentando problemas de almacenamiento en búfer
+description: Pasos para solucionar problemas si todos los espectadores están experimentando problemas de almacenamiento en búfer.
+tags:
+  - almacenamiento en búfer
+  - almacenando en búfer
+  - rueda de carga
+  - cargando
+unlisted: true
+related:
+  excludeFromAll: true
+---
+
+import { IncludeMarkdown } from "@site/src/components";
+import HardwareUsage from "../shared/hardware-usage.md";
+import HlsAnalyzer from "../shared/hls-analyzer.md";
+import StreamHealth from "../shared/stream-health.md";
+import BroadcastingSoftware from "../shared/broadcasting-software.md";
+import MatchHighestOutputQuality from "../shared/match-highest-output-quality.md";
+import ReduceVideoQuality from "../shared/reduce-video-quality.md";
+import UseStorage from "../shared/use-storage.md";
+import UseCdn from "../shared/use-cdn.md";
+import RelocatePhysicalServer from "../shared/relocate-physical-server.md";
+import SlowStorageUploads from "../shared/slow-storage-uploads.md";
+
+Cuando todos los espectadores están almacenando en búfer al mismo tiempo, el problema casi siempre está en el servidor o en el lado de la transmisión en lugar de en la conexión de algún espectador individual. Sigue los pasos a continuación en orden.
+
+Después de leer a continuación, también puedes encontrar útiles los consejos navegando en la [Guía de resolución de problemas de OBS](https://github.com/obsproject/obs-studio/wiki/Stream-Buffering-Issues/d65033b24e4a4c81c87323f05a59c12f78de620b), incluso si no utilizas OBS.
+
+## Verifica la utilización del hardware de tu servidor Owncast
+
+<IncludeMarkdown>
+  <HardwareUsage />
+</IncludeMarkdown>
+
+## Obtén información adicional
+
+<IncludeMarkdown>
+  <StreamHealth />
+</IncludeMarkdown>
+
+<IncludeMarkdown>
+  <HlsAnalyzer />
+</IncludeMarkdown>
+
+## Comienza con tu software de transmisión
+
+### Transmite tu flujo de forma confiable
+
+<IncludeMarkdown>
+  <BroadcastingSoftware />
+</IncludeMarkdown>
+
+### Iguala la calidad del video
+
+<IncludeMarkdown>
+  <MatchHighestOutputQuality />
+</IncludeMarkdown>
+
+## Aumenta tu almacenamiento en búfer de latencia
+
+Aumentar el ajuste de almacenamiento en búfer de latencia comenzará al usuario más detrás de la transmisión en vivo, pero dará al cliente más video reproducible antes de que se quede atascado esperando el borde en vivo. Menos latencia es menos eficiente y más propenso a crear almacenamiento en búfer. Deberás verificar con [HLS Analyzer](https://hlsanalyzer.com) después de aumentar el valor de tu almacenamiento en búfer de latencia para ver si redujo alguna advertencia.
+
+Necesitarás reiniciar un flujo después de cambiar este valor en la configuración de video de Owncast.
+
+**Inconveniente**: Aumentar tu latencia hace que sea más difícil interactuar en vivo con los espectadores a medida que el retraso entre cuando realizas una acción y cuando ellos la ven aumenta.
+
+## Reduce tu calidad de video
+
+<IncludeMarkdown>
+  <ReduceVideoQuality />
+</IncludeMarkdown>
+
+## Usa almacenamiento externo
+
+<IncludeMarkdown>
+  <UseStorage />
+</IncludeMarkdown>
+
+## Usa un CDN
+
+<IncludeMarkdown>
+  <UseCdn />
+</IncludeMarkdown>
+
+## Muévete a un servidor que esté más centralmente ubicado o alojado por un proveedor más rápido
+
+<IncludeMarkdown>
+  <RelocatePhysicalServer />
+</IncludeMarkdown>
+
+## Si estás experimentando cargas lentas a almacenamiento externo
+
+<IncludeMarkdown>
+  <SlowStorageUploads />
+</IncludeMarkdown>

@@ -1,0 +1,353 @@
+---
+title: Complementos de chat
+description: Construya bots de chat, herramientas de moderación y filtros de mensajes para los complementos de Owncast utilizando controladores de chat y las API de owncast.chat.
+sidebar_position: 5
+sidebar_label: Complementos de chat
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - complementos
+  - chat
+  - bots
+  - moderación
+  - filtros
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Si desea construir un complemento que hable en el chat, reaccione a los espectadores o modere mensajes, esta es la página para comenzar. Se muestran ejemplos de código en ambos lenguajes admitidos. Primero configure su herramienta en la página del SDK de [JavaScript](/docs/plugins/sdks/javascript) o [Python](/docs/plugins/sdks/python).
+
+Owncast expone la funcionalidad de chat en tres capas:
+
+1. **Manejadores de eventos de chat** para que su complemento pueda reaccionar cuando las personas hablen, se unan, se vayan o cambien su nombre.
+2. **APIs de chat y usuario**, para que su complemento pueda publicar mensajes, inspeccionar el estado del chat y moderar usuarios.
+3. **Filtros de chat** para que su complemento pueda reescribir o eliminar mensajes *antes* de que los espectadores los vean.
+
+## Lo que puede construir
+
+* Bots de chat que responden a comandos o palabras clave.
+* Bots de bienvenida que saludan a las personas cuando se unen.
+* Bots recordatorios que publican mensajes cuando comienza la transmisión.
+* Bots de cuenta regresiva y temporizadores impulsados por `owncast.timer` o el manejador de ticks.
+* Ayudantes de moderación que ocultan mensajes, desconectan clientes o deshabilitan usuarios abusivos.
+* Filtros que reescriben, traducen o eliminan mensajes antes de que sean transmitidos.
+
+Un bot de respuesta es solo un manejador:
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { definePlugin, owncast } = require("@owncast/plugin-sdk");
+
+module.exports = definePlugin({
+  onChatMessage(msg) {
+    const name = msg.user?.displayName ?? "alguien";
+    owncast.chat.send(`${name} dijo: ${msg.body}`);
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+from owncast_plugin import plugin, owncast
+
+@plugin.on_chat_message
+def echo(msg):
+    name = msg.user.display_name if msg.user else "alguien"
+    owncast.chat.send(f"{name} dijo: {msg.body}")
+```
+
+</TabItem>
+</Tabs>
+
+## Reaccionando al chat
+
+Defina `onChatMessage` (`@plugin.on_chat_message` en Python) para ver cada mensaje después de que se ejecuten los filtros, justo antes de que se transmita a los espectadores:
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onChatMessage(msg) {
+    owncast.chat.send(`echo: ${msg.body}`);
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_chat_message
+def echo(msg):
+    owncast.chat.send(f"echo: {msg.body}")
+```
+
+</TabItem>
+</Tabs>
+
+Los campos a los que más accede son `msg.body` (el texto sin formato), `msg.user` (la identidad del remitente, con `user.id` para el estado por usuario y `user.scopes` para las verificaciones de moderador) y `msg.timestamp` (determinista, así que prefiera esto sobre el reloj al comparar el tiempo transcurrido o al afirmar en pruebas). No base el estado o permisos en nombres de pantalla.
+
+Para obtener la carga del mensaje completa y todos los demás eventos a los que un complemento de chat puede suscribirse (unión y salida de usuarios, cambio de nombre, moderación y más), consulte la [Referencia de eventos](/docs/plugins/events).
+
+## Envío de mensajes de chat
+
+### `owncast.chat.send`
+
+Publicar un mensaje de chat. Enviado como la identidad del bot de su complemento. Toma texto sin formato, no marcado: la UI de chat escapa en HTML al mostrarlo, por lo que caracteres como `\<`, `&` y `"` se muestran como texto en lugar de HTML.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.chat.send("hola chat");
+owncast.chat.sendAction("saludos");        // mensaje de acción estilo /me
+owncast.chat.system("La transmisión comenzará en 5 minutos");
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.chat.send("hola chat")
+owncast.chat.send_action("saludos")        # mensaje de acción estilo /me
+owncast.chat.system("La transmisión comenzará en 5 minutos")
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `chat.send`.
+
+### `owncast.chat.sendAction`
+
+Publicar un mensaje de estilo de acción (`/me`): `sendAction` en JavaScript, `send_action` en Python. Al igual que `send`, toma texto sin formato y es escapado en HTML por la UI de chat al mostrarse.
+
+Requiere `chat.send`.
+
+### `owncast.chat.system`
+
+Publicar un mensaje de anuncio del servidor. No se asocia ninguna identidad de bot. El cuerpo se renderiza en línea como HTML. Utilice esto para avisos breves atribuidos al servidor como "La transmisión comenzará en 5 minutos". Trate el cuerpo como salida HTML no confiable: no intercale la entrada controlada por el espectador sin escapar.
+
+Requiere `chat.send`.
+
+### Identidad de chat
+
+Cada complemento tiene exactamente una identidad de chat: el bot que Owncast provisiona cuando su complemento está instalado. Su nombre para mostrar es el `bot.displayName` de su manifiesto si está establecido, de lo contrario `name`.
+
+Tanto `send` como `sendAction` publican como esta identidad a través de la tubería de chat normal de Owncast, incluidos filtros, límites de velocidad y moderación. Los complementos no pueden publicar bajo nombres arbitrarios o hacerse pasar por usuarios reales.
+
+El usuario bot se basa en el `slug` del complemento, por lo que la identidad sobrevive a las ediciones del manifiesto en `name` o `bot.displayName`. Si necesita múltiples personalidades de chat, envíe múltiples complementos.
+
+## Leyendo el estado del chat
+
+### `owncast.chat.history`
+
+Devuelve los mensajes de chat más recientes (un límite opcional predeterminado a 50). Cada entrada tiene la forma `{ id, user?, clientId?, body, timestamp }`.
+
+Requiere `chat.history`.
+
+### `owncast.chat.clients`
+
+Devuelve la lista de clientes de chat actualmente conectados: `{ id, userId?, displayName?, connectedAt?, userAgent?, ipAddress?, messageCount?` }`. El `id`es el ID del cliente de conexión utilizado por`owncast.chat.kick\`.
+
+Requiere `chat.history`.
+
+### `owncast.server.emotes`
+
+Lea los emotes de chat personalizados del servidor (`{ nombre, url }`) cuando su bot quiera hacer referencia o reflejar el catálogo de emotes.
+
+Requiere `server.read`.
+
+### `owncast.users.list` y `owncast.users.get`
+
+Lea la lista de usuarios del chat o un registro de usuario único por id.
+
+Requiere `users.read`.
+
+## APIs de moderación
+
+Estos son `deleteMessage` / `kick` / `sendTo` / `replyTo` en JavaScript y `delete_message` / `kick` / `send_to` / `reply_to` en Python.
+
+### `owncast.chat.deleteMessage`
+
+Ocultar un mensaje de chat de los espectadores, por id de mensaje.
+
+Requiere `chat.moderate`.
+
+### `owncast.chat.kick`
+
+Desconectar a un cliente de chat, por id de cliente.
+
+Requiere `chat.moderate`.
+
+### `owncast.chat.sendTo`
+
+Envía un mensaje privado a un solo cliente conectado, por id de cliente.
+
+Requiere `chat.send`.
+
+### `owncast.chat.replyTo`
+
+Susurrar una respuesta a quien envió un mensaje de chat. Puede pasar ya sea el objeto de mensaje completo del manejador de chat-mensaje / filtro, o un id de cliente simple si eso es todo lo que tiene. Devuelve un valor falsy cuando la conexión del remitente ya no es conocida, lo que le da una fácil opción de respaldo a un mensaje público.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onChatMessage(msg) {
+    if (!owncast.chat.replyTo(msg, "pst: recibí tu mensaje")) {
+      owncast.chat.send("recibí tu mensaje"); // el remitente ya se desconectó
+    }
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_chat_message
+def whisper(msg):
+    if not owncast.chat.reply_to(msg, "pst: recibí tu mensaje"):
+        owncast.chat.send("recibí tu mensaje")  # el remitente ya se desconectó
+```
+
+</TabItem>
+</Tabs>
+
+Requiere `chat.send`.
+
+## Comandos
+
+Para los comandos de chat, declare una tabla de comandos con alias, tiempos de espera, filtrado de moderadores y listas automáticas de `!help`. Consulte [Comandos de chat](/docs/plugins/commands).
+
+## Moderando usuarios
+
+### `owncast.users.setEnabled`
+
+Habilitar o deshabilitar a un usuario de chat, por id, con un motivo opcional: `setEnabled` en JavaScript, `set_enabled` en Python.
+
+Requiere `users.moderate`.
+
+### `owncast.users.banIP`
+
+Prohibir una IP de unirse al chat: `banIP` en JavaScript, `ban_ip` en Python.
+
+Requiere `users.moderate`.
+
+## Filtros de chat
+
+Los filtros ven los mensajes de chat antes de ser transmitidos, con la capacidad de reescribirlos o eliminarlos. Los filtros se ejecutan primero con menor prioridad. Un `drop` termina la cadena y el mensaje nunca alcanza los filtros o notificaciones posteriores. Un `modify` pasa la nueva carga al siguiente filtro.
+
+### `filterChatMessage`
+
+Recibe la misma forma de `ChatMessage` que el manejador de mensajes de chat y devuelve uno de tres resultados, construidos con el ayudante `filter`:
+
+* **pass**: deja pasar el mensaje sin cambios.
+* **modify**: reemplázalo con una nueva carga.
+* **drop**: elimínalo (con un motivo). La cadena se detiene aquí.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { definePlugin, filter } = require("@owncast/plugin-sdk");
+
+module.exports = definePlugin({
+  filterChatMessage(msg) {
+    if (msg.body.includes("spam")) return filter.drop("palabra clave de spam");
+    if (msg.body.includes("maldita")) {
+      return filter.modify({ ...msg, body: msg.body.replace("maldita", "****") });
+    }
+    return filter.pass();
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+from owncast_plugin import plugin, filter
+
+@plugin.filter_chat_message
+def clean(msg):
+    if "spam" in msg.body:
+        return filter.drop("palabra clave de spam")
+    if "maldita" in msg.body:
+        return filter.modify({**msg.raw, "body": msg.body.replace("maldita", "****")})
+    return filter.pass_()  # guión bajo al final: pass es una palabra clave
+```
+
+</TabItem>
+</Tabs>
+
+Requiere el permiso `chat.filter`. El host rechaza la carga si un complemento define el manejador de filtros sin declarar ese permiso.
+
+### Prioridad del filtro (opcional)
+
+Números más bajos se ejecutan antes. Predeterminado `100`. Establezca esto con `filterPriority` (JavaScript) / `filter_priority` (Python) en la definición del complemento.
+
+Utilice esto cuando el comportamiento de su complemento dependa de si otros filtros ya se han ejecutado. Por ejemplo, un filtro de palabrotas generalmente debe ejecutarse antes que un traductor.
+
+### Seguridad del filtro
+
+* Los errores se tratan como un pase. Un filtro que lanza nunca bloquea el chat.
+* Los filtros tienen un límite de tiempo de 50 ms. Un filtro lento se cancela y se trata como pase.
+* Después de 5 fallos consecutivos (errores o tiempos de espera), el complemento se desactiva automáticamente por el resto de la sesión. Una llamada de filtro exitosa restablece el contador.
+
+## Límites impuestos por el host que importan para los complementos de chat
+
+Algunos límites de host valen la pena diseñar alrededor de:
+
+* tiempo de ejecución del filtro: **50 ms** por mensaje
+* tiempo de ejecución del controlador de eventos (mensaje de chat, usuario unido, etc.): **500 ms** por llamada
+* cielo duro por llamada: **10 s**
+* tamaño de salida del filtro: **1 MiB**
+* temporizadores pendientes: **64** a la vez
+* rango de demora del temporizador: **100 ms a 24 h**
+
+Eso significa que los bots de chat y los filtros deben permanecer ligeros, evitar los viajes de ida y vuelta lentos por la red en el camino crítico, y mantener las cargas reescritas pequeñas.
+
+## Permisos que necesitará comúnmente
+
+* `chat.send`: publicar mensajes de chat y respuestas privadas.
+* `chat.history`: leer mensajes de chat recientes y clientes conectados.
+* `chat.moderate`: ocultar mensajes y desconectar clientes.
+* `chat.filter`: reescribir o eliminar mensajes antes de la transmisión.
+* `users.read`: inspeccionar registros de usuarios.
+* `users.moderate`: deshabilitar usuarios de chat o prohibir IPs.
+
+Consulte [Permisos](/docs/plugins/permissions) para el modelo de seguridad completo.
+
+## Ejemplos de complementos de chat
+
+El SDK de complementos envía pequeños ejemplos centrados en el chat que se mapean estrechamente a los patrones de esta página (cada uno tiene versiones en JavaScript y Python):
+
+* `eco-bot`: el bot de respuesta más pequeño posible que utiliza el controlador de mensajes de chat + `owncast.chat.send`.
+* `registro-de-chat`: registra cada mensaje de chat sin responder.
+* `seguimiento-de-stream`: combina comandos de chat, controladores del ciclo de vida del usuario de chat y anuncios de acción.
+* `filtro-de-groserías`: reescribe mensajes sin eliminarlos.
+* `modo-lento`: elimina mensajes usando `msg.timestamp` para limitar la tasa.
+* `bot-de-compromiso`: modera eliminando un mensaje.
+* `bot-de-temporizador`: bots de recordatorio/cuenta regresiva impulsados desde el chat, usando temporizadores y el controlador de ticks.
+
+Visítalos en [examples/js](https://github.com/owncast/plugin-sdk/tree/main/examples/js) · [examples/python](https://github.com/owncast/plugin-sdk/tree/main/examples/python).
+
+## Dónde encaja esto con los otros documentos de plugins
+
+* [Elegir un SDK](/docs/plugins) y las páginas de [JavaScript](/docs/plugins/sdks/javascript) / [Python](/docs/plugins/sdks/python) cubren la configuración específica del lenguaje, CLI y sintaxis.
+* [Comandos de chat](/docs/plugins/commands) cubre tablas de comandos, el `!help` automático y mezclar comandos con tus propios controladores de chat.
+* [Manejadores de eventos](/docs/plugins/events) es la referencia completa de manejadores para *todos* los eventos del plugin.
+* [APIs de Owncast](/docs/plugins/apis) es la referencia completa de API para *todos* los métodos de `owncast.*`.
+* [Referencia de manifiesto](/docs/plugins/manifest) cubre permisos, campos de identidad del bot y cada propiedad del manifiesto.
+* [Contribuyendo a la UI](/docs/plugins/ui) cubre la UI del lado del espectador, superposiciones, botones, scripts y estilos si tu plugin de chat también incluye piezas del frontend.
+
+Si estás comenzando desde cero, lee primero [Inicio Rápido](/docs/plugins/quickstart) y luego vuelve aquí.

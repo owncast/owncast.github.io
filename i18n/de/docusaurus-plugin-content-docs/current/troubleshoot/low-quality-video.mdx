@@ -1,0 +1,33 @@
+---
+title: Video niedriger Qualität
+description: Passen Sie die Einstellungen sowohl in Ihrer Übertragungssoftware als auch auf Ihrem Server an, um die Videoqualität Ihres Streams zu verbessern.
+tags:
+  - Video
+  - Qualität
+unlisted: true
+related:
+  excludeFromAll: true
+---
+
+import { IncludeMarkdown } from "@site/src/components";
+import LowQualityVideo from "./shared/low-quality-video.md";
+
+## Stellen Sie sicher, dass Sie streamen, was Sie erwarten
+
+<IncludeMarkdown>
+  <LowQualityVideo />
+</IncludeMarkdown>
+
+## Erhöhen Sie die Bitrate, die auf Ihrem Server konfiguriert ist
+
+Die Bitrate des Owncast-Streams ist die Menge an Daten, die Ihr Owncast-Server an die Zuschauer sendet, wenn Sie streamen. Die Erhöhung Ihrer Bitrate kann die Videoqualität verbessern, aber nur bis zu einem bestimmten Punkt. Je mehr Bewegung und je höher die Bildrate, die Sie anbieten, desto höher ist die Bitrate, die Sie wahrscheinlich anbieten müssen, um sichtbare "Artefakte" und Blockbildung in Ihrem Video zu vermeiden. Streams mit weniger Bewegung, niedrigeren Auflösungen oder einer niedrigeren Bildrate können mit einer niedrigeren Bitrate auskommen, was es Ihnen erleichtert zu streamen und es Ihren Zuschauern erleichtert, den Inhalt zu konsumieren.
+
+Wenn Sie die Bitrate innerhalb von Owncast erhöhen, stellen Sie sicher, dass Sie auch mindestens diese Bitrate aus Ihrer Übertragungssoftware streamen. Es gibt keinen Grund, eine Bitrate-Konfiguration auf Ihrem Owncast-Server anzubieten, die höher ist als das, was Sie von Ihrer Übertragungssoftware streamen.
+
+**Nachteil**: Eine höhere Bitrate beansprucht mehr verfügbare Internetbandbreite und erzeugt größere Video-Segmente, wodurch es länger dauert, bis Zuschauer herunterladen können, was zu Pufferung führen kann, wenn sie das Video nicht rechtzeitig herunterladen können. Denken Sie auch darüber nach, den Zuschauern niedrigere Qualitätsoptionen anzubieten. Die Erhöhung Ihrer Bitrate erhöht auch die Anforderungen an die Internetverbindung Ihres Owncast-Servers, stellen Sie also sicher, dass dies kein Engpass ist. Sprechen Sie mit Ihren Zuschauern und testen Sie mit [HLS Analyzer](https://hlsanalyzer.com), wenn Sie Änderungen vornehmen.
+
+## Weisen Sie Ihrem Server mehr Ressourcen zu, um die visuelle Qualität zu steigern
+
+Möglicherweise möchten Sie auch die Menge an CPU (oder GPU, wenn Sie eine hardwarebeschleunigte Einstellung verwenden) erhöhen, die zur Verarbeitung des Videos auf Ihrem Owncast-Server verwendet wird. Wenn Sie weiter nach unten gehen, werden Sie sichtbar sehen, wie die Qualität abnimmt.
+
+**Nachteil**: Denken Sie daran, dass die Erhöhung der Hardware-Ressourcen, die der Verarbeitung Ihres Videos gewidmet sind, wie erwartet, auch die verwendete Hardware erhöht. Sie sollten die Auslastung im Auge behalten, um sicherzustellen, dass Ihr Server die aktualisierten Einstellungen bewältigen kann.

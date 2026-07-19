@@ -1,0 +1,89 @@
+---
+title: Konfiguration
+description: Lassen Sie Administratoren Ihr Plugin mit typisierten Einstellungen konfigurieren. Owncast rendert das Formular, Sie lesen die Werte zur Laufzeit mit owncast.config.get.
+sidebar_position: 7
+sidebar_label: Konfiguration
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - Plugins
+  - Konfiguration
+  - Administrator
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Owncast bietet Plugins zwei Möglichkeiten, um einem Administrator die Änderung von Einstellungen zu ermöglichen. Deklarieren Sie einen `config`-Block im Manifest, und Owncast rendert ein typisiertes Formular für Sie, ohne Admin-HTML und ohne Code zum Speichern oder Laden zu schreiben. Oder registrieren Sie eine `admin`-Seite und bedienen Sie Ihr eigenes HTML.
+
+Verwenden Sie den `config`-Block des Manifests für flache, typisierte Regler: Strings, Zahlen und Schalter. Greifen Sie auf eine [benutzerdefinierte Admin-Seite](/docs/plugins/ui#admin-pages) nur dann zu, wenn Sie eine Benutzeroberfläche benötigen, die das Auto-Formular nicht ausdrücken kann, wie ein gruppiertes Layout, eine Live-Vorschau oder einen Aktionsschalter, der Ihre eigene API aufruft. Die beiden können koexistieren. Ein Plugin kann sowohl den Auto-Formular-Einstellungs-Tab als auch eine oder mehrere benutzerdefinierte Admin-Seiten haben.
+
+## Einstellungen im Manifest deklarieren
+
+Jeder Eintrag unter `config` hat einen `type`, einen `default` und eine `description`:
+
+```json
+{
+  "config": {
+    "greeting": { "type": "string", "default": "welcome!", "description": "Erstbeitragsnachricht" },
+    "cooldownMs": { "type": "number", "default": 2000, "description": "Pro-Benutzer-Befehlsabkühlung" },
+    "modOnly": { "type": "boolean", "default": false, "description": "Auf Moderatoren beschränken" }
+  }
+}
+```
+
+| Feld          | Notizen                                                                                                                                                          |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`        | Einer von `string`, `number` oder `boolean`. Jeder andere Wert wird akzeptiert, erhält jedoch ein einfaches Texteingabefeld und keine Typprüfung beim Speichern. |
+| `default`     | Der Wert, den `config.get` zurückgibt, bis ein Administrator ein Überschreiben speichert. Sein JSON-Typ sollte mit `type` übereinstimmen.                        |
+| `description` | Das Label, das neben dem Feld im Admin-Formular angezeigt wird. Fällt auf den Schlüsselnamen zurück, wenn es leer ist.                                           |
+
+Schlüssel dürfen nicht mit `__` beginnen. Dieses Präfix ist für instanzspezifischen Status reserviert, den der Host injiziert, und ein Plugin, das einen Schlüssel wie `__internal` deklariert, kann nicht geladen werden.
+
+## Was der Administrator sieht
+
+Ein Plugin, das einen `config`-Block deklariert, erhält einen **Einstellungen**-Tab auf seiner Detailseite unter Admin → Plugins. Owncast baut das Formular aus dem Schema auf:
+
+* `string` rendert ein Texteingabefeld, `number` ein numerisches Eingabefeld und `boolean` einen Schalter.
+* Die `description` ist das Feldlabel.
+* Der `default` wird angezeigt, bis ein Administrator ein Überschreiben speichert.
+* Ein Schlüssel, dessen Name wie ein Credential aussieht, wird als maskiertes Passwortfeld gerendert. Die Übereinstimmung ist nicht groß-/kleinschreibungssensitiv und tritt auf, wenn der Name `secret`, `password`, `token`, `apikey` oder `api_key` enthält oder das eigenständige Wort `key` ist. Also maskieren `apiKey`, `clientSecret`, `accessToken` und `webhook_secret`. Namen wie `accessKey` oder `keyValue` tun dies nicht, da `key` nur als ganzes Wortübereinstimmung zählt. Benennen Sie ein geheimes Feld `apiKey`, `api_key` oder alles, was mit `Secret` oder `Token` endet, wenn Sie möchten, dass es maskiert wird.
+
+Ein Plugin ohne `config`-Block zeigt keinen Einstellungen-Tab an.
+
+## Werte zur Laufzeit lesen
+
+`owncast.config.get(key, fallback?)` gibt das Überschreiben des Administrators zurück, wenn eines gesetzt ist, sonst den deklarierten Standardwert, der bereits in den deklarierten Typ geparsed ist.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const cooldownMs = owncast.config.get("cooldownMs", 2000);
+const modOnly = owncast.config.get("modOnly", false);
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+cooldown_ms = owncast.config.get("cooldownMs", 2000)
+mod_only = owncast.config.get("modOnly", False)
+```
+
+</TabItem>
+</Tabs>
+
+`config.get` ist ambient, benötigt also keine Berechtigung. Ein `number`-Feld wird als Zahl und ein `boolean` als Bool zurückgegeben, sodass Sie keine Strings selbst parsen müssen. Für einen unbekannten Schlüssel oder einen deklarierten Schlüssel, der weder einen Standardwert noch ein gespeichertes Überschreiben hat, gibt es `fallback` zurück (`undefined` in JavaScript und `None` in Python, wenn Sie nichts übergeben). Übergeben Sie ein Fallback, mit dem Sie arbeiten können.
+
+Die vollständige Signatur befindet sich in der [API-Referenz](/docs/plugins/apis#config).
+
+## Validierung und Speicherung
+
+Wenn ein Administrator das Formular speichert, überprüft Owncast jeden Wert gegen das Schema, bevor es gespeichert wird:
+
+* Ein Schlüssel, der im Manifest nicht deklariert ist, wird mit `400 unbekannter Konfigurationsschlüssel` abgelehnt.
+* Ein `string`-Feld muss einen String, eine `number` eine Zahl und einen `boolean` einen Bool erhalten. Ein Typfehler wird abgelehnt. Jeder andere deklarierte `type` wird so gespeichert, wie er ist.
+* Der Anfragebody ist auf 1 MB begrenzt.
+
+Überschreibungen bleiben im eigenen Schlüssel-/Wertspeicher des Plugins unter dem reservierten Schlüssel `owncast.config`, benannt mit dem `slug` des Plugins. Andere Plugins können sie nicht lesen, und sie überstehen Neustarts und Neuinstallationen. Ändern des `slug` nach der Veröffentlichung startet einen frischen Speicher, sodass gespeicherte Überschreibungen auf ihre Standardwerte zurückgesetzt werden, die gleiche Regel, die auch für den Rest Ihrer [KV-Daten](/docs/plugins/apis#storage) gilt.

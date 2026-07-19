@@ -1,0 +1,63 @@
+---
+id: geräte-google-tv
+title: Google TV
+slug: /watching-streams/google-tv
+sidebar_label: Google TV
+deviceId: google-tv
+deviceType: smart-tv
+reliability: hoch
+hide_title: true
+tags:
+  - google-tv
+  - android-tv
+  - vlc
+  - smart-tv
+  - fernseher
+  - sehen
+description: |
+  Sehen Sie Owncast-Streams auf Google TV mit VLC oder anderen kompatiblen Android TV-Apps.
+icon: /images/devices/google-tv.svg
+---
+
+import DeviceLayout from "@site/src/components/tv/DeviceLayout";
+import { DeviceOptionsGrid } from "@site/src/components/tv/DeviceOptionsGrid";
+import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
+import StoreButton from "@site/src/components/StoreButton";
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard id="vlc-google-tv" title="VLC für Android TV" badge="Empfohlen" difficulty="einfach" reliability="hoch" screenshot="/images/devices/google-tv/vlc-streams.png" screenshotAlt="VLC für Android TV-Streams-Schnittstelle" summary="Verwenden Sie VLC aus dem Google Play Store, um Owncast-Streams auf Ihrem Google TV abzuspielen.">
+
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Voll ausgestatteter Mediaplayer optimiert für die TV-Oberfläche.</li>
+      <li>Einfaches Eingeben der Stream-URL.</li>
+      <li>Kostenlos und regelmäßig aktualisiert.</li>
+    </ul>
+
+    <details>
+      <summary>Schritt-für-Schritt-Anleitungen anzeigen</summary>
+
+      1. Installieren Sie VLC aus dem Google Play Store.
+      2. Wählen Sie **„Streams“** aus dem Abschnitt **„Durchsuchen“**.
+      3. Geben Sie den Namen des Streams ein, den Sie ansehen möchten. Zum Beispiel: `https://watch.owncast.online`.
+      4. Wählen Sie **„Weiter“**.
+
+    </details>
+
+    <StoreButton url="https://play.google.com/store/apps/details?id=org.videolan.vlc" type="android" />
+
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

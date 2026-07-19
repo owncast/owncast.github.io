@@ -1,0 +1,50 @@
+---
+title: Stream-Performance
+description: Es ist wichtig zu wissen, ob Ihr Owncast-Stream gut funktioniert. Es gibt einige Tools im Admin-Bereich, die dabei helfen können.
+sidebar_position: 200
+sidebar_label: Stream-Performance
+tags:
+  - Metriken
+  - Prometheus
+  - Leistung
+  - Wiedergabe
+  - Hardware
+  - CPU
+---
+
+import StreamHealth from "./troubleshoot/shared/stream-health.md";
+import { IncludeMarkdown } from "@site/src/components";
+
+## Allgemeine Stream-Gesundheit
+
+<IncludeMarkdown>
+  <StreamHealth />
+</IncludeMarkdown>
+
+## Hardware
+
+Es ist wichtig zu wissen, wie Ihre CPU insbesondere mit den Videoverarbeitungsaufgaben Schritt hält, wenn Sie Probleme beheben möchten. Owncast bietet Ihnen einen umfassenden Überblick über wichtige Hardwaremetriken, um hierbei zu helfen.
+
+<img src="/docs/img/admin-hardware-info.png" alt="Die Hardware-Info-Seite im Admin-Bereich zeigt CPU-, Speicher- und Festplattennutzungsanzeigen mit einem Diagramm zur Nutzung im Zeitverlauf." width="80%" />
+
+Wenn Sie sehen, dass Ihre Hardware überlastet ist, möchten Sie möglicherweise [Probleme beheben](/troubleshoot).
+
+## Prometheus
+
+Für Benutzer, die externe Überwachungslösungen bevorzugen, unterstützt Owncast die Verwendung von [Prometheus](https://prometheus.io/), um eine Reihe von Metriken zu sammeln.
+
+Sie können Ihre Prometheus-Konfiguration auf Ihre Owncast-Instanz mit dem Endpunkt `/api/admin/prometheus` richten und dabei grundlegende Authentifizierung und die Anmeldedaten des Administrators verwenden.
+
+Zum Beispiel:
+
+```yaml
+- job_name: owncast
+  scrape_interval: 1m
+  metrics_path: /api/admin/prometheus
+  scheme: https
+  basic_auth:
+    username: admin
+    password: mein_admin_passwort
+  static_configs:
+    - targets: ["mein.owncast.server"]
+```

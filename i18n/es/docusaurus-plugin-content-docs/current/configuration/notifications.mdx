@@ -1,0 +1,67 @@
+---
+title: Notificaciones de transmisión en vivo
+description: Envía notificaciones cuando tu transmisión se active.
+sidebar_position: 200
+sidebar_label: Notificaciones de transmisión en vivo
+tags:
+  - notificaciones
+  - discord
+  - fediverse
+  - en vivo
+  - espectadores
+  - webhooks
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+Algunas transmisiones se benefician de anunciar a su audiencia cuando se activan.
+
+Esto no es un respaldo de ningún servicio en particular, pero puede ayudar a algunos streamers a integrarse en sus comunidades existentes.
+
+Si deseas ampliar esto y enviar notificaciones automáticas a otros destinos, crea un [webhook](/docs/api/webhooks).
+
+Encontrarás estos canales en **Configuración → Notificaciones** en el administrador.
+
+<img src="/docs/img/admin-notifications.png" alt="La página de configuración de Notificaciones en el administrador, con secciones para alertas del navegador, Discord, sociales de Fediverse y webhooks personalizados" width="75%" />
+
+<Tabs>
+  <TabItem value="notificaciones-push-del-navegador" label="Notificaciones del navegador" default>
+
+        Usando notificaciones push del navegador, tus espectadores pueden elegir ser notificados cada vez que salgas en vivo.
+
+        No todos los navegadores admiten esta función, y los navegadores que lo hacen pueden manejarlo de manera diferente. Brave, por ejemplo, requiere que elijas la duración de validez de las notificaciones. Es probable que quieran seleccionar "Para siempre" para mantener la notificación activa.
+
+        ### Activando las notificaciones del navegador en iOS
+
+        Puedes solicitar ser notificado cuando una transmisión se active en iOS siguiendo estos pasos:
+
+        1. Abre Safari y navega a tu instancia de Owncast.
+        2. Toca el icono de compartir en la parte inferior de tu navegador.
+        3. Toca "Agregar a la pantalla de inicio".
+        4. Toca el nuevo icono de Owncast en tu pantalla de inicio.
+        5. Presiona el botón "Notificar".
+        6. Toca "Permitir" cuando se te pida.
+
+  </TabItem>
+  <TabItem value="extensión-del-navegador" label="Extensión del navegador">
+    Otra forma sugerida de recibir notificaciones del navegador de cualquier número de transmisiones es utilizando la [Extensión de Navegador de Owncast por craftamap](https://github.com/craftamap/owncast-browser-extension). Está disponible para [Chrome](https://chrome.google.com/webstore/detail/owncast-extension/djgneammmklaajinkihpibdpaflehgio) y [Firefox](https://addons.mozilla.org/en-US/firefox/addon/owncast-extension/).
+  </TabItem>
+
+<TabItem value="fediverse" label="Fediverse">
+  Las características sociales de Fediverse tienen soporte integrado para notificar a tus seguidores cuando salgas en vivo. [Visita la documentación](/docs/social/) para más información.
+</TabItem>
+
+  <TabItem value="discord" label="Discord">
+        Puedes notificar a un canal de Discord cuando tu transmisión se active. Visita la [documentación de Discord](https://support.discord.com/hc/en-us/articles/228383668) para instrucciones completas.
+
+    * Visita Editar Canal / Integraciones en tu canal de Discord.
+    * Crea un webhook.
+    * Proporciona la URL en la configuración de Owncast.
+  </TabItem>
+
+<TabItem value="personalizado" label="Personalizado">
+  Puedes crear tus propias notificaciones personalizadas usando [webhooks](/docs/api/webhooks). Esto te permite enviar notificaciones a cualquier servicio escribiendo tu propia integración.
+</TabItem>
+
+</Tabs>

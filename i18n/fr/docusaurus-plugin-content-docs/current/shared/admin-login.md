@@ -1,29 +1,29 @@
 ---
-title: Default Login Information
-description: Instructions for logging into the Owncast admin interface and default credentials.
+title: Informations de connexion par défaut
+description: Instructions pour se connecter à l'interface admin d'Owncast et les identifiants par défaut.
 unlisted: true
 related:
   excludeFromAll: true
 ---
 
-The admin interface can be found by navigating to `/admin` on your Owncast server (e.g., `https://owncast.example.com/admin`).
+L'interface admin peut être trouvée en naviguant à `/admin` sur votre serveur Owncast (par exemple, `https://owncast.example.com/admin`).
 
-[Configuring your broadcasting software](/docs/broadcasting) to stream to your Owncast server requires you to use the `/live` endpoint along with providing the stream key. (e.g., `rtmp://owncast.example.com/live` with stream key `abc123`). If your software does not allow specifying the stream key separately, you may need to append it to the URL as `rtmp://owncast.example.com/live/abc123`.
+[Configurer votre logiciel de diffusion](/docs/broadcasting) pour diffuser sur votre serveur Owncast nécessite d'utiliser l'endpoint `/live` tout en fournissant la clé de stream. (par exemple, `rtmp://owncast.example.com/live` avec la clé de stream `abc123`). Si votre logiciel ne permet pas de spécifier la clé de stream séparément, vous devrez peut-être l'ajouter à l'URL comme `rtmp://owncast.example.com/live/abc123`.
 
-## Default credentials
+## Identifiants par défaut
 
-| Default        | Value  |
-| -------------- | ------ |
-| Admin username | admin  |
-| Admin password | abc123 |
-| Stream key     | abc123 |
+| Par défaut              | Valeur |
+| ----------------------- | ------ |
+| Nom d'utilisateur admin | admin  |
+| Mot de passe admin      | abc123 |
+| Clé de stream           | abc123 |
 
-These are the default credentials for logging into the Owncast admin interface and streaming to your Owncast server. It is highly recommended that you change these values immediately after your first login to ensure the security of your server.
+Ce sont les identifiants par défaut pour se connecter à l'interface admin d'Owncast et diffuser sur votre serveur Owncast. Il est fortement recommandé de changer ces valeurs immédiatement après votre première connexion pour assurer la sécurité de votre serveur.
 
-## Next steps
+## Étapes suivantes
 
-1. Point your broadcasting software at your new server using `rtmp://yourserver/live` with your stream key. If your software doesn't have a way to specify a stream key use the url `rtmp://yourserver/live/streamkey` and use your stream key instead.
-1. Access your server in your web browser by visiting `http://yourserver:8080`.
-1. You can visit the Admin dashboard at `http://yourserver:8080/admin` where you can check visitor and server stats, change your stream key, personalize the content displayed on your page, and more. To login, use `admin` and the stream key as the password.
+1. Dirigez votre logiciel de diffusion vers votre nouveau serveur en utilisant `rtmp://yourserver/live` avec votre clé de stream. Si votre logiciel n'a pas de moyen de spécifier une clé de stream, utilisez l'url `rtmp://yourserver/live/streamkey` et utilisez votre clé de stream à la place.
+2. Accédez à votre serveur dans votre navigateur web en visitant `http://yourserver:8080`.
+3. Vous pouvez visiter le tableau de bord Admin à `http://yourserver:8080/admin` où vous pouvez vérifier les statistiques des visiteurs et du serveur, changer votre clé de stream, personnaliser le contenu affiché sur votre page, et plus encore. Pour vous connecter, utilisez le nom d'utilisateur `admin` et votre mot de passe admin (`abc123` par défaut).
 
-**Note:** Your stream key is only used by your streaming software to publish video; it is not your admin password.
+**Remarque :** Votre clé de stream et votre mot de passe admin par défaut sont tous deux `abc123`, mais ce sont des paramètres séparés. La clé de stream est uniquement utilisée par votre logiciel de diffusion pour publier la vidéo. Ce n'est pas votre mot de passe admin.

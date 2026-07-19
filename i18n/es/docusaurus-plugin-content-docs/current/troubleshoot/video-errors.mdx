@@ -1,0 +1,30 @@
+---
+title: Errores relacionados con video
+description: Solucionar errores relacionados con video en los registros de Owncast
+unlisted: true
+related:
+  excludeFromAll: true
+tags:
+  - video
+  - errores
+  - miniatura
+---
+
+import { IncludeMarkdown } from "@site/src/components";
+import MiscVideoIssues from "./shared/misc-video-issues.md";
+
+## Primeros pasos
+
+<IncludeMarkdown>
+  <MiscVideoIssues />
+</IncludeMarkdown>
+
+## Error al generar miniatura
+
+Si ves un error en los registros de Owncast que indica que no se pudo generar una miniatura para tu transmisión, es probable que tengas habilitado el Passthrough de Video, y el video que estás enviando a Owncast no esté en un formato reproducible.
+
+Si ves este error, también es probable que tus espectadores estén teniendo problemas para reproducir tu transmisión.
+
+### Solución
+
+Desactiva el Passthrough de Video en la configuración de video de tu servidor Owncast.

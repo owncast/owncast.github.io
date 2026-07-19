@@ -1,0 +1,89 @@
+---
+title: Configuración
+description: Deja que los administradores configuren tu complemento con configuraciones tipadas. Owncast renderiza el formulario, tú lees los valores en tiempo de ejecución con owncast.config.get.
+sidebar_position: 7
+sidebar_label: Configuración
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - complementos
+  - configuración
+  - administrador
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Owncast brinda a los complementos dos formas de permitir que un administrador cambie configuraciones. Declara un bloque `config` en el manifiesto y Owncast renderiza un formulario tipado para ti, sin HTML para administradores y sin necesidad de escribir código para guardar o cargar. O registra una página de `admin` y sirve tu propio HTML.
+
+Usa el bloque `config` del manifiesto para controles planos y tipados: cadenas, números y conmutadores. Accede a una [página de administrador personalizada](/docs/plugins/ui#admin-pages) solo cuando necesites una interfaz que el formulario automático no pueda expresar, como un diseño agrupado, una vista previa en vivo o un botón de acción que llame a tu propia API. Los dos pueden coexistir. Un complemento puede tener tanto la pestaña de Configuraciones del formulario automático como una o más páginas de administrador personalizadas.
+
+## Declara configuraciones en el manifiesto
+
+Cada entrada bajo `config` tiene un `tipo`, un `valor por defecto` y una `descripción`:
+
+```json
+{
+  "config": {
+    "greeting": { "type": "string", "default": "¡bienvenido!", "description": "Mensaje de primer ingreso" },
+    "cooldownMs": { "type": "number", "default": 2000, "description": "Tiempo de espera por usuario" },
+    "modOnly": { "type": "boolean", "default": false, "description": "Restringido a moderadores" }
+  }
+}
+```
+
+| Campo               | Notas                                                                                                                                                    |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tipo`              | Uno de `string`, `number`, o `boolean`. Cualquier otro valor es aceptado pero obtiene una entrada de texto simple y sin verificación de tipo al guardar. |
+| `valor por defecto` | El valor que `config.get` devuelve hasta que un administrador guarda una anulación. Su tipo JSON debe coincidir con `tipo`.                              |
+| `descripción`       | La etiqueta mostrada al lado del campo en el formulario de administrador. Vuelve al nombre de la clave cuando está vacío.                                |
+
+Los nombres de clave no pueden comenzar con `__`. Ese prefijo está reservado para el estado por instancia que inyecta el host, y un complemento que declare una clave como `__internal` falla al cargar.
+
+## Lo que ve el administrador
+
+Un complemento que declara un bloque `config` obtiene una pestaña de **Configuraciones** en su página de detalles bajo Administrador → Complementos. Owncast construye el formulario a partir del esquema:
+
+* `string` renderiza una entrada de texto, `number` una entrada numérica, y `boolean` un conmutador.
+* La `descripción` es la etiqueta del campo.
+* El `valor por defecto` se muestra hasta que un administrador guarda una anulación.
+* Una clave cuyo nombre parece una credencial se renderiza como una entrada de contraseña enmascarada. La coincidencia no distingue entre mayúsculas y minúsculas y se activa cuando el nombre contiene `secret`, `password`, `token`, `apikey`, o `api_key`, o es la palabra aislada `key`. Así `apiKey`, `clientSecret`, `accessToken`, y `webhook_secret` se enmascaran. Nombres como `accessKey` o `keyValue` no lo hacen, porque `key` solo coincide como una palabra completa. Nombra un campo secreto `apiKey`, `api_key`, o cualquier cosa que termine en `Secret` o `Token` si quieres que esté enmascarado.
+
+Un complemento sin bloque `config` no muestra pestaña de Configuraciones.
+
+## Leer valores en tiempo de ejecución
+
+`owncast.config.get(key, fallback?)` devuelve la anulación del administrador cuando una está configurada, de lo contrario, el valor por defecto declarado, ya analizado al tipo declarado.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const cooldownMs = owncast.config.get("cooldownMs", 2000);
+const modOnly = owncast.config.get("modOnly", false);
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+cooldown_ms = owncast.config.get("cooldownMs", 2000)
+mod_only = owncast.config.get("modOnly", False)
+```
+
+</TabItem>
+</Tabs>
+
+`config.get` es ambiental, por lo que no necesita ningún permiso. Un campo `number` regresa como un número y un `boolean` como un booleano, así que no analices cadenas tú mismo. Para una clave desconocida, o una clave declarada que no tenga ni valor por defecto ni una anulación guardada, devuelve `fallback` (`undefined` en JavaScript y `None` en Python cuando no pasas nada). Pasa un valor de respaldo con el que puedas trabajar.
+
+La firma completa vive en la [referencia de APIs](/docs/plugins/apis#config).
+
+## Validación y almacenamiento
+
+Cuando un administrador guarda el formulario, Owncast verifica cada valor contra el esquema antes de almacenarlo:
+
+* Una clave no declarada en el manifiesto es rechazada con `400 clave de config desconocida`.
+* Un campo `string` debe recibir una cadena, un `number` un número, y un `boolean` un booleano. Un desajuste de tipo es rechazado. Cualquier otro `tipo` declarado se almacena tal cual.
+* El cuerpo de la solicitud está limitado a 1 MB.
+
+Las anulaciones persisten en el propio almacén de clave/valor del complemento bajo la clave reservada `owncast.config`, con un espacio de nombres por el `slug` del complemento. Otros complementos no pueden leerlos, y sobreviven a reinicios y reinstalaciones. Cambiar el `slug` después del lanzamiento comienza un nuevo almacén, por lo que las anulaciones guardadas vuelven a sus valores por defecto, la misma regla que se aplica al resto de tus [datos KV](/docs/plugins/apis#storage).

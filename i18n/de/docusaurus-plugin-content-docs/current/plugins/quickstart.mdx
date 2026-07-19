@@ -1,0 +1,229 @@
+---
+title: Plugin-Quickstart
+description: Erstellen Sie ein neues Owncast-Plugin in JavaScript oder Python, bauen Sie es, paketieren Sie es und installieren Sie es auf Ihrem Server.
+sidebar_position: 2
+sidebar_label: Schnellstart
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - Plugins
+  - schnellstart
+  - gerüst
+  - Erste Schritte
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Diese Seite führt Sie von nichts zu einem Plugin, das auf Ihrem Owncast-Server läuft. Plugins können in **JavaScript** oder **Python** geschrieben werden: Wählen Sie unten die Registerkarte für Ihre Sprache. Die beiden haben vollständige Funktionsparität. Wenn Sie unsicher sind, siehe [Wählen Sie ein SDK](/docs/plugins).
+
+## Voraussetzungen
+
+* Ein Owncast-Server, den Sie verwalten können, Version 0.3.0 oder neuer.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+- Node.js 18 oder neuer (`node --version`, um zu überprüfen) für die `@owncast/plugin-sdk`-Toolchain.
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+* Python 3.8 oder neuer, und [`uv`](https://docs.astral.sh/uv/) oder `pip`, um die `owncast-plugin-py`-Toolchain zu installieren.
+
+</TabItem>
+</Tabs>
+
+## 1. Ein neues Plugin erstellen
+
+Die Kennung eines Plugins ist sein **Slug**: Kleinbuchstaben, Ziffern und Bindestriche, die mit einem Buchstaben beginnen. Es wird als Verzeichnisname, Ausgabedateiname und URL-Präfix verwendet.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+Erstellen Sie ein Projekt mit `create-owncast-plugin`, geben Sie das Slug an:
+
+```sh
+npx create-owncast-plugin@latest my-plugin
+cd my-plugin
+npm install
+```
+
+Sie haben nun:
+
+```text
+my-plugin/
+├── package.json
+├── plugin.manifest.json     Anzeigename, Slug, Version, Berechtigungen
+├── README.md                wie man es baut, testet, paketiert und installiert
+├── INSTRUCTIONS.md          optional, als Registerkarte im Admin gerendert
+├── AGENTS.md                Notizen für KI-Programmieragenten
+├── .agents/                 eine gebündelte Fähigkeit für KI-Programmieragenten
+├── src/
+│   └── plugin.js            Ihr Code, mit einem Beispiel-Handler
+└── __tests__/
+    └── plugin.test.js       ein Beispiel-Szenariotest
+```
+
+`npm install` erstellt auch `node_modules/`. Keine dieser Dateien wird für Sie erstellt, aber Sie können eine `icon.png` (im Admin-Pluginliste angezeigt), ein Verzeichnis `public/` (statische Dateien, die unter `/plugins/my-plugin/` bereitgestellt werden) und ein Verzeichnis `assets/` (Dateien, die der Host inline für Manifestfelder einfügt) hinzufügen.
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+Erstellen Sie ein Projekt mit `new`, geben Sie das Slug an. `uvx` führt den Gerüstbau direkt von PyPI aus, ohne etwas zu installieren:
+
+```sh
+uvx owncast-plugin-py new my-plugin
+cd my-plugin
+uv tool install owncast-plugin-py      # oder:  pip install owncast-plugin-py — für build/test/serve/package
+```
+
+Sie haben nun:
+
+```text
+my-plugin/
+├── plugin.manifest.json     Anzeigename, Slug, Version, Berechtigungen
+├── README.md                wie man es baut, testet, paketiert und installiert
+├── INSTRUCTIONS.md          optional, als Registerkarte im Admin gerendert
+├── AGENTS.md                Notizen für KI-Programmieragenten
+├── .agents/                 eine gebündelte Fähigkeit für KI-Programmieragenten
+├── src/
+│   └── plugin.py            Ihr Code, mit einem Beispiel-Handler
+└── __tests__/
+    └── plugin.test.json     ein Beispiel-Szenariotest
+```
+
+</TabItem>
+</Tabs>
+
+Das Manifest hat sowohl einen menschenlesbaren Anzeigenamen (`"name": "My Plugin"`) als auch einen Slug (`"slug": "my-plugin"`). Der Anzeigename ist das, was Administratoren in Listen sehen. Der Slug ist der kanonische Bezeichner. Siehe die [Manifestreferenz](/docs/plugins/manifest#name-and-slug) für die Regeln.
+
+## 2. Schreiben Sie etwas Code
+
+Ein Handler reagiert auf ein Ereignis. Das SDK leitet die Abonnentenliste des Manifests von den Handlern ab, die Sie definieren, sodass nichts anderes synchronisiert werden muss. Hier ist ein Echo-Bot:
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+Öffnen Sie `src/plugin.js`:
+
+```js
+const { definePlugin, owncast } = require('@owncast/plugin-sdk');
+
+module.exports = definePlugin({
+  onChatMessage(msg) {
+    owncast.chat.send(`echo: ${msg.body}`);
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+Erstellen Sie `src/plugin.py`:
+
+```python
+from owncast_plugin import plugin, owncast
+
+@plugin.on_chat_message
+def echo(msg):
+    owncast.chat.send(f"echo: {msg.body}")
+```
+
+</TabItem>
+</Tabs>
+
+Siehe die [Handlerreferenz](/docs/plugins/events) für alles, in das Sie sich einhaken können, und die [APIs-Referenz](/docs/plugins/apis) für jede `owncast.*`-Methode.
+
+## 3. Bauen Sie das Plugin
+
+Dies erzeugt `my-plugin.ocpkg` in Ihrem Projektstamm: eine einzelne Datei, die Ihr Manifest, das kompilierte Plugin und den Inhalt von `public/` und `assets/` enthält. Die `.ocpkg` ist das Distributionsformat: Diese eine Datei ist alles, was ein Administrator braucht.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```sh
+npm run package
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```sh
+owncast-plugin-py package my-plugin
+```
+
+</TabItem>
+</Tabs>
+
+## 4. Führen Sie die Tests durch
+
+Jedes Szenario löst Ereignisse durch die echte Plugin-Laufzeit mit simulierten Nebeneffekten aus, sodass ein erfolgreicher Test dasselbe Verhalten in der Produktion bedeutet. Siehe die [Testanleitung](/docs/plugins/testing) für das vollständige Datenmodell.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```sh
+npm test
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```sh
+owncast-plugin-py test my-plugin
+```
+
+</TabItem>
+</Tabs>
+
+## 5. (Optional) gegen einen lokalen Entwicklungsserver iterieren
+
+Dient das Plugin unter `http://localhost:8080/plugins/my-plugin/` zum Curlen von Endpunkten, Öffnen statischer Seiten in einem Browser oder Auslösen von Ereignis-Handlern über die `/_dev/`-Hilfseindpunkte (zum Beispiel `POST /_dev/chat`). Starten Sie den Entwicklungsserver neu, wenn Sie Ihren Code ändern.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```sh
+npm run serve
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```sh
+owncast-plugin-py serve my-plugin
+```
+
+</TabItem>
+</Tabs>
+
+## 6. Installieren Sie es auf Ihrem Server
+
+Im Owncast-Admin öffnen Sie **Plugins** in der Seitenleiste und klicken auf **Plugin hochladen**. Wählen Sie die Datei `my-plugin.ocpkg`, die Ihr Build erstellt hat. Das Plugin erscheint sofort in der Liste. Aktivieren Sie **Aktiviert**, um es zu laden.
+
+<img src="/docs/img/plugins-installed-list.png" alt="Die Plugins-Seite im Admin zeigt installierte Plugins mit den angeforderten Berechtigungen, dem Status, einem Aktivierungsschalter sowie den Schaltflächen Plugin hochladen und Konfigurieren an." width="80%" />
+
+Alternativ können Sie `my-plugin.ocpkg` in das Verzeichnis `data/plugins/` Ihres Servers kopieren, und der nächste Scan-Tick wird es erfassen:
+
+```sh
+scp my-plugin.ocpkg user@your-owncast-server:/path/to/owncast/data/plugins/
+```
+
+Wenn das Plugin Berechtigungen deklariert, überprüft der Administrator sie im Tab **Berechtigungen** auf der Detailseite des Plugins, bevor er sie aktiviert. Die erste Aktivierung erfasst das genehmigte Berechtigungsset. Wenn Sie später ein Update versenden, das um mehr Zugriff bittet, deaktiviert Owncast das Plugin automatisch und fordert den Administrator zur erneuten Genehmigung auf.
+
+<img src="/docs/img/plugin-permissions-tab.png" alt="Der Tab &#x22;Berechtigungen&#x22; auf der Detailseite eines Plugins, der jede angeforderte Berechtigung mit einer Beschreibung in einfacher Sprache auflistet." width="80%" />
+
+## Was als Nächstes gelesen werden soll
+
+* [Wählen Sie ein SDK](/docs/plugins) und seine Seiten [JavaScript](/docs/plugins/sdks/javascript) / [Python](/docs/plugins/sdks/python) für die vollständige sprachspezifische Referenz.
+* [Manifestreferenz](/docs/plugins/manifest) für das vollständige Schema von `plugin.manifest.json`.
+* [Handlerreferenz](/docs/plugins/events) für jedes Ereignis, auf das Sie sich abonnieren können.
+* [Owncast-APIs](/docs/plugins/apis) für jede Methode, die Sie aus dem Plugin-Code aufrufen können.
+
+## Wenn etwas schiefgeht
+
+* Das Plugin erscheint nicht in der Admin-Liste. Stellen Sie sicher, dass die `.ocpkg` im `data/plugins/` und nicht nur in `plugins/` ist, und dass der Dateiname mit `.ocpkg` endet. Die Admin-Plugins-Seite verfügt über einen Aktualisieren-Button, wenn Sie nicht auf den nächsten Scan-Tick warten möchten.
+* Das Plugin erscheint, kann aber nicht aktiviert werden. Überprüfen Sie die Detailansicht des Plugins des Administrators. Die **Status**-Spalte zeigt `Fehler` an, wenn das Manifest ungültig ist oder das Plugin nicht instanziiert werden konnte. Fahren Sie mit dem Mauszeiger über die Nachricht oder führen Sie Ihre Tests lokal aus, um dasselbe Problem vor dem Versand zu erkennen.
+* Das Plugin wird aktiviert, macht jedoch nichts. Stellen Sie sicher, dass Sie den richtigen Handler-Namen verwenden (`onChatMessage` / `on_chat_message`, nicht `onMessage`) und dass die entsprechende Berechtigung in Ihrem Manifest vorhanden ist. Das Aufrufen einer API ohne deren Berechtigung wirft einen klaren Fehler.
+* Das Plugin wird automatisch deaktiviert. Ein Filter, der fünf Mal in Folge einen Fehler auslöst oder hängen bleibt, wird für den Rest der Sitzung deaktiviert. Beheben Sie den Fehler, bauen Sie neu, stellen Sie bereit und aktivieren Sie erneut.

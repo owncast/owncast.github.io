@@ -1,0 +1,20 @@
+---
+title: Instalación manual
+description: Si no desea usar el instalador automatizado, puede descargarlo usted mismo.
+tags:
+  - instalación
+sidebar_label: Instalación manual
+---
+
+1. Owncast necesita [ffmpeg](https://ffmpeg.org/) instalado en su servidor. El instalador automatizado lo descarga por usted, pero una instalación manual no lo hace, así que instale ffmpeg primero si no lo tiene ya.
+2. Cree un directorio para ejecutar el servicio y descargue la versión que coincida con su servidor desde la [página de lanzamientos](https://github.com/owncast/owncast/releases) en ese directorio. Se proporcionan versiones para Linux (`linux-64bit`, `linux-arm64`, `linux-arm7`, `linux-32bit`) y macOS (`macOS-64bit`, `macOS-arm64`). Use una versión `arm64` o `arm7` para una Raspberry Pi.
+3. Descomprima la versión.
+4. Ejecute `./owncast` para iniciar el servicio.
+5. Visite el administrador en `/admin` para configurar su servidor. Inicie sesión con el nombre de usuario `admin` y su contraseña de administrador (`abc123` por defecto).
+
+import { IncludeMarkdown } from "@site/src/components";
+import AdminLogin from "../../shared/admin-login.md";
+
+<IncludeMarkdown>
+  <AdminLogin />
+</IncludeMarkdown>

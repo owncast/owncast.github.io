@@ -1,0 +1,125 @@
+---
+title: Chat-Befehle
+description: Deklarieren Sie Chat-Befehle mit Aliassen, Abkühlzeiten, Moderatorenzugriff und automatischen !help-Listings.
+sidebar_position: 6
+sidebar_label: Befehle
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - plugins
+  - chat
+  - befehle
+  - bots
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Deklarieren Sie eine Befehltabelle für Befehle wie `!uptime` oder `!so`. Befehltabellen unterstützen Aliasse, Moderatorengates, Abkühlzeiten pro Benutzer, analysierte Argumente und automatische `!help`-Listings. Siehe [Chat-Grundlagen](/docs/plugins/chat) für die Chatnachrichtenlast, das Senden von Nachrichten und Filter.
+
+## Registrieren Sie eine Befehltabelle
+
+Eine Befehltabelle bietet:
+
+* einen konfigurierbaren Befehlspräfix, wobei `!` der Standard ist
+* pro-Befehl `beschreibung`, `verwendung` und `aliase`
+* pro Benutzer Abkühlzeiten
+* Moderator-nur Zugriff basierend auf den Berechtigungen des Senders
+* Argumentanalyse
+* eine automatische `!help`-Auflistung
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const { definePlugin } = require("@owncast/plugin-sdk");
+
+module.exports = definePlugin({
+  commandPrefix: "!", // optional
+  commands: {
+    uptime: {
+      description: "Wie lange wir schon live sind",
+      run: (ctx) => ctx.reply("wir sind seit einer Weile live!"),
+    },
+    so: {
+      description: "Ruf einen Zuschauer aus",
+      usage: "!so <name>",
+      aliases: ["shoutout"],
+      cooldownMs: 10_000,
+      run: (ctx) => ctx.reply(`folge ${ctx.args[0] || "jemand coolem"}`),
+    },
+    clear: {
+      description: "Löschen Sie den Chat",
+      modOnly: true,
+      run: (ctx) => ctx.replyPrivately("fertig"),
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+from owncast_plugin import plugin
+
+plugin.commands({
+    "uptime": {
+        "description": "Wie lange wir schon live sind",
+        "run": lambda ctx: ctx.reply("wir sind seit einer Weile live!"),
+    },
+    "so": {
+        "description": "Ruf einen Zuschauer aus",
+        "usage": "!so <name>",
+        "aliases": ["shoutout"],
+        "cooldown_ms": 10_000,
+        "run": lambda ctx: ctx.reply(
+            f"folge {ctx.args[0] if ctx.args else 'jemand coolem'}"
+        ),
+    },
+    "clear": {
+        "description": "Löschen Sie den Chat",
+        "mod_only": True,
+        "run": lambda ctx: ctx.reply_privately("fertig"),
+    },
+}, prefix="!")
+```
+
+</TabItem>
+</Tabs>
+
+JavaScript-Handler erhalten `msg`, `user`, `command`, `invokedAs`, `args`,
+`argString`, `reply`, und `replyPrivately`. Python verwendet `invoked_as`,
+`arg_string` und `reply_privately`.
+
+Doppelte Befehlsnamen sind erlaubt, sodass jedes passende Plugin ausgeführt wird.
+Unbekannte Befehle, moderatoren-geschützte Aufrufe und Abkühlzeiten-beschränkte Aufrufe sind still. Das Deklarieren oder Empfangen eines Befehls erfordert keine Berechtigung. Aktionen innerhalb des Handlers erfordern weiterhin ihre üblichen Berechtigungen, wie `chat.send`.
+
+## `!help` ist automatisch, aber nicht reserviert
+
+Owncast veröffentlicht eine Systemmeldung, die die Befehlsbeschreibungen von jedem aktivierten Plugin auflistet. Moderator-nur Befehle bleiben für Nicht-Moderatoren verborgen. Diese integrierte Antwort benötigt keine Plugin-Berechtigung.
+
+`!help` und dessen `!commands` Alias bleiben gewöhnliche Chatnachrichten. Plugins können sie auch deklarieren oder darauf reagieren. Die integrierte Antwort blockiert keine zusätzlichen Plugin-Antworten.
+
+<img src="/docs/img/plugin-help-command.png" alt="Die !help-Antwort im Chat, die die Befehle auflistet, die ein aktiviertem Plugin mit ihren Beschreibungen bietet, gruppiert nach Plugin" width="320" />
+
+## Verwendung gewöhnlicher Chat-Handler und Filter
+
+Eine Befehltabelle ist optional. Ein Plugin kann `msg.body` in einem `onChatMessage`-Handler für einen einzelnen festen Befehl inspizieren. Handgeschriebene Befehle erscheinen nicht in der integrierten Hilfsliste.
+
+Befehlsnachrichten bleiben gewöhnliche Chat-Nachrichten, sodass ein Plugin sowohl eine Befehltabelle als auch einen gewöhnlichen Chat-Handler verwenden kann. Chat-Filter werden vor der Befehlsübereinstimmung ausgeführt. Eine von einem Filter fallengelassene Nachricht führt keinen deklarierten Befehl aus.
+
+## Beispielplugins
+
+* **mod-befehle** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/mod-commands), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/mod-commands)): ein benutzerdefinierter `?` Präfix mit Aliassen, Abkühlzeiten und Moderatorenzugriff.
+* **stream-tracker** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/stream-tracker), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/stream-tracker)): eine Befehltabelle mit `!uptime` und `!who`, plus Stream- und Chatbenutzer-Aktivitätsverfolgung.
+* **stream-ops** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/stream-ops), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/stream-ops)): eine Befehltabelle, die Broadcast- und Video-Telemetrie berichtet.
+* **timer-bot** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/timer-bot), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/timer-bot)): eine Befehltabelle für Erinnerungen und Countdown (`!remind`, `!every`, `!countdown`).
+* **ip-bot** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/ip-bot), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/ip-bot)): ein einzelner `!ip` Befehl, der mit der öffentlichen IP des Servers beantwortet wird.
+* **relay** ([JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/relay), [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/relay)): sendet `/announce \<text>` als Broadcast-Ankündigung erneut.
+
+## Wo es als nächstes hingeht
+
+* [Chat-Plugins](/docs/plugins/chat) für die Chatnachrichtenlast, das Senden von Nachrichten und Filter.
+* [Handler-Referenz](/docs/plugins/events) für die Chatereignisse, auf die Ihr Plugin abonnieren kann.
+* [APIs-Referenz](/docs/plugins/apis) für jede `owncast.*` Methode und die Berechtigung, die sie benötigt.

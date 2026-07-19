@@ -1,0 +1,116 @@
+---
+id: appareils-télé-samsung
+title: Téléviseurs intelligents Samsung
+slug: /regarder-flux/télé-samsung
+sidebar_label: Téléviseurs Samsung
+deviceId: télé-samsung
+deviceType: télé intelligente
+reliability: faible
+hide_title: true
+tags:
+  - samsung
+  - télé intelligente
+  - tizen
+  - télévision
+  - regarder
+description: |
+  Options limitées pour regarder les flux Owncast sur les téléviseurs intelligents Samsung en raison des restrictions de la plateforme.
+icon: /images/appareils/télé-samsung.svg
+---
+
+import DeviceLayout from "@site/src/components/tv/DeviceLayout";
+import { DeviceOptionsGrid } from "@site/src/components/tv/DeviceOptionsGrid";
+import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard id="navigateur-samsung" title="Navigateur intégré" difficulty="difficile" reliability="faible" screenshot="/images/appareils/télé-samsung/interface-navigateur.png" screenshotAlt="Interface de navigateur intégrée du téléviseur Samsung" summary="Essayez d'utiliser le navigateur intégré du téléviseur Samsung pour accéder directement aux flux Owncast.">
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Peut fonctionner sur les modèles de téléviseurs Samsung plus récents.</li>
+      <li>Capacités de navigateur limitées sur la plupart des téléviseurs Samsung.</li>
+      <li>Aucune garantie de compatibilité.</li>
+    </ul>
+
+    <details>
+      <summary>Afficher les instructions étape par étape</summary>
+
+      1. Ouvrez l'application **Navigateur Web** sur votre téléviseur Samsung (si disponible).
+      2. Accédez à l'URL de votre serveur Owncast.
+      3. Essayez de lire le flux directement dans le navigateur.
+
+      **Remarque :** Les téléviseurs Samsung prennent en charge de manière limitée le streaming vidéo basé sur le web et cette méthode peut ne pas fonctionner de manière fiable.
+
+    </details>
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard id="diffusion-samsung" title="Miroitage d'écran/Diffusion" difficulty="moyen" reliability="moyen" screenshot="/images/appareils/télé-samsung/miroitage-ecran.png" screenshotAlt="Configuration du miroitage d'écran du téléviseur Samsung" summary="Utilisez le miroitage d'écran depuis votre téléphone ou votre ordinateur pour afficher les flux Owncast.">
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Fonctionne avec l'application Smart View de Samsung ou le miroitage d'écran intégré.</li>
+      <li>Nécessite un smartphone ou un ordinateur compatible.</li>
+      <li>Peut introduire un certain retard.</li>
+    </ul>
+
+    <details>
+      <summary>Afficher les instructions étape par étape</summary>
+
+      1. Assurez-vous que votre téléviseur Samsung et votre appareil sont sur le même réseau Wi-Fi.
+      2. Sur votre téléphone ou votre ordinateur, ouvrez le flux Owncast.
+      3. Utilisez les fonctionnalités de miroitage d'écran :
+         * **Android** : Utilisez Smart View ou le miroitage d'écran
+         * **iOS** : Utilisez AirPlay (si pris en charge par le téléviseur)
+         * **Windows** : Utilisez Projet/Diffuser sur un appareil
+      4. Sélectionnez votre téléviseur Samsung dans la liste des appareils disponibles.
+
+    </details>
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard id="dispositif-externe-samsung" title="Appareil de streaming externe" badge="Recommandé" difficulty="facile" reliability="élevé" screenshot="/images/appareils/télé-samsung/dispositifs-externes.png" screenshotAlt="Dispositifs de streaming externes connectés au téléviseur Samsung" summary="Connectez un dispositif de streaming dédié à votre téléviseur Samsung pour une meilleure compatibilité avec Owncast.">
+
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Bien plus fiable que les applications intégrées des téléviseurs Samsung.</li>
+      <li>Large variété d'applications et d'options compatibles.</li>
+      <li>Meilleur support à long terme et mises à jour.</li>
+    </ul>
+
+    Envisagez de connecter l'un de ces appareils à votre téléviseur Samsung :
+    * Apple TV
+    * Roku
+    * Amazon Fire TV Stick
+    * Google Chromecast
+    * NVIDIA Shield TV
+
+    Puis suivez les instructions pour votre appareil de streaming choisi.
+
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

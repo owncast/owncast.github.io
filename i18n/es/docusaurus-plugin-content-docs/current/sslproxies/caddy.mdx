@@ -1,0 +1,93 @@
+---
+title: Caddy
+description: Caddy es posiblemente la forma más rápida de configurar un proxy SSL.
+sidebar_position: 70
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+[Caddy](https://caddyserver.com/) es la forma más rápida de configurar un proxy inverso SSL con un certificado gratuito de [Let's Encrypt](https://letsencrypt.org/).
+
+Mientras intentaremos guiarte a través de algunos pasos de instalación, **se sugiere encarecidamente que sigas las [Opciones de instalación](https://caddyserver.com/docs/install) y el [Inicio rápido de proxy inverso](https://caddyserver.com/docs/quick-starts/reverse-proxy) de Caddy para más documentación, ejemplos e información detallada**. Caddy es un software bien documentado de calidad con el que deberías familiarizarte si necesitas ejecutar un proxy inverso SSL.
+
+## 1. Asegúrate de que no tienes otros servidores web en ejecución.
+
+Si estás ejecutando otro software de servidor web como Apache o NGINX utilizando el puerto 80 o 443, entonces no podrás continuar con esta instalación de Caddy. O bien, elimina las otras piezas de software o infórmate sobre cómo hacer que convivan.
+
+## 2. Instalar Caddy
+
+Dependiendo de tu sistema, puede haber diferentes opciones para la instalación. Se sugiere usar APT si es compatible con tu máquina.
+
+<Tabs>
+  <TabItem value="apt" label="Usando APT (recomendado)" default>
+      Instalar este paquete inicia y ejecuta automáticamente Caddy por ti como un servicio systemd, por lo que se ejecutará automáticamente cada vez que inicies tu máquina.
+
+```bash
+sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+sudo apt update
+sudo apt install caddy
+```
+
+[Lee los pasos de instalación de Caddy para usar apt](https://caddyserver.com/docs/install#debian-ubuntu-raspbian) para más detalles.
+
+  </TabItem>
+
+  <TabItem value="manualmente" label="Descargar manualmente">
+    1. [Visita la página de lanzamientos](https://github.com/caddyserver/caddy/releases) y expande la sección "assets".
+    2. Encuentra la versión para tu plataforma y sistema operativo.
+    3. Descomprimir el archivo: `tar -xvzf caddy_\<version>_linux_amd64.tar.gz`
+    4. Es probable que quieras configurar Caddy como un servicio del sistema para que se inicie automáticamente en segundo plano.  [Aprende cómo hacerlo](https://caddyserver.com/docs/install#linux-service).
+       [Lee la página de descarga de Caddy para más detalles.](https://caddyserver.com/docs/install#static-binaries)
+  </TabItem>
+</Tabs>
+
+## 3. Ejecutar Caddy como un proxy inverso
+
+<Tabs>
+  <TabItem value="línea de comando única" label="Línea de comando única" default>
+
+Ofrece configuración automática de HTTPS con un solo comando.
+
+```bash
+caddy reverse-proxy --from owncast.mydomain.com --to 127.0.0.1:8080
+```
+
+Reemplaza `owncast.mydomain.com` con el nombre de host público de tu servidor Owncast, como `watch.owncast.online` por ejemplo.
+
+[Lee la documentación del proxy inverso de Caddy para más detalles.](https://caddyserver.com/docs/quick-starts/reverse-proxy)
+
+  </TabItem>
+
+  <TabItem value="caddyfile" label="Caddyfile">
+  El [Caddyfile](https://caddyserver.com/docs/caddyfile) es el archivo de configuración de Caddy.
+
+Agrega a tu Caddyfile:
+
+```nginx
+owncast.example.com {
+  encode gzip
+  reverse_proxy 127.0.0.1:8080
+  tls webmaster@mydomain.com
+}
+```
+
+Reemplaza `owncast.example.com` con el nombre de host público de tu servidor Owncast, como `watch.owncast.online` por ejemplo.
+
+  </TabItem>
+
+</Tabs>
+
+Si especificas `owncast.example.com` sin un protocolo o un puerto, intentará usar los puertos `http` y `https` por defecto (80 y 443). Dado que estos son [*puertos privilegiados*](https://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html#:~:text=Priviliged%20ports,has%20put%20up%20for%20you.), necesitarás ejecutar Caddy con `sudo` o como `root`.
+
+## 4. Ejecutar Owncast normalmente
+
+Continúa ejecutando Owncast en el puerto 8080.
+
+## 5. Acceder a Owncast a través del proxy
+
+Ahora deberías poder acceder a tu servidor Owncast visitando https://owncast.example.com en lugar de http://owncast.example.com:8080.
+
+Reemplaza `owncast.example.com` con el nombre de host público de tu servidor Owncast, como `watch.owncast.online` por ejemplo.

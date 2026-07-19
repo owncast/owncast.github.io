@@ -1,0 +1,55 @@
+---
+title: Verlorene Frames
+description: ""
+unlisted: true
+related:
+  excludeFromAll: true
+tags:
+  - obs
+  - verloren
+  - Frames
+---
+
+import HardwareUsage from "./shared/hardware-usage.md";
+import BroadcastingSoftware from "./shared/broadcasting-software.md";
+import ReduceFramerate from "./shared/reduce-framerate.md";
+
+import { IncludeMarkdown } from "@site/src/components";
+
+Wenn deine Streaming-Software dir sagt, dass du Frames verlierst, liegt es entweder daran, dass deine Streaming-Hardware oder -Software nicht in der Lage ist, Frames schnell genug zu rendern, deine Netzwerkverbindung das Streaming mit deiner gewählten Bitrate nicht unterstützt oder dein Owncast-Server nicht in der Lage ist, die Frames schnell genug zu verarbeiten.
+
+Im Allgemeinen sind einige verlorene Frames vollkommen akzeptabel und zu erwarten. Ein kontinuierlicher Verlust von Frames während des Streamings bedeutet jedoch, dass etwas optimiert werden muss, sei es an der Hardware, Software oder dem Netzwerk deines lokalen Streaming-Computers oder auf der Owncast-Seite.
+
+Einige dieser Informationen stammen aus dem [Leitfaden zu verlorenen Frames von OBS](https://github.com/obsproject/obs-studio/wiki/Dropped-Frames-and-General-Connection-Issues), sodass du wahrscheinlich auch mit diesem vollständigen Dokument hilfreich sein wirst.
+
+## Überprüfe die Auslastung der Hardware deines Owncast-Servers
+
+<IncludeMarkdown>
+  <HardwareUsage />
+</IncludeMarkdown>
+
+## Überprüfe deine Streaming-Software
+
+<IncludeMarkdown>
+  <BroadcastingSoftware />
+</IncludeMarkdown>
+
+## Versuche, deine Bitrate und/oder Bildfrequenz zu verringern
+
+Das Nächste, was zu tun ist, ist die Bitrate und/oder Bildfrequenz in deiner Streaming-Software zu senken, bis die verlorenen Frames aufhören. Netzwerkbedingungen sind nicht immer von Tag zu Tag gleich, und was gestern funktioniert hat, garantiert nicht, dass es heute funktioniert. Manchmal gibt es einfach nicht viel anderes zu tun, als die Bitrate zu senken, um die schlechte Verbindung zu diesem Zeitpunkt auszugleichen.
+
+<IncludeMarkdown>
+  <ReduceFramerate />
+</IncludeMarkdown>
+
+Lies mehr über [Video-Encoding und Qualität](/docs/video).
+
+**Nachteil**: Die Reduzierung deiner Videoqualität kann die Qualität deines Streams für einige Inhalte sichtbar verringern.
+
+## Stream nicht über eine Wireless-Verbindung
+
+In vielen Fällen können drahtlose Verbindungen Probleme verursachen, aufgrund ihrer instabilen Natur. Streaming erfordert wirklich eine stabile Verbindung. Drahtlose Verbindungen sind oft in Ordnung, aber wenn du Probleme hast, ist es eine sehr gute Änderung, die zu machen ist.
+
+## Geschwindigkeitstest
+
+Geschwindigkeitstests sind eine sehr grobe Schätzung – sie haben wenig Bedeutung im Hinblick auf das Streaming. Nur weil ein Geschwindigkeitstest sagt, du hast 5 Mb/s Upload, heißt das nicht, dass du stabil mit 5 Mb/s hochladen kannst. Das ist leider nicht, wie das Internet funktioniert. Du kannst nie garantiert eine stabile Verbindung zu einem Server aufrechterhalten, wenn der Server oder die Routing-Punkte zum Server instabil sind. Deine "stabile" Bitrate liegt wahrscheinlich bei etwa 70-75 % deines "geschätzten" Geschwindigkeitstest-Uploads (und das ist nur, wenn du nicht gedrosselt wirst). Wenn überhaupt, kann ein Geschwindigkeitstest dir die theoretisch maximale Geschwindigkeit mitteilen, mit der du unter idealen Bedingungen streamen könntest, aber die Bedingungen sind nie perfekt.

@@ -7,6 +7,9 @@ files:
     translation: /i18n/%two_letters_code%/**/%original_file_name%
   # Docs Markdown files
   - source: /docs/**/*
+    ignore:
+      - /docs/**/*.svg
+      - /docs/images/**
     translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%
     # update_option: update_as_unapproved
     # i18n/%locale%/docusaurus-plugin-content-docs/current

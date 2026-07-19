@@ -1,0 +1,44 @@
+---
+title: Utilisez une image de conteneur
+description: Des images pour exécuter Owncast dans un environnement containerisé sont disponibles pour les versions.
+tags:
+  - docker
+  - conteneur
+  - portainer
+  - installation
+  - compose
+---
+
+1. Tirez la version `latest` [depuis Dockerhub](https://hub.docker.com/r/owncast/owncast/tags): `docker pull owncast/owncast:latest`.
+2. Exécutez ce qui suit pour démarrer le service. Liaison du répertoire `data` garde votre base de données et vos sauvegardes sur l'hôte, donc vous pouvez les déplacer vers un autre serveur plus tard.
+
+```bash
+docker run --restart unless-stopped -v "$(pwd)/data:/app/data" -p 8080:8080 -p 1935:1935 owncast/owncast:latest
+```
+
+Alternativement, vous pouvez créer un fichier `docker-compose.yml` avec le contenu suivant :
+
+```yaml
+services:
+  owncast:
+    image: owncast/owncast:latest
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+      - "1935:1935"
+    volumes:
+      - ./data:/app/data
+```
+
+et exécuter `docker compose up -d` pour démarrer le service.
+
+Pour mettre à niveau vers une nouvelle version plus tard, tirez la dernière image et recréez le conteneur : exécutez `docker pull owncast/owncast:latest`, puis `docker compose up -d` (ou arrêtez le conteneur et réexécutez votre commande `docker run`).
+
+## Connectez-vous à l'admin et configurez votre flux
+
+import { IncludeMarkdown } from "@site/src/components";
+import AdminLogin from "../../shared/admin-login.md";
+
+<IncludeMarkdown>
+  <AdminLogin />
+</IncludeMarkdown>

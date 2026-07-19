@@ -1,0 +1,30 @@
+---
+title: Video bezogene Fehler
+description: Beheben von video bezogenen Fehlern in den Owncast-Protokollen
+unlisted: true
+related:
+  excludeFromAll: true
+tags:
+  - Video
+  - Fehler
+  - Vorschaubild
+---
+
+import { IncludeMarkdown } from "@site/src/components";
+import MiscVideoIssues from "./shared/misc-video-issues.md";
+
+## Erste Schritte
+
+<IncludeMarkdown>
+  <MiscVideoIssues />
+</IncludeMarkdown>
+
+## Fehler beim Generieren des Vorschaubildes
+
+Wenn Sie in Ihren Owncast-Protokollen einen Fehler sehen, der besagt, dass ein Vorschaubild für Ihren Stream nicht generiert werden konnte, liegt das wahrscheinlich daran, dass Sie die Video-Passthrough-Funktion aktiviert haben und das Video, das Sie an Owncast senden, nicht in einem abspielbaren Format vorliegt.
+
+Wenn Sie diesen Fehler sehen, ist es auch wahrscheinlich, dass Ihre Zuschauer Probleme beim Abspielen Ihres Streams haben.
+
+### Lösung
+
+Deaktivieren Sie die Video-Passthrough-Funktion in den Videoeinstellungen Ihres Owncast-Servers.

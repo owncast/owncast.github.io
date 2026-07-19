@@ -1,0 +1,93 @@
+---
+title: Proxies SSL y HTTP
+slug: /sslproxies
+description: Coloca tu servidor Owncast detrás de un proxy para habilitar SSL.
+sidebar_position: 1
+sidebar_label: Proxies SSL y HTTP
+hide_table_of_contents: false
+tags:
+  - ssl
+  - https
+  - proxy inverso
+  - incrustar
+  - proxy
+  - seguridad
+  - navegador
+---
+
+Si estás configurando Owncast y te confunden términos como proxy inverso, SSL o HTTPS, quizás esto te ayude. Esta página explica qué son, por qué Owncast puede necesitarlos y cómo encajan todo junto.
+
+## Qué es un proxy inverso
+
+Un proxy inverso es un pequeño servidor que se sitúa delante de Owncast. Es:
+
+* Escucha en Internet público (puertos 80 y 443)
+* Maneja HTTPS / SSL
+* Reenvía el tráfico a Owncast ejecutándose de manera privada (generalmente en el puerto 8080)
+* Posee el certificado
+* Cifra el tráfico
+* Descifra antes de enviarlo a Owncast
+  Owncast nunca ve HTTPS — ve tráfico interno en claro.
+
+Piensa en ello como en un **mostrador de recepción**:
+
+* El público habla con el mostrador de recepción.
+* El mostrador de recepción le pasa cosas a Owncast.
+
+Owncast se basa en herramientas estándar probadas (como Caddy, Nginx, Traefik) para hacerlo correctamente. Muchos que ya autoalojan, o poseen su propia infraestructura, tendrán una configuración de proxy inverso ya que pueden agregar Owncast.
+
+## Por qué quieres soportar SSL
+
+1. Si quieres incrustar tu video o chat de Owncast en una página que usa SSL, tu servidor Owncast también deberá estar asegurado.
+2. Los navegadores etiquetarán tu sitio como ["No Seguro"](https://support.apple.com/en-us/HT208672) si no usas SSL.
+3. Se ve más profesional y tu sitio parecerá más confiable.
+4. Asegurar el tráfico web en Internet público es lo correcto.
+
+### Cuándo quizás no lo necesites
+
+1. Si solo estás probando y experimentando con Owncast.
+2. Estás ejecutando el servicio internamente y no tienes planes para una audiencia pública.
+
+## Malentendidos comunes (y por qué rompe cosas)
+
+* ❌ “Habilité HTTPS en Owncast”
+* ❌ “Reenvié el puerto 443 a Owncast”
+* ❌ “No necesito un proxy inverso”
+* ❌ "Reenvié el puerto RTMP 1935 al proxy web"
+
+Estos usualmente causan:
+
+* Erros de conexión en OBS
+* La interfaz de administración funciona, pero el video no
+* Incrustaciones que no funcionan
+* Advertencias de contenido mixto en los navegadores
+* Todavía puedes cargar Owncast en el puerto 8080 pero no por el puerto https 443
+* Tu transmisión no está disponible en aplicaciones móviles
+
+## Una configuración correcta (simplificada)
+
+1. El DNS apunta tu dominio a tu servidor
+2. El proxy inverso escucha en los puertos 80 / 443 (no RTMP 1935)
+3. El proxy inverso obtiene un certificado SSL
+4. El proxy inverso reenvía tráfico a Owncast
+5. Owncast se ejecuta de manera privada (generalmente :8080)
+6. OBS envía RTMP a Owncast
+
+## Si algo no funciona, las preguntas más útiles son:
+
+* “¿Dónde termina HTTPS?”
+* “¿Qué servicio está escuchando en el puerto 443?”
+* “¿Está OBS hablando con Owncast o con el proxy?”
+  Responder a esas preguntas casi siempre revela el problema.
+
+## Opciones populares
+
+Puedes usar cualquier método que desees para agregar soporte SSL, pero hay algunas opciones populares que hemos visto funcionar bien. Si tienes preguntas específicas o te gustaría hacer sugerencias sobre configuraciones u otros escenarios [háznoslo saber](/contacto).
+
+## Heredar nombre de visualización del proxy inverso
+
+Owncast normalmente asigna un nombre de visualización aleatorio cuando nuevos usuarios se unen al chat. Los proxies inversos ascendentes pueden influir en este comportamiento estableciendo un encabezado HTTP `X-Forwarded-User` al pasar el tráfico web. Este encabezado se usará en lugar de un nombre aleatorio para derivar el nombre de visualización de un usuario. Un usuario aún podrá cambiar su propio nombre de visualización a cualquier valor deseado.
+
+## Sugerido
+
+Si no tienes requisitos para usar otras opciones, se sugiere que instales [Caddy](/docs/sslproxies/caddy) ya que puede ser instalada rápida y fácilmente.

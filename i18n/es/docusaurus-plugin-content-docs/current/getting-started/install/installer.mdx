@@ -1,0 +1,44 @@
+---
+title: Instalador rápido de Owncast
+tags:
+  - instalación
+  - automatizado
+  - demo
+  - ejemplo
+description: Comienza a transmitir a tu propio servidor en segundos.
+sidebar_label: instalador rápido de Owncast
+---
+
+Al usar el instalador, puedes empezar a funcionar en aproximadamente un minuto. Sin embargo, si prefieres [descargar una versión manualmente](/docs/getting-started/install/manual), usar una [instalación con un clic](/docs/getting-started/install/providers) en un proveedor de alojamiento compatible, o otros métodos, visita la [página de instalación](/docs/getting-started/install/) para encontrar el método de instalación que mejor se adapte a tus necesidades.
+
+### Instalador
+
+Pega lo siguiente en tu terminal y el instalador descargará la versión más reciente de Owncast para tu plataforma.
+También descargará una copia de ffmpeg si no tienes uno instalado.
+
+```bash
+curl -s https://owncast.online/install.sh | bash
+```
+
+**Nota**: No se sugiere que ejecutes esto como root, ya que estás descargando y ejecutando un script de internet. También se recomienda inspeccionar el contenido de cualquier script remoto antes de ejecutarlo.
+
+<img src="/owncast-install.gif" width="90%" />
+
+---
+
+### Mira un ejemplo de cómo empezar a funcionar en menos de un minuto.
+
+<VideoPlayer mp4="/install-preview.mp4" webm="/install-preview.webm" poster="/install-preview.jpg" title="Haciendo funcionar Owncast en menos de un minuto" />
+
+### ¡Eso es todo!
+
+Aunque el instalador anterior será suficiente para que la mayoría de las personas comiencen rápidamente, es posible que desees aprender sobre la configuración del servidor, la transmisión y pasos opcionales, como [proxies SSL](/docs/sslproxies/nginx) y ejecutar Owncast como un [servicio del sistema](/docs/configuration/systemservice).
+
+## Inicia sesión en el administrador y configura tu transmisión
+
+import { IncludeMarkdown, VideoPlayer } from '@site/src/components';
+import AdminLogin from '../../shared/admin-login.md';
+
+<IncludeMarkdown>
+  <AdminLogin />
+</IncludeMarkdown>

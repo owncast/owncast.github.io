@@ -1,0 +1,42 @@
+---
+title: Listet euren Stream im Owncast-Verzeichnis auf
+description: Das Owncast-Verzeichnis ist eine zentrale Liste von Streams, die von Menschen entdeckt werden können.
+sidebar_position: 600
+sidebar_label: Listet euren Stream im Owncast-Verzeichnis auf
+tags:
+  - verzeichnis
+  - zuschauer
+  - entdecken
+  - entdeckung
+  - entdeckbarkeit
+  - live
+  - iptv
+  - m3u8
+---
+
+Um Menschen zu helfen, Streams von Personen zu entdecken, die Owncast nutzen, haben wir ein optionales Owncast-Verzeichnis unter https://owncast.directory, zu dem ihr euch hinzufügen könnt.
+
+1. Besucht die **"Allgemein"** Einstellungen im Admin.
+2. Setzt die öffentliche URL zu eurem Owncast-Server, auf die ihr verlinkt werden wollt.
+3. Setzt das **"Über"** mit einer kurzen Beschreibung eures Streams.
+4. Setzt die **Tags**, die mit den Inhalten verbunden sind, die ihr streamt.
+5. Markiert, ob eure Inhalte *Nicht sicher für die Arbeit* (nsfw) sind.
+
+## Wenn euer Server nicht im Verzeichnis angezeigt wird
+
+1. Es ist optional, also stellt sicher, dass ihr die [Konfigurationsanweisungen](/docs/directory) befolgt, um das Verzeichnis für euren Server zu aktivieren.
+2. Es wird ungefähr 5 Minuten dauern, bis euer Server das erste Mal erscheint, nachdem ihr diese Funktion aktiviert habt.
+3. Ihr möchtet vielleicht euren Server mit `owncast --enableVerboseLogging` ausführen, um zu sehen, welche Fehler angezeigt werden.
+4. Wenn ihr früher gelistet wart, aber nicht mehr angezeigt werdet, müsst ihr möglicherweise eure Registrierung beim Server in den Servereinstellungen des Administrators zurücksetzen.
+5. Wenn ihr kürzlich die URL eures Servers geändert habt, setzt eure Registrierung in den Servereinstellungen zurück.
+6. Wenn es ein Problem gibt, das dazu führt, dass ihr nicht gelistet seid, [bitte eröffnet ein GitHub-Problem](https://github.com/owncast/owncast/issues), damit wir bei der Fehlersuche helfen oder eure Registrierung im Verzeichnis zurücksetzen können.
+
+## Durchstöbert das Owncast-Verzeichnis
+
+Wenn eure Anwendung das hat, was oft als "IPTV" oder M3U-Unterstützung bezeichnet wird, könnt ihr das Verzeichnis direkt durchsuchen, indem ihr `https://owncast.directory/api/iptv` zur Anwendung hinzufügt. Nicht alle Anwendungen unterstützen das.
+
+Darüber hinaus gibt es einige native Anwendungen, die es euch ermöglichen, das Owncast-Verzeichnis zu durchsuchen und Streams direkt aus der Anwendung heraus anzusehen. Lest mehr über [Streams ansehen](/docs/watching-streams/).
+
+## Eure eigene Verzeichnis aufbauen
+
+Das Owncast-Verzeichnis ist nicht das einzige mögliche. Jeder Owncast-Server sendet seinen Live-Status über ActivityPub, so dass ihr euer eigenes Verzeichnis oder Aggregator einrichten könnt, das verfolgt, welche Server streamen. Siehe [Erstellung eines Verzeichnisses von Owncast-Streams](/docs/api/activitypub#building-a-directory-of-owncast-streams) für das Protokoll und das [owncast-directory-example](https://github.com/owncast/owncast-directory-example) Repository als kleines ausführbares Referenz.

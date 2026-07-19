@@ -1,0 +1,29 @@
+---
+title: APIs Web de Owncast
+description: Integra código externo con Owncast a través de HTTP, utilizando webhooks para recibir eventos y APIs de token de acceso para enviar acciones.
+sidebar_position: 200
+slug: /api/
+---
+
+Las APIs web son la forma en que el código que se ejecuta fuera de Owncast se comunica con tu servidor a través de HTTP. Vienen en dos mitades:
+
+* [**Webhooks**](/docs/api/webhooks) notifican a tu aplicación cuando sucede algo en la transmisión, como la llegada de un mensaje de chat o la transmisión en vivo. Owncast envía un `POST` HTTP a un endpoint que tú hospedas.
+* [**APIs**](/docs/api/requests) permiten que tu aplicación envíe acciones de regreso a Owncast, como publicar un mensaje de chat o actualizar el título de la transmisión. Las solicitudes se autentican con un token de acceso.
+
+Para recibir webhooks, crea un endpoint en cualquier servidor web, en cualquier idioma, que acepte un `POST` HTTP. Cada carga útil de evento lleva un campo `type` que nombra el evento y un objeto `eventData` con sus detalles.
+
+## Ejemplo
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eWE7HGJQI_4?start=547" title="Reproductor de video de YouTube" frameborder="0" allow="acelerómetro; reproducción automática; escritura en portapapeles; medios encriptados; giroscopio; imagen en imagen" allowfullscreen />
+
+## Referencia de API
+
+Explora cada endpoint en la [API publicada](/api/release) o en la [API en desarrollo](/api/development).
+
+## Entorno de desarrollo
+
+Aloja tu código en cualquier lugar y escríbelo en cualquier idioma. Necesita ser accesible por tu servidor Owncast para recibir webhooks, y capaz de alcanzar tu servidor para llamar a las APIs. Mientras desarrollas localmente, una herramienta de tunelización como [ngrok](https://ngrok.com/) o [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) le da a tu máquina una URL pública temporal para que Owncast pueda entregar webhooks a ella. Cuando estés listo, mueve el código a cualquier servidor o plataforma de hosting que desees.
+
+## Ejecuta tu código dentro de Owncast en su lugar
+
+Si prefieres que tu código se ejecute dentro del servidor en lugar de llamarlo a través de HTTP, [plugins](/docs/plugins) son la otra forma de construir. Consulta [maneras de extender Owncast](/docs/extend) para ver cómo se comparan los dos enfoques.

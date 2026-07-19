@@ -1,0 +1,232 @@
+---
+title: Lo que necesitas para ejecutar Owncast
+description: No hay una regla estricta sobre cuántos recursos usará Owncast, ya que depende de tu configuración y requisitos, pero aquí hay algunos ejemplos.
+sidebar_position: 200
+sidebar_label: Lo que necesitas para ejecutar Owncast
+hide_table_of_contents: false
+tags:
+  - recursos
+  - requisitos
+  - ancho de banda
+  - cpu
+  - alojamiento
+  - disco
+  - bitrate
+  - framerate
+  - passthrough
+  - escalado
+  - almacenamiento de objetos
+  - cdn
+---
+
+import ResourcesCalculator from "@site/src/components/ResourcesCalculator";
+
+Es imposible dar una sola respuesta sobre cuáles son los requisitos para que ejecutes Owncast, o cuánto costará. Es tu servidor, y depende completamente de ti cómo decides configurarlo, y en qué entornos decides ejecutarlo. Cada entorno tiene diferentes rendimiento, precios y características.
+
+---
+
+## Conocimientos básicos
+
+Es muy útil para que entiendas los conceptos básicos incluidos en la transmisión de video.
+
+* **CPU**: Se usa para transcodificar el video a múltiples calidades para que los espectadores puedan verlo en redes de diferentes velocidades.
+* **Ancho de banda de red**: Se usa para distribuir el video a tus espectadores.
+
+### El número de espectadores no afecta el uso de CPU
+
+Sabiendo esto, ves que **el uso de CPU es el mismo independientemente de cuántos espectadores tengas**. 0 o 100, la CPU sigue realizando el trabajo. Piénsalo como crear un archivo zip. Si tienes un archivo de 100MB, y lo comprimes, y se convierte en 70MB, puedes enviar ese archivo de 70MB a tantas personas como quieras sin comprimirlo de nuevo para cada persona. Pero aún necesitas enviar el archivo a cada persona por separado, lo que requiere ancho de banda de red cada vez que lo envías. Sin embargo, si quieres enviar a algunas personas una versión de 70MB y a otras una versión de 50MB, necesitarás crear dos archivos separados. Esa versión de 50MB tomará más tiempo y usará más CPU para crearla, debido al trabajo adicional que toma comprimir el archivo más. Esto es lo mismo con el video. Cuanto más trabajo se requiera para codificar tu video, más CPU se necesitará. Generalmente, cuanto más necesites reducir el tamaño y bitrate de tu video, más CPU se usará. Pero ofrecer versiones de bitrate bajo/calidad inferior de tu transmisión es importante para permitir que más espectadores la vean desde todo el mundo, en cualquier tipo de red.
+
+### Tu ancho de banda de subida como streamer
+
+Antes de que tu servidor pueda distribuir video a los espectadores, necesitas enviar tu transmisión al servidor. Esto requiere **ancho de banda de subida** desde donde estés transmitiendo. Si estás transmitiendo a 5000kbps, necesitas una velocidad de subida que pueda sostener ese ritmo de manera confiable.
+
+**Regla general**: Tu velocidad de subida debe ser al menos **1.5 veces tu bitrate de transmisión** para tener en cuenta fluctuaciones y margen. Para una transmisión de 5000kbps, apunta a al menos 7.5 Mbps de subida.
+
+| Bitrate de transmisión | Velocidad mínima de subida |
+| ---------------------- | -------------------------- |
+| 2500 kbps              | 4 Mbps                     |
+| 4000 kbps              | 6 Mbps                     |
+| 5000 kbps              | 7.5 Mbps                   |
+| 6000 kbps              | 9 Mbps                     |
+| 8000 kbps              | 12 Mbps                    |
+
+**Consideraciones importantes:**
+
+* **La internet en casa es a menudo asimétrica**: La mayoría de las conexiones residenciales tienen velocidades de descarga mucho más rápidas que las de subida. Un plan de "100 Mbps" podría tener solo 10-20 Mbps de subida. Verifica tu velocidad de subida real en [speedtest.net](https://www.speedtest.net/) o similar.
+* **Conexiones compartidas**: Si otros en tu red están usando ancho de banda mientras tú transmites, tu ancho de banda de subida disponible disminuye.
+* **Usa una conexión por cable**: WiFi agrega latencia e inestabilidad. Se recomienda encarecidamente una conexión ethernet por cable a tu router para transmisión.
+* **Esto es aparte del ancho de banda del servidor**: Tu subida envía la transmisión al servidor. El servidor luego necesita su propio ancho de banda para distribuir a los espectadores.
+
+## Escenario de ejemplo
+
+Ahora que entiendes lo básico, usemos un ejemplo para ilustrar cómo tu configuración puede impactar los recursos de tu servidor, y lo más importante, la experiencia de tus espectadores. Es un poco simplista y los números reales pueden variar en la vida real, pero podría ayudar a responder la pregunta de "aproximadamente cuántos recursos de ancho de banda y CPU usará Owncast?"
+
+Has configurado tu fuente de transmisión (como OBS) para transmitir a tu instancia de Owncast a **5000kbps**. Tienes **25 espectadores**. **5** de ellos están en redes lentas o móviles, **17** de ellos tienen internet rápido y estable, y **3** de ellos tienen internet rápido la mayor parte del tiempo, pero la velocidad fluctúa. Los 25 espectadores vieron una transmisión completa que dura dos horas. Tienes un proveedor de alojamiento que te da 4TB de ancho de banda por mes.
+
+### Ofrece una opción de alta y baja calidad
+
+Decidiste ofrecer tanto una opción de alta como de baja calidad, y configuraste la opción de alta calidad a 5000kbps y la opción de baja calidad a 1500kbps.
+
+**¿Cuánto ancho de banda se usa en tu servidor para esta transmisión?**
+
+| Bitrate                                    | Duración      | Espectadores | Total                      |
+| ------------------------------------------ | ------------- | ------------ | -------------------------- |
+| 0.000625 Gigabytes por segundo (5000kbps)  | 7200 segundos | 20           | 90 Gigabytes               |
+| 0.0001875 Gigabytes por segundo (1500kbps) | 7200 segundos | 5            | 6.75 Gigabytes             |
+|                                            |               |              | **Total**: 96.75 Gigabytes |
+
+**¿Qué velocidad máxima de red necesita tu servidor?**
+
+Tu servidor debe ser capaz de sostener el bitrate combinado saliente para todos los espectadores al mismo tiempo. En este escenario: (20 espectadores × 5000kbps) + (5 espectadores × 1500kbps) = **107.5 Mbps**. Tu plan de alojamiento necesita soportar al menos este consumo de ancho de banda saliente.
+
+**¿Cuánta CPU?**
+
+| Calidad  | Uso de CPU                                                 |
+| -------- | ---------------------------------------------------------- |
+| 5000kbps | Ligero (transcodificación mínima, coincide con la entrada) |
+| 1500kbps | Moderado (codificación activa para reducir bitrate)        |
+
+**¿Cómo es la experiencia del espectador?**
+
+| Calidad  | Espectadores | Experiencia |
+| -------- | ------------ | ----------- |
+| 5000kbps | 20           | Buena       |
+| 1500kbps | 5            | Buena       |
+
+**Resultado**: Has proporcionado tanto una opción de alta como de baja calidad para tus espectadores, de modo que aquellos con una red lenta tengan una opción, y aquellos con una red rápida, que podría ralentizarse de vez en cuando, puedan bajarse al modo de baja calidad cuando sea necesario. Además, en este caso, has ahorrado casi 16G de tráfico de ancho de banda al ofrecer una calidad inferior. Estás usando más CPU para una experiencia mucho mejor. Podrías transmitir 42 veces en un mes antes de alcanzar tu límite de ancho de banda.
+
+### Ofrece una opción única de alta calidad usando la menor cantidad de CPU
+
+Has decidido que quieres usar la menor CPU posible en tu servidor de Owncast, por lo que activas el modo "Video Passthrough" como la única salida disponible. Esto significa que el video exacto que estás enviando desde tu software de transmisión local es lo que se envía a tus espectadores.
+
+**¿Cuánto ancho de banda se usa en tu servidor para esta transmisión?**
+
+| Bitrate                                   | Duración      | Espectadores | Total           |
+| ----------------------------------------- | ------------- | ------------ | --------------- |
+| 0.000625 Gigabytes por segundo (5000kbps) | 7200 segundos | 25           | 112.5 Gigabytes |
+
+**¿Qué velocidad máxima de red necesita tu servidor?**
+
+Todos los 25 espectadores están recibiendo la misma transmisión de 5000kbps: 25 × 5000kbps = **125 Mbps** de salida sostenida.
+
+**¿Cuánta CPU?**
+
+| Calidad  | Uso de CPU                     |
+| -------- | ------------------------------ |
+| 5000kbps | Mínimo (sin transcodificación) |
+
+**¿Cómo es la experiencia del espectador?**
+
+| Calidad  | Espectadores | Experiencia |
+| -------- | ------------ | ----------- |
+| 5000kbps | 17           | Buena       |
+| 5000kbps | 3            | Mala        |
+| 5000kbps | 5            | Inmirable   |
+
+**Resultado**: No estás usando mucha CPU, pero solo **el 68%** de tus espectadores están teniendo una buena experiencia. El otro **32%** están teniendo una mala experiencia con frecuentes interrupciones, y **el 20%** de ellos no pueden ver tu transmisión en absoluto. Podrías transmitir 36 veces en un mes antes de alcanzar tu límite de ancho de banda.
+
+### Usa un proveedor de almacenamiento compatible con S3 para ancho de banda
+
+Si tienes dudas sobre tu plan de alojamiento, asignación de ancho de banda o crecimiento de audiencia, puedes usar un proveedor de almacenamiento S3 en lugar de tu servidor para responsabilidades de ancho de banda. En este ejemplo, nuevamente decides ofrecer tanto una opción de alta como de baja calidad, y configuras la opción de alta calidad a 5000kbps y la opción de baja calidad a 1500kbps. La CPU utilizada es la misma que en el ejemplo anterior para la opción de alta+baja calidad. Aprende más sobre [almacenamiento compatible con S3](/docs/storage).
+
+**¿Cuánto ancho de banda se usa en tu servidor para esta transmisión?**
+
+| Bitrate                                    | Duración      | Total                     |
+| ------------------------------------------ | ------------- | ------------------------- |
+| 0.000625 Gigabytes por segundo (5000kbps)  | 7200 segundos | 4.5 Gigabytes             |
+| 0.0001875 Gigabytes por segundo (1500kbps) | 7200 segundos | 1.35 Gigabytes            |
+|                                            |               | **Total**: 5.85 Gigabytes |
+
+**¿Cuánto ancho de banda saliente se utiliza en tu proveedor S3 para esta transmisión?**
+
+| Bitrate                                    | Duración      | Espectadores | Total                      |
+| ------------------------------------------ | ------------- | ------------ | -------------------------- |
+| 0.000625 Gigabytes por segundo (5000kbps)  | 7200 segundos | 20           | 90 Gigabytes               |
+| 0.0001875 Gigabytes por segundo (1500kbps) | 7200 segundos | 5            | 6.75 Gigabytes             |
+|                                            |               |              | **Total**: 96.75 Gigabytes |
+
+**¿Qué velocidad máxima de red necesita tu servidor?**
+
+Dado que los espectadores se sirven desde S3, tu servidor no envía video a los espectadores en absoluto. Solo necesita suficiente ancho de banda saliente para subir una copia de cada calidad de transmisión a S3: 5000kbps + 1500kbps = 6500kbps = **6.5 Mbps**. Esto se mantiene igual, ya tengas 0 espectadores o 1,000. Tu proveedor de S3 maneja el ancho de banda orientado al espectador, que en este escenario alcanza un máximo de **107.5 Mbps** — pero esa es su infraestructura, no la tuya.
+
+**Resultado**: Has proporcionado tanto una opción de alta como de baja calidad para tus espectadores, de modo que aquellos con una red lenta tengan una opción, y aquellos con una red rápida que podría disminuir periódicamente pueden reducirse a la baja calidad cuando sea necesario. Sin embargo, estas calidades de video no se sirven desde tu servidor Owncast, sino desde un proveedor de almacenamiento externo compatible con S3. Esto permite aumentar tu número de espectadores y agregar calidades de video adicionales sin tener que preocuparte por agotar la asignación de ancho de banda de tu servidor. Podrías transmitir 24/7 sin preocupaciones usando esta configuración, sin embargo, estarías utilizando la misma cantidad de ancho de banda de tu servidor si tienes cero espectadores o 100 espectadores. Tu uso de CPU sería el mismo como si estuvieras sirviendo el video directamente desde tu servidor.
+
+## Referencia rápida
+
+### ¿Cuánto ancho de banda utilizará Owncast?
+
+**Fórmula**: `(bitrate en kbps × duración en segundos × espectadores) ÷ 8,000,000 = GB`
+
+**Estimaciones rápidas para una transmisión de 2 horas:**
+
+| Bitrate  | 10 espectadores | 25 espectadores | 50 espectadores |
+| -------- | --------------- | --------------- | --------------- |
+| 2000kbps | 18 GB           | 45 GB           | 90 GB           |
+| 4000kbps | 36 GB           | 90 GB           | 180 GB          |
+| 6000kbps | 54 GB           | 135 GB          | 270 GB          |
+
+Ofrecer múltiples opciones de calidad reduce el ancho de banda total porque los espectadores en conexiones más lentas utilizan la transmisión de menor bitrate. Usar [almacenamiento compatible con S3](/docs/storage) descarga completamente el ancho de banda de tu servidor.
+
+### ¿Qué velocidad de red máxima necesita mi servidor?
+
+**Fórmula**: `bitrate en kbps × espectadores ÷ 1,000 = Mbps`
+
+**Estimaciones rápidas:**
+
+| Bitrate  | 10 espectadores | 25 espectadores | 50 espectadores |
+| -------- | --------------- | --------------- | --------------- |
+| 2000kbps | 20 Mbps         | 50 Mbps         | 100 Mbps        |
+| 4000kbps | 40 Mbps         | 100 Mbps        | 200 Mbps        |
+| 6000kbps | 60 Mbps         | 150 Mbps        | 300 Mbps        |
+
+Este es el ancho de banda sostenido que tu servidor necesita durante una transmisión. Si ofreces múltiples opciones de calidad, calcula cada calidad por separado y súmalas. La mayoría de los proveedores de VPS ofrecen puertos de 1 Gbps, lo que soporta aproximadamente 200 espectadores a 5000kbps. Si tus espectadores superan la capacidad de red de tu servidor, experimentarán buffering. Usar [almacenamiento compatible con S3](/docs/storage) elimina este límite de tu servidor.
+
+### ¿Cuánto CPU utilizará Owncast?
+
+**Guía rápida:**
+
+| Configuración                      | Uso de CPU |
+| ---------------------------------- | ---------- |
+| Calidad de paso único              | Mínimo     |
+| Calidad de transcodificación única | Ligero     |
+| Dos calidades (alta + baja)        | Moderado   |
+| Tres calidades o compresión pesada | Pesado     |
+
+Un solo núcleo de CPU puede manejar típicamente una calidad de salida transcodificada a 30fps. El modo de paso (sin transcodificación) utiliza muy poco CPU independientemente del bitrate. Por supuesto, todas las CPUs son diferentes en rendimiento según el hardware y los proveedores de alojamiento, por lo que varía mucho y no se puede garantizar nada. Necesitarás experimentar para encontrar lo que mejor funciona para tus necesidades.
+
+### ¿Aumenta el uso de CPU con más espectadores?
+
+No. Para la codificación de video, el uso de CPU se mantiene constante ya sea que tengas 1 espectador o 1,000. El video se codifica una vez y se distribuye a todos los espectadores. Sólo el ancho de banda del servidor aumenta con el número de espectadores. El uso de CPU puede crecer ligeramente con más espectadores debido a la actividad del chat y otros gastos generales, pero esto es mínimo en comparación con la codificación de video.
+
+### ¿Cómo afecta la tasa de cuadros al uso de CPU?
+
+Las tasas de cuadros más altas requieren más CPU. Reducir la tasa de cuadros es una manera efectiva de disminuir el uso de CPU:
+
+| Tasa de cuadros | CPU relativa     |
+| --------------- | ---------------- |
+| 60 fps          | 2x de referencia |
+| 30 fps          | 1x de referencia |
+| 24 fps          | 0.8x             |
+| 15 fps          | 0.5x             |
+
+Considera usar tasas de cuadros más bajas (24fps) para salidas de menor calidad para ahorrar CPU y mantener una reproducción fluida para espectadores en conexiones lentas.
+
+### ¿Cuánto espacio en disco utilizará Owncast?
+
+Casi ninguno. Owncast transmite en tiempo real y limpia los segmentos de video a medida que se entregan. No necesitas planificar el almacenamiento de video.
+
+### ¿Debería ofrecer solo la mejor calidad para mantener las cosas simples?
+
+Ofrecer solo video de mayor bitrate excluye a los espectadores en redes móviles y conexiones más lentas. Una transmisión de 5000kbps requiere una conexión estable de 5+ Mbps para verlo sin buffering. Muchos espectadores no tienen eso, especialmente en móviles.
+
+**Recomendación**: Siempre ofrece al menos dos opciones de calidad. Una calidad alta (4000-6000kbps) para espectadores con conexiones rápidas, y una calidad baja (1000-2000kbps) para todos los demás. Tus espectadores te lo agradecerán.
+
+## Calculadora de Recursos
+
+Utiliza esta calculadora interactiva para estimar los requisitos de ancho de banda y CPU según tu configuración específica de transmisión:
+
+<ResourcesCalculator />
+
+## Más información
+
+Visita la [documentación de video](/docs/video) detallada para aprender más sobre cómo Owncast maneja el video.

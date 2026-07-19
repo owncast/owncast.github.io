@@ -1,0 +1,116 @@
+---
+id: dispositivos-samsung-tv
+title: Samsung Smart TVs
+slug: /ver-transmisiones/samsung-tv
+sidebar_label: Televisores Samsung
+deviceId: samsung-tv
+deviceType: smart-tv
+reliability: bajo
+hide_title: true
+tags:
+  - samsung
+  - smart-tv
+  - tizen
+  - televisión
+  - mirando
+description: |
+  Opciones limitadas para ver transmisiones de Owncast en Samsung Smart TVs debido a restricciones de la plataforma.
+icon: /imagenes/dispositivos/samsung-tv.svg
+---
+
+import DeviceLayout from "@site/src/components/tv/DeviceLayout";
+import { DeviceOptionsGrid } from "@site/src/components/tv/DeviceOptionsGrid";
+import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard id="navegador-samsung" title="Navegador integrado" difficulty="difícil" reliability="bajo" screenshot="/imagenes/dispositivos/samsung-tv/interfaz-navegador.png" screenshotAlt="Interfaz del navegador integrado de Samsung TV" summary="Intenta utilizar el navegador integrado de Samsung TV para acceder directamente a las transmisiones de Owncast.">
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Puede funcionar en modelos más nuevos de Samsung TV.</li>
+      <li>Capacidades limitadas del navegador en la mayoría de las Samsung TVs.</li>
+      <li>No hay garantías de compatibilidad.</li>
+    </ul>
+
+    <details>
+      <summary>Mostrar instrucciones paso a paso</summary>
+
+      1. Abre la app de **Navegador Web** en tu Samsung TV (si está disponible).
+      2. Navega a la URL de tu servidor Owncast.
+      3. Intenta reproducir la transmisión directamente en el navegador.
+
+      **Nota:** Las TVs Samsung tienen soporte limitado para transmisiones de video basadas en la web y este método puede no funcionar de manera confiable.
+
+    </details>
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard id="casting-samsung" title="Duplicación de pantalla/Casting" difficulty="medio" reliability="medio" screenshot="/imagenes/dispositivos/samsung-tv/duplicacion-pantalla.png" screenshotAlt="Configuración de duplicación de pantalla de Samsung TV" summary="Utiliza la duplicación de pantalla desde tu teléfono o computadora para mostrar transmisiones de Owncast.">
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Funciona con la app Smart View de Samsung o la duplicación de pantalla integrada.</li>
+      <li>Requiere un smartphone o computadora compatible.</li>
+      <li>Puede introducir cierta latencia.</li>
+    </ul>
+
+    <details>
+      <summary>Mostrar instrucciones paso a paso</summary>
+
+      1. Asegúrate de que tu Samsung TV y el dispositivo estén en la misma red Wi-Fi.
+      2. En tu teléfono o computadora, abre la transmisión de Owncast.
+      3. Usa las funciones de duplicación de pantalla:
+         * **Android**: Usa Smart View o Duplicación de Pantalla
+         * **iOS**: Usa AirPlay (si es compatible con la TV)
+         * **Windows**: Usa Proyectar/Castear a Dispositivo
+      4. Selecciona tu Samsung TV de la lista de dispositivos disponibles.
+
+    </details>
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard id="dispositivo-exterior-samsung" title="Dispositivo de Streaming Externo" badge="Recomendado" difficulty="fácil" reliability="alto" screenshot="/imagenes/dispositivos/samsung-tv/dispositivos-externos.png" screenshotAlt="Dispositivos de streaming externos conectados a Samsung TV" summary="Conecta un dispositivo de streaming dedicado a tu Samsung TV para mejor compatibilidad con Owncast.">
+
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Mucho más confiable que las apps integradas de Samsung TV.</li>
+      <li>Amplia variedad de aplicaciones y opciones compatibles.</li>
+      <li>Mejor soporte y actualizaciones a largo plazo.</li>
+    </ul>
+
+    Considera conectar uno de estos dispositivos a tu Samsung TV:
+    * Apple TV
+    * Roku
+    * Amazon Fire TV Stick
+    * Google Chromecast
+    * NVIDIA Shield TV
+
+    Luego sigue las instrucciones para tu dispositivo de streaming elegido.
+
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

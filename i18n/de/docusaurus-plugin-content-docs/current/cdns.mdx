@@ -1,0 +1,59 @@
+---
+title: Content Delivery Networks (CDNs)
+description: Ein CDN kann die Netzwerkleistung Ihrer Owncast-Instanz verbessern, indem es Inhalte von Servern, die näher bei den Nutzern sind, zwischenspeichert und verteilt.
+sidebar_position: 200
+sidebar_label: Content Delivery Networks (CDNs)
+tags:
+  - cdn
+  - Leistung
+  - Netzwerk
+  - Langsamkeit
+  - Latenz
+  - Geschwindigkeit
+---
+
+## Was ist ein CDN?
+
+Ein CDN, oder Content Delivery Network, ist ein Dienst, der verwendet wird, um Ihre Inhalte geografisch an Endnutzer zu verteilen. Es hilft, die Leistung zu verbessern, indem die Ladezeit von Inhalten reduziert wird.
+
+Ein CDN funktioniert, indem es die Inhalte über mehrere Server verteilt, die strategisch an verschiedenen geografischen Standorten platziert sind. Diese Verteilung sorgt dafür, dass Inhalte von einem Server geliefert werden, der physisch näher beim Nutzer ist, wodurch die Distanz verringert wird, die Daten zurücklegen müssen. Es hilft auch, die Last auf dem Ursprungsserver (Ihrem Owncast-Server) zu verringern, indem die Lieferung von Inhalten an die CDN-Server ausgelagert wird.
+
+CDNs verwenden Caching, um Inhalte zu speichern. Wenn ein Nutzer Inhalte anfordert, die bereits im CDN-Server zwischengespeichert sind, können sie schnell geliefert werden, ohne dass eine erneute Abfrage beim Ursprungsserver erforderlich ist. Dieser Caching-Mechanismus verbessert die allgemeine Geschwindigkeit und Reaktionsfähigkeit Ihrer Inhalte.
+
+Zusätzlich zum Caching können CDNs auch andere Optimierungsfunktionen wie Datenkompression und Sicherheitsmaßnahmen wie DDoS-Schutz bieten. Diese zusätzlichen Funktionen tragen dazu bei, die Leistung, Skalierbarkeit und Verfügbarkeit von Websites und Webanwendungen weiter zu verbessern.
+
+## Wie hilft dies mit Ihrem Owncast-Stream?
+
+Indem man ein CDN vor Ihre Owncast-Instanz platziert, kann es für Zuschauer Ihres Streams nützlich sein, die geografisch weit von Ihrem tatsächlichen Server entfernt sind, wodurch das Streamen Ihres Videos langsamer wird, was potenziell zu Pufferung oder anderen Problemen führt.
+
+Darüber hinaus wird Ihre gesamte Owncast-Webseite für alle Besucher schneller geladen, da das CDN die statischen Assets (wie CSS, JavaScript, Bilder usw.), die Ihre Owncast-Instanz ausmachen, zwischenspeichern und bereitstellen wird.
+
+## Was ist der Unterschied zwischen einem Speicheranbieter und einem CDN?
+
+CDNs sind darauf ausgelegt, die Lieferleistung zu verbessern und die Latenz zu reduzieren, indem sie Inhalte von Servern verteilen, die näher bei den Nutzern sind. Speicheranbieter konzentrieren sich darauf, eine skalierbare und zuverlässige Speicherinfrastruktur für die Speicherung von Daten bereitzustellen. Obwohl es einige Überlappungen bei den Funktionen geben kann, unterscheiden sich ihre Hauptziele und Funktionen erheblich.
+
+Während CDNs und Speicheranbieter zwei verschiedene Dienste sind, bieten einige Objekt-Speicheranbieter möglicherweise integrierte CDNs an, die aktiviert werden können.
+
+## Wie können Sie ein CDN mit Owncast verwenden?
+
+Obwohl es unmöglich ist, auf die spezifischen Details jedes CDN-Anbieters und jeder Konfiguration einzugehen, sind hier die grundlegenden Schritte, die Sie unternehmen müssen, um ein CDN vor Ihre Owncast-Instanz zu stellen.
+
+### Ohne einen Speicheranbieter
+
+1. Ihr tatsächlicher Owncast-Server, der einem CDN als "Ursprung" bekannt ist, benötigt einen öffentlich verfügbaren Hostnamen, der sich von dem unterscheidet, den Sie verwenden, um auf Ihre Owncast-Instanz zuzugreifen. Wenn Sie beispielsweise wollen, dass Ihre Zuschauer auf Ihre Owncast-Instanz unter `https://owncast.example.com` zugreifen, müssen Sie einen neuen Hostnamen wie `owncast-origin.example.com` erstellen und ihn auf Ihren Owncast-Server verweisen.
+2. In Ihrer CDN-Konfiguration müssen Sie angeben, dass `owncast-origin.example.com` als der Ursprung für Ihre Owncast-Instanz verwendet wird.
+3. Sie müssen Ihre DNS-Konfiguration aktualisieren, um Ihren Owncast-Hostnamen auf Ihr CDN zu verweisen. Wenn Sie beispielsweise auf Ihre Owncast-Instanz unter `https://owncast.example.com` zugreifen, müssen Sie Ihre DNS-Konfiguration aktualisieren, um `owncast.example.com` auf Ihr CDN anstelle Ihres tatsächlichen Servers zu verweisen.
+4. Besuchen Sie Ihren Owncast-Administrator und unter "Servereinstellungen" unter "Erweitert" müssen Sie die Websocket-Überschreibung so einstellen, dass sie auf den Ursprungshostnamen verweist, den Sie in Schritt 1 erstellt haben. Zum Beispiel, `wss://owncast-origin.example.com`. Wenn Sie diesen Schritt nicht ausführen, ist Ihr Chat für CDN-Anbieter, die das Durchleiten von Websockets nicht unterstützen, nicht mehr zugänglich.
+
+### Mit einem externen Speicheranbieter
+
+1. In dieser Konfiguration ist Ihr Speicheranbieter der Ursprungsserver, nicht Ihr Owncast-Server.
+2. Holen Sie sich den Endpunkt-Hostnamen für Ihren Speicher-Bucket von Ihrem Anbieter.
+3. In Ihrer CDN-Konfiguration müssen Sie angeben, dass der Hostname des Speicheranbieters als Ursprungsserver verwendet wird.
+4. Im Owncast-Admin unter "Speicherung" und "Erweitert" müssen Sie den "Bedienungspunkt" auf den Hostnamen Ihrer CDN-Bereitstellung einstellen.
+
+## Dinge zu beachten
+
+* Ihr Owncast-Server (der Ursprungsserver) muss sich immer noch in einem Netzwerk befinden, das schnell genug ist, damit das CDN auf Ihre Inhalte zugreifen und sie an Ihre Zuschauer verteilen kann. Einfach ein CDN hinzuzufügen, wird das Netzwerk Ihrer Owncast-Instanz nicht automatisch schneller machen, obwohl es die Netzwerkbelastung Ihres Servers durch Caching verringern kann.
+* In einigen Fällen macht es die Verwendung eines CDNs vor Ihrem Owncast-Server schwieriger, eine genaue Zählung der Zuschauer zu haben. Das ist ein Kompromiss, den Sie berücksichtigen müssen. Im Allgemeinen wird, wenn Sie eine niedrige Zahl an Zuschauern haben, eine höhere Zahl an Zuschauern angezeigt, als Sie tatsächlich haben (aufgrund mehrerer CDN-Server, die auf Ihre Inhalte zugreifen), und wenn Sie eine hohe Zahl an Nutzern haben, wird eine niedrigere Zahl an Zuschauern angezeigt, als Sie tatsächlich haben (wegen mehrerer Zuschauer, die denselben zwischengespeicherten Inhalt ansehen). Updates für Owncast zur Verbesserung dieser Situation sind geplant.
+* Je mehr Zuschauer Sie haben, desto nützlicher wird ein CDN sein. Wenn Sie nur eine kleine Anzahl von Zuschauern haben, wird wahrscheinlich jede Anfrage weiterhin Ihren Ursprungsserver treffen, so dass ein CDN nicht so nützlich sein wird und in einigen Fällen sogar nachteilig für die Zuschauer sein könnte, da es einen zusätzlichen Netzwerkhop benötigt. Überprüfen Sie Ihre CDN-Statistiken, um zu sehen, wie viele Anfragen aus dem CDN-Cache (Hits) gegenüber Ihrem Ursprungsserver (Misses) bedient werden.

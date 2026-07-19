@@ -1,0 +1,27 @@
+---
+title: Der Stream puffert für diejenigen mit mobilen oder langsamen Netzwerken
+description: ""
+tags:
+  - Puffern
+  - langsam
+  - mobil
+---
+
+import { IncludeMarkdown } from "@site/src/components";
+import AddLowerQualityOutputs from "../shared/add-lower-quality-outputs.md";
+import ReduceVideoQuality from "../shared/reduce-video-quality.md";
+
+Wenn einige Leute Ihren Stream ohne Probleme genießen können, während andere aufgrund ihrer eigenen Internetverbindung oder mobiler Umstände nicht in der Lage sind, Ihren Stream in der Qualität oder den Qualitäten zu genießen, die Sie konfiguriert haben, könnte ihr Netzwerk oder [Standort](/docs/troubleshoot/buffering/geo) daran schuld sein. Statt zu versuchen, irgendetwas auf Ihrer Seite zu beschleunigen, müssen Sie zusätzliche Optionen anbieten, die sie schneller herunterladen können.
+
+Nachdem Sie unten gelesen haben, finden Sie vielleicht auch hilfreiche Tipps in dem [OBS-Fehlerbehebungsleitfaden](https://github.com/obsproject/obs-studio/wiki/Stream-Buffering-Issues), selbst wenn Sie OBS nicht verwenden.
+
+## Fügen Sie zusätzliche niedrigere Ausgabew qualities hinzu
+
+<IncludeMarkdown>
+  <AddLowerQualityOutputs />
+  <ReduceVideoQuality />
+</IncludeMarkdown>
+
+## Der Zuschauer wechselt nach Bedarf zwischen den Qualitäten
+
+Mit einer Technologie namens Adaptive Bitrate Streaming wechselt der Zuschauer transparent zwischen verschiedenen Videoqualitäten nach Bedarf. Erfahren Sie mehr darüber, wie dies und andere Videofunktionen funktionieren, indem Sie unser detaillierteres [Video-Dokument](/docs/video) lesen.

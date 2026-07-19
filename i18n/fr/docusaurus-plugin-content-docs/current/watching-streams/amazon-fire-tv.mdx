@@ -1,0 +1,62 @@
+---
+id: appareils-amazon-fire-tv
+title: Amazon Fire TV
+slug: /regarder-des-flux/amazon-fire-tv
+sidebar_label: Amazon Fire TV
+deviceId: amazon-fire-tv
+deviceType: boîte de streaming
+reliability: élevé
+hide_title: true
+tags:
+  - amazon
+  - fire-tv
+  - vlc
+  - boîte de streaming
+  - télévision
+  - regarder
+description: Regardez les flux Owncast sur Amazon Fire TV en utilisant VLC ou d'autres applications compatibles.
+icon: /images/appareils/amazon-fire-tv.svg
+---
+
+import DeviceLayout from "@site/src/components/tv/DeviceLayout";
+import { DeviceOptionsGrid } from "@site/src/components/tv/DeviceOptionsGrid";
+import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
+import StoreButton from "@site/src/components/StoreButton";
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard id="vlc-fire-tv" title="VLC pour Fire TV" badge="Recommandé" difficulty="facile" reliability="élevé" screenshot="/images/appareils/amazon-fire-tv/vlc-streams.png" screenshotAlt="Interface de flux VLC pour Fire TV" summary="Utilisez VLC pour lire les flux Owncast directement sur votre appareil Fire TV.">
+
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Lecteur multimédia fiable avec un excellent support des flux.</li>
+      <li>Entrée d'URL directe pour n'importe quel serveur Owncast.</li>
+      <li>Gratuit et largement disponible.</li>
+    </ul>
+
+    <details>
+      <summary>Afficher les instructions étape par étape</summary>
+
+      1. Installez VLC pour Amazon Fire TV depuis l'Amazon App Store.
+      2. Sélectionnez **"Flux"** dans la section **"Navigation"**.
+      3. Tapez le nom du flux que vous souhaitez regarder. Par exemple : `https://watch.owncast.online`.
+      4. Sélectionnez **"Suivant"**.
+
+    </details>
+
+    <StoreButton url="https://www.amazon.com/VLC-Mobile-Team-for-Fire/dp/B00U65KQMQ" type="amazon" />
+
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

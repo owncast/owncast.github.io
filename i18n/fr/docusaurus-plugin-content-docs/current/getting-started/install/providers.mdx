@@ -1,0 +1,45 @@
+---
+title: Owncast préinstallé avec des fournisseurs d'hébergement
+sidebar_label: Installé par des fournisseurs d'hébergement
+description: Obtenez automatiquement un serveur avec Owncast préinstallé en utilisant des fournisseurs d'hébergement pris en charge.
+tags:
+  - installation
+  - hébergement
+  - fournisseurs
+  - automatisé
+---
+
+Certains fournisseurs de services offrent des options d'installation en 1 clic pour Owncast, ce qui vous permet de démarrer sans installer vous-même le logiciel manuellement.
+
+## Suivez les instructions de votre fournisseur d'hébergement
+
+Suivez les instructions de votre fournisseur d'hébergement choisi pour commencer, car chacun d'eux aura son propre processus spécifique. Le projet Owncast ne pourra généralement pas prendre en charge les problèmes spécifiques à votre fournisseur d'hébergement, donc veuillez contacter leur support si vous avez des problèmes.
+
+## Ce dont vous avez besoin
+
+1. Un nom de domaine et un accès à vos paramètres DNS. Ceci est requis pour prendre en charge [SSL](/docs/sslproxies).
+2. Un compte avec un fournisseur d'hébergement qui prend en charge les installations automatiques de Owncast.
+
+### Certains fournisseurs connus
+
+* [DigitalOcean](https://marketplace.digitalocean.com/apps/owncast?refcode=492f098407b2)
+* [Elestio](https://elest.io/open-source/owncast). Ils sont entièrement gérés, ce qui signifie qu'ils gèrent les mises à jour, les sauvegardes, etc.
+* [Hetzner](https://docs.hetzner.com/cloud/apps/list/owncast/)
+* [Linode/Akamai](https://www.linode.com/marketplace/apps/owncast/owncast/?r=588ad4bf08ce8394e8eb11f0a463fde64637af9d)
+
+Certains de ces fournisseurs peuvent offrir des crédits gratuits pour de nouveaux comptes, ou donner du crédit à Owncast pour des recommandations.
+
+## Configuration de DNS
+
+1. Connectez-vous à votre fournisseur DNS.
+2. Ajoutez un **« enregistrement A »** pointant vers le nouveau serveur créé par votre fournisseur d'hébergement, et le nom d'hôte que vous souhaitez utiliser pour Owncast.
+3. Attendez environ 5 minutes, mais cela peut prendre plus de temps en fonction de votre fournisseur DNS.
+4. Lorsque `http://your_new_server:8080` se charge dans votre navigateur, votre installation est complète.
+5. Vous devrez peut-être redémarrer votre nouveau serveur pour que le proxy SSL démarre, en fonction de votre fournisseur d'hébergement.
+
+import { IncludeMarkdown } from "@site/src/components";
+import AdminLogin from "../../shared/admin-login.md";
+
+<IncludeMarkdown>
+  <AdminLogin />
+</IncludeMarkdown>

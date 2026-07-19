@@ -1,0 +1,186 @@
+---
+id: dispositivos-iphone-ipad
+title: iPhone y iPad
+slug: /mirando-flujos/iphone-ipad
+sidebar_label: iPhone y iPad
+deviceId: iphone-ipad
+deviceType: otros
+reliability: alto
+hide_title: true
+tags:
+  - iphone
+  - ipad
+  - ios
+  - ipados
+  - aplicación-oficial
+  - safari
+  - móvil
+  - airplay
+  - mirando
+description: |
+  Mira los flujos de Owncast en iPhone y iPad usando la aplicación nativa de Owncasts, el navegador Safari o AirPlay a otros dispositivos.
+icon: /images/devices/iphone-ipad.svg
+---
+
+import DeviceLayout from "@site/src/components/tv/DeviceLayout";
+import { DeviceOptionsGrid } from "@site/src/components/tv/DeviceOptionsGrid";
+import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
+import StoreButton from "@site/src/components/StoreButton";
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard id="owncasts-ios" title="Owncasts para iOS" badge="Recomendado" difficulty="fácil" reliability="alto" screenshot="/images/devices/iphone-ipad/owncasts-ios-directory.png" screenshotAlt="Pantalla del directorio de Owncasts para iOS" summary="Usa la aplicación nativa de Owncasts para navegar por el directorio o conectarte directamente a tu propio servidor.">
+
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Mejor experiencia para ver flujos de Owncast en móvil.</li>
+      <li>Navegación de directorio incorporada.</li>
+      <li>Soporte de imagen en imagen para multitareas.</li>
+      <li>Integración de AirPlay para emitir a la TV.</li>
+    </ul>
+
+    <details>
+      <summary>Muestra instrucciones paso a paso</summary>
+
+      1. Instala **Owncasts para iOS** desde la App Store.
+      2. Lanza la aplicación y navega por el directorio o añade tu propio servidor de Owncast en la configuración.
+      3. Selecciona un flujo para comenzar a ver.
+      4. Usa el botón de AirPlay para emitir a dispositivos compatibles como Apple TV o TVs con AirPlay habilitado.
+
+    </details>
+
+    <StoreButton url="https://apps.apple.com/app/owncasts/id1669506909" type="ios" />
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard id="navegador-safari" title="Navegador Safari" difficulty="fácil" reliability="alto" screenshot="/images/devices/iphone-ipad/safari-browser.png" screenshotAlt="El navegador Safari reproduciendo el flujo de Owncast" summary="Mira los flujos de Owncast directamente en Safari con soporte de pantalla completa y AirPlay.">
+
+
+
+
+
+
+
+
+    <ul>
+      <li>No se requiere instalación de la aplicación.</li>
+      <li>Funciona con cualquier servidor Owncast.</li>
+      <li>Controles de AirPlay integrados en el reproductor de video.</li>
+      <li>Soporte de imagen en imagen en dispositivos compatibles.</li>
+    </ul>
+
+    <details>
+      <summary>Muestra instrucciones paso a paso</summary>
+
+      1. Abre **Safari** en tu iPhone o iPad.
+      2. Navega a la URL de tu servidor Owncast (ej: `https://watch.owncast.online`).
+      3. Toca el botón de reproducción para comenzar el flujo.
+      4. Usa el botón de AirPlay en los controles de video para emitir a otros dispositivos.
+      5. Toca el botón de pantalla completa para una visualización inmersiva.
+
+    </details>
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard id="vlc-ios" title="VLC para iOS" difficulty="medio" reliability="alto" screenshot="/images/devices/iphone-ipad/vlc-network.png" screenshotAlt="Interfaz de flujo de red de VLC para iOS" summary="Usa VLC para reproducir flujos de Owncast con controles avanzados de reproducción y opciones.">
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Reproductor de medios avanzado con soporte de formatos extensos.</li>
+      <li>Soporte de flujo de red para entrada directa de URL.</li>
+      <li>Capacidades de reproducción sin conexión.</li>
+      <li>Soporte de AirPlay incorporado.</li>
+    </ul>
+
+    <details>
+      <summary>Muestra instrucciones paso a paso</summary>
+
+      1. Instala **VLC para iOS** desde la App Store.
+      2. Abre VLC y toca la pestaña **Red**.
+      3. Ingresa la URL de tu servidor Owncast (ej: `https://watch.owncast.online`).
+      4. Toca el flujo para comenzar la reproducción.
+      5. Usa el botón de AirPlay para emitir a otros dispositivos si lo deseas.
+
+    </details>
+
+    <StoreButton url="https://apps.apple.com/app/vlc-for-mobile/id650377962" type="ios" />
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard id="airplay-emision" title="AirPlay a TV" difficulty="fácil" reliability="alto" screenshot="/images/devices/iphone-ipad/airplay-tv.png" screenshotAlt="Pantalla de selección de dispositivo AirPlay" summary="Haz flujo desde tu iPhone o iPad a Apple TV, TVs compatibles con AirPlay u otros receptores AirPlay.">
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Funciona desde la aplicación de Owncasts y Safari.</li>
+      <li>Transmisión de video de alta calidad a pantallas grandes.</li>
+      <li>Controla la reproducción desde tu dispositivo móvil.</li>
+      <li>Continúa usando tu teléfono mientras transmites.</li>
+    </ul>
+
+    <details>
+      <summary>Muestra instrucciones paso a paso</summary>
+
+      1. Comienza a reproducir un flujo de Owncast en tu iPhone o iPad (usando ya sea la aplicación de Owncasts o Safari).
+      2. Busca el botón de **AirPlay** en los controles de video o en la interfaz de la aplicación.
+      3. Toca el botón de AirPlay y selecciona tu dispositivo objetivo (Apple TV, smart TV, etc.).
+      4. El flujo comenzará a reproducirse en el dispositivo seleccionado.
+      5. Usa tu iPhone/iPad como un control remoto.
+
+    </details>
+
+    Para más detalles, visita [la documentación de AirPlay de Apple](https://support.apple.com/en-us/HT204289).
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard id="control-centro-airplay" title="AirPlay del Centro de Control" difficulty="fácil" reliability="alto" screenshot="/images/devices/iphone-ipad/control-center-airplay.png" screenshotAlt="Centro de Control de iOS con botón de AirPlay" summary="Usa el Centro de Control para enviar rápidamente cualquier flujo de Owncast a dispositivos compatibles.">
+
+
+
+
+
+
+
+
+    <ul>
+      <li>Acceso a AirPlay en todo el sistema desde el Centro de Control.</li>
+      <li>Funciona con cualquier aplicación o navegador que reproduzca flujos de Owncast.</li>
+      <li>Cambio rápido de dispositivo.</li>
+    </ul>
+
+    <details>
+      <summary>Muestra instrucciones paso a paso</summary>
+
+      1. Comienza a reproducir un flujo de Owncast en cualquier aplicación o Safari.
+      2. Abre **Centro de Control** (desliza hacia abajo desde la esquina superior derecha en los iPhones más nuevos, desliza hacia arriba desde la parte inferior en los modelos más antiguos).
+      3. Toca el ícono de **AirPlay** (rectángulo con triángulo).
+      4. Selecciona tu dispositivo compatible con AirPlay de la lista.
+      5. El audio y video se transmitirán al dispositivo seleccionado.
+
+    </details>
+
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>
