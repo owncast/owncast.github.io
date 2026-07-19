@@ -509,7 +509,7 @@ Requiere el permiso `http.serve`. El SDK de JavaScript expone un único `onHttpR
 
 ## Autenticación
 
-### Verificación de autenticación: `auth.check` {#auth-check}
+### Verificación de autenticación: `auth.check` {/* #auth-check */}
 
 Solo se activa para el plugin [`auth.gate`](/docs/plugins/auth) habilitado, y solo en la carga de página de un espectador, nunca en el camino caliente (segmentos de video, API, chat). Para cuando se ejecute, el host ya ha verificado la cookie de sesión del espectador y ha resuelto su identidad. Tu manejador decide si esa sesión debe continuar. Es opcional: omítelo y una cookie válida es suficiente hasta que expire.
 
@@ -625,7 +625,7 @@ Llamado cuando `manifest.extraPageContent` no tiene un archivo de `content` est�
 
 Consulta [Contribuyendo UI](/docs/plugins/ui) para el lado del manifiesto.
 
-## Eventos de conexión SSE {#sse-events}
+## Eventos de conexión SSE {/* #sse-events */}
 
 Cuando un navegador abre o cierra uno de los streams `/plugins/\<name>/_sse/\<channel>` de tu plugin, Owncast dispara `sse.connect` y `sse.disconnect`. Úsalos para rastrear quién está conectado, por ejemplo, para mantener un conteo en vivo para un overlay. Consulta [Actualizaciones en tiempo real](/docs/plugins/http#realtime-updates-server-sent-events) para el lado de envío que envía datos a esos navegadores.
 

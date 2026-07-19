@@ -509,7 +509,7 @@ Benötigt die `http.serve`-Berechtigung. Das JavaScript-SDK bietet einen einzeln
 
 ## Authentifizierung
 
-### Auth-Überprüfung: `auth.check` {#auth-check}
+### Auth-Überprüfung: `auth.check` {/* #auth-check */}
 
 Wird nur für das aktivierte [`auth.gate`](/docs/plugins/auth) Plugin ausgelöst und nur beim Laden der `/`-Seite eines Zuschauers, niemals auf dem heißen Pfad (Video-Segmente, die API, Chat). Zu diesem Zeitpunkt hat der Host bereits das Sitzungscookie des Zuschauers überprüft und ihre Identität ermittelt. Ihr Handler entscheidet, ob diese Sitzung fortgesetzt werden sollte. Es ist optional: Lassen Sie es weg, und ein gültiges Cookie reicht aus, bis es abläuft.
 
@@ -625,7 +625,7 @@ Wird aufgerufen, wenn `manifest.extraPageContent` keine statische `content`-Date
 
 Siehe [UI beizutragen](/docs/plugins/ui) für die Manifest-Seite.
 
-## SSE-Verbindungsereignisse {#sse-events}
+## SSE-Verbindungsereignisse {/* #sse-events */}
 
 Wenn ein Browser einen Ihrer Plugin-/plugins/\<name>/_sse/\<channel>-Streams öffnet oder schließt, löst Owncast `sse.connect` und `sse.disconnect` aus. Verwenden Sie sie, um nachzuverfolgen, wer verbunden ist, um beispielsweise eine Live-Zählung für ein Overlay aufrechtzuerhalten. Siehe [Echtzeitaktualisierungen](/docs/plugins/http#realtime-updates-server-sent-events) für die Push-Seite, die Daten an diese Browser sendet.
 

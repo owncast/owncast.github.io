@@ -84,7 +84,7 @@ Send a private message to a single connected client.
 
 Requires `chat.send`.
 
-### `owncast.chat.replyTo(msg, text)` {#chat-replyto}
+### `owncast.chat.replyTo(msg, text)` {/* #chat-replyto */}
 
 Whisper a reply back to whoever sent a chat message. Pass the chat message from `onChatMessage`/`filterChatMessage` (or a bare client ID). Returns `false` if the sender's connection is unknown (no client ID), so you can fall back to a public `send`. Sugar over `sendTo(clientId, text)`.
 
@@ -217,7 +217,7 @@ owncast.users.ban_ip("203.0.113.42")
 
 Requires `users.moderate`.
 
-### `owncast.users.register({ authId, displayName?, scopes? })` {#users-register}
+### `owncast.users.register({ authId, displayName?, scopes? })` {/* #users-register */}
 
 Find-or-create an authenticated Owncast user for an external identity and return `{ userId }`. `authId` is a stable, provider-scoped identifier (e.g. `"github:583231"`, or a fixed string like `"shared"` for a single shared identity); the host namespaces it by your plugin's slug, so plugins can't collide on or spoof each other's users. The resulting user is marked authenticated, with `displayName` seeded from the provider and any `scopes` (e.g. `["MODERATOR"]`) applied. Call it again with the same `authId` to update the existing user rather than create a new one.
 
@@ -248,7 +248,7 @@ Requires `users.register`.
 
 These power a [viewer-authentication gate](/docs/plugins/auth). `grantSession` and `endSession` only work inside an `onHttpRequest` handler, because the host attaches the session cookie to the in-flight HTTP response.
 
-### `owncast.auth.grantSession({ userId, ttl? })` {#auth-grant-session}
+### `owncast.auth.grantSession({ userId, ttl? })` {/* #auth-grant-session */}
 
 Issue a signed session for an already-registered user (the `userId` from `owncast.users.register`). The host mints, signs, and attaches the session cookie to the current response; your plugin never sees the token, so it can't forge or leak it. `ttl` is an optional lifetime in seconds (`0`/omitted uses the host default of 24 hours).
 
@@ -275,7 +275,7 @@ return {"status": 302, "headers": {"Location": return_to}}
 
 Requires `auth.gate`.
 
-### `owncast.auth.endSession()` {#auth-end-session}
+### `owncast.auth.endSession()` {/* #auth-end-session */}
 
 Clear the current viewer's session cookie on this response to sign them out. Your plugin still controls the redirect (and may bounce on to the provider's own logout).
 

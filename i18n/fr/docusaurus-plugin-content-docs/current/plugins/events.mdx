@@ -509,7 +509,7 @@ Nécessite la permission `http.serve`. Le SDK JavaScript expose un unique gestio
 
 ## Authentification
 
-### Vérification d'authentification : `auth.check` {#auth-check}
+### Vérification d'authentification : `auth.check` {/* #auth-check */}
 
 Se déclenche uniquement pour le plugin [`auth.gate`](/docs/plugins/auth) activé, et uniquement lors du chargement de la page `/` d'un visualiseur, jamais dans le chemin critique (segments vidéo, API, chat). Au moment où il s'exécute, l'hôte a déjà vérifié le cookie de session du visualiseur et résolu leur identité. Votre gestionnaire décide si cette session doit continuer. C'est optionnel : omettez-le et un cookie valide suffit jusqu'à ce qu'il expire.
 
@@ -625,7 +625,7 @@ Appelé lorsque `manifest.extraPageContent` n'a pas de fichier `content` statiqu
 
 Voir [Contribuer à l'UI](/docs/plugins/ui) pour le côté manifeste.
 
-## Événements de connexion SSE {#sse-events}
+## Événements de connexion SSE {/* #sse-events */}
 
 Lorsqu'un navigateur ouvre ou ferme l'un des flux de votre plugin `/plugins/\<name>/_sse/\<channel>`, Owncast déclenche `sse.connect` et `sse.disconnect`. Utilisez-les pour suivre qui est connecté, par exemple pour maintenir un compte en direct pour une superposition. Voir [Mises à jour en temps réel](/docs/plugins/http#realtime-updates-server-sent-events) pour le côté push qui envoie des données à ces navigateurs.
 

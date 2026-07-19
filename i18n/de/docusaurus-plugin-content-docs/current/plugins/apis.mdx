@@ -84,7 +84,7 @@ Senden Sie eine private Nachricht an einen einzelnen verbundenen Client.
 
 Benötigt `chat.send`.
 
-### `owncast.chat.replyTo(msg, text)` {#chat-replyto}
+### `owncast.chat.replyTo(msg, text)` {/* #chat-replyto */}
 
 Flüstern Sie eine Antwort an den Absender einer Chat-Nachricht zurück. Übergeben Sie die Chat-Nachricht von `onChatMessage`/`filterChatMessage` (oder einer einfachen Client-ID). Gibt `false` zurück, wenn die Verbindung des Absenders unbekannt ist (keine Client-ID), sodass Sie auf ein öffentliches `send` zurückgreifen können. Zucker über `sendTo(clientId, text)`.
 
@@ -217,7 +217,7 @@ owncast.users.ban_ip("203.0.113.42")
 
 Benötigt `users.moderate`.
 
-### `owncast.users.register({ authId, displayName?, scopes? })` {#users-register}
+### `owncast.users.register({ authId, displayName?, scopes? })` {/* #users-register */}
 
 Finden oder erstellen Sie einen authentifizierten Owncast-Benutzer für eine externe Identität und geben Sie `{ userId }` zurück. `authId` ist ein stabiler, anbietergebundener Bezeichner (z. B. `"github:583231"` oder ein fester String wie `"shared"` für eine einzelne gemeinsame Identität); der Host namespace es anhand des Slugs Ihres Plugins, damit Plugins sich nicht gegenseitig stören oder Benutzer vortäuschen können. Der resultierende Benutzer wird als authentifiziert gekennzeichnet, mit `displayName`, das vom Anbieter gesetzt wird, und allen `scopes` (z. B. `["MODERATOR"]`), die angewendet werden. Rufen Sie es erneut mit der gleichen `authId` auf, um den vorhandenen Benutzer zu aktualisieren, anstatt einen neuen zu erstellen.
 
@@ -248,7 +248,7 @@ Benötigt `users.register`.
 
 Diese ermöglichen ein [Viewer-Authentifizierungs-Gateway](/docs/plugins/auth). `grantSession` und `endSession` funktionieren nur innerhalb eines `onHttpRequest` Handlers, da der Host das Sitzungscookie an die in-flight HTTP-Antwort anhängt.
 
-### `owncast.auth.grantSession({ userId, ttl? })` {#auth-grant-session}
+### `owncast.auth.grantSession({ userId, ttl? })` {/* #auth-grant-session */}
 
 Geben Sie eine signierte Sitzung für einen bereits registrierten Benutzer aus (der `userId` von `owncast.users.register`). Der Host mint, signiert und hängt das Sitzungscookie an die aktuelle Antwort; Ihr Plugin sieht das Token niemals, sodass es es nicht fälschen oder leaken kann. `ttl` ist eine optionale Lebensdauer in Sekunden (`0`/weggelassen verwendet den Standard des Hosts von 24 Stunden).
 
@@ -275,7 +275,7 @@ return {"status": 302, "headers": {"Location": return_to}}
 
 Benötigt `auth.gate`.
 
-### `owncast.auth.endSession()` {#auth-end-session}
+### `owncast.auth.endSession()` {/* #auth-end-session */}
 
 Löschen Sie das Sitzungscookie des aktuellen Zuschauers in dieser Antwort, um sie auszuloggen. Ihr Plugin kontrolliert weiterhin die Umleitung (und kann auf die Abmeldung des Anbieters umleiten).
 

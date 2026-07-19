@@ -9,14 +9,14 @@ Wir unterstützen derzeit die folgenden Aktionen, die Sie über Anfragen aus Ihr
 
 | Ereignis                      |                                                                            Endpunkt                                                                            |                    Bereich |
 | :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------: |
-| System-Chat-Nachricht         |                     <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1system/post">/api/integrations/chat/system</a>                     | `CAN_SEND_SYSTEM_MESSAGES` |
-| Standard-Chat-Nachricht       |                       <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1send/post">/api/integrations/chat/send</a>                       |        `CAN_SEND_MESSAGES` |
-| Chat-Aktion                   |                     <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1action/post">/api/integrations/chat/action</a>                     | `CAN_SEND_SYSTEM_MESSAGES` |
-| Chat-Nachricht entfernen      |          <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1messagevisibility/post">/api/integrations/chat/messagevisibility</a>          |         `HAS_ADMIN_ACCESS` |
-| Chatverlauf abrufen           |                             <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat/get">/api/integrations/chat</a>                             |         `HAS_ADMIN_ACCESS` |
-| Getrennte Clients abrufen     |                          <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1clients/get">/api/integrations/clients</a>                          |         `HAS_ADMIN_ACCESS` |
-| Stream-Titel festlegen        |                      <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1streamtitle/post">/api/integrations/streamtitle</a>                     |         `HAS_ADMIN_ACCESS` |
-| Systemnachricht an den Client | <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1system~1client~1{clientId}/post">/api/integrations/chat/system/client/`{clientId}`</a> | `CAN_SEND_SYSTEM_MESSAGES` |
+| System-Chat-Nachricht         |                     <a href="/api/release">/api/integrations/chat/system</a>                     | `CAN_SEND_SYSTEM_MESSAGES` |
+| Standard-Chat-Nachricht       |                       <a href="/api/release">/api/integrations/chat/send</a>                       |        `CAN_SEND_MESSAGES` |
+| Chat-Aktion                   |                     <a href="/api/release">/api/integrations/chat/action</a>                     | `CAN_SEND_SYSTEM_MESSAGES` |
+| Chat-Nachricht entfernen      |          <a href="/api/release">/api/integrations/chat/messagevisibility</a>          |         `HAS_ADMIN_ACCESS` |
+| Chatverlauf abrufen           |                             <a href="/api/release">/api/integrations/chat</a>                             |         `HAS_ADMIN_ACCESS` |
+| Getrennte Clients abrufen     |                          <a href="/api/release">/api/integrations/clients</a>                          |         `HAS_ADMIN_ACCESS` |
+| Stream-Titel festlegen        |                      <a href="/api/release">/api/integrations/streamtitle</a>                     |         `HAS_ADMIN_ACCESS` |
+| Systemnachricht an den Client | <a href="/api/release">/api/integrations/chat/system/client/`{clientId}`</a> | `CAN_SEND_SYSTEM_MESSAGES` |
 
 Besuchen Sie die API-Dokumentation für jeden Endpunkt, um mehr über die erwarteten oder zurückgegebenen Werte zu erfahren.
 

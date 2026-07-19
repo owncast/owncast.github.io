@@ -84,7 +84,7 @@ Envoyer un message privé à un seul client connecté.
 
 Nécessite `chat.send`.
 
-### `owncast.chat.replyTo(msg, text)` {#chat-replyto}
+### `owncast.chat.replyTo(msg, text)` {/* #chat-replyto */}
 
 Chuchoter une réponse à celui qui a envoyé un message de chat. Passer le message de chat depuis `onChatMessage`/`filterChatMessage` (ou un ID de client nu). Retourne `false` si la connexion de l'expéditeur est inconnue (pas d'ID de client), donc vous pouvez revenir à un `send` public. Sugar sur `sendTo(clientId, text)`.
 
@@ -217,7 +217,7 @@ owncast.users.ban_ip("203.0.113.42")
 
 Nécessite `users.moderate`.
 
-### `owncast.users.register({ authId, displayName?, scopes? })` {#users-register}
+### `owncast.users.register({ authId, displayName?, scopes? })` {/* #users-register */}
 
 Trouver ou créer un utilisateur Owncast authentifié pour une identité externe et retourner `{ userId }`. `authId` est un identifiant stable à portée de fournisseur (par ex. `"github:583231"`, ou une chaîne fixe comme `"shared"` pour une seule identité partagée) ; l'hôte le nomme par le `slug` de votre plugin, donc les plugins ne peuvent pas entrer en collision ou usurper les utilisateurs des autres. L'utilisateur résultant est marqué comme authentifié, avec `displayName` provenant du fournisseur et tous les `scopes` (par ex. `["MODERATOR"]`) appliqués. Appelez à nouveau avec le même `authId` pour mettre à jour l'utilisateur existant plutôt que d'en créer un nouveau.
 
@@ -248,7 +248,7 @@ Nécessite `users.register`.
 
 Cela alimente une [porte d'authentification des spectateurs](/docs/plugins/auth). `grantSession` et `endSession` ne fonctionnent que dans un gestionnaire `onHttpRequest`, car l'hôte attache le cookie de session à la réponse HTTP en vol.
 
-### `owncast.auth.grantSession({ userId, ttl? })` {#auth-grant-session}
+### `owncast.auth.grantSession({ userId, ttl? })` {/* #auth-grant-session */}
 
 Émettre une session signée pour un utilisateur déjà enregistré (l'`userId` de `owncast.users.register`). L'hôte crée, signe et attache le cookie de session à la réponse actuelle ; votre plugin ne voit jamais le jeton, donc il ne peut pas le forger ou le fuir. `ttl` est une durée de vie facultative en secondes (`0`/omis utilise la valeur par défaut de l'hôte de 24 heures).
 
@@ -275,7 +275,7 @@ return {"status": 302, "headers": {"Location": "/"}}
 
 Nécessite `auth.gate`.
 
-### `owncast.auth.endSession()` {#auth-end-session}
+### `owncast.auth.endSession()` {/* #auth-end-session */}
 
 Effacer le cookie de session actuel du spectateur sur cette réponse pour le déconnecter. Votre plugin contrôle toujours la redirection (et peut rediriger vers la déconnexion propre du fournisseur).
 

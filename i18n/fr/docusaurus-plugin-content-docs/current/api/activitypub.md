@@ -20,7 +20,7 @@ tags:
 
 Cette page documente l'implémentation de [ActivityPub](https://www.w3.org/TR/activitypub/) dans Owncast au niveau du protocole : quelles activités un serveur **envoie**, lesquelles il **reçoit**, comment il s'identifie, et comment il signe et vérifie les requêtes. Elle s'adresse aux développeurs qui souhaitent construire une application Fediverse qui interopère avec Owncast, que cela signifie suivre un serveur Owncast depuis une autre plateforme, consommer ses notifications en direct, ou créer des outils qui comprennent les extensions personnalisées d'Owncast.
 
-Si vous êtes un opérateur Owncast et que vous souhaitez simplement activer la fédération, consultez [Le Fediverse](/social/the-fediverse) et [Activation des fonctionnalités sociales](/social#enabling-social-features) à la place. Cette page suppose une familiarité avec ActivityPub, ActivityStreams 2.0, JSON-LD et les signatures HTTP.
+Si vous êtes un opérateur Owncast et que vous souhaitez simplement activer la fédération, consultez [Le Fediverse](/docs/social/the-fediverse) et [Activation des fonctionnalités sociales](/docs/social#enabling-social-features) à la place. Cette page suppose une familiarité avec ActivityPub, ActivityStreams 2.0, JSON-LD et les signatures HTTP.
 
 ## Modèle mental
 

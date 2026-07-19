@@ -41,7 +41,7 @@ You'll now see in the admin a text field for adding an optional "Stream Title", 
 
 Owncast now has the ability for you to build your own add-ons and integrations on top of it. Some good examples are chat bots, video stream overlays, and sending external actions into chat such as notifying people when somebody has donated or followed.
 
-[Learn more about these APIs](/thirdparty) and you can start building on top of your Owncast server. Feel free to ask us any questions as this is brand new, and we want to give you what you need to build great things.
+[Learn more about these APIs](/docs/api) and you can start building on top of your Owncast server. Feel free to ask us any questions as this is brand new, and we want to give you what you need to build great things.
 
 ## Backups
 

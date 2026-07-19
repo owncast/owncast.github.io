@@ -84,7 +84,7 @@ Envía un mensaje privado a un solo cliente conectado.
 
 Requiere `chat.send`.
 
-### `owncast.chat.replyTo(msg, text)` {#chat-replyto}
+### `owncast.chat.replyTo(msg, text)` {/* #chat-replyto */}
 
 Susurra una respuesta a quien envió un mensaje de chat. Pasa el mensaje de chat de `onChatMessage`/`filterChatMessage` (o un ID de cliente simple). Devuelve `false` si la conexión del remitente es desconocida (sin ID de cliente), por lo que puedes volver a un `send` público. Azúcar sobre `sendTo(clientId, text)`.
 
@@ -217,7 +217,7 @@ owncast.users.ban_ip("203.0.113.42")
 
 Requiere `users.moderate`.
 
-### `owncast.users.register({ authId, displayName?, scopes? })` {#users-register}
+### `owncast.users.register({ authId, displayName?, scopes? })` {/* #users-register */}
 
 Encuentra o crea un usuario de Owncast autenticado para una identidad externa y devuelve `{ userId }`. `authId` es un identificador estable, con alcance de proveedor (por ejemplo, `"github:583231"`, o una cadena fija como `"shared"` para una única identidad compartida); el anfitrión lo nombra por el `slug` de tu complemento, por lo que los complementos no pueden colisionar ni suplantar los usuarios entre sí. El usuario resultante está marcado como autenticado, con `displayName` proporcionado por el proveedor y cualquier `scopes` (por ejemplo, `["MODERATOR"]`) aplicado. Llámalo nuevamente con el mismo `authId` para actualizar el usuario existente en lugar de crear uno nuevo.
 
@@ -248,7 +248,7 @@ Requiere `users.register`.
 
 Estos impulsan un [puerta de autenticación de espectadores](/docs/plugins/auth). `grantSession` y `endSession` solo funcionan dentro de un controlador `onHttpRequest`, porque el anfitrión adjunta la cookie de sesión a la respuesta HTTP en vuelo.
 
-### `owncast.auth.grantSession({ userId, ttl? })` {#auth-grant-session}
+### `owncast.auth.grantSession({ userId, ttl? })` {/* #auth-grant-session */}
 
 Emite una sesión firmada para un usuario ya registrado (el `userId` de `owncast.users.register`). El anfitrión emite, firma y adjunta la cookie de sesión a la respuesta actual; tu complemento nunca ve el token, por lo que no puede falsificarlo o filtrarlo. `ttl` es una duración opcional en segundos (`0`/omitido usa el valor predeterminado del anfitrión de 24 horas).
 
@@ -275,7 +275,7 @@ return {"status": 302, "headers": {"Location": "/"}}
 
 Requiere `auth.gate`.
 
-### `owncast.auth.endSession()` {#auth-end-session}
+### `owncast.auth.endSession()` {/* #auth-end-session */}
 
 Limpia la cookie de sesión del visualizador actual en esta respuesta para cerrar sesión. Tu complemento aún controla la redirección (y puede redirigir al propio cierre de sesión del proveedor).
 

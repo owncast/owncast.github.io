@@ -251,7 +251,7 @@ Todo lo demás está restringido, **incluyendo `/api/status` y las incrustacione
 * **TTL predeterminado es de 24 horas**, con un refresco deslizante disponible a través del veredicto `refresh` de `onAuthCheck`. Debido a que la TTL es el tope para la revocación, es un verdadero control de seguridad.
 * **El secreto de firma es responsabilidad del host de Owncast.** Se genera automáticamente en el primer uso y se persiste en la configuración. Rotarlo invalida cada sesión (un botón de pánico). Los autores de complementos nunca lo tocan, y está separado de cualquier secreto de *cliente* de OAuth, que es la preocupación de configuración de tu complemento.
 
-## Identidad de chat {#chat-identity}
+## Identidad de chat {/* #chat-identity */}
 
 Un inicio de sesión de puerta produce automáticamente una identidad de chat autenticada. Debido a que `users.register` crea o vincula un verdadero usuario de Owncast (marcado como autenticado, con un nombre visible sembrado del proveedor) y la cookie de sesión lleva el token de acceso de ese usuario, el chat lee la identidad directamente de la cookie: cuando `/ws` (o una llamada REST de chat) llega sin parámetro de consulta `?accessToken=`, vuelve a usar el token de acceso en la cookie de la puerta. Ningún token se transporta nunca al `localStorage` del navegador. El espectador inicia sesión una vez y aparece en el chat bajo su nombre de proveedor.
 

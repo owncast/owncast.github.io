@@ -95,13 +95,11 @@ const ALL_REDIRECTS = [
     from: '/quickstart/startstreaming/',
   },
   {
-    to: '/development-builds/',
+    to: '/development-builds',
     from: '/nightly-builds/',
   },
-  {
-    to: '/docs/getting-started/install/installer/',
-    from: '/quickstart/installer/',
-  },
+  // The old Hugo site served the API reference at /api/latest.
+  { to: '/api/release', from: '/api/latest' },
 ];
 
 const config: Config = {
@@ -135,8 +133,13 @@ const config: Config = {
       swcJsMinimizer: true,
       swcHtmlMinimizer: true,
       lightningCssMinimizer: true,
-      // rspackBundler disabled - causes 404 issues with this project
-      rspackBundler: false,
+      // rspackBundler used to cause 404 issues with this project. Re-enabled
+      // on 3.10.2 (2026-07-19) after a trial produced an HTML file inventory
+      // and sitemap identical to webpack's and a clean browser smoke test.
+      // If 404s reappear on the deployed site, turn this and
+      // rspackPersistentCache back off.
+      rspackBundler: true,
+      rspackPersistentCache: true,
       mdxCrossCompilerCache: true,
     },
   },
@@ -151,7 +154,8 @@ const config: Config = {
   organizationName: 'owncast', // Usually your GitHub org/user name.
   projectName: 'owncast.github.io', // Usually your repo name.
 
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'throw',
+  onBrokenAnchors: 'warn',
 
   clientModules: [
     require.resolve('./src/clientModules/sidebarScrollFade.ts'),
@@ -477,8 +481,6 @@ const config: Config = {
         content:
           'live streaming, live video, open source, self-hosted, streaming server, rtmp, hls, chat',
       },
-      { name: 'twitter:site', content: '@owncastlive' },
-      { name: 'twitter:creator', content: '@owncastlive' },
       { property: 'og:locale', content: 'en_US' },
       { property: 'og:type', content: 'website' },
     ],

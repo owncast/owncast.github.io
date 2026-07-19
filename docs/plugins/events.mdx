@@ -509,7 +509,7 @@ Requires the `http.serve` permission. The JavaScript SDK exposes a single `onHtt
 
 ## Authentication
 
-### Auth check: `auth.check` {#auth-check}
+### Auth check: `auth.check` {/* #auth-check */}
 
 Only fires for the enabled [`auth.gate`](/docs/plugins/auth) plugin, and only on a viewer's `/` page load, never on the hot path (video segments, the API, chat). By the time it runs, the host has already verified the viewer's session cookie and resolved their identity. Your handler decides whether that session should continue. It's optional: omit it and a valid cookie is enough until it expires.
 
@@ -625,7 +625,7 @@ Called when `manifest.extraPageContent` has no static `content` file. The host p
 
 See [Contributing UI](/docs/plugins/ui) for the manifest side.
 
-## SSE connection events {#sse-events}
+## SSE connection events {/* #sse-events */}
 
 When a browser opens or closes one of your plugin's `/plugins/<name>/_sse/<channel>` streams, Owncast fires `sse.connect` and `sse.disconnect`. Use them to track who is connected, for example to keep a live count for an overlay. See [Realtime updates](/docs/plugins/http#realtime-updates-server-sent-events) for the push side that sends data to those browsers.
 

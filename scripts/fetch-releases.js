@@ -178,6 +178,22 @@ function generateSidebarPosition(tagName) {
 }
 
 /**
+ * Rewrite documentation paths that have moved since old release notes were
+ * written. Release bodies come from GitHub and can't be edited there, so map
+ * legacy paths to their current locations on emit (same approach as
+ * fetch-docmost.js rewriting /dev/ links).
+ */
+function rewriteLegacyDocLinks(body) {
+  return body
+    .replaceAll('](/docs/appearance/', '](/docs/configuration/appearance')
+    .replaceAll(
+      '](/docs/custom-javascript/',
+      '](/docs/configuration/custom-javascript'
+    )
+    .replaceAll('](/thirdparty', '](/docs/api');
+}
+
+/**
  * Generate markdown content for a release
  */
 function generateReleaseMarkdown(release) {
@@ -228,7 +244,7 @@ date: ${isoDate}
 
   // Add release body if available
   if (release.body) {
-    content += release.body;
+    content += rewriteLegacyDocLinks(release.body);
   }
 
   // Add download links section if there are assets

@@ -251,7 +251,7 @@ Everything else is gated, **including `/api/status` and embeds**. Leaking live-s
 - **TTL defaults to 24 hours**, with a sliding refresh available through `onAuthCheck`'s `refresh` verdict. Because the TTL is the revocation backstop, it's a real security knob.
 - **The signing secret is the Owncast host's responsibility.** It's auto-generated on first use and persisted in config. Rotating it invalidates every session (a panic button). Plugin authors never touch it, and it's separate from any OAuth _client_ secret, which is your plugin's config concern.
 
-## Chat identity {#chat-identity}
+## Chat identity {/* #chat-identity */}
 
 A gate login produces an authenticated chat identity automatically. Because `users.register` creates or links a real Owncast user (marked authenticated, with a display name seeded from the provider) and the session cookie carries that user's access token, chat reads the identity straight from the cookie: when `/ws` (or a chat REST call) arrives with no `?accessToken=` query parameter, it falls back to the access token in the gate cookie. No token is ever shuttled into the browser's `localStorage`. The viewer signs in once and shows up in chat under their provider name.
 

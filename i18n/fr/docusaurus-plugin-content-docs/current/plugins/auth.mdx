@@ -251,7 +251,7 @@ Tout le reste est soumis à l'authentification, **y compris `/api/status` et les
 * **Le TTL par défaut est de 24 heures**, avec un rafraîchissement glissant disponible via le verdict `refresh` d'`onAuthCheck`. Parce que le TTL est le dernier recours pour la révocation, c'est un vrai moyen de sécurité.
 * **Le secret de signature est la responsabilité de l'hôte Owncast.** Il est auto-généré lors de la première utilisation et conservé dans la configuration. Le fait de le faire tourner invalide chaque session (un bouton de panique). Les auteurs de plugins ne le touchent jamais, et il est séparé de tout secret *client* OAuth, qui concerne la configuration de votre plugin.
 
-## Identité du chat {#chat-identity}
+## Identité du chat {/* #chat-identity */}
 
 Une connexion par porte produit automatiquement une identité de chat authentifiée. Parce que `users.register` crée ou relie un véritable utilisateur Owncast (marqué comme authentifié, avec un nom d'affichage semé à partir du fournisseur) et le cookie de session contient le jeton d'accès de cet utilisateur, le chat lit l'identité directement à partir du cookie : lorsque `/ws` (ou un appel REST de chat) arrive sans paramètre de requête `?accessToken=`, il tombe en arrière sur le jeton d'accès dans le cookie de la porte. Aucun jeton n'est jamais transporté dans le `localStorage` du navigateur. Le spectateur se connecte une fois et apparaît dans le chat sous son nom de fournisseur.
 

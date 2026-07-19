@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This is the Owncast documentation and marketing website, built with **Docusaurus 3.9.1**, **React 19**, **TypeScript**, and **Tailwind CSS**. It is deployed to [owncast.online](https://owncast.online).
+This is the Owncast documentation and marketing website, built with **Docusaurus 3.10.2**, **React 19**, **TypeScript**, and **Tailwind CSS**. It is deployed to [owncast.online](https://owncast.online).
 
 ## Quick Reference
 
@@ -127,7 +127,7 @@ Chat uses the Matrix protocol. Client logic is in `src/lib/matrix/` and `src/hoo
 
 ## Things to Watch Out For
 
-- **Do not enable `rspackBundler`** in `docusaurus.config.ts` — it causes 404 issues with this project (noted in config comments).
+- **`rspackBundler` history**: it caused 404 issues in the past and was disabled for a long time. Re-enabled 2026-07-19 on Docusaurus 3.10.2 after output-parity verification. If unexplained 404s appear on the deployed site, suspect it first and turn it (and `rspackPersistentCache`) off in `docusaurus.config.ts`.
 - **Markdown format is set to `detect`**: `.md` files are parsed as CommonMark (no JSX allowed), `.mdx` files are parsed as MDX. If a `.md` file needs JSX, rename it to `.mdx`.
 - **The blog preset is disabled.** Releases and news use separate `@docusaurus/plugin-content-blog` instances with their own `id`, `path`, and `routeBasePath`.
 - **GitHub API rate limits**: Build scripts that fetch from GitHub may fail without a `GITHUB_TOKEN` environment variable, especially in CI.

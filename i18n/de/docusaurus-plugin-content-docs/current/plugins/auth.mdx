@@ -251,7 +251,7 @@ Alles andere ist abgesichert, **einschließlich `/api/status` und Einbettungen**
 * **TTL standardmäßig 24 Stunden**, mit einem gleitenden Refresh über das `refresh`-Urteil von `onAuthCheck` verfügbar. Da die TTL das Sicherheitsnetz für den Widerruf ist, ist es ein echtes Sicherheitsinstrument.
 * **Das Geheimnis der Signatur liegt in der Verantwortung des Owncast-Hosts.** Es wird bei der ersten Verwendung automatisch generiert und in der Konfiguration gespeichert. Die Rotation macht jede Sitzung ungültig (einen Panik-Button). Plugin-Autoren berühren es nie, und es ist unabhängig von einem OAuth-Client-Geheimnis, was die Konfiguration Ihres Plugins betrifft.
 
-## Chat-Identität {#chat-identity}
+## Chat-Identität {/* #chat-identity */}
 
 Ein Toranmeldung erzeugt automatisch eine authentifizierte Chat-Identität. Da `users.register` einen echten Owncast-Benutzer erstellt oder verknüpft (als authentifiziert gekennzeichnet, mit einem angezeigten Namen, der vom Anbieter stammt), und das Sitzungscookie das Zugangs-Token dieses Benutzers trägt, liest der Chat die Identität direkt aus dem Cookie: Wenn `/ws` (oder ein Chat-REST-Anruf) ohne das `?accessToken=`-Abfrageparameter ankommt, fällt er auf das Zugangs-Token im Gate-Cookie zurück. Kein Token wird jemals in den `localStorage` des Browsers transportiert. Der Zuschauer meldet sich einmal an und erscheint im Chat unter seinem Anbieternamen.
 

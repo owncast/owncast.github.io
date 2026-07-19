@@ -9,14 +9,14 @@ Nous supportons actuellement les actions suivantes que vous pouvez effectuer via
 
 | Événement                      |                                                                      Point de terminaison                                                                      |                     Portée |
 | :----------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------: | -------------------------: |
-| Message de chat système        |                     <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1system/post">/api/integrations/chat/system</a>                     | `CAN_SEND_SYSTEM_MESSAGES` |
-| Message de chat standard       |                       <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1send/post">/api/integrations/chat/send</a>                       |        `CAN_SEND_MESSAGES` |
-| Action de chat                 |                     <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1action/post">/api/integrations/chat/action</a>                     | `CAN_SEND_SYSTEM_MESSAGES` |
-| Supprimer le message de chat   |          <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1messagevisibility/post">/api/integrations/chat/messagevisibility</a>          |         `HAS_ADMIN_ACCESS` |
-| Obtenir l'historique des chats |                             <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat/get">/api/integrations/chat</a>                             |         `HAS_ADMIN_ACCESS` |
-| Obtenir les clients connectés  |                          <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1clients/get">/api/integrations/clients</a>                          |         `HAS_ADMIN_ACCESS` |
-| Définir le titre du flux       |                      <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1streamtitle/post">/api/integrations/streamtitle</a>                     |         `HAS_ADMIN_ACCESS` |
-| message système au client      | <a href="/api/latest/#tag/Integrations/paths/~1api~1integrations~1chat~1system~1client~1{clientId}/post">/api/integrations/chat/system/client/`{clientId}`</a> | `CAN_SEND_SYSTEM_MESSAGES` |
+| Message de chat système        |                     <a href="/api/release">/api/integrations/chat/system</a>                     | `CAN_SEND_SYSTEM_MESSAGES` |
+| Message de chat standard       |                       <a href="/api/release">/api/integrations/chat/send</a>                       |        `CAN_SEND_MESSAGES` |
+| Action de chat                 |                     <a href="/api/release">/api/integrations/chat/action</a>                     | `CAN_SEND_SYSTEM_MESSAGES` |
+| Supprimer le message de chat   |          <a href="/api/release">/api/integrations/chat/messagevisibility</a>          |         `HAS_ADMIN_ACCESS` |
+| Obtenir l'historique des chats |                             <a href="/api/release">/api/integrations/chat</a>                             |         `HAS_ADMIN_ACCESS` |
+| Obtenir les clients connectés  |                          <a href="/api/release">/api/integrations/clients</a>                          |         `HAS_ADMIN_ACCESS` |
+| Définir le titre du flux       |                      <a href="/api/release">/api/integrations/streamtitle</a>                     |         `HAS_ADMIN_ACCESS` |
+| message système au client      | <a href="/api/release">/api/integrations/chat/system/client/`{clientId}`</a> | `CAN_SEND_SYSTEM_MESSAGES` |
 
 Visitez la documentation de l'API pour chaque point de terminaison afin d'en savoir plus sur les valeurs attendues ou qui seront retournées.
 
