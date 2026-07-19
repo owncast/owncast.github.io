@@ -5,12 +5,11 @@
  * Runs as part of prebuild.
  */
 
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
-const SOURCE_URL =
-  "https://nyc3.digitaloceanspaces.com/owncast-nightly/nightly/index.html";
-const OUT_FILE = path.join(__dirname, "..", "src", "pages", "nightly-builds.md");
+const SOURCE_URL = 'https://nyc3.digitaloceanspaces.com/owncast-nightly/nightly/index.html';
+const OUT_FILE = path.join(__dirname, '..', 'src', 'pages', 'development-builds.md');
 
 async function main() {
   const res = await fetch(SOURCE_URL);
@@ -22,16 +21,16 @@ async function main() {
   // Take the body content and drop its <h1>; the page frontmatter supplies the title.
   const body = (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i) || [])[1];
   if (!body) {
-    throw new Error("Could not find <body> in nightly builds index");
+    throw new Error('Could not find <body> in nightly builds index');
   }
-  const content = body.replace(/<h1[^>]*>[\s\S]*?<\/h1>/i, "").trim();
+  const content = body.replace(/<h1[^>]*>[\s\S]*?<\/h1>/i, '').trim();
 
   const page = `---
-title: Nightly Builds
-description: Download the latest nightly builds of Owncast.
+title: Development Builds
+description: Download the latest in-development builds of Owncast and tools.
 ---
 
-# Owncast nightly builds
+# Owncast development builds
 
 ${content}
 `;
@@ -40,23 +39,23 @@ ${content}
   console.log(`Wrote ${OUT_FILE}`);
 }
 
-main().catch((error) => {
+main().catch(error => {
   // Fail soft: a nightly-bucket hiccup must not block the whole site build.
   console.warn(`fetch-nightly-builds: ${error.message}`);
   if (!fs.existsSync(OUT_FILE)) {
     fs.writeFileSync(
       OUT_FILE,
       `---
-title: Nightly Builds
-description: Download the latest nightly builds of Owncast.
+title: Development Builds
+description: Download the latest in-development builds of Owncast and tools.
 ---
 
-# Owncast nightly builds
+# Owncast development builds
 
 The nightly builds list is temporarily unavailable. Please check back later.
 `,
     );
   } else {
-    console.warn("Keeping previously generated nightly-builds page.");
+    console.warn('Keeping previously generated nightly-builds page.');
   }
 });
