@@ -1,10 +1,10 @@
 {
   "title": {
-    "message": "Propiedad",
+    "message": "Owncast",
     "description": "The title in the navbar"
   },
   "logo.alt": {
-    "message": "Logo de posesión",
+    "message": "Logo de Owncast",
     "description": "The alt text of navbar logo"
   },
   "item.label.Documentation": {
@@ -18,5 +18,9 @@
   "item.label.Quickstart": {
     "message": "Inicio rápido",
     "description": "Navbar item with label Quickstart"
+  },
+  "item.label.Releases": {
+    "message": "Lanzamientos",
+    "description": "Navbar item with label Releases"
   }
 }

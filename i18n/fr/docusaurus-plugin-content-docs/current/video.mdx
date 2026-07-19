@@ -51,7 +51,7 @@ Le débit binaire est la quantité de données que vous envoyez lors de la diffu
 
 ### Résolution
 
-La résolution désigne la taille d'une vidéo sur un écran. Comme les débits binaires, vous pouvez fournir plusieurs tailles différentes pour différents cas, mais demander de redimensionner une vidéo implique un travail supplémentaire à réaliser.
+La résolution désigne la taille d'une vidéo sur un écran. Comme pour les débits binaires, vous pouvez fournir plusieurs tailles différentes pour différents cas, mais demander de redimensionner une vidéo équivaut à un travail supplémentaire qui doit être effectué.
 
 Il est recommandé que si vous devez changer la taille, vous ne changiez que la largeur **ou** la hauteur, et cela conservera le bon rapport d'aspect pour vous. Si vous changez à la fois la largeur et la hauteur, vous pourriez changer le rapport d'aspect de la vidéo et vous pourriez vous retrouver avec une image déformée si vous ne la définissez pas correctement.
 
@@ -66,6 +66,20 @@ Plus vous utilisez de CPU, meilleure sera l'image de sortie, ou plus petit sera 
 ### Tampon de latence
 
 Vous avez un certain contrôle sur la latence en direct entre le diffuseur et le spectateur. Bien qu'il soit tout à fait compréhensible de vouloir avoir aussi peu de latence que possible, vous devrez peut-être augmenter le tampon de latence si vous rencontrez des problèmes. En général, plus la latence est basse, moins de tampon est disponible pour d'éventuels transferts lents, des coupures de réseau ou des erreurs.
+
+### Lecture automatique
+
+Par défaut, les spectateurs appuient sur lecture pour commencer à regarder. Si vous préférez que le flux commence de lui-même lorsque quelqu'un ouvre votre page, modifiez le réglage de **Lecture automatique** sur la même page de configuration de la vidéo. Cela n'a pas d'impact sur les performances, et cela s'applique à votre page Owncast et aux [lecteurs intégrés](/docs/embed#autoplay).
+
+<img src="/docs/img/admin-autoplay.png" alt="Le réglage de Lecture automatique sur la page de configuration de la vidéo dans l'administration, montrant le menu déroulant de comportement" width="65 %" />
+
+* **Jamais** : le lecteur attend que le spectateur appuie sur lecture. C'est le défaut.
+* **Toujours** : le flux commence dès que la page s'ouvre. Il joue avec du son là où le navigateur le permet et commence sans son partout ailleurs. Pendant que le flux joue sans son, le lecteur montre un grand bouton de désactivation du silence sur la vidéo, afin qu'activer le son nécessite un clic.
+* **Seulement si le son est disponible** : le flux commence de lui-même uniquement lorsque le navigateur du spectateur permet également la lecture du son. Il ne commence jamais en silence. Si le navigateur bloque le son, le spectateur appuie sur lecture comme d'habitude.
+
+Chaque navigateur majeur restreint la lecture automatique avec son, en fonction de ses propres règles, ses paramètres et souvent l'historique du spectateur avec votre site. En pratique, **Toujours** commence généralement sans son pour les visiteurs de première fois, et **Seulement si le son est disponible** ne joue généralement pas automatiquement pour eux du tout.
+
+Le lecteur ne joue également jamais automatiquement, peu importe ce réglage, pour les spectateurs qui ont l'économiseur de données activé ou dont le système demande un mouvement réduit (la préférence d'accessibilité `prefers-reduced-motion`).
 
 ### Passage de vidéo
 

@@ -1,6 +1,6 @@
 {
   "title": {
-    "message": "Discussion personnelle",
+    "message": "Owncast",
     "description": "The title in the navbar"
   },
   "logo.alt": {
@@ -18,5 +18,9 @@
   "item.label.Quickstart": {
     "message": "Démarrage rapide",
     "description": "Navbar item with label Quickstart"
+  },
+  "item.label.Releases": {
+    "message": "Versions",
+    "description": "Navbar item with label Releases"
   }
 }

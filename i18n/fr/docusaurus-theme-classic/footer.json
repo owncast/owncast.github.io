@@ -17,7 +17,7 @@
   },
   "link.item.label.Releases": {
     "message": "Versions",
-    "description": "The label of footer link with label=Releases linking to /blog"
+    "description": "The label of footer link with label=Releases linking to /releases"
   },
   "link.item.label.Roadmap": {
     "message": "Feuille de route",
@@ -29,7 +29,7 @@
   },
   "link.item.label.Community Chat": {
     "message": "Chat de la communauté",
-    "description": "The label of footer link with label=Community Chat linking to https://matrix.to/#/#owncast:matrix.org"
+    "description": "The label of footer link with label=Community Chat linking to https://app.element.io/#/room/#owncast.support:matrix.org"
   },
   "link.item.label.Contribute": {
     "message": "Contribuer",
@@ -40,7 +40,31 @@
     "description": "The label of footer link with label=Contact linking to /contact"
   },
   "copyright": {
-    "message": "Owncast® is a <a href=\"/trademark\">registered trademark</a> of the Owncast Project.",
+    "message": "Owncast® est une marque <a href=\"/trademark\">déposée</a> du projet Owncast.",
     "description": "The footer copyright"
+  },
+  "link.title.More": {
+    "message": "Plus",
+    "description": "The title of the footer links column with title=More in the footer"
+  },
+  "link.item.label.Donate": {
+    "message": "Faire un don",
+    "description": "The label of footer link with label=Donate linking to https://opencollective.com/owncast/donate"
+  },
+  "link.item.label.Demo Server": {
+    "message": "Serveur de démonstration",
+    "description": "The label of footer link with label=Demo Server linking to https://watch.owncast.online"
+  },
+  "link.item.label.Merch store": {
+    "message": "Boutique de merch",
+    "description": "The label of footer link with label=Merch store linking to https://merch.owncast.online"
+  },
+  "link.item.label.Additional Resources": {
+    "message": "Ressources supplémentaires",
+    "description": "The label of footer link with label=Additional Resources linking to /resources"
+  },
+  "link.item.label.Security": {
+    "message": "Sécurité",
+    "description": "The label of footer link with label=Security linking to /security"
   }
 }

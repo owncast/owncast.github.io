@@ -51,7 +51,7 @@ Die Bitrate ist die Menge an Daten, die Sie bei der Übertragung senden. Eine h�
 
 ### Auflösung
 
-Die Auflösung bezieht sich auf die Größe eines Videos auf einem Bildschirm. Wie bei Bitraten können Sie mehrere verschiedene Größen für unterschiedliche Fälle angeben, aber das Anfordern einer Größenänderung eines Videos bedeutet zusätzliche Arbeit, die erledigt werden muss.
+Die Auflösung bezieht sich auf die Größe eines Videos auf einem Bildschirm. Wie bei Bitraten können Sie mehrere verschiedene Größen für unterschiedliche Fälle angeben, aber die Anfrage, ein Video zu ändern, bedeutet zusätzliche Arbeit, die erledigt werden muss.
 
 Es wird empfohlen, wenn Sie die Größe ändern müssen, nur die Breite **oder** die Höhe zu ändern, und es wird das richtige Seitenverhältnis für Sie beibehalten. Wenn Sie sowohl die Breite als auch die Höhe ändern, ändern Sie möglicherweise das Seitenverhältnis des Videos und enden mit einem verzerrten Bild, wenn Sie es nicht korrekt einstellen.
 
@@ -66,6 +66,20 @@ Je mehr CPU Sie verwenden, desto besser wird das Ausgabebild sein, oder desto kl
 ### Latenzpuffer
 
 Sie haben eine gewisse Kontrolle über die Live-Latenz zwischen dem Sender und dem Zuschauer. Obwohl es völlig verständlich ist, so wenig Latenz wie möglich haben zu wollen, müssen Sie möglicherweise den Latenzpuffer erhöhen, wenn Sie Probleme haben. Im Allgemeinen gilt: Je niedriger die Latenz, desto weniger Puffer steht für mögliche langsame Übertragungen, Netzwerkstörungen oder Fehler zur Verfügung.
+
+### Automatisches Abspielen
+
+Standardmäßig drücken die Zuschauer auf Play, um zu schauen. Wenn Sie möchten, dass der Stream automatisch startet, wenn jemand Ihre Seite öffnet, ändern Sie die Einstellung **Autoplay** auf derselben Videokonfigurationsseite. Es hat keine Leistungsbeeinträchtigung und es gilt für Ihre Owncast-Seite und für [eingebettete Player](/docs/embed#autoplay).
+
+<img src="/docs/img/admin-autoplay.png" alt="Die Einstellung für Automatisches Abspielen auf der Videokonfigurationsseite im Admin zeigt das Auswahlfeld für das Verhalten" width="65%" />
+
+* **Nie**: Der Player wartet darauf, dass der Zuschauer auf Play drückt. Das ist die Standardeinstellung.
+* **Immer**: Der Stream beginnt, sobald die Seite geöffnet wird. Es spielt mit Ton, wo der Browser es erlaubt und startet stumm in allen anderen Fällen. Während der Stream stumm abgespielt wird, zeigt der Player einen großen Stummschalt-Button über dem Video, sodass das Einschalten des Tons nur einen Klick erfordert.
+* **Nur wenn Ton verfügbar ist**: Der Stream beginnt nur dann automatisch, wenn der Browser des Zuschauers es ebenfalls erlaubt, Ton abzuspielen. Es beginnt nie stumm. Wenn der Browser den Ton blockiert, drückt der Zuschauer wie gewohnt auf Play.
+
+Jeder gängige Browser schränkt das automatisches Abspielen mit Ton basierend auf seinen eigenen Regeln, Einstellungen und oft der Historie des Zuschauers mit Ihrer Seite ein. In der Praxis startet **Immer** in der Regel stumm für Erstbesucher, und **Nur wenn Ton verfügbar ist** spielt normalerweise überhaupt nicht automatisch für sie ab.
+
+Der Player spielt auch niemals automatisch ab, unabhängig von dieser Einstellung, für Zuschauer, die den Datensparer aktiviert haben oder deren System nach reduzierter Bewegung fragt (die `prefers-reduced-motion` Barrierefreiheitspräferenz).
 
 ### Video-Passthrough
 

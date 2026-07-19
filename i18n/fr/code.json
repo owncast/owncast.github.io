@@ -59,6 +59,57 @@
   "homepage.faq.description": {
     "message": "Réponses aux questions courantes que les gens posent au sujet de Owncast."
   },
+  "homepage.faq.q1.question": {
+    "message": "Devrais-je passer à Owncast depuis Twitch, YouTube, Facebook, ou une autre plateforme ?"
+  },
+  "homepage.faq.q1.answer": {
+    "message": "Honnêtement, {probablyNot} Owncast est une alternative pour lorsque ces plateformes ne répondent plus à vos besoins. Si vous êtes satisfait de votre plateforme actuelle, et des compromis qu’elle implique, il n’y a aucune raison de changer.\n\nMais si vous construisez un projet qui nécessite un composant de diffusion en direct, ou si vous avez un besoin de streaming interne, ou si vous êtes une entreprise médiatique qui souhaite créer un flux 24/7, alors Owncast a du sens là où d’autres options n’en ont pas.\n\nOu si vous êtes quelqu’un qui a constaté que d’autres plateformes ne vous accueillent plus, vous ou votre contenu, ou que vous souhaitez prendre une direction différente, alors construire votre propre solution, emmener votre audience existante avec vous, et être responsable de votre propre destinée a également beaucoup de sens."
+  },
+  "homepage.faq.q2.question": {
+    "message": "Les développeurs Owncast savent-ils ce que je stream?"
+  },
+  "homepage.faq.q2.answer": {
+    "message": "Par défaut, {absolutelyNot} Il n'y a aucun moyen pour personne de le savoir, mais vous et vos téléspectateurs. Cependant, si vous choisissez de lister votre diffusion en direct sur l' {directoryLink}, ou si vous avez l' {socialLink} sur le Fediverse, plus d'informations sur votre contenu seront disponibles pour les autres."
+  },
+  "homepage.faq.q3.question": {
+    "message": "Est-ce que ça coûte cher de faire tourner Owncast ? Quelqu'un sur Twitch a dit que c'est vraiment cher."
+  },
+  "homepage.faq.q3.answer": {
+    "message": "Owncast peut fonctionner à un coût réduit et fonctionner sur du matériel modeste. Même un Raspberry Pi moderne. C'est généralement {resourcesLink} à payer. {costEmphasis}\n\nLa plupart des gens commencent avec un petit serveur ou même avec leur propre hébergement. En commençant par une configuration simple, vous pouvez gérer les choses au fur et à mesure que votre audience augmente, vous pouvez {scalingLink} votre solution d'hébergement en conséquence pour gérer l'augmentation du trafic. Passer à {storageLink} en général à {removes} la plupart des problèmes de bande passante."
+  },
+  "homepage.faq.q4.question": {
+    "message": "Il est difficile de mettre en place Owncast ? Quelqu'un sur YouTube a dit que c'est vraiment difficile."
+  },
+  "homepage.faq.q4.answer": {
+    "message": "Owncast est conçu pour être facile à utiliser et facile à configurer. Notre documentation fournit {quickstartLink} pour vous aider à démarrer rapidement."
+  },
+  "homepage.faq.q5.question": {
+    "message": "Je veux faire croître mon public. Est-ce que Owncast peut me faire plus de spectateurs? TikTok me donne plus de spectateurs."
+  },
+  "homepage.faq.q5.answer.intro": {
+    "message": "Si vous étiez dans un groupe, et que vous faisiez tout le travail pour écrire des chansons, répéter, réserver un concert, mais que vous n’en parliez à personne, {disappointed}\n\nNous nous sommes tous habitués aux plateformes qui servent notre contenu aux masses sur un plateau. En retour, les créateurs vivent avec des règles strictes, des limitations et de la collecte de données.\n\nOwncast vous donne les outils pour construire votre propre audience selon vos propres conditions. Il ne le fait pas à votre place, c’est votre travail. Cependant, il existe quelques opportunités :"
+  },
+  "homepage.faq.q5.answer.fediverse": {
+    "message": "Connectez-vous à l' {fediverseLink}, permettant à vos utilisateurs de découvrir votre flux sur Mastodon, Pleroma et Misskey. Encouragez les gens à suivre et à partager votre stream."
+  },
+  "homepage.faq.q5.answer.directory": {
+    "message": "Listez votre flux dans l' {directoryLink}, le rendant visible par les personnes qui recherchent de nouveaux flux."
+  },
+  "homepage.faq.q5.answer.conclusion": {
+    "message": "Owncast peut ne pas être bien adapté si vous voulez appuyer sur \"Go Live\" et s'attendre à ce que les gens viennent juste d'arriver."
+  },
+  "homepage.faq.q6.question": {
+    "message": "Je suis un représentant d'une entreprise de médias qui cherche à décrocher une diffusion en direct qui dit qu'elle est gérée par Owncast. Éliminez-la ou autre!"
+  },
+  "homepage.faq.q6.answer": {
+    "message": "{youProblem} Owncast n’est pas impliqué et ne peut pas vous être d’aucune aide. Vous seriez surpris de voir combien de personnes refusent de comprendre cela."
+  },
+  "homepage.faq.q7.question": {
+    "message": "Où puis-je discuter avec des gens à propos de Owncast si j'ai des questions?"
+  },
+  "homepage.faq.q7.answer": {
+    "message": "Si notre {docsLink} ne répond pas à votre question, visitez notre {contactLink} pour des liens vers des salons de discussion de la communauté les traqueurs de problèmes, et d'autres façons d'entrer en contact avec la communauté Owncast et les développeurs."
+  },
   "homepage.features.customAppearance.title": {
     "message": "Apparence et domaine personnalisés"
   },
@@ -105,10 +156,10 @@
     "message": "Chat intégré"
   },
   "homepage.featurePreview.chat.description": {
-    "message": "Discussion en temps réel incluse, aucun service tiers n'est requis."
+    "message": "Chat en temps réel inclus, aucun service tiers requis. Outils de modération, émoticônes personnalisées et authentification des utilisateurs inclus."
   },
   "homepage.featurePreview.branding.title": {
-    "message": "Branding personnalisé sur votre page, servi par votre domaine"
+    "message": "Marque personnalisée, votre domaine"
   },
   "homepage.featurePreview.branding.description": {
     "message": "Streamez à partir de votre propre domaine avec votre propre apparence et votre propre sensation. Créez votre propre interface utilisateur et possédez réellement cette expérience."
@@ -117,13 +168,13 @@
     "message": "Notifications"
   },
   "homepage.featurePreview.notifications.description": {
-    "message": "Notifier les abonnés via divers canaux lorsque vous allez en direct."
+    "message": "Prévenez les abonnés via divers canaux lorsque vous êtes en direct. Ne manquez jamais une occasion de vous connecter avec votre public."
   },
   "homepage.featurePreview.fediverse.title": {
     "message": "Support Fediverse"
   },
   "homepage.featurePreview.fediverse.description": {
-    "message": "Encourager l'engagement et toucher de nouveaux téléspectateurs à travers le fédivers."
+    "message": "Encouragez l'engagement et atteignez de nouveaux spectateurs à travers le fediverse. Connectez-vous aux plateformes Mastodon et ActivityPub."
   },
   "homepage.featurePreview.extensible.title": {
     "message": "Extensible"
@@ -168,7 +219,7 @@
     "message": "Utilise des protocoles et des standards ouverts"
   },
   "homepage.protocolCompat.description": {
-    "message": "Choisissez les outils et les services de votre choix pour travailler avec Owncast."
+    "message": "Choisissez les outils, services et logiciels de votre choix pour travailler avec Owncast."
   },
   "homepage.softwareCompat.title": {
     "message": "Compatible avec vos outils de diffusion favoris"
@@ -287,7 +338,7 @@
     "description": "Pluralized label for \"{count} docs tagged\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
   },
   "theme.docs.tagDocListPageTitle": {
-    "message": "{nDocsTagged} with \"{tagName}\"",
+    "message": "{nDocsTagged} avec \"{tagName}\"",
     "description": "The title of the page for a docs tag"
   },
   "theme.docs.versionBadge.label": {
@@ -555,5 +606,826 @@
   "theme.tags.tagsPageTitle": {
     "message": "Tags",
     "description": "The title of the tag list page"
+  },
+  "contributors.title": {
+    "message": "Contributeurs"
+  },
+  "contributors.description": {
+    "message": "Contribuez de manière technique ou non technique."
+  },
+  "contributors.learnHow": {
+    "message": "Apprenez comment vous impliquer."
+  },
+  "donors.title": {
+    "message": "Donateurs"
+  },
+  "donors.description": {
+    "message": "Aidez à soutenir le projet en effectuant un don financier à"
+  },
+  "donors.note": {
+    "message": "Cette liste reflète les soutiens financiers actifs aidant à financer le développement, les initiatives et l'infrastructure en cours."
+  },
+  "docs.welcome.title": {
+    "message": "Bienvenue dans la documentation d'Owncast !"
+  },
+  "docs.welcome.description": {
+    "message": "Owncast est un serveur vidéo en direct et de chat web auto-hébergé qui vous permet de diffuser votre contenu à votre public sans dépendre de plateformes tierces. Que vous soyez débutant cherchant à configurer votre premier flux ou utilisateur expérimenté à la recherche d'options de configuration avancées, cette documentation vise à vous orienter dans la bonne direction."
+  },
+  "chat.error.generic": {
+    "message": "Un problème est survenu"
+  },
+  "chat.error.retry": {
+    "message": "Réessayez"
+  },
+  "chat.community.chooseName": {
+    "message": "Choisissez un nom pour rejoindre le chat"
+  },
+  "chat.community.connecting": {
+    "message": "Connexion au chat de support Owncast..."
+  },
+  "chat.community.description": {
+    "message": "Ceci est une salle de chat communautaire où vous pouvez poser des questions et obtenir de l'aide d'autres utilisateurs et contributeurs Owncast."
+  },
+  "chat.community.guidelines": {
+    "message": "Veuillez être courtois et respectueux envers les autres qui consacrent peut-être leur temps bénévolement pour aider. Avant de demander, envisagez de vérifier la {docsLink} et la {issuesLink} pour voir si votre question a déjà reçu une réponse."
+  },
+  "chat.community.docsLink": {
+    "message": "documentation"
+  },
+  "chat.community.issuesLink": {
+    "message": "problèmes passés"
+  },
+  "chat.info.title": {
+    "message": "Chat communautaire Owncast"
+  },
+  "chat.info.subtitle": {
+    "message": "Un lieu pour poser des questions et obtenir de l'aide de la communauté Owncast."
+  },
+  "chat.info.body": {
+    "message": "Ceci est une salle de chat communautaire où vous pouvez vous connecter avec d'autres utilisateurs et contributeurs Owncast. Veuillez être courtois et respectueux envers les autres qui consacrent leur temps à aider."
+  },
+  "chat.info.checkFirst": {
+    "message": "Avant de demander, envisagez de vérifier la {docsLink} et la {issuesLink} pour voir si votre question a déjà reçu une réponse."
+  },
+  "chat.info.docsLink": {
+    "message": "documentation"
+  },
+  "chat.info.issuesLink": {
+    "message": "problèmes passés"
+  },
+  "chat.info.matrix.title": {
+    "message": "Connectez-vous avec n'importe quel client Matrix"
+  },
+  "chat.info.matrix.description": {
+    "message": "Cette conversation est alimentée par {matrixLink}, un protocole de communication ouvert et décentralisé. Vous pouvez rejoindre cette salle en utilisant n'importe quel client Matrix :"
+  },
+  "chat.info.matrix.openElement": {
+    "message": "Ouvrir dans Element"
+  },
+  "chat.info.matrix.matrixToLink": {
+    "message": "lien matrix.to"
+  },
+  "chat.tab.answers": {
+    "message": "Aide instantanée"
+  },
+  "chat.tab.community": {
+    "message": "Discuter avec la communauté"
+  },
+  "chat.answers.preparing": {
+    "message": "Owncat fait semblant de taper..."
+  },
+  "chat.answers.thinking": {
+    "message": "Owncat fait semblant de taper..."
+  },
+  "chat.answers.subtitle": {
+    "message": "Réponses de la documentation Owncast et des problèmes passés"
+  },
+  "chat.answers.stop": {
+    "message": "Arrêter"
+  },
+  "chat.answers.newConversation": {
+    "message": "Nouvelle conversation"
+  },
+  "chat.answers.welcome": {
+    "message": "Salut, je suis Owncat, je peux rechercher dans les Owncasts existants {docsLink} pour essayer de trouver des réponses pour vous. En tant que résultats automatisés, ceux-ci ne remplacent pas la lecture des documents vous-même ou la discussion avec de vraies personnes, mais cela pourrait être un outil utile."
+  },
+  "chat.answers.senderName": {
+    "message": "Owncat"
+  },
+  "chat.answers.askCommunity": {
+    "message": "Besoin de plus d'aide ? Demandez à la communauté →"
+  },
+  "chat.answers.placeholder": {
+    "message": "Posez n'importe quelle question sur Owncast..."
+  },
+  "chat.displayName.errorEmpty": {
+    "message": "Veuillez entrer un nom"
+  },
+  "chat.displayName.errorTooLong": {
+    "message": "Le nom est trop long"
+  },
+  "chat.displayName.errorFailed": {
+    "message": "Échec de la définition du nom. Veuillez réessayer."
+  },
+  "chat.displayName.titleChange": {
+    "message": "Changez votre nom"
+  },
+  "chat.displayName.titleWelcome": {
+    "message": "Bienvenue dans le chat de support Owncast"
+  },
+  "chat.displayName.descriptionChange": {
+    "message": "Mettez à jour le nom affiché avec vos messages."
+  },
+  "chat.displayName.descriptionWelcome": {
+    "message": "Comment devrions-nous vous appeler ?"
+  },
+  "chat.displayName.placeholder": {
+    "message": "Votre nom d'affichage"
+  },
+  "chat.displayName.cancel": {
+    "message": "Annuler"
+  },
+  "chat.displayName.saving": {
+    "message": "Enregistrement..."
+  },
+  "chat.displayName.update": {
+    "message": "Mettre à jour"
+  },
+  "chat.displayName.join": {
+    "message": "Rejoindre le chat"
+  },
+  "chat.messages.empty": {
+    "message": "Aucun message pour l'instant"
+  },
+  "chat.thread.viewThread": {
+    "message": "Voir le fil"
+  },
+  "chat.input.connecting": {
+    "message": "Connexion..."
+  },
+  "chat.input.placeholder": {
+    "message": "Tapez un message..."
+  },
+  "chat.thread.by": {
+    "message": "Fil par"
+  },
+  "chat.thread.replySingular": {
+    "message": "répondre"
+  },
+  "chat.thread.replyPlural": {
+    "message": "réponses"
+  },
+  "chat.thread.replyPlaceholder": {
+    "message": "Répondre dans le fil ..."
+  },
+  "directory.editPage": {
+    "message": "Vous avez des ressources à partager ? Améliorez cette page en les ajoutant."
+  },
+  "homepage.featurePreview.chat.category": {
+    "message": "Communauté"
+  },
+  "homepage.featurePreview.branding.category": {
+    "message": "Marque"
+  },
+  "homepage.featurePreview.notifications.category": {
+    "message": "Engagement"
+  },
+  "homepage.featurePreview.fediverse.category": {
+    "message": "Social"
+  },
+  "homepage.featurePreview.extensible.category": {
+    "message": "Développeur"
+  },
+  "chat.displayName.skip": {
+    "message": "Passer"
+  },
+  "chat.answers.welcomeDocsLink": {
+    "message": "documentation"
+  },
+  "chat.answers.welcomeAlternatives": {
+    "message": "Si vous préférez {chatLink}, vous pouvez le faire aussi, bien que vous puissiez avoir à attendre quelqu'un pour répondre. Vous êtes également invité à poser des questions sur notre {issueTracker}."
+  },
+  "chat.answers.welcomeChatTab": {
+    "message": "Discuter avec la communauté"
+  },
+  "chat.answers.welcomeIssueTracker": {
+    "message": "suivi des problèmes"
+  },
+  "chat.answers.welcomeChatLink": {
+    "message": "discutez avec de véritables développeurs et membres de la communauté Owncast"
+  },
+  "chat.info.buttonLabel": {
+    "message": "À propos de cette conversation"
+  },
+  "chat.displayName.label": {
+    "message": "Nom d'affichage"
+  },
+  "chat.community.welcome": {
+    "message": "Vous êtes maintenant dans le chat de support d'Owncast. Dites bonjour !"
+  },
+  "resourcesCalculator.cpu.minimal": {
+    "message": "Minimal"
+  },
+  "resourcesCalculator.cpu.light": {
+    "message": "Léger"
+  },
+  "resourcesCalculator.cpu.moderate": {
+    "message": "Modéré"
+  },
+  "resourcesCalculator.cpu.heavy": {
+    "message": "Lourd"
+  },
+  "resourcesCalculator.rec.highCpu": {
+    "message": "Une utilisation élevée du CPU a été détectée. Envisagez de réduire les variantes de qualité ou de diminuer les taux d'images."
+  },
+  "resourcesCalculator.rec.manyViewers": {
+    "message": "De nombreux spectateurs"
+  },
+  "resourcesCalculator.rec.someViewers": {
+    "message": "Quelques spectateurs"
+  },
+  "resourcesCalculator.rec.fewViewers": {
+    "message": "Une poignée de spectateurs"
+  },
+  "resourcesCalculator.rec.smallNumberViewers": {
+    "message": "Un petit nombre de spectateurs"
+  },
+  "resourcesCalculator.rec.buffering": {
+    "message": "{experienceText} pourrait rencontrer des interruptions. Ajoutez une option de qualité à faible débit binaire pour les spectateurs mobiles et ceux ayant des connexions lentes."
+  },
+  "resourcesCalculator.rec.s3": {
+    "message": "Envisagez d'utiliser un stockage d'objets pour augmenter la bande passante avec plus de spectateurs et réduire la charge serveur."
+  },
+  "resourcesCalculator.rec.highBitrateNoLow": {
+    "message": "Un débit binaire élevé sans options de faible qualité exclura les spectateurs sur mobile et les réseaux plus lents. Ajoutez une variante de qualité en dessous de 2000 kbps."
+  },
+  "resourcesCalculator.rec.singleHighQuality": {
+    "message": "Des flux de qualité unique au-dessus de 4000 kbps peuvent causer des interruptions pour les spectateurs sur mobile et les réseaux plus lents. Ajoutez des variantes de qualité inférieure."
+  },
+  "resourcesCalculator.rec.passthroughOnly": {
+    "message": "Le mode de passage épargne le CPU mais peut entraîner des interruptions pour les spectateurs sur des connexions plus lentes."
+  },
+  "resourcesCalculator.rec.highFrameRate": {
+    "message": "Des taux d'images élevés (60 fps et plus) augmentent considérablement l'utilisation du CPU. Envisagez de réduire pour un contenu non lié aux jeux."
+  },
+  "resourcesCalculator.rec.veryHighFrameRate": {
+    "message": "90 fps nécessite des ressources CPU substantielles. Recommandé uniquement pour du contenu à mouvement rapide avec du matériel puissant."
+  },
+  "resourcesCalculator.rec.lowerFrameRate": {
+    "message": "Envisagez d'ajouter une option de taux d'images inférieur (24 ou 15 fps) pour réduire l'utilisation du CPU et améliorer l'expérience pour les spectateurs mobiles et ceux ayant des connexions plus lentes."
+  },
+  "resourcesCalculator.rec.mixedFrameRates": {
+    "message": "Les variantes de qualité inférieure pourraient utiliser des taux de rafraîchissement réduits (24-30 fps) pour économiser le CPU tout en maintenant une bonne expérience."
+  },
+  "resourcesCalculator.experience.excellent": {
+    "message": "Excellent"
+  },
+  "resourcesCalculator.experience.veryGood": {
+    "message": "Très bon"
+  },
+  "resourcesCalculator.experience.good": {
+    "message": "Bon"
+  },
+  "resourcesCalculator.experience.fair": {
+    "message": "Équitable"
+  },
+  "resourcesCalculator.experience.poor": {
+    "message": "Pauvre"
+  },
+  "resourcesCalculator.experience.veryPoor": {
+    "message": "Très pauvre"
+  },
+  "resourcesCalculator.label.inputBitrate": {
+    "message": "Débit d'entrée :"
+  },
+  "resourcesCalculator.label.viewers": {
+    "message": "Spectateurs :"
+  },
+  "resourcesCalculator.label.duration": {
+    "message": "Durée :"
+  },
+  "resourcesCalculator.label.usingS3": {
+    "message": "Utilisation du stockage d'objets"
+  },
+  "resourcesCalculator.label.outputQualities": {
+    "message": "Qualités de sortie :"
+  },
+  "resourcesCalculator.metric.bandwidth": {
+    "message": "Bande passante"
+  },
+  "resourcesCalculator.metric.peakOutboundSpeed": {
+    "message": "Vitesse de sortie maximale"
+  },
+  "resourcesCalculator.metric.cpu": {
+    "message": "Processeur"
+  },
+  "resourcesCalculator.metric.experience": {
+    "message": "Expérience"
+  },
+  "resourcesCalculator.recommendations.title": {
+    "message": "Recommandations"
+  },
+  "resourcesCalculator.recommendations.none": {
+    "message": "Aucune recommandation"
+  },
+  "resourcesCalculator.editor.title": {
+    "message": "Configurer la sortie de qualité"
+  },
+  "resourcesCalculator.editor.passthrough": {
+    "message": "Passage vidéo"
+  },
+  "resourcesCalculator.editor.outputBitrate": {
+    "message": "Débit de sortie :"
+  },
+  "resourcesCalculator.editor.frameRate": {
+    "message": "Taux de rafraîchissement :"
+  },
+  "resourcesCalculator.editor.passthroughInfo": {
+    "message": "Le débit binaire correspondra à l'entrée : {bitrate}"
+  },
+  "resourcesCalculator.editor.passthroughFrameRate": {
+    "message": "Le taux de rafraîchissement correspondra au flux d'entrée"
+  },
+  "resourcesCalculator.editor.save": {
+    "message": "Enregistrer"
+  },
+  "resourcesCalculator.editor.cancel": {
+    "message": "Annuler"
+  },
+  "homepage.announcementBar.plugins": {
+    "message": "Owncast prend maintenant en charge des plugins personnalisés. {link}",
+    "description": "Announcement bar message linking to the plugins docs"
+  },
+  "homepage.announcementBar.plugins.link": {
+    "message": "En savoir plus",
+    "description": "Link text in the plugins announcement bar"
+  },
+  "wizard.quickstart.title": {
+    "message": "Assistant de démarrage rapide",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.install-method-page.title": {
+    "message": "Comment souhaitez-vous installer Owncast ?",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.install-method-page.description": {
+    "message": "En utilisant l'installateur, vous pouvez être opérationnel en environ une minute. Cependant, si vous préférez télécharger une version manuellement, utiliser une installation en un clic chez un fournisseur d'hébergement supporté, utiliser un conteneur, vous avez ces options et bien d'autres. Si vous préférez, vous pouvez consulter notre documentation d'installation complète.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.install-method-page.elements.install_method.title": {
+    "message": "Sélectionnez votre méthode d'installation préférée :",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.install-method-page.elements.install_method.choices.manual.text": {
+    "message": "Je veux installer Owncast manuellement.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.install-method-page.elements.install_method.choices.hostingprovider.text": {
+    "message": "Je veux que Owncast soit installé pour moi auprès d'un fournisseur d'hébergement.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.install-method-page.elements.install_method.choices.docker.text": {
+    "message": "Je veux exécuter Owncast dans un environnement conteneurisé tel que Docker ou Kubernetes.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.install-method-page.elements.install_method.choices.other.text": {
+    "message": "Autres matériels ou environnements d'hébergement spécifiques.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.install-method-page.elements.install_method.choices.installed-what-is-next.text": {
+    "message": "Owncast est installé et je ne suis pas sûr de ce qu'il faut faire ensuite.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.docker-result.title": {
+    "message": "Installation de Docker",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.docker-result.elements.docker_guide.html": {
+    "message": "<h3>Guide d'installation de Docker</h3><p><a href='/quickstart/docker' target='_blank' rel='noopener'>Suivez le guide d'installation de Docker</a></p><p>Ce guide vous expliquera comment exécuter Owncast dans un environnement conteneurisé.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.manual-install-method-page.title": {
+    "message": "Comment souhaitez-vous installer Owncast manuellement ?",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.manual-install-method-page.description": {
+    "message": "Owncast fournit un script d'installation rapide qui installera toujours la version la plus récente et vous fera fonctionner très rapidement. Cependant, il existe d'autres options.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.manual-install-method-page.elements.manual_method.title": {
+    "message": "Choisissez votre méthode d'installation manuelle :",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.manual-install-method-page.elements.manual_method.choices.quickinstaller.text": {
+    "message": "Je veux utiliser le script d'installation rapide d'Owncast.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.manual-install-method-page.elements.manual_method.choices.download.text": {
+    "message": "Je veux télécharger une version d'Owncast.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.manual-install-method-page.elements.manual_method.choices.packagemanager.text": {
+    "message": "Je veux utiliser le gestionnaire de paquets de mon système d'exploitation.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.quickinstaller-result.title": {
+    "message": "Installateur rapide",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.quickinstaller-result.elements.quickinstaller_guide.html": {
+    "message": "<h3>Guide d'installation rapide</h3><p><a href='/quickstart/installer' target='_blank' rel='noopener'>Utilisez l'installateur rapide d'Owncast</a></p><p>L'installateur rapide téléchargera et configurera Owncast automatiquement pour vous.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.download-result.title": {
+    "message": "Téléchargement manuel",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.download-result.elements.download_guide.html": {
+    "message": "<h3>Guide de téléchargement manuel</h3><p><a href='/quickstart/manual/' target='_blank' rel='noopener'>Télécharger et installer Owncast manuellement</a></p><p>Ce guide vous montrera comment télécharger et configurer Owncast étape par étape.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.os-package-manager-page.title": {
+    "message": "Utilisez le gestionnaire de paquets de votre système d'exploitation",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.os-package-manager-page.description": {
+    "message": "<strong>Remarque</strong> : Ces paquets peuvent être obsolètes. Ces paquets ne sont pas construits ou maintenus par le projet Owncast et toute préoccupation ou support spécifique concernant leur installation doit être dirigé vers les mainteneurs des paquets.<br><br>Quel système d'exploitation ou distribution utilisez-vous ?",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.os-package-manager-page.elements.os_package.title": {
+    "message": "Sélectionnez votre système d'exploitation :",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.os-package-manager-page.elements.os_package.choices.arch.text": {
+    "message": "Arch Linux",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.os-package-manager-page.elements.os_package.choices.freebsd.text": {
+    "message": "FreeBSD",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.os-package-manager-page.elements.os_package.choices.nixos.text": {
+    "message": "nixos",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.arch-result.title": {
+    "message": "Paquet Arch Linux",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.arch-result.elements.arch_guide.html": {
+    "message": "<h3>Paquet Arch Linux</h3><p><a href='https://aur.archlinux.org/packages/owncast/' target='_blank' rel='noopener'>Installer Owncast depuis AUR</a></p><p>Vous pouvez installer Owncast en utilisant votre helper AUR préféré.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.freebsd-result.title": {
+    "message": "Paquet FreeBSD",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.freebsd-result.elements.freebsd_guide.html": {
+    "message": "<h3>Paquet FreeBSD</h3><p><a href='https://www.freshports.org/www/owncast/' target='_blank' rel='noopener'>Installer Owncast sur FreeBSD</a></p><p>Installez Owncast en utilisant le système de ports FreeBSD.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.nixos-result.title": {
+    "message": "Paquet NixOS",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.nixos-result.elements.nixos_guide.html": {
+    "message": "<h3>Paquet NixOS</h3><p><a href='https://search.nixos.org/packages?channel=unstable&show=owncast&from=0&size=50&sort=relevance&type=packages&query=owncast' target='_blank' rel='noopener'>Installer Owncast sur NixOS</a></p><p>Installez Owncast en utilisant le gestionnaire de paquets Nix.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.hostingprovider-install-method-page.title": {
+    "message": "Quel fournisseur d'hébergement souhaitez-vous utiliser pour installer Owncast pour vous ?",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.hostingprovider-install-method-page.description": {
+    "message": "Owncast est pris en charge par les fournisseurs d'hébergement suivants et ils peuvent installer Owncast pour vous.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.hostingprovider-install-method-page.elements.hosting.html": {
+    "message": "<h3>Guide d'installation des fournisseurs d'hébergement</h3><p><a href='//docs/getting-started/install/providers' target='_blank' rel='noopener'>Installer Owncast sur un fournisseur d'hébergement</a></p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.linode-result.title": {
+    "message": "Installation Linode",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.linode-result.elements.linode_guide.html": {
+    "message": "<h3>Guide d'installation de Linode</h3><p><a href='/quickstart/linode/' target='_blank' rel='noopener'>Installer Owncast sur Linode</a></p><p>Suivez le guide étape par étape pour configurer Owncast sur Linode.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.digitalocean-result.title": {
+    "message": "Installation DigitalOcean",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.digitalocean-result.elements.digitalocean_guide.html": {
+    "message": "<h3>Guide d'installation de DigitalOcean</h3><p><a href='/quickstart/digitalocean/' target='_blank' rel='noopener'>Installer Owncast sur DigitalOcean</a></p><p>Suivez le guide étape par étape pour configurer Owncast sur DigitalOcean.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.vultr-result.title": {
+    "message": "Installation Vultr",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.vultr-result.elements.vultr_guide.html": {
+    "message": "<h3>Vultr Marketplace</h3><p><a href='https://www.vultr.com/marketplace/apps/owncast' target='_blank' rel='noopener'>Installer Owncast depuis Vultr Marketplace</a></p><p>Déployez Owncast en un clic depuis le marché Vultr.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.zeuscloud-result.title": {
+    "message": "Installation Zeus Cloud",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.zeuscloud-result.elements.zeuscloud_guide.html": {
+    "message": "<h3>Zeus Cloud</h3><p><a href='https://www.zeuscloud.co.uk/apps/owncast' target='_blank' rel='noopener'>Installer Owncast sur Zeus Cloud</a></p><p>Déployez Owncast avec l'hébergement géré de Zeus Cloud.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.elestio-result.title": {
+    "message": "Installation Elestio",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.elestio-result.elements.elestio_guide.html": {
+    "message": "<h3>Guide d'installation Elestio</h3><p><a href='/quickstart/elestio/' target='_blank' rel='noopener'>Installer Owncast sur Elestio</a></p><p>Hébergement Owncast entièrement géré avec Elestio.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.hetzner-result.title": {
+    "message": "Installation Hetzner",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.hetzner-result.elements.hetzner_guide.html": {
+    "message": "<h3>Applications Cloud Hetzner</h3><p><a href='https://docs.hetzner.com/cloud/apps/list/owncast/' target='_blank' rel='noopener'>Installer Owncast sur Hetzner</a></p><p>Déployez Owncast en utilisant les applications Cloud Hetzner.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.other-install-page.title": {
+    "message": "Autres matériels et environnements spécifiques",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.other-install-page.description": {
+    "message": "Les méthodes suivantes permettent de configurer Owncast. Celles-ci ne sont pas packagées ou maintenues par le projet Owncast et tout soutien ou préoccupation concernant ces méthodes d'installation alternatives doivent être dirigés vers les mainteneurs des options respectives.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.other-install-page.elements.other_method.title": {
+    "message": "Sélectionnez votre environnement :",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.other-install-page.elements.other_method.choices.yunohost.text": {
+    "message": "J'utilise Yunohost",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.other-install-page.elements.other_method.choices.cloudron.text": {
+    "message": "J'utilise Cloudron",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.other-install-page.elements.other_method.choices.qnap.text": {
+    "message": "Je possède un NAS Qnap",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.yunohost-result.title": {
+    "message": "Installation Yunohost",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.yunohost-result.elements.yunohost_guide.html": {
+    "message": "<h3>Application Yunohost</h3><p><a href='https://dash.yunohost.org/appci/app/owncast' target='_blank' rel='noopener'>Installer Owncast sur Yunohost</a></p><p>Installer Owncast via le catalogue d'applications de Yunohost.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.cloudron-result.title": {
+    "message": "Installation Cloudron",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.cloudron-result.elements.cloudron_guide.html": {
+    "message": "<h3>Application Cloudron</h3><p><a href='https://docs.cloudron.io/apps/owncast/' target='_blank' rel='noopener'>Installer Owncast sur Cloudron</a></p><p>Déployez Owncast via votre plateforme Cloudron.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.qnap-result.title": {
+    "message": "Installation QNAP NAS",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.qnap-result.elements.qnap_guide.html": {
+    "message": "<h3>Paquet QNAP</h3><p><a href='https://qnapclub.eu/en/qpkg/1138' target='_blank' rel='noopener'>Installer Owncast sur QNAP</a></p><p>Installer le paquet Owncast sur votre NAS QNAP.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.installed-what-is-next-page.title": {
+    "message": "Owncast est installé. Que faire ensuite ?",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.installed-what-is-next-page.description": {
+    "message": "Si Owncast est installé et fonctionne mais que vous ne savez pas quoi faire ensuite, vous êtes peut-être prêt à partir ! Mais il y a d'autres choses que vous voudrez peut-être vérifier, comme s'assurer que vous supportez SSL.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.installed-what-is-next-page.elements.next_step.title": {
+    "message": "Que voudriez-vous faire ensuite ?",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.installed-what-is-next-page.elements.next_step.choices.startstreaming.text": {
+    "message": "Je veux apprendre comment commencer à diffuser.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.installed-what-is-next-page.elements.next_step.choices.configure-ssl.text": {
+    "message": "Mon serveur ne prend pas encore en charge SSL (https) et je veux le configurer.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.installed-what-is-next-page.elements.next_step.choices.configure-system-service.text": {
+    "message": "Je veux configurer Owncast pour qu'il démarre automatiquement et s'exécute en arrière-plan en tant que service.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.installed-what-is-next-page.elements.next_step.choices.directory.text": {
+    "message": "Je veux lister mon flux dans le répertoire public afin que d'autres puissent le découvrir.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.installed-what-is-next-page.elements.next_step.choices.configure-video.text": {
+    "message": "Je souhaite en savoir plus sur la configuration de la qualité de ma vidéo.",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.startstreaming-result.title": {
+    "message": "Guide de diffusion",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.startstreaming-result.elements.streaming_guide.html": {
+    "message": "<h3>Guide de diffusion</h3><p><a href='/docs/broadcasting/' target='_blank' rel='noopener'>Apprenez à commencer à diffuser</a></p><p>Ce guide couvre comment configurer votre logiciel de diffusion et commencer à diffuser sur votre serveur Owncast.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.configure-ssl-result.title": {
+    "message": "Configuration SSL",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.configure-ssl-result.elements.ssl_guide.html": {
+    "message": "<h3>Guide de configuration SSL</h3><p><a href='/docs/sslproxies/' target='_blank' rel='noopener'>Configurer SSL et reverse proxies</a></p><p>Apprenez à configurer le cryptage SSL/TLS pour votre serveur Owncast.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.configure-system-service-result.title": {
+    "message": "Configuration du service système",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.configure-system-service-result.elements.service_guide.html": {
+    "message": "<h3>Guide du service système</h3><p><a href='/docs/configuration/systemservice' target='_blank' rel='noopener'>Configurer Owncast en tant que service système</a></p><p>Configurez Owncast pour qu'il démarre automatiquement et s'exécute en arrière-plan.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.directory-result.title": {
+    "message": "Liste des répertoires",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.directory-result.elements.directory_guide.html": {
+    "message": "<h3>Guide de liste des répertoires</h3><p><a href='/docs/directory/' target='_blank' rel='noopener'>Lister votre flux dans le répertoire</a></p><p>Apprenez à rendre votre flux découvrable dans le répertoire public.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.configure-video-result.title": {
+    "message": "Configuration vidéo",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.quickstart.pages.configure-video-result.elements.video_guide.html": {
+    "message": "<h3>Guide de configuration vidéo</h3><p><a href='/docs/video/' target='_blank' rel='noopener'>Configurer la qualité et les paramètres vidéo</a></p><p>Apprenez à optimiser la qualité de votre vidéo et à configurer les paramètres d'encodage.</p>",
+    "description": "Wizard string from src/data/quickstart_tree.json"
+  },
+  "wizard.troubleshooting.title": {
+    "message": "Dépannage Owncast",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.firstpage.title": {
+    "message": "Quel problème essayez-vous de résoudre ?",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.firstpage.description": {
+    "message": "Bien que chaque environnement soit différent, nous espérons que de nombreuses questions et problèmes peuvent être résolus en parcourant les sujets suivants.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.firstpage.elements.issue.title": {
+    "message": "Sélectionnez un :",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.firstpage.elements.issue.choices.streaming.text": {
+    "message": "Mon flux a des problèmes de buffering pour les spectateurs.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.firstpage.elements.issue.choices.dropping-frames.text": {
+    "message": "Je perds des images pendant la diffusion.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.firstpage.elements.issue.choices.misc-video-errors.text": {
+    "message": "Je vois des erreurs liées à la vidéo dans mes journaux.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.firstpage.elements.issue.choices.hardware-usage.text": {
+    "message": "L'utilisation de mon matériel serveur est trop élevée.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.firstpage.elements.issue.choices.chat-offline.text": {
+    "message": "Le chat apparaît hors ligne.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.firstpage.elements.issue.choices.latency.text": {
+    "message": "Je veux réduire la latence en direct de mon flux.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.firstpage.elements.issue.choices.low-quality.text": {
+    "message": "La qualité de sortie de mon flux est basse.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.firstpage.elements.issue.choices.immediate-disconnect.text": {
+    "message": "Mon logiciel de diffusion se déconnecte immédiatement après que j'ai commencé à diffuser.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.firstpage.elements.issue.choices.change-streamkey.text": {
+    "message": "Je veux réinitialiser ma clé de flux ou mon mot de passe admin.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.firstpage.elements.issue.choices.visit-chat.text": {
+    "message": "Je n'ai aucune idée de ce qui se passe. Ne puis-je pas juste parler à quelqu'un ?",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.streaming-page.title": {
+    "message": "Problèmes de buffering",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.streaming-page.elements.streaming_sub.title": {
+    "message": "Le buffering affecte-t-il tout le monde ou seulement certains spectateurs ?",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.streaming-page.elements.streaming_sub.choices.buffering-foreveryone.text": {
+    "message": "Mon flux se bloque pour tout le monde.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.streaming-page.elements.streaming_sub.choices.buffering-forsome.text": {
+    "message": "Mon flux est bon pour certains, mais se bloque pour d'autres.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.buffering-for-some-page.title": {
+    "message": "Certains spectateurs rencontrent des problèmes de buffering",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.buffering-for-some-page.elements.buffering_some_sub.title": {
+    "message": "Quel groupe est impacté ?",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.buffering-for-some-page.elements.buffering_some_sub.choices.buffering-geo.text": {
+    "message": "Spectateurs géographiquement éloignés de mon serveur.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.buffering-for-some-page.elements.buffering_some_sub.choices.buffering-slow-networks.text": {
+    "message": "Spectateurs utilisant des réseaux lents ou mobiles.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.chat-offline-page.title": {
+    "message": "Mon chat est hors ligne.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.chat-offline-page.elements.chat_offline_sub.title": {
+    "message": "Quand le chat est-il hors ligne ?",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.chat-offline-page.elements.chat_offline_sub.choices.chat-offline-while-streaming.text": {
+    "message": "Le chat est hors ligne pendant la diffusion.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.chat-offline-page.elements.chat_offline_sub.choices.chat-offline-not-streaming.text": {
+    "message": "Le chat est hors ligne seulement lorsque je ne diffuse pas.",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.result_stream_all.elements.r1.html": {
+    "message": "<h3>Guide recommandé</h3><p><a href='https://owncast.online/troubleshoot/buffering/all' target='_blank' rel='noopener'>Réparez le buffering pour tous les spectateurs</a></p>",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.result_stream_geo.elements.r2.html": {
+    "message": "<h3>Guide recommandé</h3><p><a href='https://owncast.online/troubleshoot/buffering/geo' target='_blank' rel='noopener'>Réparez le buffering pour les spectateurs géographiquement éloignés</a></p>",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.result_stream_slow.elements.r3.html": {
+    "message": "<h3>Guide recommandé</h3><p><a href='https://owncast.online/troubleshoot/buffering/slow-networks' target='_blank' rel='noopener'>Réparez le buffering sur des réseaux lents/mobiles</a></p>",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.result_latency.elements.r4.html": {
+    "message": "<h3>Guide recommandé</h3><p><a href='https://owncast.online/troubleshoot/latency' target='_blank' rel='noopener'>Réduire la latence en direct</a></p>",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.result_hw_usage.elements.r5.html": {
+    "message": "<h3>Guide recommandé</h3><p><a href='https://owncast.online/troubleshoot/hardware-usage' target='_blank' rel='noopener'>Réduire l'utilisation du matériel serveur</a></p>",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.result_chat_streaming.elements.r6.html": {
+    "message": "<h3>Guide recommandé</h3><p><a href='https://owncast.online/troubleshoot/chat/offline-while-streaming' target='_blank' rel='noopener'>Chat hors ligne pendant la diffusion</a></p>",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.result_chat_not_streaming.elements.r7.html": {
+    "message": "<h3>Guide recommandé</h3><p><a href='https://owncast.online/troubleshoot/chat/offline-while-not-streaming' target='_blank' rel='noopener'>Chat hors ligne quand je ne diffuse pas</a></p>",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.result_immediate_disconnect.elements.r8.html": {
+    "message": "<h3>Guide recommandé</h3><p><a href='https://owncast.online/troubleshoot/stream-disconnect' target='_blank' rel='noopener'>Le diffuseur se déconnecte immédiatement</a></p>",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.result_change_streamkey.elements.r9.html": {
+    "message": "<h3>Guide recommandé</h3><p><a href='https://owncast.online/troubleshoot/change-streamkey' target='_blank' rel='noopener'>Réinitialiser ma clé de flux ou mon mot de passe admin</a></p>",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.result_visit_chat.elements.r10.html": {
+    "message": "<h3>Obtenir de l'aide</h3><p><a href='https://owncast.online/contact' target='_blank' rel='noopener'>Parler à l'équipe Owncast</a></p>",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.result_dropping_frames.elements.r11.html": {
+    "message": "<h3>Guide recommandé</h3><p><a href='https://owncast.online/troubleshoot/dropped-frames' target='_blank' rel='noopener'>Réparer les images perdues</a></p>",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.result_low_quality.elements.r12.html": {
+    "message": "<h3>Guide recommandé</h3><p><a href='https://owncast.online/troubleshoot/low-quality-video' target='_blank' rel='noopener'>Améliorer la qualité de sortie</a></p>",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
+  },
+  "wizard.troubleshooting.pages.result_misc_video_errors.elements.r13.html": {
+    "message": "<h3>Guide recommandé</h3><p><a href='https://owncast.online/troubleshoot/video-errors' target='_blank' rel='noopener'>Réparer les erreurs liées à la vidéo</a></p>",
+    "description": "Wizard string from src/data/troubleshooting_tree.json"
   }
 }

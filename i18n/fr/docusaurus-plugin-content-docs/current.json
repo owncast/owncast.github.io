@@ -66,5 +66,41 @@
   "sidebar.docs.doc.Owncast Documentation": {
     "message": "Documentation de Owncast",
     "description": "The label for the doc item Owncast Documentation in sidebar docs, linking to the doc index"
+  },
+  "sidebar.docs.category.Configure your Owncast server": {
+    "message": "Configure votre serveur Owncast",
+    "description": "The label for category Configure your Owncast server in sidebar docs"
+  },
+  "sidebar.docs.category.Chat": {
+    "message": "Discussion",
+    "description": "The label for category Chat in sidebar docs"
+  },
+  "sidebar.docs.category.Plugins, APIs, webhooks & your custom functionality": {
+    "message": "Plugins, APIs, webhooks et votre fonctionnalité personnalisée",
+    "description": "The label for category Plugins, APIs, webhooks & your custom functionality in sidebar docs"
+  },
+  "sidebar.docs.category.Web APIs": {
+    "message": "APIs Web",
+    "description": "The label for category Web APIs in sidebar docs"
+  },
+  "sidebar.docs.category.Owncast plugins": {
+    "message": "Plugins Owncast",
+    "description": "The label for category Owncast plugins in sidebar docs"
+  },
+  "sidebar.docs.category.plugins-get-started": {
+    "message": "Commencer",
+    "description": "The label for category Get started in sidebar docs"
+  },
+  "sidebar.docs.category.Build features": {
+    "message": "Construire des fonctionnalités",
+    "description": "The label for category Build features in sidebar docs"
+  },
+  "sidebar.docs.category.Reference": {
+    "message": "Référence",
+    "description": "The label for category Reference in sidebar docs"
+  },
+  "sidebar.docs.category.Ship & test": {
+    "message": "Expédier et tester",
+    "description": "The label for category Ship & test in sidebar docs"
   }
 }

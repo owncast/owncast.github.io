@@ -15,8 +15,11 @@ tags:
 
 import ColorThemeBuilder from "@site/src/components/ColorThemeBuilder";
 
-Es wird dringend empfohlen, sich mit <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Basic_selectors" target="_blank" rel="noopener noreferrer">CSS-Selektoren</a> und der <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties" target="_blank" rel="noopener noreferrer">Syntax von CSS-Variablen</a> vertraut zu machen, um das Beste aus der Anpassung Ihrer Owncast-Instanz herauszuholen. Bald können Sie Ihre Owncast-Seite so gestalten, wie Sie möchten.
-Die Verwendung des <a href="#owncast-css-helper">Owncast CSS-Helfers</a> ist eine großartige Möglichkeit, um zu beginnen.
+Sie können die Farben und das Erscheinungsbild Ihrer Owncast-Seite unter **Konfiguration → Allgemein → Erscheinungsbild** im Adminbereich anpassen. Beginnen Sie mit den Farbwahlwerkzeugen, die keinen Code benötigen. Für eine feinere Kontrolle können Sie Ihr eigenes CSS im Editor schreiben, und der <a href="#owncast-css-helper">Owncast CSS-Helfer</a> unten generiert einen Ausgangspunkt, den Sie einfügen können.
+
+Wenn Sie mit benutzerdefiniertem CSS weitergehen möchten, hilft es, sich mit <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Basic_selectors" target="_blank" rel="noopener noreferrer">CSS-Selektoren</a> und der <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties" target="_blank" rel="noopener noreferrer">CSS-Variablen-Syntax</a> wohlzufühlen, aber Sie benötigen beides nicht, um zu beginnen.
+
+<img src="/docs/img/admin-appearance.png" alt="Die Einstellungsseite für das Erscheinungsbild im Adminbereich, die die Farbauswähler für die Abschnitte und den benutzerdefinierten CSS-Editor zeigt" width="75%" />
 
 ## CSS-Selektoren
 
@@ -40,7 +43,7 @@ Die Verwendung des <a href="#owncast-css-helper">Owncast CSS-Helfers</a> ist ein
 ## CSS-Variablen
 
 Sie können die den CSS-Variablen zugewiesenen Werte manuell überschreiben, indem Sie sie im CSS-Editor im Admin-Bereich festlegen.
-Sie finden eine Liste von [Variablennamen](https://owncast.online/components/?path=/docs/owncast-styles-colors-palette--docs), die Sie überschreiben können.
+Sie finden eine Liste von [Variablen Namen](https://ui.owncast.online/?path=/docs/owncast-styles-colors-palette--docs), die Sie überschreiben können.
 
 Wenn Sie beispielsweise alle Aktionspunkte (Links, Schaltflächen) rot, die Schaltflächenränder grün und die Schriftart des Inhalts auf eine `serif`-Schriftart ändern möchten, können Sie die folgenden CSS-Variablen wie folgt festlegen:
 
@@ -57,10 +60,26 @@ Wenn Sie beispielsweise alle Aktionspunkte (Links, Schaltflächen) rot, die Scha
 Während Sie mit CSS jedes Element auf der Seite ansprechen können, Wenn es bestimmte Elemente gibt, bei denen Sie Schwierigkeiten haben, diese anzupassen, bitte eröffnen Sie ein Ticket im <a href="https://github.com/owncast/owncast/issues" target="_blank" rel="noopener noreferrer">Owncast GitHub-Repository</a>, damit wir in Betracht ziehen können, zusätzliche Selektoren oder CSS-Variablen hinzuzufügen, um die Anpassung zu erleichtern.
 Wir werden wahrscheinlich auch im Laufe der Zeit weitere Anpassungsoptionen direkt auf der Erscheinungsseite von Owncast für häufige Anwendungsfälle hinzufügen. Wenn Sie etwas Bestimmtes anpassen möchten, sind Beiträge willkommen!
 
+## Erscheinungsbild und Themen-Plugins
+
+Plugins können auch die Viewer-Seite gestalten. Ein Themen-Plugin ist die unterstützte Möglichkeit, ein verpacktes Aussehen zu installieren und zu teilen. Ihre Einstellungen auf dieser Seite und die Styles eines Plugins kombiniert in das Endergebnis.
+
+Ihre Entscheidungen gewinnen. Die Farben, die Sie hier auswählen, und das CSS, das Sie im Editor schreiben, werden über die Styles von Plugins angewendet, sodass, wo beide die gleiche Farbe berühren, Ihre wirksam wird. Ein Themen-Plugin fungiert als Basis: Es ändert die Farben, die Sie nicht selbst festgelegt haben, und jede Farbe, die Sie ausdrücklich festlegen, hebt es auf.
+
+Wenn ein Plugin Ihre Seite gestaltet, sagt Ihnen diese Seite:
+
+* Eine Anzeige oben nennt das Plugin oder die Plugins, die derzeit Styles anwenden.
+* Jede Farbe, die auch von einem Plugin festgelegt wird, ist mit einer `auch gesetzt von <plugin>`-Notiz neben ihrem Farbwahlfeld gekennzeichnet.
+
+Zwei Hebel steuern das Ergebnis:
+
+* Um ein Themen-Plugin das vollständige Aussehen steuern zu lassen, löschen Sie Ihre eigenen Farben mit **Auf Standard zurücksetzen**. Wenn hier nichts festgelegt ist, zeigt das Thema des Plugins vollständig durch.
+* Um die Gestaltung eines Plugins vollständig zu stoppen, deaktivieren Sie es auf der **Plugins**-Seite im Admin.
+
 ## Owncast CSS-Helper
 
 Um Ihnen bei der Anpassung Ihrer Owncast-Farben über CSS-Variablen und der Anpassung bestimmter Elemente zu helfen, verwenden Sie den CSS-Helfer unten. Dies soll Ihnen einen ersten Eindruck beim Schreiben Ihres eigenen CSS geben, keine vollständige Lösung.
-Wählen Sie Farben mit den Farbauswahlen, bearbeiten Sie das CSS nach Bedarf direkt und fügen Sie das Ergebnis dann in Ihren Owncast-Adminbereich unter <em>Allgemeine Einstellungen → Erscheinungsbild.</em> ein.
+Wählen Sie Farben mit den Farbwahlwerkzeugen aus, bearbeiten Sie das CSS nach Bedarf direkt, und kopieren Sie dann das Ergebnis in Ihren Owncast-Adminbereich unter <em>Konfiguration → Allgemein → Erscheinungsbild.</em>
 
 :::tip
 Sie können Ihr benutzerdefiniertes CSS kopieren und einfügen und es anderen Owncast-Nutzern als Themen zur Verfügung stellen!

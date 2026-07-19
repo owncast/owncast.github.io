@@ -62,5 +62,9 @@
   "link.item.label.Additional Resources": {
     "message": "Additional Resources",
     "description": "The label of footer link with label=Additional Resources linking to /resources"
+  },
+  "link.item.label.Security": {
+    "message": "Security",
+    "description": "The label of footer link with label=Security linking to /security"
   }
 }

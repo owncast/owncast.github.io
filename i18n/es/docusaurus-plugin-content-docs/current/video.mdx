@@ -67,6 +67,20 @@ Cuanto más CPU uses, mejor será la imagen de salida, o más pequeño será el 
 
 Tienes cierto control sobre la latencia en vivo entre el emisor y el espectador. Aunque es completamente comprensible querer tener la menor latencia posible, puedes necesitar aumentar el búfer de latencia si estás experimentando problemas. En general, cuanto menor sea la latencia, menos búfer estará disponible para cualquier posible transferencia lenta, problemas de red o errores.
 
+### Reproducción automática
+
+Por defecto, los espectadores presionan reproducir para comenzar a ver. Si prefieres que la transmisión comience por sí sola cuando alguien abra tu página, cambia la configuración de **Reproducción automática** en la misma página de configuración del video. No tiene impacto en el rendimiento y se aplica a tu página de Owncast y a [reproductores incrustados](/docs/embed#autoplay).
+
+<img src="/docs/img/admin-autoplay.png" alt="La configuración de Reproducción automática en la página de configuración del video en el administrador, mostrando el menú desplegable de comportamiento" width="65%" />
+
+* **Nunca**: el reproductor espera a que el espectador presione reproducir. Este es el valor por defecto.
+* **Siempre**: la transmisión comienza en el momento en que se abre la página. Se reproduce con sonido donde el navegador lo permite y comienza en silencio en otros lugares. Mientras la transmisión se reproduce en modo silencioso, el reproductor muestra un gran botón de activar sonido sobre el video, por lo que activar el sonido es un solo clic.
+* **Solo si hay sonido disponible**: la transmisión comienza por sí sola solo cuando el navegador del espectador permite que el sonido se reproduzca también. Nunca comienza en silencio. Si el navegador bloquea el sonido, el espectador presiona reproducir como de costumbre.
+
+Cada navegador importante restringe la reproducción automática con sonido, basándose en sus propias reglas, en su configuración y, a menudo, en el historial del espectador con tu sitio. En la práctica, **Siempre** generalmente comienza en silencio para los visitantes primerizos, y **Solo si hay sonido disponible** generalmente no se reproduce automáticamente para ellos.
+
+El reproductor también nunca reproduce automáticamente, independientemente de esta configuración, para los espectadores que tienen habilitado el ahorro de datos o cuyo sistema solicita movimiento reducido (la preferencia de accesibilidad `prefers-reduced-motion`).
+
 ### Transmisión de video
 
 <IncludeMarkdown>
