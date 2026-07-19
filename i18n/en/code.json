@@ -960,6 +960,72 @@
     "message": "Learn more",
     "description": "Link text in the plugins announcement bar"
   },
+  "fediverseMockup.neonArcadePost": {
+    "message": "Getting ready for tonight's stream! Something special planned 🎮"
+  },
+  "fediverseMockup.openDiscoursePost": {
+    "message": "Join us for today's discussion! We're talking about creative hobbies and how they help with work-life balance."
+  },
+  "fediverseMockup.basementBeatsPost": {
+    "message": "Friday night vibes incoming! Spinning some deep cuts tonight 🎧"
+  },
+  "fediverseMockup.pixelDreamsPost": {
+    "message": "Cozy afternoon drawing session! Working on some character designs today 🎨\n\nCome hang out and chat while I sketch!"
+  },
+  "fediverseMockup.neonPixelArcadePost": {
+    "message": "Classic console night! Playing through some favorites from the 90s 🕹️"
+  },
+  "fediverseMockup.terminalSessionsPost": {
+    "message": "Building something fun today! Learning a new framework and sharing the journey."
+  },
+  "fediverseMockup.moonlightSessionsPost": {
+    "message": "Late night improv session! Some friends stopped by to jam 🎷"
+  },
+  "fediverseMockup.firesideTalesPost": {
+    "message": "Campaign night continues! The party is in deep trouble this week... 🐉"
+  },
+  "fediverseMockup.homeKitchenPost": {
+    "message": "Sunday cooking! Making comfort food from scratch today 🍝"
+  },
+  "fediverseMockup.skywardTonightPost": {
+    "message": "Perfect night for stargazing! Setting up the telescope for some planetary viewing 🔭"
+  },
+  "fediverseMockup.boostedBy": {
+    "message": "{name} boosted"
+  },
+  "chatMockup.welcomeMessage": {
+    "message": "Welcome to the stream! Please be respectful and have fun."
+  },
+  "chatMockup.message1": {
+    "message": "This playlist is amazing!"
+  },
+  "chatMockup.message2": {
+    "message": "Hey everyone, glad to be here"
+  },
+  "chatMockup.message3": {
+    "message": "Can you play some lo-fi next?"
+  },
+  "chatMockup.followedThisStream": {
+    "message": "followed this stream"
+  },
+  "chatMockup.message4": {
+    "message": "The sound quality is incredible"
+  },
+  "chatMockup.message5": {
+    "message": "First time here, love the vibes!"
+  },
+  "chatMockup.message6": {
+    "message": "@CosmicDreamer welcome!"
+  },
+  "chatMockup.message7": {
+    "message": "What software are you using for the stream?"
+  },
+  "chatMockup.joinedTheChat": {
+    "message": "joined the chat"
+  },
+  "chatMockup.inputPlaceholder": {
+    "message": "Send a message to chat"
+  },
   "wizard.quickstart.title": {
     "message": "Owncast Quickstart Wizard",
     "description": "Wizard string from src/data/quickstart_tree.json"

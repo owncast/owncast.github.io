@@ -58,8 +58,14 @@ export default function Wizard({ tree, name }: WizardProps): JSX.Element {
     m.locale = i18n.currentLocale;
     m.showProgressBar = "off";
     m.onCurrentPageChanged.add((sender, options) => {
-      if (options.newCurrentPage?.redirect) {
-        window.location.replace(options.newCurrentPage?.redirect);
+      const redirect = options.newCurrentPage?.redirect;
+      if (redirect) {
+        // Tree redirects are default-locale paths; keep the reader's language
+        const localized =
+          i18n.currentLocale === i18n.defaultLocale || !redirect.startsWith("/")
+            ? redirect
+            : `/${i18n.currentLocale}${redirect}`;
+        window.location.replace(localized);
       }
     });
     return m;

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import Translate, { translate } from "@docusaurus/Translate";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import clsx from "clsx";
 import styles from "./FediverseTimelineMockup.module.css";
@@ -71,7 +72,10 @@ const POSTS: Post[] = [
     displayName: "Neon Arcade Live",
     username: "@neonarcade@streamhub.space",
     time: "3h",
-    text: "Getting ready for tonight's stream! Something special planned 🎮",
+    text: translate({
+      id: "fediverseMockup.neonArcadePost",
+      message: "Getting ready for tonight's stream! Something special planned 🎮",
+    }),
     tags: ["#gaming", "#streaming"],
     link: "https://neon.arcade.live",
     imageSrc: "/images/screenshots/stream-neon-arcade.webp",
@@ -84,7 +88,11 @@ const POSTS: Post[] = [
     displayName: "Open Discourse",
     username: "@opendiscourse@fediverse.town",
     time: "4h",
-    text: "Join us for today's discussion! We're talking about creative hobbies and how they help with work-life balance.",
+    text: translate({
+      id: "fediverseMockup.openDiscoursePost",
+      message:
+        "Join us for today's discussion! We're talking about creative hobbies and how they help with work-life balance.",
+    }),
     tags: ["#discussion", "#community", "#hobbies"],
     link: "https://open.discourse.chat",
     imageSrc: "/images/screenshots/stream-open-disclosure.webp",
@@ -98,7 +106,10 @@ const POSTS: Post[] = [
     displayName: "Basement Beats",
     username: "@basementbeats@soundwave.club",
     time: "4h",
-    text: "Friday night vibes incoming! Spinning some deep cuts tonight 🎧",
+    text: translate({
+      id: "fediverseMockup.basementBeatsPost",
+      message: "Friday night vibes incoming! Spinning some deep cuts tonight 🎧",
+    }),
     tags: ["#music", "#dj", "#electronic", "#house"],
     link: "https://basement.beats.fm",
     imageSrc: "/images/screenshots/stream-basement-beats.webp",
@@ -112,7 +123,11 @@ const POSTS: Post[] = [
     displayName: "Pixel Dreams Studio",
     username: "@pixeldreams@artcollective.io",
     time: "5h",
-    text: "Cozy afternoon drawing session! Working on some character designs today 🎨\n\nCome hang out and chat while I sketch!",
+    text: translate({
+      id: "fediverseMockup.pixelDreamsPost",
+      message:
+        "Cozy afternoon drawing session! Working on some character designs today 🎨\n\nCome hang out and chat while I sketch!",
+    }),
     tags: ["#art", "#digitalart", "#illustration"],
     link: "https://pixel.dreams.art",
     imageSrc: "/images/screenshots/stream-live-drawing-illustrating.webp",
@@ -127,7 +142,10 @@ const POSTS: Post[] = [
     displayName: "Neon Pixel Arcade",
     username: "@neonpixelarcade@retro.zone",
     time: "6h",
-    text: "Classic console night! Playing through some favorites from the 90s 🕹️",
+    text: translate({
+      id: "fediverseMockup.neonPixelArcadePost",
+      message: "Classic console night! Playing through some favorites from the 90s 🕹️",
+    }),
     tags: ["#retrogaming", "#nostalgia", "#gaming"],
     link: "https://neon.pixelarcade.tv",
     imageSrc: "/images/screenshots/stream-arcade-8bit-gaming.webp",
@@ -143,7 +161,10 @@ const POSTS: Post[] = [
     displayName: "Terminal Sessions",
     username: "@terminalsessions@devtalk.net",
     time: "7h",
-    text: "Building something fun today! Learning a new framework and sharing the journey.",
+    text: translate({
+      id: "fediverseMockup.terminalSessionsPost",
+      message: "Building something fun today! Learning a new framework and sharing the journey.",
+    }),
     tags: ["#programming", "#coding", "#webdev"],
     link: "https://terminal.sessions.dev",
     imageSrc: "/images/screenshots/stream-terminal-sessions.webp",
@@ -158,7 +179,10 @@ const POSTS: Post[] = [
     displayName: "Moonlight Sessions",
     username: "@moonlightsessions@jazzcat.fm",
     time: "8h",
-    text: "Late night improv session! Some friends stopped by to jam 🎷",
+    text: translate({
+      id: "fediverseMockup.moonlightSessionsPost",
+      message: "Late night improv session! Some friends stopped by to jam 🎷",
+    }),
     tags: ["#jazz", "#livemusic", "#improv"],
     link: "https://moonlight.sessions.fm",
     imageSrc: "/images/screenshots/stream-midnight-sessions.webp",
@@ -173,7 +197,10 @@ const POSTS: Post[] = [
     displayName: "Fireside Tales",
     username: "@firesidetales@tabletop.quest",
     time: "9h",
-    text: "Campaign night continues! The party is in deep trouble this week... 🐉",
+    text: translate({
+      id: "fediverseMockup.firesideTalesPost",
+      message: "Campaign night continues! The party is in deep trouble this week... 🐉",
+    }),
     tags: ["#ttrpg", "#tabletop", "#roleplaying"],
     link: "https://fireside.tales.game",
     imageSrc: "/images/screenshots/stream-dnd-campaign.webp",
@@ -188,7 +215,10 @@ const POSTS: Post[] = [
     displayName: "Home Kitchen Live",
     username: "@homekitchen@foodie.social",
     time: "10h",
-    text: "Sunday cooking! Making comfort food from scratch today 🍝",
+    text: translate({
+      id: "fediverseMockup.homeKitchenPost",
+      message: "Sunday cooking! Making comfort food from scratch today 🍝",
+    }),
     tags: ["#cooking", "#homemade", "#foodie"],
     link: "https://home.kitchen.live",
     imageSrc: "/images/screenshots/stream-home-kitchen-live.webp",
@@ -204,7 +234,11 @@ const POSTS: Post[] = [
     displayName: "Skyward Tonight",
     username: "@skywardtonight@stargazer.club",
     time: "11h",
-    text: "Perfect night for stargazing! Setting up the telescope for some planetary viewing 🔭",
+    text: translate({
+      id: "fediverseMockup.skywardTonightPost",
+      message:
+        "Perfect night for stargazing! Setting up the telescope for some planetary viewing 🔭",
+    }),
     tags: ["#astronomy", "#stargazing", "#science"],
     link: "https://skyward.tonight.live",
     imageSrc: "/images/screenshots/stream-stargazing-live.webp",
@@ -245,7 +279,9 @@ function PostCard({ post }: { post: Post }) {
       {post.boostedBy && (
         <div className={styles.boostHeader}>
           {ICON_BOOST}
-          {post.boostedBy} boosted
+          <Translate id="fediverseMockup.boostedBy" values={{ name: post.boostedBy }}>
+            {"{name} boosted"}
+          </Translate>
         </div>
       )}
       <div className={styles.postHeader}>

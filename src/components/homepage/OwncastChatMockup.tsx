@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, type CSSProperties } from "react";
 import useBaseUrl from "@docusaurus/useBaseUrl";
+import Translate, { translate } from "@docusaurus/Translate";
 import clsx from "clsx";
 import styles from "./OwncastChatMockup.module.css";
 
@@ -70,7 +71,10 @@ const MESSAGES: Message[] = [
   {
     id: "welcome",
     type: "system",
-    text: "Welcome to the stream! Please be respectful and have fun.",
+    text: translate({
+      id: "chatMockup.welcomeMessage",
+      message: "Welcome to the stream! Please be respectful and have fun.",
+    }),
   },
   { id: "join-1", type: "join", username: "MusicLover42" },
   {
@@ -78,27 +82,39 @@ const MESSAGES: Message[] = [
     type: "user",
     username: "SynthWave_Fan",
     color: "green",
-    text: "This playlist is amazing!",
+    text: translate({
+      id: "chatMockup.message1",
+      message: "This playlist is amazing!",
+    }),
   },
   {
     id: "msg-2",
     type: "user",
     username: "NightOwl",
     color: "purple",
-    text: "Hey everyone, glad to be here",
+    text: translate({
+      id: "chatMockup.message2",
+      message: "Hey everyone, glad to be here",
+    }),
   },
   {
     id: "msg-3",
     type: "user",
     username: "ChillBeats",
     color: "blue",
-    text: "Can you play some lo-fi next?",
+    text: translate({
+      id: "chatMockup.message3",
+      message: "Can you play some lo-fi next?",
+    }),
   },
   {
     id: "fed-1",
     type: "fediverse",
     handle: "alex_creates@nightwire.fediverse",
-    action: "followed this stream",
+    action: translate({
+      id: "chatMockup.followedThisStream",
+      message: "followed this stream",
+    }),
     eventKind: "follow",
   },
   {
@@ -106,28 +122,40 @@ const MESSAGES: Message[] = [
     type: "user",
     username: "RetroGamer",
     color: "orange",
-    text: "The sound quality is incredible",
+    text: translate({
+      id: "chatMockup.message4",
+      message: "The sound quality is incredible",
+    }),
   },
   {
     id: "msg-5",
     type: "user",
     username: "CosmicDreamer",
     color: "pink",
-    text: "First time here, love the vibes!",
+    text: translate({
+      id: "chatMockup.message5",
+      message: "First time here, love the vibes!",
+    }),
   },
   {
     id: "msg-6",
     type: "user",
     username: "SynthWave_Fan",
     color: "green",
-    text: "@CosmicDreamer welcome!",
+    text: translate({
+      id: "chatMockup.message6",
+      message: "@CosmicDreamer welcome!",
+    }),
   },
   {
     id: "msg-7",
     type: "user",
     username: "ChillBeats",
     color: "blue",
-    text: "What software are you using for the stream?",
+    text: translate({
+      id: "chatMockup.message7",
+      message: "What software are you using for the stream?",
+    }),
   },
 ];
 
@@ -148,8 +176,8 @@ function MessageItem({ message }: { message: Message }) {
         <div className={styles.joinMessage}>
           <span className={styles.joinIcon}>{ICON_JOIN}</span>
           <span>
-            <span className={styles.joinName}>{message.username}</span> joined
-            the chat
+            <span className={styles.joinName}>{message.username}</span>{" "}
+            <Translate id="chatMockup.joinedTheChat">joined the chat</Translate>
           </span>
         </div>
       );
@@ -241,7 +269,9 @@ export function OwncastChatMockup({
       <div className={styles.inputContainer}>
         <div className={styles.input}>
           <span className={styles.inputPlaceholder}>
-            Send a message to chat
+            <Translate id="chatMockup.inputPlaceholder">
+              Send a message to chat
+            </Translate>
           </span>
           <div className={styles.inputIcons}>
             {ICON_EMOJI}
