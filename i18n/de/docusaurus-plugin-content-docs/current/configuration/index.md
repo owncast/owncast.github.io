@@ -1,8 +1,7 @@
 ---
 title: Konfiguration
-slug: /konfiguration
-description: >-
-  Die Konfiguration erfolgt in der Regel über die Owncast-Administrationsseite auf Ihrem Server unter `/admin`, es gibt jedoch eine Reihe von Laufzeitflags, die Sie beim Starten von Owncast setzen können, um sein Verhalten zu ändern.
+slug: /configuration
+description: Die Konfiguration erfolgt in der Regel über die Owncast-Administrationsseite auf Ihrem Server unter `/admin`, es gibt jedoch eine Reihe von Laufzeitflags, die Sie beim Starten von Owncast setzen können, um sein Verhalten zu ändern.
 sidebar_position: 1
 sidebar_label: Konfiguration
 tags:

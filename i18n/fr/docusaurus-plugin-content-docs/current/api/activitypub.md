@@ -1,7 +1,6 @@
 ---
 title: ActivityPub & Le protocole Fediverse
-description: >-
-  Une référence au niveau du protocole pour les activités ActivityPub qu'Owncast envoie et reçoit, afin que vous puissiez construire une application Fediverse qui interopère avec les serveurs Owncast.
+description: Une référence au niveau du protocole pour les activités ActivityPub qu'Owncast envoie et reçoit, afin que vous puissiez construire une application Fediverse qui interopère avec les serveurs Owncast.
 sidebar_position: 50
 sidebar_label: protocole ActivityPub
 toc_min_heading_level: 2

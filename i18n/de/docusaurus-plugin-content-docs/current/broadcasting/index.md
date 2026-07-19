@@ -1,8 +1,7 @@
 ---
 title: Broadcast-Software einrichten
 slug: /broadcasting
-description: >-
-  Wie Sie Ihre Broadcast-Software konfigurieren, kann die Qualität und Leistung Ihres Streams beeinflussen
+description: Wie Sie Ihre Broadcast-Software konfigurieren, kann die Qualität und Leistung Ihres Streams beeinflussen
 sidebar_position: 1
 sidebar_label: Überblick über Broadcast-Software
 tags:

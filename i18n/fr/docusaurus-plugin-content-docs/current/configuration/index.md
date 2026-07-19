@@ -1,8 +1,7 @@
 ---
 title: Configuration
 slug: /configuration
-description: >-
-  La configuration se fait généralement via la page d'administration d'Owncast située sur votre serveur sous `/admin`, cependant, il existe un certain nombre de drapeaux d'exécution que vous pouvez définir lors du démarrage d'Owncast pour modifier son comportement.
+description: La configuration se fait généralement via la page d'administration d'Owncast située sur votre serveur sous `/admin`, cependant, il existe un certain nombre de drapeaux d'exécution que vous pouvez définir lors du démarrage d'Owncast pour modifier son comportement.
 sidebar_position: 1
 sidebar_label: Configuration
 tags:

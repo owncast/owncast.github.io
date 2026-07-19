@@ -1,8 +1,7 @@
 ---
 title: Configuración
-slug: /configuración
-description: >-
-  La configuración generalmente se realiza a través de la página de administración de Owncast ubicada en su servidor bajo `/admin`, sin embargo, hay varios flags de ejecución que puede establecer al iniciar Owncast para modificar su comportamiento.
+slug: /configuration
+description: La configuración generalmente se realiza a través de la página de administración de Owncast ubicada en su servidor bajo `/admin`, sin embargo, hay varios flags de ejecución que puede establecer al iniciar Owncast para modificar su comportamiento.
 sidebar_position: 1
 sidebar_label: Configuración
 tags:

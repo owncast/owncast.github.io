@@ -18,7 +18,7 @@
     "typecheck": "tsc",
     "generate-contributors": "node scripts/generate-contributors.js",
     "crowdin": "crowdin",
-    "crowdin:sync": "npm run write-translations && crowdin download",
+    "crowdin:sync": "npm run write-translations && crowdin download && node scripts/fix-translated-frontmatter.js",
     "crowdin:upload-existing": "npm run write-translations && node scripts/crowdin-upload-existing.js"
   },
   "dependencies": {
@@ -74,6 +74,7 @@
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.26",
     "gray-matter": "^4.0.3",
+    "js-yaml": "^5.2.1",
     "lighthouse": "^13.0.3",
     "lucide-react": "^0.561.0",
     "postcss": "^8.5.6",

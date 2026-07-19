@@ -1,7 +1,6 @@
 ---
 title: Owncast als Hintergrunddienst ausführen
-description: >-
-  Richten Sie Owncast ein, damit es als Systemdienst läuft und beim Start Ihres Servers automatisch gestartet wird.
+description: Richten Sie Owncast ein, damit es als Systemdienst läuft und beim Start Ihres Servers automatisch gestartet wird.
 sidebar_position: 200
 sidebar_label: Owncast als Hintergrunddienst ausführen
 ---

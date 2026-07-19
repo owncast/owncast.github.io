@@ -1,6 +1,6 @@
 ---
 title: Le chat est hors ligne lorsque le streaming n'est pas actif
-description: "Le chat est uniquement activé lorsqu'un stream est actif"
+description: Le chat est uniquement activé lorsqu'un stream est actif
 unlisted: true
 related:
   excludeFromAll: true

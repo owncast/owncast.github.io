@@ -1,7 +1,7 @@
 ---
-id: regarder-des-flux
+id: watching-streams
 title: Regarder sur les téléviseurs et les appareils
-slug: /regarder-des-flux
+slug: /watching-streams
 sidebar_label: Aperçu & Méthodes Génériques
 hide_title: true
 sidebar_position: 1

@@ -1,8 +1,7 @@
 ---
 title: Configurer le logiciel de diffusion
-slug: /diffusion
-description: >-
-  La façon dont vous configurez votre logiciel de diffusion peut affecter la qualité et la performance de votre flux
+slug: /broadcasting
+description: La façon dont vous configurez votre logiciel de diffusion peut affecter la qualité et la performance de votre flux
 sidebar_position: 1
 sidebar_label: Aperçu du logiciel de diffusion
 tags:

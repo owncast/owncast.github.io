@@ -1,7 +1,6 @@
 ---
 title: ActivityPub & Das Fediverse-Protokoll
-description: >-
-  Eine Protokollreferenz für die Aktivitäten von ActivityPub, die Owncast sendet und empfängt, damit Sie eine Fediverse-Anwendung entwickeln können, die mit Owncast-Servern interoperabel ist.
+description: Eine Protokollreferenz für die Aktivitäten von ActivityPub, die Owncast sendet und empfängt, damit Sie eine Fediverse-Anwendung entwickeln können, die mit Owncast-Servern interoperabel ist.
 sidebar_position: 50
 sidebar_label: ActivityPub-Protokoll
 toc_min_heading_level: 2

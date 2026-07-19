@@ -11,6 +11,9 @@ files:
       - /docs/**/*.svg
       - /docs/images/**
     translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%
+    # NOTE: machine-readable front matter (id, slug, deviceType, ...) gets
+    # mangled by machine translation; scripts/fix-translated-frontmatter.js
+    # restores it from the English source after every crowdin download.
     # update_option: update_as_unapproved
     # i18n/%locale%/docusaurus-plugin-content-docs/current
   # # Blog Markdown files

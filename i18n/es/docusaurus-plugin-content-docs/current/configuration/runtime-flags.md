@@ -1,7 +1,6 @@
 ---
 title: Configuración a través de banderas de ejecución
-description: >-
-  La configuración generalmente se realiza a través de la página de administración de Owncast ubicada en su servidor bajo `/admin`, sin embargo, hay varias banderas de ejecución que puede establecer al iniciar Owncast para modificar su comportamiento.
+description: La configuración generalmente se realiza a través de la página de administración de Owncast ubicada en su servidor bajo `/admin`, sin embargo, hay varias banderas de ejecución que puede establecer al iniciar Owncast para modificar su comportamiento.
 sidebar_position: 100
 sidebar_label: Configuración a través de banderas de ejecución
 ---

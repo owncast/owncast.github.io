@@ -1,7 +1,6 @@
 ---
 title: Exécuter Owncast en tant que service d'arrière-plan
-description: >-
-  Configurez Owncast pour qu'il s'exécute en tant que service système, démarrant automatiquement lorsque votre serveur démarre.
+description: Configurez Owncast pour qu'il s'exécute en tant que service système, démarrant automatiquement lorsque votre serveur démarre.
 sidebar_position: 200
 sidebar_label: Exécuter Owncast en tant que service d'arrière-plan
 ---

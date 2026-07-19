@@ -1,7 +1,7 @@
 ---
-id: mirando-flujos
+id: watching-streams
 title: Mirando en televisores y dispositivos
-slug: /mirando-flujos
+slug: /watching-streams
 sidebar_label: Resumen y Métodos Genéricos
 hide_title: true
 sidebar_position: 1

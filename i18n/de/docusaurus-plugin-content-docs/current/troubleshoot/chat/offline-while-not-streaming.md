@@ -1,6 +1,6 @@
 ---
 title: Der Chat ist offline, während nicht gestreamt wird
-description: "Der Chat ist nur aktiviert, wenn ein Stream aktiv ist"
+description: Der Chat ist nur aktiviert, wenn ein Stream aktiv ist
 unlisted: true
 related:
   excludeFromAll: true

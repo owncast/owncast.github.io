@@ -1,7 +1,7 @@
 ---
-id: streams anschauen
+id: watching-streams
 title: Auf TVs und Geräten anschauen
-slug: /streams-anschauen
+slug: /watching-streams
 sidebar_label: Überblick & allgemeine Methoden
 hide_title: true
 sidebar_position: 1

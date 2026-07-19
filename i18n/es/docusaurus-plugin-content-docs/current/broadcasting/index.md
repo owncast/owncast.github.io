@@ -1,8 +1,7 @@
 ---
 title: Configurar software de emisión
-slug: /emisión
-description: >-
-  Cómo configurar tu software de emisión puede afectar la calidad y rendimiento de tu transmisión
+slug: /broadcasting
+description: Cómo configurar tu software de emisión puede afectar la calidad y rendimiento de tu transmisión
 sidebar_position: 1
 sidebar_label: Visión general del software de emisión
 tags:

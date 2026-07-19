@@ -1,7 +1,6 @@
 ---
 title: Konfiguration über Runtime-Flags
-description: >-
-  Die Konfiguration erfolgt in der Regel über die Owncast-Verwaltungsseite, die sich auf Ihrem Server unter `/admin` befindet. Es gibt jedoch eine Reihe von Runtime-Flags, die Sie beim Starten von Owncast festlegen können, um sein Verhalten zu ändern.
+description: Die Konfiguration erfolgt in der Regel über die Owncast-Verwaltungsseite, die sich auf Ihrem Server unter `/admin` befindet. Es gibt jedoch eine Reihe von Runtime-Flags, die Sie beim Starten von Owncast festlegen können, um sein Verhalten zu ändern.
 sidebar_position: 100
 sidebar_label: Konfiguration über Runtime-Flags
 ---

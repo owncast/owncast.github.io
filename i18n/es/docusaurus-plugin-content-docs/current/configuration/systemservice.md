@@ -1,7 +1,6 @@
 ---
 title: Ejecutar Owncast como un servicio en segundo plano
-description: >-
-  Configura Owncast para que se ejecute como un servicio del sistema, comenzando automáticamente cuando tu servidor lo hace.
+description: Configura Owncast para que se ejecute como un servicio del sistema, comenzando automáticamente cuando tu servidor lo hace.
 sidebar_position: 200
 sidebar_label: Ejecutar Owncast como un servicio en segundo plano
 ---

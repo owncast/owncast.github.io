@@ -1,6 +1,6 @@
 ---
 title: El chat está desconectado mientras no se transmite
-description: "El chat solo está habilitado cuando una transmisión está activa"
+description: El chat solo está habilitado cuando una transmisión está activa
 unlisted: true
 related:
   excludeFromAll: true
