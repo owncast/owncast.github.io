@@ -93,8 +93,19 @@ jobs:
           sudo swapon /mnt/swapfile
           free -h
 
+      # Build each locale in its own process. A single docusaurus build of all
+      # 26 locales accumulates memory until the hosted runner dies.
       - name: Build
-        run: npm run build
+        run: |
+          npm run prebuild
+          locales=$(node -e "const m=require('fs').readFileSync('docusaurus.config.ts','utf8').match(/locales:\s*\[([^\]]*)\]/)[1];console.log([...m.matchAll(/'([^']+)'/g)].map(x=>x[1]).join(' '))")
+          echo "Building locales: $locales"
+          npx docusaurus build --locale en --out-dir build
+          for l in $locales; do
+            if [ "$l" != "en" ]; then
+              npx docusaurus build --locale "$l" --out-dir "build/$l"
+            fi
+          done
         env:
           NODE_OPTIONS: --max-old-space-size=6144
           GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
