@@ -13,7 +13,9 @@ tags:
 
 Plugins let you add new behavior to your Owncast server without writing code yourself. They're small add-ons that run inside Owncast and can react to chat, viewers, stream events, and the fediverse. A plugin is delivered as a single `.ocpkg` file you upload from the admin.
 
-It is very early in the plugin ecosystem. The API is new and evolving, and there are only a few plugins available today. But there's a lot you can do with them: chat bots, stream overlays, custom integrations with other services, and more. If you have an idea for a plugin you'd like to see, share it with the [community](/chat?tab=community).
+:::info[Plugins are new in Owncast v0.3.0]
+Plugins are brand-new functionality, introduced in Owncast v0.3.0, and there are few plugins available today. If you hit a bug or have a suggestion, please [open an issue](https://github.com/owncast/plugin-sdk/issues) or [chat live with the community](/chat?tab=community). If you have an idea for a plugin you'd like to see, share it with the [community](/chat?tab=community). You are encouraged to build your own plugins to share chat bots, stream overlays, custom integrations, themes and more. The [plugin SDK](/docs/plugins) has everything you need to get started.
+:::
 
 ## What can a plugin do?
 
@@ -55,7 +57,7 @@ Either way, Owncast shows you the plugin's permission list and asks whether to e
 
 Many plugins add chat commands. These are short messages that start with a prefix, usually `!`, that tell a plugin to do something. The Timer Bot example below adds `!remind`, `!countdown`, and a few others. A viewer types the command and the plugin responds in chat.
 
-You do not have to memorize what each plugin offers. Owncast has a built-in `!help` command. Anyone in chat can type `!help` (or `!commands`) and Owncast replies with a single message listing every command from your enabled plugins, grouped by plugin, each with a short description.
+You do not have to memorize what each plugin offers. Owncast has a built-in `!help` command. Anyone in chat can type `!help` (or `!commands`) and Owncast replies with a single message listing every command from supported plugins, grouped by plugin, each with a short description.
 
 ![Chat showing the !help command listing and the Timer Bot plugin in use](/docs/img/plugins-chat-help.png)
 
@@ -65,6 +67,10 @@ A few things worth knowing about `!help`:
 - **Plugins advertise their own commands.** A plugin declares its commands and their descriptions, so there is nothing for you to configure. The descriptions you see in `!help` come straight from the plugin.
 - **Moderator commands stay hidden.** Commands a plugin marks as moderator-only only show up in `!help` for your moderators.
 
+## Hardware and resource usage
+
+Plugins are standalone tiny programs that run inside Owncast. If you enable plugins they will take up some additional CPU and memory for the runtimes and plugin themselves. Generally the first plugin will see the most RAM usage jump, and then small increases from there. If you notice your server slowing down after enabling a plugin, try disabling it to see if performance improves.
+
 ## Where do plugins come from?
 
 Plugins are built and shared by their authors.
@@ -73,4 +79,4 @@ When you install a third-party plugin, the **Permissions** list is your trust bo
 
 ## Want to build one?
 
-The full developer documentation lives at [Build custom plugins](/docs/plugins).
+The full developer documentation lives at our [plugin development docs](/docs/plugins).

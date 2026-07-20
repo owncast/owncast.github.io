@@ -26,7 +26,7 @@ Code below is shown for both SDKs. Pick your language with the tabs, and your ch
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-const { definePlugin, owncast, filter } = require("@owncast/plugin-sdk");
+const { definePlugin, owncast, filter } = require('@owncast/plugin-sdk');
 
 module.exports = definePlugin({
   onChatMessage(msg) {
@@ -88,7 +88,7 @@ interface ChatMessage {
 ```js
 module.exports = definePlugin({
   onChatMessage(msg) {
-    if (msg.user?.scopes?.includes("MODERATOR")) {
+    if (msg.user?.scopes?.includes('MODERATOR')) {
       owncast.chat.send(`hi mod ${msg.user.displayName}`);
     }
   },
@@ -139,8 +139,12 @@ interface User {
 
 ```js
 module.exports = definePlugin({
-  onChatUserJoined(user) { owncast.chat.send(`welcome ${user.displayName}`); },
-  onChatUserParted(user) { /* … */ },
+  onChatUserJoined(user) {
+    owncast.chat.send(`welcome ${user.displayName}`);
+  },
+  onChatUserParted(user) {
+    /* … */
+  },
 });
 ```
 
@@ -197,9 +201,15 @@ interface { startedAt: string; title?: string; summary?: string }
 
 ```js
 module.exports = definePlugin({
-  onStreamStarted(info) { owncast.chat.send(`live now: ${info.title}`); },
-  onStreamStopped(info) { /* … */ },
-  onStreamTitleChanged(change) { /* change.to */ },
+  onStreamStarted(info) {
+    owncast.chat.send(`live now: ${info.title}`);
+  },
+  onStreamStopped(info) {
+    /* … */
+  },
+  onStreamTitleChanged(change) {
+    /* change.to */
+  },
 });
 ```
 
@@ -249,17 +259,17 @@ No permission required.
 
 ## Fediverse events
 
-Owncast exposes seven internal plugin event subscriptions for inbound Fediverse activity. These are plugin events, not external HTTP webhooks. Every subscription in this section requires the `fediverse.inbound` permission.
+Owncast exposes internal plugin event subscriptions for inbound Fediverse activity. These are plugin events, not external HTTP webhooks. Every subscription in this section requires the `fediverse.inbound` permission.
 
-| Event | JavaScript handler | Python handler | Payload |
-| --- | --- | --- | --- |
-| `fediverse.follow` | `onFediverseFollow` | `@plugin.on_fediverse_follow` | `{ actor }` |
-| `fediverse.like` | `onFediverseLike` | `@plugin.on_fediverse_like` | `{ actor, target }` |
-| `fediverse.repost` | `onFediverseRepost` | `@plugin.on_fediverse_repost` | `{ actor, target }` |
-| `fediverse.quote` | `onFediverseQuote` | `@plugin.on_fediverse_quote` | `{ actor, target }` |
-| `fediverse.mention` | `onFediverseMention` | `@plugin.on_fediverse_mention` | `FediverseInboundPost` |
-| `fediverse.reply` | `onFediverseReply` | `@plugin.on_fediverse_reply` | `FediverseInboundPost` |
-| `fediverse.activity` | `onFediverse` | `@plugin.on_fediverse` | Raw ActivityPub JSON object |
+| Event                | JavaScript handler   | Python handler                 | Payload                     |
+| -------------------- | -------------------- | ------------------------------ | --------------------------- |
+| `fediverse.follow`   | `onFediverseFollow`  | `@plugin.on_fediverse_follow`  | `{ actor }`                 |
+| `fediverse.like`     | `onFediverseLike`    | `@plugin.on_fediverse_like`    | `{ actor, target }`         |
+| `fediverse.repost`   | `onFediverseRepost`  | `@plugin.on_fediverse_repost`  | `{ actor, target }`         |
+| `fediverse.quote`    | `onFediverseQuote`   | `@plugin.on_fediverse_quote`   | `{ actor, target }`         |
+| `fediverse.mention`  | `onFediverseMention` | `@plugin.on_fediverse_mention` | `FediverseInboundPost`      |
+| `fediverse.reply`    | `onFediverseReply`   | `@plugin.on_fediverse_reply`   | `FediverseInboundPost`      |
+| `fediverse.activity` | `onFediverse`        | `@plugin.on_fediverse`         | Raw ActivityPub JSON object |
 
 ### Follow, like, repost, and quote
 
@@ -348,7 +358,7 @@ The catch-all runs in addition to a specialized handler. For example, an accepte
 ```js
 module.exports = definePlugin({
   onFediverse(activity) {
-    if (typeof activity.type === "string") {
+    if (typeof activity.type === 'string') {
       owncast.log.info(`inbound activity: ${activity.type}`);
     }
   },
@@ -388,9 +398,9 @@ A filter handler receives the same `ChatMessage` shape as the chat-message event
 ```js
 module.exports = definePlugin({
   filterChatMessage(msg) {
-    if (msg.body.includes("spam")) return filter.drop("spam");
-    if (msg.body.includes("damn"))
-      return filter.modify({ ...msg, body: msg.body.replace("damn", "****") });
+    if (msg.body.includes('spam')) return filter.drop('spam');
+    if (msg.body.includes('damn'))
+      return filter.modify({ ...msg, body: msg.body.replace('damn', '****') });
     return filter.pass();
   },
 });
@@ -420,9 +430,9 @@ Each filter can declare a priority. Lower numbers run earlier (default `100`). U
 
 ### Filter safety
 
-* Errors are treated as a pass. A throwing filter never blocks chat. The chain continues with the original message.
-* Filters are time-capped at 50 ms. A slow filter is cancelled and treated as pass.
-* After 5 consecutive failures (errors or timeouts) the plugin is auto-disabled for the rest of the session, with a one-time log line. A successful filter call resets the counter, so transient flakiness doesn't accumulate. Restart the host to re-enable.
+- Errors are treated as a pass. A throwing filter never blocks chat. The chain continues with the original message.
+- Filters are time-capped at 50 ms. A slow filter is cancelled and treated as pass.
+- After 5 consecutive failures (errors or timeouts) the plugin is auto-disabled for the rest of the session, with a one-time log line. A successful filter call resets the counter, so transient flakiness doesn't accumulate. Restart the host to re-enable.
 
 ### Command tables
 
@@ -434,7 +444,7 @@ Declare a **command table** for aliases, cooldowns, moderator gating, parsed arg
 ```js
 module.exports = definePlugin({
   commands: {
-    uptime: { description: "How long we've been live", run: (ctx) => ctx.reply("a while!") },
+    uptime: { description: "How long we've been live", run: ctx => ctx.reply('a while!') },
   },
 });
 ```
@@ -485,7 +495,7 @@ interface OutgoingHttpResponse {
 ```js
 module.exports = definePlugin({
   onHttpRequest(req) {
-    if (req.path === "/status") return { status: 200, body: '{"ok":true}' };
+    if (req.path === '/status') return { status: 200, body: '{"ok":true}' };
     return { status: 404 };
   },
 });
@@ -530,21 +540,21 @@ interface AuthCheckRequest {
 }
 
 type AuthCheckResult =
-  | { action: "ok" }
-  | { action: "refresh"; ttl?: number }
-  | { action: "deny"; reason?: string };
+  | { action: 'ok' }
+  | { action: 'refresh'; ttl?: number }
+  | { action: 'deny'; reason?: string };
 ```
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-const { definePlugin, owncast, authCheck } = require("@owncast/plugin-sdk");
+const { definePlugin, owncast, authCheck } = require('@owncast/plugin-sdk');
 
 module.exports = definePlugin({
   onAuthCheck(req) {
     if (owncast.kv.get(`banned:${req.user.id}`)) {
-      return authCheck.deny("access revoked");
+      return authCheck.deny('access revoked');
     }
     return authCheck.ok();
   },
@@ -577,7 +587,7 @@ Both handlers receive a `ContentRequest`:
 
 ```ts
 interface ContentRequest {
-  slug: string;   // stable identifier declared in the manifest
+  slug: string; // stable identifier declared in the manifest
   user?: User; // viewer's chat identity: present when authenticated, absent for anonymous viewers
 }
 ```
@@ -590,10 +600,14 @@ Return the full HTML string for the content block. If you don't recognise the sl
 ```js
 module.exports = definePlugin({
   onTabContent: {
-    stats(ctx) { return `<h1>Live stats for ${ctx.user?.displayName ?? "viewer"}</h1>`; },
+    stats(ctx) {
+      return `<h1>Live stats for ${ctx.user?.displayName ?? 'viewer'}</h1>`;
+    },
   },
   onPageContent: {
-    banner(ctx) { return "<p>Welcome!</p>"; },
+    banner(ctx) {
+      return '<p>Welcome!</p>';
+    },
   },
 });
 ```
@@ -644,8 +658,12 @@ interface SSEConnectionEvent {
 
 ```js
 module.exports = definePlugin({
-  onSseConnect(e) { /* e.connectionId, e.channel */ },
-  onSseDisconnect(e) { /* same connectionId as the matching connect */ },
+  onSseConnect(e) {
+    /* e.connectionId, e.channel */
+  },
+  onSseDisconnect(e) {
+    /* same connectionId as the matching connect */
+  },
 });
 ```
 
@@ -684,7 +702,9 @@ interface TickEvent {
 
 ```js
 module.exports = definePlugin({
-  onTick(e) { /* e.now */ },
+  onTick(e) {
+    /* e.now */
+  },
 });
 ```
 
@@ -712,10 +732,12 @@ Plugins can compose by emitting and subscribing to arbitrary custom events. Subs
 ```js
 module.exports = definePlugin({
   on: {
-    "other-plugin.milestone"(payload) { /* react */ },
+    'other-plugin.milestone'(payload) {
+      /* react */
+    },
   },
   onStreamStarted() {
-    owncast.events.emit("my-plugin.went-live", { at: Date.now() });
+    owncast.events.emit('my-plugin.went-live', { at: Date.now() });
   },
 });
 ```
@@ -742,31 +764,31 @@ See [Owncast APIs](./apis#plugin-to-plugin-events) for the emit API.
 
 Each row is a runtime event. The handler name follows your SDK's convention: camelCase methods (`onChatMessage`) in JavaScript, `@plugin.*` decorators (`@plugin.on_chat_message`) in Python.
 
-| Event                      | Payload                            | Permission to subscribe                |
-| -------------------------- | ---------------------------------- | -------------------------------------- |
-| `chat.message.received`    | `ChatMessage`                      | none                                   |
-| `chat.user.joined`         | `User`                             | none                                   |
-| `chat.user.parted`         | `User`                             | none                                   |
-| `chat.user.renamed`        | `{ user, previousName }`           | none                                   |
-| `chat.message.moderated`   | `{ messageId, visible, moderator}` | none                                   |
-| `stream.started`           | `{ startedAt, title, summary }`    | none                                   |
-| `stream.stopped`           | `{ stoppedAt }`                    | none                                   |
-| `stream.title.changed`     | `{ from, to }`                     | none                                   |
-| `fediverse.follow`         | `{ actor }`                        | `fediverse.inbound`                   |
-| `fediverse.like`           | `{ actor, target }`                | `fediverse.inbound`                   |
-| `fediverse.repost`         | `{ actor, target }`                | `fediverse.inbound`                   |
-| `fediverse.quote`          | `{ actor, target }`                | `fediverse.inbound`                   |
-| `fediverse.mention`        | `FediverseInboundPost`             | `fediverse.inbound`                   |
-| `fediverse.reply`          | `FediverseInboundPost`             | `fediverse.inbound`                   |
-| `fediverse.activity`       | Raw ActivityPub JSON object        | `fediverse.inbound`                   |
-| chat message filter        | `ChatMessage`                      | `chat.filter`                          |
-| HTTP request               | `IncomingHttpRequest`              | `http.serve`                           |
-| auth check                 | `AuthCheckRequest`                 | `auth.gate`                            |
-| `sse.connect`              | `SSEConnectionEvent`               | `http.sse`                             |
-| `sse.disconnect`           | `SSEConnectionEvent`               | `http.sse`                             |
-| `tick`                     | `{ now }`                          | none                                   |
-| tab content                | `ContentRequest`                   | none to subscribe. Whatever APIs the handler calls |
-| page content               | `ContentRequest`                   | none to subscribe. Whatever APIs the handler calls |
-| custom events              | (per-event)                        | none to subscribe, `events.emit` to emit |
+| Event                    | Payload                            | Permission to subscribe                            |
+| ------------------------ | ---------------------------------- | -------------------------------------------------- |
+| `chat.message.received`  | `ChatMessage`                      | none                                               |
+| `chat.user.joined`       | `User`                             | none                                               |
+| `chat.user.parted`       | `User`                             | none                                               |
+| `chat.user.renamed`      | `{ user, previousName }`           | none                                               |
+| `chat.message.moderated` | `{ messageId, visible, moderator}` | none                                               |
+| `stream.started`         | `{ startedAt, title, summary }`    | none                                               |
+| `stream.stopped`         | `{ stoppedAt }`                    | none                                               |
+| `stream.title.changed`   | `{ from, to }`                     | none                                               |
+| `fediverse.follow`       | `{ actor }`                        | `fediverse.inbound`                                |
+| `fediverse.like`         | `{ actor, target }`                | `fediverse.inbound`                                |
+| `fediverse.repost`       | `{ actor, target }`                | `fediverse.inbound`                                |
+| `fediverse.quote`        | `{ actor, target }`                | `fediverse.inbound`                                |
+| `fediverse.mention`      | `FediverseInboundPost`             | `fediverse.inbound`                                |
+| `fediverse.reply`        | `FediverseInboundPost`             | `fediverse.inbound`                                |
+| `fediverse.activity`     | Raw ActivityPub JSON object        | `fediverse.inbound`                                |
+| chat message filter      | `ChatMessage`                      | `chat.filter`                                      |
+| HTTP request             | `IncomingHttpRequest`              | `http.serve`                                       |
+| auth check               | `AuthCheckRequest`                 | `auth.gate`                                        |
+| `sse.connect`            | `SSEConnectionEvent`               | `http.sse`                                         |
+| `sse.disconnect`         | `SSEConnectionEvent`               | `http.sse`                                         |
+| `tick`                   | `{ now }`                          | none                                               |
+| tab content              | `ContentRequest`                   | none to subscribe. Whatever APIs the handler calls |
+| page content             | `ContentRequest`                   | none to subscribe. Whatever APIs the handler calls |
+| custom events            | (per-event)                        | none to subscribe, `events.emit` to emit           |
 
 Subscribing to ungated hooks and custom events requires no permission. Gated hooks require the permission listed in the table. Calling Owncast APIs from inside a handler requires the API's permission too. See [Owncast APIs](/docs/plugins/apis) for the catalog of methods and what each one grants.
