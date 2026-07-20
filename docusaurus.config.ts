@@ -2,6 +2,14 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import path from 'path';
+import fs from 'fs';
+
+// When building a single locale (docusaurus build --locale xx) some plugins
+// produce output that is identical for every locale because it's generated
+// from the English source files. Only run those for the default locale.
+const localeArgIndex = process.argv.indexOf('--locale');
+const buildLocale = localeArgIndex !== -1 ? process.argv[localeArgIndex + 1] : 'en';
+const isDefaultLocaleBuild = buildLocale === 'en';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -128,6 +136,11 @@ const config: Config = {
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    // Nothing on this site uses git metadata (no showLastUpdateTime/Author,
+    // every blog post has a frontmatter date), but the eager git VCS init
+    // reads the entire repo history on every build (~35s per locale build).
+    // Disable it outright.
+    experimental_vcs: false,
     faster: {
       swcJsLoader: true,
       swcJsMinimizer: true,
@@ -164,34 +177,13 @@ const config: Config = {
 
   i18n: {
     defaultLocale: 'en',
-    locales: [
-      'en',
-      'ar',
-      'bn',
-      'de',
-      'el',
-      'es',
-      'eu',
-      'fr',
-      'ga',
-      'hi',
-      'hr',
-      'it',
-      'ja',
-      'ko',
-      'ms',
-      'nl',
-      'no',
-      'pa',
-      'pl',
-      'pt',
-      'ru',
-      'sv',
-      'th',
-      'vi',
-      'zh-CN',
-      'zh-TW',
-    ],
+    // Temporarily trimmed to the locales with validated translations:
+    // Cloudflare Pages rejects deployments over 20,000 files, and the full
+    // 26-locale build blows past that (the extra locales were English
+    // fallback copies anyway while their translations await validation).
+    // Disabled for now: ar bn el eu ga hi hr it ja ko ms nl no pa pl pt ru
+    // sv th vi zh-CN zh-TW (localeConfigs kept below for easy re-enable).
+    locales: ['en', 'de', 'es', 'fr'],
     localeConfigs: {
       en: {
         label: 'English',
@@ -330,87 +322,93 @@ const config: Config = {
 
   plugins: [
     ['plugin-image-zoom', {}],
-    [
-      'docusaurus-plugin-llms',
-      {
-        includeBlog: true,
-        excludeImports: true,
-        removeDuplicateHeadings: true,
-        generateLLMsFullTxt: true,
-        ignoreFiles: ['troubleshoot/*'],
-        customLLMFiles: [
-          {
-            filename: 'llms-sdk-javascript.txt',
-            includePatterns: ['docs/plugins/sdks/javascript.{md,mdx}'],
-            fullContent: true,
-            title: 'Javascript Plugin SDK Documentation',
-            description: 'Complete reference for the Javascript Plugin SDK',
-          },
-          {
-            filename: 'llms-sdk-python.txt',
-            includePatterns: ['docs/plugins/sdks/python.{md,mdx}'],
-            fullContent: true,
-            title: 'Python Plugin SDK Documentation',
-            description: 'Complete reference for the Python Plugin SDK',
-          },
-          {
-            filename: 'llms-plugins.txt',
-            includePatterns: ['docs/plugins/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'Owncast Plugin Development Documentation',
-            description: 'Complete reference for Owncast plugin development',
-          },
-          {
-            filename: 'llms-activitypub.txt',
-            includePatterns: ['docs/api/activitypub.{md,mdx}', 'docs/social/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'Owncast ActivityPub & Fediverse Documentation',
-            description:
-              "Complete reference for Owncast's ActivityPub federation and fediverse integration",
-          },
-          {
-            filename: 'llms-configuration.txt',
-            includePatterns: ['docs/configuration/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'Owncast Configuration Documentation',
-            description:
-              'Complete reference for configuring an Owncast server, including appearance, notifications, runtime flags, and the web interface',
-          },
-          {
-            filename: 'llms-api.txt',
-            includePatterns: ['docs/api/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'Owncast API & Integrations Documentation',
-            description:
-              'Complete reference for the Owncast web APIs, actions, webhooks, and ActivityPub integration',
-          },
-          {
-            filename: 'llms-broadcasting.txt',
-            includePatterns: ['docs/broadcasting/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'Owncast Broadcasting Documentation',
-            description:
-              'Complete reference for broadcasting to Owncast, including OBS, ffmpeg, hardware, and restreaming setup',
-          },
-          {
-            filename: 'llms-chat.txt',
-            includePatterns: ['docs/chat/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'Owncast Chat Documentation',
-            description:
-              'Complete reference for Owncast chat, including authentication, moderation, and emoji',
-          },
-          {
-            filename: 'llms-getting-started.txt',
-            includePatterns: ['docs/getting-started/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'Owncast Getting Started & Installation Documentation',
-            description:
-              'Complete reference for installing Owncast and configuring your first stream',
-          },
-        ],
-      },
-    ],
+    // llms.txt output is generated from the English source docs, so it's
+    // byte-identical for every locale. Skip it on non-default locale builds.
+    ...(isDefaultLocaleBuild
+      ? [
+          [
+            'docusaurus-plugin-llms',
+            {
+              includeBlog: true,
+              excludeImports: true,
+              removeDuplicateHeadings: true,
+              generateLLMsFullTxt: true,
+              ignoreFiles: ['troubleshoot/*'],
+              customLLMFiles: [
+                {
+                  filename: 'llms-sdk-javascript.txt',
+                  includePatterns: ['docs/plugins/sdks/javascript.{md,mdx}'],
+                  fullContent: true,
+                  title: 'Javascript Plugin SDK Documentation',
+                  description: 'Complete reference for the Javascript Plugin SDK',
+                },
+                {
+                  filename: 'llms-sdk-python.txt',
+                  includePatterns: ['docs/plugins/sdks/python.{md,mdx}'],
+                  fullContent: true,
+                  title: 'Python Plugin SDK Documentation',
+                  description: 'Complete reference for the Python Plugin SDK',
+                },
+                {
+                  filename: 'llms-plugins.txt',
+                  includePatterns: ['docs/plugins/**/*.{md,mdx}'],
+                  fullContent: true,
+                  title: 'Owncast Plugin Development Documentation',
+                  description: 'Complete reference for Owncast plugin development',
+                },
+                {
+                  filename: 'llms-activitypub.txt',
+                  includePatterns: ['docs/api/activitypub.{md,mdx}', 'docs/social/**/*.{md,mdx}'],
+                  fullContent: true,
+                  title: 'Owncast ActivityPub & Fediverse Documentation',
+                  description:
+                    "Complete reference for Owncast's ActivityPub federation and fediverse integration",
+                },
+                {
+                  filename: 'llms-configuration.txt',
+                  includePatterns: ['docs/configuration/**/*.{md,mdx}'],
+                  fullContent: true,
+                  title: 'Owncast Configuration Documentation',
+                  description:
+                    'Complete reference for configuring an Owncast server, including appearance, notifications, runtime flags, and the web interface',
+                },
+                {
+                  filename: 'llms-api.txt',
+                  includePatterns: ['docs/api/**/*.{md,mdx}'],
+                  fullContent: true,
+                  title: 'Owncast API & Integrations Documentation',
+                  description:
+                    'Complete reference for the Owncast web APIs, actions, webhooks, and ActivityPub integration',
+                },
+                {
+                  filename: 'llms-broadcasting.txt',
+                  includePatterns: ['docs/broadcasting/**/*.{md,mdx}'],
+                  fullContent: true,
+                  title: 'Owncast Broadcasting Documentation',
+                  description:
+                    'Complete reference for broadcasting to Owncast, including OBS, ffmpeg, hardware, and restreaming setup',
+                },
+                {
+                  filename: 'llms-chat.txt',
+                  includePatterns: ['docs/chat/**/*.{md,mdx}'],
+                  fullContent: true,
+                  title: 'Owncast Chat Documentation',
+                  description:
+                    'Complete reference for Owncast chat, including authentication, moderation, and emoji',
+                },
+                {
+                  filename: 'llms-getting-started.txt',
+                  includePatterns: ['docs/getting-started/**/*.{md,mdx}'],
+                  fullContent: true,
+                  title: 'Owncast Getting Started & Installation Documentation',
+                  description:
+                    'Complete reference for installing Owncast and configuring your first stream',
+                },
+              ],
+            },
+          ],
+        ]
+      : []),
     // Releases blog - for version releases
     [
       '@docusaurus/plugin-content-blog',

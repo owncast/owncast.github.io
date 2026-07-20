@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
 
 // Supported locales (excluding default 'en'); keep in sync with docusaurus.config.ts
-const SUPPORTED_LOCALES = [
-  "ar", "bn", "de", "el", "es", "eu", "fr", "ga", "hi", "hr", "it", "ja",
-  "ko", "ms", "nl", "no", "pa", "pl", "pt", "ru", "sv", "th", "vi",
-  "zh-CN", "zh-TW",
-];
+const SUPPORTED_LOCALES = ["de", "es", "fr"];
 const LOCALE_REDIRECT_KEY = "owncast_locale_redirected";
 
 // Get the user's preferred locale from browser settings
