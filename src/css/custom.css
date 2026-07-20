@@ -326,3 +326,45 @@ html[data-theme='dark'] .docMainWrapper {
 html.plugin-id-dev .pagination-nav {
   display: none;
 }
+
+/* ---------------------------------------------------------------------------
+   Content tabs (<Tabs>/<TabItem>)
+   Infima's default tabs are bare labels sitting next to each other with only
+   an underline on the active one. Restyle them as classic attached tabs: a
+   header strip joined to a bordered panel, with the active tab visually
+   connected to its content. Scoped to .tabs-container so the Radix tabs on
+   other pages are unaffected.
+--------------------------------------------------------------------------- */
+.tabs-container {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--ifm-leading);
+}
+
+.tabs-container > .tabs {
+  background-color: var(--ifm-color-emphasis-100);
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.tabs-container > .tabs .tabs__item {
+  border-radius: 0;
+  border-bottom: none;
+  border-right: 1px solid var(--ifm-color-emphasis-200);
+  border-top: 2px solid transparent;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.1rem;
+}
+
+.tabs-container > .tabs .tabs__item--active {
+  background-color: var(--ifm-background-color);
+  border-top-color: var(--ifm-link-color);
+  color: var(--ifm-heading-color);
+}
+
+/* The tab panel wrapper is a plain div after the tab list — attach it to the
+   strip and pad the content. */
+.tabs-container > .tabs + div {
+  margin-top: 0 !important;
+  padding: 1rem 1.25rem;
+}
