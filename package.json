@@ -18,7 +18,7 @@
     "typecheck": "tsc",
     "generate-contributors": "node scripts/generate-contributors.js",
     "crowdin": "crowdin",
-    "crowdin:sync": "npm run write-translations && crowdin download -l es-ES -l fr -l de && node scripts/fix-translated-frontmatter.js",
+    "crowdin:sync": "npm run write-translations && crowdin download -l es-ES -l fr -l de -l it -l ja -l pt-BR -l ru -l zh-CN && node scripts/fix-translated-frontmatter.js",
     "crowdin:upload-existing": "npm run write-translations && node scripts/crowdin-upload-existing.js"
   },
   "dependencies": {
