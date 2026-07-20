@@ -140,6 +140,12 @@
   --prism-color: #e8eaed;
 }
 
+/* Python decorators (@plugin.on_chat_message): Prism aliases them as
+   `punctuation`, which overrides the theme's keyword purple. */
+html[data-theme='dark'] .token.decorator.annotation {
+  color: #da9eff !important;
+}
+
 /* Global resets to avoid “washed out” look in dark mode due to overlays/opacity/blur */
 html[data-theme='dark'] .main-wrapper,
 html[data-theme='dark'] .container,

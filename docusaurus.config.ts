@@ -1,4 +1,4 @@
-import { themes as prismThemes } from 'prism-react-renderer';
+import { themes as prismThemes, type PrismTheme } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import path from 'path';
@@ -10,6 +10,40 @@ import fs from 'fs';
 const localeArgIndex = process.argv.indexOf('--locale');
 const buildLocale = localeArgIndex !== -1 ? process.argv[localeArgIndex + 1] : 'en';
 const isDefaultLocaleBuild = buildLocale === 'en';
+
+// Code-block syntax theme built from the Owncast brand palette
+// (src/css/variables.css). Background comes from --prism-background-color
+// in custom.css.
+const owncastCodeTheme: PrismTheme = {
+  plain: { color: '#e2e8f0', backgroundColor: '#0b0d12' },
+  styles: [
+    {
+      types: ['comment', 'prolog', 'doctype', 'cdata'],
+      style: { color: '#5d5f72', fontStyle: 'italic' },
+    },
+    { types: ['punctuation', 'operator'], style: { color: '#b6b3c6' } },
+    { types: ['property', 'attr-name', 'tag'], style: { color: '#8ab4f8' } },
+    {
+      types: ['string', 'char', 'attr-value', 'inserted', 'url'],
+      style: { color: '#42bea6' },
+    },
+    {
+      types: ['number', 'boolean', 'constant', 'symbol', 'regex', 'important'],
+      style: { color: '#ffc655' },
+    },
+    {
+      types: ['keyword', 'atrule', 'decorator', 'annotation'],
+      style: { color: '#da9eff' },
+    },
+    {
+      types: ['function', 'class-name', 'builtin', 'selector'],
+      style: { color: '#c3dafe' },
+    },
+    { types: ['variable'], style: { color: '#e2e8f0' } },
+    { types: ['deleted'], style: { color: '#ff4b39' } },
+    { types: ['changed'], style: { color: '#ffc655' } },
+  ],
+};
 
 // See localeConfigs below: pin each locale to its deployed /<locale>/ subpath.
 function withLocaleBaseUrls<T extends Record<string, object>>(configs: T) {
@@ -739,13 +773,14 @@ const config: Config = {
     },
     prism: {
       theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      darkTheme: owncastCodeTheme,
       additionalLanguages: [
         'bash',
         'diff',
         'json',
         'yaml',
         'toml',
+        'ini',
         'javascript',
         'nginx',
         'apacheconf',
