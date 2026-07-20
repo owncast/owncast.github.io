@@ -84,9 +84,18 @@ jobs:
         env:
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
+      - name: Add swap space for the multi-locale build
+        run: |
+          sudo fallocate -l 8G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+          free -h
+
       - name: Build
         run: npm run build
         env:
+          NODE_OPTIONS: --max-old-space-size=6144
           GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
           DOCMOST_URL: ${{ vars.DOCMOST_URL }}
           DOCMOST_SPACE: ${{ vars.DOCMOST_SPACE }}
