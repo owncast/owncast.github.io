@@ -177,13 +177,12 @@ const config: Config = {
 
   i18n: {
     defaultLocale: 'en',
-    // Temporarily trimmed to the locales with validated translations:
-    // Cloudflare Pages rejects deployments over 20,000 files, and the full
-    // 26-locale build blows past that (the extra locales were English
-    // fallback copies anyway while their translations await validation).
-    // Disabled for now: ar bn el eu ga hi hr it ja ko ms nl no pa pl pt ru
-    // sv th vi zh-CN zh-TW (localeConfigs kept below for easy re-enable).
-    locales: ['en', 'de', 'es', 'fr'],
+    // Temporarily trimmed: Cloudflare Pages rejects deployments over 20,000
+    // files and the full 26-locale build blows past it (~1,665 files per
+    // locale, so ~12 locales fit). Currently at ~15k with growth headroom.
+    // Disabled for now: ar bn el eu ga hi hr ko ms nl no pa pl sv th vi
+    // zh-TW (localeConfigs kept below for easy re-enable).
+    locales: ['en', 'de', 'es', 'fr', 'it', 'ja', 'pt', 'ru', 'zh-CN'],
     localeConfigs: {
       en: {
         label: 'English',
