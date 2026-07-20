@@ -11,6 +11,16 @@ const localeArgIndex = process.argv.indexOf('--locale');
 const buildLocale = localeArgIndex !== -1 ? process.argv[localeArgIndex + 1] : 'en';
 const isDefaultLocaleBuild = buildLocale === 'en';
 
+// See localeConfigs below: pin each locale to its deployed /<locale>/ subpath.
+function withLocaleBaseUrls<T extends Record<string, object>>(configs: T) {
+  return Object.fromEntries(
+    Object.entries(configs).map(([code, cfg]) => [
+      code,
+      { baseUrl: code === 'en' ? '/' : `/${code}/`, ...cfg },
+    ]),
+  );
+}
+
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 // All redirect configurations - both wildcards and regular redirects
@@ -183,7 +193,12 @@ const config: Config = {
     // Disabled for now: ar bn el eu ga hi hr ko ms nl no pa pl sv th vi
     // zh-TW (localeConfigs kept below for easy re-enable).
     locales: ['en', 'de', 'es', 'fr', 'it', 'ja', 'pt', 'ru', 'zh-CN'],
-    localeConfigs: {
+    // Locales are built one process at a time in CI (docusaurus build
+    // --locale xx), and a single-locale build defaults every locale's
+    // baseUrl to '/' — which breaks the locale dropdown links (they all
+    // point at '/') and makes locale pages reference the root /assets.
+    // Pin each locale to the /<locale>/ subpath it's deployed under.
+    localeConfigs: withLocaleBaseUrls({
       en: {
         label: 'English',
         htmlLang: 'en-US',
@@ -289,7 +304,7 @@ const config: Config = {
         label: '繁體中文',
         htmlLang: 'zh-TW',
       },
-    },
+    }),
   },
 
   presets: [
