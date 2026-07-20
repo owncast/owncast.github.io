@@ -11,6 +11,8 @@ export const VideoPlayer = ({
   maxWidth = '700px',
   poster,
   src,
+  webm,
+  title,
   width,
   height,
   loop,
@@ -24,7 +26,12 @@ export const VideoPlayer = ({
   muted?: boolean;
   maxWidth?: string;
   poster?: string;
+  /** mp4 source URL (universal fallback) */
   src: string;
+  /** webm source URL, preferred by browsers that support it */
+  webm?: string;
+  /** Accessible title for the video */
+  title?: string;
   width?: string;
   height?: string;
   loop?: boolean;
@@ -39,6 +46,7 @@ export const VideoPlayer = ({
   const [isNearViewport, setIsNearViewport] = useState(!autoPlay);
   const resolvedPoster = useBaseUrl(poster);
   const resolvedSrc = useBaseUrl(src);
+  const resolvedWebm = useBaseUrl(webm);
 
   // For autoPlay videos, defer loading the src until near viewport
   useEffect(() => {
@@ -90,6 +98,7 @@ export const VideoPlayer = ({
         {!isPlaying ? (
           <button
             onClick={togglePlay}
+            aria-label={title ? `Play: ${title}` : 'Play video'}
             className={clsx(
               'w-full h-full flex items-center justify-center absolute inset-0 group',
               variant === 'primary'
@@ -121,8 +130,9 @@ export const VideoPlayer = ({
         ) : null}
 
         <video
+          key={isNearViewport ? 'ready' : 'lazy'}
           ref={videoRef}
-          src={isNearViewport ? resolvedSrc : undefined}
+          title={title}
           width={width}
           height={height}
           controls={autoPlay || isPlaying || controls}
@@ -136,6 +146,7 @@ export const VideoPlayer = ({
           preload={isNearViewport ? preload : 'none'}
         >
           <track kind="captions" />
+          {isNearViewport && webm && <source src={resolvedWebm} type="video/webm" />}
           {isNearViewport && <source src={resolvedSrc} type="video/mp4" />}
           Your browser does not support the video tag.
         </video>

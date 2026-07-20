@@ -20,5 +20,4 @@ export type { ContributorsProps } from './Contributors';
 export { default as IncludeMarkdown } from './IncludeMarkdown';
 export type { IncludeMarkdownProps } from './IncludeMarkdown';
 
-export { default as VideoPlayer } from './VideoPlayer';
-export type { VideoPlayerProps } from './VideoPlayer';
+export { VideoPlayer } from './shared/VideoPlayer';
