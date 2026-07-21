@@ -28,7 +28,7 @@ Owncast allows people to follow, engage with, and share your stream with others 
 ## What it supports
 
 1. People can follow your server.
-1. Your followers show up in the "Followers" tab on your stream's page.
+1. Your followers show up in the "Followers" tab on your stream's page. You can hide this tab if you prefer.
 1. You can send out posts to your followers via the admin.
 1. Your followers will automatically get notified when you go live.
 1. Your followers can share that you've gone live with their circle of followers.
@@ -87,8 +87,13 @@ You must be hosting your Owncast server behind SSL, with a _https_ URL. Set up a
 Visit the _Configuration -> Social_ page to configure.
 
 1. You can set the username that you're seen as.
-1. You can set the text that is sent out each time you go live.
+1. You can set the "Now Live" message that is sent out each time you go live. Go-live posts are only sent when this message is set, so leave it blank to disable them.
 1. You can toggle "Private mode".
+1. You can mark your server as potentially NSFW so previews of your stream are flagged as sensitive.
+1. You can toggle "Show engagement" to control whether follows, likes and shares appear in your chat feed.
+1. You can toggle "Allow quotes" to control whether people can quote your posts.
+1. You can toggle "Hide followers" to remove the public Followers tab from your stream page. Social features stay enabled.
+1. You can list blocked domains to stop specific servers from interacting with yours.
 
 <img src="/docs/img/admin-social-features.png" alt="The Social features configuration page in the admin, with the server URL, Enable Social Features toggle, Private mode toggle, username, and go-live message fields" width="75%" />
 
@@ -102,7 +107,15 @@ Enabling _Private Mode_ will require those who wish to follow your server to be 
 
 Private Mode will also make it so any posts you send out are only visible to your followers, not others, as they cannot be shared.
 
+### Managing followers
+
+The _Followers_ section of the admin lists your current, pending, and blocked followers. With Private Mode on, new follow requests wait there until you approve or reject them. For existing followers you can choose between _Remove_, which lets them follow you again later, and _Block_, which prevents them from following you again.
+
 ### Quote posts
+
+:::info[New in Owncast 0.3.0]
+Quote post support was added in Owncast 0.3.0.
+:::
 
 People on Mastodon, GoToSocial and other platforms that support quote posts can quote your posts in their own, adding their commentary while showing your original post to their followers. Owncast approves these quotes automatically using the consent flow the Fediverse uses, so quotes of your posts show up correctly everywhere.
 
@@ -110,7 +123,7 @@ If you would rather not allow this, turn off _Allow quotes_ on the _Configuratio
 
 ## Composing messages to your followers
 
-By clicking the _Compose_ button in the admin header you can create a post to send to your followers. This could be used to tell people when you plan on streaming, or to remind people that you're still live.
+By clicking the _Compose_ button in the admin header you can create a post to send to your followers. This could be used to tell people when you plan on streaming, or to remind people that you're still live. Posts are limited to 500 characters and support simple Markdown formatting. Hashtags are turned into links to their tag pages.
 
 ## Engagement
 

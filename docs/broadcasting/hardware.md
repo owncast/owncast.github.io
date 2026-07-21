@@ -4,7 +4,7 @@ description: Various pieces of hardware have been tested with Owncast.
 sidebar_position: 100
 ---
 
-The following hardware with native live streaming have been tested and work.
+The following hardware with native live streaming support has been reported to work by the community. This list is not independently verified by the Owncast team.
 
 - [GoPro Hero 8](https://gopro.com/)
 - [Mevo](https://mevo.com/)
@@ -12,5 +12,12 @@ The following hardware with native live streaming have been tested and work.
 - [TriCaster Mini](https://www.vizrt.com/tricaster/mini/) \*you have to send the Stream Key as an unencrypted parameter called "Stream ID"
 - [Kiloview E1](https://www.kiloview.com/en/encoder/h264-wired/)
 - [Blackmagic Web Presenter HD](https://www.blackmagicdesign.com/products/blackmagicwebpresenter)
+
+When a device asks for separate fields, use these values:
+
+| Field | Value |
+| ----- | ----- |
+| Server URL | `rtmp://yourserver:1935/live` |
+| Stream Key | A stream key from the admin, under Configuration > Server Setup in the Stream Keys tab |
 
 If you have tested other hardware with Owncast we'd love to hear about it!

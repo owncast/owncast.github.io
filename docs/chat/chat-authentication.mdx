@@ -15,10 +15,14 @@ tags:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-There is no requirement to authenticate when using Owncast chat. However, some prefer
+By default there is no requirement to authenticate when using Owncast chat. However, some prefer
 to authenticate themselves to verify their identity to others, and to continue using the same chat
 identity across multiple devices and browsers. This is especially helpful for those with [moderator](/docs/chat/)
 privileges.
+
+Server operators can also turn on _Require Authentication_ in the admin under `Configuration` \> `Chat`.
+When it is on, anyone who has not authenticated, other than moderators, is rejected when they try to send
+a chat message.
 
 You can access the authentication options via the chat dropdown menu in the upper right of the page.
 
@@ -28,13 +32,13 @@ You can access the authentication options via the chat dropdown menu in the uppe
   <TabItem value="FediAuth" label="FediAuth" default>
 ## Fediverse Authentication (FediAuth)
 
-Using your Fediverse account you can be sent a one time use code to verify your identity and authenticate
+Using your Fediverse account you can be sent a one time use six digit code to verify your identity and authenticate
 yourself with Owncast chat. Fediverse support must be enabled on the Owncast server for this feature to be available.
 
-This is done by sending a direct message to your account. If you do not receive this message make sure you can accept
+The code arrives as a direct message to your account. If you do not receive this message make sure you can accept
 direct messages.
 
-These codes expire, so you will need to request a new one if necessary.
+The code is valid for 10 minutes. After that you will need to request a new one.
   </TabItem>
 
   <TabItem value="IndieAuth" label="IndieAuth">
@@ -46,7 +50,7 @@ Visit [IndieAuth.net](https://indieauth.net/) to learn more.
 
 ### Owncast is an IndieAuth server
 
-If you run an Owncast server you can use it to authenticate yourself on other Owncast instances by using the URL of your server.
+If you run an Owncast server you can use it as your IndieAuth provider by entering the URL of your server. Authenticating this way verifies you as the admin of that Owncast server.
   </TabItem>
 </Tabs>
 

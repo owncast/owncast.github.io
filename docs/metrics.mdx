@@ -50,3 +50,18 @@ For example:
   static_configs:
     - targets: ["my.owncast.server"]
 ```
+
+### Exported metrics
+
+All series are gauges, and all carry two constant labels: `version` (the Owncast version) and `host` (your configured server URL, or `unknown` if it isn't set).
+
+| Name                                        | Meaning                                                          |
+| ------------------------------------------- | ---------------------------------------------------------------- |
+| `owncast_instance_active_viewer_count`      | The number of current viewers.                                   |
+| `owncast_instance_active_chat_client_count` | The number of connected chat clients.                            |
+| `owncast_instance_total_chat_users`         | The total number of chat users on this Owncast instance.         |
+| `owncast_instance_current_chat_message_count` | The number of chat messages currently saved before cleanup.    |
+| `owncast_instance_playback_error_count`     | Errors reported by players within the current collection window. |
+| `owncast_instance_cpu_usage`                | CPU usage as seen internally by Owncast.                         |
+
+Owncast refreshes these values every 2 minutes, so scraping more frequently than that won't give you more resolution.

@@ -1,5 +1,5 @@
 ---
-title: Configuration
+title: Configuration via Plugins
 description: Let admins configure your plugin with typed settings. Owncast renders the form, you read the values at runtime with owncast.config.get.
 sidebar_position: 7
 sidebar_label: Configuration
@@ -32,11 +32,11 @@ Each entry under `config` has a `type`, a `default`, and a `description`:
 }
 ```
 
-| Field         | Notes                                                                                                                     |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Field         | Notes                                                                                                                          |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `type`        | One of `string`, `number`, or `boolean`. Any other value is accepted but gets a plain text input and no type checking on save. |
-| `default`     | The value `config.get` returns until an admin saves an override. Its JSON type should match `type`.                       |
-| `description` | The label shown next to the field in the admin form. Falls back to the key name when empty.                               |
+| `default`     | The value `config.get` returns until an admin saves an override. Its JSON type should match `type`.                            |
+| `description` | The label shown next to the field in the admin form. Falls back to the key name when empty.                                    |
 
 Key names cannot start with `__`. That prefix is reserved for per-instance state the host injects, and a plugin that declares a key like `__internal` fails to load.
 
@@ -59,8 +59,8 @@ A plugin with no `config` block shows no Settings tab.
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-const cooldownMs = owncast.config.get("cooldownMs", 2000);
-const modOnly = owncast.config.get("modOnly", false);
+const cooldownMs = owncast.config.get('cooldownMs', 2000);
+const modOnly = owncast.config.get('modOnly', false);
 ```
 
 </TabItem>

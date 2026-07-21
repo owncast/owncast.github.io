@@ -17,6 +17,8 @@ We currently support the following actions you can make via requests from your c
 | Get connected clients    |                          <a href="/api/release">/api/integrations/clients</a>                          |         `HAS_ADMIN_ACCESS` |
 | Set stream title         |                     <a href="/api/release">/api/integrations/streamtitle</a>                      |         `HAS_ADMIN_ACCESS` |
 | system message to client | <a href="/api/release">/api/integrations/chat/system/client/`{clientId}`</a> | `CAN_SEND_SYSTEM_MESSAGES` |
+| Get server status        |                            <a href="/api/release">/api/integrations/status</a>                            |         `HAS_ADMIN_ACCESS` |
+| Get a chat user's details |            <a href="/api/release">/api/integrations/moderation/chat/user/`{userId}`</a>            |         `HAS_ADMIN_ACCESS` |
 
 Visit the API documentation for each endpoint to learn more about what values are expected or will be returned.
 
@@ -71,13 +73,13 @@ Each access token is granted one or more scopes that control what it can do. The
 | -------------------------- | -------------------------------------------------------------------------------------------------------- |
 | `CAN_SEND_MESSAGES`        | Send standard chat messages as the token's own user.                                                     |
 | `CAN_SEND_SYSTEM_MESSAGES` | Send chat messages as the system, and send chat actions.                                                 |
-| `HAS_ADMIN_ACCESS`         | Administrative actions: read chat history, list connected clients, set the stream title, and change message visibility. |
+| `HAS_ADMIN_ACCESS`         | Administrative actions: read chat history, list connected clients, set the stream title, change message visibility, get the server status, and look up a chat user. |
 
 ## Responses and errors
 
 | Status | Meaning                                                                                          |
 | ------ | ------------------------------------------------------------------------------------------------ |
-| `200`  | The request succeeded. The JSON body has `success: true` and a short `message`.                  |
+| `200`  | The request succeeded. For the mutation (`POST`) endpoints the JSON body is the `success: true` envelope with a short `message`. The `GET` endpoints return the domain object instead: the server status, an array of chat messages, an array of connected clients, or a user's details. |
 | `400`  | The request body was malformed. The JSON body has `success: false` and a `message`.              |
 | `401`  | The access token is missing, invalid, or lacks the scope the endpoint requires. The body is plain text. |
 | `500`  | The server hit an error handling the request.                                                    |

@@ -6,9 +6,21 @@ sidebar_label: Manual install
 ---
 
 1. Owncast needs [ffmpeg](https://ffmpeg.org/) installed on your server. The automated installer downloads it for you, but a manual install does not, so install ffmpeg first if you do not already have it.
-1. Make a directory to run the service from, and download the release that matches your server from the [releases page](https://github.com/owncast/owncast/releases) into that directory. Builds are provided for Linux (`linux-64bit`, `linux-arm64`, `linux-arm7`, `linux-32bit`) and macOS (`macOS-64bit`, `macOS-arm64`). Use an `arm64` or `arm7` build for a Raspberry Pi.
+1. Make a directory to run the service from, and download the release that matches your server from the [releases page](https://github.com/owncast/owncast/releases) into that directory. Run `uname -m` to find your architecture, then pick the matching archive:
+
+   | `uname -m` output | OS    | Archive                             |
+   | ----------------- | ----- | ----------------------------------- |
+   | `x86_64`          | Linux | `owncast-<version>-linux-64bit.zip` |
+   | `aarch64`         | Linux | `owncast-<version>-linux-arm64.zip` |
+   | `armv7l`          | Linux | `owncast-<version>-linux-arm7.zip`  |
+   | `i686`            | Linux | `owncast-<version>-linux-32bit.zip` |
+   | `x86_64`          | macOS | `owncast-<version>-macOS-64bit.zip` |
+   | `arm64`           | macOS | `owncast-<version>-macOS-arm64.zip` |
+
+   Raspberry Pi boards are covered by the `arm64` and `arm7` builds. There is no ARMv6 build, so the original Raspberry Pi and the first Pi Zero are not supported.
 1. Unzip the release.
-1. Run `./owncast` to start the service.
+1. Make sure the two ports Owncast uses are reachable from outside your server: `8080` for the web interface and `1935` for RTMP ingest. Open them in your firewall or cloud provider's security rules if needed.
+1. Run `./owncast` to start the service. This runs Owncast in the foreground. To keep it running in the background and start it on boot, [run it as a system service](/docs/configuration/systemservice).
 1. Visit the admin at `/admin` to configure your server. Log in with the username `admin` and your admin password (`abc123` by default).
 
 import { IncludeMarkdown } from "@site/src/components";

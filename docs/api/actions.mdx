@@ -9,6 +9,10 @@ sidebar_position: 48
 
 You can build additional interfaces that are hosted with any add-ons, extensions, or 3rd party sites. Each action is a single URL or custom HTML that will be loaded and displayed when a user presses a button on the Owncast page.
 
+:::info[New in Owncast 0.3.0]
+Plugins can also contribute action buttons alongside the ones you register by hand. See the [plugin manifest](/docs/plugins/manifest) documentation.
+:::
+
 ## Examples
 
 Some examples of this functionality might be things like:
@@ -33,12 +37,26 @@ Some examples of this functionality might be things like:
 1. Give it a name that will be displayed on the button that launches this action, an optional description that will show in the modal that presents the action, a URL to an optional icon for the button, and optionally a color that will be used for the button.
 1. If you really want to register a URL you don't control, but it doesn't work with the default functionality, you can tell it to "Open Externally" and it will open a new tab in your browser. This is not optimal, but it's an option.
 
+## Query parameters passed to URL actions
+
+When a viewer opens a URL action, Owncast appends query parameters to your URL:
+
+- `instance` is always appended and holds the URL of the Owncast page the viewer is on. Useful if you host one action for multiple servers.
+- `username` and `userId` are appended only when the viewer has a chat user. `username` is the display name, which is not unique. `userId` is a stable identifier for that chat user.
+
+These parameters are conveniences, not authenticated identity. Anyone can open your URL with any values, so never grant access or make privileged API calls based on them. Use them to pre-fill forms and label sessions.
+
+## The iframe sandbox
+
+A URL action loads inside a modal in an iframe with `sandbox="allow-same-origin allow-scripts allow-popups allow-forms"`. Your page can run scripts, submit forms, and open popups, but it cannot navigate the top-level Owncast page or trigger downloads.
+
+There is no postMessage bridge. An embedded action cannot close or resize the modal, and it has no way to call back into Owncast. Treat the action as a self-contained page.
+
 ## Best practices
 
 1. This action's UI should perform little to no navigation. It shouldn't be treated as a way to show just any page.
 1. Design your UI to live in a small window that doesn't require much, if any, scrolling, and is responsive to mobile and small displays.
 1. Make sure your URL's server allows loading your content from your Owncast server via [X-FRAME-OPTIONS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) and the [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy).
-1. The chat username of the person who fired this action is passed along as a URL parameter so you can pre-fill any forms for convenience. You should utilize this.
-1. The instance URL of the Owncast server that is displaying this action UI is passed along as a URL parameter so if you happen to be hosting actions for multiple servers you can know where it's coming from. **Note:** You shouldn't perform arbitrary API requests just because this parameter exists, since anybody can easily fake it.
+1. The [query parameters](#query-parameters-passed-to-url-actions) Owncast appends tell you which server and which chat user opened the action. Use them to pre-fill forms, and remember they can be faked, so never treat them as proof of identity.
 1. For HTML actions that include custom styling via `<style>` tags, you should make sure to have selectors that are as specific as possible, not colliding with any other elements in the page.
 1. For HTML actions that directly embed a `<form>` element, it makes sense to set `target="_blank"` to open the submit page in a new tab. That way your viewers won't have to stop the stream when submitting the form.

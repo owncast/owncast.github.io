@@ -30,6 +30,9 @@ An example configuration for lighttpd might appear as follows:
 
 ```
 $HTTP["host"] == "owncast.yourdomain.com" {
+  # Forward all requests to Owncast:
+  proxy.server = ( "" => ( ( "host" => "127.0.0.1", "port" => 8080 ) ) )
+
   proxy.forwarded = ( "host" => 1,
                       "proto" => 1,
                       "for" => 1,

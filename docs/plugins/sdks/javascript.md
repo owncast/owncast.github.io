@@ -90,15 +90,16 @@ module.exports = definePlugin({
 });
 ```
 
-The package exports three things:
+The package exports four things you'll use:
 
 - **`definePlugin(handlers)`**: registers your handlers and returns the plugin object to export.
 - **`owncast`**: the host API namespace (`owncast.chat.send(...)`, `owncast.kv.get(...)`, and the rest). Method names are **camelCase**. Each call is gated by the matching permission you declare in your manifest. See the [APIs reference](/docs/plugins/apis).
 - **`filter`**: the constructor for filter results: `filter.pass()`, `filter.modify(payload)`, `filter.drop(reason)`. Used only from `filterChatMessage`.
+- **`authCheck`**: verdict helpers for the `onAuthCheck` handler of an `auth.gate` plugin: `authCheck.ok()`, `authCheck.refresh({ ttl? })`, `authCheck.deny(reason?)`.
 
 Handler names are camelCase and map to the runtime events listed in the [handlers reference](/docs/plugins/events): `onChatMessage`, `filterChatMessage`, `onChatUserJoined`, `onStreamStarted`, `onTick`, `onFediverseFollow`, `onHttpRequest`, and so on. Payload fields are camelCase too (`msg.user.displayName`, `msg.clientId`).
 
-Beyond top-level methods, two handler groups take a key and are passed as nested objects: `on: { "my.event"(payload) {} }` for custom events and `onTabContent: { slug(ctx) {} }` / `onPageContent` for dynamic viewer pages. Two more take no key: `onPageStyles()` and `onPageScripts()` return CSS and JavaScript injected into the viewer page at request time, gated on `ui.modify`. And rather than hand-rolling prefix parsing in `onChatMessage`, you can declare a `commands` table that the host's built-in `!help` picks up automatically. Both are shown for JavaScript on the subject pages: [Handlers](/docs/plugins/events), [Commands](/docs/plugins/commands), and [UI](/docs/plugins/ui).
+Beyond top-level methods, custom-event handlers are passed as a nested object keyed by event type: `on: { "my.event"(payload) {} }`. Dynamic viewer pages use plain functions: `onTabContent(ctx)` and `onPageContent(ctx)` are each a single handler receiving a `ctx` that carries the requested `slug` (your plugin branches on it when it declares several tabs). Two more take no key: `onPageStyles()` and `onPageScripts()` return CSS and JavaScript injected into the viewer page at request time, gated on `ui.modify`. And rather than hand-rolling prefix parsing in `onChatMessage`, you can declare a `commands` table that the host's built-in `!help` picks up automatically. Both are shown for JavaScript on the subject pages: [Handlers](/docs/plugins/events), [Commands](/docs/plugins/commands), and [UI](/docs/plugins/ui).
 
 ## TypeScript
 
@@ -132,6 +133,8 @@ npm run package   # produces my-plugin.ocpkg
 npm test          # runs your scenarios
 npm run serve     # iterate against a local dev server
 ```
+
+`npm run package` only rebuilds when the bundle is missing. After changing source, run `npm run build` first so the package doesn't ship stale code.
 
 The `.ocpkg` is the single distribution artifact: it contains your manifest, the bundled code, your `public/` and `assets/` directories, and an optional `icon.png` and `INSTRUCTIONS.md`. See [Packaging & distribution](/docs/plugins/packaging) for what goes inside and how to install it.
 

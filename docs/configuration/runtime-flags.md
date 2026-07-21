@@ -12,36 +12,47 @@ Most admins never need these. Use the admin UI for normal configuration. The fla
 
 You can run Owncast with `--help` to see a full list of available runtime flags.
 
-## Admin Password
+## Flag reference
 
-You can reset the admin password on startup via the `--adminpassword` flag. This is the usual way to recover access if you have lost your admin password. For example:
+| Flag                           | Value             | Purpose                                                                                       | Persistence                                     |
+| ------------------------------ | ----------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `--adminpassword`              | password          | Set a new admin password. The usual way to recover access if you lost yours.                  | Saved to the database                           |
+| `--backupdir`                  | directory path    | Directory where [database backups](/docs/backups) are written.                                | This run only                                   |
+| `--database`                   | file path         | Use a database file other than the default `data/owncast.db`.                                 | This run only                                   |
+| `--enableDebugFeatures`        | none              | Enable additional debugging options.                                                          | This run only                                   |
+| `--enableVerboseLogging`       | none              | Enable additional logging.                                                                    | This run only                                   |
+| `--followervalidationinterval` | seconds           | How often Fediverse followers are re-validated.                                               | This run only                                   |
+| `--logdir`                     | directory path    | Directory where logs are written.                                                             | This run only                                   |
+| `--restoreDatabase`            | backup file path  | Restore a database backup, then exit. Restart Owncast afterwards.                             | One-time action                                 |
+| `--rtmpport`                   | port number       | Set the listen port for the RTMP server. Default is `1935`.                                   | Saved to the database                           |
+| `--streamkey`                  | key               | Set a temporary stream key. While it's in effect the Stream Keys admin tab is hidden.         | This session only                               |
+| `--webserverip`                | IP address        | Force the web server to listen on a specific IP address.                                      | Saved to the database                           |
+| `--webserverport`              | port number       | Force the web server to listen on a specific port. Default is `8080`.                         | Saved to the database                           |
+
+Flags marked "saved to the database" change your stored server configuration. The new value keeps applying on later starts even after you drop the flag. The others only affect the run they're passed to.
+
+## Examples
+
+Reset a lost admin password:
 
 ```bash
 owncast --adminpassword mynewpassword
 ```
 
-## Stream Key
-
-You can set a temporary stream key on startup via the `--streamkey` flag. For example:
+Set a temporary stream key for this session:
 
 ```bash
 owncast --streamkey mystreamkey
 ```
 
-## Custom Ports
-
-Per default, Owncast will run a `http` web server on port `8080` and a RTMP server on port `1935`. You can change the ports in the the admin. You must restart Owncast for these changes to take effect.
-
-You can also set the port on the command line via the `--webserverport` and `--rtmpport` flags respectively. For example:
+Run on custom ports. You can also change ports in the admin, which requires a restart to take effect:
 
 ```bash
 owncast --webserverport 9090 --rtmpport 2945
 ```
 
-## Backups
-
-You can specify where backups are saved via the `--backupdir` flag. For example:
+Restore a database backup:
 
 ```bash
-owncast --backupdir /path/to/backup/directory
+owncast --restoreDatabase /path/to/owncastdb.bak
 ```

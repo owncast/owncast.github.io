@@ -22,6 +22,10 @@ There are numerous ways to watch Owncast live streams on many different devices.
 Most applications listed here are not provided by, endorsed by, or supported by Owncast. You should make your own choices about what applications you install. Products listed are suggestions that have been tested and found to work with Owncast. Those built and provided by Owncast should be seen as side projects to assist viewers.
 :::
 
+:::info[New in Owncast 0.3.0]
+If the server runs an authentication gate plugin, direct HLS URLs and third-party apps may be redirected to authenticate before playback. These instructions assume a public instance.
+:::
+
 ## Quick Access Methods
 
 ### Any Existing Video Player or Hardware
@@ -42,6 +46,18 @@ If your application has what is often called "IPTV" or M3U support, you can brow
 - **[Roku](/docs/watching-streams/roku)** - Owncasts for Roku or AirPlay
 - **[Amazon Fire TV](/docs/watching-streams/amazon-fire-tv)** - VLC for Fire TV
 - **[Google TV](/docs/watching-streams/google-tv)** - VLC for Android TV
+- **[Chromecast](/docs/watching-streams/chromecast)** - Cast from the Chrome browser
+
+### Smart TVs
+
+- **[LG TVs (WebOS)](/docs/watching-streams/lg-webos)** - SATV or other IPTV apps
+- **[Samsung TVs](/docs/watching-streams/samsung-tv)** - Built-in browser, mirroring, or an external device
+
+### Mobile, Desktop, and Media Centers
+
+- **[iPhone & iPad](/docs/watching-streams/iphone-ipad)** - Owncasts for iOS, Safari, or VLC
+- **[Kodi](/docs/watching-streams/kodi)** - Owncast plugin or direct URL playback
+- **[Web Browsers](/docs/watching-streams/web)** - The built-in Owncast web player
 
 ## Recommended Setup
 

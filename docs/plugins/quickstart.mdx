@@ -150,7 +150,7 @@ npm run package
 <TabItem value="py" label="Python">
 
 ```sh
-owncast-plugin-py package my-plugin
+owncast-plugin-py package
 ```
 
 </TabItem>
@@ -171,7 +171,7 @@ npm test
 <TabItem value="py" label="Python">
 
 ```sh
-owncast-plugin-py test my-plugin
+owncast-plugin-py test
 ```
 
 </TabItem>
@@ -192,7 +192,7 @@ npm run serve
 <TabItem value="py" label="Python">
 
 ```sh
-owncast-plugin-py serve my-plugin
+owncast-plugin-py serve
 ```
 
 </TabItem>
@@ -214,7 +214,7 @@ Alternatively, copy `my-plugin.ocpkg` to your server's `data/plugins/` directory
 scp my-plugin.ocpkg user@your-owncast-server:/path/to/owncast/data/plugins/
 ```
 
-If the plugin declares permissions, the admin reviews them in the **Permissions** tab on the plugin's detail page before enabling. The first enable captures the approved permission set. If you later ship an update that asks for more access, Owncast auto-disables the plugin and prompts the admin to re-approve.
+If the plugin declares permissions, the admin reviews them in the **Permissions** tab on the plugin's detail page before enabling. The first enable captures the approved permission set. If you later ship an update that asks for more access, the already-approved version keeps running with its existing permissions while the update waits as pending until the admin re-approves.
 
 <img
   src="/docs/img/plugin-permissions-tab.png"
@@ -233,5 +233,5 @@ If the plugin declares permissions, the admin reviews them in the **Permissions*
 
 - The plugin doesn't appear in the admin list. Make sure the `.ocpkg` is in `data/plugins/`, not just `plugins/`, and the filename ends in `.ocpkg`. The admin **Plugins** page has a Refresh button if you don't want to wait for the next scan tick.
 - The plugin appears but won't enable. Check the admin's plugin detail view. The **Status** column shows `error` if the manifest is invalid or the plugin failed to instantiate. Hover for the message, or run your tests locally to catch the same problem before shipping.
-- The plugin enables but does nothing. Make sure you're using the right handler name (`onChatMessage` / `on_chat_message`, not `onMessage`) and that the matching permission is in your manifest. Calling an API without its permission throws a clear error.
+- The plugin enables but does nothing. Make sure you're using the right handler name (`onChatMessage` / `on_chat_message`, not `onMessage`) and that the matching permission is in your manifest. A call without its permission never reaches Owncast: the denial is logged on the server and the call returns an empty or zero value, so watch the Owncast logs.
 - The plugin is auto-disabled. A filter that throws or hangs five times in a row gets disabled for the rest of the session. Fix the bug, rebuild, redeploy, and re-enable.

@@ -16,3 +16,4 @@ Your server can optionally use the [MaxMind GeoLite2 Database](https://dev.maxmi
 1. Unzip the file and place the `GeoLite2-City.mmdb` file into the `data` directory of your Owncast server. Create this directory if needed.
 1. Restart your Owncast service.
 
+Once enabled, the **Viewers** page in the admin at `/admin/viewer-info` shows a **Location** column with the region and country for each current viewer, resolved from the GeoIP data. Viewers without a resolvable country, or connecting through an anonymous proxy, do not get a location.

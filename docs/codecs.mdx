@@ -14,12 +14,12 @@ sidebar_label: Hardware accelerated encoding & codecs
 1. You are **not** running on a VPS provided to you by a hosting provider, as shared virtual servers do not allow for direct access to hardware.
 1. You have compatible hardware and have direct access to it.
 1. You installed and configured any drivers and libraries needed to take advantage of your hardware.
-1. You have a copy of `ffmpeg` that is version 4.1.5 or greater that is specifically built to utilize these drivers and libraries.
+1. You have a copy of `ffmpeg` that is specifically built to utilize these drivers and libraries. Version 4.1.5 or newer is suggested.
 
 ## Things to keep in mind
 
 1. Most people won't be able to take advantage of this unless you're running your own hardware.
-1. Just because a specific hardware accelerated codec shows in the Owncast admin **does not mean your machine is configured to support it**. It simply means Owncast believes that codec to be available.
+1. Just because a specific hardware accelerated codec shows in the Owncast admin **does not mean your machine is configured to support it**. Owncast builds that list by running `ffmpeg -encoders` and keeping the H.264 encoders it knows how to use. An entry appearing means your copy of ffmpeg advertises that encoder, not that the drivers and hardware behind it are proven to work.
 1. Very little of what is required to get your hardware working has anything to do with Owncast. Any questions you have about your particular hardware should be directed to your hardware manufacturer or whoever provides the drivers and libraries to utilize it. There's likely a lot of information already online, so please do your research.
 
 ## Compatible hardware
@@ -73,22 +73,32 @@ Links:
 - [Tal.org instructions on building ffmpeg with nvenc](https://www.tal.org/tutorials/ffmpeg_nvidia_encode)
 - [Shell script that claims to automate the process on Ubuntu](https://gist.github.com/ransagy/3f6f1a9e5ede6212425f3b36b136216e)
 
+### OpenMAX (omx)
+
+OpenMAX (`h264_omx`) is a hardware encoding interface most commonly used on older Raspberry Pi boards. It shows in the admin as "OpenMax (omx) for Raspberry Pi". Your copy of ffmpeg must be built with OpenMAX support, which many distribution builds no longer include.
+
+### Apple VideoToolbox
+
+VideoToolbox (`h264_videotoolbox`) is Apple's hardware video encoding framework. If you run Owncast on macOS, ffmpeg builds from Homebrew and most other sources include it, and it uses the media engine built into Apple hardware.
+
 ## ffmpeg
 
 Once your system is configured to use the correct drivers and libraries required you'll need to make sure your copy of `ffmpeg` supports it.
 
-Verify you have ffmpeg installed that's at least version 4.1.5.
+Owncast suggests `ffmpeg` version 4.1.5 or newer. This is a suggestion, not a hard requirement. Owncast does not refuse to run with an older version, but you may experience issues with video.
 
 ```
 $ ffmpeg -version
 ffmpeg version 6.1.1 Copyright (c) 2000-2024 the FFmpeg developers
 ```
 
-Verify the codec you expect to use is enabled in your version of ffmpeg.
+Verify the encoder you expect to use is enabled in your version of ffmpeg. This mirrors what Owncast itself does to populate the codec dropdown in the admin.
 
 ```
-$ ffmpeg -hide_banner -codecs | grep 264
- DEV.LS h264                 H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10 (decoders: h264 h264_v4l2m2m h264_mmal ) (encoders: libx264 libx264rgb h264_omx h264_v4l2m2m h264_vaapi )
+$ ffmpeg -hide_banner -encoders | grep 264
+ V....D libx264              libx264 H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10 (codec: h264)
+ V....D h264_v4l2m2m         V4L2 mem2mem H.264 encoder wrapper (codec: h264)
+ V....D h264_vaapi           H.264/AVC (VAAPI) (codec: h264)
 ```
 
-If the codec you hope to use is not in this list then you may need to build your own copy of ffmpeg that supports it.
+If the encoder you hope to use is not in this list then you may need to build your own copy of ffmpeg that supports it.

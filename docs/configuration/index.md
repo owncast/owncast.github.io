@@ -17,8 +17,15 @@ For most people Owncast will be completely usable out of the box without additio
 
 <img src="/docs/img/admin-dashboard.png" alt="The Owncast admin dashboard, showing the navigation sidebar and the stream status overview" width="80%" />
 
-The admin is where you configure everything below. Open it at `/admin` on your server and sign in with your admin password.
+Configuration is done in the admin. Open it at `/admin` on your server and sign in with your admin password. The **Configuration** menu contains:
 
-There are, however, handfuls of items you can configure to tweak the content of your page, [the video quality](/docs/video), [server performance](/docs/metrics) and more.
+- **General**: your server name, logo, tags and page content. See [customizing your website](/docs/configuration/website).
+- **Server Setup**: admin password, stream keys, ports and S3 storage. See [server setup](/docs/configuration/server-setup).
+- **Video**: quality variants, latency and codec settings. See [video quality](/docs/video).
+- **Chat**: enable or disable chat and set moderation rules. See [chat moderation](/docs/chat/moderation).
+- **Social**: Fediverse participation and social links. See [social features](/docs/social).
+- **Notifications**: let your audience know when you go live. See [notifications](/docs/configuration/notifications).
 
-You can also [extend Owncast’s functionality](/docs/api) by building your own bots, overlays, tools and integrations by taking advantage of the third party APIs.
+A few related settings live elsewhere in the admin. [Webhooks](/docs/api/webhooks), [Access Tokens](/docs/api/requests) and [External Actions](/docs/api/actions) are under **Integrations**. Custom [emoji](/docs/chat/emoji) are under **Chat > Emojis**.
+
+You can also [extend Owncast's functionality](/docs/extend) with plugins or by building your own bots, overlays, tools and integrations on the APIs.

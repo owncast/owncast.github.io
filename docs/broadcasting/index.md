@@ -23,9 +23,11 @@ However, we haven't tested with everything. So if you're using something specifi
 
 ## Pointing your software to Owncast
 
-Most broadcasting software will have a way to specify a "custom" location as a RTMP endpoint. In this case you would specify `rtmp://yourserver/live` as the RTMP destination, specifying your streaming key where it asks for it. The default stream key is `abc123` but you should change this immediately after setting up Owncast.
+Owncast accepts incoming streams over RTMP on TCP port 1935 by default. The port is configurable in the admin under Configuration > Server Setup (see [Server Setup](/docs/configuration/server-setup)). Your stream key is only accepted on the `/live/` path, so the full endpoint is `rtmp://yourserver:1935/live/<your-stream-key>`.
 
-If your software doesn't have a place to specify a streaming key you can simply append it to your RTMP location, for example: `rtmp://yourserver/live/abc123`.
+Most broadcasting software will have a way to specify a "custom" location as a RTMP endpoint. In this case you would specify `rtmp://yourserver:1935/live` as the RTMP destination, specifying your stream key where it asks for it. The default stream key is `abc123` but you should change this immediately after setting up Owncast.
+
+If your software doesn't have a place to specify a stream key you can simply append it to your RTMP location, for example: `rtmp://yourserver:1935/live/abc123`.
 
 ## How you configure your broadcasting software matters
 
@@ -33,7 +35,7 @@ You will want to configure your broadcasting software to match the highest quali
 
 Every server, environment, network speed and processing capacity is different. Just because you _want_ to offer a certain quality doesn't mean your server can support it.
 
-If you find yourself trying to squeeze better performance out of Owncast then try setting your broadcasting software to a lower quality as well as lowering the quality in your Owncast instance.
+If you find yourself trying to squeeze better performance out of Owncast then try setting your broadcasting software to a lower quality as well as lowering the output quality in the admin under Configuration > Video.
 
 ## Broadcasting Settings
 
@@ -56,9 +58,13 @@ Resolution refers to the size of a video on a screen, and frame rate refers to h
 
 The bitrate is the amount of data you send to your Owncast server when you stream. A higher bitrate takes up more of your available internet bandwidth. Increasing your bitrate can improve your video quality, but only up to a certain point.
 
+### Video and audio codecs
+
+Use H.264 video and AAC audio for the best compatibility. Owncast's ingest layer also recognizes H.265 video and MP3 and Speex audio, but transcoding and playback compatibility are only assured for H.264 and AAC.
+
 ### Keyframe Interval
 
-It is suggested you set your broadcasting software keyframe setting at _2_ and **not** at `auto`.
+Set your broadcasting software to send a keyframe every 2 seconds and do not leave it at `auto`. Keyframe settings use different units in different tools. The OBS keyframe interval is in seconds, so use `2`. The ffmpeg `-g` option counts frames, so use twice your framerate.
 
 ### Audio settings
 
@@ -68,7 +74,7 @@ Set your broadcasting software to send Owncast `AAC` audio.
 
 When streaming also make sure to match your audio quality to what you're streaming. If you're a music focused stream then maybe go higher. If you're just talking, then maybe you can afford to go lower.
 
-Owncast will not re-encode audio, so it will go out exactly how it's sent.
+Owncast passes audio through untouched by default, so it goes out exactly how it's sent. If audio passthrough is turned off for an output variant, Owncast re-encodes that variant's audio to AAC.
 
 | Quality | Bitrate |
 | ------- | ------- |

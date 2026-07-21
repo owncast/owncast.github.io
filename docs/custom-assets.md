@@ -7,6 +7,8 @@ sidebar_label: Host public assets
 
 By creating a `data/public` directory and putting your own files there you can serve any assets that you wish to make publicly available for any reason.
 
+Owncast 0.3.0 writes plugin-hosted files under `data/public/plugins/`, so do not place your own files there.
+
 Afterward, you will be able to access these assets via the `/public` path on your Owncast web server. For example:
 
 `https://stream.example.com/public/image.png`

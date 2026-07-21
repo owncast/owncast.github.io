@@ -23,7 +23,7 @@ A reverse proxy is a small server that sits in front of Owncast. It:
 
 - Listens on the public internet (ports 80 and 443)
 - Handles HTTPS / SSL
-- Forwards traffic to Owncast running privately (usually on port 8080)
+- Forwards traffic to Owncast (by default on port 8080)
 - Owns the certificate
 - Encrypts traffic
 - Decrypts it before sending it to Owncast
@@ -70,8 +70,11 @@ These usually cause:
 2. Reverse proxy listens on ports 80 / 443 (not RTMP 1935)
 3. Reverse proxy gets an SSL certificate
 4. Reverse proxy forwards traffic to Owncast
-5. Owncast runs privately (usually :8080)
-6. OBS sends RTMP to Owncast
+5. Owncast runs on :8080 (the port is configurable in Server Setup)
+6. Owncast itself is kept off the public internet: bind it to loopback with `--webserverip 127.0.0.1` or firewall port 8080. By default Owncast listens on every interface, so without this step visitors can bypass your proxy and reach it directly over plain HTTP.
+7. OBS sends RTMP to Owncast on port 1935, not through the proxy
+
+The proxy must forward every path to Owncast, including the websocket upgrade at `/ws` that chat uses. All of the example configurations in this section do this.
 
 ## If something isn’t working, the most helpful questions to ask are:
 

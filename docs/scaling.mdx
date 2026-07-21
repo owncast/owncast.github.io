@@ -47,7 +47,7 @@ If you are not familiar with the topics below, or you don't feel comfortable wit
 
 ## Chat
 
-When scaling chat you're limited by what your single server will be able to handle as far as open connections. For most people the standard configuration is likely going to suffice, as it's been tested to thousands of concurrent clients.
+When scaling chat you're limited by what your single server will be able to handle as far as open connections. For most people the standard configuration is likely going to suffice. Users have run chat with thousands of concurrent connections, but that is anecdotal experience rather than a tested or guaranteed limit, and results depend on your server's resources.
 
 Owncast will automatically increase the amount of concurrent sockets that your operating system will allow. However, if you still get the `too many open files` error it's because your `ulimit` value is lower than the number of open resources Owncast is trying to to use. You will want to have a more powerful server (cpu, ram) when raising the max limit and handle more chat connections.
 

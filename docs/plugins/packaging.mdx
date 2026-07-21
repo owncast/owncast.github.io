@@ -1,5 +1,5 @@
 ---
-title: Packaging & publishing
+title: Packaging & publishing plugins
 description: Bundle your plugin into a .ocpkg, install it on a server, and list it in the public plugin directory.
 sidebar_position: 10
 sidebar_label: Packaging & publishing
@@ -27,6 +27,8 @@ A plugin's distribution format is the `.ocpkg` file: a single bundle containing 
 npm run package
 ```
 
+`npm run package` only rebuilds when the bundle is missing. After changing source, run `npm run build` first so the package doesn't ship stale code.
+
 </TabItem>
 <TabItem value="py" label="Python">
 
@@ -38,6 +40,8 @@ owncast-plugin-py package my-plugin
 </Tabs>
 
 Either way, the build bundles your plugin together with your `public/` and `assets/` directories into a single `<your-slug>.ocpkg` at the project root.
+
+Before writing the archive, both SDKs run your built plugin through `owncast-plugin-test --load-only`: the same install-time load path a real server runs, covering `register()`, manifest-runtime agreement, and permission-gated subscriptions. Packaging fails if a real Owncast server would refuse to load the plugin, for example a fediverse handler without `fediverse.inbound` declared. The check needs the host test binary, which the JS SDK fetches during `npm install` and the Python SDK downloads on first use.
 
 The file is self-contained. Share it however you like:
 
@@ -95,7 +99,11 @@ No build inputs: `node_modules`, `package.json`, `pyproject.toml`, or your `.js`
 
 In the Owncast admin, open **Plugins** in the sidebar and click **Upload plugin**. Pick your `.ocpkg` and the server installs it in place. The new plugin appears in the list immediately.
 
-<img src="/docs/img/plugins-installed-list.png" alt="The Plugins page in the admin, listing installed plugins with their requested permissions, status, an enable toggle, and Upload plugin and Configure buttons" width="80%" />
+<img
+  src="/docs/img/plugins-installed-list.png"
+  alt="The Plugins page in the admin, listing installed plugins with their requested permissions, status, an enable toggle, and Upload plugin and Configure buttons"
+  width="80%"
+/>
 
 If the admin UI isn't an option (automation, no browser access, scripted deploys) you can also drop the `.ocpkg` directly into the server's `data/plugins/` directory:
 
@@ -113,18 +121,18 @@ In either case, finish the install in the admin:
 
 ## Updating an installed plugin
 
-To ship an update, upload the new `.ocpkg` from the admin's **Plugins** page (or overwrite the file in `data/plugins/` directly). The new contents replace the existing entry under the same plugin name. To force an immediate reload of an enabled plugin, click **Reload** on its row.
+To ship an update, upload the new `.ocpkg` from the admin's **Plugins** page (or overwrite the file in `data/plugins/` directly). The manifest's `slug` is the identity key: the new contents replace the existing entry with the same slug, whatever the uploaded file was called. To force an immediate reload of an enabled plugin, click **Reload** on its row.
 
 ### What happens when permissions change
 
 - You removed permissions. Silent. The plugin reloads with the smaller set.
-- You added permissions. Owncast auto-disables the plugin and shows a "needs re-approval" badge in the plugin list. The admin reviews the new permissions in the **Permissions** tab (new entries are tagged) and clicks **Approve** to accept the expanded set and re-enable the plugin.
+- You added permissions. The old approved version keeps running (it holds only the approved permissions) and the new package waits as pending, with a "needs re-approval" badge in the plugin list. The admin reviews the new permissions in the **Permissions** tab (new entries are tagged) and clicks **Approve** to accept the expanded set and load the update.
 
 A plugin's effective capabilities never grow without explicit admin consent, even across updates.
 
 ### Bumping the version
 
-Bump `version` in `plugin.manifest.json` whenever you cut a release. The host enforces a manifest-runtime version match at load time. If you change the version in the manifest without also rebuilding (so the runtime's reported version still has the old number), the load fails with a clear error.
+Bump `version` in `plugin.manifest.json` whenever you cut a release. It's what admins see in the plugin list and what the registry uses to tell releases apart. The host doesn't gate loading on it: update identity is the `slug`, and the load-time check compares slug and permissions, not version.
 
 Versioning is for humans. Semver is recommended but not enforced.
 

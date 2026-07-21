@@ -1,5 +1,5 @@
 ---
-title: Contributing UI
+title: Contributing web UI with Plugins
 description: Add admin pages to the Owncast admin UI and action buttons to the viewer chrome.
 sidebar_position: 8
 sidebar_label: UI
@@ -31,26 +31,28 @@ Plugins can register pages that appear inside the Owncast admin UI under **Plugi
 {
   "permissions": ["http.serve"],
   "admin": {
-    "pages": [
-      { "title": "Settings", "path": "/admin", "icon": "gear" }
-    ]
+    "pages": [{ "title": "Settings", "path": "/admin", "icon": "gear" }]
   }
 }
 ```
 
 Each entry has a `title`, a `path` glob, and an optional `icon`:
 
-| Field   | Notes                                                                                                |
-| ------- | ---------------------------------------------------------------------------------------------------- |
-| `title` | The tab label inside the plugin's admin view.                                                        |
-| `path`  | A path glob under `/plugins/<your-slug>/`. Examples: `"/admin"`, `"/admin/*"`, `"/admin/api/*"`.     |
-| `icon`  | Short semantic name. Supported: `gear`, `wrench`, `user`, `users`, `lock`, `info`, `apps`, `docs`, `bell` (aliases like `settings` and `notifications` also work).    |
+| Field   | Notes                                                                                                                                                              |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `title` | The tab label inside the plugin's admin view.                                                                                                                      |
+| `path`  | A path glob under `/plugins/<your-slug>/`. Examples: `"/admin"`, `"/admin/*"`, `"/admin/api/*"`.                                                                   |
+| `icon`  | Short semantic name. Supported: `gear`, `wrench`, `user`, `users`, `lock`, `info`, `apps`, `docs`, `bell` (aliases like `settings` and `notifications` also work). |
 
 ### How they're rendered
 
 Owncast's admin renders each declared page as a tab inside `/admin/plugins/configure?id=<your-slug>`. The tab body is an `<iframe>` pointed at `/plugins/<your-slug>/<path>`. Each plugin gets a bookmarkable URL and a sidebar entry under **Plugins** in the admin navigation.
 
-<img src="/docs/img/plugin-admin-page.png" alt="A plugin's admin page rendered as a tab inside the admin, alongside its Instructions and Permissions tabs" width="80%" />
+<img
+  src="/docs/img/plugin-admin-page.png"
+  alt="A plugin's admin page rendered as a tab inside the admin, alongside its Instructions and Permissions tabs"
+  width="80%"
+/>
 
 The host auto-injects the baseline stylesheet into HTML responses on admin paths, so plain `<input>` and `<button>` controls look native to Owncast's admin without you needing to ship CSS. See [Styling plugin UI](#styling-plugin-ui) for what you get for free and the helper classes available. Plugins that prefer their own styling can layer on top.
 
@@ -71,13 +73,13 @@ Use multiple globs when you have both a UI page and a JSON API:
   "admin": {
     "pages": [
       { "title": "Settings", "path": "/admin" },
-      { "title": "Settings", "path": "/admin/api/*" }
+      { "title": "Settings", "path": "/admin/*" }
     ]
   }
 }
 ```
 
-Duplicate `title` is fine. Both globs feed one tab.
+The admin UI deduplicates tabs by the resolved iframe URL, not by title. `/admin` and `/admin/*` both resolve to `/admin/`, so this pair produces one visible tab that gates the whole subtree. A pair like `/admin` and `/admin/api/*` resolves to two different URLs and produces two tabs.
 
 ### Author flow
 
@@ -90,7 +92,11 @@ Duplicate `title` is fine. Both globs feed one tab.
 
 Owncast surfaces a row of action buttons in its viewer UI. Clickable entries that either open a URL (in a modal or new tab) or render raw HTML. Plugins can contribute their own.
 
-<img src="/docs/img/plugin-action-buttons.png" alt="A row of plugin-contributed action buttons beneath the stream on the viewer page, next to the built-in Follow and Notify buttons" width="85%" />
+<img
+  src="/docs/img/plugin-action-buttons.png"
+  alt="A row of plugin-contributed action buttons beneath the stream on the viewer page, next to the built-in Follow and Notify buttons"
+  width="85%"
+/>
 
 ### Manifest-declared buttons
 
@@ -122,29 +128,29 @@ While your plugin is enabled, the host merges its action entries into the list O
 
 ### Field reference
 
-| Field            | Notes                                                                                          |
-| ---------------- | ---------------------------------------------------------------------------------------------- |
-| `title`          | Required. The button label.                                                                    |
-| `url`            | Either an absolute `https://...` URL or a path. Mutually exclusive with `html`.                |
-| `html`           | Raw HTML rendered in an inline modal. Mutually exclusive with `url`.                           |
-| `icon`           | Optional image URL shown on the button. Same path rules as `url`.                              |
-| `color`          | Optional hex color for the button background.                                                  |
-| `description`    | Optional. Shown in the modal that opens for URL-based actions.                                 |
-| `openExternally` | If `true`, the URL opens in a new tab instead of an inline modal.                              |
+| Field            | Notes                                                                           |
+| ---------------- | ------------------------------------------------------------------------------- |
+| `title`          | Required. The button label.                                                     |
+| `url`            | Either an absolute `https://...` URL or a path. Mutually exclusive with `html`. |
+| `html`           | Raw HTML rendered in an inline modal. Mutually exclusive with `url`.            |
+| `icon`           | Optional image URL shown on the button. Same path rules as `url`.               |
+| `color`          | Optional hex color for the button background.                                   |
+| `description`    | Optional. Shown in the modal that opens for URL-based actions.                  |
+| `openExternally` | If `true`, the URL opens in a new tab instead of an inline modal.               |
 
 ### Path rules
 
 Two simple rules cover everything:
 
-* Relative paths auto-prefix to your plugin's namespace. `"/"` becomes `/plugins/my-plugin/`. `"/star.png"` becomes `/plugins/my-plugin/star.png`. This saves you from hard-coding your plugin name. Applies to both `url` and `icon`.
-* Absolute `https://...` URLs pass through unchanged. Use these for external links and CDN-hosted icons.
+- Relative paths auto-prefix to your plugin's namespace. `"/"` becomes `/plugins/my-plugin/`. `"/star.png"` becomes `/plugins/my-plugin/star.png`. This saves you from hard-coding your plugin name. Applies to both `url` and `icon`.
+- Absolute `https://...` URLs pass through unchanged. Use these for external links and CDN-hosted icons.
 
 The host enforces:
 
-* `ui.modify` permission is required. Manifests with `actions` but no `ui.modify` are rejected at load.
-* Exactly one of `url` or `html` per entry.
-* URLs and icons that resolve into your namespace require `http.serve`. You're the one serving them.
-* URLs and icons pointing at another plugin's namespace are rejected. Catches typos and prevents one plugin from advertising another's UI.
+- `ui.modify` permission is required. Manifests with `actions` but no `ui.modify` are rejected at load.
+- Exactly one of `url` or `html` per entry.
+- URLs and icons that resolve into your namespace require `http.serve`. You're the one serving them.
+- URLs and icons pointing at another plugin's namespace are rejected. Catches typos and prevents one plugin from advertising another's UI.
 
 ### Runtime additions
 
@@ -154,13 +160,13 @@ A plugin can append more action buttons at runtime, without a reload, by calling
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-const { definePlugin, owncast } = require("@owncast/plugin-sdk");
+const { definePlugin, owncast } = require('@owncast/plugin-sdk');
 
 module.exports = definePlugin({
   onStreamStarted() {
     owncast.actions.add({
-      title: "Donate",
-      url: "https://example.com/donate",
+      title: 'Donate',
+      url: 'https://example.com/donate',
       openExternally: true,
     });
     // or add several at once: owncast.actions.add([ { ... }, { ... } ])
@@ -207,15 +213,15 @@ The baseline styles the iframe-rendered surfaces: [admin pages](#admin-pages) an
 
 For native building blocks beyond plain elements, the baseline ships a few opt-in classes. They reference the same theme tokens as the rest of Owncast, so they restyle automatically when an admin customizes the theme.
 
-| Class              | What it does                                                                                                                                            |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Class              | What it does                                                                                                                                                                                    |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `card`             | A native card surface, the same look as the followers and featured-streams cards. A plain `<section>` / `<article>` stays flush, so opt in with `class="card"` when you want the boxed surface. |
-| `card interactive` | Add `interactive` to a clickable card for the native hover lift.                                                                                        |
-| `card-grid`        | A responsive grid that fills as many ~260px columns as fit and collapses to one column on a narrow frame. Drop `card` children straight in.             |
-| `tag`              | A pill tag or badge, matching the tags on the native stream cards.                                                                                      |
-| `stack`            | A vertical flex column with a consistent gap.                                                                                                           |
-| `row`              | A horizontal flex row that wraps, with a consistent gap.                                                                                                |
-| `muted`            | De-emphasized text, for captions and secondary detail.                                                                                                  |
+| `card interactive` | Add `interactive` to a clickable card for the native hover lift.                                                                                                                                |
+| `card-grid`        | A responsive grid that fills as many ~260px columns as fit and collapses to one column on a narrow frame. Drop `card` children straight in.                                                     |
+| `tag`              | A pill tag or badge, matching the tags on the native stream cards.                                                                                                                              |
+| `stack`            | A vertical flex column with a consistent gap.                                                                                                                                                   |
+| `row`              | A horizontal flex row that wraps, with a consistent gap.                                                                                                                                        |
+| `muted`            | De-emphasized text, for captions and secondary detail.                                                                                                                                          |
 
 ```html
 <div class="card-grid">
@@ -251,12 +257,12 @@ Requires `ui.modify` only (the plugin paints inside Owncast's chrome). `http.ser
 
 ### Path rules
 
-* Bare paths like `"theme.css"` auto-prefix to your plugin's namespace.
-* `"/theme.css"` resolves the same way.
-* Fully qualified `/plugins/<your-slug>/...` paths pass through.
-* Paths in another plugin's namespace are rejected.
-* `http://` and `https://` URLs are rejected. Bundle external assets and reference them with `@font-face` or `url(...)` from inside your CSS instead, so an admin reviewing the manifest sees every file that will load.
-* Each entry must end in `.css`.
+- Bare paths like `"theme.css"` auto-prefix to your plugin's namespace.
+- `"/theme.css"` resolves the same way.
+- Fully qualified `/plugins/<your-slug>/...` paths pass through.
+- Paths in another plugin's namespace are rejected.
+- `http://` and `https://` URLs are rejected. Bundle external assets and reference them with `@font-face` or `url(...)` from inside your CSS instead, so an admin reviewing the manifest sees every file that will load.
+- Each entry must end in `.css`.
 
 ### How contributions are rendered
 
@@ -294,11 +300,13 @@ When the CSS depends on plugin state, a theme the admin picked or a value in the
 <TabItem value="js" label="JavaScript" default>
 
 ```js
+const ACCENTS = { ocean: '#2386e2', forest: '#42bea6' };
+
 module.exports = definePlugin({
   onPageStyles() {
-    const theme = owncast.kv.get("theme");
-    if (!theme) return;
-    return `:root { --theme-color-action: ${accentFor(theme)}; }`;
+    const accent = ACCENTS[owncast.kv.get('theme')];
+    if (!accent) return;
+    return `:root { --theme-color-action: ${accent}; }`;
   },
 });
 ```
@@ -307,18 +315,20 @@ module.exports = definePlugin({
 <TabItem value="py" label="Python">
 
 ```python
+ACCENTS = {"ocean": "#2386e2", "forest": "#42bea6"}
+
 @plugin.on_page_styles
 def page_styles():
-    theme = owncast.kv.get("theme")
-    if not theme:
+    accent = ACCENTS.get(owncast.kv.get("theme"))
+    if not accent:
         return
-    return f":root {{ --theme-color-action: {accent_for(theme)}; }}"
+    return f":root {{ --theme-color-action: {accent}; }}"
 ```
 
 </TabItem>
 </Tabs>
 
-Requires `ui.modify`. Return nothing (a bare `return`, the same as returning `""`) when there is nothing to contribute on a given request. The call takes no per-viewer argument, so the `/api/config` response stays cacheable. The `theme-hub` example in the SDK uses this to apply an admin-selected theme to the whole viewer UI.
+Requires `ui.modify`. The examples above also read the KV store, which separately requires `storage.kv`. Return nothing (a bare `return`, the same as returning `""`) when there is nothing to contribute on a given request. The call takes no per-viewer argument, so the `/api/config` response stays cacheable. The `theme-hub` example in the SDK uses this to apply an admin-selected theme to the whole viewer UI.
 
 ## Viewer scripts
 
@@ -339,9 +349,9 @@ These are **viewer-page** scripts that run in the browser, always JavaScript, re
 
 The viewer page loads `/customjavascript` as a single `<script async>` tag. Every plugin's JS runs in the same global window as the admin's custom JS and the rest of Owncast's chrome. Three implications:
 
-* Top-level `var` and `function` declarations land on `window`. Wrap your script in an IIFE (`(function(){ ... })()`) so private state stays private and you don't collide with the admin's JS or other plugins.
-* The host wraps each plugin's contribution in its own try/catch, so a runtime error throws to the browser console (prefixed `owncast plugin <your-slug> script error:`) without stopping the other plugins' scripts. A syntax error is not isolated: it breaks parsing of the one concatenated script tag before any try/catch runs, so ship valid JavaScript.
-* Relative `fetch('./data.json')` resolves against the viewer page's URL, not against your plugin. Use absolute paths like `/plugins/<your-slug>/data.json` for files you ship in `public/`.
+- Top-level `var` and `function` declarations land on `window`. Wrap your script in an IIFE (`(function(){ ... })()`) so private state stays private and you don't collide with the admin's JS or other plugins.
+- The host wraps each plugin's contribution in its own try/catch, so a runtime error throws to the browser console (prefixed `owncast plugin <your-slug> script error:`) without stopping the other plugins' scripts. A syntax error is not isolated: it breaks parsing of the one concatenated script tag before any try/catch runs, so ship valid JavaScript.
+- Relative `fetch('./data.json')` resolves against the viewer page's URL, not against your plugin. Use absolute paths like `/plugins/<your-slug>/data.json` for files you ship in `public/`.
 
 ### Dynamic scripts: `onPageScripts`
 
@@ -356,7 +366,7 @@ This is for any request-time JavaScript, not only theming. Use it to run viewer-
 module.exports = definePlugin({
   // Run request-time JavaScript on the viewer page.
   onPageScripts() {
-    const notice = owncast.kv.get("notice");
+    const notice = owncast.kv.get('notice');
     if (!notice) return;
     return `alert(${JSON.stringify(notice)});`;
   },
@@ -367,6 +377,8 @@ module.exports = definePlugin({
 <TabItem value="py" label="Python">
 
 ```python
+import json
+
 @plugin.on_page_scripts
 def page_scripts():
     notice = owncast.kv.get("notice")
@@ -378,7 +390,7 @@ def page_scripts():
 </TabItem>
 </Tabs>
 
-The output runs in the shared viewer `window`, so the IIFE and absolute-path advice above still applies. Escape any untrusted strings you embed: `JSON.stringify` in JavaScript and `json.dumps` in Python both produce a safely-quoted literal, which is why the examples wrap the notice in one before passing it to `alert`. Return nothing (a bare `return`, the same as returning `""`) to contribute nothing.
+The output runs in the shared viewer `window`, so the IIFE and absolute-path advice above still applies. Escape any untrusted strings you embed: `JSON.stringify` in JavaScript and `json.dumps` in Python both produce a safely-quoted literal, which is why the examples wrap the notice in one before passing it to `alert`. Like the styles examples, reading the KV store requires `storage.kv` on top of `ui.modify`. Return nothing (a bare `return`, the same as returning `""`) to contribute nothing.
 
 ### When to use it
 
@@ -395,9 +407,9 @@ Plugins can prepend HTML to the viewer page's extra-content block. Declare `mani
 }
 ```
 
-| Field     | Notes                                                                                                      |
-| --------- | ---------------------------------------------------------------------------------------------------------- |
-| `slug`    | Required. A stable identifier passed to the page-content handler when the host asks for rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. |
+| Field     | Notes                                                                                                                                                                             |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `slug`    | Required. A stable identifier passed to the page-content handler when the host asks for rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter.            |
 | `content` | Optional. Relative path to a static HTML file in `assets/`. When present, that file's bytes are inlined directly. When omitted, the host calls your page-content handler instead. |
 
 ### Static vs dynamic
@@ -412,7 +424,7 @@ module.exports = definePlugin({
   onPageContent: {
     // keyed by the manifest slug; ctx = { slug, user? }
     banner(ctx) {
-      const who = ctx.user ? `, ${ctx.user.displayName}` : "";
+      const who = ctx.user ? `, ${ctx.user.displayName}` : '';
       return `<div class="banner">Welcome${who}!</div>`;
     },
   },
@@ -463,9 +475,9 @@ This means plugin HTML can use any element the viewer page accepts. It also mean
 
 A pattern that often reads cleaner than building the same DOM imperatively from a `scripts`-only plugin:
 
-* `panel.html` declares structure, classes, and IDs you can reason about as plain HTML.
-* `panel.css` (declared in `styles`) themes it.
-* `panel.js` attaches event listeners, fetches data, mutates state.
+- `panel.html` declares structure, classes, and IDs you can reason about as plain HTML.
+- `panel.css` (declared in `styles`) themes it.
+- `panel.js` attaches event listeners, fetches data, mutates state.
 
 When to reach for HTML-plus-JS instead of pure JavaScript: anything with non-trivial layout, ARIA attributes, or third-party widgets that expect to bootstrap from existing DOM. Pure `scripts` still makes sense for plugins that build their UI only on certain conditions (after a fetch, after a user action) where rendering nothing on initial paint is the right behavior.
 
@@ -481,17 +493,17 @@ Plugins can add tabs to the viewer page's tab row (next to the built-in **About*
 {
   "permissions": ["ui.modify"],
   "tabs": [
-    { "title": "Music",       "slug": "music",    "content": "music.html" },
+    { "title": "Music", "slug": "music", "content": "music.html" },
     { "title": "Stream Info", "slug": "stream-info" }
   ]
 }
 ```
 
-| Field     | Notes                                                                                                                                                                 |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `title`   | Required. The label shown on the tab.                                                                                                                                 |
+| Field     | Notes                                                                                                                                                                                                        |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `title`   | Required. The label shown on the tab.                                                                                                                                                                        |
 | `slug`    | Required. Stable identifier passed to the tab-content handler when the host requests rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. Must be unique within the plugin's tabs. |
-| `content` | Optional. Relative path to a static HTML file in `assets/`. When present, that file's bytes are inlined directly. When omitted, the host calls the tab-content handler instead. |
+| `content` | Optional. Relative path to a static HTML file in `assets/`. When present, that file's bytes are inlined directly. When omitted, the host calls the tab-content handler instead.                              |
 
 Requires `ui.modify`. `http.serve` is not required: each tab's HTML is read from `assets/` and inlined into the tab body. The viewer page renders one tab per entry, with the `title` as the label and the file's contents as the body.
 
@@ -499,7 +511,14 @@ Requires `ui.modify`. `http.serve` is not required: each tab's HTML is read from
 
 The host emits a `pluginTabs[]` array on `/api/config`. The viewer page maps each entry to a tab whose body is the inlined HTML, rendered in a sandboxed iframe with the baseline stylesheet injected, so plain HTML looks native with no CSS of your own.
 
-<img src="/docs/img/plugin-viewer-tabs.png" alt="Plugin-contributed tabs on the viewer page, shown alongside the built-in About and Followers tabs" width="75%" /> See [Styling plugin UI](#styling-plugin-ui) for the baseline and the helper classes. Plugin tabs are appended after the built-ins in declaration order. The React key is derived from the plugin's slug so a tab unmounts only when its source plugin is disabled or removed.
+<img
+  src="/docs/img/plugin-viewer-tabs.png"
+  alt="Plugin-contributed tabs on the viewer page, shown alongside the built-in About and Followers tabs"
+  width="75%"
+/>
+See [Styling plugin UI](#styling-plugin-ui) for the baseline and the helper classes. Plugin tabs are
+appended after the built-ins in declaration order. The React key is derived from the plugin's slug
+so a tab unmounts only when its source plugin is disabled or removed.
 
 ### The `slug` field
 
@@ -507,18 +526,19 @@ The host emits a `pluginTabs[]` array on `/api/config`. The viewer page maps eac
 
 ### Dynamic tab content
 
-When a tab has no `content` file, the host calls your **tab-content handler** each time a viewer loads that tab. Implement it when content should change per viewer or pull live data. The host calls the handler with the requested `slug` and the viewer's identity, and your handler returns the HTML string for the tab body:
+When a tab has no `content` file, the host calls your **tab-content handler** to produce it. Implement it when content should change per viewer or pull live data. The host resolves every dynamic tab while building the viewer's `/api/config` payload, once per config request rather than on tab click, so keep the handler fast. It receives the requested `slug` and the viewer's identity, and returns the HTML string for the tab body:
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
 
 ```js
 module.exports = definePlugin({
-  onTabContent: {
-    // keyed by the manifest slug; ctx = { slug, user? }
-    "stream-info"(ctx) {
-      return "<h2>Stream info</h2><p>Live every weekday at 8pm UTC.</p>";
-    },
+  onTabContent(ctx) {
+    // ctx = { slug, user? }
+    if (ctx.slug === 'stream-info') {
+      return '<h2>Stream info</h2><p>Live every weekday at 8pm UTC.</p>';
+    }
+    return '';
   },
 });
 ```

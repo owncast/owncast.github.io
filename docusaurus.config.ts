@@ -125,6 +125,8 @@ const ALL_REDIRECTS = [
   { to: '/docs/chat/moderation', from: '/docs/moderation/' },
   { to: '/docs/chat/chat-authentication', from: '/docs/chat-authentication' },
   { to: '/contribute', from: '/help' },
+  // The docs contribute page moved to the internal contributor guide.
+  { to: '/devdocs/contributor-guide', from: '/docs/contribute' },
   // Configuration docs moved under /docs/configuration/.
   { to: '/docs/configuration/appearance', from: '/docs/appearance/' },
   {

@@ -12,7 +12,7 @@ The example below is for **Linux**, capturing the `/dev/video2` camera and the `
 ffmpeg -f alsa -ac 2 -i hw:1,0 -thread_queue_size 64 \
   -f v4l2 -framerate 60 -video_size 1280x720 -input_format yuyv422 -i /dev/video2 \
   -c:v libx264 -preset veryfast -b:v 1984k -maxrate 1984k -bufsize 3968k \
-  -vf "format=yuv420p" -g 60 -c:a aac -b:a 128k -ar 44100 \
+  -vf "format=yuv420p" -g 120 -c:a aac -b:a 128k -ar 44100 \
   -f flv rtmp://<ip-of-your-server>/live/<your-streaming-key>
 ```
 
@@ -21,7 +21,7 @@ What the main options do:
 - `-i /dev/video2` and `-i hw:1,0`: the video and audio inputs. These are the parts you change for your hardware and platform (see below).
 - `-c:v libx264 -preset veryfast`: encode video with x264. `veryfast` trades some compression efficiency for lower CPU use. Slower presets look better at the same bitrate but use more CPU.
 - `-b:v 1984k -maxrate 1984k -bufsize 3968k`: aim for a video bitrate of about 1984 kbps and cap it there. See [choosing video quality](/docs/video) to pick a bitrate for your content and upload speed.
-- `-g 60`: emit a keyframe every 60 frames. At 60 fps that is one every 2 seconds, which is what Owncast needs to segment the stream cleanly. Set this to twice your framerate.
+- `-g 120`: emit a keyframe every 120 frames. `-g` counts frames, not seconds, so at 60 fps this is a keyframe every 2 seconds, which is what Owncast needs to segment the stream cleanly. Set `-g` to twice your framerate.
 - `-c:a aac -b:a 128k -ar 44100`: AAC audio at 128 kbps and 44.1 kHz.
 - `-f flv rtmp://.../live/<your-streaming-key>`: send the result to your Owncast server. Keep the `/live/` path and use your stream key.
 

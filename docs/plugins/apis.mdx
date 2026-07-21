@@ -1,5 +1,5 @@
 ---
-title: Owncast APIs
+title: Owncast Plugin APIs
 description: Every owncast.* method your plugin can call from inside a handler, what it returns, and what permission it needs.
 sidebar_position: 5
 sidebar_label: APIs
@@ -18,7 +18,11 @@ tags:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Owncast plugin runtime exposes a single global, `owncast`, with the host functions your plugin can call. Most methods require the matching permission in your manifest, and calling without it throws a clear error. A few are **ambient** and need no permission: timers, reading bundled assets, and `owncast.config.get`.
+The Owncast plugin runtime exposes a single global, `owncast`, with the host functions your plugin can call. Most methods require the matching permission in your manifest. A call without it never reaches Owncast: the host logs the denial and the call returns an empty or zero value. A few are **ambient** and need no permission: timers, reading bundled assets, and `owncast.config.get`.
+
+:::info[New in Owncast 0.3.0]
+Plugins require Owncast 0.3.0 or later.
+:::
 
 Calls are shown for both SDKs, pick your language with the tabs. See [JavaScript](/docs/plugins/sdks/javascript) or [Python](/docs/plugins/sdks/python) for setup. (JavaScript method names are camelCase, Python uses `snake_case`, so `sendAction` becomes `send_action`, and so on.)
 
@@ -34,7 +38,7 @@ Post a chat message. Sent as your plugin's bot identity (display name from `bot.
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-owncast.chat.send("hello chat");
+owncast.chat.send('hello chat');
 ```
 
 </TabItem>
@@ -57,7 +61,7 @@ Post an action-style ("/me") message.
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-owncast.chat.sendAction("is now live");
+owncast.chat.sendAction('is now live');
 ```
 
 </TabItem>
@@ -122,7 +126,7 @@ Requires `chat.history`.
 
 ### `owncast.chat.clients()`
 
-Return the list of currently-connected chat clients, each with `id`, `userId?`, `displayName?`, `connectedAt?`, `userAgent?`, `ipAddress?`, and `messageCount?`. `id` is the per-connection client ID used by `chat.kick`.
+Return the list of currently-connected chat clients, each with `id`, `userId?`, `displayName?`, `connectedAt?`, `userAgent?`, `ipAddress?`, and `messageCount`. `id` is the per-connection client ID used by `chat.kick`.
 
 Requires `chat.history`.
 
@@ -155,7 +159,7 @@ Read the chat user list or a single user record.
 
 ```js
 const users = owncast.users.list();
-const alice = owncast.users.get("u-alice");
+const alice = owncast.users.get('u-alice');
 ```
 
 </TabItem>
@@ -179,7 +183,7 @@ Enable or disable a chat user.
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-owncast.users.setEnabled("u-spammer", false, "spam");
+owncast.users.setEnabled('u-spammer', false, 'spam');
 ```
 
 </TabItem>
@@ -202,7 +206,7 @@ Ban an IP from joining chat.
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-owncast.users.banIP("203.0.113.42");
+owncast.users.banIP('203.0.113.42');
 ```
 
 </TabItem>
@@ -226,8 +230,8 @@ Find-or-create an authenticated Owncast user for an external identity and return
 
 ```js
 const { userId } = owncast.users.register({
-  authId: "github:583231",
-  displayName: "octocat",
+  authId: 'github:583231',
+  displayName: 'octocat',
 });
 ```
 
@@ -256,7 +260,7 @@ Issue a signed session for an already-registered user (the `userId` from `owncas
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-const { userId } = owncast.users.register({ authId: "shared", displayName: "Guest" });
+const { userId } = owncast.users.register({ authId: 'shared', displayName: 'Guest' });
 owncast.auth.grantSession({ userId });
 return { status: 302, headers: { Location: returnTo } };
 ```
@@ -284,7 +288,7 @@ Clear the current viewer's session cookie on this response to sign them out. You
 
 ```js
 owncast.auth.endSession();
-return { status: 302, headers: { Location: "/" } };
+return { status: 302, headers: { Location: '/' } };
 ```
 
 </TabItem>
@@ -312,11 +316,11 @@ For richer types, use the JSON helpers (`getJSON` / `setJSON`, `get_json` / `set
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-owncast.kv.set("count", "1");
-const n = Number(owncast.kv.get("count") ?? "0");
+owncast.kv.set('count', '1');
+const n = Number(owncast.kv.get('count') ?? '0');
 
-owncast.kv.setJSON("prefs", { theme: "dark" });
-const prefs = owncast.kv.getJSON("prefs", {});
+owncast.kv.setJSON('prefs', { theme: 'dark' });
+const prefs = owncast.kv.getJSON('prefs', {});
 ```
 
 </TabItem>
@@ -337,7 +341,7 @@ Requires `storage.kv`.
 
 ### `owncast.storage.upload(name, bytes)`
 
-Upload a file to Owncast's public file area. Returns `{ url }` (for example, `https://your-server.example/public/plugins/my-plugin/badge.png`), usable in image tags, action buttons, fediverse posts, and so on.
+Upload a file to Owncast's public file area. Returns `{ url }` (for example, `https://your-server.example/public/plugins/my-plugin/badge.png`), usable in image tags, action buttons, fediverse posts, and so on. Returns `null` if the upload fails.
 
 Requires `storage.upload`.
 
@@ -345,14 +349,14 @@ Requires `storage.upload`.
 
 A private, sandboxed filesystem at `data/plugin-data/<your-slug>/`. Unlike `owncast.storage.upload`, these files stay server-side: they're never served over HTTP. Paths are relative to your sandbox root. The host confines every path to your own directory (a plugin cannot read another plugin's files, and `../` or absolute paths collapse back inside the sandbox). Parent directories are created as needed on write.
 
-| Method | Returns |
-| --- | --- |
-| `fs.read(path)` | the file's bytes, or `null` if missing |
-| `fs.readText(path)` | the file as UTF-8 text, or `null` if missing |
-| `fs.write(path, data)` | `{ ok, error? }` |
-| `fs.list(dir)` | entry names (a missing directory is empty) |
-| `fs.delete(path)` | `{ ok, error? }` (file or empty directory) |
-| `fs.exists(path)` | boolean |
+| Method                 | Returns                                      |
+| ---------------------- | -------------------------------------------- |
+| `fs.read(path)`        | the file's bytes, or `null` if missing       |
+| `fs.readText(path)`    | the file as UTF-8 text, or `null` if missing |
+| `fs.write(path, data)` | `{ ok, error? }`                             |
+| `fs.list(dir)`         | entry names (a missing directory is empty)   |
+| `fs.delete(path)`      | `{ ok, error? }` (file or empty directory)   |
+| `fs.exists(path)`      | boolean                                      |
 
 In Python these are `snake_case` (`fs.read_text`, the rest unchanged).
 
@@ -360,8 +364,8 @@ In Python these are `snake_case` (`fs.read_text`, the rest unchanged).
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-owncast.fs.write("notes/log.txt", "hello");
-const text = owncast.fs.readText("notes/log.txt");
+owncast.fs.write('notes/log.txt', 'hello');
+const text = owncast.fs.readText('notes/log.txt');
 ```
 
 </TabItem>
@@ -387,7 +391,7 @@ Read one of your plugin's [manifest-declared `config`](/docs/plugins/configurati
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-const cooldownMs = owncast.config.get("cooldownMs", 2000);
+const cooldownMs = owncast.config.get('cooldownMs', 2000);
 ```
 
 </TabItem>
@@ -412,7 +416,7 @@ Synchronous outbound HTTP request. `opts` carries `method`, `headers`, and `body
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-const res = owncast.http.fetch("https://api.example.com/status");
+const res = owncast.http.fetch('https://api.example.com/status');
 if (res.status === 200) {
   const data = JSON.parse(res.body);
 }
@@ -446,7 +450,7 @@ Emit a custom event that other plugins can subscribe to. Subscribing plugins rec
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-owncast.events.emit("my-plugin.thing-happened", { id: 123 });
+owncast.events.emit('my-plugin.thing-happened', { id: 123 });
 ```
 
 </TabItem>
@@ -500,7 +504,7 @@ Requires `server.read`.
 
 ### `owncast.server.socials()`
 
-The streamer's configured social links, each `{ platform, url, icon }`.
+The streamer's configured social links, each `{ platform, url, icon? }`.
 
 Requires `server.read`.
 
@@ -512,7 +516,7 @@ Requires `server.read`.
 
 ### `owncast.server.federation()`
 
-Whether fediverse federation is enabled and under what handle: `{ enabled, username, isPrivate }`.
+Whether fediverse federation is enabled and under what handle: `{ enabled, username?, isPrivate? }`. `username` is omitted when unset, and `isPrivate` is present only when true.
 
 Requires `server.read`.
 
@@ -586,7 +590,7 @@ Push to subscribed browsers.
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-owncast.notifications.browserPush({ title: "Live now", body: "Come say hi", url: "/" });
+owncast.notifications.browserPush({ title: 'Live now', body: 'Come say hi', url: '/' });
 ```
 
 </TabItem>
@@ -613,6 +617,8 @@ Requires `notifications.send`.
 
 Make a public post to the fediverse from the Owncast account.
 
+Returns `{ url }` on success (currently with an empty `url`: Owncast publishes the note but does not yet return its URL), or `null` when the host rejects the call.
+
 Requires `fediverse.post`. High-trust: a fediverse post goes out under the streamer's own handle and can't be silently revoked. Admins should grant sparingly.
 
 ## Action buttons (runtime)
@@ -625,7 +631,7 @@ Append one or more action buttons to your plugin's manifest set without a reload
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-owncast.actions.add({ title: "Donate", url: "/plugins/my-plugin/donate", openExternally: true });
+owncast.actions.add({ title: 'Donate', url: '/plugins/my-plugin/donate', openExternally: true });
 ```
 
 </TabItem>
@@ -654,15 +660,15 @@ Full coverage in [UI: Action buttons](/docs/plugins/ui#action-buttons).
 
 Push a Server-Sent-Event to every browser connected to your plugin's `/_sse/<channel>` endpoint.
 
-* `channel`: which stream to push to. Use `""` for the default channel.
-* `event`: the event name the browser listens for. Use `""` for the default `message` event.
-* `data`: payload. Strings are sent as-is. Anything else is JSON-encoded for you.
+- `channel`: which stream to push to. Use `""` for the default channel.
+- `event`: the event name the browser listens for. Use `""` for the default `message` event.
+- `data`: payload. Strings are sent as-is. Anything else is JSON-encoded for you.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-owncast.sse.send("alerts", "donation", { from: "alice", amount: 5 });
+owncast.sse.send('alerts', 'donation', { from: 'alice', amount: 5 });
 ```
 
 </TabItem>
@@ -713,35 +719,35 @@ Same, decoded as UTF-8 text.
 
 Method names below are the JavaScript (camelCase) form. The Python equivalents are `snake_case` (`sendAction` → `send_action`, `banIP` → `ban_ip`, `videoConfig` → `video_config`, and so on).
 
-| API                                              | Permission           |
-| ------------------------------------------------ | -------------------- |
-| `owncast.chat.send`                              | `chat.send`          |
-| `owncast.chat.sendAction`                        | `chat.send`          |
-| `owncast.chat.sendTo`                            | `chat.send`          |
-| `owncast.chat.system`                            | `chat.send`          |
-| `owncast.chat.replyTo`                            | `chat.send`          |
-| `owncast.chat.history`                           | `chat.history`       |
-| `owncast.chat.clients`                           | `chat.history`       |
-| `owncast.chat.deleteMessage`                     | `chat.moderate`      |
-| `owncast.chat.kick`                              | `chat.moderate`      |
-| `owncast.users.list` / `.get`                    | `users.read`         |
-| `owncast.users.setEnabled` / `.banIP`            | `users.moderate`     |
-| `owncast.users.register`                         | `users.register`     |
-| `owncast.auth.grantSession` / `.endSession`      | `auth.gate`          |
-| `owncast.kv.get` / `.set` / `.getJSON` / `.setJSON` | `storage.kv`         |
-| `owncast.storage.upload`                         | `storage.upload`     |
+| API                                                                          | Permission           |
+| ---------------------------------------------------------------------------- | -------------------- |
+| `owncast.chat.send`                                                          | `chat.send`          |
+| `owncast.chat.sendAction`                                                    | `chat.send`          |
+| `owncast.chat.sendTo`                                                        | `chat.send`          |
+| `owncast.chat.system`                                                        | `chat.send`          |
+| `owncast.chat.replyTo`                                                       | `chat.send`          |
+| `owncast.chat.history`                                                       | `chat.history`       |
+| `owncast.chat.clients`                                                       | `chat.history`       |
+| `owncast.chat.deleteMessage`                                                 | `chat.moderate`      |
+| `owncast.chat.kick`                                                          | `chat.moderate`      |
+| `owncast.users.list` / `.get`                                                | `users.read`         |
+| `owncast.users.setEnabled` / `.banIP`                                        | `users.moderate`     |
+| `owncast.users.register`                                                     | `users.register`     |
+| `owncast.auth.grantSession` / `.endSession`                                  | `auth.gate`          |
+| `owncast.kv.get` / `.set` / `.getJSON` / `.setJSON`                          | `storage.kv`         |
+| `owncast.storage.upload`                                                     | `storage.upload`     |
 | `owncast.fs.read` / `.readText` / `.write` / `.list` / `.delete` / `.exists` | `storage.fs`         |
-| `owncast.http.fetch`                             | `network.fetch`      |
-| `owncast.events.emit`                            | `events.emit`        |
-| `owncast.stream.current`                         | `server.read`        |
-| `owncast.stream.broadcaster`                     | `server.read`        |
-| `owncast.server.info` / `.socials` / etc.        | `server.read`        |
-| `owncast.videoConfig.read`                       | `videoconfig.read`   |
-| `owncast.videoConfig.write`                      | `videoconfig.write`  |
-| `owncast.notifications.discord` / `.browserPush` | `notifications.send` |
-| `owncast.fediverse.post`                         | `fediverse.post`     |
-| `owncast.actions.add` / `.clear`                 | `ui.modify`          |
-| `owncast.timer.setTimeout` / `.setInterval` / `.clear` | none (ambient)       |
-| `owncast.assets.read` / `.readText`              | none (ambient)       |
-| `owncast.config.get`              | none (ambient)       |
-| `owncast.sse.send`                               | `http.sse`           |
+| `owncast.http.fetch`                                                         | `network.fetch`      |
+| `owncast.events.emit`                                                        | `events.emit`        |
+| `owncast.stream.current`                                                     | `server.read`        |
+| `owncast.stream.broadcaster`                                                 | `server.read`        |
+| `owncast.server.info` / `.socials` / `.emotes` / `.federation` / `.tags`     | `server.read`        |
+| `owncast.videoConfig.read`                                                   | `videoconfig.read`   |
+| `owncast.videoConfig.write`                                                  | `videoconfig.write`  |
+| `owncast.notifications.discord` / `.browserPush` / `.fediverse`              | `notifications.send` |
+| `owncast.fediverse.post`                                                     | `fediverse.post`     |
+| `owncast.actions.add` / `.clear`                                             | `ui.modify`          |
+| `owncast.timer.setTimeout` / `.setInterval` / `.clear`                       | none (ambient)       |
+| `owncast.assets.read` / `.readText`                                          | none (ambient)       |
+| `owncast.config.get`                                                         | none (ambient)       |
+| `owncast.sse.send`                                                           | `http.sse`           |

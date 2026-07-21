@@ -10,7 +10,7 @@ The following configuration example requires Apache >= 2.4.47.
 Ensure required Apache modules are enabled using the `a2enmod` command.
 
 ```bash
-$ sudo a2enmod proxy proxy_http ssl
+$ sudo a2enmod proxy proxy_http ssl headers
 ```
 
 ```apacheconf

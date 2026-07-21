@@ -48,7 +48,7 @@ Here's what knobs can be tweaked when trying to determine the quality or qualiti
 
 ### Bitrate
 
-The bitrate is the amount of data you send when you stream. A higher bitrate takes up more available internet bandwidth and create larger sized segments of video, making it take longer for viewers to download. Increasing your bitrate can improve your video quality, but only up to a certain point.
+The bitrate is the amount of data you send when you stream. A higher bitrate takes up more available internet bandwidth and create larger sized segments of video, making it take longer for viewers to download. Increasing your bitrate can improve your video quality, but only up to a certain point. You can select bitrates between 400 and 13,000 kbps, in 100 kbps steps.
 
 ### Resolution
 
@@ -58,11 +58,11 @@ It's recommended if you have to change the size to only change the width **or** 
 
 ### Framerate
 
-Framerate is the number of frames per second in the video. Owncast defaults to 24fps, but other common framerates are 30 or 60. Increasing the framerate will use more CPU on your server, and more bandwidth for your users as more frames of video have to be processed and made available to your viewers any given second.
+Framerate is the number of frames per second in the video. Owncast defaults to 24fps, but other common framerates are 30 or 60. You can select any framerate between 24 and 120. Increasing the framerate will use more CPU on your server, and more bandwidth for your users as more frames of video have to be processed and made available to your viewers any given second.
 
 ### CPU Usage
 
-The more CPU you use the better the output image will be, or the smaller of a file the output will be for the same quality. However, you will need to balance the amount of CPU you have available with the amount you can use to process video.
+The more CPU you use the better the output image will be, or the smaller of a file the output will be for the same quality. However, you will need to balance the amount of CPU you have available with the amount you can use to process video. There are five CPU usage levels to pick from, ranging from lowest to highest.
 
 ### Latency Buffer
 
@@ -88,6 +88,10 @@ The player also never autoplays, regardless of this setting, for viewers who hav
 <IncludeMarkdown>
   <OwncastWithQualities />
 </IncludeMarkdown>
+
+When passthrough is enabled for a stream output, Owncast copies your inbound video untouched instead of re-encoding it. All the other settings for that output, such as bitrate, resolution, framerate and CPU usage level, are ignored. Because no encoding work happens, passthrough saves nearly all the CPU that output would otherwise use.
+
+The tradeoff is that viewers receive exactly what your broadcasting software sends. If your source uses settings some players or browsers can't handle, the stream can be **unplayable** for those viewers, and Owncast can't correct it. Long keyframe intervals in your source also increase latency, because Owncast can't optimally segment video it isn't re-encoding. This is why the admin asks you to confirm you understand the risks before enabling it. Test playback on the devices you care about before relying on passthrough.
 
 ## Audio
 

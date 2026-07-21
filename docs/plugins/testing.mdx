@@ -17,6 +17,10 @@ import TabItem from '@theme/TabItem';
 
 Owncast plugins ship with a scenario-based testing framework that drives your built plugin through the real Owncast plugin runtime, with the side effects (chat sends, HTTP fetches, config writes) captured for assertions. A passing test means the same behavior in production.
 
+:::info[New in Owncast 0.3.0]
+Plugins require Owncast 0.3.0 or later.
+:::
+
 Scenarios are plain data, so the scenario model on this page is identical whatever language you write in. Test files live under `__tests__/`. How you write and run them differs slightly by SDK.
 
 ## Writing and running tests
@@ -203,14 +207,19 @@ The scenario's top-level `expect` checks what happened across the whole run:
 | `kickedClients`     | Client IDs disconnected via `owncast.chat.kick`                                 |
 | `discordPosts`      | List of Discord notification strings                                            |
 | `browserPushes`     | List of `{ title, body, url }` browser-push payloads                            |
-| `fediversePosts`    | List of fediverse posts made via `owncast.fediverse.post`                       |
+| `fediversePosts`    | List of `{ type, body?, image?, link? }` payloads sent via `owncast.notifications.fediverse` |
+| `fediverseOutbox`   | List of `owncast.fediverse.post` strings (exact match, in order)                |
+| `userRegistrations` | List of `{ authId, displayName?, scopes? }` from `owncast.users.register`, in order. `displayName` and `scopes` are checked only when set |
+| `sessionGrants`     | List of `{ userId, ttl? }` from `owncast.auth.grantSession` (`ttl` is checked only when non-zero) |
+| `sessionClears`     | Number of `owncast.auth.endSession` calls                                       |
 | `userModerations`   | List of `{ userId, enabled, reason }` from `owncast.users.setEnabled`           |
 | `bannedIPs`         | List of IPs banned via `owncast.users.banIP`                                    |
-| `uploads`           | List of `{ name, data }` uploads via `owncast.storage.upload`                   |
+| `uploads`           | List of `{ name, body? }` from `owncast.storage.upload` (`body` is the uploaded bytes as a string, checked only when set) |
 | `videoConfigWrites` | List of partial configs applied via `owncast.videoConfig.write()`               |
 | `emits`             | List of `{ eventType, payload }` for `owncast.events.emit` calls                |
+| `commands`          | List of `{ name, prefix?, description?, usage?, aliases?, modOnly, caseSensitive, cooldownMs }` chat-command registrations, matched by `name` in any order (`prefix`, `description`, `usage`, and `aliases` are checked only when set) |
 | `kv`                | Partial map of plugin-config state after the scenario                           |
-| `httpRequests`      | Outbound HTTP calls made by your plugin                                         |
+| `httpRequests`      | List of `{ url, method?, body? }` outbound `owncast.http.fetch` calls. `url` is an exact match, an omitted `method` matches any, an omitted `body` skips the check |
 
 `chatSends` (and the other chat assertions) capture posts from **any** step: including chat your plugin sends from inside an HTTP-request handler, not just from event handlers.
 

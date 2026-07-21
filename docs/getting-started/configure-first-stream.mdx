@@ -20,7 +20,9 @@ To begin streaming you need two things: your Owncast server's RTMP URL (`rtmp://
 
 The admin password and stream keys are managed independently, so you can add as many stream keys as you like. Most people only need one, but multiple keys are useful in some setups, such as giving a co-host their own key you can revoke later.
 
-You add and remove stream keys on the admin server setup page.
+You manage stream keys in the admin under **Configuration > Server Setup**, which has **Server Config** and **Stream Keys** tabs. New keys are auto-generated for you, and each key in the list can be revealed and copied. See the [server setup guide](/docs/configuration/server-setup) for the full page.
+
+If you start Owncast with the `--streamkey` flag, the **Stream Keys** tab is hidden and the value from the command line is used for that session.
 
 <img src="/docs/img/admin-stream-keys.png" alt="The Stream Keys tab of the Server settings page, showing the default stream key and a button to add more" width="80%" />
 

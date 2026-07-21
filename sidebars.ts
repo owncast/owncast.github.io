@@ -45,6 +45,7 @@ const sidebars: SidebarsConfig = {
       label: "Configure your Owncast server",
       link: { type: "doc", id: "configuration/index" },
       items: [
+        "configuration/server-setup",
         "configuration/website",
         "embed",
         "configuration/appearance",

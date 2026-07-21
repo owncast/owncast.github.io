@@ -6,6 +6,10 @@ description: >-
 tags: [docker, container, portainer, installation, compose]
 ---
 
+:::info[New in Owncast 0.3.0]
+Owncast 0.3.0 features such as [plugins](/docs/plugins) are only in the nightly image, `ghcr.io/owncast/owncast:nightly`. The stable image is `owncast/owncast:latest` on Docker Hub.
+:::
+
 1. Pull the `latest` version [from Dockerhub](https://hub.docker.com/r/owncast/owncast/tags): `docker pull owncast/owncast:latest`.
 1. Run the following to start the service. Binding the `data` directory keeps your database and backups on the host, so you can move them to another server later.
 

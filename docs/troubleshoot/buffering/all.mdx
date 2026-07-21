@@ -27,20 +27,22 @@ When every viewer is buffering at once, the problem is almost always on the serv
 
 After reading below you might also find helpful tips browsing the [OBS Troubleshooting Guide](https://github.com/obsproject/obs-studio/wiki/Stream-Buffering-Issues/d65033b24e4a4c81c87323f05a59c12f78de620b), even if you don't use OBS.
 
-## Check your Owncast server hardware utilization
-
-<IncludeMarkdown>
-  <HardwareUsage />
-</IncludeMarkdown>
-
-## Get some additional information
+## Check Stream Performance
 
 <IncludeMarkdown>
   <StreamHealth />
 </IncludeMarkdown>
 
+## Analyze your stream with the HLS Analyzer
+
 <IncludeMarkdown>
   <HlsAnalyzer />
+</IncludeMarkdown>
+
+## Check your Owncast server hardware utilization
+
+<IncludeMarkdown>
+  <HardwareUsage />
 </IncludeMarkdown>
 
 ## Start with your broadcasting software
@@ -61,7 +63,7 @@ After reading below you might also find helpful tips browsing the [OBS Troublesh
 
 Increasing your latency buffer setting will start the user further behind live but give the client more playable video before it gets stuck waiting for the live edge. Less latency is less efficient and more likely to create buffering. Check against [HLS Analyzer](https://hlsanalyzer.com) after increasing your latency buffer value to see if it reduced any warnings.
 
-You will need to restart a stream after changing this value in the Owncast video settings.
+You can change this value in the admin under Configuration > Video. Latency and video quality changes take effect on your next stream, so restart your stream after changing them.
 
 **Drawback**: Increasing your latency makes it harder to interact live with viewers as the delay between when you perform an action and when they see it increases.
 

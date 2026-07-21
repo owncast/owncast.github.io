@@ -23,12 +23,20 @@ If you'd like to expand on this and send automated notifications to other destin
 
 You'll find these channels under **Configuration → Notifications** in the admin.
 
+Before you can enable any of them you must set your **Server URL** under **Configuration → General**. Until you do, every notification channel on this page is disabled and the admin shows a warning with a field to set it.
+
 <img src="/docs/img/admin-notifications.png" alt="The Notifications settings page in the admin, with sections for browser alerts, Discord, Fediverse social, and custom webhooks" width="75%" />
+
+Go-live notifications are not instant. Owncast waits 2 minutes after your stream starts before sending them, which avoids notifying people about accidental or very short streams. And if a notification already went out in the previous 10 minutes, for example because your stream briefly dropped and reconnected, a new one is not sent.
 
 <Tabs>
   <TabItem value="browser-push-notifications" label="Browser notifications" default>
 
         Using browser push notifications your viewers can choose to be notified each time you go live.
+
+        To offer this, turn on **Enable browser notifications** and set the required **Go Live Text**, the message sent when you go live, up to 200 characters.
+
+        Browser push notifications are not supported for local servers. Your instance must be reachable at a public HTTPS address.
 
         Not all browsers support this feature, and browsers that do may handle it differently. Brave, for example, requires you to choose the duration the notifications are valid. They will likely want to select "Forever" to keep the notification active.
 
@@ -37,11 +45,12 @@ You'll find these channels under **Configuration → Notifications** in the admi
         You can request to be notified when a stream goes live on iOS by following these steps:
 
         1.  Open Safari and navigate to your Owncast instance.
-        2.  Tap the share icon at the bottom of your browser.
-        3.  Tap "Add to Home Screen".
-        4.  Tap the new Owncast icon on your home screen.
-        5.  Press the "Notify" button.
-        6.  Tap "Allow" when prompted.
+        2.  Tap the share button in Safari.
+        3.  Scroll down and tap "Add to Home Screen".
+        4.  Tap "Add".
+        5.  Give the link a name and tap the new icon on your home screen.
+        6.  Press the "Notify" button and enable notifications.
+        7.  Tap "Allow" when prompted.
 
   </TabItem>
   <TabItem value="browser-extension" label="Browser extension">
@@ -61,11 +70,12 @@ You'll find these channels under **Configuration → Notifications** in the admi
 </TabItem>
 
   <TabItem value="discord" label="Discord">
-        You can notify a Discord channel when your stream goes live. Visit the [Discord documentation](https://support.discord.com/hc/en-us/articles/228383668) for complete instructions.
+        You can notify a Discord channel when your stream goes live.
 
-    - Visit Edit Channel / Integrations on your Discord channel.
-    - Create a webhook.
-    - Provide URL in the Owncast configuration.
+    - Visit Edit Channel / Integrations on your Discord channel and create a webhook. The [Discord documentation](https://support.discord.com/hc/en-us/articles/228383668) has complete instructions.
+    - In the Owncast admin, turn on **Enable Discord**.
+    - Paste the webhook into the **Webhook URL** field.
+    - Set the **Go Live Text**, the message posted when you go live, up to 300 characters.
     </TabItem>
 
 <TabItem value="custom" label="Custom">

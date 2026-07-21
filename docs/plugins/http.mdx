@@ -1,5 +1,5 @@
 ---
-title: Serving HTTP
+title: Serving HTTP via Plugins
 description: Serve URLs from your plugin, write dynamic handlers, gate admin endpoints, and push realtime events to browsers.
 sidebar_position: 7
 sidebar_label: HTTP
@@ -45,20 +45,20 @@ There are two routing styles. In **JavaScript** you write a single `onHttpReques
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-const { definePlugin } = require("@owncast/plugin-sdk");
+const { definePlugin } = require('@owncast/plugin-sdk');
 
 module.exports = definePlugin({
   onHttpRequest(req) {
     // req: { method, path, headers, query, body, user? }
-    if (req.method === "GET" && req.path === "/api/messages") {
+    if (req.method === 'GET' && req.path === '/api/messages') {
       return {
         status: 200,
-        headers: { "Content-Type": "application/json" },
-        body: "[]",
+        headers: { 'Content-Type': 'application/json' },
+        body: '[]',
       };
     }
-    if (req.method === "POST" && req.path === "/api/messages") {
-      const data = JSON.parse(req.body || "{}");
+    if (req.method === 'POST' && req.path === '/api/messages') {
+      const data = JSON.parse(req.body || '{}');
       return { status: 201 };
     }
     return { status: 404 };
@@ -110,12 +110,12 @@ A request to `/plugins/my-plugin/` (no trailing path) serves `public/index.html`
 
 ## Request and response limits
 
-* Request bodies are capped at 1 MB.
-* Response bodies are capped at 10 MB.
-* Path traversal (`..`) in URLs is blocked at the host level. You'll never see it in your handler's path.
-* Response headers are filtered through an allowlist. You can set `Content-Type`, `Content-Encoding`, `Content-Language`, `Cache-Control`, `Set-Cookie`, `Location`, `ETag`, `Last-Modified`, `Vary`, `Link`, and CORS (`Access-Control-*`) headers. Owncast-owned headers (`Server`, `Content-Security-Policy`, `Strict-Transport-Security`, `X-Frame-Options`) are blocked.
-* Cookies you set apply to your plugin's URL space by default (`/plugins/<your-slug>/`). If you want a cookie to be sent on requests outside that path, set `Path=...` explicitly. Otherwise the browser scopes it to your namespace and won't leak it into other plugins or into Owncast's own paths.
-* Each request is time-capped at 5 seconds before the host returns a `504` and discards your response.
+- Request bodies are capped at 1 MB.
+- Response bodies are capped at 10 MB.
+- Path traversal (`..`) in URLs is blocked at the host level. You'll never see it in your handler's path.
+- Response headers are filtered through an allowlist. You can set `Content-Type`, `Content-Encoding`, `Content-Language`, `Cache-Control`, `Set-Cookie`, `Location`, `ETag`, `Last-Modified`, `Vary`, `Link`, and CORS (`Access-Control-*`) headers. Owncast-owned headers (`Server`, `Content-Security-Policy`, `Strict-Transport-Security`, `X-Frame-Options`) are blocked.
+- Cookies you set apply to your plugin's URL space by default (`/plugins/<your-slug>/`). If you want a cookie to be sent on requests outside that path, set `Path=...` explicitly. Otherwise the browser scopes it to your namespace and won't leak it into other plugins or into Owncast's own paths.
+- Each request is time-capped at 5 seconds before the host returns a `504` and discards your response.
 
 ## Public vs. authenticated
 
@@ -129,8 +129,8 @@ For requests made by a chat user with a valid user-token, the request carries th
 ```js
 module.exports = definePlugin({
   onHttpRequest(req) {
-    if (!req.user) return { status: 401 };           // not signed in
-    if (!req.user.scopes?.includes("MODERATOR")) return { status: 403 };
+    if (!req.user) return { status: 401 }; // not signed in
+    if (!req.user.scopes?.includes('MODERATOR')) return { status: 403 };
     return { status: 200, body: `hello ${req.user.displayName}` };
   },
 });
@@ -186,11 +186,11 @@ Push from any handler, for example, from your chat handler, by calling `owncast.
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-const { definePlugin, owncast } = require("@owncast/plugin-sdk");
+const { definePlugin, owncast } = require('@owncast/plugin-sdk');
 
 module.exports = definePlugin({
   onChatMessage(msg) {
-    owncast.sse.send("overlay", "chat", {
+    owncast.sse.send('overlay', 'chat', {
       from: msg.user?.displayName,
       body: msg.body,
     });
@@ -215,9 +215,9 @@ def push(msg):
 </TabItem>
 </Tabs>
 
-* `channel`: which stream to push to. Browsers subscribe per channel, so you can run several independent streams (`"overlay"`, `"admin-stats"`) from one plugin. Use `""` for a single default channel.
-* `event`: the event name the browser listens for (`addEventListener("chat", ...)`). Pass `""` for the browser's default `message` event.
-* `data`: the payload. Strings are sent as-is. Anything else is JSON-encoded for you.
+- `channel`: which stream to push to. Browsers subscribe per channel, so you can run several independent streams (`"overlay"`, `"admin-stats"`) from one plugin. Use `""` for a single default channel.
+- `event`: the event name the browser listens for (`addEventListener("chat", ...)`). Pass `""` for the browser's default `message` event.
+- `data`: the payload. Strings are sent as-is. Anything else is JSON-encoded for you.
 
 Sends are fire-and-forget. The call returns immediately and never blocks, even if no one is connected or a client is slow. Slow clients drop frames rather than stall your plugin. There are also SSE-connection lifecycle events (a viewer's stream opening and closing) you can subscribe to: see the [handlers reference](/docs/plugins/events#sse-events).
 
@@ -228,19 +228,19 @@ Standard `EventSource` API on the viewer page. No library. This runs in the brow
 ```html
 <!-- public/index.html, served at /plugins/my-plugin/ -->
 <script>
-  const events = new EventSource("/plugins/my-plugin/_sse/overlay");
-  events.addEventListener("chat", (e) => {
+  const events = new EventSource('/plugins/my-plugin/_sse/overlay');
+  events.addEventListener('chat', e => {
     const { from, body } = JSON.parse(e.data);
-    document.getElementById("feed").textContent = `${from}: ${body}`;
+    document.getElementById('feed').textContent = `${from}: ${body}`;
   });
 </script>
 ```
 
 ### Notes
 
-* Up to 64 simultaneous connections per plugin. Over that the endpoint returns `503`. `EventSource` reconnects automatically.
-* If the channel matches one of your `admin.pages[]` globs, it's auth-gated like any admin route. Handy for an admin-only stats stream.
-* The endpoint is host-owned. Your request handler never sees `/_sse/...` requests, and you can't serve your own route there.
+- Up to 64 simultaneous connections per plugin. Over that the endpoint returns `503`. `EventSource` reconnects automatically.
+- If the channel matches one of your `admin.pages[]` globs, it's auth-gated like any admin route. Handy for an admin-only stats stream.
+- The endpoint is host-owned. Your request handler never sees `/_sse/...` requests, and you can't serve your own route there.
 
 ## Putting it together: a complete overlay plugin
 
@@ -263,11 +263,11 @@ The plugin subscribes to chat messages and pushes each one to the `overlay` SSE 
 
 ```js
 // src/plugin.js
-const { definePlugin, owncast } = require("@owncast/plugin-sdk");
+const { definePlugin, owncast } = require('@owncast/plugin-sdk');
 
 module.exports = definePlugin({
   onChatMessage(msg) {
-    owncast.sse.send("overlay", "chat", {
+    owncast.sse.send('overlay', 'chat', {
       from: msg.user?.displayName,
       body: msg.body,
     });
@@ -301,10 +301,10 @@ The viewer page is the same `EventSource` snippet shown above, pointed at the re
 <body>
   <div id="feed"></div>
   <script>
-    const events = new EventSource("./_sse/overlay");
-    events.addEventListener("chat", (e) => {
+    const events = new EventSource('./_sse/overlay');
+    events.addEventListener('chat', e => {
       const { from, body } = JSON.parse(e.data);
-      document.getElementById("feed").textContent = `${from}: ${body}`;
+      document.getElementById('feed').textContent = `${from}: ${body}`;
     });
   </script>
 </body>

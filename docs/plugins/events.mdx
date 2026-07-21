@@ -1,5 +1,5 @@
 ---
-title: Events
+title: Plugin Events
 description: Every event your plugin can subscribe to (chat, stream, fediverse, filter, HTTP, and more), with its payload shape.
 sidebar_position: 4
 sidebar_label: Events
@@ -193,7 +193,7 @@ No permission required.
 Fires when a broadcast begins.
 
 ```ts
-interface { startedAt: string; title?: string; summary?: string }
+interface { startedAt?: string; title?: string; summary?: string }
 ```
 
 <Tabs groupId="plugin-lang">
@@ -240,7 +240,7 @@ No permission required.
 Fires when a broadcast ends.
 
 ```ts
-interface { stoppedAt: string }
+interface { stoppedAt?: string }
 ```
 
 No permission required.
@@ -250,7 +250,7 @@ No permission required.
 Fires when the streamer updates the title mid-stream.
 
 ```ts
-interface { from?: string; to: string }
+interface { from: string; to: string }
 ```
 
 `from` is currently always empty: Owncast's title-changed event carries only the new title.
@@ -298,7 +298,7 @@ module.exports = definePlugin({
     owncast.chat.send(`new follower: ${event.actor.handle}`);
   },
   onFediverseQuote(event) {
-    owncast.log.info(`quoted post: ${event.target.url}`);
+    console.log(`quoted post: ${event.target.url}`);
   },
 });
 ```
@@ -313,7 +313,7 @@ def thank(event):
 
 @plugin.on_fediverse_quote
 def record_quote(event):
-    owncast.log.info(f"quoted post: {event.target.url}")
+    print(f"quoted post: {event.target.url}")
 ```
 
 </TabItem>
@@ -359,7 +359,7 @@ The catch-all runs in addition to a specialized handler. For example, an accepte
 module.exports = definePlugin({
   onFediverse(activity) {
     if (typeof activity.type === 'string') {
-      owncast.log.info(`inbound activity: ${activity.type}`);
+      console.log(`inbound activity: ${activity.type}`);
     }
   },
 });
@@ -372,7 +372,7 @@ module.exports = definePlugin({
 @plugin.on_fediverse
 def record_activity(activity):
     if isinstance(activity.type, str):
-        owncast.log.info(f"inbound activity: {activity.type}")
+        print(f"inbound activity: {activity.type}")
 ```
 
 </TabItem>
@@ -478,7 +478,7 @@ interface IncomingHttpRequest {
   headers: Record<string, string>;
   body: string;
   remoteAddr: string;
-  authenticated: boolean; // came from an authenticated Owncast admin
+  authenticated: boolean; // came from any authenticated Owncast session, admin or viewer
   user?: { id: string; displayName: string; scopes: string[] }; // user-token requests only
 }
 
@@ -519,7 +519,7 @@ Requires the `http.serve` permission. The JavaScript SDK exposes a single `onHtt
 
 ## Authentication
 
-### Auth check: `auth.check` {/* #auth-check */}
+### Auth check hook {/* #auth-check */}
 
 Only fires for the enabled [`auth.gate`](/docs/plugins/auth) plugin, and only on a viewer's `/` page load, never on the hot path (video segments, the API, chat). By the time it runs, the host has already verified the viewer's session cookie and resolved their identity. Your handler decides whether that session should continue. It's optional: omit it and a valid cookie is enough until it expires.
 
@@ -599,15 +599,14 @@ Return the full HTML string for the content block. If you don't recognise the sl
 
 ```js
 module.exports = definePlugin({
-  onTabContent: {
-    stats(ctx) {
-      return `<h1>Live stats for ${ctx.user?.displayName ?? 'viewer'}</h1>`;
-    },
+  onTabContent(ctx) {
+    if (ctx.slug === "stats") {
+      return `<h1>Live stats for ${ctx.user?.displayName ?? "viewer"}</h1>`;
+    }
+    return "";
   },
-  onPageContent: {
-    banner(ctx) {
-      return '<p>Welcome!</p>';
-    },
+  onPageContent(ctx) {
+    return ctx.slug === "banner" ? "<p>Welcome!</p>" : "";
   },
 });
 ```

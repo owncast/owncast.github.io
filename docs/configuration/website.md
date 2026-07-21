@@ -28,9 +28,25 @@ Below are some items you'll likely want to customize to update the content that 
 
 <img src="/docs/img/admin-website-general.png" alt="The General settings page in the admin, with fields for the instance name, description, logo, tags, social links, and custom page content" width="65%" />
 
-### Name and description
+### Name and About
 
-By setting your name, description and logo you can quickly update the contents of the website to reflect your stream.
+By setting your name, About text and logo you can quickly update the contents of the website to reflect your stream. The **Name** field accepts up to 255 characters. The **About** field is a short blurb, up to 500 characters, about you, your server, or what your stream is about.
+
+### Server URL
+
+The full public URL of your server, for example `https://owncast.mysite.com`. You must set it before you can enable the [Owncast Directory](/docs/directory/) listing or any of the [live stream notifications](/docs/configuration/notifications/).
+
+### Offline Message
+
+An optional message, up to 2500 characters, shown to visitors when you're not streaming. Markdown is supported.
+
+### Logo
+
+Upload your logo as a PNG, JPEG or GIF up to 2 MB. A square image of at least 256x256 works best. SVGs are discouraged as they can't be displayed on all social media platforms.
+
+### Favicon
+
+Upload a custom favicon in PNG or ICO format, up to 200 KB. It appears in browser tabs and bookmarks.
 
 ### Tags
 
@@ -43,3 +59,19 @@ You can add links to your profiles on other sites by adding them in the admin.
 ### Web page content
 
 The body of your page content can be customized in your admin. Use standard [Markdown syntax](https://www.markdownguide.org/basic-syntax/) to add links, images, and more.
+
+### Hide viewer count
+
+Turn this on to hide the viewer count on your web page.
+
+### Disable search engine indexing
+
+Turn this on to ask search engines not to index your site.
+
+### Enable directory
+
+Request a listing in the [Owncast Directory](https://owncast.directory), an external service run by the Owncast project that helps people find streams. Requires the Server URL to be set. Read more about [the directory](/docs/directory/).
+
+### NSFW
+
+If you stream explicit or adult content, turn this on so unexpected eyes won't accidentally see it in the directory. Like the directory toggle, it requires the Server URL to be set.

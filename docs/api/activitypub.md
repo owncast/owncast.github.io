@@ -30,7 +30,7 @@ If you are an Owncast operator and just want to turn federation on, see [The Fed
 An Owncast server federates as a **single actor** of type `Service`. There is one account per server (default username `live`), and it represents the stream itself rather than a person. Compared to a general-purpose social server, the model is intentionally narrow:
 
 - The actor **sends** posts to its followers (most importantly, a "going live" notification) and a periodic stream "ping".
-- The actor **receives** follows, likes, boosts (announces), and a handful of server-to-server activities, but it does **not** accept inbound posts or replies (`Create` is intentionally rejected).
+- The actor **receives** follows, likes, boosts (announces), replies and mentions, quote requests, and a handful of server-to-server activities. Inbound posts are only surfaced to the operator and plugins: they are never added to a timeline and never re-federated.
 - There is exactly one user, no open registration, and the `following` collection is always empty.
 
 All federation endpoints return `405 Method Not Allowed` when federation is disabled, so check that first if a server appears unreachable.
@@ -248,6 +248,7 @@ Owncast verifies the signature on every activity delivered to its inbox:
 3. It checks that your key's owning domain is **not** on the instance's blocked-domains list and that the actor itself is not blocked.
 4. It verifies the signature, trying the stated algorithm and then falling back to `rsa-sha256` and `rsa-sha512`.
 5. It verifies the `Digest` header against the request body.
+6. If your request carries a parseable `Date` header, it must be close to the server's clock: a date more than 1 hour in the past or more than 1 hour in the future is rejected. This bounds replay of captured, validly-signed requests. A missing or unparseable `Date` skips the check.
 
 In practice this means: sign `(request-target) host date digest` with an RSA key, publish that key in your actor's `publicKey` field, include a SHA-256 `Digest`, and serve your actor over HTTPS.
 
@@ -263,6 +264,9 @@ All outbound activities originate from the server actor and are delivered to fol
 | `Offer`  | server URL       | Periodically while live, as a stream "ping"                        | Directory followers  |
 | `Accept` | inbound `Follow` | In response to a received `Follow`                                 | The follower         |
 | `Reject` | inbound `Follow` | When the operator removes a directory that was listing this server | That directory       |
+| `Leave`  | server URL       | The stream ends (the offline counterpart to `Offer`)                | Directory followers  |
+| `Undo`   | `Follow`         | An operator unfeatures an Owncast server they previously followed   | The target server    |
+| `Accept` / `Reject` | inbound `QuoteRequest` | In response to a received [`QuoteRequest`](#quote-requests-fep-044f) | The requester |
 
 ### Create / Note — going live
 
@@ -272,7 +276,7 @@ This is the activity most consumers care about: subscribe by following the actor
 
 ### Offer / stream ping (outbound)
 
-This is an Owncast extension that supports the **featured-streams / mini-directory** feature. While live, the server periodically sends an `Offer` activity whose `object` is the server URL, carrying [Owncast custom metadata](#owncast-custom-namespace) (stream status, title, description, server name, logo, tags). It lets a receiving directory keep its list of live streams fresh without polling. The matching offline signal is the inbound [`Leave`](#server-to-server-activities) activity. Owncast sends `Offer` and `Leave` only to followers that identified themselves as a directory (see [the custom namespace](#owncast-custom-namespace)), never to ordinary fan followers.
+This is an Owncast extension that supports the **featured-streams / mini-directory** feature. While live, the server periodically sends an `Offer` activity whose `object` is the server URL, carrying [Owncast custom metadata](#owncast-custom-namespace) (stream status, title, description, server name, logo, tags). It lets a receiving directory keep its list of live streams fresh without polling. The matching offline signal is the [`Leave`](#server-to-server-activities) activity, sent when the stream ends. Owncast sends `Offer` and `Leave` only to followers that identified themselves as a directory (see [the custom namespace](#owncast-custom-namespace)), never to ordinary fan followers.
 
 ### Update, Follow, Accept
 
@@ -282,7 +286,7 @@ This is an Owncast extension that supports the **featured-streams / mini-directo
 
 ## Activities Owncast receives (inbound)
 
-Deliver these by POSTing a signed activity to the actor's `inbox`. Owncast queues, signature-verifies, and dispatches each one.
+Deliver these by POSTing a signed activity to the actor's `inbox`. The inbox returns `202 Accepted` immediately and processes the activity asynchronously, so a `202` only means the activity was queued, not that it was acted on. Owncast signature-verifies and dispatches each one from that queue.
 
 | Activity                      | Handling                                                                                                                                                                                                                                                                                                |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -294,13 +298,30 @@ Deliver these by POSTing a signed activity to the actor's `inbox`. Owncast queue
 | `Reject` → `Follow`           | Marks our follow of a remote server as rejected.                                                                                                                                                                                                                                                        |
 | `Offer`                       | A stream ping from another Owncast server. If it carries `streamStatus: "live"` Owncast marks that server online in its federated-servers table and stores the streamed metadata.                                                                                                                       |
 | `Leave`                       | The offline counterpart to `Offer`: marks the remote Owncast server's stream offline.                                                                                                                                                                                                                   |
-| `Update` → `Person`/`Service` | Updates stored metadata (display name, inbox, shared inbox, avatar) for an existing follower.                                                                                                                                                                                                           |
-| `Create`                      | **Not accepted.** Owncast intentionally rejects inbound `Create` activities — you cannot post or reply into an Owncast server over ActivityPub.                                                                                                                                                         |
+| `Update` → `Person`           | Updates stored metadata (display name, inbox, shared inbox, avatar) for an existing follower. Updates with any other object type are ignored.                                                                                                                                            |
+| `Create` → `Note`             | Accepted when the object is a single `Note` attributed to the signing actor and the note is either a reply to a post this server published or addressed to the actor (a mention). Raised as an event for the operator and plugins, not added to any timeline. See [inbound posts](#inbound-posts-create). |
+| `QuoteRequest`                | A [FEP-044f](https://codeberg.org/fediverse/fep/src/branch/main/fep/044f/fep-044f.md) request to quote one of the server's posts. Accepted only for locally authored posts while federation is public and quotes are enabled. Answered with `Accept` or `Reject`. See [quote requests](#quote-requests-fep-044f). |
 
 Two important guards:
 
 - **Engagement age limit.** `Like` and `Announce` activities are only recorded if the referenced object is no more than **36 hours** old. Older engagements are ignored. This keeps engagement notifications tied to recent streams.
 - **Blocking & SSRF.** Inbound activities from blocked domains/actors are rejected during signature verification. Outbound deliveries refuse non-HTTPS and internal/loopback inbox URLs.
+
+### Inbound posts (Create)
+
+:::info[New in Owncast 0.3.0]
+Earlier releases rejected every inbound `Create`. Owncast 0.3.0 accepts the narrow cases described here.
+:::
+
+Owncast accepts a `Create` whose object is exactly one `Note` attributed to the same actor that sent it. It keeps two kinds of notes: replies to a post the server itself published, and notes that address the actor directly (mentions). Everything else is ignored. An accepted post is raised as a reply or mention event for the operator's integrations and plugins. It is not added to a timeline, is not shown to viewers, and is never re-federated, so there is still no public conversation surface on an Owncast server.
+
+### Quote requests (FEP-044f)
+
+:::info[New in Owncast 0.3.0]
+`QuoteRequest` handling is new in Owncast 0.3.0.
+:::
+
+A remote user asking permission to quote one of the server's posts sends a [FEP-044f](https://codeberg.org/fediverse/fep/src/branch/main/fep/044f/fep-044f.md) `QuoteRequest` whose `object` is the post being quoted and whose `instrument` is the quote post itself. Owncast accepts the request only when the quoted object is a post this server authored, federation is in public mode, and the operator has quoting enabled. On accept it stores a `QuoteAuthorization` stamp as a dereferenceable object and replies with an `Accept` whose `result` is the stamp's IRI, so any server can fetch the stamp to verify the quote was approved. Every other case gets a `Reject`, which clears the pending quote on the remote end.
 
 ### Server-to-server activities
 
@@ -385,4 +406,4 @@ To follow and consume an Owncast stream from your own application:
 6. **Optionally** act as a directory: set `https://owncast.online/ns#directory` to `true` on your `Follow`, have the operator approve it, then consume the `Offer`/`Leave` pings and the `https://owncast.online/ns#*` metadata for real-time liveness and richer directory entries.
 7. **Verify** the signature on everything Owncast sends you against the actor's `#main-key`.
 
-Remember that Owncast will not accept replies or posts (`Create` is rejected) and exposes no `following` list, so design your integration around following + notifications + likes/boosts rather than two-way conversation.
+Owncast accepts replies and mentions only as notifications for the operator and plugins: they are never threaded, displayed, or re-federated, and the server exposes no `following` list. Design your integration around following + notifications + likes/boosts rather than two-way conversation.

@@ -32,6 +32,7 @@ The following is a list of events you can get notified about.
 1. Visit `/admin/webhooks` on your owncast server.
 1. Click `Create Webhook`.
 1. Put in the full public URL to an endpoint that can receive this webhook.
+1. Keep or replace the pre-filled webhook secret. Owncast uses it to sign every delivery, and you'll use it to verify them. You can reveal or copy it later from the webhook list.
 1. Select the events you want to be notified of.
 1. Save this new webhook.
 
@@ -42,9 +43,52 @@ The following is a list of events you can get notified about.
 
 ### Verifying webhook requests
 
-Owncast does not sign or authenticate webhook requests. There is no shared secret and no signature header, so your endpoint cannot cryptographically confirm that a request came from your Owncast server. Treat the endpoint as something anyone could call, and do not wire it directly to actions you would not want an unauthenticated caller to trigger.
+:::info[New in Owncast 0.3.0]
+Owncast 0.3.0 signs every webhook delivery. Earlier releases send unsigned requests with no signature header.
+:::
 
-If you want a basic guard, put a hard-to-guess token in the webhook URL you register (for example `https://example.com/owncast-hook/9f3c...`) and reject any request that arrives without it.
+Every webhook has a secret, created with the webhook in the admin. Each delivery includes an `owncast-signature` header:
+
+```text
+owncast-signature: t=1718400000.s=5f8a1c...
+```
+
+`t` is the Unix timestamp when the request was signed. `s` is a hex-encoded HMAC-SHA256 signature.
+
+To verify a delivery:
+
+1. Parse `t` and `s` from the header.
+2. Reject the request if `t` differs from the current time by more than 300 seconds. This blocks replayed deliveries.
+3. Compute `HMAC-SHA256(secret, "<t>." + body)`, where `body` is the exact raw request body. Don't re-serialize the JSON, since any formatting difference changes the signature.
+4. Hex-encode the result and compare it to `s` using a constant-time comparison.
+
+A Node.js example:
+
+```js
+const crypto = require("crypto");
+
+function verifyWebhook(signatureHeader, rawBody, secret) {
+  const parts = {};
+  for (const part of signatureHeader.split(".")) {
+    const [key, value] = part.trim().split("=");
+    if (key === "t" || key === "s") parts[key] = value;
+  }
+  if (!parts.t || !parts.s) return false;
+
+  // Reject replays outside a 5 minute window.
+  if (Math.abs(Date.now() / 1000 - Number(parts.t)) > 300) return false;
+
+  const expected = crypto
+    .createHmac("sha256", secret)
+    .update(`${parts.t}.${rawBody}`)
+    .digest("hex");
+
+  if (parts.s.length !== expected.length) return false;
+  return crypto.timingSafeEqual(Buffer.from(parts.s), Buffer.from(expected));
+}
+```
+
+Verification is optional. If you skip it, treat your endpoint as something anyone on the internet could call.
 
 ### High level webhooks
 
@@ -63,6 +107,8 @@ where
 - **type** gives information about what kind of event it is (one of the types from the table above).
 - **eventData** gives more information on the event. The structure of `eventData` is different for each `type`.
 
+Every `eventData` also includes a `status` object describing the current stream state and a `serverURL` string identifying the server that sent the event. The one exception is `FEDIVERSE_ENGAGEMENT_FOLLOW`, which carries `serverURL` but no `status`.
+
 Examples of what `eventData` to expect for each event type are below.
 
 ## Webhook Examples
@@ -73,6 +119,17 @@ Examples of what `eventData` to expect for each event type are below.
 {
   "type": "CHAT",
   "eventData": {
+    "status": {
+      "lastConnectTime": "2021-08-12T07:45:03.986220954Z",
+      "lastDisconnectTime": null,
+      "versionNumber": "0.2.5",
+      "streamTitle": "",
+      "viewerCount": 3,
+      "overallMaxViewerCount": 7,
+      "sessionMaxViewerCount": 4,
+      "online": true
+    },
+    "serverURL": "https://stream.example.com",
     "user": {
       "id": "qSRQpeM7R",
       "displayName": "lazyDaisy",
@@ -83,15 +140,18 @@ Examples of what `eventData` to expect for each event type are below.
       "isBot": false,
       "authenticated": false
     },
-    "clientId": 2,
-    "body": "hello world \u003cimg class=\"emoji\" alt=\":beerparrot:\" title=\":beerparrot:\" src=\"/img/emoji/beerparrot.gif\"\u003e",
-    "rawBody": "hello world \u003cimg class=\"emoji\" alt=\":beerparrot:\" title=\":beerparrot:\" src=\"/img/emoji/beerparrot.gif\"\u003e",
+    "timestamp": "2021-08-12T07:53:12.061982913Z",
+    "body": "\u003cp\u003ehello world \u003cimg class=\"emoji\" alt=\":beerparrot:\" title=\":beerparrot:\" src=\"/img/emoji/beerparrot.gif\"\u003e\u003c/p\u003e",
+    "rawBody": "hello world :beerparrot:",
     "id": "j-rXteG7R",
-    "visible": true,
-    "timestamp": "2021-08-12T07:53:12.061982913Z"
+    "clientId": 2,
+    "visible": true
   }
 }
 ```
+
+- `body` is the message rendered to sanitized HTML. Markdown is converted and emoji shortcodes are replaced with `<img>` tags.
+- `rawBody` is the original message text exactly as the user typed it.
 
 Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8` a simple string field with the name `author` was used.
 
@@ -101,9 +161,19 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 {
   "type": "NAME_CHANGE",
   "eventData": {
-    "type": "NAME_CHANGE",
-    "id": "",
-    "timestamp": "0001-01-01T00:00:00Z",
+    "status": {
+      "lastConnectTime": "2021-08-12T07:45:03.986220954Z",
+      "lastDisconnectTime": null,
+      "versionNumber": "0.2.5",
+      "streamTitle": "",
+      "viewerCount": 3,
+      "overallMaxViewerCount": 7,
+      "sessionMaxViewerCount": 4,
+      "online": true
+    },
+    "serverURL": "https://stream.example.com",
+    "id": "GsxeK6MIg",
+    "timestamp": "2022-09-19T12:33:59.423278816+02:00",
     "user": {
       "id": "qSRQpeM7R",
       "displayName": "NotSoLazyDaisy",
@@ -114,7 +184,6 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
       "isBot": false,
       "authenticated": false
     },
-    "clientId": 2,
     "newName": "NotSoLazyDaisy"
   }
 }
@@ -126,6 +195,17 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 {
   "type": "USER_JOINED",
   "eventData": {
+    "status": {
+      "lastConnectTime": "2021-08-12T07:45:03.986220954Z",
+      "lastDisconnectTime": null,
+      "versionNumber": "0.2.5",
+      "streamTitle": "",
+      "viewerCount": 3,
+      "overallMaxViewerCount": 7,
+      "sessionMaxViewerCount": 4,
+      "online": true
+    },
+    "serverURL": "https://stream.example.com",
     "id": "wAgcTeM7g",
     "timestamp": "2021-08-12T08:19:28.921355401Z",
     "user": {
@@ -137,20 +217,30 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
       "nameChangedAt": "0001-01-01T00:00:00Z",
       "isBot": false,
       "authenticated": false
-    },
-    "clientId": 2
+    }
   }
 }
 ```
 
 #### USER_PARTED
 
-`USER_PARTED` is sent 10 seconds after a user's last active chat connection disconnects. If the user reconnects during that time, the event is canceled. Disabling visible join and part messages only hides the message in chat; the webhook is still sent.
+`USER_PARTED` is sent 10 seconds after a user's last active chat connection disconnects. If the user reconnects during that time, the event is canceled. Disabling visible join and part messages only hides the message in chat. The webhook is still sent.
 
 ```json
 {
   "type": "USER_PARTED",
   "eventData": {
+    "status": {
+      "lastConnectTime": "2021-08-12T07:45:03.986220954Z",
+      "lastDisconnectTime": null,
+      "versionNumber": "0.2.5",
+      "streamTitle": "",
+      "viewerCount": 3,
+      "overallMaxViewerCount": 7,
+      "sessionMaxViewerCount": 4,
+      "online": true
+    },
+    "serverURL": "https://stream.example.com",
     "id": "Ws4gTeM7R",
     "timestamp": "2021-08-12T08:20:01.061982913Z",
     "user": {
@@ -175,6 +265,17 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
   "eventData": {
     "id": "WtokptnVR",
     "name": "Owncast",
+    "serverURL": "https://stream.example.com",
+    "status": {
+      "lastConnectTime": "2022-09-19T12:30:26.97907142+02:00",
+      "lastDisconnectTime": null,
+      "versionNumber": "0.2.5",
+      "streamTitle": "",
+      "viewerCount": 0,
+      "overallMaxViewerCount": 7,
+      "sessionMaxViewerCount": 0,
+      "online": true
+    },
     "streamTitle": "",
     "summary": "Welcome to your new Owncast server! This description can be changed in the admin. Visit https://owncast.online/docs/configuration/ to learn more.",
     "timestamp": "2022-09-19T12:30:26.97907142+02:00"
@@ -190,6 +291,17 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
   "eventData": {
     "id": "YP-aptn4g",
     "name": "Owncast",
+    "serverURL": "https://stream.example.com",
+    "status": {
+      "lastConnectTime": "2022-09-19T12:30:26.97907142+02:00",
+      "lastDisconnectTime": "2022-09-19T12:40:21.205872269+02:00",
+      "versionNumber": "0.2.5",
+      "streamTitle": "",
+      "viewerCount": 0,
+      "overallMaxViewerCount": 7,
+      "sessionMaxViewerCount": 2,
+      "online": false
+    },
     "streamTitle": "",
     "summary": "Welcome to your new Owncast server! This description can be changed in the admin. Visit https://owncast.online/docs/configuration/ to learn more.",
     "timestamp": "2022-09-19T12:40:21.205872269+02:00"
@@ -205,6 +317,7 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
   "eventData": {
     "id": "DmeikEf4Rz",
     "name": "New Owncast Server",
+    "serverURL": "https://stream.example.com",
     "status": {
       "lastConnectTime": null,
       "lastDisconnectTime": "2024-10-24T22:35:05Z",
@@ -228,28 +341,47 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 {
   "type": "VISIBILITY-UPDATE",
   "eventData": {
+    "status": {
+      "lastConnectTime": "2022-09-19T12:30:26.97907142+02:00",
+      "lastDisconnectTime": null,
+      "versionNumber": "0.2.5",
+      "streamTitle": "",
+      "viewerCount": 3,
+      "overallMaxViewerCount": 7,
+      "sessionMaxViewerCount": 4,
+      "online": true
+    },
+    "serverURL": "https://stream.example.com",
     "id": "zqGupt7VR",
-    "MessageIDs": ["-Zzltt74g", "rvd2ppn4g"],
     "timestamp": "2022-09-19T12:44:28.225779601+02:00",
-    "Visible": false
+    "user": null,
+    "visible": false,
+    "ids": ["-Zzltt74g", "rvd2ppn4g"]
   }
 }
 ```
 
-- `MessageIDs` is a list of IDs of messages that had their visibility changed.
+- `ids` is a list of IDs of messages that had their visibility changed.
+- `visible` is the new visibility of those messages.
+- `user` is always `null` for this event.
 
 #### FEDIVERSE_ENGAGEMENT_FOLLOW
 
+:::info[New in Owncast 0.3.0]
+Owncast 0.3.0 adds the `serverURL` field to this event. Earlier releases send only `id`, `timestamp`, `name`, `username`, and `image`.
+:::
+
 ```json
 {
+  "type": "FEDIVERSE_ENGAGEMENT_FOLLOW",
   "eventData": {
-    "timestamp": "2026-04-13T19:17:12.528099886Z",
     "id": "AqilY4hDR",
+    "timestamp": "2026-04-13T19:17:12.528099886Z",
     "name": "Test Follower",
     "username": "testfollower@fake-mastodon.example.com",
-    "image": "https://fake-mastodon.example.com/avatars/testfollower.png"
-  },
-  "type": "FEDIVERSE_ENGAGEMENT_FOLLOW"
+    "image": "https://fake-mastodon.example.com/avatars/testfollower.png",
+    "serverURL": "https://stream.example.com"
+  }
 }
 ```
 
@@ -257,6 +389,7 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 - `eventData.name` is the display name of the follower.
 - `eventData.username` is the full `user@domain` handle.
 - `eventData.image` is the URL to the follower's avatar.
+- Unlike the other events, `eventData` does not include a `status` object.
 
 ### clientId vs. user.id
 

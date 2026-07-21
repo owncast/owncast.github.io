@@ -14,3 +14,25 @@ It is natural for you to want to have as little latency as possible between when
 <IncludeMarkdown>
   <Reducing />
 </IncludeMarkdown>
+
+## Latency buffer levels
+
+The **Latency Buffer** setting on the admin's Video configuration page selects one of five levels. Each level trades latency for stability by changing how long each video segment is and how many segments the playlist holds for viewers.
+
+| Level       | Seconds per segment | Segments in playlist | Approximate latency |
+| ----------- | ------------------- | -------------------- | ------------------- |
+| 0 (lowest)  | 1                   | 25                   | ~5 seconds          |
+| 1           | 2                   | 15                   | ~8-9 seconds        |
+| 2 (default) | 3                   | 10                   | ~10 seconds         |
+| 3           | 4                   | 8                    | ~15 seconds         |
+| 4 (highest) | 5                   | 5                    | ~18 seconds         |
+
+Changing the level while you are live does not affect the current stream. The new setting takes effect the next time you begin a stream.
+
+## The Minimize latency player setting
+
+:::info[New in Owncast 0.3.0]
+This player option is available starting in Owncast 0.3.0.
+:::
+
+Viewers can turn on **Minimize latency** in the player's settings menu. It slightly speeds up playback to bring the viewer closer to live. It only acts when there is spare bandwidth and enough buffered video, it backs off immediately when playback conditions degrade, and it disables itself for the rest of the session after repeated buffering. Viewers with an unstable connection can leave it off.

@@ -21,7 +21,7 @@ This page is the Python-specific layer: install, the `@plugin` decorators, the `
 
 ## How it maps to the reference docs
 
-The shared reference names handlers and APIs in their canonical (camelCase) form. To read it as Python, apply one rule: **everything is `snake_case`.** Quick orientation:
+The shared reference names handlers and APIs in their canonical (camelCase) form. To read it as Python, apply one rule: **decorators, host methods, and payload attribute access are `snake_case`.** Raw wire dictionaries (`msg.raw`) and scenario JSON keep their camelCase wire names. Quick orientation:
 
 | In the reference                                    | In Python                                                                                               |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -85,11 +85,13 @@ def block_spam(msg):
     return filter.drop("spam") if "spam" in msg.body else filter.pass_()
 ```
 
-The module exports three things:
+The module exports five things:
 
 - **`plugin`**: the decorator registry. `@plugin.on_chat_message`, `@plugin.filter_chat_message`, `@plugin.on_stream_started`, `@plugin.on_tick`, `@plugin.on_fediverse_follow`, and the rest mirror the runtime events in the [handlers reference](/docs/plugins/events). Two take a key: `@plugin.on("custom.event")` for plugin-emitted events and `@plugin.on_tab_content("slug")` / `@plugin.on_page_content("slug")` for dynamic viewer-page HTML. Two take no key: `@plugin.on_page_styles` and `@plugin.on_page_scripts` return CSS and JavaScript injected into the viewer page at request time, gated on `ui.modify`.
 - **`owncast`**: the host API namespace. Method names are **`snake_case`** (`owncast.chat.send_action`, `owncast.kv.get_json`). Each call is gated by the matching permission you declare in your manifest. See the [APIs reference](/docs/plugins/apis).
 - **`filter`**, filter results returned from a `filter_chat_message` handler: `filter.pass_()` (trailing underscore, `pass` is a Python keyword), `filter.modify(...)`, `filter.drop(reason)`.
+- **`auth_check`**: verdict helpers for the `@plugin.on_auth_check` handler of an `auth.gate` plugin: `auth_check.ok()`, `auth_check.refresh(ttl=...)`, `auth_check.deny(reason)`.
+- **`CommandContext`**: what a declared command's `run()` receives: `.msg`, `.user`, `.command`, `.invoked_as`, `.args`, and `.arg_string`, plus `reply(text)` and `reply_privately(text)` helpers. Import it for type hints.
 
 Payloads are attribute objects with `snake_case` accessors over the wire JSON (`msg.body`, `msg.user.display_name`, `msg.client_id`). Use `msg.raw` for the underlying dict. Host calls that return JSON objects come back as the same attribute objects (`owncast.server.info().name`). Lists come back as Python lists.
 
@@ -100,23 +102,23 @@ Two more Python idioms worth knowing, both documented in full (with Python examp
 
 ## The CLI
 
-Installing the SDK gives you `owncast-plugin-py`. Building and packaging bundle your source and need no compiler. The `test` and `serve` commands fetch the prebuilt host binaries (the scenario runner and dev server) on first use:
+Installing the SDK gives you `owncast-plugin-py`. Building and packaging bundle your source and need no compiler. The `test`, `serve`, and `package` commands fetch the prebuilt host binaries on first use (`package` runs its install-time load check through the test binary):
 
-| Command                               | What it does                                                        |
-| ------------------------------------- | ------------------------------------------------------------------- |
-| `owncast-plugin-py new my-plugin`     | Scaffold a new plugin project in `./my-plugin`                      |
-| `owncast-plugin-py build my-plugin`   | Build `src/plugin.py` (without packaging)                           |
-| `owncast-plugin-py test my-plugin`    | Build, then run the `__tests__/` scenarios                          |
-| `owncast-plugin-py serve my-plugin`   | Local dev server (`-p/--port` to change the port, defaults to 8080) |
-| `owncast-plugin-py package my-plugin` | Build + bundle → `<slug>.ocpkg`: the file you ship                  |
+| Command                             | What it does                                                        |
+| ----------------------------------- | ------------------------------------------------------------------- |
+| `owncast-plugin-py new my-plugin`   | Scaffold a new plugin project in `./my-plugin`                      |
+| `owncast-plugin-py build`           | Build `src/plugin.py` (without packaging)                           |
+| `owncast-plugin-py test`            | Build, then run the `__tests__/` scenarios                          |
+| `owncast-plugin-py serve`           | Local dev server (`-p/--port` to change the port, defaults to 8080) |
+| `owncast-plugin-py package`         | Build + bundle → `<slug>.ocpkg`: the file you ship                  |
 
 ```sh
-owncast-plugin-py package my-plugin    # produces my-plugin.ocpkg
-owncast-plugin-py test my-plugin
-owncast-plugin-py serve my-plugin      # POST /_dev/chat to drive event handlers
+owncast-plugin-py package    # produces my-plugin.ocpkg
+owncast-plugin-py test
+owncast-plugin-py serve      # POST /_dev/chat to drive event handlers
 ```
 
-The directory argument defaults to `.`, so you can `cd` into the project and omit it. The `.ocpkg` is the single distribution artifact. See [Packaging & distribution](/docs/plugins/packaging) for what goes inside and how to install it.
+All four run against the current directory. The positional project argument defaults to `.`, so inside the project you pass nothing. From elsewhere, pass the project directory: `owncast-plugin-py package my-plugin`. The `.ocpkg` is the single distribution artifact. See [Packaging & distribution](/docs/plugins/packaging) for what goes inside and how to install it.
 
 ## Constraints to know
 
@@ -125,7 +127,7 @@ A few things about how Python plugins are built shape how you write them. You im
 - **Pure-Python only, and no `pip`.** There is no `pip install` step: you add third-party code by copying its (pure-Python) source into your project. Dependencies with C extensions (numpy, pandas, and the like) won't load. See [Third-party libraries](#third-party-libraries). For outbound HTTP use `owncast.http.fetch`, not `requests`.
 - **Don't shadow standard-library names.** A top-level `def json(...)` (or any other stdlib name) shadows the real module and can break the build, and a module file named after a stdlib module (`src/json.py`) is ignored in favor of the real one. Name them `json_response` and the like.
 - **The entry can't use relative imports.** In `src/plugin.py`, import your own modules absolutely (`from helpers import ...`), not `from . import helpers`. A relative import there fails the build, though relative imports inside a package's own modules are fine.
-- **`snake_case` everywhere**, in contrast to the JS SDK's camelCase: `send_action`, `get_json`, `msg.user.display_name`, `filter.pass_()`.
+- **`snake_case` in the code you write**, in contrast to the JS SDK's camelCase: `send_action`, `get_json`, `msg.user.display_name`, `filter.pass_()`. Raw wire dictionaries (`msg.raw`) and scenario JSON stay camelCase.
 
 ## Third-party libraries
 

@@ -23,7 +23,7 @@ For any bugs or issues you'd like to file with the project.
 
 If you have any general usage or support questions, you'll find responses in our chat, where other users and developers hang out.
 
-## [Contribute to the project](/docs/contribute)
+## [Contribute to the project](/devdocs/contributor-guide)
 
 The project is always looking for people to help build, support and keep Owncast alive.
 

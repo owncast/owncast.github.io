@@ -18,9 +18,13 @@ If your storage provider is S3 compatible it will likely work with Owncast. Read
 1. Visit your Owncast server setup page in the admin and view the Object Storage settings.
 1. Enable it.
 1. Visit your storage provider and create a new bucket.
-1. Enter the bucket name, access key, secret key, and endpoint that your object storage provider's interface gave you into the Owncast settings. These have to be correct, so double check them. Contact your storage provider's support if you're not sure what these are.
+1. Enter the bucket name, access key, secret key, endpoint, and region that your object storage provider's interface gave you into the Owncast settings. All of these fields are required, and Owncast will reject the configuration if any are missing, so double check them. If your provider doesn't use regions, enter the placeholder value its documentation suggests. Contact your storage provider's support if you're not sure what these are.
 1. Make sure your bucket is publicly accessible, and anybody can read files from it. Some storage providers may set your bucket as private by default, so you may need to change this setting.
 1. If your storage provider requires you to setup any kind of [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) policy in order for your files to be accessed, make sure you do that. Visit your object storage provider's documentation to learn how to configure your CORS policy, as it's different for every provider. It's generally a good idea to allow all origins, but you can restrict it to your Owncast server if you have a specific need to do that, and you don't anticipate using your stream in other web pages. If your stream is not working and your browser console error log shows errors about `CORS` or `Access-Control-Allow-Origin`, this is likely the problem. This is often very common, so make sure your bucket is setup correctly.
+
+## Retention
+
+Owncast keeps only the recent playback window in your bucket. As new video segments upload, it deletes objects older than the playlist depth plus a cleanup buffer of about 20 segments. The bucket never holds more than the last few minutes of your stream, so don't treat it as a recording archive.
 
 ### Optional settings
 

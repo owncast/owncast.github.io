@@ -293,7 +293,7 @@ Requires the `chat.filter` permission. The host rejects the load if a plugin def
 
 ### Filter priority (optional)
 
-Lower numbers run earlier. Default `100`. Set it with `filterPriority` (JavaScript) / `filter_priority` (Python) on the plugin definition.
+Lower numbers run earlier. Default `100`. Set it with `filterPriority` (JavaScript) on the plugin definition, or by calling `plugin.set_filter_priority(priority)` (Python).
 
 Use this when your plugin's behavior depends on whether other filters have already run. For example, a profanity filter should usually run before a translator.
 

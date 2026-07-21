@@ -70,6 +70,10 @@ If you would like the player to be muted once it starts playing, append `?initia
 
 One interaction to know about: `sound-only` never starts silently, so combining it with `initiallyMuted=true` means the player will not autoplay at all.
 
+### Hiding the follow button
+
+If your server has social features enabled, the embedded player offers a follow button. Hide it for a single embed by appending `?supportsSocialFollow=false` to the URL. Any other value keeps the button.
+
 ## Customizing the Embedded Stream Styling
 
 You can easily customize the styling of the embedded Owncast stream to match your website's design by applying CSS styles. Here's how you can do it:
@@ -119,7 +123,16 @@ There are two types of embed chats: A read-only chat which only shows the messag
 
 ### Embedding standalone chat
 
-The standalone chat URL lives at: `http://owncast.example.com/embed/chat/readwrite`.
+The standalone chat URL lives at: `http://owncast.example.com/embed/chat/readwrite`. It is the full chat: viewers get a name and can send messages, subject to the same chat rules as your main page.
+
+```html
+<iframe
+  src="https://owncast.example.com/embed/chat/readwrite"
+  title="Owncast chat"
+  height="500px"
+  width="350px"
+></iframe>
+```
 
 It will look something like:
 
@@ -127,7 +140,16 @@ It will look something like:
 
 ### Embedding read-only chat
 
-The read-only chat URL lives at: `http://owncast.example.com/embed/chat/readonly`.
+The read-only chat URL lives at: `http://owncast.example.com/embed/chat/readonly`. It shows messages only, with no input for sending them.
+
+```html
+<iframe
+  src="https://owncast.example.com/embed/chat/readonly"
+  title="Owncast chat"
+  height="500px"
+  width="350px"
+></iframe>
+```
 
 One common use of read-only chat is adding the chat messages to your broadcasting software, such as a web layer in OBS.
 

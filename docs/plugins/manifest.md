@@ -1,5 +1,5 @@
 ---
-title: Manifest reference
+title: Plugin Manifest reference
 description: Every field your plugin's manifest can contain, with examples.
 sidebar_position: 3
 sidebar_label: Manifest
@@ -13,6 +13,10 @@ tags:
 ---
 
 Every plugin has a `plugin.manifest.json` file at its root. This is the source of truth for the plugin's identity, the permissions it needs, the network destinations it's allowed to call, the admin pages it contributes, and the action buttons it adds to the viewer UI.
+
+:::info[New in Owncast 0.3.0]
+Plugins require Owncast 0.3.0 or later.
+:::
 
 The manifest is what an admin reviews before installing the plugin. The host parses it at load time and enforces every declaration. Nothing in the compiled plugin can grant a capability the manifest didn't ask for.
 
@@ -36,23 +40,24 @@ The manifest is plain JSON that describes the plugin to the host, independent of
 
 ## Top-level fields
 
-| Field         | Type     | Required | Description                                                                                                  |
-| ------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------ |
-| `api`         | string   | yes      | Manifest schema version. Currently `"1"`.                                                                    |
-| `name`        | string   | yes      | Human-readable display name shown in admin lists and registry cards. Example: `"Awesome Echo Bot"`.          |
-| `slug`        | string   | no       | Canonical identifier (URL prefix, config namespace, filename). Auto-derived from `name` if omitted. See below. |
-| `version`     | string   | yes      | Your plugin's version. Semver recommended. Must match what the runtime reports at load time.                 |
-| `description` | string   | no       | One-sentence summary the admin sees in the plugin list and during install.                                   |
-| `permissions` | string[] | no       | List of capabilities your plugin needs. See [Permissions](/docs/plugins/permissions).                        |
-| `config`      | object   | no       | Admin-configurable settings your plugin reads at runtime. See [Configuration](/docs/plugins/configuration). |
-| `bot`         | object   | no       | Chat-bot configuration. See [`bot`](#bot-chat-bot-identity).                                                 |
-| `network`     | object   | no       | Outbound-HTTP allowlist, required when `network.fetch` is granted. See below.                                |
-| `actions`     | object[] | no       | Action buttons to add to the viewer UI. See [UI: Action buttons](/docs/plugins/ui#action-buttons).           |
-| `admin`       | object   | no       | Admin pages to add to the Owncast admin UI. See [UI: Admin pages](/docs/plugins/ui#admin-pages).             |
-| `styles`      | string[] | no       | CSS files inlined into the viewer page. See [`styles`](#styles-css-injection).                               |
-| `scripts`     | string[] | no       | JavaScript files inlined into the viewer page. See [`scripts`](#scripts-javascript-injection).               |
-| `extraPageContent` | object | no    | An object declaring a slug and an optional HTML file prepended to the viewer's extra-content block. See [`extraPageContent`](#extrapagecontent-html-block). |
-| `tabs`        | object[] | no       | Viewer-page tabs the plugin contributes alongside the built-in tabs. See [`tabs`](#tabs-viewer-page-tabs).         |
+| Field              | Type     | Required | Description                                                                                                                                                 |
+| ------------------ | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `api`              | string   | yes      | Manifest schema version. Currently `"1"`.                                                                                                                   |
+| `name`             | string   | yes      | Human-readable display name shown in admin lists and registry cards. Example: `"Awesome Echo Bot"`.                                                         |
+| `slug`             | string   | no       | Canonical identifier (URL prefix, config namespace, filename). Auto-derived from `name` if omitted. See below.                                              |
+| `version`          | string   | yes      | Your plugin's version. SemVer recommended. Informational metadata for admins and the registry: the host doesn't gate loading on it.                        |
+| `description`      | string   | no       | One-sentence summary the admin sees in the plugin list and during install.                                                                                  |
+| `category`         | string   | no       | Registry browse category. See [`category`](#category-registry-browse-category).                                                                             |
+| `permissions`      | string[] | no       | List of capabilities your plugin needs. See [Permissions](/docs/plugins/permissions).                                                                       |
+| `config`           | object   | no       | Admin-configurable settings your plugin reads at runtime. See [Configuration](/docs/plugins/configuration).                                                 |
+| `bot`              | object   | no       | Chat-bot configuration. See [`bot`](#bot-chat-bot-identity).                                                                                                |
+| `network`          | object   | no       | Outbound-HTTP allowlist, required when `network.fetch` is granted. See below.                                                                               |
+| `actions`          | object[] | no       | Action buttons to add to the viewer UI. See [UI: Action buttons](/docs/plugins/ui#action-buttons).                                                          |
+| `admin`            | object   | no       | Admin pages to add to the Owncast admin UI. See [UI: Admin pages](/docs/plugins/ui#admin-pages).                                                            |
+| `styles`           | string[] | no       | CSS files inlined into the viewer page. See [`styles`](#styles-css-injection).                                                                              |
+| `scripts`          | string[] | no       | JavaScript files inlined into the viewer page. See [`scripts`](#scripts-javascript-injection).                                                              |
+| `extraPageContent` | object   | no       | An object declaring a slug and an optional HTML file prepended to the viewer's extra-content block. See [`extraPageContent`](#extrapagecontent-html-block). |
+| `tabs`             | object[] | no       | Viewer-page tabs the plugin contributes alongside the built-in tabs. See [`tabs`](#tabs-viewer-page-tabs).                                                  |
 
 ### `name` and `slug`
 
@@ -60,14 +65,20 @@ The manifest is plain JSON that describes the plugin to the host, independent of
 
 `slug` is the canonical identifier. It controls:
 
-* The plugin's URL prefix: `/plugins/<slug>/...`
-* The config (key-value store) namespace
-* The filename of the built artifact (`<slug>.ocpkg`)
-* The primary key in the plugin registry
+- The plugin's URL prefix: `/plugins/<slug>/...`
+- The config (key-value store) namespace
+- The filename of the built artifact (`<slug>.ocpkg`)
+- The primary key in the plugin registry
 
 Slugs are lowercase letters, digits, and hyphens, starting with a letter, up to 64 characters. The SDK derives one from `name` automatically when `slug` is omitted: spaces and punctuation collapse into single hyphens, letters lowercase. `"Awesome Echo Bot"` becomes `awesome-echo-bot`. Pin `slug` explicitly when the auto-derivation isn't what you want, or when your display name uses characters outside ASCII (`"Café Helper"` would otherwise yield `caf-helper`).
 
 Avoid changing the slug after release: the rename will look like a different plugin to admins, with a fresh config store. Changing `name` (display only) is safe. It doesn't change identity.
+
+### `category`: registry browse category
+
+An optional label that places your plugin in a browse category on the registry and in the admin UI. The canonical values are `chat-bots`, `chat-filters`, `moderation`, `authentication`, `themes`, `overlays`, `notifications`, `integrations`, `video`, `analytics`, `games`, `admin-utilities`, `examples`, and `other`.
+
+The SDK's packaging CLI warns when `category` isn't one of these, but nothing rejects it: the host and registry tolerate unknown categories, they just won't match any browse filter.
 
 ### `bot`: chat-bot identity
 
@@ -99,6 +110,8 @@ Declare typed settings here and Owncast renders an editable form for them in the
   }
 }
 ```
+
+Config keys starting with `__` are reserved: the host uses that prefix to inject per-instance state into the plugin runtime, and a manifest declaring one is rejected at load.
 
 Full coverage, including how the form renders, credential masking, validation, and where overrides are stored, in [Configuration](/docs/plugins/configuration).
 
@@ -171,23 +184,23 @@ Action buttons are clickable entries Owncast surfaces under the stream. While yo
 
 Each entry:
 
-| Field            | Type    | Notes                                                                              |
-| ---------------- | ------- | ---------------------------------------------------------------------------------- |
-| `title`          | string  | Required. The button label.                                                        |
-| `url`            | string  | Either an absolute `https://...` URL or a path. Mutually exclusive with `html`.    |
-| `html`           | string  | Raw HTML rendered in an inline modal. Mutually exclusive with `url`.               |
-| `icon`           | string  | Optional image URL shown on the button. Same path rules as `url`.                  |
-| `color`          | string  | Optional hex color for the button background.                                      |
-| `description`    | string  | Optional. Shown in the modal that opens for URL-based actions.                     |
-| `openExternally` | boolean | If `true`, the URL opens in a new tab instead of an inline modal.                  |
+| Field            | Type    | Notes                                                                           |
+| ---------------- | ------- | ------------------------------------------------------------------------------- |
+| `title`          | string  | Required. The button label.                                                     |
+| `url`            | string  | Either an absolute `https://...` URL or a path. Mutually exclusive with `html`. |
+| `html`           | string  | Raw HTML rendered in an inline modal. Mutually exclusive with `url`.            |
+| `icon`           | string  | Optional image URL shown on the button. Same path rules as `url`.               |
+| `color`          | string  | Optional hex color for the button background.                                   |
+| `description`    | string  | Optional. Shown in the modal that opens for URL-based actions.                  |
+| `openExternally` | boolean | If `true`, the URL opens in a new tab instead of an inline modal.               |
 
 Rules the host enforces at load time:
 
-* `ui.modify` permission is required. Without it, the manifest is rejected.
-* Exactly one of `url` or `html` per entry.
-* Relative URLs (and icons) starting with `/` auto-prefix to your plugin's namespace. `"/"` becomes `/plugins/my-plugin/`. `"/star.png"` becomes `/plugins/my-plugin/star.png`. Saves you from hard-coding your plugin name.
-* URLs (and icons) that resolve into your namespace require `http.serve`, since you're the one serving them.
-* URLs (and icons) pointing at another plugin's namespace are rejected. Catches typos and prevents one plugin from advertising another's UI.
+- `ui.modify` permission is required. Without it, the manifest is rejected.
+- Exactly one of `url` or `html` per entry.
+- Relative URLs (and icons) starting with `/` auto-prefix to your plugin's namespace. `"/"` becomes `/plugins/my-plugin/`. `"/star.png"` becomes `/plugins/my-plugin/star.png`. Saves you from hard-coding your plugin name.
+- URLs (and icons) that resolve into your namespace require `http.serve`, since you're the one serving them.
+- URLs (and icons) pointing at another plugin's namespace are rejected. Catches typos and prevents one plugin from advertising another's UI.
 
 Full coverage in [UI: Action buttons](/docs/plugins/ui#action-buttons).
 
@@ -199,9 +212,7 @@ Plugins can register pages that appear in the Owncast admin UI under **Plugins**
 {
   "permissions": ["http.serve"],
   "admin": {
-    "pages": [
-      { "title": "Settings", "path": "/admin", "icon": "gear" }
-    ]
+    "pages": [{ "title": "Settings", "path": "/admin", "icon": "gear" }]
   }
 }
 ```
@@ -229,12 +240,12 @@ A list of CSS files the plugin contributes to the viewer page. Each file's conte
 
 Path rules match action-button URLs:
 
-* Bare paths like `"theme.css"` auto-prefix to your plugin's namespace.
-* Single-slash paths like `"/theme.css"` get the same treatment.
-* Fully qualified `/plugins/<your-slug>/...` paths pass through.
-* Paths in another plugin's namespace are rejected.
-* `http://` and `https://` URLs are rejected. Bundle external assets (fonts, images) and reference them with `@font-face` or `url(...)` from inside your CSS, so an admin reviewing the manifest sees every file that will land in their page.
-* Each entry must end in `.css`.
+- Bare paths like `"theme.css"` auto-prefix to your plugin's namespace.
+- Single-slash paths like `"/theme.css"` get the same treatment.
+- Fully qualified `/plugins/<your-slug>/...` paths pass through.
+- Paths in another plugin's namespace are rejected.
+- `http://` and `https://` URLs are rejected. Bundle external assets (fonts, images) and reference them with `@font-face` or `url(...)` from inside your CSS, so an admin reviewing the manifest sees every file that will land in their page.
+- Each entry must end in `.css`.
 
 Requires `ui.modify` only (the plugin paints inside Owncast's chrome). `http.serve` is not needed: each file's bytes are read from `assets/` and inlined into `customStyles` on `/api/config`, not served at a URL. The host emits a `/* plugin: <your-slug> ... */` comment in front of each contribution so a reader can attribute a rule back to whichever plugin shipped it.
 
@@ -270,9 +281,9 @@ An object that contributes an HTML block to the viewer's extra-content area, pre
 }
 ```
 
-| Field     | Type   | Notes                                                                                                                                                      |
-| --------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `slug`    | string | Required only when `content` is omitted (the host passes it to `onPageContent`). Optional otherwise. Lowercase letters, digits, and hyphens, starting with a letter. |
+| Field     | Type   | Notes                                                                                                                                                                   |
+| --------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `slug`    | string | Required only when `content` is omitted (the host passes it to `onPageContent`). Optional otherwise. Lowercase letters, digits, and hyphens, starting with a letter.    |
 | `content` | string | Optional. Relative path to a static HTML file in `assets/`. When present, that file's bytes are inlined directly. When omitted, the host calls `onPageContent` instead. |
 
 **Static** (with `content`): the host reads the file at request time and inlines the bytes. Same path rules as `styles` and `scripts`, applied to a single `.html` entry. Plugin HTML bypasses the markdown processor so tags and attributes pass through as written.
@@ -291,7 +302,7 @@ A list of tabs the plugin contributes to the viewer page's tab row (next to the 
 {
   "permissions": ["ui.modify"],
   "tabs": [
-    { "title": "Music",    "slug": "music",    "content": "music.html" },
+    { "title": "Music", "slug": "music", "content": "music.html" },
     { "title": "Schedule", "slug": "schedule", "content": "schedule.html" }
   ]
 }
@@ -299,11 +310,11 @@ A list of tabs the plugin contributes to the viewer page's tab row (next to the 
 
 Each entry has:
 
-| Field     | Notes                                                                                                                                                                 |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `title`   | Required. The label shown on the tab.                                                                                                                                 |
+| Field     | Notes                                                                                                                                                                                                                                                               |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`   | Required. The label shown on the tab. Must be unique within the plugin's tabs.                                                                                                                                                                                      |
 | `slug`    | Required only when `content` is omitted (derived from `title` otherwise). Stable identifier passed to `onTabContent` when the host requests rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. Must be unique within the plugin's tabs. |
-| `content` | Optional. Relative path to an HTML file under `assets/`. Same path rules as `extraPageContent` (auto-prefix to your namespace, cross-plugin paths and `http(s)://` URLs rejected, must end in `.html`). When omitted, the host calls `onTabContent` instead. |
+| `content` | Optional. Relative path to an HTML file under `assets/`. Same path rules as `extraPageContent` (auto-prefix to your namespace, cross-plugin paths and `http(s)://` URLs rejected, must end in `.html`). When omitted, the host calls `onTabContent` instead.        |
 
 Requires `ui.modify`. `http.serve` is not required: each tab's HTML is read from `assets/` and inlined into the `pluginTabs[]` array on `/api/config`. The viewer page maps each entry to a tab whose body renders the HTML directly.
 
@@ -311,11 +322,12 @@ Full coverage in [UI: Viewer-page tabs](/docs/plugins/ui#viewer-page-tabs).
 
 ## Manifest-to-runtime contract
 
-When your plugin loads, the host parses the manifest and asks the runtime to register itself. It compares the two and rejects the load if they don't agree on:
+When your plugin loads, the host parses the manifest and asks the runtime to register itself. It compares the two and rejects the load when:
 
-* `slug` (the canonical identifier)
-* `version`
-* Any permission the runtime uses that wasn't declared in the manifest
+- the slugs don't match (`slug` is the canonical identity on both sides)
+- the runtime uses a permission that wasn't declared in the manifest
+
+`version` is intentionally not compared. It's informational metadata the host gates nothing on, and the SDK bakes it into the registration from the same manifest at build time anyway.
 
 You don't write the registration yourself: the SDK generates it from the handlers you define (see your [SDK reference](/docs/plugins) for how handlers are declared in your language). Knowing this contract exists is useful when debugging. A "permission requested at runtime not declared in manifest" error means you added a handler that needs a permission you forgot to list.
 
@@ -354,15 +366,11 @@ A non-trivial manifest exercising most features:
     }
   ],
   "admin": {
-    "pages": [
-      { "title": "Sidekick settings", "path": "/admin", "icon": "gear" }
-    ]
+    "pages": [{ "title": "Sidekick settings", "path": "/admin", "icon": "gear" }]
   },
   "styles": ["sidekick.css"],
   "scripts": ["sidekick.js"],
   "extraPageContent": { "slug": "intro", "content": "intro.html" },
-  "tabs": [
-    { "title": "Schedule", "slug": "schedule", "content": "schedule.html" }
-  ]
+  "tabs": [{ "title": "Schedule", "slug": "schedule", "content": "schedule.html" }]
 }
 ```

@@ -17,7 +17,7 @@ Using either the Owncast admin, or inline moderation controls within your chat, 
 
 Moderators have no access to the admin, and exist to help you keep your chat in order.
 
-In your admin, visit `Chat & Users` \> `Users` to find the user you want to grant Moderator privileges.
+In your admin, visit `Users` to find the user you want to grant Moderator privileges.
 Bring up their details and you can add them as a moderator.
 
 By default there are no moderators, so at the very least you might want to make yourself one.
@@ -37,7 +37,7 @@ is useful when trolls are trying to impersonate somebody.
 
 ## Removing chat messages using the Admin
 
-Visit `Chat & Users` \> `Messages` in your admin to perform chat message moderation tasks.
+Visit `Chat` \> `Messages` in your admin to perform chat message moderation tasks.
 
 ### Single message
 
@@ -53,7 +53,7 @@ Alternately, you can select, via checkboxes, the messages you want to change all
 
 ## Banning users from your chat using the Admin
 
-Visit `Chat & Users` \> `Users` in your admin to perform user moderation tasks.
+Visit `Users` in your admin to perform user moderation tasks.
 
 Banning a user will immediately disconnect them from chat and hide the chat interface from their browser. It will also remove all previous messages sent by this user from the chat feed.
 
@@ -64,6 +64,10 @@ You can un-ban a previously banned user, but note that it will not restore these
 Alternatively, you can click on the user display name and bring up the user info modal and ban them from there.
 
 ![The user info modal opened from a display name, with a button to ban the user](/docs/img/user-moderation-ban-user-modal.png)
+
+### Banning vs deleting
+
+Banning is reversible, since you can un-ban the user later. The same menu also offers _Delete user_, which is permanent. It removes the user and all of their data, including their messages, and cannot be undone.
 
 ## IP Address Blocking
 
@@ -80,11 +84,20 @@ worst of the worst away. Moderation is still the responsibility of each individu
 
 A list of blocked IPs can be viewed in the Admin Chat Users interface and can be un-banned via the same interface.
 
-## Profanity / Slur filter
+## Chat settings
 
-A basic profanity filter can be enabled in the chat settings. This will reject messages that match an internal list.
+Visit `Configuration` \> `Chat` in your admin to change how chat behaves:
+
+- **Chat**: turn chat on or off entirely.
+- **Join Messages**: announce in chat when a viewer joins.
+- **Welcome Message**: a system chat message sent to viewers when they first connect. Leave it blank to disable.
+- **Forbidden usernames**: a list of words that are not allowed in chat usernames.
+- **Default usernames**: an optional list of usernames that new visitors get assigned. With fewer than 10 entries, random names are generated instead.
+- **Established users only**: block messages from accounts younger than 15 minutes. Moderators are exempt.
+- **Chat language filter**: reject messages that contain offensive language, using an internal word list.
+- **Require Authentication**: only [authenticated users](/docs/chat/chat-authentication) and moderators may send messages.
 
 ## Rate limiter
 
-By default there is a built-in rate limiter that will attempt to prevent users from sending too many messages in a short period of time. This is to help prevent spam and abuse. The rate limiter can be disabled in the chat settings.
+Chat has a built-in rate limiter to prevent spam. It allows roughly one message every two thirds of a second. A user who floods faster than that is blocked from sending messages for 10 seconds and is told so. Moderators are never rate limited. You can turn the limiter off with the _Spam Protection_ toggle in the chat settings.
 

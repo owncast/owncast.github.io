@@ -149,7 +149,7 @@ If you have concerns about your hosting plan, bandwidth allocation or viewership
 
 **What peak network speed does your server need?**
 
-Since viewers are served from S3, your server doesn't send video to viewers at all. It only needs enough outbound bandwidth to upload one copy of each quality stream to S3: 5000kbps + 1500kbps = 6500kbps = **6.5 Mbps**. This stays the same whether you have 0 viewers or 1,000. Your S3 provider handles the viewer-facing throughput, which in this scenario peaks at **107.5 Mbps** — but that's their infrastructure, not yours.
+Since viewers are served from S3, your server doesn't send video to viewers at all. It only needs enough outbound bandwidth to upload one copy of each quality stream to S3: 5000kbps + 1500kbps = 6500kbps = **6.5 Mbps**. This stays the same whether you have 0 viewers or 1,000. Your S3 provider handles the viewer-facing throughput, which in this scenario peaks at **107.5 Mbps**, but that is their infrastructure, not yours.
 
 **Result**: You've provided both a high and low quality option for your viewers so those with a slow network have an option, and those with a fast network that might periodically slow down can dip down into the low quality when needed. However, these video qualities are not being served from your Owncast server, but instead an external S3 compatible storage provider. This allows for increasing your viewership and adding additional video qualities without concern of you exhausting your server's bandwidth allocation. You would be able to stream 24/7 without worry using this configuration, however you'd be using the same amount of your server bandwidth if you had zero viewers or 100 viewers. Your CPU usage would be the same as if you were serving the video directly from your server.
 
@@ -185,7 +185,7 @@ This is the sustained outbound throughput your server needs during a stream. If 
 
 ### How much CPU will Owncast use?
 
-**Quick guide:**
+These are rough examples from measured tests, not guarantees. Actual CPU use varies by codec, bitrate, resolution and encoder preset.
 
 | Configuration                        | CPU Usage |
 | ------------------------------------ | --------- |
@@ -194,7 +194,7 @@ This is the sustained outbound throughput your server needs during a stream. If 
 | Two qualities (high + low)           | Moderate  |
 | Three qualities or heavy compression | Heavy     |
 
-A single CPU core can typically handle one transcoded output quality at 30fps. Passthrough mode (no transcoding) uses very little CPU regardless of bitrate. Of course, all CPUs are different in performance across hardware and hosting providers, so it varies greatly and no guarantee can ever be made. You will need to experiment to find out what works best for your needs.
+As a rough rule of thumb from measured examples, a single CPU core can often handle one transcoded output quality at 30fps, but this varies with codec, bitrate, resolution and encoder preset. Passthrough mode (no transcoding) uses very little CPU regardless of bitrate. All CPUs are different in performance across hardware and hosting providers, so no guarantee can ever be made. You will need to experiment to find out what works best for your needs.
 
 ### Does CPU usage increase with more viewers?
 
@@ -202,26 +202,27 @@ No. For video encoding, CPU usage stays constant whether you have 1 viewer or 1,
 
 ### How does frame rate affect CPU usage?
 
-Higher frame rates require more CPU. Reducing frame rate is an effective way to lower CPU usage:
+Higher frame rates require more CPU. Reducing frame rate is an effective way to lower CPU usage. These multipliers are rough measured examples and will vary by codec, bitrate, resolution and encoder preset:
 
 | Frame Rate | Relative CPU |
 | ---------- | ------------ |
 | 60 fps     | 2x baseline  |
 | 30 fps     | 1x baseline  |
 | 24 fps     | 0.8x         |
-| 15 fps     | 0.5x         |
 
 Consider using lower frame rates (24fps) for lower quality outputs to save CPU while maintaining smooth playback for viewers on slow connections.
 
 ### How much disk space will Owncast use?
 
-Almost none. Owncast streams in real-time and cleans up video segments as they're delivered. You don't need to plan for video storage.
+Live video needs very little disk space. Owncast writes HLS video segments to disk temporarily and cleans them up as the stream progresses, so you don't need to plan for video storage.
+
+The `data/` directory does persist and grow over time. It holds the Owncast database and its hourly backups, custom emoji, public files, viewer metrics, GeoIP data and, starting with Owncast 0.3.0, installed plugins and their data. Give it room to grow and include it in your [backups](/docs/backups).
 
 ### Should I just offer the highest quality to keep things simple?
 
 Offering only high bitrate video excludes viewers on mobile networks and slower connections. A 5000kbps stream requires a stable 5+ Mbps connection to watch without buffering. Many viewers don't have that, especially on mobile.
 
-**Recommendation**: Always offer at least two quality options. A high quality (4000-6000kbps) for viewers with fast connections, and a low quality (1000-2000kbps) for everyone else. Your viewers will thank you.
+**Recommendation**: Offering a second, lower quality option (1000-2000kbps) alongside your high quality one (4000-6000kbps) helps viewers on slow or mobile connections. That said, Owncast ships with a single variant by default, and the [video documentation](/docs/video) recommends starting with one variant and testing before adding more. Add a low quality option once your setup works and your CPU has headroom.
 
 ## Resources Calculator
 

@@ -1,5 +1,5 @@
 ---
-title: Chat commands
+title: Chat plugin commands
 description: Declare chat commands with aliases, cooldowns, moderator gating, and automatic !help listings.
 sidebar_position: 6
 sidebar_label: Commands
@@ -24,37 +24,37 @@ message payload, sending messages, and filters.
 
 A command table provides:
 
-* a configurable command prefix, with `!` as the default
-* per-command `description`, `usage`, and `aliases`
-* per-user cooldowns
-* moderator-only gating based on the sender's scopes
-* argument parsing
-* an automatic `!help` listing
+- a configurable command prefix, with `!` as the default
+- per-command `description`, `usage`, and `aliases`
+- per-user cooldowns
+- moderator-only gating based on the sender's scopes
+- argument parsing
+- an automatic `!help` listing
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-const { definePlugin } = require("@owncast/plugin-sdk");
+const { definePlugin } = require('@owncast/plugin-sdk');
 
 module.exports = definePlugin({
-  commandPrefix: "!", // optional
+  commandPrefix: '!', // optional
   commands: {
     uptime: {
       description: "How long we've been live",
-      run: (ctx) => ctx.reply("we've been live a while!"),
+      run: ctx => ctx.reply("we've been live a while!"),
     },
     so: {
-      description: "Shout out a viewer",
-      usage: "!so <name>",
-      aliases: ["shoutout"],
+      description: 'Shout out a viewer',
+      usage: '!so <name>',
+      aliases: ['shoutout'],
       cooldownMs: 10_000,
-      run: (ctx) => ctx.reply(`go follow ${ctx.args[0] || "someone cool"}`),
+      run: ctx => ctx.reply(`go follow ${ctx.args[0] || 'someone cool'}`),
     },
     clear: {
-      description: "Clear the chat",
+      description: 'Clear the chat',
       modOnly: true,
-      run: (ctx) => ctx.replyPrivately("done"),
+      run: ctx => ctx.replyPrivately('done'),
     },
   },
 });
@@ -110,7 +110,11 @@ response needs no plugin permission.
 also declare or respond to them. The built-in response does not block additional
 plugin responses.
 
-<img src="/docs/img/plugin-help-command.png" alt="The !help response in chat, listing the commands an enabled plugin provides with their descriptions, grouped by plugin" width="320" />
+<img
+  src="/docs/img/plugin-help-command.png"
+  alt="The !help response in chat, listing the commands an enabled plugin provides with their descriptions, grouped by plugin"
+  width="320"
+/>
 
 ## Using ordinary chat handlers and filters
 
