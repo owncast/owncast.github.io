@@ -1,10 +1,15 @@
-import React, { type ReactNode } from "react";
+import React, { type ReactNode, useEffect, useRef } from "react";
 import clsx from "clsx";
 import { ThemeClassNames } from "@docusaurus/theme-common";
 
 import type { Props } from "@theme/Admonition/Layout";
 
 import styles from "./styles.module.css";
+import OwncatHead from "@site/static/images/owncat-head.svg";
+import OwncatAlertHey from "@site/static/images/owncat-alert-hey.svg";
+import OwncatAlertLook from "@site/static/images/owncat-alert-look.svg";
+import OwncatUnderConstruction from "@site/static/images/owncat-under-construction.svg";
+import OwncatNew from "@site/static/images/4-owncat-new.svg";
 
 // Owncat-themed titles for each admonition type
 const owncatTitles: Record<string, string> = {
@@ -18,6 +23,49 @@ const owncatTitles: Record<string, string> = {
   important: "Owncat informs you",
   success: "Owncat celebrates",
 };
+
+type OwncatIconComponent = React.ComponentType<
+  React.SVGProps<SVGSVGElement>
+>;
+
+const owncatIcons: Record<string, OwncatIconComponent> = {
+  tip: OwncatAlertHey,
+  success: OwncatAlertHey,
+  info: OwncatAlertLook,
+  important: OwncatAlertLook,
+  warning: OwncatUnderConstruction,
+  caution: OwncatUnderConstruction,
+  danger: OwncatUnderConstruction,
+  new: OwncatNew,
+};
+
+function AttentionOwncatIcon({ Icon }: { Icon: OwncatIconComponent }) {
+  const iconRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const icon = iconRef.current;
+    if (!icon) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          icon.classList.add(styles.owncatIconShake);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 },
+    );
+
+    observer.observe(icon);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <span ref={iconRef} className={styles.owncatIcon} aria-hidden="true">
+      <Icon />
+    </span>
+  );
+}
 
 function AdmonitionContainer({
   type,
@@ -41,29 +89,31 @@ function AdmonitionContainer({
 function AdmonitionHeading({
   type,
   title,
-}: Pick<Props, "type" | "title">) {
-  // Keep the Owncat-themed heading for every callout. When the author gives a
-  // title (`:::warning[My title]`), Docusaurus passes it as a plain string, and
-  // we show it on a second line under the heading. Without one, Docusaurus
-  // passes a <Translate> element for the default type label, which we ignore.
-  const themedTitle = owncatTitles[type] || "Owncat says";
+  children,
+}: Pick<Props, "type" | "title" | "children">) {
+  // Custom titles appear below the Owncat-themed heading. New callouts use the
+  // custom title as their only heading because the artwork already says NEW.
   const customTitle =
     typeof title === "string" && title.trim() ? title : null;
+  const themedTitle =
+    type === "new"
+      ? customTitle || "Update"
+      : owncatTitles[type] || "Owncat says";
+  const OwncatIcon = owncatIcons[type] || OwncatHead;
 
   return (
     <div className={styles.admonitionHeading}>
-      <img
-        src="/images/owncat-head.svg"
-        alt=""
-        className={styles.owncatIcon}
-        aria-hidden="true"
-      />
-      <span className={styles.admonitionTitles}>
+      <AttentionOwncatIcon Icon={OwncatIcon} />
+      <div className={styles.admonitionTitles}>
         <span className={styles.admonitionTitle}>{themedTitle}</span>
-        {customTitle && (
-          <span className={styles.admonitionSubtitle}>{customTitle}</span>
+        {type === "new" ? (
+          <AdmonitionContent>{children}</AdmonitionContent>
+        ) : (
+          customTitle && (
+            <span className={styles.admonitionSubtitle}>{customTitle}</span>
+          )
         )}
-      </span>
+      </div>
     </div>
   );
 }
@@ -78,8 +128,10 @@ export default function AdmonitionLayout(props: Props): ReactNode {
   const { type, title, children, className } = props;
   return (
     <AdmonitionContainer type={type} className={className}>
-      <AdmonitionHeading type={type} title={title} />
-      <AdmonitionContent>{children}</AdmonitionContent>
+      <AdmonitionHeading type={type} title={title}>
+        {type === "new" ? children : null}
+      </AdmonitionHeading>
+      {type !== "new" && <AdmonitionContent>{children}</AdmonitionContent>}
     </AdmonitionContainer>
   );
 }

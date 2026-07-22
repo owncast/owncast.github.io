@@ -351,6 +351,10 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           routeBasePath: 'docs',
           path: 'docs',
+          admonitions: {
+            keywords: ['new'],
+            extendDefaults: true,
+          },
           // Enable edit URLs to allow contributors to edit documentation on GitHub
           editUrl: 'https://github.com/owncast/owncast.github.io/edit/owncast-docusaurus/',
           // docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi

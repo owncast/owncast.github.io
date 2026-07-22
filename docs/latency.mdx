@@ -1,11 +1,11 @@
 ---
-title: "Reducing Latency"
+title: 'Reducing Latency'
 description: Understand what affects Owncast stream latency and how to reduce the delay between you and your viewers.
-tags: ["latency", "lag", "buffer"]
+tags: ['latency', 'lag', 'buffer']
 ---
 
-import Reducing from "./troubleshoot/shared/reducing-viewer-latency.md";
-import { IncludeMarkdown } from "@site/src/components";
+import Reducing from './troubleshoot/shared/reducing-viewer-latency.md';
+import { IncludeMarkdown } from '@site/src/components';
 
 ## Overview
 
@@ -31,8 +31,8 @@ Changing the level while you are live does not affect the current stream. The ne
 
 ## The Minimize latency player setting
 
-:::info[New in Owncast 0.3.0]
-This player option is available starting in Owncast 0.3.0.
+:::new[Minimize latency option requires Owncast v0.3.0]
+This option may not be the best for everyone. People should try it for themselves in the player settings.
 :::
 
 Viewers can turn on **Minimize latency** in the player's settings menu. It slightly speeds up playback to bring the viewer closer to live. It only acts when there is spare bandwidth and enough buffered video, it backs off immediately when playback conditions degrade, and it disables itself for the rest of the session after repeated buffering. Viewers with an unstable connection can leave it off.

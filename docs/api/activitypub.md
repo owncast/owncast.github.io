@@ -309,7 +309,7 @@ Two important guards:
 
 ### Inbound posts (Create)
 
-:::info[New in Owncast 0.3.0]
+:::new[Inbound fediverse posts require Owncast v0.3.0]
 Earlier releases rejected every inbound `Create`. Owncast 0.3.0 accepts the narrow cases described here.
 :::
 
@@ -317,7 +317,7 @@ Owncast accepts a `Create` whose object is exactly one `Note` attributed to the 
 
 ### Quote requests (FEP-044f)
 
-:::info[New in Owncast 0.3.0]
+:::new[Quote requests require Owncast v0.3.0]
 `QuoteRequest` handling is new in Owncast 0.3.0.
 :::
 

@@ -63,10 +63,10 @@ function useFeatures(): Feature[] {
         message:
           "Stream from your own domain with your own look and feel. Create your own UI, truly owning the experience.",
       }),
-      imageSrc: "/images/screenshots/screenshot-customize.webp",
-      imageWidth: 1750,
-      imageHeight: 900,
-      imagePosition: { bottom: "0%", left: "0%", width: "100%" },
+      imageSrc: "/images/lp-2-chicklet.svg",
+      imageWidth: 956,
+      imageHeight: 510,
+      imagePosition: { top: "5%", left: "0%", width: "100%" },
     },
     {
       id: "feature-6",
@@ -83,10 +83,10 @@ function useFeatures(): Feature[] {
         message:
           "Notify followers via various channels when you go live. Never miss an opportunity to connect with your audience.",
       }),
-      imageSrc: "/images/screenshots/screenshot-offline-notify.webp",
-      imageWidth: 1334,
-      imageHeight: 1191,
-      imagePosition: { top: "5%", left: "10%", width: "140%" },
+      imageSrc: "/images/lp-3-chicklet.svg",
+      imageWidth: 958,
+      imageHeight: 532,
+      imagePosition: { top: "5%", left: "0%", width: "100%" },
     },
     {
       id: "feature-7",
@@ -121,10 +121,10 @@ function useFeatures(): Feature[] {
         message:
           "Integrates with existing tools, and supports your own plugins or use the on top of the web API.",
       }),
-      imageSrc: "/images/screenshots/screenshot-expand.webp",
-      imageWidth: 739,
-      imageHeight: 783,
-      imagePosition: { top: "10%", left: "5%", width: "120%" },
+      imageSrc: "/images/lp-5-chicklet.svg",
+      imageWidth: 959,
+      imageHeight: 510,
+      imagePosition: { top: "5%", left: "0%", width: "100%" },
     },
   ];
 }

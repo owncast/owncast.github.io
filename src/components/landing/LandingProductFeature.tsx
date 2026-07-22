@@ -49,13 +49,7 @@ export const LandingProductFeature = ({
   imageSrc?: string;
   imageAlt?: string;
   imagePosition?: 'left' | 'right' | 'center';
-  imagePerspective?:
-    | 'none'
-    | 'left'
-    | 'right'
-    | 'bottom'
-    | 'bottom-lg'
-    | 'paper';
+  imagePerspective?: 'none' | 'left' | 'right' | 'bottom' | 'bottom-lg' | 'paper';
   imageShadow?: 'none' | 'soft' | 'hard';
   imageClassName?: string;
   zoomOnHover?: boolean;
@@ -71,23 +65,17 @@ export const LandingProductFeature = ({
     <section
       className={clsx(
         'relative w-full flex flex-col justify-center items-center gap-8 py-12 lg:py-16',
-        withBackground && variant === 'primary'
-          ? 'bg-primary-100/20 dark:bg-primary-900/10'
-          : '',
+        withBackground && variant === 'primary' ? 'bg-primary-100/20 dark:bg-primary-900/10' : '',
         withBackground && variant === 'secondary'
           ? 'bg-secondary-100/20 dark:bg-secondary-900/10'
           : '',
-        withBackgroundGlow || imagePerspective !== 'none'
-          ? 'overflow-hidden'
-          : '',
+        withBackgroundGlow || imagePerspective !== 'none' ? 'overflow-hidden' : '',
         imagePerspective === 'paper' ? 'md:pb-24' : '',
         className,
       )}
     >
       {effectComponent ? (
-        <div className={clsx('absolute inset-0', effectClassName)}>
-          {effectComponent}
-        </div>
+        <div className={clsx('absolute inset-0', effectClassName)}>{effectComponent}</div>
       ) : null}
 
       {imageSrc && withBackgroundGlow ? (
@@ -119,9 +107,7 @@ export const LandingProductFeature = ({
           className={clsx(
             'w-full flex flex-col gap-4',
             imagePosition === 'left' && 'lg:col-start-2 lg:row-start-1',
-            textPosition === 'center'
-              ? 'md:max-w-lg items-center text-center'
-              : 'items-start',
+            textPosition === 'center' ? 'md:max-w-lg items-center text-center' : 'items-start',
             textClassName,
           )}
         >
@@ -135,11 +121,7 @@ export const LandingProductFeature = ({
             titleComponent
           )}
 
-          {description ? (
-            <p className="mt-4 md:text-xl">{description}</p>
-          ) : (
-            descriptionComponent
-          )}
+          {description ? <p className="mt-4 md:text-xl">{description}</p> : descriptionComponent}
 
           {children}
         </div>
@@ -177,8 +159,7 @@ export const LandingProductFeature = ({
                   imagePerspective === 'left' && 'lg:perspective-left',
                   imagePerspective === 'right' && 'lg:perspective-right',
                   imagePerspective === 'bottom' && 'lg:perspective-bottom',
-                  imagePerspective === 'bottom-lg' &&
-                    'lg:perspective-bottom-lg',
+                  imagePerspective === 'bottom-lg' && 'lg:perspective-bottom-lg',
                   imagePerspective === 'paper' && 'lg:perspective-paper',
                   imagePerspective === 'paper' && zoomOnHover
                     ? 'hover:scale-90 transition-all'

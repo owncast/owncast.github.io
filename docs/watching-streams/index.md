@@ -22,7 +22,7 @@ There are numerous ways to watch Owncast live streams on many different devices.
 Most applications listed here are not provided by, endorsed by, or supported by Owncast. You should make your own choices about what applications you install. Products listed are suggestions that have been tested and found to work with Owncast. Those built and provided by Owncast should be seen as side projects to assist viewers.
 :::
 
-:::info[New in Owncast 0.3.0]
+:::new[Authentication gates require Owncast v0.3.0]
 If the server runs an authentication gate plugin, direct HLS URLs and third-party apps may be redirected to authenticate before playback. These instructions assume a public instance.
 :::
 

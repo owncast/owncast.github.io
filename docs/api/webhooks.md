@@ -43,7 +43,7 @@ The following is a list of events you can get notified about.
 
 ### Verifying webhook requests
 
-:::info[New in Owncast 0.3.0]
+:::new[Signed webhooks require Owncast v0.3.0]
 Owncast 0.3.0 signs every webhook delivery. Earlier releases send unsigned requests with no signature header.
 :::
 
@@ -367,7 +367,7 @@ Note: the field `user` in the chat was introduced with `v0.0.8`. Before `v0.0.8`
 
 #### FEDIVERSE_ENGAGEMENT_FOLLOW
 
-:::info[New in Owncast 0.3.0]
+:::new[Webhook server URLs require Owncast v0.3.0]
 Owncast 0.3.0 adds the `serverURL` field to this event. Earlier releases send only `id`, `timestamp`, `name`, `username`, and `image`.
 :::
 

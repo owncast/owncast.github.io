@@ -15,7 +15,7 @@ tags:
 
 Every Owncast plugin runs in a sandbox with no implicit access to anything outside the plugin itself. To do useful work (read chat, post to the fediverse, fetch a URL, write to a key-value store) your plugin asks the host through `owncast.*` methods. Each of those methods is gated by a permission you declare in your manifest.
 
-:::info[New in Owncast 0.3.0]
+:::new[Plugin permissions require Owncast v0.3.0]
 Plugins require Owncast 0.3.0 or later.
 :::
 

@@ -14,7 +14,7 @@ Some examples of reasons you might need this:
 - Initializing a payment processor you have embedded on your page.
 - Use JavaScript to manipulate the interface.
 
-:::info[New in Owncast 0.3.0]
+:::new[Plugin scripts require Owncast v0.3.0]
 Starting in Owncast 0.3.0, the `/customjavascript` endpoint serves your code followed by the scripts of every enabled plugin, so your code and plugin scripts share the same page context.
 :::
 

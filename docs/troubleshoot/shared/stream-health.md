@@ -18,6 +18,6 @@ If you're seeing on this page that people are experiencing issues playing back y
 
 Note: Only some players report detailed playback metrics themselves, mostly web browsers running the Owncast web interface.
 
-:::info[New in Owncast 0.3.0]
+:::new[Server-observed playback metrics require Owncast v0.3.0]
 For players that do not self-report, such as VLC, mpv, Safari and ffmpeg, Owncast records the download speed and duration of video segments it serves, as observed by the server. This only works when Owncast serves the video itself. If your segments are hosted on S3 storage, viewers download them from there and these players are not represented in the metrics.
 :::

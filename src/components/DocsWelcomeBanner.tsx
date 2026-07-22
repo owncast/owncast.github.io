@@ -1,13 +1,14 @@
 import React from "react";
 import Translate from "@docusaurus/Translate";
 import styles from "../css/docs-welcome.module.css";
+import OwncatPointingRight from "@site/static/images/5-owncat-pointing-right.svg";
 
 export default function DocsWelcomeBanner(): React.ReactElement {
   return (
     <div className={styles.welcomeBanner}>
-      <img
-        src="/images/owncat-head.svg"
-        alt="Owncat"
+      <OwncatPointingRight
+        role="img"
+        aria-label="Owncat"
         className={styles.welcomeOwncat}
       />
       <div>

@@ -1,6 +1,6 @@
 ---
-title: ""
-description: ""
+title: ''
+description: ''
 unlisted: true
 related:
   excludeFromAll: true
@@ -12,7 +12,9 @@ It's up to you to decide you want lower delays over **less reliability** or a mo
 
 ## Warning for Video Passthrough
 
+:::warning[Video passthrough may make latency worse.]
 If you are using **Video Passthrough** in your video configuration it will likely **increase** your latency. Because you're telling Owncast not to re-encode your video it can't optimally segment your video into the sized chunks required to manage your latency. If you really want to optimize latency then you should absolutely turn off Passthrough.
+:::
 
 ## Drawbacks
 

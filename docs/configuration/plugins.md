@@ -13,7 +13,7 @@ tags:
 
 Plugins let you add new behavior to your Owncast server without writing code yourself. They're small add-ons that run inside Owncast and can react to chat, viewers, stream events, and the fediverse. A plugin is delivered as a single `.ocpkg` file you upload from the admin.
 
-:::info[Plugins are new in Owncast v0.3.0]
+:::new[Plugins require Owncast v0.3.0]
 Plugins are brand-new functionality, introduced in Owncast v0.3.0, and there are few plugins available today. If you hit a bug or have a suggestion, please [open an issue](https://github.com/owncast/plugin-sdk/issues) or [chat live with the community](/chat?tab=community). If you have an idea for a plugin you'd like to see, share it with the [community](/chat?tab=community). You are encouraged to build your own plugins to share chat bots, stream overlays, custom integrations, themes and more. The [plugin SDK](/docs/plugins) has everything you need to get started.
 :::
 

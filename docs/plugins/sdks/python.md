@@ -13,7 +13,7 @@ tags:
 
 The Python SDK, `owncast-plugin-py`, lets you author Owncast plugins in **Python**. You write ordinary Python with decorators. A build step turns it into a single installable plugin that runs sandboxed inside the Owncast server: the same `.ocpkg` format and full feature set as the [JavaScript SDK](/docs/plugins/sdks/javascript), so a Python plugin is a first-class peer of a JS one.
 
-:::info[New in Owncast 0.3.0]
+:::new[Python plugins require Owncast v0.3.0]
 The plugin SDKs are brand-new in Owncast 0.3.0 and the API is still evolving. If you hit a bug or have a suggestion, please [open an issue](https://github.com/owncast/plugin-sdk/issues) or [chat live with the community](/chat?tab=community).
 :::
 

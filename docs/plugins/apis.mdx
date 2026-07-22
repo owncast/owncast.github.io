@@ -20,7 +20,7 @@ import TabItem from '@theme/TabItem';
 
 The Owncast plugin runtime exposes a single global, `owncast`, with the host functions your plugin can call. Most methods require the matching permission in your manifest. A call without it never reaches Owncast: the host logs the denial and the call returns an empty or zero value. A few are **ambient** and need no permission: timers, reading bundled assets, and `owncast.config.get`.
 
-:::info[New in Owncast 0.3.0]
+:::new[Plugin APIs require Owncast v0.3.0]
 Plugins require Owncast 0.3.0 or later.
 :::
 

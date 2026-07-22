@@ -306,7 +306,7 @@ function AIChatInner({
                       message: "Owncat",
                     })}
                   >
-                    <Avatar name="Owncat" src="/images/owncat-head.svg" />
+                    <Avatar name="Owncat" src="/images/8-owncat-gold-star.svg" />
                     <MessageGroup.Header>
                       {translate({
                         id: "chat.answers.senderName",
@@ -456,7 +456,7 @@ function AIChatInner({
                         message: "Owncat",
                       })}
                     >
-                      <Avatar name="Owncat" src="/images/owncat-head.svg" />
+                      <Avatar name="Owncat" src="/images/8-owncat-gold-star.svg" />
                       <MessageGroup.Header>
                         {translate({
                           id: "chat.answers.senderName",

@@ -31,7 +31,6 @@ Because Owncast uses the HLS standard, almost any video player can play your str
   <OwncastBasic />
 </IncludeMarkdown>
 
-
 Owncast takes your source stream and converts it to short, individual video segments. A list of these segments is supplied to your viewer's player and will read and play all the segments in order. This is using a specification called [HLS](https://developer.apple.com/documentation/http-live-streaming) or HTTP Live Streaming. You can optionally generate multiple different qualities of video to allow lower bandwidth options. This is called [Adaptive bitrate streaming](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming).
 
 In this case Owncast works as the Media encoder, Stream segmenter, and distribution web server. However [Owncast supports video being distributed via 3rd party storage as well](/docs/storage), so in that case the video segments would be distributed from there, instead.
@@ -72,7 +71,11 @@ You have some control over the live latency between the broadcaster and the view
 
 By default viewers press play to start watching. If you would rather the stream start on its own when someone opens your page, change the **Autoplay** setting on the same Video configuration page. It has no performance impact, and it applies to your Owncast page and to [embedded players](/docs/embed#autoplay).
 
-<img src="/docs/img/admin-autoplay.png" alt="The Autoplay setting on the Video configuration page in the admin, showing the behavior dropdown" width="65%" />
+<img
+  src="/docs/img/admin-autoplay.png"
+  alt="The Autoplay setting on the Video configuration page in the admin, showing the behavior dropdown"
+  width="65%"
+/>
 
 - **Never**: the player waits for the viewer to press play. This is the default.
 - **Always**: the stream starts the moment the page opens. It plays with sound where the browser allows it and starts muted everywhere else. While the stream plays muted, the player shows a large unmute button over the video so turning on sound is one click.
@@ -82,12 +85,15 @@ Every major browser restricts autoplay with sound, based on its own rules, its s
 
 The player also never autoplays, regardless of this setting, for viewers who have data saver enabled or whose system asks for reduced motion (the `prefers-reduced-motion` accessibility preference).
 
-
-### Video Passthrough
-
 <IncludeMarkdown>
   <OwncastWithQualities />
 </IncludeMarkdown>
+
+### Video Passthrough
+
+:::warning[This is an advanced setting that most people should not use.]
+Owncast has an optional setting to turn off re-encoding of your inbound stream, potentially saving substantial hardware utilization and supporting a higher quality stream with less resources. However, because your video will not be re-encoded it’s possible that certain video from certain sources may **end up not being playable at all**. This is the risk of enabling this.
+:::
 
 When passthrough is enabled for a stream output, Owncast copies your inbound video untouched instead of re-encoding it. All the other settings for that output, such as bitrate, resolution, framerate and CPU usage level, are ignored. Because no encoding work happens, passthrough saves nearly all the CPU that output would otherwise use.
 
@@ -114,4 +120,3 @@ If you are running on physical hardware you may be able to increase the performa
 ## Resource and requirement examples
 
 Visit the [resources and requirements](/docs/resources-requirements/) page to see some examples of what you can expect from your server hardware and network connection and how it may affect your viewers.
-

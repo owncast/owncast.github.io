@@ -15,7 +15,7 @@ const admonitionTypes: typeof AdmonitionTypes = {
   danger: AdmonitionTypeDanger,
 };
 
-// Undocumented legacy admonition type aliases
+// Undocumented legacy aliases plus custom admonition types
 // Provide hardcoded/untranslated retrocompatible label
 // See also https://github.com/facebook/docusaurus/issues/7767
 const admonitionAliases: typeof AdmonitionTypes = {
@@ -23,6 +23,7 @@ const admonitionAliases: typeof AdmonitionTypes = {
   important: (props) => <AdmonitionTypeInfo title="important" {...props} />,
   success: (props) => <AdmonitionTypeTip title="success" {...props} />,
   caution: AdmonitionTypeCaution,
+  new: (props) => <AdmonitionTypeInfo {...props} />,
 };
 
 export default {

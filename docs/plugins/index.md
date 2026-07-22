@@ -16,7 +16,7 @@ tags:
 
 Owncast can be extended with **plugins**: small programs that the server loads at runtime to react to chat messages, stream events, fediverse activity, and HTTP requests. They run inside a sandbox, so a plugin can crash without taking the server down, and the host enforces a clear permission model so an admin always knows what a plugin can touch.
 
-:::info[New in Owncast 0.3.0]
+:::new[Plugins require Owncast v0.3.0]
 Plugins are brand-new functionality, introduced in Owncast 0.3.0, and the API is still evolving. If you hit a bug or have a suggestion, please [open an issue](https://github.com/owncast/plugin-sdk/issues) or [chat live with the community](/chat?tab=community).
 :::
 

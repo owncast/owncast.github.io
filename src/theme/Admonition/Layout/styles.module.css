@@ -22,14 +22,16 @@
 
 /* Owncat mascot icon */
 .owncatIcon {
-  width: 2rem;
-  height: auto;
+  width: 4rem;
+  height: 4rem;
   flex-shrink: 0;
+  object-fit: contain;
+  margin: 0.5rem;
   transition: transform 0.2s ease;
 }
 
 .admonition:hover .owncatIcon {
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.05) rotate(3deg);
 }
 
 .admonitionTitles {
@@ -49,6 +51,12 @@
   font-weight: var(--ifm-font-weight-semibold);
   font-size: var(--ifm-h6-font-size);
   line-height: var(--ifm-heading-line-height);
+  text-transform: none;
+}
+
+.admonitionTitles .admonitionContent {
+  font: var(--ifm-font-size-base) / var(--ifm-line-height-base)
+    var(--ifm-font-family-base);
   text-transform: none;
 }
 

@@ -1,8 +1,7 @@
-import React from "react";
 import Translate, { translate } from "@docusaurus/Translate";
-import { Button } from "@/components/shared/ui/button";
 import { LandingProductFeature } from "@/components/landing/LandingProductFeature";
 import { LandingProductFeatureKeyPoints } from "@/components/landing/LandingProductFeatureKeyPoints";
+import { Button } from "@/components/shared/ui/button";
 import { LandingShapesCtaBg } from "@/components/landing";
 
 export function InstallerSection() {
@@ -59,22 +58,34 @@ export function InstallerSection() {
             keyPoints={keyPoints}
           />
 
-          <Button
-            className="mt-4 hidden md:inline-flex"
-            variant="primary"
-            asChild
-          >
-            <a href="/quickstart">
-              <Translate id="homepage.installer.cta">Install now</Translate>
-            </a>
-          </Button>
+          <div className="relative mt-4 hidden w-full md:block">
+            <img
+              src="/images/lp-1-owncat-cta.svg"
+              alt=""
+              width={2594}
+              height={1100}
+              loading="lazy"
+              decoding="async"
+              className="pointer-events-none block w-full h-auto"
+            />
+            <Button
+              className="absolute left-[21.9%] top-[57.1%] -translate-x-1/2 -translate-y-1/2"
+              variant="primary"
+              asChild
+            >
+              <a href="/quickstart">
+                <Translate id="homepage.installer.cta">Install now</Translate>
+              </a>
+            </Button>
+          </div>
         </>
       }
       imageSrc="/owncast-install.gif"
       imageAlt="Screenshot of the product"
       imagePosition="left"
       imagePerspective="bottom"
-      imageClassName="hidden md:block"
+      zoomOnHover={false}
+      imageClassName="hidden md:block transition-transform lg:hover:scale-95"
       variant="primary"
     />
   );

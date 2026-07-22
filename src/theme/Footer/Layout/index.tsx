@@ -26,7 +26,7 @@ export default function FooterLayout({
       )}
     >
       <img
-        src="/images/owncat-head.svg"
+        src="/images/2-owncat-waving.svg"
         className={styles.footerWatermark}
         alt=""
       />

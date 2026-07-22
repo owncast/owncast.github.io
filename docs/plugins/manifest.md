@@ -14,7 +14,7 @@ tags:
 
 Every plugin has a `plugin.manifest.json` file at its root. This is the source of truth for the plugin's identity, the permissions it needs, the network destinations it's allowed to call, the admin pages it contributes, and the action buttons it adds to the viewer UI.
 
-:::info[New in Owncast 0.3.0]
+:::new[Plugin manifests require Owncast v0.3.0]
 Plugins require Owncast 0.3.0 or later.
 :::
 
