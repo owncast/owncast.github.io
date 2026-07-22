@@ -76,7 +76,7 @@
       }
 
       .cls-13 {
-        fill: #e2d8bf;
+        fill: rgba(226, 216, 191, .4);
       }
     </style>
     <filter id="luminosity-noclip" x="18.46" y="32.47" width="941.55" height="974.13" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">

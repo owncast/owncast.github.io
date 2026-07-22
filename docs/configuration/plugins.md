@@ -63,7 +63,7 @@ You do not have to memorize what each plugin offers. Owncast has a built-in `!he
 
 A few things worth knowing about `!help`:
 
-- **Owncast builds the list, not a plugin.** No plugin can override `!help`, and the list always reflects exactly the commands your currently enabled plugins provide. Install a plugin that adds commands and they appear in `!help` right away. Disable it and they disappear.
+- **Automatically generated.** Install a plugin that adds commands and they appear in `!help` right away. Disable it and they disappear.
 - **Plugins advertise their own commands.** A plugin declares its commands and their descriptions, so there is nothing for you to configure. The descriptions you see in `!help` come straight from the plugin.
 - **Moderator commands stay hidden.** Commands a plugin marks as moderator-only only show up in `!help` for your moderators.
 

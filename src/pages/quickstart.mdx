@@ -5,11 +5,12 @@ description: Get started with Owncast using this step-by-step wizard.
 
 import Wizard from '../components/Wizard'
 import tree from '../data/quickstart_tree.json'
-import styles from '../css/quickstart.module.css'
+import styles from '../css/wizard-header.module.css'
+import OwncatWaving from '@site/static/images/2-owncat-waving.svg'
 
-<div className={styles.quickstartHeader}>
-  <img src="/images/owncat-head.svg" alt="" className={styles.quickstartOwncat} aria-hidden="true" />
-  <p className={styles.quickstartIntro}>Answer a few questions to get personalized setup instructions.</p>
+<div className={styles.wizardHeader}>
+  <OwncatWaving className={styles.wizardOwncat} aria-hidden="true" />
+  <p className={styles.wizardIntro}>Answer a few questions to get personalized setup instructions.</p>
 </div>
 
 <Wizard tree={tree} name="quickstart"/>

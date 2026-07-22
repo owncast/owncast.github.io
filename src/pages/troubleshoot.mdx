@@ -5,5 +5,12 @@ description: Find solutions to common issues.
 
 import Wizard from '../components/Wizard'
 import tree from '../data/troubleshooting_tree.json'
+import styles from '../css/wizard-header.module.css'
+import OwncatLaptop from '@site/static/images/2-owncat-laptop.svg'
+
+<div className={styles.wizardHeader}>
+  <OwncatLaptop className={styles.wizardOwncat} aria-hidden="true" />
+  <p className={styles.wizardIntro}>Something not working? Answer a few questions and we'll help you track it down.</p>
+</div>
 
 <Wizard tree={tree} name="troubleshooting"/>

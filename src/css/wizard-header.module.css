@@ -1,5 +1,5 @@
-/* Quickstart wizard header with Owncat */
-.quickstartHeader {
+/* Shared wizard page header with Owncat */
+.wizardHeader {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -8,40 +8,40 @@
   padding: 1rem;
 }
 
-.quickstartOwncat {
-  width: 56px;
+.wizardOwncat {
+  width: 84px;
   height: auto;
   flex-shrink: 0;
   transition: transform 0.3s ease;
 }
 
-.quickstartOwncat:hover {
+.wizardOwncat:hover {
   transform: scale(1.1) rotate(-5deg);
 }
 
-.quickstartIntro {
+.wizardIntro {
   font-size: 1.1rem;
   color: var(--ifm-color-emphasis-700);
   margin: 0;
   max-width: 400px;
 }
 
-[data-theme='dark'] .quickstartIntro {
+[data-theme='dark'] .wizardIntro {
   color: var(--ifm-color-emphasis-500);
 }
 
 @media screen and (max-width: 480px) {
-  .quickstartHeader {
+  .wizardHeader {
     flex-direction: column;
     text-align: center;
     gap: 0.75rem;
   }
 
-  .quickstartOwncat {
-    width: 48px;
+  .wizardOwncat {
+    width: 64px;
   }
 
-  .quickstartIntro {
+  .wizardIntro {
     font-size: 1rem;
   }
 }
