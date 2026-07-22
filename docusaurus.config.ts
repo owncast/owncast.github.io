@@ -76,6 +76,11 @@ const ALL_REDIRECTS = [
   { to: '/devdocs/*', from: '/dev/*' },
   { to: '/devdocs/', from: '/dev/' },
 
+  // External redirect: support chat room on Matrix.
+  {
+    to: 'https://matrix.to/#/#owncast.support:matrix.org',
+    from: '/support-chat',
+  },
   // Regular redirects
   // Social docs restructure: enabling page merged into the main social page.
   {
