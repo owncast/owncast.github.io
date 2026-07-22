@@ -11,7 +11,7 @@
 }
 
 .welcomeOwncat {
-  width: 8rem;
+  width: 64px;
   height: auto;
   flex-shrink: 0;
   transition: transform 0.3s ease;

@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState, type CSSProperties } from 'react';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import Translate, { translate } from '@docusaurus/Translate';
-import clsx from 'clsx';
-import styles from './OwncastChatMockup.module.css';
+import React, { useEffect, useRef, useState, type CSSProperties } from "react";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import Translate, { translate } from "@docusaurus/Translate";
+import clsx from "clsx";
+import styles from "./OwncastChatMockup.module.css";
 
-type UsernameColor = 'green' | 'purple' | 'blue' | 'orange' | 'pink';
+type UsernameColor = "green" | "purple" | "blue" | "orange" | "pink";
 
 const COLOR_CLASS: Record<UsernameColor, string> = {
   green: styles.colorGreen,
@@ -18,15 +18,15 @@ const COLOR_CLASS: Record<UsernameColor, string> = {
 //   - drop the file into static/images/ (e.g. static/images/chat-mockup/avatar-1.jpg)
 //   - set `avatarSrc: "/images/chat-mockup/avatar-1.jpg"` on the fediverse message
 type Message =
-  | { id: string; type: 'system'; text: string }
-  | { id: string; type: 'user'; username: string; color: UsernameColor; text: string }
-  | { id: string; type: 'join'; username: string }
+  | { id: string; type: "system"; text: string }
+  | { id: string; type: "user"; username: string; color: UsernameColor; text: string }
+  | { id: string; type: "join"; username: string }
   | {
       id: string;
-      type: 'fediverse';
+      type: "fediverse";
       handle: string;
       action: string;
-      eventKind?: 'follow' | 'default';
+      eventKind?: "follow" | "default";
       avatarSrc?: string;
     };
 
@@ -69,119 +69,119 @@ const REPEATS = [0, 1, 2] as const;
 
 const MESSAGES: Message[] = [
   {
-    id: 'welcome',
-    type: 'system',
+    id: "welcome",
+    type: "system",
     text: translate({
-      id: 'chatMockup.welcomeMessage',
-      message: 'Welcome to the stream! Please be respectful and have fun.',
+      id: "chatMockup.welcomeMessage",
+      message: "Welcome to the stream! Please be respectful and have fun.",
     }),
   },
-  { id: 'join-1', type: 'join', username: 'MusicLover42' },
+  { id: "join-1", type: "join", username: "MusicLover42" },
   {
-    id: 'msg-1',
-    type: 'user',
-    username: 'SynthWave_Fan',
-    color: 'green',
+    id: "msg-1",
+    type: "user",
+    username: "SynthWave_Fan",
+    color: "green",
     text: translate({
-      id: 'chatMockup.message1',
-      message: 'This playlist is amazing!',
-    }),
-  },
-  {
-    id: 'msg-2',
-    type: 'user',
-    username: 'Owncat',
-    color: 'purple',
-    text: translate({
-      id: 'chatMockup.message2',
-      message: 'Hey everyone, glad to be here!',
+      id: "chatMockup.message1",
+      message: "This playlist is amazing!",
     }),
   },
   {
-    id: 'msg-3',
-    type: 'user',
-    username: 'ChillBeats',
-    color: 'blue',
+    id: "msg-2",
+    type: "user",
+    username: "NightOwl",
+    color: "purple",
     text: translate({
-      id: 'chatMockup.message3',
-      message: 'Can you play some lo-fi next?',
+      id: "chatMockup.message2",
+      message: "Hey everyone, glad to be here",
     }),
   },
   {
-    id: 'fed-1',
-    type: 'fediverse',
-    handle: 'owncat@own.cat.streaming',
-    avatarSrc: '/images/owncat-head.svg',
+    id: "msg-3",
+    type: "user",
+    username: "ChillBeats",
+    color: "blue",
+    text: translate({
+      id: "chatMockup.message3",
+      message: "Can you play some lo-fi next?",
+    }),
+  },
+  {
+    id: "fed-1",
+    type: "fediverse",
+    handle: "alex_creates@nightwire.fediverse",
     action: translate({
-      id: 'chatMockup.followedThisStream',
-      message: 'followed this stream',
+      id: "chatMockup.followedThisStream",
+      message: "followed this stream",
     }),
-    eventKind: 'follow',
+    eventKind: "follow",
   },
   {
-    id: 'msg-4',
-    type: 'user',
-    username: 'RetroGamer',
-    color: 'orange',
+    id: "msg-4",
+    type: "user",
+    username: "RetroGamer",
+    color: "orange",
     text: translate({
-      id: 'chatMockup.message4',
-      message: 'The sound quality is incredible',
-    }),
-  },
-  {
-    id: 'msg-5',
-    type: 'user',
-    username: 'CosmicDreamer',
-    color: 'pink',
-    text: translate({
-      id: 'chatMockup.message5',
-      message: 'First time here, love the vibes!',
+      id: "chatMockup.message4",
+      message: "The sound quality is incredible",
     }),
   },
   {
-    id: 'msg-6',
-    type: 'user',
-    username: 'SynthWave_Fan',
-    color: 'green',
+    id: "msg-5",
+    type: "user",
+    username: "CosmicDreamer",
+    color: "pink",
     text: translate({
-      id: 'chatMockup.message6',
-      message: '@CosmicDreamer welcome!',
+      id: "chatMockup.message5",
+      message: "First time here, love the vibes!",
     }),
   },
   {
-    id: 'msg-7',
-    type: 'user',
-    username: 'ChillBeats',
-    color: 'blue',
+    id: "msg-6",
+    type: "user",
+    username: "SynthWave_Fan",
+    color: "green",
     text: translate({
-      id: 'chatMockup.message7',
-      message: 'What software are you using for the stream?',
+      id: "chatMockup.message6",
+      message: "@CosmicDreamer welcome!",
+    }),
+  },
+  {
+    id: "msg-7",
+    type: "user",
+    username: "ChillBeats",
+    color: "blue",
+    text: translate({
+      id: "chatMockup.message7",
+      message: "What software are you using for the stream?",
     }),
   },
 ];
 
 function MessageItem({ message }: { message: Message }) {
-  const rawAvatar = message.type === 'fediverse' ? (message.avatarSrc ?? '') : '';
+  const rawAvatar =
+    message.type === "fediverse" ? message.avatarSrc ?? "" : "";
   const resolvedAvatar = useBaseUrl(rawAvatar);
 
   switch (message.type) {
-    case 'system':
+    case "system":
       return (
         <div className={styles.systemMessage}>
           <div className={styles.systemText}>{message.text}</div>
         </div>
       );
-    case 'join':
+    case "join":
       return (
         <div className={styles.joinMessage}>
           <span className={styles.joinIcon}>{ICON_JOIN}</span>
           <span>
-            <span className={styles.joinName}>{message.username}</span>{' '}
+            <span className={styles.joinName}>{message.username}</span>{" "}
             <Translate id="chatMockup.joinedTheChat">joined the chat</Translate>
           </span>
         </div>
       );
-    case 'user':
+    case "user":
       return (
         <div className={styles.userMessage}>
           <div className={clsx(styles.username, COLOR_CLASS[message.color])}>
@@ -190,14 +190,25 @@ function MessageItem({ message }: { message: Message }) {
           <div className={styles.messageText}>{message.text}</div>
         </div>
       );
-    case 'fediverse': {
-      const avatarSrc = message.avatarSrc ? resolvedAvatar : DEFAULT_FEDIVERSE_AVATAR;
-      const isFollow = message.eventKind === 'follow';
+    case "fediverse": {
+      const avatarSrc = message.avatarSrc
+        ? resolvedAvatar
+        : DEFAULT_FEDIVERSE_AVATAR;
+      const isFollow = message.eventKind === "follow";
       return (
         <div className={styles.fediverseMessage}>
           <div className={styles.fediverseAvatar}>
-            <img className={styles.fediverseAvatarImg} src={avatarSrc} alt="" />
-            <div className={clsx(styles.fediverseBadge, isFollow && styles.fediverseBadgeFollow)}>
+            <img
+              className={styles.fediverseAvatarImg}
+              src={avatarSrc}
+              alt=""
+            />
+            <div
+              className={clsx(
+                styles.fediverseBadge,
+                isFollow && styles.fediverseBadgeFollow
+              )}
+            >
               {ICON_FOLLOW}
             </div>
           </div>
@@ -216,16 +227,20 @@ export interface OwncastChatMockupProps {
   style?: CSSProperties;
 }
 
-export function OwncastChatMockup({ className, style }: OwncastChatMockupProps) {
+export function OwncastChatMockup({
+  className,
+  style,
+}: OwncastChatMockupProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     const node = containerRef.current;
-    if (!node || typeof IntersectionObserver === 'undefined') return;
-    const observer = new IntersectionObserver(([entry]) => setPaused(!entry.isIntersecting), {
-      threshold: 0,
-    });
+    if (!node || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setPaused(!entry.isIntersecting),
+      { threshold: 0 }
+    );
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
@@ -238,21 +253,25 @@ export function OwncastChatMockup({ className, style }: OwncastChatMockupProps) 
       aria-hidden="true"
     >
       <div className={styles.messagesWrapper}>
-        <div className={clsx(styles.messagesScroll, paused && styles.scrollPaused)}>
+        <div
+          className={clsx(styles.messagesScroll, paused && styles.scrollPaused)}
+        >
           {/* 3 copies: needed when viewport height > one set's height,
               otherwise the bottom of the viewport runs out of content
               near the wrap. See the scrollUp keyframe in the CSS. */}
-          {REPEATS.map(repeat =>
-            MESSAGES.map(message => (
+          {REPEATS.map((repeat) =>
+            MESSAGES.map((message) => (
               <MessageItem key={`${message.id}-${repeat}`} message={message} />
-            )),
+            ))
           )}
         </div>
       </div>
       <div className={styles.inputContainer}>
         <div className={styles.input}>
           <span className={styles.inputPlaceholder}>
-            <Translate id="chatMockup.inputPlaceholder">Send a message to chat</Translate>
+            <Translate id="chatMockup.inputPlaceholder">
+              Send a message to chat
+            </Translate>
           </span>
           <div className={styles.inputIcons}>
             {ICON_EMOJI}

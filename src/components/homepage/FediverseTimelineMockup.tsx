@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
-import Translate, { translate } from '@docusaurus/Translate';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import clsx from 'clsx';
-import styles from './FediverseTimelineMockup.module.css';
+import React, { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import Translate, { translate } from "@docusaurus/Translate";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import clsx from "clsx";
+import styles from "./FediverseTimelineMockup.module.css";
 
 const ICON_REPLY = (
   <svg viewBox="0 0 24 24">
@@ -66,182 +66,182 @@ type Post = {
 
 const POSTS: Post[] = [
   {
-    id: 'owncat-gaming',
-    avatarGradient: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
-    avatarSrc: '/images/8-owncat-gold-star.svg',
-    displayName: 'Owncat Gaming',
-    username: '@owncat@owncat.gaming',
-    time: '3h',
+    id: "neon-arcade",
+    avatarGradient: "linear-gradient(135deg, #6366f1 0%, #a855f7 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-neon-arcade-live.webp",
+    displayName: "Neon Arcade Live",
+    username: "@neonarcade@streamhub.space",
+    time: "3h",
     text: translate({
-      id: 'fediverseMockup.neonArcadePost',
-      message: "Starting up tonight's stream! Get over here, something special is planned 🎮",
+      id: "fediverseMockup.neonArcadePost",
+      message: "Getting ready for tonight's stream! Something special planned 🎮",
     }),
-    tags: ['#gaming', '#streaming'],
-    link: 'https://neon.arcade.live',
-    imageSrc: '/images/screenshots/stream-neon-arcade.webp',
+    tags: ["#gaming", "#streaming"],
+    link: "https://neon.arcade.live",
+    imageSrc: "/images/screenshots/stream-neon-arcade.webp",
     replies: 6,
   },
   {
-    id: 'open-discourse',
-    avatarGradient: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)',
-    avatarSrc: '/images/screenshots/stream-logo-open-discourse.webp',
-    displayName: 'Open Discourse',
-    username: '@opendiscourse@talking.town',
-    time: '4h',
+    id: "open-discourse",
+    avatarGradient: "linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-open-discourse.webp",
+    displayName: "Open Discourse",
+    username: "@opendiscourse@fediverse.town",
+    time: "4h",
     text: translate({
-      id: 'fediverseMockup.openDiscoursePost',
+      id: "fediverseMockup.openDiscoursePost",
       message:
         "Join us for today's discussion! We're talking about creative hobbies and how they help with work-life balance.",
     }),
-    tags: ['#discussion', '#community', '#hobbies'],
-    link: 'https://open.discourse.chat',
-    imageSrc: '/images/screenshots/stream-open-disclosure.webp',
+    tags: ["#discussion", "#community", "#hobbies"],
+    link: "https://open.discourse.chat",
+    imageSrc: "/images/screenshots/stream-open-disclosure.webp",
     replies: 1,
     boosts: { active: true },
   },
   {
-    id: 'basement-beats',
-    avatarGradient: 'linear-gradient(135deg, #f97316 0%, #eab308 100%)',
-    avatarSrc: '/images/screenshots/stream-logo-basement-beats.webp',
-    displayName: 'Basement Beats',
-    username: '@basementbeats@soundwave.club',
-    time: '4h',
+    id: "basement-beats",
+    avatarGradient: "linear-gradient(135deg, #f97316 0%, #eab308 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-basement-beats.webp",
+    displayName: "Basement Beats",
+    username: "@basementbeats@soundwave.club",
+    time: "4h",
     text: translate({
-      id: 'fediverseMockup.basementBeatsPost',
-      message: 'Friday night vibes incoming! Spinning some deep cuts tonight 🎧',
+      id: "fediverseMockup.basementBeatsPost",
+      message: "Friday night vibes incoming! Spinning some deep cuts tonight 🎧",
     }),
-    tags: ['#music', '#dj', '#electronic', '#house'],
-    link: 'https://basement.beats.fm',
-    imageSrc: '/images/screenshots/stream-basement-beats.webp',
+    tags: ["#music", "#dj", "#electronic", "#house"],
+    link: "https://basement.beats.fm",
+    imageSrc: "/images/screenshots/stream-basement-beats.webp",
     favorites: { count: 3, active: true },
   },
   {
-    id: 'pixel-dreams',
-    boostedBy: 'owncat',
-    avatarGradient: 'linear-gradient(135deg, #ec4899 0%, #f472b6 100%)',
-    avatarSrc: '/images/screenshots/stream-logo-pixel-dreams-studio.webp',
-    displayName: 'Pixel Dreams Studio',
-    username: '@pixeldreams@artcollective.io',
-    time: '5h',
+    id: "pixel-dreams",
+    boostedBy: "sketchfan42",
+    avatarGradient: "linear-gradient(135deg, #ec4899 0%, #f472b6 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-pixel-dreams-studio.webp",
+    displayName: "Pixel Dreams Studio",
+    username: "@pixeldreams@artcollective.io",
+    time: "5h",
     text: translate({
-      id: 'fediverseMockup.pixelDreamsPost',
+      id: "fediverseMockup.pixelDreamsPost",
       message:
-        'Cozy afternoon drawing session! Working on some character designs today 🎨\n\nCome hang out and chat while I sketch!',
+        "Cozy afternoon drawing session! Working on some character designs today 🎨\n\nCome hang out and chat while I sketch!",
     }),
-    tags: ['#art', '#digitalart', '#illustration'],
-    link: 'https://pixel.dreams.art',
-    imageSrc: '/images/screenshots/stream-live-drawing-illustrating.webp',
+    tags: ["#art", "#digitalart", "#illustration"],
+    link: "https://pixel.dreams.art",
+    imageSrc: "/images/screenshots/stream-live-drawing-illustrating.webp",
     replies: 12,
     boosts: { count: 45, active: true },
     favorites: { count: 89, active: true },
   },
   {
-    id: 'neon-pixel-arcade',
-    avatarGradient: 'linear-gradient(135deg, #10b981 0%, #34d399 100%)',
-    avatarSrc: '/images/screenshots/stream-logo-neon-pixel-arcade.webp',
-    displayName: 'Neon Pixel Arcade',
-    username: '@neonpixelarcade@retro.zone',
-    time: '6h',
+    id: "neon-pixel-arcade",
+    avatarGradient: "linear-gradient(135deg, #10b981 0%, #34d399 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-neon-pixel-arcade.webp",
+    displayName: "Neon Pixel Arcade",
+    username: "@neonpixelarcade@retro.zone",
+    time: "6h",
     text: translate({
-      id: 'fediverseMockup.neonPixelArcadePost',
-      message: 'Classic console night! Playing through some favorites from the 90s 🕹️',
+      id: "fediverseMockup.neonPixelArcadePost",
+      message: "Classic console night! Playing through some favorites from the 90s 🕹️",
     }),
-    tags: ['#retrogaming', '#nostalgia', '#gaming'],
-    link: 'https://neon.pixelarcade.tv',
-    imageSrc: '/images/screenshots/stream-arcade-8bit-gaming.webp',
+    tags: ["#retrogaming", "#nostalgia", "#gaming"],
+    link: "https://neon.pixelarcade.tv",
+    imageSrc: "/images/screenshots/stream-arcade-8bit-gaming.webp",
     replies: 8,
     boosts: { count: 23 },
     favorites: { count: 67, active: true },
   },
   {
-    id: 'terminal-sessions',
-    boostedBy: 'opensourcefan',
-    avatarGradient: 'linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%)',
-    avatarSrc: '/images/screenshots/steram-logo-terminal-sessions.webp',
-    displayName: 'Terminal Sessions',
-    username: '@terminalsessions@devtalk.net',
-    time: '7h',
+    id: "terminal-sessions",
+    boostedBy: "opensourcefan",
+    avatarGradient: "linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%)",
+    avatarSrc: "/images/screenshots/steram-logo-terminal-sessions.webp",
+    displayName: "Terminal Sessions",
+    username: "@terminalsessions@devtalk.net",
+    time: "7h",
     text: translate({
-      id: 'fediverseMockup.terminalSessionsPost',
-      message: 'Building something fun today! Learning a new framework and sharing the journey.',
+      id: "fediverseMockup.terminalSessionsPost",
+      message: "Building something fun today! Learning a new framework and sharing the journey.",
     }),
-    tags: ['#programming', '#coding', '#webdev'],
-    link: 'https://terminal.sessions.dev',
-    imageSrc: '/images/screenshots/stream-terminal-sessions.webp',
+    tags: ["#programming", "#coding", "#webdev"],
+    link: "https://terminal.sessions.dev",
+    imageSrc: "/images/screenshots/stream-terminal-sessions.webp",
     replies: 34,
     boosts: { count: 78, active: true },
     favorites: { count: 156, active: true },
   },
   {
-    id: 'moonlight-sessions',
-    avatarGradient: 'linear-gradient(135deg, #7c3aed 0%, #a855f7 100%)',
-    avatarSrc: '/images/screenshots/stream-logo-midnight-sessions.webp',
-    displayName: 'Moonlight Sessions',
-    username: '@moonlightsessions@jazzcat.fm',
-    time: '8h',
+    id: "moonlight-sessions",
+    avatarGradient: "linear-gradient(135deg, #7c3aed 0%, #a855f7 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-midnight-sessions.webp",
+    displayName: "Moonlight Sessions",
+    username: "@moonlightsessions@jazzcat.fm",
+    time: "8h",
     text: translate({
-      id: 'fediverseMockup.moonlightSessionsPost',
-      message: 'Late night improv session! Some friends stopped by to jam 🎷',
+      id: "fediverseMockup.moonlightSessionsPost",
+      message: "Late night improv session! Some friends stopped by to jam 🎷",
     }),
-    tags: ['#jazz', '#livemusic', '#improv'],
-    link: 'https://moonlight.sessions.fm',
-    imageSrc: '/images/screenshots/stream-midnight-sessions.webp',
+    tags: ["#jazz", "#livemusic", "#improv"],
+    link: "https://moonlight.sessions.fm",
+    imageSrc: "/images/screenshots/stream-midnight-sessions.webp",
     replies: 15,
     boosts: { count: 56 },
     favorites: { count: 234, active: true },
   },
   {
-    id: 'fireside-tales',
-    avatarGradient: 'linear-gradient(135deg, #dc2626 0%, #ef4444 100%)',
-    avatarSrc: '/images/screenshots/stream-logo-fireside-tales.webp',
-    displayName: 'Fireside Tales',
-    username: '@firesidetales@tabletop.quest',
-    time: '9h',
+    id: "fireside-tales",
+    avatarGradient: "linear-gradient(135deg, #dc2626 0%, #ef4444 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-fireside-tales.webp",
+    displayName: "Fireside Tales",
+    username: "@firesidetales@tabletop.quest",
+    time: "9h",
     text: translate({
-      id: 'fediverseMockup.firesideTalesPost',
-      message: 'Campaign night continues! The party is in deep trouble this week... 🐉',
+      id: "fediverseMockup.firesideTalesPost",
+      message: "Campaign night continues! The party is in deep trouble this week... 🐉",
     }),
-    tags: ['#ttrpg', '#tabletop', '#roleplaying'],
-    link: 'https://fireside.tales.game',
-    imageSrc: '/images/screenshots/stream-dnd-campaign.webp',
+    tags: ["#ttrpg", "#tabletop", "#roleplaying"],
+    link: "https://fireside.tales.game",
+    imageSrc: "/images/screenshots/stream-dnd-campaign.webp",
     replies: 28,
     boosts: { count: 67, active: true },
     favorites: { count: 178, active: true },
   },
   {
-    id: 'home-kitchen',
-    avatarGradient: 'linear-gradient(135deg, #ea580c 0%, #f97316 100%)',
-    avatarSrc: '/images/screenshots/stream-logo-home-kitchen-live.webp',
-    displayName: 'Home Kitchen Live',
-    username: '@homekitchen@foodie.social',
-    time: '10h',
+    id: "home-kitchen",
+    avatarGradient: "linear-gradient(135deg, #ea580c 0%, #f97316 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-home-kitchen-live.webp",
+    displayName: "Home Kitchen Live",
+    username: "@homekitchen@foodie.social",
+    time: "10h",
     text: translate({
-      id: 'fediverseMockup.homeKitchenPost',
-      message: 'Sunday cooking! Making comfort food from scratch today 🍝',
+      id: "fediverseMockup.homeKitchenPost",
+      message: "Sunday cooking! Making comfort food from scratch today 🍝",
     }),
-    tags: ['#cooking', '#homemade', '#foodie'],
-    link: 'https://home.kitchen.live',
-    imageSrc: '/images/screenshots/stream-home-kitchen-live.webp',
+    tags: ["#cooking", "#homemade", "#foodie"],
+    link: "https://home.kitchen.live",
+    imageSrc: "/images/screenshots/stream-home-kitchen-live.webp",
     replies: 19,
     boosts: { count: 34 },
     favorites: { count: 112, active: true },
   },
   {
-    id: 'skyward-tonight',
-    boostedBy: 'spacefan99',
-    avatarGradient: 'linear-gradient(135deg, #0891b2 0%, #22d3ee 100%)',
-    avatarSrc: '/images/screenshots/stream-logo-skyward-tonight.webp',
-    displayName: 'Skyward Tonight',
-    username: '@skywardtonight@stargazer.club',
-    time: '11h',
+    id: "skyward-tonight",
+    boostedBy: "spacefan99",
+    avatarGradient: "linear-gradient(135deg, #0891b2 0%, #22d3ee 100%)",
+    avatarSrc: "/images/screenshots/stream-logo-skyward-tonight.webp",
+    displayName: "Skyward Tonight",
+    username: "@skywardtonight@stargazer.club",
+    time: "11h",
     text: translate({
-      id: 'fediverseMockup.skywardTonightPost',
+      id: "fediverseMockup.skywardTonightPost",
       message:
-        'Perfect night for stargazing! Setting up the telescope for some planetary viewing 🔭',
+        "Perfect night for stargazing! Setting up the telescope for some planetary viewing 🔭",
     }),
-    tags: ['#astronomy', '#stargazing', '#science'],
-    link: 'https://skyward.tonight.live',
-    imageSrc: '/images/screenshots/stream-stargazing-live.webp',
+    tags: ["#astronomy", "#stargazing", "#science"],
+    link: "https://skyward.tonight.live",
+    imageSrc: "/images/screenshots/stream-stargazing-live.webp",
     replies: 45,
     boosts: { count: 123, active: true },
     favorites: { count: 456, active: true },
@@ -255,14 +255,14 @@ function PostActionItem({
 }: {
   icon: ReactNode;
   state?: ActionState;
-  variant?: 'boost' | 'fav';
+  variant?: "boost" | "fav";
 }) {
   const activeClass =
-    state?.active && variant === 'boost'
+    state?.active && variant === "boost"
       ? styles.actionBoost
-      : state?.active && variant === 'fav'
-        ? styles.actionFav
-        : undefined;
+      : state?.active && variant === "fav"
+      ? styles.actionFav
+      : undefined;
   return (
     <div className={clsx(styles.action, activeClass)}>
       {icon}
@@ -272,15 +272,15 @@ function PostActionItem({
 }
 
 function PostCard({ post }: { post: Post }) {
-  const avatarSrc = useBaseUrl(post.avatarSrc ?? '');
-  const imageSrc = useBaseUrl(post.imageSrc ?? '');
+  const avatarSrc = useBaseUrl(post.avatarSrc ?? "");
+  const imageSrc = useBaseUrl(post.imageSrc ?? "");
   return (
     <div className={styles.post}>
       {post.boostedBy && (
         <div className={styles.boostHeader}>
           {ICON_BOOST}
           <Translate id="fediverseMockup.boostedBy" values={{ name: post.boostedBy }}>
-            {'{name} boosted'}
+            {"{name} boosted"}
           </Translate>
         </div>
       )}
@@ -288,7 +288,10 @@ function PostCard({ post }: { post: Post }) {
         {post.avatarSrc ? (
           <img className={styles.avatar} src={avatarSrc} alt="" />
         ) : (
-          <div className={styles.avatar} style={{ background: post.avatarGradient }} />
+          <div
+            className={styles.avatar}
+            style={{ background: post.avatarGradient }}
+          />
         )}
         <div className={styles.userInfo}>
           <div className={styles.displayName}>{post.displayName}</div>
@@ -298,11 +301,11 @@ function PostCard({ post }: { post: Post }) {
       </div>
       <div className={styles.postContent}>
         {post.text}
-        {'\n\n'}
+        {"\n\n"}
         {post.tags.map((tag, i) => (
           <React.Fragment key={tag}>
             <span className={styles.hashtag}>{tag}</span>
-            {i < post.tags.length - 1 ? ' ' : null}
+            {i < post.tags.length - 1 ? " " : null}
           </React.Fragment>
         ))}
       </div>
@@ -336,16 +339,20 @@ export interface FediverseTimelineMockupProps {
   style?: CSSProperties;
 }
 
-export function FediverseTimelineMockup({ className, style }: FediverseTimelineMockupProps) {
+export function FediverseTimelineMockup({
+  className,
+  style,
+}: FediverseTimelineMockupProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     const node = containerRef.current;
-    if (!node || typeof IntersectionObserver === 'undefined') return;
-    const observer = new IntersectionObserver(([entry]) => setPaused(!entry.isIntersecting), {
-      threshold: 0,
-    });
+    if (!node || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setPaused(!entry.isIntersecting),
+      { threshold: 0 }
+    );
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
@@ -359,10 +366,10 @@ export function FediverseTimelineMockup({ className, style }: FediverseTimelineM
     >
       <div className={styles.wrapper}>
         <div className={clsx(styles.scroll, paused && styles.scrollPaused)}>
-          {POSTS.map(post => (
+          {POSTS.map((post) => (
             <PostCard key={post.id} post={post} />
           ))}
-          {POSTS.map(post => (
+          {POSTS.map((post) => (
             <PostCard key={`${post.id}-loop`} post={post} />
           ))}
         </div>
