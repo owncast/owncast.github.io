@@ -17,7 +17,7 @@ Any application that supports HLS video will play back an Owncast stream. Instal
 
 ## Browsing the directory
 
-If your application has _IPTV_ or _M3U_ support, you can also browse the directory directly from the application by adding `https://directory.owncast.online/api/iptv` to the application. Not all apps support this.
+If your application has _IPTV_ or _M3U_ support, you can also browse the directory directly from the application by adding `https://owncast.directory/api/iptv` to the application. Not all apps support this.
 
 ## Device and Platform support
 
@@ -108,7 +108,7 @@ iPlayTV
 
 1. Install [iPlayTV](https://apps.apple.com/us/app/iplaytv-iptv-m3u-player/id1072226801) from the tvOS App Store.
 1. Visit Settings -> Edit
-1. For the `M3U` Playlist URL: `https://directory.owncast.online/api/iptv`
+1. For the `M3U` Playlist URL: `https://owncast.directory/api/iptv`
 1. Change the `Channels Refresh` to the lowest value it offers.
 
 <a href="https://apps.apple.com/us/app/iplaytv-iptv-m3u-player/id1072226801">
@@ -132,7 +132,7 @@ iPlayTV
 
 1. Install **SATV** (free) from your smart TV's app store.
 1. Run it and press button to **"Add Playlist"**.
-1. Type in: `https://directory.owncast.online/api/iptv`. Make sure it's _https_.
+1. Type in: `https://owncast.directory/api/iptv`. Make sure it's _https_.
 1. Double check you typed it in correctly.
 1. Save this playlist.
 1. It will refresh the current live streams each time you launch the SATV app.
