@@ -24,7 +24,7 @@ Our resources are limited, and we'll be picky and start small. These servers wil
 
 ## What we would ask of you
 
-- Be listed as a public streamer on our [Directory](https://directory.owncast.online) where people would discover you.
+- Be listed as a public streamer on our [Directory](https://owncast.directory) where people would discover you.
 - Stream consistently enough to make it worthwhile for everyone involved, and that you expect to continue streaming into the future.
 - Plan on making an effort to build an audience.
 - Nothing NSFW or crazy offensive. As always, if you run your own server you can do whatever you like. But in this case we'll be responsible for the servers and they'll be shown to the general public, so we want the content to be generally accessible.
