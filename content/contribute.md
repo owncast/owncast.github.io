@@ -2,6 +2,6 @@
 title: Contribute
 ---
 
-<meta http-equiv="refresh" content="0; url=https://owncast.dev/owncast/Contributor-Guide-12eed550d9b347829323496e3bf12ca3" />
+<meta http-equiv="refresh" content="0; url=https://github.com/owncast/owncast/blob/develop/CONTRIBUTING.md" />
 
-Click <a href="https://owncast.dev/owncast/Contributor-Guide-12eed550d9b347829323496e3bf12ca3">here</a> if you are not redirected.
+Click <a href="https://github.com/owncast/owncast/blob/develop/CONTRIBUTING.md">here</a> if you are not redirected.
