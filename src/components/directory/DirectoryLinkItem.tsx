@@ -22,7 +22,7 @@ export function DirectoryLinkItem({ link }: DirectoryLinkItemProps) {
       )}
     >
       <div className="flex items-start justify-between gap-2">
-        <h4 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+        <h4 className="m-0 text-base font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
           {link.title}
         </h4>
         <svg
@@ -40,7 +40,7 @@ export function DirectoryLinkItem({ link }: DirectoryLinkItemProps) {
           />
         </svg>
       </div>
-      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+      <p className="m-0 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
         {link.description}
       </p>
     </a>

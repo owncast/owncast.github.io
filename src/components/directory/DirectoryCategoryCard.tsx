@@ -26,10 +26,10 @@ export function DirectoryCategoryCard({
         'cursor-pointer w-full'
       )}
     >
-      <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+      <h3 className="m-0 text-lg font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
         {category.name}
       </h3>
-      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+      <p className="m-0 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
         {category.description}
       </p>
       <span className="text-xs text-gray-500 dark:text-gray-500 mt-auto">
