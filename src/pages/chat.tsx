@@ -96,6 +96,11 @@ const CHATSCOPE_THEME = `
 [data-chat-container] [role=tab] { background: transparent !important; border-radius: 0 !important; padding: 8px 16px !important; color: #9ca8ba !important; font-size: 0.875rem !important; font-weight: 500 !important; border-bottom: 2px solid transparent !important; box-shadow: none !important; transition: color 0.15s, border-color 0.15s !important; }
 [data-chat-container] [role=tab]:hover { color: #e2e8f0 !important; }
 [data-chat-container] [role=tab][data-state=active] { color: #e2e8f0 !important; border-bottom-color: #7a5cf3 !important; background: transparent !important; box-shadow: none !important; }
+.chat-room-scope-notice { display: flex; align-items: center; gap: 8px; flex-shrink: 0; padding: 8px 16px; border-bottom: 1px solid #262e3a; background: #171d27; color: #9ca8ba; font-size: 0.75rem; line-height: 1.4; }
+.chat-room-scope-notice svg { width: 14px; height: 14px; flex: none; color: #7db4f4; }
+.chat-room-scope-notice button { appearance: none; border: 0; padding: 0; background: none; color: #7db4f4; cursor: pointer; font: inherit; }
+.chat-room-scope-notice button:hover { color: #e2e8f0; }
+.chat-room-scope-notice button:focus-visible { border-radius: 2px; outline: 2px solid #7db4f4; outline-offset: 2px; }
 /* Markdown formatting is handled via inline styles in React components. */
 `;
 
@@ -117,7 +122,7 @@ function useChatTheme() {
 // Community tab — mounts MatrixClientProvider only when activated
 // ---------------------------------------------------------------------------
 
-function CommunityTab() {
+function CommunityTab({ onOpenInfo }: { onOpenInfo: () => void }) {
   const {
     session,
     status,
@@ -141,7 +146,24 @@ function CommunityTab() {
   return (
     <>
       {communityReady && communityRoom ? (
-        <RoomTabContent roomId={communityRoom.id} />
+        <>
+          <div className="chat-room-scope-notice" role="note">
+            <Info aria-hidden="true" />
+            <span>
+              <Translate id="chat.community.publicRoomOnly">
+                Public room only. Direct messages sent to this web chat will
+                not be seen.
+              </Translate>{" "}
+              <button type="button" onClick={onOpenInfo}>
+                <Translate id="chat.community.matrixClientCta">
+                  Use a Matrix client for more features
+                </Translate>
+                .
+              </button>
+            </span>
+          </div>
+          <RoomTabContent roomId={communityRoom.id} />
+        </>
       ) : status === "error" ? (
         <div
           style={{
@@ -267,10 +289,15 @@ function CommunityTab() {
   );
 }
 
-function CommunityTabHeader() {
+function CommunityTabHeader({
+  infoOpen,
+  onInfoOpenChange,
+}: {
+  infoOpen: boolean;
+  onInfoOpenChange: (open: boolean) => void;
+}) {
   const { session, submitDisplayName } = useMatrixClient();
   const [nameDialogOpen, setNameDialogOpen] = React.useState(false);
-  const [infoOpen, setInfoOpen] = React.useState(false);
   const communityRoom = CHAT_CONFIG.rooms[0];
 
   return (
@@ -278,7 +305,7 @@ function CommunityTabHeader() {
       <Button
         variant="ghost"
         size="icon"
-        onClick={() => setInfoOpen(true)}
+        onClick={() => onInfoOpenChange(true)}
         aria-label={translate({
           id: "chat.info.buttonLabel",
           message: "About this chat",
@@ -300,7 +327,7 @@ function CommunityTabHeader() {
         </Button>
       )}
 
-      <Dialog open={infoOpen} onOpenChange={setInfoOpen}>
+      <Dialog open={infoOpen} onOpenChange={onInfoOpenChange}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
@@ -474,7 +501,13 @@ function CommunityTabHeader() {
 }
 
 /** Renders CommunityTabHeader into the header bar via a portal. */
-function CommunityTabHeaderPortal() {
+function CommunityTabHeaderPortal({
+  infoOpen,
+  onInfoOpenChange,
+}: {
+  infoOpen: boolean;
+  onInfoOpenChange: (open: boolean) => void;
+}) {
   const [container, setContainer] = React.useState<HTMLElement | null>(null);
 
   React.useEffect(() => {
@@ -482,7 +515,13 @@ function CommunityTabHeaderPortal() {
   }, []);
 
   if (!container) return null;
-  return ReactDOM.createPortal(<CommunityTabHeader />, container);
+  return ReactDOM.createPortal(
+    <CommunityTabHeader
+      infoOpen={infoOpen}
+      onInfoOpenChange={onInfoOpenChange}
+    />,
+    container,
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -492,6 +531,7 @@ function CommunityTabHeaderPortal() {
 export default function ChatPage(): JSX.Element {
   const [activeTab, setActiveTab] = React.useState("ai");
   const [communityMounted, setCommunityMounted] = React.useState(false);
+  const [communityInfoOpen, setCommunityInfoOpen] = React.useState(false);
 
   useChatTheme();
 
@@ -609,13 +649,20 @@ export default function ChatPage(): JSX.Element {
             {/* Community tab — single provider wraps header + content */}
             {communityMounted ? (
               <MatrixClientProvider config={CHAT_CONFIG}>
-                {activeTab === "community" && <CommunityTabHeaderPortal />}
+                {activeTab === "community" && (
+                  <CommunityTabHeaderPortal
+                    infoOpen={communityInfoOpen}
+                    onInfoOpenChange={setCommunityInfoOpen}
+                  />
+                )}
                 <TabsContent
                   value="community"
                   className="mt-0 flex min-h-0 flex-1 flex-col overflow-hidden data-[state=inactive]:hidden"
                   forceMount
                 >
-                  <CommunityTab />
+                  <CommunityTab
+                    onOpenInfo={() => setCommunityInfoOpen(true)}
+                  />
                 </TabsContent>
               </MatrixClientProvider>
             ) : (
