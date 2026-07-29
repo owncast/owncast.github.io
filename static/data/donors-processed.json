@@ -1,1 +1,72 @@
-[]
+[
+  {
+    "login": "Anthony Zone",
+    "avatar_url": "/images/owncat-head-gray-red.svg",
+    "html_url": "https://opencollective.com/anthony-zone"
+  },
+  {
+    "login": "emacsen",
+    "avatar_url": "/images/owncat-head-white.svg",
+    "html_url": "https://opencollective.com/guest-618ea119"
+  },
+  {
+    "login": "Flaki",
+    "avatar_url": "/images/avatars/flaki.webp",
+    "html_url": "https://opencollective.com/flaki"
+  },
+  {
+    "login": "Heongle",
+    "avatar_url": "/images/avatars/heongle.webp",
+    "html_url": "https://opencollective.com/heongle"
+  },
+  {
+    "login": "Incognito",
+    "avatar_url": "/images/owncat-head-black-orange.svg",
+    "html_url": "https://opencollective.com/incognito-3b4cd5c7"
+  },
+  {
+    "login": "Incognito",
+    "avatar_url": "/images/owncat-head-siamese-teal.svg",
+    "html_url": "https://opencollective.com/user-5bdb86e0"
+  },
+  {
+    "login": "Joel Bradshaw",
+    "avatar_url": "/images/avatars/joel-bradshaw.webp",
+    "html_url": "https://opencollective.com/joel-bradshaw"
+  },
+  {
+    "login": "Luka Prinčič",
+    "avatar_url": "/images/owncat-head-ginger.svg",
+    "html_url": "https://opencollective.com/luka-princic"
+  },
+  {
+    "login": "N-iX Ltd",
+    "avatar_url": "/images/avatars/n-ix-ltd.webp",
+    "html_url": "https://opencollective.com/n-ix-ltd"
+  },
+  {
+    "login": "nebunez",
+    "avatar_url": "/images/avatars/nebunez.webp",
+    "html_url": "https://opencollective.com/nebunez"
+  },
+  {
+    "login": "Paul Lindner",
+    "avatar_url": "/images/avatars/paul-lindner.webp",
+    "html_url": "https://opencollective.com/lindner"
+  },
+  {
+    "login": "Simon Michalke",
+    "avatar_url": "/images/owncat-head-cream-coral.svg",
+    "html_url": "https://opencollective.com/simon-michalke"
+  },
+  {
+    "login": "Tom",
+    "avatar_url": "/images/avatars/tom.webp",
+    "html_url": "https://opencollective.com/tom31"
+  },
+  {
+    "login": "Walter Ebert",
+    "avatar_url": "/images/avatars/walter-ebert.webp",
+    "html_url": "https://opencollective.com/walterebert"
+  }
+]
