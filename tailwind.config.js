@@ -1,4 +1,3 @@
-import type { Config } from 'tailwindcss';
 import { fontFamily } from 'tailwindcss/defaultTheme';
 import { colors } from './data/config/colors';
 
@@ -6,7 +5,7 @@ import tailwindcssAnimate from 'tailwindcss-animate';
 import tailwindcssForms from '@tailwindcss/forms';
 import tailwindcssTypography from '@tailwindcss/typography';
 
-const config: Config = {
+const config = {
   darkMode: ['selector', '[data-theme="dark"]'],
   content: [
     './src/pages/index.tsx',
