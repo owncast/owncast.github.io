@@ -72,9 +72,9 @@ const ALL_REDIRECTS = [
   // },
   { to: '/docs/api/*', from: '/thirdparty/*' },
   { to: '/docs/getting-started/install/providers/*', from: '/quickstart/*' },
-  // Internal dev docs moved from /dev to /devdocs.
-  { to: '/devdocs/*', from: '/dev/*' },
-  { to: '/devdocs/', from: '/dev/' },
+  // Internal dev docs moved from /dev to /dev-docs.
+  { to: '/dev-docs/*', from: '/dev/*' },
+  { to: '/dev-docs/', from: '/dev/' },
 
   // External redirect: support chat room on Matrix.
   {
@@ -131,7 +131,7 @@ const ALL_REDIRECTS = [
   { to: '/docs/chat/chat-authentication', from: '/docs/chat-authentication' },
   { to: '/contribute', from: '/help' },
   // The docs contribute page moved to the internal contributor guide.
-  { to: '/devdocs/contributor-guide', from: '/docs/contribute' },
+  { to: '/dev-docs/contributor-guide', from: '/docs/contribute' },
   // Configuration docs moved under /docs/configuration/.
   { to: '/docs/configuration/appearance', from: '/docs/appearance/' },
   {
@@ -366,9 +366,9 @@ const config: Config = {
         },
         blog: false, // Disabled - using multi-instance blog plugins instead
         sitemap: {
-          // Keep internal /devdocs (Docmost) docs out of the public sitemap so
+          // Keep internal /dev-docs (Docmost) docs out of the public sitemap so
           // search engines don't route end users to development documentation.
-          ignorePatterns: ['/devdocs/**'],
+          ignorePatterns: ['/dev-docs/**'],
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -581,10 +581,10 @@ const config: Config = {
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
         blogDir: ['releases', 'news'],
-        // /devdocs (Docmost) docs are internal dev docs, not for end users. They're
+        // /dev-docs (Docmost) docs are internal dev docs, not for end users. They're
         // already excluded by routeBasePath, but pin it so a future indexPages
         // or docsRouteBasePath change can never leak them into search.
-        ignoreFiles: [/^devdocs\//],
+        ignoreFiles: [/^dev-docs\//],
       },
     ],
     // Dev docs - sourced from Docmost via scripts/fetch-docmost.js (prototype)
@@ -592,7 +592,7 @@ const config: Config = {
       '@docusaurus/plugin-content-docs',
       {
         id: 'dev',
-        routeBasePath: 'devdocs',
+        routeBasePath: 'dev-docs',
         path: 'dev-docs',
         sidebarPath: './sidebarsDev.ts',
       },

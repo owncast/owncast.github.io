@@ -41,11 +41,6 @@ export const directoryData: DirectoryCategory[] = [
         title: 'Liquidsoap',
         description: 'Liquidsoap is a powerful tool for building complex audio and video stream generators.',
         url: 'https://www.liquidsoap.info/doc-dev/video.html',
-      },
-      {
-        title: 'owncast-stream',
-        description: 'A small Rust/GStreamer streamer for Owncast. It keeps one RTMP connection open while switching from a generated lobby to one movie.  Imax GRID UI inspired TUI',
-        url: 'https://github.com/robot-head/owncast-stream',
       }
     ],
   },
@@ -143,7 +138,7 @@ export const directoryData: DirectoryCategory[] = [
       { 
         title: "Internal Owncast Project Documentation",
         description: 'Includes the documentation for operating the Owncast project. Such as contributing, building the project, technical specifics, and future plans.',
-        url: 'https://owncast.online/devdocs/',
+        url: 'https://owncast.online/dev-docs/',
       },
       {
         title: 'Owncast UI Components, Assets, and Styles',

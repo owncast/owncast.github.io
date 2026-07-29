@@ -1,46 +1,34 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Layout from "@theme/Layout";
-import Translate, { translate } from "@docusaurus/Translate";
-import {
-  Zap,
-  MessageCircle,
-  ExternalLink,
-  Pencil,
-  Loader2,
-  Info,
-} from "lucide-react";
-import { Button } from "@/components/shared/ui/button";
-import { Badge } from "@/components/shared/ui/badge";
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "@/components/shared/ui/tabs";
-import { MatrixClientProvider, useMatrixClient } from "@/hooks/useMatrixClient";
-import type { ChatConfig } from "@/lib/matrix/types";
-import { RoomTabContent } from "@/components/chat/RoomTabContent";
-import { DisplayNameDialog } from "@/components/chat/DisplayNameDialog";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Layout from '@theme/Layout';
+import Translate, { translate } from '@docusaurus/Translate';
+import { Zap, MessageCircle, ExternalLink, Pencil, Loader2, Info } from 'lucide-react';
+import { Button } from '@/components/shared/ui/button';
+import { Badge } from '@/components/shared/ui/badge';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/shared/ui/tabs';
+import { MatrixClientProvider, useMatrixClient } from '@/hooks/useMatrixClient';
+import type { ChatConfig } from '@/lib/matrix/types';
+import { RoomTabContent } from '@/components/chat/RoomTabContent';
+import { DisplayNameDialog } from '@/components/chat/DisplayNameDialog';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@/components/shared/ui/dialog";
-import { AIChatTab } from "@/components/chat/AIChatTab";
+} from '@/components/shared/ui/dialog';
+import { AIChatTab } from '@/components/chat/AIChatTab';
 
-import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 
 const CHAT_CONFIG: ChatConfig = {
-  homeserverUrl: "https://matrix.owncast.online/",
-  registrationProxyUrl: "https://matrix.owncast.online/register-guest",
+  homeserverUrl: 'https://matrix.owncast.online/',
+  registrationProxyUrl: 'https://matrix.owncast.online/register-guest',
   rooms: [
     {
-      id: "#owncast.support:matrix.org",
-      label: "Support",
-      alias: "#owncast.support:matrix.org",
+      id: '#owncast.support:matrix.org',
+      label: 'Support',
+      alias: '#owncast.support:matrix.org',
     },
   ],
 };
@@ -101,19 +89,32 @@ const CHATSCOPE_THEME = `
 .chat-room-scope-notice button { appearance: none; border: 0; padding: 0; background: none; color: #7db4f4; cursor: pointer; font: inherit; }
 .chat-room-scope-notice button:hover { color: #e2e8f0; }
 .chat-room-scope-notice button:focus-visible { border-radius: 2px; outline: 2px solid #7db4f4; outline-offset: 2px; }
+/* Pin the shell to the viewport while this page is mounted, and let the content
+   wrapper take exactly the space the navbar and announcement bar leave over.
+   Both matter: everything below (chatscope included) sizes itself with
+   height:100%, which needs a definite height to resolve against, and the
+   theme's own wrapper is flex-basis:auto/shrink:0, so a tall conversation would
+   otherwise push the message input off the bottom of the screen. */
+html[data-chat-page] #__docusaurus { height: 100% !important; }
+html[data-chat-page] .main-wrapper { flex: 1 1 0% !important; min-height: 0 !important; }
 /* Markdown formatting is handled via inline styles in React components. */
 `;
 
 function useChatTheme() {
   React.useEffect(() => {
-    const id = "chatscope-owncast-theme";
-    if (document.getElementById(id)) return;
-    const style = document.createElement("style");
-    style.id = id;
-    style.textContent = CHATSCOPE_THEME;
-    document.head.appendChild(style);
+    const html = document.documentElement;
+    html.dataset.chatPage = '';
+    const id = 'chatscope-owncast-theme';
+    const existing = document.getElementById(id);
+    const style = existing ?? document.createElement('style');
+    if (!existing) {
+      style.id = id;
+      style.textContent = CHATSCOPE_THEME;
+      document.head.appendChild(style);
+    }
     return () => {
-      style.remove();
+      delete html.dataset.chatPage;
+      if (!existing) style.remove();
     };
   }, []);
 }
@@ -137,11 +138,11 @@ function CommunityTab({ onOpenInfo }: { onOpenInfo: () => void }) {
   const [nameDialogOpen, setNameDialogOpen] = React.useState(false);
 
   React.useEffect(() => {
-    if (status === "naming") setNameDialogOpen(true);
+    if (status === 'naming') setNameDialogOpen(true);
   }, [status]);
 
   const communityRoom = CHAT_CONFIG.rooms[0];
-  const communityReady = status === "ready";
+  const communityReady = status === 'ready';
 
   return (
     <>
@@ -151,9 +152,8 @@ function CommunityTab({ onOpenInfo }: { onOpenInfo: () => void }) {
             <Info aria-hidden="true" />
             <span>
               <Translate id="chat.community.publicRoomOnly">
-                Public room only. Direct messages sent to this web chat will
-                not be seen.
-              </Translate>{" "}
+                Public room only. Direct messages sent to this web chat will not be seen.
+              </Translate>{' '}
               <button type="button" onClick={onOpenInfo}>
                 <Translate id="chat.community.matrixClientCta">
                   Use a Matrix client for more features
@@ -164,22 +164,22 @@ function CommunityTab({ onOpenInfo }: { onOpenInfo: () => void }) {
           </div>
           <RoomTabContent roomId={communityRoom.id} />
         </>
-      ) : status === "error" ? (
+      ) : status === 'error' ? (
         <div
           style={{
             flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
             gap: 12,
           }}
         >
-          <p role="alert" style={{ color: "#ff4b39", fontSize: "0.875rem" }}>
+          <p role="alert" style={{ color: '#ff4b39', fontSize: '0.875rem' }}>
             {error ??
               translate({
-                id: "chat.error.generic",
-                message: "Something went wrong",
+                id: 'chat.error.generic',
+                message: 'Something went wrong',
               })}
           </p>
           <Button variant="outline" size="sm" onClick={retry}>
@@ -190,24 +190,24 @@ function CommunityTab({ onOpenInfo }: { onOpenInfo: () => void }) {
         <div
           style={{
             flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "0 2rem",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '0 2rem',
             maxWidth: 520,
-            margin: "0 auto",
-            textAlign: "center",
+            margin: '0 auto',
+            textAlign: 'center',
           }}
         >
-          {status !== "naming" && (
+          {status !== 'naming' && (
             <Loader2
               className="animate-spin"
               aria-hidden="true"
               style={{
                 width: 48,
                 height: 48,
-                color: "#7db4f4",
+                color: '#7db4f4',
                 marginBottom: 16,
               }}
             />
@@ -215,42 +215,40 @@ function CommunityTab({ onOpenInfo }: { onOpenInfo: () => void }) {
           <div
             role="status"
             aria-live="polite"
-            style={{ fontSize: "1.25rem", marginBottom: 16, color: "#e2e8f0" }}
+            style={{ fontSize: '1.25rem', marginBottom: 16, color: '#e2e8f0' }}
           >
-            {status === "naming"
+            {status === 'naming'
               ? translate({
-                  id: "chat.community.chooseName",
-                  message: "Choose a name to join the chat",
+                  id: 'chat.community.chooseName',
+                  message: 'Choose a name to join the chat',
                 })
               : translate({
-                  id: "chat.community.connecting",
-                  message: "Connecting to the Owncast support chat...",
+                  id: 'chat.community.connecting',
+                  message: 'Connecting to the Owncast support chat...',
                 })}
           </div>
           <p
             style={{
-              color: "#9ca8ba",
-              fontSize: "0.875rem",
+              color: '#9ca8ba',
+              fontSize: '0.875rem',
               lineHeight: 1.6,
               marginBottom: 12,
             }}
           >
             <Translate id="chat.community.description">
-              This is a community chat room where you can ask questions and get
-              help from other Owncast users and contributors.
+              This is a community chat room where you can ask questions and get help from other
+              Owncast users and contributors.
             </Translate>
           </p>
-          <p
-            style={{ color: "#9ca8ba", fontSize: "0.8125rem", lineHeight: 1.6 }}
-          >
+          <p style={{ color: '#9ca8ba', fontSize: '0.8125rem', lineHeight: 1.6 }}>
             <Translate
               id="chat.community.guidelines"
               values={{
                 docsLink: (
-                  <a href="/docs" style={{ color: "#7db4f4" }}>
+                  <a href="/docs" style={{ color: '#7db4f4' }}>
                     {translate({
-                      id: "chat.community.docsLink",
-                      message: "documentation",
+                      id: 'chat.community.docsLink',
+                      message: 'documentation',
                     })}
                   </a>
                 ),
@@ -259,18 +257,18 @@ function CommunityTab({ onOpenInfo }: { onOpenInfo: () => void }) {
                     href="https://github.com/owncast/owncast/issues"
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ color: "#7db4f4" }}
+                    style={{ color: '#7db4f4' }}
                   >
                     {translate({
-                      id: "chat.community.issuesLink",
-                      message: "past issues",
+                      id: 'chat.community.issuesLink',
+                      message: 'past issues',
                     })}
                   </a>
                 ),
               }}
             >
               {
-                "Please be courteous and respectful of others who may be volunteering their time to help. Before asking, consider checking the {docsLink} and {issuesLink} to see if your question has already been answered."
+                'Please be courteous and respectful of others who may be volunteering their time to help. Before asking, consider checking the {docsLink} and {issuesLink} to see if your question has already been answered.'
               }
             </Translate>
           </p>
@@ -280,7 +278,7 @@ function CommunityTab({ onOpenInfo }: { onOpenInfo: () => void }) {
       <DisplayNameDialog
         open={nameDialogOpen}
         currentName={session?.displayName}
-        required={status === "naming"}
+        required={status === 'naming'}
         onSubmit={submitDisplayName}
         onSkip={skipDisplayName}
         onOpenChange={setNameDialogOpen}
@@ -307,10 +305,10 @@ function CommunityTabHeader({
         size="icon"
         onClick={() => onInfoOpenChange(true)}
         aria-label={translate({
-          id: "chat.info.buttonLabel",
-          message: "About this chat",
+          id: 'chat.info.buttonLabel',
+          message: 'About this chat',
         })}
-        style={{ color: "#9ca8ba", width: 28, height: 28 }}
+        style={{ color: '#9ca8ba', width: 28, height: 28 }}
       >
         <Info style={{ width: 16, height: 16 }} aria-hidden="true" />
       </Button>
@@ -320,7 +318,7 @@ function CommunityTabHeader({
           variant="ghost"
           size="sm"
           onClick={() => setNameDialogOpen(true)}
-          style={{ color: "#e2e8f0", gap: 6, fontSize: "0.75rem" }}
+          style={{ color: '#e2e8f0', gap: 6, fontSize: '0.75rem' }}
         >
           {session.displayName}
           <Pencil style={{ width: 12, height: 12 }} />
@@ -335,27 +333,26 @@ function CommunityTabHeader({
             </DialogTitle>
             <DialogDescription>
               <Translate id="chat.info.subtitle">
-                A place to ask questions and get help from the Owncast
-                community.
+                A place to ask questions and get help from the Owncast community.
               </Translate>
             </DialogDescription>
           </DialogHeader>
 
           <div
             style={{
-              color: "#e2e8f0",
-              fontSize: "0.875rem",
+              color: '#e2e8f0',
+              fontSize: '0.875rem',
               lineHeight: 1.6,
-              display: "flex",
-              flexDirection: "column",
+              display: 'flex',
+              flexDirection: 'column',
               gap: 12,
             }}
           >
             <p>
               <Translate id="chat.info.body">
-                This is a community chat room where you can connect with other
-                Owncast users and contributors. Please be courteous and
-                respectful of others who volunteer their time to help.
+                This is a community chat room where you can connect with other Owncast users and
+                contributors. Please be courteous and respectful of others who volunteer their time
+                to help.
               </Translate>
             </p>
             <p>
@@ -363,10 +360,10 @@ function CommunityTabHeader({
                 id="chat.info.checkFirst"
                 values={{
                   docsLink: (
-                    <a href="/docs" style={{ color: "#7db4f4" }}>
+                    <a href="/docs" style={{ color: '#7db4f4' }}>
                       {translate({
-                        id: "chat.info.docsLink",
-                        message: "documentation",
+                        id: 'chat.info.docsLink',
+                        message: 'documentation',
                       })}
                     </a>
                   ),
@@ -375,35 +372,33 @@ function CommunityTabHeader({
                       href="https://github.com/owncast/owncast/issues"
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: "#7db4f4" }}
+                      style={{ color: '#7db4f4' }}
                     >
                       {translate({
-                        id: "chat.info.issuesLink",
-                        message: "past issues",
+                        id: 'chat.info.issuesLink',
+                        message: 'past issues',
                       })}
                     </a>
                   ),
                 }}
               >
                 {
-                  "Before asking, consider checking the {docsLink} and {issuesLink} to see if your question has already been answered."
+                  'Before asking, consider checking the {docsLink} and {issuesLink} to see if your question has already been answered.'
                 }
               </Translate>
             </p>
 
             <div
               style={{
-                borderTop: "1px solid #262e3a",
+                borderTop: '1px solid #262e3a',
                 paddingTop: 12,
                 marginTop: 4,
               }}
             >
               <p style={{ fontWeight: 600, marginBottom: 8 }}>
-                <Translate id="chat.info.matrix.title">
-                  Connect with any Matrix client
-                </Translate>
+                <Translate id="chat.info.matrix.title">Connect with any Matrix client</Translate>
               </p>
-              <p style={{ color: "#9ca8ba" }}>
+              <p style={{ color: '#9ca8ba' }}>
                 <Translate
                   id="chat.info.matrix.description"
                   values={{
@@ -412,7 +407,7 @@ function CommunityTabHeader({
                         href="https://matrix.org"
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ color: "#7db4f4" }}
+                        style={{ color: '#7db4f4' }}
                       >
                         Matrix
                       </a>
@@ -420,7 +415,7 @@ function CommunityTabHeader({
                   }}
                 >
                   {
-                    "This chat is powered by {matrixLink}, an open, decentralized communication protocol. You can join this room using any Matrix client:"
+                    'This chat is powered by {matrixLink}, an open, decentralized communication protocol. You can join this room using any Matrix client:'
                   }
                 </Translate>
               </p>
@@ -428,59 +423,55 @@ function CommunityTabHeader({
                 <div
                   style={{
                     marginTop: 8,
-                    display: "flex",
-                    flexDirection: "column",
+                    display: 'flex',
+                    flexDirection: 'column',
                     gap: 6,
                   }}
                 >
                   <div
                     style={{
-                      backgroundColor: "#12161d",
+                      backgroundColor: '#12161d',
                       borderRadius: 6,
-                      padding: "8px 12px",
-                      fontSize: "0.8125rem",
-                      fontFamily: "monospace",
-                      color: "#e2e8f0",
+                      padding: '8px 12px',
+                      fontSize: '0.8125rem',
+                      fontFamily: 'monospace',
+                      color: '#e2e8f0',
                     }}
                   >
                     {communityRoom.alias}
                   </div>
-                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                     <a
                       href={`https://app.element.io/#/room/${communityRoom.alias}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
-                        display: "inline-flex",
-                        alignItems: "center",
+                        display: 'inline-flex',
+                        alignItems: 'center',
                         gap: 4,
-                        color: "#7db4f4",
-                        fontSize: "0.8125rem",
-                        textDecoration: "none",
+                        color: '#7db4f4',
+                        fontSize: '0.8125rem',
+                        textDecoration: 'none',
                       }}
                     >
                       <ExternalLink style={{ width: 12, height: 12 }} />
-                      <Translate id="chat.info.matrix.openElement">
-                        Open in Element
-                      </Translate>
+                      <Translate id="chat.info.matrix.openElement">Open in Element</Translate>
                     </a>
                     <a
                       href={`https://matrix.to/#/${communityRoom.alias}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
-                        display: "inline-flex",
-                        alignItems: "center",
+                        display: 'inline-flex',
+                        alignItems: 'center',
                         gap: 4,
-                        color: "#7db4f4",
-                        fontSize: "0.8125rem",
-                        textDecoration: "none",
+                        color: '#7db4f4',
+                        fontSize: '0.8125rem',
+                        textDecoration: 'none',
                       }}
                     >
                       <ExternalLink style={{ width: 12, height: 12 }} />
-                      <Translate id="chat.info.matrix.matrixToLink">
-                        matrix.to link
-                      </Translate>
+                      <Translate id="chat.info.matrix.matrixToLink">matrix.to link</Translate>
                     </a>
                   </div>
                 </div>
@@ -511,15 +502,12 @@ function CommunityTabHeaderPortal({
   const [container, setContainer] = React.useState<HTMLElement | null>(null);
 
   React.useEffect(() => {
-    setContainer(document.getElementById("community-header-portal"));
+    setContainer(document.getElementById('community-header-portal'));
   }, []);
 
   if (!container) return null;
   return ReactDOM.createPortal(
-    <CommunityTabHeader
-      infoOpen={infoOpen}
-      onInfoOpenChange={onInfoOpenChange}
-    />,
+    <CommunityTabHeader infoOpen={infoOpen} onInfoOpenChange={onInfoOpenChange} />,
     container,
   );
 }
@@ -529,7 +517,7 @@ function CommunityTabHeaderPortal({
 // ---------------------------------------------------------------------------
 
 export default function ChatPage(): JSX.Element {
-  const [activeTab, setActiveTab] = React.useState("ai");
+  const [activeTab, setActiveTab] = React.useState('ai');
   const [communityMounted, setCommunityMounted] = React.useState(false);
   const [communityInfoOpen, setCommunityInfoOpen] = React.useState(false);
 
@@ -539,65 +527,63 @@ export default function ChatPage(): JSX.Element {
   const handleTabChange = React.useCallback(
     (tab: string) => {
       setActiveTab(tab);
-      if (tab === "community" && !communityMounted) {
+      if (tab === 'community' && !communityMounted) {
         setCommunityMounted(true);
       }
       // Keep the URL shareable so /chat?tab=community deep-links straight here.
-      if (typeof window !== "undefined") {
+      if (typeof window !== 'undefined') {
         const url =
-          tab === "community"
+          tab === 'community'
             ? `${window.location.pathname}?tab=community`
             : window.location.pathname;
-        window.history.replaceState(null, "", url);
+        window.history.replaceState(null, '', url);
       }
     },
     [communityMounted],
   );
 
   const switchToCommunity = React.useCallback(() => {
-    handleTabChange("community");
+    handleTabChange('community');
   }, [handleTabChange]);
 
   // Honor a deep link to the community tab: /chat#community or
   // /chat?tab=community. Runs once on mount (server render always starts on the
   // AI tab, so this avoids a hydration mismatch).
   React.useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
     const params = new URLSearchParams(window.location.search);
-    if (
-      window.location.hash === "#community" ||
-      params.get("tab") === "community"
-    ) {
-      handleTabChange("community");
+    if (window.location.hash === '#community' || params.get('tab') === 'community') {
+      handleTabChange('community');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <Layout
-      title="Chat"
-      description="Chat with the Owncast community and get support."
-      noFooter
-    >
+    <Layout title="Chat" description="Chat with the Owncast community and get support." noFooter>
       <main
         style={{
-          display: "flex",
-          flexDirection: "column",
-          height: "calc(100dvh - var(--ifm-navbar-height))",
-          overflow: "hidden",
+          display: 'flex',
+          flexDirection: 'column',
+          // Fill the space the shell leaves us. html[data-chat-page] above pins
+          // #__docusaurus to the viewport, so this percentage is definite and
+          // the panes below clamp instead of growing. A viewport calc would
+          // also have to subtract the announcement bar, whose CSS variable
+          // stays at 30px even after the bar is dismissed.
+          height: '100%',
+          overflow: 'hidden',
           minHeight: 0,
         }}
       >
         <div
           data-chat-container
           style={{
-            display: "flex",
-            flexDirection: "column",
-            height: "100%",
-            width: "100%",
-            backgroundColor: "#12161d",
-            color: "#e2e8f0",
-            overflow: "hidden",
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            width: '100%',
+            backgroundColor: '#12161d',
+            color: '#e2e8f0',
+            overflow: 'hidden',
             minHeight: 0,
           }}
         >
@@ -609,12 +595,12 @@ export default function ChatPage(): JSX.Element {
             {/* Header */}
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: "8px 16px",
-                backgroundColor: "#2D3748",
-                borderBottom: "1px solid #262e3a",
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '8px 16px',
+                backgroundColor: '#2D3748',
+                borderBottom: '1px solid #262e3a',
                 flexShrink: 0,
               }}
             >
@@ -625,14 +611,12 @@ export default function ChatPage(): JSX.Element {
                 </TabsTrigger>
                 <TabsTrigger value="community" className="gap-1.5">
                   <MessageCircle className="h-4 w-4" />
-                  <Translate id="chat.tab.community">
-                    Chat with the Community
-                  </Translate>
+                  <Translate id="chat.tab.community">Chat with the Community</Translate>
                 </TabsTrigger>
               </TabsList>
 
               <div
-                style={{ display: "flex", alignItems: "center", gap: 12 }}
+                style={{ display: 'flex', alignItems: 'center', gap: 12 }}
                 id="community-header-portal"
               />
             </div>
@@ -649,7 +633,7 @@ export default function ChatPage(): JSX.Element {
             {/* Community tab — single provider wraps header + content */}
             {communityMounted ? (
               <MatrixClientProvider config={CHAT_CONFIG}>
-                {activeTab === "community" && (
+                {activeTab === 'community' && (
                   <CommunityTabHeaderPortal
                     infoOpen={communityInfoOpen}
                     onInfoOpenChange={setCommunityInfoOpen}
@@ -660,9 +644,7 @@ export default function ChatPage(): JSX.Element {
                   className="mt-0 flex min-h-0 flex-1 flex-col overflow-hidden data-[state=inactive]:hidden"
                   forceMount
                 >
-                  <CommunityTab
-                    onOpenInfo={() => setCommunityInfoOpen(true)}
-                  />
+                  <CommunityTab onOpenInfo={() => setCommunityInfoOpen(true)} />
                 </TabsContent>
               </MatrixClientProvider>
             ) : (
