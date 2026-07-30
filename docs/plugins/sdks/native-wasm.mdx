@@ -174,13 +174,13 @@ Owncast sets reserved Extism config values before calling the plugin:
 
 | Key | Native WebAssembly value |
 | --- | --- |
-| `manifest` | The packaged `plugin.manifest.json`, unchanged. |
+| `manifest` | The manifest Owncast loaded, unchanged. |
 | `__slug` | The canonical slug resolved by Owncast. Use this when the plugin needs its identity. |
 | `script` | Not set. The WebAssembly module is already the plugin code. |
 
 Read `manifest` in `register` and return that JSON. Do not compile a second copy of the manifest into the module. The packaged manifest is what the administrator reviewed and what Owncast loaded, so returning it prevents two copies from drifting apart.
 
-A language SDK derives subscriptions and commands from registered handlers. A native module has no SDK to do that work, so declare `subscriptions` and `commands` in `plugin.manifest.json`. Returning the injected manifest from `register` reports those declarations to Owncast.
+A language SDK derives subscriptions and commands from registered handlers. A native module has no SDK to do that work, so declare any `subscriptions` and `commands` entries it needs in `plugin.manifest.json`. Returning the injected manifest from `register` reports those declarations to Owncast.
 
 A minimal manifest shared by all three examples is:
 
@@ -247,4 +247,4 @@ Use `--load-only` when the plugin has no scenario files:
 ./tools/owncast-plugin-test --load-only path/to/my-plugin
 ```
 
-The load check calls `register`, compares the returned identity and permissions with the packaged manifest, validates permission-carrying subscriptions, and instantiates the real host imports. Fix any load failure before creating the `.ocpkg`.
+The load check calls `register`, compares the returned identity and permissions with the manifest, validates permission-carrying subscriptions, and instantiates the same host-function surface with test implementations. Fix any load failure before creating the `.ocpkg`.
