@@ -37,11 +37,19 @@ owncast-plugin-py package my-plugin
 ```
 
 </TabItem>
+<TabItem value="wasm" label="Native WebAssembly">
+
+Use your language toolchain to compile the module, then package it as a ZIP with
+the canonical `plugin.wasm` filename. The
+[Native WebAssembly guide](/docs/plugins/sdks/native-wasm) includes build
+commands for Rust, TinyGo, and AssemblyScript.
+
+</TabItem>
 </Tabs>
 
-Either way, the build bundles your plugin together with your `public/` and `assets/` directories into a single `<your-slug>.ocpkg` at the project root.
+The resulting `<your-slug>.ocpkg` contains the manifest and runnable code. It can also include the plugin's `public/` and `assets/` directories.
 
-Before writing the archive, both SDKs run your built plugin through `owncast-plugin-test --load-only`: the same install-time load path a real server runs, covering `register()`, manifest-runtime agreement, and permission-gated subscriptions. Packaging fails if a real Owncast server would refuse to load the plugin, for example a fediverse handler without `fediverse.inbound` declared. The check needs the host test binary, which the JS SDK fetches during `npm install` and the Python SDK downloads on first use.
+The JavaScript and Python packagers run the built plugin through `owncast-plugin-test --load-only` before writing the archive. This uses the same install-time load path as a real server, covering `register()`, manifest and runtime agreement, and permission-gated subscriptions. Native WebAssembly authors run `owncast-plugin-test` directly before packaging. See [Native WebAssembly: Test before installing](/docs/plugins/sdks/native-wasm#test-before-installing).
 
 The file is self-contained. Share it however you like:
 
@@ -86,14 +94,28 @@ The file is admin-facing, so write it for the streamer who installed your plugin
 
 ## What's inside a `.ocpkg`
 
-- Your `plugin.manifest.json`
-- Your plugin code
+- `plugin.manifest.json`
+- One code entry: `plugin.js`, `plugin.py`, or `plugin.wasm`
 - `icon.png` if you provided one
 - `INSTRUCTIONS.md` if you provided one
 - The contents of your `public/` directory if you have one (web-served at `/plugins/<slug>/`)
 - The contents of your `assets/` directory if you have one (host-read for manifest fields that inline content)
 
-No build inputs: `node_modules`, `package.json`, `pyproject.toml`, or your `.js`/`.ts`/`.py` source. Those produce the package. They aren't shipped in it. The admin who installs your plugin never sees them.
+The code filename selects the runtime. A native module must be named `plugin.wasm` inside the archive, regardless of the plugin slug.
+
+Build inputs such as `node_modules`, `package.json`, `pyproject.toml`, `Cargo.toml`, and uncompiled source do not belong in the package. They produce the code entry that the server runs.
+
+## Loose native WebAssembly files
+
+During development, a native module can be installed without creating an `.ocpkg`. Copy the module and manifest into `data/plugins/` with the same basename:
+
+```text
+data/plugins/
+├── my-plugin.wasm
+└── my-plugin.manifest.json
+```
+
+Owncast scans for the `.wasm` file and reads the matching `.manifest.json`. The packaged `.ocpkg` format is still recommended for distribution because it keeps the code, manifest, and optional assets together.
 
 ## Installing on a server
 
@@ -181,4 +203,4 @@ In the directory's Browse view your plugin shows its name, author, description, 
 
 - [Manifest reference](/docs/plugins/manifest) for the full list of manifest fields.
 - [Permissions](/docs/plugins/permissions) for the trust model and the full permission list.
-- Example plugins: [examples/js](https://github.com/owncast/plugin-sdk/tree/main/examples/js) · [examples/python](https://github.com/owncast/plugin-sdk/tree/main/examples/python).
+- Example plugins: [JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js) · [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python) · [Native WebAssembly](https://github.com/owncast/plugin-sdk/tree/main/examples/wasm).

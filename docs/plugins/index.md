@@ -20,7 +20,7 @@ Owncast can be extended with **plugins**: small programs that the server loads a
 Plugins are brand-new functionality, introduced in Owncast 0.3.0, and the API is still evolving. If you hit a bug or have a suggestion, please [open an issue](https://github.com/owncast/plugin-sdk/issues) or [chat live with the community](/chat?tab=community).
 :::
 
-You can write a plugin in **JavaScript** or **Python**. The two SDKs are first-class peers with full feature parity: the handlers, APIs, permissions, and manifest in this section apply to both, and only the scaffolding and language syntax differ.
+You can write a plugin with the JavaScript SDK, the Python SDK, or as a native WebAssembly module. The two SDKs are the recommended paths for most plugins. Native WebAssembly is an advanced option for compiled languages and direct access to the plugin wire protocol.
 
 ## What you can build
 
@@ -33,14 +33,15 @@ You can write a plugin in **JavaScript** or **Python**. The two SDKs are first-c
 
 Every example plugin in the SDK is a complete starting point you can copy.
 
-## Two SDKs
+## Choose an authoring path
 
-Both SDKs produce the same `.ocpkg`, run sandboxed in the server, and package to roughly the same size. Pick the language you would rather write.
+All three paths produce the same `.ocpkg` format and use the same manifest, permissions, events, and Owncast APIs.
 
-- **[JavaScript](/docs/plugins/sdks/javascript)** with [`@owncast/plugin-sdk`](https://www.npmjs.com/package/@owncast/plugin-sdk). Scaffold with `npx create-owncast-plugin`, write `definePlugin({ ... })`, build with `npm run package`.
-- **[Python](/docs/plugins/sdks/python)** with [`owncast-plugin-py`](https://pypi.org/project/owncast-plugin-py/). Scaffold with `uvx owncast-plugin-py new`, write decorated functions, build with `owncast-plugin-py package`.
+- **[JavaScript](/docs/plugins/sdks/javascript)** with [`@owncast/plugin-sdk`](https://www.npmjs.com/package/@owncast/plugin-sdk). Scaffold with `npx create-owncast-plugin`, write `definePlugin({ ... })`, and build with `npm run package`.
+- **[Python](/docs/plugins/sdks/python)** with [`owncast-plugin-py`](https://pypi.org/project/owncast-plugin-py/). Scaffold with `uvx owncast-plugin-py new`, write decorated functions, and build with `owncast-plugin-py package`.
+- **[Native WebAssembly](/docs/plugins/sdks/native-wasm)** with Rust, TinyGo, AssemblyScript, Zig, or another compiled language. Implement the wire protocol directly and package the compiled module as `plugin.wasm`.
 
-The same echo bot in each:
+The same echo bot in each SDK:
 
 ```js
 // JavaScript
@@ -71,7 +72,7 @@ flowchart LR
     subgraph Dev[Development]
         direction TB
         Source["your plugin source<br/>plugin.manifest.json<br/>public/<br/>assets/"]
-        Build["package with your SDK"]
+        Build["build and package"]
         Pkg["my-plugin.ocpkg"]
         Source --> Build --> Pkg
     end
@@ -89,7 +90,7 @@ flowchart LR
 
 Once enabled, the plugin runs inside the Owncast process. Handlers you defined fire when matching events happen. APIs you call (sending chat, reading config, fetching URLs) go through the host, which checks the permissions you declared in your manifest.
 
-Each enabled plugin uses a little more of the server's memory. The first plugin of a language also loads that language's shared runtime, a one-time cost that is larger for Python than for JavaScript. Every plugin after that adds only a small amount on top.
+Each enabled plugin uses more server memory. JavaScript and Python share one runtime per language, so the first plugin in either language has a larger one-time cost. A native WebAssembly plugin loads its own compiled module instead of a shared language runtime.
 
 ## What a plugin can do
 
@@ -114,7 +115,7 @@ This is why an admin can install a third-party plugin without auditing every lin
 ## Where to go next
 
 - [Quickstart](/docs/plugins/quickstart). Scaffold a new plugin, build it, install it.
-- [JavaScript](/docs/plugins/sdks/javascript) and [Python](/docs/plugins/sdks/python). The language-specific setup, CLI, and syntax for each SDK.
+- [JavaScript](/docs/plugins/sdks/javascript), [Python](/docs/plugins/sdks/python), and [Native WebAssembly](/docs/plugins/sdks/native-wasm). Choose a language and build path.
 - [Manifest reference](/docs/plugins/manifest). Every field your `plugin.manifest.json` can contain.
 - [Chat plugins](/docs/plugins/chat). Build bots, moderation tools, and chat filters.
 - [Events](/docs/plugins/events). Every event your plugin can subscribe to, with payload shapes.
@@ -128,4 +129,4 @@ This is why an admin can install a third-party plugin without auditing every lin
 ## Source
 
 - SDK source: [github.com/owncast/plugin-sdk](https://github.com/owncast/plugin-sdk)
-- Example plugins, one per feature: [JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js) · [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python)
+- Example plugins: [JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js) · [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python) · [Native WebAssembly](https://github.com/owncast/plugin-sdk/tree/main/examples/wasm)
