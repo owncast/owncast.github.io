@@ -137,9 +137,17 @@ Grants `owncast.storage.upload(name, bytes)`: upload a file to Owncast's public 
 
 ### `storage.fs`
 
-Grants `owncast.fs.*`: a private, sandboxed filesystem at `data/plugin-data/<your-slug>/` that your plugin can read, write, list, and delete within. Useful for caches, generated data files, append-style logs, or anything you need to persist as real files rather than key/value strings.
+Grants `owncast.fs.*`: a private, sandboxed filesystem at `data/plugin-storage/<your-slug>/files/` that your plugin can read, write, list, and delete within. Useful for caches, generated data files, append-style logs, or anything you need to persist as real files rather than key/value strings.
 
 Unlike `storage.upload`, these files stay **server-side**: they're never served over HTTP. Every path is confined to your plugin's own directory: a plugin cannot read another plugin's files or escape its sandbox (`../` and absolute paths are collapsed back inside).
+
+### `storage.sql`
+
+Grants `owncast.sql.*`: one private SQLite database per plugin, at `data/plugin-storage/<your-slug>/db/plugin.db`. `owncast.sql.exec(sql, params?)` runs statements, `owncast.sql.query(sql, params?)` returns matching rows, and `owncast.sql.queryRow(sql, params?)` reads a single row. Reach for this instead of `storage.kv` when you need to sort, filter, or aggregate rather than just remember a value. See [`owncast.sql.*`](/docs/plugins/apis#owncastsql) for the methods in both languages, the per-call limits, and the SQL the host refuses.
+
+The database is private to your plugin and separate from Owncast's own database. The `storage.fs` sandbox is rooted at `files/`, so `db/` is not a path `owncast.fs.*` refuses but one it **cannot express**, and the filesystem quota walk covers `files/` only, so the two quotas stay independent: the database has its own 128 MiB cap, and files written through `storage.fs` count against a separate 256 MiB quota.
+
+Plugin databases are **not** included in Owncast's database backups, so treat the contents as rebuildable or export what matters yourself. SQL data is retained when a plugin is uninstalled, the same as its config and its `storage.fs` files, so a reinstall finds its tables where it left them. An admin who wants the space back deletes `data/plugin-storage/<your-slug>/`.
 
 ### `network.fetch`
 
@@ -252,7 +260,8 @@ None of the four viewer-injection fields require `http.serve`, and neither do th
 | `auth.gate`          | `owncast.auth.grantSession`, `.endSession`, and the `onAuthCheck` handler: be the site's auth gate                             |
 | `storage.kv`         | Per-plugin namespaced key/value store                                                                                          |
 | `storage.upload`     | Upload files to Owncast's public file area                                                                                     |
-| `storage.fs`         | Private, sandboxed server-side filesystem at `data/plugin-data/<your-slug>/`                                                   |
+| `storage.fs`         | Private, sandboxed server-side filesystem at `data/plugin-storage/<your-slug>/files/`                                          |
+| `storage.sql`        | Private per-plugin SQLite database at `data/plugin-storage/<your-slug>/db/plugin.db`                                           |
 | `network.fetch`      | Outbound HTTP. Also requires `network.allowedHosts`                                                                            |
 | `events.emit`        | Emit custom events for other plugins                                                                                           |
 | `http.serve`         | Serve HTTP at `/plugins/<your-slug>/*`                                                                                         |
