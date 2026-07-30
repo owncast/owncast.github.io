@@ -1,0 +1,250 @@
+---
+title: Native WebAssembly
+description: Build an Owncast plugin as a self-contained WebAssembly module with Rust, TinyGo, AssemblyScript, Zig, or another compiled language.
+sidebar_position: 4
+sidebar_label: Native WebAssembly
+toc_min_heading_level: 2
+toc_max_heading_level: 3
+tags:
+  - plugins
+  - webassembly
+  - wasm
+  - rust
+  - tinygo
+  - assemblyscript
+  - advanced
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+A native WebAssembly plugin is a self-contained module that implements the Owncast plugin wire protocol directly. It does not use the JavaScript or Python SDK and it does not run on their shared language engines.
+
+Use this path when you need a compiled language, want to reuse an existing library, or need direct control over the WebAssembly interface. For most plugins, the [JavaScript SDK](/docs/plugins/sdks/javascript) or [Python SDK](/docs/plugins/sdks/python) requires less code and tooling.
+
+## Choose a language and Extism PDK
+
+Any language that can produce an Extism-compatible WebAssembly module can be used.
+
+| Language | Extism PDK | Build target |
+| --- | --- | --- |
+| Rust | [`extism-pdk`](https://github.com/extism/rust-pdk) | `wasm32-unknown-unknown` |
+| TinyGo | [`go-pdk`](https://github.com/extism/go-pdk) | `wasip1` with `-buildmode=c-shared` |
+| AssemblyScript | [`@extism/as-pdk`](https://www.npmjs.com/package/@extism/as-pdk) | WebAssembly through `asc` |
+| Zig and others | [Extism PDKs](https://extism.org/docs/concepts/pdk) | Depends on the language |
+
+The examples below implement the smallest valid Owncast plugin. Each exports `register`, reads the packaged manifest that Owncast injected, and returns it unchanged. They intentionally register no events or commands.
+
+<Tabs groupId="native-wasm-language">
+<TabItem value="rust" label="Rust" default>
+
+Add `extism-pdk` to a library crate that builds as `cdylib`:
+
+```toml title="Cargo.toml"
+[package]
+name = "my-plugin"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+extism-pdk = "1"
+```
+
+```rust title="src/lib.rs"
+use extism_pdk::*;
+
+#[plugin_fn]
+pub fn register() -> FnResult<String> {
+    Ok(config::get("manifest")?
+        .ok_or_else(|| Error::msg("Owncast did not inject the plugin manifest"))?)
+}
+```
+
+Build it:
+
+```sh
+rustup target add wasm32-unknown-unknown
+cargo build --release --target wasm32-unknown-unknown
+cp target/wasm32-unknown-unknown/release/my_plugin.wasm my-plugin.wasm
+```
+
+The plugin SDK repository also contains a [complete Rust example](https://github.com/owncast/plugin-sdk/tree/main/examples/wasm/hello-wasm) that receives a chat event and calls an Owncast host function.
+
+</TabItem>
+<TabItem value="tinygo" label="TinyGo">
+
+Create a module and add the Extism Go PDK:
+
+```sh
+go mod init example.com/my-plugin
+go get github.com/extism/go-pdk@v1.1.3
+```
+
+```go title="main.go"
+package main
+
+import "github.com/extism/go-pdk"
+
+//go:wasmexport register
+func register() int32 {
+	manifest, ok := pdk.GetConfig("manifest")
+	if !ok {
+		pdk.SetErrorString("Owncast did not inject the plugin manifest")
+		return 1
+	}
+	pdk.OutputString(manifest)
+	return 0
+}
+
+func main() {}
+```
+
+Build it with TinyGo 0.34.0 or newer:
+
+```sh
+tinygo build -o my-plugin.wasm -target wasip1 -buildmode=c-shared main.go
+```
+
+The `c-shared` build mode creates a reactor module, so Owncast can call `register` without running the module as a command.
+
+</TabItem>
+<TabItem value="assemblyscript" label="AssemblyScript">
+
+Install AssemblyScript and its Extism PDK:
+
+```sh
+npm init -y
+npm install @extism/as-pdk@1.0.0
+npm install --save-dev assemblyscript@0.27.31
+mkdir -p assembly
+```
+
+```ts title="assembly/index.ts"
+import { Config, Host } from '@extism/as-pdk';
+
+export function myAbort(
+  _message: string | null,
+  _fileName: string | null,
+  _lineNumber: u32,
+  _columnNumber: u32,
+): void {}
+
+export function register(): i32 {
+  const manifest = Config.get('manifest');
+  if (manifest === null) {
+    return 1;
+  }
+  Host.outputString(manifest);
+  return 0;
+}
+```
+
+Build it:
+
+```sh
+npx asc assembly/index.ts \
+  --outFile my-plugin.wasm \
+  --use abort=assembly/index/myAbort
+```
+
+The custom `myAbort` export keeps the module from importing AssemblyScript's default abort handler, which the Owncast host does not provide.
+
+</TabItem>
+</Tabs>
+
+## Implement the Owncast wire protocol
+
+Every native plugin must export `register`. Export the other entry points your plugin uses, such as `on_event`, `on_filter`, or `on_http_request`. Declare Owncast host functions as imports from the `extism:host/user` module. Your language's Extism PDK handles memory shared with those imports.
+
+The [Owncast wire protocol](https://github.com/owncast/plugin-sdk/blob/main/docs/WIRE_PROTOCOL.md) is the source of truth for:
+
+- Plugin exports and their input and output shapes.
+- Owncast host imports and their required permissions.
+- Event envelopes, filter results, and HTTP request responses.
+- Timeouts and size limits.
+
+Native modules use the same manifest, events, host functions, and permission checks as JavaScript and Python plugins. They only replace the language SDK layer.
+
+## Read the packaged manifest
+
+Owncast sets reserved Extism config values before calling the plugin:
+
+| Key | Native WebAssembly value |
+| --- | --- |
+| `manifest` | The packaged `plugin.manifest.json`, unchanged. |
+| `__slug` | The canonical slug resolved by Owncast. Use this when the plugin needs its identity. |
+| `script` | Not set. The WebAssembly module is already the plugin code. |
+
+Read `manifest` in `register` and return that JSON. Do not compile a second copy of the manifest into the module. The packaged manifest is what the administrator reviewed and what Owncast loaded, so returning it prevents two copies from drifting apart.
+
+A language SDK derives subscriptions and commands from registered handlers. A native module has no SDK to do that work, so declare `subscriptions` and `commands` in `plugin.manifest.json`. Returning the injected manifest from `register` reports those declarations to Owncast.
+
+A minimal manifest shared by all three examples is:
+
+```json title="plugin.manifest.json"
+{
+  "api": "1",
+  "name": "My Plugin",
+  "slug": "my-plugin",
+  "version": "0.1.0"
+}
+```
+
+## Package the module
+
+For loose installation and local testing, place the compiled module beside its project manifest:
+
+```text
+my-plugin.wasm
+plugin.manifest.json
+```
+
+For a loose installation in Owncast's `data/plugins/` directory, rename the manifest so both files have the same basename:
+
+```text
+my-plugin.wasm
+my-plugin.manifest.json
+```
+
+For an installable `.ocpkg`, create a ZIP archive with canonical names:
+
+```text
+my-plugin.ocpkg
+├── plugin.manifest.json
+├── plugin.wasm
+├── icon.png               optional
+├── INSTRUCTIONS.md        optional
+├── public/                optional, web-served files
+└── assets/                optional, host-read files
+```
+
+The module inside the archive must be named `plugin.wasm`, regardless of the plugin slug. Owncast uses that filename to select the native WebAssembly runtime.
+
+See [Packaging and publishing](/docs/plugins/packaging) for installation, updates, icons, instructions, and the public plugin directory.
+
+## Test before installing
+
+Clone the plugin SDK repository and build `owncast-plugin-test` once:
+
+```sh
+git clone https://github.com/owncast/plugin-sdk.git
+cd plugin-sdk
+./tools/bootstrap.sh
+```
+
+Run it against the directory containing `<slug>.wasm`, `plugin.manifest.json`, and any scenarios:
+
+```sh
+./tools/owncast-plugin-test path/to/my-plugin
+```
+
+Use `--load-only` when the plugin has no scenario files:
+
+```sh
+./tools/owncast-plugin-test --load-only path/to/my-plugin
+```
+
+The load check calls `register`, compares the returned identity and permissions with the packaged manifest, validates permission-carrying subscriptions, and instantiates the real host imports. Fix any load failure before creating the `.ocpkg`.
