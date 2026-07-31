@@ -6,7 +6,6 @@ sidebar_label: Google TV
 
 deviceId: google-tv
 deviceType: smart-tv
-reliability: high
 hide_title: true
 tags:
   - google-tv
@@ -20,10 +19,10 @@ description: >
 icon: /images/devices/google-tv.svg
 ---
 
-import DeviceLayout from "@site/src/components/tv/DeviceLayout";
-import { DeviceOptionsGrid } from "@site/src/components/tv/DeviceOptionsGrid";
-import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
-import StoreButton from "@site/src/components/StoreButton";
+import DeviceLayout from '@site/src/components/tv/DeviceLayout';
+import { DeviceOptionsGrid } from '@site/src/components/tv/DeviceOptionsGrid';
+import { DeviceOptionCard } from '@site/src/components/tv/DeviceOptionCard';
+import StoreButton from '@site/src/components/StoreButton';
 
 <DeviceLayout>
 
@@ -34,9 +33,8 @@ import StoreButton from "@site/src/components/StoreButton";
     title="VLC for Android TV"
     badge="Recommended"
     difficulty="easy"
-    reliability="high"
-    screenshot="/images/devices/google-tv/vlc-streams.png"
-    screenshotAlt="VLC for Android TV streams interface"
+    screenshot="/images/devices/google-tv/vlc-android-tv.jpg"
+    screenshotAlt="VLC for Android TV playback interface"
     summary="Use VLC from the Google Play Store to play Owncast streams on your Google TV."
   >
     <ul>
@@ -49,9 +47,9 @@ import StoreButton from "@site/src/components/StoreButton";
       <summary>Show step-by-step instructions</summary>
 
       1. Install VLC from the Google Play store.
-      2. Select **"Streams"** from the **"Browsing"** section.
+      2. Select **Streams** from the **Browsing** row.
       3. Enter the stream URL. The direct HLS form is the most reliable, for example `https://watch.owncast.online/hls/stream.m3u8`.
-      4. Select **"Next"**.
+      4. Select the send arrow next to the field to start playback.
 
     </details>
 

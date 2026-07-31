@@ -6,7 +6,6 @@ sidebar_label: Apple TV
 
 deviceId: apple-tv # used for anchors / grids if you want
 deviceType: streaming-box # streaming-box | smart-tv | console | casting | other
-reliability: high # high | medium | low
 hide_title: true
 tags:
   - airplay
@@ -37,9 +36,8 @@ import StoreButton from "@site/src/components/StoreButton";
     title="Owncasts for tvOS"
     badge="Recommended"
     difficulty="easy"
-    reliability="high"
     screenshot="/images/devices/apple-tv/owncasts-tvos-home.png"
-    screenshotAlt="Owncasts for tvOS home screen"
+    screenshotAlt="Owncasts app directory screen"
     summary="Use the native Owncasts for tvOS app to browse the Owncast directory or connect directly to your own server."
   >
     <ul>
@@ -49,7 +47,7 @@ import StoreButton from "@site/src/components/StoreButton";
     </ul>
 
     <StoreButton
-      url="https://apps.apple.com/app/owncasts/id1669506909"
+      url="https://apps.apple.com/us/app/owncasts/id6451178968"
       type="tvos"
     />
 
@@ -70,9 +68,8 @@ import StoreButton from "@site/src/components/StoreButton";
     id="vlc-tvos"
     title="VLC for tvOS"
     difficulty="medium"
-    reliability="high"
-    screenshot="/images/devices/apple-tv/vlc-network-stream.png"
-    screenshotAlt="VLC for tvOS network stream screen"
+    screenshot="/images/devices/apple-tv/vlc-playback.jpg"
+    screenshotAlt="VLC playback screen"
     summary="Use VLC to open your Owncast URL directly as a network stream."
   >
     <ul>
@@ -85,8 +82,8 @@ import StoreButton from "@site/src/components/StoreButton";
 
       1. Install **VLC** from the tvOS App Store.
       2. Open VLC and navigate to **Network Stream**.
-      3. Enter your Owncast URL. The direct HLS form is the most reliable, for example `https://watch.yourserver.tld/hls/stream.m3u8`.
-      4. Select the stream and start playback.
+      3. Type your Owncast URL into the **Enter URL to play** field. The direct HLS form is the most reliable, for example `https://watch.yourserver.tld/hls/stream.m3u8`.
+      4. Submit the field to start playback. VLC keeps recent stream URLs on this screen so you can pick the stream again later.
 
     </details>
 
@@ -101,9 +98,8 @@ import StoreButton from "@site/src/components/StoreButton";
     id="airplay-ios"
     title="AirPlay from iPhone or iPad"
     difficulty="easy"
-    reliability="high"
-    screenshot="/images/devices/apple-tv/airplay-control-center.png"
-    screenshotAlt="iOS Control Center with AirPlay target"
+    screenshot="/images/devices/iphone-ipad/airplay-tv.png"
+    screenshotAlt="AirPlay device selection screen"
     summary="Play the Owncast stream on your iPhone/iPad and AirPlay to your Apple TV."
   >
     <ul>
@@ -127,7 +123,6 @@ import StoreButton from "@site/src/components/StoreButton";
     id="airplay-mac"
     title="AirPlay from Mac"
     difficulty="medium"
-    reliability="high"
     summary="Play the Owncast stream on your Mac and mirror or AirPlay the video to Apple TV."
   >
     <ul>
@@ -151,7 +146,6 @@ import StoreButton from "@site/src/components/StoreButton";
     id="iplaytv-tvos"
     title="iPlayTV for tvOS"
     difficulty="medium"
-    reliability="medium"
     screenshot="/images/devices/apple-tv/iplaytv-interface.png"
     screenshotAlt="iPlayTV for tvOS IPTV interface"
     summary="Use iPlayTV to browse the Owncast directory via IPTV playlist on your Apple TV."
@@ -159,17 +153,17 @@ import StoreButton from "@site/src/components/StoreButton";
     <ul>
       <li>Browse the entire Owncast directory directly on your TV.</li>
       <li>IPTV playlist support for directory integration.</li>
-      <li>Automatic refresh of live streams.</li>
+      <li>Reload the playlist to pick up the streams that are live now.</li>
     </ul>
 
     <details>
       <summary>Show step-by-step instructions</summary>
 
       1. Install **iPlayTV** from the tvOS App Store.
-      2. Visit Settings → Edit.
-      3. For the `M3U` Playlist URL: `https://owncast.directory/api/iptv`
-      4. Change the `Channels Refresh` to the lowest value it offers.
-      5. Save and browse available Owncast streams.
+      2. Open iPlayTV and choose **Add Playlist**.
+      3. Choose the remote M3U link option and enter the directory playlist URL: `https://owncast.directory/api/iptv`
+      4. Give the playlist a name and save it.
+      5. Open the playlist and browse the available Owncast streams.
 
     </details>
 

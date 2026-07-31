@@ -212,6 +212,7 @@ const sidebars: SidebarsConfig = {
         "watching-streams/devices-apple-tv",
         "watching-streams/devices-chromecast",
         "watching-streams/devices-google-tv",
+        "watching-streams/devices-android",
         "watching-streams/devices-iphone-ipad",
         "watching-streams/devices-kodi",
         "watching-streams/devices-lg-webos",

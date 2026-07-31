@@ -1,13 +1,12 @@
-import React from "react";
-import useBaseUrl from "@docusaurus/useBaseUrl";
-import styles from "./DeviceOptions.module.css";
+import React from 'react';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import styles from './DeviceOptions.module.css';
 
 interface DeviceOptionCardProps {
   id?: string;
   title: string;
   badge?: string; // e.g. "Recommended", "Advanced"
-  difficulty?: "easy" | "medium" | "hard";
-  reliability?: "high" | "medium" | "low";
+  difficulty?: 'easy' | 'medium' | 'hard';
   screenshot?: string; // image path
   screenshotAlt?: string;
   summary?: string; // 1–2 sentence summary
@@ -15,15 +14,9 @@ interface DeviceOptionCardProps {
 }
 
 const difficultyLabels: Record<string, string> = {
-  easy: "Easy",
-  medium: "Intermediate",
-  hard: "Advanced",
-};
-
-const reliabilityLabels: Record<string, string> = {
-  high: "Very reliable",
-  medium: "Generally works",
-  low: "Limited / experimental",
+  easy: 'Easy',
+  medium: 'Intermediate',
+  hard: 'Advanced',
 };
 
 export function DeviceOptionCard({
@@ -31,7 +24,6 @@ export function DeviceOptionCard({
   title,
   badge,
   difficulty,
-  reliability,
   screenshot,
   screenshotAlt,
   summary,
@@ -47,14 +39,7 @@ export function DeviceOptionCard({
 
         <div className={styles.metaRow}>
           {difficulty && (
-            <span className={styles.metaChip}>
-              {difficultyLabels[difficulty] ?? difficulty}
-            </span>
-          )}
-          {reliability && (
-            <span className={styles.metaChipSecondary}>
-              {reliabilityLabels[reliability] ?? reliability}
-            </span>
+            <span className={styles.metaChip}>{difficultyLabels[difficulty] ?? difficulty}</span>
           )}
         </div>
 
