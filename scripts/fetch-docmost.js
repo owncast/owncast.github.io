@@ -270,6 +270,7 @@ function emitDocusaurus(manifest, spaceSlug) {
       '---',
       `title: ${JSON.stringify(p.title)}`,
       `slug: /${slug}`, // relative to the dev docs routeBasePath (/dev-docs)
+      'displayed_sidebar: devSidebar',
       p.labels.length ? `tags: [${p.labels.map(l => JSON.stringify(l)).join(', ')}]` : null,
       `custom_edit_url: ${JSON.stringify(docmostUrl)}`,
       '---',

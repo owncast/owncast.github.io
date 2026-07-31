@@ -595,6 +595,7 @@ const config: Config = {
         routeBasePath: 'dev-docs',
         path: 'dev-docs',
         sidebarPath: './sidebarsDev.ts',
+        breadcrumbs: true,
       },
     ],
     [
