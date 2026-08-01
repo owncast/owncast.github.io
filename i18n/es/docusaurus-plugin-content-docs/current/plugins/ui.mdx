@@ -31,9 +31,9 @@ Los complementos pueden registrar páginas que aparecen dentro de la interfaz de
 {
   "permissions": ["http.serve"],
   "admin": {
-    "pages": [
-      { "title": "Configuración", "path": "/admin", "icon": "gear" }
-    ]
+    "pages": {
+      "/admin": { "title": "Configuración", "icon": "gear" }
+    }
   }
 }
 ```
@@ -69,10 +69,10 @@ Utiliza múltiples globs cuando tengas tanto una página de interfaz de usuario 
 ```json
 {
   "admin": {
-    "pages": [
-      { "title": "Configuración", "path": "/admin" },
-      { "title": "Configuración", "path": "/admin/api/*" }
-    ]
+    "pages": {
+      "/admin": { "title": "Configuración" },
+      "/admin/api/*": { "title": "Configuración" }
+    }
   }
 }
 ```
@@ -409,12 +409,13 @@ Usa `content` cuando el HTML es el mismo para cada espectador: tiras de anuncios
 
 ```js
 module.exports = definePlugin({
-  onPageContent: {
-    // agrupado por el slug del manifiesto; ctx = { slug, user? }
-    banner(ctx) {
+  onPageContent(ctx) {
+    // ctx = { slug, user? }
+    if (ctx.slug === "banner") {
       const who = ctx.user ? `, ${ctx.user.displayName}` : "";
-      return `<div class="banner">¡Bienvenido${who}!</div>`;
-    },
+      return `<div class="banner">Bienvenido${who}!</div>`;
+    }
+    return "";
   },
 });
 ```
@@ -480,10 +481,10 @@ Los complementos pueden agregar pestañas a la fila de pestañas de la página d
 ```json
 {
   "permissions": ["ui.modify"],
-  "tabs": [
-    { "title": "Música",       "slug": "music",    "content": "music.html" },
-    { "title": "Información de Stream", "slug": "stream-info" }
-  ]
+  "tabs": {
+    "music": { "title": "Música", "content": "music.html" },
+    "stream-info": { "title": "Información de Stream" }
+  }
 }
 ```
 
@@ -514,11 +515,12 @@ Cuando una pestaña no tiene un archivo `content`, el host llama a tu **controla
 
 ```js
 module.exports = definePlugin({
-  onTabContent: {
-    // indexado por el slug del manifiesto; ctx = { slug, user? }
-    "stream-info"(ctx) {
+  onTabContent(ctx) {
+    // ctx = { slug, user? }
+    if (ctx.slug === "stream-info") {
       return "<h2>Información del stream</h2><p>En vivo todos los días de lunes a viernes a las 8pm UTC.</p>";
-    },
+    }
+    return "";
   },
 });
 ```

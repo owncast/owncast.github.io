@@ -589,11 +589,14 @@ Geben Sie den kompletten HTML-String für den Inhaltsblock zurück. Wenn Sie den
 
 ```js
 module.exports = definePlugin({
-  onTabContent: {
-    stats(ctx) { return `<h1>Live-Statistiken für ${ctx.user?.displayName ?? "Zuschauer"}</h1>`; },
+  onTabContent(ctx) {
+    if (ctx.slug === "stats") {
+      return `<h1>Live-Statistiken für ${ctx.user?.displayName ?? "Zuschauer"}</h1>`;
+    }
+    return "";
   },
-  onPageContent: {
-    banner(ctx) { return "<p>Willkommen!</p>"; },
+  onPageContent(ctx) {
+    return ctx.slug === "banner" ? "<p>Willkommen!</p>" : "";
   },
 });
 ```

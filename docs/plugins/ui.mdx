@@ -25,28 +25,32 @@ Manifest declarations on this page are plain JSON, identical whatever language y
 For flat, typed settings (strings, numbers, switches), declare a manifest `config` block and let Owncast render the form for you. See [Configuration](/docs/plugins/configuration). Build a custom admin page when you need a UI the auto-form can't express.
 :::
 
-Plugins can register pages that appear inside the Owncast admin UI under **Plugins**. Declare them in the manifest:
+Plugins can register pages that appear inside the Owncast admin UI under **Plugins**. Declare them as an object keyed by plugin-relative path glob:
 
 ```json
 {
   "permissions": ["http.serve"],
   "admin": {
-    "pages": [{ "title": "Settings", "path": "/admin", "icon": "gear" }]
+    "pages": {
+      "/admin": { "title": "Settings", "icon": "gear" }
+    }
   }
 }
 ```
 
-Each entry has a `title`, a `path` glob, and an optional `icon`:
+Each entry has:
 
-| Field   | Notes                                                                                                                                                              |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `title` | The tab label inside the plugin's admin view.                                                                                                                      |
-| `path`  | A path glob under `/plugins/<your-slug>/`. Examples: `"/admin"`, `"/admin/*"`, `"/admin/api/*"`.                                                                   |
-| `icon`  | Short semantic name. Supported: `gear`, `wrench`, `user`, `users`, `lock`, `info`, `apps`, `docs`, `bell` (aliases like `settings` and `notifications` also work). |
+| Part       | Notes                                                                                                                                                                       |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| object key | Required path glob under `/plugins/<your-slug>/`. Examples: `"/admin"`, `"/admin/*"`, `"/admin/api/*"`.                                                                     |
+| `title`    | Required tab label inside the plugin's admin view.                                                                                                                          |
+| `icon`     | Optional short semantic name. Supported: `gear`, `wrench`, `user`, `users`, `lock`, `info`, `apps`, `docs`, `bell` (aliases like `settings` and `notifications` also work). |
+
+The host derives the page path from the object key. Do not add a `path` member to the value. The host rejects arrays and page values containing the legacy `path` member.
 
 ### How they're rendered
 
-Owncast's admin renders each declared page as a tab inside `/admin/plugins/configure?id=<your-slug>`. The tab body is an `<iframe>` pointed at `/plugins/<your-slug>/<path>`. Each plugin gets a bookmarkable URL and a sidebar entry under **Plugins** in the admin navigation.
+Owncast's admin renders each declared page as a tab inside `/admin/plugins/configure?id=<your-slug>`. The tab body is an `<iframe>` pointed at the path from the object key under `/plugins/<your-slug>/`. Each plugin gets a bookmarkable URL and a sidebar entry under **Plugins** in the admin navigation.
 
 <img
   src="/docs/img/plugin-admin-page.png"
@@ -71,21 +75,21 @@ Use multiple globs when you have both a UI page and a JSON API:
 ```json
 {
   "admin": {
-    "pages": [
-      { "title": "Settings", "path": "/admin" },
-      { "title": "Settings", "path": "/admin/*" }
-    ]
+    "pages": {
+      "/admin": { "title": "Settings" },
+      "/admin/*": { "title": "Settings" }
+    }
   }
 }
 ```
 
-The admin UI deduplicates tabs by the resolved iframe URL, not by title. `/admin` and `/admin/*` both resolve to `/admin/`, so this pair produces one visible tab that gates the whole subtree. A pair like `/admin` and `/admin/api/*` resolves to two different URLs and produces two tabs.
+The admin UI deduplicates tabs by the resolved iframe URL, not by title. `/admin` and `/admin/*` both resolve to `/admin/`, so this pair produces one visible tab that gates the whole subtree. A pair like `/admin` and `/admin/api/*` resolves to two different URLs and produces two tabs. JSON object order is not significant. Owncast processes and displays pages in lexicographic path order.
 
 ### Author flow
 
 1. Put admin HTML, CSS, and JS in `public/admin/index.html` (and friends).
 2. Expose admin APIs via your request handler at `/admin/api/...` (see [Serving HTTP](/docs/plugins/http)).
-3. Declare the relevant globs in `manifest.admin.pages[].path`.
+3. Declare the relevant path keys in `manifest.admin.pages`.
 4. Visit `/admin/plugins/configure?id=<your-slug>` in the admin UI. Owncast uses your existing admin login to gate the page. No extra prompt.
 
 ## Action buttons
@@ -421,12 +425,12 @@ Use `content` when the HTML is the same for every viewer: announcement strips, s
 
 ```js
 module.exports = definePlugin({
-  onPageContent: {
-    // keyed by the manifest slug; ctx = { slug, user? }
-    banner(ctx) {
+  onPageContent(ctx) {
+    if (ctx.slug === 'banner') {
       const who = ctx.user ? `, ${ctx.user.displayName}` : '';
       return `<div class="banner">Welcome${who}!</div>`;
-    },
+    }
+    return '';
   },
 });
 ```
@@ -487,25 +491,27 @@ Standalone, `extraPageContent` is the simplest path for announcement strips, spo
 
 ## Viewer-page tabs
 
-Plugins can add tabs to the viewer page's tab row (next to the built-in **About** and **Followers** tabs) by declaring `manifest.tabs[]`. Each entry requires a `slug` and a `title`. The `content` path is optional.
+Plugins can add tabs to the viewer page's tab row next to the built-in **About** and **Followers** tabs by declaring `manifest.tabs` as an object. Each object key is the tab's stable slug. Every value requires a `title`, and `content` is optional.
 
 ```json
 {
   "permissions": ["ui.modify"],
-  "tabs": [
-    { "title": "Music", "slug": "music", "content": "music.html" },
-    { "title": "Stream Info", "slug": "stream-info" }
-  ]
+  "tabs": {
+    "music": { "title": "Music", "content": "music.html" },
+    "stream-info": { "title": "Stream Info" }
+  }
 }
 ```
 
-| Field     | Notes                                                                                                                                                                                                        |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `title`   | Required. The label shown on the tab.                                                                                                                                                                        |
-| `slug`    | Required. Stable identifier passed to the tab-content handler when the host requests rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. Must be unique within the plugin's tabs. |
-| `content` | Optional. Relative path to a static HTML file in `assets/`. When present, that file's bytes are inlined directly. When omitted, the host calls the tab-content handler instead.                              |
+| Part       | Notes                                                                                                                                                                           |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| object key | Required stable slug passed to the tab-content handler. Lowercase letters, digits, and hyphens, starting with a letter.                                                         |
+| `title`    | Required. The label shown on the tab. Must be unique within the plugin's tabs.                                                                                                  |
+| `content`  | Optional. Relative path to a static HTML file in `assets/`. When present, that file's bytes are inlined directly. When omitted, the host calls the tab-content handler instead. |
 
-Requires `ui.modify`. `http.serve` is not required: each tab's HTML is read from `assets/` and inlined into the tab body. The viewer page renders one tab per entry, with the `title` as the label and the file's contents as the body.
+The host derives the tab slug from the object key. Do not add a `slug` member to the value. The host rejects arrays and tab values containing the legacy `slug` member.
+
+Requires `ui.modify`. `http.serve` is not required: each static tab's HTML is read from `assets/` and inlined into the tab body. For a dynamic tab, the host passes the object key to the tab-content handler as `slug` and inlines the returned HTML.
 
 ### How tabs are rendered
 
@@ -516,17 +522,18 @@ The host emits a `pluginTabs[]` array on `/api/config`. The viewer page maps eac
   alt="Plugin-contributed tabs on the viewer page, shown alongside the built-in About and Followers tabs"
   width="75%"
 />
-See [Styling plugin UI](#styling-plugin-ui) for the baseline and the helper classes. Plugin tabs are
-appended after the built-ins in declaration order. The React key is derived from the plugin's slug
-so a tab unmounts only when its source plugin is disabled or removed.
+See [Styling plugin UI](#styling-plugin-ui) for the baseline and the helper classes. Tabs from each
+plugin are appended after the built-ins in lexicographic slug order. Ordering between tabs from
+different plugins is unspecified. JSON object order is not significant. The React key combines the
+tab slug and title, so changing either value remounts that tab.
 
-### The `slug` field
+### The tab object key
 
-`slug` is a stable name you control. It's passed to your tab-content handler so a single handler can serve multiple tabs without guessing which one was requested. The slug shows up in host logs and future API calls, so pick something that reads clearly, like `"music"` or `"stream-info"`. You can change `title` freely. Changing `slug` is a breaking change if any code keys on it.
+The object key is a stable name you control. The host passes it to your tab-content handler as `slug`, so one handler can serve multiple tabs without guessing which one was requested. It also appears in host logs and future API calls, so pick something clear, like `"music"` or `"stream-info"`. You can change `title` freely unless your code depends on it. Changing the key is a breaking change if code depends on the existing slug.
 
 ### Dynamic tab content
 
-When a tab has no `content` file, the host calls your **tab-content handler** to produce it. Implement it when content should change per viewer or pull live data. The host resolves every dynamic tab while building the viewer's `/api/config` payload, once per config request rather than on tab click, so keep the handler fast. It receives the requested `slug` and the viewer's identity, and returns the HTML string for the tab body:
+When a tab value has no `content` file, the host calls your **tab-content handler** to produce it. Implement it when content should change per viewer or pull live data. The host resolves every dynamic tab while building the viewer's `/api/config` payload, once per config request rather than on tab click, so keep the handler fast. It passes the tab's object key as `slug` with the viewer's identity, and expects the HTML string for the tab body:
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>

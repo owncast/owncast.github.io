@@ -45,7 +45,7 @@ The manifest is plain JSON that describes the plugin to the host, independent of
 | `api`              | string   | yes      | Manifest schema version. Currently `"1"`.                                                                                                                   |
 | `name`             | string   | yes      | Human-readable display name shown in admin lists and registry cards. Example: `"Awesome Echo Bot"`.                                                         |
 | `slug`             | string   | no       | Canonical identifier (URL prefix, config namespace, filename). Auto-derived from `name` if omitted. See below.                                              |
-| `version`          | string   | yes      | Your plugin's version. SemVer recommended. Informational metadata for admins and the registry: the host doesn't gate loading on it.                        |
+| `version`          | string   | yes      | Your plugin's version. SemVer recommended. Informational metadata for admins and the registry: the host doesn't gate loading on it.                         |
 | `description`      | string   | no       | One-sentence summary the admin sees in the plugin list and during install.                                                                                  |
 | `category`         | string   | no       | Registry browse category. See [`category`](#category-registry-browse-category).                                                                             |
 | `permissions`      | string[] | no       | List of capabilities your plugin needs. See [Permissions](/docs/plugins/permissions).                                                                       |
@@ -57,7 +57,7 @@ The manifest is plain JSON that describes the plugin to the host, independent of
 | `styles`           | string[] | no       | CSS files inlined into the viewer page. See [`styles`](#styles-css-injection).                                                                              |
 | `scripts`          | string[] | no       | JavaScript files inlined into the viewer page. See [`scripts`](#scripts-javascript-injection).                                                              |
 | `extraPageContent` | object   | no       | An object declaring a slug and an optional HTML file prepended to the viewer's extra-content block. See [`extraPageContent`](#extrapagecontent-html-block). |
-| `tabs`             | object[] | no       | Viewer-page tabs the plugin contributes alongside the built-in tabs. See [`tabs`](#tabs-viewer-page-tabs).                                                  |
+| `tabs`             | object   | no       | Viewer-page tabs keyed by stable slug. See [`tabs`](#tabs-viewer-page-tabs).                                                                                |
 
 ### `name` and `slug`
 
@@ -206,26 +206,32 @@ Full coverage in [UI: Action buttons](/docs/plugins/ui#action-buttons).
 
 ## `admin`: admin pages
 
-Plugins can register pages that appear in the Owncast admin UI under **Plugins**:
+Plugins can register pages that appear in the Owncast admin UI under **Plugins**. The `pages` object is keyed by plugin-relative path glob:
 
 ```json
 {
   "permissions": ["http.serve"],
   "admin": {
-    "pages": [{ "title": "Settings", "path": "/admin", "icon": "gear" }]
+    "pages": {
+      "/admin": { "title": "Settings", "icon": "gear" }
+    }
   }
 }
 ```
 
-Each entry:
+Each entry has:
 
-| Field   | Type   | Notes                                                                                       |
-| ------- | ------ | ------------------------------------------------------------------------------------------- |
-| `title` | string | Required. The tab label shown in the admin UI.                                              |
-| `path`  | string | Required. A path glob under your plugin's namespace (for example `"/admin"`, `"/admin/*"`). |
-| `icon`  | string | Optional. A short semantic name (`gear`, `wrench`, `user`, and so on).                      |
+| Part       | Type   | Notes                                                                                |
+| ---------- | ------ | ------------------------------------------------------------------------------------ |
+| object key | string | Required path glob under the plugin's namespace, such as `"/admin"` or `"/admin/*"`. |
+| `title`    | string | Required. The tab label shown in the admin UI.                                       |
+| `icon`     | string | Optional. A short semantic name (`gear`, `wrench`, `user`, and so on).               |
 
-Requests under `/plugins/<your-slug>/<path>` matching any declared glob are auth-gated by the host: unauthenticated requests get a `401` before your plugin code runs. Full coverage in [UI: Admin pages](/docs/plugins/ui#admin-pages).
+The host derives each page path from its object key. A key of `"/admin"` maps to `/plugins/<your-slug>/admin`. Requests matching any key are auth-gated by the host, so unauthenticated requests get a `401` before your plugin code runs.
+
+JSON object order is not significant. Owncast displays admin pages in lexicographic path order. `pages` must be an object. Do not add a `path` member to a page value. The host rejects arrays and page values containing the legacy `path` member.
+
+Full coverage in [UI: Admin pages](/docs/plugins/ui#admin-pages).
 
 ## `styles`: CSS injection
 
@@ -296,27 +302,29 @@ Full coverage in [UI: Extra page content](/docs/plugins/ui#extra-page-content).
 
 ## `tabs`: viewer-page tabs
 
-A list of tabs the plugin contributes to the viewer page's tab row (next to the built-in **About** and **Followers** tabs). Each entry requires `title`. `content` is optional, and `slug` is required only when `content` is omitted (otherwise it's derived from `title`).
+The `tabs` object contributes tabs to the viewer page's tab row next to the built-in **About** and **Followers** tabs. Each object key is the tab's stable slug. Every value requires `title`, and `content` is optional.
 
 ```json
 {
   "permissions": ["ui.modify"],
-  "tabs": [
-    { "title": "Music", "slug": "music", "content": "music.html" },
-    { "title": "Schedule", "slug": "schedule", "content": "schedule.html" }
-  ]
+  "tabs": {
+    "music": { "title": "Music", "content": "music.html" },
+    "schedule": { "title": "Schedule", "content": "schedule.html" }
+  }
 }
 ```
 
 Each entry has:
 
-| Field     | Notes                                                                                                                                                                                                                                                               |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `title`   | Required. The label shown on the tab. Must be unique within the plugin's tabs.                                                                                                                                                                                      |
-| `slug`    | Required only when `content` is omitted (derived from `title` otherwise). Stable identifier passed to `onTabContent` when the host requests rendered HTML. Lowercase letters, digits, and hyphens, starting with a letter. Must be unique within the plugin's tabs. |
-| `content` | Optional. Relative path to an HTML file under `assets/`. Same path rules as `extraPageContent` (auto-prefix to your namespace, cross-plugin paths and `http(s)://` URLs rejected, must end in `.html`). When omitted, the host calls `onTabContent` instead.        |
+| Part       | Notes                                                                                                                                                                                                                                                |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| object key | Required stable slug. Lowercase letters, digits, and hyphens, starting with a letter. The host passes this key to `onTabContent` when `content` is omitted.                                                                                          |
+| `title`    | Required. The label shown on the tab. Must be unique within the plugin's tabs.                                                                                                                                                                       |
+| `content`  | Optional. Relative path to an HTML file under `assets/`. Same path rules as `extraPageContent` (auto-prefix to your namespace, cross-plugin paths and `http(s)://` URLs rejected, must end in `.html`). When omitted, the host calls `onTabContent`. |
 
-Requires `ui.modify`. `http.serve` is not required: each tab's HTML is read from `assets/` and inlined into the `pluginTabs[]` array on `/api/config`. The viewer page maps each entry to a tab whose body renders the HTML directly.
+Within each plugin, Owncast displays tabs in lexicographic slug order. JSON object order is not significant. Ordering between tabs from different plugins is unspecified. `tabs` must be an object. Do not add a `slug` member to a tab value. The host rejects arrays and tab values containing the legacy `slug` member.
+
+Requires `ui.modify`. `http.serve` is not required: each static tab's HTML is read from `assets/` and inlined into the `pluginTabs[]` array on `/api/config`. For a dynamic tab, the host passes the object key to `onTabContent` as `slug` and inlines the returned HTML.
 
 Full coverage in [UI: Viewer-page tabs](/docs/plugins/ui#viewer-page-tabs).
 
@@ -366,11 +374,15 @@ A non-trivial manifest exercising most features:
     }
   ],
   "admin": {
-    "pages": [{ "title": "Sidekick settings", "path": "/admin", "icon": "gear" }]
+    "pages": {
+      "/admin": { "title": "Sidekick settings", "icon": "gear" }
+    }
   },
   "styles": ["sidekick.css"],
   "scripts": ["sidekick.js"],
   "extraPageContent": { "slug": "intro", "content": "intro.html" },
-  "tabs": [{ "title": "Schedule", "slug": "schedule", "content": "schedule.html" }]
+  "tabs": {
+    "schedule": { "title": "Schedule", "content": "schedule.html" }
+  }
 }
 ```
