@@ -111,7 +111,9 @@ Grants:
 
 ### `users.register`
 
-Grants `owncast.users.register({ authId, displayName?, scopes? })`: find-or-create an authenticated Owncast user for an external identity and return its `userId`. The `authId` is a stable, provider-scoped identifier (e.g. `"github:583231"`). Pass it raw, without prefixing your slug: the host records the slug separately and scopes every lookup to that pair, so two plugins can't collide on or spoof each other's users.
+Grants `owncast.users.register({ authId, displayName?, scopes?, profileUrl?, handle?, public? })`: find or create an authenticated Owncast user for an external identity and return its `userId`. The `authId` is a stable, provider-scoped identifier such as `"github:583231"`. Pass it raw, without prefixing your slug. The host records the slug separately and scopes every lookup to that pair, so two plugins cannot collide with or spoof each other's users.
+
+The optional `profileUrl`, `handle`, and `public` fields attach a verified external identity. The profile URL must be empty or an absolute HTTP(S) URL. Set `public` to `true` only after the viewer opts into public display. These profile fields are captured on the first registration.
 
 This is how a plugin turns a third-party login (OAuth, Discord, a shared password) into a real Owncast user with an authenticated chat identity. On its own it neither gates the site nor issues a session: pair it with `auth.gate` to build a login gate, or use it alone to mint verified chat identities.
 
