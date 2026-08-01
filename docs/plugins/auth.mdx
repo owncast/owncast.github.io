@@ -1,6 +1,6 @@
 ---
 title: Authentication
-description: Build a plugin that makes viewers sign in (OAuth, a password, anything over HTTP) before they can reach the stream, using the auth.gate capability.
+description: Build a plugin that makes viewers sign in with OAuth, a password, or any HTTP-based provider before they can reach protected Owncast resources.
 sidebar_position: 1
 sidebar_label: Authentication Plugins
 toc_min_heading_level: 2
@@ -17,12 +17,13 @@ tags:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-A plugin can be the **authentication gate** for an Owncast site: viewers must sign in through it before they can reach the page, the video, chat, or the API. The plugin supplies the login method: OAuth (GitHub, Discord, Google), a magic link, SAML, or just a shared password. Owncast enforces the gate. This replaces the high-friction "put a reverse proxy like Vouch in front of Owncast" pattern with a first-class plugin capability.
-
-The split of responsibility is the whole model:
+An **authentication gate** plugin makes viewers sign in before reaching the
+resources selected by the server operator. The plugin supplies the login
+method, such as OAuth, a magic link, SAML, or a shared password. Owncast
+enforces the selected access mode.
 
 - **Your plugin is the identity provider.** It renders the login screen, talks to the external provider, and decides who is allowed in.
-- **The Owncast host is the gatekeeper and session authority.** It owns the session cookie, enforces the gate on every request, and never lets your plugin near the per-request hot path.
+- **The Owncast host is the gatekeeper and session authority.** It owns the session cookie, enforces the selected access mode, and never puts your plugin in the per-request hot path.
 
 :::info[Requires auth.gate]
 Everything on this page needs the [`auth.gate`](/docs/plugins/permissions#authgate) permission, plus [`users.register`](/docs/plugins/permissions#usersregister) to create the authenticated user and [`http.serve`](/docs/plugins/permissions#httpserve) to render the login flow.
@@ -30,21 +31,43 @@ Everything on this page needs the [`auth.gate`](/docs/plugins/permissions#authga
 
 ## What gets gated
 
-When an `auth.gate` plugin is enabled, the **entire web server is gated**, not just the HTML page. The viewer page (`/`), the video (`/hls/*`), chat (`/ws`), and the API all sit behind the gate. Owncast's own admin pages are the exception: they stay behind the admin login rather than the viewer gate, so an admin can always reach the controls.
+When an `auth.gate` plugin is enabled, the viewer page, chat, embeds,
+`/api/config`, and the rest of the public web surface require login. Owncast's
+admin pages keep their own admin authentication so an operator can always
+disable a broken gate.
 
-The accepted consequence: **the stream is only viewable through Owncast's own web UI.** Native players (VLC, QuickTime) can't carry the session cookie, so they can't play a gated stream.
+The operator selects one cumulative access mode on the plugin's
+**Authentication** tab:
+
+| Access mode | Effect |
+| --- | --- |
+| Website only (default) | The web interface requires sign-in. `/hls/*`, `/api/status`, and Owncast Directory listing stay public. |
+| Website, video players, and other resources | Also gates Owncast-hosted `/hls/*`. Players such as VLC cannot complete the browser login. `/api/status` and directory listing stay public. |
+| Website, video players, and server status requests | Gates the web interface, Owncast-hosted `/hls/*`, and `/api/status`. Owncast Directory listing is disabled. |
+
+The modes are cumulative. There is no status-only mode that hides
+`/api/status` while leaving HLS public. The default protects the website
+without breaking existing players or uptime monitors.
+
+Selecting either stream-protection mode blocks native players. VLC, QuickTime,
+mobile apps, and restreamers cannot complete a browser login or carry the
+session cookie. An `Authorization` header or query token does not bypass the
+gate.
+
+A viewer with a valid session is always let through, regardless of the
+selected mode.
 
 :::warning[Distributing your video with External storage (Object storage/CDN) caveat]
-When distributing your video stream directly from your server, the gate is airtight: every byte flows through Owncast. With Object Storage or CDN, playlists are rewritten to absolute remote URLs and segments are fetched directly from the bucket, so the gate never sees those requests. Gating still stops an anonymous visitor from _discovering_ the segment list, but a _leaked or shared_ segment URL stays fetchable. **Gate + local distribution is airtight. Gate + Object Storage is good friction, not airtight.**
+When distributing your video stream directly from your server, stream protection is airtight: every byte flows through Owncast. With Object Storage or CDN, playlists are rewritten to absolute remote URLs and segments are fetched directly from the bucket, so the gate never sees those requests. Gating still stops an anonymous visitor from _discovering_ the segment list, but a _leaked or shared_ segment URL stays fetchable. **Stream protection + local distribution is airtight. Stream protection + Object Storage is good friction, not airtight.**
 :::
 
 ## How it works
 
-Once the gate is armed, every request is checked, including each HLS segment, which a live viewer pulls every few seconds. Calling into your plugin's embedded engine on every one of those would melt the server, so the plugin is kept out of the hot path:
+Once the gate is armed, every non-exempt request is checked. Under stream protection that includes each HLS segment, which a live viewer pulls every few seconds. Calling into your plugin's embedded engine on every one of those would melt the server, so the plugin is kept out of the hot path:
 
 | When                                             | Cost                                                                   | What happens                                                         |
 | ------------------------------------------------ | ---------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| **Every request** (`/hls/*`, images, `/ws`, API) | Verify cookie signature + expiry                                       | valid → pass, missing/invalid → redirect to login                    |
+| **Every non-exempt request**                     | Verify cookie signature + expiry                                       | valid passes. Missing or invalid gets a redirect to login, or a `401` for anything that is not a `GET` or `HEAD` |
 | **`/` page loads only**                          | Optional engine call: [`onAuthCheck`](/docs/plugins/events#auth-check) | re-validate against your provider, returns `ok` / `refresh` / `deny` |
 
 Your plugin only runs the **login flow** (infrequent, about once per viewer session) and the optional per-page-load `onAuthCheck`. The Owncast host mints and checks a **signed session cookie** so the per-request check is signature-and-expiry only: no database lookup, no plugin call.
@@ -234,21 +257,33 @@ Declaring `auth.gate` does nothing on its own. The gate is armed by **enabling t
 
 The gate's posture is decoupled from your plugin's health. If the gate is armed but the plugin is unavailable (crashed, failed to load, errored, or auto-disabled after repeated failures), Owncast **denies all viewer traffic** and serves a static "authentication temporarily unavailable" page. It never falls open. The admin is always reachable (admin routes use Owncast's existing Basic Auth and bypass the gate) so you can fix the config or disable the plugin. Already-valid sessions survive an outage, because checking a cookie needs no plugin call.
 
+A gate that is enabled but not running is still a gate. No access-policy setting can turn a failing-closed gate into an open one.
+
 ### What bypasses the gate
 
-The principle: the gate covers only the otherwise-public surface. Any route that already enforces its own credential bypasses it.
+The gate covers the otherwise-public surface. Routes that enforce their own
+credentials bypass it. The selected access mode also leaves some resources
+public.
 
-- The gate plugin's own namespace `/plugins/<your-slug>/*` and its static assets (so the login screen is reachable while you're locked out).
-- `/admin/*` and `/api/admin/*`, already behind admin Basic Auth.
-- External-API-token routes, where a valid Bearer client carries no cookie and gating would bounce it into a login page.
-- The viewer page's own static assets (the JS/CSS bundle needed to render the login UI).
+Always exempt:
 
-Everything else is gated, **including `/api/status` and embeds**. Leaking live-status or viewer counts to anonymous visitors would undercut the point of gating.
+- The active gate plugin's own namespace `/plugins/<your-slug>/*` and its static assets, so the login screen remains reachable.
+- `/admin/*` and `/api/admin/*`, which use admin authentication.
+- External API routes under `/api/integrations/`, which validate their own Bearer tokens.
+- Static viewer assets needed to render the page. HTML entry points are still gated.
+- `/api/yp`, which the Owncast Directory fetches anonymously. The most restrictive mode disables directory listing and makes this endpoint return `404`.
+
+Mode-dependent:
+
+- `/hls/*` stays public only in **Website only** mode.
+- `/api/status` stays public in **Website only** and **Website, video players, and other resources** modes.
+
+Everything else is gated, including embeds and `/api/config`.
 
 ## Session details
 
 - **Stateless signed cookie**, `HttpOnly`, `Secure` (on HTTPS requests), `SameSite=Lax`, `Path=/`. Lax rather than Strict because the provider callback is a cross-site top-level redirect.
-- **TTL defaults to 24 hours**, with a sliding refresh available through `onAuthCheck`'s `refresh` verdict. Because the TTL is the revocation backstop, it's a real security knob.
+- **TTL is set by your plugin** when it calls `grantSession({ ttl })`, defaulting to 24 hours and capped at 30 days. A sliding refresh is available through `onAuthCheck`'s `refresh` verdict. Because the TTL is the revocation backstop, it's a real security knob.
 - **The signing secret is the Owncast host's responsibility.** It's auto-generated on first use and persisted in config. Rotating it invalidates every session (a panic button). Plugin authors never touch it, and it's separate from any OAuth _client_ secret, which is your plugin's config concern.
 
 ## Chat identity {/* #chat-identity */}
