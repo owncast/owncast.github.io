@@ -589,11 +589,14 @@ Retournez la chaîne HTML complète pour le bloc de contenu. Si vous ne reconnai
 
 ```js
 module.exports = definePlugin({
-  onTabContent: {
-    stats(ctx) { return `<h1>Statistiques en direct pour ${ctx.user?.displayName ?? "visualiseur"}</h1>`; },
+  onTabContent(ctx) {
+    if (ctx.slug === "stats") {
+      return `<h1>Statistiques en direct pour ${ctx.user?.displayName ?? "visualiseur"}</h1>`;
+    }
+    return "";
   },
-  onPageContent: {
-    banner(ctx) { return "<p>Bienvenue!</p>"; },
+  onPageContent(ctx) {
+    return ctx.slug === "banner" ? "<p>Bienvenue!</p>" : "";
   },
 });
 ```

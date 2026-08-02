@@ -589,11 +589,14 @@ Devuelve la cadena HTML completa para el bloque de contenido. Si no reconoces el
 
 ```js
 module.exports = definePlugin({
-  onTabContent: {
-    stats(ctx) { return `<h1>Estadísticas en vivo para ${ctx.user?.displayName ?? "espectador"}</h1>`; },
+  onTabContent(ctx) {
+    if (ctx.slug === "stats") {
+      return `<h1>Estadísticas en vivo para ${ctx.user?.displayName ?? "espectador"}</h1>`;
+    }
+    return "";
   },
-  onPageContent: {
-    banner(ctx) { return "<p>¡Bienvenido!</p>"; },
+  onPageContent(ctx) {
+    return ctx.slug === "banner" ? "<p>¡Bienvenido!</p>" : "";
   },
 });
 ```

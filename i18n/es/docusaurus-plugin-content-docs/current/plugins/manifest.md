@@ -52,7 +52,7 @@ El manifiesto es un JSON sencillo que describe el complemento al host, independi
 | `styles`           | cadena[] | no        | Archivos CSS incrustados en la página del visualizador. Ver [`styles`](#styles-css-injection).                                                                                     |
 | `scripts`          | cadena[] | no        | Archivos JavaScript incrustados en la página del visualizador. Ver [`scripts`](#scripts-javascript-injection).                                                                     |
 | `extraPageContent` | objeto                                                       | no        | Un objeto que declara un slug y un archivo HTML opcional que se prefiere al bloque de contenido extra del visualizador. Ver [`extraPageContent`](#extrapagecontent-html-block).    |
-| `tabs`             | objeto[] | no        | Pestañas de la página del visualizador que el complemento contribuye junto con las pestañas integradas. Ver [`tabs`](#tabs-viewer-page-tabs).                                      |
+| `tabs`             | objeto                                                         | no        | Pestañas de la página del espectador con slugs estables como claves del objeto. Ver [`tabs`](#tabs-viewer-page-tabs).                                                       |
 
 ### `name` y `slug`
 
@@ -193,15 +193,15 @@ Cobertura completa en [UI: Botones de acción](/docs/plugins/ui#action-buttons).
 
 ## `admin`: páginas de administración
 
-Los plugins pueden registrar páginas que aparecen en la interfaz de administración de Owncast bajo **Plugins**:
+Los plugins pueden registrar páginas que aparecen en la interfaz de administración de Owncast bajo **Plugins**. `pages` es un objeto cuyas claves son patrones de ruta relativos al plugin:
 
 ```json
 {
   "permissions": ["http.serve"],
   "admin": {
-    "pages": [
-      { "title": "Configuraciones", "path": "/admin", "icon": "gear" }
-    ]
+    "pages": {
+      "/admin": { "title": "Configuraciones", "icon": "gear" }
+    }
   }
 }
 ```
@@ -211,7 +211,7 @@ Cada entrada:
 | Campo   | Tipo   | Notas                                                                                                                                                              |
 | ------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `title` | cadena | Requerido. La etiqueta de la pestaña mostrada en la interfaz de administración.                                                    |
-| `path`  | cadena | Requerido. Un patrón de ruta dentro del espacio de nombres de tu plugin (por ejemplo `"/admin"`, `"/admin/*"`). |
+| clave del objeto | cadena | Patrón de ruta requerido dentro del espacio de nombres de tu plugin, por ejemplo `"/admin"` o `"/admin/*"`. No añadas un campo `path` al valor de la página. |
 | `icon`  | cadena | Opcional. Un nombre semántico corto (`gear`, `wrench`, `user`, etc.).                           |
 
 Las solicitudes bajo `/plugins/<your-slug>/<path>` que coinciden con cualquier patrón declarado requieren autorización por parte del host: las solicitudes no autenticadas obtienen un `401` antes de que se ejecute el código de tu plugin. Cobertura completa en [UI: Páginas de administración](/docs/plugins/ui#admin-pages).
@@ -285,15 +285,15 @@ Cobertura completa en [UI: Contenido de página adicional](/docs/plugins/ui#extr
 
 ## `tabs`: pestañas de la página del espectador
 
-Una lista de pestañas que el plugin contribuye a la fila de pestañas de la página del espectador (junto a las pestañas incorporadas **Acerca de** y **Seguidores**). Cada entrada requiere `title`. `content` es opcional, y `slug` es requerido solo cuando se omite `content` (de lo contrario se deriva de `title`).
+El objeto `tabs` añade pestañas a la fila de pestañas de la página del espectador, junto a las pestañas incorporadas **Acerca de** y **Seguidores**. Cada clave del objeto es el slug estable de la pestaña. Cada valor requiere `title`. `content` es opcional.
 
 ```json
 {
   "permissions": ["ui.modify"],
-  "tabs": [
-    { "title": "Música",    "slug": "music",    "content": "music.html" },
-    { "title": "Calendario", "slug": "schedule", "content": "schedule.html" }
-  ]
+  "tabs": {
+    "music": { "title": "Música", "content": "music.html" },
+    "schedule": { "title": "Calendario", "content": "schedule.html" }
+  }
 }
 ```
 
@@ -302,7 +302,7 @@ Cada entrada tiene:
 | Campo     | Notas                                                                                                                                                                                                                                                                                                                                                                                      |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `title`   | Requerido. La etiqueta mostrada en la pestaña.                                                                                                                                                                                                                                                                                                             |
-| `slug`    | Requerido solo cuando se omite `content` (derivado de `title` de lo contrario). Identificador estable pasado a `onTabContent` cuando el host solicita HTML renderizado. Letras minúsculas, dígitos y guiones, comenzando con una letra. Debe ser único dentro de las pestañas del plugin.               |
+| clave del objeto | Slug estable requerido. Debe contener letras minúsculas, dígitos y guiones, y comenzar con una letra. El host pasa esta clave a `onTabContent` cuando se omite `content`. No añadas un campo `slug` al valor de la pestaña. |
 | `content` | Opcional. Ruta relativa a un archivo HTML en `assets/`. Las mismas reglas de ruta que `extraPageContent` (prefijo automático a tu espacio de nombres, rutas cruzadas de plugins y URL `http(s)://` rechazadas, deben terminar en `.html`). Cuando se omite, el host llama a `onTabContent` en su lugar. |
 
 Requiere `ui.modify`. `http.serve` no es requerido: el HTML de cada pestaña se lee de `assets/` y se inserta en el array `pluginTabs[]` en `/api/config`. La página del espectador mapea cada entrada a una pestaña cuyo cuerpo renderiza directamente el HTML.
@@ -354,15 +354,15 @@ Un manifiesto no trivial que utiliza la mayoría de las características:
     }
   ],
   "admin": {
-    "pages": [
-      { "title": "Configuraciones del Sidekick", "path": "/admin", "icon": "gear" }
-    ]
+    "pages": {
+      "/admin": { "title": "Configuraciones del Sidekick", "icon": "gear" }
+    }
   },
   "styles": ["sidekick.css"],
   "scripts": ["sidekick.js"],
   "extraPageContent": { "slug": "intro", "content": "intro.html" },
-  "tabs": [
-    { "title": "Calendario", "slug": "schedule", "content": "schedule.html" }
-  ]
+  "tabs": {
+    "schedule": { "title": "Calendario", "content": "schedule.html" }
+  }
 }
 ```

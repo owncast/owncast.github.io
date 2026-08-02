@@ -52,7 +52,7 @@ Das Manifest ist einfaches JSON, das das Plugin für den Host beschreibt, unabh�
 | `styles`           | String[] | Nein         | CSS-Dateien, die in die Viewer-Seite eingebettet sind. Siehe [`styles`](#styles-css-injection).                                                                                                      |
 | `scripts`          | String[] | Nein         | JavaScript-Dateien, die in die Viewer-Seite eingebettet sind. Siehe [`scripts`](#scripts-javascript-injection).                                                                                      |
 | `extraPageContent` | Objekt                                                       | Nein         | Ein Objekt, das einen Slug und eine optionale HTML-Datei deklariert, die dem Block für zusätzlichen Inhalt des Viewers vorangestellt wird. Siehe [`extraPageContent`](#extrapagecontent-html-block). |
-| `tabs`             | Object[] | Nein         | Tabs der Viewer-Seite, die das Plugin zusätzlich zu den integrierten Tabs beisteuert. Siehe [`tabs`](#tabs-viewer-page-tabs).                                                                        |
+| `tabs`             | Objekt                                                         | Nein         | Viewer-Seiten-Tabs mit stabilen Slugs als Objektschlüssel. Siehe [`tabs`](#tabs-viewer-page-tabs).                                                                                                   |
 
 ### `name` und `slug`
 
@@ -193,15 +193,15 @@ Vollständige Abdeckung in [UI: Aktionsschaltflächen](/docs/plugins/ui#action-b
 
 ## `admin`: Admin-Seiten
 
-Plugins können Seiten registrieren, die in der Owncast-Admin-UI unter **Plugins** angezeigt werden:
+Plugins können Seiten registrieren, die in der Owncast-Admin-UI unter **Plugins** angezeigt werden. `pages` ist ein Objekt mit pluginrelativen Pfad-Globs als Schlüsseln:
 
 ```json
 {
   "permissions": ["http.serve"],
   "admin": {
-    "pages": [
-      { "title": "Einstellungen", "path": "/admin", "icon": "gear" }
-    ]
+    "pages": {
+      "/admin": { "title": "Einstellungen", "icon": "gear" }
+    }
   }
 }
 ```
@@ -211,7 +211,7 @@ Jeder Eintrag:
 | Feld    | Typ          | Hinweise                                                                                                                                                    |
 | ------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `titel` | Zeichenfolge | Erforderlich. Das Tab-Etikett, das in der Admin-UI angezeigt wird.                                                          |
-| `path`  | Zeichenfolge | Erforderlich. Ein Pfad-Globb unter dem Namensraum Ihres Plugins (zum Beispiel `"/admin"`, `"/admin/*"`). |
+| Objektschlüssel | Zeichenfolge | Erforderlicher Pfad-Glob im Namensraum deines Plugins, zum Beispiel `"/admin"` oder `"/admin/*"`. Füge dem Seitenwert kein `path`-Feld hinzu. |
 | `icon`  | Zeichenfolge | Optional. Ein kurzer semantischer Name (`gear`, `wrench`, `user` usw.).                  |
 
 Anfragen unter `/plugins/<your-slug>/<path>`, die einem deklarierten Globb entsprechen, sind vom Host auth-gated: nicht authentifizierte Anfragen erhalten einen `401`, bevor Ihr Plugin-Code ausgeführt wird. Vollständige Abdeckung in [UI: Admin-Seiten](/docs/plugins/ui#admin-pages).
@@ -285,15 +285,15 @@ Vollständige Abdeckung in [UI: Zusätzlicher Seiteninhalt](/docs/plugins/ui#ext
 
 ## `tabs`: Viewer-Seiten-Registerkarten
 
-Eine Liste von Tabs, die das Plugin zur Registerkartenzeile der Viewer-Seite beiträgt (neben den eingebauten **Über**- und **Follower**-Tabs). Jeder Eintrag benötigt `title`. `content` ist optional, und `slug` ist nur erforderlich, wenn `content` weggelassen wird (ansonsten wird es aus `title` abgeleitet).
+Das `tabs`-Objekt fügt der Registerkartenzeile der Viewer-Seite Tabs hinzu, neben den integrierten Tabs **Über** und **Follower**. Jeder Objektschlüssel ist der stabile Slug des Tabs. Jeder Wert benötigt `title`. `content` ist optional.
 
 ```json
 {
   "permissions": ["ui.modify"],
-  "tabs": [
-    { "title": "Musik",    "slug": "music",    "content": "music.html" },
-    { "title": "Zeitplan", "slug": "schedule", "content": "schedule.html" }
-  ]
+  "tabs": {
+    "music": { "title": "Musik", "content": "music.html" },
+    "schedule": { "title": "Zeitplan", "content": "schedule.html" }
+  }
 }
 ```
 
@@ -302,7 +302,7 @@ Jeder Eintrag hat:
 | Feld      | Hinweise                                                                                                                                                                                                                                                                                                                                                                                                          |
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `title`   | Erforderlich. Das auf der Registerkarte angezeigte Etikett.                                                                                                                                                                                                                                                                                                                       |
-| `slug`    | Erforderlich, wenn `content` weggelassen wird (ansonsten von `title` abgeleitet). Stabiler Bezeichner, der an `onTabContent` übergeben wird, wenn der Host gerenderte HTML anfordert. Kleinbuchstaben, Ziffern und Bindestriche, beginnend mit einem Buchstaben. Muss innerhalb der Registerkarten des Plugins eindeutig sein. |
+| Objektschlüssel | Erforderlicher stabiler Slug. Kleinbuchstaben, Ziffern und Bindestriche, beginnend mit einem Buchstaben. Der Host übergibt diesen Schlüssel an `onTabContent`, wenn `content` weggelassen wird. Füge dem Tab-Wert kein `slug`-Feld hinzu. |
 | `content` | Optional. Relativer Pfad zu einer HTML-Datei unter `assets/`. Gleiche Pfadregeln wie `extraPageContent` (automatisch mit Ihrem Namensraum vorangestellt, plattformübergreifende Pfade und `http(s)://` URLs abgelehnt, muss mit `.html` enden). Wenn weggelassen, ruft der Host stattdessen `onTabContent` auf.                |
 
 Benötigt `ui.modify`. `http.serve` ist nicht erforderlich: das HTML jeder Registerkarte wird aus `assets/` gelesen und in das `pluginTabs[]` Array auf `/api/config` eingefügt. Die Viewer-Seite ordnet jeden Eintrag einer Registerkarte zu, deren Body das HTML direkt rendert.
@@ -354,15 +354,15 @@ Ein nicht triviales Manifest, das die meisten Funktionen nutzt:
     }
   ],
   "admin": {
-    "pages": [
-      { "title": "Einstellungen des Begleiters", "path": "/admin", "icon": "gear" }
-    ]
+    "pages": {
+      "/admin": { "title": "Einstellungen des Begleiters", "icon": "gear" }
+    }
   },
   "styles": ["sidekick.css"],
   "scripts": ["sidekick.js"],
   "extraPageContent": { "slug": "intro", "content": "intro.html" },
-  "tabs": [
-    { "title": "Zeitplan", "slug": "schedule", "content": "schedule.html" }
-  ]
+  "tabs": {
+    "schedule": { "title": "Zeitplan", "content": "schedule.html" }
+  }
 }
 ```
