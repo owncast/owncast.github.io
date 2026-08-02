@@ -135,7 +135,7 @@ State persists across reloads and host restarts.
 
 ### `storage.upload`
 
-Grants `owncast.storage.upload(name, bytes)`: upload a file to Owncast's public file area and get back a URL. Useful for badges, dynamically-generated images, fediverse post attachments.
+Grants `owncast.storage.upload(name, data)`: upload a file to Owncast's public file area and get back a URL. Useful for badges, dynamically-generated images, fediverse post attachments.
 
 ### `storage.fs`
 

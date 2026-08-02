@@ -220,6 +220,7 @@ The scenario's top-level `expect` checks what happened across the whole run:
 | `commands`          | List of `{ name, prefix?, description?, usage?, aliases?, modOnly, caseSensitive, cooldownMs }` chat-command registrations, matched by `name` in any order (`prefix`, `description`, `usage`, and `aliases` are checked only when set) |
 | `kv`                | Partial map of plugin-config state after the scenario                                                                                                                                                                                  |
 | `httpRequests`      | List of `{ url, method?, body? }` outbound `owncast.http.fetch` calls. `url` is an exact match, an omitted `method` matches any, an omitted `body` skips the check                                                                     |
+
 Use the camelCase wire names in `userRegistrations` for both JavaScript and Python scenarios. `displayName`, `profileUrl`, and `handle` are compared whenever supplied, including when set to `""`. `scopes` is compared whenever supplied. `[]` expects no scopes and matches either an omitted or empty actual list. Non-empty arrays match exactly. `public` is compared whenever supplied, so `false` asserts that the plugin kept the identity private. Omit any of these fields to skip its check.
 
 ```json
