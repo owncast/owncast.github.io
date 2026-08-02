@@ -266,7 +266,7 @@ Owncast exposes internal plugin event subscriptions for inbound Fediverse activi
 | `fediverse.follow`   | `onFediverseFollow`  | `@plugin.on_fediverse_follow`  | `{ actor }`                 |
 | `fediverse.like`     | `onFediverseLike`    | `@plugin.on_fediverse_like`    | `{ actor, target }`         |
 | `fediverse.repost`   | `onFediverseRepost`  | `@plugin.on_fediverse_repost`  | `{ actor, target }`         |
-| `fediverse.quote`    | `onFediverseQuote`   | `@plugin.on_fediverse_quote`   | `{ actor, target }`         |
+| `fediverse.quote`    | `onFediverseQuote`   | `@plugin.on_fediverse_quote`   | `FediverseQuote`            |
 | `fediverse.mention`  | `onFediverseMention` | `@plugin.on_fediverse_mention` | `FediverseInboundPost`      |
 | `fediverse.reply`    | `onFediverseReply`   | `@plugin.on_fediverse_reply`   | `FediverseInboundPost`      |
 | `fediverse.activity` | `onFediverse`        | `@plugin.on_fediverse`         | Raw ActivityPub JSON object |
@@ -285,9 +285,22 @@ interface FediverseEngagement {
   actor: FediverseActor;
   target?: { url: string };
 }
+
+interface FediverseQuote extends FediverseEngagement {
+  target: { url: string }; // locally authored post being quoted
+  content?: string; // rendered HTML from the source instance
+  contentText?: string; // plain-text version
+  url: string; // remote quote post permalink
+  postedAt?: string; // ISO-8601
+  inReplyTo?: string;
+  attachments?: { url: string; mediaType: string; alt?: string }[];
+  language?: string;
+}
 ```
 
-A follow contains only `actor`. Likes, reposts, and quotes also contain `target`. For a quote, `target` is the locally authored post that the remote actor quoted.
+A follow contains only `actor`. Likes and reposts also contain `target`.
+
+A quote contains `target` for the locally authored post and `url` for the remote quote post. Content metadata is included when the requesting server embeds its quote `Note` in the `QuoteRequest`. Some servers send only the quote post IRI, so `content`, `contentText`, `postedAt`, `inReplyTo`, `attachments`, and `language` are optional.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
@@ -298,7 +311,8 @@ module.exports = definePlugin({
     owncast.chat.send(`new follower: ${event.actor.handle}`);
   },
   onFediverseQuote(event) {
-    console.log(`quoted post: ${event.target.url}`);
+    console.log(`${event.actor.handle}: ${event.contentText ?? 'quoted your post'}`);
+    console.log(`quote: ${event.url}`);
   },
 });
 ```
@@ -313,7 +327,8 @@ def thank(event):
 
 @plugin.on_fediverse_quote
 def record_quote(event):
-    print(f"quoted post: {event.target.url}")
+    print(f"{event.actor.handle}: {event.content_text or 'quoted your post'}")
+    print(f"quote: {event.url}")
 ```
 
 </TabItem>
@@ -774,7 +789,7 @@ Each row is a runtime event. The handler name follows your SDK's convention: cam
 | `fediverse.follow`       | `{ actor }`                        | `fediverse.inbound`                                |
 | `fediverse.like`         | `{ actor, target }`                | `fediverse.inbound`                                |
 | `fediverse.repost`       | `{ actor, target }`                | `fediverse.inbound`                                |
-| `fediverse.quote`        | `{ actor, target }`                | `fediverse.inbound`                                |
+| `fediverse.quote`        | `FediverseQuote`                   | `fediverse.inbound`                                |
 | `fediverse.mention`      | `FediverseInboundPost`             | `fediverse.inbound`                                |
 | `fediverse.reply`        | `FediverseInboundPost`             | `fediverse.inbound`                                |
 | `fediverse.activity`     | Raw ActivityPub JSON object        | `fediverse.inbound`                                |
