@@ -353,10 +353,12 @@ A private, sandboxed filesystem at `data/plugin-data/<your-slug>/`. Unlike `ownc
 | ---------------------- | -------------------------------------------- |
 | `fs.read(path)`        | the file's bytes, or `null` if missing       |
 | `fs.readText(path)`    | the file as UTF-8 text, or `null` if missing |
-| `fs.write(path, data)` | `{ ok, error? }`                             |
+| `fs.write(path, data)` | `{ error? }`                                 |
 | `fs.list(dir)`         | entry names (a missing directory is empty)   |
-| `fs.delete(path)`      | `{ ok, error? }` (file or empty directory)   |
+| `fs.delete(path)`      | `{ error? }` (file or empty directory)       |
 | `fs.exists(path)`      | boolean                                      |
+
+`fs.write` and `fs.delete` return `{}` on success. If the host rejects the operation, they return `{ error }` with the reason.
 
 In Python these are `snake_case` (`fs.read_text`, the rest unchanged).
 
@@ -380,6 +382,60 @@ text = owncast.fs.read_text("notes/log.txt")
 </Tabs>
 
 Requires `storage.fs`.
+
+### `owncast.sql.exec(sql, params?)`, `.query(sql, params?)`, and `.queryRow(sql, params?)`
+
+Each plugin gets a private SQLite database, separate from Owncast's database.
+
+On success, `exec` returns `{ rowsAffected, lastInsertId }` in JavaScript and a dict with the same camelCase keys in Python. There is no `ok` field. `query` returns an array or list of rows keyed by column name. `queryRow` in JavaScript and `query_row` in Python return the first row, or `null` and `None` when no row matches.
+
+When present, `params` is a JavaScript array or Python list of values bound to `?` placeholders in order. Values can be `null` or `None`, booleans, numbers, or strings. Each call accepts at most 64 parameters.
+
+SQL failures do not return an error object. JavaScript throws an `Error`, and Python raises a `RuntimeError`. This includes a rejected statement, a host failure, or a missing `storage.sql` permission.
+
+An unbounded `query` that exceeds 10,000 rows or 1 MiB of encoded output throws or raises instead of returning truncated rows. Add a SQL `LIMIT` when a table can grow. `queryRow` and `query_row` ask the host for only one row and return the first match.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.sql.exec('CREATE TABLE IF NOT EXISTS scores (name TEXT PRIMARY KEY, points INTEGER)');
+owncast.sql.exec(
+  'INSERT INTO scores (name, points) VALUES (?, ?) ON CONFLICT(name) DO UPDATE SET points = excluded.points',
+  ['Ada', 4],
+);
+const leaders = owncast.sql.query(
+  'SELECT name, points FROM scores ORDER BY points DESC LIMIT ?',
+  [10],
+);
+const ada = owncast.sql.queryRow('SELECT points FROM scores WHERE name = ?', ['Ada']);
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.sql.exec(
+    "CREATE TABLE IF NOT EXISTS scores (name TEXT PRIMARY KEY, points INTEGER)"
+)
+owncast.sql.exec(
+    "INSERT INTO scores (name, points) VALUES (?, ?) ON CONFLICT(name) DO UPDATE SET points = excluded.points",
+    ["Ada", 4],
+)
+leaders = owncast.sql.query(
+    "SELECT name, points FROM scores ORDER BY points DESC LIMIT ?",
+    [10],
+)
+ada = owncast.sql.query_row(
+    "SELECT points FROM scores WHERE name = ?",
+    ["Ada"],
+)
+```
+
+</TabItem>
+</Tabs>
+
+Requires `storage.sql`.
 
 ## Config
 
@@ -737,6 +793,7 @@ Method names below are the JavaScript (camelCase) form. The Python equivalents a
 | `owncast.kv.get` / `.set` / `.getJSON` / `.setJSON`                          | `storage.kv`         |
 | `owncast.storage.upload`                                                     | `storage.upload`     |
 | `owncast.fs.read` / `.readText` / `.write` / `.list` / `.delete` / `.exists` | `storage.fs`         |
+| `owncast.sql.exec` / `.query` / `.queryRow`                                  | `storage.sql`        |
 | `owncast.http.fetch`                                                         | `network.fetch`      |
 | `owncast.events.emit`                                                        | `events.emit`        |
 | `owncast.stream.current`                                                     | `server.read`        |
