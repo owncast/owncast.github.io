@@ -221,9 +221,11 @@ owncast.users.ban_ip("203.0.113.42")
 
 Requires `users.moderate`.
 
-### `owncast.users.register({ authId, displayName?, scopes? })` {/* #users-register */}
+### `owncast.users.register({ authId, displayName?, scopes?, profileUrl?, handle?, public? })` {/* #users-register */}
 
-Find-or-create an authenticated Owncast user for an external identity and return `{ userId }`. `authId` is a stable, provider-scoped identifier (e.g. `"github:583231"`, or a fixed string like `"shared"` for a single shared identity); the host namespaces it by your plugin's slug, so plugins can't collide on or spoof each other's users. The resulting user is marked authenticated, with `displayName` seeded from the provider and any `scopes` (e.g. `["MODERATOR"]`) applied. Call it again with the same `authId` to update the existing user rather than create a new one.
+Find or create an authenticated Owncast user for an external identity and return `{ userId }`. Pass the provider's stable `authId` without adding your plugin slug. The host stores the slug separately as the identity provider, so plugins cannot collide with or spoof each other's users. `displayName` seeds a new user's name, and non-empty `scopes` such as `["MODERATOR"]` are applied on each call.
+
+The optional `profileUrl`, `handle`, and `public` fields describe a verified external identity. `profileUrl` must be empty or an absolute HTTP(S) URL. `handle` is the provider's verified label, such as a GitHub login or fediverse handle. Set `public` to `true` only after the viewer opts into public display. It defaults to `false`. These profile fields are captured when the identity is first registered. Later calls with the same `authId` return the existing user but do not change the stored profile fields.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
@@ -232,6 +234,9 @@ Find-or-create an authenticated Owncast user for an external identity and return
 const { userId } = owncast.users.register({
   authId: 'github:583231',
   displayName: 'octocat',
+  profileUrl: 'https://github.com/octocat',
+  handle: 'octocat',
+  public: false, // Set true only after the viewer opts in.
 });
 ```
 
@@ -239,7 +244,13 @@ const { userId } = owncast.users.register({
 <TabItem value="py" label="Python">
 
 ```python
-result = owncast.users.register("github:583231", display_name="octocat")
+result = owncast.users.register(
+    "github:583231",
+    display_name="octocat",
+    profile_url="https://github.com/octocat",
+    handle="octocat",
+    public=False,  # Set true only after the viewer opts in.
+)
 user_id = result.user_id
 ```
 
@@ -339,9 +350,9 @@ prefs = owncast.kv.get_json("prefs", {})
 
 Requires `storage.kv`.
 
-### `owncast.storage.upload(name, bytes)`
+### `owncast.storage.upload(name, data)`
 
-Upload a file to Owncast's public file area. Returns `{ url }` (for example, `https://your-server.example/public/plugins/my-plugin/badge.png`), usable in image tags, action buttons, fediverse posts, and so on. Returns `null` if the upload fails.
+Upload a file to Owncast's public file area. JavaScript accepts a `Uint8Array` or string. Python accepts `bytes` or `str`. Raw bytes are preserved, while strings are encoded as UTF-8. JavaScript returns `{ url }` or `null`. Python returns a dict accessed as `result["url"]`, or `None`.
 
 Requires `storage.upload`.
 
@@ -349,18 +360,16 @@ Requires `storage.upload`.
 
 A private, sandboxed filesystem at `data/plugin-data/<your-slug>/`. Unlike `owncast.storage.upload`, these files stay server-side: they're never served over HTTP. Paths are relative to your sandbox root. The host confines every path to your own directory (a plugin cannot read another plugin's files, and `../` or absolute paths collapse back inside the sandbox). Parent directories are created as needed on write.
 
-| Method                 | Returns                                      |
-| ---------------------- | -------------------------------------------- |
-| `fs.read(path)`        | the file's bytes, or `null` if missing       |
-| `fs.readText(path)`    | the file as UTF-8 text, or `null` if missing |
-| `fs.write(path, data)` | `{ error? }`                                 |
-| `fs.list(dir)`         | entry names (a missing directory is empty)   |
-| `fs.delete(path)`      | `{ error? }` (file or empty directory)       |
-| `fs.exists(path)`      | boolean                                      |
+| JavaScript             | Python                 | Returns                                               |
+| ---------------------- | ---------------------- | ----------------------------------------------------- |
+| `fs.read(path)`        | `fs.read(path)`        | `Uint8Array` / `bytes`, or `null` / `None` if missing |
+| `fs.readText(path)`    | `fs.read_text(path)`   | UTF-8 `string` / `str`, or `null` / `None` if missing |
+| `fs.write(path, data)` | `fs.write(path, data)` | `{ error? }`                                          |
+| `fs.list(dir)`         | `fs.list(dir)`         | entry names (a missing directory is empty)            |
+| `fs.delete(path)`      | `fs.delete(path)`      | `{ error? }` for a file or empty directory            |
+| `fs.exists(path)`      | `fs.exists(path)`      | boolean                                               |
 
-`fs.write` and `fs.delete` return `{}` on success. If the host rejects the operation, they return `{ error }` with the reason.
-
-In Python these are `snake_case` (`fs.read_text`, the rest unchanged).
+`fs.read` preserves the original bytes. `fs.readText` and `fs.read_text` decode UTF-8. Python replaces malformed byte sequences when decoding. `fs.write` preserves a JavaScript `Uint8Array` or Python `bytes`, and UTF-8 encodes strings. `fs.write` and `fs.delete` return `{}` on success. If the host rejects the operation, they return `{ error }` with the reason.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
@@ -368,6 +377,11 @@ In Python these are `snake_case` (`fs.read_text`, the rest unchanged).
 ```js
 owncast.fs.write('notes/log.txt', 'hello');
 const text = owncast.fs.readText('notes/log.txt');
+
+const data = new Uint8Array([0xff, 0x00, 0x80]);
+owncast.fs.write('cache/data.bin', data);
+const stored = owncast.fs.read('cache/data.bin');
+if (stored) owncast.storage.upload('data.bin', stored);
 ```
 
 </TabItem>
@@ -376,6 +390,12 @@ const text = owncast.fs.readText('notes/log.txt');
 ```python
 owncast.fs.write("notes/log.txt", "hello")
 text = owncast.fs.read_text("notes/log.txt")
+
+data = bytes((0xFF, 0x00, 0x80))
+owncast.fs.write("cache/data.bin", data)
+stored = owncast.fs.read("cache/data.bin")
+if stored is not None:
+    owncast.storage.upload("data.bin", stored)
 ```
 
 </TabItem>
@@ -763,13 +783,28 @@ Cancel a pending timeout or interval by the id either call returned.
 
 Read files you shipped in your plugin's `assets/` directory. **Ambient**: no permission required. (Python: `read`, `read_text`.)
 
-### `owncast.assets.read(path)`
+### `owncast.assets.read(path)` and `owncast.assets.readText(path)`
 
-Return the bytes of a bundled asset at `path`, relative to `assets/`.
+Read a file bundled under `assets/`, relative to that directory. `read` returns the original bytes as a JavaScript `Uint8Array` or Python `bytes`. `readText` and Python's `read_text` decode the bytes as UTF-8. Python replaces malformed byte sequences when decoding. Missing files return `null` in JavaScript or `None` in Python.
 
-### `owncast.assets.readText(path)`
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
 
-Same, decoded as UTF-8 text.
+```js
+const image = owncast.assets.read('badge.png');
+const template = owncast.assets.readText('template.html');
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+image = owncast.assets.read("badge.png")
+template = owncast.assets.read_text("template.html")
+```
+
+</TabItem>
+</Tabs>
 
 ## Complete API reference
 

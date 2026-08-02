@@ -209,17 +209,45 @@ The scenario's top-level `expect` checks what happened across the whole run:
 | `browserPushes`     | List of `{ title, body, url }` browser-push payloads                                                                                                                                                                                   |
 | `fediversePosts`    | List of `{ type, body?, image?, link? }` payloads sent via `owncast.notifications.fediverse`                                                                                                                                           |
 | `fediverseOutbox`   | List of `owncast.fediverse.post` strings (exact match, in order)                                                                                                                                                                       |
-| `userRegistrations` | List of `{ authId, displayName?, scopes? }` from `owncast.users.register`, in order. `displayName` and `scopes` are checked only when set                                                                                              |
+| `userRegistrations` | List of `{ authId, displayName?, scopes?, profileUrl?, handle?, public? }` from `owncast.users.register`, in order. `authId` is always checked. Other fields are checked when present                                                  |
 | `sessionGrants`     | List of `{ userId, ttl? }` from `owncast.auth.grantSession` (`ttl` is checked only when non-zero)                                                                                                                                      |
 | `sessionClears`     | Number of `owncast.auth.endSession` calls                                                                                                                                                                                              |
 | `userModerations`   | List of `{ userId, enabled, reason }` from `owncast.users.setEnabled`                                                                                                                                                                  |
 | `bannedIPs`         | List of IPs banned via `owncast.users.banIP`                                                                                                                                                                                           |
-| `uploads`           | List of `{ name, body? }` from `owncast.storage.upload` (`body` is the uploaded bytes as a string, checked only when set)                                                                                                              |
+| `uploads`           | List of `{ name, body?, bodyBase64? }` from `owncast.storage.upload`. `name` is always checked. Non-empty `body` values compare text. Present `bodyBase64` values compare exact decoded bytes                                          |
 | `videoConfigWrites` | List of partial configs applied via `owncast.videoConfig.write()`                                                                                                                                                                      |
 | `emits`             | List of `{ eventType, payload }` for `owncast.events.emit` calls                                                                                                                                                                       |
 | `commands`          | List of `{ name, prefix?, description?, usage?, aliases?, modOnly, caseSensitive, cooldownMs }` chat-command registrations, matched by `name` in any order (`prefix`, `description`, `usage`, and `aliases` are checked only when set) |
 | `kv`                | Partial map of plugin-config state after the scenario                                                                                                                                                                                  |
 | `httpRequests`      | List of `{ url, method?, body? }` outbound `owncast.http.fetch` calls. `url` is an exact match, an omitted `method` matches any, an omitted `body` skips the check                                                                     |
+
+Use the camelCase wire names in `userRegistrations` for both JavaScript and Python scenarios. `displayName`, `profileUrl`, and `handle` are compared whenever supplied, including when set to `""`. `scopes` is compared whenever supplied. `[]` expects no scopes and matches either an omitted or empty actual list. Non-empty arrays match exactly. `public` is compared whenever supplied, so `false` asserts that the plugin kept the identity private. Omit any of these fields to skip its check.
+
+```json
+{
+  "expect": {
+    "userRegistrations": [
+      {
+        "authId": "github:583231",
+        "displayName": "octocat",
+        "profileUrl": "https://github.com/octocat",
+        "handle": "octocat",
+        "public": false
+      }
+    ]
+  }
+}
+```
+
+Use `body` for text uploads. It is checked only when its value is non-empty, so omitting it or setting it to `""` skips the body check. Use `bodyBase64` for exact byte comparisons. It is checked whenever supplied and accepts standard base64 with or without padding. An empty `bodyBase64` value (`""`) decodes to zero bytes and asserts an empty upload. If both fields contain checked values, both comparisons run.
+
+```json
+{
+  "expect": {
+    "uploads": [{ "name": "invalid-utf8.bin", "bodyBase64": "/wCA" }]
+  }
+}
+```
 
 `chatSends` (and the other chat assertions) capture posts from **any** step: including chat your plugin sends from inside an HTTP-request handler, not just from event handlers.
 
