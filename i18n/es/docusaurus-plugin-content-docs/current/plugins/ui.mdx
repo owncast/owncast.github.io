@@ -413,7 +413,7 @@ module.exports = definePlugin({
     // ctx = { slug, user? }
     if (ctx.slug === "banner") {
       const who = ctx.user ? `, ${ctx.user.displayName}` : "";
-      return `<div class="banner">Bienvenido${who}!</div>`;
+      return `<div class="banner">¡Bienvenido${who}!</div>`;
     }
     return "";
   },
