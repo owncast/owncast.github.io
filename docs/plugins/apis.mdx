@@ -18,13 +18,42 @@ tags:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Owncast plugin runtime exposes a single global, `owncast`, with the host functions your plugin can call. Most methods require the matching permission in your manifest. A call without it never reaches Owncast: the host logs the denial and the call returns an empty or zero value. A few are **ambient** and need no permission: timers, reading bundled assets, and `owncast.config.get`.
+The Owncast plugin runtime exposes a single global, `owncast`, with the host functions your plugin can call. Most methods require the matching permission in your manifest. A call without it never reaches Owncast: the host logs the denial and the call returns an empty or zero value. A few are **ambient** and need no permission: logging, timers, reading bundled assets, and `owncast.config.get`.
 
 :::new[Plugin APIs require Owncast v0.3.0]
 Plugins require Owncast 0.3.0 or later.
 :::
 
 Calls are shown for both SDKs, pick your language with the tabs. See [JavaScript](/docs/plugins/sdks/javascript) or [Python](/docs/plugins/sdks/python) for setup. (JavaScript method names are camelCase, Python uses `snake_case`, so `sendAction` becomes `send_action`, and so on.)
+
+## Logging
+
+### `owncast.log.info(message)`, `.warning(message)`, and `.error(message)`
+
+Write an operator-visible entry to Owncast's server log. Owncast records the calling plugin's slug and the matching `info`, `warning`, or `error` severity. It replaces control characters with spaces so each entry stays on one line, then truncates messages longer than 4 KiB.
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+owncast.log.info('sync started');
+owncast.log.warning('provider response is incomplete');
+owncast.log.error('sync failed');
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+owncast.log.info("sync started")
+owncast.log.warning("provider response is incomplete")
+owncast.log.error("sync failed")
+```
+
+</TabItem>
+</Tabs>
+
+Ambient: no permission required. See the paired `chat-logger` examples for [JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/chat-logger) and [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/chat-logger).
 
 ## Chat
 
@@ -812,6 +841,7 @@ Method names below are the JavaScript (camelCase) form. The Python equivalents a
 
 | API                                                                          | Permission           |
 | ---------------------------------------------------------------------------- | -------------------- |
+| `owncast.log.info` / `.warning` / `.error`                                   | none (ambient)       |
 | `owncast.chat.send`                                                          | `chat.send`          |
 | `owncast.chat.sendAction`                                                    | `chat.send`          |
 | `owncast.chat.sendTo`                                                        | `chat.send`          |
