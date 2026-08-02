@@ -30,7 +30,7 @@ Calls are shown for both SDKs, pick your language with the tabs. See [JavaScript
 
 ### `owncast.log.info(message)`, `.warning(message)`, and `.error(message)`
 
-Write an operator-visible entry to Owncast's server log. Owncast records the calling plugin's slug and the matching `info`, `warning`, or `error` severity.
+Write an operator-visible entry to Owncast's server log. Owncast records the calling plugin's slug and the matching `info`, `warning`, or `error` severity. It replaces control characters with spaces so each entry stays on one line, then truncates messages longer than 4 KiB.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
