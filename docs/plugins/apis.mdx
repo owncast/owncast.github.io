@@ -387,7 +387,7 @@ Requires `storage.upload`.
 
 ### `owncast.fs.*`
 
-A private, sandboxed filesystem at `data/plugin-data/<your-slug>/`. Unlike `owncast.storage.upload`, these files stay server-side: they're never served over HTTP. Paths are relative to your sandbox root. The host confines every path to your own directory (a plugin cannot read another plugin's files, and `../` or absolute paths collapse back inside the sandbox). Parent directories are created as needed on write.
+A private, sandboxed filesystem at `data/plugin-storage/<your-slug>/files/`. Unlike `owncast.storage.upload`, these files stay server-side: they're never served over HTTP. Paths are relative to your sandbox root. The host confines every path to your own directory (a plugin cannot read another plugin's files, and `../` or absolute paths collapse back inside the sandbox). Parent directories are created as needed on write.
 
 | JavaScript             | Python                 | Returns                                               |
 | ---------------------- | ---------------------- | ----------------------------------------------------- |
