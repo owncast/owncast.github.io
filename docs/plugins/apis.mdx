@@ -666,7 +666,29 @@ Requires `server.read`.
 
 ### `owncast.videoConfig.read()`
 
-Read the output and transcoding configuration: `{ latencyLevel, codec, variants }`, where each variant is `{ width, height, framerate, videoBitrate, audioBitrate, isPassthrough }`.
+Returns the current `VideoConfig`.
+
+| Field | Type | Values |
+| --- | --- | --- |
+| `latencyLevel` | number | `0` through `4` |
+| `codec` | string | `libx264`, `h264_omx`, `h264_vaapi`, `h264_qsv`, `h264_nvenc`, `h264_v4l2m2m`, or `h264_videotoolbox` |
+| `autoplay` | string | `off`, `always`, or `sound-only` |
+| `variants` | `StreamVariant[]` | Configured output renditions |
+
+Hardware codecs require the matching encoder in the host's ffmpeg build. Autoplay `off` requires the viewer to press play. `always` starts automatically and may fall back to muted playback. `sound-only` starts automatically only when the browser allows sound.
+
+Each `StreamVariant` has these fields:
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `width` | number | Scaled output width |
+| `height` | number | Scaled output height |
+| `framerate` | number | Output frames per second |
+| `videoBitrate` | number | Video bitrate in kbps |
+| `cpuUsageLevel` | number | Processing usage from `0` (lowest) through `4` (highest) |
+| `isPassthrough` | boolean | Pass video through without transcoding |
+
+Audio settings are not exposed to plugins. Owncast preserves the existing audio configuration for each variant a plugin updates.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
@@ -689,20 +711,20 @@ Requires `videoconfig.read`.
 
 ### `owncast.videoConfig.write(partial)`
 
-Update video configuration. Pass a partial object. Only the fields you include are changed. Changes apply on the next stream start: the host does not restart an active broadcast.
+Update any of the `VideoConfig` fields above. Pass a partial object. Only the fields you include are changed. Changes apply on the next stream start: the host does not restart an active broadcast.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-owncast.videoConfig.write({ latencyLevel: 2 });
+owncast.videoConfig.write({ latencyLevel: 2, autoplay: "sound-only" });
 ```
 
 </TabItem>
 <TabItem value="py" label="Python">
 
 ```python
-owncast.video_config.write({"latencyLevel": 2})
+owncast.video_config.write({"latencyLevel": 2, "autoplay": "sound-only"})
 ```
 
 </TabItem>
