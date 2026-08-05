@@ -671,11 +671,13 @@ Returns the current `VideoConfig`.
 | Field | Type | Values |
 | --- | --- | --- |
 | `latencyLevel` | number | `0` through `4` |
-| `codec` | string | `libx264`, `h264_omx`, `h264_vaapi`, `h264_qsv`, `h264_nvenc`, `h264_v4l2m2m`, or `h264_videotoolbox` |
+| `codec` | string | Configured ffmpeg encoder name |
 | `autoplay` | string | `off`, `always`, or `sound-only` |
 | `variants` | `StreamVariant[]` | Configured output renditions |
 
-Hardware codecs require the matching encoder in the host's ffmpeg build. Autoplay `off` requires the viewer to press play. `always` starts automatically and may fall back to muted playback. `sound-only` starts automatically only when the browser allows sound.
+`codec` reads can report a legacy value or an encoder added by a newer host. Writes accept `libx264`, `h264_omx`, `h264_vaapi`, `h264_qsv`, `h264_nvenc`, `h264_v4l2m2m`, or `h264_videotoolbox`. Hardware codecs require the matching encoder in the host's ffmpeg build.
+
+Autoplay `off` requires the viewer to press play. `always` starts automatically and may fall back to muted playback. `sound-only` starts automatically only when the browser allows sound.
 
 Each `StreamVariant` has these fields:
 
