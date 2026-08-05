@@ -246,6 +246,13 @@ html[data-theme='dark'] .docMainWrapper {
   padding-top: 10px;
 }
 
+/* Keep generated document links available for dev-doc breadcrumbs without
+   displaying a second document list in the sidebar. */
+.dev-docs-sidebar-documents {
+  display: none;
+}
+
+
 .menu__link {
   transition: padding 0.2s ease-in-out;
   font-weight: 400;

@@ -266,7 +266,7 @@ Owncast exposes internal plugin event subscriptions for inbound Fediverse activi
 | `fediverse.follow`   | `onFediverseFollow`  | `@plugin.on_fediverse_follow`  | `{ actor }`                 |
 | `fediverse.like`     | `onFediverseLike`    | `@plugin.on_fediverse_like`    | `{ actor, target }`         |
 | `fediverse.repost`   | `onFediverseRepost`  | `@plugin.on_fediverse_repost`  | `{ actor, target }`         |
-| `fediverse.quote`    | `onFediverseQuote`   | `@plugin.on_fediverse_quote`   | `{ actor, target }`         |
+| `fediverse.quote`    | `onFediverseQuote`   | `@plugin.on_fediverse_quote`   | `FediverseQuote`            |
 | `fediverse.mention`  | `onFediverseMention` | `@plugin.on_fediverse_mention` | `FediverseInboundPost`      |
 | `fediverse.reply`    | `onFediverseReply`   | `@plugin.on_fediverse_reply`   | `FediverseInboundPost`      |
 | `fediverse.activity` | `onFediverse`        | `@plugin.on_fediverse`         | Raw ActivityPub JSON object |
@@ -285,9 +285,22 @@ interface FediverseEngagement {
   actor: FediverseActor;
   target?: { url: string };
 }
+
+interface FediverseQuote extends FediverseEngagement {
+  target: { url: string }; // locally authored post being quoted
+  content?: string; // rendered HTML from the source instance
+  contentText?: string; // plain-text version
+  url: string; // remote quote post permalink
+  postedAt?: string; // ISO-8601
+  inReplyTo?: string;
+  attachments?: { url: string; mediaType: string; alt?: string }[];
+  language?: string;
+}
 ```
 
-A follow contains only `actor`. Likes, reposts, and quotes also contain `target`. For a quote, `target` is the locally authored post that the remote actor quoted.
+A follow contains only `actor`. Likes and reposts also contain `target`.
+
+A quote contains `target` for the locally authored post and `url` for the remote quote post. Content metadata is included when the requesting server embeds its quote `Note` in the `QuoteRequest`. Some servers send only the quote post IRI, so `content`, `contentText`, `postedAt`, `inReplyTo`, `attachments`, and `language` are optional.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
@@ -298,7 +311,8 @@ module.exports = definePlugin({
     owncast.chat.send(`new follower: ${event.actor.handle}`);
   },
   onFediverseQuote(event) {
-    console.log(`quoted post: ${event.target.url}`);
+    console.log(`${event.actor.handle}: ${event.contentText ?? 'quoted your post'}`);
+    console.log(`quote: ${event.url}`);
   },
 });
 ```
@@ -313,7 +327,8 @@ def thank(event):
 
 @plugin.on_fediverse_quote
 def record_quote(event):
-    print(f"quoted post: {event.target.url}")
+    print(f"{event.actor.handle}: {event.content_text or 'quoted your post'}")
+    print(f"quote: {event.url}")
 ```
 
 </TabItem>
@@ -513,7 +528,7 @@ def status(req):
 </TabItem>
 </Tabs>
 
-Endpoints are public by default. Gate admin features on `req.authenticated`. Manifest-declared admin paths (`admin.pages[].path`) are auth-gated by the host before your handler runs, so for those routes you don't need to check.
+Endpoints are public by default. Gate admin features on `req.authenticated`. Paths matching a key in `admin.pages` are auth-gated by the host before your handler runs, so for those routes you don't need to check.
 
 Requires the `http.serve` permission. The JavaScript SDK exposes a single `onHttpRequest` catch-all. The Python SDK adds declarative per-path/per-method routes (`@plugin.get`, `@plugin.route`, …). See [Serving HTTP](/docs/plugins/http) for the full request model.
 
@@ -540,9 +555,7 @@ interface AuthCheckRequest {
 }
 
 type AuthCheckResult =
-  | { action: 'ok' }
-  | { action: 'refresh'; ttl?: number }
-  | { action: 'deny'; reason?: string };
+  { action: 'ok' } | { action: 'refresh'; ttl?: number } | { action: 'deny'; reason?: string };
 ```
 
 <Tabs groupId="plugin-lang">
@@ -581,13 +594,13 @@ Requires `auth.gate`, and it fails closed: if the handler errors or times out, t
 
 ## Content handlers
 
-These two handlers let a plugin generate tab or extra-page HTML at request time: useful when the content should be personalised per viewer or depend on live stream data. They're the dynamic counterpart to shipping a static HTML file via `manifest.tabs[].content` or `manifest.extraPageContent.content`.
+These two handlers let a plugin generate tab or extra-page HTML at request time. Use them when content should be personalised per viewer or depend on live stream data. They're the dynamic counterpart to shipping a static HTML file via a tab value's `content` member or `manifest.extraPageContent.content`.
 
 Both handlers receive a `ContentRequest`:
 
 ```ts
 interface ContentRequest {
-  slug: string; // stable identifier declared in the manifest
+  slug: string; // manifest.tabs object key or manifest.extraPageContent.slug
   user?: User; // viewer's chat identity: present when authenticated, absent for anonymous viewers
 }
 ```
@@ -600,13 +613,13 @@ Return the full HTML string for the content block. If you don't recognise the sl
 ```js
 module.exports = definePlugin({
   onTabContent(ctx) {
-    if (ctx.slug === "stats") {
-      return `<h1>Live stats for ${ctx.user?.displayName ?? "viewer"}</h1>`;
+    if (ctx.slug === 'stats') {
+      return `<h1>Live stats for ${ctx.user?.displayName ?? 'viewer'}</h1>`;
     }
-    return "";
+    return '';
   },
   onPageContent(ctx) {
-    return ctx.slug === "banner" ? "<p>Welcome!</p>" : "";
+    return ctx.slug === 'banner' ? '<p>Welcome!</p>' : '';
   },
 });
 ```
@@ -630,7 +643,7 @@ def banner(ctx):
 
 ### Tab content
 
-Called when a tab entry in `manifest.tabs[]` has no static `content` file. The host passes the tab's `slug` so a single plugin can serve multiple tabs. No permission required to subscribe. Whatever Owncast APIs you call from inside the handler require their usual permissions.
+Called when a value in the `manifest.tabs` object has no static `content` file. The host passes that value's object key as `slug`, so a single plugin can serve multiple tabs. No permission required to subscribe. Whatever Owncast APIs you call from inside the handler require their usual permissions.
 
 ### Page content
 
@@ -776,7 +789,7 @@ Each row is a runtime event. The handler name follows your SDK's convention: cam
 | `fediverse.follow`       | `{ actor }`                        | `fediverse.inbound`                                |
 | `fediverse.like`         | `{ actor, target }`                | `fediverse.inbound`                                |
 | `fediverse.repost`       | `{ actor, target }`                | `fediverse.inbound`                                |
-| `fediverse.quote`        | `{ actor, target }`                | `fediverse.inbound`                                |
+| `fediverse.quote`        | `FediverseQuote`                   | `fediverse.inbound`                                |
 | `fediverse.mention`      | `FediverseInboundPost`             | `fediverse.inbound`                                |
 | `fediverse.reply`        | `FediverseInboundPost`             | `fediverse.inbound`                                |
 | `fediverse.activity`     | Raw ActivityPub JSON object        | `fediverse.inbound`                                |

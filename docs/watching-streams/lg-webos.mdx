@@ -6,18 +6,17 @@ sidebar_label: LG TVs (WebOS)
 
 deviceId: lg-webos
 deviceType: smart-tv
-reliability: medium
 hide_title: true
 tags:
   - lg
   - webos
   - smart-tv
-  - satv
+  - m3u
   - iptv
   - television
   - watching
 description: >
-  Watch Owncast streams on LG WebOS TVs using SATV or other IPTV-compatible apps.
+  Watch Owncast streams on LG WebOS TVs using an IPTV playlist app or the built-in browser.
 icon: /images/devices/lg-tv.svg
 ---
 
@@ -30,31 +29,28 @@ import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
 <DeviceOptionsGrid>
 
   <DeviceOptionCard
-    id="satv-webos"
-    title="SATV App"
+    id="iptv-webos"
+    title="IPTV Playlist App"
     badge="Recommended"
     difficulty="medium"
-    reliability="medium"
-    screenshot="/images/devices/lg-webos/satv-app.png"
-    screenshotAlt="SATV app IPTV playlist interface"
-    summary="Use the SATV app to browse the Owncast directory via IPTV playlist on your LG WebOS TV."
+    summary="Install an IPTV player from the LG Content Store and point it at the Owncast directory playlist."
   >
     <ul>
       <li>Browse the entire Owncast directory directly on your TV.</li>
-      <li>Free app available on LG Content Store.</li>
-      <li>Automatic refresh of live streams.</li>
+      <li>webOS has no native M3U playlist support, so this needs a third-party player.</li>
+      <li>Reload the playlist to pick up the streams that are live now.</li>
     </ul>
 
     <details>
       <summary>Show step-by-step instructions</summary>
 
-      1. Install **SATV** (free) from your LG TV's app store.
-      2. Run it and press button to **"Add Playlist"**.
-      3. Type in: `https://owncast.directory/api/iptv`. Make sure it's https.
-      4. Double check you typed it in correctly.
-      5. Save this playlist.
-      6. It will refresh the current live streams each time you launch the SATV app.
-      7. Choose the live stream you want to watch.
+      1. Install an IPTV or M3U player from the LG Content Store. Availability varies by region and by TV model.
+      2. Add a playlist using this URL: `https://owncast.directory/api/iptv`. Make sure it starts with `https`.
+      3. Double check you typed it in correctly, then save the playlist.
+      4. Reload or reopen the playlist to refresh the list of live streams.
+      5. Choose the live stream you want to watch.
+
+      **Note:** Players differ in how a playlist is added. Some take the URL on the TV, and others want you to upload the playlist through their own website keyed to your TV. Follow whichever method your chosen app documents.
 
     </details>
 
@@ -64,25 +60,24 @@ import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
     id="direct-url-webos"
     title="Direct URL Input"
     difficulty="hard"
-    reliability="low"
     screenshot="/images/devices/lg-webos/direct-url.png"
-    screenshotAlt="WebOS browser direct URL input"
-    summary="Some WebOS browsers may support direct playback of Owncast streams."
+    screenshotAlt="LG webOS browser address bar"
+    summary="Use the webOS Web browser app to open an Owncast stream directly on the TV."
   >
     <ul>
-      <li>May work with built-in browser on newer LG TVs.</li>
+      <li>webOS includes a Web browser app on the Home menu.</li>
       <li>Requires manual URL entry.</li>
-      <li>Limited compatibility and reliability.</li>
+      <li>LG notes that browser functions are more limited than on a computer or phone.</li>
     </ul>
 
     <details>
       <summary>Show step-by-step instructions</summary>
 
-      1. Open the web browser on your LG WebOS TV (if available).
-      2. Navigate to your Owncast server URL.
+      1. Open **Web browser** from **Home** on your LG webOS TV.
+      2. Enter your Owncast server URL in the address bar.
       3. Try to play the stream directly in the browser.
 
-      **Note:** This method has limited success and may not work on all LG TV models.
+      **Note:** TV browsers are limited compared with a phone or computer, so web video playback may not work reliably.
 
     </details>
 

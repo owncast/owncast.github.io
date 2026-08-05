@@ -28,7 +28,7 @@ Once `http.serve` is declared, the host routes every request under `/plugins/<yo
 
 ```mermaid
 flowchart LR
-    Req([Request to<br/>/plugins/my-plugin/X]) --> Admin{Path matches<br/>manifest.admin.pages?}
+    Req([Request to<br/>/plugins/my-plugin/X]) --> Admin{Path matches a<br/>manifest.admin.pages key?}
     Admin -->|yes, not authenticated| Auth401([401 Unauthorized])
     Admin -->|yes, authenticated| Static
     Admin -->|no| Static
@@ -91,7 +91,7 @@ Routes are exact and plugin-relative. Read query params from `req.query`. A hand
 </TabItem>
 </Tabs>
 
-The `manifest.admin.pages` gate at the top is covered in [UI: Admin pages](/docs/plugins/ui#admin-pages). From the perspective of HTTP serving it's just a 401-before-your-handler-runs filter applied to matching paths.
+The `manifest.admin.pages` key match at the top is covered in [UI: Admin pages](/docs/plugins/ui#admin-pages). From the perspective of HTTP serving, it is a 401-before-your-handler-runs filter applied to paths matching one of the object's keys.
 
 ## Static files
 
@@ -119,7 +119,7 @@ A request to `/plugins/my-plugin/` (no trailing path) serves `public/index.html`
 
 ## Public vs. authenticated
 
-Endpoints are public by default. To make something admin-only, either check whether the request is authenticated inside your handler and return `401` when it isn't, or declare the path in `manifest.admin.pages[]` and let the host gate it for you (see [UI: Admin pages](/docs/plugins/ui#admin-pages)).
+Endpoints are public by default. To make something admin-only, either check whether the request is authenticated inside your handler and return `401` when it isn't, or add its path glob as a key in `manifest.admin.pages` and let the host gate it for you (see [UI: Admin pages](/docs/plugins/ui#admin-pages)).
 
 For requests made by a chat user with a valid user-token, the request carries the user's identity (`id`, display name, and `scopes`). Useful for per-user dashboards or moderator-only tools:
 
@@ -152,7 +152,7 @@ def my_data(req):
 </TabItem>
 </Tabs>
 
-For paths declared in `manifest.admin.pages[]`, the host returns `401` before your handler runs, so you don't have to check at all.
+For paths matching a key in `manifest.admin.pages`, the host returns `401` before your handler runs, so you don't have to check at all.
 
 ## Realtime updates (Server-Sent Events)
 
@@ -239,7 +239,7 @@ Standard `EventSource` API on the viewer page. No library. This runs in the brow
 ### Notes
 
 - Up to 64 simultaneous connections per plugin. Over that the endpoint returns `503`. `EventSource` reconnects automatically.
-- If the channel matches one of your `admin.pages[]` globs, it's auth-gated like any admin route. Handy for an admin-only stats stream.
+- If the channel matches a key in `admin.pages`, it's auth-gated like any admin route. Handy for an admin-only stats stream.
 - The endpoint is host-owned. Your request handler never sees `/_sse/...` requests, and you can't serve your own route there.
 
 ## Putting it together: a complete overlay plugin

@@ -52,7 +52,7 @@ Le manifeste est un JSON simple qui décrit le plugin à l'hôte, indépendammen
 | `styles`           | string[] | non    | Fichiers CSS intégrés dans la page du visualiseur. Voir [`styles`](#styles-css-injection).                                                                                       |
 | `scripts`          | string[] | non    | Fichiers JavaScript intégrés dans la page du visualiseur. Voir [`scripts`](#scripts-javascript-injection).                                                                       |
 | `extraPageContent` | objet                                                        | non    | Un objet déclarant un slug et un fichier HTML optionnel ajouté au bloc de contenu supplémentaire du visualiseur. Voir [`extraPageContent`](#extrapagecontent-html-block).        |
-| `tabs`             | objet[]  | non    | Onglets de page du visualiseur que le plugin contribue aux onglets intégrés. Voir [`tabs`](#tabs-viewer-page-tabs).                                                              |
+| `tabs`             | objet                                                          | non    | Onglets de la page du visualiseur dont les clés sont des slugs stables. Voir [`tabs`](#tabs-viewer-page-tabs).                                                                    |
 
 ### `name` et `slug`
 
@@ -193,15 +193,15 @@ Couverture complète dans [UI : Boutons d'action](/docs/plugins/ui#action-butto
 
 ## `admin` : pages administratives
 
-Les plugins peuvent enregistrer des pages qui apparaissent dans l'interface utilisateur d'administration d'Owncast sous **Plugins** :
+Les plugins peuvent enregistrer des pages qui apparaissent dans l'interface d'administration d'Owncast sous **Plugins**. `pages` est un objet dont les clés sont des motifs de chemin relatifs au plugin :
 
 ```json
 {
   "permissions": ["http.serve"],
   "admin": {
-    "pages": [
-      { "title": "Paramètres", "path": "/admin", "icon": "gear" }
-    ]
+    "pages": {
+      "/admin": { "title": "Paramètres", "icon": "gear" }
+    }
   }
 }
 ```
@@ -211,7 +211,7 @@ Chaque entrée :
 | Champ   | Type   | Remarques                                                                                                                                               |
 | ------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `title` | chaîne | Requis. L'étiquette de l'onglet affichée dans l'interface d'administration.                                             |
-| `path`  | chaîne | Requis. Un chemin glob sous l'espace de noms de votre plugin (par exemple `"/admin"`, `"/admin/*"`). |
+| clé de l'objet | chaîne | Motif de chemin requis dans l'espace de noms de votre plugin, par exemple `"/admin"` ou `"/admin/*"`. N'ajoutez pas de champ `path` à la valeur de la page. |
 | `icon`  | chaîne | Facultatif. Un nom sémantique court (`gear`, `wrench`, `user`, etc.).                |
 
 Les demandes sous `/plugins/<your-slug>/<path>` correspondant à tout glob déclaré sont authentifiées par l'hôte : les demandes non authentifiées obtiennent un `401` avant que le code du plugin ne s'exécute. Couverture complète dans [UI : Pages d'administration](/docs/plugins/ui#admin-pages).
@@ -285,15 +285,15 @@ Couverture complète dans [UI : Contenu de page supplémentaire](/docs/plugins/
 
 ## `tabs` : onglets de la page du visualiseur
 
-Une liste d'onglets que le plugin contribue à la ligne d'onglets de la page du visualiseur (à côté des onglets intégrés **À propos** et **Abonnés**). Chaque entrée nécessite `title`. `content` est optionnel, et `slug` est requis uniquement lorsque `content` est omis (sinon il est dérivé de `title`).
+L'objet `tabs` ajoute des onglets à la ligne d'onglets de la page du visualiseur, à côté des onglets intégrés **À propos** et **Abonnés**. Chaque clé de l'objet est le slug stable de l'onglet. Chaque valeur nécessite `title`. `content` est facultatif.
 
 ```json
 {
   "permissions": ["ui.modify"],
-  "tabs": [
-    { "title": "Musique",    "slug": "musique",    "content": "music.html" },
-    { "title": "Calendrier", "slug": "calendrier", "content": "schedule.html" }
-  ]
+  "tabs": {
+    "musique": { "title": "Musique", "content": "music.html" },
+    "calendrier": { "title": "Calendrier", "content": "schedule.html" }
+  }
 }
 ```
 
@@ -302,7 +302,7 @@ Chaque entrée a :
 | Champ     | Remarques                                                                                                                                                                                                                                                                                                                                                                                                           |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `title`   | Requis. L'étiquette affichée sur l'onglet.                                                                                                                                                                                                                                                                                                                                          |
-| `slug`    | Requis uniquement lorsque `content` est omis (dérivé de `title` sinon). Identifiant stable passé à `onTabContent` lorsque l'hôte demande du HTML rendu. Lettres minuscules, chiffres et tirets, commençant par une lettre. Doit être unique dans les onglets du plugin.                                                          |
+| clé de l'objet | Slug stable requis. Il doit contenir des lettres minuscules, des chiffres et des tirets, et commencer par une lettre. L'hôte transmet cette clé à `onTabContent` lorsque `content` est omis. N'ajoutez pas de champ `slug` à la valeur de l'onglet. |
 | `content` | Facultatif. Chemin relatif vers un fichier HTML sous `assets/`. Les mêmes règles de chemin que `extraPageContent` (préfixées automatiquement à votre espace de noms, les chemins entre plugins et les URL `http(s)://` rejetées, doivent se terminer par `.html`). Lorsqu'il est omis, l'hôte appelle `onTabContent` à la place. |
 
 Nécessite `ui.modify`. `http.serve` n'est pas requis : le HTML de chaque onglet est lu à partir de `assets/` et intégré dans le tableau `pluginTabs[]` sur `/api/config`. La page du visualiseur associe chaque entrée à un onglet dont le corps rend le HTML directement.
@@ -354,15 +354,15 @@ Un manifeste non trivial exerçant la plupart des fonctionnalités :
     }
   ],
   "admin": {
-    "pages": [
-      { "title": "Paramètres du Sidekick", "path": "/admin", "icon": "gear" }
-    ]
+    "pages": {
+      "/admin": { "title": "Paramètres du Sidekick", "icon": "gear" }
+    }
   },
   "styles": ["sidekick.css"],
   "scripts": ["sidekick.js"],
   "extraPageContent": { "slug": "intro", "content": "intro.html" },
-  "tabs": [
-    { "title": "Calendrier", "slug": "calendrier", "content": "schedule.html" }
-  ]
+  "tabs": {
+    "calendrier": { "title": "Calendrier", "content": "schedule.html" }
+  }
 }
 ```

@@ -87,7 +87,7 @@ def block_spam(msg):
 
 The module exports five things:
 
-- **`plugin`**: the decorator registry. `@plugin.on_chat_message`, `@plugin.filter_chat_message`, `@plugin.on_stream_started`, `@plugin.on_tick`, `@plugin.on_fediverse_follow`, and the rest mirror the runtime events in the [handlers reference](/docs/plugins/events). Two take a key: `@plugin.on("custom.event")` for plugin-emitted events and `@plugin.on_tab_content("slug")` / `@plugin.on_page_content("slug")` for dynamic viewer-page HTML. Two take no key: `@plugin.on_page_styles` and `@plugin.on_page_scripts` return CSS and JavaScript injected into the viewer page at request time, gated on `ui.modify`.
+- **`plugin`**: the decorator registry. `@plugin.on_chat_message`, `@plugin.filter_chat_message`, `@plugin.on_stream_started`, `@plugin.on_tick`, `@plugin.on_fediverse_follow`, and the rest mirror the runtime events in the [handlers reference](/docs/plugins/events). Two take a key: `@plugin.on("custom.event")` for plugin-emitted events and `@plugin.on_tab_content("slug")` / `@plugin.on_page_content("slug")` for dynamic viewer-page HTML. For tab content, the decorator argument matches a `manifest.tabs` object key. For extra page content, it matches `manifest.extraPageContent.slug`. Two take no key: `@plugin.on_page_styles` and `@plugin.on_page_scripts` return CSS and JavaScript injected into the viewer page at request time, gated on `ui.modify`.
 - **`owncast`**: the host API namespace. Method names are **`snake_case`** (`owncast.chat.send_action`, `owncast.kv.get_json`). Each call is gated by the matching permission you declare in your manifest. See the [APIs reference](/docs/plugins/apis).
 - **`filter`**, filter results returned from a `filter_chat_message` handler: `filter.pass_()` (trailing underscore, `pass` is a Python keyword), `filter.modify(...)`, `filter.drop(reason)`.
 - **`auth_check`**: verdict helpers for the `@plugin.on_auth_check` handler of an `auth.gate` plugin: `auth_check.ok()`, `auth_check.refresh(ttl=...)`, `auth_check.deny(reason)`.
@@ -104,13 +104,13 @@ Two more Python idioms worth knowing, both documented in full (with Python examp
 
 Installing the SDK gives you `owncast-plugin-py`. Building and packaging bundle your source and need no compiler. The `test`, `serve`, and `package` commands fetch the prebuilt host binaries on first use (`package` runs its install-time load check through the test binary):
 
-| Command                             | What it does                                                        |
-| ----------------------------------- | ------------------------------------------------------------------- |
-| `owncast-plugin-py new my-plugin`   | Scaffold a new plugin project in `./my-plugin`                      |
-| `owncast-plugin-py build`           | Build `src/plugin.py` (without packaging)                           |
-| `owncast-plugin-py test`            | Build, then run the `__tests__/` scenarios                          |
-| `owncast-plugin-py serve`           | Local dev server (`-p/--port` to change the port, defaults to 8080) |
-| `owncast-plugin-py package`         | Build + bundle → `<slug>.ocpkg`: the file you ship                  |
+| Command                           | What it does                                                        |
+| --------------------------------- | ------------------------------------------------------------------- |
+| `owncast-plugin-py new my-plugin` | Scaffold a new plugin project in `./my-plugin`                      |
+| `owncast-plugin-py build`         | Build `src/plugin.py` (without packaging)                           |
+| `owncast-plugin-py test`          | Build, then run the `__tests__/` scenarios                          |
+| `owncast-plugin-py serve`         | Local dev server (`-p/--port` to change the port, defaults to 8080) |
+| `owncast-plugin-py package`       | Build + bundle → `<slug>.ocpkg`: the file you ship                  |
 
 ```sh
 owncast-plugin-py package    # produces my-plugin.ocpkg

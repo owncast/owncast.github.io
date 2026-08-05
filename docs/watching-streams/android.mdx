@@ -1,0 +1,118 @@
+---
+id: devices-android
+title: Android phones and tablets
+slug: /watching-streams/android
+sidebar_label: Android phones and tablets
+
+deviceId: android
+deviceType: mobile
+icon: /images/devices/android.svg
+hide_title: true
+tags:
+  - android
+  - vlc
+  - mpv
+  - hls
+  - mobile
+  - watching
+description: Watch Owncast streams on Android phones and tablets with VLC, mpv-android, or the built-in web player.
+---
+
+import DeviceLayout from '@site/src/components/tv/DeviceLayout';
+import { DeviceOptionsGrid } from '@site/src/components/tv/DeviceOptionsGrid';
+import { DeviceOptionCard } from '@site/src/components/tv/DeviceOptionCard';
+import StoreButton from '@site/src/components/StoreButton';
+
+<DeviceLayout>
+
+<DeviceOptionsGrid>
+
+  <DeviceOptionCard
+    id="vlc-android"
+    title="VLC for Android"
+    badge="Recommended"
+    difficulty="easy"
+    screenshot="/images/devices/android/vlc-android.webp"
+    screenshotAlt="VLC for Android app interface"
+    summary="Use VLC to play an Owncast stream from its direct HLS URL."
+  >
+    <ul>
+      <li>Free and open source.</li>
+      <li>Supports network streams and adaptive streaming.</li>
+      <li>Works on Android phones, tablets, and Android TV devices.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Install VLC from Google Play.
+      2. Open the **More** tab and select **Streams**.
+      3. Enter your stream URL. The direct HLS form is the most reliable, for example `https://watch.owncast.online/hls/stream.m3u8`.
+      4. Tap the send arrow next to the field to start playback.
+
+    </details>
+
+    <StoreButton
+      url="https://play.google.com/store/apps/details?id=org.videolan.vlc"
+      type="android"
+    />
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard
+    id="mpv-android"
+    title="mpv-android"
+    difficulty="medium"
+    screenshot="/images/devices/android/mpv-android.webp"
+    screenshotAlt="mpv-android playback interface"
+    summary="Use mpv-android when you want a lightweight player for a direct Owncast stream URL."
+  >
+    <ul>
+      <li>Open source player based on libmpv.</li>
+      <li>Supports network playback, including HLS streams.</li>
+      <li>Offers detailed playback and subtitle controls.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Install mpv-android from Google Play.
+      2. On the main screen, tap **Open URL**.
+      3. Enter your stream URL, for example `https://watch.owncast.online/hls/stream.m3u8`.
+      4. Tap **OK**.
+
+    </details>
+
+    <StoreButton
+      url="https://play.google.com/store/apps/details?id=is.xyz.mpv"
+      type="android"
+    />
+
+  </DeviceOptionCard>
+
+  <DeviceOptionCard
+    id="android-web-player"
+    title="Android web browser"
+    difficulty="easy"
+    summary="The built-in browser can use Owncast's web player without installing another app."
+  >
+    <ul>
+      <li>Open your Owncast server URL in Chrome or another modern Android browser.</li>
+      <li>Uses the same web player as desktop viewers.</li>
+      <li>Supports chat, stream metadata, and authentication when the server enables them.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Open Chrome or another modern browser on your Android device.
+      2. Navigate to your Owncast server URL, such as `https://watch.owncast.online`.
+      3. Tap the play button.
+
+    </details>
+
+  </DeviceOptionCard>
+
+</DeviceOptionsGrid>
+
+</DeviceLayout>

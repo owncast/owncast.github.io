@@ -31,18 +31,18 @@ Scenarios are plain data, so the scenario model on this page is identical whatev
 Write `__tests__/*.test.js` files that call `runScenarios([...])`:
 
 ```js
-const { runScenarios } = require("@owncast/plugin-sdk/testing");
+const { runScenarios } = require('@owncast/plugin-sdk/testing');
 
 runScenarios([
   {
-    name: "echoes the message",
+    name: 'echoes the message',
     events: [
       {
-        event: "chat.message.received",
-        payload: { user: { id: "u1", displayName: "alice" }, body: "hi" },
+        event: 'chat.message.received',
+        payload: { user: { id: 'u1', displayName: 'alice' }, body: 'hi' },
       },
     ],
-    expect: { chatSends: ["alice said: hi"] },
+    expect: { chatSends: ['alice said: hi'] },
   },
 ]);
 ```
@@ -85,16 +85,16 @@ A scenario describes **host events**, not your plugin code, so payload fields us
 ```json
 {
   "name": "human-readable description",
-  "given": { },
-  "events": [ ],
-  "expect": { }
+  "given": {},
+  "events": [],
+  "expect": {}
 }
 ```
 
-* `name`: what the scenario tests. Shown in pass/fail output.
-* `given`: optional. Seed initial state your plugin reads from (chat history, kv values, server info, canned HTTP responses).
-* `events`: the steps to run, in order. Each step is one notification dispatch, filter chain invocation, or HTTP request.
-* `expect`: final-state assertions (after every step runs). What chat messages were posted, what HTTP requests went out, what was written to kv, and so on.
+- `name`: what the scenario tests. Shown in pass/fail output.
+- `given`: optional. Seed initial state your plugin reads from (chat history, kv values, server info, canned HTTP responses).
+- `events`: the steps to run, in order. Each step is one notification dispatch, filter chain invocation, or HTTP request.
+- `expect`: final-state assertions (after every step runs). What chat messages were posted, what HTTP requests went out, what was written to kv, and so on.
 
 ## Step types
 
@@ -180,7 +180,7 @@ For [`auth.gate`](/docs/plugins/auth) plugins, drives the [`onAuthCheck`](/docs/
 }
 ```
 
-`action` is `"ok"`, `"refresh"`, or `"deny"`; `reason` is optional and matched exactly when set.
+`action` is `"ok"`, `"refresh"`, or `"deny"`. `reason` is optional and matched exactly when set.
 
 ### Content steps
 
@@ -190,36 +190,65 @@ For [`auth.gate`](/docs/plugins/auth) plugins, drives the [`onAuthCheck`](/docs/
 { "tabContent": { "slug": "schedule", "expect": { "bodyContains": "Friday" } } }
 ```
 
-`tabContent` and `pageContent` take a `slug` and an optional `user`; all four accept `expect.body` (exact) or `expect.bodyContains`.
+`tabContent` and `pageContent` take a `slug` and an optional `user`. In production, Owncast passes a `manifest.tabs` object key to `onTabContent` and `manifest.extraPageContent.slug` to `onPageContent`. Scenario steps call these handlers directly, so the slug can be arbitrary when testing fallback behavior for an unknown slug. All four steps accept `expect.body` (exact) or `expect.bodyContains`.
 
 ## Final-state assertions
 
 The scenario's top-level `expect` checks what happened across the whole run:
 
-| Assertion           | What it checks                                                                  |
-| ------------------- | ------------------------------------------------------------------------------- |
-| `chatSends`         | List of `owncast.chat.send` strings (exact match, in order)                     |
-| `chatActions`       | List of `owncast.chat.sendAction` strings                                       |
-| `chatSystems`       | List of `owncast.chat.system` strings                                           |
-| `chatTo`            | List of `{ clientId, text }` from `owncast.chat.sendTo` / `replyTo`             |
-| `sseSends`          | Ordered list of `{ channel, event?, data? }` from `owncast.sse.send` (omit `event`/`data` to match only on channel) |
-| `deletedMessages`   | Message IDs hidden via `owncast.chat.deleteMessage`                             |
-| `kickedClients`     | Client IDs disconnected via `owncast.chat.kick`                                 |
-| `discordPosts`      | List of Discord notification strings                                            |
-| `browserPushes`     | List of `{ title, body, url }` browser-push payloads                            |
-| `fediversePosts`    | List of `{ type, body?, image?, link? }` payloads sent via `owncast.notifications.fediverse` |
-| `fediverseOutbox`   | List of `owncast.fediverse.post` strings (exact match, in order)                |
-| `userRegistrations` | List of `{ authId, displayName?, scopes? }` from `owncast.users.register`, in order. `displayName` and `scopes` are checked only when set |
-| `sessionGrants`     | List of `{ userId, ttl? }` from `owncast.auth.grantSession` (`ttl` is checked only when non-zero) |
-| `sessionClears`     | Number of `owncast.auth.endSession` calls                                       |
-| `userModerations`   | List of `{ userId, enabled, reason }` from `owncast.users.setEnabled`           |
-| `bannedIPs`         | List of IPs banned via `owncast.users.banIP`                                    |
-| `uploads`           | List of `{ name, body? }` from `owncast.storage.upload` (`body` is the uploaded bytes as a string, checked only when set) |
-| `videoConfigWrites` | List of partial configs applied via `owncast.videoConfig.write()`               |
-| `emits`             | List of `{ eventType, payload }` for `owncast.events.emit` calls                |
+| Assertion           | What it checks                                                                                                                                                                                                                         |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatSends`         | List of `owncast.chat.send` strings (exact match, in order)                                                                                                                                                                            |
+| `chatActions`       | List of `owncast.chat.sendAction` strings                                                                                                                                                                                              |
+| `chatSystems`       | List of `owncast.chat.system` strings                                                                                                                                                                                                  |
+| `logs`              | Ordered list of `{ plugin, level, message }` entries from `owncast.log`. `plugin` is the manifest slug and `level` is `info`, `warning`, or `error`                                                                                    |
+| `chatTo`            | List of `{ clientId, text }` from `owncast.chat.sendTo` / `replyTo`                                                                                                                                                                    |
+| `sseSends`          | Ordered list of `{ channel, event?, data? }` from `owncast.sse.send` (omit `event`/`data` to match only on channel)                                                                                                                    |
+| `deletedMessages`   | Message IDs hidden via `owncast.chat.deleteMessage`                                                                                                                                                                                    |
+| `kickedClients`     | Client IDs disconnected via `owncast.chat.kick`                                                                                                                                                                                        |
+| `discordPosts`      | List of Discord notification strings                                                                                                                                                                                                   |
+| `browserPushes`     | List of `{ title, body, url }` browser-push payloads                                                                                                                                                                                   |
+| `fediversePosts`    | List of `{ type, body?, image?, link? }` payloads sent via `owncast.notifications.fediverse`                                                                                                                                           |
+| `fediverseOutbox`   | List of `owncast.fediverse.post` strings (exact match, in order)                                                                                                                                                                       |
+| `userRegistrations` | List of `{ authId, displayName?, scopes?, profileUrl?, handle?, public? }` from `owncast.users.register`, in order. `authId` is always checked. Other fields are checked when present                                                  |
+| `sessionGrants`     | List of `{ userId, ttl? }` from `owncast.auth.grantSession` (`ttl` is checked only when non-zero)                                                                                                                                      |
+| `sessionClears`     | Number of `owncast.auth.endSession` calls                                                                                                                                                                                              |
+| `userModerations`   | List of `{ userId, enabled, reason }` from `owncast.users.setEnabled`                                                                                                                                                                  |
+| `bannedIPs`         | List of IPs banned via `owncast.users.banIP`                                                                                                                                                                                           |
+| `uploads`           | List of `{ name, body?, bodyBase64? }` from `owncast.storage.upload`. `name` is always checked. Non-empty `body` values compare text. Present `bodyBase64` values compare exact decoded bytes                                          |
+| `videoConfigWrites` | List of partial configs applied via `owncast.videoConfig.write()`                                                                                                                                                                      |
+| `emits`             | List of `{ eventType, payload }` for `owncast.events.emit` calls                                                                                                                                                                       |
 | `commands`          | List of `{ name, prefix?, description?, usage?, aliases?, modOnly, caseSensitive, cooldownMs }` chat-command registrations, matched by `name` in any order (`prefix`, `description`, `usage`, and `aliases` are checked only when set) |
-| `kv`                | Partial map of plugin-config state after the scenario                           |
-| `httpRequests`      | List of `{ url, method?, body? }` outbound `owncast.http.fetch` calls. `url` is an exact match, an omitted `method` matches any, an omitted `body` skips the check |
+| `kv`                | Partial map of plugin-config state after the scenario                                                                                                                                                                                  |
+| `httpRequests`      | List of `{ url, method?, body? }` outbound `owncast.http.fetch` calls. `url` is an exact match, an omitted `method` matches any, an omitted `body` skips the check                                                                     |
+
+Use the camelCase wire names in `userRegistrations` for both JavaScript and Python scenarios. `displayName`, `profileUrl`, and `handle` are compared whenever supplied, including when set to `""`. `scopes` is compared whenever supplied. `[]` expects no scopes and matches either an omitted or empty actual list. Non-empty arrays match exactly. `public` is compared whenever supplied, so `false` asserts that the plugin kept the identity private. Omit any of these fields to skip its check.
+
+```json
+{
+  "expect": {
+    "userRegistrations": [
+      {
+        "authId": "github:583231",
+        "displayName": "octocat",
+        "profileUrl": "https://github.com/octocat",
+        "handle": "octocat",
+        "public": false
+      }
+    ]
+  }
+}
+```
+
+Use `body` for text uploads. It is checked only when its value is non-empty, so omitting it or setting it to `""` skips the body check. Use `bodyBase64` for exact byte comparisons. It is checked whenever supplied and accepts standard base64 with or without padding. An empty `bodyBase64` value (`""`) decodes to zero bytes and asserts an empty upload. If both fields contain checked values, both comparisons run.
+
+```json
+{
+  "expect": {
+    "uploads": [{ "name": "invalid-utf8.bin", "bodyBase64": "/wCA" }]
+  }
+}
+```
 
 `chatSends` (and the other chat assertions) capture posts from **any** step: including chat your plugin sends from inside an HTTP-request handler, not just from event handlers.
 
@@ -233,15 +262,19 @@ Example exercising several:
 {
   "name": "bumps the counter and broadcasts an event",
   "events": [
-    { "event": "chat.message.received", "payload": { "user": { "id": "u-alice", "displayName": "alice" }, "body": "hi" } },
-    { "event": "chat.message.received", "payload": { "user": { "id": "u-alice", "displayName": "alice" }, "body": "hi again" } }
+    {
+      "event": "chat.message.received",
+      "payload": { "user": { "id": "u-alice", "displayName": "alice" }, "body": "hi" }
+    },
+    {
+      "event": "chat.message.received",
+      "payload": { "user": { "id": "u-alice", "displayName": "alice" }, "body": "hi again" }
+    }
   ],
   "expect": {
     "chatSends": ["alice: 1 message", "alice: 2 messages"],
     "kv": { "count:u-alice": "2" },
-    "emits": [
-      { "eventType": "milestone.reached", "payload": { "user": "alice", "count": 2 } }
-    ]
+    "emits": [{ "eventType": "milestone.reached", "payload": { "user": "alice", "count": 2 } }]
   }
 }
 ```
@@ -250,21 +283,21 @@ Example exercising several:
 
 Each `given.*` field controls what a specific host read returns. Combine these to put your plugin in any state you want.
 
-| Field               | Controls                                                       |
-| ------------------- | -------------------------------------------------------------- |
-| `given.kv`          | Pre-populate your plugin's key/value store (`owncast.kv`)      |
-| `given.config`      | Admin-set overrides for manifest-declared config keys (`owncast.config.get`); unseeded keys return the manifest defaults |
-| `given.stream`      | What `owncast.stream.current()` returns                        |
-| `given.broadcaster` | What `owncast.stream.broadcaster()` returns                    |
-| `given.server`      | What `owncast.server.info()` returns                           |
-| `given.socials`     | What `owncast.server.socials()` returns                        |
-| `given.federation`  | What `owncast.server.federation()` returns                     |
-| `given.tags`        | What `owncast.server.tags()` returns                           |
-| `given.videoConfig` | What `owncast.videoConfig.read()` returns                      |
-| `given.chatHistory` | What `owncast.chat.history()` returns                          |
-| `given.chatClients` | What `owncast.chat.clients()` returns                          |
-| `given.users`       | What `owncast.users.list()` / `.get(id)` returns               |
-| `given.httpResponses` | Canned responses for outbound `owncast.http.fetch` calls     |
+| Field                 | Controls                                                                                                                 |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `given.kv`            | Pre-populate your plugin's key/value store (`owncast.kv`)                                                                |
+| `given.config`        | Admin-set overrides for manifest-declared config keys (`owncast.config.get`). Unseeded keys return the manifest defaults |
+| `given.stream`        | What `owncast.stream.current()` returns                                                                                  |
+| `given.broadcaster`   | What `owncast.stream.broadcaster()` returns                                                                              |
+| `given.server`        | What `owncast.server.info()` returns                                                                                     |
+| `given.socials`       | What `owncast.server.socials()` returns                                                                                  |
+| `given.federation`    | What `owncast.server.federation()` returns                                                                               |
+| `given.tags`          | What `owncast.server.tags()` returns                                                                                     |
+| `given.videoConfig`   | What `owncast.videoConfig.read()` returns                                                                                |
+| `given.chatHistory`   | What `owncast.chat.history()` returns                                                                                    |
+| `given.chatClients`   | What `owncast.chat.clients()` returns                                                                                    |
+| `given.users`         | What `owncast.users.list()` / `.get(id)` returns                                                                         |
+| `given.httpResponses` | Canned responses for outbound `owncast.http.fetch` calls                                                                 |
 
 Example:
 
@@ -308,7 +341,7 @@ For plugins that call `owncast.http.fetch`, `given.httpResponses` is an array of
 }
 ```
 
-A fixture matches by `url` glob (and `method`, if set). The first matching fixture wins and serves any number of calls — fixtures aren't consumed, so a sequence where the same URL must answer differently across calls (a 401 followed by a 200 after a token refresh, say) can't be modeled; unit-test that branch outside the runner. If your plugin makes a call that no fixture matches, the framework fails the scenario so you know to add a case.
+A fixture matches by `url` glob (and `method`, if set). The first matching fixture wins and serves any number of calls. Fixtures aren't consumed, so a sequence where the same URL must answer differently across calls (a 401 followed by a 200 after a token refresh, say) can't be modeled. Unit-test that branch outside the runner. If your plugin makes a call that no fixture matches, the framework fails the scenario so you know to add a case.
 
 ## Auth in HTTP scenarios
 
@@ -352,9 +385,9 @@ Without either flag, requests to manifest-declared admin paths return `401` befo
 
 ## Speed and isolation
 
-* Each scenario gets a fresh plugin instance and a clean in-memory config. State doesn't leak from one scenario to the next.
-* Tests are fast. A typical test file with rebuild finishes in a few seconds. Run them on every save.
-* No real Owncast required. The runtime is bundled with the SDK, so you don't need a server to test.
+- Each scenario gets a fresh plugin instance and a clean in-memory config. State doesn't leak from one scenario to the next.
+- Tests are fast. A typical test file with rebuild finishes in a few seconds. Run them on every save.
+- No real Owncast required. The runtime is bundled with the SDK, so you don't need a server to test.
 
 ## Local dev server
 

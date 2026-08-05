@@ -6,7 +6,6 @@ sidebar_label: Samsung TVs
 
 deviceId: samsung-tv
 deviceType: smart-tv
-reliability: low
 hide_title: true
 tags:
   - samsung
@@ -29,27 +28,24 @@ import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
 
   <DeviceOptionCard
     id="browser-samsung"
-    title="Built-in Browser"
+    title="Built-in Internet Browser"
     difficulty="hard"
-    reliability="low"
-    screenshot="/images/devices/samsung-tv/browser-interface.png"
-    screenshotAlt="Samsung TV built-in browser interface"
-    summary="Try using Samsung TV's built-in browser to access Owncast streams directly."
+    summary="Try Samsung's preinstalled Internet app to open an Owncast stream directly on the TV."
   >
     <ul>
-      <li>May work on newer Samsung TV models.</li>
-      <li>Limited browser capabilities on most Samsung TVs.</li>
+      <li>Samsung ships a preinstalled browser app called Internet.</li>
+      <li>Browser capability and video support vary by model and firmware.</li>
       <li>No guarantees of compatibility.</li>
     </ul>
 
     <details>
       <summary>Show step-by-step instructions</summary>
 
-      1. Open the **Web Browser** app on your Samsung TV (if available).
+      1. Press **Home**, move left in Smart Hub, select **Media**, then open the **Internet** app.
       2. Navigate to your Owncast server URL.
       3. Try to play the stream directly in the browser.
 
-      **Note:** Samsung TVs have limited support for web-based video streaming and this method may not work reliably.
+      **Note:** TV browsers are limited compared with a phone or computer, so web video playback may not work reliably.
 
     </details>
 
@@ -59,9 +55,8 @@ import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
     id="casting-samsung"
     title="Screen Mirroring/Casting"
     difficulty="medium"
-    reliability="medium"
     screenshot="/images/devices/samsung-tv/screen-mirroring.png"
-    screenshotAlt="Samsung TV screen mirroring setup"
+    screenshotAlt="AirPlay device selection screen"
     summary="Use screen mirroring from your phone or computer to display Owncast streams."
   >
     <ul>
@@ -90,9 +85,8 @@ import { DeviceOptionCard } from "@site/src/components/tv/DeviceOptionCard";
     title="External Streaming Device"
     badge="Recommended"
     difficulty="easy"
-    reliability="high"
-    screenshot="/images/devices/samsung-tv/external-devices.png"
-    screenshotAlt="External streaming devices connected to Samsung TV"
+    screenshot="/images/devices/roku/owncasts-roku-home.jpg"
+    screenshotAlt="Owncasts for Roku home screen"
     summary="Connect a dedicated streaming device to your Samsung TV for better Owncast compatibility."
   >
     <ul>

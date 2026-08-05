@@ -50,10 +50,11 @@ If your application has what is often called "IPTV" or M3U support, you can brow
 
 ### Smart TVs
 
-- **[LG TVs (WebOS)](/docs/watching-streams/lg-webos)** - SATV or other IPTV apps
-- **[Samsung TVs](/docs/watching-streams/samsung-tv)** - Built-in browser, mirroring, or an external device
+- **[LG TVs (WebOS)](/docs/watching-streams/lg-webos)** - An IPTV playlist app or the built-in browser
+- **[Samsung TVs](/docs/watching-streams/samsung-tv)** - The Internet app, mirroring, or an external device
 
 ### Mobile, Desktop, and Media Centers
+- **[Android phones and tablets](/docs/watching-streams/android)** - VLC, mpv-android, or the built-in web player
 
 - **[iPhone & iPad](/docs/watching-streams/iphone-ipad)** - Owncasts for iOS, Safari, or VLC
 - **[Kodi](/docs/watching-streams/kodi)** - Owncast plugin or direct URL playback

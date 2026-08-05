@@ -58,7 +58,7 @@ export function InstallerSection() {
             keyPoints={keyPoints}
           />
 
-          <div className="relative mt-4 hidden w-full md:block">
+          <div className="relative mt-4 hidden w-full max-w-md md:block">
             <img
               src="/images/lp-1-owncat-cta.svg"
               alt=""
