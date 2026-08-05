@@ -4,11 +4,16 @@ import Translate from '@docusaurus/Translate';
 import Link from '@docusaurus/Link';
 import type { Props } from '@theme/AnnouncementBar/Content';
 import styles from './styles.module.css';
-import NewIcon from '@site/static/images/4-owncat-new.svg';
+
 export default function AnnouncementBarContent(props: Props): React.JSX.Element {
   return (
     <div {...props} className={clsx(styles.content, props.className)}>
-      <NewIcon className={styles.announceBarNewIcon} />
+      <img
+        className={styles.announceBarNewIcon}
+        src="/images/4-owncat-new.svg"
+        alt=""
+        aria-hidden="true"
+      />
       <Translate
         id="homepage.announcementBar.plugins"
         description="Announcement bar message linking to the plugins docs"

@@ -391,6 +391,9 @@ const config: Config = {
               includeBlog: true,
               excludeImports: true,
               removeDuplicateHeadings: true,
+              // Link to complete rendered pages. Source MDX imports are not
+              // self-contained when exported as individual Markdown files.
+              addMdExtension: false,
               generateLLMsFullTxt: true,
               ignoreFiles: ['troubleshoot/*'],
               customLLMFiles: [

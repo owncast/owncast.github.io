@@ -9,6 +9,7 @@ npm install          # Install dependencies (Node >= 20)
 npm start            # Dev server with hot reload
 npm run build        # Full production build (runs prebuild first)
 npm run typecheck    # TypeScript type checking
+npm run verify:llm   # Check generated LLM links and extraction markup after a build
 ```
 
 The prebuild step fetches dynamic data from GitHub (releases, contributors, avatars, API URLs). It requires network access and may need a `GITHUB_TOKEN` env var for rate limits.
