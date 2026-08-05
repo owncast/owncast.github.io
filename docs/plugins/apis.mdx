@@ -432,59 +432,90 @@ if stored is not None:
 
 Requires `storage.fs`.
 
-### `owncast.sql.exec(sql, params?)`, `.query(sql, params?)`, and `.queryRow(sql, params?)`
+### `owncast.sql.*`
 
-Each plugin gets a private SQLite database, separate from Owncast's database.
+One private SQLite database per plugin, at `data/plugin-storage/<your-slug>/db/plugin.db`, separate from Owncast's own database and from the [`storage.fs`](/docs/plugins/permissions#storagefs) sandbox. The sandbox is rooted at `files/`, so `db/` is not a path `owncast.fs.*` refuses but one it cannot express, and the filesystem quota walk covers `files/` only, so the two quotas stay independent. Reach for this over [`storage.kv`](/docs/plugins/permissions#storagekv) when you need to sort, filter, or aggregate rather than just remember a value.
 
-On success, `exec` returns `{ rowsAffected, lastInsertId }` in JavaScript and a dict with the same camelCase keys in Python. There is no `ok` field. `query` returns an array or list of rows keyed by column name. `queryRow` in JavaScript and `query_row` in Python return the first row, or `null` and `None` when no row matches.
+| Method                       | Returns                                              |
+| ---------------------------- | ---------------------------------------------------- |
+| `sql.exec(sql, params?)`     | `{ rowsAffected, lastInsertId }`                     |
+| `sql.query(sql, params?)`    | rows as objects keyed by column name                 |
+| `sql.queryRow(sql, params?)` | the first row object, or `null` when nothing matched |
 
-When present, `params` is a JavaScript array or Python list of values bound to `?` placeholders in order. Values can be `null` or `None`, booleans, numbers, or strings. Each call accepts at most 64 parameters.
-
-SQL failures do not return an error object. JavaScript throws an `Error`, and Python raises a `RuntimeError`. This includes a rejected statement, a host failure, or a missing `storage.sql` permission.
-
-An unbounded `query` that exceeds 10,000 rows or 1 MiB of encoded output throws or raises instead of returning truncated rows. Add a SQL `LIMIT` when a table can grow. `queryRow` and `query_row` ask the host for only one row and return the first match.
+In Python `queryRow` is `query_row`, rows come back as dicts, and `query_row` returns `None` when nothing matched. An error throws in JavaScript and raises `RuntimeError` in Python. Parameters are `null`/`None`, booleans, numbers, or strings. Anything else is refused.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-owncast.sql.exec('CREATE TABLE IF NOT EXISTS scores (name TEXT PRIMARY KEY, points INTEGER)');
+owncast.sql.exec(`CREATE TABLE IF NOT EXISTS chatters (
+  user_id  TEXT PRIMARY KEY,
+  messages INTEGER NOT NULL DEFAULT 0
+)`);
+
 owncast.sql.exec(
-  'INSERT INTO scores (name, points) VALUES (?, ?) ON CONFLICT(name) DO UPDATE SET points = excluded.points',
-  ['Ada', 4],
+  `INSERT INTO chatters (user_id, messages) VALUES (?, 1)
+   ON CONFLICT (user_id) DO UPDATE SET messages = messages + 1`,
+  [msg.user.id],
 );
-const leaders = owncast.sql.query(
-  'SELECT name, points FROM scores ORDER BY points DESC LIMIT ?',
-  [10],
+
+const top = owncast.sql.query(
+  'SELECT user_id, messages FROM chatters ORDER BY messages DESC LIMIT ?',
+  [5],
 );
-const ada = owncast.sql.queryRow('SELECT points FROM scores WHERE name = ?', ['Ada']);
+const mine = owncast.sql.queryRow('SELECT messages FROM chatters WHERE user_id = ?', [msg.user.id]);
 ```
 
 </TabItem>
 <TabItem value="py" label="Python">
 
 ```python
+owncast.sql.exec("""
+    CREATE TABLE IF NOT EXISTS chatters (
+      user_id  TEXT PRIMARY KEY,
+      messages INTEGER NOT NULL DEFAULT 0
+    )
+""")
+
 owncast.sql.exec(
-    "CREATE TABLE IF NOT EXISTS scores (name TEXT PRIMARY KEY, points INTEGER)"
+    """
+    INSERT INTO chatters (user_id, messages) VALUES (?, 1)
+    ON CONFLICT (user_id) DO UPDATE SET messages = messages + 1
+    """,
+    [msg.user.id],
 )
-owncast.sql.exec(
-    "INSERT INTO scores (name, points) VALUES (?, ?) ON CONFLICT(name) DO UPDATE SET points = excluded.points",
-    ["Ada", 4],
+
+top = owncast.sql.query(
+    "SELECT user_id, messages FROM chatters ORDER BY messages DESC LIMIT ?",
+    [5],
 )
-leaders = owncast.sql.query(
-    "SELECT name, points FROM scores ORDER BY points DESC LIMIT ?",
-    [10],
-)
-ada = owncast.sql.query_row(
-    "SELECT points FROM scores WHERE name = ?",
-    ["Ada"],
-)
+mine = owncast.sql.query_row("SELECT messages FROM chatters WHERE user_id = ?", [msg.user.id])
 ```
 
 </TabItem>
 </Tabs>
 
-Requires `storage.sql`.
+Each `exec` call runs as one host-owned transaction. A multi-statement batch commits whole or leaves the database untouched, so a schema migration can't half-apply. A plugin cannot leave a transaction open across calls, so there's nothing to clean up either.
+
+`query` never hands back a silently short result. A query that overruns the row cap or the result budget is an **error** telling you to add a `LIMIT`, so write the bound you actually want when a table grows with your audience. `queryRow` reads a single row, which keeps it cheap on a table `query` is too big for.
+
+| Limit                 | Value                         |
+| --------------------- | ----------------------------- |
+| Encoded request       | 64 KiB total JSON             |
+| Bound parameters      | 64 per call                   |
+| Returned column value | 1 MiB                         |
+| Encoded query result  | 1 MiB                         |
+| Rows returned         | 10000                         |
+| Call duration         | 2 seconds                     |
+| Database size         | 128 MiB                       |
+
+Ordinary SQL is unaffected: DDL, DML, indexes, views, triggers, `ORDER BY`, recursive CTEs, subqueries, `UNION`, and the json1 functions all work. Refused in every host: `ATTACH`, `DETACH`, every `PRAGMA` (reads included), temporary-schema DDL both as keywords (`CREATE TEMP TABLE` / `INDEX` / `TRIGGER` / `VIEW`) and schema-qualified (`CREATE TABLE temp.x`), `load_extension()`, `VACUUM` and `VACUUM INTO`, and transaction controls (`BEGIN`, `COMMIT`, `END`, `ROLLBACK`, `SAVEPOINT`, and `RELEASE`). `exec` already owns the transaction around the whole batch.
+
+::::caution[JavaScript loses precision above 2^53]
+Parameters and results cross the host boundary as JSON. Python can bind and read exact 64-bit SQLite integers. JavaScript loses unsafe integers before `JSON.stringify` on writes and during `JSON.parse` on reads. Store values above `Number.MAX_SAFE_INTEGER` (2^53 - 1) as TEXT when a JavaScript plugin needs them to remain exact.
+::::
+
+Requires `storage.sql`. For a worked example, the `chat-leaderboard` plugin covers schema creation in one atomic `exec`, an `ON CONFLICT` upsert, a bounded ranked `query`, and a single-row read, in both [JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js/chat-leaderboard) and [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python/chat-leaderboard). It contrasts with `message-counter`, which keeps the same counts in [`storage.kv`](/docs/plugins/permissions#storagekv) and cannot rank.
 
 ## Config
 
