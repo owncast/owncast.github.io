@@ -32,7 +32,7 @@ The shared reference names APIs in their canonical form, which is the JavaScript
 | Call a host API (e.g. `owncast.chat.sendAction`)    | identical: `owncast.chat.sendAction(text)`                         |
 | Payload fields                                      | camelCase: `msg.user.displayName`, `msg.clientId`                  |
 | Filter result                                       | `filter.pass()` / `filter.modify(payload)` / `filter.drop(reason)` |
-| Subscribe to a custom event                         | `on: { "my.event"(payload) { … } }`                                |
+| Declare a plugin-owned custom hook                 | `on: { "my.event"(payload) { … } }`. Owned as `<your-slug>.my.event` |
 | Build / test your plugin                            | `npm run package` / `npm test`                                     |
 
 ## Prerequisites

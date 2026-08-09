@@ -736,39 +736,47 @@ For one-off or custom-interval scheduling, use timers (`owncast.timer.setTimeout
 
 ## Plugin-to-plugin events
 
-Plugins can compose by emitting and subscribing to arbitrary custom events. Subscribing to a custom event requires no permission. To emit, declare `events.emit`. Event names are arbitrary strings. Namespacing with your plugin name (for example `"my-plugin.thing-happened"`) avoids collisions.
+Custom events are directed hooks for plugin-to-plugin composition. A plugin declares a local hook name, and the host registers it as `<plugin-slug>.<hook>`. The slug comes from the receiving plugin's manifest, so another plugin cannot claim the same fully qualified hook. Declaring a hook requires no permission. Emitting to one requires `events.emit`.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
 
 ```js
+// In the plugin whose slug is "announcer":
 module.exports = definePlugin({
   on: {
-    'other-plugin.milestone'(payload) {
+    'announcement.broadcast'(payload) {
       /* react */
     },
   },
-  onStreamStarted() {
-    owncast.events.emit('my-plugin.went-live', { at: Date.now() });
-  },
 });
+
+// Another plugin targets announcer's fully qualified hook:
+owncast.events.emit('announcer.announcement.broadcast', { text: 'We are live' });
 ```
 
 </TabItem>
 <TabItem value="py" label="Python">
 
 ```python
-@plugin.on("other-plugin.milestone")
-def react(payload):
+# In the plugin whose slug is "announcer":
+@plugin.on("announcement.broadcast")
+def announce(payload):
     ...
 
-@plugin.on_stream_started
-def went_live(info):
-    owncast.events.emit("my-plugin.went-live", {"at": info.started_at})
+# Another plugin targets announcer's fully qualified hook:
+owncast.events.emit(
+    "announcer.announcement.broadcast",
+    {"text": "We are live"},
+)
 ```
 
 </TabItem>
 </Tabs>
+
+The receiving handler uses only its local hook name. Emitters use the full
+`<recipient-slug>.<hook>` target. Built-in event names remain canonical and
+cannot be claimed as custom hooks.
 
 See [Owncast APIs](./apis#plugin-to-plugin-events) for the emit API.
 
@@ -776,7 +784,7 @@ See [Owncast APIs](./apis#plugin-to-plugin-events) for the emit API.
 
 Each row is a runtime event. The handler name follows your SDK's convention: camelCase methods (`onChatMessage`) in JavaScript, `@plugin.*` decorators (`@plugin.on_chat_message`) in Python.
 
-| Event                    | Payload                            | Permission to subscribe                            |
+| Event                    | Payload                            | Permission                                         |
 | ------------------------ | ---------------------------------- | -------------------------------------------------- |
 | `chat.message.received`  | `ChatMessage`                      | none                                               |
 | `chat.user.joined`       | `User`                             | none                                               |
@@ -799,8 +807,8 @@ Each row is a runtime event. The handler name follows your SDK's convention: cam
 | `sse.connect`            | `SSEConnectionEvent`               | `http.sse`                                         |
 | `sse.disconnect`         | `SSEConnectionEvent`               | `http.sse`                                         |
 | `tick`                   | `{ now }`                          | none                                               |
-| tab content              | `ContentRequest`                   | none to subscribe. Whatever APIs the handler calls |
-| page content             | `ContentRequest`                   | none to subscribe. Whatever APIs the handler calls |
-| custom events            | (per-event)                        | none to subscribe, `events.emit` to emit           |
+| tab content              | `ContentRequest`                   | none. Whatever APIs the handler calls              |
+| page content             | `ContentRequest`                   | none. Whatever APIs the handler calls              |
+| custom hooks             | (per-hook)                         | none to declare, `events.emit` to target one       |
 
-Subscribing to ungated hooks and custom events requires no permission. Gated hooks require the permission listed in the table. Calling Owncast APIs from inside a handler requires the API's permission too. See [Owncast APIs](/docs/plugins/apis) for the catalog of methods and what each one grants.
+Subscribing to ungated built-in events and declaring custom hooks requires no permission. Gated hooks require the permission listed in the table. Calling Owncast APIs from inside a handler requires the API's permission too. See [Owncast APIs](/docs/plugins/apis) for the catalog of methods and what each one grants.

@@ -168,10 +168,10 @@ The wildcard `"*"` is permitted but must be written explicitly so admins reviewi
 
 ### `events.emit`
 
-Grants `owncast.events.emit(eventType, payload)`: emit a custom event that the
-host namespaces with your plugin slug before dispatching it. Subscribers use
-`<plugin-slug>.<eventType>`. Subscribing to events emitted by other plugins
-does not require a permission.
+Grants `owncast.events.emit(eventType, payload)`. Pass the receiving plugin's
+fully qualified `<recipient-slug>.<hook>` name. The host does not rewrite the
+emitted name. Declaring and receiving a plugin-owned custom hook does not
+require a permission.
 
 ### `http.serve`
 
