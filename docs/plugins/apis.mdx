@@ -585,6 +585,9 @@ Emit a custom event that other plugins can subscribe to. The host prefixes
 Pass an event-name suffix. Dots are allowed for hierarchy. Subscribers use the
 fully qualified `<plugin-slug>.<event>` name in their custom-event handler:
 see the [handlers reference](/docs/plugins/events#plugin-to-plugin-events).
+If the composed name would equal a built-in Owncast event (a plugin slugged
+`chat` emitting `message.received`), the host drops the emit instead of
+delivering a forged core event.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
