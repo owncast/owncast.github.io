@@ -129,4 +129,4 @@ This is why an admin can install a third-party plugin without auditing every lin
 ## Source
 
 - SDK source: [github.com/owncast/plugin-sdk](https://github.com/owncast/plugin-sdk)
-- Example plugins: [JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js) · [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python) · [Native WebAssembly](https://github.com/owncast/plugin-sdk/tree/main/examples/wasm)
+- Example plugins: [JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js) · [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python)

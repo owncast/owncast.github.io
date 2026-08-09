@@ -143,7 +143,11 @@ In either case, finish the install in the admin:
 
 ## Updating an installed plugin
 
-To ship an update, upload the new `.ocpkg` from the admin's **Plugins** page (or overwrite the file in `data/plugins/` directly). The manifest's `slug` is the identity key: the new contents replace the existing entry with the same slug, whatever the uploaded file was called. To force an immediate reload of an enabled plugin, click **Reload** on its row.
+To ship an update, replace the package file in `data/plugins/` directly, or install the new version from the admin's **Browse** tab if you publish to the directory. The manifest's `slug` is the identity key: the new contents replace the existing entry with the same slug, whatever the file was called. To force an immediate reload of an enabled plugin, click **Reload** on its row.
+
+Uploading from the admin's **Plugins** page only installs a *new* plugin. An upload whose `slug` already belongs to an installed plugin is rejected ("uninstall it before uploading another plugin with the same slug"), so uninstall the old one first if the admin upload is your only update path.
+
+Two files in `data/plugins/` that declare the same `slug` are also a conflict. Owncast keeps the first one it finds, ignores the other, and logs which package was skipped.
 
 ### What happens when permissions change
 
@@ -203,4 +207,4 @@ In the directory's Browse view your plugin shows its name, author, description, 
 
 - [Manifest reference](/docs/plugins/manifest) for the full list of manifest fields.
 - [Permissions](/docs/plugins/permissions) for the trust model and the full permission list.
-- Example plugins: [JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js) · [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python) · [Native WebAssembly](https://github.com/owncast/plugin-sdk/tree/main/examples/wasm).
+- Example plugins: [JavaScript](https://github.com/owncast/plugin-sdk/tree/main/examples/js) · [Python](https://github.com/owncast/plugin-sdk/tree/main/examples/python).

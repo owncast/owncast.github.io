@@ -18,7 +18,7 @@ tags:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Owncast plugin runtime exposes a single global, `owncast`, with the host functions your plugin can call. Most methods require the matching permission in your manifest. A call without it never reaches Owncast: the host logs the denial and the call returns an empty or zero value. A few are **ambient** and need no permission: logging, timers, reading bundled assets, and `owncast.config.get`.
+The Owncast plugin runtime exposes a single global, `owncast`, with the host functions your plugin can call. Most methods require the matching permission in your manifest. A call without it never reaches Owncast: the host logs the denial and the call does nothing. What your plugin sees depends on the method. Mutating calls that report an outcome raise an error (moderation, `users.register`, `auth.grantSession`, `kv.set`, `videoConfig.write`, `actions.add`, `actions.clear`, and every `sql` method), readers return an empty or zero value, and calls that return nothing become silent no-ops. `fs.write`, `fs.delete`, and `storage.upload` are the exceptions: they report failure in their return value rather than raising. A few methods are **ambient** and need no permission: logging, timers, reading bundled assets, and `owncast.config.get`.
 
 :::new[Plugin APIs require Owncast v0.3.0]
 Plugins require Owncast 0.3.0 or later.
@@ -252,7 +252,7 @@ Requires `users.moderate`.
 
 ### `owncast.users.register({ authId, displayName?, scopes?, profileUrl?, handle?, public? })` {/* #users-register */}
 
-Find or create an authenticated Owncast user for an external identity and return `{ userId }`. Pass the provider's stable `authId` without adding your plugin slug. The host stores the slug separately as the identity provider, so plugins cannot collide with or spoof each other's users. `displayName` seeds a new user's name, and non-empty `scopes` such as `["MODERATOR"]` are applied on each call.
+Find or create an authenticated Owncast user for an external identity and return `{ userId }`. Pass the provider's stable `authId` without adding your plugin slug. The host stores the slug separately as the identity provider, so plugins cannot collide with or spoof each other's users. `displayName` seeds a new user's name and is optional: omit it, or pass `null`, and Owncast generates a display name the same way it does for anonymous viewers. Non-empty `scopes` such as `["MODERATOR"]` are applied on each call.
 
 The optional `profileUrl`, `handle`, and `public` fields describe a verified external identity. `profileUrl` must be empty or an absolute HTTP(S) URL. `handle` is the provider's verified label, such as a GitHub login or fediverse handle. Set `public` to `true` only after the viewer opts into public display. It defaults to `false`. These profile fields are captured when the identity is first registered. Later calls with the same `authId` return the existing user but do not change the stored profile fields.
 
@@ -580,20 +580,24 @@ See [Manifest reference: network](/docs/plugins/manifest#network-outbound-http-a
 
 ### `owncast.events.emit(eventType, payload)`
 
-Emit a custom event that other plugins can subscribe to. Subscribing plugins receive it through their custom-event handler: see the [handlers reference](/docs/plugins/events#plugin-to-plugin-events). Namespace your event types with your plugin name to avoid collisions.
+Emit a custom event that other plugins can subscribe to. The host prefixes
+`eventType` with your plugin's slug, so plugins cannot impersonate one another.
+Pass an event-name suffix. Dots are allowed for hierarchy. Subscribers use the
+fully qualified `<plugin-slug>.<event>` name in their custom-event handler:
+see the [handlers reference](/docs/plugins/events#plugin-to-plugin-events).
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
 
 ```js
-owncast.events.emit('my-plugin.thing-happened', { id: 123 });
+owncast.events.emit('thing-happened', { id: 123 });
 ```
 
 </TabItem>
 <TabItem value="py" label="Python">
 
 ```python
-owncast.events.emit("my-plugin.thing-happened", {"id": 123})
+owncast.events.emit("thing-happened", {"id": 123})
 ```
 
 </TabItem>
@@ -761,7 +765,7 @@ Requires `fediverse.post`. High-trust: a fediverse post goes out under the strea
 
 ### `owncast.actions.add(button | buttons[])`
 
-Append one or more action buttons to your plugin's manifest set without a reload. Each button takes the same fields as a `manifest.actions` entry (`title`, plus `url`/`openExternally` or inline `html`). The host validates each entry with the same rules as `manifest.actions` and persists the result so additions survive a reload.
+Append one or more action buttons to your plugin's manifest set without a reload. Each button takes the same fields as a `manifest.actions` entry (`title`, plus `url`/`openExternally` or inline `html`). The host validates each entry with the same rules as `manifest.actions` and persists the result so additions survive a reload. A rejected entry throws an error naming the entry and the rule it broke, and the whole batch is rejected, so nothing is added when any entry is invalid.
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>

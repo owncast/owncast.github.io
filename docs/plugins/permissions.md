@@ -13,7 +13,7 @@ tags:
   - trust
 ---
 
-Every Owncast plugin runs in a sandbox with no implicit access to anything outside the plugin itself. To do useful work (read chat, post to the fediverse, fetch a URL, write to a key-value store) your plugin asks the host through `owncast.*` methods. Each of those methods is gated by a permission you declare in your manifest.
+Every Owncast plugin runs in a sandbox with no implicit access to anything outside the plugin itself. To do useful work (read chat, post to the fediverse, fetch a URL, write to a key-value store) your plugin asks the host through `owncast.*` methods. Almost every one of those methods is gated by a permission you declare in your manifest. The exceptions are a handful of **ambient** methods that reach nothing sensitive and need no permission: `owncast.log.*`, `owncast.timer.*`, reading your own bundled assets, and `owncast.config.get`.
 
 :::new[Plugin permissions require Owncast v0.3.0]
 Plugins require Owncast 0.3.0 or later.
@@ -37,7 +37,7 @@ The permission identifiers and the trust model below are the same regardless of 
 
 2. The admin reviews them when enabling. Owncast's plugin detail page lists each permission with a human-readable description.
 
-3. The host enforces them at runtime. Calling `owncast.chat.send(...)` without `chat.send` in your manifest never reaches Owncast: the host logs the denial and the call returns an empty or zero value (calls that return nothing become silent no-ops).
+3. The host enforces them at runtime. Calling `owncast.chat.send(...)` without `chat.send` in your manifest never reaches Owncast: the host logs the denial and the call does nothing. Mutating calls that report an outcome raise an error (moderation, `users.register`, `auth.grantSession`, `kv.set`, `videoConfig.write`, `actions.add`, `actions.clear`, and every `sql` method), readers return an empty or zero value, and calls that return nothing become silent no-ops. `fs.write`, `fs.delete`, and `storage.upload` report failure in their return value instead of raising.
 
 4. The host catches drift. Your built plugin declares the permissions it uses at runtime. The host compares that against the manifest and refuses to load the plugin if the runtime asks for more than the manifest grants. You can't sneak in extra access by swapping out the plugin file after the fact.
 
@@ -168,9 +168,10 @@ The wildcard `"*"` is permitted but must be written explicitly so admins reviewi
 
 ### `events.emit`
 
-Grants `owncast.events.emit(eventType, payload)`: emit a custom event that other plugins can subscribe to via `on: { ... }`.
-
-Subscribing to events emitted by other plugins does not require a permission.
+Grants `owncast.events.emit(eventType, payload)`: emit a custom event that the
+host namespaces with your plugin slug before dispatching it. Subscribers use
+`<plugin-slug>.<eventType>`. Subscribing to events emitted by other plugins
+does not require a permission.
 
 ### `http.serve`
 

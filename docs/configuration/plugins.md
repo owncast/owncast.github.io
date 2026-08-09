@@ -44,7 +44,7 @@ Open **Plugins** in the admin sidebar. There are two ways to add one.
 
 ![The plugin catalog in the Owncast admin Browse tab](/docs/img/plugins-browse.png)
 
-**Upload your own.** On the **Installed** tab, click **Upload plugin** and pick an `.ocpkg` file. Use this for a plugin you built yourself or got from somewhere other than the catalog.
+**Upload your own.** On the **Installed** tab, click **Upload plugin** and pick an `.ocpkg` file. Use this for a plugin you built yourself or got from somewhere other than the catalog. Every plugin has a unique identifier, so an upload that collides with a plugin you already have installed is rejected. Uninstall the old copy first if you are replacing it by hand.
 
 Either way, Owncast shows you the plugin's permission list and asks whether to enable it. Toggle **Enabled** to load it. The plugin survives restarts, so you do not need to enable it again after a reboot.
 
