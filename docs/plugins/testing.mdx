@@ -217,7 +217,7 @@ The scenario's top-level `expect` checks what happened across the whole run:
 | `bannedIPs`         | List of IPs banned via `owncast.users.banIP`                                                                                                                                                                                           |
 | `uploads`           | List of `{ name, body?, bodyBase64? }` from `owncast.storage.upload`. `name` is always checked. Non-empty `body` values compare text. Present `bodyBase64` values compare exact decoded bytes                                          |
 | `videoConfigWrites` | List of partial configs applied via `owncast.videoConfig.write()`                                                                                                                                                                      |
-| `emits`             | List of `{ eventType, payload }` for `owncast.events.emit` calls                                                                                                                                                                       |
+| `emits`             | List of `{ eventType, payload }` for `owncast.events.emit` calls. `eventType` is the dispatched name, so it carries your plugin's slug prefix                                                                                          |
 | `commands`          | List of `{ name, prefix?, description?, usage?, aliases?, modOnly, caseSensitive, cooldownMs }` chat-command registrations, matched by `name` in any order (`prefix`, `description`, `usage`, and `aliases` are checked only when set) |
 | `kv`                | Partial map of plugin-config state after the scenario                                                                                                                                                                                  |
 | `httpRequests`      | List of `{ url, method?, body? }` outbound `owncast.http.fetch` calls. `url` is an exact match, an omitted `method` matches any, an omitted `body` skips the check                                                                     |
@@ -274,7 +274,7 @@ Example exercising several:
   "expect": {
     "chatSends": ["alice: 1 message", "alice: 2 messages"],
     "kv": { "count:u-alice": "2" },
-    "emits": [{ "eventType": "milestone.reached", "payload": { "user": "alice", "count": 2 } }]
+    "emits": [{ "eventType": "my-plugin.milestone.reached", "payload": { "user": "alice", "count": 2 } }]
   }
 }
 ```
