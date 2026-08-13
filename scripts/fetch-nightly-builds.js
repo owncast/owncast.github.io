@@ -9,7 +9,18 @@ const fs = require('fs');
 const path = require('path');
 
 const SOURCE_URL = 'https://nyc3.digitaloceanspaces.com/owncast-nightly/nightly/index.html';
+const TEMPLATE_FILE = path.join(__dirname, 'templates', 'development-builds.md');
+const CONTENT_PLACEHOLDER = '{{NIGHTLY_BUILDS}}';
 const OUT_FILE = path.join(__dirname, '..', 'src', 'pages', 'development-builds.md');
+
+function writePage(content) {
+  const template = fs.readFileSync(TEMPLATE_FILE, 'utf8');
+  if (!template.includes(CONTENT_PLACEHOLDER)) {
+    throw new Error(`Template is missing ${CONTENT_PLACEHOLDER}`);
+  }
+
+  fs.writeFileSync(OUT_FILE, template.replace(CONTENT_PLACEHOLDER, content));
+}
 
 async function main() {
   const res = await fetch(SOURCE_URL);
@@ -25,17 +36,7 @@ async function main() {
   }
   const content = body.replace(/<h1[^>]*>[\s\S]*?<\/h1>/i, '').trim();
 
-  const page = `---
-title: Development Builds
-description: Download the latest in-development builds of Owncast and tools.
----
-
-# Owncast development builds
-
-${content}
-`;
-
-  fs.writeFileSync(OUT_FILE, page);
+  writePage(content);
   console.log(`Wrote ${OUT_FILE}`);
 }
 
@@ -43,17 +44,8 @@ main().catch(error => {
   // Fail soft: a nightly-bucket hiccup must not block the whole site build.
   console.warn(`fetch-nightly-builds: ${error.message}`);
   if (!fs.existsSync(OUT_FILE)) {
-    fs.writeFileSync(
-      OUT_FILE,
-      `---
-title: Development Builds
-description: Download the latest in-development builds of Owncast and tools.
----
-
-# Owncast development builds
-
-The nightly builds list is temporarily unavailable. Please check back later.
-`,
+    writePage(
+      'The nightly builds list is temporarily unavailable. Please check back later.',
     );
   } else {
     console.warn('Keeping previously generated nightly-builds page.');
