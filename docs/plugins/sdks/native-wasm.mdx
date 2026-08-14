@@ -180,6 +180,10 @@ Read `manifest` in `register` and return that JSON. Do not compile a second copy
 
 A language SDK derives subscriptions and commands from registered handlers. A native module has no SDK to do that work, so declare any `subscriptions` and `commands` entries it needs in `plugin.manifest.json`. Returning the injected manifest from `register` reports those declarations to Owncast.
 
+Owncast registers each custom hook in `subscriptions.notify` as
+`<recipient-slug>.<hook>` using the module's manifest slug. Emitters target that
+fully qualified name. The module's `on_event` export receives the local `<hook>`.
+
 A minimal manifest shared by all three examples is:
 
 ```json title="plugin.manifest.json"
