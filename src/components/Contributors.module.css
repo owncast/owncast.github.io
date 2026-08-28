@@ -156,22 +156,6 @@
   margin-top: 1rem;
 }
 
-.browserTesting {
-  font-size: 1.3125rem;
-  color: var(--ifm-color-emphasis-800);
-  margin: 1.5rem 0;
-}
-
-.lambdaTestLogo {
-  vertical-align: middle;
-  margin-left: 5px;
-  filter: invert(0);
-}
-
-[data-theme='dark'] .lambdaTestLogo {
-  filter: invert(1);
-}
-
 .loading {
   padding: 2rem;
   text-align: center;
@@ -190,13 +174,6 @@
 }
 
 /* Dark theme adjustments */
-[data-theme='dark'] .browserTesting {
-  color: var(--ifm-color-emphasis-600);
-}
-
-[data-theme='dark'] .lambdaTestLogo {
-  filter: brightness(0) invert(1);
-}
 
 [data-theme='dark'] .error {
   background-color: rgba(220, 53, 69, 0.1);
