@@ -108,6 +108,8 @@ jobs:
         run: apt update && apt install -y curl unzip procps
       - name: Install an old version of Owncast
         run: OWNCAST_VERSION=${{ matrix.old_version }} static/install.sh
+      - name: Reinstall before initializing Owncast
+        run: static/install.sh
       - name: Initialize Owncast
         run: cd owncast && timeout 5 ./owncast || true
       - name: Upgrade to the latest version of Owncast
