@@ -18,6 +18,10 @@ if ! [ "${OWNCAST_BACKUP_DIRECTORY:-}" ]; then
 	OWNCAST_BACKUP_DIRECTORY="$(pwd)/owncast-install-backups"
 fi
 
+if ! [ "${FORCE_FFMPEG_DOWNLOAD:-}" ]; then
+	FORCE_FFMPEG_DOWNLOAD=false
+fi
+
 INSTALL_TEMP_DIRECTORY="$(mktemp -d)"
 
 # Set up an exit handler so we can print a help message on failures.
