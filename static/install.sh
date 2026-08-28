@@ -186,8 +186,8 @@ main() {
 	esac
 
 	# Build ffmpeg download URL
-	FFMPEG_VERSION="8.0"
-	FFMPEG_RELEASE="20260221183825"
+	FFMPEG_VERSION="9.0"
+	FFMPEG_RELEASE="20260815222458"
 	FFMPEG_SUFFIX=""
 	[[ "$FFMPEG_OS" == "linux" ]] && FFMPEG_SUFFIX="-static"
 	FFMPEG_DOWNLOAD_URL="https://github.com/owncast/ffmpeg-builds/releases/download/${FFMPEG_RELEASE}/ffmpeg${FFMPEG_VERSION}-${FFMPEG_OS}-${FFMPEG_ARCH}${FFMPEG_SUFFIX}.tar.gz"
