@@ -147,20 +147,16 @@ main() {
 	# Determine operating system & architecture
 	case $(uname -s) in
 	"Darwin")
+		PLATFORM="macOS"
+		FFMPEG_OS="darwin"
 		case "$(uname -m)" in
 		"x86_64")
 			OWNCAST_ARCH="64bit"
-			PLATFORM="macOS"
-			FFMPEG_VERSION="4.3.1"
-			FFMPEG_DOWNLOAD_URL="https://evermeet.cx/ffmpeg/ffmpeg-${FFMPEG_VERSION}.zip"
-			FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"
+			FFMPEG_ARCH="amd64"
 			;;
 		"arm64")
 			OWNCAST_ARCH="arm64"
-			PLATFORM="macOS"
-			FFMPEG_VERSION="6"
-			FFMPEG_DOWNLOAD_URL="https://www.osxexperts.net/ffmpeg${FFMPEG_VERSION}arm.zip"
-			FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.zip"
+			FFMPEG_ARCH="arm64"
 			;;
 		*)
 			errorAndExit "Unsupported CPU architecture $(uname -m)"
@@ -170,28 +166,34 @@ main() {
 
 		# ;;
 	"Linux")
+		PLATFORM="linux"
+		FFMPEG_OS="linux"
 		case "$(uname -m)" in
 		"x86_64")
-			FFMPEG_ARCH="linux-x64"
+			FFMPEG_ARCH="amd64"
 			OWNCAST_ARCH="64bit"
 			;;
 		aarch64)
-			FFMPEG_ARCH="linux-arm64"
+			FFMPEG_ARCH="arm64"
 			OWNCAST_ARCH="arm64"
 			;;
 		*)
 			errorAndExit "Unsupported CPU architecture $(uname -m)"
 			;;
 		esac
-		PLATFORM="linux"
-		FFMPEG_VERSION="b4.3.1"
-		FFMPEG_DOWNLOAD_URL="https://github.com/eugeneware/ffmpeg-static/releases/download/${FFMPEG_VERSION}/${FFMPEG_ARCH}"
-		FFMPEG_TARGET_FILE="${OWNCAST_INSTALL_DIRECTORY}/ffmpeg"
 		;;
 	*)
 		errorAndExit "Unsupported operating system $(uname -s)"
 		;;
 	esac
+
+	# Build ffmpeg download URL
+	FFMPEG_VERSION="8.0"
+	FFMPEG_RELEASE="20260221183825"
+	FFMPEG_SUFFIX=""
+	[[ "$FFMPEG_OS" == "linux" ]] && FFMPEG_SUFFIX="-static"
+	FFMPEG_DOWNLOAD_URL="https://github.com/owncast/ffmpeg-builds/releases/download/${FFMPEG_RELEASE}/ffmpeg${FFMPEG_VERSION}-${FFMPEG_OS}-${FFMPEG_ARCH}${FFMPEG_SUFFIX}.tar.gz"
+	FFMPEG_TARGET_FILE="${INSTALL_TEMP_DIRECTORY}/ffmpeg.tar.gz"
 
 	# Build release download URL
 	OWNCAST_URL="https://github.com/owncast/owncast/releases/download/v${OWNCAST_VERSION}/owncast-${OWNCAST_VERSION}-${PLATFORM}-${OWNCAST_ARCH}.zip"
@@ -234,15 +236,19 @@ main() {
 	# Delete release zip file
 	rm "$OWNCAST_TARGET_FILE"
 
-	# Check for ffmpeg
-	if ! [[ -x "$(command -v ffmpeg)" || -x "${OWNCAST_INSTALL_DIRECTORY}/ffmpeg" ]]; then
+	# Check for ffmpeg (skip check if FORCE_FFMPEG_DOWNLOAD is set)
+	if [[ "$FORCE_FFMPEG_DOWNLOAD" == true ]] || ! [[ -x "$(command -v ffmpeg)" || -x "${OWNCAST_INSTALL_DIRECTORY}/ffmpeg" ]]; then
 		# Download ffmpeg
 		printf "${BLUE}Downloading${NC} ffmpeg v${FFMPEG_VERSION} "
 		curl -s -L "${FFMPEG_DOWNLOAD_URL}" --output "${FFMPEG_TARGET_FILE}" &
 		spinner $!
-		printf "${GREEN}Downloaded${NC} ffmpeg because it was not found on your system [${GREEN}✓${NC}]\n"
-		if [[ "$FFMPEG_TARGET_FILE" == *.zip ]]; then
-			unzip -oq "$FFMPEG_TARGET_FILE" -d "$OWNCAST_INSTALL_DIRECTORY"
+		if [[ "$FORCE_FFMPEG_DOWNLOAD" == true ]]; then
+			printf "${GREEN}Downloaded${NC} ffmpeg (forced download) [${GREEN}✓${NC}]\n"
+		else
+			printf "${GREEN}Downloaded${NC} ffmpeg because it was not found on your system [${GREEN}✓${NC}]\n"
+		fi
+		if [[ "$FFMPEG_TARGET_FILE" == *.tar.gz ]]; then
+			tar -xzf "$FFMPEG_TARGET_FILE" -C "$OWNCAST_INSTALL_DIRECTORY"
 			rm "$FFMPEG_TARGET_FILE"
 		fi
 		chmod u+x "${OWNCAST_INSTALL_DIRECTORY}/ffmpeg"
