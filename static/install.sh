@@ -163,8 +163,6 @@ main() {
 			;;
 		esac
 		;;
-
-		# ;;
 	"Linux")
 		PLATFORM="linux"
 		FFMPEG_OS="linux"
