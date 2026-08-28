@@ -43,12 +43,8 @@ i18n/
 # Local Docmost export prototype (scripts/fetch-docmost.js)
 .docmost-preview/
 
-# Generated dev docs synced from Docmost (scripts/fetch-docmost.js).
-# index.mdx is the hand-edited landing and IS tracked; everything else here is
-# generated and ignored.
-dev-docs/*
-!dev-docs/index.mdx
-src/data/dev-manifest.json
+# Generated dev docs synced from Docmost are tracked as the last-known-good
+# snapshot so clean CI builds still work when Docmost is unavailable.
 
 # Nightly builds page (generated at build time by scripts/fetch-nightly-builds.js)
 src/pages/development-builds.md
