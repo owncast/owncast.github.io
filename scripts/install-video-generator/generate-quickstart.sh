@@ -83,7 +83,6 @@ CURSOR_X=560
 CURSOR_Y=430
 CURSOR_W=350                # Width (height calculated to maintain aspect ratio)
 CURSOR_START=49             # When cursor appears (seconds into output)
-CURSOR_END=60               # When cursor disappears (seconds into output)
 
 # Green box settings
 BOX_X=95
@@ -103,7 +102,6 @@ FADE_DURATION=1             # Duration of fade out (seconds)
 FREEZE_FRAMES=$((INSTALL_FREEZE_DURATION * 25))  # 25fps
 FREEZE_TRIM_START=$(echo "$INSTALL_TRIM_END - 0.1" | bc)
 FADE_START=$((OUTPUT_DURATION - FADE_START_BEFORE_END))  # When fade out begins
-STILL_FRAMES=$(((OUTPUT_DURATION - STILL_START + 5) * 25))  # Frames for still image duration (with buffer)
 GINGER_UNIT_W=$((GINGER_W + 4 * GINGER_SHADOW_BLUR))  # video + room for shadow blur
 GINGER_UNIT_H=$((GINGER_H + 4 * GINGER_SHADOW_BLUR))
 
