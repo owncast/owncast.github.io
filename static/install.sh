@@ -175,14 +175,6 @@ main() {
 			FFMPEG_ARCH="linux-x64"
 			OWNCAST_ARCH="64bit"
 			;;
-		i?86)
-			FFMPEG_ARCH="linux-ia32"
-			OWNCAST_ARCH="32bit"
-			;;
-		armv7?)
-			FFMPEG_ARCH="linux-arm"
-			OWNCAST_ARCH="arm7"
-			;;
 		aarch64)
 			FFMPEG_ARCH="linux-arm64"
 			OWNCAST_ARCH="arm64"
