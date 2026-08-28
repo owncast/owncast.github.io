@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Check out web site code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0
 

@@ -11,7 +11,7 @@ echo ""
 printf "%-45s | %-6s | %s\n" "Old URL" "Status" "New URL"
 printf "%-45s-+-%-6s-+-%s\n" "---------------------------------------------" "------" "------------------------------------------------------------"
 
-while IFS="," read -r _ old_abs requested_url status _
+while IFS="," read -r old_raw old_abs requested_url status final_url redirect_chain elapsed_ms error
 do
   printf "%-45s | %-6s | %s\n" "$old_abs" "$status" "$requested_url"
 done < <(tail -n +2 broken.csv)

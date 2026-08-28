@@ -22,7 +22,7 @@ jobs:
     container:
       image: docker.io/ubuntu:22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - name: Install shellcheck
         run: apt update && apt install -y shellcheck bash && shellcheck --version
