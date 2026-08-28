@@ -64,6 +64,7 @@ const StoreButton: React.FC<StoreButtonProps> = ({
         <img
           src={useBaseUrl(imageSrc)}
           alt={altText}
+          data-no-image-zoom
           style={{ width, height: "auto" }}
           loading="lazy"
           decoding="async"

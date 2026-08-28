@@ -634,6 +634,9 @@ const config: Config = {
   ],
 
   themeConfig: {
+    imageZoom: {
+      selector: '.markdown img:not([data-no-image-zoom])',
+    },
     announcementBar: {
       id: 'plugins',
       content:

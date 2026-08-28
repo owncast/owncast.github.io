@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import mediumZoom from "medium-zoom";
 import Translate, { translate } from "@docusaurus/Translate";
 import {
   LandingProductCardSection,
@@ -6,13 +7,19 @@ import {
 } from "@/components/landing";
 
 export function AppsList() {
+  useEffect(() => {
+    const zoom = mediumZoom(".homepage-native-apps img");
+    return () => {
+      zoom.detach();
+    };
+  }, []);
   return (
     <LandingProductCardSection
+      className="homepage-native-apps"
       title={translate({
         id: "homepage.apps.title",
         message: "Owncast works everywhere",
       })}
-      withBackground
       descriptionComponent={
         <p className="text-gray-600 dark:text-gray-300 text-lg font-semibold max-w-4xl mb-8">
           <Translate id="homepage.apps.description">
@@ -33,12 +40,16 @@ export function AppsList() {
             message:
               "Browse the directory, add private servers, and get notified when streams go live on the iPhone.",
           }),
-          imageSrc:
-            "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/0d/14/93/0d149310-7032-5a4c-a23e-af5667fe8f5e/AppIcon-0-1x_U007epad-0-0-P3-85-220-0.png/400x400ia-75.webp",
+          imageSrc: "/images/devices/iphone-ipad/owncasts-ios-directory.png",
+          imageClassName: "homepage-native-app-screenshot",
           actionComponent: (
-            <a href="https://apps.apple.com/us/app/owncasts/id6451178968">
-              <LandingAppStoreButton appStore="ios-appstore" />
-            </a>
+            <LandingAppStoreButton appStore="ios-appstore" asChild>
+              <a
+                href="https://apps.apple.com/us/app/owncasts/id6451178968"
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            </LandingAppStoreButton>
           ),
         },
         {
@@ -52,10 +63,15 @@ export function AppsList() {
               "The Roku channel lets you browse the Owncasst directory and add private servers. A very convenient way to watch live streams on the most popular set-top box.",
           }),
           imageSrc: "/images/devices/roku/owncasts-roku-home.jpg",
+          imageClassName: "homepage-native-app-screenshot",
           actionComponent: (
-            <a href="https://apps.apple.com/us/app/owncasts/id6451178968">
-              <LandingAppStoreButton appStore="roku-channelstore" />
-            </a>
+            <LandingAppStoreButton appStore="roku-channelstore" asChild>
+              <a
+                href="https://apps.apple.com/us/app/owncasts/id6451178968"
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            </LandingAppStoreButton>
           ),
         },
         {
@@ -68,12 +84,16 @@ export function AppsList() {
             message:
               "For users of AppleTV, this app provides an easy way to access the Owncast directory and your favorite streams right from your TV.",
           }),
-          imageSrc:
-            "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource116/v4/af/71/3e/af713ebb-2ca3-8bbc-019a-9da5c3efff11/d9a535e2-d0b8-49ba-9ad2-fd4b9f06802e_Screen_Shot_2023-08-10_at_9.51.07_PM.png/960x540bb.webp",
+          imageSrc: "/images/devices/apple-tv/owncasts-tvos-home.png",
+          imageClassName: "homepage-native-app-screenshot",
           actionComponent: (
-            <a href="https://apps.apple.com/us/app/owncasts/id6451178968">
-              <LandingAppStoreButton appStore="tvos-appstore" />
-            </a>
+            <LandingAppStoreButton appStore="tvos-appstore" asChild>
+              <a
+                href="https://apps.apple.com/us/app/owncasts/id6451178968"
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            </LandingAppStoreButton>
           ),
         },
       ]}

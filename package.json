@@ -47,6 +47,7 @@
     "ag-grid-react": "^36.0.0",
     "circle-flags": "^2.8.1",
     "dotenv": "^17.2.3",
+    "medium-zoom": "^1.1.0",
     "plugin-image-zoom": "github:flexanalytics/plugin-image-zoom",
     "prism-react-renderer": "^2.3.0",
     "prop-types": "^15.8.1",

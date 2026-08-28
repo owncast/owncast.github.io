@@ -381,3 +381,17 @@ html.plugin-id-dev .pagination-nav {
   margin-top: 0 !important;
   padding: 1rem 1.25rem;
 }
+
+/* Preserve the full native-app screenshot when the image viewer opens it. */
+.homepage-native-app-screenshot:not(.medium-zoom-image--opened) {
+  width: auto !important;
+  height: 100% !important;
+  left: 50%;
+  right: auto;
+  object-fit: contain !important;
+  transform: translateX(-50%) !important;
+}
+
+.medium-zoom-image--opened.homepage-native-app-screenshot {
+  object-fit: contain !important;
+}

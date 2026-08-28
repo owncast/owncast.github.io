@@ -11,6 +11,7 @@ export interface ProductCardProps {
   imageAlt?: string;
   imageWidth?: number;
   imageHeight?: number;
+  imageClassName?: string;
   imageLoading?: "eager" | "lazy";
   imageDecoding?: "async" | "auto" | "sync";
   imageFetchPriority?: "high" | "low" | "auto";
@@ -36,6 +37,7 @@ export function LandingProductCard({
   imageAlt = '',
   imageWidth,
   imageHeight,
+  imageClassName,
   imageLoading,
   imageDecoding,
   imageFetchPriority,
@@ -84,7 +86,10 @@ export function LandingProductCard({
             loading={imageLoading}
             decoding={imageDecoding}
             fetchPriority={imageFetchPriority}
-            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
+            className={clsx(
+              "absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-500",
+              imageClassName,
+            )}
           />
         </div>
       )}

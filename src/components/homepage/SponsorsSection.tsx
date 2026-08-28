@@ -47,13 +47,6 @@ export function SponsorsSection() {
       width: 178,
       height: 40,
     },
-    {
-      name: "lambda test",
-      src: "https://www.lambdatest.com/resources/images/logo-white.svg",
-      url: "https://www.lambdatest.com",
-      width: 147,
-      height: 40,
-    },
   ];
 
   return (

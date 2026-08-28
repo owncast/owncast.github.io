@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button } from '@/components/shared/ui/button';
-import clsx from 'clsx';
+import { Button, buttonVariants } from '@/components/shared/ui/button';
+import { cn } from '@/lib/utils';
 
 import IosAppStoreWhite from './buttons/IosAppStoreBlack';
 import IosAppStoreBlack from './buttons/IosAppStoreWhite';
@@ -72,38 +72,35 @@ export const LandingAppStoreButton = ({
   ...props
 }: LandingAppStoreButtonProps) => {
   const storeName = STORE_NAMES[appStore];
-
   const SvgComponent = STORE_IMAGES[appStore][variant];
+  const buttonClassName = cn(
+    buttonVariants({ variant: 'unstyled', size }),
+    'p-0 relative inline-flex items-center justify-center self-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary-500',
+    className,
+  );
+
+  if (asChild && React.isValidElement(children)) {
+    return React.cloneElement(
+      children as React.ReactElement,
+      {
+        className: cn(buttonClassName, children.props.className),
+        'aria-label': `Download from ${storeName}`,
+      },
+      <SvgComponent aria-label={`${storeName} button`} />,
+    );
+  }
 
   return (
     <Button
       type="button"
-      className={clsx(
-        'p-0 relative inline-flex items-center justify-center cursor-pointer transition-opacity duration-200 hover:opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary-500',
-        className,
-      )}
+      className={buttonClassName}
       aria-label={`Download from ${storeName}`}
       {...props}
       size={size}
-      variant={'ghost'}
+      variant={'unstyled'}
       tabIndex={0}
-      asChild={asChild}
     >
-      {asChild ? (
-        children ? (
-          React.cloneElement(
-            children as React.ReactElement,
-            {},
-            <SvgComponent aria-label={`${storeName} button`} />,
-          )
-        ) : (
-          <span>
-            <SvgComponent aria-label={`${storeName} button`} />
-          </span>
-        )
-      ) : (
-        <SvgComponent aria-label={`${storeName} button`} />
-      )}
+      <SvgComponent aria-label={`${storeName} button`} />
     </Button>
   );
 };
