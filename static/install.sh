@@ -124,7 +124,9 @@ backupInstall() {
 	[[ -d $OWNCAST_BACKUP_DIRECTORY ]] || mkdir "$OWNCAST_BACKUP_DIRECTORY"
 
 	for i in "${FILE_LIST[@]}"; do
-		cp -r "$i" "${BACKUP_STAGING}"/backup
+		if [[ -e "$i" ]]; then
+			cp -r "$i" "${BACKUP_STAGING}"/backup
+		fi
 	done
 
 	pushd "${BACKUP_STAGING}" >>/dev/null
