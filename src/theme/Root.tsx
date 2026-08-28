@@ -56,15 +56,68 @@ export default function Root({ children }) {
   }, []);
 
   useEffect(() => {
-    if (window.location.hostname !== "owncast.online") return;
+    let analyticsScript: HTMLScriptElement | null = null;
+    let idleCallbackId: number | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    let hasLoaded = false;
 
-    const analyticsScript = document.createElement("script");
-    analyticsScript.src = "https://plausible.io/js/script.js";
-    analyticsScript.setAttribute("data-domain", "owncast.online");
-    document.head.appendChild(analyticsScript);
+    const loadThirdPartyScripts = () => {
+      if (hasLoaded) return;
+      hasLoaded = true;
+
+      // Load Plausible analytics script (deferred)
+      analyticsScript = document.createElement("script");
+      analyticsScript.src = "https://plausible.io/js/script.js";
+      analyticsScript.defer = true;
+      analyticsScript.setAttribute("data-domain", "owncast.online");
+      document.head.appendChild(analyticsScript);
+
+      removeInteractionListeners();
+    };
+
+    const interactionEvents: Array<keyof WindowEventMap> = [
+      "pointerdown",
+      "keydown",
+      "touchstart",
+      "scroll",
+    ];
+
+    const onInteraction = () => loadThirdPartyScripts();
+
+    const addInteractionListeners = () => {
+      interactionEvents.forEach((event) => {
+        window.addEventListener(event, onInteraction, { once: true, passive: true });
+      });
+    };
+
+    const removeInteractionListeners = () => {
+      interactionEvents.forEach((event) => {
+        window.removeEventListener(event, onInteraction);
+      });
+    };
+
+    addInteractionListeners();
+
+    if ("requestIdleCallback" in window) {
+      idleCallbackId = window.requestIdleCallback(loadThirdPartyScripts, {
+        timeout: 5000,
+      });
+    } else {
+      timeoutId = setTimeout(loadThirdPartyScripts, 5000);
+    }
 
     return () => {
-      analyticsScript.remove();
+      removeInteractionListeners();
+
+      if (analyticsScript && document.head.contains(analyticsScript)) {
+        document.head.removeChild(analyticsScript);
+      }
+      if (idleCallbackId !== undefined && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleCallbackId);
+      }
+      if (timeoutId !== undefined) {
+        clearTimeout(timeoutId);
+      }
     };
   }, []);
 
