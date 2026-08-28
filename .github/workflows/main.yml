@@ -3,7 +3,7 @@ name: Build and deploy to GitHub Pages
 on:
   push:
     branches:
-      - "owncast-docusaurus"
+      - "master"
   schedule:
     # Every six hours update the web site
     - cron: "0 */6 * * *"
@@ -67,11 +67,11 @@ jobs:
         run: |
           git config user.name "Owncast"
           git config user.email "owncast@owncast.online"
-          git fetch origin owncast-docusaurus
-          git reset --soft origin/owncast-docusaurus
+          git fetch origin master
+          git reset --soft origin/master
           git add releases/ static/data/contributors.json static/data/donors.json static/data/contributors-processed.json static/data/donors-processed.json static/owncast-install.*
           git diff --staged --quiet || git commit -m "Update dynamic content"
-          git push origin HEAD:owncast-docusaurus
+          git push origin HEAD:master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

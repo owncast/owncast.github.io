@@ -27,7 +27,7 @@ never break a deploy.
 It's wired into the `prebuild` script in `package.json`, which Docusaurus runs
 automatically before every `npm run build`. The deploy workflow
 (`.github/workflows/main.yml`) builds with `npm run build`, and runs on every
-push to `owncast-docusaurus` and on a schedule every six hours, so a stale or
+push to `master` and on a schedule every six hours, so a stale or
 empty news feed is refreshed automatically.
 
 ## Notes

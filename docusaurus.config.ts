@@ -361,7 +361,7 @@ const config: Config = {
             extendDefaults: true,
           },
           // Enable edit URLs to allow contributors to edit documentation on GitHub
-          editUrl: 'https://github.com/owncast/owncast.github.io/edit/owncast-docusaurus/',
+          editUrl: 'https://github.com/owncast/owncast.github.io/edit/master/',
           // docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: false, // Disabled - using multi-instance blog plugins instead

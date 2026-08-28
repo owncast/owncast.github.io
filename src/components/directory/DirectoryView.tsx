@@ -109,7 +109,7 @@ export function DirectoryView() {
         {/* Edit section */}
         <div className={styles.editSection}>
           <a
-            href="https://github.com/owncast/owncast.github.io/edit/owncast-docusaurus/src/data/directory.ts"
+            href="https://github.com/owncast/owncast.github.io/edit/master/src/data/directory.ts"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.editLink}
