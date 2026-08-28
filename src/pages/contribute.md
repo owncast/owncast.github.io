@@ -20,7 +20,7 @@ Visit our detailed [contribution guide](/dev-docs/contributor-guide) to learn ab
 
 If you want to be a part of a project that a lot of people think is pretty cool, please reach out.
 
-We abide by our [Code of Conduct](/contribute/) and feel strongly about open, appreciative, and empathetic people joining us. We've been very lucky to have this so far, so maybe you can help us with your skills and passion, too!
+We abide by our [Code of Conduct](/code-of-conduct/) and feel strongly about open, appreciative, and empathetic people joining us. We've been very lucky to have this so far, so maybe you can help us with your skills and passion, too!
 
 As you continue to read, and you find the project interesting, I urge you to do any of the following:
 
