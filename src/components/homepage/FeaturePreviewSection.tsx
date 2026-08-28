@@ -17,6 +17,7 @@ interface Feature {
   imageWidth?: number;
   imageHeight?: number;
   priority?: boolean;
+  documentationUrl: string;
   mockup?: "fediverse" | "chat";
   // CSS positioning for cropped screenshot effect
   imagePosition?: {
@@ -47,6 +48,7 @@ function useFeatures(): Feature[] {
       }),
       mockup: "chat",
       imagePosition: { bottom: "0%", left: "0%", width: "100%" },
+      documentationUrl: "/docs/chat",
     },
     {
       id: "feature-4",
@@ -67,6 +69,7 @@ function useFeatures(): Feature[] {
       imageWidth: 956,
       imageHeight: 510,
       imagePosition: { top: "5%", left: "0%", width: "100%" },
+      documentationUrl: "/docs/configuration/appearance",
     },
     {
       id: "feature-6",
@@ -87,6 +90,7 @@ function useFeatures(): Feature[] {
       imageWidth: 958,
       imageHeight: 532,
       imagePosition: { top: "5%", left: "0%", width: "100%" },
+      documentationUrl: "/docs/configuration/notifications",
     },
     {
       id: "feature-7",
@@ -105,6 +109,7 @@ function useFeatures(): Feature[] {
       }),
       mockup: "fediverse",
       imagePosition: { top: "0%", left: "0%", width: "100%" },
+      documentationUrl: "/docs/social/the-fediverse",
     },
     {
       id: "feature-10",
@@ -125,6 +130,7 @@ function useFeatures(): Feature[] {
       imageWidth: 959,
       imageHeight: 510,
       imagePosition: { top: "5%", left: "0%", width: "100%" },
+      documentationUrl: "/docs/extend",
     },
   ];
 }
@@ -315,7 +321,7 @@ function FeatureCard({
                 {feature.description}
               </p>
               <a
-                href="#"
+                href={feature.documentationUrl}
                 className="text-primary-400 text-sm font-semibold inline-flex items-center gap-1.5 hover:text-primary-300 transition-colors"
               >
                 Learn more →
