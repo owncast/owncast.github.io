@@ -5,6 +5,10 @@ on:
       - "static/install.sh"
   workflow_dispatch:
 
+concurrency:
+  group: install-preview-master
+  cancel-in-progress: true
+
 jobs:
   generate-install-video:
     runs-on: ubuntu-latest
