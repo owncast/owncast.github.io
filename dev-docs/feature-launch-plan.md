@@ -2,8 +2,7 @@
 title: "Feature Launch Plan"
 slug: /feature-launch-plan
 displayed_sidebar: devSidebar
-tags: ["wip"]
-custom_edit_url: "https://project.owncast.tv/s/general/p/feature-launch-plan-3tZGZ154Ue"
+custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/feature-launch-plan-rZvNyi6rMx"
 ---
 ## What is it?
 

@@ -2,8 +2,7 @@
 title: "Adding type-safe SQL queries"
 slug: /adding-type-safe-sql-queries
 displayed_sidebar: devSidebar
-tags: ["development"]
-custom_edit_url: "https://project.owncast.tv/s/general/p/adding-type-safe-sql-queries-wBepejBjR9"
+custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/adding-type-safe-sql-queries-Uhsa2XfuZr"
 ---
 Owncast uses [sqlc](https://sqlc.dev) to turn hand-written SQL into type-safe Go. You write the SQL, sqlc generates the Go. Two pieces work together:
 

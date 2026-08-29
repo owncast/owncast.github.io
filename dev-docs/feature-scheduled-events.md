@@ -2,8 +2,7 @@
 title: "Feature: Scheduled Events"
 slug: /feature-scheduled-events
 displayed_sidebar: devSidebar
-tags: ["project-requirements"]
-custom_edit_url: "https://project.owncast.tv/s/general/p/feature-scheduled-events-LEigheYXm5"
+custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/feature-scheduled-events-avAJDXcXpC"
 ---
 |     |     |
 | --- | --- |
@@ -23,7 +22,7 @@ custom_edit_url: "https://project.owncast.tv/s/general/p/feature-scheduled-event
 # Problem
 
 1. A stream is offline more than it is online. A visitor doesn't know when to return because it just displays a "stream is just offline" message and does not display any indication that there will be future activity. Knowing that something is coming soon gives you a chance to build excitement for that event.
-  1. Current workaround in Owncast server: Streamers would add a note "I stream every Sunday from 4 PM PST" in About and/or Offline
+2. Current workaround in Owncast server: Streamers would add a note "I stream every Sunday from 4 PM PST" in About and/or Offline
 
 # Goal
 

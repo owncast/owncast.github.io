@@ -2,8 +2,7 @@
 title: "Submitting a Pull Request"
 slug: /submitting-a-pull-request
 displayed_sidebar: devSidebar
-tags: ["contributing", "development"]
-custom_edit_url: "https://project.owncast.tv/s/general/p/submitting-a-pull-request-YP1pdRI9Of"
+custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/submitting-a-pull-request-DZjN7GcWYS"
 ---
 Owncast is a do-ocracy run by a small group of volunteers. New changes are always welcome, and a little process up front keeps things smooth for everyone.
 

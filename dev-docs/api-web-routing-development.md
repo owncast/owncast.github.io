@@ -2,8 +2,7 @@
 title: "API / Web Routing Development"
 slug: /api-web-routing-development
 displayed_sidebar: devSidebar
-tags: ["contributing", "development"]
-custom_edit_url: "https://project.owncast.tv/s/general/p/api-web-routing-development-yuZk2LOUcv"
+custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/api-web-routing-development-WpBZONTivM"
 ---
 Our web routing and API are defined by the [OpenAPI specification](https://github.com/owncast/owncast/blob/develop/openapi.yaml). It defines the available web routes, API endpoints, handlers, requests, responses, and error objects. That gives us one source of truth for documentation, types, and routing.
 

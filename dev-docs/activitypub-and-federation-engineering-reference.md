@@ -2,8 +2,7 @@
 title: "ActivityPub and Federation: Engineering Reference"
 slug: /activitypub-and-federation-engineering-reference
 displayed_sidebar: devSidebar
-tags: ["development"]
-custom_edit_url: "https://project.owncast.tv/s/general/p/activitypub-and-federation-engineering-reference-MzNSUJ2147"
+custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/activitypub-and-federation-engineering-reference-kcwX012MbQ"
 ---
 The internal reference for how Owncast's federation actually works: architecture, pipelines, wire formats, security decisions, storage, configuration and testing. The protocol-level summary lives in FEDERATION.md in the repo (FEP-67ff format) and the user-facing doc is on owncast.online under Social features. This doc is for people working on the code.
 

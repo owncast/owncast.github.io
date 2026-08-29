@@ -2,8 +2,7 @@
 title: "Development"
 slug: /development
 displayed_sidebar: devSidebar
-tags: ["contributing", "development"]
-custom_edit_url: "https://project.owncast.tv/s/general/p/development-TW3T9dUVmb"
+custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/development-3ClQzIGqhx"
 ---
 This document gets you up and running for Owncast development. If you want more on contributing in non-technical ways too, read the Contributor Guide.
 

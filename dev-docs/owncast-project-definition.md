@@ -2,8 +2,7 @@
 title: "Owncast Project Definition"
 slug: /owncast-project-definition
 displayed_sidebar: devSidebar
-tags: ["project-requirements"]
-custom_edit_url: "https://project.owncast.tv/s/general/p/owncast-project-definition-c5oC8voW54"
+custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/owncast-project-definition-MXjJK5PDnp"
 ---
 ## Why
 

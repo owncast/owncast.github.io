@@ -2,8 +2,7 @@
 title: "Directory"
 slug: /directory
 displayed_sidebar: devSidebar
-tags: ["production", "community", "side-projects"]
-custom_edit_url: "https://project.owncast.tv/s/general/p/directory-jL0pyRlxoG"
+custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/directory-ZAoxYtxGtX"
 ---
 This document aims to describe the details around the Owncast Directory.
 

@@ -2,8 +2,7 @@
 title: "Owncast Mastodon Server"
 slug: /owncast-mastodon-server
 displayed_sidebar: devSidebar
-tags: ["community"]
-custom_edit_url: "https://project.owncast.tv/s/general/p/owncast-mastodon-server-PSjaZlFwAN"
+custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/owncast-mastodon-server-cTyGFps3ds"
 ---
 The Owncast Mastodon server is a server just for Owncast. It is hosted and managed by Fedihost.
 

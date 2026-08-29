@@ -2,42 +2,39 @@
 title: "Updated web site"
 slug: /updated-web-site
 displayed_sidebar: devSidebar
-tags: ["wip", "project-requirements"]
-custom_edit_url: "https://project.owncast.tv/s/general/p/updated-web-site-RnlS8RFeEc"
+custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/updated-web-site-89Mthstvfw"
 ---
-# Test page: https://owncast-preview.surge.sh
-
 Branch: https://github.com/owncast/owncast.github.io/tree/master
 
 # Current Problems
 
 1. We have so much documentation it's impossible to find what you're looking for. Even Gabe can't find it and has to rely on the AI search thing because the actual site search doesn't work.
 2. Topics and information are duplicated on multiple pages because they're applicable multiple places. But it's a copy/paste thing where everything gets out of sync.
-  1. This includes standalone documents, but also "wizard" style guides that have the exact same content. But you just get to it in different ways.
-  2. A document about scaling might talk about setting up object storage, but there will also be a dedicated guide about setting up object storage, and then a troubleshooting document about buffering will also talk about setting up object storage.
-3. Native search doesn't work.
-4. Documents often fall into completely random categories that are not helpful in describing what you should be looking at.
-5. Different topics such as help vs. troubleshooting vs. setup vs. optimization vs. third party software setup vs. advanced settings are all on the same level and it's impossible to know what's important or in what order you should care about them.
-6. Original discussion: https://github.com/owncast/owncast/discussions/4346
+3. This includes standalone documents, but also "wizard" style guides that have the exact same content. But you just get to it in different ways.
+4. A document about scaling might talk about setting up object storage, but there will also be a dedicated guide about setting up object storage, and then a troubleshooting document about buffering will also talk about setting up object storage.
+5. Native search doesn't work.
+6. Documents often fall into completely random categories that are not helpful in describing what you should be looking at.
+7. Different topics such as help vs. troubleshooting vs. setup vs. optimization vs. third party software setup vs. advanced settings are all on the same level and it's impossible to know what's important or in what order you should care about them.
+8. Original discussion: https://github.com/owncast/owncast/discussions/4346
 
 # Site Requirements
 
 1. Documentation
-  1. Clearly categorized
-  2. Easily searchable
-  3. Interactive elements and helpful tools
-    1. This is something we couldn't previously do and I want to do now.
-  4. Existing doc URLs must persist to any new site. At least redirect.
-  5. Git history **must** be preserved so the contributor list is kept. If we're moving content from an old document to a new document, we should use Git to move or copy the old document to a new document and edit the new document. **Do not just create a new document from scratch.**
-2. Installation wizard
-  1. Quick install
-  2. Manual install
-  3. Hosting providers
-3. Troubleshooting wizard
-4. A home page
-  1. Tells you what Owncast is and why you'd use it
-  2. Routes you to how to install it
-  3. Routes you to documentation on how to use it
+2. Clearly categorized
+3. Easily searchable
+4. Interactive elements and helpful tools  
+  1\. This is something we couldn't previously do and I want to do now.
+5. Existing doc URLs must persist to any new site. At least redirect.
+6. Git history **must** be preserved so the contributor list is kept. If we're moving content from an old document to a new document, we should use Git to move or copy the old document to a new document and edit the new document. **Do not just create a new document from scratch.**
+7. Installation wizard
+8. Quick install
+9. Manual install
+10. Hosting providers
+11. Troubleshooting wizard
+12. A home page
+13. Tells you what Owncast is and why you'd use it
+14. Routes you to how to install it
+15. Routes you to documentation on how to use it
 
 # Information Architecture
 

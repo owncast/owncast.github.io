@@ -2,8 +2,7 @@
 title: "Design Guidelines & Resources"
 slug: /design-guidelines-resources
 displayed_sidebar: devSidebar
-tags: ["contributing"]
-custom_edit_url: "https://project.owncast.tv/s/general/p/design-guidelines-resources-5wTqNDY2rr"
+custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/design-guidelines-resources-Aup1f5gC9t"
 ---
 A collection of design contribution guidelines and resources for the Owncast interface.
 

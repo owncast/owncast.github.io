@@ -2,8 +2,7 @@
 title: "How Owncast Fits Together"
 slug: /how-owncast-fits-together
 displayed_sidebar: devSidebar
-tags: ["development"]
-custom_edit_url: "https://project.owncast.tv/s/general/p/how-owncast-fits-together-gPfek0cYqp"
+custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/how-owncast-fits-together-BaO53MRpVH"
 ---
 A quick tour of the moving parts, so you know where your change belongs. You do not need to understand all of this to contribute, but a map helps. For where each piece lives in the source, see [Where the Code Lives](/dev-docs/where-the-code-lives).
 

@@ -2,8 +2,7 @@
 title: "CMCD playback reporting"
 slug: /cmcd-playback-reporting
 displayed_sidebar: devSidebar
-tags: ["development"]
-custom_edit_url: "https://project.owncast.tv/s/general/p/cmcd-playback-reporting-H2xG73mmBt"
+custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/cmcd-playback-reporting-wvUvZ716go"
 ---
 Owncast records viewer playback health through Common Media Client Data (CMCD), defined by CTA-5004. Players that expose CMCD contribute their own measurements. Players that do not are observed from completed HLS segment transfers when the observation is trustworthy.
 

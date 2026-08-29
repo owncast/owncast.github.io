@@ -2,8 +2,7 @@
 title: "Contributor Guide"
 slug: /contributor-guide
 displayed_sidebar: devSidebar
-tags: ["contributing"]
-custom_edit_url: "https://project.owncast.tv/s/general/p/contributor-guide-mnwWOheDOm"
+custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/contributor-guide-i6MTpPEzE7"
 ---
 Owncast is a growing open source project giving freedom, flexibility, and fun to live streamers. This is a starting point for anyone looking to contribute in any capacity.
 
