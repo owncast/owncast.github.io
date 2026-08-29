@@ -6,7 +6,9 @@
     "file": "Feature Launch Plan.md",
     "icon": "⛵",
     "category": null,
-    "labels": [],
+    "labels": [
+      "wip"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T22:00:30.332Z",
     "author": "Gabe Kangas",
@@ -20,7 +22,9 @@
     "file": "Feature Scheduled Events.md",
     "icon": "🗓️",
     "category": null,
-    "labels": [],
+    "labels": [
+      "project-requirements"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:36:43.947Z",
     "author": "Gabe Kangas",
@@ -34,7 +38,10 @@
     "file": "Development.md",
     "icon": "🛠️",
     "category": null,
-    "labels": [],
+    "labels": [
+      "development",
+      "contributing"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:36:43.947Z",
     "author": "Gabe Kangas",
@@ -48,7 +55,9 @@
     "file": "Owncast Mastodon Server.md",
     "icon": "📢",
     "category": null,
-    "labels": [],
+    "labels": [
+      "community"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:36:43.947Z",
     "author": "Gabe Kangas",
@@ -62,7 +71,11 @@
     "file": "Directory.md",
     "icon": "📖",
     "category": null,
-    "labels": [],
+    "labels": [
+      "side-projects",
+      "community",
+      "production"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T22:00:10.790Z",
     "author": "Gabe Kangas",
@@ -76,7 +89,9 @@
     "file": "Contributor Guide.md",
     "icon": "🙋",
     "category": null,
-    "labels": [],
+    "labels": [
+      "contributing"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:36:43.947Z",
     "author": "Gabe Kangas",
@@ -90,7 +105,10 @@
     "file": "5th Anniversary Plans.md",
     "icon": "🎂",
     "category": null,
-    "labels": [],
+    "labels": [
+      "wip",
+      "community"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:36:43.947Z",
     "author": "Gabe Kangas",
@@ -104,7 +122,10 @@
     "file": "Updated web site.md",
     "icon": "🌐",
     "category": null,
-    "labels": [],
+    "labels": [
+      "project-requirements",
+      "wip"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:36:43.947Z",
     "author": "Gabe Kangas",
@@ -118,7 +139,9 @@
     "file": "1-Click Installs on Hosting Marketplaces.md",
     "icon": "🧑‍💻",
     "category": null,
-    "labels": [],
+    "labels": [
+      "production"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:45:54.428Z",
     "author": "Gabe Kangas",
@@ -132,7 +155,10 @@
     "file": "Merch Store.md",
     "icon": "👜",
     "category": null,
-    "labels": [],
+    "labels": [
+      "side-projects",
+      "community"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:58:17.148Z",
     "author": "Gabe Kangas",
@@ -146,7 +172,9 @@
     "file": "Creating a release.md",
     "icon": "🚀",
     "category": null,
-    "labels": [],
+    "labels": [
+      "production"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:36:43.947Z",
     "author": "Gabe Kangas",
@@ -160,7 +188,10 @@
     "file": "Glossary.md",
     "icon": "📚",
     "category": null,
-    "labels": [],
+    "labels": [
+      "contributing",
+      "development"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:59:54.483Z",
     "author": "Gabe Kangas",
@@ -174,7 +205,10 @@
     "file": "Submitting a Pull Request.md",
     "icon": "🔀",
     "category": null,
-    "labels": [],
+    "labels": [
+      "development",
+      "contributing"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:36:43.947Z",
     "author": "Gabe Kangas",
@@ -202,7 +236,9 @@
     "file": "Owncast Project Definition.md",
     "icon": "🎯",
     "category": null,
-    "labels": [],
+    "labels": [
+      "project-requirements"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:58:08.073Z",
     "author": "Gabe Kangas",
@@ -216,7 +252,10 @@
     "file": "Technical Details/API  Web Routing Development.md",
     "icon": "🌐",
     "category": "Technical Details",
-    "labels": [],
+    "labels": [
+      "development",
+      "contributing"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T22:01:41.002Z",
     "author": "Gabe Kangas",
@@ -230,7 +269,9 @@
     "file": "Technical Details/ActivityPub and Federation Engineering Reference.md",
     "icon": "🕸️",
     "category": "Technical Details",
-    "labels": [],
+    "labels": [
+      "development"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:58:26.542Z",
     "author": "Gabe Kangas",
@@ -244,7 +285,10 @@
     "file": "Technical Details/Authentication Plugin Reference.md",
     "icon": "🧩",
     "category": "Technical Details",
-    "labels": [],
+    "labels": [
+      "plugins",
+      "authentication"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:58:52.919Z",
     "author": "Gabe Kangas",
@@ -258,7 +302,9 @@
     "file": "Technical Details/Plugin host integration.md",
     "icon": "🧩",
     "category": "Technical Details",
-    "labels": [],
+    "labels": [
+      "development"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:57:27.077Z",
     "author": "Gabe Kangas",
@@ -272,7 +318,9 @@
     "file": "Technical Details/CMCD playback reporting.md",
     "icon": "📈",
     "category": "Technical Details",
-    "labels": [],
+    "labels": [
+      "development"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T22:00:59.149Z",
     "author": "Gabe Kangas",
@@ -286,7 +334,10 @@
     "file": "Technical Details/Video Pipeline.md",
     "icon": "📺",
     "category": "Technical Details",
-    "labels": [],
+    "labels": [
+      "video",
+      "development"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:57:21.921Z",
     "author": "Gabe Kangas",
@@ -300,7 +351,9 @@
     "file": "Technical Details/How Owncast Fits Together.md",
     "icon": "🏗️",
     "category": "Technical Details",
-    "labels": [],
+    "labels": [
+      "development"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:57:40.428Z",
     "author": "Gabe Kangas",
@@ -314,7 +367,9 @@
     "file": "Contributor Guide/Design Guidelines & Resources.md",
     "icon": "🎨",
     "category": "Contributor Guide",
-    "labels": [],
+    "labels": [
+      "contributing"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:55:27.445Z",
     "author": "Gabe Kangas",
@@ -328,7 +383,10 @@
     "file": "Development/Web string translations.md",
     "icon": "🔠",
     "category": "Development",
-    "labels": [],
+    "labels": [
+      "development",
+      "contributing"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:54:37.242Z",
     "author": "Gabe Kangas",
@@ -342,7 +400,10 @@
     "file": "Development/How we develop frontend components.md",
     "icon": "🖥️",
     "category": "Development",
-    "labels": [],
+    "labels": [
+      "development",
+      "contributing"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:54:25.568Z",
     "author": "Gabe Kangas",
@@ -356,7 +417,10 @@
     "file": "Development/Where the Code Lives.md",
     "icon": "🗺️",
     "category": "Development",
-    "labels": [],
+    "labels": [
+      "development",
+      "contributing"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:54:39.736Z",
     "author": "Gabe Kangas",
@@ -370,7 +434,9 @@
     "file": "Development/Bundling the web application.md",
     "icon": "📥",
     "category": "Development",
-    "labels": [],
+    "labels": [
+      "development"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:55:02.201Z",
     "author": "Gabe Kangas",
@@ -384,7 +450,9 @@
     "file": "Development/Adding type-safe SQL queries.md",
     "icon": "🗄️",
     "category": "Development",
-    "labels": [],
+    "labels": [
+      "development"
+    ],
     "createdAt": "2026-08-29T21:36:43.947Z",
     "updatedAt": "2026-08-29T21:55:10.198Z",
     "author": "Gabe Kangas",

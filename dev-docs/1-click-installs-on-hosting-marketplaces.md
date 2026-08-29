@@ -2,6 +2,7 @@
 title: "1-Click Installs on Hosting Marketplaces"
 slug: /1-click-installs-on-hosting-marketplaces
 displayed_sidebar: devSidebar
+tags: ["production"]
 custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/1-click-installs-on-hosting-marketplaces-gnIEXwrjbn"
 ---
 The Owncast project is tasked with maintaining 1-Click installs for some hosting provider marketplaces. Each is built completely differently and requires manual effort to maintain.

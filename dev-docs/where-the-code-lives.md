@@ -2,6 +2,7 @@
 title: "Where the Code Lives"
 slug: /where-the-code-lives
 displayed_sidebar: devSidebar
+tags: ["development", "contributing"]
 custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/where-the-code-lives-e9IWNn9qJ8"
 ---
 Owncast is spread across a few repositories. Knowing which one holds what saves a lot of searching.

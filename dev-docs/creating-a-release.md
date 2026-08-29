@@ -2,6 +2,7 @@
 title: "Creating a release"
 slug: /creating-a-release
 displayed_sidebar: devSidebar
+tags: ["production"]
 custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/creating-a-release-kjUFxH0fCj"
 ---
 Owncast ships as standalone archives you can download and install, and as Docker images pulled from Docker Hub. The original image was [gabekangas/owncast](https://hub.docker.com/repository/docker/gabekangas/owncast), now deprecated in favor of [owncast/owncast](https://hub.docker.com/repository/docker/owncast/owncast). For now both still get updated on each release. We can drop the old one later.

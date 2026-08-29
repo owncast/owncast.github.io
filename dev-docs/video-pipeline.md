@@ -2,6 +2,7 @@
 title: "Video Pipeline"
 slug: /video-pipeline
 displayed_sidebar: devSidebar
+tags: ["video", "development"]
 custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/video-pipeline-Vlq5QmjQDh"
 ---
 Owncast accepts one RTMP broadcaster, turns it into HLS playlists and MPEG-TS segments with ffmpeg, stores those files, and serves them from `/hls/`.

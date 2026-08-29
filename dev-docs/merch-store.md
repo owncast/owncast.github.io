@@ -2,6 +2,7 @@
 title: "Merch Store"
 slug: /merch-store
 displayed_sidebar: devSidebar
+tags: ["side-projects", "community"]
 custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/merch-store-pdYguTMHLP"
 ---
 > Located at: [merch.owncast.online](http://merch.owncast.online)

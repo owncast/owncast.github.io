@@ -2,6 +2,7 @@
 title: "Plugin host integration"
 slug: /plugin-host-integration
 displayed_sidebar: devSidebar
+tags: ["development"]
 custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/plugin-host-integration-Q8G1CKxl0z"
 ---
 How Owncast runs plugins and how the plugin system is wired into the server.  

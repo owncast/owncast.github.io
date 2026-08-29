@@ -2,6 +2,7 @@
 title: "How we develop frontend components"
 slug: /how-we-develop-frontend-components
 displayed_sidebar: devSidebar
+tags: ["development", "contributing"]
 custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/how-we-develop-frontend-components-W0goMoKAPf"
 ---
 This is how we build components for the Owncast web UI. Use it when changing existing components or adding new ones. A shared pattern keeps the project readable and maintainable.

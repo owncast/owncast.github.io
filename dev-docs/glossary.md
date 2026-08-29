@@ -2,6 +2,7 @@
 title: "Glossary"
 slug: /glossary
 displayed_sidebar: devSidebar
+tags: ["contributing", "development"]
 custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/glossary-TwJNMDxcow"
 ---
 Common terms you will run into around Owncast.

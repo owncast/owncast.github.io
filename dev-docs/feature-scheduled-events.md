@@ -2,6 +2,7 @@
 title: "Feature: Scheduled Events"
 slug: /feature-scheduled-events
 displayed_sidebar: devSidebar
+tags: ["project-requirements"]
 custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/feature-scheduled-events-avAJDXcXpC"
 ---
 |     |     |

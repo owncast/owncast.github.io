@@ -2,6 +2,7 @@
 title: "5th Anniversary Plans"
 slug: /5th-anniversary-plans
 displayed_sidebar: devSidebar
+tags: ["wip", "community"]
 custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/5th-anniversary-plans-dBTgJnVoQB"
 ---
 May 2025 is the 5th anniversary of Owncast. The first commit date is May 23rd, but Gabe will be out of town and not able to do all the big things that day, so we should do it the week before.

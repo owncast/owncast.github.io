@@ -2,6 +2,7 @@
 title: "Updated web site"
 slug: /updated-web-site
 displayed_sidebar: devSidebar
+tags: ["project-requirements", "wip"]
 custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/updated-web-site-89Mthstvfw"
 ---
 Branch: https://github.com/owncast/owncast.github.io/tree/master

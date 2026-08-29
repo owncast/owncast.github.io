@@ -2,6 +2,7 @@
 title: "Authentication Plugin Reference"
 slug: /authentication-plugin-reference
 displayed_sidebar: devSidebar
+tags: ["plugins", "authentication"]
 custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/authentication-plugin-reference-XkVwpQA9sr"
 ---
 Owncast authentication plugins split identity-provider work from host-owned request gating, sessions, and access policy.

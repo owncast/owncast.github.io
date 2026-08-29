@@ -2,6 +2,7 @@
 title: "Bundling the web application"
 slug: /bundling-the-web-application
 displayed_sidebar: devSidebar
+tags: ["development"]
 custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/bundling-the-web-application-2simY7ea0f"
 ---
 Most people never need to do this. When you change the web app and merge it into the `develop` branch, the bundling happens automatically. And if you are developing the web app locally, you are better off running `npm run dev`.

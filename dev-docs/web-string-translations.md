@@ -2,6 +2,7 @@
 title: "Web string translations"
 slug: /web-string-translations
 displayed_sidebar: devSidebar
+tags: ["development", "contributing"]
 custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/web-string-translations-jg5sTtQlWd"
 ---
 > Please provide improvements and be patient with this document as we work through all the different use cases when it comes to localizing strings in the web UI.
