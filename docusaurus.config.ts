@@ -798,16 +798,12 @@ const config: Config = {
       // Public API key: it is safe to commit it
       apiKey: 'fb72abd2ab0ab0685856778e448cc767',
 
-      indexName: 'owncast',
+      indexName: 'Documentation site',
 
       // Optional: see doc section below
       contextualSearch: true,
 
-      // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
-      replaceSearchResultPathname: {
-        from: '/docs/', // or as RegExp: /\/docs\//
-        to: '/',
-      },
+      // Search results already use the site's current /docs/ URLs.
 
       // Optional: Algolia search parameters
       searchParameters: {},
