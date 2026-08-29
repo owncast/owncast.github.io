@@ -236,6 +236,16 @@ html[data-theme='dark'] .docMainWrapper {
   }
 }
 
+/* Hide the DocSearch attribution. */
+.DocSearch-Footer .DocSearch-Logo {
+  display: none;
+}
+
+/* Hide the attribution on the full search page too. */
+.search-page-wrapper [class*='searchLogoColumn'] {
+  display: none;
+}
+
 .theme-doc-sidebar-item-category-level-1 {
   padding-top: 4px;
 }
