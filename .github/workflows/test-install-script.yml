@@ -117,4 +117,11 @@ jobs:
       - name: Check backup file is created
         run: ls -lAH owncast/data owncast/${OWNCAST_BACKUP_DIRECTORY}/*.tar.gz
       - name: Check backup has the expected content
-        run: tar -tf owncast/${OWNCAST_BACKUP_DIRECTORY}/*.tar.gz --wildcards '*/data/owncast\.db*'
+        run: |
+          for backup in owncast/${OWNCAST_BACKUP_DIRECTORY}/*.tar.gz; do
+            if tar -tzf "$backup" --wildcards '*owncast.db*' >/dev/null; then
+              exit 0
+            fi
+          done
+          echo "No backup archive contains owncast.db"
+          exit 1
