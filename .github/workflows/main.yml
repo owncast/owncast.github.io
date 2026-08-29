@@ -49,7 +49,21 @@ jobs:
       - name: Fetch donors
         run: |
           CUTOFF_DATE=$(date -d '90 days ago' '+%Y-%m-%d')
-          curl https://opencollective.com/owncast/members/all.json | jq --arg cutoff "$CUTOFF_DATE" 'map(.) | .[] | select(.role=="BACKER" and .lastTransactionAt >= $cutoff) | {login: .name, avatar_url: .image, html_url: .profile}' | jq --slurp '.' > static/data/donors.json
+          MEMBERS_FILE=$(mktemp)
+          DONORS_FILE=$(mktemp)
+          trap 'rm -f "$MEMBERS_FILE" "$DONORS_FILE"' EXIT
+
+          if curl --fail --silent --show-error --location --retry 3 --connect-timeout 10 --max-time 60 \
+            https://opencollective.com/owncast/members/all.json > "$MEMBERS_FILE" \
+            && jq -e 'type == "array"' "$MEMBERS_FILE" >/dev/null \
+            && jq --arg cutoff "$CUTOFF_DATE" \
+              '[.[] | select(.role == "BACKER" and .lastTransactionAt >= $cutoff) | {login: .name, avatar_url: .image, html_url: .profile}]' \
+              "$MEMBERS_FILE" > "$DONORS_FILE" \
+            && jq -e 'length > 0' "$DONORS_FILE" >/dev/null; then
+            mv "$DONORS_FILE" static/data/donors.json
+          else
+            echo "OpenCollective donor data was unavailable or empty; keeping the previous donor list."
+          fi
 
       - name: Process donors
         run: node scripts/process-donors.js
