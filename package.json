@@ -34,7 +34,6 @@
     "@docusaurus/preset-classic": "^3.10.2",
     "@docusaurus/theme-mermaid": "^3.10.2",
     "@docusaurus/theme-search-algolia": "^3.10.2",
-    "@easyops-cn/docusaurus-search-local": "^0.52.1",
     "@fontsource/inter": "^5.2.8",
     "@kapaai/react-sdk": "^0.10.1",
     "@lezer/highlight": "^1.2.3",

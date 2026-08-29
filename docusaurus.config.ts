@@ -576,20 +576,6 @@ const config: Config = {
         redirects: ALL_REDIRECTS.filter(r => !r.to.includes('*')), // Only non-wildcard redirects
       },
     ],
-    [
-      '@easyops-cn/docusaurus-search-local',
-      {
-        hashed: true,
-        language: ['en'],
-        highlightSearchTermsOnTargetPage: true,
-        explicitSearchResultPath: true,
-        blogDir: ['releases', 'news'],
-        // /dev-docs (Docmost) docs are internal dev docs, not for end users. They're
-        // already excluded by routeBasePath, but pin it so a future indexPages
-        // or docsRouteBasePath change can never leak them into search.
-        ignoreFiles: [/^dev-docs\//],
-      },
-    ],
     // Dev docs - sourced from Docmost via scripts/fetch-docmost.js (prototype)
     [
       '@docusaurus/plugin-content-docs',
@@ -663,6 +649,7 @@ const config: Config = {
       },
       { property: 'og:locale', content: 'en_US' },
       { property: 'og:type', content: 'website' },
+      { property: 'algolia-site-verification', content: '0B089564897D1D58' },
     ],
     colorMode: {
       defaultMode: 'dark',
@@ -803,6 +790,33 @@ const config: Config = {
         'nginx',
         'apacheconf',
       ],
+    },
+    algolia: {
+      // The application ID provided by Algolia
+      appId: 'X65AY0JOWD',
+
+      // Public API key: it is safe to commit it
+      apiKey: 'fb72abd2ab0ab0685856778e448cc767',
+
+      indexName: 'owncast',
+
+      // Optional: see doc section below
+      contextualSearch: true,
+
+      // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
+      replaceSearchResultPathname: {
+        from: '/docs/', // or as RegExp: /\/docs\//
+        to: '/',
+      },
+
+      // Optional: Algolia search parameters
+      searchParameters: {},
+
+      // Optional: path for search page that enabled by default (`false` to disable it)
+      searchPagePath: 'search',
+
+      // Optional: whether the insights feature is enabled or not on Docsearch (`false` by default)
+      insights: true,
     },
   } satisfies Preset.ThemeConfig,
 };
