@@ -649,7 +649,7 @@ const config: Config = {
       },
       { property: 'og:locale', content: 'en_US' },
       { property: 'og:type', content: 'website' },
-      { property: 'algolia-site-verification', content: '0B089564897D1D58' },
+      { name: 'algolia-site-verification', content: '0B089564897D1D58' },
     ],
     colorMode: {
       defaultMode: 'dark',
