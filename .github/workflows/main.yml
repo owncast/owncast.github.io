@@ -77,12 +77,34 @@ jobs:
 
       - name: Commit changes
         run: |
-          git config user.name "Owncast"
-          git config user.email "owncast@owncast.online"
-          git add releases/ dev-docs/ src/data/dev-manifest.json static/data/contributors.json static/data/donors.json static/data/contributors-processed.json static/data/donors-processed.json static/owncast-install.*
-          git diff --staged --quiet || git commit -m "Update dynamic content"
-          git pull --rebase --autostash
-          git push
+          generated_dir=$(mktemp -d)
+          trap 'rm -rf "$generated_dir"' EXIT
+          mkdir -p "$generated_dir"/{releases,dev-docs,src/data,static/data,static}
+          cp -a releases/. "$generated_dir/releases/"
+          cp -a dev-docs/. "$generated_dir/dev-docs/"
+          cp -a src/data/dev-manifest.json "$generated_dir/src/data/"
+          cp -a static/data/{contributors.json,donors.json,contributors-processed.json,donors-processed.json} "$generated_dir/static/data/"
+          cp -a static/owncast-install.* "$generated_dir/static/"
+
+          for attempt in 1 2 3; do
+            git fetch origin master
+            git reset --hard origin/master
+            cp -a "$generated_dir"/releases/. releases/
+            cp -a "$generated_dir"/dev-docs/. dev-docs/
+            cp -a "$generated_dir"/src/data/dev-manifest.json src/data/
+            cp -a "$generated_dir"/static/data/. static/data/
+            cp -a "$generated_dir"/static/owncast-install.* static/
+
+            git add releases/ dev-docs/ src/data/dev-manifest.json static/data/contributors.json static/data/donors.json static/data/contributors-processed.json static/data/donors-processed.json static/owncast-install.*
+            if git diff --staged --quiet; then
+              exit 0
+            fi
+            git commit -m "Update dynamic content"
+            if git push origin HEAD:master; then
+              exit 0
+            fi
+          done
+          exit 1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
