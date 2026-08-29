@@ -13,4 +13,11 @@ import OwncatWaving from '@site/static/images/2-owncat-waving.svg'
   <p className={styles.wizardIntro}>Answer a few questions to get personalized setup instructions.</p>
 </div>
 
-<Wizard tree={tree} name="quickstart"/>
+<Wizard
+  tree={tree}
+  name="quickstart"
+  analyticsEvent={{
+    eventName: "quickstart-install-option-selected",
+    questionName: "install_method",
+  }}
+/>

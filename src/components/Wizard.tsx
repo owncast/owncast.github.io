@@ -25,11 +25,38 @@ Serializer.addProperty("page", {
   default: "",
 });
 
+interface AnalyticsEvent {
+  eventName: string;
+  questionName: string;
+}
+
 interface WizardProps {
   /** Raw survey tree JSON (English source strings) */
   tree: object;
   /** Stable wizard name; translation ids are `wizard.<name>.<path>` */
   name: string;
+  /** Optional event emitted when this wizard's named question changes. */
+  analyticsEvent?: AnalyticsEvent;
+}
+
+type Plausible = ((eventName: string) => void) & {
+  q?: [string][];
+};
+
+declare global {
+  interface Window {
+    plausible?: Plausible;
+  }
+}
+
+function trackPlausibleEvent(eventName: string): void {
+  let plausible = window.plausible;
+  if (!plausible) {
+    const q: [string][] = [];
+    plausible = Object.assign((event: string) => q.push([event]), { q });
+    window.plausible = plausible;
+  }
+  plausible(eventName);
 }
 
 /**
@@ -50,13 +77,24 @@ function localizeTree(tree: object, name: string): object {
   return clone;
 }
 
-export default function Wizard({ tree, name }: WizardProps): JSX.Element {
+export default function Wizard({
+  tree,
+  name,
+  analyticsEvent,
+}: WizardProps): JSX.Element {
   const { i18n } = useDocusaurusContext();
   const model = useMemo(() => {
     const m = new Model(localizeTree(tree, name));
     // SurveyJS chrome (buttons, validation messages) follows the site locale
     m.locale = i18n.currentLocale;
     m.showProgressBar = "off";
+    if (analyticsEvent) {
+      m.onValueChanged.add((_, options) => {
+        if (options.name === analyticsEvent.questionName) {
+          trackPlausibleEvent(analyticsEvent.eventName);
+        }
+      });
+    }
     m.onCurrentPageChanged.add((sender, options) => {
       const redirect = options.newCurrentPage?.redirect;
       if (redirect) {
@@ -69,7 +107,7 @@ export default function Wizard({ tree, name }: WizardProps): JSX.Element {
       }
     });
     return m;
-  }, [tree, name, i18n.currentLocale]);
+  }, [tree, name, i18n.currentLocale, analyticsEvent]);
 
   return (
     <div className={styles.wizard}>
