@@ -47,17 +47,20 @@ export function InstallerSection() {
         id: "homepage.installer.title",
         message: "Install in seconds. Stream in minutes.",
       })}
+      className="!pt-4 !pb-0 lg:!py-16"
+      innerClassName="!py-0 !min-h-0 lg:!p-6"
+      textClassName="[&>h2]:!mb-0"
       withBackground
       withBackgroundGlow
       effectComponent={<LandingShapesCtaBg variant="primary" />}
       descriptionComponent={
         <>
           <LandingProductFeatureKeyPoints
-            className="mt-4"
+            className="!mt-0 !pb-0"
             variant="secondary"
             keyPoints={keyPoints}
+            mobileCarousel
           />
-
           <div className="relative mt-4 hidden w-full max-w-md md:block">
             <img
               src="/images/lp-1-owncat-cta.svg"

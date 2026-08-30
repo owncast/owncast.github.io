@@ -22,22 +22,22 @@ export function SoftwareCompatList() {
       })}
       className="!mt-2 lg:!mt-0"
       supportingComponent={
-        <div className="grid grid-cols-3 gap-2 w-full place-items-center lg:contents">
+        <div className="flex items-center justify-between gap-2 w-full lg:contents">
           <a href="https://obsproject.com/" target="_blank" rel="noreferrer">
             <OBSIcon
-              className="w-12 h-auto lg:w-12 lg:h-12"
+              className="w-8 h-auto lg:w-12 lg:h-12"
               stroke="black"
               strokeWidth="1.3"
             />
           </a>
           <a href="https://streamlabs.com/" target="_blank" rel="noreferrer">
-            <StreamLabsIcon className="w-12 h-auto lg:w-12 lg:h-12" />
+            <StreamLabsIcon className="w-8 h-auto lg:w-12 lg:h-12" />
           </a>
           <a href="https://ffmpeg.org/" target="_blank" rel="noreferrer">
-            <FfmpegIcon className="w-12 h-auto lg:w-12 lg:h-12" />
+            <FfmpegIcon className="w-8 h-auto lg:w-12 lg:h-12" />
           </a>
           <a href="https://gopro.com/" target="_blank" rel="noreferrer">
-            <GoProIcon className="w-12 h-auto lg:w-12 lg:h-12" />
+            <GoProIcon className="w-8 h-auto lg:w-12 lg:h-12" />
           </a>
           <a
             href="https://www.blackmagicdesign.com/products/atemmini"
@@ -45,13 +45,13 @@ export function SoftwareCompatList() {
             rel="noreferrer"
           >
             <BlackMagicDesignIcon
-              className="w-12 h-auto lg:w-12 lg:h-12"
+              className="w-8 h-auto lg:w-12 lg:h-12"
               stroke="black"
               strokeWidth="1.3"
             />
           </a>
           <a href="https://www.vmix.com/" target="_blank" rel="noreferrer">
-            <VmixIcon className="w-12 h-auto lg:w-12 lg:h-12" />
+            <VmixIcon className="w-8 h-auto lg:w-12 lg:h-12" />
           </a>
         </div>
       }

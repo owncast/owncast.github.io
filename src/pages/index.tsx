@@ -41,6 +41,7 @@ export default function Home(): React.JSX.Element {
   return (
     <Layout>
       <Head>
+        <meta name="apple-itunes-app" content="app-id=6451178968" />
         <link
           rel="preload"
           as="image"
@@ -54,13 +55,21 @@ export default function Home(): React.JSX.Element {
       <FeatureGrid />
 
       <ArchetypesSection />
-      <FAQSection />
+      <div className="hidden md:block">
+        <FAQSection />
+      </div>
       <InstallerSection />
-      <ProtocolCompatList />
+      <div className="hidden md:block">
+        <ProtocolCompatList />
+      </div>
 
-      <LazySection component={StoreSection} minHeight={400} />
+      <div className="hidden md:block">
+        <LazySection component={StoreSection} minHeight={400} />
+      </div>
       <LazySection component={AppsList} minHeight={400} />
-      <LazySection component={SponsorsSection} minHeight={200} />
+      <div className="hidden md:block">
+        <LazySection component={SponsorsSection} minHeight={200} />
+      </div>
       <LazySection component={Contributors} minHeight={300} />
     </Layout>
   );

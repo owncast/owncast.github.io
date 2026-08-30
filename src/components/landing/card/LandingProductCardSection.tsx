@@ -47,7 +47,7 @@ export function LandingProductCardSection({
   return (
     <section
       className={clsx(
-        'w-full flex flex-col justify-center items-center gap-8 py-12 lg:py-16',
+        'w-full flex flex-col justify-center items-center gap-8 py-6 lg:py-16',
         withBackground && variant === 'primary'
           ? 'bg-primary-100/20 dark:bg-primary-900/10'
           : '',
@@ -81,14 +81,14 @@ export function LandingProductCardSection({
       >
         {titleComponent ||
           (title && (
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-4">
+            <h2 className="text-xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-2 md:mb-4">
               {title}
             </h2>
           ))}
 
         {descriptionComponent ||
           (description && (
-            <p className="text-muted-foreground max-w-2xl mb-8">
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mb-4 md:mb-8">
               {description}
             </p>
           ))}

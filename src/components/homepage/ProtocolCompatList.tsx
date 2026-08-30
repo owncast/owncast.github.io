@@ -18,14 +18,16 @@ export function ProtocolCompatList() {
         message:
           "Choose the tools, services, and software of your choice to work with Owncast.",
       })}
-      className="!mt-0 lg:!mt-0 !py-0 !p-2"
+      className="!mt-0 !p-6"
+      innerClassName="!max-w-full !px-6 !py-0 lg:!px-6 lg:!py-4"
+      supportingClassName="!mt-0 !p-0"
       variant="secondary"
       supportingComponent={
-        <div className="grid grid-cols-2 gap-4 w-full lg:flex lg:gap-4">
-          <HLSIcon className="w-full h-auto lg:w-40 lg:h-40" />
-          <ObjectStorageIcon className="w-full h-auto lg:w-40 lg:h-40" />
-          <RTMPIcon className="w-full h-auto lg:w-40 lg:h-40" />
-          <ActivityPubLogo className="w-full h-auto lg:w-40 lg:h-40" />
+        <div className="grid grid-cols-2 justify-items-center gap-2 w-full lg:flex lg:gap-4">
+          <HLSIcon className="w-32 h-auto lg:w-40 lg:h-40" />
+          <ObjectStorageIcon className="w-32 h-auto lg:w-40 lg:h-40" />
+          <RTMPIcon className="w-32 h-auto lg:w-40 lg:h-40" />
+          <ActivityPubLogo className="w-32 h-auto lg:w-40 lg:h-40" />
         </div>
       }
     />

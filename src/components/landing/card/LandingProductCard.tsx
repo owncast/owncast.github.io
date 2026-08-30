@@ -12,6 +12,7 @@ export interface ProductCardProps {
   imageWidth?: number;
   imageHeight?: number;
   imageClassName?: string;
+  imageContainerClassName?: string;
   imageLoading?: "eager" | "lazy";
   imageDecoding?: "async" | "auto" | "sync";
   imageFetchPriority?: "high" | "low" | "auto";
@@ -38,6 +39,7 @@ export function LandingProductCard({
   imageWidth,
   imageHeight,
   imageClassName,
+  imageContainerClassName,
   imageLoading,
   imageDecoding,
   imageFetchPriority,
@@ -50,7 +52,7 @@ export function LandingProductCard({
   href,
 }: ProductCardProps) {
   const cardClasses = clsx(
-    'relative group flex flex-col gap-4 rounded-xl border shadow-sm transition-all duration-200 overflow-hidden h-full',
+    'relative group flex flex-col gap-2 md:gap-4 rounded-xl border shadow-sm transition-all duration-200 overflow-hidden h-full',
     featured && 'border-2 shadow-md',
     featured &&
       variant === 'primary' &&
@@ -77,7 +79,12 @@ export function LandingProductCard({
       )}
 
       {imageSrc && (
-        <div className="flex-shrink-0 w-full h-40 md:h-48 relative overflow-hidden">
+        <div
+          className={clsx(
+            'flex-shrink-0 w-full relative overflow-hidden',
+            imageContainerClassName || 'h-32 md:h-48',
+          )}
+        >
           <Image
             src={imageSrc}
             alt={imageAlt || title}
@@ -95,9 +102,9 @@ export function LandingProductCard({
       )}
 
       {/* Content section */}
-      <div className="flex-1 flex flex-col justify-between gap-2 px-4 pb-2">
+      <div className="flex-1 flex flex-col justify-between gap-1 md:gap-2 px-4 pb-2">
 
-        <div className="text-left space-y-2">
+        <div className="text-left space-y-1 md:space-y-2">
           {titleComponent || (
             <h3
               className={clsx(

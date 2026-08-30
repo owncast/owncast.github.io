@@ -139,22 +139,28 @@ function MobileFeatureCard({ feature }: { feature: Feature }) {
   const resolvedImageSrc = useBaseUrl(feature.imageSrc || "");
 
   return (
-    <div className="flex flex-col gap-4 p-4 rounded-lg bg-neutral-500/10 h-full">
+    <div className="flex flex-col gap-3 p-3 rounded-lg bg-neutral-500/10 h-full">
       <div>
         <div className="inline-block px-3 py-1 mb-2 rounded-full bg-primary-500/25">
           <span className="text-xs font-semibold tracking-wider uppercase text-primary-400">
             {feature.category}
           </span>
         </div>
-        <p className="text-xl font-bold">{feature.title}</p>
+        <p className="text-lg font-bold">{feature.title}</p>
         <p className="text-base leading-relaxed text-muted-foreground">
           {feature.description}
         </p>
       </div>
       {feature.mockup === "fediverse" ? (
-        <FediverseTimelineMockup className="w-full max-w-md mx-auto rounded-md" />
+        <FediverseTimelineMockup
+          className="w-full max-w-md mx-auto rounded-md"
+          style={{ aspectRatio: "16 / 9" }}
+        />
       ) : feature.mockup === "chat" ? (
-        <OwncastChatMockup className="w-full max-w-md mx-auto rounded-md" />
+        <OwncastChatMockup
+          className="w-full max-w-md mx-auto rounded-md"
+          style={{ aspectRatio: "16 / 9" }}
+        />
       ) : feature.videoSrc ? (
         <VideoPlayer
           className="w-full max-w-md mx-auto rounded-md"
@@ -181,8 +187,8 @@ function MobileFeatureCard({ feature }: { feature: Feature }) {
 
 function MobileFeatureList({ features }: { features: Feature[] }) {
   return (
-    <section className="lg:hidden py-6">
-      <div className="flex gap-4 overflow-x-auto px-6 pb-4 snap-x snap-mandatory scrollbar-hide">
+    <section className="lg:hidden py-4">
+      <div className="flex gap-4 overflow-x-auto px-6 pb-2 snap-x snap-mandatory scrollbar-hide">
         {features.map((feature) => (
           <div
             key={feature.id}

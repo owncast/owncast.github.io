@@ -87,8 +87,9 @@ export function FeatureGrid() {
   ];
 
   return (
-    <div style={{ maxWidth: "95%", margin: "0 auto" }}>
+    <div className="w-full lg:w-[95%] lg:mx-auto">
       <LandingFeatureList
+        className="!pb-4 lg:!pb-8"
         title={translate({
           id: "homepage.features.sectionTitle",
           message: "Why Owncast?",
@@ -99,6 +100,7 @@ export function FeatureGrid() {
             "There are many different reasons for using Owncast. Here are some common ones.",
         })}
         featureItems={featureItems}
+        mobileCarousel
         variant="primary"
         withBackgroundGlow
         backgroundGlowVariant="primary"

@@ -6,6 +6,7 @@ import { VideoPlayer } from '@/components/shared/VideoPlayer';
 const LandingPrimaryCtaContent = ({
   className,
   childrenClassName,
+  textClassName,
   textPosition = 'left',
   title,
   titleComponent,
@@ -16,6 +17,7 @@ const LandingPrimaryCtaContent = ({
 }: {
   className?: string;
   childrenClassName?: string;
+  textClassName?: string;
   textPosition?: 'center' | 'left';
   title?: string | React.ReactNode;
   titleComponent?: React.ReactNode;
@@ -27,17 +29,18 @@ const LandingPrimaryCtaContent = ({
   return (
     <div
       className={clsx(
-        'flex flex-col gap-4',
+        'flex flex-col gap-3 sm:gap-4',
         textPosition === 'center'
           ? 'items-center text-center'
           : 'justify-center',
+        textClassName,
         className,
       )}
     >
       {leadingComponent}
 
       {title ? (
-        <h1 className="text-2xl md:text-3xl lg:text-4xl leading-tight font-semibold md:max-w-2xl">
+        <h1 className="text-xl md:text-3xl lg:text-4xl leading-tight font-semibold md:max-w-2xl">
           {title}
         </h1>
       ) : (
@@ -125,7 +128,7 @@ export const LandingPrimaryImageCtaSection = ({
   return (
     <section
       className={clsx(
-        'relative w-full flex flex-col justify-center items-center gap-8 py-12 lg:py-16',
+        'relative w-full flex flex-col justify-center items-center gap-8 py-6 lg:py-16',
         withBackground && variant === 'primary'
           ? 'bg-primary-100/20 dark:bg-primary-900/10'
           : '',
@@ -166,7 +169,7 @@ export const LandingPrimaryImageCtaSection = ({
 
       <div
         className={clsx(
-          'w-full p-6 gap-8 relative',
+          'w-full px-6 py-4 lg:p-6 gap-8 relative',
           imagePosition === 'center'
             ? 'flex flex-col container-narrow'
             : 'grid lg:grid-cols-2 max-w-full container-wide items-center',
@@ -252,6 +255,8 @@ export const LandingPrimaryVideoCtaSection = ({
   children,
   className,
   innerClassName,
+  textClassName,
+  childrenClassName,
   title,
   titleComponent,
   description,
@@ -279,6 +284,8 @@ export const LandingPrimaryVideoCtaSection = ({
   children?: React.ReactNode;
   className?: string;
   innerClassName?: string;
+  textClassName?: string;
+  childrenClassName?: string;
   title?: string | React.ReactNode;
   titleComponent?: React.ReactNode;
   description?: string | React.ReactNode;
@@ -306,7 +313,7 @@ export const LandingPrimaryVideoCtaSection = ({
   return (
     <section
       className={clsx(
-        'relative w-full flex flex-col justify-center items-center gap-8 py-12 lg:py-16',
+        'relative w-full flex flex-col justify-center items-center gap-8 py-6 lg:py-16',
         withBackground && variant === 'primary'
           ? 'bg-primary-100/20 dark:bg-primary-900/10'
           : '',
@@ -331,7 +338,7 @@ export const LandingPrimaryVideoCtaSection = ({
 
       <div
         className={clsx(
-          'w-full p-6 flex flex-col gap-8 relative z-10',
+          'w-full px-6 py-4 lg:p-6 flex flex-col gap-8 relative z-10',
           videoPosition === 'center'
             ? 'container-narrow'
             : 'max-w-full container-wide grid lg:grid-cols-2 items-center',
@@ -354,6 +361,8 @@ export const LandingPrimaryVideoCtaSection = ({
           description={description}
           descriptionComponent={descriptionComponent}
           textPosition={textPosition}
+          childrenClassName={childrenClassName}
+          textClassName={textClassName}
           leadingComponent={leadingComponent}
         >
           {children}
@@ -463,7 +472,7 @@ export const LandingPrimaryTextCtaSection = ({
   return (
     <section
       className={clsx(
-        'relative w-full flex flex-col justify-center items-center gap-8 py-12 lg:py-16',
+        'relative w-full flex flex-col justify-center items-center gap-8 py-6 lg:py-16',
         withBackground && variant === 'primary'
           ? 'bg-primary-100/20 dark:bg-primary-900/10'
           : '',
@@ -499,7 +508,7 @@ export const LandingPrimaryTextCtaSection = ({
 
       <div
         className={clsx(
-          'w-full p-6 flex flex-col gap-8 relative z-10',
+          'w-full px-6 py-4 lg:p-6 flex flex-col gap-8 relative z-10',
           textPosition === 'center'
             ? 'container-narrow'
             : 'max-w-full container-wide',

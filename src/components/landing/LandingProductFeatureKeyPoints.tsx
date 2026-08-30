@@ -20,6 +20,7 @@ export const LandingProductFeatureKeyPoints = ({
   variant = 'primary',
   descriptionStyle = 'block',
   icon,
+  mobileCarousel = false,
 }: {
   className?: string;
   iconClassName?: string;
@@ -27,6 +28,7 @@ export const LandingProductFeatureKeyPoints = ({
   variant?: 'primary' | 'secondary';
   descriptionStyle?: 'inline' | 'block';
   icon?: React.ReactNode | SVGSVGElement | LucideIcon;
+  mobileCarousel?: boolean;
 }) => {
   const iconClass = clsx(
     'h-5 w-5 inline -mt-0.5',
@@ -49,7 +51,9 @@ export const LandingProductFeatureKeyPoints = ({
   return (
     <dl
       className={clsx(
-        'mt-10 max-w-xl text-base leading-7 text-gray-600 dark:text-gray-500 lg:max-w-md',
+        'mt-10 w-full min-w-0 max-w-xl text-base leading-7 text-gray-600 dark:text-gray-500 lg:max-w-md',
+        mobileCarousel &&
+          'flex items-stretch gap-4 overflow-x-auto pb-2 mb-0 px-6 -mx-6 !w-[calc(100%+3rem)] snap-x snap-mandatory scrollbar-hide lg:block lg:overflow-visible lg:pb-0 lg:px-0 lg:mx-0 lg:!w-auto',
         className,
       )}
     >
@@ -60,6 +64,8 @@ export const LandingProductFeatureKeyPoints = ({
             className={clsx(
               'last:mb-0',
               keyPoint.description ? 'mb-8' : 'mb-2',
+              mobileCarousel &&
+                'snap-center shrink-0 w-[85vw] max-w-sm rounded-lg bg-neutral-500/10 p-3 lg:w-auto lg:mb-8',
             )}
           >
             <dt className="inline text-lg font-semibold text-gray-900 dark:text-gray-100">

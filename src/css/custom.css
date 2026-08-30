@@ -402,6 +402,23 @@ html.plugin-id-dev .pagination-nav {
   transform: translateX(-50%) !important;
 }
 
+.homepage-native-app-screenshot-cropped:not(.medium-zoom-image--opened) {
+  width: 100% !important;
+  height: 100% !important;
+  left: 0;
+  object-fit: cover !important;
+  object-position: top !important;
+  transform: none !important;
+}
+
+@media (min-width: 1024px) {
+  .homepage-native-app-screenshot-cropped:not(.medium-zoom-image--opened) {
+    width: 80% !important;
+    left: 10% !important;
+    object-position: center 30% !important;
+  }
+}
+
 .medium-zoom-image--opened.homepage-native-app-screenshot {
   object-fit: contain !important;
 }

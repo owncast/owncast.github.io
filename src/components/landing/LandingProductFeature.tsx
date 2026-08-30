@@ -64,7 +64,7 @@ export const LandingProductFeature = ({
   return (
     <section
       className={clsx(
-        'relative w-full flex flex-col justify-center items-center gap-8 py-12 lg:py-16',
+        'relative w-full flex flex-col justify-center items-center gap-8 py-6 lg:py-16',
         withBackground && variant === 'primary' ? 'bg-primary-100/20 dark:bg-primary-900/10' : '',
         withBackground && variant === 'secondary'
           ? 'bg-secondary-100/20 dark:bg-secondary-900/10'
@@ -93,7 +93,7 @@ export const LandingProductFeature = ({
 
       <div
         className={clsx(
-          'w-full p-6 flex flex-col items-center relative',
+          'w-full px-6 py-4 lg:p-6 flex flex-col items-center relative',
           imagePosition === 'center'
             ? 'container-narrow'
             : 'max-w-full container-wide grid lg:grid-cols-2',
@@ -105,7 +105,7 @@ export const LandingProductFeature = ({
       >
         <div
           className={clsx(
-            'w-full flex flex-col gap-4',
+            'w-full max-w-full min-w-0 flex flex-col gap-2 sm:gap-4',
             imagePosition === 'left' && 'lg:col-start-2 lg:row-start-1',
             textPosition === 'center' ? 'md:max-w-lg items-center text-center' : 'items-start',
             textClassName,
@@ -114,14 +114,14 @@ export const LandingProductFeature = ({
           {leadingComponent}
 
           {title ? (
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight">
+            <h2 className="text-xl md:text-3xl lg:text-4xl font-semibold leading-tight">
               {title}
             </h2>
           ) : (
             titleComponent
           )}
 
-          {description ? <p className="mt-4 md:text-xl">{description}</p> : descriptionComponent}
+          {description ? <p className="mt-2 md:mt-4 md:text-xl">{description}</p> : descriptionComponent}
 
           {children}
         </div>

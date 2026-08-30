@@ -20,7 +20,7 @@ export const LandingFeature = ({
   variant?: "primary" | "secondary";
 }) => {
   return (
-    <div className={clsx("flex flex-col gap-4 py-4", className)}>
+    <div className={clsx("flex flex-col gap-2 py-2 sm:gap-4 sm:py-4", className)}>
       <div
         className={clsx(
           "hidden sm:flex items-center justify-center w-16 h-16 rounded-md",
@@ -34,7 +34,7 @@ export const LandingFeature = ({
       </div>
 
       <div className="flex flex-col gap-1">
-        <h3 className="text-lg font-semibold">{title}</h3>
+        <h3 className="text-base sm:text-lg font-semibold">{title}</h3>
         <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed font-semibold">{description}</p>
       </div>
     </div>

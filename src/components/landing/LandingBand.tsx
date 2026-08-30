@@ -12,6 +12,7 @@ export const LandingBandSection = ({
   children,
   className,
   innerClassName,
+  supportingClassName,
   title,
   titleComponent,
   description,
@@ -23,6 +24,7 @@ export const LandingBandSection = ({
   children?: React.ReactNode;
   className?: string;
   innerClassName?: string;
+  supportingClassName?: string;
   title?: string | React.ReactNode;
   titleComponent?: React.ReactNode;
   description?: string | React.ReactNode;
@@ -52,7 +54,7 @@ export const LandingBandSection = ({
           )}
         >
           {title ? (
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold">
+            <h2 className="text-xl md:text-3xl lg:text-4xl font-bold">
               {title}
             </h2>
           ) : (
@@ -60,7 +62,7 @@ export const LandingBandSection = ({
           )}
 
           {description ? (
-            <p className="text-lg">{description}</p>
+            <p className="text-base md:text-lg">{description}</p>
           ) : (
             descriptionComponent
           )}
@@ -70,9 +72,9 @@ export const LandingBandSection = ({
 
         <div
           className={clsx(
-            'flex gap-4 lg:gap-6 ml-auto mt-12 lg:mt-0 lg:max-w-lg xl:max-w-none flex-shrink',
+            'flex gap-4 lg:gap-6 ml-auto mt-4 lg:mt-0 lg:max-w-lg xl:max-w-none flex-shrink',
             withBackground ? 'text-black' : '',
-            className,
+            supportingClassName,
           )}
         >
           {supportingComponent}

@@ -10,6 +10,9 @@ import { LandingPathsCtaBg } from "@/components/landing";
 export function HeroSection() {
   return (
     <LandingPrimaryVideoCtaSection
+      innerClassName="!gap-2 lg:!gap-8"
+      textClassName="!gap-2 lg:!gap-4 [&>h1]:!mb-0 lg:[&>h1]:!mb-4 [&>p]:!mb-0 lg:[&>p]:!mb-5"
+      childrenClassName="hidden md:flex"
       title={translate({
         id: "homepage.hero.title",
         message: "Open source software for running your own live stream",

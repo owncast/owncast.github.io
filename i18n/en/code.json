@@ -180,7 +180,7 @@
     "message": "Extensible"
   },
   "homepage.featurePreview.extensible.description": {
-    "message": "Integrates with existing tools, and build your own internal and external utilities on top of the API."
+    "message": "Integrates with existing tools, and supports your own plugins or use the on top of the web API."
   },
   "homepage.hero.title": {
     "message": "Open source software for running your own live stream"

@@ -91,26 +91,26 @@ export function ArchetypesSection() {
   const archetypes = useArchetypes();
 
   return (
-    <section className="w-full py-8 px-6 bg-[#2d3748]/10 dark:bg-[#2d3748]/20">
+    <section className="w-full py-4 px-6 bg-[#2d3748]/10 dark:bg-[#2d3748]/20">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-center mb-4">
+        <h2 className="text-xl md:text-3xl lg:text-4xl font-bold tracking-tight text-center mb-2 md:mb-4">
           <Translate id="homepage.archetypes.title">
             Who is Owncast for?
           </Translate>
         </h2>
-        <p className="text-gray-600 dark:text-gray-300 text-lg font-semibold text-center max-w-2xl mx-auto mb-8">
+        <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 font-semibold text-center max-w-2xl mx-auto mb-4 md:mb-8">
           <Translate id="homepage.archetypes.subtitle">
             Owncast works for all kinds of streams. Here's some of who's using
             it.
           </Translate>
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {archetypes.map((archetype) => (
             <div
               key={archetype.title}
-              className="flex flex-col items-center text-center p-4 rounded-xl bg-white/50 dark:bg-gray-800/50"
+              className="flex flex-col items-center text-center p-3 md:p-4 rounded-xl bg-white/50 dark:bg-gray-800/50"
             >
-              <archetype.icon className="w-10 h-10 mb-3 text-primary-600 dark:text-primary-400" />
+              <archetype.icon className="w-8 h-8 md:w-10 md:h-10 mb-2 md:mb-3 text-primary-600 dark:text-primary-400" />
               <h3 className="font-semibold mb-1">{archetype.title}</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
                 {archetype.description}
