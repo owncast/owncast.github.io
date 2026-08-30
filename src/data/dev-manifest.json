@@ -1,5 +1,21 @@
 [
   {
+    "pageId": "01a04f74-198c-77fc-99c2-cc9b4737dcd5",
+    "slugId": "i6MTpPEzE7",
+    "title": "Contributor Guide",
+    "file": "Contributor Guide.md",
+    "icon": "🙋",
+    "category": null,
+    "labels": [
+      "contributing"
+    ],
+    "createdAt": "2026-08-29T21:36:43.947Z",
+    "updatedAt": "2026-08-30T00:52:38.377Z",
+    "author": "Gabe Kangas",
+    "authorAvatar": null,
+    "slug": "/dev-docs/contributor-guide"
+  },
+  {
     "pageId": "01a04f74-198d-743c-9f32-9a6bfa00c066",
     "slugId": "rZvNyi6rMx",
     "title": "Feature Launch Plan",
@@ -81,22 +97,6 @@
     "author": "Gabe Kangas",
     "authorAvatar": null,
     "slug": "/dev-docs/directory"
-  },
-  {
-    "pageId": "01a04f74-198c-77fc-99c2-cc9b4737dcd5",
-    "slugId": "i6MTpPEzE7",
-    "title": "Contributor Guide",
-    "file": "Contributor Guide.md",
-    "icon": "🙋",
-    "category": null,
-    "labels": [
-      "contributing"
-    ],
-    "createdAt": "2026-08-29T21:36:43.947Z",
-    "updatedAt": "2026-08-29T21:36:43.947Z",
-    "author": "Gabe Kangas",
-    "authorAvatar": null,
-    "slug": "/dev-docs/contributor-guide"
   },
   {
     "pageId": "01a04f74-198b-72c9-8676-da2f34b7f616",
@@ -361,22 +361,6 @@
     "slug": "/dev-docs/how-owncast-fits-together"
   },
   {
-    "pageId": "01a04f74-198d-743c-9f32-8f1ae2905983",
-    "slugId": "Aup1f5gC9t",
-    "title": "Design Guidelines & Resources",
-    "file": "Contributor Guide/Design Guidelines & Resources.md",
-    "icon": "🎨",
-    "category": "Contributor Guide",
-    "labels": [
-      "contributing"
-    ],
-    "createdAt": "2026-08-29T21:36:43.947Z",
-    "updatedAt": "2026-08-29T21:55:27.445Z",
-    "author": "Gabe Kangas",
-    "authorAvatar": null,
-    "slug": "/dev-docs/design-guidelines-resources"
-  },
-  {
     "pageId": "01a04f74-198d-743c-9f32-cbcc12350ee8",
     "slugId": "jg5sTtQlWd",
     "title": "Web string translations",
@@ -458,5 +442,21 @@
     "author": "Gabe Kangas",
     "authorAvatar": null,
     "slug": "/dev-docs/adding-type-safe-sql-queries"
+  },
+  {
+    "pageId": "01a04f74-198d-743c-9f32-8f1ae2905983",
+    "slugId": "Aup1f5gC9t",
+    "title": "Design Guidelines & Resources",
+    "file": "Contributor Guide/Design Guidelines & Resources.md",
+    "icon": "🎨",
+    "category": "Contributor Guide",
+    "labels": [
+      "contributing"
+    ],
+    "createdAt": "2026-08-29T21:36:43.947Z",
+    "updatedAt": "2026-08-29T21:55:27.445Z",
+    "author": "Gabe Kangas",
+    "authorAvatar": null,
+    "slug": "/dev-docs/design-guidelines-resources"
   }
 ]
