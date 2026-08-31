@@ -15,17 +15,46 @@ tags:
   - hls
   - mobile
   - watching
-description: Watch Owncast streams on Android phones and tablets with VLC, mpv-android, or the built-in web player.
+description: Watch Owncast streams on Android phones and tablets with Owncasts, VLC, mpv-android, or the built-in web player.
 ---
 
 import DeviceLayout from '@site/src/components/tv/DeviceLayout';
 import { DeviceOptionsGrid } from '@site/src/components/tv/DeviceOptionsGrid';
 import { DeviceOptionCard } from '@site/src/components/tv/DeviceOptionCard';
 import StoreButton from '@site/src/components/StoreButton';
+import { AndroidInstallButton } from '@site/src/components/AndroidInstallButton';
 
 <DeviceLayout>
 
 <DeviceOptionsGrid>
+  <DeviceOptionCard
+    id="owncasts-android"
+    title="Owncasts for Android"
+    badge="Recommended"
+    difficulty="easy"
+    screenshot="/apps/owncasts/android/owncasts-android-home.png"
+    screenshotAlt="Owncasts for Android directory screen"
+    summary="Use the native Owncasts app to browse the directory, save favorite servers, and watch streams."
+  >
+    <ul>
+      <li>Built for Android phones and tablets.</li>
+      <li>Directory browsing and favorite servers built in.</li>
+      <li>Includes playback and chat.</li>
+    </ul>
+
+    <details>
+      <summary>Show step-by-step instructions</summary>
+
+      1. Open the [Owncasts for Android](/apps/owncasts/android/) page.
+      2. Choose Google Play, Obtainium, or a direct APK download.
+      3. Launch Owncasts and browse the directory or add your own Owncast server.
+      4. Select a stream to start watching.
+
+    </details>
+
+    <AndroidInstallButton />
+
+  </DeviceOptionCard>
 
   <DeviceOptionCard
     id="vlc-android"
@@ -34,7 +63,6 @@ import StoreButton from '@site/src/components/StoreButton';
     difficulty="easy"
     screenshot="/images/devices/android/vlc-android.webp"
     screenshotAlt="VLC for Android app interface"
-    summary="Use VLC to play an Owncast stream from its direct HLS URL."
   >
     <ul>
       <li>Free and open source.</li>

@@ -366,9 +366,9 @@ const config: Config = {
         },
         blog: false, // Disabled - using multi-instance blog plugins instead
         sitemap: {
-          // Keep internal /dev-docs (Docmost) docs out of the public sitemap so
-          // search engines don't route end users to development documentation.
-          ignorePatterns: ['/dev-docs/**'],
+          // Keep internal /dev-docs (Docmost) and direct app download pages out of the public
+          // sitemap so search engines don't route end users to them.
+          ignorePatterns: ['/dev-docs/**', '/apps/owncasts/android/**'],
         },
         theme: {
           customCss: './src/css/custom.css',

@@ -1,0 +1,60 @@
+---
+title: Owncasts for Android
+description: Download Owncasts for Android phones, tablets, and TVs, or receive updates through Obtainium.
+---
+
+import Head from '@docusaurus/Head';
+import styles from './android.module.css';
+
+<Head>
+  <meta name="robots" content="noindex" />
+</Head>
+
+<div className={styles.page}>
+  <section className={styles.hero}>
+    <div className={styles.heroCopy}>
+      <div className={styles.platform}>
+        <img src="/images/devices/android.svg" alt="" aria-hidden="true" />
+        <span>Android 8.0 and newer</span>
+      </div>
+      <h1>Owncasts <span>for Android</span></h1>
+      <p className={styles.intro}>Watch independent live streams from your phone, tablet, or Android TV.</p>
+      <p className={styles.release}>Version 1.0.0 · Universal APK · 3.6 MB</p>
+    </div>
+    <div className={styles.preview}>
+      <div className={styles.previewGlow} aria-hidden="true" />
+      <img
+        src="/apps/owncasts/android/owncasts-android-home.png"
+        alt="Owncasts showing a directory of live streams on an Android phone"
+      />
+    </div>
+  </section>
+
+  <section className={styles.options} aria-labelledby="install-heading">
+    <div className={styles.sectionHeading}>
+      <p>Installation</p>
+      <h2 id="install-heading">Choose where to install Owncasts</h2>
+    </div>
+    <div className={styles.optionGrid}>
+      <article className={styles.option}>
+        <span className={styles.optionLabel}>Automatic updates</span>
+        <h3>Google Play</h3>
+        <p>Install Owncasts through Google Play and receive updates from the store.</p>
+        <span className={styles.comingSoon}>Coming soon</span>
+      </article>
+      <article className={styles.option}>
+        <span className={styles.optionLabel}>Automatic updates</span>
+        <h3>Obtainium</h3>
+        <p>Get Owncasts and updates through Obtainium.</p>
+        <a className={styles.optionAction} href="obtainium://add/https://owncast.online/apps/owncasts/android/obtainium.html">Add to Obtainium</a>
+      </article>
+      <article className={styles.option}>
+        <span className={styles.optionLabel}>Manual updates</span>
+        <h3>Direct APK</h3>
+        <p>Download and install the APK yourself.</p>
+        <a className={styles.optionAction} href="/apps/owncasts/android/owncasts-foss-1.0.0.apk">Download APK</a>
+      </article>
+    </div>
+    <p className={styles.disclaimer}>Push notifications are available only in the Google Play version.</p>
+  </section>
+</div>

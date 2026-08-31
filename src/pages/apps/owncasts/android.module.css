@@ -1,0 +1,224 @@
+.page {
+  --android-green: #3ddc84;
+  --android-green-dark: #163f2a;
+  --panel: rgba(24, 19, 31, 0.76);
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 72px 0 96px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+  align-items: center;
+  gap: clamp(48px, 8vw, 112px);
+  min-height: 620px;
+}
+
+.heroCopy h1 {
+  max-width: 720px;
+  margin: 22px 0 18px;
+  font-size: clamp(3.25rem, 7vw, 6.4rem);
+  line-height: 0.92;
+  letter-spacing: -0.065em;
+  white-space: nowrap;
+}
+
+.heroCopy h1 span {
+  display: block;
+}
+
+.platform {
+  display: inline-grid;
+  grid-template-columns: 20px auto 20px;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid rgba(61, 220, 132, 0.28);
+  border-radius: 999px;
+  background: var(--android-green-dark);
+  color: #b8f4d2;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.platform img {
+  grid-column: 1;
+  width: 20px;
+  height: 20px;
+}
+
+.platform span {
+  grid-column: 2;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.intro {
+  max-width: 600px;
+  margin: 0;
+  color: var(--ifm-color-emphasis-700);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  line-height: 1.55;
+}
+
+.release {
+  margin: 16px 0 0;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 0.9rem;
+}
+
+.preview {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 340px);
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 36px;
+  background: #09070d;
+  box-shadow: 0 36px 90px rgba(0, 0, 0, 0.46);
+  transform: rotate(2.5deg);
+}
+
+.preview img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  border-radius: 28px;
+}
+
+.previewGlow {
+  position: absolute;
+  inset: 18% -28% 8%;
+  background: radial-gradient(circle, rgba(61, 220, 132, 0.2), transparent 68%);
+  filter: blur(22px);
+}
+
+.options {
+  padding: 96px 0 72px;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.sectionHeading {
+  max-width: 680px;
+  margin-bottom: 34px;
+}
+
+.sectionHeading > p {
+  margin: 0 0 8px;
+  color: var(--android-green);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  letter-spacing: -0.035em;
+}
+
+.optionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.disclaimer {
+  margin: 24px 0 0;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 0.9rem;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 14px;
+  background: var(--panel);
+}
+
+.option h3 {
+  margin: 12px 0 8px;
+  font-size: 1.65rem;
+}
+
+.option p {
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.7;
+}
+
+.optionLabel {
+  color: var(--android-green);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.optionAction,
+.comingSoon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  min-height: 42px;
+  margin-top: auto;
+  padding: 0 16px;
+  border-radius: 7px;
+  font-weight: 700;
+}
+
+.optionAction {
+  background: var(--android-green);
+  color: #10241a;
+  text-decoration: none;
+  transition: background 140ms ease;
+}
+
+.optionAction:hover {
+  background: #66e49c;
+  color: #10241a;
+  text-decoration: none;
+}
+
+.optionAction:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+@media (max-width: 800px) {
+  .page {
+    width: min(100% - 28px, 620px);
+    padding-top: 48px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .heroCopy h1 {
+    font-size: clamp(3.2rem, 16vw, 5rem);
+  }
+
+  .preview {
+    width: min(78vw, 320px);
+    transform: rotate(1.5deg);
+  }
+
+  .optionGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .optionAction {
+    transition: none;
+  }
+}
