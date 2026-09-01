@@ -6,7 +6,7 @@ type Child = ReactElement<any, any>; // eslint-disable-line @typescript-eslint/n
 
 export interface KeyPoint {
   title: string;
-  description?: string;
+  description?: React.ReactNode;
 }
 
 /**
@@ -65,7 +65,7 @@ export const LandingProductFeatureKeyPoints = ({
               'last:mb-0',
               keyPoint.description ? 'mb-8' : 'mb-2',
               mobileCarousel &&
-                'snap-center shrink-0 w-[85vw] max-w-sm rounded-lg bg-neutral-500/10 p-3 lg:w-auto lg:mb-8',
+                'snap-center shrink-0 w-[85vw] max-w-sm rounded-lg bg-neutral-500/10 p-3 lg:w-auto lg:mb-8 lg:bg-transparent',
             )}
           >
             <dt className="inline text-lg font-semibold text-gray-900 dark:text-gray-100">

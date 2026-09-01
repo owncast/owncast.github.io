@@ -27,6 +27,7 @@ export const LandingProductFeature = ({
   imagePerspective = 'paper',
   imageShadow = 'hard',
   imageClassName,
+  imageComponent,
   zoomOnHover = true,
   minHeight = 350,
   withBackground = false,
@@ -52,6 +53,7 @@ export const LandingProductFeature = ({
   imagePerspective?: 'none' | 'left' | 'right' | 'bottom' | 'bottom-lg' | 'paper';
   imageShadow?: 'none' | 'soft' | 'hard';
   imageClassName?: string;
+  imageComponent?: React.ReactNode;
   zoomOnHover?: boolean;
   minHeight?: number;
   withBackground?: boolean;
@@ -126,7 +128,7 @@ export const LandingProductFeature = ({
           {children}
         </div>
 
-        {imageSrc ? (
+        {imageSrc || imageComponent ? (
           <>
             {imagePosition === 'center' ? (
               <section className="w-full mt-auto pt-4 md:pt-6">
@@ -147,31 +149,33 @@ export const LandingProductFeature = ({
             ) : null}
 
             {imagePosition === 'left' || imagePosition === 'right' ? (
-              <Image
-                className={clsx(
-                  'relative w-full h-auto rounded-md lg:scale-90',
-                  zoomOnHover ? 'hover:scale-100 transition-all' : '',
-                  imageShadow === 'none' && '!shadow-none',
-                  imageShadow === 'soft' && 'shadow-md',
-                  imageShadow === 'hard' && 'hard-shadow',
-                  imagePosition === 'left' && 'lg:-left-6',
-                  imagePosition === 'right' && 'lg:-right-6',
-                  imagePerspective === 'left' && 'lg:perspective-left',
-                  imagePerspective === 'right' && 'lg:perspective-right',
-                  imagePerspective === 'bottom' && 'lg:perspective-bottom',
-                  imagePerspective === 'bottom-lg' && 'lg:perspective-bottom-lg',
-                  imagePerspective === 'paper' && 'lg:perspective-paper',
-                  imagePerspective === 'paper' && zoomOnHover
-                    ? 'hover:scale-90 transition-all'
-                    : '',
-                  imagePerspective === 'none' ? 'my-4' : 'my-8',
-                  imageClassName,
-                )}
-                alt={imageAlt}
-                src={imageSrc}
-                width={minHeight ? minHeight + 75 : 1000}
-                height={minHeight ? minHeight + 75 : 1000}
-              />
+              imageComponent || (
+                <Image
+                  className={clsx(
+                    'relative w-full h-auto rounded-md lg:scale-90',
+                    zoomOnHover ? 'hover:scale-100 transition-all' : '',
+                    imageShadow === 'none' && '!shadow-none',
+                    imageShadow === 'soft' && 'shadow-md',
+                    imageShadow === 'hard' && 'hard-shadow',
+                    imagePosition === 'left' && 'lg:-left-6',
+                    imagePosition === 'right' && 'lg:-right-6',
+                    imagePerspective === 'left' && 'lg:perspective-left',
+                    imagePerspective === 'right' && 'lg:perspective-right',
+                    imagePerspective === 'bottom' && 'lg:perspective-bottom',
+                    imagePerspective === 'bottom-lg' && 'lg:perspective-bottom-lg',
+                    imagePerspective === 'paper' && 'lg:perspective-paper',
+                    imagePerspective === 'paper' && zoomOnHover
+                      ? 'hover:scale-90 transition-all'
+                      : '',
+                    imagePerspective === 'none' ? 'my-4' : 'my-8',
+                    imageClassName,
+                  )}
+                  alt={imageAlt}
+                  src={imageSrc!}
+                  width={minHeight ? minHeight + 75 : 1000}
+                  height={minHeight ? minHeight + 75 : 1000}
+                />
+              )
             ) : null}
           </>
         ) : null}

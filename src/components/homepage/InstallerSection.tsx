@@ -1,21 +1,40 @@
+import { useState } from "react";
 import Translate, { translate } from "@docusaurus/Translate";
 import { LandingProductFeature } from "@/components/landing/LandingProductFeature";
 import { LandingProductFeatureKeyPoints } from "@/components/landing/LandingProductFeatureKeyPoints";
 import { Button } from "@/components/shared/ui/button";
 import { LandingShapesCtaBg } from "@/components/landing";
+import { VideoPlayer } from "@/components/shared/VideoPlayer";
 
 export function InstallerSection() {
+  const [showSetupVideo, setShowSetupVideo] = useState(false);
   const keyPoints = [
     {
       title: translate({
         id: "homepage.installer.keypoint1.title",
         message: "Built to be run quickly",
       }),
-      description: translate({
-        id: "homepage.installer.keypoint1.description",
-        message:
-          "We won't expect you to clone a git repo, install dependencies, and understand the development environment it was built with by making you fight with npm, pip or ruby gems.",
-      }),
+      description: (
+        <>
+          {translate({
+            id: "homepage.installer.keypoint1.description",
+            message:
+              "We won't expect you to clone a git repo, install dependencies, and understand the development environment it was built with by making you fight with npm, pip or ruby gems.",
+          })}{" "}
+          <a
+            className="font-semibold text-secondary-500 underline underline-offset-4"
+            href="#installer-setup-video"
+            onClick={event => {
+              event.preventDefault();
+              setShowSetupVideo(true);
+            }}
+          >
+            <Translate id="homepage.installer.setup-video">
+              Watch a full setup in a minute
+            </Translate>
+          </a>
+        </>
+      ),
     },
     {
       title: translate({
@@ -47,7 +66,7 @@ export function InstallerSection() {
         id: "homepage.installer.title",
         message: "Install in seconds. Stream in minutes.",
       })}
-      className="!pt-4 !pb-0 lg:!py-16"
+      className="!pt-4 !pb-0 lg:!pt-16 lg:!pb-8"
       innerClassName="!py-0 !min-h-0 lg:!p-6"
       textClassName="[&>h2]:!mb-0"
       withBackground
@@ -87,6 +106,21 @@ export function InstallerSection() {
       imageAlt="Screenshot of the product"
       imagePosition="left"
       imagePerspective="bottom"
+      imageComponent={
+        showSetupVideo ? (
+          <VideoPlayer
+            className="relative my-8 w-full lg:-left-6 lg:scale-90 lg:perspective-bottom"
+            src="/install-preview.webm"
+            webm="/install-preview.webm"
+            title={translate({
+              id: "homepage.installer.setup-video.title",
+              message: "Owncast setup in a minute",
+            })}
+            muted={false}
+            maxWidth="none"
+          />
+        ) : undefined
+      }
       zoomOnHover={false}
       imageClassName="hidden md:block transition-transform lg:hover:scale-95"
       variant="primary"

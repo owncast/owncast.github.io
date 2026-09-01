@@ -214,7 +214,7 @@ export function FAQSection() {
       withBackground
       withBackgroundGlow
       backgroundGlowVariant="secondary"
-      variant="primary"
+      variant="secondary"
     />
   );
 }

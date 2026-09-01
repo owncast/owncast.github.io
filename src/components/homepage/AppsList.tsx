@@ -26,6 +26,8 @@ export function AppsList() {
   return (
     <LandingProductCardSection
       className="homepage-native-apps"
+      withBackground
+      variant="secondary"
       title={translate({
         id: 'homepage.apps.title',
         message: 'Owncast works everywhere',
