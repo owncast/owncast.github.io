@@ -422,3 +422,7 @@ html.plugin-id-dev .pagination-nav {
 .medium-zoom-image--opened.homepage-native-app-screenshot {
   object-fit: contain !important;
 }
+
+.homepage-android-install-icon {
+  filter: brightness(0);
+}

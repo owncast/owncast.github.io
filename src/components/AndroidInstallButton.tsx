@@ -10,7 +10,7 @@ export function AndroidInstallButton() {
         src="/images/devices/android.svg"
         alt=""
         aria-hidden="true"
-        className="h-5 w-5 brightness-0"
+        className="homepage-android-install-icon h-5 w-5"
         data-no-image-zoom
       />
       <span className="flex flex-col items-start justify-center leading-none">

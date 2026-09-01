@@ -5,6 +5,7 @@ import { LandingProductCardSection, LandingAppStoreButton } from '@/components/l
 import { AndroidInstallButton } from '@/components/AndroidInstallButton';
 
 export function AppsList() {
+  const [storePlatform, setStorePlatform] = useState<'android' | 'apple' | null>(null);
   const [isIPhone, setIsIPhone] = useState(false);
 
   useEffect(() => {
@@ -14,7 +15,12 @@ export function AppsList() {
     };
   }, []);
   useEffect(() => {
-    setIsIPhone(navigator.userAgent.includes('iPhone'));
+    const { userAgent, platform, maxTouchPoints } = navigator;
+    const isAppleMobile =
+      /iPad|iPhone|iPod/.test(userAgent) || (platform === 'MacIntel' && maxTouchPoints > 1);
+
+    setStorePlatform(/Android/.test(userAgent) ? 'android' : isAppleMobile ? 'apple' : null);
+    setIsIPhone(userAgent.includes('iPhone'));
   }, []);
 
   return (
@@ -49,14 +55,16 @@ export function AppsList() {
           imageContainerClassName: 'aspect-square lg:aspect-auto lg:h-48',
           actionComponent: (
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <LandingAppStoreButton appStore="ios-appstore" asChild>
-                <a
-                  href="https://apps.apple.com/us/app/owncasts/id6451178968"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              </LandingAppStoreButton>
-              <AndroidInstallButton />
+              {storePlatform !== 'android' && (
+                <LandingAppStoreButton appStore="ios-appstore" asChild>
+                  <a
+                    href="https://apps.apple.com/us/app/owncasts/id6451178968"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                </LandingAppStoreButton>
+              )}
+              {storePlatform !== 'apple' && <AndroidInstallButton />}
             </div>
           ),
         },
