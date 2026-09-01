@@ -17,7 +17,7 @@ fi
 # === STEP 0: Regenerate docs-install-page.mp4 ===
 # Records the getting-started docs page in a real browser (with chrome),
 # scrolling down slightly. Fills the gap before the install video starts.
-DOCS_URL="https://owncast-docs-dev-testing.pages.dev/docs/getting-started/install"
+DOCS_URL="https://owncast.online/docs/getting-started/install"
 sh record-docs-page.sh "$DOCS_URL" docs-install-page.mp4 12
 
 # `./generate-quickstart.sh docs-only` stops here, for iterating on the recording
