@@ -4,6 +4,7 @@ description: >-
   This release has a handful of features, big and small, to improve the overall Owncast experience, primarily around the core streaming and chat functionality.
 sidebar_position: 12
 date: 2022-07-09T21:24:54.000Z
+tags: [release, changelog]
 ---
 
 This release has a handful of features, big and small, to improve the overall Owncast experience, primarily around the core streaming and chat functionality.
@@ -212,3 +213,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.0.12-linux-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.12/owncast-0.0.12-linux-arm64.zip) (17.5 MB) |
 | owncast-0.0.12-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.12/owncast-0.0.12-linux-arm7.zip) (17.9 MB) |
 | owncast-0.0.12-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.12/owncast-0.0.12-macOS-64bit.zip) (19.2 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>

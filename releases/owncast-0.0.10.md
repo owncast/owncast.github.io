@@ -4,6 +4,7 @@ description: >-
   This is a hot fix to resolve an issue using external S3 compatible storage in v0.0.9: #1455
 sidebar_position: 10
 date: 2021-10-06T22:40:14.000Z
+tags: [release, changelog]
 ---
 
 This is a hot fix to resolve an issue using external S3 compatible storage in v0.0.9: #1455
@@ -31,3 +32,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.0.10-linux-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.10/owncast-0.0.10-linux-arm64.zip) (13.6 MB) |
 | owncast-0.0.10-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.10/owncast-0.0.10-linux-arm7.zip) (13.6 MB) |
 | owncast-0.0.10-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.10/owncast-0.0.10-macOS-64bit.zip) (14.7 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>

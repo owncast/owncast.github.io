@@ -4,6 +4,7 @@ description: >-
   0.0.6 has quite a few changes that impact you, so please take a moment to read about the changes in their entirety.
 sidebar_position: 6
 date: 2021-03-08T18:25:51.000Z
+tags: [release, changelog]
 ---
 
 0.0.6 has quite a few changes that impact you, so please take a moment to read about the changes in their entirety.
@@ -114,3 +115,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.0.6-linux-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.6/owncast-0.0.6-linux-64bit.zip) (12.9 MB) |
 | owncast-0.0.6-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.6/owncast-0.0.6-linux-arm7.zip) (12.4 MB) |
 | owncast-0.0.6-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.6/owncast-0.0.6-macOS-64bit.zip) (13.4 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>

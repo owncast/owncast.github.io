@@ -4,6 +4,7 @@ description: >-
   I hope everyone is enjoying all the changes and improvements from the web overhaul that came with v0.1.0. With so many changes we knew there'd be a a slew of bug fixes to come along after. And the fir...
 sidebar_position: 101
 date: 2023-07-28T20:07:08.000Z
+tags: [release, changelog]
 ---
 
 I hope everyone is enjoying all the changes and improvements from the web overhaul that came with v0.1.0. With so many changes we knew there'd be a a slew of bug fixes to come along after. And the first round of those are here.
@@ -175,3 +176,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.1.1-linux-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.1/owncast-0.1.1-linux-arm64.zip) (15.8 MB) |
 | owncast-0.1.1-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.1/owncast-0.1.1-linux-arm7.zip) (15.8 MB) |
 | owncast-0.1.1-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.1/owncast-0.1.1-macOS-64bit.zip) (17.3 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>

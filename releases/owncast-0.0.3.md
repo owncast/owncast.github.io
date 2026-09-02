@@ -4,6 +4,7 @@ description: >-
   There is now a quick installer you can use to install the latest release.  See a demo of it in action.
 sidebar_position: 3
 date: 2020-12-14T16:01:57.000Z
+tags: [release, changelog]
 ---
 
 ## Installer
@@ -83,3 +84,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.0.3-linux-32bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.3/owncast-0.0.3-linux-32bit.zip) (12.2 MB) |
 | owncast-0.0.3-linux-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.3/owncast-0.0.3-linux-64bit.zip) (12.6 MB) |
 | owncast-0.0.3-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.3/owncast-0.0.3-macOS-64bit.zip) (13.1 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>

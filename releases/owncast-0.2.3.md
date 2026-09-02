@@ -4,6 +4,7 @@ description: >-
   This is a small bug fix release to address Prometheus metrics, a couple FediAuth, and private Federation functionality items.
 sidebar_position: 203
 date: 2025-05-10T21:14:45.000Z
+tags: [release, changelog]
 ---
 
 This is a small bug fix release to address Prometheus metrics, a couple FediAuth, and private Federation functionality items.
@@ -82,3 +83,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.2.3-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.3/owncast-0.2.3-linux-arm7.zip) (16.1 MB) |
 | owncast-0.2.3-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.3/owncast-0.2.3-macOS-64bit.zip) (24.7 MB) |
 | owncast-0.2.3-macOS-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.3/owncast-0.2.3-macOS-arm64.zip) (24.0 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>

@@ -4,6 +4,7 @@ description: >-
   Owncast v0.0.9 is a smaller release with a handful of tweaks and fixes.  There's not a lot of user-facing changes this time around, but take a look through the below changes and see if there's anythin...
 sidebar_position: 9
 date: 2021-09-26T21:37:40.000Z
+tags: [release, changelog]
 ---
 
 Owncast v0.0.9 is a smaller release with a handful of tweaks and fixes.  There's not a lot of user-facing changes this time around, but take a look through the below changes and see if there's anything that might impact you.
@@ -109,3 +110,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.0.9-linux-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.9/owncast-0.0.9-linux-arm64.zip) (13.6 MB) |
 | owncast-0.0.9-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.9/owncast-0.0.9-linux-arm7.zip) (13.6 MB) |
 | owncast-0.0.9-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.9/owncast-0.0.9-macOS-64bit.zip) (14.7 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>

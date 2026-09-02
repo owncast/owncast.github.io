@@ -4,6 +4,7 @@ description: >-
   In honor of @mattdsteele and @JCake live streaming their wedding using Owncast tomorrow, here's the first release version.
 sidebar_position: 1
 date: 2020-08-08T04:11:57.000Z
+tags: [release, changelog]
 ---
 
 In honor of @mattdsteele and @JCake live streaming their wedding using Owncast tomorrow, here's the first release version.
@@ -34,3 +35,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 |----------|----------|
 | owncast-linux-0.0.1.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.1/owncast-linux-0.0.1.zip) (9.5 MB) |
 | owncast-macOS-0.0.1.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.1/owncast-macOS-0.0.1.zip) (10.0 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>

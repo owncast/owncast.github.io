@@ -4,6 +4,7 @@ description: >-
   A handful of Fediverse fixes are included in this release, along with some long standing requests such as being able to change the favicon, and optionally require chat authentication to take part in t...
 sidebar_position: 205
 date: 2026-04-11T22:44:17.000Z
+tags: [release, changelog]
 ---
 
 ## This Release
@@ -96,3 +97,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.2.5-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.5/owncast-0.2.5-linux-arm7.zip) (17.2 MB) |
 | owncast-0.2.5-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.5/owncast-0.2.5-macOS-64bit.zip) (25.9 MB) |
 | owncast-0.2.5-macOS-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.5/owncast-0.2.5-macOS-arm64.zip) (25.0 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>

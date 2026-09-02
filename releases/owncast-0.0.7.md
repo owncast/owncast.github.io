@@ -4,6 +4,7 @@ description: >-
   This release focuses on a handful of things that should improve the day to day usage of Owncast. The biggest being the ability to use hardware accelerated video codecs and free up your CPU if you're r...
 sidebar_position: 7
 date: 2021-05-15T16:44:35.000Z
+tags: [release, changelog]
 ---
 
 This release focuses on a handful of things that should improve the day to day usage of Owncast. The biggest being the ability to use hardware accelerated video codecs and free up your CPU if you're running on dedicated hardware.  This is great for people who are hosting from home, even on things like a Raspberry Pi.  Other additions people have asked for such as being able to upload your logo directly from the admin, hiding chat, custom CSS, being able to manually select a video stream quality from the player and more are included in this update.  Read the below changelog for more details.
@@ -118,3 +119,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.0.7-linux-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.7/owncast-0.0.7-linux-64bit.zip) (13.8 MB) |
 | owncast-0.0.7-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.7/owncast-0.0.7-linux-arm7.zip) (13.3 MB) |
 | owncast-0.0.7-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.7/owncast-0.0.7-macOS-64bit.zip) (14.4 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>

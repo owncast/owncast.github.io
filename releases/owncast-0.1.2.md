@@ -4,6 +4,7 @@ description: >-
   1. Stop the service from running. If you're using a pre-installed image through a hosting provider, or setup Owncast to run under systemd you can probably just simply run systemctl stop owncast.
 sidebar_position: 102
 date: 2023-11-18T21:17:25.000Z
+tags: [release, changelog]
 ---
 
 # Changelog
@@ -113,3 +114,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.1.2-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.2/owncast-0.1.2-linux-arm7.zip) (16.2 MB) |
 | owncast-0.1.2-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.2/owncast-0.1.2-macOS-64bit.zip) (26.7 MB) |
 | owncast-0.1.2-macOS-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.2/owncast-0.1.2-macOS-arm64.zip) (26.6 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>

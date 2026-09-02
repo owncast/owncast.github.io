@@ -4,6 +4,7 @@ description: >-
   This update consists of a handful of changes, both user-facing and behind the scenes.
 sidebar_position: 204
 date: 2026-01-10T23:34:29.000Z
+tags: [release, changelog]
 ---
 
 # Changelog
@@ -158,3 +159,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.2.4-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.4/owncast-0.2.4-linux-arm7.zip) (16.4 MB) |
 | owncast-0.2.4-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.4/owncast-0.2.4-macOS-64bit.zip) (25.1 MB) |
 | owncast-0.2.4-macOS-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.4/owncast-0.2.4-macOS-arm64.zip) (24.2 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>

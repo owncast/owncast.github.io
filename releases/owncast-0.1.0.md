@@ -4,6 +4,7 @@ description: >-
   The first commit to Owncast was May 23, 2020. It's been a wild ride seeing what everyone has been streaming and all the creative use cases people have come up with. Thank you to everyone who has contr...
 sidebar_position: 100
 date: 2023-05-30T16:18:06.000Z
+tags: [release, changelog]
 ---
 
 **Note:** Please read these release notes in their entirety. There are many changes and it's important for you to know what has changed and how it will affect you.
@@ -228,3 +229,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.1.0-linux-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.0/owncast-0.1.0-linux-arm64.zip) (15.6 MB) |
 | owncast-0.1.0-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.0/owncast-0.1.0-linux-arm7.zip) (15.6 MB) |
 | owncast-0.1.0-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.0/owncast-0.1.0-macOS-64bit.zip) (17.0 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>

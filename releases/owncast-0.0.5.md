@@ -4,6 +4,7 @@ description: >-
   Owncast v0.0.5 focuses primarily on some basic chat moderation, enabling the admin to remove chat messages
 sidebar_position: 5
 date: 2021-01-13T07:30:48.000Z
+tags: [release, changelog]
 ---
 
 [Owncast v0.0.5](https://github.com/owncast/owncast/milestone/8?closed=1) focuses primarily on some basic chat moderation, enabling the admin to remove chat messages
@@ -73,3 +74,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.0.5-linux-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.5/owncast-0.0.5-linux-64bit.zip) (13.0 MB) |
 | owncast-0.0.5-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.5/owncast-0.0.5-linux-arm7.zip) (12.5 MB) |
 | owncast-0.0.5-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.5/owncast-0.0.5-macOS-64bit.zip) (13.5 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>

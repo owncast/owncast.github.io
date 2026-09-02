@@ -4,6 +4,7 @@ description: >-
   This month marks 5 years of Owncast. It's been a lot of fun, and there's still so much more planned. Thank you for being patient during this time when it's primarily architectural updates, bug fixes, ...
 sidebar_position: 202
 date: 2025-05-03T18:45:34.000Z
+tags: [release, changelog]
 ---
 
 ## Happy 5 years!
@@ -138,3 +139,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.2.2-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.2/owncast-0.2.2-linux-arm7.zip) (16.0 MB) |
 | owncast-0.2.2-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.2/owncast-0.2.2-macOS-64bit.zip) (24.6 MB) |
 | owncast-0.2.2-macOS-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.2/owncast-0.2.2-macOS-arm64.zip) (24.0 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>
