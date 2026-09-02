@@ -98,4 +98,4 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.2.5-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.5/owncast-0.2.5-macOS-64bit.zip) (25.9 MB) |
 | owncast-0.2.5-macOS-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.5/owncast-0.2.5-macOS-arm64.zip) (25.0 MB) |
 
-<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent"></iframe>
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 100vh; background: transparent"></iframe>
