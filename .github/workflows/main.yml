@@ -210,6 +210,29 @@ jobs:
           AWS_S3_ENDPOINT: https://${{ secrets.DO_SPACES_REGION }}.digitaloceanspaces.com
           SOURCE_DIR: build
 
+      # Release slugs contain dots, so Fastly treats clean URLs as file keys.
+      - name: Generate extensionless release aliases
+        run: |
+          for page in build/releases/owncast-*/index.html build/*/releases/owncast-*/index.html; do
+            [ -f "$page" ] || continue
+            target="release-aliases/${page#build/}"
+            target="${target%/index.html}"
+            mkdir -p "$(dirname "$target")"
+            cp "$page" "$target"
+          done
+
+      - name: Upload extensionless release aliases
+        uses: jakejarvis/s3-sync-action@v0.5.1
+        with:
+          args: --content-type text/html --cache-control 'public,max-age=60' --acl public-read
+        env:
+          AWS_S3_BUCKET: ${{ secrets.DO_SPACES_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.DO_SPACES_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DO_SPACES_SECRET }}
+          AWS_REGION: ${{ secrets.DO_SPACES_REGION }}
+          AWS_S3_ENDPOINT: https://${{ secrets.DO_SPACES_REGION }}.digitaloceanspaces.com
+          SOURCE_DIR: release-aliases
+
       # Purge Fastly cache
       #
       # Recommended: soft purge so users get instant fresh content when needed,
