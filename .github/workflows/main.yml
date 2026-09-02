@@ -87,6 +87,8 @@ jobs:
         run: |
           docker build -t owncast-installer-preview-generator .
           docker run --rm -v $PWD:/vhs owncast-installer-preview-generator ./installer.tape
+          docker run --rm -v $PWD:/vhs --entrypoint /bin/sh owncast-installer-preview-generator \
+            -c 'gifsicle -O3 --careful owncast-install.gif > owncast-install.optimized.gif && mv owncast-install.optimized.gif owncast-install.gif'
           mv owncast-install.* ../../static/
 
       - name: Commit changes

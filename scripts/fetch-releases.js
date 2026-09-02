@@ -17,6 +17,9 @@ const REPO = 'owncast';
 const RELEASES_DIR = path.join(__dirname, '..', 'releases');
 const CACHE_FILE = path.join(__dirname, '..', '.releases-cache.json');
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const TEMPLATE_FILE = path.join(__dirname, 'templates', 'release.md');
+const FRONTMATTER_PLACEHOLDER = '{{FRONTMATTER}}';
+const CONTENT_PLACEHOLDER = '{{RELEASE_CONTENT}}';
 
 /**
  * Load cache from disk
@@ -64,10 +67,10 @@ function githubRequest(apiPath, etag = null) {
       },
     };
 
-    const req = https.request(options, (res) => {
+    const req = https.request(options, res => {
       let data = '';
 
-      res.on('data', (chunk) => {
+      res.on('data', chunk => {
         data += chunk;
       });
 
@@ -85,7 +88,7 @@ function githubRequest(apiPath, etag = null) {
             if (json.message && json.message.includes('rate limit')) {
               console.warn('GitHub API rate limit exceeded');
               console.warn(
-                `Reset at: ${new Date(parseInt(res.headers['x-ratelimit-reset']) * 1000)}`
+                `Reset at: ${new Date(parseInt(res.headers['x-ratelimit-reset']) * 1000)}`,
               );
               reject(new Error('Rate limit exceeded'));
               return;
@@ -100,9 +103,7 @@ function githubRequest(apiPath, etag = null) {
               etag: res.headers.etag,
               rateLimit: {
                 remaining: res.headers['x-ratelimit-remaining'],
-                reset: new Date(
-                  parseInt(res.headers['x-ratelimit-reset']) * 1000
-                ),
+                reset: new Date(parseInt(res.headers['x-ratelimit-reset']) * 1000),
               },
             });
           } else {
@@ -114,7 +115,7 @@ function githubRequest(apiPath, etag = null) {
       });
     });
 
-    req.on('error', (error) => {
+    req.on('error', error => {
       reject(error);
     });
 
@@ -133,7 +134,7 @@ async function fetchAllReleases(etag = null) {
   // First request uses etag for caching
   const firstResult = await githubRequest(
     `/repos/${OWNER}/${REPO}/releases?per_page=${perPage}&page=${page}`,
-    etag
+    etag,
   );
 
   if (firstResult.notModified) {
@@ -142,19 +143,19 @@ async function fetchAllReleases(etag = null) {
 
   allReleases.push(...firstResult.data);
   console.log(
-    `  Fetched page ${page} (${firstResult.data.length} releases), rate limit remaining: ${firstResult.rateLimit.remaining}`
+    `  Fetched page ${page} (${firstResult.data.length} releases), rate limit remaining: ${firstResult.rateLimit.remaining}`,
   );
 
   // Fetch additional pages if needed
   while (firstResult.data.length === perPage) {
     page++;
     const result = await githubRequest(
-      `/repos/${OWNER}/${REPO}/releases?per_page=${perPage}&page=${page}`
+      `/repos/${OWNER}/${REPO}/releases?per_page=${perPage}&page=${page}`,
     );
     if (result.data.length === 0) break;
     allReleases.push(...result.data);
     console.log(
-      `  Fetched page ${page} (${result.data.length} releases), rate limit remaining: ${result.rateLimit.remaining}`
+      `  Fetched page ${page} (${result.data.length} releases), rate limit remaining: ${result.rateLimit.remaining}`,
     );
   }
 
@@ -186,11 +187,25 @@ function generateSidebarPosition(tagName) {
 function rewriteLegacyDocLinks(body) {
   return body
     .replaceAll('](/docs/appearance/', '](/docs/configuration/appearance')
-    .replaceAll(
-      '](/docs/custom-javascript/',
-      '](/docs/configuration/custom-javascript'
-    )
+    .replaceAll('](/docs/custom-javascript/', '](/docs/configuration/custom-javascript')
     .replaceAll('](/thirdparty', '](/docs/api');
+}
+
+/**
+ * Render the generated release content into the editable release template.
+ */
+function applyReleaseTemplate(frontmatter, content) {
+  const template = fs.readFileSync(TEMPLATE_FILE, 'utf8');
+
+  if (!template.includes(FRONTMATTER_PLACEHOLDER) || !template.includes(CONTENT_PLACEHOLDER)) {
+    throw new Error(`Template must include ${FRONTMATTER_PLACEHOLDER} and ${CONTENT_PLACEHOLDER}`);
+  }
+
+  return template
+    .replace(FRONTMATTER_PLACEHOLDER, frontmatter)
+    .replace(CONTENT_PLACEHOLDER, content.trim())
+    .trimEnd()
+    .concat('\n');
 }
 
 /**
@@ -206,7 +221,7 @@ function generateReleaseMarkdown(release) {
   let description = `Release ${tagName} of Owncast`;
   if (release.body) {
     // Get first meaningful line/paragraph for description
-    const lines = release.body.split('\n').filter((line) => {
+    const lines = release.body.split('\n').filter(line => {
       const trimmed = line.trim();
       return (
         trimmed &&
@@ -237,6 +252,7 @@ description: >-
   ${description}
 sidebar_position: ${sidebarPosition}
 date: ${isoDate}
+tags: [release, changelog]
 ---`;
 
   // Build content
@@ -254,15 +270,15 @@ date: ${isoDate}
 
     // Group assets by type
     const binaries = release.assets.filter(
-      (a) =>
+      a =>
         a.name.endsWith('.zip') ||
         a.name.endsWith('.tar.gz') ||
         a.name.includes('linux') ||
         a.name.includes('darwin') ||
-        a.name.includes('windows')
+        a.name.includes('windows'),
     );
     const checksums = release.assets.filter(
-      (a) => a.name.includes('checksums') || a.name.endsWith('.txt')
+      a => a.name.includes('checksums') || a.name.endsWith('.txt'),
     );
 
     if (binaries.length > 0) {
@@ -282,7 +298,7 @@ date: ${isoDate}
     }
   }
 
-  return `${frontmatter}\n\n${content.trim()}\n`;
+  return applyReleaseTemplate(frontmatter, content);
 }
 
 /**
@@ -339,9 +355,7 @@ async function main() {
     const markdown = generateReleaseMarkdown(release);
 
     // Check if file exists and content is different
-    const existingContent = fs.existsSync(filepath)
-      ? fs.readFileSync(filepath, 'utf-8')
-      : null;
+    const existingContent = fs.existsSync(filepath) ? fs.readFileSync(filepath, 'utf-8') : null;
 
     if (existingContent === markdown) {
       console.log(`  Unchanged: ${filename}`);
@@ -374,8 +388,11 @@ async function main() {
   console.log(`   Skipped: ${skipped}`);
 }
 
-// Run the script
-main().catch((error) => {
-  console.error('❌ Error:', error);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch(error => {
+    console.error('❌ Error:', error);
+    process.exit(1);
+  });
+}
+
+module.exports = { applyReleaseTemplate, generateReleaseMarkdown };
