@@ -108,7 +108,7 @@ def greet_mods(msg):
 </TabItem>
 </Tabs>
 
-`user` lleva la **identidad completa del remitente**, así que clave el estado por usuario en el estable `user.id` y gatea el comportamiento solo de moderador en `user.scopes` (p. ej. `"MODERATOR"`) en lugar de emparejar el nombre mostrado. Para responder de forma privada al remitente, utiliza la API de respuesta al chat (ver [APIs de Owncast](./apis#chat-replyto)).
+`user` lleva la **identidad completa del remitente**, así que clave el estado por usuario en el estable `user.id` y gatea el comportamiento solo de moderador en `user.scopes` (p. ej. `"MODERATOR"`) en lugar de emparejar el nombre mostrado. Para responder de forma privada al remitente, utiliza la API de respuesta al chat (ver [APIs de Owncast](/docs/plugins/apis#chat-replyto)).
 
 `timestamp` es la hora del reloj del host para el mensaje. El reloj de sandbox funciona, pero `timestamp` es determinista y la elección correcta al comparar el tiempo transcurrido entre eventos o asentar en pruebas.
 
@@ -739,7 +739,7 @@ def went_live(info):
 </TabItem>
 </Tabs>
 
-Consulta [APIs de Owncast](./apis#plugin-to-plugin-events) para la API de emisión.
+Consulta [APIs de Owncast](/docs/plugins/apis#plugin-to-plugin-events) para la API de emisión.
 
 ## Referencia completa del manejador
 

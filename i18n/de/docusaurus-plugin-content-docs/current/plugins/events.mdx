@@ -108,7 +108,7 @@ def greet_mods(msg):
 </TabItem>
 </Tabs>
 
-`user` enthält die **vollständige Senderidentität**, also speichert den benutzerspezifischen Zustand auf der stabilen `user.id` und steuert moderatorenexklusive Verhaltensweisen auf `user.scopes` (z.B. `"MODERATOR"`) anstatt mit dem Anzeigenamen abzugleichen. Um privat auf den Sender zu antworten, verwenden Sie die Chat-Antwort-API (siehe [Owncast APIs](./apis#chat-replyto)).
+`user` enthält die **vollständige Senderidentität**, also speichert den benutzerspezifischen Zustand auf der stabilen `user.id` und steuert moderatorenexklusive Verhaltensweisen auf `user.scopes` (z.B. `"MODERATOR"`) anstatt mit dem Anzeigenamen abzugleichen. Um privat auf den Sender zu antworten, verwenden Sie die Chat-Antwort-API (siehe [Owncast APIs](/docs/plugins/apis#chat-replyto)).
 
 `timestamp` ist die Wanduhrzeit des Hosts für die Nachricht. Die Sandbox-Uhr funktioniert, aber `timestamp` ist deterministisch und die richtige Wahl, um die verstrichene Zeit über Ereignisse hinweg zu vergleichen oder in Tests zu bestätigen.
 
@@ -739,7 +739,7 @@ def went_live(info):
 </TabItem>
 </Tabs>
 
-Siehe [Owncast APIs](./apis#plugin-to-plugin-events) für die Emit-API.
+Siehe [Owncast APIs](/docs/plugins/apis#plugin-to-plugin-events) für die Emit-API.
 
 ## Vollständige Handlerreferenz
 

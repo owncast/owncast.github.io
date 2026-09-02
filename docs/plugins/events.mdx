@@ -108,7 +108,7 @@ def greet_mods(msg):
 </TabItem>
 </Tabs>
 
-`user` carries the **full sender identity**, so key per-user state on the stable `user.id` and gate moderator-only behavior on `user.scopes` (e.g. `"MODERATOR"`) rather than matching the display name. To reply privately to the sender, use the chat reply-to API (see [Owncast APIs](./apis#chat-replyto)).
+`user` carries the **full sender identity**, so key per-user state on the stable `user.id` and gate moderator-only behavior on `user.scopes` (e.g. `"MODERATOR"`) rather than matching the display name. To reply privately to the sender, use the chat reply-to API (see [Owncast APIs](/docs/plugins/apis#chat-replyto)).
 
 `timestamp` is the host's wall-clock time for the message. The sandbox clock works, but `timestamp` is deterministic and the right choice when comparing elapsed time across events or asserting in tests.
 
@@ -778,7 +778,7 @@ The receiving handler uses only its local hook name. Emitters use the full
 `<recipient-slug>.<hook>` target. Built-in event names remain canonical and
 cannot be claimed as custom hooks.
 
-See [Owncast APIs](./apis#plugin-to-plugin-events) for the emit API.
+See [Owncast APIs](/docs/plugins/apis#plugin-to-plugin-events) for the emit API.
 
 ## Complete handler reference
 

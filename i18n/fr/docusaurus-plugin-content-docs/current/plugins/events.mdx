@@ -108,7 +108,7 @@ def greet_mods(msg):
 </TabItem>
 </Tabs>
 
-`user` représente l'**identité complète de l'expéditeur**, donc la clé pour chaque état utilisateur sur le stable `user.id` et la porte vers un comportement réservé aux modérateurs sur `user.scopes` (par exemple `"MODERATOR"`) plutôt que de faire correspondre le nom affiché. Pour répondre en privé à l'expéditeur, utilisez l'API de réponse au chat (voir [Owncast APIs](./apis#chat-replyto)).
+`user` représente l'**identité complète de l'expéditeur**, donc la clé pour chaque état utilisateur sur le stable `user.id` et la porte vers un comportement réservé aux modérateurs sur `user.scopes` (par exemple `"MODERATOR"`) plutôt que de faire correspondre le nom affiché. Pour répondre en privé à l'expéditeur, utilisez l'API de réponse au chat (voir [Owncast APIs](/docs/plugins/apis#chat-replyto)).
 
 `timestamp` est l'heure du serveur pour le message. L'horloge du bac à sable fonctionne, mais `timestamp` est déterministe et le bon choix lors de la comparaison du temps écoulé entre les événements ou lors d'assertions dans les tests.
 
@@ -739,7 +739,7 @@ def went_live(info):
 </TabItem>
 </Tabs>
 
-Voir [APIs d'Owncast](./apis#plugin-to-plugin-events) pour l'API d'émission.
+Voir [APIs d'Owncast](/docs/plugins/apis#plugin-to-plugin-events) pour l'API d'émission.
 
 ## Référence complète des gestionnaires
 
