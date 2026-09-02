@@ -165,6 +165,9 @@ const config: Config = {
   title: 'Owncast - Free and Open Source Livestreaming',
   tagline: 'Free and Open Source Livestreaming',
   favicon: '/favicon.png',
+  // Fastly serves generated directory routes only with their trailing slash.
+  trailingSlash: true,
+
 
   // Static scripts (loaded outside of webpack/React)
   scripts: [
