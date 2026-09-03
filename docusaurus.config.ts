@@ -168,6 +168,14 @@ const config: Config = {
   // Fastly serves generated directory routes only with their trailing slash.
   trailingSlash: true,
 
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {},
+      innerHTML:
+        "location.pathname.endsWith('/index.html')&&location.replace(location.pathname.slice(0,-10)+location.search+location.hash)",
+    },
+  ],
 
   // Static scripts (loaded outside of webpack/React)
   scripts: [
