@@ -95,11 +95,8 @@ A special **thank you** to the organizations that offer services to help Owncast
 
 [Fastly](https://www.fastly.com/fast-forward), [Cypress](https://cloud.cypress.io/projects/wwi3xe), [BrowserStack](https://www.browserstack.com/open-source), [Chromatic](https://www.chromatic.com/builds?appId=629132c6e23893003a9e89c5), [Docker](https://hub.docker.com/u/owncast) and [Rocket.Chat](https://owncast.rocket.chat/).
 
-<iframe
-  src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=%230f1115"
-  title="Support Owncast"
-  style="display: block; width: 80%; height: 400px; border: 0; background: #0f1115"
-></iframe>
+
+---
 
 ## Downloads
 
@@ -113,3 +110,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.1.3-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.3/owncast-0.1.3-linux-arm7.zip) (15.9 MB) |
 | owncast-0.1.3-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.3/owncast-0.1.3-macOS-64bit.zip) (25.0 MB) |
 | owncast-0.1.3-macOS-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.1.3/owncast-0.1.3-macOS-arm64.zip) (24.8 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 100vh; background: transparent"></iframe>

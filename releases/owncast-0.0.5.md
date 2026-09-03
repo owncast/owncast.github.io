@@ -61,11 +61,8 @@ The features regarding chat message moderation brought new endpoints:
 * [`POST /api/admin/chat/updatemessagevisibility`](https://owncast.online/api/0.0.5/#tag/Admin/paths/~1api~1admin~1chat~1updatemessagevisibility/post) toggles the visibility of of messages
 * The Chat Websocket has a new message type `VISIBILITY-UPDATE`.
 
-<iframe
-  src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=%230f1115"
-  title="Support Owncast"
-  style="display: block; width: 80%; height: 400px; border: 0; background: #0f1115"
-></iframe>
+
+---
 
 ## Downloads
 
@@ -77,3 +74,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.0.5-linux-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.5/owncast-0.0.5-linux-64bit.zip) (13.0 MB) |
 | owncast-0.0.5-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.5/owncast-0.0.5-linux-arm7.zip) (12.5 MB) |
 | owncast-0.0.5-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.5/owncast-0.0.5-macOS-64bit.zip) (13.5 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 100vh; background: transparent"></iframe>

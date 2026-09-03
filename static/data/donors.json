@@ -78,5 +78,10 @@
     "login": "Coraline Ada Ehmke",
     "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/8fa61da0-129c-11ed-abc9-9d62f2e2da43.jpg",
     "html_url": "https://opencollective.com/coraline-ada-ehmke"
+  },
+  {
+    "login": "Guest",
+    "avatar_url": null,
+    "html_url": "https://opencollective.com/guest-aa8ac994"
   }
 ]

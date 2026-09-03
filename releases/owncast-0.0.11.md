@@ -132,11 +132,8 @@ Our project sponsors [Noblestreet](https://opencollective.com/noblestreet) and [
 
 And our fantastic donors [Simon Michalke](https://opencollective.com/simon-michalke), [rootbeerdan](https://opencollective.com/rootbeerdan), [Luka Prinčič](https://opencollective.com/luka-princic), [Kyle Bronsdon](https://opencollective.com/guest-7c7eb0e8), [Robin](https://opencollective.com/robin-mol1), [Flaki](https://opencollective.com/flaki), [Joel Bradshaw](https://opencollective.com/joel-bradshaw), [Paul Lindner](https://opencollective.com/lindner), [Real Targeted Traffic](https://opencollective.com/seo25-com), [TargetedVisitors](https://opencollective.com/targeted-traffic), [Tom Hansen](https://opencollective.com/guest-eca9a6e4), [pwxlwrk](https://opencollective.com/guest-3bb3ecf0), [Incognito](https://opencollective.com/incognito-3b4cd5c7), [Niels Digital](https://opencollective.com/guest-80892d29), [nebunez](https://opencollective.com/guest-50d297d1) and [Merlin](https://opencollective.com/johnathan-shunn).
 
-<iframe
-  src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=%230f1115"
-  title="Support Owncast"
-  style="display: block; width: 80%; height: 400px; border: 0; background: #0f1115"
-></iframe>
+
+---
 
 ## Downloads
 
@@ -149,3 +146,5 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.0.11-linux-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.11/owncast-0.0.11-linux-arm64.zip) (13.6 MB) |
 | owncast-0.0.11-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.11/owncast-0.0.11-linux-arm7.zip) (13.7 MB) |
 | owncast-0.0.11-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.11/owncast-0.0.11-macOS-64bit.zip) (15.1 MB) |
+
+<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 100vh; background: transparent"></iframe>
