@@ -199,8 +199,11 @@ Our project sponsors [Noblestreet](https://opencollective.com/noblestreet), [Okt
 
 And our fantastic donors [Simon Michalke](https://opencollective.com/simon-michalke), [rootbeerdan](https://opencollective.com/rootbeerdan), [Luka Prinčič](https://opencollective.com/luka-princic), [Kyle Bronsdon](https://opencollective.com/guest-7c7eb0e8), [Flaki](https://opencollective.com/flaki), [Raffael Rehberger](https://opencollective.com/ruffy), [Joel Bradshaw](https://opencollective.com/joel-bradshaw), [Paul Lindner](https://opencollective.com/lindner), [Real Targeted Traffic](https://opencollective.com/seo25-com), [TargetedVisitors](https://opencollective.com/targeted-traffic), [Incognito](https://opencollective.com/incognito-3b4cd5c7), [nebunez](https://opencollective.com/guest-50d297d1), [Merlin](https://opencollective.com/johnathan-shunn), [Teklynk](https://opencollective.com/guest-87b42e0e), [Ole](https://opencollective.com/guest-c741c302), [PlayBox Technology](https://opencollective.com/playbox-technology), [Guest](https://opencollective.com/guest-ef71fba6) and [Guest](https://opencollective.com/guest-7c9c2080).
 
-
----
+<iframe
+  src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=%230f1115"
+  title="Support Owncast"
+  style="display: block; width: 80%; height: 400px; border: 0; background: #0f1115"
+></iframe>
 
 ## Downloads
 
@@ -213,5 +216,3 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.0.12-linux-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.12/owncast-0.0.12-linux-arm64.zip) (17.5 MB) |
 | owncast-0.0.12-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.12/owncast-0.0.12-linux-arm7.zip) (17.9 MB) |
 | owncast-0.0.12-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.12/owncast-0.0.12-macOS-64bit.zip) (19.2 MB) |
-
-<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 100vh; background: transparent"></iframe>

@@ -5,6 +5,7 @@
  * Run this script to sync the /releases page with GitHub releases.
  */
 
+const crypto = require('crypto');
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
@@ -20,6 +21,7 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const TEMPLATE_FILE = path.join(__dirname, 'templates', 'release.md');
 const FRONTMATTER_PLACEHOLDER = '{{FRONTMATTER}}';
 const CONTENT_PLACEHOLDER = '{{RELEASE_CONTENT}}';
+const DOWNLOADS_PLACEHOLDER = '{{DOWNLOADS}}';
 
 /**
  * Load cache from disk
@@ -194,16 +196,23 @@ function rewriteLegacyDocLinks(body) {
 /**
  * Render the generated release content into the editable release template.
  */
-function applyReleaseTemplate(frontmatter, content) {
+function applyReleaseTemplate(frontmatter, content, downloads) {
   const template = fs.readFileSync(TEMPLATE_FILE, 'utf8');
 
-  if (!template.includes(FRONTMATTER_PLACEHOLDER) || !template.includes(CONTENT_PLACEHOLDER)) {
-    throw new Error(`Template must include ${FRONTMATTER_PLACEHOLDER} and ${CONTENT_PLACEHOLDER}`);
+  if (
+    !template.includes(FRONTMATTER_PLACEHOLDER) ||
+    !template.includes(CONTENT_PLACEHOLDER) ||
+    !template.includes(DOWNLOADS_PLACEHOLDER)
+  ) {
+    throw new Error(
+      `Template must include ${FRONTMATTER_PLACEHOLDER}, ${CONTENT_PLACEHOLDER}, and ${DOWNLOADS_PLACEHOLDER}`,
+    );
   }
 
   return template
     .replace(FRONTMATTER_PLACEHOLDER, frontmatter)
     .replace(CONTENT_PLACEHOLDER, content.trim())
+    .replace(DOWNLOADS_PLACEHOLDER, downloads.trim())
     .trimEnd()
     .concat('\n');
 }
@@ -255,18 +264,14 @@ date: ${isoDate}
 tags: [release, changelog]
 ---`;
 
-  // Build content
-  let content = '';
+  // Build release body content.
+  const content = release.body ? rewriteLegacyDocLinks(release.body) : '';
 
-  // Add release body if available
-  if (release.body) {
-    content += rewriteLegacyDocLinks(release.body);
-  }
-
-  // Add download links section if there are assets
+  // Build download links separately so the template controls their placement.
+  let downloads = '';
   if (release.assets && release.assets.length > 0) {
-    content += '\n\n---\n\n## Downloads\n\n';
-    content += `View all downloads on the [GitHub release page](${release.html_url}).\n\n`;
+    downloads += '## Downloads\n\n';
+    downloads += `View all downloads on the [GitHub release page](${release.html_url}).\n\n`;
 
     // Group assets by type
     const binaries = release.assets.filter(
@@ -282,23 +287,23 @@ tags: [release, changelog]
     );
 
     if (binaries.length > 0) {
-      content += '| Platform | Download |\n';
-      content += '|----------|----------|\n';
+      downloads += '| Platform | Download |\n';
+      downloads += '|----------|----------|\n';
       for (const asset of binaries) {
         const sizeMB = (asset.size / (1024 * 1024)).toFixed(1);
-        content += `| ${asset.name} | [Download](${asset.browser_download_url}) (${sizeMB} MB) |\n`;
+        downloads += `| ${asset.name} | [Download](${asset.browser_download_url}) (${sizeMB} MB) |\n`;
       }
     }
 
     if (checksums.length > 0) {
-      content += '\n### Checksums\n\n';
+      downloads += '\n### Checksums\n\n';
       for (const asset of checksums) {
-        content += `- [${asset.name}](${asset.browser_download_url})\n`;
+        downloads += `- [${asset.name}](${asset.browser_download_url})\n`;
       }
     }
   }
 
-  return applyReleaseTemplate(frontmatter, content);
+  return applyReleaseTemplate(frontmatter, content, downloads);
 }
 
 /**
@@ -317,22 +322,21 @@ async function main() {
   console.log('📦 Fetching Owncast releases from GitHub...\n');
 
   const cache = loadCache();
+  const template = fs.readFileSync(TEMPLATE_FILE, 'utf8');
+  const templateHash = crypto.createHash('sha256').update(template).digest('hex');
 
-  // Fetch all releases
-  console.log('Fetching releases list...');
-  const result = await fetchAllReleases(cache.etag);
-
+  // A template edit needs fresh release bodies to regenerate every page.
+  const result = await fetchAllReleases(cache.templateHash === templateHash ? cache.etag : null);
   if (result.notModified) {
     console.log('✅ Releases not modified (using cached data)');
     return;
   }
-
   const releases = result.data;
   console.log(`\nFound ${releases.length} release(s)\n`);
 
   // Update cache
   cache.etag = result.etag;
-
+  cache.templateHash = templateHash;
   // Ensure releases directory exists
   if (!fs.existsSync(RELEASES_DIR)) {
     fs.mkdirSync(RELEASES_DIR, { recursive: true });

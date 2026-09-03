@@ -227,6 +227,7 @@ const config: Config = {
   clientModules: [
     require.resolve('./src/clientModules/sidebarScrollFade.ts'),
     require.resolve('./src/clientModules/localePreference.ts'),
+    require.resolve('./src/clientModules/releaseEmbedResize.ts'),
   ],
 
   i18n: {

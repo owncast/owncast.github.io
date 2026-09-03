@@ -19,7 +19,11 @@ There are no other changes and this only impacts those using that feature.  See 
 1. Re-run the installer as the user you run Owncast under. For example if you are running owncast as the user "owncast": `su -c "curl https://owncast.online/install.sh |bash" owncast`
 1. Restart the service. If you're running under systemd `systemctl start owncast`.
 
----
+<iframe
+  src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=%230f1115"
+  title="Support Owncast"
+  style="display: block; width: 80%; height: 400px; border: 0; background: #0f1115"
+></iframe>
 
 ## Downloads
 
@@ -32,5 +36,3 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.0.10-linux-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.10/owncast-0.0.10-linux-arm64.zip) (13.6 MB) |
 | owncast-0.0.10-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.10/owncast-0.0.10-linux-arm7.zip) (13.6 MB) |
 | owncast-0.0.10-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.10/owncast-0.0.10-macOS-64bit.zip) (14.7 MB) |
-
-<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 100vh; background: transparent"></iframe>

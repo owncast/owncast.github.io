@@ -29,7 +29,11 @@ Additional `v0.2.x` releases will continue until the backend refactor work is co
 - Fix custom theme not applying. Fixes https://github.com/owncast/owncast/issues/4112
 - Fix admin upgrade message showing when it shouldn't.
 
----
+<iframe
+  src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=%230f1115"
+  title="Support Owncast"
+  style="display: block; width: 80%; height: 400px; border: 0; background: #0f1115"
+></iframe>
 
 ## Downloads
 
@@ -42,5 +46,3 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.2.1-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.1/owncast-0.2.1-linux-arm7.zip) (15.9 MB) |
 | owncast-0.2.1-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.1/owncast-0.2.1-macOS-64bit.zip) (24.6 MB) |
 | owncast-0.2.1-macOS-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.1/owncast-0.2.1-macOS-arm64.zip) (23.9 MB) |
-
-<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 100vh; background: transparent"></iframe>
