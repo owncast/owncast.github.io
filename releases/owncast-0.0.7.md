@@ -107,7 +107,11 @@ Thank you to the contributors for v0.0.7: [nebunez](https://github.com/nebunez),
 
 Thank you to those financially supporting Owncast. The project sponsors [Noblestreet](https://opencollective.com/noblestreet), [Okta](https://opencollective.com/okta) and our awesome donors [incognito](https://opencollective.com/incognito959), [Guest](https://opencollective.com/guest-809e649f), [Simon Michalke](https://opencollective.com/simon-michalke), [GoMage](https://opencollective.com/gomage), [rootbeerdan](https://opencollective.com/rootbeerdan), [GTX](https://opencollective.com/gtx), [John DeAscentis](https://opencollective.com/john-deascentis), [Luka Prinčič](https://opencollective.com/luka-princic), [Kyle Bronsdon](https://opencollective.com/guest-7c7eb0e8), [Guest](https://opencollective.com/guest-b4f6cea0) and [Alan Peterson](https://opencollective.com/alan-peterson).
 
----
+<iframe
+  src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=%230f1115"
+  title="Support Owncast"
+  style="display: block; width: 80%; height: 400px; border: 0; background: #0f1115"
+></iframe>
 
 ## Downloads
 
@@ -119,5 +123,3 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.0.7-linux-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.7/owncast-0.0.7-linux-64bit.zip) (13.8 MB) |
 | owncast-0.0.7-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.7/owncast-0.0.7-linux-arm7.zip) (13.3 MB) |
 | owncast-0.0.7-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.7/owncast-0.0.7-macOS-64bit.zip) (14.4 MB) |
-
-<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 100vh; background: transparent"></iframe>

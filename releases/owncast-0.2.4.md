@@ -144,8 +144,11 @@ These organizations support Owncast via non-monetary support and services. [Cypr
 ## Thank you to our [financial supporters](https://opencollective.com/owncast)!
 [Simon Michalke](https://opencollective.com/simon-michalke), [Luka Prinčič](https://opencollective.com/luka-princic), [Flaki](https://opencollective.com/flaki), [Joel Bradshaw](https://opencollective.com/joel-bradshaw), [Paul Lindner](https://opencollective.com/lindner), [Incognito](https://opencollective.com/incognito-3b4cd5c7), [nebunez](https://opencollective.com/nebunez), [Teklynk](https://opencollective.com/teklynk), [Incognito](https://opencollective.com/user-5bdb86e0), [emacsen](https://opencollective.com/guest-618ea119), [Rick](https://opencollective.com/patrick-materla), [Tom](https://opencollective.com/tom31), [Alex O'Carroll](https://opencollective.com/alex-ocarroll), [Kev Mul](https://opencollective.com/kev-mul), [Incognito](https://opencollective.com/user-be0b67ae), [Thomas OConnor](https://opencollective.com/thomas-oconnor), [hatniX](https://opencollective.com/hatnix), [Max Schnabel](https://opencollective.com/guest-2124a284), [Incognito](https://opencollective.com/user-9fd67848), [Guest](https://opencollective.com/guest-e0844f5f), [Walter Ebert](https://opencollective.com/walterebert), [Lee](https://opencollective.com/guest-194ec786), [Sam](https://opencollective.com/guest-e5c5ea51), [Simon Michalke](https://opencollective.com/simon-michalke), [Incognito](https://opencollective.com/user-5bdb86e0), [The Green Wizard](https://opencollective.com/the-green-wizard), [Lucas](https://opencollective.com/guest-f1850b43), [Tom](https://opencollective.com/tom31), [inpc](https://opencollective.com/inpc), [Anthony Zone](https://opencollective.com/anthony-zone), [Ставки на спорт](https://opencollective.com/stavki-na-sport-ua) and [MATSUDA RYUKI](https://opencollective.com/guest-07d84ecb).
 
-
----
+<iframe
+  src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=%230f1115"
+  title="Support Owncast"
+  style="display: block; width: 80%; height: 400px; border: 0; background: #0f1115"
+></iframe>
 
 ## Downloads
 
@@ -159,5 +162,3 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.2.4-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.4/owncast-0.2.4-linux-arm7.zip) (16.4 MB) |
 | owncast-0.2.4-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.4/owncast-0.2.4-macOS-64bit.zip) (25.1 MB) |
 | owncast-0.2.4-macOS-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.2.4/owncast-0.2.4-macOS-arm64.zip) (24.2 MB) |
-
-<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 100vh; background: transparent"></iframe>

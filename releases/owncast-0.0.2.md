@@ -42,7 +42,11 @@ However, you're free to upgrade any way you like, but make sure your `chat.db`, 
 * Remove Cache-Control header when sending to external S3 storage to support Digital Ocean Spaces.
 * Stream gets cleaned up after 5 minutes of being disconnected.
 
----
+<iframe
+  src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=%230f1115"
+  title="Support Owncast"
+  style="display: block; width: 80%; height: 400px; border: 0; background: #0f1115"
+></iframe>
 
 ## Downloads
 
@@ -53,5 +57,3 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.0.2-linux-32bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.2/owncast-0.0.2-linux-32bit.zip) (9.4 MB) |
 | owncast-0.0.2-linux-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.2/owncast-0.0.2-linux-64bit.zip) (13.4 MB) |
 | owncast-0.0.2-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.0.2/owncast-0.0.2-macOS-64bit.zip) (12.9 MB) |
-
-<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 100vh; background: transparent"></iframe>

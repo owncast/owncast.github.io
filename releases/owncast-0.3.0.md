@@ -174,7 +174,11 @@ Make a donation to the Owncast project to sustain its future, and make sure inde
 
 <a href="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 80vh; background: transparent">Donate here!</a>
 
----
+<iframe
+  src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=%230f1115"
+  title="Support Owncast"
+  style="display: block; width: 80%; height: 400px; border: 0; background: #0f1115"
+></iframe>
 
 ## Downloads
 
@@ -188,5 +192,3 @@ View all downloads on the [GitHub release page](https://github.com/owncast/ownca
 | owncast-0.3.0-linux-arm7.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.3.0/owncast-0.3.0-linux-arm7.zip) (22.3 MB) |
 | owncast-0.3.0-macOS-64bit.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.3.0/owncast-0.3.0-macOS-64bit.zip) (37.3 MB) |
 | owncast-0.3.0-macOS-arm64.zip | [Download](https://github.com/owncast/owncast/releases/download/v0.3.0/owncast-0.3.0-macOS-arm64.zip) (36.3 MB) |
-
-<iframe src="https://opencollective.com/embed/owncast/donate?amount=20&interval=month&contributeAs=me&tags=release%2Cchangelog&hideSteps=true&hideFAQ=true&hideHeader=true&useTheme=true&backgroundColor=#000000" style="width: 80%; min-height: 100vh; background: transparent"></iframe>
