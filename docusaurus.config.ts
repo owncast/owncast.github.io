@@ -520,13 +520,17 @@ const config: Config = {
         showReadingTime: true,
         postsPerPage: 10,
         feedOptions: {
-          type: ['rss', 'atom'],
+          type: ['rss', 'atom', 'json'],
           title: 'Owncast News',
           description: 'Announcements, updates, and news from the Owncast project',
           copyright: `Copyright © ${new Date().getFullYear()} Owncast`,
           language: 'en-US',
           limit: 20,
           xslt: true,
+          createFeedItems: async ({ blogPosts, siteConfig, outDir, defaultCreateFeedItems }) => {
+            const items = await defaultCreateFeedItems({ blogPosts, siteConfig, outDir });
+            return items.map(item => ({ ...item, published: item.date }));
+          },
         },
         onInlineTags: 'warn',
         onInlineAuthors: 'warn',

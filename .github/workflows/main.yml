@@ -155,6 +155,8 @@ jobs:
           # Locales have explicit baseUrls (/de/, /fr/, ...) so docusaurus
           # appends the locale segment to --out-dir itself.
           npx docusaurus build --locale en --out-dir build
+          # Released Owncast servers consume this legacy JSON Feed path.
+          cp build/news/feed.json build/news/index.json
           for l in $locales; do
             if [ "$l" != "en" ]; then
               npx docusaurus build --locale "$l" --out-dir build
