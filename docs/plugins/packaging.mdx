@@ -1,6 +1,6 @@
 ---
 title: Packaging & publishing plugins
-description: Bundle your plugin into a .ocpkg, install it on a server, and list it in the public plugin directory.
+description: Bundle your plugin into a .ocpkg, install it on a server, and list it in the public plugin catalog.
 sidebar_position: 10
 sidebar_label: Packaging & publishing
 toc_min_heading_level: 2
@@ -143,9 +143,9 @@ In either case, finish the install in the admin:
 
 ## Updating an installed plugin
 
-To ship an update, replace the package file in `data/plugins/` directly, or install the new version from the admin's **Browse** tab if you publish to the directory. The manifest's `slug` is the identity key: the new contents replace the existing entry with the same slug, whatever the file was called. To force an immediate reload of an enabled plugin, click **Reload** on its row.
+To ship an update, replace the package file in `data/plugins/` directly, or install the new version from the admin's **Browse** tab if you publish to the plugin catalog. The manifest's `slug` is the identity key: the new contents replace the existing entry with the same slug, whatever the file was called. To force an immediate reload of an enabled plugin, click **Reload** on its row.
 
-Uploading from the admin's **Plugins** page only installs a *new* plugin. An upload whose `slug` already belongs to an installed plugin is rejected ("uninstall it before uploading another plugin with the same slug"), so uninstall the old one first if the admin upload is your only update path.
+Uploading from the admin's **Plugins** page only installs a _new_ plugin. An upload whose `slug` already belongs to an installed plugin is rejected ("uninstall it before uploading another plugin with the same slug"), so uninstall the old one first if the admin upload is your only update path.
 
 Two files in `data/plugins/` that declare the same `slug` are also a conflict. Owncast keeps the first one it finds, ignores the other, and logs which package was skipped.
 
@@ -179,29 +179,29 @@ Before you publish a plugin:
 - The icon is included if you have one.
 - An `INSTRUCTIONS.md` ships with anything an admin needs to know after install: setup steps, configuration notes, why each permission is requested. Plugins with non-obvious behavior or required configuration should ship one. Trivial plugins (a hello-world chat handler) don't need it.
 
-## Publishing to the directory
+## Publishing to the plugin catalog
 
-Listing your plugin in the public directory at [owncast.directory](https://owncast.directory) is optional. A `.ocpkg` is self-contained, so you can always hand it to an admin directly. The directory just makes your plugin discoverable and gives admins one-click install and updates.
+Listing your plugin in the public plugin catalog is optional, but this is how you offer it to all Owncast users. A `.ocpkg` is self-contained, so you can always hand it to an admin directly if they want it, but the catalog is the way to go. The catalog just makes your plugin discoverable and gives admins one-click install and updates.
 
 A few manifest fields shape your listing, so fill them in first: `name` (the display name), `version` (bump it for every update), `slug` (your permanent identifier, see [Manifest](/docs/plugins/manifest#name-and-slug)), `description` (the one-line summary on your card), `permissions` (keep them minimal, admins review them), and an optional `icon.png`.
 
 ### Sign in
 
-The directory uses passwordless, magic-link sign-in. Go to [owncast.directory/plugins/login](https://owncast.directory/plugins/login), enter your email, and click the link in your inbox. Your email is your author identity, tied to the plugins you own. On your account page you can set an optional display name that appears as the author on your listings.
+The catalog uses passwordless, magic-link sign-in. Go to [the catalog login](https://owncast.directory/plugins/login), enter your email, and click the link in your inbox. Your email is your author identity, tied to the plugins you own. On your account page you can set an optional display name that appears as the author on your listings.
 
 ### Submit
 
-Go to [owncast.directory/plugins/submit](https://owncast.directory/plugins/submit) and upload your `.ocpkg`. The directory reads your manifest, validates the package, and publishes the version. Submission is done through the website, with no command-line publish step today. The form also takes a few optional extras: a preview image (a screenshot, PNG or JPEG up to 5 MB), a homepage link, browse tags, and a summary that overrides the manifest description.
+Go to [the catalog submission page](https://owncast.directory/plugins/submit) and upload your `.ocpkg`. The public catalog reads your manifest, validates the package, and publishes the version. Submission is done through the website, with no command-line publish step today. The form also takes a few optional extras: a preview image (a screenshot, PNG or JPEG up to 5 MB), a homepage link, browse tags, and a summary that overrides the manifest description.
 
 ### Ownership and updates
 
 - The first submitter owns the slug. When you publish a slug for the first time, it is bound to your account and nobody else can publish under it. A submission for a slug owned by another author is rejected.
 - Each version is published once. To ship an update, bump `version` in your manifest, re-package, and submit again.
-- Manage your plugins at [owncast.directory/plugins/account](https://owncast.directory/plugins/account), where you can see everything you have published and remove a listing.
+- Manage your plugins at [on the catalog](https://owncast.directory/plugins/account), where you can see everything you have published and remove a listing.
 
 ### What operators see
 
-In the directory's Browse view your plugin shows its name, author, description, icon, latest version, and preview image if you uploaded one. When an admin installs it, Owncast shows the permissions your manifest requests, renders your `INSTRUCTIONS.md`, and lists any chat commands you register. That metadata is what an operator uses to decide whether to trust and enable your plugin, so write it with that reader in mind.
+In the Owncast admin's catalog Browse view your plugin shows its name, author, description, icon, latest version, and preview image if you uploaded one. When an admin installs it, Owncast shows the permissions your manifest requests, renders your `INSTRUCTIONS.md`, and lists any chat commands you register. That metadata is what an operator uses to decide whether to trust and enable your plugin, so write it with that reader in mind.
 
 ## Where to go next
 
