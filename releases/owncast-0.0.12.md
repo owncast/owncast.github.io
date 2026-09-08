@@ -117,7 +117,7 @@ This update will impact most users, so as time goes on I'll make sure to update 
 
 - Authenticated users' display names are no longer available to others. [#1810](https://github.com/owncast/owncast/issues/1810)
 
-- Add “services” and ��metadata” to NodeInfo/2.0 [#1922](https://github.com/owncast/owncast/pull/1922)
+- Add “services” and “metadata” to NodeInfo/2.0 [#1922](https://github.com/owncast/owncast/pull/1922)
 
 - manifest - Add fullscreen mode/change name [#1934](https://github.com/owncast/owncast/pull/1934)
 
