@@ -185,6 +185,20 @@ jobs:
           command: pages deploy ./build --project-name=owncast-docs-dev-testing
 
       # Deploy to DigitalOcean Spaces
+      # Released Owncast servers fetch the public news feed cross-origin.
+      - name: Configure Spaces CORS
+        run: |
+          aws s3api put-bucket-cors \
+            --bucket "$AWS_S3_BUCKET" \
+            --cors-configuration '{"CORSRules":[{"AllowedOrigins":["*"],"AllowedMethods":["GET","HEAD"],"AllowedHeaders":["*"],"MaxAgeSeconds":3600}]}' \
+            --endpoint-url "$AWS_S3_ENDPOINT"
+        env:
+          AWS_S3_BUCKET: ${{ secrets.DO_SPACES_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.DO_SPACES_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DO_SPACES_SECRET }}
+          AWS_REGION: ${{ secrets.DO_SPACES_REGION }}
+          AWS_S3_ENDPOINT: https://${{ secrets.DO_SPACES_REGION }}.digitaloceanspaces.com
+
 
       # Upload non-HTML assets (long cache)
       - name: Upload assets
