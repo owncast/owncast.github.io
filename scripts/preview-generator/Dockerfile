@@ -1,4 +1,4 @@
-FROM ghcr.io/charmbracelet/vhs
+FROM ghcr.io/charmbracelet/vhs:v0.11.0
 
 
 # Create volume
