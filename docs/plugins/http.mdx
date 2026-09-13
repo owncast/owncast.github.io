@@ -180,7 +180,7 @@ sequenceDiagram
 
 ### Plugin side
 
-Push from any handler, for example, from your chat handler, by calling `owncast.sse.send(channel, event, data)`:
+Push from any handler, for example, from a viewer-visible chat handler, by calling `owncast.sse.send(channel, event, data)`:
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
@@ -189,11 +189,8 @@ Push from any handler, for example, from your chat handler, by calling `owncast.
 const { definePlugin, owncast } = require('@owncast/plugin-sdk');
 
 module.exports = definePlugin({
-  onChatMessage(msg) {
-    owncast.sse.send('overlay', 'chat', {
-      from: msg.user?.displayName,
-      body: msg.body,
-    });
+  onChatMessageBroadcast(message) {
+    owncast.sse.send('overlay', 'chat', message);
   },
 });
 ```
@@ -204,16 +201,18 @@ module.exports = definePlugin({
 ```python
 from owncast_plugin import plugin, owncast
 
-@plugin.on_chat_message
-def push(msg):
-    owncast.sse.send("overlay", "chat", {
-        "from": msg.user.display_name if msg.user else None,
-        "body": msg.body,
-    })
+@plugin.on_chat_message_broadcast
+def push(message):
+    owncast.sse.send("overlay", "chat", message.raw)
 ```
 
 </TabItem>
 </Tabs>
+
+`onChatMessageBroadcast` / `@plugin.on_chat_message_broadcast` includes
+human messages, plugin responses, system messages, and actions. Its `body`
+is sanitized rendered HTML. Use `textContent` for untrusted text; only insert
+this host-sanitized `body` as HTML when reproducing Owncast's chat rendering.
 
 - `channel`: which stream to push to. Browsers subscribe per channel, so you can run several independent streams (`"overlay"`, `"admin-stats"`) from one plugin. Use `""` for a single default channel.
 - `event`: the event name the browser listens for (`addEventListener("chat", ...)`). Pass `""` for the browser's default `message` event.
@@ -256,7 +255,8 @@ The manifest declares the two permissions the overlay needs:
 }
 ```
 
-The plugin subscribes to chat messages and pushes each one to the `overlay` SSE channel:
+The plugin subscribes to viewer-visible chat and pushes each message to the
+`overlay` SSE channel:
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
@@ -266,11 +266,8 @@ The plugin subscribes to chat messages and pushes each one to the `overlay` SSE 
 const { definePlugin, owncast } = require('@owncast/plugin-sdk');
 
 module.exports = definePlugin({
-  onChatMessage(msg) {
-    owncast.sse.send('overlay', 'chat', {
-      from: msg.user?.displayName,
-      body: msg.body,
-    });
+  onChatMessageBroadcast(message) {
+    owncast.sse.send('overlay', 'chat', message);
   },
 });
 ```
@@ -282,12 +279,9 @@ module.exports = definePlugin({
 # src/plugin.py
 from owncast_plugin import plugin, owncast
 
-@plugin.on_chat_message
-def push(msg):
-    owncast.sse.send("overlay", "chat", {
-        "from": msg.user.display_name if msg.user else None,
-        "body": msg.body,
-    })
+@plugin.on_chat_message_broadcast
+def push(message):
+    owncast.sse.send("overlay", "chat", message.raw)
 ```
 
 </TabItem>
@@ -303,8 +297,14 @@ The viewer page is the same `EventSource` snippet shown above, pointed at the re
   <script>
     const events = new EventSource('./_sse/overlay');
     events.addEventListener('chat', e => {
-      const { from, body } = JSON.parse(e.data);
-      document.getElementById('feed').textContent = `${from}: ${body}`;
+      const message = JSON.parse(e.data);
+      const sender = message.user?.displayName || message.senderName;
+      const row = document.createElement('div');
+      if (sender) row.append(`${sender}: `);
+      const body = document.createElement('span');
+      body.innerHTML = message.body; // host-sanitized rendered HTML
+      row.append(body);
+      document.getElementById('feed').append(row);
     });
   </script>
 </body>

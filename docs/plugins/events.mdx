@@ -116,6 +116,50 @@ No permission required to subscribe.
 
 > **Older hosts** delivered `user` as a plain display-name string rather than the identity object. If you support hosts that predate the identity payload, read it defensively. See your SDK page for the idiom.
 
+### Viewer-visible chat: `chat.message.broadcast`
+
+Fires for every chat event viewers receive, including human messages, plugin
+responses, system messages, and chat actions. The `body` is sanitized,
+rendered HTML. Use this event for passive consumers such as overlays.
+
+```ts
+interface ChatMessageBroadcast {
+  id: string;
+  type: "CHAT" | "SYSTEM" | "CHAT_ACTION";
+  user?: User;
+  senderName?: string;
+  body: string; // sanitized rendered HTML
+  timestamp: string;
+}
+```
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+module.exports = definePlugin({
+  onChatMessageBroadcast(message) {
+    owncast.sse.send("overlay", "chat", message);
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+@plugin.on_chat_message_broadcast
+def stream_message(message):
+    owncast.sse.send("overlay", "chat", message.raw)
+```
+
+</TabItem>
+</Tabs>
+
+This is a passive event. Do not declare `chat.send` in a plugin that handles
+`chat.message.broadcast`; use `chat.message.received` for handlers that react
+to user input and post replies. No permission is required to subscribe.
+
 ### Chat user joined / parted: `chat.user.joined`, `chat.user.parted`
 
 Fires when a chat user connects or disconnects.
@@ -787,6 +831,7 @@ Each row is a runtime event. The handler name follows your SDK's convention: cam
 | Event                    | Payload                            | Permission                                         |
 | ------------------------ | ---------------------------------- | -------------------------------------------------- |
 | `chat.message.received`  | `ChatMessage`                      | none                                               |
+| `chat.message.broadcast` | `ChatMessageBroadcast`             | none                                               |
 | `chat.user.joined`       | `User`                             | none                                               |
 | `chat.user.parted`       | `User`                             | none                                               |
 | `chat.user.renamed`      | `{ user, previousName }`           | none                                               |
