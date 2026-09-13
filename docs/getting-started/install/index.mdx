@@ -6,15 +6,11 @@ sidebar_position: 100
 sidebar_label: Installation
 ---
 
-import { IncludeMarkdown } from "@site/src/components";
-import Installer from "./installer.mdx";
-import Manual from "./manual.mdx";
+import { IncludeMarkdown } from '@site/src/components';
+import Installer from './installer.mdx';
+import Manual from './manual.mdx';
 
 There are several ways to install Owncast. The quick installer below is the easiest and works on most Linux and macOS servers. You can also install [manually](#manual-installation) from a release download, run the [container image](/docs/getting-started/install/container), or use a [one-click install at a hosting provider](/docs/getting-started/install/providers).
-
-:::new[Plugin support requires an Owncast v0.3.0 build]
-Owncast 0.3.0 features such as [plugins](/docs/plugins) are not in a stable release yet. To try them you need a [nightly development build](/development-builds), or the container image `ghcr.io/owncast/owncast:nightly`. The stable release is v0.2.5.
-:::
 
 <IncludeMarkdown>
   <Installer />
