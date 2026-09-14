@@ -156,9 +156,9 @@ def stream_message(message):
 </TabItem>
 </Tabs>
 
-This is a passive event. Do not declare `chat.send` in a plugin that handles
-`chat.message.broadcast`; use `chat.message.received` for handlers that react
-to user input and post replies. No permission is required to subscribe.
+This is a passive event. Calling `chat.send` from this callback can feed the
+callback again, so use `chat.message.received` for handlers that react to user
+input and post replies. No permission is required to subscribe.
 
 ### Chat user joined / parted: `chat.user.joined`, `chat.user.parted`
 
