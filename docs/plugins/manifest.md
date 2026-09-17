@@ -5,6 +5,7 @@ sidebar_position: 3
 sidebar_label: Manifest
 toc_min_heading_level: 2
 toc_max_heading_level: 3
+hide_table_of_contents: false
 tags:
   - plugins
   - manifest
