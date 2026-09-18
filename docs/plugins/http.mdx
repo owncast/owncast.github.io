@@ -86,10 +86,17 @@ def fallback(req):
     return {"status": 404}
 ```
 
-Routes are exact and plugin-relative. Read query params from `req.query`. A handler returns a `dict` (`{status, body, headers}`), a `str` (→ 200), or `None` (→ 204). `@plugin.route(path, methods=[...])` covers multiple methods on one path.
+Routes are exact and plugin-relative. Read query params from `req.query`. A handler returns a `dict` (`{status, body, headers}`), a `str`, `bytes`, or `bytearray` (→ 200), or `None` (→ 204). A dictionary body may also be `bytes` or `bytearray`. `@plugin.route(path, methods=[...])` covers multiple methods on one path.
 
 </TabItem>
 </Tabs>
+
+Strings are sent as UTF-8. In JavaScript, set the response `body` to a
+`Uint8Array`. In Python, return `bytes` or `bytearray` directly or use either
+as a dictionary body. Set `Content-Type` to describe the content.
+
+Dynamic byte responses require Owncast v0.3.1 or later. An older host returns
+an empty body.
 
 The `manifest.admin.pages` key match at the top is covered in [UI: Admin pages](/docs/plugins/ui#admin-pages). From the perspective of HTTP serving, it is a 401-before-your-handler-runs filter applied to paths matching one of the object's keys.
 

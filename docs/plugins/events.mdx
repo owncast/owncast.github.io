@@ -501,7 +501,7 @@ interface IncomingHttpRequest {
 interface OutgoingHttpResponse {
   status?: number; // default 200
   headers?: Record<string, string>;
-  body?: string;
+  body?: string | Uint8Array;
 }
 ```
 
@@ -528,6 +528,13 @@ def status(req):
 
 </TabItem>
 </Tabs>
+
+Response strings are sent as UTF-8. In JavaScript, set the response `body` to a
+`Uint8Array`. In Python, return `bytes` or `bytearray` directly or use either
+as a dictionary body.
+
+Byte response bodies require Owncast v0.3.1 or later. Older hosts return an
+empty body.
 
 Endpoints are public by default. Gate admin features on `req.authenticated`. Paths matching a key in `admin.pages` are auth-gated by the host before your handler runs, so for those routes you don't need to check.
 

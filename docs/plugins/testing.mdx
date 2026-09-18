@@ -169,6 +169,10 @@ Headers and body are optional:
 }
 ```
 
+Use `expect.bodyBase64` for an exact byte comparison of a binary response. It
+accepts standard base64 with or without padding. `expect.body` and
+`expect.bodyContains` compare response text.
+
 ### `authCheck`: re-validate a gate session
 
 For [`auth.gate`](/docs/plugins/auth) plugins, drives the [`onAuthCheck`](/docs/plugins/events#auth-check) handler directly with a resolved viewer identity and asserts the verdict:
