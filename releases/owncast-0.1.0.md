@@ -117,7 +117,7 @@ Primarily due to Twitter removing external API access to their service, but also
 
 1. Stop the service from running. If you're using a pre-installed image through a hosting provider, or setup Owncast to run under systemd you can probably just simply run `systemctl stop owncast`.
 1. Change to the directory where Owncast is installed on your server. If you're using a pre-installed image through a hosting provider you it's likely Owncast is located in `/opt/owncast`.
-1. If you���ve customized your web interface in any way you will want to back up the files you’ve changed or customized.
+1. If you’ve customized your web interface in any way you will want to back up the files you’ve changed or customized.
 1. Re-run the installer as the user you run Owncast under. For example if you are running owncast as the user "owncast": `su -c "curl https://owncast.online/install.sh |bash" owncast`. If you are running as a different user, run the upgrade as the same user you're running Owncast as.
 1. Restart the service. If you're running under systemd `systemctl start owncast`.
 
