@@ -5,6 +5,8 @@ description: Download Owncasts for Android phones, tablets, and TVs, or receive 
 
 import Head from '@docusaurus/Head';
 import styles from './android.module.css';
+import { LandingAppStoreButton } from '@/components/landing/app-store-button/LandingAppStoreButton';
+
 
 <Head>
   <meta name="robots" content="noindex" />
@@ -40,7 +42,9 @@ import styles from './android.module.css';
         <span className={styles.optionLabel}>Automatic updates</span>
         <h3>Google Play</h3>
         <p>Install Owncasts through Google Play and receive updates from the store.</p>
-        <span className={styles.comingSoon}>Coming soon</span>
+        <LandingAppStoreButton appStore="google-playstore" asChild>
+          <a href="https://play.google.com/store/apps/details?id=online.owncast.owncasts.android" target="_blank" rel="noopener noreferrer" />
+        </LandingAppStoreButton>
       </article>
       <article className={styles.option}>
         <span className={styles.optionLabel}>Automatic updates</span>
