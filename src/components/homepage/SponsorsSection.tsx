@@ -33,13 +33,6 @@ export function SponsorsSection() {
       width: 176,
       height: 40,
     },
-    {
-      name: "rocket chat",
-      src: "/images/sponsors/rocketchat.webp",
-      url: "https://rocket.chat",
-      width: 220,
-      height: 40,
-    },
   ];
 
   return (
