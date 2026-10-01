@@ -40,6 +40,11 @@
     "html_url": "https://opencollective.com/guest-618ea119"
   },
   {
+    "login": "Rick",
+    "avatar_url": null,
+    "html_url": "https://opencollective.com/patrick-materla"
+  },
+  {
     "login": "Tom",
     "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/523261ef-fc85-4ddf-811b-ad765b3aba71/Me2024.png",
     "html_url": "https://opencollective.com/tom31"
@@ -93,5 +98,25 @@
     "login": "Guest",
     "avatar_url": null,
     "html_url": "https://opencollective.com/guest-9b24c6c4"
+  },
+  {
+    "login": "Jennie",
+    "avatar_url": null,
+    "html_url": "https://opencollective.com/guest-f6f2ac74"
+  },
+  {
+    "login": "Lyrilith",
+    "avatar_url": null,
+    "html_url": "https://opencollective.com/guest-c887d5c3"
+  },
+  {
+    "login": "tedmyoung",
+    "avatar_url": "https://avatars.githubusercontent.com/tedyoung",
+    "html_url": "https://opencollective.com/jitterted"
+  },
+  {
+    "login": "sknob",
+    "avatar_url": null,
+    "html_url": "https://opencollective.com/incognito-65af7c51"
   }
 ]
