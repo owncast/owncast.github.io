@@ -48,3 +48,10 @@ i18n/
 
 # Nightly builds page (generated at build time by scripts/fetch-nightly-builds.js)
 src/pages/development-builds.md
+
+# design-sync (claude.ai/design) machine state
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules

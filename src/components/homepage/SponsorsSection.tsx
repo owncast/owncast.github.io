@@ -40,13 +40,6 @@ export function SponsorsSection() {
       width: 220,
       height: 40,
     },
-    {
-      name: "digital ocean",
-      src: "/images/sponsors/digitalocean.svg",
-      url: "https://digitalocean.com?utm_medium=opensource&utm_source=owncast",
-      width: 178,
-      height: 40,
-    },
   ];
 
   return (
