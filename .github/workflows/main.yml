@@ -90,6 +90,22 @@ jobs:
       - name: Generate releases pages
         run: node scripts/fetch-releases.js
 
+      - name: Check if install preview needs regeneration
+        id: release_check
+        run: |
+          latest=$(curl -sf "https://api.github.com/repos/owncast/owncast/releases/latest" \
+            -H "Authorization: Bearer ${{ secrets.GH_ACCESS_TOKEN }}" \
+            -H "User-Agent: Owncast-Docs-Builder" | jq -r .tag_name)
+          stored=$(cat static/owncast-install.version 2>/dev/null || echo "")
+          echo "latest=$latest" >> "$GITHUB_OUTPUT"
+          if [ "$latest" = "$stored" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Install preview already at $latest — skipping generator."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "Regenerating install preview: '$stored' -> '$latest'"
+          fi
+
       - name: Sync developer documentation
         run: node scripts/fetch-docmost.js
         env:
@@ -99,6 +115,7 @@ jobs:
           DOCMOST_PASSWORD: ${{ secrets.DOCMOST_PASSWORD }}
 
       - name: Run preview generator
+        if: steps.release_check.outputs.skip != 'true'
         working-directory: scripts/preview-generator
         run: |
           docker build -t owncast-installer-preview-generator .
@@ -106,6 +123,7 @@ jobs:
           docker run --rm -v $PWD:/vhs --entrypoint /bin/sh owncast-installer-preview-generator \
             -c 'gifsicle -O3 --careful owncast-install.gif > owncast-install.optimized.gif && mv owncast-install.optimized.gif owncast-install.gif'
           mv owncast-install.* ../../static/
+          echo "${{ steps.release_check.outputs.latest }}" > ../../static/owncast-install.version
 
       - name: Commit changes
         run: |
@@ -116,7 +134,9 @@ jobs:
           cp -a dev-docs/. "$generated_dir/dev-docs/"
           cp -a src/data/dev-manifest.json "$generated_dir/src/data/"
           cp -a static/data/{contributors.json,donors.json,past-donors.json,contributors-processed.json,donors-processed.json,past-donors-processed.json} "$generated_dir/static/data/"
-          cp -a static/owncast-install.* "$generated_dir/static/"
+          if [ "$SKIP_INSTALL_PREVIEW" != "true" ]; then
+            cp -a static/owncast-install.* "$generated_dir/static/"
+          fi
 
           for attempt in 1 2 3; do
             git fetch origin master
@@ -127,9 +147,11 @@ jobs:
             cp -a "$generated_dir"/dev-docs/. dev-docs/
             cp -a "$generated_dir"/src/data/dev-manifest.json src/data/
             cp -a "$generated_dir"/static/data/. static/data/
-            cp -a "$generated_dir"/static/owncast-install.* static/
-
-            git add releases/ dev-docs/ src/data/dev-manifest.json static/data/contributors.json static/data/donors.json static/data/past-donors.json static/data/contributors-processed.json static/data/donors-processed.json static/data/past-donors-processed.json static/owncast-install.*
+            if [ "$SKIP_INSTALL_PREVIEW" != "true" ]; then
+              cp -a "$generated_dir"/static/owncast-install.* static/
+              git add static/owncast-install.*
+            fi
+            git add releases/ dev-docs/ src/data/dev-manifest.json static/data/contributors.json static/data/donors.json static/data/past-donors.json static/data/contributors-processed.json static/data/donors-processed.json static/data/past-donors-processed.json
             if git diff --staged --quiet; then
               exit 0
             fi
@@ -141,6 +163,7 @@ jobs:
           exit 1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SKIP_INSTALL_PREVIEW: ${{ steps.release_check.outputs.skip }}
 
       - name: Upload changed source files to Crowdin
         run: npm run crowdin:upload-existing
