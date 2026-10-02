@@ -1,10 +1,11 @@
 ---
-title: "Design Guidelines & Resources"
+title: 'Design Guidelines & Resources'
 slug: /design-guidelines-resources
 displayed_sidebar: devSidebar
-tags: ["contributing"]
-custom_edit_url: "https://project.owncast.tv/s/dev-docs/p/design-guidelines-resources-Aup1f5gC9t"
+tags: ['contributing']
+custom_edit_url: 'https://project.owncast.tv/s/dev-docs/p/design-guidelines-resources-Aup1f5gC9t'
 ---
+
 A collection of design contribution guidelines and resources for the Owncast interface.
 
 > All participating designers are highly encouraged to shape and evolve these guidelines! It is a work in progress and as we have design contributors we can work to solidify the process, tools and resources.
@@ -23,7 +24,7 @@ Read the detailed product overview to learn more about the product and who it's 
 
 ### We encourage you to:
 
-- Get in touch with the team by joining our [Community Chat](https://owncast.rocket.chat/).
+- Get in touch with the team by joining our [Project Chat](https://owncast.online/chat/?tab=community).
 - Check out our [Contributor Guide](https://owncast.online/help) and [Code of Conduct](https://github.com/owncast/owncast/blob/develop/CODE_OF_CONDUCT.md)
 
 ## 🎭 Target audience
