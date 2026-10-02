@@ -50,8 +50,9 @@ jobs:
         run: |
           CUTOFF_DATE=$(date -d '90 days ago' '+%Y-%m-%d')
           MEMBERS_FILE=$(mktemp)
-          DONORS_FILE=$(mktemp)
-          trap 'rm -f "$MEMBERS_FILE" "$DONORS_FILE"' EXIT
+          DONORS_FILE=$(mktemp static/data/donors.json.XXXXXX)
+          PAST_DONORS_FILE=$(mktemp static/data/past-donors.json.XXXXXX)
+          trap 'rm -f "$MEMBERS_FILE" "$DONORS_FILE" "$PAST_DONORS_FILE"' EXIT
 
           if curl --fail --silent --show-error --location --retry 3 --connect-timeout 10 --max-time 60 \
             https://opencollective.com/owncast/members/all.json > "$MEMBERS_FILE" \
@@ -59,10 +60,25 @@ jobs:
             && jq --arg cutoff "$CUTOFF_DATE" \
               '[.[] | select(.role == "BACKER" and .lastTransactionAt >= $cutoff) | {login: .name, avatar_url: .image, html_url: .profile}]' \
               "$MEMBERS_FILE" > "$DONORS_FILE" \
-            && jq -e 'length > 0' "$DONORS_FILE" >/dev/null; then
+            && jq --arg cutoff "$CUTOFF_DATE" \
+              '[. as $members
+                | [$members[] | select(.role == "BACKER" and .lastTransactionAt >= $cutoff) | .profile] as $current_profiles
+                | $members[]
+                | select(
+                    .role == "BACKER"
+                    and (.lastTransactionAt | type) == "string"
+                    and .lastTransactionAt < $cutoff
+                    and .totalAmountDonated > 0
+                    and (.profile as $profile | ($current_profiles | index($profile)) == null)
+                  )
+                | {login: .name, avatar_url: .image, html_url: .profile}]' \
+              "$MEMBERS_FILE" > "$PAST_DONORS_FILE" \
+            && jq -e 'length > 0' "$DONORS_FILE" >/dev/null \
+            && jq -e 'type == "array"' "$PAST_DONORS_FILE" >/dev/null; then
             mv "$DONORS_FILE" static/data/donors.json
+            mv "$PAST_DONORS_FILE" static/data/past-donors.json
           else
-            echo "OpenCollective donor data was unavailable or empty; keeping the previous donor list."
+            echo "OpenCollective donor data was unavailable or empty; keeping the previous current and past donor lists."
           fi
 
       - name: Process donors
@@ -99,7 +115,7 @@ jobs:
           cp -a releases/. "$generated_dir/releases/"
           cp -a dev-docs/. "$generated_dir/dev-docs/"
           cp -a src/data/dev-manifest.json "$generated_dir/src/data/"
-          cp -a static/data/{contributors.json,donors.json,contributors-processed.json,donors-processed.json} "$generated_dir/static/data/"
+          cp -a static/data/{contributors.json,donors.json,past-donors.json,contributors-processed.json,donors-processed.json,past-donors-processed.json} "$generated_dir/static/data/"
           cp -a static/owncast-install.* "$generated_dir/static/"
 
           for attempt in 1 2 3; do
@@ -113,7 +129,7 @@ jobs:
             cp -a "$generated_dir"/static/data/. static/data/
             cp -a "$generated_dir"/static/owncast-install.* static/
 
-            git add releases/ dev-docs/ src/data/dev-manifest.json static/data/contributors.json static/data/donors.json static/data/contributors-processed.json static/data/donors-processed.json static/owncast-install.*
+            git add releases/ dev-docs/ src/data/dev-manifest.json static/data/contributors.json static/data/donors.json static/data/past-donors.json static/data/contributors-processed.json static/data/donors-processed.json static/data/past-donors-processed.json static/owncast-install.*
             if git diff --staged --quiet; then
               exit 0
             fi

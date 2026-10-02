@@ -11,6 +11,7 @@ import { LazySection } from '@/components/shared/LazySection';
 import { ArchetypesSection } from '@/components/homepage/Archetypes';
 import { InstallerSection } from '@/components/homepage/InstallerSection';
 import { ProtocolCompatList } from '@/components/homepage/ProtocolCompatList';
+import { SupportSection } from '@/components/homepage/SupportSection';
 
 // Lazy loaded — image/avatar-heavy sections with minimal indexable text.
 // They load 600px before entering the viewport (no pop-in).
@@ -58,6 +59,7 @@ export default function Home(): React.JSX.Element {
         <ProtocolCompatList />
       </div>
       <InstallerSection />
+      <SupportSection />
 
       <div className="hidden md:block">
         <LazySection component={FAQSection} minHeight={400} />

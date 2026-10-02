@@ -60,7 +60,7 @@ If you're a people person that enjoys what we're doing and wants to take part, w
 
 ## Can't contribute with any of the above, but still want to help?
 
-[Donate!](https://opencollective.com/owncast)
+[Donate!](/donate/)
 
 ## Want to write some code?
 

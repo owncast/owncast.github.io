@@ -136,25 +136,6 @@
   border-radius: 50%;
 }
 
-.donorBox {
-  margin-top: 3rem;
-}
-
-/* Larger avatars for donors */
-.donorBox .contributorItem {
-  margin-right: -10px;
-}
-
-.donorBox .contributorItem figure {
-  width: 72px;
-  height: 72px;
-}
-
-.donorBox .donorNote {
-  font-size: 0.875rem;
-  color: var(--ifm-color-emphasis-600);
-  margin-top: 1rem;
-}
 
 .loading {
   padding: 2rem;

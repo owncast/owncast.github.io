@@ -71,28 +71,30 @@ function processDonors(donors) {
 async function main() {
   console.log("Processing donors data...");
 
-  const donorsPath = path.join(__dirname, "..", "static", "data", "donors.json");
+  const dataDir = path.join(__dirname, "..", "static", "data");
+  const donorFiles = [
+    ["donors.json", "donors-processed.json"],
+    ["past-donors.json", "past-donors-processed.json"],
+  ];
 
-  if (!fs.existsSync(donorsPath)) {
-    console.log("donors.json not found, skipping");
-    return;
+  for (const [inputFile, outputFile] of donorFiles) {
+    const donorsPath = path.join(dataDir, inputFile);
+
+    if (!fs.existsSync(donorsPath)) {
+      console.log(`${inputFile} not found, skipping`);
+      continue;
+    }
+
+    const rawDonors = JSON.parse(fs.readFileSync(donorsPath, "utf8"));
+    console.log(`Read ${rawDonors.length} donors from ${inputFile}`);
+
+    const processedDonors = processDonors(rawDonors);
+    console.log(`Processed ${processedDonors.length} donors`);
+
+    const outputPath = path.join(dataDir, outputFile);
+    fs.writeFileSync(outputPath, JSON.stringify(processedDonors, null, 2));
+    console.log(`Saved processed donors to ${outputPath}`);
   }
-
-  const rawDonors = JSON.parse(fs.readFileSync(donorsPath, "utf8"));
-  console.log(`Read ${rawDonors.length} donors from donors.json`);
-
-  const processedDonors = processDonors(rawDonors);
-  console.log(`Processed ${processedDonors.length} donors`);
-
-  const outputPath = path.join(
-    __dirname,
-    "..",
-    "static",
-    "data",
-    "donors-processed.json"
-  );
-  fs.writeFileSync(outputPath, JSON.stringify(processedDonors, null, 2));
-  console.log(`Saved processed donors to ${outputPath}`);
 }
 
 if (require.main === module) {

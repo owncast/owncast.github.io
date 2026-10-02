@@ -194,6 +194,37 @@ html[data-theme='dark'] .docMainWrapper {
   border-radius: var(--radius-lg);
 }
 
+.header-donate-link {
+  background: var(--theme-color-action);
+  border: 1px solid #a78bfa;
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-weight: 700;
+  margin-inline: 0.5rem;
+  padding: 0.4rem 0.9rem;
+}
+
+.header-donate-link:hover {
+  background: #6e3eff;
+  color: #fff;
+  text-decoration: none;
+}
+
+.header-donate-link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+@media (min-width: 997px) and (max-width: 1200px) {
+  .navbar {
+    font-size: 0.875rem;
+  }
+
+  .navbar__link {
+    padding-inline: 0.5rem;
+  }
+}
+
 /* GitHub icon in navbar */
 .header-github-link::before {
   content: '';

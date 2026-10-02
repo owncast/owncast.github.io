@@ -1,0 +1,57 @@
+.support {
+  margin: 3rem auto;
+  padding: 3rem 1.5rem;
+  width: calc(100% - 2rem);
+  max-width: 1100px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.16), rgba(59, 130, 246, 0.06));
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 1rem;
+}
+
+.content {
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.content h2 {
+  margin: 0 auto 1rem;
+  font-weight: 700;
+  line-height: 1.15;
+  text-wrap: balance;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  letter-spacing: -0.025em;
+}
+
+.content p {
+  color: #d1d5db;
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.65;
+  margin: 0 0 1.25rem;
+}
+
+.support a:focus-visible {
+  outline: 2px solid #b5a5ff;
+  outline-offset: 3px;
+}
+
+.support > section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(183, 190, 208, 0.16);
+}
+
+.support > section > ul,
+:global([data-theme='dark']) .support > section > ul {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+
+@media (max-width: 480px) {
+  .support {
+    padding: 2rem 1rem;
+  }
+
+}

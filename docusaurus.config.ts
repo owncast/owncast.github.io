@@ -626,6 +626,7 @@ const config: Config = {
         repo: 'owncast',
       },
     ],
+    require.resolve('./plugins/owncast-funding'),
     [
       require.resolve('./plugins/milestones-plugin'),
       {
@@ -639,12 +640,12 @@ const config: Config = {
     imageZoom: {
       selector: '.markdown img:not([data-no-image-zoom])',
     },
-    announcementBar: {
-      id: 'plugins',
-      content:
-        'Owncast now supports custom plugins. <a href="/docs/configuration/plugins">Learn more</a>',
-      isCloseable: true,
-    },
+    // announcementBar: {
+    //   id: 'plugins',
+    //   content:
+    //     'Owncast now supports custom plugins. <a href="/docs/configuration/plugins">Learn more</a>',
+    //   isCloseable: true,
+    // },
     // Collapse other top-level sections when you open one, so navigating into
     // one section doesn't leave unrelated sections expanded.
     docs: {
@@ -701,6 +702,12 @@ const config: Config = {
           position: 'left',
         },
         {
+          to: '/donate/',
+          label: 'Donate',
+          position: 'right',
+          className: 'header-donate-link',
+        },
+        {
           href: 'https://github.com/owncast',
           position: 'right',
           className: 'header-github-link',
@@ -755,7 +762,7 @@ const config: Config = {
             },
             {
               label: 'Donate',
-              href: 'https://opencollective.com/owncast/donate',
+              to: '/donate/',
             },
             {
               label: 'Security',

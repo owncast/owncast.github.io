@@ -91,25 +91,82 @@ import { EmbedContent } from './components';
 **Note:** Files to be embedded should be placed in the `static/` folder of your Docusaurus site.
 
 ### 6. Contributors
-Display contributors grid from data/contributors.json.
+Displays the contributor avatar grid from `static/data/contributors-processed.json`.
 
 **Usage:**
 ```tsx
 import { Contributors } from './components';
 
 <Contributors />
-<Contributors showDonors={false} contributorsTitle="Project Contributors" />
 ```
 
-**Props:**
-- `showDonors` (boolean, optional): Whether to show donors section (default: true)
-- `contributorsTitle` (string, optional): Custom title for contributors section
-- `donorsTitle` (string, optional): Custom title for donors section
+The homepage's financial appeal lives in
+`src/components/homepage/SupportSection.tsx`, immediately after the installer
+section. It links to `/donate/` without showing funding amounts or goals. Move
+`<SupportSection />` in `src/pages/index.tsx` to experiment with placement.
+The appeal has one donation action: the supporter button. Current
+supporter recognition sits below a divider without a nested panel; these styles
+are scoped to the homepage so the donation page keeps its supporter panels.
 
-**Data Files:**
-The component expects the following JSON files in `static/data/`:
-- `contributors.json`: Array of contributor objects with `login`, `avatar_url`, and `html_url`
-- `donors.json`: Array of donor objects with `login`, `html_url`, and optional `avatar_url`
+`FinancialSupporters.tsx` displays the same current supporter list on the homepage
+and donation page, using `static/data/donors-processed.json`. “Current” means a
+BACKER whose last transaction was within the past 90 days, including one-time donors.
+The donation page opts into `<FinancialSupporters showPast />`, adding a collapsed
+“Thank you to our past supporters” accordion backed by
+`static/data/past-donors-processed.json`. Earlier paid BACKERs are shown
+alphabetically, excluding current profiles and duplicates, with anonymous public
+names preserved and no contribution amounts displayed.
+The donor workflow derives both lists from the same Open Collective members
+response and cutoff; `scripts/process-donors.js` deduplicates, sorts, and assigns
+fallback avatars to both raw snapshots.
+The collapsed disclosure is an unboxed text control; the historical avatar panel
+appears only when expanded and shares the current supporter panel’s width.
+
+`SponsorsSection.tsx` recognizes in-kind contributions under “Infrastructure
+and service sponsors”, separate from the financial supporters in `SupportSection`.
+
+The site-wide Donate link is configured in `docusaurus.config.ts` and styled
+with `.header-donate-link` in `src/css/custom.css`.
+
+### Donation page
+
+`src/pages/donate.tsx` uses the shared Button, Input, and Label primitives.
+Visitors can select an Open Collective preset or enter a custom amount, then
+continue to monthly or one-time checkout. Open Collective handles payment.
+The suggested starting donation is $10; visitors can change it before checkout.
+Amount presets use 44px touch targets. The selected amount and monthly action use
+the primary Button variant; unselected amounts and one-time support use
+outlinePrimary. Donation-scoped CSS normalizes native button/input borders because
+Tailwind preflight is disabled. The past-supporter disclosure uses a brand-colored
+keyboard focus outline without animating the focus ring.
+Control borders share the amount field’s solid color for at least 3:1 contrast
+against the card surface. Compact hero spacing keeps the monthly action within
+the first screen at a 1440×900 desktop viewport.
+Concrete funded examples appear in a separate responsive list, keeping the
+ongoing-support sidebar concise.
+The corporate sponsorship section invites long-term support while reserving
+project decisions to the maintainers, and links to the public maintainer email.
+Future possibilities (paid development time, conference travel, and independent
+event streaming) are presented separately from past funded work and the live
+Open Collective goals, without promises, targets, or timelines.
+Donation-page section headings share one scoped typography rule, while the main
+page title and item headings retain their separate hierarchy.
+
+`plugins/owncast-funding/index.js` adapts the public queries and normalization
+from `fedifunding.org/scripts/sync-opencollective.mjs`. Each site build or dev
+server startup fetches Open Collective data, reusing the existing one-hour
+build cache. The page shows the snapshot timestamp. Updating Open Collective
+goals or presets requires no source changes, but becomes visible on the next
+build after the cache expires.
+
+Recurring monthly support is active monthly contributions plus active yearly
+contributions divided by twelve. Goal progress follows Open Collective's goal
+type: estimated monthly budget, yearly budget, or available balance. Budget
+estimates are not presented as recurring support. Goal targets and tier presets
+are converted from minor currency units; no funding targets are hardcoded.
+
+If fetching fails, the plugin publishes unavailable figures rather than fake
+zeroes, and the page retains a direct Open Collective donation option.
 
 ## Installation Dependencies
 

@@ -37,7 +37,7 @@
   flex-shrink: 0;
 }
 
-@media (max-width: 996px) {
+@media (max-width: 1200px) {
   .githubInfo {
     display: none;
   }

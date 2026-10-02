@@ -39,7 +39,7 @@ export function SponsorsSection() {
     <section className={`${styles.sponsors} hidden md:block`}>
       <div className="container text--center">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-4">
-          <Translate id="homepage.sponsors.title">Supported by</Translate>
+          <Translate id="homepage.sponsors.infrastructureTitle">Infrastructure and service sponsors</Translate>
         </h2>
         <ul className={styles.sponsorsList}>
           {sponsors.map((sponsor, idx) => (
@@ -57,9 +57,9 @@ export function SponsorsSection() {
           ))}
         </ul>
         <p className="text-gray-600 dark:text-gray-300 text-lg font-semibold max-w-4xl mx-auto">
-          <Translate id="homepage.sponsors.description">
-            These organizations support Owncast via non-monetary support and
-            services.
+          <Translate id="homepage.sponsors.servicesDescription">
+            These organizations contribute services and infrastructure that help
+            keep Owncast running.
           </Translate>
         </p>
       </div>

@@ -15,7 +15,6 @@ export { default as EmbedContent } from './EmbedContent';
 export type { EmbedContentProps } from './EmbedContent';
 
 export { default as Contributors } from './Contributors';
-export type { ContributorsProps } from './Contributors';
 
 export { default as IncludeMarkdown } from './IncludeMarkdown';
 export type { IncludeMarkdownProps } from './IncludeMarkdown';
