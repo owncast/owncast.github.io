@@ -9,6 +9,7 @@ import { translate } from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { Model, Serializer, PageModel } from "survey-core";
 import { Survey } from "survey-react-ui";
+import { trackPlausibleEvent } from "@/lib/analytics";
 
 const { visitStrings } = require("../data/wizardStrings");
 
@@ -37,26 +38,6 @@ interface WizardProps {
   name: string;
   /** Optional event emitted when this wizard's named question changes. */
   analyticsEvent?: AnalyticsEvent;
-}
-
-type Plausible = ((eventName: string) => void) & {
-  q?: [string][];
-};
-
-declare global {
-  interface Window {
-    plausible?: Plausible;
-  }
-}
-
-function trackPlausibleEvent(eventName: string): void {
-  let plausible = window.plausible;
-  if (!plausible) {
-    const q: [string][] = [];
-    plausible = Object.assign((event: string) => q.push([event]), { q });
-    window.plausible = plausible;
-  }
-  plausible(eventName);
 }
 
 /**

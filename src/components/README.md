@@ -128,6 +128,35 @@ and service sponsors”, separate from the financial supporters in `SupportSecti
 The site-wide Donate link is configured in `docusaurus.config.ts` and styled
 with `.header-donate-link` in `src/css/custom.css`.
 
+### Homepage section analytics
+
+`src/pages/index.tsx` sends `Homepage Section Viewed: <section>` to Plausible,
+once per homepage visit when at least 10% of a section is
+visible. Lazy sections count only after their content loads, not while showing
+a placeholder. Hidden mobile sections do not count. Financial supporters are
+measured separately from the surrounding support appeal. Shared components
+have no view tracking, so the donor list on `/donate/` does not send this event.
+
+In Plausible **Site settings → Goals**, add custom event goals with matching
+names, such as `Homepage Section Viewed: Financial supporters`. The section
+names are Hero, Feature preview, Streaming software, Use cases, Features,
+Protocols, Installer, Support, Financial supporters, FAQ, Store, Apps,
+Sponsors, and Contributors. Separate event names avoid requiring Plausible's
+Business-plan custom properties. These passive events use `interactive: false`
+to avoid affecting bounce rate. Custom events count toward billable usage.
+
+`src/lib/analytics.ts` shares the event queue with the wizards, preserving
+early views until the deferred Plausible script loads.
+With a local server running, verify visibility, deduplication, homepage
+revisits, and donation-page exclusion without sending real analytics:
+
+```bash
+node scripts/verify-homepage-analytics.mjs http://127.0.0.1:3000/
+```
+
+On Linux hosts that cannot launch Chromium's sandbox, append `--no-sandbox`
+for this local smoke check.
+
 ### Donation page
 
 `src/pages/donate.tsx` uses the shared Button, Input, and Label primitives.
