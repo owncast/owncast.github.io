@@ -147,20 +147,33 @@ jobs:
 
       # Build each locale in its own process. A single docusaurus build of all
       # 26 locales accumulates memory until the hosted runner dies.
+      # Locales have explicit baseUrls (/de/, /fr/, ...) so docusaurus appends
+      # the locale segment to --out-dir itself. Build English first so the
+      # on-disk plugin cache (github-info, milestones) is warm before localized
+      # builds start. Localized builds run two at a time in parallel; each uses
+      # isolated generated and output directories because Docusaurus rewrites
+      # locale-specific files in .docusaurus/ at startup.
       - name: Build
         run: |
           npm run prebuild
           locales=$(node -e "const m=require('fs').readFileSync('docusaurus.config.ts','utf8').match(/locales:\s*\[([^\]]*)\]/)[1];console.log([...m.matchAll(/'([^']+)'/g)].map(x=>x[1]).join(' '))")
           echo "Building locales: $locales"
-          # Locales have explicit baseUrls (/de/, /fr/, ...) so docusaurus
-          # appends the locale segment to --out-dir itself.
           npx docusaurus build --locale en --out-dir build
           # Released Owncast servers consume this legacy JSON Feed path.
           cp build/news/feed.json build/news/index.json
+          localized=()
           for l in $locales; do
             if [ "$l" != "en" ]; then
-              npx docusaurus build --locale "$l" --out-dir build
+              localized+=("$l")
             fi
+          done
+          printf '%s\n' "${localized[@]}" | xargs -r -n 1 -P 2 bash -c '
+            locale="$1"
+            DOCUSAURUS_GENERATED_FILES_DIR_NAME=".docusaurus-$locale" \
+              npx docusaurus build --locale "$locale" --out-dir "build-$locale"
+          ' _
+          for l in "${localized[@]}"; do
+            mv "build-$l/$l" "build/$l"
           done
         env:
           NODE_OPTIONS: --max-old-space-size=6144
