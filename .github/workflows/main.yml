@@ -221,20 +221,6 @@ jobs:
           DOCMOST_SPACE: ${{ vars.DOCMOST_SPACE }}
           DOCMOST_EMAIL: ${{ vars.DOCMOST_EMAIL }}
           DOCMOST_PASSWORD: ${{ secrets.DOCMOST_PASSWORD }}
-      # - name: Deploy to surge
-      #   uses: dswistowski/surge-sh-action@v1
-      #   with:
-      #     domain: owncast-preview.surge.sh
-      #     project: ./build
-      #     login: ${{ secrets.SURGE_LOGIN }}
-      #     token: ${{ secrets.SURGE_TOKEN }}
-
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ./build --project-name=owncast-docs-dev-testing
 
       # Deploy to DigitalOcean Spaces
       # Released Owncast servers fetch the public news feed cross-origin.
@@ -250,7 +236,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.DO_SPACES_SECRET }}
           AWS_REGION: ${{ secrets.DO_SPACES_REGION }}
           AWS_S3_ENDPOINT: https://${{ secrets.DO_SPACES_REGION }}.digitaloceanspaces.com
-
 
       # Upload non-HTML assets (long cache)
       - name: Upload assets
