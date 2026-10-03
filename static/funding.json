@@ -1,0 +1,102 @@
+{
+    "$schema": "https://fundingjson.org/schema/v1.1.0.json",
+    "version": "v1.1.0",
+    "entity": {
+        "type": "individual",
+        "role": "maintainer",
+        "name": "Gabe Kangas",
+        "email": "gabek@real-ity.com",
+        "description": "Independent developer and maintainer of Owncast, a free, open source, self-hosted live video streaming and chat server. Owncast gives people full control over their live streams without depending on corporate platforms.",
+        "webpageUrl": {
+            "url": "https://owncast.online"
+        }
+    },
+    "projects": [
+        {
+            "guid": "owncast",
+            "name": "Owncast",
+            "description": "Owncast is a free, open source, self-hosted, single-user live video streaming and chat server. Run your own live stream on your own server, keep control over your content, and build communities without being beholden to any platform. Owncast supports RTMP ingest, HLS delivery, a real-time chat with a moderation system, and ActivityPub federation so your stream can be followed and interacted with from the Fediverse.",
+            "webpageUrl": {
+                "url": "https://owncast.online"
+            },
+            "repositoryUrl": {
+                "url": "https://github.com/owncast/owncast",
+                "wellKnown": "https://github.com/owncast/owncast/blob/develop/.well-known/funding-manifest-urls"
+            },
+            "licenses": [
+                "spdx:MIT"
+            ],
+            "tags": [
+                "live-streaming",
+                "self-hosted",
+                "video",
+                "chat",
+                "fediverse",
+                "activitypub",
+                "open-source",
+                "hls",
+                "decentralized"
+            ]
+        }
+    ],
+    "funding": {
+        "channels": [
+            {
+                "guid": "open-collective",
+                "type": "payment-provider",
+                "address": "https://opencollective.com/owncast",
+                "description": "Support Owncast via Open Collective. Accepts one-time and recurring contributions via credit/debit card. Funds are transparently tracked and used for project expenses including infrastructure, design, legal, and community outreach."
+            }
+        ],
+        "plans": [
+            {
+                "guid": "monthly-any",
+                "status": "active",
+                "name": "Monthly supporter",
+                "description": "A recurring monthly contribution of any amount to help sustain Owncast development and cover ongoing project costs.",
+                "amount": 0,
+                "currency": "USD",
+                "frequency": "monthly",
+                "channels": [
+                    "open-collective"
+                ]
+            },
+            {
+                "guid": "monthly-5",
+                "status": "active",
+                "name": "Monthly: $5",
+                "description": "A small recurring monthly contribution that adds up and helps keep Owncast moving forward.",
+                "amount": 5,
+                "currency": "USD",
+                "frequency": "monthly",
+                "channels": [
+                    "open-collective"
+                ]
+            },
+            {
+                "guid": "monthly-10",
+                "status": "active",
+                "name": "Monthly: $10",
+                "description": "A steady monthly contribution that directly funds new features and project improvements.",
+                "amount": 10,
+                "currency": "USD",
+                "frequency": "monthly",
+                "channels": [
+                    "open-collective"
+                ]
+            },
+            {
+                "guid": "one-time-any",
+                "status": "active",
+                "name": "One-time contribution",
+                "description": "A one-time contribution of any amount to support Owncast.",
+                "amount": 0,
+                "currency": "USD",
+                "frequency": "one-time",
+                "channels": [
+                    "open-collective"
+                ]
+            }
+        ]
+    }
+}
