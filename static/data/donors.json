@@ -148,5 +148,10 @@
     "login": "jmorahan",
     "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/f802fea0-691c-11ed-894a-f390f8d559dd.jpg",
     "html_url": "https://opencollective.com/jmorahan"
+  },
+  {
+    "login": "Guest",
+    "avatar_url": null,
+    "html_url": "https://opencollective.com/guest-19ea33d7"
   }
 ]
