@@ -244,6 +244,13 @@ Owncast and plugins communicate through a shared dispatcher
   slow plugin never blocks the chat hot path. Bot-authored messages are  
   dropped to prevent echo loops. A once-a-second `tick` event fires for  
   plugins that opt in.
+
+- **Outbound ActivityPub:** the producer dispatches `fediverse.outbound` after
+  local persistence, including when there are no followers. Delivery to remote
+  servers is separate. Plugins do not receive one event per recipient or
+  delivery retry, and the host makes no durable plugin-notification or replay
+  guarantee. Private activities are included, but the producer must exclude
+  authentication messages containing one-time passcodes.
 - **Chat filter:** plugins' `filterChatMessage` handlers run on inbound  
   messages before broadcast (drop, redact, rewrite). Each filter call gets  
   50ms. A modified body is re-run through the standard render/sanitize  
