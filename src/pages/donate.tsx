@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import Layout from "@theme/Layout";
 import Translate, { translate } from "@docusaurus/Translate";
-import { Scale, Palette, Gift, Code2, Plane, Radio } from "lucide-react";
+import { Scale, Palette, Gift, Code2, Plane, Radio, Github } from "lucide-react";
 import { Button } from "@/components/shared/ui/button";
 import { FinancialSupporters } from "@/components/FinancialSupporters";
 import { Input } from "@/components/shared/ui/input";
@@ -362,6 +362,18 @@ export default function DonatePage(): React.ReactElement {
                   </p>
                 ) : null}
               </form>
+
+              <div className={styles.githubSponsors}>
+                <a
+                  href="https://github.com/sponsors/owncast"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.githubSponsorsButton}
+                >
+                  <Github size={14} />
+                  <Translate id="donate.github.button">Donate on GitHub instead</Translate>
+                </a>
+              </div>
             </section>
 
             <aside className={styles.purposeCard}>

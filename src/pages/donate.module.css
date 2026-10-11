@@ -244,6 +244,33 @@
   text-decoration-color: currentColor;
 }
 
+.githubSponsors {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.githubSponsorsButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  border: 1px solid rgba(193, 181, 255, 0.35);
+  border-radius: 6px;
+  color: #c1b5ff;
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s, background-color 0.15s;
+}
+
+.githubSponsorsButton:hover {
+  border-color: #c1b5ff;
+  color: #fff;
+  background-color: rgba(193, 181, 255, 0.08);
+  text-decoration: none;
+}
+
 .purposeCard {
   display: flex;
   flex-direction: column;
