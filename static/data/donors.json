@@ -140,9 +140,9 @@
     "html_url": "https://opencollective.com/user-300b25ef"
   },
   {
-    "login": "Guest",
+    "login": "Default Media Transmitter",
     "avatar_url": null,
-    "html_url": "https://opencollective.com/guest-acfd3dd7"
+    "html_url": "https://opencollective.com/default-media-transmitter"
   },
   {
     "login": "schenkl",
@@ -163,5 +163,10 @@
     "login": "Loonie and Scooty",
     "avatar_url": null,
     "html_url": "https://opencollective.com/guest-9d8ae4ca"
+  },
+  {
+    "login": "Default Media Transmitter",
+    "avatar_url": null,
+    "html_url": "https://opencollective.com/default-media-transmitter"
   }
 ]
