@@ -260,7 +260,7 @@ No permission required.
 
 ## Fediverse events
 
-Owncast exposes internal plugin event subscriptions for inbound Fediverse activity. These are plugin events, not external HTTP webhooks. Every subscription in this section requires the `fediverse.inbound` permission.
+Owncast exposes internal plugin events for inbound and outbound Fediverse activity. These are plugin events, not external HTTP webhooks. Inbound subscriptions require `fediverse.inbound`. The outbound activity subscription requires the separate `fediverse.outbound` permission.
 
 | Event                | JavaScript handler   | Python handler                 | Payload                     |
 | -------------------- | -------------------- | ------------------------------ | --------------------------- |
@@ -395,6 +395,99 @@ def record_activity(activity):
 </Tabs>
 
 Signature and actor-origin verification establish where the activity came from. They do not make its fields safe. Treat the raw object as untrusted plugin input. Check field types and required values, sanitize content before rendering it, and validate URLs before fetching them.
+
+### Outbound activity: `fediverse.outbound`
+
+`fediverse.outbound` receives the raw ActivityPub activity JSON as one object. Owncast emits one event after it successfully persists each locally generated activity. This is a local-persistence boundary, not a remote-delivery receipt. The event is emitted even when the instance has no followers. It is not emitted per recipient or again when federation delivery retries.
+
+The event covers locally generated activities such as posts and go-live notices, profile updates, Follow and Undo, Accept and Reject, quote responses, and stream-status activities. It is notify-only: a plugin cannot change or stop federation by handling it. There is no durable plugin-notification or replay guarantee if a plugin is unavailable.
+
+Ordinary private activities are included, so treat every payload as potentially private. Authentication messages containing one-time passcodes are excluded. A plugin that crossposts should first check the activity type, embedded object type, and audience. For a public post, accept only a `Create` with an embedded `Note` addressed to the ActivityStreams Public collection in `to` or `cc` on the activity or Note. These recipient fields can be a string or an array. Do not treat follower-only or direct-message audiences as public.
+
+For example, a public `Create(Note)` can look like this:
+
+```json
+{
+  "id": "https://owncast.example/activities/123",
+  "type": "Create",
+  "actor": "https://owncast.example/actor",
+  "to": ["https://www.w3.org/ns/activitystreams#Public"],
+  "cc": ["https://owncast.example/actor/followers"],
+  "object": {
+    "id": "https://owncast.example/posts/123",
+    "type": "Note",
+    "attributedTo": "https://owncast.example/actor",
+    "to": ["https://www.w3.org/ns/activitystreams#Public"],
+    "cc": ["https://owncast.example/actor/followers"],
+    "content": "We're live"
+  }
+}
+```
+
+<Tabs groupId="plugin-lang">
+<TabItem value="js" label="JavaScript" default>
+
+```js
+const AS_PUBLIC = 'https://www.w3.org/ns/activitystreams#Public';
+
+function hasPublicRecipient(value) {
+  const recipients = Array.isArray(value) ? value : value == null ? [] : [value];
+  return recipients.includes(AS_PUBLIC);
+}
+
+function hasPublicAudience(activity, note) {
+  let foundPublic = false;
+  for (const target of [activity, note]) {
+    const isPublic = hasPublicRecipient(target.to) || hasPublicRecipient(target.cc);
+    if (('to' in target || 'cc' in target) && !isPublic) return false;
+    foundPublic ||= isPublic;
+  }
+  return foundPublic;
+}
+
+module.exports = definePlugin({
+  onFediverseOutbound(activity) {
+    const note = activity?.object;
+    if (activity?.type !== 'Create' || note?.type !== 'Note') return;
+
+    if (hasPublicAudience(activity, note)) console.log(`public note: ${note.content}`);
+  },
+});
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```python
+AS_PUBLIC = "https://www.w3.org/ns/activitystreams#Public"
+
+@plugin.on_fediverse_outbound
+def inspect_outbound(activity):
+    raw = activity.raw
+    note = raw.get("object")
+    if raw.get("type") != "Create" or not isinstance(note, dict) or note.get("type") != "Note":
+        return
+
+    found_public = False
+    for target in (raw, note):
+        recipients = []
+        for field in ("to", "cc"):
+            value = target.get(field, [])
+            recipients.extend(value if isinstance(value, list) else [value])
+        is_public = AS_PUBLIC in recipients
+        if ("to" in target or "cc" in target) and not is_public:
+            return
+        found_public = found_public or is_public
+    if found_public:
+        print(f"public note: {note.get('content', '')}")
+```
+
+</TabItem>
+</Tabs>
+
+The JavaScript handler receives the activity as a JSON object. Python exposes it through the same `_Obj` attributes as other event payloads, with the underlying dictionary available as `activity.raw`.
+
+`onFediverseOutbound` requires `fediverse.outbound`. Crossposting also requires whatever outbound API or credentials your plugin uses. Review the raw payload and audience before forwarding content to another service.
 
 ## Filter chain
 
@@ -802,6 +895,7 @@ Each row is a runtime event. The handler name follows your SDK's convention: cam
 | `fediverse.mention`      | `FediverseInboundPost`             | `fediverse.inbound`                                |
 | `fediverse.reply`        | `FediverseInboundPost`             | `fediverse.inbound`                                |
 | `fediverse.activity`     | Raw ActivityPub JSON object        | `fediverse.inbound`                                |
+| `fediverse.outbound`     | Raw ActivityPub JSON object        | `fediverse.outbound`                               |
 | chat message filter      | `ChatMessage`                      | `chat.filter`                                      |
 | HTTP request             | `IncomingHttpRequest`              | `http.serve`                                       |
 | auth check               | `AuthCheckRequest`                 | `auth.gate`                                        |

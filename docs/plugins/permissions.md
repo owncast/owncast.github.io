@@ -227,6 +227,12 @@ Grants subscription to all seven inbound Fediverse plugin events:
 
 The `fediverse.activity` catch-all receives the verified activity's raw JSON object. It runs in addition to any matching specialized event. This permission only covers receiving activity. Posting from the Owncast account requires the separate `fediverse.post` permission.
 
+### `fediverse.outbound`
+
+Grants subscription to the `fediverse.outbound` plugin event. The handler receives raw ActivityPub JSON for locally persisted outbound activities, including ordinary private activities. Authentication messages containing one-time passcodes are excluded.
+
+This is an observer-only permission. It does not let a plugin modify or stop federation delivery, and it does not guarantee remote delivery. Because the payload can contain private content, grant this permission only to plugins you trust. See [Plugin Events](/docs/plugins/events) for the event timing and audience-filtering guidance.
+
 ### `fediverse.post`
 
 Grants `owncast.fediverse.post(text)`: make a public post to the fediverse from the Owncast account.
@@ -274,6 +280,7 @@ None of the four viewer-injection fields require `http.serve`, and neither do th
 | `videoconfig.write`  | Modify the video output config (applies on the next stream start)                                                              |
 | `notifications.send` | Send Discord, browser-push, or fediverse notifications                                                                         |
 | `fediverse.inbound`  | Subscribe to all seven inbound events: `fediverse.follow`, `.like`, `.repost`, `.quote`, `.mention`, `.reply`, and `.activity` |
+| `fediverse.outbound` | Subscribe to locally persisted outbound ActivityPub activities.                                                            |
 | `fediverse.post`     | Public-post to the fediverse (rate-limited)                                                                                    |
 | `ui.modify`          | Add action buttons or tabs to Owncast's viewer chrome. Inline plugin CSS, JavaScript, or HTML into the viewer page             |
 
