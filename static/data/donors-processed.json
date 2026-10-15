@@ -1,12 +1,17 @@
 [
   {
+    "login": "Christopher Miller",
+    "avatar_url": "/images/owncat-head-gray-red.svg",
+    "html_url": "https://opencollective.com/grueproof"
+  },
+  {
     "login": "Coraline Ada Ehmke",
     "avatar_url": "/images/avatars/coraline-ada-ehmke.webp",
     "html_url": "https://opencollective.com/coraline-ada-ehmke"
   },
   {
     "login": "Default Media Transmitter",
-    "avatar_url": "/images/owncat-head-gray-red.svg",
+    "avatar_url": "/images/owncat-head-white.svg",
     "html_url": "https://opencollective.com/default-media-transmitter"
   },
   {
@@ -16,7 +21,7 @@
   },
   {
     "login": "emacsen",
-    "avatar_url": "/images/owncat-head-white.svg",
+    "avatar_url": "/images/owncat-head-black-orange.svg",
     "html_url": "https://opencollective.com/guest-618ea119"
   },
   {
@@ -31,22 +36,22 @@
   },
   {
     "login": "Guest",
-    "avatar_url": "/images/owncat-head-black-orange.svg",
+    "avatar_url": "/images/owncat-head-siamese-teal.svg",
     "html_url": "https://opencollective.com/guest-aa8ac994"
   },
   {
     "login": "Guest",
-    "avatar_url": "/images/owncat-head-siamese-teal.svg",
+    "avatar_url": "/images/owncat-head-ginger.svg",
     "html_url": "https://opencollective.com/guest-4ef35323"
   },
   {
     "login": "Guest",
-    "avatar_url": "/images/owncat-head-ginger.svg",
+    "avatar_url": "/images/owncat-head-cream-coral.svg",
     "html_url": "https://opencollective.com/guest-9b24c6c4"
   },
   {
     "login": "Guest",
-    "avatar_url": "/images/owncat-head-cream-coral.svg",
+    "avatar_url": "/images/owncat-head-tuxedo-red.svg",
     "html_url": "https://opencollective.com/guest-19ea33d7"
   },
   {
@@ -56,27 +61,27 @@
   },
   {
     "login": "Incognito",
-    "avatar_url": "/images/owncat-head-tuxedo-red.svg",
+    "avatar_url": "/images/owncat-head-gray.svg",
     "html_url": "https://opencollective.com/incognito-3b4cd5c7"
   },
   {
     "login": "Incognito",
-    "avatar_url": "/images/owncat-head-gray.svg",
+    "avatar_url": "/images/owncat-head-white-pink.svg",
     "html_url": "https://opencollective.com/user-5bdb86e0"
   },
   {
     "login": "Incognito",
-    "avatar_url": "/images/owncat-head-white-pink.svg",
+    "avatar_url": "/images/owncat-head-brown-green.svg",
     "html_url": "https://opencollective.com/user-300b25ef"
   },
   {
     "login": "inpc",
-    "avatar_url": "/images/owncat-head-brown-green.svg",
+    "avatar_url": "/images/owncat-head-black.svg",
     "html_url": "https://opencollective.com/inpc"
   },
   {
     "login": "Jennie",
-    "avatar_url": "/images/owncat-head-black.svg",
+    "avatar_url": "/images/owncat-head-ginger-blue.svg",
     "html_url": "https://opencollective.com/guest-f6f2ac74"
   },
   {
@@ -91,17 +96,17 @@
   },
   {
     "login": "Loonie and Scooty",
-    "avatar_url": "/images/owncat-head-ginger-blue.svg",
+    "avatar_url": "/images/owncat-head-siamese.svg",
     "html_url": "https://opencollective.com/guest-9d8ae4ca"
   },
   {
     "login": "Luka Prinčič",
-    "avatar_url": "/images/owncat-head-siamese.svg",
+    "avatar_url": "/images/owncat-head-gray-teal.svg",
     "html_url": "https://opencollective.com/luka-princic"
   },
   {
     "login": "Lyrilith",
-    "avatar_url": "/images/owncat-head-gray-teal.svg",
+    "avatar_url": "/images/owncat-head-cream.svg",
     "html_url": "https://opencollective.com/guest-c887d5c3"
   },
   {
@@ -121,17 +126,17 @@
   },
   {
     "login": "Rick",
-    "avatar_url": "/images/owncat-head-cream.svg",
+    "avatar_url": "/images/owncat-head-black-red.svg",
     "html_url": "https://opencollective.com/patrick-materla"
   },
   {
     "login": "schenkl",
-    "avatar_url": "/images/owncat-head-black-red.svg",
+    "avatar_url": "/images/owncat-head-tuxedo.svg",
     "html_url": "https://opencollective.com/guest-8fa188d4"
   },
   {
     "login": "sknob",
-    "avatar_url": "/images/owncat-head-tuxedo.svg",
+    "avatar_url": "/images/owncat-head-white-blue.svg",
     "html_url": "https://opencollective.com/incognito-65af7c51"
   },
   {

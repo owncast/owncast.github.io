@@ -168,5 +168,10 @@
     "login": "Default Media Transmitter",
     "avatar_url": null,
     "html_url": "https://opencollective.com/default-media-transmitter"
+  },
+  {
+    "login": "Christopher Miller",
+    "avatar_url": null,
+    "html_url": "https://opencollective.com/grueproof"
   }
 ]
