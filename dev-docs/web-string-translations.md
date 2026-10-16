@@ -51,7 +51,7 @@ In the React component you wish to display a localized string, use the Translati
 ```javascript
 <Translation
 	translationKey={Localization.Admin.EditInstanceDetails.helloWorld}
-	defaultText=\"Hello, world\"
+	defaultText="Hello, world"
 />
 ```
 
@@ -64,14 +64,14 @@ You can add HTML and assign a CSS class to the final rendered string.
 **Example**: You want to render
 
 ```html
-<span class=\"hello-world\"><strong>Hello, world</strong></span>
+<span class="hello-world"><strong>Hello, world</strong></span>
 ```
 
 ```javascript
 <Translation
 	translationKey={Localization.Admin.EditInstanceDetails.helloWorld}
-	defaultText=\"<strong>Hello, world</strong>\"
-	className=\"hello-world\"
+	defaultText="<strong>Hello, world</strong>"
+	className="hello-world"
 />
 ```
 
@@ -88,7 +88,7 @@ Hello, world, Bob!
 ```javascript
 <Translation
 	translationKey={Localization.Admin.EditInstanceDetails.helloWorld}
-	defaultText=\"Hello, world, {{name}}\"
+	defaultText="Hello, world, {{name}}"
 	vars={{name: 'Bob'}}
 />
 ```
