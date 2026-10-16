@@ -261,6 +261,7 @@ function emitDocusaurus(manifest, spaceSlug) {
     // Docmost content still cross-links pages as /dev/...; the site route is
     // /dev-docs, so rewrite those links on emit.
     body = body.replace(/\]\(\/dev\//g, '](/dev-docs/');
+    body = body.replace(/```[\s\S]*?```/g, block => block.replace(/\\"/g, '"'));
 
     // Links the doc's "Edit" action back to the page in Docmost. Docmost
     // resolves the page by the trailing slugId, so the title part is cosmetic.
