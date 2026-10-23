@@ -178,5 +178,10 @@
     "login": "Brother Soul",
     "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/0f720a57-d5cf-4085-b479-12f9bd87262c/Brother%20Soul%20Logo%2001%20(no%20copywrite).png",
     "html_url": "https://opencollective.com/brother-soul"
+  },
+  {
+    "login": "Oskar",
+    "avatar_url": null,
+    "html_url": "https://opencollective.com/oskar-5f326b1d"
   }
 ]
