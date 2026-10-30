@@ -183,5 +183,10 @@
     "login": "Oskar",
     "avatar_url": null,
     "html_url": "https://opencollective.com/oskar-5f326b1d"
+  },
+  {
+    "login": "GitHub Sponsors",
+    "avatar_url": "https://opencollective-production.s3.us-west-1.amazonaws.com/87b1d240-f617-11ea-9960-fd7e8ab20fe4.png",
+    "html_url": "https://opencollective.com/github-sponsors"
   }
 ]
