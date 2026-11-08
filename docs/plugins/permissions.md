@@ -141,7 +141,9 @@ Grants `owncast.storage.upload(name, data)`: upload a file to Owncast's public f
 
 Grants `owncast.fs.*`: a private, sandboxed filesystem at `data/plugin-storage/<your-slug>/files/` that your plugin can read, write, list, and delete within. Useful for caches, generated data files, append-style logs, or anything you need to persist as real files rather than key/value strings.
 
-Unlike `storage.upload`, these files stay **server-side**: they're never served over HTTP. Every path is confined to your plugin's own directory: a plugin cannot read another plugin's files or escape its sandbox (`../` and absolute paths are collapsed back inside).
+Unlike `storage.upload`, these files stay **server-side** and are never served over HTTP. Every path your plugin passes is relative to the `files/` sandbox root — `plugin-storage/<slug>/` is the **parent** directory, not the root. Files placed there directly are outside the sandbox and invisible to `owncast.fs.*`. If you pre-seed files on the server, they must go inside `plugin-storage/<slug>/files/`. See [`owncast.fs.*`](/docs/plugins/apis#owncastfs) for the path mapping table and a directory tree.
+
+If `fs.*` calls return empty unexpectedly, check the manifest declares `"storage.fs"` in `permissions` first — without it every call returns empty silently.
 
 ### `storage.sql`
 

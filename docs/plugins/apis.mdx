@@ -388,18 +388,50 @@ Requires `storage.upload`.
 
 ### `owncast.fs.*`
 
-A private, sandboxed filesystem at `data/plugin-storage/<your-slug>/files/`. Unlike `owncast.storage.upload`, these files stay server-side: they're never served over HTTP. Paths are relative to your sandbox root. The host confines every path to your own directory (a plugin cannot read another plugin's files, and `../` or absolute paths collapse back inside the sandbox). Parent directories are created as needed on write.
+A private, sandboxed filesystem for server-side files your plugin needs to persist. All `owncast.fs.*` paths are **relative to your sandbox root**, which is the `files/` subdirectory inside your plugin's storage directory:
+
+```
+data/
+└── plugin-storage/
+    └── your-slug/
+        ├── files/              ← sandbox root — all fs.* paths start here
+        │   ├── cover/
+        │   │   └── image.jpg   ← fs.read("cover/image.jpg")
+        │   └── notes.txt       ← fs.read("notes.txt")
+        └── db/
+            └── plugin.db       ← SQL storage, not reachable via fs.*
+```
+
+| File on disk (relative to `plugin-storage/<slug>/`) | Argument to `fs.*` |
+| ---------------------------------------------------- | ------------------- |
+| `files/notes.txt`                                    | `"notes.txt"`       |
+| `files/cover/image.jpg`                              | `"cover/image.jpg"` |
+| `files/cover/` (list a subdirectory)                 | `"cover"`           |
+| `files/` (list the sandbox root)                     | `""`                |
+
+:::warning[The sandbox root is `files/`, not your plugin's storage directory]
+`plugin-storage/<slug>/` is the parent of both `files/` and `db/`. It is **not** the sandbox root. Files placed directly in `plugin-storage/<slug>/` are outside the sandbox and invisible to `owncast.fs.*`. If you pre-seed files on the server, they must go inside `plugin-storage/<slug>/files/`.
+:::
+
+Unlike `owncast.storage.upload`, these files stay server-side and are never served over HTTP. The host confines every path to your own directory (`../` and absolute paths collapse back inside the sandbox). Parent directories are created as needed on write.
+
+:::tip[If `fs.list` returns empty when you expect files]
+Two causes produce identical symptoms — `[]` with no error:
+1. **Missing permission** — your manifest must declare `"storage.fs"` in `permissions`. Without it, every `fs.*` call returns empty silently. Check this first.
+2. **Files in the wrong place** — files must be inside `plugin-storage/<slug>/files/`, not the parent directory. Use `""` to list the sandbox root, not `"files/"` or `"files/cover"`.
+:::
 
 | JavaScript             | Python                 | Returns                                               |
 | ---------------------- | ---------------------- | ----------------------------------------------------- |
 | `fs.read(path)`        | `fs.read(path)`        | `Uint8Array` / `bytes`, or `null` / `None` if missing |
 | `fs.readText(path)`    | `fs.read_text(path)`   | UTF-8 `string` / `str`, or `null` / `None` if missing |
 | `fs.write(path, data)` | `fs.write(path, data)` | `{ error? }`                                          |
-| `fs.list(dir)`         | `fs.list(dir)`         | entry names (a missing directory is empty)            |
+| `fs.list(dir)`         | `fs.list(dir)`         | entry names (`[]` if missing or empty)                |
 | `fs.delete(path)`      | `fs.delete(path)`      | `{ error? }` for a file or empty directory            |
 | `fs.exists(path)`      | `fs.exists(path)`      | boolean                                               |
 
 `fs.read` preserves the original bytes. `fs.readText` and `fs.read_text` decode UTF-8. Python replaces malformed byte sequences when decoding. `fs.write` preserves a JavaScript `Uint8Array` or Python `bytes`, and UTF-8 encodes strings. `fs.write` and `fs.delete` return `{}` on success. If the host rejects the operation, they return `{ error }` with the reason.
+
 
 <Tabs groupId="plugin-lang">
 <TabItem value="js" label="JavaScript" default>
@@ -412,6 +444,10 @@ const data = new Uint8Array([0xff, 0x00, 0x80]);
 owncast.fs.write('cache/data.bin', data);
 const stored = owncast.fs.read('cache/data.bin');
 if (stored) owncast.storage.upload('data.bin', stored);
+
+// List the sandbox root; pass a subdir name to list deeper.
+const files = owncast.fs.list('');       // e.g. ['cache', 'notes']
+const cached = owncast.fs.list('cache'); // e.g. ['data.bin']
 ```
 
 </TabItem>
@@ -426,6 +462,10 @@ owncast.fs.write("cache/data.bin", data)
 stored = owncast.fs.read("cache/data.bin")
 if stored is not None:
     owncast.storage.upload("data.bin", stored)
+
+# List the sandbox root; pass a subdir name to list deeper.
+files = owncast.fs.list("")        # e.g. ['cache', 'notes']
+cached = owncast.fs.list("cache")  # e.g. ['data.bin']
 ```
 
 </TabItem>
