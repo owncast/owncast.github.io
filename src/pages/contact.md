@@ -33,6 +33,12 @@ The project is always looking for people to help build, support and keep Owncast
 We are not responsible for the content that people stream using Owncast nor do we have insight into how people may use this software. For specific concerns contact the owners of the servers in question.
 :::
 
+> Email: [security@owncast.online](mailto:security@owncast.online)
+
+### [Partnerships, or media inquiries]
+
+Do not use this for support questions, use the options above to get help with usage or technical issues from the community. Any support email to this address may not receive a response.
+
 > Maintainer: Gabe Kangas
 >
 > Fediverse: [@gabek@social.gabekangas.com](https://social.gabekangas.com/gabek)<br />
