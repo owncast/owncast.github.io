@@ -3,10 +3,7 @@
   overflow: hidden;
   padding: 2rem 0 5rem;
   color: #edf0f7;
-  background:
-    radial-gradient(ellipse at 84% 0%, rgba(101, 68, 233, 0.22), transparent 36rem),
-    radial-gradient(ellipse at 0% 34%, rgba(48, 84, 132, 0.12), transparent 30rem),
-    #12161d;
+  background: #12161d;
 }
 
 .container {
@@ -15,50 +12,42 @@
 }
 
 .hero {
-  max-width: 810px;
-  margin: 0 auto 2rem;
-  text-align: center;
+  max-width: 760px;
+  margin: 0 0 2.5rem;
 }
 
 .eyebrow {
   margin: 0 0 0.75rem;
-  color: #b9aaff;
+  color: #aab4c5;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.1em;
   line-height: 1.4;
   text-transform: uppercase;
 }
 
 .hero h1 {
-  max-width: 760px;
-  margin: 0 auto;
+  margin: 0;
   color: #fff;
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  font-weight: 750;
-  letter-spacing: -0.055em;
-  line-height: 1.04;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
 }
 
 .heroDescription {
-  max-width: 670px;
-  margin: 1rem auto 0;
+  max-width: 620px;
+  margin: 1rem 0 0;
   color: #c2c9d6;
   font-size: clamp(1.05rem, 2vw, 1.2rem);
   line-height: 1.7;
 }
 
 .supportStats {
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem 2.5rem;
-  margin: 1rem auto 0;
-  padding: 0.75rem 1.4rem;
-  border: 1px solid rgba(178, 165, 255, 0.22);
-  border-radius: 1rem;
-  background: rgba(13, 16, 23, 0.64);
-  box-shadow: 0 14px 50px rgba(0, 0, 0, 0.13);
+  gap: 0.75rem 3rem;
+  margin: 1.75rem 0 0;
 }
 
 .stat {
@@ -69,7 +58,7 @@
 
 .stat strong {
   color: #fff;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-variant-numeric: tabular-nums;
   line-height: 1.25;
 }
@@ -82,11 +71,11 @@
 
 .dataNotice {
   max-width: 640px;
-  margin: 1.5rem auto 0;
+  margin: 1.5rem 0 0;
   padding: 0.85rem 1rem;
   border: 1px solid rgba(194, 201, 214, 0.22);
-  border-radius: 0.75rem;
-  background: rgba(13, 16, 23, 0.55);
+  border-radius: 12px;
+  background: #181d26;
   color: #c2c9d6;
   font-size: 0.92rem;
   line-height: 1.5;
@@ -102,12 +91,12 @@
 .contributeCard,
 .purposeCard,
 .goalCard,
-.corporateCard,
-.possibilitiesSection {
-  border: 1px solid rgba(183, 190, 208, 0.14);
-  border-radius: 1.25rem;
-  background: linear-gradient(145deg, rgba(31, 37, 50, 0.96), rgba(23, 28, 38, 0.97));
-  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.19);
+.fundedSection,
+.possibilitiesSection,
+.corporateCard {
+  border: 1px solid rgba(183, 190, 208, 0.12);
+  border-radius: 12px;
+  background: #181d26;
 }
 
 .contributeCard {
@@ -121,7 +110,7 @@
   color: #fff;
   font-size: clamp(1.55rem, 3.2vw, 2rem);
   font-weight: 700;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
@@ -314,9 +303,6 @@
 .fundedSection {
   margin-top: 3rem;
   padding: clamp(1.25rem, 3vw, 2rem);
-  border-radius: 1.25rem;
-  background: linear-gradient(135deg, rgba(101, 68, 233, 0.12), rgba(48, 84, 132, 0.08));
-  text-align: center;
 }
 
 
@@ -337,39 +323,44 @@
 .fundedList li {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  text-align: left;
+  gap: 0.85rem;
   color: #edf0f7;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.5;
 }
 
 .fundedList svg,
 .possibilitiesGrid svg {
   flex-shrink: 0;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
   color: #b9aaff;
-  stroke-width: 1.5;
+  stroke-width: 1.75;
 }
 
 .possibilitiesSection {
-  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 1.5rem 3rem;
+  margin-top: 1.25rem;
   padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.possibilitiesSection .sectionHeading {
+  margin: 0;
 }
 
 .possibilitiesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .possibilitiesGrid article {
   min-width: 0;
   display: grid;
   align-content: start;
-  grid-template-columns: 2.5rem minmax(0, 1fr);
-  gap: 0.75rem 1rem;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: 0.6rem 0.85rem;
 }
 
 .possibilitiesGrid svg {
@@ -379,7 +370,7 @@
 .possibilitiesGrid h3 {
   margin: 0;
   color: #edf0f7;
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.4;
 }
 
@@ -418,18 +409,16 @@
 }
 
 .goalsSection {
-  margin-top: 4.5rem;
+  margin-top: 3.5rem;
 }
 
 .sectionHeading {
-  max-width: 720px;
-  margin: 0 auto 1.5rem;
-  text-align: center;
+  max-width: 640px;
+  margin: 0 0 1.5rem;
 }
 
-
 .sectionHeading > p:last-child {
-  margin: 0.75rem auto 0;
+  margin: 0.5rem 0 0;
 }
 
 .goalGrid {
@@ -445,7 +434,7 @@
 
 .goalKind {
   margin: 0 0 0.45rem;
-  color: #b9aaff;
+  color: #aab4c5;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -506,28 +495,28 @@
 .progressBar {
   display: block;
   width: 100%;
-  height: 0.62rem;
+  height: 0.5rem;
   overflow: hidden;
   border: 0;
   border-radius: 999px;
   appearance: none;
-  background: #10141b;
-  color: #8a70f4;
+  background: #232a36;
+  color: #7c63f0;
 }
 
 .progressBar::-webkit-progress-bar {
   border-radius: 999px;
-  background: #10141b;
+  background: #232a36;
 }
 
 .progressBar::-webkit-progress-value {
   border-radius: 999px;
-  background: linear-gradient(90deg, #6345dc, #a28eff);
+  background: #7c63f0;
 }
 
 .progressBar::-moz-progress-bar {
   border-radius: 999px;
-  background: linear-gradient(90deg, #6345dc, #a28eff);
+  background: #7c63f0;
 }
 
 .progressValue {
@@ -540,11 +529,10 @@
 .emptyGoals {
   margin: 0;
   padding: 1.35rem;
-  border: 1px solid rgba(183, 190, 208, 0.14);
-  border-radius: 0.9rem;
-  background: rgba(31, 37, 50, 0.7);
+  border: 1px solid rgba(183, 190, 208, 0.12);
+  border-radius: 12px;
+  background: #181d26;
   color: #bbc4d2;
-  text-align: center;
 }
 
 .pageFooter {
@@ -575,20 +563,13 @@
     padding-top: 2.5rem;
   }
 
-  .mainGrid {
+  .mainGrid,
+  .possibilitiesSection {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .purposeCard {
-    min-height: 0;
   }
 
   .transparency {
     margin-top: 1.5rem;
-  }
-
-  .goalsSection {
-    margin-top: 3.5rem;
   }
 }
 
@@ -599,17 +580,6 @@
 
   .hero {
     margin-bottom: 2rem;
-  }
-
-  .supportStats {
-    width: 100%;
-    justify-content: space-around;
-    padding: 0.9rem;
-  }
-
-  .stat {
-    min-width: 40%;
-    text-align: center;
   }
 
   .checkoutButtons {

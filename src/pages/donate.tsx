@@ -218,9 +218,6 @@ export default function DonatePage(): React.ReactElement {
               aria-labelledby="contribute-title"
             >
               <div className={styles.cardIntro}>
-                <p className={styles.eyebrow}>
-                  <Translate id="donate.contribute.eyebrow">Give directly</Translate>
-                </p>
                 <h2 id="contribute-title">
                   <Translate id="donate.contribute.title">
                     Help keep Owncast going
@@ -377,9 +374,6 @@ export default function DonatePage(): React.ReactElement {
             </section>
 
             <aside className={styles.purposeCard}>
-              <p className={styles.eyebrow}>
-                <Translate id="donate.purpose.eyebrow">What your support helps</Translate>
-              </p>
               <h2>
                 <Translate id="donate.purpose.title">
                   A community project with real-world needs
@@ -503,9 +497,6 @@ export default function DonatePage(): React.ReactElement {
 
           <section className={styles.goalsSection} aria-labelledby="goals-title">
             <div className={styles.sectionHeading}>
-              <p className={styles.eyebrow}>
-                <Translate id="donate.goals.eyebrow">Funding priorities</Translate>
-              </p>
               <h2 id="goals-title">
                 <Translate id="donate.goals.title">Current funding goals</Translate>
               </h2>
