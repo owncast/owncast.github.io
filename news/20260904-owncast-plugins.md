@@ -2,7 +2,7 @@
 title: You can now do way more with Owncast
 description: >-
   Owncast now supports plugins, allowing you to extend its functionality in ways that were not possible before.
-draft: false
+draft: true
 date: 2026-09-03
 ---
 
