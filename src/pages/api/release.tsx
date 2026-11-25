@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "@theme/Layout";
-import Head from "@docusaurus/Head";
 import ApiReference from "@/components/ApiReference";
 
 // Load API configuration
@@ -22,12 +21,6 @@ export default function ApiReleasePage(): React.ReactElement {
       title="Owncast Web APIs (Release)"
       description="API documentation for Owncast release branch"
     >
-      <Head>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/@scalar/api-reference-react/dist/style.css"
-        />
-      </Head>
       <main className="container margin-vert--lg">
         <ApiReference url={apiConfig.releaseApiUrl} />
       </main>

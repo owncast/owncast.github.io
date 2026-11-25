@@ -1,12 +1,14 @@
 import React, { Suspense, lazy } from "react";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 
-// Lazy load the Scalar API Reference component
-const ScalarApiReference = lazy(() =>
-  import("@scalar/api-reference-react").then((module) => ({
-    default: module.ApiReferenceReact,
-  }))
-);
+// Scalar's scoped CSS must come from the same package version as its markup.
+const ScalarApiReference = lazy(async () => {
+  const [{ ApiReferenceReact }] = await Promise.all([
+    import("@scalar/api-reference-react"),
+    import("@scalar/api-reference-react/style.css"),
+  ]);
+  return { default: ApiReferenceReact };
+});
 
 interface ApiReferenceProps {
   url: string;
